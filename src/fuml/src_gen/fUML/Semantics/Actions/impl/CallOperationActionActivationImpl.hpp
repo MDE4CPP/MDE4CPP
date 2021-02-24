@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CallOperationActionActivation.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Actions
 			CallOperationActionActivationImpl(const CallOperationActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CallOperationActionActivationImpl& operator=(CallOperationActionActivationImpl const&) = delete;
 
 		protected:
@@ -34,10 +35,7 @@ namespace fUML::Semantics::Actions
 			virtual void setThisCallOperationActionActivationPtr(std::weak_ptr<CallOperationActionActivation> thisCallOperationActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			CallOperationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			CallOperationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -49,8 +47,6 @@ namespace fUML::Semantics::Actions
 			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -60,21 +56,16 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::CallOperationAction > getCallOperationAction() const ;
+			virtual std::shared_ptr<uml::CallOperationAction> getCallOperationAction() const ;
 			
-			
-			virtual void setCallOperationAction(std::shared_ptr<uml::CallOperationAction> _callOperationAction) ;
-			
+			virtual void setCallOperationAction(std::shared_ptr<uml::CallOperationAction>) ;
 			/*Additional Setter for 'CallActionActivation::callAction' redefined by reference 'callOperationAction'*/
 			
-			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction) ;
-			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callOperationAction'*/
+			virtual void setCallAction(std::shared_ptr<uml::CallAction>) ;/*Additional Setter for 'ActionActivation::action' redefined by reference 'callOperationAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
-			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callOperationAction'*/
+			virtual void setAction(std::shared_ptr<uml::Action>) ;/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callOperationAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
-							
+			virtual void setNode(std::shared_ptr<uml::ActivityNode>) ;
 			
 			//*********************************
 			// Union Getter

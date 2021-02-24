@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CS_Locus.hpp"
 
@@ -24,7 +25,7 @@ namespace PSCS::Semantics::Loci
 			CS_LocusImpl(const CS_LocusImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CS_LocusImpl& operator=(CS_LocusImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace PSCS::Semantics::Loci
 			CS_LocusImpl();
 			virtual std::shared_ptr<CS_Locus> getThisCS_LocusPtr() const;
 			virtual void setThisCS_LocusPtr(std::weak_ptr<CS_Locus> thisCS_LocusPtr);
-
 
 
 		public:
@@ -45,8 +45,6 @@ namespace PSCS::Semantics::Loci
 			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class> type) ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -55,7 +53,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

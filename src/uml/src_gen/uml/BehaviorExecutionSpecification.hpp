@@ -93,15 +93,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior > getBehavior() const = 0;
-			
+			virtual std::shared_ptr<uml::Behavior> getBehavior() const = 0;
 			/*!
 			Behavior whose execution is occurring.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) = 0;
-			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior>) = 0;
 			
 
 		protected:
@@ -118,7 +116,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::Behavior > m_behavior;
+			std::shared_ptr<uml::Behavior> m_behavior;
 
 		public:
 			//*********************************
@@ -129,7 +127,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -139,7 +137,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

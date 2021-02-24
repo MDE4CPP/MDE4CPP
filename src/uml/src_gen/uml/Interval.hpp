@@ -92,29 +92,25 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getMax() const = 0;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getMax() const = 0;
 			/*!
 			Refers to the ValueSpecification denoting the maximum value of the range.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setMax(std::shared_ptr<uml::ValueSpecification> _max) = 0;
-			
+			virtual void setMax(std::shared_ptr<uml::ValueSpecification>) = 0;
 			/*!
 			Refers to the ValueSpecification denoting the minimum value of the range.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getMin() const = 0;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getMin() const = 0;
 			/*!
 			Refers to the ValueSpecification denoting the minimum value of the range.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setMin(std::shared_ptr<uml::ValueSpecification> _min) = 0;
-			
+			virtual void setMin(std::shared_ptr<uml::ValueSpecification>) = 0;
 			
 
 		protected:
@@ -131,12 +127,12 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			std::shared_ptr<uml::ValueSpecification > m_max;/*!
+			std::shared_ptr<uml::ValueSpecification> m_max;/*!
 			Refers to the ValueSpecification denoting the minimum value of the range.
 			<p>From package UML::Values.</p>
 			*/
 			
-			std::shared_ptr<uml::ValueSpecification > m_min;
+			std::shared_ptr<uml::ValueSpecification> m_min;
 
 		public:
 			//*********************************
@@ -147,7 +143,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -157,7 +153,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

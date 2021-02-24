@@ -102,21 +102,18 @@ namespace uml
 			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> getArgument() const = 0;
 			
-			
 			/*!
 			For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Port > getOnPort() const = 0;
-			
+			virtual std::shared_ptr<uml::Port> getOnPort() const = 0;
 			/*!
 			For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setOnPort(std::shared_ptr<uml::Port> _onPort) = 0;
-			
+			virtual void setOnPort(std::shared_ptr<uml::Port>) = 0;
 			
 
 		protected:
@@ -138,7 +135,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::Port > m_onPort;
+			std::shared_ptr<uml::Port> m_onPort;
 
 		public:
 			//*********************************
@@ -164,7 +161,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

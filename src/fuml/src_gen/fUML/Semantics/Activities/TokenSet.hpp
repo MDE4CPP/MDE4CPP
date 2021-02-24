@@ -79,7 +79,6 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getTokens() const = 0;
 			
 			
-			
 
 		protected:
 			//*********************************

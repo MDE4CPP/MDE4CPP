@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ReadSelfAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ReadSelfActionImpl(const ReadSelfActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ReadSelfActionImpl& operator=(ReadSelfActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisReadSelfActionPtr(std::weak_ptr<ReadSelfAction> thisReadSelfActionPtr);
 
 			//Additional constructors for the containments back reference
-			ReadSelfActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ReadSelfActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ReadSelfActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ReadSelfActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ReadSelfActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ReadSelfActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ReadSelfActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ReadSelfActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,31 +54,23 @@ namespace uml
 			_'context' <> null
 			*/
 			 
-			virtual bool contained(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If the ReadSelfAction is contained in an Behavior that is acting as a method, then the Operation of the method must not be static.
 			let behavior: Behavior = self.containingBehavior() in
 			behavior.specification<>null implies not behavior.specification.isStatic
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type of the result OutputPin is the context Classifier.
 			result.type = _'context'
 			*/
 			 
-			virtual bool type(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -101,16 +85,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
 			/*!
 			The OutputPin on which the context object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -135,7 +117,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

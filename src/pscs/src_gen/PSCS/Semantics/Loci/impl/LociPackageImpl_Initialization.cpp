@@ -86,13 +86,12 @@ void LociPackageImpl::initializeCS_ExecutionFactoryContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class());
 	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setName("getStereotypeApplication");
+	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class());
 	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setLowerBound(1);
 	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setUpperBound(1);
 	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setUnique(true);
 	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element);
 		parameter->setName("stereotype");
@@ -113,13 +112,12 @@ void LociPackageImpl::initializeCS_ExecutionFactoryContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
 	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString->setName("getStereotypeClass");
+	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
 	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString->setLowerBound(1);
 	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString->setUpperBound(1);
 	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString->setUnique(true);
 	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString);
 		parameter->setName("profileName");
@@ -140,13 +138,12 @@ void LociPackageImpl::initializeCS_ExecutionFactoryContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_ExecutionFactory_Operation_instantiateVisitor_Element->setEType(fUML::Semantics::Loci::LociPackage::eInstance()->getSemanticVisitor_Class());
 	m_cS_ExecutionFactory_Operation_instantiateVisitor_Element->setName("instantiateVisitor");
+	m_cS_ExecutionFactory_Operation_instantiateVisitor_Element->setEType(fUML::Semantics::Loci::LociPackage::eInstance()->getSemanticVisitor_Class());
 	m_cS_ExecutionFactory_Operation_instantiateVisitor_Element->setLowerBound(1);
 	m_cS_ExecutionFactory_Operation_instantiateVisitor_Element->setUpperBound(1);
 	m_cS_ExecutionFactory_Operation_instantiateVisitor_Element->setUnique(true);
 	m_cS_ExecutionFactory_Operation_instantiateVisitor_Element->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_ExecutionFactory_Operation_instantiateVisitor_Element);
 		parameter->setName("element");
@@ -168,13 +165,12 @@ void LociPackageImpl::initializeCS_ExecutorContent()
 	
 	
 	
-	m_cS_Executor_Operation_start_Class_ParameterValue->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class());
 	m_cS_Executor_Operation_start_Class_ParameterValue->setName("start");
+	m_cS_Executor_Operation_start_Class_ParameterValue->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class());
 	m_cS_Executor_Operation_start_Class_ParameterValue->setLowerBound(1);
 	m_cS_Executor_Operation_start_Class_ParameterValue->setUpperBound(1);
 	m_cS_Executor_Operation_start_Class_ParameterValue->setUnique(true);
 	m_cS_Executor_Operation_start_Class_ParameterValue->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Executor_Operation_start_Class_ParameterValue);
 		parameter->setName("type");
@@ -206,13 +202,12 @@ void LociPackageImpl::initializeCS_LocusContent()
 	
 	
 	
-	m_cS_Locus_Operation_instantiate_Class->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class());
 	m_cS_Locus_Operation_instantiate_Class->setName("instantiate");
+	m_cS_Locus_Operation_instantiate_Class->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class());
 	m_cS_Locus_Operation_instantiate_Class->setLowerBound(1);
 	m_cS_Locus_Operation_instantiate_Class->setUpperBound(1);
 	m_cS_Locus_Operation_instantiate_Class->setUnique(true);
 	m_cS_Locus_Operation_instantiate_Class->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Locus_Operation_instantiate_Class);
 		parameter->setName("type");

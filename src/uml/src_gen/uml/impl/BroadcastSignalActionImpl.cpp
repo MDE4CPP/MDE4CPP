@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -57,8 +58,7 @@
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -81,7 +81,7 @@ BroadcastSignalActionImpl::~BroadcastSignalActionImpl()
 }
 
 //Additional constructor for the containments back reference
-BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::Activity > par_activity)
+BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::Activity> par_activity)
 :BroadcastSignalActionImpl()
 {
 	m_activity = par_activity;
@@ -89,7 +89,7 @@ BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::Activity
 }
 
 //Additional constructor for the containments back reference
-BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :BroadcastSignalActionImpl()
 {
 	m_inStructuredNode = par_inStructuredNode;
@@ -97,7 +97,7 @@ BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::Structur
 }
 
 //Additional constructor for the containments back reference
-BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :BroadcastSignalActionImpl()
 {
 	m_namespace = par_namespace;
@@ -105,134 +105,24 @@ BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::Namespac
 }
 
 //Additional constructor for the containments back reference
-BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::Element > par_owner)
+BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::Element> par_owner)
 :BroadcastSignalActionImpl()
 {
 	m_owner = par_owner;
 }
 
-
-BroadcastSignalActionImpl::BroadcastSignalActionImpl(const BroadcastSignalActionImpl & obj):BroadcastSignalActionImpl()
+BroadcastSignalActionImpl::BroadcastSignalActionImpl(const BroadcastSignalActionImpl & obj): InvocationActionImpl(obj), BroadcastSignalAction(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy BroadcastSignalAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_isLeaf = obj.getIsLeaf();
-	m_isLocallyReentrant = obj.getIsLocallyReentrant();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_activity  = obj.getActivity();
-
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_context  = obj.getContext();
-
-	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
-	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
-
-	m_inStructuredNode  = obj.getInStructuredNode();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
-	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_onPort  = obj.getOnPort();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
 	m_signal  = obj.getSignal();
 
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::InputPin>> _argumentList = obj.getArgument();
-	for(std::shared_ptr<uml::InputPin> _argument : *_argumentList)
-	{
-		this->getArgument()->add(std::shared_ptr<uml::InputPin>(std::dynamic_pointer_cast<uml::InputPin>(_argument->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_argument" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
-	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
-	{
-		this->getHandler()->add(std::shared_ptr<uml::ExceptionHandler>(std::dynamic_pointer_cast<uml::ExceptionHandler>(_handler->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_handler" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
-	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
-	{
-		this->getInInterruptibleRegion()->add(std::shared_ptr<uml::InterruptibleActivityRegion>(std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_inInterruptibleRegion->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inInterruptibleRegion" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityPartition>> _inPartitionList = obj.getInPartition();
-	for(std::shared_ptr<uml::ActivityPartition> _inPartition : *_inPartitionList)
-	{
-		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(std::dynamic_pointer_cast<uml::ActivityPartition>(_inPartition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _localPostconditionList = obj.getLocalPostcondition();
-	for(std::shared_ptr<uml::Constraint> _localPostcondition : *_localPostconditionList)
-	{
-		this->getLocalPostcondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_localPostcondition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_localPostcondition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _localPreconditionList = obj.getLocalPrecondition();
-	for(std::shared_ptr<uml::Constraint> _localPrecondition : *_localPreconditionList)
-	{
-		this->getLocalPrecondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_localPrecondition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_localPrecondition" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNodeList = obj.getRedefinedNode();
-	for(std::shared_ptr<uml::ActivityNode> _redefinedNode : *_redefinedNodeList)
-	{
-		this->getRedefinedNode()->add(std::shared_ptr<uml::ActivityNode>(std::dynamic_pointer_cast<uml::ActivityNode>(_redefinedNode->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  BroadcastSignalActionImpl::copy() const
@@ -254,19 +144,19 @@ std::shared_ptr<ecore::EClass> BroadcastSignalActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool BroadcastSignalActionImpl::no_onport(Any diagnostics,std::map <  Any ,  Any > context)
+bool BroadcastSignalActionImpl::no_onport(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BroadcastSignalActionImpl::number_of_arguments(Any diagnostics,std::map <  Any ,  Any > context)
+bool BroadcastSignalActionImpl::number_of_arguments(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool BroadcastSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
+bool BroadcastSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -278,17 +168,15 @@ bool BroadcastSignalActionImpl::type_ordering_multiplicity(Any diagnostics,std::
 /*
 Getter & Setter for reference signal
 */
-std::shared_ptr<uml::Signal > BroadcastSignalActionImpl::getSignal() const
+std::shared_ptr<uml::Signal> BroadcastSignalActionImpl::getSignal() const
 {
 //assert(m_signal);
     return m_signal;
 }
-
 void BroadcastSignalActionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 {
     m_signal = _signal;
 }
-
 
 
 //*********************************
@@ -344,7 +232,7 @@ std::shared_ptr<Union<uml::Element>> BroadcastSignalActionImpl::getOwnedElement(
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > BroadcastSignalActionImpl::getOwner() const
+std::weak_ptr<uml::Element> BroadcastSignalActionImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -484,7 +372,6 @@ void BroadcastSignalActionImpl::loadAttributes(std::shared_ptr<persistence::inte
 
 void BroadcastSignalActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	InvocationActionImpl::loadNode(nodeName, loadHandler);
@@ -545,9 +432,8 @@ void BroadcastSignalActionImpl::saveContent(std::shared_ptr<persistence::interfa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("signal", this->getSignal()); 
+		saveHandler->addReference(this->getSignal(), "signal", getSignal()->eClass() != uml::umlPackage::eInstance()->getSignal_Class()); 
 	}
 	catch (std::exception& e)
 	{

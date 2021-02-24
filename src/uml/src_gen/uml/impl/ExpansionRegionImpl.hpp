@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ExpansionRegion.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ExpansionRegionImpl(const ExpansionRegionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ExpansionRegionImpl& operator=(ExpansionRegionImpl const&) = delete;
 
 		protected:
@@ -33,29 +34,16 @@ namespace uml
 			virtual void setThisExpansionRegionPtr(std::weak_ptr<ExpansionRegion> thisExpansionRegionPtr);
 
 			//Additional constructors for the containments back reference
-			ExpansionRegionImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id);
-
-
+			ExpansionRegionImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id);
 			//Additional constructors for the containments back reference
-
-
 			//Additional constructors for the containments back reference
-			ExpansionRegionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ExpansionRegionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ExpansionRegionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ExpansionRegionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ExpansionRegionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ExpansionRegionImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ExpansionRegionImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup);
-
-
-
+			ExpansionRegionImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup);
 
 		public:
 			//destructor
@@ -75,13 +63,13 @@ namespace uml
 			*/
 			 
 			virtual uml::ExpansionKind getMode() const ;
-			
 			/*!
 			The mode in which the ExpansionRegion executes its contents. If parallel, executions are concurrent. If iterative, executions are sequential. If stream, a stream of values flows into a single execution.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setMode (uml::ExpansionKind _mode);
+			
 			
 			//*********************************
 			// Reference
@@ -93,7 +81,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ExpansionNode>> getInputElement() const ;
 			
-			
 			/*!
 			The ExpansionNodes that form the output collections of the ExpansionRegion.
 			<p>From package UML::Actions.</p>
@@ -102,7 +89,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::ExpansionNode>> getOutputElement() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -152,7 +138,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

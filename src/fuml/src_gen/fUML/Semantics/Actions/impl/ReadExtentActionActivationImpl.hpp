@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ReadExtentActionActivation.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Actions
 			ReadExtentActionActivationImpl(const ReadExtentActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ReadExtentActionActivationImpl& operator=(ReadExtentActionActivationImpl const&) = delete;
 
 		protected:
@@ -34,10 +35,7 @@ namespace fUML::Semantics::Actions
 			virtual void setThisReadExtentActionActivationPtr(std::weak_ptr<ReadExtentActionActivation> thisReadExtentActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			ReadExtentActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			ReadExtentActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -56,7 +54,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

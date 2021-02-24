@@ -104,16 +104,12 @@ namespace uml
 			value.type.conformsTo(type)
 			*/
 			 
-			virtual bool compatible_type(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool compatible_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A ValuePin may have no incoming ActivityEdges.
 			incoming->isEmpty()
 			*/
 			 
-			virtual bool no_incoming_edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -126,15 +122,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getValue() const = 0;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getValue() const = 0;
 			/*!
 			The ValueSpecification that is evaluated to obtain the value that the ValuePin will provide.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::ValueSpecification> _value) = 0;
-			
+			virtual void setValue(std::shared_ptr<uml::ValueSpecification>) = 0;
 			
 
 		protected:
@@ -151,7 +145,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::ValueSpecification > m_value;
+			std::shared_ptr<uml::ValueSpecification> m_value;
 
 		public:
 			//*********************************
@@ -172,7 +166,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

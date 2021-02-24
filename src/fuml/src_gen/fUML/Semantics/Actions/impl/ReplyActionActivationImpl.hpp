@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ReplyActionActivation.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Actions
 			ReplyActionActivationImpl(const ReplyActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ReplyActionActivationImpl& operator=(ReplyActionActivationImpl const&) = delete;
 
 		protected:
@@ -34,10 +35,7 @@ namespace fUML::Semantics::Actions
 			virtual void setThisReplyActionActivationPtr(std::weak_ptr<ReplyActionActivation> thisReplyActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			ReplyActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			ReplyActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -49,8 +47,6 @@ namespace fUML::Semantics::Actions
 			 
 			virtual void doAction() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -59,7 +55,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

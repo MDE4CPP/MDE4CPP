@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ObjectActivation.hpp"
 
@@ -26,7 +27,7 @@ virtual public ObjectActivation
 			ObjectActivationImpl(const ObjectActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ObjectActivationImpl& operator=(ObjectActivationImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public ObjectActivation
 			ObjectActivationImpl();
 			virtual std::shared_ptr<ObjectActivation> getThisObjectActivationPtr() const;
 			virtual void setThisObjectActivationPtr(std::weak_ptr<ObjectActivation> thisObjectActivationPtr);
-
 
 
 		public:
@@ -45,33 +45,15 @@ virtual public ObjectActivation
 			// Operations
 			//*********************************
 			 
-			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) ;
-			
-			 
-			virtual void _send(Any signal) ;
-			
-			 
-			virtual void _startObjectBehavior() ;
-			
-			 
-			virtual void dispatchNextEvent() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent() ;
-			
-			 
-			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) ;
-			
-			 
-			virtual void startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) ;
-			
-			 
-			virtual void stop() ;
-			
-			 
+			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) ; 
+			virtual void _send(Any signal) ; 
+			virtual void _startObjectBehavior() ; 
+			virtual void dispatchNextEvent() ; 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent() ; 
+			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) ; 
+			virtual void startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) ; 
+			virtual void stop() ; 
 			virtual void unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -85,21 +67,16 @@ virtual public ObjectActivation
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>> getClassifierBehaviorExecutions() const ;
 			
 			
-			
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>> getEventPool() const ;
 			
 			
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getObject() const ;
 			
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object > getObject() const ;
-			
-			
-			virtual void setObject(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _object) ;
-			
+			virtual void setObject(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>) ;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::EventAccepter>> getWaitingEventAccepters() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter

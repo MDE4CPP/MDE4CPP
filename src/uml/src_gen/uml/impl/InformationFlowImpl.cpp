@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -51,8 +52,7 @@
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -75,7 +75,7 @@ InformationFlowImpl::~InformationFlowImpl()
 }
 
 //Additional constructor for the containments back reference
-InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::Namespace > par_namespace)
+InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :InformationFlowImpl()
 {
 	m_namespace = par_namespace;
@@ -83,14 +83,14 @@ InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::Namespace > par_name
 }
 
 //Additional constructor for the containments back reference
-InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::Element > par_owner)
+InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::Element> par_owner)
 :InformationFlowImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::Package > par_owningPackage)
+InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :InformationFlowImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -98,92 +98,44 @@ InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::Package > par_owning
 }
 
 //Additional constructor for the containments back reference
-InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :InformationFlowImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-InformationFlowImpl::InformationFlowImpl(const InformationFlowImpl & obj):InformationFlowImpl()
+InformationFlowImpl::InformationFlowImpl(const InformationFlowImpl & obj): DirectedRelationshipImpl(obj), PackageableElementImpl(obj), InformationFlow(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InformationFlow "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	std::shared_ptr<Bag<uml::Classifier>> _conveyed = obj.getConveyed();
 	m_conveyed.reset(new Bag<uml::Classifier>(*(obj.getConveyed().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
 	std::shared_ptr<Bag<uml::Relationship>> _realization = obj.getRealization();
 	m_realization.reset(new Bag<uml::Relationship>(*(obj.getRealization().get())));
-
 	std::shared_ptr<Bag<uml::ActivityEdge>> _realizingActivityEdge = obj.getRealizingActivityEdge();
 	m_realizingActivityEdge.reset(new Bag<uml::ActivityEdge>(*(obj.getRealizingActivityEdge().get())));
-
 	std::shared_ptr<Bag<uml::Connector>> _realizingConnector = obj.getRealizingConnector();
 	m_realizingConnector.reset(new Bag<uml::Connector>(*(obj.getRealizingConnector().get())));
-
 	std::shared_ptr<Bag<uml::Message>> _realizingMessage = obj.getRealizingMessage();
 	m_realizingMessage.reset(new Bag<uml::Message>(*(obj.getRealizingMessage().get())));
 
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::NamedElement>> _informationSourceList = obj.getInformationSource();
-	for(std::shared_ptr<uml::NamedElement> _informationSource : *_informationSourceList)
+	std::shared_ptr<Subset<uml::NamedElement, uml::Element>> informationSourceContainer = getInformationSource();
+	for(auto _informationSource : *obj.getInformationSource()) 
 	{
-		this->getInformationSource()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_informationSource->copy())));
+		informationSourceContainer->push_back(std::dynamic_pointer_cast<uml::NamedElement>(_informationSource->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_informationSource" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::NamedElement>> _informationTargetList = obj.getInformationTarget();
-	for(std::shared_ptr<uml::NamedElement> _informationTarget : *_informationTargetList)
+	std::shared_ptr<Subset<uml::NamedElement, uml::Element>> informationTargetContainer = getInformationTarget();
+	for(auto _informationTarget : *obj.getInformationTarget()) 
 	{
-		this->getInformationTarget()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_informationTarget->copy())));
+		informationTargetContainer->push_back(std::dynamic_pointer_cast<uml::NamedElement>(_informationTarget->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_informationTarget" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  InformationFlowImpl::copy() const
@@ -205,19 +157,19 @@ std::shared_ptr<ecore::EClass> InformationFlowImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool InformationFlowImpl::convey_classifiers(Any diagnostics,std::map <  Any ,  Any > context)
+bool InformationFlowImpl::convey_classifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationFlowImpl::must_conform(Any diagnostics,std::map <  Any ,  Any > context)
+bool InformationFlowImpl::must_conform(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool InformationFlowImpl::sources_and_targets_kind(Any diagnostics,std::map <  Any ,  Any > context)
+bool InformationFlowImpl::sources_and_targets_kind(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -240,8 +192,6 @@ std::shared_ptr<Bag<uml::Classifier>> InformationFlowImpl::getConveyed() const
 //assert(m_conveyed);
     return m_conveyed;
 }
-
-
 
 
 
@@ -271,8 +221,6 @@ std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::ge
 
 
 
-
-
 /*
 Getter & Setter for reference informationTarget
 */
@@ -299,8 +247,6 @@ std::shared_ptr<Subset<uml::NamedElement, uml::Element>> InformationFlowImpl::ge
 
 
 
-
-
 /*
 Getter & Setter for reference realization
 */
@@ -315,8 +261,6 @@ std::shared_ptr<Bag<uml::Relationship>> InformationFlowImpl::getRealization() co
 
     return m_realization;
 }
-
-
 
 
 
@@ -337,8 +281,6 @@ std::shared_ptr<Bag<uml::ActivityEdge>> InformationFlowImpl::getRealizingActivit
 
 
 
-
-
 /*
 Getter & Setter for reference realizingConnector
 */
@@ -353,8 +295,6 @@ std::shared_ptr<Bag<uml::Connector>> InformationFlowImpl::getRealizingConnector(
 
     return m_realizingConnector;
 }
-
-
 
 
 
@@ -375,12 +315,10 @@ std::shared_ptr<Bag<uml::Message>> InformationFlowImpl::getRealizingMessage() co
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > InformationFlowImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> InformationFlowImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -400,7 +338,7 @@ std::shared_ptr<Union<uml::Element>> InformationFlowImpl::getOwnedElement() cons
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > InformationFlowImpl::getOwner() const
+std::weak_ptr<uml::Element> InformationFlowImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -927,7 +865,6 @@ void InformationFlowImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 
 void InformationFlowImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
@@ -943,39 +880,39 @@ void InformationFlowImpl::resolveReferences(const int featureID, std::vector<std
 			std::shared_ptr<Bag<uml::Classifier>> _conveyed = getConveyed();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Classifier> _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
+				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
 				if (_r != nullptr)
 				{
 					_conveyed->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
 
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
 		{
-			std::shared_ptr<Bag<uml::NamedElement>> _informationSource = getInformationSource();
+			std::shared_ptr<Subset<uml::NamedElement, uml::Element>> _informationSource = getInformationSource();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::NamedElement> _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
+				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
 				if (_r != nullptr)
 				{
 					_informationSource->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
 
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
 		{
-			std::shared_ptr<Bag<uml::NamedElement>> _informationTarget = getInformationTarget();
+			std::shared_ptr<Subset<uml::NamedElement, uml::Element>> _informationTarget = getInformationTarget();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::NamedElement> _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
+				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
 				if (_r != nullptr)
 				{
 					_informationTarget->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -985,11 +922,11 @@ void InformationFlowImpl::resolveReferences(const int featureID, std::vector<std
 			std::shared_ptr<Bag<uml::Relationship>> _realization = getRealization();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Relationship> _r = std::dynamic_pointer_cast<uml::Relationship>(ref);
+				std::shared_ptr<uml::Relationship>  _r = std::dynamic_pointer_cast<uml::Relationship>(ref);
 				if (_r != nullptr)
 				{
 					_realization->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -999,11 +936,11 @@ void InformationFlowImpl::resolveReferences(const int featureID, std::vector<std
 			std::shared_ptr<Bag<uml::ActivityEdge>> _realizingActivityEdge = getRealizingActivityEdge();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::ActivityEdge> _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
+				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
 				if (_r != nullptr)
 				{
 					_realizingActivityEdge->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -1013,11 +950,11 @@ void InformationFlowImpl::resolveReferences(const int featureID, std::vector<std
 			std::shared_ptr<Bag<uml::Connector>> _realizingConnector = getRealizingConnector();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Connector> _r = std::dynamic_pointer_cast<uml::Connector>(ref);
+				std::shared_ptr<uml::Connector>  _r = std::dynamic_pointer_cast<uml::Connector>(ref);
 				if (_r != nullptr)
 				{
 					_realizingConnector->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -1027,11 +964,11 @@ void InformationFlowImpl::resolveReferences(const int featureID, std::vector<std
 			std::shared_ptr<Bag<uml::Message>> _realizingMessage = getRealizingMessage();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Message> _r = std::dynamic_pointer_cast<uml::Message>(ref);
+				std::shared_ptr<uml::Message>  _r = std::dynamic_pointer_cast<uml::Message>(ref);
 				if (_r != nullptr)
 				{
 					_realizingMessage->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -1067,7 +1004,6 @@ void InformationFlowImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 	// Add references
 		saveHandler->addReferences<uml::Classifier>("conveyed", this->getConveyed());
 		saveHandler->addReferences<uml::NamedElement>("informationSource", this->getInformationSource());

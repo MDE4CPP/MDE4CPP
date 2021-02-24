@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -44,8 +45,7 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -68,7 +68,7 @@ TriggerImpl::~TriggerImpl()
 }
 
 //Additional constructor for the containments back reference
-TriggerImpl::TriggerImpl(std::weak_ptr<uml::Namespace > par_namespace)
+TriggerImpl::TriggerImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :TriggerImpl()
 {
 	m_namespace = par_namespace;
@@ -76,56 +76,26 @@ TriggerImpl::TriggerImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-TriggerImpl::TriggerImpl(std::weak_ptr<uml::Element > par_owner)
+TriggerImpl::TriggerImpl(std::weak_ptr<uml::Element> par_owner)
 :TriggerImpl()
 {
 	m_owner = par_owner;
 }
 
-
-TriggerImpl::TriggerImpl(const TriggerImpl & obj):TriggerImpl()
+TriggerImpl::TriggerImpl(const TriggerImpl & obj): NamedElementImpl(obj), Trigger(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Trigger "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	m_event  = obj.getEvent();
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
 	std::shared_ptr<Bag<uml::Port>> _port = obj.getPort();
 	m_port.reset(new Bag<uml::Port>(*(obj.getPort().get())));
 
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  TriggerImpl::copy() const
@@ -147,7 +117,7 @@ std::shared_ptr<ecore::EClass> TriggerImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TriggerImpl::trigger_with_ports(Any diagnostics,std::map <  Any ,  Any > context)
+bool TriggerImpl::trigger_with_ports(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -159,17 +129,15 @@ bool TriggerImpl::trigger_with_ports(Any diagnostics,std::map <  Any ,  Any > co
 /*
 Getter & Setter for reference event
 */
-std::shared_ptr<uml::Event > TriggerImpl::getEvent() const
+std::shared_ptr<uml::Event> TriggerImpl::getEvent() const
 {
 //assert(m_event);
     return m_event;
 }
-
 void TriggerImpl::setEvent(std::shared_ptr<uml::Event> _event)
 {
     m_event = _event;
 }
-
 
 
 /*
@@ -186,8 +154,6 @@ std::shared_ptr<Bag<uml::Port>> TriggerImpl::getPort() const
 
     return m_port;
 }
-
-
 
 
 
@@ -209,7 +175,7 @@ std::shared_ptr<Union<uml::Element>> TriggerImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > TriggerImpl::getOwner() const
+std::weak_ptr<uml::Element> TriggerImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -373,7 +339,6 @@ void TriggerImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 
 void TriggerImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	NamedElementImpl::loadNode(nodeName, loadHandler);
@@ -400,11 +365,11 @@ void TriggerImpl::resolveReferences(const int featureID, std::vector<std::shared
 			std::shared_ptr<Bag<uml::Port>> _port = getPort();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Port> _r = std::dynamic_pointer_cast<uml::Port>(ref);
+				std::shared_ptr<uml::Port>  _r = std::dynamic_pointer_cast<uml::Port>(ref);
 				if (_r != nullptr)
 				{
 					_port->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -433,9 +398,8 @@ void TriggerImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("event", this->getEvent()); 
+		saveHandler->addReference(this->getEvent(), "event", getEvent()->eClass() != uml::umlPackage::eInstance()->getEvent_Class()); 
 		saveHandler->addReferences<uml::Port>("port", this->getPort());
 	}
 	catch (std::exception& e)

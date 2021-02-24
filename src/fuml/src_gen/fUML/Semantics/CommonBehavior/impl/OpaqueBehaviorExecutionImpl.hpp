@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../OpaqueBehaviorExecution.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::CommonBehavior
 			OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExecutionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			OpaqueBehaviorExecutionImpl& operator=(OpaqueBehaviorExecutionImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::CommonBehavior
 			OpaqueBehaviorExecutionImpl();
 			virtual std::shared_ptr<OpaqueBehaviorExecution> getThisOpaqueBehaviorExecutionPtr() const;
 			virtual void setThisOpaqueBehaviorExecutionPtr(std::weak_ptr<OpaqueBehaviorExecution> thisOpaqueBehaviorExecutionPtr);
-
 
 
 		public:
@@ -43,12 +43,8 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual void doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameters) ;
-			
-			 
+			virtual void doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameters) ; 
 			virtual void execute() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -58,7 +54,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

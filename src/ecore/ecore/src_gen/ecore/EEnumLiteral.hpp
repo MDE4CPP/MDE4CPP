@@ -78,22 +78,24 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual Any getInstance() const = 0;
-			
 			 
-			virtual void setInstance (Any _instance)= 0;virtual std::string getLiteral() const = 0;
-			
+			virtual void setInstance (Any _instance)= 0;
 			 
-			virtual void setLiteral (std::string _literal)= 0;virtual int getValue() const = 0;
-			
+			virtual std::string getLiteral() const = 0;
+			 
+			virtual void setLiteral (std::string _literal)= 0;
+			 
+			virtual int getValue() const = 0;
 			 
 			virtual void setValue (int _value)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
 			
 			virtual std::weak_ptr<ecore::EEnum> getEEnum() const = 0;
-			
 			
 			
 

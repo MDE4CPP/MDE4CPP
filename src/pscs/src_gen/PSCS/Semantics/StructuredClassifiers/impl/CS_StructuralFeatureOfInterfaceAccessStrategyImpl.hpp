@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CS_StructuralFeatureOfInterfaceAccessStrategy.hpp"
 
@@ -24,7 +25,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			CS_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_StructuralFeatureOfInterfaceAccessStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CS_StructuralFeatureOfInterfaceAccessStrategyImpl& operator=(CS_StructuralFeatureOfInterfaceAccessStrategyImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 			CS_StructuralFeatureOfInterfaceAccessStrategyImpl();
 			virtual std::shared_ptr<CS_StructuralFeatureOfInterfaceAccessStrategy> getThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr() const;
 			virtual void setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(std::weak_ptr<CS_StructuralFeatureOfInterfaceAccessStrategy> thisCS_StructuralFeatureOfInterfaceAccessStrategyPtr);
-
 
 
 		public:
@@ -43,15 +43,9 @@ namespace PSCS::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::string getName() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<uml::StructuralFeature> feature) ;
-			
-			 
+			virtual std::string getName() ; 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<uml::StructuralFeature> feature) ; 
 			virtual void write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -61,7 +55,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

@@ -85,9 +85,7 @@ namespace uml
 			constrainedElement->size() = 1
 			*/
 			 
-			virtual bool has_one_constrainedElement(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool has_one_constrainedElement(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -97,13 +95,13 @@ namespace uml
 			*/
 			 
 			virtual bool getFirstEvent() const = 0;
-			
 			/*!
 			The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
 			<p>From package UML::Values.</p>
 			*/
 			 
 			virtual void setFirstEvent (bool _firstEvent)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -135,7 +133,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -145,7 +143,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

@@ -82,16 +82,22 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual Any getDefaultValue() const = 0;
+			 
+			virtual void setDefaultValue (Any _defaultValue)= 0;
+			 
+			virtual void * getInstanceClass() const = 0;
 			
 			 
-			virtual void setDefaultValue (Any _defaultValue)= 0;virtual void * getInstanceClass() const = 0;virtual std::string getInstanceClassName() const = 0;
-			
+			virtual std::string getInstanceClassName() const = 0;
 			 
-			virtual void setInstanceClassName (std::string _instanceClassName)= 0;virtual std::string getInstanceTypeName() const = 0;
-			
+			virtual void setInstanceClassName (std::string _instanceClassName)= 0;
+			 
+			virtual std::string getInstanceTypeName() const = 0;
 			 
 			virtual void setInstanceTypeName (std::string _instanceTypeName)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -99,9 +105,7 @@ namespace ecore
 			virtual std::weak_ptr<ecore::EPackage> getEPackage() const = 0;
 			
 			
-			
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const = 0;
-			
 			
 			
 

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -37,8 +38,7 @@
 #include "uml/Element.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -61,36 +61,23 @@ FactoryImpl::~FactoryImpl()
 }
 
 //Additional constructor for the containments back reference
-FactoryImpl::FactoryImpl(std::weak_ptr<uml::Element > par_owner)
+FactoryImpl::FactoryImpl(std::weak_ptr<uml::Element> par_owner)
 :FactoryImpl()
 {
 	m_owner = par_owner;
 }
 
-
-FactoryImpl::FactoryImpl(const FactoryImpl & obj):FactoryImpl()
+FactoryImpl::FactoryImpl(const FactoryImpl & obj): ElementImpl(obj), Factory(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Factory "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_owner  = obj.getOwner();
-
 
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  FactoryImpl::copy() const
@@ -214,7 +201,6 @@ void FactoryImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 
 void FactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ElementImpl::loadNode(nodeName, loadHandler);

@@ -85,17 +85,13 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual int integerValue() = 0;
-			
-			/*!
+			virtual int integerValue() = 0;/*!
 			The query isComputable() is redefined to be true.
 			result = (true)
 			<p>From package UML::Values.</p>
 			*/
 			 
 			virtual bool isComputable() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -105,13 +101,13 @@ namespace uml
 			*/
 			 
 			virtual int getValue() const = 0;
-			
 			/*!
 			The specified Integer value.
 			<p>From package UML::Values.</p>
 			*/
 			 
 			virtual void setValue (int _value)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -143,7 +139,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -153,7 +149,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

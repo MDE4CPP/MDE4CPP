@@ -98,23 +98,17 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ConnectableElement> > allRoles() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::ConnectableElement> > allRoles() = 0;/*!
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this structured classifier.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) = 0;/*!
 			Derivation for StructuredClassifier::/part
 			result = (ownedAttribute->select(isComposite)->asSet())
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::Property> > getParts() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -129,7 +123,6 @@ namespace uml
 			
 			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement>> getOwnedAttribute() const = 0;
 			
-			
 			/*!
 			The connectors owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p>
@@ -137,14 +130,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement>> getOwnedConnector() const = 0;
 			
-			
 			/*!
 			The Properties specifying instances that the StructuredClassifier owns by composition. This collection is derived, selecting those owned Properties where isComposite is true.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Property>> getPart() const = 0;
-			
 			
 			
 			
@@ -205,7 +196,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -220,7 +211,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

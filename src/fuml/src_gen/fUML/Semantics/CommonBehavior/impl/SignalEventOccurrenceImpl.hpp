@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../SignalEventOccurrence.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::CommonBehavior
 			SignalEventOccurrenceImpl(const SignalEventOccurrenceImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			SignalEventOccurrenceImpl& operator=(SignalEventOccurrenceImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::CommonBehavior
 			SignalEventOccurrenceImpl();
 			virtual std::shared_ptr<SignalEventOccurrence> getThisSignalEventOccurrencePtr() const;
 			virtual void setThisSignalEventOccurrencePtr(std::weak_ptr<SignalEventOccurrence> thisSignalEventOccurrencePtr);
-
 
 
 		public:
@@ -43,12 +43,8 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
-			
-			 
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ; 
 			virtual bool match(std::shared_ptr<uml::Trigger> trigger) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -59,12 +55,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance > getSignalInstance() const ;
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> getSignalInstance() const ;
 			
+			virtual void setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>) ;
 			
-			virtual void setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

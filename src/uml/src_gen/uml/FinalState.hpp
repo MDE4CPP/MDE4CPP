@@ -93,44 +93,32 @@ namespace uml
 			submachine->isEmpty()
 			*/
 			 
-			virtual bool cannot_reference_submachine(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool cannot_reference_submachine(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A FinalState has no entry Behavior.
 			entry->isEmpty()
 			*/
 			 
-			virtual bool no_entry_behavior(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool no_entry_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A FinalState has no exit Behavior.
 			exit->isEmpty()
 			*/
 			 
-			virtual bool no_exit_behavior(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool no_exit_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A FinalState cannot have any outgoing Transitions.
 			outgoing->size() = 0
 			*/
 			 
-			virtual bool no_outgoing_transitions(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool no_outgoing_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A FinalState cannot have Regions.
 			region->size() = 0
 			*/
 			 
-			virtual bool no_regions(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool no_regions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A FinalState has no state (doActivity) Behavior.
 			doActivity->isEmpty()
 			*/
 			 
-			virtual bool no_state_behavior(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool no_state_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -165,7 +153,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -180,7 +168,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

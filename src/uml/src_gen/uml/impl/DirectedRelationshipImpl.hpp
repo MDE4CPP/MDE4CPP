@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../DirectedRelationship.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			DirectedRelationshipImpl(const DirectedRelationshipImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			DirectedRelationshipImpl& operator=(DirectedRelationshipImpl const&) = delete;
 
 		protected:
@@ -33,10 +34,7 @@ namespace uml
 			virtual void setThisDirectedRelationshipPtr(std::weak_ptr<DirectedRelationship> thisDirectedRelationshipPtr);
 
 			//Additional constructors for the containments back reference
-			DirectedRelationshipImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			DirectedRelationshipImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -59,7 +57,7 @@ namespace uml
 			
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

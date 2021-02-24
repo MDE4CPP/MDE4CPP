@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EnumerationLiteral.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			EnumerationLiteralImpl(const EnumerationLiteralImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EnumerationLiteralImpl& operator=(EnumerationLiteralImpl const&) = delete;
 
 		protected:
@@ -33,26 +34,15 @@ namespace uml
 			virtual void setThisEnumerationLiteralPtr(std::weak_ptr<EnumerationLiteral> thisEnumerationLiteralPtr);
 
 			//Additional constructors for the containments back reference
-			EnumerationLiteralImpl(std::weak_ptr<uml::Enumeration > par_enumeration);
-
-
+			EnumerationLiteralImpl(std::weak_ptr<uml::Enumeration> par_enumeration);
 			//Additional constructors for the containments back reference
-			EnumerationLiteralImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			EnumerationLiteralImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			EnumerationLiteralImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			EnumerationLiteralImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			EnumerationLiteralImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			EnumerationLiteralImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			EnumerationLiteralImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			EnumerationLiteralImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -61,12 +51,8 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 			 
 			virtual std::shared_ptr<Bag<uml::Classifier> > getClassifiers() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -81,16 +67,14 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Enumeration > getEnumeration() const ;
-			
+			virtual std::weak_ptr<uml::Enumeration> getEnumeration() const ;
 			/*!
 			The Enumeration that this EnumerationLiteral is a member of.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setEnumeration(std::shared_ptr<uml::Enumeration> _enumeration) ;
+			virtual void setEnumeration(std::weak_ptr<uml::Enumeration>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -100,7 +84,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -110,7 +94,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

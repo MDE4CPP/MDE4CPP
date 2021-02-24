@@ -63,12 +63,8 @@ namespace fUML::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual int choose(int size) = 0;
-			
-			 
+			virtual int choose(int size) = 0; 
 			virtual std::string getName() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

@@ -94,17 +94,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Action> > allActions() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Action> > allActions() = 0;/*!
 			Returns all the ActivityNodes directly or indirectly owned by this Action. This includes at least all the Pins of the Action.
 			result = (input.oclAsType(Pin)->asSet()->union(output->asSet()))
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > allOwnedNodes() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::ActivityNode> > allOwnedNodes() = 0;/*!
 			result = (if inStructuredNode<>null then inStructuredNode.containingBehavior() 
 			else if activity<>null then activity
 			else interaction 
@@ -115,10 +111,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Behavior> containingBehavior() = 0;
-			
-			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -128,13 +120,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsLocallyReentrant() const = 0;
-			
 			/*!
 			If true, the Action can begin a new, concurrent execution, even if there is already another execution of the Action ongoing. If false, the Action cannot begin a new execution until any previous execution has completed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setIsLocallyReentrant (bool _isLocallyReentrant)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -143,8 +135,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier > getContext() const = 0;
-			
+			virtual std::shared_ptr<uml::Classifier> getContext() const = 0;
 			
 			
 			
@@ -155,14 +146,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Constraint, uml::Element>> getLocalPostcondition() const = 0;
 			
-			
 			/*!
 			A Constraint that must be satisfied when execution of the Action is started.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Constraint, uml::Element>> getLocalPrecondition() const = 0;
-			
 			
 			
 			
@@ -188,7 +177,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::Classifier > m_context;/*!
+			std::shared_ptr<uml::Classifier> m_context;/*!
 			The ordered set of InputPins representing the inputs to the Action.
 			<p>From package UML::Actions.</p>
 			*/
@@ -239,7 +228,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

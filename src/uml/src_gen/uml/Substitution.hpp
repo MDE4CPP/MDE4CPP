@@ -70,19 +70,19 @@ namespace uml
 			Substitution(){}
 
 			//Additional constructors for the containments back reference
-			Substitution(std::weak_ptr<uml::Namespace > par_namespace);
+			Substitution(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-			Substitution(std::weak_ptr<uml::Element > par_owner);
+			Substitution(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-			Substitution(std::weak_ptr<uml::Package > par_owningPackage);
+			Substitution(std::weak_ptr<uml::Package> par_owningPackage);
 
 			//Additional constructors for the containments back reference
-			Substitution(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+			Substitution(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 			//Additional constructors for the containments back reference
-			Substitution(std::weak_ptr<uml::Classifier > par_substitutingClassifier);
+			Substitution(std::weak_ptr<uml::Classifier> par_substitutingClassifier);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -106,29 +106,25 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier > getContract() const = 0;
-			
+			virtual std::shared_ptr<uml::Classifier> getContract() const = 0;
 			/*!
 			The contract with which the substituting classifier complies.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setContract(std::shared_ptr<uml::Classifier> _contract) = 0;
-			
+			virtual void setContract(std::shared_ptr<uml::Classifier>) = 0;
 			/*!
 			Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Classifier > getSubstitutingClassifier() const = 0;
-			
+			virtual std::weak_ptr<uml::Classifier> getSubstitutingClassifier() const = 0;
 			/*!
 			Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setSubstitutingClassifier(std::shared_ptr<uml::Classifier> _substitutingClassifier) = 0;
-			
+			virtual void setSubstitutingClassifier(std::weak_ptr<uml::Classifier>) = 0;
 			
 
 		protected:
@@ -145,12 +141,12 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			std::shared_ptr<uml::Classifier > m_contract;/*!
+			std::shared_ptr<uml::Classifier> m_contract;/*!
 			Instances of the substituting classifier are runtime substitutable where instances of the contract classifier are expected.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			std::weak_ptr<uml::Classifier > m_substitutingClassifier;
+			std::weak_ptr<uml::Classifier> m_substitutingClassifier;
 
 		public:
 			//*********************************
@@ -161,7 +157,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -171,7 +167,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/

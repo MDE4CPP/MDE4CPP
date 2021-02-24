@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -46,8 +47,7 @@
 #include "ecore/ETypeParameter.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -1100,7 +1100,6 @@ void EClassImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 
 void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	try
 	{
@@ -1111,7 +1110,7 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "EGenericType";
 			}
-		loadHandler->handleChildContainer<ecore::EGenericType>(this->getEGenericSuperTypes());  
+			loadHandler->handleChildContainer<ecore::EGenericType>(this->getEGenericSuperTypes());  
 
 			return; 
 		}
@@ -1123,7 +1122,7 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "EOperation";
 			}
-		loadHandler->handleChildContainer<ecore::EOperation>(this->getEOperations());  
+			loadHandler->handleChildContainer<ecore::EOperation>(this->getEOperations());  
 
 			return; 
 		}
@@ -1136,7 +1135,7 @@ void EClassImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-		loadHandler->handleChildContainer<ecore::EStructuralFeature>(this->getEStructuralFeatures());  
+			loadHandler->handleChildContainer<ecore::EStructuralFeature>(this->getEStructuralFeatures());  
 
 			return; 
 		}

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../AcceptCallActionActivation.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Actions
 			AcceptCallActionActivationImpl(const AcceptCallActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			AcceptCallActionActivationImpl& operator=(AcceptCallActionActivationImpl const&) = delete;
 
 		protected:
@@ -34,10 +35,7 @@ namespace fUML::Semantics::Actions
 			virtual void setThisAcceptCallActionActivationPtr(std::weak_ptr<AcceptCallActionActivation> thisAcceptCallActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			AcceptCallActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			AcceptCallActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -49,8 +47,6 @@ namespace fUML::Semantics::Actions
 			 
 			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -59,7 +55,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

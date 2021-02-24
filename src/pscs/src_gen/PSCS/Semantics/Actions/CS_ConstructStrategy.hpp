@@ -32,13 +32,13 @@ namespace PSCS
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Object;
-}
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	class CS_Object;
+}
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
 }
 namespace uml 
 {
@@ -75,12 +75,8 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context) = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context) = 0; 
 			virtual std::string getName() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

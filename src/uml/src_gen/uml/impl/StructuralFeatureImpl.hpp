@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../StructuralFeature.hpp"
 
@@ -25,7 +26,7 @@ namespace uml
 			StructuralFeatureImpl(const StructuralFeatureImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			StructuralFeatureImpl& operator=(StructuralFeatureImpl const&) = delete;
 
 		protected:
@@ -35,14 +36,9 @@ namespace uml
 			virtual void setThisStructuralFeaturePtr(std::weak_ptr<StructuralFeature> thisStructuralFeaturePtr);
 
 			//Additional constructors for the containments back reference
-			StructuralFeatureImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			StructuralFeatureImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			StructuralFeatureImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			StructuralFeatureImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,7 +58,6 @@ namespace uml
 			*/
 			 
 			virtual bool getIsReadOnly() const ;
-			
 			/*!
 			If isReadOnly is true, the StructuralFeature may not be written to after initialization.
 			<p>From package UML::Classification.</p>
@@ -70,10 +65,11 @@ namespace uml
 			 
 			virtual void setIsReadOnly (bool _isReadOnly);
 			
+			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -88,7 +84,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

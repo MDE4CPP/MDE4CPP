@@ -83,9 +83,7 @@ namespace uml
 			after->closure(toAfter.after)->excludes(before)
 			*/
 			 
-			virtual bool irreflexive_transitive_closure(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool irreflexive_transitive_closure(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -98,29 +96,25 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification > getAfter() const = 0;
-			
+			virtual std::shared_ptr<uml::OccurrenceSpecification> getAfter() const = 0;
 			/*!
 			The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after) = 0;
-			
+			virtual void setAfter(std::shared_ptr<uml::OccurrenceSpecification>) = 0;
 			/*!
 			The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification > getBefore() const = 0;
-			
+			virtual std::shared_ptr<uml::OccurrenceSpecification> getBefore() const = 0;
 			/*!
 			The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before) = 0;
-			
+			virtual void setBefore(std::shared_ptr<uml::OccurrenceSpecification>) = 0;
 			
 
 		protected:
@@ -137,12 +131,12 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::OccurrenceSpecification > m_after;/*!
+			std::shared_ptr<uml::OccurrenceSpecification> m_after;/*!
 			The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::OccurrenceSpecification > m_before;
+			std::shared_ptr<uml::OccurrenceSpecification> m_before;
 
 		public:
 			//*********************************
@@ -158,7 +152,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

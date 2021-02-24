@@ -50,13 +50,15 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			virtual std::shared_ptr<std::map < std::string, std::string>> getDetails() const ;
-			
 			 
-			virtual void setDetails (std::shared_ptr<std::map < std::string, std::string>> _details);virtual std::string getSource() const ;
-			
+			virtual std::shared_ptr<std::map < std::string, std::string>> getDetails() const ;
+			 
+			virtual void setDetails (std::shared_ptr<std::map < std::string, std::string>> _details);
+			 
+			virtual std::string getSource() const ;
 			 
 			virtual void setSource (std::string _source);
+			
 			
 			//*********************************
 			// Reference
@@ -65,15 +67,11 @@ namespace ecore
 			virtual std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> getContents() const ;
 			
 			
-			
 			virtual std::weak_ptr<ecore::EModelElement> getEModelElement() const ;
-			
 			
 			virtual void setEModelElement(std::weak_ptr<ecore::EModelElement>) ;
 			
-			
 			virtual std::shared_ptr<Bag<ecore::EObject>> getReferences() const ;
-			
 			
 			
 			

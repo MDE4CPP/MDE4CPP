@@ -95,30 +95,22 @@ namespace uml
 			result <> null implies result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_result(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool multiplicity_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The multiplicity of the value InputPin is 1..1.
 			value<>null implies value.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_value(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool multiplicity_of_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The type of the result OutputPin is the same as the type of the inherited object InputPin.
 			result <> null implies result.type = object.type
 			*/
 			 
-			virtual bool type_of_result(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool type_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The type of the value InputPin must conform to the type of the structuralFeature.
 			value <> null implies value.type.conformsTo(structuralFeature.type)
 			*/
 			 
-			virtual bool type_of_value(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool type_of_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -131,29 +123,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const = 0;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
 			/*!
 			The OutputPin on which is put the input object as modified by the WriteStructuralFeatureAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) = 0;
-			
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
 			/*!
 			The InputPin that provides the value to be added or removed from the StructuralFeature.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getValue() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getValue() const = 0;
 			/*!
 			The InputPin that provides the value to be added or removed from the StructuralFeature.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::InputPin> _value) = 0;
-			
+			virtual void setValue(std::shared_ptr<uml::InputPin>) = 0;
 			
 
 		protected:
@@ -170,12 +158,12 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::OutputPin > m_result;/*!
+			std::shared_ptr<uml::OutputPin> m_result;/*!
 			The InputPin that provides the value to be added or removed from the StructuralFeature.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_value;
+			std::shared_ptr<uml::InputPin> m_value;
 
 		public:
 			//*********************************
@@ -206,7 +194,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

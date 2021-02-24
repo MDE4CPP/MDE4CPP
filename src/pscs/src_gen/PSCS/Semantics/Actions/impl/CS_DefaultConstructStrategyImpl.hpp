@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CS_DefaultConstructStrategy.hpp"
 
@@ -24,7 +25,7 @@ namespace PSCS::Semantics::Actions
 			CS_DefaultConstructStrategyImpl(const CS_DefaultConstructStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CS_DefaultConstructStrategyImpl& operator=(CS_DefaultConstructStrategyImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace PSCS::Semantics::Actions
 			CS_DefaultConstructStrategyImpl();
 			virtual std::shared_ptr<CS_DefaultConstructStrategy> getThisCS_DefaultConstructStrategyPtr() const;
 			virtual void setThisCS_DefaultConstructStrategyPtr(std::weak_ptr<CS_DefaultConstructStrategy> thisCS_DefaultConstructStrategyPtr);
-
 
 
 		public:
@@ -43,48 +43,20 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Property> feature,std::shared_ptr<fUML::Semantics::Values::Value> value) ;
-			
-			 
-			virtual bool canInstantiate(std::shared_ptr<uml::Property> p) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context,std::shared_ptr<uml::Class> type) ;
-			
-			 
-			virtual void generateArrayPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector) ;
-			
-			 
-			virtual std::shared_ptr<uml::Class> generateRealizingClass(std::shared_ptr<uml::Interface> interface_,std::string className) ;
-			
-			 
-			virtual void generateStarPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector) ;
-			
-			 
-			virtual int getCardinality(std::shared_ptr<uml::ConnectorEnd> end) ;
-			
-			 
-			virtual std::shared_ptr<uml::Association> getDefaultAssociation() ;
-			
-			 
-			virtual std::shared_ptr<uml::Class> getRealizingClass(std::shared_ptr<uml::Interface> interface_) ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::ConnectorEnd> end) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiateInterface(std::shared_ptr<uml::Interface> interface,std::shared_ptr<fUML::Semantics::Loci::Locus> locus) ;
-			
-			 
-			virtual bool isArrayPattern(std::shared_ptr<uml::Connector> c) ;
-			
-			 
+			virtual void addStructuralFeatureValue(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Property> feature,std::shared_ptr<fUML::Semantics::Values::Value> value) ; 
+			virtual bool canInstantiate(std::shared_ptr<uml::Property> p) ; 
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context) ; 
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> constructObject(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context,std::shared_ptr<uml::Class> type) ; 
+			virtual void generateArrayPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector) ; 
+			virtual std::shared_ptr<uml::Class> generateRealizingClass(std::shared_ptr<uml::Interface> interface_,std::string className) ; 
+			virtual void generateStarPattern(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::Connector> connector) ; 
+			virtual int getCardinality(std::shared_ptr<uml::ConnectorEnd> end) ; 
+			virtual std::shared_ptr<uml::Association> getDefaultAssociation() ; 
+			virtual std::shared_ptr<uml::Class> getRealizingClass(std::shared_ptr<uml::Interface> interface_) ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValuesFromConnectorEnd(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::ConnectorEnd> end) ; 
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiateInterface(std::shared_ptr<uml::Interface> interface,std::shared_ptr<fUML::Semantics::Loci::Locus> locus) ; 
+			virtual bool isArrayPattern(std::shared_ptr<uml::Connector> c) ; 
 			virtual bool isStarPattern(std::shared_ptr<uml::Connector> c) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -95,22 +67,17 @@ namespace PSCS::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Association > getDefaultAssociation() const ;
+			virtual std::shared_ptr<uml::Association> getDefaultAssociation() const ;
 			
-			
-			virtual void setDefaultAssociation(std::shared_ptr<uml::Association> _defaultAssociation) ;
-			
+			virtual void setDefaultAssociation(std::shared_ptr<uml::Association>) ;
 			
 			virtual std::shared_ptr<Bag<uml::Class>> getGeneratedRealizingClasses() const ;
 			
 			
+			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const ;
 			
-			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const ;
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) ;
 			
-			
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

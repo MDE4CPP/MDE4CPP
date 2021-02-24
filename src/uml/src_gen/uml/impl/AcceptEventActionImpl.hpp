@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../AcceptEventAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			AcceptEventActionImpl(const AcceptEventActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			AcceptEventActionImpl& operator=(AcceptEventActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisAcceptEventActionPtr(std::weak_ptr<AcceptEventAction> thisAcceptEventActionPtr);
 
 			//Additional constructors for the containments back reference
-			AcceptEventActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			AcceptEventActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			AcceptEventActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			AcceptEventActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			AcceptEventActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			AcceptEventActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			AcceptEventActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			AcceptEventActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -67,16 +59,12 @@ namespace uml
 					 trigger.event.oclAsType(SignalEvent).signal->forAll(s | s.conformsTo(type)))
 			*/
 			 
-			virtual bool conforming_type(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool conforming_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			AcceptEventActions may have no input pins.
 			input->size() = 0
 			*/
 			 
-			virtual bool no_input_pins(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool no_input_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			There are no OutputPins if the trigger events are only ChangeEvents and/or CallEvents when this action is an instance of AcceptEventAction and not an instance of a descendant of AcceptEventAction (such as AcceptCallAction).
 			(self.oclIsTypeOf(AcceptEventAction) and
 			   (trigger->forAll(event.oclIsKindOf(ChangeEvent) or  
@@ -84,17 +72,13 @@ namespace uml
 			implies output->size() = 0
 			*/
 			 
-			virtual bool no_output_pins(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool no_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If isUnmarshall=false and any of the triggers are for SignalEvents or TimeEvents, there must be exactly one result OutputPin with multiplicity 1..1.
 			not isUnmarshall and trigger->exists(event.oclIsKindOf(SignalEvent) or event.oclIsKindOf(TimeEvent)) implies 
 				output->size() = 1 and output->first().is(1,1)
 			*/
 			 
-			virtual bool one_output_pin(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If isUnmarshall is true (and this is not an AcceptCallAction), there must be exactly one trigger, which is for a SignalEvent. The number of result output pins must be the same as the number of attributes of the signal. The type and ordering of each result output pin must be the same as the corresponding attribute of the signal. The multiplicity of each result output pin must be compatible with the multiplicity of the corresponding attribute.
 			isUnmarshall and self.oclIsTypeOf(AcceptEventAction) implies
 				trigger->size()=1 and
@@ -107,9 +91,7 @@ namespace uml
 					result->at(i).includesMultiplicity(attribute->at(i)))
 			*/
 			 
-			virtual bool unmarshall_signal_events(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool unmarshall_signal_events(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -120,13 +102,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsUnmarshall() const ;
-			
 			/*!
 			Indicates whether there is a single OutputPin for a SignalEvent occurrence, or multiple OutputPins for attribute values of the instance of the Signal associated with a SignalEvent occurrence.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setIsUnmarshall (bool _isUnmarshall);
+			
 			
 			//*********************************
 			// Reference
@@ -138,7 +120,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getResult() const ;
 			
-			
 			/*!
 			The Triggers specifying the Events of which the AcceptEventAction waits for occurrences.
 			<p>From package UML::Actions.</p>
@@ -147,7 +128,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Trigger, uml::Element>> getTrigger() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -172,7 +152,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

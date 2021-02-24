@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CS_AcceptEventActionActivation.hpp"
 
@@ -24,7 +25,7 @@ namespace PSCS::Semantics::Actions
 			CS_AcceptEventActionActivationImpl(const CS_AcceptEventActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CS_AcceptEventActionActivationImpl& operator=(CS_AcceptEventActionActivationImpl const&) = delete;
 
 		protected:
@@ -34,10 +35,7 @@ namespace PSCS::Semantics::Actions
 			virtual void setThisCS_AcceptEventActionActivationPtr(std::weak_ptr<CS_AcceptEventActionActivation> thisCS_AcceptEventActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			CS_AcceptEventActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			CS_AcceptEventActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -49,8 +47,6 @@ namespace PSCS::Semantics::Actions
 			 
 			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -59,7 +55,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

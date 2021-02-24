@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ActivityNode.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ActivityNodeImpl(const ActivityNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ActivityNodeImpl& operator=(ActivityNodeImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisActivityNodePtr(std::weak_ptr<ActivityNode> thisActivityNodePtr);
 
 			//Additional constructors for the containments back reference
-			ActivityNodeImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ActivityNodeImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ActivityNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ActivityNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ActivityNodeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ActivityNodeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ActivityNodeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ActivityNodeImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -67,8 +59,6 @@ namespace uml
 			 
 			virtual std::shared_ptr<uml::Activity> containingActivity() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -82,15 +72,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Activity > getActivity() const ;
-			
+			virtual std::weak_ptr<uml::Activity> getActivity() const ;
 			/*!
 			The Activity containing the ActivityNode, if it is directly owned by an Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setActivity(std::shared_ptr<uml::Activity> _activity) ;
-			
+			virtual void setActivity(std::weak_ptr<uml::Activity>) ;
 			
 			
 			/*!
@@ -100,7 +88,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> getInInterruptibleRegion() const ;
 			
-			
 			/*!
 			ActivityPartitions containing the ActivityNode.
 			<p>From package UML::Activities.</p>
@@ -108,21 +95,18 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> getInPartition() const ;
 			
-			
 			/*!
 			The StructuredActivityNode containing the ActvityNode, if it is directly owned by a StructuredActivityNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::StructuredActivityNode > getInStructuredNode() const ;
-			
+			virtual std::weak_ptr<uml::StructuredActivityNode> getInStructuredNode() const ;
 			/*!
 			The StructuredActivityNode containing the ActvityNode, if it is directly owned by a StructuredActivityNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setInStructuredNode(std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode) ;
-			
+			virtual void setInStructuredNode(std::weak_ptr<uml::StructuredActivityNode>) ;
 			/*!
 			ActivityEdges that have the ActivityNode as their target.
 			<p>From package UML::Activities.</p>
@@ -130,14 +114,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getIncoming() const ;
 			
-			
 			/*!
 			ActivityEdges that have the ActivityNode as their source.
 			<p>From package UML::Activities.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getOutgoing() const ;
-			
 			
 			/*!
 			ActivityNodes from a generalization of the Activity containining this ActivityNode that are redefined by this ActivityNode.
@@ -147,7 +129,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> getRedefinedNode() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -167,7 +148,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

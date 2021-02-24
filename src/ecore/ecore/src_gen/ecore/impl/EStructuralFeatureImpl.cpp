@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -41,8 +42,7 @@
 #include "ecore/ETypedElement.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -89,7 +89,7 @@ EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & ob
 	m_defaultValue = obj.getDefaultValue();
 	m_defaultValueLiteral = obj.getDefaultValueLiteral();
 	m_derived = obj.isDerived();
-// unknown attribute type or missing setter for featureID
+	m_featureID = obj.getFeatureID();
 	m_transient = obj.isTransient();
 	m_unsettable = obj.isUnsettable();
 	m_volatile = obj.isVolatile();
@@ -501,7 +501,6 @@ void EStructuralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void EStructuralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	ETypedElementImpl::loadNode(nodeName, loadHandler);

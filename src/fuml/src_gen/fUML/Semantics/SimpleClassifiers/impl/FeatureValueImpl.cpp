@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -38,13 +39,12 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
-
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -66,31 +66,25 @@ FeatureValueImpl::~FeatureValueImpl()
 }
 
 
-
-FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj):FeatureValueImpl()
+FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj): ecore::EModelElementImpl(obj),
+FeatureValue(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FeatureValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_position = obj.getPosition();
 
 	//copy references with no containment (soft copy)
-	
 	m_feature  = obj.getFeature();
 
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _valuesList = obj.getValues();
-	for(std::shared_ptr<fUML::Semantics::Values::Value> _values : *_valuesList)
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesContainer = getValues();
+	for(auto _values : *obj.getValues()) 
 	{
-		this->getValues()->add(std::shared_ptr<fUML::Semantics::Values::Value>(std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_values->copy())));
+		valuesContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_values->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_values" << std::endl;
-	#endif
-
 	
 }
 
@@ -116,12 +110,10 @@ int FeatureValueImpl::getPosition() const
 {
 	return m_position;
 }
-
 void FeatureValueImpl::setPosition(int _position)
 {
 	m_position = _position;
 } 
-
 
 
 //*********************************
@@ -215,17 +207,15 @@ bool FeatureValueImpl::hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleCla
 /*
 Getter & Setter for reference feature
 */
-std::shared_ptr<uml::StructuralFeature > FeatureValueImpl::getFeature() const
+std::shared_ptr<uml::StructuralFeature> FeatureValueImpl::getFeature() const
 {
 //assert(m_feature);
     return m_feature;
 }
-
 void FeatureValueImpl::setFeature(std::shared_ptr<uml::StructuralFeature> _feature)
 {
     m_feature = _feature;
 }
-
 
 
 /*
@@ -242,8 +232,6 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> FeatureValueImpl::getValues
 
     return m_values;
 }
-
-
 
 
 
@@ -412,7 +400,6 @@ void FeatureValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void FeatureValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
 	try
 	{
@@ -424,14 +411,9 @@ void FeatureValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<fUML::Semantics::Values::Value> values = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(modelFactory->create(typeName));
-			if (values != nullptr)
-			{
-				std::shared_ptr<Bag<fUML::Semantics::Values::Value>> list_values = this->getValues();
-				list_values->push_back(values);
-				loadHandler->handleChild(values);
-			}
-			return;
+			loadHandler->handleChildContainer<fUML::Semantics::Values::Value>(this->getValues());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -483,20 +465,15 @@ void FeatureValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		{
 			saveHandler->addAttribute("position", this->getPosition());
 		}
-
 	// Add references
-		saveHandler->addReference("feature", this->getFeature()); 
-
+		saveHandler->addReference(this->getFeature(), "feature", getFeature()->eClass() != uml::umlPackage::eInstance()->getStructuralFeature_Class()); 
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'values'
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> list_values = this->getValues();
-		for (std::shared_ptr<fUML::Semantics::Values::Value> values : *list_values) 
-		{
-			saveHandler->addReference(values, "values", values->eClass() !=fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
-		}
+
+		saveHandler->addReferences<fUML::Semantics::Values::Value>("values", this->getValues());
 	}
 	catch (std::exception& e)
 	{

@@ -85,8 +85,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -101,14 +99,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::PackageableElement>> getDeployedElement() const = 0;
 			
-			
 			/*!
 			The set of Deployments for a DeploymentTarget.
 			<p>From package UML::Deployments.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Deployment, uml::Element>> getDeployment() const = 0;
-			
 			
 			
 
@@ -147,7 +143,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

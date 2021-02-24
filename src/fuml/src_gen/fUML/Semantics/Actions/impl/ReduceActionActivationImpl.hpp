@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ReduceActionActivation.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Actions
 			ReduceActionActivationImpl(const ReduceActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ReduceActionActivationImpl& operator=(ReduceActionActivationImpl const&) = delete;
 
 		protected:
@@ -34,10 +35,7 @@ namespace fUML::Semantics::Actions
 			virtual void setThisReduceActionActivationPtr(std::weak_ptr<ReduceActionActivation> thisReduceActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			ReduceActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			ReduceActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -57,12 +55,10 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getCurrentExecution() const ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCurrentExecution() const ;
 			
+			virtual void setCurrentExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>) ;
 			
-			virtual void setCurrentExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _currentExecution) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

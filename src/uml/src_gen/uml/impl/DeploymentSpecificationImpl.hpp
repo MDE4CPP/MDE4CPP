@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../DeploymentSpecification.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			DeploymentSpecificationImpl(const DeploymentSpecificationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			DeploymentSpecificationImpl& operator=(DeploymentSpecificationImpl const&) = delete;
 
 		protected:
@@ -33,29 +34,16 @@ namespace uml
 			virtual void setThisDeploymentSpecificationPtr(std::weak_ptr<DeploymentSpecification> thisDeploymentSpecificationPtr);
 
 			//Additional constructors for the containments back reference
-			DeploymentSpecificationImpl(std::weak_ptr<uml::Deployment > par_deployment);
-
-
+			DeploymentSpecificationImpl(std::weak_ptr<uml::Deployment> par_deployment);
 			//Additional constructors for the containments back reference
-			DeploymentSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			DeploymentSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			DeploymentSpecificationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			DeploymentSpecificationImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			DeploymentSpecificationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			DeploymentSpecificationImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			DeploymentSpecificationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			DeploymentSpecificationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -69,16 +57,12 @@ namespace uml
 			deployment->forAll (location.deployedElement->forAll (oclIsKindOf(Component)))
 			*/
 			 
-			virtual bool deployed_elements(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool deployed_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The DeploymentTarget of a DeploymentSpecification is a kind of ExecutionEnvironment.
 			deployment->forAll (location.oclIsKindOf(ExecutionEnvironment))
 			*/
 			 
-			virtual bool deployment_target(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool deployment_target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -89,25 +73,25 @@ namespace uml
 			*/
 			 
 			virtual std::string getDeploymentLocation() const ;
-			
 			/*!
 			The location where an Artifact is deployed onto a Node. This is typically a 'directory' or 'memory address.'
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual void setDeploymentLocation (std::string _deploymentLocation);/*!
+			virtual void setDeploymentLocation (std::string _deploymentLocation);
+			/*!
 			The location where a component Artifact executes. This may be a local or remote location.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
 			virtual std::string getExecutionLocation() const ;
-			
 			/*!
 			The location where a component Artifact executes. This may be a local or remote location.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
 			virtual void setExecutionLocation (std::string _executionLocation);
+			
 			
 			//*********************************
 			// Reference
@@ -117,16 +101,14 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Deployment > getDeployment() const ;
-			
+			virtual std::weak_ptr<uml::Deployment> getDeployment() const ;
 			/*!
 			The deployment with which the DeploymentSpecification is associated.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual void setDeployment(std::shared_ptr<uml::Deployment> _deployment) ;
+			virtual void setDeployment(std::weak_ptr<uml::Deployment>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -151,7 +133,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -166,7 +148,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

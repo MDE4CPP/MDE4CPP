@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -36,13 +37,12 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Values/impl/ValuesFactoryImpl.hpp"
-#include "fUML/Semantics/Values/impl/ValuesPackageImpl.hpp"
-
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -64,24 +64,19 @@ EvaluationImpl::~EvaluationImpl()
 }
 
 
-
-EvaluationImpl::EvaluationImpl(const EvaluationImpl & obj):EvaluationImpl()
+EvaluationImpl::EvaluationImpl(const EvaluationImpl & obj): fUML::Semantics::Loci::SemanticVisitorImpl(obj), Evaluation(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Evaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_locus  = obj.getLocus();
-
 	m_specification  = obj.getSpecification();
 
-
 	//Clone references with containment (deep copy)
-
-
 }
 
 std::shared_ptr<ecore::EObject>  EvaluationImpl::copy() const
@@ -115,33 +110,29 @@ std::shared_ptr<fUML::Semantics::Values::Value> EvaluationImpl::evaluate()
 /*
 Getter & Setter for reference locus
 */
-std::shared_ptr<fUML::Semantics::Loci::Locus > EvaluationImpl::getLocus() const
+std::shared_ptr<fUML::Semantics::Loci::Locus> EvaluationImpl::getLocus() const
 {
 //assert(m_locus);
     return m_locus;
 }
-
 void EvaluationImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
 }
 
 
-
 /*
 Getter & Setter for reference specification
 */
-std::shared_ptr<uml::ValueSpecification > EvaluationImpl::getSpecification() const
+std::shared_ptr<uml::ValueSpecification> EvaluationImpl::getSpecification() const
 {
 //assert(m_specification);
     return m_specification;
 }
-
 void EvaluationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
 {
     m_specification = _specification;
 }
-
 
 
 //*********************************
@@ -267,7 +258,6 @@ void EvaluationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void EvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Values::ValuesFactory> modelFactory=fUML::Semantics::Values::ValuesFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Loci::SemanticVisitorImpl::loadNode(nodeName, loadHandler);
@@ -319,10 +309,9 @@ void EvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("locus", this->getLocus()); 
-		saveHandler->addReference("specification", this->getSpecification()); 
+		saveHandler->addReference(this->getLocus(), "locus", getLocus()->eClass() != fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class()); 
+		saveHandler->addReference(this->getSpecification(), "specification", getSpecification()->eClass() != uml::umlPackage::eInstance()->getValueSpecification_Class()); 
 	}
 	catch (std::exception& e)
 	{

@@ -96,9 +96,7 @@ namespace uml
 			result.isOrdered = structuralFeature.isOrdered
 			*/
 			 
-			virtual bool type_and_ordering(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool type_and_ordering(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -111,15 +109,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const = 0;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
 			/*!
 			The OutputPin on which the result values are placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) = 0;
-			
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
 			
 
 		protected:
@@ -136,7 +132,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::OutputPin > m_result;
+			std::shared_ptr<uml::OutputPin> m_result;
 
 		public:
 			//*********************************
@@ -167,7 +163,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

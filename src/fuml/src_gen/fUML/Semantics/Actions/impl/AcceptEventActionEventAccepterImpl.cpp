@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,13 +35,11 @@
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
-#include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
-
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -62,22 +61,18 @@ AcceptEventActionEventAccepterImpl::~AcceptEventActionEventAccepterImpl()
 }
 
 
-
-AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl(const AcceptEventActionEventAccepterImpl & obj):AcceptEventActionEventAccepterImpl()
+AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl(const AcceptEventActionEventAccepterImpl & obj): fUML::Semantics::CommonBehavior::EventAccepterImpl(obj), AcceptEventActionEventAccepter(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AcceptEventActionEventAccepter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_actionActivation  = obj.getActionActivation();
 
-
 	//Clone references with containment (deep copy)
-
-
 }
 
 std::shared_ptr<ecore::EObject>  AcceptEventActionEventAccepterImpl::copy() const
@@ -106,17 +101,15 @@ std::shared_ptr<ecore::EClass> AcceptEventActionEventAccepterImpl::eStaticClass(
 /*
 Getter & Setter for reference actionActivation
 */
-std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation > AcceptEventActionEventAccepterImpl::getActionActivation() const
+std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> AcceptEventActionEventAccepterImpl::getActionActivation() const
 {
 //assert(m_actionActivation);
     return m_actionActivation;
 }
-
 void AcceptEventActionEventAccepterImpl::setActionActivation(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> _actionActivation)
 {
     m_actionActivation = _actionActivation;
 }
-
 
 
 //*********************************
@@ -223,7 +216,6 @@ void AcceptEventActionEventAccepterImpl::loadAttributes(std::shared_ptr<persiste
 
 void AcceptEventActionEventAccepterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::CommonBehavior::EventAccepterImpl::loadNode(nodeName, loadHandler);
@@ -263,9 +255,8 @@ void AcceptEventActionEventAccepterImpl::saveContent(std::shared_ptr<persistence
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("actionActivation", this->getActionActivation()); 
+		saveHandler->addReference(this->getActionActivation(), "actionActivation", getActionActivation()->eClass() != fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptEventActionActivation_Class()); 
 	}
 	catch (std::exception& e)
 	{

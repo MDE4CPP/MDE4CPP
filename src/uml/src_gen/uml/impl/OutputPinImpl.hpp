@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../OutputPin.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			OutputPinImpl(const OutputPinImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			OutputPinImpl& operator=(OutputPinImpl const&) = delete;
 
 		protected:
@@ -33,54 +34,29 @@ namespace uml
 			virtual void setThisOutputPinPtr(std::weak_ptr<OutputPin> thisOutputPinPtr);
 
 			//Additional constructors for the containments back reference
-			OutputPinImpl(std::weak_ptr<uml::Action > par_action);
-
-
+			OutputPinImpl(std::weak_ptr<uml::Action> par_action);
 			//Additional constructors for the containments back reference
-			OutputPinImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			OutputPinImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			OutputPinImpl(std::weak_ptr<uml::CallAction > par_callAction);
-
-
+			OutputPinImpl(std::weak_ptr<uml::CallAction> par_callAction);
 			//Additional constructors for the containments back reference
-			OutputPinImpl(std::weak_ptr<uml::ClearStructuralFeatureAction > par_clearStructuralFeatureAction);
-
-
+			OutputPinImpl(std::weak_ptr<uml::ClearStructuralFeatureAction> par_clearStructuralFeatureAction);
 			//Additional constructors for the containments back reference
-			OutputPinImpl(std::weak_ptr<uml::CreateObjectAction > par_createObjectAction);
-
-
+			OutputPinImpl(std::weak_ptr<uml::CreateObjectAction> par_createObjectAction);
 			//Additional constructors for the containments back reference
-			OutputPinImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			OutputPinImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			OutputPinImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			OutputPinImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			OutputPinImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			OutputPinImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			OutputPinImpl(std::weak_ptr<uml::ReadSelfAction > par_readSelfAction);
-
-
+			OutputPinImpl(std::weak_ptr<uml::ReadSelfAction> par_readSelfAction);
 			//Additional constructors for the containments back reference
-			OutputPinImpl(std::weak_ptr<uml::ReadStructuralFeatureAction > par_readStructuralFeatureAction);
-
-
+			OutputPinImpl(std::weak_ptr<uml::ReadStructuralFeatureAction> par_readStructuralFeatureAction);
 			//Additional constructors for the containments back reference
-			OutputPinImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
-
-
+			OutputPinImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction);
 			//Additional constructors for the containments back reference
-			OutputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction);
-
-
-
+			OutputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction> par_writeStructuralFeatureAction);
 
 		public:
 			//destructor
@@ -97,9 +73,7 @@ namespace uml
 				action.oclAsType(StructuredActivityNode).allOwnedNodes()->includesAll(incoming.source)
 			*/
 			 
-			virtual bool incoming_edges_structured_only(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool incoming_edges_structured_only(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -110,52 +84,37 @@ namespace uml
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<uml::Action > getAction() const ;
+			virtual std::weak_ptr<uml::Action> getAction() const ;
 			
 			
+			virtual std::weak_ptr<uml::CallAction> getCallAction() const ;
 			
-			virtual std::weak_ptr<uml::CallAction > getCallAction() const ;
+			virtual void setCallAction(std::weak_ptr<uml::CallAction>) ;
 			
+			virtual std::weak_ptr<uml::ClearStructuralFeatureAction> getClearStructuralFeatureAction() const ;
 			
-			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction) ;
+			virtual void setClearStructuralFeatureAction(std::weak_ptr<uml::ClearStructuralFeatureAction>) ;
 			
+			virtual std::weak_ptr<uml::CreateObjectAction> getCreateObjectAction() const ;
 			
-			virtual std::weak_ptr<uml::ClearStructuralFeatureAction > getClearStructuralFeatureAction() const ;
+			virtual void setCreateObjectAction(std::weak_ptr<uml::CreateObjectAction>) ;
 			
+			virtual std::weak_ptr<uml::ReadSelfAction> getReadSelfAction() const ;
 			
-			virtual void setClearStructuralFeatureAction(std::shared_ptr<uml::ClearStructuralFeatureAction> _clearStructuralFeatureAction) ;
+			virtual void setReadSelfAction(std::weak_ptr<uml::ReadSelfAction>) ;
 			
+			virtual std::weak_ptr<uml::ReadStructuralFeatureAction> getReadStructuralFeatureAction() const ;
 			
-			virtual std::weak_ptr<uml::CreateObjectAction > getCreateObjectAction() const ;
+			virtual void setReadStructuralFeatureAction(std::weak_ptr<uml::ReadStructuralFeatureAction>) ;
 			
+			virtual std::weak_ptr<uml::ValueSpecificationAction> getValueSpecificationAction() const ;
 			
-			virtual void setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction> _createObjectAction) ;
+			virtual void setValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction>) ;
 			
+			virtual std::weak_ptr<uml::WriteStructuralFeatureAction> getWriteStructuralFeatureAction() const ;
 			
-			virtual std::weak_ptr<uml::ReadSelfAction > getReadSelfAction() const ;
+			virtual void setWriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction>) ;
 			
-			
-			virtual void setReadSelfAction(std::shared_ptr<uml::ReadSelfAction> _readSelfAction) ;
-			
-			
-			virtual std::weak_ptr<uml::ReadStructuralFeatureAction > getReadStructuralFeatureAction() const ;
-			
-			
-			virtual void setReadStructuralFeatureAction(std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction) ;
-			
-			
-			virtual std::weak_ptr<uml::ValueSpecificationAction > getValueSpecificationAction() const ;
-			
-			
-			virtual void setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction) ;
-			
-			
-			virtual std::weak_ptr<uml::WriteStructuralFeatureAction > getWriteStructuralFeatureAction() const ;
-			
-			
-			virtual void setWriteStructuralFeatureAction(std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -175,7 +134,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

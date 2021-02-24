@@ -68,21 +68,11 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual int countOfferedVales() = 0;
-			
-			 
-			virtual bool hasTokens() = 0;
-			
-			 
-			virtual void removeOfferedValues(int count) = 0;
-			
-			 
-			virtual void removeWithdrawnTokens() = 0;
-			
-			 
+			virtual int countOfferedVales() = 0; 
+			virtual bool hasTokens() = 0; 
+			virtual void removeOfferedValues(int count) = 0; 
+			virtual void removeWithdrawnTokens() = 0; 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > retrieveOfferedTokens() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -92,7 +82,6 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getOfferedTokens() const = 0;
-			
 			
 			
 

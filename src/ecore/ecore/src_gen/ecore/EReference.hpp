@@ -75,13 +75,18 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			virtual bool isContainer() const = 0;virtual bool isContainment() const = 0;
+			 
+			virtual bool isContainer() const = 0;
 			
 			 
-			virtual void setContainment (bool _containment)= 0;virtual bool isResolveProxies() const = 0;
-			
+			virtual bool isContainment() const = 0;
+			 
+			virtual void setContainment (bool _containment)= 0;
+			 
+			virtual bool isResolveProxies() const = 0;
 			 
 			virtual void setResolveProxies (bool _resolveProxies)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -89,18 +94,13 @@ namespace ecore
 			virtual std::shared_ptr<Bag<ecore::EAttribute>> getEKeys() const = 0;
 			
 			
-			
 			virtual std::shared_ptr<ecore::EReference> getEOpposite() const = 0;
-			
 			
 			virtual void setEOpposite(std::shared_ptr<ecore::EReference>) = 0;
 			
-			
 			virtual std::shared_ptr<ecore::EClass> getEReferenceType() const = 0;
 			
-			
 			virtual void setEReferenceType(std::shared_ptr<ecore::EClass>) = 0;
-			
 			
 
 		protected:

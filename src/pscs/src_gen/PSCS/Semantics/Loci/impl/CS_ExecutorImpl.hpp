@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CS_Executor.hpp"
 
@@ -24,7 +25,7 @@ namespace PSCS::Semantics::Loci
 			CS_ExecutorImpl(const CS_ExecutorImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CS_ExecutorImpl& operator=(CS_ExecutorImpl const&) = delete;
 
 		protected:
@@ -34,10 +35,7 @@ namespace PSCS::Semantics::Loci
 			virtual void setThisCS_ExecutorPtr(std::weak_ptr<CS_Executor> thisCS_ExecutorPtr);
 
 			//Additional constructors for the containments back reference
-			CS_ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus);
-
-
-
+			CS_ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus);
 
 		public:
 			//destructor
@@ -49,8 +47,6 @@ namespace PSCS::Semantics::Loci
 			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<uml::Class> type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -59,7 +55,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ValuePin.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ValuePinImpl(const ValuePinImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ValuePinImpl& operator=(ValuePinImpl const&) = delete;
 
 		protected:
@@ -33,54 +34,29 @@ namespace uml
 			virtual void setThisValuePinPtr(std::weak_ptr<ValuePin> thisValuePinPtr);
 
 			//Additional constructors for the containments back reference
-			ValuePinImpl(std::weak_ptr<uml::Action > par_action);
-
-
+			ValuePinImpl(std::weak_ptr<uml::Action> par_action);
 			//Additional constructors for the containments back reference
-			ValuePinImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ValuePinImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ValuePinImpl(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction);
-
-
+			ValuePinImpl(std::weak_ptr<uml::AddStructuralFeatureValueAction> par_addStructuralFeatureValueAction);
 			//Additional constructors for the containments back reference
-			ValuePinImpl(std::weak_ptr<uml::CallOperationAction > par_callOperationAction);
-
-
+			ValuePinImpl(std::weak_ptr<uml::CallOperationAction> par_callOperationAction);
 			//Additional constructors for the containments back reference
-			ValuePinImpl(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction);
-
-
+			ValuePinImpl(std::weak_ptr<uml::DestroyObjectAction> par_destroyObjectAction);
 			//Additional constructors for the containments back reference
-			ValuePinImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ValuePinImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ValuePinImpl(std::weak_ptr<uml::InvocationAction > par_invocationAction);
-
-
+			ValuePinImpl(std::weak_ptr<uml::InvocationAction> par_invocationAction);
 			//Additional constructors for the containments back reference
-			ValuePinImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ValuePinImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ValuePinImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ValuePinImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ValuePinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction);
-
-
+			ValuePinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> par_removeStructuralFeatureValueAction);
 			//Additional constructors for the containments back reference
-			ValuePinImpl(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction);
-
-
+			ValuePinImpl(std::weak_ptr<uml::StructuralFeatureAction> par_structuralFeatureAction);
 			//Additional constructors for the containments back reference
-			ValuePinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction);
-
-
-
+			ValuePinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction> par_writeStructuralFeatureAction);
 
 		public:
 			//destructor
@@ -94,16 +70,12 @@ namespace uml
 			value.type.conformsTo(type)
 			*/
 			 
-			virtual bool compatible_type(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool compatible_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A ValuePin may have no incoming ActivityEdges.
 			incoming->isEmpty()
 			*/
 			 
-			virtual bool no_incoming_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -118,16 +90,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getValue() const ;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getValue() const ;
 			/*!
 			The ValueSpecification that is evaluated to obtain the value that the ValuePin will provide.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::ValueSpecification> _value) ;
+			virtual void setValue(std::shared_ptr<uml::ValueSpecification>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -147,7 +117,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ClearAssociationAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ClearAssociationActionImpl(const ClearAssociationActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ClearAssociationActionImpl& operator=(ClearAssociationActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisClearAssociationActionPtr(std::weak_ptr<ClearAssociationAction> thisClearAssociationActionPtr);
 
 			//Additional constructors for the containments back reference
-			ClearAssociationActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ClearAssociationActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ClearAssociationActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ClearAssociationActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ClearAssociationActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ClearAssociationActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ClearAssociationActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ClearAssociationActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,16 +54,12 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type of the InputPin must conform to the type of at least one of the memberEnds of the association.
 			association.memberEnd->exists(self.object.type.conformsTo(type))
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -86,30 +74,26 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Association > getAssociation() const ;
-			
+			virtual std::shared_ptr<uml::Association> getAssociation() const ;
 			/*!
 			The Association to be cleared.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setAssociation(std::shared_ptr<uml::Association> _association) ;
-			
+			virtual void setAssociation(std::shared_ptr<uml::Association>) ;
 			/*!
 			The InputPin that gives the object whose participation in the Association is to be cleared.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getObject() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getObject() const ;
 			/*!
 			The InputPin that gives the object whose participation in the Association is to be cleared.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object) ;
+			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -134,7 +118,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

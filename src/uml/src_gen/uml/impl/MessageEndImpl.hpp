@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../MessageEnd.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			MessageEndImpl(const MessageEndImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			MessageEndImpl& operator=(MessageEndImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace uml
 			virtual void setThisMessageEndPtr(std::weak_ptr<MessageEnd> thisMessageEndPtr);
 
 			//Additional constructors for the containments back reference
-			MessageEndImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			MessageEndImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			MessageEndImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			MessageEndImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -83,27 +79,21 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::InteractionFragment> > enclosingFragment() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::InteractionFragment> > enclosingFragment() ;/*!
 			This query returns value true if this MessageEnd is a receiveEvent.
 			message->notEmpty()
 			result = (message.receiveEvent->asSet()->includes(self))
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual bool isReceive() ;
-			
-			/*!
+			virtual bool isReceive() ;/*!
 			This query returns value true if this MessageEnd is a sendEvent.
 			message->notEmpty()
 			result = (message.sendEvent->asSet()->includes(self))
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual bool isSend() ;
-			
-			/*!
+			virtual bool isSend() ;/*!
 			This query returns a set including the MessageEnd (if exists) at the opposite end of the Message for this MessageEnd.
 			result = (message->asSet().messageEnd->asSet()->excluding(self))
 			message->notEmpty()
@@ -111,8 +101,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::MessageEnd> > oppositeEnd() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -127,16 +115,14 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Message > getMessage() const ;
-			
+			virtual std::shared_ptr<uml::Message> getMessage() const ;
 			/*!
 			References a Message.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setMessage(std::shared_ptr<uml::Message> _message) ;
+			virtual void setMessage(std::shared_ptr<uml::Message>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -151,7 +137,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

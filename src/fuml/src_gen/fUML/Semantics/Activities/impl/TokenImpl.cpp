@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -40,13 +41,11 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
-#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
-
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -68,23 +67,20 @@ TokenImpl::~TokenImpl()
 }
 
 
-
-TokenImpl::TokenImpl(const TokenImpl & obj):TokenImpl()
+TokenImpl::TokenImpl(const TokenImpl & obj): ecore::EModelElementImpl(obj),
+Token(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Token "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_withdrawn = obj.isWithdrawn();
 
 	//copy references with no containment (soft copy)
-	
 	m_holder  = obj.getHolder();
 
-
 	//Clone references with containment (deep copy)
-
-
 }
 
 std::shared_ptr<ecore::EObject>  TokenImpl::copy() const
@@ -109,12 +105,10 @@ bool TokenImpl::isWithdrawn() const
 {
 	return m_withdrawn;
 }
-
 void TokenImpl::setWithdrawn(bool _withdrawn)
 {
 	m_withdrawn = _withdrawn;
 } 
-
 
 
 //*********************************
@@ -176,7 +170,7 @@ void TokenImpl::withdraw()
 		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder = this->getHolder().lock();
 		//NEWDEBUG
 		DEBUG_MESSAGE(std::cout<<"-- printing from Token::"<<__FUNCTION__<<" '"<<(holder->getNode() == nullptr ? "..." : ("holder = " + holder->getNode()->getName()))<<"' : !isWithdrawn"<<std::endl;)
-        this->setHolder(nullptr);
+		this->setHolder(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>(nullptr));
 		this->setWithdrawn(true);
 		if (holder)
 		{	
@@ -194,17 +188,15 @@ void TokenImpl::withdraw()
 /*
 Getter & Setter for reference holder
 */
-std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > TokenImpl::getHolder() const
+std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> TokenImpl::getHolder() const
 {
 
     return m_holder;
 }
-
-void TokenImpl::setHolder(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder)
+void TokenImpl::setHolder(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder)
 {
     m_holder = _holder;
 }
-
 
 
 //*********************************
@@ -323,7 +315,6 @@ void TokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 
 void TokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
 	//load BasePackage Nodes
 }

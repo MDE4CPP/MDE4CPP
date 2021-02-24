@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../StructuredActivityNode.hpp"
 
@@ -25,7 +26,7 @@ namespace uml
 			StructuredActivityNodeImpl(const StructuredActivityNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			StructuredActivityNodeImpl& operator=(StructuredActivityNodeImpl const&) = delete;
 
 		protected:
@@ -35,29 +36,16 @@ namespace uml
 			virtual void setThisStructuredActivityNodePtr(std::weak_ptr<StructuredActivityNode> thisStructuredActivityNodePtr);
 
 			//Additional constructors for the containments back reference
-			StructuredActivityNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id);
-
-
+			StructuredActivityNodeImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id);
 			//Additional constructors for the containments back reference
-
-
 			//Additional constructors for the containments back reference
-			StructuredActivityNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			StructuredActivityNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			StructuredActivityNodeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			StructuredActivityNodeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			StructuredActivityNodeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			StructuredActivityNodeImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			StructuredActivityNodeImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup);
-
-
-
+			StructuredActivityNodeImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup);
 
 		public:
 			//destructor
@@ -72,32 +60,24 @@ namespace uml
 				union(self.targetNodes().incoming->intersection(self.allOwnedNodes().outgoing))->asSet()
 			*/
 			 
-			virtual bool edges(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The incoming ActivityEdges of an InputPin of a StructuredActivityNode must have sources that are not within the StructuredActivityNode.
 			input.incoming.source->excludesAll(allOwnedNodes()-output)
 			*/
 			 
-			virtual bool input_pin_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool input_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The outgoing ActivityEdges of the OutputPins of a StructuredActivityNode must have targets that are not within the StructuredActivityNode.
 			output.outgoing.target->excludesAll(allOwnedNodes()-input)
 			*/
 			 
-			virtual bool output_pin_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool output_pin_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as sources of edges owned by the StructuredActivityNode.
 			result = (node->union(input.oclAsType(ActivityNode)->asSet())->
 			  union(node->select(oclIsKindOf(Action)).oclAsType(Action).output)->asSet())
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > sourceNodes() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::ActivityNode> > sourceNodes() ;/*!
 			Return those ActivityNodes contained immediately within the StructuredActivityNode that may act as targets of edges owned by the StructuredActivityNode.
 			result = (node->union(output.oclAsType(ActivityNode)->asSet())->
 			  union(node->select(oclIsKindOf(Action)).oclAsType(Action).input)->asSet())
@@ -105,8 +85,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::ActivityNode> > targetNodes() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -117,13 +95,13 @@ namespace uml
 			*/
 			 
 			virtual bool getMustIsolate() const ;
-			
 			/*!
 			If true, then any object used by an Action within the StructuredActivityNode cannot be accessed by any Action outside the node until the StructuredActivityNode as a whole completes. Any concurrent Actions that would result in accessing such objects are required to have their execution deferred until the completion of the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setMustIsolate (bool _mustIsolate);
+			
 			
 			//*********************************
 			// Reference
@@ -135,14 +113,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge,uml::Element>> getEdge() const ;
 			
-			
 			/*!
 			The ActivityNodes immediately contained in the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode,uml::Element>> getNode() const ;
-			
 			
 			/*!
 			The InputPins owned by the StructuredActivityNode.
@@ -151,14 +127,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getStructuredNodeInput() const ;
 			
-			
 			/*!
 			The OutputPins owned by the StructuredActivityNode.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getStructuredNodeOutput() const ;
-			
 			
 			/*!
 			The Variables defined in the scope of the StructuredActivityNode.
@@ -168,7 +142,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> getVariable() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -218,7 +191,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

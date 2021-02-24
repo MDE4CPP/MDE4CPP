@@ -68,30 +68,14 @@ namespace fUML::Semantics::Values
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
-			
-			 
-			virtual bool checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) = 0;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const = 0;
-			
-			 
-			virtual bool hasTypes(std::shared_ptr<uml::Classifier> type) = 0;
-			
-			 
-			virtual std::string objectId() = 0;
-			
-			 
-			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0; 
+			virtual bool checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) = 0; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0; 
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const = 0; 
+			virtual bool hasTypes(std::shared_ptr<uml::Classifier> type) = 0; 
+			virtual std::string objectId() = 0; 
+			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0; 
 			virtual std::string toString() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

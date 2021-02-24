@@ -64,10 +64,10 @@ namespace uml
 			ProtocolConformance(){}
 
 			//Additional constructors for the containments back reference
-			ProtocolConformance(std::weak_ptr<uml::Element > par_owner);
+			ProtocolConformance(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-			ProtocolConformance(std::weak_ptr<uml::ProtocolStateMachine > par_specificMachine);
+			ProtocolConformance(std::weak_ptr<uml::ProtocolStateMachine> par_specificMachine);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -91,29 +91,25 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ProtocolStateMachine > getGeneralMachine() const = 0;
-			
+			virtual std::shared_ptr<uml::ProtocolStateMachine> getGeneralMachine() const = 0;
 			/*!
 			Specifies the ProtocolStateMachine to which the specific ProtocolStateMachine conforms.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine> _generalMachine) = 0;
-			
+			virtual void setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine>) = 0;
 			/*!
 			Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::ProtocolStateMachine > getSpecificMachine() const = 0;
-			
+			virtual std::weak_ptr<uml::ProtocolStateMachine> getSpecificMachine() const = 0;
 			/*!
 			Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setSpecificMachine(std::shared_ptr<uml::ProtocolStateMachine> _specificMachine) = 0;
-			
+			virtual void setSpecificMachine(std::weak_ptr<uml::ProtocolStateMachine>) = 0;
 			
 
 		protected:
@@ -130,12 +126,12 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			std::shared_ptr<uml::ProtocolStateMachine > m_generalMachine;/*!
+			std::shared_ptr<uml::ProtocolStateMachine> m_generalMachine;/*!
 			Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			std::weak_ptr<uml::ProtocolStateMachine > m_specificMachine;
+			std::weak_ptr<uml::ProtocolStateMachine> m_specificMachine;
 
 		public:
 			//*********************************
@@ -151,7 +147,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/

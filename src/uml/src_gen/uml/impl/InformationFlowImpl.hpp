@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../InformationFlow.hpp"
 
@@ -24,7 +25,7 @@ namespace uml
 			InformationFlowImpl(const InformationFlowImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			InformationFlowImpl& operator=(InformationFlowImpl const&) = delete;
 
 		protected:
@@ -34,22 +35,13 @@ namespace uml
 			virtual void setThisInformationFlowPtr(std::weak_ptr<InformationFlow> thisInformationFlowPtr);
 
 			//Additional constructors for the containments back reference
-			InformationFlowImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			InformationFlowImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			InformationFlowImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			InformationFlowImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			InformationFlowImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			InformationFlowImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			InformationFlowImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			InformationFlowImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -64,15 +56,11 @@ namespace uml
 			  or oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component))
 			*/
 			 
-			virtual bool convey_classifiers(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool convey_classifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The sources and targets of the information flow must conform to the sources and targets or conversely the targets and sources of the realization relationships.
 			*/
 			 
-			virtual bool must_conform(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool must_conform(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The sources and targets of the information flow can only be one of the following kind: Actor, Node, UseCase, Artifact, Class, Component, Port, Property, Interface, Package, ActivityNode, ActivityPartition,
 			Behavior and InstanceSpecification except when its classifier is a relationship (i.e. it represents a link).
 			(self.informationSource->forAll( sis |
@@ -90,9 +78,7 @@ namespace uml
 			(oclIsKindOf(InstanceSpecification) and not sit.oclAsType(InstanceSpecification).classifier->exists(oclIsKindOf(Relationship)))))
 			*/
 			 
-			virtual bool sources_and_targets_kind(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool sources_and_targets_kind(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -109,14 +95,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Classifier>> getConveyed() const ;
 			
-			
 			/*!
 			Defines from which source the conveyed InformationItems are initiated.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationSource() const ;
-			
 			
 			/*!
 			Defines to which target the conveyed InformationItems are directed.
@@ -125,14 +109,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationTarget() const ;
 			
-			
 			/*!
 			Determines which Relationship will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Relationship>> getRealization() const ;
-			
 			
 			/*!
 			Determines which ActivityEdges will realize the specified flow.
@@ -141,14 +123,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getRealizingActivityEdge() const ;
 			
-			
 			/*!
 			Determines which Connectors will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Connector>> getRealizingConnector() const ;
-			
 			
 			/*!
 			Determines which Messages will realize the specified flow.
@@ -158,7 +138,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Message>> getRealizingMessage() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -168,7 +147,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -178,7 +157,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/

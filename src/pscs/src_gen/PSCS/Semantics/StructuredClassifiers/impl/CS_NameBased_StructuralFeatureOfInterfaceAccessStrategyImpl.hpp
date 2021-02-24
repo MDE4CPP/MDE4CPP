@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy.hpp"
 
@@ -24,7 +25,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl& operator=(CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 			CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl();
 			virtual std::shared_ptr<CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> getThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr() const;
 			virtual void setThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr(std::weak_ptr<CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> thisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr);
-
 
 
 		public:
@@ -43,12 +43,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<uml::StructuralFeature> feature) ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<uml::StructuralFeature> feature) ; 
 			virtual void write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -58,7 +54,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

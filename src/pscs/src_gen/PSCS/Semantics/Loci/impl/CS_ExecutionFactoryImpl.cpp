@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -84,13 +85,14 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/Loci/impl/LociFactoryImpl.hpp"
-#include "PSCS/Semantics/Loci/impl/LociPackageImpl.hpp"
-
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
-#include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -112,40 +114,25 @@ CS_ExecutionFactoryImpl::~CS_ExecutionFactoryImpl()
 }
 
 //Additional constructor for the containments back reference
-CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
+CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus)
 :CS_ExecutionFactoryImpl()
 {
 	m_locus = par_locus;
 }
 
-
-CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj):CS_ExecutionFactoryImpl()
+CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj): fUML::Semantics::Loci::ExecutionFactoryImpl(obj), CS_ExecutionFactory(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_ExecutionFactory "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	std::shared_ptr<Bag<uml::Package>> _appliedProfiles = obj.getAppliedProfiles();
 	m_appliedProfiles.reset(new Bag<uml::Package>(*(obj.getAppliedProfiles().get())));
 
-	std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = obj.getBuiltInTypes();
-	m_builtInTypes.reset(new Bag<uml::PrimitiveType>(*(obj.getBuiltInTypes().get())));
-
-	m_locus  = obj.getLocus();
-
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
-	m_primitiveBehaviorPrototypes.reset(new Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>(*(obj.getPrimitiveBehaviorPrototypes().get())));
-
-	std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = obj.getStrategies();
-	m_strategies.reset(new Bag<fUML::Semantics::Loci::SemanticStrategy>(*(obj.getStrategies().get())));
-
-
 	//Clone references with containment (deep copy)
-
-
 }
 
 std::shared_ptr<ecore::EObject>  CS_ExecutionFactoryImpl::copy() const
@@ -305,8 +292,6 @@ std::shared_ptr<Bag<uml::Package>> CS_ExecutionFactoryImpl::getAppliedProfiles()
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
@@ -445,7 +430,6 @@ void CS_ExecutionFactoryImpl::loadAttributes(std::shared_ptr<persistence::interf
 
 void CS_ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::Loci::LociFactory> modelFactory=PSCS::Semantics::Loci::LociFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Loci::ExecutionFactoryImpl::loadNode(nodeName, loadHandler);
@@ -460,11 +444,11 @@ void CS_ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector
 			std::shared_ptr<Bag<uml::Package>> _appliedProfiles = getAppliedProfiles();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Package> _r = std::dynamic_pointer_cast<uml::Package>(ref);
+				std::shared_ptr<uml::Package>  _r = std::dynamic_pointer_cast<uml::Package>(ref);
 				if (_r != nullptr)
 				{
 					_appliedProfiles->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -487,7 +471,6 @@ void CS_ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interface
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::Loci::LociPackage> package = PSCS::Semantics::Loci::LociPackage::eInstance();
-
 	// Add references
 		saveHandler->addReferences<uml::Package>("appliedProfiles", this->getAppliedProfiles());
 	}

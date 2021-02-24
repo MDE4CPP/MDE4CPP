@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Value.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Values
 			ValueImpl(const ValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ValueImpl& operator=(ValueImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::Values
 			ValueImpl();
 			virtual std::shared_ptr<Value> getThisValuePtr() const;
 			virtual void setThisValuePtr(std::weak_ptr<Value> thisValuePtr);
-
 
 
 		public:
@@ -43,30 +43,14 @@ namespace fUML::Semantics::Values
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual bool checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) ;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
-			
-			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const ;
-			
-			 
-			virtual bool hasTypes(std::shared_ptr<uml::Classifier> type) ;
-			
-			 
-			virtual std::string objectId() ;
-			
-			 
-			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual bool checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) ; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ; 
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const ; 
+			virtual bool hasTypes(std::shared_ptr<uml::Classifier> type) ; 
+			virtual std::string objectId() ; 
+			virtual std::shared_ptr<uml::ValueSpecification> specify() ; 
 			virtual std::string toString() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -76,7 +60,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

@@ -94,16 +94,12 @@ namespace uml
 			target.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The target InputPin has no type.
 			target.type= null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -113,25 +109,25 @@ namespace uml
 			*/
 			 
 			virtual bool getIsDestroyLinks() const = 0;
-			
 			/*!
 			Specifies whether links in which the object participates are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDestroyLinks (bool _isDestroyLinks)= 0;/*!
+			virtual void setIsDestroyLinks (bool _isDestroyLinks)= 0;
+			/*!
 			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual bool getIsDestroyOwnedObjects() const = 0;
-			
 			/*!
 			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setIsDestroyOwnedObjects (bool _isDestroyOwnedObjects)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -140,15 +136,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getTarget() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getTarget() const = 0;
 			/*!
 			The InputPin providing the object to be destroyed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::InputPin> _target) = 0;
-			
+			virtual void setTarget(std::shared_ptr<uml::InputPin>) = 0;
 			
 
 		protected:
@@ -177,7 +171,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_target;
+			std::shared_ptr<uml::InputPin> m_target;
 
 		public:
 			//*********************************
@@ -203,7 +197,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

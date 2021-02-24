@@ -95,9 +95,7 @@ namespace uml
 			onPort<>null implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort)
 			*/
 			 
-			virtual bool type_target_pin(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -110,29 +108,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getRequest() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getRequest() const = 0;
 			/*!
 			The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRequest(std::shared_ptr<uml::InputPin> _request) = 0;
-			
+			virtual void setRequest(std::shared_ptr<uml::InputPin>) = 0;
 			/*!
 			The target object to which the object is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getTarget() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getTarget() const = 0;
 			/*!
 			The target object to which the object is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::InputPin> _target) = 0;
-			
+			virtual void setTarget(std::shared_ptr<uml::InputPin>) = 0;
 			
 
 		protected:
@@ -149,12 +143,12 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_request;/*!
+			std::shared_ptr<uml::InputPin> m_request;/*!
 			The target object to which the object is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_target;
+			std::shared_ptr<uml::InputPin> m_target;
 
 		public:
 			//*********************************
@@ -180,7 +174,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

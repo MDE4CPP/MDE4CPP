@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../DestructionOccurrenceSpecification.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			DestructionOccurrenceSpecificationImpl(const DestructionOccurrenceSpecificationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			DestructionOccurrenceSpecificationImpl& operator=(DestructionOccurrenceSpecificationImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisDestructionOccurrenceSpecificationPtr(std::weak_ptr<DestructionOccurrenceSpecification> thisDestructionOccurrenceSpecificationPtr);
 
 			//Additional constructors for the containments back reference
-			DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
-
-
+			DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
 			//Additional constructors for the containments back reference
-			DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
-
-
+			DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand);
 			//Additional constructors for the containments back reference
-			DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			DestructionOccurrenceSpecificationImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -64,9 +56,7 @@ namespace uml
 			in peerEvents->last() = self
 			*/
 			 
-			virtual bool no_occurrence_specifications_below(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool no_occurrence_specifications_below(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -76,7 +66,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -86,7 +76,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -96,7 +86,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

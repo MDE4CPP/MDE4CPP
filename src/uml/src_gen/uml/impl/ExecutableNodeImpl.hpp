@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ExecutableNode.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ExecutableNodeImpl(const ExecutableNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ExecutableNodeImpl& operator=(ExecutableNodeImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisExecutableNodePtr(std::weak_ptr<ExecutableNode> thisExecutableNodePtr);
 
 			//Additional constructors for the containments back reference
-			ExecutableNodeImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ExecutableNodeImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ExecutableNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ExecutableNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ExecutableNodeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ExecutableNodeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ExecutableNodeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ExecutableNodeImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -75,7 +67,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> getHandler() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -95,7 +86,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

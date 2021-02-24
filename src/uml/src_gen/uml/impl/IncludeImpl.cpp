@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -43,8 +44,7 @@
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -67,7 +67,7 @@ IncludeImpl::~IncludeImpl()
 }
 
 //Additional constructor for the containments back reference
-IncludeImpl::IncludeImpl(std::weak_ptr<uml::UseCase > par_includingCase)
+IncludeImpl::IncludeImpl(std::weak_ptr<uml::UseCase> par_includingCase)
 :IncludeImpl()
 {
 	m_includingCase = par_includingCase;
@@ -75,7 +75,7 @@ IncludeImpl::IncludeImpl(std::weak_ptr<uml::UseCase > par_includingCase)
 }
 
 //Additional constructor for the containments back reference
-IncludeImpl::IncludeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+IncludeImpl::IncludeImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :IncludeImpl()
 {
 	m_namespace = par_namespace;
@@ -83,63 +83,28 @@ IncludeImpl::IncludeImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-IncludeImpl::IncludeImpl(std::weak_ptr<uml::Element > par_owner)
+IncludeImpl::IncludeImpl(std::weak_ptr<uml::Element> par_owner)
 :IncludeImpl()
 {
 	m_owner = par_owner;
 }
 
-
-IncludeImpl::IncludeImpl(const IncludeImpl & obj):IncludeImpl()
+IncludeImpl::IncludeImpl(const IncludeImpl & obj): DirectedRelationshipImpl(obj), NamedElementImpl(obj), Include(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Include "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	m_includingCase  = obj.getIncludingCase();
 
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
-
 	//Clone references with containment (deep copy)
-
 	if(obj.getAddition()!=nullptr)
 	{
 		m_addition = std::dynamic_pointer_cast<uml::UseCase>(obj.getAddition()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_addition" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  IncludeImpl::copy() const
@@ -168,39 +133,35 @@ std::shared_ptr<ecore::EClass> IncludeImpl::eStaticClass() const
 /*
 Getter & Setter for reference addition
 */
-std::shared_ptr<uml::UseCase > IncludeImpl::getAddition() const
+std::shared_ptr<uml::UseCase> IncludeImpl::getAddition() const
 {
 //assert(m_addition);
     return m_addition;
 }
-
 void IncludeImpl::setAddition(std::shared_ptr<uml::UseCase> _addition)
 {
     m_addition = _addition;
 }
 
 
-
 /*
 Getter & Setter for reference includingCase
 */
-std::weak_ptr<uml::UseCase > IncludeImpl::getIncludingCase() const
+std::weak_ptr<uml::UseCase> IncludeImpl::getIncludingCase() const
 {
 //assert(m_includingCase);
     return m_includingCase;
 }
-
-void IncludeImpl::setIncludingCase(std::shared_ptr<uml::UseCase> _includingCase)
+void IncludeImpl::setIncludingCase(std::weak_ptr<uml::UseCase> _includingCase)
 {
     m_includingCase = _includingCase;
 }
 
 
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > IncludeImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> IncludeImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -220,7 +181,7 @@ std::shared_ptr<Union<uml::Element>> IncludeImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > IncludeImpl::getOwner() const
+std::weak_ptr<uml::Element> IncludeImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -430,7 +391,6 @@ void IncludeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 
 void IncludeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
@@ -494,9 +454,8 @@ void IncludeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("addition", this->getAddition()); 
+		saveHandler->addReference(this->getAddition(), "addition", getAddition()->eClass() != uml::umlPackage::eInstance()->getUseCase_Class()); 
 	}
 	catch (std::exception& e)
 	{

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -40,8 +41,7 @@
 #include "uml/TemplateSignature.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -64,64 +64,31 @@ OperationTemplateParameterImpl::~OperationTemplateParameterImpl()
 }
 
 //Additional constructor for the containments back reference
-OperationTemplateParameterImpl::OperationTemplateParameterImpl(std::weak_ptr<uml::Element > par_owner)
+OperationTemplateParameterImpl::OperationTemplateParameterImpl(std::weak_ptr<uml::Element> par_owner)
 :OperationTemplateParameterImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-OperationTemplateParameterImpl::OperationTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
+OperationTemplateParameterImpl::OperationTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature> par_signature)
 :OperationTemplateParameterImpl()
 {
 	m_signature = par_signature;
 	m_owner = par_signature;
 }
 
-
-OperationTemplateParameterImpl::OperationTemplateParameterImpl(const OperationTemplateParameterImpl & obj):OperationTemplateParameterImpl()
+OperationTemplateParameterImpl::OperationTemplateParameterImpl(const OperationTemplateParameterImpl & obj): TemplateParameterImpl(obj), OperationTemplateParameter(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OperationTemplateParameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_default  = obj.getDefault();
-
-	m_owner  = obj.getOwner();
-
-	m_parameteredElement  = obj.getParameteredElement();
-
-	m_signature  = obj.getSignature();
-
 
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	if(obj.getOwnedDefault()!=nullptr)
-	{
-		m_ownedDefault = std::dynamic_pointer_cast<uml::ParameterableElement>(obj.getOwnedDefault()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedDefault" << std::endl;
-	#endif
-	if(obj.getOwnedParameteredElement()!=nullptr)
-	{
-		m_ownedParameteredElement = std::dynamic_pointer_cast<uml::ParameterableElement>(obj.getOwnedParameteredElement()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedParameteredElement" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  OperationTemplateParameterImpl::copy() const
@@ -143,7 +110,7 @@ std::shared_ptr<ecore::EClass> OperationTemplateParameterImpl::eStaticClass() co
 //*********************************
 // Operations
 //*********************************
-bool OperationTemplateParameterImpl::match_default_signature(Any diagnostics,std::map <  Any ,  Any > context)
+bool OperationTemplateParameterImpl::match_default_signature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -171,7 +138,7 @@ std::shared_ptr<Union<uml::Element>> OperationTemplateParameterImpl::getOwnedEle
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > OperationTemplateParameterImpl::getOwner() const
+std::weak_ptr<uml::Element> OperationTemplateParameterImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -255,7 +222,6 @@ void OperationTemplateParameterImpl::loadAttributes(std::shared_ptr<persistence:
 
 void OperationTemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	TemplateParameterImpl::loadNode(nodeName, loadHandler);

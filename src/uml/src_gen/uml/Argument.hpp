@@ -75,19 +75,18 @@ namespace uml
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual std::string getName() const = 0;
-			
 			 
 			virtual void setName (std::string _name)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Object > getValue() const = 0;
+			virtual std::shared_ptr<uml::Object> getValue() const = 0;
 			
-			
-			virtual void setValue(std::shared_ptr<uml::Object> _value) = 0;
-			
+			virtual void setValue(std::shared_ptr<uml::Object>) = 0;
 			
 
 		protected:
@@ -102,7 +101,7 @@ namespace uml
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Object > m_value;
+			std::shared_ptr<uml::Object> m_value;
 
 		public:
 			//*********************************

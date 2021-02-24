@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CreateObjectActionActivation.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Actions
 			CreateObjectActionActivationImpl(const CreateObjectActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CreateObjectActionActivationImpl& operator=(CreateObjectActionActivationImpl const&) = delete;
 
 		protected:
@@ -34,10 +35,7 @@ namespace fUML::Semantics::Actions
 			virtual void setThisCreateObjectActionActivationPtr(std::weak_ptr<CreateObjectActionActivation> thisCreateObjectActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			CreateObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			CreateObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -49,8 +47,6 @@ namespace fUML::Semantics::Actions
 			 
 			virtual void doAction() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -60,18 +56,14 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::CreateObjectAction > getCreateObjectAction() const ;
+			virtual std::shared_ptr<uml::CreateObjectAction> getCreateObjectAction() const ;
 			
-			
-			virtual void setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction> _createObjectAction) ;
-			
+			virtual void setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction>) ;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'createObjectAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
-			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'createObjectAction'*/
+			virtual void setAction(std::shared_ptr<uml::Action>) ;/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'createObjectAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
-							
+			virtual void setNode(std::shared_ptr<uml::ActivityNode>) ;
 			
 			//*********************************
 			// Union Getter

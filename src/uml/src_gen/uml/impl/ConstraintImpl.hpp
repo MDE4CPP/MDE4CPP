@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Constraint.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ConstraintImpl(const ConstraintImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ConstraintImpl& operator=(ConstraintImpl const&) = delete;
 
 		protected:
@@ -33,25 +34,14 @@ namespace uml
 			virtual void setThisConstraintPtr(std::weak_ptr<Constraint> thisConstraintPtr);
 
 			//Additional constructors for the containments back reference
-			ConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id);
-
-
+			ConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id);
 			//Additional constructors for the containments back reference
-
-
 			//Additional constructors for the containments back reference
-			ConstraintImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ConstraintImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			ConstraintImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			ConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			ConstraintImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -64,22 +54,16 @@ namespace uml
 			The ValueSpecification for a Constraint must evaluate to a Boolean value.
 			*/
 			 
-			virtual bool boolean_value(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool boolean_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Evaluating the ValueSpecification for a Constraint must not have side effects.
 			*/
 			 
-			virtual bool no_side_effects(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A Constraint cannot be applied to itself.
 			not constrainedElement->includes(self)
 			*/
 			 
-			virtual bool not_apply_to_self(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool not_apply_to_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -96,36 +80,31 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Element>> getConstrainedElement() const ;
 			
-			
 			/*!
 			Specifies the Namespace that owns the Constraint.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getContext() const ;
-			
+			virtual std::weak_ptr<uml::Namespace> getContext() const ;
 			/*!
 			Specifies the Namespace that owns the Constraint.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setContext(std::shared_ptr<uml::Namespace> _context) ;
-			
+			virtual void setContext(std::weak_ptr<uml::Namespace>) ;
 			/*!
 			A condition that must be true when evaluated in order for the Constraint to be satisfied.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const ;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const ;
 			/*!
 			A condition that must be true when evaluated in order for the Constraint to be satisfied.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) ;
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -135,7 +114,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -145,7 +124,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

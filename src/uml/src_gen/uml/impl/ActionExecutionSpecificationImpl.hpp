@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ActionExecutionSpecification.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ActionExecutionSpecificationImpl(const ActionExecutionSpecificationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ActionExecutionSpecificationImpl& operator=(ActionExecutionSpecificationImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisActionExecutionSpecificationPtr(std::weak_ptr<ActionExecutionSpecification> thisActionExecutionSpecificationPtr);
 
 			//Additional constructors for the containments back reference
-			ActionExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
-
-
+			ActionExecutionSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
 			//Additional constructors for the containments back reference
-			ActionExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
-
-
+			ActionExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand);
 			//Additional constructors for the containments back reference
-			ActionExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ActionExecutionSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ActionExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ActionExecutionSpecificationImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -66,9 +58,7 @@ namespace uml
 			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction
 			*/
 			 
-			virtual bool action_referenced(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool action_referenced(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -83,16 +73,14 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Action > getAction() const ;
-			
+			virtual std::shared_ptr<uml::Action> getAction() const ;
 			/*!
 			Action whose execution is occurring.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) ;
+			virtual void setAction(std::shared_ptr<uml::Action>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -102,7 +90,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -112,7 +100,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

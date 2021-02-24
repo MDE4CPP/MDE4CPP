@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../RemoveVariableValueAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			RemoveVariableValueActionImpl(const RemoveVariableValueActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			RemoveVariableValueActionImpl& operator=(RemoveVariableValueActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisRemoveVariableValueActionPtr(std::weak_ptr<RemoveVariableValueAction> thisRemoveVariableValueActionPtr);
 
 			//Additional constructors for the containments back reference
-			RemoveVariableValueActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			RemoveVariableValueActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			RemoveVariableValueActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			RemoveVariableValueActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			RemoveVariableValueActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			RemoveVariableValueActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			RemoveVariableValueActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			RemoveVariableValueActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -69,9 +61,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool removeAt_and_value(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool removeAt_and_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -82,13 +72,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsRemoveDuplicates() const ;
-			
 			/*!
 			Specifies whether to remove duplicates of the value in nonunique Variables.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setIsRemoveDuplicates (bool _isRemoveDuplicates);
+			
 			
 			//*********************************
 			// Reference
@@ -98,16 +88,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getRemoveAt() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getRemoveAt() const ;
 			/*!
 			An InputPin that provides the position of an existing value to remove in ordered, nonunique Variables. The type of the removeAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRemoveAt(std::shared_ptr<uml::InputPin> _removeAt) ;
+			virtual void setRemoveAt(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -132,7 +120,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

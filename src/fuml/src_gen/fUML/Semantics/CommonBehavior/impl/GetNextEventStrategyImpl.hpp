@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../GetNextEventStrategy.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::CommonBehavior
 			GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			GetNextEventStrategyImpl& operator=(GetNextEventStrategyImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::CommonBehavior
 			GetNextEventStrategyImpl();
 			virtual std::shared_ptr<GetNextEventStrategy> getThisGetNextEventStrategyPtr() const;
 			virtual void setThisGetNextEventStrategyPtr(std::weak_ptr<GetNextEventStrategy> thisGetNextEventStrategyPtr);
-
 
 
 		public:
@@ -43,12 +43,8 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::string getName() ;
-			
-			 
+			virtual std::string getName() ; 
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -58,7 +54,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

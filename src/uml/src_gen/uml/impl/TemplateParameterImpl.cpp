@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -39,8 +40,7 @@
 #include "uml/TemplateSignature.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -63,66 +63,43 @@ TemplateParameterImpl::~TemplateParameterImpl()
 }
 
 //Additional constructor for the containments back reference
-TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::Element > par_owner)
+TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::Element> par_owner)
 :TemplateParameterImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature)
+TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::TemplateSignature> par_signature)
 :TemplateParameterImpl()
 {
 	m_signature = par_signature;
 	m_owner = par_signature;
 }
 
-
-TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj):TemplateParameterImpl()
+TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj): ElementImpl(obj), TemplateParameter(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TemplateParameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_default  = obj.getDefault();
-
-	m_owner  = obj.getOwner();
-
 	m_parameteredElement  = obj.getParameteredElement();
-
 	m_signature  = obj.getSignature();
 
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
 	if(obj.getOwnedDefault()!=nullptr)
 	{
 		m_ownedDefault = std::dynamic_pointer_cast<uml::ParameterableElement>(obj.getOwnedDefault()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedDefault" << std::endl;
-	#endif
 	if(obj.getOwnedParameteredElement()!=nullptr)
 	{
 		m_ownedParameteredElement = std::dynamic_pointer_cast<uml::ParameterableElement>(obj.getOwnedParameteredElement()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedParameteredElement" << std::endl;
-	#endif
-
 	
-
 	
 }
 
@@ -145,7 +122,7 @@ std::shared_ptr<ecore::EClass> TemplateParameterImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateParameterImpl::must_be_compatible(Any diagnostics,std::map <  Any ,  Any > context)
+bool TemplateParameterImpl::must_be_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -157,81 +134,71 @@ bool TemplateParameterImpl::must_be_compatible(Any diagnostics,std::map <  Any ,
 /*
 Getter & Setter for reference default
 */
-std::shared_ptr<uml::ParameterableElement > TemplateParameterImpl::getDefault() const
+std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getDefault() const
 {
 
     return m_default;
 }
-
 void TemplateParameterImpl::setDefault(std::shared_ptr<uml::ParameterableElement> _default)
 {
     m_default = _default;
 }
 
 
-
 /*
 Getter & Setter for reference ownedDefault
 */
-std::shared_ptr<uml::ParameterableElement > TemplateParameterImpl::getOwnedDefault() const
+std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedDefault() const
 {
 
     return m_ownedDefault;
 }
-
 void TemplateParameterImpl::setOwnedDefault(std::shared_ptr<uml::ParameterableElement> _ownedDefault)
 {
     m_ownedDefault = _ownedDefault;
 }
 
 
-
 /*
 Getter & Setter for reference ownedParameteredElement
 */
-std::shared_ptr<uml::ParameterableElement > TemplateParameterImpl::getOwnedParameteredElement() const
+std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedParameteredElement() const
 {
 
     return m_ownedParameteredElement;
 }
-
 void TemplateParameterImpl::setOwnedParameteredElement(std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement)
 {
     m_ownedParameteredElement = _ownedParameteredElement;
 }
 
 
-
 /*
 Getter & Setter for reference parameteredElement
 */
-std::shared_ptr<uml::ParameterableElement > TemplateParameterImpl::getParameteredElement() const
+std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getParameteredElement() const
 {
 //assert(m_parameteredElement);
     return m_parameteredElement;
 }
-
 void TemplateParameterImpl::setParameteredElement(std::shared_ptr<uml::ParameterableElement> _parameteredElement)
 {
     m_parameteredElement = _parameteredElement;
 }
 
 
-
 /*
 Getter & Setter for reference signature
 */
-std::weak_ptr<uml::TemplateSignature > TemplateParameterImpl::getSignature() const
+std::weak_ptr<uml::TemplateSignature> TemplateParameterImpl::getSignature() const
 {
 //assert(m_signature);
     return m_signature;
 }
-
-void TemplateParameterImpl::setSignature(std::shared_ptr<uml::TemplateSignature> _signature)
+void TemplateParameterImpl::setSignature(std::weak_ptr<uml::TemplateSignature> _signature)
 {
     m_signature = _signature;
 }
-
 
 
 //*********************************
@@ -252,7 +219,7 @@ std::shared_ptr<Union<uml::Element>> TemplateParameterImpl::getOwnedElement() co
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > TemplateParameterImpl::getOwner() const
+std::weak_ptr<uml::Element> TemplateParameterImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -422,7 +389,6 @@ void TemplateParameterImpl::loadAttributes(std::shared_ptr<persistence::interfac
 
 void TemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -434,12 +400,9 @@ void TemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> ownedDefault = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER);
-			if (ownedDefault != nullptr)
-			{
-				loadHandler->handleChild(ownedDefault);
-			}
-			return;
+			loadHandler->handleChild(this->getOwnedDefault()); 
+
+			return; 
 		}
 
 		if ( nodeName.compare("ownedParameteredElement") == 0 )
@@ -450,12 +413,9 @@ void TemplateParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> ownedParameteredElement = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER);
-			if (ownedParameteredElement != nullptr)
-			{
-				loadHandler->handleChild(ownedParameteredElement);
-			}
-			return;
+			loadHandler->handleChild(this->getOwnedParameteredElement()); 
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -532,22 +492,21 @@ void TemplateParameterImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedDefault'
-		std::shared_ptr<uml::ParameterableElement > ownedDefault = this->getOwnedDefault();
+		std::shared_ptr<uml::ParameterableElement> ownedDefault = this->getOwnedDefault();
 		if (ownedDefault != nullptr)
 		{
 			saveHandler->addReference(ownedDefault, "ownedDefault", ownedDefault->eClass() != package->getParameterableElement_Class());
 		}
 
 		// Save 'ownedParameteredElement'
-		std::shared_ptr<uml::ParameterableElement > ownedParameteredElement = this->getOwnedParameteredElement();
+		std::shared_ptr<uml::ParameterableElement> ownedParameteredElement = this->getOwnedParameteredElement();
 		if (ownedParameteredElement != nullptr)
 		{
 			saveHandler->addReference(ownedParameteredElement, "ownedParameteredElement", ownedParameteredElement->eClass() != package->getParameterableElement_Class());
 		}
-
 	// Add references
-		saveHandler->addReference("default", this->getDefault()); 
-		saveHandler->addReference("parameteredElement", this->getParameteredElement()); 
+		saveHandler->addReference(this->getDefault(), "default", getDefault()->eClass() != uml::umlPackage::eInstance()->getParameterableElement_Class()); 
+		saveHandler->addReference(this->getParameteredElement(), "parameteredElement", getParameteredElement()->eClass() != uml::umlPackage::eInstance()->getParameterableElement_Class()); 
 	}
 	catch (std::exception& e)
 	{

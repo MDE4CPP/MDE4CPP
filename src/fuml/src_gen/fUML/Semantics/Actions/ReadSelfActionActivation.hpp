@@ -82,8 +82,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			 
 			virtual void doAction() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -92,18 +90,14 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::ReadSelfAction > getReadSelfAction() const = 0;
+			virtual std::shared_ptr<uml::ReadSelfAction> getReadSelfAction() const = 0;
 			
-			
-			virtual void setReadSelfAction(std::shared_ptr<uml::ReadSelfAction> _readSelfAction) = 0;
-			
+			virtual void setReadSelfAction(std::shared_ptr<uml::ReadSelfAction>) = 0;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'readSelfAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
-			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'readSelfAction'*/
+			virtual void setAction(std::shared_ptr<uml::Action>) = 0;/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'readSelfAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
 
 		protected:
 			//*********************************
@@ -115,7 +109,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::ReadSelfAction > m_readSelfAction;
+			std::shared_ptr<uml::ReadSelfAction> m_readSelfAction;
 
 		public:
 			//*********************************

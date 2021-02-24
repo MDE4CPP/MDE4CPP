@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CS_RequestPropagationStrategy.hpp"
 
@@ -24,7 +25,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			CS_RequestPropagationStrategyImpl(const CS_RequestPropagationStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CS_RequestPropagationStrategyImpl& operator=(CS_RequestPropagationStrategyImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 			CS_RequestPropagationStrategyImpl();
 			virtual std::shared_ptr<CS_RequestPropagationStrategy> getThisCS_RequestPropagationStrategyPtr() const;
 			virtual void setThisCS_RequestPropagationStrategyPtr(std::weak_ptr<CS_RequestPropagationStrategy> thisCS_RequestPropagationStrategyPtr);
-
 
 
 		public:
@@ -43,12 +43,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::string getName() ;
-			
-			 
+			virtual std::string getName() ; 
 			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> context) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -58,7 +54,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CollaborationUse.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			CollaborationUseImpl(const CollaborationUseImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CollaborationUseImpl& operator=(CollaborationUseImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace uml
 			virtual void setThisCollaborationUsePtr(std::weak_ptr<CollaborationUse> thisCollaborationUsePtr);
 
 			//Additional constructors for the containments back reference
-			CollaborationUseImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			CollaborationUseImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			CollaborationUseImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			CollaborationUseImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,9 +58,7 @@ namespace uml
 			      ce1.collaboration = ce2.collaboration)
 			*/
 			 
-			virtual bool client_elements(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool client_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
 			type.ownedConnector->forAll(connector |
 			  let rolesConnectedInCollab : Set(ConnectableElement) = connector.end.role->asSet(),
@@ -77,16 +71,12 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool connectors(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool connectors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Every collaborationRole in the Collaboration is bound within the CollaborationUse.
 			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role)))
 			*/
 			 
-			virtual bool every_role(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool every_role(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -103,22 +93,19 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Dependency, uml::Element>> getRoleBinding() const ;
 			
-			
 			/*!
 			The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Collaboration > getType() const ;
-			
+			virtual std::shared_ptr<uml::Collaboration> getType() const ;
 			/*!
 			The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setType(std::shared_ptr<uml::Collaboration> _type) ;
+			virtual void setType(std::shared_ptr<uml::Collaboration>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -133,7 +120,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

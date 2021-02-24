@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../SendSignalAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			SendSignalActionImpl(const SendSignalActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			SendSignalActionImpl& operator=(SendSignalActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisSendSignalActionPtr(std::weak_ptr<SendSignalAction> thisSendSignalActionPtr);
 
 			//Additional constructors for the containments back reference
-			SendSignalActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			SendSignalActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			SendSignalActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			SendSignalActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			SendSignalActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			SendSignalActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			SendSignalActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			SendSignalActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,9 +54,7 @@ namespace uml
 			argument->size()=signal.allAttributes()->size()
 			*/
 			 
-			virtual bool number_order(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool number_order(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
 			let attribute: OrderedSet(Property) = signal.allAttributes() in
 			Sequence{1..argument->size()}->forAll(i | 
@@ -73,16 +63,12 @@ namespace uml
 				argument->at(i).compatibleWith(attribute->at(i)))
 			*/
 			 
-			virtual bool type_ordering_multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool type_ordering_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If onPort is not empty, the Port given by onPort must be an owned or inherited feature of the type of the target InputPin.
 			not onPort->isEmpty() implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort)
 			*/
 			 
-			virtual bool type_target_pin(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -97,30 +83,26 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal > getSignal() const ;
-			
+			virtual std::shared_ptr<uml::Signal> getSignal() const ;
 			/*!
 			The Signal whose instance is transmitted to the target.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setSignal(std::shared_ptr<uml::Signal> _signal) ;
-			
+			virtual void setSignal(std::shared_ptr<uml::Signal>) ;
 			/*!
 			The InputPin that provides the target object to which the Signal instance is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getTarget() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getTarget() const ;
 			/*!
 			The InputPin that provides the target object to which the Signal instance is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::InputPin> _target) ;
+			virtual void setTarget(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -145,7 +127,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

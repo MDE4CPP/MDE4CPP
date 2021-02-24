@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Factory.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			FactoryImpl(const FactoryImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			FactoryImpl& operator=(FactoryImpl const&) = delete;
 
 		protected:
@@ -33,10 +34,7 @@ namespace uml
 			virtual void setThisFactoryPtr(std::weak_ptr<Factory> thisFactoryPtr);
 
 			//Additional constructors for the containments back reference
-			FactoryImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			FactoryImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -54,8 +52,6 @@ namespace uml
 			 
 			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class> metaClass) ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -64,7 +60,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

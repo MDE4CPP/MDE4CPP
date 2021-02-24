@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Variable.hpp"
 
@@ -24,7 +25,7 @@ namespace uml
 			VariableImpl(const VariableImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			VariableImpl& operator=(VariableImpl const&) = delete;
 
 		protected:
@@ -34,26 +35,15 @@ namespace uml
 			virtual void setThisVariablePtr(std::weak_ptr<Variable> thisVariablePtr);
 
 			//Additional constructors for the containments back reference
-			VariableImpl(std::weak_ptr<uml::Activity > par_activityScope);
-
-
+			VariableImpl(std::weak_ptr<uml::Activity> par_activityScope);
 			//Additional constructors for the containments back reference
-			VariableImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			VariableImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			VariableImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			VariableImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			VariableImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			VariableImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-			VariableImpl(std::weak_ptr<uml::StructuredActivityNode > par_scope);
-
-
-
+			VariableImpl(std::weak_ptr<uml::StructuredActivityNode> par_scope);
 
 		public:
 			//destructor
@@ -72,8 +62,6 @@ namespace uml
 			 
 			virtual bool isAccessibleBy(std::shared_ptr<uml::Action> a) ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -87,30 +75,26 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Activity > getActivityScope() const ;
-			
+			virtual std::weak_ptr<uml::Activity> getActivityScope() const ;
 			/*!
 			An Activity that owns the Variable.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setActivityScope(std::shared_ptr<uml::Activity> _activityScope) ;
-			
+			virtual void setActivityScope(std::weak_ptr<uml::Activity>) ;
 			/*!
 			A StructuredActivityNode that owns the Variable.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::StructuredActivityNode > getScope() const ;
-			
+			virtual std::weak_ptr<uml::StructuredActivityNode> getScope() const ;
 			/*!
 			A StructuredActivityNode that owns the Variable.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setScope(std::shared_ptr<uml::StructuredActivityNode> _scope) ;
+			virtual void setScope(std::weak_ptr<uml::StructuredActivityNode>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -120,7 +104,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -130,7 +114,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

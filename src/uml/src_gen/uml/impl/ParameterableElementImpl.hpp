@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ParameterableElement.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ParameterableElementImpl(const ParameterableElementImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ParameterableElementImpl& operator=(ParameterableElementImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace uml
 			virtual void setThisParameterableElementPtr(std::weak_ptr<ParameterableElement> thisParameterableElementPtr);
 
 			//Additional constructors for the containments back reference
-			ParameterableElementImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ParameterableElementImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ParameterableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			ParameterableElementImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -55,17 +51,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement> p) ;
-			
-			/*!
+			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement> p) ;/*!
 			The query isTemplateParameter() determines if this ParameterableElement is exposed as a formal TemplateParameter.
 			result = (templateParameter->notEmpty())
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
 			virtual bool isTemplateParameter() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -80,30 +72,26 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::TemplateParameter > getOwningTemplateParameter() const ;
-			
+			virtual std::weak_ptr<uml::TemplateParameter> getOwningTemplateParameter() const ;
 			/*!
 			The formal TemplateParameter that owns this ParameterableElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setOwningTemplateParameter(std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter) ;
-			
+			virtual void setOwningTemplateParameter(std::weak_ptr<uml::TemplateParameter>) ;
 			/*!
 			The TemplateParameter that exposes this ParameterableElement as a formal parameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TemplateParameter > getTemplateParameter() const ;
-			
+			virtual std::shared_ptr<uml::TemplateParameter> getTemplateParameter() const ;
 			/*!
 			The TemplateParameter that exposes this ParameterableElement as a formal parameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setTemplateParameter(std::shared_ptr<uml::TemplateParameter> _templateParameter) ;
+			virtual void setTemplateParameter(std::shared_ptr<uml::TemplateParameter>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -118,7 +106,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

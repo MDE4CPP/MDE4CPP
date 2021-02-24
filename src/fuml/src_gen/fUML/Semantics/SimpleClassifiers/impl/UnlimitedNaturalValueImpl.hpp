@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../UnlimitedNaturalValue.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			UnlimitedNaturalValueImpl(const UnlimitedNaturalValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			UnlimitedNaturalValueImpl& operator=(UnlimitedNaturalValueImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			UnlimitedNaturalValueImpl();
 			virtual std::shared_ptr<UnlimitedNaturalValue> getThisUnlimitedNaturalValuePtr() const;
 			virtual void setThisUnlimitedNaturalValuePtr(std::weak_ptr<UnlimitedNaturalValue> thisUnlimitedNaturalValuePtr);
-
 
 
 		public:
@@ -43,31 +43,24 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
-			
-			 
-			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ; 
+			virtual std::shared_ptr<uml::ValueSpecification> specify() ; 
 			virtual std::string toString() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual int getValue() const ;
-			
 			 
 			virtual void setValue (int _value);
+			
 			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

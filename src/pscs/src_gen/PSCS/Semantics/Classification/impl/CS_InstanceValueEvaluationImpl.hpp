@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CS_InstanceValueEvaluation.hpp"
 
@@ -24,7 +25,7 @@ namespace PSCS::Semantics::Classification
 			CS_InstanceValueEvaluationImpl(const CS_InstanceValueEvaluationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CS_InstanceValueEvaluationImpl& operator=(CS_InstanceValueEvaluationImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace PSCS::Semantics::Classification
 			CS_InstanceValueEvaluationImpl();
 			virtual std::shared_ptr<CS_InstanceValueEvaluation> getThisCS_InstanceValueEvaluationPtr() const;
 			virtual void setThisCS_InstanceValueEvaluationPtr(std::weak_ptr<CS_InstanceValueEvaluation> thisCS_InstanceValueEvaluationPtr);
-
 
 
 		public:
@@ -45,8 +45,6 @@ namespace PSCS::Semantics::Classification
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -55,7 +53,7 @@ namespace PSCS::Semantics::Classification
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

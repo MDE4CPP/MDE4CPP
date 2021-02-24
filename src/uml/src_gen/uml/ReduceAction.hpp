@@ -94,16 +94,12 @@ namespace uml
 			The type of the collection InputPin must be a collection.
 			*/
 			 
-			virtual bool input_type_is_collection(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool input_type_is_collection(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The type of the output of the reducer Behavior must conform to the type of the result OutputPin.
 			reducer.outputParameters().type->forAll(conformsTo(result.type))
 			*/
 			 
-			virtual bool output_types_are_compatible(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool output_types_are_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The reducer Behavior must have two input ownedParameters and one output ownedParameter, where the type of the output Parameter and the type of elements of the input collection conform to the types of the input Parameters.
 			let inputs: OrderedSet(Parameter) = reducer.inputParameters() in
 			let outputs: OrderedSet(Parameter) = reducer.outputParameters() in
@@ -114,9 +110,7 @@ namespace uml
 				collection.upperBound()>1 implies collection.type.conformsTo(t))
 			*/
 			 
-			virtual bool reducer_inputs_output(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool reducer_inputs_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -126,13 +120,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsOrdered() const = 0;
-			
 			/*!
 			Indicates whether the order of the input collection should determine the order in which the reducer Behavior is applied to its elements.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setIsOrdered (bool _isOrdered)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -141,43 +135,37 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getCollection() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getCollection() const = 0;
 			/*!
 			The InputPin that provides the collection to be reduced.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setCollection(std::shared_ptr<uml::InputPin> _collection) = 0;
-			
+			virtual void setCollection(std::shared_ptr<uml::InputPin>) = 0;
 			/*!
 			A Behavior that is repreatedly applied to two elements of the input collection to produce a value that is of the same type as elements of the collection.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior > getReducer() const = 0;
-			
+			virtual std::shared_ptr<uml::Behavior> getReducer() const = 0;
 			/*!
 			A Behavior that is repreatedly applied to two elements of the input collection to produce a value that is of the same type as elements of the collection.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setReducer(std::shared_ptr<uml::Behavior> _reducer) = 0;
-			
+			virtual void setReducer(std::shared_ptr<uml::Behavior>) = 0;
 			/*!
 			The output pin on which the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const = 0;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
 			/*!
 			The output pin on which the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) = 0;
-			
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
 			
 
 		protected:
@@ -200,17 +188,17 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_collection;/*!
+			std::shared_ptr<uml::InputPin> m_collection;/*!
 			A Behavior that is repreatedly applied to two elements of the input collection to produce a value that is of the same type as elements of the collection.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::Behavior > m_reducer;/*!
+			std::shared_ptr<uml::Behavior> m_reducer;/*!
 			The output pin on which the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::OutputPin > m_result;
+			std::shared_ptr<uml::OutputPin> m_result;
 
 		public:
 			//*********************************
@@ -241,7 +229,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

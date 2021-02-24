@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -43,8 +44,7 @@
 #include "ecore/EStructuralFeature.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -87,7 +87,7 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj): EStructuralFeatureIm
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EReference "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-// unknown attribute type or missing setter for container
+	m_container = obj.isContainer();
 	m_containment = obj.isContainment();
 	m_resolveProxies = obj.isResolveProxies();
 
@@ -443,7 +443,6 @@ void EReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void EReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	EStructuralFeatureImpl::loadNode(nodeName, loadHandler);

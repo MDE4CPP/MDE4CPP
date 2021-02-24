@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../FirstChoiceStrategy.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Loci
 			FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			FirstChoiceStrategyImpl& operator=(FirstChoiceStrategyImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::Loci
 			FirstChoiceStrategyImpl();
 			virtual std::shared_ptr<FirstChoiceStrategy> getThisFirstChoiceStrategyPtr() const;
 			virtual void setThisFirstChoiceStrategyPtr(std::weak_ptr<FirstChoiceStrategy> thisFirstChoiceStrategyPtr);
-
 
 
 		public:
@@ -45,8 +45,6 @@ namespace fUML::Semantics::Loci
 			 
 			virtual int choose(int size) ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -55,7 +53,7 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

@@ -73,8 +73,6 @@ namespace fUML::Semantics::Values
 			//*********************************
 			 
 			virtual std::shared_ptr<uml::PrimitiveType> getType(std::string builtInTypeName) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

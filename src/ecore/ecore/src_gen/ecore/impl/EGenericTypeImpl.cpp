@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/Any.hpp"
@@ -37,8 +38,7 @@
 #include "ecore/ETypeParameter.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -416,7 +416,6 @@ void EGenericTypeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	try
 	{
@@ -427,7 +426,7 @@ void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "EGenericType";
 			}
-		loadHandler->handleChild(this->getELowerBound());
+			loadHandler->handleChild(this->getELowerBound());
 
 			return; 
 		}
@@ -439,7 +438,7 @@ void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "EGenericType";
 			}
-		loadHandler->handleChildContainer<ecore::EGenericType>(this->getETypeArguments());  
+			loadHandler->handleChildContainer<ecore::EGenericType>(this->getETypeArguments());  
 
 			return; 
 		}
@@ -451,7 +450,7 @@ void EGenericTypeImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "EGenericType";
 			}
-		loadHandler->handleChild(this->getEUpperBound());
+			loadHandler->handleChild(this->getEUpperBound());
 
 			return; 
 		}

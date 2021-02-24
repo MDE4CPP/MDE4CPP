@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -59,13 +60,13 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
-#include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
-
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -87,77 +88,29 @@ CallActionActivationImpl::~CallActionActivationImpl()
 }
 
 //Additional constructor for the containments back reference
-CallActionActivationImpl::CallActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+CallActionActivationImpl::CallActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :CallActionActivationImpl()
 {
 	m_group = par_group;
 }
 
-
-CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImpl & obj):CallActionActivationImpl()
+CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImpl & obj): InvocationActionActivationImpl(obj), CallActionActivation(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CallActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_firing = obj.isFiring();
-	m_running = obj.isRunning();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_action  = obj.getAction();
-
 	m_callAction  = obj.getCallAction();
 
-	m_group  = obj.getGroup();
-
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
-
-	m_node  = obj.getNode();
-
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
-
-	std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>(*(obj.getPinActivation().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> _callExecutionsList = obj.getCallExecutions();
-	for(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _callExecutions : *_callExecutionsList)
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> callExecutionsContainer = getCallExecutions();
+	for(auto _callExecutions : *obj.getCallExecutions()) 
 	{
-		this->getCallExecutions()->add(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(_callExecutions->copy())));
+		callExecutionsContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(_callExecutions->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_callExecutions" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _heldTokensList = obj.getHeldTokens();
-	for(std::shared_ptr<fUML::Semantics::Activities::Token> _heldTokens : *_heldTokensList)
-	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Semantics::Activities::Token>(std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_heldTokens->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
-	for(std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
-	{
-		this->getInputPinActivation()->add(std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>(std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>(_inputPinActivation->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
-	for(std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
-	{
-		this->getOutputPinActivation()->add(std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>(std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(_outputPinActivation->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
-	#endif
-
 	
 }
 
@@ -373,19 +326,17 @@ void CallActionActivationImpl::terminate()
 /*
 Getter & Setter for reference callAction
 */
-std::shared_ptr<uml::CallAction > CallActionActivationImpl::getCallAction() const
+std::shared_ptr<uml::CallAction> CallActionActivationImpl::getCallAction() const
 {
 //assert(m_callAction);
     return m_callAction;
 }
-
 void CallActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)
 {
     m_callAction = _callAction;
 	//additional setter call for redefined reference ActionActivation::action
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_callAction);
 }
-
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
 void CallActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
 {
@@ -395,11 +346,11 @@ void CallActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
 		m_callAction = _callAction;
 
 		//additional setter call for redefined reference ActionActivation::action
-		fUML::Semantics::Actions::ActionActivationImpl::setAction(_action);
+		fUML::Semantics::Actions::ActionActivationImpl::setAction(_callAction);
 	}
 	else
 	{
-		std::cerr<<"[CallActionActivation::setAction] : Could not set action because provided action was not of type 'uml::CallAction'"<<std::endl;
+		std::cerr<<"[CallActionActivation::setAction] : Could not set action because provided action was not of type 'std::shared_ptr<uml::CallAction>'"<<std::endl;
 	}
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
@@ -415,7 +366,7 @@ void CallActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
 	}
 	else
 	{
-		std::cerr<<"[CallActionActivation::setNode] : Could not set node because provided node was not of type 'uml::CallAction'"<<std::endl;
+		std::cerr<<"[CallActionActivation::setNode] : Could not set node because provided node was not of type 'std::shared_ptr<uml::CallAction>'"<<std::endl;
 	}
 }
 
@@ -434,8 +385,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> CallActionActiv
 
     return m_callExecutions;
 }
-
-
 
 
 
@@ -604,7 +553,6 @@ void CallActionActivationImpl::loadAttributes(std::shared_ptr<persistence::inter
 
 void CallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
 	try
 	{
@@ -616,14 +564,9 @@ void CallActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<pe
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> callExecutions = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(modelFactory->create(typeName));
-			if (callExecutions != nullptr)
-			{
-				std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> list_callExecutions = this->getCallExecutions();
-				list_callExecutions->push_back(callExecutions);
-				loadHandler->handleChild(callExecutions);
-			}
-			return;
+			loadHandler->handleChildContainer<fUML::Semantics::CommonBehavior::Execution>(this->getCallExecutions());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -681,20 +624,15 @@ void CallActionActivationImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("callAction", this->getCallAction()); 
-
+		saveHandler->addReference(this->getCallAction(), "callAction", getCallAction()->eClass() != uml::umlPackage::eInstance()->getCallAction_Class()); 
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'callExecutions'
-		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> list_callExecutions = this->getCallExecutions();
-		for (std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> callExecutions : *list_callExecutions) 
-		{
-			saveHandler->addReference(callExecutions, "callExecutions", callExecutions->eClass() !=fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
-		}
+
+		saveHandler->addReferences<fUML::Semantics::CommonBehavior::Execution>("callExecutions", this->getCallExecutions());
 	}
 	catch (std::exception& e)
 	{

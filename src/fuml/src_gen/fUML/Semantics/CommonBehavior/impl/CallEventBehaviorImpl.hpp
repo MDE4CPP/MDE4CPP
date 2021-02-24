@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CallEventBehavior.hpp"
 
@@ -26,7 +27,7 @@ virtual public CallEventBehavior
 			CallEventBehaviorImpl(const CallEventBehaviorImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CallEventBehaviorImpl& operator=(CallEventBehaviorImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public CallEventBehavior
 			CallEventBehaviorImpl();
 			virtual std::shared_ptr<CallEventBehavior> getThisCallEventBehaviorPtr() const;
 			virtual void setThisCallEventBehaviorPtr(std::weak_ptr<CallEventBehavior> thisCallEventBehaviorPtr);
-
 
 
 		public:
@@ -46,8 +46,6 @@ virtual public CallEventBehavior
 			//*********************************
 			
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -57,12 +55,10 @@ virtual public CallEventBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Operation > getOperation() const ;
+			virtual std::shared_ptr<uml::Operation> getOperation() const ;
 			
+			virtual void setOperation(std::shared_ptr<uml::Operation>) ;
 			
-			virtual void setOperation(std::shared_ptr<uml::Operation> _operation) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../AcceptCallAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			AcceptCallActionImpl(const AcceptCallActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			AcceptCallActionImpl& operator=(AcceptCallActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisAcceptCallActionPtr(std::weak_ptr<AcceptCallAction> thisAcceptCallActionPtr);
 
 			//Additional constructors for the containments back reference
-			AcceptCallActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			AcceptCallActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			AcceptCallActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			AcceptCallActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			AcceptCallActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			AcceptCallActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			AcceptCallActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			AcceptCallActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -67,24 +59,18 @@ namespace uml
 				parameter->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool result_pins(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The action must have exactly one trigger, which must be for a CallEvent.
 			trigger->size()=1 and
 			trigger->asSequence()->first().event.oclIsKindOf(CallEvent)
 			*/
 			 
-			virtual bool trigger_call_event(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool trigger_call_event(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			isUnmrashall must be true for an AcceptCallAction.
 			isUnmarshall = true
 			*/
 			 
-			virtual bool unmarshall(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool unmarshall(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -99,16 +85,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getReturnInformation() const ;
-			
+			virtual std::shared_ptr<uml::OutputPin> getReturnInformation() const ;
 			/*!
 			An OutputPin where a value is placed containing sufficient information to perform a subsequent ReplyAction and return control to the caller. The contents of this value are opaque. It can be passed and copied but it cannot be manipulated by the model.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setReturnInformation(std::shared_ptr<uml::OutputPin> _returnInformation) ;
+			virtual void setReturnInformation(std::shared_ptr<uml::OutputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -133,7 +117,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

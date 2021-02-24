@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Argument.hpp"
 
@@ -25,7 +26,7 @@ virtual public Argument
 			ArgumentImpl(const ArgumentImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ArgumentImpl& operator=(ArgumentImpl const&) = delete;
 
 		protected:
@@ -33,7 +34,6 @@ virtual public Argument
 			ArgumentImpl();
 			virtual std::shared_ptr<Argument> getThisArgumentPtr() const;
 			virtual void setThisArgumentPtr(std::weak_ptr<Argument> thisArgumentPtr);
-
 
 
 		public:
@@ -48,21 +48,20 @@ virtual public Argument
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual std::string getName() const ;
-			
 			 
 			virtual void setName (std::string _name);
+			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Object > getValue() const ;
+			virtual std::shared_ptr<uml::Object> getValue() const ;
 			
+			virtual void setValue(std::shared_ptr<uml::Object>) ;
 			
-			virtual void setValue(std::shared_ptr<uml::Object> _value) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

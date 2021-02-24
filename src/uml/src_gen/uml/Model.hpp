@@ -88,8 +88,6 @@ namespace uml
 			*/
 			 
 			virtual bool isMetamodel() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -99,13 +97,13 @@ namespace uml
 			*/
 			 
 			virtual std::string getViewpoint() const = 0;
-			
 			/*!
 			The name of the viewpoint that is expressed by a model (this name may refer to a profile definition).
 			<p>From package UML::Packages.</p>
 			*/
 			 
 			virtual void setViewpoint (std::string _viewpoint)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -142,7 +140,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -157,7 +155,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

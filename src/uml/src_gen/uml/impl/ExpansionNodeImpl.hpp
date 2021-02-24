@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ExpansionNode.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ExpansionNodeImpl(const ExpansionNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ExpansionNodeImpl& operator=(ExpansionNodeImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisExpansionNodePtr(std::weak_ptr<ExpansionNode> thisExpansionNodePtr);
 
 			//Additional constructors for the containments back reference
-			ExpansionNodeImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ExpansionNodeImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ExpansionNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ExpansionNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ExpansionNodeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ExpansionNodeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ExpansionNodeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ExpansionNodeImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,9 +54,7 @@ namespace uml
 			regionAsInput->notEmpty() xor regionAsOutput->notEmpty()
 			*/
 			 
-			virtual bool region_as_input_or_output(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool region_as_input_or_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -79,30 +69,26 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExpansionRegion > getRegionAsInput() const ;
-			
+			virtual std::shared_ptr<uml::ExpansionRegion> getRegionAsInput() const ;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an input.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRegionAsInput(std::shared_ptr<uml::ExpansionRegion> _regionAsInput) ;
-			
+			virtual void setRegionAsInput(std::shared_ptr<uml::ExpansionRegion>) ;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an output.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExpansionRegion > getRegionAsOutput() const ;
-			
+			virtual std::shared_ptr<uml::ExpansionRegion> getRegionAsOutput() const ;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an output.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion> _regionAsOutput) ;
+			virtual void setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -122,7 +108,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

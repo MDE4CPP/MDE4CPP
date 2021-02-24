@@ -73,22 +73,22 @@ namespace uml
 			ValueSpecification(){}
 
 			//Additional constructors for the containments back reference
-			ValueSpecification(std::weak_ptr<uml::Namespace > par_namespace);
+			ValueSpecification(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-			ValueSpecification(std::weak_ptr<uml::Element > par_owner);
+			ValueSpecification(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-			ValueSpecification(std::weak_ptr<uml::Package > par_owningPackage);
+			ValueSpecification(std::weak_ptr<uml::Package> par_owningPackage);
 
 			//Additional constructors for the containments back reference
-			ValueSpecification(std::weak_ptr<uml::Slot > par_owningSlot);
+			ValueSpecification(std::weak_ptr<uml::Slot> par_owningSlot);
 
 			//Additional constructors for the containments back reference
-			ValueSpecification(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+			ValueSpecification(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 			//Additional constructors for the containments back reference
-			ValueSpecification(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
+			ValueSpecification(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -105,57 +105,43 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool booleanValue() = 0;
-			
-			/*!
+			virtual bool booleanValue() = 0;/*!
 			The query integerValue() gives a single Integer value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual int integerValue() = 0;
-			
-			/*!
+			virtual int integerValue() = 0;/*!
 			The query isComputable() determines whether a value specification can be computed in a model. This operation cannot be fully defined in OCL. A conforming implementation is expected to deliver true for this operation for all ValueSpecifications that it can compute, and to compute all of those for which the operation is true. A conforming implementation is expected to be able to compute at least the value of all LiteralSpecifications.
 			result = (false)
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool isComputable() = 0;
-			
-			/*!
+			virtual bool isComputable() = 0;/*!
 			The query isNull() returns true when it can be computed that the value is null.
 			result = (false)
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool isNull() = 0;
-			
-			/*!
+			virtual bool isNull() = 0;/*!
 			The query realValue() gives a single Real value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual double realValue() = 0;
-			
-			/*!
+			virtual double realValue() = 0;/*!
 			The query stringValue() gives a single String value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::string stringValue() = 0;
-			
-			/*!
+			virtual std::string stringValue() = 0;/*!
 			The query unlimitedValue() gives a single UnlimitedNatural value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p>
 			*/
 			 
 			virtual int unlimitedValue() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -164,17 +150,13 @@ namespace uml
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<uml::Slot > getOwningSlot() const = 0;
+			virtual std::weak_ptr<uml::Slot> getOwningSlot() const = 0;
 			
+			virtual void setOwningSlot(std::weak_ptr<uml::Slot>) = 0;
 			
-			virtual void setOwningSlot(std::shared_ptr<uml::Slot> _owningSlot) = 0;
+			virtual std::weak_ptr<uml::ValueSpecificationAction> getValueSpecificationAction() const = 0;
 			
-			
-			virtual std::weak_ptr<uml::ValueSpecificationAction > getValueSpecificationAction() const = 0;
-			
-			
-			virtual void setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction) = 0;
-			
+			virtual void setValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction>) = 0;
 			
 
 		protected:
@@ -187,8 +169,8 @@ namespace uml
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<uml::Slot > m_owningSlot;
-			std::weak_ptr<uml::ValueSpecificationAction > m_valueSpecificationAction;
+			std::weak_ptr<uml::Slot> m_owningSlot;
+			std::weak_ptr<uml::ValueSpecificationAction> m_valueSpecificationAction;
 
 		public:
 			//*********************************
@@ -199,7 +181,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -209,7 +191,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

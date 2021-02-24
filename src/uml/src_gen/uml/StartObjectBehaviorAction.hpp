@@ -104,30 +104,22 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Behavior> behavior() = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Behavior> behavior() = 0;/*!
 			The multiplicity of the object InputPin must be 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A StartObjectBehaviorAction may not specify onPort.
 			onPort->isEmpty()
 			*/
 			 
-			virtual bool no_onport(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool no_onport(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The type of the object InputPin must be either a Behavior or a BehavioredClassifier with a classifierBehavior.
 			self.behavior()<>null
 			*/
 			 
-			virtual bool type_of_object(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool type_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -140,15 +132,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getObject() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
 			/*!
 			An InputPin that holds the object that is either a Behavior to be started or has a classifierBehavior to be started.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object) = 0;
-			
+			virtual void setObject(std::shared_ptr<uml::InputPin>) = 0;
 			
 
 		protected:
@@ -165,7 +155,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_object;
+			std::shared_ptr<uml::InputPin> m_object;
 
 		public:
 			//*********************************
@@ -196,7 +186,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

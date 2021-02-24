@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Deployment.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			DeploymentImpl(const DeploymentImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			DeploymentImpl& operator=(DeploymentImpl const&) = delete;
 
 		protected:
@@ -33,26 +34,15 @@ namespace uml
 			virtual void setThisDeploymentPtr(std::weak_ptr<Deployment> thisDeploymentPtr);
 
 			//Additional constructors for the containments back reference
-			DeploymentImpl(std::weak_ptr<uml::DeploymentTarget > par_location);
-
-
+			DeploymentImpl(std::weak_ptr<uml::DeploymentTarget> par_location);
 			//Additional constructors for the containments back reference
-			DeploymentImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			DeploymentImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			DeploymentImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			DeploymentImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			DeploymentImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			DeploymentImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			DeploymentImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			DeploymentImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -78,7 +68,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::DeploymentSpecification, uml::Element>> getConfiguration() const ;
 			
-			
 			/*!
 			The Artifacts that are deployed onto a Node. This association specializes the supplier association.
 			<p>From package UML::Deployments.</p>
@@ -86,22 +75,19 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::DeployedArtifact, uml::NamedElement /*Subset does not reference a union*/>> getDeployedArtifact() const ;
 			
-			
 			/*!
 			The DeployedTarget which is the target of a Deployment.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::DeploymentTarget > getLocation() const ;
-			
+			virtual std::weak_ptr<uml::DeploymentTarget> getLocation() const ;
 			/*!
 			The DeployedTarget which is the target of a Deployment.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual void setLocation(std::shared_ptr<uml::DeploymentTarget> _location) ;
+			virtual void setLocation(std::weak_ptr<uml::DeploymentTarget>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -111,7 +97,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -121,7 +107,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/

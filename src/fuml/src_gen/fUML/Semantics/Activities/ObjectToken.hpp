@@ -71,15 +71,9 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> other) = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> other) = 0; 
 			virtual bool isControl() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -88,11 +82,9 @@ namespace fUML::Semantics::Activities
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Values::Value > getValue() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
 			
-			
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value) = 0;
-			
+			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value>) = 0;
 			
 
 		protected:
@@ -105,7 +97,7 @@ namespace fUML::Semantics::Activities
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::Values::Value > m_value;
+			std::shared_ptr<fUML::Semantics::Values::Value> m_value;
 
 		public:
 			//*********************************

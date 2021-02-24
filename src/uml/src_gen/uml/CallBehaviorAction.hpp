@@ -95,9 +95,7 @@ namespace uml
 			onPort=null
 			*/
 			 
-			virtual bool no_onport(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool no_onport(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -110,15 +108,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior > getBehavior() const = 0;
-			
+			virtual std::shared_ptr<uml::Behavior> getBehavior() const = 0;
 			/*!
 			The Behavior being invoked.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) = 0;
-			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior>) = 0;
 			
 
 		protected:
@@ -135,7 +131,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::Behavior > m_behavior;
+			std::shared_ptr<uml::Behavior> m_behavior;
 
 		public:
 			//*********************************
@@ -166,7 +162,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

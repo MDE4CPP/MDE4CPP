@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -46,8 +47,7 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -70,7 +70,7 @@ LiteralIntegerImpl::~LiteralIntegerImpl()
 }
 
 //Additional constructor for the containments back reference
-LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::Namespace > par_namespace)
+LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :LiteralIntegerImpl()
 {
 	m_namespace = par_namespace;
@@ -78,14 +78,14 @@ LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::Namespace > par_namesp
 }
 
 //Additional constructor for the containments back reference
-LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::Element > par_owner)
+LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::Element> par_owner)
 :LiteralIntegerImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::Package > par_owningPackage)
+LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :LiteralIntegerImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -93,7 +93,7 @@ LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::Package > par_owningPa
 }
 
 //Additional constructor for the containments back reference
-LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 :LiteralIntegerImpl()
 {
 	m_owningSlot = par_owningSlot;
@@ -101,7 +101,7 @@ LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::Slot > par_owningSlot)
 }
 
 //Additional constructor for the containments back reference
-LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :LiteralIntegerImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
@@ -109,65 +109,25 @@ LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::TemplateParameter > pa
 }
 
 //Additional constructor for the containments back reference
-LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+LiteralIntegerImpl::LiteralIntegerImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction)
 :LiteralIntegerImpl()
 {
 	m_valueSpecificationAction = par_valueSpecificationAction;
 	m_owner = par_valueSpecificationAction;
 }
 
-
-LiteralIntegerImpl::LiteralIntegerImpl(const LiteralIntegerImpl & obj):LiteralIntegerImpl()
+LiteralIntegerImpl::LiteralIntegerImpl(const LiteralIntegerImpl & obj): LiteralSpecificationImpl(obj), LiteralInteger(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralInteger "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
+	//Clone Attributes with (deep copy)
 	m_value = obj.getValue();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningSlot  = obj.getOwningSlot();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-	m_type  = obj.getType();
-
-	m_valueSpecificationAction  = obj.getValueSpecificationAction();
-
 
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  LiteralIntegerImpl::copy() const
@@ -192,12 +152,10 @@ int LiteralIntegerImpl::getValue() const
 {
 	return m_value;
 }
-
 void LiteralIntegerImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
-
 
 
 //*********************************
@@ -226,7 +184,7 @@ bool LiteralIntegerImpl::isComputable()
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > LiteralIntegerImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> LiteralIntegerImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -246,7 +204,7 @@ std::shared_ptr<Union<uml::Element>> LiteralIntegerImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > LiteralIntegerImpl::getOwner() const
+std::weak_ptr<uml::Element> LiteralIntegerImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -382,7 +340,6 @@ void LiteralIntegerImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void LiteralIntegerImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);

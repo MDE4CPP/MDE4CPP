@@ -81,8 +81,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class> metaClass) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

@@ -75,12 +75,8 @@ namespace PSCS::Semantics::Values
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0; 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > executeExpressionBehavior() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

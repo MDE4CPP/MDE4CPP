@@ -79,15 +79,11 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 			/*!
 			Sets the Lifeline on which the OccurrenceSpecification appears.
 			*/
 			 
 			virtual void setCovered(std::shared_ptr<uml::Lifeline> value) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -102,14 +98,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToAfter() const = 0;
 			
-			
 			/*!
 			References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToBefore() const = 0;
-			
 			
 			
 
@@ -143,7 +137,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -153,7 +147,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

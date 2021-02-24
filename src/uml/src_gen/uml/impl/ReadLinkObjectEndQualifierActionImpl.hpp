@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ReadLinkObjectEndQualifierAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ReadLinkObjectEndQualifierActionImpl(const ReadLinkObjectEndQualifierActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ReadLinkObjectEndQualifierActionImpl& operator=(ReadLinkObjectEndQualifierActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisReadLinkObjectEndQualifierActionPtr(std::weak_ptr<ReadLinkObjectEndQualifierAction> thisReadLinkObjectEndQualifierActionPtr);
 
 			//Additional constructors for the containments back reference
-			ReadLinkObjectEndQualifierActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ReadLinkObjectEndQualifierActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ReadLinkObjectEndQualifierActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ReadLinkObjectEndQualifierActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ReadLinkObjectEndQualifierActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ReadLinkObjectEndQualifierActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ReadLinkObjectEndQualifierActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ReadLinkObjectEndQualifierActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,58 +54,42 @@ namespace uml
 			qualifier.associationEnd.association.oclIsKindOf(AssociationClass)
 			*/
 			 
-			virtual bool association_of_association(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool association_of_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The ends of the Association must not be static.
 			qualifier.associationEnd.association.memberEnd->forAll(e | not e.isStatic)
 			*/
 			 
-			virtual bool ends_of_association(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool ends_of_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The multiplicity of the qualifier Property is 1..1.
 			qualifier.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool multiplicity_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_result(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool multiplicity_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The qualifier Property must be a qualifier of an Association end.
 			qualifier.associationEnd <> null
 			*/
 			 
-			virtual bool qualifier_attribute(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool qualifier_attribute(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type of the result OutputPin is the same as the type of the qualifier Property.
 			result.type = qualifier.type
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type of the object InputPin is the AssociationClass that owns the Association end that has the given qualifier Property.
 			object.type = qualifier.associationEnd.association
 			*/
 			 
-			virtual bool type_of_object(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool type_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -128,44 +104,38 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getObject() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getObject() const ;
 			/*!
 			The InputPin from which the link object is obtained.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object) ;
-			
+			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
 			/*!
 			The qualifier Property to be read.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property > getQualifier() const ;
-			
+			virtual std::shared_ptr<uml::Property> getQualifier() const ;
 			/*!
 			The qualifier Property to be read.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setQualifier(std::shared_ptr<uml::Property> _qualifier) ;
-			
+			virtual void setQualifier(std::shared_ptr<uml::Property>) ;
 			/*!
 			The OutputPin where the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
 			/*!
 			The OutputPin where the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -195,7 +165,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CallEventExecution.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::CommonBehavior
 			CallEventExecutionImpl(const CallEventExecutionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CallEventExecutionImpl& operator=(CallEventExecutionImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::CommonBehavior
 			CallEventExecutionImpl();
 			virtual std::shared_ptr<CallEventExecution> getThisCallEventExecutionPtr() const;
 			virtual void setThisCallEventExecutionPtr(std::weak_ptr<CallEventExecution> thisCallEventExecutionPtr);
-
 
 
 		public:
@@ -43,55 +43,32 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() ;
-			
-			 
-			virtual void execute() ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getInputParameterValues() ;
-			
-			 
-			virtual std::shared_ptr<uml::Operation> getOperation() ;
-			
-			 
-			virtual bool isCallerSuspended() ;
-			
-			 
-			virtual void makeCall() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
-			
-			 
-			virtual void releaseCaller() ;
-			
-			 
-			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues) ;
-			
-			 
-			virtual void suspendCaller() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() ; 
+			virtual void execute() ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getInputParameterValues() ; 
+			virtual std::shared_ptr<uml::Operation> getOperation() ; 
+			virtual bool isCallerSuspended() ; 
+			virtual void makeCall() ; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ; 
+			virtual void releaseCaller() ; 
+			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues) ; 
+			virtual void suspendCaller() ; 
 			virtual void wait_() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual bool getCallerSuspended() const ;
-			
 			 
 			virtual void setCallerSuspended (bool _callerSuspended);
+			
 			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

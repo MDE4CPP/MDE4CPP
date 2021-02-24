@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../GeneralOrdering.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			GeneralOrderingImpl(const GeneralOrderingImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			GeneralOrderingImpl& operator=(GeneralOrderingImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace uml
 			virtual void setThisGeneralOrderingPtr(std::weak_ptr<GeneralOrdering> thisGeneralOrderingPtr);
 
 			//Additional constructors for the containments back reference
-			GeneralOrderingImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			GeneralOrderingImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			GeneralOrderingImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			GeneralOrderingImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -54,9 +50,7 @@ namespace uml
 			after->closure(toAfter.after)->excludes(before)
 			*/
 			 
-			virtual bool irreflexive_transitive_closure(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool irreflexive_transitive_closure(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -71,30 +65,26 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification > getAfter() const ;
-			
+			virtual std::shared_ptr<uml::OccurrenceSpecification> getAfter() const ;
 			/*!
 			The OccurrenceSpecification referenced comes after the OccurrenceSpecification referenced by before.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after) ;
-			
+			virtual void setAfter(std::shared_ptr<uml::OccurrenceSpecification>) ;
 			/*!
 			The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification > getBefore() const ;
-			
+			virtual std::shared_ptr<uml::OccurrenceSpecification> getBefore() const ;
 			/*!
 			The OccurrenceSpecification referenced comes before the OccurrenceSpecification referenced by after.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before) ;
+			virtual void setBefore(std::shared_ptr<uml::OccurrenceSpecification>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -109,7 +99,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

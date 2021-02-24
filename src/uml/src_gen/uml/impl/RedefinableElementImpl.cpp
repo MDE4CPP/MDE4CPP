@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -44,8 +45,7 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -68,7 +68,7 @@ RedefinableElementImpl::~RedefinableElementImpl()
 }
 
 //Additional constructor for the containments back reference
-RedefinableElementImpl::RedefinableElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
+RedefinableElementImpl::RedefinableElementImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :RedefinableElementImpl()
 {
 	m_namespace = par_namespace;
@@ -76,58 +76,28 @@ RedefinableElementImpl::RedefinableElementImpl(std::weak_ptr<uml::Namespace > pa
 }
 
 //Additional constructor for the containments back reference
-RedefinableElementImpl::RedefinableElementImpl(std::weak_ptr<uml::Element > par_owner)
+RedefinableElementImpl::RedefinableElementImpl(std::weak_ptr<uml::Element> par_owner)
 :RedefinableElementImpl()
 {
 	m_owner = par_owner;
 }
 
-
-RedefinableElementImpl::RedefinableElementImpl(const RedefinableElementImpl & obj):RedefinableElementImpl()
+RedefinableElementImpl::RedefinableElementImpl(const RedefinableElementImpl & obj): NamedElementImpl(obj), RedefinableElement(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy RedefinableElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_isLeaf = obj.getIsLeaf();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
 	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
 	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
 	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  RedefinableElementImpl::copy() const
@@ -152,12 +122,10 @@ bool RedefinableElementImpl::getIsLeaf() const
 {
 	return m_isLeaf;
 }
-
 void RedefinableElementImpl::setIsLeaf(bool _isLeaf)
 {
 	m_isLeaf = _isLeaf;
 } 
-
 
 
 //*********************************
@@ -175,19 +143,19 @@ bool RedefinableElementImpl::isRedefinitionContextValid(std::shared_ptr<uml::Red
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::non_leaf_redefinition(Any diagnostics,std::map <  Any ,  Any > context)
+bool RedefinableElementImpl::non_leaf_redefinition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::redefinition_consistent(Any diagnostics,std::map <  Any ,  Any > context)
+bool RedefinableElementImpl::redefinition_consistent(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RedefinableElementImpl::redefinition_context_valid(Any diagnostics,std::map <  Any ,  Any > context)
+bool RedefinableElementImpl::redefinition_context_valid(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -203,13 +171,9 @@ Getter & Setter for reference redefinedElement
 
 
 
-
-
 /*
 Getter & Setter for reference redefinitionContext
 */
-
-
 
 
 
@@ -232,7 +196,7 @@ std::shared_ptr<Union<uml::Element>> RedefinableElementImpl::getOwnedElement() c
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > RedefinableElementImpl::getOwner() const
+std::weak_ptr<uml::Element> RedefinableElementImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -390,7 +354,6 @@ void RedefinableElementImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void RedefinableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	NamedElementImpl::loadNode(nodeName, loadHandler);

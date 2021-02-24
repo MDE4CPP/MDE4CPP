@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CS_AddStructuralFeatureValueActionActivation.hpp"
 
@@ -24,7 +25,7 @@ namespace PSCS::Semantics::Actions
 			CS_AddStructuralFeatureValueActionActivationImpl(const CS_AddStructuralFeatureValueActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CS_AddStructuralFeatureValueActionActivationImpl& operator=(CS_AddStructuralFeatureValueActionActivationImpl const&) = delete;
 
 		protected:
@@ -34,10 +35,7 @@ namespace PSCS::Semantics::Actions
 			virtual void setThisCS_AddStructuralFeatureValueActionActivationPtr(std::weak_ptr<CS_AddStructuralFeatureValueActionActivation> thisCS_AddStructuralFeatureValueActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			CS_AddStructuralFeatureValueActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			CS_AddStructuralFeatureValueActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -47,12 +45,8 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void doAction() ;
-			
-			 
+			virtual void doAction() ; 
 			virtual void doActionDefault() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -62,7 +56,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ExtensionalValueList.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			ExtensionalValueListImpl(const ExtensionalValueListImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ExtensionalValueListImpl& operator=(ExtensionalValueListImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::StructuredClassifiers
 			ExtensionalValueListImpl();
 			virtual std::shared_ptr<ExtensionalValueList> getThisExtensionalValueListPtr() const;
 			virtual void setThisExtensionalValueListPtr(std::weak_ptr<ExtensionalValueList> thisExtensionalValueListPtr);
-
 
 
 		public:
@@ -43,21 +43,11 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual bool addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) ;
-			
-			 
-			virtual void addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> getValue() ;
-			
-			 
-			virtual std::string removeValue(int i) ;
-			
-			 
+			virtual bool addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) ; 
+			virtual void addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i) ; 
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> getValue() ; 
+			virtual std::string removeValue(int i) ; 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -67,7 +57,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

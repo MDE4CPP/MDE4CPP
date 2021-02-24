@@ -78,8 +78,6 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class> type) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

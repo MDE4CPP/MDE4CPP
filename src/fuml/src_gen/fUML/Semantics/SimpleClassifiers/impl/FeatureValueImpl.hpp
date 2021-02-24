@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../FeatureValue.hpp"
 
@@ -26,7 +27,7 @@ virtual public FeatureValue
 			FeatureValueImpl(const FeatureValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			FeatureValueImpl& operator=(FeatureValueImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public FeatureValue
 			FeatureValueImpl();
 			virtual std::shared_ptr<FeatureValue> getThisFeatureValuePtr() const;
 			virtual void setThisFeatureValuePtr(std::weak_ptr<FeatureValue> thisFeatureValuePtr);
-
 
 
 		public:
@@ -45,35 +45,29 @@ virtual public FeatureValue
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _copy() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _copy() ; 
 			virtual bool hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> other) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual int getPosition() const ;
-			
 			 
 			virtual void setPosition (int _position);
+			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::StructuralFeature > getFeature() const ;
+			virtual std::shared_ptr<uml::StructuralFeature> getFeature() const ;
 			
-			
-			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature) ;
-			
+			virtual void setFeature(std::shared_ptr<uml::StructuralFeature>) ;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter

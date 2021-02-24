@@ -49,11 +49,11 @@ virtual public EObject
 			virtual std::shared_ptr<ecore::EClass> eClass() const ; 
 			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const ; 
 			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const ; 
-			virtual std::shared_ptr<Bag < ecore::EObject>> eContents() const ; 
-			virtual std::shared_ptr<Bag < ecore::EObject>> eCrossReferences() const ; 
+			virtual std::shared_ptr<std::list < ecore::EObject>> eContents() const ; 
+			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const ; 
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const ; 
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const ; 
-			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<Bag < Any>> arguments) const ; 
+			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) const ; 
 			virtual bool eIsProxy() const ; 
 			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const ; 
 			virtual int eResource() const ; 
@@ -63,10 +63,11 @@ virtual public EObject
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual int getMetaElementID() const ;
-			
 			 
 			virtual void setMetaElementID (int _metaElementID);
+			
 			
 			//*********************************
 			// Reference
@@ -74,9 +75,7 @@ virtual public EObject
 			
 			virtual std::weak_ptr<ecore::EObject> getEContainer() const ;
 			
-			
 			virtual void setEContainer(std::weak_ptr<ecore::EObject>) ;
-			
 			
 			
 			

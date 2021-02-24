@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../StartObjectBehaviorAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			StartObjectBehaviorActionImpl(const StartObjectBehaviorActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			StartObjectBehaviorActionImpl& operator=(StartObjectBehaviorActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisStartObjectBehaviorActionPtr(std::weak_ptr<StartObjectBehaviorAction> thisStartObjectBehaviorActionPtr);
 
 			//Additional constructors for the containments back reference
-			StartObjectBehaviorActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			StartObjectBehaviorActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			StartObjectBehaviorActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			StartObjectBehaviorActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			StartObjectBehaviorActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			StartObjectBehaviorActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			StartObjectBehaviorActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			StartObjectBehaviorActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -70,30 +62,22 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Behavior> behavior() ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Behavior> behavior() ;/*!
 			The multiplicity of the object InputPin must be 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A StartObjectBehaviorAction may not specify onPort.
 			onPort->isEmpty()
 			*/
 			 
-			virtual bool no_onport(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool no_onport(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type of the object InputPin must be either a Behavior or a BehavioredClassifier with a classifierBehavior.
 			self.behavior()<>null
 			*/
 			 
-			virtual bool type_of_object(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool type_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -108,16 +92,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getObject() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getObject() const ;
 			/*!
 			An InputPin that holds the object that is either a Behavior to be started or has a classifierBehavior to be started.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object) ;
+			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -147,7 +129,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

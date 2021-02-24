@@ -86,8 +86,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::ConnectorEnd> > getEnds() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -101,7 +99,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::ConnectorEnd>> getEnd() const = 0;
-			
 			
 			
 
@@ -135,7 +132,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

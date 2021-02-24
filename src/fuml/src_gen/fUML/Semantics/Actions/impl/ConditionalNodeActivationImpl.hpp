@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ConditionalNodeActivation.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Actions
 			ConditionalNodeActivationImpl(const ConditionalNodeActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ConditionalNodeActivationImpl& operator=(ConditionalNodeActivationImpl const&) = delete;
 
 		protected:
@@ -34,10 +35,7 @@ namespace fUML::Semantics::Actions
 			virtual void setThisConditionalNodeActivationPtr(std::weak_ptr<ConditionalNodeActivation> thisConditionalNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
-			ConditionalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			ConditionalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -47,15 +45,9 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause> clause) ;
-			
-			 
-			virtual void runTest(std::shared_ptr<uml::Clause> clause) ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause> clause) ; 
+			virtual void runTest(std::shared_ptr<uml::Clause> clause) ; 
 			virtual void selectBody(std::shared_ptr<uml::Clause> clause) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -69,11 +61,9 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> getClauseActivations() const ;
 			
 			
-			
 			virtual std::shared_ptr<Bag<uml::Clause>> getSelectedClauses() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../DataValue.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			DataValueImpl(const DataValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			DataValueImpl& operator=(DataValueImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			DataValueImpl();
 			virtual std::shared_ptr<DataValue> getThisDataValuePtr() const;
 			virtual void setThisDataValuePtr(std::weak_ptr<DataValue> thisDataValuePtr);
-
 
 
 		public:
@@ -43,15 +43,9 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ; 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -62,12 +56,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::DataType > getType() const ;
+			virtual std::shared_ptr<uml::DataType> getType() const ;
 			
+			virtual void setType(std::shared_ptr<uml::DataType>) ;
 			
-			virtual void setType(std::shared_ptr<uml::DataType> _type) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

@@ -71,12 +71,8 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::string getName() = 0;
-			
-			 
+			virtual std::string getName() = 0; 
 			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -40,8 +41,7 @@
 #include "uml/QualifierValue.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -64,48 +64,30 @@ LinkEndDataImpl::~LinkEndDataImpl()
 }
 
 //Additional constructor for the containments back reference
-LinkEndDataImpl::LinkEndDataImpl(std::weak_ptr<uml::Element > par_owner)
+LinkEndDataImpl::LinkEndDataImpl(std::weak_ptr<uml::Element> par_owner)
 :LinkEndDataImpl()
 {
 	m_owner = par_owner;
 }
 
-
-LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj):LinkEndDataImpl()
+LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj): ElementImpl(obj), LinkEndData(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LinkEndData "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_end  = obj.getEnd();
-
-	m_owner  = obj.getOwner();
-
 	m_value  = obj.getValue();
 
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
+	std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> qualifierContainer = getQualifier();
+	for(auto _qualifier : *obj.getQualifier()) 
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
+		qualifierContainer->push_back(std::dynamic_pointer_cast<uml::QualifierValue>(_qualifier->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::QualifierValue>> _qualifierList = obj.getQualifier();
-	for(std::shared_ptr<uml::QualifierValue> _qualifier : *_qualifierList)
-	{
-		this->getQualifier()->add(std::shared_ptr<uml::QualifierValue>(std::dynamic_pointer_cast<uml::QualifierValue>(_qualifier->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_qualifier" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_qualifier->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
@@ -139,31 +121,31 @@ std::shared_ptr<Bag<uml::InputPin> > LinkEndDataImpl::allPins()
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::end_object_input_pin(Any diagnostics,std::map <  Any ,  Any > context)
+bool LinkEndDataImpl::end_object_input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::multiplicity(Any diagnostics,std::map <  Any ,  Any > context)
+bool LinkEndDataImpl::multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::property_is_association_end(Any diagnostics,std::map <  Any ,  Any > context)
+bool LinkEndDataImpl::property_is_association_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::qualifiers(Any diagnostics,std::map <  Any ,  Any > context)
+bool LinkEndDataImpl::qualifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkEndDataImpl::same_type(Any diagnostics,std::map <  Any ,  Any > context)
+bool LinkEndDataImpl::same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -175,17 +157,15 @@ bool LinkEndDataImpl::same_type(Any diagnostics,std::map <  Any ,  Any > context
 /*
 Getter & Setter for reference end
 */
-std::shared_ptr<uml::Property > LinkEndDataImpl::getEnd() const
+std::shared_ptr<uml::Property> LinkEndDataImpl::getEnd() const
 {
 //assert(m_end);
     return m_end;
 }
-
 void LinkEndDataImpl::setEnd(std::shared_ptr<uml::Property> _end)
 {
     m_end = _end;
 }
-
 
 
 /*
@@ -214,22 +194,18 @@ std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> LinkEndDataImpl::getQ
 
 
 
-
-
 /*
 Getter & Setter for reference value
 */
-std::shared_ptr<uml::InputPin > LinkEndDataImpl::getValue() const
+std::shared_ptr<uml::InputPin> LinkEndDataImpl::getValue() const
 {
 
     return m_value;
 }
-
 void LinkEndDataImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 {
     m_value = _value;
 }
-
 
 
 //*********************************
@@ -416,7 +392,6 @@ void LinkEndDataImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 
 void LinkEndDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -427,14 +402,9 @@ void LinkEndDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "QualifierValue";
 			}
-			std::shared_ptr<uml::QualifierValue> qualifier = std::dynamic_pointer_cast<uml::QualifierValue>(modelFactory->create(typeName));
-			if (qualifier != nullptr)
-			{
-				std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> list_qualifier = this->getQualifier();
-				list_qualifier->push_back(qualifier);
-				loadHandler->handleChild(qualifier);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::QualifierValue>(this->getQualifier());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -503,10 +473,9 @@ void LinkEndDataImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		{
 			saveHandler->addReference(qualifier, "qualifier", qualifier->eClass() != package->getQualifierValue_Class());
 		}
-
 	// Add references
-		saveHandler->addReference("end", this->getEnd()); 
-		saveHandler->addReference("value", this->getValue()); 
+		saveHandler->addReference(this->getEnd(), "end", getEnd()->eClass() != uml::umlPackage::eInstance()->getProperty_Class()); 
+		saveHandler->addReference(this->getValue(), "value", getValue()->eClass() != uml::umlPackage::eInstance()->getInputPin_Class()); 
 	}
 	catch (std::exception& e)
 	{

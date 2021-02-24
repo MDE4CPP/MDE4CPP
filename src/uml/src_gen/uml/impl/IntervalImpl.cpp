@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -46,8 +47,7 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -70,7 +70,7 @@ IntervalImpl::~IntervalImpl()
 }
 
 //Additional constructor for the containments back reference
-IntervalImpl::IntervalImpl(std::weak_ptr<uml::Namespace > par_namespace)
+IntervalImpl::IntervalImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :IntervalImpl()
 {
 	m_namespace = par_namespace;
@@ -78,14 +78,14 @@ IntervalImpl::IntervalImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-IntervalImpl::IntervalImpl(std::weak_ptr<uml::Element > par_owner)
+IntervalImpl::IntervalImpl(std::weak_ptr<uml::Element> par_owner)
 :IntervalImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-IntervalImpl::IntervalImpl(std::weak_ptr<uml::Package > par_owningPackage)
+IntervalImpl::IntervalImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :IntervalImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -93,7 +93,7 @@ IntervalImpl::IntervalImpl(std::weak_ptr<uml::Package > par_owningPackage)
 }
 
 //Additional constructor for the containments back reference
-IntervalImpl::IntervalImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+IntervalImpl::IntervalImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 :IntervalImpl()
 {
 	m_owningSlot = par_owningSlot;
@@ -101,7 +101,7 @@ IntervalImpl::IntervalImpl(std::weak_ptr<uml::Slot > par_owningSlot)
 }
 
 //Additional constructor for the containments back reference
-IntervalImpl::IntervalImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+IntervalImpl::IntervalImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :IntervalImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
@@ -109,68 +109,26 @@ IntervalImpl::IntervalImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemp
 }
 
 //Additional constructor for the containments back reference
-IntervalImpl::IntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+IntervalImpl::IntervalImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction)
 :IntervalImpl()
 {
 	m_valueSpecificationAction = par_valueSpecificationAction;
 	m_owner = par_valueSpecificationAction;
 }
 
-
-IntervalImpl::IntervalImpl(const IntervalImpl & obj):IntervalImpl()
+IntervalImpl::IntervalImpl(const IntervalImpl & obj): ValueSpecificationImpl(obj), Interval(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Interval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	m_max  = obj.getMax();
-
 	m_min  = obj.getMin();
 
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningSlot  = obj.getOwningSlot();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-	m_type  = obj.getType();
-
-	m_valueSpecificationAction  = obj.getValueSpecificationAction();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  IntervalImpl::copy() const
@@ -199,39 +157,35 @@ std::shared_ptr<ecore::EClass> IntervalImpl::eStaticClass() const
 /*
 Getter & Setter for reference max
 */
-std::shared_ptr<uml::ValueSpecification > IntervalImpl::getMax() const
+std::shared_ptr<uml::ValueSpecification> IntervalImpl::getMax() const
 {
 //assert(m_max);
     return m_max;
 }
-
 void IntervalImpl::setMax(std::shared_ptr<uml::ValueSpecification> _max)
 {
     m_max = _max;
 }
 
 
-
 /*
 Getter & Setter for reference min
 */
-std::shared_ptr<uml::ValueSpecification > IntervalImpl::getMin() const
+std::shared_ptr<uml::ValueSpecification> IntervalImpl::getMin() const
 {
 //assert(m_min);
     return m_min;
 }
-
 void IntervalImpl::setMin(std::shared_ptr<uml::ValueSpecification> _min)
 {
     m_min = _min;
 }
 
 
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > IntervalImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> IntervalImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -251,7 +205,7 @@ std::shared_ptr<Union<uml::Element>> IntervalImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > IntervalImpl::getOwner() const
+std::weak_ptr<uml::Element> IntervalImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -405,7 +359,6 @@ void IntervalImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void IntervalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
@@ -471,10 +424,9 @@ void IntervalImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("max", this->getMax()); 
-		saveHandler->addReference("min", this->getMin()); 
+		saveHandler->addReference(this->getMax(), "max", getMax()->eClass() != uml::umlPackage::eInstance()->getValueSpecification_Class()); 
+		saveHandler->addReference(this->getMin(), "min", getMin()->eClass() != uml::umlPackage::eInstance()->getValueSpecification_Class()); 
 	}
 	catch (std::exception& e)
 	{

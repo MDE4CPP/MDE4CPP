@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ExtensionalValue.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			ExtensionalValueImpl(const ExtensionalValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ExtensionalValueImpl& operator=(ExtensionalValueImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::StructuredClassifiers
 			ExtensionalValueImpl();
 			virtual std::shared_ptr<ExtensionalValue> getThisExtensionalValuePtr() const;
 			virtual void setThisExtensionalValuePtr(std::weak_ptr<ExtensionalValue> thisExtensionalValuePtr);
-
 
 
 		public:
@@ -43,12 +43,8 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
 			virtual void destroy() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -59,12 +55,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const ;
+			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const ;
 			
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) ;
 			
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

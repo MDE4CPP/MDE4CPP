@@ -71,19 +71,19 @@ namespace uml
 			ComponentRealization(){}
 
 			//Additional constructors for the containments back reference
-			ComponentRealization(std::weak_ptr<uml::Component > par_abstraction);
+			ComponentRealization(std::weak_ptr<uml::Component> par_abstraction);
 
 			//Additional constructors for the containments back reference
-			ComponentRealization(std::weak_ptr<uml::Namespace > par_namespace);
+			ComponentRealization(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-			ComponentRealization(std::weak_ptr<uml::Element > par_owner);
+			ComponentRealization(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-			ComponentRealization(std::weak_ptr<uml::Package > par_owningPackage);
+			ComponentRealization(std::weak_ptr<uml::Package> par_owningPackage);
 
 			//Additional constructors for the containments back reference
-			ComponentRealization(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+			ComponentRealization(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -107,22 +107,19 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Component > getAbstraction() const = 0;
-			
+			virtual std::weak_ptr<uml::Component> getAbstraction() const = 0;
 			/*!
 			The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setAbstraction(std::shared_ptr<uml::Component> _abstraction) = 0;
-			
+			virtual void setAbstraction(std::weak_ptr<uml::Component>) = 0;
 			/*!
 			The Classifiers that are involved in the implementation of the Component that owns this Realization.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> getRealizingClassifier() const = 0;
-			
 			
 			
 
@@ -140,7 +137,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			std::weak_ptr<uml::Component > m_abstraction;/*!
+			std::weak_ptr<uml::Component> m_abstraction;/*!
 			The Classifiers that are involved in the implementation of the Component that owns this Realization.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
@@ -156,7 +153,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -166,7 +163,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/

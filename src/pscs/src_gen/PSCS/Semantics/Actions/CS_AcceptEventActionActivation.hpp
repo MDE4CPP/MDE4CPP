@@ -86,8 +86,6 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			 
 			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

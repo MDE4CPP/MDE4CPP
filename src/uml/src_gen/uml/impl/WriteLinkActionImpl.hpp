@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../WriteLinkAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			WriteLinkActionImpl(const WriteLinkActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			WriteLinkActionImpl& operator=(WriteLinkActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisWriteLinkActionPtr(std::weak_ptr<WriteLinkAction> thisWriteLinkActionPtr);
 
 			//Additional constructors for the containments back reference
-			WriteLinkActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			WriteLinkActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			WriteLinkActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			WriteLinkActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			WriteLinkActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			WriteLinkActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			WriteLinkActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			WriteLinkActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -67,9 +59,7 @@ namespace uml
 			    other<>end and _'context'.conformsTo(other.type.oclAsType(Classifier))))
 			*/
 			 
-			virtual bool allow_access(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool allow_access(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -79,7 +69,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -104,7 +94,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

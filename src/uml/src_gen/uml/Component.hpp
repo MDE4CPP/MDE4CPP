@@ -108,27 +108,19 @@ namespace uml
 			Creates a(n) (abstract) class with the specified name as a packaged element of this component.
 			*/
 			 
-			virtual std::shared_ptr<uml::Class> createOwnedClass(std::string name,bool isAbstract) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Class> createOwnedClass(std::string name,bool isAbstract) = 0;/*!
 			Creates a enumeration with the specified name as a packaged element of this component.
 			*/
 			 
-			virtual std::shared_ptr<uml::Enumeration> createOwnedEnumeration(std::string name) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Enumeration> createOwnedEnumeration(std::string name) = 0;/*!
 			Creates an interface with the specified name as a packaged element of this component.
 			*/
 			 
-			virtual std::shared_ptr<uml::Interface> createOwnedInterface(std::string name) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Interface> createOwnedInterface(std::string name) = 0;/*!
 			Creates a primitive type with the specified name as a packaged element of this component.
 			*/
 			 
-			virtual std::shared_ptr<uml::PrimitiveType> createOwnedPrimitiveType(std::string name) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::PrimitiveType> createOwnedPrimitiveType(std::string name) = 0;/*!
 			Derivation for Component::/provided
 			result = (let 	ris : Set(Interface) = allRealizedInterfaces(),
 			        realizingClassifiers : Set(Classifier) =  self.realization.realizingClassifier->union(self.allParents()->collect(realization.realizingClassifier))->asSet(),
@@ -140,9 +132,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds() = 0;/*!
 			Derivation for Component::/required
 			result = (let 	uis : Set(Interface) = allUsedInterfaces(),
 			        realizingClassifiers : Set(Classifier) = self.realization.realizingClassifier->union(self.allParents()->collect(realization.realizingClassifier))->asSet(),
@@ -155,23 +145,17 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds() = 0;/*!
 			A Component cannot nest Classifiers.
 			nestedClassifier->isEmpty()
 			*/
 			 
-			virtual bool no_nested_classifiers(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool no_nested_classifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A Component nested in a Class cannot have any packaged elements.
 			nestingClass <> null implies packagedElement->isEmpty()
 			*/
 			 
-			virtual bool no_packaged_elements(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool no_packaged_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -181,13 +165,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsIndirectlyInstantiated() const = 0;
-			
 			/*!
 			If true, the Component is defined at design-time, but at run-time (or execution-time) an object specified by the Component does not exist, that is, the Component is instantiated indirectly, through the instantiation of its realizing Classifiers or parts.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
 			virtual void setIsIndirectlyInstantiated (bool _isIndirectlyInstantiated)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -198,14 +182,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> getPackagedElement() const = 0;
 			
-			
 			/*!
 			The Interfaces that the Component exposes to its environment. These Interfaces may be Realized by the Component or any of its realizingClassifiers, or they may be the Interfaces that are provided by its public Ports.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Interface>> getProvided() const = 0;
-			
 			
 			/*!
 			The set of Realizations owned by the Component. Realizations reference the Classifiers of which the Component is an abstraction; i.e., that realize its behavior.
@@ -214,14 +196,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>> getRealization() const = 0;
 			
-			
 			/*!
 			The Interfaces that the Component requires from other Components in its environment in order to be able to offer its full set of provided functionality. These Interfaces may be used by the Component or any of its realizingClassifiers, or they may be the Interfaces that are required by its public Ports.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Interface>> getRequired() const = 0;
-			
 			
 			
 
@@ -286,7 +266,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -301,7 +281,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

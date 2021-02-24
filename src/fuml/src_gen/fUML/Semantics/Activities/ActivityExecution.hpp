@@ -86,18 +86,10 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
-			
-			 
-			virtual void execute() = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0; 
+			virtual void execute() = 0; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0; 
 			virtual void terminate() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -106,21 +98,16 @@ namespace fUML::Semantics::Activities
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > getActivationGroup() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> getActivationGroup() const = 0;
 			
+			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>) = 0;
 			
-			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup) = 0;
+			virtual std::shared_ptr<uml::Activity> getActivity() const = 0;
 			
-			
-			virtual std::shared_ptr<uml::Activity > getActivity() const = 0;
-			
-			
-			virtual void setActivity(std::shared_ptr<uml::Activity> _activity) = 0;
-			
+			virtual void setActivity(std::shared_ptr<uml::Activity>) = 0;
 			/*Additional Setter for 'Execution::behavior' redefined by reference 'activity'*/
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) = 0;
-			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior>) = 0;
 
 		protected:
 			//*********************************
@@ -132,8 +119,8 @@ namespace fUML::Semantics::Activities
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > m_activationGroup;
-			mutable std::shared_ptr<uml::Activity > m_activity;
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> m_activationGroup;
+			mutable std::shared_ptr<uml::Activity> m_activity;
 
 		public:
 			//*********************************

@@ -91,15 +91,13 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getChangeExpression() const = 0;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getChangeExpression() const = 0;
 			/*!
 			A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setChangeExpression(std::shared_ptr<uml::ValueSpecification> _changeExpression) = 0;
-			
+			virtual void setChangeExpression(std::shared_ptr<uml::ValueSpecification>) = 0;
 			
 
 		protected:
@@ -116,7 +114,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			std::shared_ptr<uml::ValueSpecification > m_changeExpression;
+			std::shared_ptr<uml::ValueSpecification> m_changeExpression;
 
 		public:
 			//*********************************
@@ -127,7 +125,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -137,7 +135,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -47,8 +48,7 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -71,7 +71,7 @@ ExecutionSpecificationImpl::~ExecutionSpecificationImpl()
 }
 
 //Additional constructor for the containments back reference
-ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction)
 :ExecutionSpecificationImpl()
 {
 	m_enclosingInteraction = par_enclosingInteraction;
@@ -79,7 +79,7 @@ ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Intera
 }
 
 //Additional constructor for the containments back reference
-ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand)
 :ExecutionSpecificationImpl()
 {
 	m_enclosingOperand = par_enclosingOperand;
@@ -87,7 +87,7 @@ ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Intera
 }
 
 //Additional constructor for the containments back reference
-ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ExecutionSpecificationImpl()
 {
 	m_namespace = par_namespace;
@@ -95,70 +95,25 @@ ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Namesp
 }
 
 //Additional constructor for the containments back reference
-ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Element> par_owner)
 :ExecutionSpecificationImpl()
 {
 	m_owner = par_owner;
 }
 
-
-ExecutionSpecificationImpl::ExecutionSpecificationImpl(const ExecutionSpecificationImpl & obj):ExecutionSpecificationImpl()
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(const ExecutionSpecificationImpl & obj): InteractionFragmentImpl(obj), ExecutionSpecification(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExecutionSpecification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
-	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
-
-	m_enclosingInteraction  = obj.getEnclosingInteraction();
-
-	m_enclosingOperand  = obj.getEnclosingOperand();
-
 	m_finish  = obj.getFinish();
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
 	m_start  = obj.getStart();
 
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
-	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
-	{
-		this->getGeneralOrdering()->add(std::shared_ptr<uml::GeneralOrdering>(std::dynamic_pointer_cast<uml::GeneralOrdering>(_generalOrdering->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_generalOrdering" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  ExecutionSpecificationImpl::copy() const
@@ -180,7 +135,7 @@ std::shared_ptr<ecore::EClass> ExecutionSpecificationImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExecutionSpecificationImpl::same_lifeline(Any diagnostics,std::map <  Any ,  Any > context)
+bool ExecutionSpecificationImpl::same_lifeline(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -192,39 +147,35 @@ bool ExecutionSpecificationImpl::same_lifeline(Any diagnostics,std::map <  Any ,
 /*
 Getter & Setter for reference finish
 */
-std::shared_ptr<uml::OccurrenceSpecification > ExecutionSpecificationImpl::getFinish() const
+std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getFinish() const
 {
 //assert(m_finish);
     return m_finish;
 }
-
 void ExecutionSpecificationImpl::setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish)
 {
     m_finish = _finish;
 }
 
 
-
 /*
 Getter & Setter for reference start
 */
-std::shared_ptr<uml::OccurrenceSpecification > ExecutionSpecificationImpl::getStart() const
+std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getStart() const
 {
 //assert(m_start);
     return m_start;
 }
-
 void ExecutionSpecificationImpl::setStart(std::shared_ptr<uml::OccurrenceSpecification> _start)
 {
     m_start = _start;
 }
 
 
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > ExecutionSpecificationImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> ExecutionSpecificationImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -244,7 +195,7 @@ std::shared_ptr<Union<uml::Element>> ExecutionSpecificationImpl::getOwnedElement
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > ExecutionSpecificationImpl::getOwner() const
+std::weak_ptr<uml::Element> ExecutionSpecificationImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -388,7 +339,6 @@ void ExecutionSpecificationImpl::loadAttributes(std::shared_ptr<persistence::int
 
 void ExecutionSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
@@ -449,10 +399,9 @@ void ExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence::interf
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("finish", this->getFinish()); 
-		saveHandler->addReference("start", this->getStart()); 
+		saveHandler->addReference(this->getFinish(), "finish", getFinish()->eClass() != uml::umlPackage::eInstance()->getOccurrenceSpecification_Class()); 
+		saveHandler->addReference(this->getStart(), "start", getStart()->eClass() != uml::umlPackage::eInstance()->getOccurrenceSpecification_Class()); 
 	}
 	catch (std::exception& e)
 	{

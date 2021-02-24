@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../SignalEvent.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			SignalEventImpl(const SignalEventImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			SignalEventImpl& operator=(SignalEventImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisSignalEventPtr(std::weak_ptr<SignalEvent> thisSignalEventPtr);
 
 			//Additional constructors for the containments back reference
-			SignalEventImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			SignalEventImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			SignalEventImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			SignalEventImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			SignalEventImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			SignalEventImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			SignalEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			SignalEventImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -72,16 +64,14 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal > getSignal() const ;
-			
+			virtual std::shared_ptr<uml::Signal> getSignal() const ;
 			/*!
 			The specific Signal that is associated with this SignalEvent.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setSignal(std::shared_ptr<uml::Signal> _signal) ;
+			virtual void setSignal(std::shared_ptr<uml::Signal>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -91,7 +81,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -101,7 +91,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

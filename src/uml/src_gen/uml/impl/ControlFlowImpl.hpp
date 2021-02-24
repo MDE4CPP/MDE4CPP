@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ControlFlow.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ControlFlowImpl(const ControlFlowImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ControlFlowImpl& operator=(ControlFlowImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisControlFlowPtr(std::weak_ptr<ControlFlow> thisControlFlowPtr);
 
 			//Additional constructors for the containments back reference
-			ControlFlowImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ControlFlowImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ControlFlowImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ControlFlowImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ControlFlowImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ControlFlowImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ControlFlowImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ControlFlowImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -63,9 +55,7 @@ namespace uml
 			(target.oclIsKindOf(ObjectNode) implies target.oclAsType(ObjectNode).isControlType)
 			*/
 			 
-			virtual bool object_nodes(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool object_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -75,7 +65,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -95,7 +85,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

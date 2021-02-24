@@ -97,92 +97,48 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void addOutgoingEdge(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge) = 0;
-			
-			 
-			virtual void addPinActivation(std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation) = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > completeAction() = 0;
-			
-			 
-			virtual void createNodeActivations() = 0;
-			
-			 
-			virtual void doAction() = 0;
-			
-			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getTokens(std::shared_ptr<uml::InputPin> pin) = 0;
-			
-			 
-			virtual bool isFirng() = 0;
-			
-			 
-			virtual bool isReady() = 0;
-			
-			 
-			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> makeBooleanValue(bool value) = 0;
-			
-			 
-			virtual void putToken(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
-			
-			 
-			virtual void putTokens(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values) = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Actions::PinActivation> retrievePinActivation(std::shared_ptr<uml::Pin> pin) = 0;
-			
-			 
-			virtual void run() = 0;
-			
-			 
-			virtual void sendOffers() = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > takeTokens(std::shared_ptr<uml::InputPin> pin) = 0;
-			
-			 
-			virtual void terminate() = 0;
-			
-			 
+			virtual void addOutgoingEdge(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edge) = 0; 
+			virtual void addPinActivation(std::shared_ptr<fUML::Semantics::Actions::PinActivation> pinActivation) = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > completeAction() = 0; 
+			virtual void createNodeActivations() = 0; 
+			virtual void doAction() = 0; 
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getTokens(std::shared_ptr<uml::InputPin> pin) = 0; 
+			virtual bool isFirng() = 0; 
+			virtual bool isReady() = 0; 
+			virtual bool isSourceFor(std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> edgeInstance) = 0; 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> makeBooleanValue(bool value) = 0; 
+			virtual void putToken(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<fUML::Semantics::Values::Value> value) = 0; 
+			virtual void putTokens(std::shared_ptr<uml::OutputPin> pin,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values) = 0; 
+			virtual std::shared_ptr<fUML::Semantics::Actions::PinActivation> retrievePinActivation(std::shared_ptr<uml::Pin> pin) = 0; 
+			virtual void run() = 0; 
+			virtual void sendOffers() = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > takeTokens(std::shared_ptr<uml::InputPin> pin) = 0; 
+			virtual void terminate() = 0; 
 			virtual bool valueParticipatesInLink(std::shared_ptr<fUML::Semantics::Values::Value> value,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual bool isFiring() const = 0;
-			
 			 
 			virtual void setFiring (bool _firing)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Action > getAction() const = 0;
+			virtual std::shared_ptr<uml::Action> getAction() const = 0;
 			
-			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
-			
+			virtual void setAction(std::shared_ptr<uml::Action>) = 0;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'action'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
 			virtual std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> getInputPinActivation() const = 0;
 			
 			
-			
 			virtual std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> getOutputPinActivation() const = 0;
-			
 			
 			
 			
@@ -200,7 +156,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Action > m_action;
+			std::shared_ptr<uml::Action> m_action;
 			mutable std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> m_inputPinActivation;
 			mutable std::shared_ptr<Subset<fUML::Semantics::Actions::OutputPinActivation, fUML::Semantics::Actions::PinActivation>> m_outputPinActivation;
 			mutable std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> m_pinActivation;

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CallEvent.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			CallEventImpl(const CallEventImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CallEventImpl& operator=(CallEventImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisCallEventPtr(std::weak_ptr<CallEvent> thisCallEventPtr);
 
 			//Additional constructors for the containments back reference
-			CallEventImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			CallEventImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			CallEventImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			CallEventImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			CallEventImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			CallEventImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			CallEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			CallEventImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -72,16 +64,14 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Operation > getOperation() const ;
-			
+			virtual std::shared_ptr<uml::Operation> getOperation() const ;
 			/*!
 			Designates the Operation whose invocation raised the CalEvent.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setOperation(std::shared_ptr<uml::Operation> _operation) ;
+			virtual void setOperation(std::shared_ptr<uml::Operation>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -91,7 +81,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -101,7 +91,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

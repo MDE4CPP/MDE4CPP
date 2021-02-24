@@ -72,8 +72,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -82,11 +80,9 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Signal > getType() const = 0;
+			virtual std::shared_ptr<uml::Signal> getType() const = 0;
 			
-			
-			virtual void setType(std::shared_ptr<uml::Signal> _type) = 0;
-			
+			virtual void setType(std::shared_ptr<uml::Signal>) = 0;
 			
 
 		protected:
@@ -99,7 +95,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Signal > m_type;
+			std::shared_ptr<uml::Signal> m_type;
 
 		public:
 			//*********************************

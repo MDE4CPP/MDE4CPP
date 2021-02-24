@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ProtocolStateMachine.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ProtocolStateMachineImpl(const ProtocolStateMachineImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ProtocolStateMachineImpl& operator=(ProtocolStateMachineImpl const&) = delete;
 
 		protected:
@@ -33,29 +34,16 @@ namespace uml
 			virtual void setThisProtocolStateMachinePtr(std::weak_ptr<ProtocolStateMachine> thisProtocolStateMachinePtr);
 
 			//Additional constructors for the containments back reference
-			ProtocolStateMachineImpl(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier);
-
-
+			ProtocolStateMachineImpl(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier);
 			//Additional constructors for the containments back reference
-			ProtocolStateMachineImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ProtocolStateMachineImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ProtocolStateMachineImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ProtocolStateMachineImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ProtocolStateMachineImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			ProtocolStateMachineImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			ProtocolStateMachineImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			ProtocolStateMachineImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -70,24 +58,18 @@ namespace uml
 			((v.oclAsType(Pseudostate).kind <>  PseudostateKind::deepHistory) and (v.oclAsType(Pseudostate).kind <> PseudostateKind::shallowHistory))))
 			*/
 			 
-			virtual bool deep_or_shallow_history(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool deep_or_shallow_history(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The states of a ProtocolStateMachine cannot have entry, exit, or do activity Behaviors.
 			region->forAll(r | r.subvertex->forAll(v | v.oclIsKindOf(State) implies
 			(v.oclAsType(State).entry->isEmpty() and v.oclAsType(State).exit->isEmpty() and v.oclAsType(State).doActivity->isEmpty())))
 			*/
 			 
-			virtual bool entry_exit_do(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool entry_exit_do(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			All Transitions of a ProtocolStateMachine must be ProtocolTransitions.
 			region->forAll(r | r.transition->forAll(t | t.oclIsTypeOf(ProtocolTransition)))
 			*/
 			 
-			virtual bool protocol_transitions(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool protocol_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -105,7 +87,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::ProtocolConformance, uml::Element>> getConformance() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -130,7 +111,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -145,7 +126,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

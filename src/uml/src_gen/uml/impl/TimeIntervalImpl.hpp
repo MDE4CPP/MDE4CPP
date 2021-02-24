@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../TimeInterval.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			TimeIntervalImpl(const TimeIntervalImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			TimeIntervalImpl& operator=(TimeIntervalImpl const&) = delete;
 
 		protected:
@@ -33,30 +34,17 @@ namespace uml
 			virtual void setThisTimeIntervalPtr(std::weak_ptr<TimeInterval> thisTimeIntervalPtr);
 
 			//Additional constructors for the containments back reference
-			TimeIntervalImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			TimeIntervalImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			TimeIntervalImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			TimeIntervalImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			TimeIntervalImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			TimeIntervalImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			TimeIntervalImpl(std::weak_ptr<uml::Slot > par_owningSlot);
-
-
+			TimeIntervalImpl(std::weak_ptr<uml::Slot> par_owningSlot);
 			//Additional constructors for the containments back reference
-			TimeIntervalImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			TimeIntervalImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-			TimeIntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
-
-
-
+			TimeIntervalImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction);
 
 		public:
 			//destructor
@@ -75,7 +63,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -85,7 +73,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -95,7 +83,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

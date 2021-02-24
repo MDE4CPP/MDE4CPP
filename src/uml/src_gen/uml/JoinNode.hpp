@@ -93,16 +93,12 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool incoming_object_flow(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool incoming_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A JoinNode has one outgoing ActivityEdge.
 			outgoing->size() = 1
 			*/
 			 
-			virtual bool one_outgoing_edge(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool one_outgoing_edge(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -112,13 +108,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsCombineDuplicate() const = 0;
-			
 			/*!
 			Indicates whether incoming tokens having objects with the same identity are combined into one by the JoinNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
 			virtual void setIsCombineDuplicate (bool _isCombineDuplicate)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -127,15 +123,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getJoinSpec() const = 0;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getJoinSpec() const = 0;
 			/*!
 			A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setJoinSpec(std::shared_ptr<uml::ValueSpecification> _joinSpec) = 0;
-			
+			virtual void setJoinSpec(std::shared_ptr<uml::ValueSpecification>) = 0;
 			
 
 		protected:
@@ -158,7 +152,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			std::shared_ptr<uml::ValueSpecification > m_joinSpec;
+			std::shared_ptr<uml::ValueSpecification> m_joinSpec;
 
 		public:
 			//*********************************
@@ -179,7 +173,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

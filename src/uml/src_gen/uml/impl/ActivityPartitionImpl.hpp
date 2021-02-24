@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ActivityPartition.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ActivityPartitionImpl(const ActivityPartitionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ActivityPartitionImpl& operator=(ActivityPartitionImpl const&) = delete;
 
 		protected:
@@ -33,26 +34,15 @@ namespace uml
 			virtual void setThisActivityPartitionPtr(std::weak_ptr<ActivityPartition> thisActivityPartitionPtr);
 
 			//Additional constructors for the containments back reference
-			ActivityPartitionImpl(std::weak_ptr<uml::Activity > par_inActivity);
-
-
+			ActivityPartitionImpl(std::weak_ptr<uml::Activity> par_inActivity);
 			//Additional constructors for the containments back reference
-			ActivityPartitionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ActivityPartitionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ActivityPartitionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ActivityPartitionImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ActivityPartitionImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup);
-
-
+			ActivityPartitionImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup);
 			//Additional constructors for the containments back reference
-			ActivityPartitionImpl(std::weak_ptr<uml::ActivityPartition > par_superPartition);
-
-
-
+			ActivityPartitionImpl(std::weak_ptr<uml::ActivityPartition> par_superPartition);
 
 		public:
 			//destructor
@@ -66,9 +56,7 @@ namespace uml
 			isDimension implies superPartition->isEmpty()
 			*/
 			 
-			virtual bool dimension_not_contained(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool dimension_not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If a non-external ActivityPartition represents a Classifier and has a superPartition, then the superPartition must represent a Classifier, and the Classifier of the subpartition must be nested (nestedClassifier or ownedBehavior) in the Classifier represented by the superPartition, or be at the contained end of a composition Association with the Classifier represented by the superPartition.
 			(not isExternal and represents.oclIsKindOf(Classifier) and superPartition->notEmpty()) implies
 			(
@@ -85,9 +73,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool represents_classifier(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool represents_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If an ActivityPartition represents a Property and has a superPartition representing a Classifier, then all the other non-external subpartitions of the superPartition must represent Properties directly owned by the same Classifier.
 			(represents.oclIsKindOf(Property) and superPartition->notEmpty() and superPartition.represents.oclIsKindOf(Classifier)) implies
 			(
@@ -98,9 +84,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool represents_property(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool represents_property(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If an ActivityPartition represents a Property and has a superPartition, then the Property must be of a Classifier represented by the superPartition, or of a Classifier that is the type of a Property represented by the superPartition.
 			(represents.oclIsKindOf(Property) and superPartition->notEmpty()) implies
 			(
@@ -109,9 +93,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool represents_property_and_is_contained(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool represents_property_and_is_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -122,25 +104,25 @@ namespace uml
 			*/
 			 
 			virtual bool getIsDimension() const ;
-			
 			/*!
 			Indicates whether the ActivityPartition groups other ActivityPartitions along a dimension.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsDimension (bool _isDimension);/*!
+			virtual void setIsDimension (bool _isDimension);
+			/*!
 			Indicates whether the ActivityPartition represents an entity to which the partitioning structure does not apply.
 			<p>From package UML::Activities.</p>
 			*/
 			 
 			virtual bool getIsExternal() const ;
-			
 			/*!
 			Indicates whether the ActivityPartition represents an entity to which the partitioning structure does not apply.
 			<p>From package UML::Activities.</p>
 			*/
 			 
 			virtual void setIsExternal (bool _isExternal);
+			
 			
 			//*********************************
 			// Reference
@@ -152,7 +134,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> getEdge() const ;
 			
-			
 			/*!
 			ActivityNodes immediately contained in the ActivityPartition.
 			<p>From package UML::Activities.</p>
@@ -160,21 +141,18 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> getNode() const ;
 			
-			
 			/*!
 			An Element represented by the functionality modeled within the ActivityPartition.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Element > getRepresents() const ;
-			
+			virtual std::shared_ptr<uml::Element> getRepresents() const ;
 			/*!
 			An Element represented by the functionality modeled within the ActivityPartition.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setRepresents(std::shared_ptr<uml::Element> _represents) ;
-			
+			virtual void setRepresents(std::shared_ptr<uml::Element>) ;
 			/*!
 			Other ActivityPartitions immediately contained in this ActivityPartition (as its subgroups).
 			<p>From package UML::Activities.</p>
@@ -182,22 +160,19 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> getSubpartition() const ;
 			
-			
 			/*!
 			Other ActivityPartitions immediately containing this ActivityPartition (as its superGroups).
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::ActivityPartition > getSuperPartition() const ;
-			
+			virtual std::weak_ptr<uml::ActivityPartition> getSuperPartition() const ;
 			/*!
 			Other ActivityPartitions immediately containing this ActivityPartition (as its superGroups).
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setSuperPartition(std::shared_ptr<uml::ActivityPartition> _superPartition) ;
+			virtual void setSuperPartition(std::weak_ptr<uml::ActivityPartition>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -222,7 +197,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Other ActivityGroups immediately contained in this ActivityGroup.
 			<p>From package UML::Activities.</p>
 			*/
@@ -232,7 +207,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::ActivityGroup > getSuperGroup() const ; 
+			virtual std::weak_ptr<uml::ActivityGroup> getSuperGroup() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

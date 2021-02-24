@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../VariableAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			VariableActionImpl(const VariableActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			VariableActionImpl& operator=(VariableActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisVariableActionPtr(std::weak_ptr<VariableAction> thisVariableActionPtr);
 
 			//Additional constructors for the containments back reference
-			VariableActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			VariableActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			VariableActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			VariableActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			VariableActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			VariableActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			VariableActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			VariableActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,9 +54,7 @@ namespace uml
 			variable.isAccessibleBy(self)
 			*/
 			 
-			virtual bool scope_of_variable(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool scope_of_variable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -79,16 +69,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Variable > getVariable() const ;
-			
+			virtual std::shared_ptr<uml::Variable> getVariable() const ;
 			/*!
 			The Variable to be read or written.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setVariable(std::shared_ptr<uml::Variable> _variable) ;
+			virtual void setVariable(std::shared_ptr<uml::Variable>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -108,7 +96,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

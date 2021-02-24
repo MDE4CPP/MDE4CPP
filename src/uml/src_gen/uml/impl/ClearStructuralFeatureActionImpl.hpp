@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ClearStructuralFeatureAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ClearStructuralFeatureActionImpl(const ClearStructuralFeatureActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ClearStructuralFeatureActionImpl& operator=(ClearStructuralFeatureActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisClearStructuralFeatureActionPtr(std::weak_ptr<ClearStructuralFeatureAction> thisClearStructuralFeatureActionPtr);
 
 			//Additional constructors for the containments back reference
-			ClearStructuralFeatureActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ClearStructuralFeatureActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ClearStructuralFeatureActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ClearStructuralFeatureActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ClearStructuralFeatureActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ClearStructuralFeatureActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ClearStructuralFeatureActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ClearStructuralFeatureActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,16 +54,12 @@ namespace uml
 			result<>null implies result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_result(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool multiplicity_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type of the result OutputPin is the same as the type of the inherited object InputPin.
 			result<>null implies result.type = object.type
 			*/
 			 
-			virtual bool type_of_result(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool type_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -86,16 +74,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
 			/*!
 			The OutputPin on which is put the input object as modified by the ClearStructuralFeatureAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -125,7 +111,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

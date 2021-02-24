@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ControlToken.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Activities
 			ControlTokenImpl(const ControlTokenImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ControlTokenImpl& operator=(ControlTokenImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::Activities
 			ControlTokenImpl();
 			virtual std::shared_ptr<ControlToken> getThisControlTokenPtr() const;
 			virtual void setThisControlTokenPtr(std::weak_ptr<ControlToken> thisControlTokenPtr);
-
 
 
 		public:
@@ -43,15 +43,9 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> other) ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> other) ; 
 			virtual bool isControl() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -61,7 +55,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

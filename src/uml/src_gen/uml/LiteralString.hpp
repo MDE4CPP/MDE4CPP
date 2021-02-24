@@ -85,17 +85,13 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool isComputable() = 0;
-			
-			/*!
+			virtual bool isComputable() = 0;/*!
 			The query stringValue() gives the value.
 			result = (value)
 			<p>From package UML::Values.</p>
 			*/
 			 
 			virtual std::string stringValue() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -105,13 +101,13 @@ namespace uml
 			*/
 			 
 			virtual std::string getValue() const = 0;
-			
 			/*!
 			The specified String value.
 			<p>From package UML::Values.</p>
 			*/
 			 
 			virtual void setValue (std::string _value)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -143,7 +139,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -153,7 +149,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

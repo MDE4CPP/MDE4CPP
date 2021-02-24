@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../BehavioredClassifier.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			BehavioredClassifierImpl(const BehavioredClassifierImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			BehavioredClassifierImpl& operator=(BehavioredClassifierImpl const&) = delete;
 
 		protected:
@@ -33,25 +34,14 @@ namespace uml
 			virtual void setThisBehavioredClassifierPtr(std::weak_ptr<BehavioredClassifier> thisBehavioredClassifierPtr);
 
 			//Additional constructors for the containments back reference
-			BehavioredClassifierImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			BehavioredClassifierImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			BehavioredClassifierImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			BehavioredClassifierImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			BehavioredClassifierImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			BehavioredClassifierImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			BehavioredClassifierImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			BehavioredClassifierImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -65,21 +55,15 @@ namespace uml
 			classifierBehavior->notEmpty() implies classifierBehavior.specification->isEmpty()
 			*/
 			 
-			virtual bool class_behavior(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool class_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Retrieves all the interfaces on which this behaviored classifier or any of its parents has an interface realization dependency.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getAllImplementedInterfaces() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Interface> > getAllImplementedInterfaces() ;/*!
 			Retrieves the interfaces on which this behaviored classifier has an interface realization dependency.
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::Interface> > getImplementedInterfaces() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -94,22 +78,19 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior > getClassifierBehavior() const ;
-			
+			virtual std::shared_ptr<uml::Behavior> getClassifierBehavior() const ;
 			/*!
 			A Behavior that specifies the behavior of the BehavioredClassifier itself.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setClassifierBehavior(std::shared_ptr<uml::Behavior> _classifierBehavior) ;
-			
+			virtual void setClassifierBehavior(std::shared_ptr<uml::Behavior>) ;
 			/*!
 			The set of InterfaceRealizations owned by the BehavioredClassifier. Interface realizations reference the Interfaces of which the BehavioredClassifier is an implementation.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> getInterfaceRealization() const ;
-			
 			
 			/*!
 			Behaviors owned by a BehavioredClassifier.
@@ -119,7 +100,6 @@ namespace uml
 			virtual std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> getOwnedBehavior() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -139,7 +119,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -154,7 +134,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

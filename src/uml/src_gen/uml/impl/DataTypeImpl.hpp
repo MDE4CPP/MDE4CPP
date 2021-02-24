@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../DataType.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			DataTypeImpl(const DataTypeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			DataTypeImpl& operator=(DataTypeImpl const&) = delete;
 
 		protected:
@@ -33,25 +34,14 @@ namespace uml
 			virtual void setThisDataTypePtr(std::weak_ptr<DataType> thisDataTypePtr);
 
 			//Additional constructors for the containments back reference
-			DataTypeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			DataTypeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			DataTypeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			DataTypeImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			DataTypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			DataTypeImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			DataTypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			DataTypeImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -64,15 +54,11 @@ namespace uml
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this data type.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) ;/*!
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this data type.
 			*/
 			 
 			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -89,7 +75,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> getOwnedAttribute() const ;
 			
-			
 			/*!
 			The Operations owned by the DataType.
 			<p>From package UML::SimpleClassifiers.</p>
@@ -98,7 +83,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> getOwnedOperation() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -123,7 +107,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -138,7 +122,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

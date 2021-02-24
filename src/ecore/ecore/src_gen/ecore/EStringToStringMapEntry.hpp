@@ -66,13 +66,15 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			virtual std::string getKey() const = 0;
-			
 			 
-			virtual void setKey (std::string _key)= 0;virtual std::string getValue() const = 0;
-			
+			virtual std::string getKey() const = 0;
+			 
+			virtual void setKey (std::string _key)= 0;
+			 
+			virtual std::string getValue() const = 0;
 			 
 			virtual void setValue (std::string _value)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -45,8 +46,7 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -69,7 +69,7 @@ ConstraintImpl::~ConstraintImpl()
 }
 
 //Additional constructor for the containments back reference
-ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id)
+ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id)
 :ConstraintImpl()
 {
 	switch(reference_id)
@@ -90,14 +90,14 @@ ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, con
 
 
 //Additional constructor for the containments back reference
-ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Element > par_owner)
+ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Element> par_owner)
 :ConstraintImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage)
+ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :ConstraintImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -105,70 +105,31 @@ ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage)
 }
 
 //Additional constructor for the containments back reference
-ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :ConstraintImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj):ConstraintImpl()
+ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj): PackageableElementImpl(obj), Constraint(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Constraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	std::shared_ptr<Bag<uml::Element>> _constrainedElement = obj.getConstrainedElement();
 	m_constrainedElement.reset(new Bag<uml::Element>(*(obj.getConstrainedElement().get())));
-
 	m_context  = obj.getContext();
 
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
 	if(obj.getSpecification()!=nullptr)
 	{
 		m_specification = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getSpecification()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_specification" << std::endl;
-	#endif
-
 	
 }
 
@@ -191,19 +152,19 @@ std::shared_ptr<ecore::EClass> ConstraintImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ConstraintImpl::boolean_value(Any diagnostics,std::map <  Any ,  Any > context)
+bool ConstraintImpl::boolean_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConstraintImpl::no_side_effects(Any diagnostics,std::map <  Any ,  Any > context)
+bool ConstraintImpl::no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConstraintImpl::not_apply_to_self(Any diagnostics,std::map <  Any ,  Any > context)
+bool ConstraintImpl::not_apply_to_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -229,44 +190,38 @@ std::shared_ptr<Bag<uml::Element>> ConstraintImpl::getConstrainedElement() const
 
 
 
-
-
 /*
 Getter & Setter for reference context
 */
-std::weak_ptr<uml::Namespace > ConstraintImpl::getContext() const
+std::weak_ptr<uml::Namespace> ConstraintImpl::getContext() const
 {
 
     return m_context;
 }
-
-void ConstraintImpl::setContext(std::shared_ptr<uml::Namespace> _context)
+void ConstraintImpl::setContext(std::weak_ptr<uml::Namespace> _context)
 {
     m_context = _context;
 }
 
 
-
 /*
 Getter & Setter for reference specification
 */
-std::shared_ptr<uml::ValueSpecification > ConstraintImpl::getSpecification() const
+std::shared_ptr<uml::ValueSpecification> ConstraintImpl::getSpecification() const
 {
 //assert(m_specification);
     return m_specification;
 }
-
 void ConstraintImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
 {
     m_specification = _specification;
 }
 
 
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > ConstraintImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> ConstraintImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -286,7 +241,7 @@ std::shared_ptr<Union<uml::Element>> ConstraintImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > ConstraintImpl::getOwner() const
+std::weak_ptr<uml::Element> ConstraintImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -470,7 +425,6 @@ void ConstraintImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void ConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -482,13 +436,9 @@ void ConstraintImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<uml::ValueSpecification> specification = std::dynamic_pointer_cast<uml::ValueSpecification>(modelFactory->create(typeName));
-			if (specification != nullptr)
-			{
-				this->setSpecification(specification);
-				loadHandler->handleChild(specification);
-			}
-			return;
+			loadHandler->handleChild(this->getSpecification()); 
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -512,11 +462,11 @@ void ConstraintImpl::resolveReferences(const int featureID, std::vector<std::sha
 			std::shared_ptr<Bag<uml::Element>> _constrainedElement = getConstrainedElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Element> _r = std::dynamic_pointer_cast<uml::Element>(ref);
+				std::shared_ptr<uml::Element>  _r = std::dynamic_pointer_cast<uml::Element>(ref);
 				if (_r != nullptr)
 				{
 					_constrainedElement->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -562,12 +512,11 @@ void ConstraintImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'specification'
-		std::shared_ptr<uml::ValueSpecification > specification = this->getSpecification();
+		std::shared_ptr<uml::ValueSpecification> specification = this->getSpecification();
 		if (specification != nullptr)
 		{
 			saveHandler->addReference(specification, "specification", specification->eClass() != package->getValueSpecification_Class());
 		}
-
 	// Add references
 		saveHandler->addReferences<uml::Element>("constrainedElement", this->getConstrainedElement());
 	}

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -40,8 +41,7 @@
 #include "uml/OutputPin.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -64,53 +64,34 @@ ClauseImpl::~ClauseImpl()
 }
 
 //Additional constructor for the containments back reference
-ClauseImpl::ClauseImpl(std::weak_ptr<uml::Element > par_owner)
+ClauseImpl::ClauseImpl(std::weak_ptr<uml::Element> par_owner)
 :ClauseImpl()
 {
 	m_owner = par_owner;
 }
 
-
-ClauseImpl::ClauseImpl(const ClauseImpl & obj):ClauseImpl()
+ClauseImpl::ClauseImpl(const ClauseImpl & obj): ElementImpl(obj), Clause(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Clause "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	std::shared_ptr<Bag<uml::ExecutableNode>> _body = obj.getBody();
 	m_body.reset(new Bag<uml::ExecutableNode>(*(obj.getBody().get())));
-
 	std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = obj.getBodyOutput();
 	m_bodyOutput.reset(new Bag<uml::OutputPin>(*(obj.getBodyOutput().get())));
-
 	m_decider  = obj.getDecider();
-
-	m_owner  = obj.getOwner();
-
 	std::shared_ptr<Bag<uml::Clause>> _predecessorClause = obj.getPredecessorClause();
 	m_predecessorClause.reset(new Bag<uml::Clause>(*(obj.getPredecessorClause().get())));
-
 	std::shared_ptr<Bag<uml::Clause>> _successorClause = obj.getSuccessorClause();
 	m_successorClause.reset(new Bag<uml::Clause>(*(obj.getSuccessorClause().get())));
-
 	std::shared_ptr<Bag<uml::ExecutableNode>> _test = obj.getTest();
 	m_test.reset(new Bag<uml::ExecutableNode>(*(obj.getTest().get())));
 
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  ClauseImpl::copy() const
@@ -132,19 +113,19 @@ std::shared_ptr<ecore::EClass> ClauseImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ClauseImpl::body_output_pins(Any diagnostics,std::map <  Any ,  Any > context)
+bool ClauseImpl::body_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClauseImpl::decider_output(Any diagnostics,std::map <  Any ,  Any > context)
+bool ClauseImpl::decider_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ClauseImpl::test_and_body(Any diagnostics,std::map <  Any ,  Any > context)
+bool ClauseImpl::test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -170,8 +151,6 @@ std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getBody() const
 
 
 
-
-
 /*
 Getter & Setter for reference bodyOutput
 */
@@ -189,22 +168,18 @@ std::shared_ptr<Bag<uml::OutputPin>> ClauseImpl::getBodyOutput() const
 
 
 
-
-
 /*
 Getter & Setter for reference decider
 */
-std::shared_ptr<uml::OutputPin > ClauseImpl::getDecider() const
+std::shared_ptr<uml::OutputPin> ClauseImpl::getDecider() const
 {
 //assert(m_decider);
     return m_decider;
 }
-
 void ClauseImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
 {
     m_decider = _decider;
 }
-
 
 
 /*
@@ -221,8 +196,6 @@ std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getPredecessorClause() const
 
     return m_predecessorClause;
 }
-
-
 
 
 
@@ -243,8 +216,6 @@ std::shared_ptr<Bag<uml::Clause>> ClauseImpl::getSuccessorClause() const
 
 
 
-
-
 /*
 Getter & Setter for reference test
 */
@@ -259,8 +230,6 @@ std::shared_ptr<Bag<uml::ExecutableNode>> ClauseImpl::getTest() const
 //assert(m_test);
     return m_test;
 }
-
-
 
 
 
@@ -632,7 +601,6 @@ void ClauseImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 
 void ClauseImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ElementImpl::loadNode(nodeName, loadHandler);
@@ -647,11 +615,11 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 			std::shared_ptr<Bag<uml::ExecutableNode>> _body = getBody();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::ExecutableNode> _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
+				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
 				if (_r != nullptr)
 				{
 					_body->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -661,11 +629,11 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 			std::shared_ptr<Bag<uml::OutputPin>> _bodyOutput = getBodyOutput();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::OutputPin> _r = std::dynamic_pointer_cast<uml::OutputPin>(ref);
+				std::shared_ptr<uml::OutputPin>  _r = std::dynamic_pointer_cast<uml::OutputPin>(ref);
 				if (_r != nullptr)
 				{
 					_bodyOutput->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -687,11 +655,11 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 			std::shared_ptr<Bag<uml::Clause>> _predecessorClause = getPredecessorClause();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Clause> _r = std::dynamic_pointer_cast<uml::Clause>(ref);
+				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
 				if (_r != nullptr)
 				{
 					_predecessorClause->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -701,11 +669,11 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 			std::shared_ptr<Bag<uml::Clause>> _successorClause = getSuccessorClause();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Clause> _r = std::dynamic_pointer_cast<uml::Clause>(ref);
+				std::shared_ptr<uml::Clause>  _r = std::dynamic_pointer_cast<uml::Clause>(ref);
 				if (_r != nullptr)
 				{
 					_successorClause->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -715,11 +683,11 @@ void ClauseImpl::resolveReferences(const int featureID, std::vector<std::shared_
 			std::shared_ptr<Bag<uml::ExecutableNode>> _test = getTest();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::ExecutableNode> _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
+				std::shared_ptr<uml::ExecutableNode>  _r = std::dynamic_pointer_cast<uml::ExecutableNode>(ref);
 				if (_r != nullptr)
 				{
 					_test->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -745,11 +713,10 @@ void ClauseImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 	// Add references
 		saveHandler->addReferences<uml::ExecutableNode>("body", this->getBody());
 		saveHandler->addReferences<uml::OutputPin>("bodyOutput", this->getBodyOutput());
-		saveHandler->addReference("decider", this->getDecider()); 
+		saveHandler->addReference(this->getDecider(), "decider", getDecider()->eClass() != uml::umlPackage::eInstance()->getOutputPin_Class()); 
 		saveHandler->addReferences<uml::Clause>("predecessorClause", this->getPredecessorClause());
 		saveHandler->addReferences<uml::Clause>("successorClause", this->getSuccessorClause());
 		saveHandler->addReferences<uml::ExecutableNode>("test", this->getTest());

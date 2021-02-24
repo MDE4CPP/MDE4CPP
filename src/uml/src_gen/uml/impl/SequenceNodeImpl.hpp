@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../SequenceNode.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			SequenceNodeImpl(const SequenceNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			SequenceNodeImpl& operator=(SequenceNodeImpl const&) = delete;
 
 		protected:
@@ -33,29 +34,16 @@ namespace uml
 			virtual void setThisSequenceNodePtr(std::weak_ptr<SequenceNode> thisSequenceNodePtr);
 
 			//Additional constructors for the containments back reference
-			SequenceNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id);
-
-
+			SequenceNodeImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id);
 			//Additional constructors for the containments back reference
-
-
 			//Additional constructors for the containments back reference
-			SequenceNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			SequenceNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			SequenceNodeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			SequenceNodeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			SequenceNodeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			SequenceNodeImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			SequenceNodeImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup);
-
-
-
+			SequenceNodeImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup);
 
 		public:
 			//destructor
@@ -81,9 +69,8 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getExecutableNode() const ;
 			
-			
 			/*Additional Setter for 'StructuredActivityNode::node' redefined by reference 'executableNode'*/
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -133,7 +120,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

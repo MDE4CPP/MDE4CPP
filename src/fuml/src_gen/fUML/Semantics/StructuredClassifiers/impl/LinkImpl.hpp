@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Link.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			LinkImpl(const LinkImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			LinkImpl& operator=(LinkImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::StructuredClassifiers
 			LinkImpl();
 			virtual std::shared_ptr<Link> getThisLinkPtr() const;
 			virtual void setThisLinkPtr(std::weak_ptr<Link> thisLinkPtr);
-
 
 
 		public:
@@ -43,21 +43,11 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual void addTo(std::shared_ptr<fUML::Semantics::Loci::Locus> locus) ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent,std::shared_ptr<uml::Property> end) ;
-			
-			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual void addTo(std::shared_ptr<fUML::Semantics::Loci::Locus> locus) ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent,std::shared_ptr<uml::Property> end) ; 
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const ; 
 			virtual bool isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link,std::shared_ptr<uml::Property> end) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -68,12 +58,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Association > getType() const ;
+			virtual std::shared_ptr<uml::Association> getType() const ;
 			
+			virtual void setType(std::shared_ptr<uml::Association>) ;
 			
-			virtual void setType(std::shared_ptr<uml::Association> _type) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

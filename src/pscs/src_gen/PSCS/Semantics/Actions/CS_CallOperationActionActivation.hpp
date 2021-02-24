@@ -88,24 +88,12 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual bool _isCreate(std::shared_ptr<uml::Operation> operation) = 0;
-			
-			 
-			virtual void doAction() = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0;
-			
-			 
-			virtual bool isCreate(std::shared_ptr<uml::Operation> operation) = 0;
-			
-			 
-			virtual bool isOperationProvided(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) = 0;
-			
-			 
+			virtual bool _isCreate(std::shared_ptr<uml::Operation> operation) = 0; 
+			virtual void doAction() = 0; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0; 
+			virtual bool isCreate(std::shared_ptr<uml::Operation> operation) = 0; 
+			virtual bool isOperationProvided(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) = 0; 
 			virtual bool isOperationRequired(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

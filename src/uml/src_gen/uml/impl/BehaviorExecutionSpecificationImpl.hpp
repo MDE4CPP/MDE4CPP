@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../BehaviorExecutionSpecification.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			BehaviorExecutionSpecificationImpl(const BehaviorExecutionSpecificationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			BehaviorExecutionSpecificationImpl& operator=(BehaviorExecutionSpecificationImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisBehaviorExecutionSpecificationPtr(std::weak_ptr<BehaviorExecutionSpecification> thisBehaviorExecutionSpecificationPtr);
 
 			//Additional constructors for the containments back reference
-			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
-
-
+			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
 			//Additional constructors for the containments back reference
-			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
-
-
+			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand);
 			//Additional constructors for the containments back reference
-			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -72,16 +64,14 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior > getBehavior() const ;
-			
+			virtual std::shared_ptr<uml::Behavior> getBehavior() const ;
 			/*!
 			Behavior whose execution is occurring.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) ;
+			virtual void setBehavior(std::shared_ptr<uml::Behavior>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -91,7 +81,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -101,7 +91,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -40,13 +41,13 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
-#include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
-
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -68,22 +69,18 @@ ReturnInformationImpl::~ReturnInformationImpl()
 }
 
 
-
-ReturnInformationImpl::ReturnInformationImpl(const ReturnInformationImpl & obj):ReturnInformationImpl()
+ReturnInformationImpl::ReturnInformationImpl(const ReturnInformationImpl & obj): fUML::Semantics::Values::ValueImpl(obj), ReturnInformation(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReturnInformation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_callEventOccurrence  = obj.getCallEventOccurrence();
 
-
 	//Clone references with containment (deep copy)
-
-
 }
 
 std::shared_ptr<ecore::EObject>  ReturnInformationImpl::copy() const
@@ -210,17 +207,15 @@ std::string ReturnInformationImpl::toString()
 /*
 Getter & Setter for reference callEventOccurrence
 */
-std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence > ReturnInformationImpl::getCallEventOccurrence() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> ReturnInformationImpl::getCallEventOccurrence() const
 {
 //assert(m_callEventOccurrence);
     return m_callEventOccurrence;
 }
-
 void ReturnInformationImpl::setCallEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> _callEventOccurrence)
 {
     m_callEventOccurrence = _callEventOccurrence;
 }
-
 
 
 //*********************************
@@ -327,7 +322,6 @@ void ReturnInformationImpl::loadAttributes(std::shared_ptr<persistence::interfac
 
 void ReturnInformationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler);
@@ -370,9 +364,8 @@ void ReturnInformationImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("callEventOccurrence", this->getCallEventOccurrence()); 
+		saveHandler->addReference(this->getCallEventOccurrence(), "callEventOccurrence", getCallEventOccurrence()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getCallEventOccurrence_Class()); 
 	}
 	catch (std::exception& e)
 	{

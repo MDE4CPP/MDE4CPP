@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../SignalInstance.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			SignalInstanceImpl(const SignalInstanceImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			SignalInstanceImpl& operator=(SignalInstanceImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			SignalInstanceImpl();
 			virtual std::shared_ptr<SignalInstance> getThisSignalInstancePtr() const;
 			virtual void setThisSignalInstancePtr(std::weak_ptr<SignalInstance> thisSignalInstancePtr);
-
 
 
 		public:
@@ -45,8 +45,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -56,12 +54,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Signal > getType() const ;
+			virtual std::shared_ptr<uml::Signal> getType() const ;
 			
+			virtual void setType(std::shared_ptr<uml::Signal>) ;
 			
-			virtual void setType(std::shared_ptr<uml::Signal> _type) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

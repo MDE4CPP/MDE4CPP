@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../JoinNode.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			JoinNodeImpl(const JoinNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			JoinNodeImpl& operator=(JoinNodeImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisJoinNodePtr(std::weak_ptr<JoinNode> thisJoinNodePtr);
 
 			//Additional constructors for the containments back reference
-			JoinNodeImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			JoinNodeImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			JoinNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			JoinNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			JoinNodeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			JoinNodeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			JoinNodeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			JoinNodeImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -64,16 +56,12 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool incoming_object_flow(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool incoming_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A JoinNode has one outgoing ActivityEdge.
 			outgoing->size() = 1
 			*/
 			 
-			virtual bool one_outgoing_edge(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool one_outgoing_edge(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -84,13 +72,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsCombineDuplicate() const ;
-			
 			/*!
 			Indicates whether incoming tokens having objects with the same identity are combined into one by the JoinNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
 			virtual void setIsCombineDuplicate (bool _isCombineDuplicate);
+			
 			
 			//*********************************
 			// Reference
@@ -100,16 +88,14 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getJoinSpec() const ;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getJoinSpec() const ;
 			/*!
 			A ValueSpecification giving the condition under which the JoinNode will offer a token on its outgoing ActivityEdge. If no joinSpec is specified, then the JoinNode will offer an outgoing token if tokens are offered on all of its incoming ActivityEdges (an "and" condition).
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setJoinSpec(std::shared_ptr<uml::ValueSpecification> _joinSpec) ;
+			virtual void setJoinSpec(std::shared_ptr<uml::ValueSpecification>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -129,7 +115,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

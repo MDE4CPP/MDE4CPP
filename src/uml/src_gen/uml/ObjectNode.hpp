@@ -102,23 +102,17 @@ namespace uml
 					selection.inputParameters()->forAll(p | self.type.conformsTo(p.type))
 			*/
 			 
-			virtual bool input_output_parameter(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool input_output_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			If isControlType=false, the ActivityEdges incoming to or outgoing from an ObjectNode must all be ObjectFlows.
 			(not isControlType) implies incoming->union(outgoing)->forAll(oclIsKindOf(ObjectFlow))
 			*/
 			 
-			virtual bool object_flow_edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool object_flow_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			If an ObjectNode has a selection Behavior, then the ordering of the object node is ordered, and vice versa.
 			(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered)
 			*/
 			 
-			virtual bool selection_behavior(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool selection_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -128,25 +122,25 @@ namespace uml
 			*/
 			 
 			virtual bool getIsControlType() const = 0;
-			
 			/*!
 			Indicates whether the type of the ObjectNode is to be treated as representing control values that may traverse ControlFlows.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsControlType (bool _isControlType)= 0;/*!
+			virtual void setIsControlType (bool _isControlType)= 0;
+			/*!
 			Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
 			virtual uml::ObjectNodeOrderingKind getOrdering() const = 0;
-			
 			/*!
 			Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
 			virtual void setOrdering (uml::ObjectNodeOrderingKind _ordering)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -157,35 +151,30 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::State>> getInState() const = 0;
 			
-			
 			/*!
 			A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior > getSelection() const = 0;
-			
+			virtual std::shared_ptr<uml::Behavior> getSelection() const = 0;
 			/*!
 			A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setSelection(std::shared_ptr<uml::Behavior> _selection) = 0;
-			
+			virtual void setSelection(std::shared_ptr<uml::Behavior>) = 0;
 			/*!
 			The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getUpperBound() const = 0;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getUpperBound() const = 0;
 			/*!
 			The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setUpperBound(std::shared_ptr<uml::ValueSpecification> _upperBound) = 0;
-			
+			virtual void setUpperBound(std::shared_ptr<uml::ValueSpecification>) = 0;
 			
 
 		protected:
@@ -219,12 +208,12 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			std::shared_ptr<uml::Behavior > m_selection;/*!
+			std::shared_ptr<uml::Behavior> m_selection;/*!
 			The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			std::shared_ptr<uml::ValueSpecification > m_upperBound;
+			std::shared_ptr<uml::ValueSpecification> m_upperBound;
 
 		public:
 			//*********************************
@@ -245,7 +234,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

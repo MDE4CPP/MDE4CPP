@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ExtensionEnd.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ExtensionEndImpl(const ExtensionEndImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ExtensionEndImpl& operator=(ExtensionEndImpl const&) = delete;
 
 		protected:
@@ -33,38 +34,21 @@ namespace uml
 			virtual void setThisExtensionEndPtr(std::weak_ptr<ExtensionEnd> thisExtensionEndPtr);
 
 			//Additional constructors for the containments back reference
-			ExtensionEndImpl(std::weak_ptr<uml::Property > par_associationEnd);
-
-
+			ExtensionEndImpl(std::weak_ptr<uml::Property> par_associationEnd);
 			//Additional constructors for the containments back reference
-			ExtensionEndImpl(std::weak_ptr<uml::Class > par_class);
-
-
+			ExtensionEndImpl(std::weak_ptr<uml::Class> par_class);
 			//Additional constructors for the containments back reference
-			ExtensionEndImpl(std::weak_ptr<uml::DataType > par_datatype);
-
-
+			ExtensionEndImpl(std::weak_ptr<uml::DataType> par_datatype);
 			//Additional constructors for the containments back reference
-			ExtensionEndImpl(std::weak_ptr<uml::Interface > par_interface);
-
-
+			ExtensionEndImpl(std::weak_ptr<uml::Interface> par_interface);
 			//Additional constructors for the containments back reference
-			ExtensionEndImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ExtensionEndImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ExtensionEndImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ExtensionEndImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ExtensionEndImpl(std::weak_ptr<uml::Association > par_owningAssociation);
-
-
+			ExtensionEndImpl(std::weak_ptr<uml::Association> par_owningAssociation);
 			//Additional constructors for the containments back reference
-			ExtensionEndImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			ExtensionEndImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -78,16 +62,12 @@ namespace uml
 			self.aggregation = AggregationKind::composite
 			*/
 			 
-			virtual bool aggregation(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool aggregation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The multiplicity of ExtensionEnd is 0..1 or 1.
 			(lowerBound() = 0 or lowerBound() = 1) and upperBound() = 1
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -97,7 +77,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -112,7 +92,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -122,7 +102,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

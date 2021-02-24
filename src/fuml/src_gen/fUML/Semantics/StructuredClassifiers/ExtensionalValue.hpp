@@ -71,12 +71,8 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0; 
 			virtual void destroy() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -85,11 +81,9 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const = 0;
 			
-			
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) = 0;
-			
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) = 0;
 			
 
 		protected:
@@ -102,7 +96,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::Loci::Locus > m_locus;
+			std::shared_ptr<fUML::Semantics::Loci::Locus> m_locus;
 
 		public:
 			//*********************************

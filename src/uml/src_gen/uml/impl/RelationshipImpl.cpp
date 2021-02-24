@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -36,8 +37,7 @@
 #include "uml/Element.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -60,39 +60,25 @@ RelationshipImpl::~RelationshipImpl()
 }
 
 //Additional constructor for the containments back reference
-RelationshipImpl::RelationshipImpl(std::weak_ptr<uml::Element > par_owner)
+RelationshipImpl::RelationshipImpl(std::weak_ptr<uml::Element> par_owner)
 :RelationshipImpl()
 {
 	m_owner = par_owner;
 }
 
-
-RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj):RelationshipImpl()
+RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj): ElementImpl(obj), Relationship(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Relationship "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_owner  = obj.getOwner();
-
 	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  RelationshipImpl::copy() const
@@ -121,8 +107,6 @@ std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
 /*
 Getter & Setter for reference relatedElement
 */
-
-
 
 
 
@@ -240,7 +224,6 @@ void RelationshipImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void RelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ElementImpl::loadNode(nodeName, loadHandler);

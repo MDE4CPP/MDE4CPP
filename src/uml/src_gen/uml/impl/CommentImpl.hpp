@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Comment.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			CommentImpl(const CommentImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CommentImpl& operator=(CommentImpl const&) = delete;
 
 		protected:
@@ -33,10 +34,7 @@ namespace uml
 			virtual void setThisCommentPtr(std::weak_ptr<Comment> thisCommentPtr);
 
 			//Additional constructors for the containments back reference
-			CommentImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			CommentImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -56,13 +54,13 @@ namespace uml
 			*/
 			 
 			virtual std::string getBody() const ;
-			
 			/*!
 			Specifies a string that is the comment.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
 			virtual void setBody (std::string _body);
+			
 			
 			//*********************************
 			// Reference
@@ -75,7 +73,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Element>> getAnnotatedElement() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter

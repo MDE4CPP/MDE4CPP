@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Values.hpp"
 
@@ -26,7 +27,7 @@ virtual public Values
 			ValuesImpl(const ValuesImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ValuesImpl& operator=(ValuesImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public Values
 			ValuesImpl();
 			virtual std::shared_ptr<Values> getThisValuesPtr() const;
 			virtual void setThisValuesPtr(std::weak_ptr<Values> thisValuesPtr);
-
 
 
 		public:
@@ -58,7 +58,6 @@ virtual public Values
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter

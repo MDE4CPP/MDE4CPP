@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../PackageMerge.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			PackageMergeImpl(const PackageMergeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			PackageMergeImpl& operator=(PackageMergeImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace uml
 			virtual void setThisPackageMergePtr(std::weak_ptr<PackageMerge> thisPackageMergePtr);
 
 			//Additional constructors for the containments back reference
-			PackageMergeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			PackageMergeImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			PackageMergeImpl(std::weak_ptr<uml::Package > par_receivingPackage);
-
-
-
+			PackageMergeImpl(std::weak_ptr<uml::Package> par_receivingPackage);
 
 		public:
 			//destructor
@@ -64,30 +60,26 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Package > getMergedPackage() const ;
-			
+			virtual std::shared_ptr<uml::Package> getMergedPackage() const ;
 			/*!
 			References the Package that is to be merged with the receiving package of the PackageMerge.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual void setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage) ;
-			
+			virtual void setMergedPackage(std::shared_ptr<uml::Package>) ;
 			/*!
 			References the Package that is being extended with the contents of the merged package of the PackageMerge.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Package > getReceivingPackage() const ;
-			
+			virtual std::weak_ptr<uml::Package> getReceivingPackage() const ;
 			/*!
 			References the Package that is being extended with the contents of the merged package of the PackageMerge.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual void setReceivingPackage(std::shared_ptr<uml::Package> _receivingPackage) ;
+			virtual void setReceivingPackage(std::weak_ptr<uml::Package>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -102,7 +94,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/

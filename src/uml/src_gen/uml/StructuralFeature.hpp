@@ -89,13 +89,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsReadOnly() const = 0;
-			
 			/*!
 			If isReadOnly is true, the StructuralFeature may not be written to after initialization.
 			<p>From package UML::Classification.</p>
 			*/
 			 
 			virtual void setIsReadOnly (bool _isReadOnly)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -132,7 +132,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

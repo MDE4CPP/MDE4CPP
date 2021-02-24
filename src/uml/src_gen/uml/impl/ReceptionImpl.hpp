@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Reception.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ReceptionImpl(const ReceptionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ReceptionImpl& operator=(ReceptionImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace uml
 			virtual void setThisReceptionPtr(std::weak_ptr<Reception> thisReceptionPtr);
 
 			//Additional constructors for the containments back reference
-			ReceptionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ReceptionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ReceptionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ReceptionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -54,9 +50,7 @@ namespace uml
 			name = signal.name
 			*/
 			 
-			virtual bool same_name_as_signal(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool same_name_as_signal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
 			signal.ownedAttribute->size() = ownedParameter->size() and
 			Sequence{1..signal.ownedAttribute->size()}->forAll( i | 
@@ -68,9 +62,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool same_structure_as_signal(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool same_structure_as_signal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -85,16 +77,14 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal > getSignal() const ;
-			
+			virtual std::shared_ptr<uml::Signal> getSignal() const ;
 			/*!
 			The Signal that this Reception handles.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setSignal(std::shared_ptr<uml::Signal> _signal) ;
+			virtual void setSignal(std::shared_ptr<uml::Signal>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -119,7 +109,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

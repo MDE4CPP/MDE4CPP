@@ -80,11 +80,11 @@ namespace ecore
 			virtual std::shared_ptr<ecore::EClass> eClass() const = 0; 
 			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const = 0; 
 			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const = 0; 
-			virtual std::shared_ptr<Bag < ecore::EObject>> eContents() const = 0; 
-			virtual std::shared_ptr<Bag < ecore::EObject>> eCrossReferences() const = 0; 
+			virtual std::shared_ptr<std::list < ecore::EObject>> eContents() const = 0; 
+			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const = 0; 
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0; 
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const = 0; 
-			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<Bag < Any>> arguments) const = 0; 
+			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) const = 0; 
 			virtual bool eIsProxy() const = 0; 
 			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0; 
 			virtual int eResource() const = 0; 
@@ -93,19 +93,18 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual int getMetaElementID() const = 0;
-			
 			 
 			virtual void setMetaElementID (int _metaElementID)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
 			
 			virtual std::weak_ptr<ecore::EObject> getEContainer() const = 0;
 			
-			
 			virtual void setEContainer(std::weak_ptr<ecore::EObject>) = 0;
-			
 			
 			
 			

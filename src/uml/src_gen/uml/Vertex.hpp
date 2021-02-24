@@ -72,13 +72,13 @@ namespace uml
 			Vertex(){}
 
 			//Additional constructors for the containments back reference
-			Vertex(std::weak_ptr<uml::Region > par_container);
+			Vertex(std::weak_ptr<uml::Region> par_container);
 
 			//Additional constructors for the containments back reference
-			Vertex(std::weak_ptr<uml::Namespace > par_namespace);
+			Vertex(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-			Vertex(std::weak_ptr<uml::Element > par_owner);
+			Vertex(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -110,25 +110,19 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() = 0;/*!
 			Derivation for Vertex::/incoming.
 			result = (Transition.allInstances()->select(target=self))
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Transition> > getIncomings() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Transition> > getIncomings() = 0;/*!
 			Derivation for Vertex::/outgoing
 			result = (Transition.allInstances()->select(source=self))
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Transition> > getOutgoings() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Transition> > getOutgoings() = 0;/*!
 			This utility query returns true if the Vertex is contained in the Region r (input argument).
 			result = (if (container = r) then
 				true
@@ -142,9 +136,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool isContainedInRegion(std::shared_ptr<uml::Region> r) = 0;
-			
-			/*!
+			virtual bool isContainedInRegion(std::shared_ptr<uml::Region> r) = 0;/*!
 			This utility operation returns true if the Vertex is contained in the State s (input argument).
 			result = (if not s.isComposite() or container->isEmpty() then
 				false
@@ -159,8 +151,6 @@ namespace uml
 			*/
 			 
 			virtual bool isContainedInState(std::shared_ptr<uml::State> s) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -173,15 +163,13 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Region > getContainer() const = 0;
-			
+			virtual std::weak_ptr<uml::Region> getContainer() const = 0;
 			/*!
 			The Region that contains this Vertex.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setContainer(std::shared_ptr<uml::Region> _container) = 0;
-			
+			virtual void setContainer(std::weak_ptr<uml::Region>) = 0;
 			/*!
 			Specifies the Transitions entering this Vertex.
 			<p>From package UML::StateMachines.</p>
@@ -189,14 +177,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Transition>> getIncoming() const = 0;
 			
-			
 			/*!
 			Specifies the Transitions departing from this Vertex.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Transition>> getOutgoing() const = 0;
-			
 			
 			
 
@@ -214,7 +200,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			std::weak_ptr<uml::Region > m_container;/*!
+			std::weak_ptr<uml::Region> m_container;/*!
 			Specifies the Transitions entering this Vertex.
 			<p>From package UML::StateMachines.</p>
 			*/
@@ -235,7 +221,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -245,7 +231,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

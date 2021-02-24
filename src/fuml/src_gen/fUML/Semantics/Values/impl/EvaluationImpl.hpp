@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Evaluation.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Values
 			EvaluationImpl(const EvaluationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EvaluationImpl& operator=(EvaluationImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::Values
 			EvaluationImpl();
 			virtual std::shared_ptr<Evaluation> getThisEvaluationPtr() const;
 			virtual void setThisEvaluationPtr(std::weak_ptr<Evaluation> thisEvaluationPtr);
-
 
 
 		public:
@@ -45,8 +45,6 @@ namespace fUML::Semantics::Values
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -56,18 +54,14 @@ namespace fUML::Semantics::Values
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const ;
+			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const ;
 			
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) ;
 			
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) ;
+			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const ;
 			
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification>) ;
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const ;
-			
-			
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

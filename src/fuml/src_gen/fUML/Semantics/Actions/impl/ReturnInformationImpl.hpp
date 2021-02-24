@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ReturnInformation.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Actions
 			ReturnInformationImpl(const ReturnInformationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ReturnInformationImpl& operator=(ReturnInformationImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::Actions
 			ReturnInformationImpl();
 			virtual std::shared_ptr<ReturnInformation> getThisReturnInformationPtr() const;
 			virtual void setThisReturnInformationPtr(std::weak_ptr<ReturnInformation> thisReturnInformationPtr);
-
 
 
 		public:
@@ -43,30 +43,14 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ;
-			
-			 
-			virtual std::shared_ptr<uml::Operation> getOperation() ;
-			
-			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
-			
-			 
-			virtual void reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues) ;
-			
-			 
-			virtual std::shared_ptr<uml::ValueSpecification> specify() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ; 
+			virtual std::shared_ptr<uml::Operation> getOperation() ; 
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ; 
+			virtual void reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues) ; 
+			virtual std::shared_ptr<uml::ValueSpecification> specify() ; 
 			virtual std::string toString() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -77,12 +61,10 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence > getCallEventOccurrence() const ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> getCallEventOccurrence() const ;
 			
+			virtual void setCallEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence>) ;
 			
-			virtual void setCallEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> _callEventOccurrence) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../TimeConstraint.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			TimeConstraintImpl(const TimeConstraintImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			TimeConstraintImpl& operator=(TimeConstraintImpl const&) = delete;
 
 		protected:
@@ -33,25 +34,14 @@ namespace uml
 			virtual void setThisTimeConstraintPtr(std::weak_ptr<TimeConstraint> thisTimeConstraintPtr);
 
 			//Additional constructors for the containments back reference
-			TimeConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id);
-
-
+			TimeConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id);
 			//Additional constructors for the containments back reference
-
-
 			//Additional constructors for the containments back reference
-			TimeConstraintImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			TimeConstraintImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			TimeConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			TimeConstraintImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			TimeConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			TimeConstraintImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -65,9 +55,7 @@ namespace uml
 			constrainedElement->size() = 1
 			*/
 			 
-			virtual bool has_one_constrainedElement(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool has_one_constrainedElement(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -78,7 +66,6 @@ namespace uml
 			*/
 			 
 			virtual bool getFirstEvent() const ;
-			
 			/*!
 			The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
 			<p>From package UML::Values.</p>
@@ -86,10 +73,11 @@ namespace uml
 			 
 			virtual void setFirstEvent (bool _firstEvent);
 			
+			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -99,7 +87,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -109,7 +97,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

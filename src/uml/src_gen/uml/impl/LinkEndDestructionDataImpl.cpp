@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -41,8 +42,7 @@
 #include "uml/QualifierValue.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -65,51 +65,25 @@ LinkEndDestructionDataImpl::~LinkEndDestructionDataImpl()
 }
 
 //Additional constructor for the containments back reference
-LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(std::weak_ptr<uml::Element > par_owner)
+LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(std::weak_ptr<uml::Element> par_owner)
 :LinkEndDestructionDataImpl()
 {
 	m_owner = par_owner;
 }
 
-
-LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj):LinkEndDestructionDataImpl()
+LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj): LinkEndDataImpl(obj), LinkEndDestructionData(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LinkEndDestructionData "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_isDestroyDuplicates = obj.getIsDestroyDuplicates();
 
 	//copy references with no containment (soft copy)
-	
 	m_destroyAt  = obj.getDestroyAt();
 
-	m_end  = obj.getEnd();
-
-	m_owner  = obj.getOwner();
-
-	m_value  = obj.getValue();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::QualifierValue>> _qualifierList = obj.getQualifier();
-	for(std::shared_ptr<uml::QualifierValue> _qualifier : *_qualifierList)
-	{
-		this->getQualifier()->add(std::shared_ptr<uml::QualifierValue>(std::dynamic_pointer_cast<uml::QualifierValue>(_qualifier->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_qualifier" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  LinkEndDestructionDataImpl::copy() const
@@ -134,18 +108,16 @@ bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const
 {
 	return m_isDestroyDuplicates;
 }
-
 void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicates)
 {
 	m_isDestroyDuplicates = _isDestroyDuplicates;
 } 
 
 
-
 //*********************************
 // Operations
 //*********************************
-bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::map <  Any ,  Any > context)
+bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -157,17 +129,15 @@ bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::map <  Any ,
 /*
 Getter & Setter for reference destroyAt
 */
-std::shared_ptr<uml::InputPin > LinkEndDestructionDataImpl::getDestroyAt() const
+std::shared_ptr<uml::InputPin> LinkEndDestructionDataImpl::getDestroyAt() const
 {
 
     return m_destroyAt;
 }
-
 void LinkEndDestructionDataImpl::setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt)
 {
     m_destroyAt = _destroyAt;
 }
-
 
 
 //*********************************
@@ -313,7 +283,6 @@ void LinkEndDestructionDataImpl::loadAttributes(std::shared_ptr<persistence::int
 
 void LinkEndDestructionDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	LinkEndDataImpl::loadNode(nodeName, loadHandler);
@@ -364,9 +333,8 @@ void LinkEndDestructionDataImpl::saveContent(std::shared_ptr<persistence::interf
 		{
 			saveHandler->addAttribute("isDestroyDuplicates", this->getIsDestroyDuplicates());
 		}
-
 	// Add references
-		saveHandler->addReference("destroyAt", this->getDestroyAt()); 
+		saveHandler->addReference(this->getDestroyAt(), "destroyAt", getDestroyAt()->eClass() != uml::umlPackage::eInstance()->getInputPin_Class()); 
 	}
 	catch (std::exception& e)
 	{

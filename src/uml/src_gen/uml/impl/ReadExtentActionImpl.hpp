@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ReadExtentAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ReadExtentActionImpl(const ReadExtentActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ReadExtentActionImpl& operator=(ReadExtentActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisReadExtentActionPtr(std::weak_ptr<ReadExtentAction> thisReadExtentActionPtr);
 
 			//Additional constructors for the containments back reference
-			ReadExtentActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ReadExtentActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ReadExtentActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ReadExtentActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ReadExtentActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ReadExtentActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ReadExtentActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ReadExtentActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,16 +54,12 @@ namespace uml
 			result.is(0,*)
 			*/
 			 
-			virtual bool multiplicity_of_result(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool multiplicity_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type of the result OutputPin is the classifier.
 			result.type = classifier
 			*/
 			 
-			virtual bool type_is_classifier(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool type_is_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -86,30 +74,26 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier > getClassifier() const ;
-			
+			virtual std::shared_ptr<uml::Classifier> getClassifier() const ;
 			/*!
 			The Classifier whose instances are to be retrieved.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setClassifier(std::shared_ptr<uml::Classifier> _classifier) ;
-			
+			virtual void setClassifier(std::shared_ptr<uml::Classifier>) ;
 			/*!
 			The OutputPin on which the Classifier instances are placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
 			/*!
 			The OutputPin on which the Classifier instances are placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -134,7 +118,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

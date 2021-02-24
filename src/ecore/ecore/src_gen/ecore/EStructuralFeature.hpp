@@ -81,34 +81,43 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual bool isChangeable() const = 0;
+			 
+			virtual void setChangeable (bool _changeable)= 0;
+			 
+			virtual Any getDefaultValue() const = 0;
+			 
+			virtual void setDefaultValue (Any _defaultValue)= 0;
+			 
+			virtual std::string getDefaultValueLiteral() const = 0;
+			 
+			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral)= 0;
+			 
+			virtual bool isDerived() const = 0;
+			 
+			virtual void setDerived (bool _derived)= 0;
+			 
+			virtual int getFeatureID() const = 0;
 			
 			 
-			virtual void setChangeable (bool _changeable)= 0;virtual Any getDefaultValue() const = 0;
-			
+			virtual bool isTransient() const = 0;
 			 
-			virtual void setDefaultValue (Any _defaultValue)= 0;virtual std::string getDefaultValueLiteral() const = 0;
-			
+			virtual void setTransient (bool _transient)= 0;
 			 
-			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral)= 0;virtual bool isDerived() const = 0;
-			
+			virtual bool isUnsettable() const = 0;
 			 
-			virtual void setDerived (bool _derived)= 0;virtual int getFeatureID() const = 0;virtual bool isTransient() const = 0;
-			
+			virtual void setUnsettable (bool _unsettable)= 0;
 			 
-			virtual void setTransient (bool _transient)= 0;virtual bool isUnsettable() const = 0;
-			
-			 
-			virtual void setUnsettable (bool _unsettable)= 0;virtual bool isVolatile() const = 0;
-			
+			virtual bool isVolatile() const = 0;
 			 
 			virtual void setVolatile (bool _volatile)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
 			
 			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const = 0;
-			
 			
 			
 

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Action.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ActionImpl(const ActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ActionImpl& operator=(ActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisActionPtr(std::weak_ptr<Action> thisActionPtr);
 
 			//Additional constructors for the containments back reference
-			ActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -63,17 +55,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Action> > allActions() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Action> > allActions() ;/*!
 			Returns all the ActivityNodes directly or indirectly owned by this Action. This includes at least all the Pins of the Action.
 			result = (input.oclAsType(Pin)->asSet()->union(output->asSet()))
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ActivityNode> > allOwnedNodes() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::ActivityNode> > allOwnedNodes() ;/*!
 			result = (if inStructuredNode<>null then inStructuredNode.containingBehavior() 
 			else if activity<>null then activity
 			else interaction 
@@ -85,10 +73,6 @@ namespace uml
 			 
 			virtual std::shared_ptr<uml::Behavior> containingBehavior() ;
 			
-			
-			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -98,13 +82,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsLocallyReentrant() const ;
-			
 			/*!
 			If true, the Action can begin a new, concurrent execution, even if there is already another execution of the Action ongoing. If false, the Action cannot begin a new execution until any previous execution has completed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setIsLocallyReentrant (bool _isLocallyReentrant);
+			
 			
 			//*********************************
 			// Reference
@@ -114,8 +98,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier > getContext() const ;
-			
+			virtual std::shared_ptr<uml::Classifier> getContext() const ;
 			
 			
 			
@@ -125,7 +108,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Constraint, uml::Element>> getLocalPostcondition() const ;
-			
 			
 			/*!
 			A Constraint that must be satisfied when execution of the Action is started.
@@ -137,7 +119,6 @@ namespace uml
 			
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -167,7 +148,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

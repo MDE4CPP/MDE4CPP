@@ -69,10 +69,10 @@ namespace uml
 			TemplateBinding(){}
 
 			//Additional constructors for the containments back reference
-			TemplateBinding(std::weak_ptr<uml::TemplateableElement > par_boundElement);
+			TemplateBinding(std::weak_ptr<uml::TemplateableElement> par_boundElement);
 
 			//Additional constructors for the containments back reference
-			TemplateBinding(std::weak_ptr<uml::Element > par_owner);
+			TemplateBinding(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -88,16 +88,12 @@ namespace uml
 			signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1)
 			*/
 			 
-			virtual bool one_parameter_substitution(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool one_parameter_substitution(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
 			parameterSubstitution->forAll(b | signature.parameter->includes(b.formal))
 			*/
 			 
-			virtual bool parameter_substitution_formal(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool parameter_substitution_formal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -110,15 +106,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::TemplateableElement > getBoundElement() const = 0;
-			
+			virtual std::weak_ptr<uml::TemplateableElement> getBoundElement() const = 0;
 			/*!
 			The TemplateableElement that is bound by this TemplateBinding.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setBoundElement(std::shared_ptr<uml::TemplateableElement> _boundElement) = 0;
-			
+			virtual void setBoundElement(std::weak_ptr<uml::TemplateableElement>) = 0;
 			/*!
 			The TemplateParameterSubstitutions owned by this TemplateBinding.
 			<p>From package UML::CommonStructure.</p>
@@ -126,21 +120,18 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> getParameterSubstitution() const = 0;
 			
-			
 			/*!
 			The TemplateSignature for the template that is the target of this TemplateBinding.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TemplateSignature > getSignature() const = 0;
-			
+			virtual std::shared_ptr<uml::TemplateSignature> getSignature() const = 0;
 			/*!
 			The TemplateSignature for the template that is the target of this TemplateBinding.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setSignature(std::shared_ptr<uml::TemplateSignature> _signature) = 0;
-			
+			virtual void setSignature(std::shared_ptr<uml::TemplateSignature>) = 0;
 			
 
 		protected:
@@ -157,7 +148,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			std::weak_ptr<uml::TemplateableElement > m_boundElement;/*!
+			std::weak_ptr<uml::TemplateableElement> m_boundElement;/*!
 			The TemplateParameterSubstitutions owned by this TemplateBinding.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -167,7 +158,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			std::shared_ptr<uml::TemplateSignature > m_signature;
+			std::shared_ptr<uml::TemplateSignature> m_signature;
 
 		public:
 			//*********************************
@@ -183,7 +174,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/

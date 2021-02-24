@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -47,8 +48,7 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -71,7 +71,7 @@ BehaviorExecutionSpecificationImpl::~BehaviorExecutionSpecificationImpl()
 }
 
 //Additional constructor for the containments back reference
-BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction)
 :BehaviorExecutionSpecificationImpl()
 {
 	m_enclosingInteraction = par_enclosingInteraction;
@@ -79,7 +79,7 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak
 }
 
 //Additional constructor for the containments back reference
-BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand)
 :BehaviorExecutionSpecificationImpl()
 {
 	m_enclosingOperand = par_enclosingOperand;
@@ -87,7 +87,7 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak
 }
 
 //Additional constructor for the containments back reference
-BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :BehaviorExecutionSpecificationImpl()
 {
 	m_namespace = par_namespace;
@@ -95,72 +95,24 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak
 }
 
 //Additional constructor for the containments back reference
-BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner)
+BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Element> par_owner)
 :BehaviorExecutionSpecificationImpl()
 {
 	m_owner = par_owner;
 }
 
-
-BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const BehaviorExecutionSpecificationImpl & obj):BehaviorExecutionSpecificationImpl()
+BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const BehaviorExecutionSpecificationImpl & obj): ExecutionSpecificationImpl(obj), BehaviorExecutionSpecification(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy BehaviorExecutionSpecification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_behavior  = obj.getBehavior();
 
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
-	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
-
-	m_enclosingInteraction  = obj.getEnclosingInteraction();
-
-	m_enclosingOperand  = obj.getEnclosingOperand();
-
-	m_finish  = obj.getFinish();
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_start  = obj.getStart();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
-	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
-	{
-		this->getGeneralOrdering()->add(std::shared_ptr<uml::GeneralOrdering>(std::dynamic_pointer_cast<uml::GeneralOrdering>(_generalOrdering->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_generalOrdering" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  BehaviorExecutionSpecificationImpl::copy() const
@@ -189,23 +141,21 @@ std::shared_ptr<ecore::EClass> BehaviorExecutionSpecificationImpl::eStaticClass(
 /*
 Getter & Setter for reference behavior
 */
-std::shared_ptr<uml::Behavior > BehaviorExecutionSpecificationImpl::getBehavior() const
+std::shared_ptr<uml::Behavior> BehaviorExecutionSpecificationImpl::getBehavior() const
 {
 
     return m_behavior;
 }
-
 void BehaviorExecutionSpecificationImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
 }
 
 
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > BehaviorExecutionSpecificationImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> BehaviorExecutionSpecificationImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -225,7 +175,7 @@ std::shared_ptr<Union<uml::Element>> BehaviorExecutionSpecificationImpl::getOwne
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > BehaviorExecutionSpecificationImpl::getOwner() const
+std::weak_ptr<uml::Element> BehaviorExecutionSpecificationImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -350,7 +300,6 @@ void BehaviorExecutionSpecificationImpl::loadAttributes(std::shared_ptr<persiste
 
 void BehaviorExecutionSpecificationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ExecutionSpecificationImpl::loadNode(nodeName, loadHandler);
@@ -402,9 +351,8 @@ void BehaviorExecutionSpecificationImpl::saveContent(std::shared_ptr<persistence
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("behavior", this->getBehavior()); 
+		saveHandler->addReference(this->getBehavior(), "behavior", getBehavior()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
 	}
 	catch (std::exception& e)
 	{

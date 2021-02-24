@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../PartDecomposition.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			PartDecompositionImpl(const PartDecompositionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			PartDecompositionImpl& operator=(PartDecompositionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisPartDecompositionPtr(std::weak_ptr<PartDecomposition> thisPartDecompositionPtr);
 
 			//Additional constructors for the containments back reference
-			PartDecompositionImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
-
-
+			PartDecompositionImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
 			//Additional constructors for the containments back reference
-			PartDecompositionImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
-
-
+			PartDecompositionImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand);
 			//Additional constructors for the containments back reference
-			PartDecompositionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			PartDecompositionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			PartDecompositionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			PartDecompositionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,21 +53,15 @@ namespace uml
 			Assume that within Interaction X, Lifeline L is of class C and decomposed to D. Within X there is a sequence of constructs along L (such constructs are CombinedFragments, InteractionUse and (plain) OccurrenceSpecifications). Then a corresponding sequence of constructs must appear within D, matched one-to-one in the same order. i) CombinedFragment covering L are matched with an extra-global CombinedFragment in D. ii) An InteractionUse covering L is matched with a global (i.e., covering all Lifelines) InteractionUse in D. iii) A plain OccurrenceSpecification on L is considered an actualGate that must be matched by a formalGate of D.
 			*/
 			 
-			virtual bool assume(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool assume(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Assume that within Interaction X, Lifeline L is of class C and decomposed to D. Assume also that there is within X an InteractionUse (say) U that covers L. According to the constraint above U will have a counterpart CU within D. Within the Interaction referenced by U, L should also be decomposed, and the decomposition should reference CU. (This rule is called commutativity of decomposition.)
 			*/
 			 
-			virtual bool commutativity_of_decomposition(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool commutativity_of_decomposition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			PartDecompositions apply only to Parts that are Parts of Internal Structures not to Parts of Collaborations.
 			*/
 			 
-			virtual bool parts_of_internal_structures(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool parts_of_internal_structures(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -85,7 +71,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -95,7 +81,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -105,7 +91,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -46,8 +47,7 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -70,7 +70,7 @@ LiteralRealImpl::~LiteralRealImpl()
 }
 
 //Additional constructor for the containments back reference
-LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::Namespace > par_namespace)
+LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :LiteralRealImpl()
 {
 	m_namespace = par_namespace;
@@ -78,14 +78,14 @@ LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::Element > par_owner)
+LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::Element> par_owner)
 :LiteralRealImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::Package > par_owningPackage)
+LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :LiteralRealImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -93,7 +93,7 @@ LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::Package > par_owningPackage)
 }
 
 //Additional constructor for the containments back reference
-LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 :LiteralRealImpl()
 {
 	m_owningSlot = par_owningSlot;
@@ -101,7 +101,7 @@ LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::Slot > par_owningSlot)
 }
 
 //Additional constructor for the containments back reference
-LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :LiteralRealImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
@@ -109,65 +109,25 @@ LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::TemplateParameter > par_owni
 }
 
 //Additional constructor for the containments back reference
-LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+LiteralRealImpl::LiteralRealImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction)
 :LiteralRealImpl()
 {
 	m_valueSpecificationAction = par_valueSpecificationAction;
 	m_owner = par_valueSpecificationAction;
 }
 
-
-LiteralRealImpl::LiteralRealImpl(const LiteralRealImpl & obj):LiteralRealImpl()
+LiteralRealImpl::LiteralRealImpl(const LiteralRealImpl & obj): LiteralSpecificationImpl(obj), LiteralReal(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralReal "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
+	//Clone Attributes with (deep copy)
 	m_value = obj.getValue();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningSlot  = obj.getOwningSlot();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-	m_type  = obj.getType();
-
-	m_valueSpecificationAction  = obj.getValueSpecificationAction();
-
 
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  LiteralRealImpl::copy() const
@@ -192,12 +152,10 @@ double LiteralRealImpl::getValue() const
 {
 	return m_value;
 }
-
 void LiteralRealImpl::setValue(double _value)
 {
 	m_value = _value;
 } 
-
 
 
 //*********************************
@@ -226,7 +184,7 @@ double LiteralRealImpl::realValue()
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > LiteralRealImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> LiteralRealImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -246,7 +204,7 @@ std::shared_ptr<Union<uml::Element>> LiteralRealImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > LiteralRealImpl::getOwner() const
+std::weak_ptr<uml::Element> LiteralRealImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -382,7 +340,6 @@ void LiteralRealImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 
 void LiteralRealImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -40,8 +41,7 @@
 #include "ecore/EPackage.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -498,7 +498,6 @@ void EPackageImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	try
 	{
@@ -510,7 +509,7 @@ void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-		loadHandler->handleChildContainer<ecore::EClassifier>(this->getEClassifiers());  
+			loadHandler->handleChildContainer<ecore::EClassifier>(this->getEClassifiers());  
 
 			return; 
 		}
@@ -522,7 +521,7 @@ void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "EPackage";
 			}
-		loadHandler->handleChildContainer<ecore::EPackage>(this->getESubpackages());  
+			loadHandler->handleChildContainer<ecore::EPackage>(this->getESubpackages());  
 
 			return; 
 		}

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../TokenSet.hpp"
 
@@ -26,7 +27,7 @@ virtual public TokenSet
 			TokenSetImpl(const TokenSetImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			TokenSetImpl& operator=(TokenSetImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public TokenSet
 			TokenSetImpl();
 			virtual std::shared_ptr<TokenSet> getThisTokenSetPtr() const;
 			virtual void setThisTokenSetPtr(std::weak_ptr<TokenSet> thisTokenSetPtr);
-
 
 
 		public:
@@ -58,7 +58,6 @@ virtual public TokenSet
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getTokens() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter

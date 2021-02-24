@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ObjectNodeActivation.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Activities
 			ObjectNodeActivationImpl(const ObjectNodeActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ObjectNodeActivationImpl& operator=(ObjectNodeActivationImpl const&) = delete;
 
 		protected:
@@ -34,10 +35,7 @@ namespace fUML::Semantics::Activities
 			virtual void setThisObjectNodeActivationPtr(std::weak_ptr<ObjectNodeActivation> thisObjectNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
-			ObjectNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			ObjectNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -47,52 +45,31 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) ;
-			
-			 
-			virtual void clearTokens() ;
-			
-			 
-			virtual int countOfferedValues() ;
-			
-			 
-			virtual int countUnofferedTokens() ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getUnofferedTokens() ;
-			
-			 
-			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) ;
-			
-			 
-			virtual void run() ;
-			
-			 
-			virtual void sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens) ;
-			
-			 
-			virtual void sendUnofferedTokens() ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeUnofferedTokens() ;
-			
-			 
+			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) ; 
+			virtual void clearTokens() ; 
+			virtual int countOfferedValues() ; 
+			virtual int countUnofferedTokens() ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getUnofferedTokens() ; 
+			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) ; 
+			virtual void run() ; 
+			virtual void sendOffers(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens) ; 
+			virtual void sendUnofferedTokens() ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeUnofferedTokens() ; 
 			virtual void terminate() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual int getOfferedTokenCount() const ;
-			
 			 
 			virtual void setOfferedTokenCount (int _offeredTokenCount);
+			
 			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

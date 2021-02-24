@@ -94,9 +94,7 @@ namespace uml
 			language->notEmpty() implies (_'body'->size() = language->size())
 			*/
 			 
-			virtual bool language_body_size(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -105,12 +103,16 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string>> getBody() const = 0;/*!
+			virtual std::shared_ptr<Bag<std::string>> getBody() const = 0;
+			
+			/*!
 			If provided, a specification of the language used for each of the body Strings.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual std::shared_ptr<Bag<std::string>> getLanguage() const = 0;
+			
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -121,14 +123,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getInputValue() const = 0;
 			
-			
 			/*!
 			The OutputPins on which the OpaqueAction provides outputs.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getOutputValue() const = 0;
-			
 			
 			
 
@@ -194,7 +194,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

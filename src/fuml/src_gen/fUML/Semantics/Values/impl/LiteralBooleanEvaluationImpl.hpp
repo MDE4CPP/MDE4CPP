@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../LiteralBooleanEvaluation.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Values
 			LiteralBooleanEvaluationImpl(const LiteralBooleanEvaluationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			LiteralBooleanEvaluationImpl& operator=(LiteralBooleanEvaluationImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::Values
 			LiteralBooleanEvaluationImpl();
 			virtual std::shared_ptr<LiteralBooleanEvaluation> getThisLiteralBooleanEvaluationPtr() const;
 			virtual void setThisLiteralBooleanEvaluationPtr(std::weak_ptr<LiteralBooleanEvaluation> thisLiteralBooleanEvaluationPtr);
-
 
 
 		public:
@@ -45,8 +45,6 @@ namespace fUML::Semantics::Values
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -55,7 +53,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

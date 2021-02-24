@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -43,8 +44,7 @@
 #include "ecore/ETypedElement.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -87,7 +87,7 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj): ETypedElementImpl(ob
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EOperation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-// unknown attribute type or missing setter for operationID
+	m_operationID = obj.getOperationID();
 
 	//copy references with no containment (soft copy)
 	m_eContainingClass  = obj.getEContainingClass();
@@ -585,7 +585,6 @@ void EOperationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	try
 	{
@@ -596,7 +595,7 @@ void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "EGenericType";
 			}
-		loadHandler->handleChildContainer<ecore::EGenericType>(this->getEGenericExceptions());  
+			loadHandler->handleChildContainer<ecore::EGenericType>(this->getEGenericExceptions());  
 
 			return; 
 		}
@@ -608,7 +607,7 @@ void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "EParameter";
 			}
-		loadHandler->handleChildContainer<ecore::EParameter>(this->getEParameters());  
+			loadHandler->handleChildContainer<ecore::EParameter>(this->getEParameters());  
 
 			return; 
 		}
@@ -620,7 +619,7 @@ void EOperationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "ETypeParameter";
 			}
-		loadHandler->handleChildContainer<ecore::ETypeParameter>(this->getETypeParameters());  
+			loadHandler->handleChildContainer<ecore::ETypeParameter>(this->getETypeParameters());  
 
 			return; 
 		}

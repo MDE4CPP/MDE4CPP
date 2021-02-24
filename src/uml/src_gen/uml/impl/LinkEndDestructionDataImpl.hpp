@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../LinkEndDestructionData.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			LinkEndDestructionDataImpl& operator=(LinkEndDestructionDataImpl const&) = delete;
 
 		protected:
@@ -33,10 +34,7 @@ namespace uml
 			virtual void setThisLinkEndDestructionDataPtr(std::weak_ptr<LinkEndDestructionData> thisLinkEndDestructionDataPtr);
 
 			//Additional constructors for the containments back reference
-			LinkEndDestructionDataImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			LinkEndDestructionDataImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -55,9 +53,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool destroyAt_pin(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool destroyAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -68,13 +64,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsDestroyDuplicates() const ;
-			
 			/*!
 			Specifies whether to destroy duplicates of the value in nonunique Association ends.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setIsDestroyDuplicates (bool _isDestroyDuplicates);
+			
 			
 			//*********************************
 			// Reference
@@ -84,16 +80,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getDestroyAt() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getDestroyAt() const ;
 			/*!
 			The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt) ;
+			virtual void setDestroyAt(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter

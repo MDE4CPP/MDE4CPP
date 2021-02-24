@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -40,8 +41,7 @@
 #include "uml/GeneralizationSet.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -64,60 +64,39 @@ GeneralizationImpl::~GeneralizationImpl()
 }
 
 //Additional constructor for the containments back reference
-GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Element > par_owner)
+GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Element> par_owner)
 :GeneralizationImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Classifier > par_specific)
+GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Classifier> par_specific)
 :GeneralizationImpl()
 {
 	m_specific = par_specific;
 	m_owner = par_specific;
 }
 
-
-GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj):GeneralizationImpl()
+GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj): DirectedRelationshipImpl(obj), Generalization(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Generalization "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_isSubstitutable = obj.getIsSubstitutable();
 
 	//copy references with no containment (soft copy)
-	
 	std::shared_ptr<Bag<uml::GeneralizationSet>> _generalizationSet = obj.getGeneralizationSet();
 	m_generalizationSet.reset(new Bag<uml::GeneralizationSet>(*(obj.getGeneralizationSet().get())));
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
 	m_specific  = obj.getSpecific();
 
-
 	//Clone references with containment (deep copy)
-
 	if(obj.getGeneral()!=nullptr)
 	{
 		m_general = std::dynamic_pointer_cast<uml::Classifier>(obj.getGeneral()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_general" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  GeneralizationImpl::copy() const
@@ -142,12 +121,10 @@ bool GeneralizationImpl::getIsSubstitutable() const
 {
 	return m_isSubstitutable;
 }
-
 void GeneralizationImpl::setIsSubstitutable(bool _isSubstitutable)
 {
 	m_isSubstitutable = _isSubstitutable;
 } 
-
 
 
 //*********************************
@@ -160,17 +137,15 @@ void GeneralizationImpl::setIsSubstitutable(bool _isSubstitutable)
 /*
 Getter & Setter for reference general
 */
-std::shared_ptr<uml::Classifier > GeneralizationImpl::getGeneral() const
+std::shared_ptr<uml::Classifier> GeneralizationImpl::getGeneral() const
 {
 //assert(m_general);
     return m_general;
 }
-
 void GeneralizationImpl::setGeneral(std::shared_ptr<uml::Classifier> _general)
 {
     m_general = _general;
 }
-
 
 
 /*
@@ -190,22 +165,18 @@ std::shared_ptr<Bag<uml::GeneralizationSet>> GeneralizationImpl::getGeneralizati
 
 
 
-
-
 /*
 Getter & Setter for reference specific
 */
-std::weak_ptr<uml::Classifier > GeneralizationImpl::getSpecific() const
+std::weak_ptr<uml::Classifier> GeneralizationImpl::getSpecific() const
 {
 //assert(m_specific);
     return m_specific;
 }
-
-void GeneralizationImpl::setSpecific(std::shared_ptr<uml::Classifier> _specific)
+void GeneralizationImpl::setSpecific(std::weak_ptr<uml::Classifier> _specific)
 {
     m_specific = _specific;
 }
-
 
 
 //*********************************
@@ -226,7 +197,7 @@ std::shared_ptr<Union<uml::Element>> GeneralizationImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > GeneralizationImpl::getOwner() const
+std::weak_ptr<uml::Element> GeneralizationImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -477,7 +448,6 @@ void GeneralizationImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void GeneralizationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
@@ -504,11 +474,11 @@ void GeneralizationImpl::resolveReferences(const int featureID, std::vector<std:
 			std::shared_ptr<Bag<uml::GeneralizationSet>> _generalizationSet = getGeneralizationSet();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::GeneralizationSet> _r = std::dynamic_pointer_cast<uml::GeneralizationSet>(ref);
+				std::shared_ptr<uml::GeneralizationSet>  _r = std::dynamic_pointer_cast<uml::GeneralizationSet>(ref);
 				if (_r != nullptr)
 				{
 					_generalizationSet->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -557,9 +527,8 @@ void GeneralizationImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 		{
 			saveHandler->addAttribute("isSubstitutable", this->getIsSubstitutable());
 		}
-
 	// Add references
-		saveHandler->addReference("general", this->getGeneral()); 
+		saveHandler->addReference(this->getGeneral(), "general", getGeneral()->eClass() != uml::umlPackage::eInstance()->getClassifier_Class()); 
 		saveHandler->addReferences<uml::GeneralizationSet>("generalizationSet", this->getGeneralizationSet());
 	}
 	catch (std::exception& e)

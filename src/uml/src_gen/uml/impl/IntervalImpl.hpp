@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Interval.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			IntervalImpl(const IntervalImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			IntervalImpl& operator=(IntervalImpl const&) = delete;
 
 		protected:
@@ -33,30 +34,17 @@ namespace uml
 			virtual void setThisIntervalPtr(std::weak_ptr<Interval> thisIntervalPtr);
 
 			//Additional constructors for the containments back reference
-			IntervalImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			IntervalImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			IntervalImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			IntervalImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			IntervalImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			IntervalImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			IntervalImpl(std::weak_ptr<uml::Slot > par_owningSlot);
-
-
+			IntervalImpl(std::weak_ptr<uml::Slot> par_owningSlot);
 			//Additional constructors for the containments back reference
-			IntervalImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			IntervalImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-			IntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
-
-
-
+			IntervalImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction);
 
 		public:
 			//destructor
@@ -80,30 +68,26 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getMax() const ;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getMax() const ;
 			/*!
 			Refers to the ValueSpecification denoting the maximum value of the range.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setMax(std::shared_ptr<uml::ValueSpecification> _max) ;
-			
+			virtual void setMax(std::shared_ptr<uml::ValueSpecification>) ;
 			/*!
 			Refers to the ValueSpecification denoting the minimum value of the range.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getMin() const ;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getMin() const ;
 			/*!
 			Refers to the ValueSpecification denoting the minimum value of the range.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setMin(std::shared_ptr<uml::ValueSpecification> _min) ;
+			virtual void setMin(std::shared_ptr<uml::ValueSpecification>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -113,7 +97,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -123,7 +107,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

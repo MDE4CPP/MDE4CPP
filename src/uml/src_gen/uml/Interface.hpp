@@ -99,22 +99,16 @@ namespace uml
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this interface.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) = 0;/*!
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this interface.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType) = 0;/*!
 			The visibility of all Features owned by an Interface must be public.
 			feature->forAll(visibility = VisibilityKind::public)
 			*/
 			 
-			virtual bool visibility(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -129,14 +123,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> getNestedClassifier() const = 0;
 			
-			
 			/*!
 			The attributes (i.e., the Properties) owned by the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> getOwnedAttribute() const = 0;
-			
 			
 			/*!
 			The Operations owned by the Interface.
@@ -145,7 +137,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> getOwnedOperation() const = 0;
 			
-			
 			/*!
 			Receptions that objects providing this Interface are willing to accept.
 			<p>From package UML::SimpleClassifiers.</p>
@@ -153,28 +144,24 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> getOwnedReception() const = 0;
 			
-			
 			/*!
 			References a ProtocolStateMachine specifying the legal sequences of the invocation of the BehavioralFeatures described in the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ProtocolStateMachine > getProtocol() const = 0;
-			
+			virtual std::shared_ptr<uml::ProtocolStateMachine> getProtocol() const = 0;
 			/*!
 			References a ProtocolStateMachine specifying the legal sequences of the invocation of the BehavioralFeatures described in the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol) = 0;
-			
+			virtual void setProtocol(std::shared_ptr<uml::ProtocolStateMachine>) = 0;
 			/*!
 			References all the Interfaces redefined by this Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>> getRedefinedInterface() const = 0;
-			
 			
 			
 
@@ -212,7 +199,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			std::shared_ptr<uml::ProtocolStateMachine > m_protocol;/*!
+			std::shared_ptr<uml::ProtocolStateMachine> m_protocol;/*!
 			References all the Interfaces redefined by this Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
@@ -243,7 +230,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -258,7 +245,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

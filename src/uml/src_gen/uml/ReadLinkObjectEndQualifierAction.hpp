@@ -95,58 +95,42 @@ namespace uml
 			qualifier.associationEnd.association.oclIsKindOf(AssociationClass)
 			*/
 			 
-			virtual bool association_of_association(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool association_of_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The ends of the Association must not be static.
 			qualifier.associationEnd.association.memberEnd->forAll(e | not e.isStatic)
 			*/
 			 
-			virtual bool ends_of_association(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool ends_of_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_object(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool multiplicity_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The multiplicity of the qualifier Property is 1..1.
 			qualifier.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool multiplicity_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_result(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool multiplicity_of_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The qualifier Property must be a qualifier of an Association end.
 			qualifier.associationEnd <> null
 			*/
 			 
-			virtual bool qualifier_attribute(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool qualifier_attribute(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The type of the result OutputPin is the same as the type of the qualifier Property.
 			result.type = qualifier.type
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The type of the object InputPin is the AssociationClass that owns the Association end that has the given qualifier Property.
 			object.type = qualifier.associationEnd.association
 			*/
 			 
-			virtual bool type_of_object(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool type_of_object(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -159,43 +143,37 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getObject() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
 			/*!
 			The InputPin from which the link object is obtained.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object) = 0;
-			
+			virtual void setObject(std::shared_ptr<uml::InputPin>) = 0;
 			/*!
 			The qualifier Property to be read.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property > getQualifier() const = 0;
-			
+			virtual std::shared_ptr<uml::Property> getQualifier() const = 0;
 			/*!
 			The qualifier Property to be read.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setQualifier(std::shared_ptr<uml::Property> _qualifier) = 0;
-			
+			virtual void setQualifier(std::shared_ptr<uml::Property>) = 0;
 			/*!
 			The OutputPin where the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const = 0;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
 			/*!
 			The OutputPin where the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) = 0;
-			
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
 			
 
 		protected:
@@ -212,17 +190,17 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_object;/*!
+			std::shared_ptr<uml::InputPin> m_object;/*!
 			The qualifier Property to be read.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::Property > m_qualifier;/*!
+			std::shared_ptr<uml::Property> m_qualifier;/*!
 			The OutputPin where the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::OutputPin > m_result;
+			std::shared_ptr<uml::OutputPin> m_result;
 
 		public:
 			//*********************************
@@ -253,7 +231,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

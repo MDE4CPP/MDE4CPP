@@ -90,9 +90,7 @@ namespace uml
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(TimeObservation)))
 			*/
 			 
-			virtual bool no_expr_requires_observation(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool no_expr_requires_observation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -105,22 +103,19 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getExpr() const = 0;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getExpr() const = 0;
 			/*!
 			A ValueSpecification that evaluates to the value of the TimeExpression.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setExpr(std::shared_ptr<uml::ValueSpecification> _expr) = 0;
-			
+			virtual void setExpr(std::shared_ptr<uml::ValueSpecification>) = 0;
 			/*!
 			Refers to the Observations that are involved in the computation of the TimeExpression value.
 			<p>From package UML::Values.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Observation>> getObservation() const = 0;
-			
 			
 			
 
@@ -138,7 +133,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			std::shared_ptr<uml::ValueSpecification > m_expr;/*!
+			std::shared_ptr<uml::ValueSpecification> m_expr;/*!
 			Refers to the Observations that are involved in the computation of the TimeExpression value.
 			<p>From package UML::Values.</p>
 			*/
@@ -154,7 +149,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -164,7 +159,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

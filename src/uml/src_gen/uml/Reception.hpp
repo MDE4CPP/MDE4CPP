@@ -93,9 +93,7 @@ namespace uml
 			name = signal.name
 			*/
 			 
-			virtual bool same_name_as_signal(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool same_name_as_signal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
 			signal.ownedAttribute->size() = ownedParameter->size() and
 			Sequence{1..signal.ownedAttribute->size()}->forAll( i | 
@@ -107,9 +105,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool same_structure_as_signal(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool same_structure_as_signal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -122,15 +118,13 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal > getSignal() const = 0;
-			
+			virtual std::shared_ptr<uml::Signal> getSignal() const = 0;
 			/*!
 			The Signal that this Reception handles.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setSignal(std::shared_ptr<uml::Signal> _signal) = 0;
-			
+			virtual void setSignal(std::shared_ptr<uml::Signal>) = 0;
 			
 
 		protected:
@@ -147,7 +141,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			std::shared_ptr<uml::Signal > m_signal;
+			std::shared_ptr<uml::Signal> m_signal;
 
 		public:
 			//*********************************
@@ -173,7 +167,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

@@ -48,22 +48,30 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual int getLowerBound() const ;
+			 
+			virtual void setLowerBound (int _lowerBound);
+			 
+			virtual bool isMany() const ;
 			
 			 
-			virtual void setLowerBound (int _lowerBound);virtual bool isMany() const ;virtual bool isOrdered() const ;
-			
+			virtual bool isOrdered() const ;
 			 
-			virtual void setOrdered (bool _ordered);virtual bool isRequired() const ;
-			
+			virtual void setOrdered (bool _ordered);
 			 
-			virtual void setRequired (bool _required);virtual bool isUnique() const ;
-			
+			virtual bool isRequired() const ;
 			 
-			virtual void setUnique (bool _unique);virtual int getUpperBound() const ;
-			
+			virtual void setRequired (bool _required);
+			 
+			virtual bool isUnique() const ;
+			 
+			virtual void setUnique (bool _unique);
+			 
+			virtual int getUpperBound() const ;
 			 
 			virtual void setUpperBound (int _upperBound);
+			
 			
 			//*********************************
 			// Reference
@@ -71,15 +79,11 @@ namespace ecore
 			
 			virtual std::shared_ptr<ecore::EGenericType> getEGenericType() const ;
 			
-			
 			virtual void setEGenericType(std::shared_ptr<ecore::EGenericType>) ;
-			
 			
 			virtual std::shared_ptr<ecore::EClassifier> getEType() const ;
 			
-			
 			virtual void setEType(std::shared_ptr<ecore::EClassifier>) ;
-			
 			
 			
 			//*********************************

@@ -64,8 +64,6 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			 
 			virtual int choose(int size) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

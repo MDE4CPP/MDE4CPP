@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../DeployedArtifact.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			DeployedArtifactImpl(const DeployedArtifactImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			DeployedArtifactImpl& operator=(DeployedArtifactImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace uml
 			virtual void setThisDeployedArtifactPtr(std::weak_ptr<DeployedArtifact> thisDeployedArtifactPtr);
 
 			//Additional constructors for the containments back reference
-			DeployedArtifactImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			DeployedArtifactImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			DeployedArtifactImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			DeployedArtifactImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -59,7 +55,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -74,7 +70,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

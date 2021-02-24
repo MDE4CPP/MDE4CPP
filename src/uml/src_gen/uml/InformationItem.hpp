@@ -96,16 +96,12 @@ namespace uml
 			self.generalization->isEmpty() and self.feature->isEmpty()
 			*/
 			 
-			virtual bool has_no(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool has_no(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			It is not instantiable.
 			isAbstract
 			*/
 			 
-			virtual bool not_instantiable(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool not_instantiable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The sources and targets of an information item (its related information flows) must designate subsets of the sources and targets of the representation information item, if any. The Classifiers that can realize an information item can only be of the following kind: Class, Interface, InformationItem, Signal, Component.
 			(self.represented->select(oclIsKindOf(InformationItem))->forAll(p |
 			  p.conveyingFlow.source->forAll(q | self.conveyingFlow.source->includes(q)) and
@@ -114,9 +110,7 @@ namespace uml
 			        oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component)))
 			*/
 			 
-			virtual bool sources_and_targets(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool sources_and_targets(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -130,7 +124,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Classifier>> getRepresented() const = 0;
-			
 			
 			
 
@@ -169,7 +162,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -184,7 +177,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

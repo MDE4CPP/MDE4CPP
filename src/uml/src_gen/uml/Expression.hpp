@@ -90,13 +90,13 @@ namespace uml
 			*/
 			 
 			virtual std::string getSymbol() const = 0;
-			
 			/*!
 			The symbol associated with this node in the expression tree.
 			<p>From package UML::Values.</p>
 			*/
 			 
 			virtual void setSymbol (std::string _symbol)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -106,7 +106,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getOperand() const = 0;
-			
 			
 			
 
@@ -141,7 +140,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -151,7 +150,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

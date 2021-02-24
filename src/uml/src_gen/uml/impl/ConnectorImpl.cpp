@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -49,8 +50,7 @@
 #include "uml/StructuredClassifier.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -73,7 +73,7 @@ ConnectorImpl::~ConnectorImpl()
 }
 
 //Additional constructor for the containments back reference
-ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Namespace > par_namespace)
+ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ConnectorImpl()
 {
 	m_namespace = par_namespace;
@@ -81,94 +81,46 @@ ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Element > par_owner)
+ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::Element> par_owner)
 :ConnectorImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::StructuredClassifier > par_structuredClassifier)
+ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::StructuredClassifier> par_structuredClassifier)
 :ConnectorImpl()
 {
 	m_structuredClassifier = par_structuredClassifier;
 	m_namespace = par_structuredClassifier;
 }
 
-
-ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj):ConnectorImpl()
+ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj): FeatureImpl(obj), Connector(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Connector "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_isLeaf = obj.getIsLeaf();
-	m_isStatic = obj.getIsStatic();
+	//Clone Attributes with (deep copy)
 	m_kind = obj.getKind();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	std::shared_ptr<Bag<uml::Behavior>> _contract = obj.getContract();
 	m_contract.reset(new Bag<uml::Behavior>(*(obj.getContract().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _featuringClassifier = obj.getFeaturingClassifier();
-	m_featuringClassifier.reset(new Union<uml::Classifier>(*(obj.getFeaturingClassifier().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
 	m_structuredClassifier  = obj.getStructuredClassifier();
-
 	m_type  = obj.getType();
 
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::ConnectorEnd>> _endList = obj.getEnd();
-	for(std::shared_ptr<uml::ConnectorEnd> _end : *_endList)
+	std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> endContainer = getEnd();
+	for(auto _end : *obj.getEnd()) 
 	{
-		this->getEnd()->add(std::shared_ptr<uml::ConnectorEnd>(std::dynamic_pointer_cast<uml::ConnectorEnd>(_end->copy())));
+		endContainer->push_back(std::dynamic_pointer_cast<uml::ConnectorEnd>(_end->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_end" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
+	std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> redefinedConnectorContainer = getRedefinedConnector();
+	for(auto _redefinedConnector : *obj.getRedefinedConnector()) 
 	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
+		redefinedConnectorContainer->push_back(std::dynamic_pointer_cast<uml::Connector>(_redefinedConnector->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Connector>> _redefinedConnectorList = obj.getRedefinedConnector();
-	for(std::shared_ptr<uml::Connector> _redefinedConnector : *_redefinedConnectorList)
-	{
-		this->getRedefinedConnector()->add(std::shared_ptr<uml::Connector>(std::dynamic_pointer_cast<uml::Connector>(_redefinedConnector->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedConnector" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_end->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
@@ -202,8 +154,6 @@ uml::ConnectorKind ConnectorImpl::getKind() const
 
 
 
-
-
 //*********************************
 // Operations
 //*********************************
@@ -213,13 +163,13 @@ uml::ConnectorKind ConnectorImpl::getKind()
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorImpl::roles(Any diagnostics,std::map <  Any ,  Any > context)
+bool ConnectorImpl::roles(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectorImpl::types(Any diagnostics,std::map <  Any ,  Any > context)
+bool ConnectorImpl::types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -242,8 +192,6 @@ std::shared_ptr<Bag<uml::Behavior>> ConnectorImpl::getContract() const
 
     return m_contract;
 }
-
-
 
 
 
@@ -273,8 +221,6 @@ std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> ConnectorImpl::getEnd()
 
 
 
-
-
 /*
 Getter & Setter for reference redefinedConnector
 */
@@ -301,38 +247,32 @@ std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> ConnectorImpl::
 
 
 
-
-
 /*
 Getter & Setter for reference structuredClassifier
 */
-std::weak_ptr<uml::StructuredClassifier > ConnectorImpl::getStructuredClassifier() const
+std::weak_ptr<uml::StructuredClassifier> ConnectorImpl::getStructuredClassifier() const
 {
 
     return m_structuredClassifier;
 }
-
-void ConnectorImpl::setStructuredClassifier(std::shared_ptr<uml::StructuredClassifier> _structuredClassifier)
+void ConnectorImpl::setStructuredClassifier(std::weak_ptr<uml::StructuredClassifier> _structuredClassifier)
 {
     m_structuredClassifier = _structuredClassifier;
 }
 
 
-
 /*
 Getter & Setter for reference type
 */
-std::shared_ptr<uml::Association > ConnectorImpl::getType() const
+std::shared_ptr<uml::Association> ConnectorImpl::getType() const
 {
 
     return m_type;
 }
-
 void ConnectorImpl::setType(std::shared_ptr<uml::Association> _type)
 {
     m_type = _type;
 }
-
 
 
 //*********************************
@@ -353,7 +293,7 @@ std::shared_ptr<Union<uml::Classifier>> ConnectorImpl::getFeaturingClassifier() 
 	return m_featuringClassifier;
 }
 
-std::weak_ptr<uml::Namespace > ConnectorImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> ConnectorImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -373,7 +313,7 @@ std::shared_ptr<Union<uml::Element>> ConnectorImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > ConnectorImpl::getOwner() const
+std::weak_ptr<uml::Element> ConnectorImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -679,7 +619,6 @@ void ConnectorImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 
 void ConnectorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -690,12 +629,9 @@ void ConnectorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "ConnectorEnd";
 			}
-			std::shared_ptr<ecore::EObject> end = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR);
-			if (end != nullptr)
-			{
-				loadHandler->handleChild(end);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::ConnectorEnd>(this->getEnd());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -719,25 +655,25 @@ void ConnectorImpl::resolveReferences(const int featureID, std::vector<std::shar
 			std::shared_ptr<Bag<uml::Behavior>> _contract = getContract();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Behavior> _r = std::dynamic_pointer_cast<uml::Behavior>(ref);
+				std::shared_ptr<uml::Behavior>  _r = std::dynamic_pointer_cast<uml::Behavior>(ref);
 				if (_r != nullptr)
 				{
 					_contract->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
 
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 		{
-			std::shared_ptr<Bag<uml::Connector>> _redefinedConnector = getRedefinedConnector();
+			std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> _redefinedConnector = getRedefinedConnector();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Connector> _r = std::dynamic_pointer_cast<uml::Connector>(ref);
+				std::shared_ptr<uml::Connector>  _r = std::dynamic_pointer_cast<uml::Connector>(ref);
 				if (_r != nullptr)
 				{
 					_redefinedConnector->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -801,11 +737,10 @@ void ConnectorImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 		{
 			saveHandler->addReference(end, "end", end->eClass() != package->getConnectorEnd_Class());
 		}
-
 	// Add references
 		saveHandler->addReferences<uml::Behavior>("contract", this->getContract());
 		saveHandler->addReferences<uml::Connector>("redefinedConnector", this->getRedefinedConnector());
-		saveHandler->addReference("type", this->getType()); 
+		saveHandler->addReference(this->getType(), "type", getType()->eClass() != uml::umlPackage::eInstance()->getAssociation_Class()); 
 	}
 	catch (std::exception& e)
 	{

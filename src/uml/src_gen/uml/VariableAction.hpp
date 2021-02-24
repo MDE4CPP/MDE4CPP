@@ -94,9 +94,7 @@ namespace uml
 			variable.isAccessibleBy(self)
 			*/
 			 
-			virtual bool scope_of_variable(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool scope_of_variable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -109,15 +107,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Variable > getVariable() const = 0;
-			
+			virtual std::shared_ptr<uml::Variable> getVariable() const = 0;
 			/*!
 			The Variable to be read or written.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setVariable(std::shared_ptr<uml::Variable> _variable) = 0;
-			
+			virtual void setVariable(std::shared_ptr<uml::Variable>) = 0;
 			
 
 		protected:
@@ -134,7 +130,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::Variable > m_variable;
+			std::shared_ptr<uml::Variable> m_variable;
 
 		public:
 			//*********************************
@@ -155,7 +151,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

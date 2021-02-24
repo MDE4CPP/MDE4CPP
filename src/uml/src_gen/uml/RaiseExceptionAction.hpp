@@ -99,15 +99,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getException() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getException() const = 0;
 			/*!
 			An InputPin whose value becomes the exception object.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setException(std::shared_ptr<uml::InputPin> _exception) = 0;
-			
+			virtual void setException(std::shared_ptr<uml::InputPin>) = 0;
 			
 
 		protected:
@@ -124,7 +122,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_exception;
+			std::shared_ptr<uml::InputPin> m_exception;
 
 		public:
 			//*********************************
@@ -150,7 +148,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

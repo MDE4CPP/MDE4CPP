@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -39,8 +40,7 @@
 #include "ecore/ETypeParameter.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -84,7 +84,7 @@ EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj): ENamedElementImpl
 	#endif
 	//Clone Attributes with (deep copy)
 	m_defaultValue = obj.getDefaultValue();
-// unknown attribute type or missing setter for instanceClass
+	m_instanceClass = obj.getInstanceClass();
 	m_instanceClassName = obj.getInstanceClassName();
 	m_instanceTypeName = obj.getInstanceTypeName();
 
@@ -422,7 +422,6 @@ void EClassifierImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 
 void EClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	try
 	{
@@ -433,7 +432,7 @@ void EClassifierImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "ETypeParameter";
 			}
-		loadHandler->handleChildContainer<ecore::ETypeParameter>(this->getETypeParameters());  
+			loadHandler->handleChildContainer<ecore::ETypeParameter>(this->getETypeParameters());  
 
 			return; 
 		}

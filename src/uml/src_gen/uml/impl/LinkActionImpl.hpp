@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../LinkAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			LinkActionImpl(const LinkActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			LinkActionImpl& operator=(LinkActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisLinkActionPtr(std::weak_ptr<LinkAction> thisLinkActionPtr);
 
 			//Additional constructors for the containments back reference
-			LinkActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			LinkActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			LinkActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			LinkActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			LinkActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			LinkActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			LinkActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			LinkActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -63,30 +55,22 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Association> association() ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Association> association() ;/*!
 			The ends of the endData must not be static.
 			endData->forAll(not end.isStatic)
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
 			endData.end = self.association().memberEnd->asBag()
 			*/
 			 
-			virtual bool same_association(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool same_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
 			inputValue->asBag()=endData.allPins()
 			*/
 			 
-			virtual bool same_pins(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool same_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -103,7 +87,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> getEndData() const ;
 			
-			
 			/*!
 			InputPins used by the LinkEndData of the LinkAction.
 			<p>From package UML::Actions.</p>
@@ -112,7 +95,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getInputValue() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -137,7 +119,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

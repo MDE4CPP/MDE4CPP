@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ForkedToken.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Activities
 			ForkedTokenImpl(const ForkedTokenImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ForkedTokenImpl& operator=(ForkedTokenImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::Activities
 			ForkedTokenImpl();
 			virtual std::shared_ptr<ForkedToken> getThisForkedTokenPtr() const;
 			virtual void setThisForkedTokenPtr(std::weak_ptr<ForkedToken> thisForkedTokenPtr);
-
 
 
 		public:
@@ -43,43 +43,33 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ;
-			
-			 
-			virtual bool isControl() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken) ; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ; 
+			virtual bool isControl() ; 
 			virtual void withdraw() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			virtual bool isBaseTokenIsWithdrawn() const ;
-			
 			 
-			virtual void setBaseTokenIsWithdrawn (bool _baseTokenIsWithdrawn);virtual int getRemainingOffersCount() const ;
-			
+			virtual bool isBaseTokenIsWithdrawn() const ;
+			 
+			virtual void setBaseTokenIsWithdrawn (bool _baseTokenIsWithdrawn);
+			 
+			virtual int getRemainingOffersCount() const ;
 			 
 			virtual void setRemainingOffersCount (int _remainingOffersCount);
+			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token > getBaseToken() const ;
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> getBaseToken() const ;
 			
+			virtual void setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token>) ;
 			
-			virtual void setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token> _baseToken) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

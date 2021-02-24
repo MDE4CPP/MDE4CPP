@@ -86,18 +86,10 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void doAction() = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0;
-			
-			 
-			virtual void removeCallExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution) = 0;
-			
-			 
+			virtual void doAction() = 0; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0; 
+			virtual void removeCallExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> execution) = 0; 
 			virtual void terminate() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -106,20 +98,15 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::CallAction > getCallAction() const = 0;
+			virtual std::shared_ptr<uml::CallAction> getCallAction() const = 0;
 			
-			
-			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction) = 0;
-			
+			virtual void setCallAction(std::shared_ptr<uml::CallAction>) = 0;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
-			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callAction'*/
+			virtual void setAction(std::shared_ptr<uml::Action>) = 0;/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> getCallExecutions() const = 0;
-			
 			
 			
 
@@ -133,7 +120,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::CallAction > m_callAction;
+			std::shared_ptr<uml::CallAction> m_callAction;
 			mutable std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::Execution>> m_callExecutions;
 
 		public:

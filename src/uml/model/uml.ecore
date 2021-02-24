@@ -4756,7 +4756,7 @@
         <details key="documentation" value="Retrieves the (only) return result parameter for this operation."/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="this->returnResult();"/>
+        <details key="body" value="return this->returnResult();"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="setIsOrdered" ordered="false" lowerBound="1">
@@ -4808,12 +4808,12 @@
         <details key="originalName" value="lower"/>
       </eAnnotations>
     </eOperations>
-    <eOperations name="returnResult" ordered="false" upperBound="-1" eType="#//Parameter">
+    <eOperations name="returnResult" ordered="false" eType="#//Parameter">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The query returnResult() returns the set containing the return parameter of the Operation if one exists, otherwise, it returns an empty set&#xA;result = (ownedParameter->select (direction = ParameterDirectionKind::return)->asSet())&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
       <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="body" value="&#x9;std::shared_ptr&lt;Bag&lt;uml::Parameter>> ownedParameters = this->getOwnedParameter();&#xA;&#x9;std::shared_ptr&lt;Bag&lt;uml::Parameter>> returnResult(new Bag&lt;uml::Parameter>);&#xA;&#xA;&#x9;for(std::shared_ptr&lt;uml::Parameter> p : *ownedParameters)&#xA;&#x9;{&#xA;&#x9;&#x9;if(p->getDirection() == uml::ParameterDirectionKind::RETURN)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;returnResult->add(p);&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;&#xA;&#x9;return returnResult;"/>
+        <details key="body" value="std::shared_ptr&lt;Bag&lt;uml::Parameter>> ownedParameters = this->getOwnedParameter();&#xA;&#x9;std::shared_ptr&lt;uml::Parameter> returnResult;&#xA;&#xA;&#x9;for(std::shared_ptr&lt;uml::Parameter> p : *ownedParameters)&#xA;&#x9;{&#xA;&#x9;&#x9;if(p->getDirection() == uml::ParameterDirectionKind::RETURN)&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;returnResult=p;&#xA;&#x9;&#x9;&#x9;&#x9;break;&#xA;&#x9;&#x9;}&#xA;&#x9;}&#xA;&#x9;&#xA;&#x9;return returnResult;"/>
       </eAnnotations>
     </eOperations>
     <eOperations name="getType" ordered="false" lowerBound="1" eType="#//Type">

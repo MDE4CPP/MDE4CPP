@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -47,8 +48,7 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -71,7 +71,7 @@ DurationIntervalImpl::~DurationIntervalImpl()
 }
 
 //Additional constructor for the containments back reference
-DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Namespace > par_namespace)
+DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :DurationIntervalImpl()
 {
 	m_namespace = par_namespace;
@@ -79,14 +79,14 @@ DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Namespace > par_na
 }
 
 //Additional constructor for the containments back reference
-DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Element > par_owner)
+DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Element> par_owner)
 :DurationIntervalImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Package > par_owningPackage)
+DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :DurationIntervalImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -94,7 +94,7 @@ DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Package > par_owni
 }
 
 //Additional constructor for the containments back reference
-DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 :DurationIntervalImpl()
 {
 	m_owningSlot = par_owningSlot;
@@ -102,7 +102,7 @@ DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::Slot > par_owningS
 }
 
 //Additional constructor for the containments back reference
-DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :DurationIntervalImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
@@ -110,68 +110,24 @@ DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::TemplateParameter 
 }
 
 //Additional constructor for the containments back reference
-DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+DurationIntervalImpl::DurationIntervalImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction)
 :DurationIntervalImpl()
 {
 	m_valueSpecificationAction = par_valueSpecificationAction;
 	m_owner = par_valueSpecificationAction;
 }
 
-
-DurationIntervalImpl::DurationIntervalImpl(const DurationIntervalImpl & obj):DurationIntervalImpl()
+DurationIntervalImpl::DurationIntervalImpl(const DurationIntervalImpl & obj): IntervalImpl(obj), DurationInterval(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationInterval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_max  = obj.getMax();
-
-	m_min  = obj.getMin();
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningSlot  = obj.getOwningSlot();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-	m_type  = obj.getType();
-
-	m_valueSpecificationAction  = obj.getValueSpecificationAction();
-
 
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  DurationIntervalImpl::copy() const
@@ -201,7 +157,7 @@ std::shared_ptr<ecore::EClass> DurationIntervalImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > DurationIntervalImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> DurationIntervalImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -221,7 +177,7 @@ std::shared_ptr<Union<uml::Element>> DurationIntervalImpl::getOwnedElement() con
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > DurationIntervalImpl::getOwner() const
+std::weak_ptr<uml::Element> DurationIntervalImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -325,7 +281,6 @@ void DurationIntervalImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void DurationIntervalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	IntervalImpl::loadNode(nodeName, loadHandler);

@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -43,13 +44,13 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/Values/impl/ValuesFactoryImpl.hpp"
-#include "PSCS/Semantics/Values/impl/ValuesPackageImpl.hpp"
-
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
-#include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "PSCS/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -71,24 +72,17 @@ CS_OpaqueExpressionEvaluationImpl::~CS_OpaqueExpressionEvaluationImpl()
 }
 
 
-
-CS_OpaqueExpressionEvaluationImpl::CS_OpaqueExpressionEvaluationImpl(const CS_OpaqueExpressionEvaluationImpl & obj):CS_OpaqueExpressionEvaluationImpl()
+CS_OpaqueExpressionEvaluationImpl::CS_OpaqueExpressionEvaluationImpl(const CS_OpaqueExpressionEvaluationImpl & obj): fUML::Semantics::Values::EvaluationImpl(obj), CS_OpaqueExpressionEvaluation(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_OpaqueExpressionEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_locus  = obj.getLocus();
-
-	m_specification  = obj.getSpecification();
-
 
 	//Clone references with containment (deep copy)
-
-
 }
 
 std::shared_ptr<ecore::EObject>  CS_OpaqueExpressionEvaluationImpl::copy() const
@@ -242,7 +236,6 @@ void CS_OpaqueExpressionEvaluationImpl::loadAttributes(std::shared_ptr<persisten
 
 void CS_OpaqueExpressionEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::Values::ValuesFactory> modelFactory=PSCS::Semantics::Values::ValuesFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Values::EvaluationImpl::loadNode(nodeName, loadHandler);

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -61,8 +62,8 @@
 #include "uml/Type.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -85,7 +86,7 @@ PackageImpl::~PackageImpl()
 }
 
 //Additional constructor for the containments back reference
-PackageImpl::PackageImpl(std::weak_ptr<uml::Namespace > par_namespace)
+PackageImpl::PackageImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :PackageImpl()
 {
 	m_namespace = par_namespace;
@@ -93,7 +94,7 @@ PackageImpl::PackageImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-PackageImpl::PackageImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+PackageImpl::PackageImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id)
 :PackageImpl()
 {
 	switch(reference_id)
@@ -113,7 +114,7 @@ PackageImpl::PackageImpl(std::weak_ptr<uml::Package > par_Package, const int ref
 }
 
 //Additional constructor for the containments back reference
-PackageImpl::PackageImpl(std::weak_ptr<uml::Element > par_owner)
+PackageImpl::PackageImpl(std::weak_ptr<uml::Element> par_owner)
 :PackageImpl()
 {
 	m_owner = par_owner;
@@ -121,194 +122,86 @@ PackageImpl::PackageImpl(std::weak_ptr<uml::Element > par_owner)
 
 
 //Additional constructor for the containments back reference
-PackageImpl::PackageImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+PackageImpl::PackageImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :PackageImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-PackageImpl::PackageImpl(const PackageImpl & obj):PackageImpl()
+PackageImpl::PackageImpl(const PackageImpl & obj): NamespaceImpl(obj), PackageableElementImpl(obj), TemplateableElementImpl(obj), Package(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Package "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_URI = obj.getURI();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
-	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
-
-	m_namespace  = obj.getNamespace();
-
 	m_nestingPackage  = obj.getNestingPackage();
 
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
-	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
+	std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>> nestedPackageContainer = getNestedPackage();
+	for(auto _nestedPackage : *obj.getNestedPackage()) 
 	{
-		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy())));
+		nestedPackageContainer->push_back(std::dynamic_pointer_cast<uml::Package>(_nestedPackage->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageableElement>> _importedMemberList = obj.getImportedMember();
-	for(std::shared_ptr<uml::PackageableElement> _importedMember : *_importedMemberList)
+	std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>> ownedStereotypeContainer = getOwnedStereotype();
+	for(auto _ownedStereotype : *obj.getOwnedStereotype()) 
 	{
-		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy())));
+		ownedStereotypeContainer->push_back(std::dynamic_pointer_cast<uml::Stereotype>(_ownedStereotype->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_importedMember" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
+	std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>> ownedTypeContainer = getOwnedType();
+	for(auto _ownedType : *obj.getOwnedType()) 
 	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
+		ownedTypeContainer->push_back(std::dynamic_pointer_cast<uml::Type>(_ownedType->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Package>> _nestedPackageList = obj.getNestedPackage();
-	for(std::shared_ptr<uml::Package> _nestedPackage : *_nestedPackageList)
+	std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> packageMergeContainer = getPackageMerge();
+	for(auto _packageMerge : *obj.getPackageMerge()) 
 	{
-		this->getNestedPackage()->add(std::shared_ptr<uml::Package>(std::dynamic_pointer_cast<uml::Package>(_nestedPackage->copy())));
+		packageMergeContainer->push_back(std::dynamic_pointer_cast<uml::PackageMerge>(_packageMerge->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nestedPackage" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
+	std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> packagedElementContainer = getPackagedElement();
+	for(auto _packagedElement : *obj.getPackagedElement()) 
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
+		packagedElementContainer->push_back(std::dynamic_pointer_cast<uml::PackageableElement>(_packagedElement->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
-	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
+	std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> profileApplicationContainer = getProfileApplication();
+	for(auto _profileApplication : *obj.getProfileApplication()) 
 	{
-		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy())));
+		profileApplicationContainer->push_back(std::dynamic_pointer_cast<uml::ProfileApplication>(_profileApplication->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedRule" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Stereotype>> _ownedStereotypeList = obj.getOwnedStereotype();
-	for(std::shared_ptr<uml::Stereotype> _ownedStereotype : *_ownedStereotypeList)
-	{
-		this->getOwnedStereotype()->add(std::shared_ptr<uml::Stereotype>(std::dynamic_pointer_cast<uml::Stereotype>(_ownedStereotype->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedStereotype" << std::endl;
-	#endif
-	if(obj.getOwnedTemplateSignature()!=nullptr)
-	{
-		m_ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(obj.getOwnedTemplateSignature()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedTemplateSignature" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Type>> _ownedTypeList = obj.getOwnedType();
-	for(std::shared_ptr<uml::Type> _ownedType : *_ownedTypeList)
-	{
-		this->getOwnedType()->add(std::shared_ptr<uml::Type>(std::dynamic_pointer_cast<uml::Type>(_ownedType->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedType" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
-	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
-	{
-		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageMerge>> _packageMergeList = obj.getPackageMerge();
-	for(std::shared_ptr<uml::PackageMerge> _packageMerge : *_packageMergeList)
-	{
-		this->getPackageMerge()->add(std::shared_ptr<uml::PackageMerge>(std::dynamic_pointer_cast<uml::PackageMerge>(_packageMerge->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_packageMerge" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageableElement>> _packagedElementList = obj.getPackagedElement();
-	for(std::shared_ptr<uml::PackageableElement> _packagedElement : *_packagedElementList)
-	{
-		this->getPackagedElement()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_packagedElement->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_packagedElement" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ProfileApplication>> _profileApplicationList = obj.getProfileApplication();
-	for(std::shared_ptr<uml::ProfileApplication> _profileApplication : *_profileApplicationList)
-	{
-		this->getProfileApplication()->add(std::shared_ptr<uml::ProfileApplication>(std::dynamic_pointer_cast<uml::ProfileApplication>(_profileApplication->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_profileApplication" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::TemplateBinding>> _templateBindingList = obj.getTemplateBinding();
-	for(std::shared_ptr<uml::TemplateBinding> _templateBinding : *_templateBindingList)
-	{
-		this->getTemplateBinding()->add(std::shared_ptr<uml::TemplateBinding>(std::dynamic_pointer_cast<uml::TemplateBinding>(_templateBinding->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_nestedPackage->initSubset(getPackagedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_nestedPackage - Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 	#endif
 	
-
 	/*Subset*/
 	m_ownedStereotype->initSubset(getPackagedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_ownedStereotype - Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 	#endif
 	
-
 	/*Subset*/
 	m_ownedType->initSubset(getPackagedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_ownedType - Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/ >(getPackagedElement())" << std::endl;
 	#endif
 	
-
 	/*Subset*/
 	m_packageMerge->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_packageMerge - Subset<uml::PackageMerge, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-
 	/*SubsetUnion*/
 	m_packagedElement->initSubsetUnion(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value SubsetUnion: " << "m_packagedElement - SubsetUnion<uml::PackageableElement, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-
 	/*Subset*/
 	m_profileApplication->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
@@ -339,12 +232,10 @@ std::string PackageImpl::getURI() const
 {
 	return m_URI;
 }
-
 void PackageImpl::setURI(std::string _URI)
 {
 	m_URI = _URI;
 } 
-
 
 
 //*********************************
@@ -398,7 +289,7 @@ std::shared_ptr<uml::Stereotype> PackageImpl::createOwnedStereotype(std::string 
 	throw "UnsupportedOperationException";
 }
 
-bool PackageImpl::elements_public_or_private(Any diagnostics,std::map <  Any ,  Any > context)
+bool PackageImpl::elements_public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -523,22 +414,18 @@ std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not r
 
 
 
-
-
 /*
 Getter & Setter for reference nestingPackage
 */
-std::weak_ptr<uml::Package > PackageImpl::getNestingPackage() const
+std::weak_ptr<uml::Package> PackageImpl::getNestingPackage() const
 {
 
     return m_nestingPackage;
 }
-
-void PackageImpl::setNestingPackage(std::shared_ptr<uml::Package> _nestingPackage)
+void PackageImpl::setNestingPackage(std::weak_ptr<uml::Package> _nestingPackage)
 {
     m_nestingPackage = _nestingPackage;
 }
-
 
 
 /*
@@ -564,8 +451,6 @@ std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does no
 
     return m_ownedStereotype;
 }
-
-
 
 
 
@@ -595,8 +480,6 @@ std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not refe
 
 
 
-
-
 /*
 Getter & Setter for reference packageMerge
 */
@@ -620,8 +503,6 @@ std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> PackageImpl::getPackage
 
     return m_packageMerge;
 }
-
-
 
 
 
@@ -651,8 +532,6 @@ std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> Package
 
 
 
-
-
 /*
 Getter & Setter for reference profileApplication
 */
@@ -679,8 +558,6 @@ std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> PackageImpl::getP
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
@@ -699,7 +576,7 @@ std::shared_ptr<Union<uml::NamedElement>> PackageImpl::getMember() const
 	return m_member;
 }
 
-std::weak_ptr<uml::Namespace > PackageImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> PackageImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -739,7 +616,7 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> 
 	return m_ownedMember;
 }
 
-std::weak_ptr<uml::Element > PackageImpl::getOwner() const
+std::weak_ptr<uml::Element> PackageImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -1138,7 +1015,6 @@ void PackageImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 
 void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -1149,16 +1025,9 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "Package";
 			}
-			// TODO here are multiple containers of same object. Check this!
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " 'nestedPackage' has more then one back-reference Object." << std::endl;
-			std::shared_ptr<ecore::EObject> nestedPackage;
-				nestedPackage = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE);
-				nestedPackage = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE);
-			if (nestedPackage != nullptr)
-			{
-				loadHandler->handleChild(nestedPackage);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Package>(this->getNestedPackage());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("ownedStereotype") == 0 )
@@ -1168,16 +1037,9 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "Stereotype";
 			}
-			// TODO here are multiple containers of same object. Check this!
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " 'ownedStereotype' has more then one back-reference Object." << std::endl;
-			std::shared_ptr<ecore::EObject> ownedStereotype;
-				ownedStereotype = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE);
-				ownedStereotype = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE);
-			if (ownedStereotype != nullptr)
-			{
-				loadHandler->handleChild(ownedStereotype);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Stereotype>(this->getOwnedStereotype());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("ownedType") == 0 )
@@ -1188,16 +1050,9 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			// TODO here are multiple containers of same object. Check this!
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " 'ownedType' has more then one back-reference Object." << std::endl;
-			std::shared_ptr<ecore::EObject> ownedType;
-				ownedType = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE);
-				ownedType = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE);
-			if (ownedType != nullptr)
-			{
-				loadHandler->handleChild(ownedType);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Type>(this->getOwnedType());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("packageMerge") == 0 )
@@ -1207,12 +1062,9 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "PackageMerge";
 			}
-			std::shared_ptr<ecore::EObject> packageMerge = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE);
-			if (packageMerge != nullptr)
-			{
-				loadHandler->handleChild(packageMerge);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::PackageMerge>(this->getPackageMerge());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("packagedElement") == 0 )
@@ -1223,12 +1075,9 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> packagedElement = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE);
-			if (packagedElement != nullptr)
-			{
-				loadHandler->handleChild(packagedElement);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::PackageableElement>(this->getPackagedElement());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("profileApplication") == 0 )
@@ -1238,12 +1087,9 @@ void PackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "ProfileApplication";
 			}
-			std::shared_ptr<ecore::EObject> profileApplication = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE);
-			if (profileApplication != nullptr)
-			{
-				loadHandler->handleChild(profileApplication);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::ProfileApplication>(this->getProfileApplication());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -1342,17 +1188,13 @@ void PackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		{
 			saveHandler->addAttribute("URI", this->getURI());
 		}
-
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'packagedElement'
-		std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> list_packagedElement = this->getPackagedElement();
-		for (std::shared_ptr<uml::PackageableElement> packagedElement : *list_packagedElement) 
-		{
-			saveHandler->addReference(packagedElement, "packagedElement", packagedElement->eClass() !=uml::umlPackage::eInstance()->getPackageableElement_Class());
-		}
+
+		saveHandler->addReferences<uml::PackageableElement>("packagedElement", this->getPackagedElement());
 	}
 	catch (std::exception& e)
 	{

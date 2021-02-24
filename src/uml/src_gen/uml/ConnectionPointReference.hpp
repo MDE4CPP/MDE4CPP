@@ -75,16 +75,16 @@ namespace uml
 			ConnectionPointReference(){}
 
 			//Additional constructors for the containments back reference
-			ConnectionPointReference(std::weak_ptr<uml::Region > par_container);
+			ConnectionPointReference(std::weak_ptr<uml::Region> par_container);
 
 			//Additional constructors for the containments back reference
-			ConnectionPointReference(std::weak_ptr<uml::Namespace > par_namespace);
+			ConnectionPointReference(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-			ConnectionPointReference(std::weak_ptr<uml::Element > par_owner);
+			ConnectionPointReference(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-			ConnectionPointReference(std::weak_ptr<uml::State > par_state);
+			ConnectionPointReference(std::weak_ptr<uml::State> par_state);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -100,16 +100,12 @@ namespace uml
 			entry->forAll(kind = PseudostateKind::entryPoint)
 			*/
 			 
-			virtual bool entry_pseudostates(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool entry_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The exit Pseudostates must be Pseudostates with kind exitPoint.
 			exit->forAll(kind = PseudostateKind::exitPoint)
 			*/
 			 
-			virtual bool exit_pseudostates(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool exit_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -124,7 +120,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Pseudostate>> getEntry() const = 0;
 			
-			
 			/*!
 			The exitPoints kind Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p>
@@ -132,21 +127,18 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Pseudostate>> getExit() const = 0;
 			
-			
 			/*!
 			The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::State > getState() const = 0;
-			
+			virtual std::weak_ptr<uml::State> getState() const = 0;
 			/*!
 			The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setState(std::shared_ptr<uml::State> _state) = 0;
-			
+			virtual void setState(std::weak_ptr<uml::State>) = 0;
 			
 
 		protected:
@@ -173,7 +165,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			std::weak_ptr<uml::State > m_state;
+			std::weak_ptr<uml::State> m_state;
 
 		public:
 			//*********************************
@@ -184,7 +176,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -194,7 +186,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

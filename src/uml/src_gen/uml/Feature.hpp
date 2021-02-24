@@ -85,13 +85,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsStatic() const = 0;
-			
 			/*!
 			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
 			<p>From package UML::Classification.</p>
 			*/
 			 
 			virtual void setIsStatic (bool _isStatic)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -140,7 +140,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

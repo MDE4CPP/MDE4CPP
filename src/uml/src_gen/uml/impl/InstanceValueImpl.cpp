@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -47,8 +48,7 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -71,7 +71,7 @@ InstanceValueImpl::~InstanceValueImpl()
 }
 
 //Additional constructor for the containments back reference
-InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::Namespace > par_namespace)
+InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :InstanceValueImpl()
 {
 	m_namespace = par_namespace;
@@ -79,14 +79,14 @@ InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::Namespace > par_namespac
 }
 
 //Additional constructor for the containments back reference
-InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::Element > par_owner)
+InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::Element> par_owner)
 :InstanceValueImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::Package > par_owningPackage)
+InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :InstanceValueImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -94,7 +94,7 @@ InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::Package > par_owningPack
 }
 
 //Additional constructor for the containments back reference
-InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 :InstanceValueImpl()
 {
 	m_owningSlot = par_owningSlot;
@@ -102,7 +102,7 @@ InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::Slot > par_owningSlot)
 }
 
 //Additional constructor for the containments back reference
-InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :InstanceValueImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
@@ -110,66 +110,25 @@ InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::TemplateParameter > par_
 }
 
 //Additional constructor for the containments back reference
-InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction)
 :InstanceValueImpl()
 {
 	m_valueSpecificationAction = par_valueSpecificationAction;
 	m_owner = par_valueSpecificationAction;
 }
 
-
-InstanceValueImpl::InstanceValueImpl(const InstanceValueImpl & obj):InstanceValueImpl()
+InstanceValueImpl::InstanceValueImpl(const InstanceValueImpl & obj): ValueSpecificationImpl(obj), InstanceValue(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InstanceValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	m_instance  = obj.getInstance();
 
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningSlot  = obj.getOwningSlot();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-	m_type  = obj.getType();
-
-	m_valueSpecificationAction  = obj.getValueSpecificationAction();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  InstanceValueImpl::copy() const
@@ -198,23 +157,21 @@ std::shared_ptr<ecore::EClass> InstanceValueImpl::eStaticClass() const
 /*
 Getter & Setter for reference instance
 */
-std::shared_ptr<uml::InstanceSpecification > InstanceValueImpl::getInstance() const
+std::shared_ptr<uml::InstanceSpecification> InstanceValueImpl::getInstance() const
 {
 //assert(m_instance);
     return m_instance;
 }
-
 void InstanceValueImpl::setInstance(std::shared_ptr<uml::InstanceSpecification> _instance)
 {
     m_instance = _instance;
 }
 
 
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > InstanceValueImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> InstanceValueImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -234,7 +191,7 @@ std::shared_ptr<Union<uml::Element>> InstanceValueImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > InstanceValueImpl::getOwner() const
+std::weak_ptr<uml::Element> InstanceValueImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -369,7 +326,6 @@ void InstanceValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void InstanceValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
@@ -423,9 +379,8 @@ void InstanceValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("instance", this->getInstance()); 
+		saveHandler->addReference(this->getInstance(), "instance", getInstance()->eClass() != uml::umlPackage::eInstance()->getInstanceSpecification_Class()); 
 	}
 	catch (std::exception& e)
 	{

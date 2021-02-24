@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -36,8 +37,7 @@
 #include "uml/Element.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -60,40 +60,26 @@ CommentImpl::~CommentImpl()
 }
 
 //Additional constructor for the containments back reference
-CommentImpl::CommentImpl(std::weak_ptr<uml::Element > par_owner)
+CommentImpl::CommentImpl(std::weak_ptr<uml::Element> par_owner)
 :CommentImpl()
 {
 	m_owner = par_owner;
 }
 
-
-CommentImpl::CommentImpl(const CommentImpl & obj):CommentImpl()
+CommentImpl::CommentImpl(const CommentImpl & obj): ElementImpl(obj), Comment(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Comment "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_body = obj.getBody();
 
 	//copy references with no containment (soft copy)
-	
 	std::shared_ptr<Bag<uml::Element>> _annotatedElement = obj.getAnnotatedElement();
 	m_annotatedElement.reset(new Bag<uml::Element>(*(obj.getAnnotatedElement().get())));
 
-	m_owner  = obj.getOwner();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  CommentImpl::copy() const
@@ -118,12 +104,10 @@ std::string CommentImpl::getBody() const
 {
 	return m_body;
 }
-
 void CommentImpl::setBody(std::string _body)
 {
 	m_body = _body;
 } 
-
 
 
 //*********************************
@@ -147,8 +131,6 @@ std::shared_ptr<Bag<uml::Element>> CommentImpl::getAnnotatedElement() const
 
     return m_annotatedElement;
 }
-
-
 
 
 
@@ -325,7 +307,6 @@ void CommentImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 
 void CommentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ElementImpl::loadNode(nodeName, loadHandler);
@@ -340,11 +321,11 @@ void CommentImpl::resolveReferences(const int featureID, std::vector<std::shared
 			std::shared_ptr<Bag<uml::Element>> _annotatedElement = getAnnotatedElement();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Element> _r = std::dynamic_pointer_cast<uml::Element>(ref);
+				std::shared_ptr<uml::Element>  _r = std::dynamic_pointer_cast<uml::Element>(ref);
 				if (_r != nullptr)
 				{
 					_annotatedElement->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -375,7 +356,6 @@ void CommentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 		{
 			saveHandler->addAttribute("body", this->getBody());
 		}
-
 	// Add references
 		saveHandler->addReferences<uml::Element>("annotatedElement", this->getAnnotatedElement());
 	}

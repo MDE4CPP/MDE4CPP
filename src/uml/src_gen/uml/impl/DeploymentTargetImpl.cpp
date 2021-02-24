@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -43,8 +44,7 @@
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -67,7 +67,7 @@ DeploymentTargetImpl::~DeploymentTargetImpl()
 }
 
 //Additional constructor for the containments back reference
-DeploymentTargetImpl::DeploymentTargetImpl(std::weak_ptr<uml::Namespace > par_namespace)
+DeploymentTargetImpl::DeploymentTargetImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :DeploymentTargetImpl()
 {
 	m_namespace = par_namespace;
@@ -75,62 +75,30 @@ DeploymentTargetImpl::DeploymentTargetImpl(std::weak_ptr<uml::Namespace > par_na
 }
 
 //Additional constructor for the containments back reference
-DeploymentTargetImpl::DeploymentTargetImpl(std::weak_ptr<uml::Element > par_owner)
+DeploymentTargetImpl::DeploymentTargetImpl(std::weak_ptr<uml::Element> par_owner)
 :DeploymentTargetImpl()
 {
 	m_owner = par_owner;
 }
 
-
-DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj):DeploymentTargetImpl()
+DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj): NamedElementImpl(obj), DeploymentTarget(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DeploymentTarget "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	std::shared_ptr<Bag<uml::PackageableElement>> _deployedElement = obj.getDeployedElement();
 	m_deployedElement.reset(new Bag<uml::PackageableElement>(*(obj.getDeployedElement().get())));
 
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Deployment>> _deploymentList = obj.getDeployment();
-	for(std::shared_ptr<uml::Deployment> _deployment : *_deploymentList)
+	std::shared_ptr<Subset<uml::Deployment, uml::Element>> deploymentContainer = getDeployment();
+	for(auto _deployment : *obj.getDeployment()) 
 	{
-		this->getDeployment()->add(std::shared_ptr<uml::Deployment>(std::dynamic_pointer_cast<uml::Deployment>(_deployment->copy())));
+		deploymentContainer->push_back(std::dynamic_pointer_cast<uml::Deployment>(_deployment->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_deployment" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_deployment->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
@@ -184,8 +152,6 @@ std::shared_ptr<Bag<uml::PackageableElement>> DeploymentTargetImpl::getDeployedE
 
 
 
-
-
 /*
 Getter & Setter for reference deployment
 */
@@ -212,8 +178,6 @@ std::shared_ptr<Subset<uml::Deployment, uml::Element>> DeploymentTargetImpl::get
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
@@ -232,7 +196,7 @@ std::shared_ptr<Union<uml::Element>> DeploymentTargetImpl::getOwnedElement() con
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > DeploymentTargetImpl::getOwner() const
+std::weak_ptr<uml::Element> DeploymentTargetImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -364,7 +328,6 @@ void DeploymentTargetImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void DeploymentTargetImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -375,12 +338,9 @@ void DeploymentTargetImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "Deployment";
 			}
-			std::shared_ptr<ecore::EObject> deployment = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION);
-			if (deployment != nullptr)
-			{
-				loadHandler->handleChild(deployment);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Deployment>(this->getDeployment());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)

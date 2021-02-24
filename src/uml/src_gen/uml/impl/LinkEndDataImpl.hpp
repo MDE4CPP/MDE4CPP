@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../LinkEndData.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			LinkEndDataImpl(const LinkEndDataImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			LinkEndDataImpl& operator=(LinkEndDataImpl const&) = delete;
 
 		protected:
@@ -33,10 +34,7 @@ namespace uml
 			virtual void setThisLinkEndDataPtr(std::weak_ptr<LinkEndData> thisLinkEndDataPtr);
 
 			//Additional constructors for the containments back reference
-			LinkEndDataImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			LinkEndDataImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -51,44 +49,32 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::InputPin> > allPins() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::InputPin> > allPins() ;/*!
 			The value InputPin is not also the qualifier value InputPin.
 			value->excludesAll(qualifier.value)
 			*/
 			 
-			virtual bool end_object_input_pin(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool end_object_input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The multiplicity of the value InputPin must be 1..1.
 			value<>null implies value.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The Property must be an Association memberEnd.
 			end.association <> null
 			*/
 			 
-			virtual bool property_is_association_end(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool property_is_association_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The qualifiers must be qualifiers of the Association end.
 			end.qualifier->includesAll(qualifier.qualifier)
 			*/
 			 
-			virtual bool qualifiers(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool qualifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type of the value InputPin conforms to the type of the Association end.
 			value<>null implies value.type.conformsTo(end.type)
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -103,15 +89,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property > getEnd() const ;
-			
+			virtual std::shared_ptr<uml::Property> getEnd() const ;
 			/*!
 			The Association end for which this LinkEndData specifies values.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setEnd(std::shared_ptr<uml::Property> _end) ;
-			
+			virtual void setEnd(std::shared_ptr<uml::Property>) ;
 			/*!
 			A set of QualifierValues used to provide values for the qualifiers of the end.
 			<p>From package UML::Actions.</p>
@@ -119,22 +103,19 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> getQualifier() const ;
 			
-			
 			/*!
 			The InputPin that provides the specified value for the given end. This InputPin is omitted if the LinkEndData specifies the "open" end for a ReadLinkAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getValue() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getValue() const ;
 			/*!
 			The InputPin that provides the specified value for the given end. This InputPin is omitted if the LinkEndData specifies the "open" end for a ReadLinkAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::InputPin> _value) ;
+			virtual void setValue(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter

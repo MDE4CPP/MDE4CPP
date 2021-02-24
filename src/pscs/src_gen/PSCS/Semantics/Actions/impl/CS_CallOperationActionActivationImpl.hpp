@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CS_CallOperationActionActivation.hpp"
 
@@ -24,7 +25,7 @@ namespace PSCS::Semantics::Actions
 			CS_CallOperationActionActivationImpl(const CS_CallOperationActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CS_CallOperationActionActivationImpl& operator=(CS_CallOperationActionActivationImpl const&) = delete;
 
 		protected:
@@ -34,10 +35,7 @@ namespace PSCS::Semantics::Actions
 			virtual void setThisCS_CallOperationActionActivationPtr(std::weak_ptr<CS_CallOperationActionActivation> thisCS_CallOperationActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			CS_CallOperationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			CS_CallOperationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -47,24 +45,12 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual bool _isCreate(std::shared_ptr<uml::Operation> operation) ;
-			
-			 
-			virtual void doAction() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ;
-			
-			 
-			virtual bool isCreate(std::shared_ptr<uml::Operation> operation) ;
-			
-			 
-			virtual bool isOperationProvided(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) ;
-			
-			 
+			virtual bool _isCreate(std::shared_ptr<uml::Operation> operation) ; 
+			virtual void doAction() ; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ; 
+			virtual bool isCreate(std::shared_ptr<uml::Operation> operation) ; 
+			virtual bool isOperationProvided(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) ; 
 			virtual bool isOperationRequired(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -74,7 +60,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

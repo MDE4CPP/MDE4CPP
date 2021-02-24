@@ -77,13 +77,13 @@ namespace uml
 			*/
 			 
 			virtual std::string getBody() const = 0;
-			
 			/*!
 			Specifies a string that is the comment.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
 			virtual void setBody (std::string _body)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -93,7 +93,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Element>> getAnnotatedElement() const = 0;
-			
 			
 			
 

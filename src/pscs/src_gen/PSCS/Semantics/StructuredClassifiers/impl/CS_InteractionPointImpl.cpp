@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -45,13 +46,13 @@
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
-
-#include "PSCS/PSCSFactory.hpp"
-#include "PSCS/PSCSPackage.hpp"
-#include "PSCS/Semantics/SemanticsFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -73,26 +74,19 @@ CS_InteractionPointImpl::~CS_InteractionPointImpl()
 }
 
 
-
-CS_InteractionPointImpl::CS_InteractionPointImpl(const CS_InteractionPointImpl & obj):CS_InteractionPointImpl()
+CS_InteractionPointImpl::CS_InteractionPointImpl(const CS_InteractionPointImpl & obj): fUML::Semantics::StructuredClassifiers::ReferenceImpl(obj), CS_InteractionPoint(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_InteractionPoint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_definingPort  = obj.getDefiningPort();
-
 	m_owner  = obj.getOwner();
 
-	m_referent  = obj.getReferent();
-
-
 	//Clone references with containment (deep copy)
-
-
 }
 
 std::shared_ptr<ecore::EObject>  CS_InteractionPointImpl::copy() const
@@ -167,33 +161,29 @@ void CS_InteractionPointImpl::startBehavior(std::shared_ptr<uml::Class> classifi
 /*
 Getter & Setter for reference definingPort
 */
-std::shared_ptr<uml::Port > CS_InteractionPointImpl::getDefiningPort() const
+std::shared_ptr<uml::Port> CS_InteractionPointImpl::getDefiningPort() const
 {
 //assert(m_definingPort);
     return m_definingPort;
 }
-
 void CS_InteractionPointImpl::setDefiningPort(std::shared_ptr<uml::Port> _definingPort)
 {
     m_definingPort = _definingPort;
 }
 
 
-
 /*
 Getter & Setter for reference owner
 */
-std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference > CS_InteractionPointImpl::getOwner() const
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> CS_InteractionPointImpl::getOwner() const
 {
 //assert(m_owner);
     return m_owner;
 }
-
 void CS_InteractionPointImpl::setOwner(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> _owner)
 {
     m_owner = _owner;
 }
-
 
 
 //*********************************
@@ -319,7 +309,6 @@ void CS_InteractionPointImpl::loadAttributes(std::shared_ptr<persistence::interf
 
 void CS_InteractionPointImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::StructuredClassifiers::ReferenceImpl::loadNode(nodeName, loadHandler);
@@ -380,10 +369,9 @@ void CS_InteractionPointImpl::saveContent(std::shared_ptr<persistence::interface
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("definingPort", this->getDefiningPort()); 
-		saveHandler->addReference("owner", this->getOwner()); 
+		saveHandler->addReference(this->getDefiningPort(), "definingPort", getDefiningPort()->eClass() != uml::umlPackage::eInstance()->getPort_Class()); 
+		saveHandler->addReference(this->getOwner(), "owner", getOwner()->eClass() != PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_Reference_Class()); 
 	}
 	catch (std::exception& e)
 	{

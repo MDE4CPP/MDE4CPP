@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../DestroyObjectAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			DestroyObjectActionImpl(const DestroyObjectActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			DestroyObjectActionImpl& operator=(DestroyObjectActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisDestroyObjectActionPtr(std::weak_ptr<DestroyObjectAction> thisDestroyObjectActionPtr);
 
 			//Additional constructors for the containments back reference
-			DestroyObjectActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			DestroyObjectActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			DestroyObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			DestroyObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			DestroyObjectActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			DestroyObjectActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			DestroyObjectActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			DestroyObjectActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,16 +54,12 @@ namespace uml
 			target.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The target InputPin has no type.
 			target.type= null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -82,25 +70,25 @@ namespace uml
 			*/
 			 
 			virtual bool getIsDestroyLinks() const ;
-			
 			/*!
 			Specifies whether links in which the object participates are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDestroyLinks (bool _isDestroyLinks);/*!
+			virtual void setIsDestroyLinks (bool _isDestroyLinks);
+			/*!
 			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual bool getIsDestroyOwnedObjects() const ;
-			
 			/*!
 			Specifies whether objects owned by the object (via composition) are destroyed along with the object.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setIsDestroyOwnedObjects (bool _isDestroyOwnedObjects);
+			
 			
 			//*********************************
 			// Reference
@@ -110,16 +98,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getTarget() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getTarget() const ;
 			/*!
 			The InputPin providing the object to be destroyed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::InputPin> _target) ;
+			virtual void setTarget(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -144,7 +130,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

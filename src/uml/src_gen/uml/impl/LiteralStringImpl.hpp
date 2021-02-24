@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../LiteralString.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			LiteralStringImpl(const LiteralStringImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			LiteralStringImpl& operator=(LiteralStringImpl const&) = delete;
 
 		protected:
@@ -33,30 +34,17 @@ namespace uml
 			virtual void setThisLiteralStringPtr(std::weak_ptr<LiteralString> thisLiteralStringPtr);
 
 			//Additional constructors for the containments back reference
-			LiteralStringImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			LiteralStringImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			LiteralStringImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			LiteralStringImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			LiteralStringImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			LiteralStringImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			LiteralStringImpl(std::weak_ptr<uml::Slot > par_owningSlot);
-
-
+			LiteralStringImpl(std::weak_ptr<uml::Slot> par_owningSlot);
 			//Additional constructors for the containments back reference
-			LiteralStringImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			LiteralStringImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-			LiteralStringImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
-
-
-
+			LiteralStringImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction);
 
 		public:
 			//destructor
@@ -71,17 +59,13 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool isComputable() ;
-			
-			/*!
+			virtual bool isComputable() ;/*!
 			The query stringValue() gives the value.
 			result = (value)
 			<p>From package UML::Values.</p>
 			*/
 			 
 			virtual std::string stringValue() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -92,7 +76,6 @@ namespace uml
 			*/
 			 
 			virtual std::string getValue() const ;
-			
 			/*!
 			The specified String value.
 			<p>From package UML::Values.</p>
@@ -100,10 +83,11 @@ namespace uml
 			 
 			virtual void setValue (std::string _value);
 			
+			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -113,7 +97,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -123,7 +107,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

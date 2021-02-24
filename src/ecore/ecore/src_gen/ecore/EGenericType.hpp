@@ -82,37 +82,26 @@ namespace ecore
 			
 			virtual std::shared_ptr<ecore::EClassifier> getEClassifier() const = 0;
 			
-			
 			virtual void setEClassifier(std::shared_ptr<ecore::EClassifier>) = 0;
-			
 			
 			virtual std::shared_ptr<ecore::EGenericType> getELowerBound() const = 0;
 			
-			
 			virtual void setELowerBound(std::shared_ptr<ecore::EGenericType>) = 0;
-			
 			
 			virtual std::shared_ptr<ecore::EClassifier> getERawType() const = 0;
 			
-			
 			virtual void setERawType(std::shared_ptr<ecore::EClassifier>) = 0;
-			
 			
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getETypeArguments() const = 0;
 			
 			
-			
 			virtual std::shared_ptr<ecore::ETypeParameter> getETypeParameter() const = 0;
-			
 			
 			virtual void setETypeParameter(std::shared_ptr<ecore::ETypeParameter>) = 0;
 			
-			
 			virtual std::shared_ptr<ecore::EGenericType> getEUpperBound() const = 0;
 			
-			
 			virtual void setEUpperBound(std::shared_ptr<ecore::EGenericType>) = 0;
-			
 			
 
 		protected:

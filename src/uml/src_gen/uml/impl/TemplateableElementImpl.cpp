@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -39,8 +40,7 @@
 #include "uml/TemplateSignature.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -63,53 +63,33 @@ TemplateableElementImpl::~TemplateableElementImpl()
 }
 
 //Additional constructor for the containments back reference
-TemplateableElementImpl::TemplateableElementImpl(std::weak_ptr<uml::Element > par_owner)
+TemplateableElementImpl::TemplateableElementImpl(std::weak_ptr<uml::Element> par_owner)
 :TemplateableElementImpl()
 {
 	m_owner = par_owner;
 }
 
-
-TemplateableElementImpl::TemplateableElementImpl(const TemplateableElementImpl & obj):TemplateableElementImpl()
+TemplateableElementImpl::TemplateableElementImpl(const TemplateableElementImpl & obj): ElementImpl(obj), TemplateableElement(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TemplateableElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_owner  = obj.getOwner();
-
 
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
 	if(obj.getOwnedTemplateSignature()!=nullptr)
 	{
 		m_ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(obj.getOwnedTemplateSignature()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedTemplateSignature" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::TemplateBinding>> _templateBindingList = obj.getTemplateBinding();
-	for(std::shared_ptr<uml::TemplateBinding> _templateBinding : *_templateBindingList)
+	std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> templateBindingContainer = getTemplateBinding();
+	for(auto _templateBinding : *obj.getTemplateBinding()) 
 	{
-		this->getTemplateBinding()->add(std::shared_ptr<uml::TemplateBinding>(std::dynamic_pointer_cast<uml::TemplateBinding>(_templateBinding->copy())));
+		templateBindingContainer->push_back(std::dynamic_pointer_cast<uml::TemplateBinding>(_templateBinding->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
-	#endif
-
 	
-
 	/*Subset*/
 	m_templateBinding->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
@@ -155,17 +135,15 @@ std::shared_ptr<Bag<uml::ParameterableElement> > TemplateableElementImpl::parame
 /*
 Getter & Setter for reference ownedTemplateSignature
 */
-std::shared_ptr<uml::TemplateSignature > TemplateableElementImpl::getOwnedTemplateSignature() const
+std::shared_ptr<uml::TemplateSignature> TemplateableElementImpl::getOwnedTemplateSignature() const
 {
 
     return m_ownedTemplateSignature;
 }
-
 void TemplateableElementImpl::setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature)
 {
     m_ownedTemplateSignature = _ownedTemplateSignature;
 }
-
 
 
 /*
@@ -191,8 +169,6 @@ std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> TemplateableElementI
 
     return m_templateBinding;
 }
-
-
 
 
 
@@ -342,7 +318,6 @@ void TemplateableElementImpl::loadAttributes(std::shared_ptr<persistence::interf
 
 void TemplateableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -353,12 +328,9 @@ void TemplateableElementImpl::loadNode(std::string nodeName, std::shared_ptr<per
 			{
 				typeName = "TemplateSignature";
 			}
-			std::shared_ptr<ecore::EObject> ownedTemplateSignature = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE);
-			if (ownedTemplateSignature != nullptr)
-			{
-				loadHandler->handleChild(ownedTemplateSignature);
-			}
-			return;
+			loadHandler->handleChild(this->getOwnedTemplateSignature()); 
+
+			return; 
 		}
 
 		if ( nodeName.compare("templateBinding") == 0 )
@@ -368,12 +340,9 @@ void TemplateableElementImpl::loadNode(std::string nodeName, std::shared_ptr<per
 			{
 				typeName = "TemplateBinding";
 			}
-			std::shared_ptr<ecore::EObject> templateBinding = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_BOUNDELEMENT);
-			if (templateBinding != nullptr)
-			{
-				loadHandler->handleChild(templateBinding);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::TemplateBinding>(this->getTemplateBinding());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -412,7 +381,7 @@ void TemplateableElementImpl::saveContent(std::shared_ptr<persistence::interface
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
 		// Save 'ownedTemplateSignature'
-		std::shared_ptr<uml::TemplateSignature > ownedTemplateSignature = this->getOwnedTemplateSignature();
+		std::shared_ptr<uml::TemplateSignature> ownedTemplateSignature = this->getOwnedTemplateSignature();
 		if (ownedTemplateSignature != nullptr)
 		{
 			saveHandler->addReference(ownedTemplateSignature, "ownedTemplateSignature", ownedTemplateSignature->eClass() != package->getTemplateSignature_Class());

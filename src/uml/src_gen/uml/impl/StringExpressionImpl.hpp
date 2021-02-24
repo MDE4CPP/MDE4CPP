@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../StringExpression.hpp"
 
@@ -24,7 +25,7 @@ namespace uml
 			StringExpressionImpl(const StringExpressionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			StringExpressionImpl& operator=(StringExpressionImpl const&) = delete;
 
 		protected:
@@ -34,34 +35,19 @@ namespace uml
 			virtual void setThisStringExpressionPtr(std::weak_ptr<StringExpression> thisStringExpressionPtr);
 
 			//Additional constructors for the containments back reference
-			StringExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			StringExpressionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			StringExpressionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			StringExpressionImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			StringExpressionImpl(std::weak_ptr<uml::StringExpression > par_owningExpression);
-
-
+			StringExpressionImpl(std::weak_ptr<uml::StringExpression> par_owningExpression);
 			//Additional constructors for the containments back reference
-			StringExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			StringExpressionImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			StringExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot);
-
-
+			StringExpressionImpl(std::weak_ptr<uml::Slot> par_owningSlot);
 			//Additional constructors for the containments back reference
-			StringExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			StringExpressionImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-			StringExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
-
-
-
+			StringExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction);
 
 		public:
 			//destructor
@@ -75,16 +61,12 @@ namespace uml
 			operand->forAll (oclIsKindOf (LiteralString))
 			*/
 			 
-			virtual bool operands(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool operands(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
 			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif
 			*/
 			 
-			virtual bool subexpressions(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool subexpressions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -99,15 +81,13 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::StringExpression > getOwningExpression() const ;
-			
+			virtual std::weak_ptr<uml::StringExpression> getOwningExpression() const ;
 			/*!
 			The StringExpression of which this StringExpression is a subExpression.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setOwningExpression(std::shared_ptr<uml::StringExpression> _owningExpression) ;
-			
+			virtual void setOwningExpression(std::weak_ptr<uml::StringExpression>) ;
 			/*!
 			The StringExpressions that constitute this StringExpression.
 			<p>From package UML::Values.</p>
@@ -116,7 +96,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::StringExpression, uml::Element>> getSubExpression() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -126,7 +105,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -136,7 +115,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

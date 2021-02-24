@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -39,8 +40,7 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -63,56 +63,38 @@ SlotImpl::~SlotImpl()
 }
 
 //Additional constructor for the containments back reference
-SlotImpl::SlotImpl(std::weak_ptr<uml::Element > par_owner)
+SlotImpl::SlotImpl(std::weak_ptr<uml::Element> par_owner)
 :SlotImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-SlotImpl::SlotImpl(std::weak_ptr<uml::InstanceSpecification > par_owningInstance)
+SlotImpl::SlotImpl(std::weak_ptr<uml::InstanceSpecification> par_owningInstance)
 :SlotImpl()
 {
 	m_owningInstance = par_owningInstance;
 	m_owner = par_owningInstance;
 }
 
-
-SlotImpl::SlotImpl(const SlotImpl & obj):SlotImpl()
+SlotImpl::SlotImpl(const SlotImpl & obj): ElementImpl(obj), Slot(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Slot "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_definingFeature  = obj.getDefiningFeature();
-
-	m_owner  = obj.getOwner();
-
 	m_owningInstance  = obj.getOwningInstance();
 
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
+	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> valueContainer = getValue();
+	for(auto _value : *obj.getValue()) 
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
+		valueContainer->push_back(std::dynamic_pointer_cast<uml::ValueSpecification>(_value->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ValueSpecification>> _valueList = obj.getValue();
-	for(std::shared_ptr<uml::ValueSpecification> _value : *_valueList)
-	{
-		this->getValue()->add(std::shared_ptr<uml::ValueSpecification>(std::dynamic_pointer_cast<uml::ValueSpecification>(_value->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_value" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_value->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
@@ -147,33 +129,29 @@ std::shared_ptr<ecore::EClass> SlotImpl::eStaticClass() const
 /*
 Getter & Setter for reference definingFeature
 */
-std::shared_ptr<uml::StructuralFeature > SlotImpl::getDefiningFeature() const
+std::shared_ptr<uml::StructuralFeature> SlotImpl::getDefiningFeature() const
 {
 //assert(m_definingFeature);
     return m_definingFeature;
 }
-
 void SlotImpl::setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature)
 {
     m_definingFeature = _definingFeature;
 }
 
 
-
 /*
 Getter & Setter for reference owningInstance
 */
-std::weak_ptr<uml::InstanceSpecification > SlotImpl::getOwningInstance() const
+std::weak_ptr<uml::InstanceSpecification> SlotImpl::getOwningInstance() const
 {
 //assert(m_owningInstance);
     return m_owningInstance;
 }
-
-void SlotImpl::setOwningInstance(std::shared_ptr<uml::InstanceSpecification> _owningInstance)
+void SlotImpl::setOwningInstance(std::weak_ptr<uml::InstanceSpecification> _owningInstance)
 {
     m_owningInstance = _owningInstance;
 }
-
 
 
 /*
@@ -202,8 +180,6 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> SlotImpl::getValu
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
@@ -222,7 +198,7 @@ std::shared_ptr<Union<uml::Element>> SlotImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > SlotImpl::getOwner() const
+std::weak_ptr<uml::Element> SlotImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -391,7 +367,6 @@ void SlotImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHand
 
 void SlotImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -403,12 +378,9 @@ void SlotImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inter
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> value = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT);
-			if (value != nullptr)
-			{
-				loadHandler->handleChild(value);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::ValueSpecification>(this->getValue());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -477,9 +449,8 @@ void SlotImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 		{
 			saveHandler->addReference(value, "value", value->eClass() != package->getValueSpecification_Class());
 		}
-
 	// Add references
-		saveHandler->addReference("definingFeature", this->getDefiningFeature()); 
+		saveHandler->addReference(this->getDefiningFeature(), "definingFeature", getDefiningFeature()->eClass() != uml::umlPackage::eInstance()->getStructuralFeature_Class()); 
 	}
 	catch (std::exception& e)
 	{

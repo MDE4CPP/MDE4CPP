@@ -96,9 +96,7 @@ namespace uml
 			regionAsInput->notEmpty() xor regionAsOutput->notEmpty()
 			*/
 			 
-			virtual bool region_as_input_or_output(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool region_as_input_or_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -111,29 +109,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExpansionRegion > getRegionAsInput() const = 0;
-			
+			virtual std::shared_ptr<uml::ExpansionRegion> getRegionAsInput() const = 0;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an input.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRegionAsInput(std::shared_ptr<uml::ExpansionRegion> _regionAsInput) = 0;
-			
+			virtual void setRegionAsInput(std::shared_ptr<uml::ExpansionRegion>) = 0;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an output.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ExpansionRegion > getRegionAsOutput() const = 0;
-			
+			virtual std::shared_ptr<uml::ExpansionRegion> getRegionAsOutput() const = 0;
 			/*!
 			The ExpansionRegion for which the ExpansionNode is an output.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion> _regionAsOutput) = 0;
-			
+			virtual void setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion>) = 0;
 			
 
 		protected:
@@ -150,12 +144,12 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::ExpansionRegion > m_regionAsInput;/*!
+			std::shared_ptr<uml::ExpansionRegion> m_regionAsInput;/*!
 			The ExpansionRegion for which the ExpansionNode is an output.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::ExpansionRegion > m_regionAsOutput;
+			std::shared_ptr<uml::ExpansionRegion> m_regionAsOutput;
 
 		public:
 			//*********************************
@@ -176,7 +170,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

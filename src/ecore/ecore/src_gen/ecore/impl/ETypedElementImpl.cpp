@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -39,8 +40,7 @@
 #include "ecore/EObject.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -77,7 +77,7 @@ ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj): ENamedEleme
 	#endif
 	//Clone Attributes with (deep copy)
 	m_lowerBound = obj.getLowerBound();
-// unknown attribute type or missing setter for many
+	m_many = obj.isMany();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
 	m_unique = obj.isUnique();
@@ -449,7 +449,6 @@ void ETypedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void ETypedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	try
 	{
@@ -460,7 +459,7 @@ void ETypedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 			{
 				typeName = "EGenericType";
 			}
-		loadHandler->handleChild(this->getEGenericType());
+			loadHandler->handleChild(this->getEGenericType());
 
 			return; 
 		}

@@ -75,11 +75,9 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation > getActionActivation() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> getActionActivation() const = 0;
 			
-			
-			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> _actionActivation) = 0;
-			
+			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation>) = 0;
 			
 
 		protected:
@@ -92,7 +90,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation > m_actionActivation;
+			std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> m_actionActivation;
 
 		public:
 			//*********************************

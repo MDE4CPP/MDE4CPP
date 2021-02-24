@@ -70,10 +70,11 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual std::string getName() const = 0;
-			
 			 
 			virtual void setName (std::string _name)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -41,8 +42,7 @@
 #include "uml/QualifierValue.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -65,51 +65,25 @@ LinkEndCreationDataImpl::~LinkEndCreationDataImpl()
 }
 
 //Additional constructor for the containments back reference
-LinkEndCreationDataImpl::LinkEndCreationDataImpl(std::weak_ptr<uml::Element > par_owner)
+LinkEndCreationDataImpl::LinkEndCreationDataImpl(std::weak_ptr<uml::Element> par_owner)
 :LinkEndCreationDataImpl()
 {
 	m_owner = par_owner;
 }
 
-
-LinkEndCreationDataImpl::LinkEndCreationDataImpl(const LinkEndCreationDataImpl & obj):LinkEndCreationDataImpl()
+LinkEndCreationDataImpl::LinkEndCreationDataImpl(const LinkEndCreationDataImpl & obj): LinkEndDataImpl(obj), LinkEndCreationData(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LinkEndCreationData "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_isReplaceAll = obj.getIsReplaceAll();
 
 	//copy references with no containment (soft copy)
-	
-	m_end  = obj.getEnd();
-
 	m_insertAt  = obj.getInsertAt();
 
-	m_owner  = obj.getOwner();
-
-	m_value  = obj.getValue();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::QualifierValue>> _qualifierList = obj.getQualifier();
-	for(std::shared_ptr<uml::QualifierValue> _qualifier : *_qualifierList)
-	{
-		this->getQualifier()->add(std::shared_ptr<uml::QualifierValue>(std::dynamic_pointer_cast<uml::QualifierValue>(_qualifier->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_qualifier" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  LinkEndCreationDataImpl::copy() const
@@ -134,18 +108,16 @@ bool LinkEndCreationDataImpl::getIsReplaceAll() const
 {
 	return m_isReplaceAll;
 }
-
 void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
 } 
 
 
-
 //*********************************
 // Operations
 //*********************************
-bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::map <  Any ,  Any > context)
+bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -157,17 +129,15 @@ bool LinkEndCreationDataImpl::insertAt_pin(Any diagnostics,std::map <  Any ,  An
 /*
 Getter & Setter for reference insertAt
 */
-std::shared_ptr<uml::InputPin > LinkEndCreationDataImpl::getInsertAt() const
+std::shared_ptr<uml::InputPin> LinkEndCreationDataImpl::getInsertAt() const
 {
 
     return m_insertAt;
 }
-
 void LinkEndCreationDataImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
 {
     m_insertAt = _insertAt;
 }
-
 
 
 //*********************************
@@ -313,7 +283,6 @@ void LinkEndCreationDataImpl::loadAttributes(std::shared_ptr<persistence::interf
 
 void LinkEndCreationDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	LinkEndDataImpl::loadNode(nodeName, loadHandler);
@@ -364,9 +333,8 @@ void LinkEndCreationDataImpl::saveContent(std::shared_ptr<persistence::interface
 		{
 			saveHandler->addAttribute("isReplaceAll", this->getIsReplaceAll());
 		}
-
 	// Add references
-		saveHandler->addReference("insertAt", this->getInsertAt()); 
+		saveHandler->addReference(this->getInsertAt(), "insertAt", getInsertAt()->eClass() != uml::umlPackage::eInstance()->getInputPin_Class()); 
 	}
 	catch (std::exception& e)
 	{

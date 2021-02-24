@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../PrimitiveValue.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			PrimitiveValueImpl(const PrimitiveValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			PrimitiveValueImpl& operator=(PrimitiveValueImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			PrimitiveValueImpl();
 			virtual std::shared_ptr<PrimitiveValue> getThisPrimitiveValuePtr() const;
 			virtual void setThisPrimitiveValuePtr(std::weak_ptr<PrimitiveValue> thisPrimitiveValuePtr);
-
 
 
 		public:
@@ -43,12 +43,8 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -59,12 +55,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::PrimitiveType > getType() const ;
+			virtual std::shared_ptr<uml::PrimitiveType> getType() const ;
 			
+			virtual void setType(std::shared_ptr<uml::PrimitiveType>) ;
 			
-			virtual void setType(std::shared_ptr<uml::PrimitiveType> _type) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

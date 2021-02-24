@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EventDispatchLoop.hpp"
 
@@ -26,7 +27,7 @@ virtual public EventDispatchLoop
 			EventDispatchLoopImpl(const EventDispatchLoopImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EventDispatchLoopImpl& operator=(EventDispatchLoopImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public EventDispatchLoop
 			EventDispatchLoopImpl();
 			virtual std::shared_ptr<EventDispatchLoop> getThisEventDispatchLoopPtr() const;
 			virtual void setThisEventDispatchLoopPtr(std::weak_ptr<EventDispatchLoop> thisEventDispatchLoopPtr);
-
 
 
 		public:
@@ -54,7 +54,7 @@ virtual public EventDispatchLoop
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

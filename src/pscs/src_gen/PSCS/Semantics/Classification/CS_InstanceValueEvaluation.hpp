@@ -76,8 +76,6 @@ namespace PSCS::Semantics::Classification
 			//*********************************
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

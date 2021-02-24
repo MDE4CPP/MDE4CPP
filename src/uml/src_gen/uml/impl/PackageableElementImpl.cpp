@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -45,8 +46,7 @@
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -69,7 +69,7 @@ PackageableElementImpl::~PackageableElementImpl()
 }
 
 //Additional constructor for the containments back reference
-PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
+PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :PackageableElementImpl()
 {
 	m_namespace = par_namespace;
@@ -77,14 +77,14 @@ PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Namespace > pa
 }
 
 //Additional constructor for the containments back reference
-PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Element > par_owner)
+PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Element> par_owner)
 :PackageableElementImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Package > par_owningPackage)
+PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :PackageableElementImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -92,58 +92,25 @@ PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::Package > par_
 }
 
 //Additional constructor for the containments back reference
-PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :PackageableElementImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-PackageableElementImpl::PackageableElementImpl(const PackageableElementImpl & obj):PackageableElementImpl()
+PackageableElementImpl::PackageableElementImpl(const PackageableElementImpl & obj): NamedElementImpl(obj), ParameterableElementImpl(obj), PackageableElement(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PackageableElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
 	m_owningPackage  = obj.getOwningPackage();
 
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  PackageableElementImpl::copy() const
@@ -165,7 +132,7 @@ std::shared_ptr<ecore::EClass> PackageableElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool PackageableElementImpl::namespace_needs_visibility(Any diagnostics,std::map <  Any ,  Any > context)
+bool PackageableElementImpl::namespace_needs_visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -177,23 +144,21 @@ bool PackageableElementImpl::namespace_needs_visibility(Any diagnostics,std::map
 /*
 Getter & Setter for reference owningPackage
 */
-std::weak_ptr<uml::Package > PackageableElementImpl::getOwningPackage() const
+std::weak_ptr<uml::Package> PackageableElementImpl::getOwningPackage() const
 {
 
     return m_owningPackage;
 }
-
-void PackageableElementImpl::setOwningPackage(std::shared_ptr<uml::Package> _owningPackage)
+void PackageableElementImpl::setOwningPackage(std::weak_ptr<uml::Package> _owningPackage)
 {
     m_owningPackage = _owningPackage;
 }
 
 
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > PackageableElementImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> PackageableElementImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -213,7 +178,7 @@ std::shared_ptr<Union<uml::Element>> PackageableElementImpl::getOwnedElement() c
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > PackageableElementImpl::getOwner() const
+std::weak_ptr<uml::Element> PackageableElementImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -342,7 +307,6 @@ void PackageableElementImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void PackageableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	NamedElementImpl::loadNode(nodeName, loadHandler);

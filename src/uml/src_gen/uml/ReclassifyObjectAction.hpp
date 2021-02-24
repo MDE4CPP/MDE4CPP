@@ -95,23 +95,17 @@ namespace uml
 			not newClassifier->exists(isAbstract)
 			*/
 			 
-			virtual bool classifier_not_abstract(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool classifier_not_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The object InputPin has no type.
 			object.type = null
 			*/
 			 
-			virtual bool input_pin(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -121,13 +115,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsReplaceAll() const = 0;
-			
 			/*!
 			Specifies whether existing Classifiers should be removed before adding the new Classifiers.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setIsReplaceAll (bool _isReplaceAll)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -138,28 +132,24 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Classifier>> getNewClassifier() const = 0;
 			
-			
 			/*!
 			The InputPin that holds the object to be reclassified.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getObject() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
 			/*!
 			The InputPin that holds the object to be reclassified.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object) = 0;
-			
+			virtual void setObject(std::shared_ptr<uml::InputPin>) = 0;
 			/*!
 			A set of Classifiers to be removed from the Classifiers of the given object.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Classifier>> getOldClassifier() const = 0;
-			
 			
 			
 
@@ -188,7 +178,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_object;/*!
+			std::shared_ptr<uml::InputPin> m_object;/*!
 			A set of Classifiers to be removed from the Classifiers of the given object.
 			<p>From package UML::Actions.</p>
 			*/
@@ -219,7 +209,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

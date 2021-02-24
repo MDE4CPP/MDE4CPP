@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Relationship.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			RelationshipImpl(const RelationshipImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			RelationshipImpl& operator=(RelationshipImpl const&) = delete;
 
 		protected:
@@ -33,10 +34,7 @@ namespace uml
 			virtual void setThisRelationshipPtr(std::weak_ptr<Relationship> thisRelationshipPtr);
 
 			//Additional constructors for the containments back reference
-			RelationshipImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			RelationshipImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -57,7 +55,7 @@ namespace uml
 			//*********************************
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter

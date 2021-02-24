@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Offer.hpp"
 
@@ -26,7 +27,7 @@ virtual public Offer
 			OfferImpl(const OfferImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			OfferImpl& operator=(OfferImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public Offer
 			OfferImpl();
 			virtual std::shared_ptr<Offer> getThisOfferPtr() const;
 			virtual void setThisOfferPtr(std::weak_ptr<Offer> thisOfferPtr);
-
 
 
 		public:
@@ -45,21 +45,11 @@ virtual public Offer
 			// Operations
 			//*********************************
 			 
-			virtual int countOfferedVales() ;
-			
-			 
-			virtual bool hasTokens() ;
-			
-			 
-			virtual void removeOfferedValues(int count) ;
-			
-			 
-			virtual void removeWithdrawnTokens() ;
-			
-			 
+			virtual int countOfferedVales() ; 
+			virtual bool hasTokens() ; 
+			virtual void removeOfferedValues(int count) ; 
+			virtual void removeWithdrawnTokens() ; 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > retrieveOfferedTokens() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -73,7 +63,6 @@ virtual public Offer
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> getOfferedTokens() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter

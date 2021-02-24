@@ -75,13 +75,13 @@ namespace uml
 			Extend(){}
 
 			//Additional constructors for the containments back reference
-			Extend(std::weak_ptr<uml::UseCase > par_extension);
+			Extend(std::weak_ptr<uml::UseCase> par_extension);
 
 			//Additional constructors for the containments back reference
-			Extend(std::weak_ptr<uml::Namespace > par_namespace);
+			Extend(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-			Extend(std::weak_ptr<uml::Element > par_owner);
+			Extend(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -97,9 +97,7 @@ namespace uml
 			extensionLocation->forAll (xp | extendedCase.extensionPoint->includes(xp))
 			*/
 			 
-			virtual bool extension_points(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool extension_points(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -112,50 +110,43 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint > getCondition() const = 0;
-			
+			virtual std::shared_ptr<uml::Constraint> getCondition() const = 0;
 			/*!
 			References the condition that must hold when the first ExtensionPoint is reached for the extension to take place. If no constraint is associated with the Extend relationship, the extension is unconditional.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setCondition(std::shared_ptr<uml::Constraint> _condition) = 0;
-			
+			virtual void setCondition(std::shared_ptr<uml::Constraint>) = 0;
 			/*!
 			The UseCase that is being extended.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::UseCase > getExtendedCase() const = 0;
-			
+			virtual std::shared_ptr<uml::UseCase> getExtendedCase() const = 0;
 			/*!
 			The UseCase that is being extended.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setExtendedCase(std::shared_ptr<uml::UseCase> _extendedCase) = 0;
-			
+			virtual void setExtendedCase(std::shared_ptr<uml::UseCase>) = 0;
 			/*!
 			The UseCase that represents the extension and owns the Extend relationship.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::UseCase > getExtension() const = 0;
-			
+			virtual std::weak_ptr<uml::UseCase> getExtension() const = 0;
 			/*!
 			The UseCase that represents the extension and owns the Extend relationship.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setExtension(std::shared_ptr<uml::UseCase> _extension) = 0;
-			
+			virtual void setExtension(std::weak_ptr<uml::UseCase>) = 0;
 			/*!
 			An ordered list of ExtensionPoints belonging to the extended UseCase, specifying where the respective behavioral fragments of the extending UseCase are to be inserted. The first fragment in the extending UseCase is associated with the first extension point in the list, the second fragment with the second point, and so on. Note that, in most practical cases, the extending UseCase has just a single behavior fragment, so that the list of ExtensionPoints is trivial.
 			<p>From package UML::UseCases.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::ExtensionPoint>> getExtensionLocation() const = 0;
-			
 			
 			
 
@@ -173,17 +164,17 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			std::shared_ptr<uml::Constraint > m_condition;/*!
+			std::shared_ptr<uml::Constraint> m_condition;/*!
 			The UseCase that is being extended.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			std::shared_ptr<uml::UseCase > m_extendedCase;/*!
+			std::shared_ptr<uml::UseCase> m_extendedCase;/*!
 			The UseCase that represents the extension and owns the Extend relationship.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			std::weak_ptr<uml::UseCase > m_extension;/*!
+			std::weak_ptr<uml::UseCase> m_extension;/*!
 			An ordered list of ExtensionPoints belonging to the extended UseCase, specifying where the respective behavioral fragments of the extending UseCase are to be inserted. The first fragment in the extending UseCase is associated with the first extension point in the list, the second fragment with the second point, and so on. Note that, in most practical cases, the extending UseCase has just a single behavior fragment, so that the list of ExtensionPoints is trivial.
 			<p>From package UML::UseCases.</p>
 			*/
@@ -199,7 +190,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -209,7 +200,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/

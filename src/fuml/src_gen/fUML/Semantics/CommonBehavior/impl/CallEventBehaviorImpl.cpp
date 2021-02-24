@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -35,13 +36,11 @@
 #include "uml/Operation.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
-
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -63,22 +62,19 @@ CallEventBehaviorImpl::~CallEventBehaviorImpl()
 }
 
 
-
-CallEventBehaviorImpl::CallEventBehaviorImpl(const CallEventBehaviorImpl & obj):CallEventBehaviorImpl()
+CallEventBehaviorImpl::CallEventBehaviorImpl(const CallEventBehaviorImpl & obj): ecore::EModelElementImpl(obj),
+CallEventBehavior(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CallEventBehavior "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_operation  = obj.getOperation();
 
-
 	//Clone references with containment (deep copy)
-
-
 }
 
 std::shared_ptr<ecore::EObject>  CallEventBehaviorImpl::copy() const
@@ -108,17 +104,15 @@ std::shared_ptr<ecore::EClass> CallEventBehaviorImpl::eStaticClass() const
 /*
 Getter & Setter for reference operation
 */
-std::shared_ptr<uml::Operation > CallEventBehaviorImpl::getOperation() const
+std::shared_ptr<uml::Operation> CallEventBehaviorImpl::getOperation() const
 {
 //assert(m_operation);
     return m_operation;
 }
-
 void CallEventBehaviorImpl::setOperation(std::shared_ptr<uml::Operation> _operation)
 {
     m_operation = _operation;
 }
-
 
 
 //*********************************
@@ -224,7 +218,6 @@ void CallEventBehaviorImpl::loadAttributes(std::shared_ptr<persistence::interfac
 
 void CallEventBehaviorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
 	//load BasePackage Nodes
 }
@@ -262,9 +255,8 @@ void CallEventBehaviorImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("operation", this->getOperation()); 
+		saveHandler->addReference(this->getOperation(), "operation", getOperation()->eClass() != uml::umlPackage::eInstance()->getOperation_Class()); 
 	}
 	catch (std::exception& e)
 	{

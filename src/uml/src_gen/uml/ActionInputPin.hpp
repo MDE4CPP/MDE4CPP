@@ -104,25 +104,19 @@ namespace uml
 			fromAction.input->forAll(oclIsKindOf(ActionInputPin))
 			*/
 			 
-			virtual bool input_pin(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The fromAction of an ActionInputPin cannot have ActivityEdges coming into or out of it or its Pins.
 			fromAction.incoming->union(outgoing)->isEmpty() and
 			fromAction.input.incoming->isEmpty() and
 			fromAction.output.outgoing->isEmpty()
 			*/
 			 
-			virtual bool no_control_or_object_flow(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool no_control_or_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The fromAction of an ActionInputPin must have exactly one OutputPin.
 			fromAction.output->size() = 1
 			*/
 			 
-			virtual bool one_output_pin(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -135,15 +129,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Action > getFromAction() const = 0;
-			
+			virtual std::shared_ptr<uml::Action> getFromAction() const = 0;
 			/*!
 			The Action used to provide the values of the ActionInputPin.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setFromAction(std::shared_ptr<uml::Action> _fromAction) = 0;
-			
+			virtual void setFromAction(std::shared_ptr<uml::Action>) = 0;
 			
 
 		protected:
@@ -160,7 +152,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::Action > m_fromAction;
+			std::shared_ptr<uml::Action> m_fromAction;
 
 		public:
 			//*********************************
@@ -181,7 +173,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

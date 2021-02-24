@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Model.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ModelImpl(const ModelImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ModelImpl& operator=(ModelImpl const&) = delete;
 
 		protected:
@@ -33,25 +34,14 @@ namespace uml
 			virtual void setThisModelPtr(std::weak_ptr<Model> thisModelPtr);
 
 			//Additional constructors for the containments back reference
-			ModelImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ModelImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ModelImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			ModelImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			ModelImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ModelImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-
-
 			//Additional constructors for the containments back reference
-			ModelImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			ModelImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -66,8 +56,6 @@ namespace uml
 			 
 			virtual bool isMetamodel() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -77,7 +65,6 @@ namespace uml
 			*/
 			 
 			virtual std::string getViewpoint() const ;
-			
 			/*!
 			The name of the viewpoint that is expressed by a model (this name may refer to a profile definition).
 			<p>From package UML::Packages.</p>
@@ -85,10 +72,11 @@ namespace uml
 			 
 			virtual void setViewpoint (std::string _viewpoint);
 			
+			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -103,7 +91,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -118,7 +106,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

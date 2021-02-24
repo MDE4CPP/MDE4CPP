@@ -51,13 +51,15 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			virtual std::string getNsPrefix() const ;
-			
 			 
-			virtual void setNsPrefix (std::string _nsPrefix);virtual std::string getNsURI() const ;
-			
+			virtual std::string getNsPrefix() const ;
+			 
+			virtual void setNsPrefix (std::string _nsPrefix);
+			 
+			virtual std::string getNsURI() const ;
 			 
 			virtual void setNsURI (std::string _nsURI);
+			
 			
 			//*********************************
 			// Reference
@@ -66,19 +68,14 @@ namespace ecore
 			virtual std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> getEClassifiers() const ;
 			
 			
-			
 			virtual std::shared_ptr<ecore::EFactory> getEFactoryInstance() const ;
 			
-			
 			virtual void setEFactoryInstance(std::shared_ptr<ecore::EFactory>) ;
-			
 			
 			virtual std::shared_ptr<Bag<ecore::EPackage>> getESubpackages() const ;
 			
 			
-			
 			virtual std::weak_ptr<ecore::EPackage> getESuperPackage() const ;
-			
 			
 			
 			

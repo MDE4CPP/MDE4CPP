@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Node.hpp"
 
@@ -24,7 +25,7 @@ namespace uml
 			NodeImpl(const NodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			NodeImpl& operator=(NodeImpl const&) = delete;
 
 		protected:
@@ -34,25 +35,14 @@ namespace uml
 			virtual void setThisNodePtr(std::weak_ptr<Node> thisNodePtr);
 
 			//Additional constructors for the containments back reference
-			NodeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			NodeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			NodeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			NodeImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			NodeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			NodeImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			NodeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			NodeImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -65,22 +55,16 @@ namespace uml
 			Creates a (binary) communication path between this node and the specified other node, with the specified navigabilities, aggregations, names, lower bounds, and upper bounds, and owned by this node's nearest package.
 			*/
 			 
-			virtual std::shared_ptr<uml::CommunicationPath> createCommunicationPath(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node> end1Node,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper) ;
-			
-			/*!
+			virtual std::shared_ptr<uml::CommunicationPath> createCommunicationPath(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Node> end1Node,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper) ;/*!
 			Retrieves the communication paths in which this node is involved.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::CommunicationPath> > getCommunicationPaths() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::CommunicationPath> > getCommunicationPaths() ;/*!
 			The internal structure of a Node (if defined) consists solely of parts of type Node.
 			part->forAll(oclIsKindOf(Node))
 			*/
 			 
-			virtual bool internal_structure(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool internal_structure(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -98,7 +82,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Node, uml::NamedElement>> getNestedNode() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -123,7 +106,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -138,7 +121,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

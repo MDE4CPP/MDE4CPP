@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -41,8 +42,7 @@
 #include "uml/Package.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -65,7 +65,7 @@ PackageImportImpl::~PackageImportImpl()
 }
 
 //Additional constructor for the containments back reference
-PackageImportImpl::PackageImportImpl(std::weak_ptr<uml::Namespace > par_importingNamespace)
+PackageImportImpl::PackageImportImpl(std::weak_ptr<uml::Namespace> par_importingNamespace)
 :PackageImportImpl()
 {
 	m_importingNamespace = par_importingNamespace;
@@ -73,49 +73,29 @@ PackageImportImpl::PackageImportImpl(std::weak_ptr<uml::Namespace > par_importin
 }
 
 //Additional constructor for the containments back reference
-PackageImportImpl::PackageImportImpl(std::weak_ptr<uml::Element > par_owner)
+PackageImportImpl::PackageImportImpl(std::weak_ptr<uml::Element> par_owner)
 :PackageImportImpl()
 {
 	m_owner = par_owner;
 }
 
-
-PackageImportImpl::PackageImportImpl(const PackageImportImpl & obj):PackageImportImpl()
+PackageImportImpl::PackageImportImpl(const PackageImportImpl & obj): DirectedRelationshipImpl(obj), PackageImport(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PackageImport "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
 	m_importingNamespace  = obj.getImportingNamespace();
 
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
-
 	//Clone references with containment (deep copy)
-
 	if(obj.getImportedPackage()!=nullptr)
 	{
 		m_importedPackage = std::dynamic_pointer_cast<uml::Package>(obj.getImportedPackage()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_importedPackage" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  PackageImportImpl::copy() const
@@ -140,18 +120,16 @@ uml::VisibilityKind PackageImportImpl::getVisibility() const
 {
 	return m_visibility;
 }
-
 void PackageImportImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
 } 
 
 
-
 //*********************************
 // Operations
 //*********************************
-bool PackageImportImpl::public_or_private(Any diagnostics,std::map <  Any ,  Any > context)
+bool PackageImportImpl::public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -163,33 +141,29 @@ bool PackageImportImpl::public_or_private(Any diagnostics,std::map <  Any ,  Any
 /*
 Getter & Setter for reference importedPackage
 */
-std::shared_ptr<uml::Package > PackageImportImpl::getImportedPackage() const
+std::shared_ptr<uml::Package> PackageImportImpl::getImportedPackage() const
 {
 //assert(m_importedPackage);
     return m_importedPackage;
 }
-
 void PackageImportImpl::setImportedPackage(std::shared_ptr<uml::Package> _importedPackage)
 {
     m_importedPackage = _importedPackage;
 }
 
 
-
 /*
 Getter & Setter for reference importingNamespace
 */
-std::weak_ptr<uml::Namespace > PackageImportImpl::getImportingNamespace() const
+std::weak_ptr<uml::Namespace> PackageImportImpl::getImportingNamespace() const
 {
 //assert(m_importingNamespace);
     return m_importingNamespace;
 }
-
-void PackageImportImpl::setImportingNamespace(std::shared_ptr<uml::Namespace> _importingNamespace)
+void PackageImportImpl::setImportingNamespace(std::weak_ptr<uml::Namespace> _importingNamespace)
 {
     m_importingNamespace = _importingNamespace;
 }
-
 
 
 //*********************************
@@ -210,7 +184,7 @@ std::shared_ptr<Union<uml::Element>> PackageImportImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > PackageImportImpl::getOwner() const
+std::weak_ptr<uml::Element> PackageImportImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -427,7 +401,6 @@ void PackageImportImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void PackageImportImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
@@ -511,9 +484,8 @@ void PackageImportImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 			}
 			saveHandler->addAttribute("visibility", literal);
 		}
-
 	// Add references
-		saveHandler->addReference("importedPackage", this->getImportedPackage()); 
+		saveHandler->addReference(this->getImportedPackage(), "importedPackage", getImportedPackage()->eClass() != uml::umlPackage::eInstance()->getPackage_Class()); 
 	}
 	catch (std::exception& e)
 	{

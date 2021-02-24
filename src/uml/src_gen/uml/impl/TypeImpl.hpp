@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Type.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			TypeImpl(const TypeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			TypeImpl& operator=(TypeImpl const&) = delete;
 
 		protected:
@@ -33,25 +34,14 @@ namespace uml
 			virtual void setThisTypePtr(std::weak_ptr<Type> thisTypePtr);
 
 			//Additional constructors for the containments back reference
-			TypeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			TypeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			TypeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			TypeImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			TypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			TypeImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			TypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			TypeImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -66,21 +56,15 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool conformsTo(std::shared_ptr<uml::Type> other) ;
-			
-			/*!
+			virtual bool conformsTo(std::shared_ptr<uml::Type> other) ;/*!
 			Creates a(n) (binary) association between this type and the specified other type, with the specified navigabilities, aggregations, names, lower bounds, and upper bounds, and owned by this type's nearest package.
 			*/
 			 
-			virtual std::shared_ptr<uml::Association> createAssociation(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type> end1Type,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper) ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Association> createAssociation(bool end1IsNavigable,uml::AggregationKind end1Aggregation,std::string end1Name,int end1Lower,int end1Upper,std::shared_ptr<uml::Type> end1Type,bool end2IsNavigable,uml::AggregationKind end2Aggregation,std::string end2Name,int end2Lower,int end2Upper) ;/*!
 			Retrieves the associations in which this type is involved.
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::Association> > getAssociations() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -95,16 +79,14 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Package > getPackage() const ;
-			
+			virtual std::weak_ptr<uml::Package> getPackage() const ;
 			/*!
 			Specifies the owning Package of this Type, if any.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setPackage(std::shared_ptr<uml::Package> _package) ;
+			virtual void setPackage(std::weak_ptr<uml::Package>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -114,7 +96,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -124,7 +106,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

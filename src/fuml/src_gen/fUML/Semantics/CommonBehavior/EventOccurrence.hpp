@@ -76,21 +76,11 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual void doSend() = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
-			
-			 
-			virtual bool match(std::shared_ptr<uml::Trigger> trigger) = 0;
-			
-			 
-			virtual bool matchAny(std::shared_ptr<Bag<uml::Trigger>> triggers) = 0;
-			
-			 
+			virtual void doSend() = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0; 
+			virtual bool match(std::shared_ptr<uml::Trigger> trigger) = 0; 
+			virtual bool matchAny(std::shared_ptr<Bag<uml::Trigger>> triggers) = 0; 
 			virtual void sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -99,11 +89,9 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference > getTarget() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> getTarget() const = 0;
 			
-			
-			virtual void setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target) = 0;
-			
+			virtual void setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>) = 0;
 			
 
 		protected:
@@ -116,7 +104,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference > m_target;
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> m_target;
 
 		public:
 			//*********************************

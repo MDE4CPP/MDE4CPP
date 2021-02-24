@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../InterruptibleActivityRegion.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			InterruptibleActivityRegionImpl& operator=(InterruptibleActivityRegionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisInterruptibleActivityRegionPtr(std::weak_ptr<InterruptibleActivityRegion> thisInterruptibleActivityRegionPtr);
 
 			//Additional constructors for the containments back reference
-			InterruptibleActivityRegionImpl(std::weak_ptr<uml::Activity > par_inActivity);
-
-
+			InterruptibleActivityRegionImpl(std::weak_ptr<uml::Activity> par_inActivity);
 			//Additional constructors for the containments back reference
-			InterruptibleActivityRegionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			InterruptibleActivityRegionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			InterruptibleActivityRegionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			InterruptibleActivityRegionImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			InterruptibleActivityRegionImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup);
-
-
-
+			InterruptibleActivityRegionImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup);
 
 		public:
 			//destructor
@@ -63,9 +55,7 @@ namespace uml
 			  node->includes(edge.source) and node->excludes(edge.target) and edge.target.containingActivity() = inActivity)
 			*/
 			 
-			virtual bool interrupting_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool interrupting_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -82,7 +72,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getInterruptingEdge() const ;
 			
-			
 			/*!
 			ActivityNodes immediately contained in the InterruptibleActivityRegion.
 			<p>From package UML::Activities.</p>
@@ -91,7 +80,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> getNode() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -111,7 +99,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

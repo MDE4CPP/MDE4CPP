@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ObjectToken.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Activities
 			ObjectTokenImpl(const ObjectTokenImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ObjectTokenImpl& operator=(ObjectTokenImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::Activities
 			ObjectTokenImpl();
 			virtual std::shared_ptr<ObjectToken> getThisObjectTokenPtr() const;
 			virtual void setThisObjectTokenPtr(std::weak_ptr<ObjectToken> thisObjectTokenPtr);
-
 
 
 		public:
@@ -43,15 +43,9 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> other) ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> other) ; 
 			virtual bool isControl() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -62,12 +56,10 @@ namespace fUML::Semantics::Activities
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Values::Value > getValue() const ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ;
 			
+			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value>) ;
 			
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

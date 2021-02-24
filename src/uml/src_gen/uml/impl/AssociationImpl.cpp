@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -61,8 +62,7 @@
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -85,7 +85,7 @@ AssociationImpl::~AssociationImpl()
 }
 
 //Additional constructor for the containments back reference
-AssociationImpl::AssociationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+AssociationImpl::AssociationImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :AssociationImpl()
 {
 	m_namespace = par_namespace;
@@ -93,14 +93,14 @@ AssociationImpl::AssociationImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-AssociationImpl::AssociationImpl(std::weak_ptr<uml::Element > par_owner)
+AssociationImpl::AssociationImpl(std::weak_ptr<uml::Element> par_owner)
 :AssociationImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-AssociationImpl::AssociationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id)
+AssociationImpl::AssociationImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id)
 :AssociationImpl()
 {
 	switch(reference_id)
@@ -120,7 +120,7 @@ AssociationImpl::AssociationImpl(std::weak_ptr<uml::Package > par_Package, const
 }
 
 //Additional constructor for the containments back reference
-AssociationImpl::AssociationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+AssociationImpl::AssociationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :AssociationImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
@@ -128,212 +128,38 @@ AssociationImpl::AssociationImpl(std::weak_ptr<uml::TemplateParameter > par_owni
 }
 
 
-
-AssociationImpl::AssociationImpl(const AssociationImpl & obj):AssociationImpl()
+AssociationImpl::AssociationImpl(const AssociationImpl & obj): ClassifierImpl(obj), RelationshipImpl(obj), Association(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Association "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_isAbstract = obj.getIsAbstract();
+	//Clone Attributes with (deep copy)
 	m_isDerived = obj.getIsDerived();
-	m_isFinalSpecialization = obj.getIsFinalSpecialization();
-	m_isLeaf = obj.getIsLeaf();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	std::shared_ptr<Bag<uml::Classifier>> _general = obj.getGeneral();
-	m_general.reset(new Bag<uml::Classifier>(*(obj.getGeneral().get())));
-
-	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
-	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_package  = obj.getPackage();
-
-	std::shared_ptr<Bag<uml::GeneralizationSet>> _powertypeExtent = obj.getPowertypeExtent();
-	m_powertypeExtent.reset(new Bag<uml::GeneralizationSet>(*(obj.getPowertypeExtent().get())));
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-	std::shared_ptr<Bag<uml::UseCase>> _useCase = obj.getUseCase();
-	m_useCase.reset(new Bag<uml::UseCase>(*(obj.getUseCase().get())));
-
 
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::CollaborationUse>> _collaborationUseList = obj.getCollaborationUse();
-	for(std::shared_ptr<uml::CollaborationUse> _collaborationUse : *_collaborationUseList)
+	std::shared_ptr<Subset<uml::Type, uml::Element>> endTypeContainer = getEndType();
+	for(auto _endType : *obj.getEndType()) 
 	{
-		this->getCollaborationUse()->add(std::shared_ptr<uml::CollaborationUse>(std::dynamic_pointer_cast<uml::CollaborationUse>(_collaborationUse->copy())));
+		endTypeContainer->push_back(std::dynamic_pointer_cast<uml::Type>(_endType->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_collaborationUse" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
-	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
+	std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> memberEndContainer = getMemberEnd();
+	for(auto _memberEnd : *obj.getMemberEnd()) 
 	{
-		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy())));
+		memberEndContainer->push_back(std::dynamic_pointer_cast<uml::Property>(_memberEnd->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Type>> _endTypeList = obj.getEndType();
-	for(std::shared_ptr<uml::Type> _endType : *_endTypeList)
+	std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> navigableOwnedEndContainer = getNavigableOwnedEnd();
+	for(auto _navigableOwnedEnd : *obj.getNavigableOwnedEnd()) 
 	{
-		this->getEndType()->add(std::shared_ptr<uml::Type>(std::dynamic_pointer_cast<uml::Type>(_endType->copy())));
+		navigableOwnedEndContainer->push_back(std::dynamic_pointer_cast<uml::Property>(_navigableOwnedEnd->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_endType" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Generalization>> _generalizationList = obj.getGeneralization();
-	for(std::shared_ptr<uml::Generalization> _generalization : *_generalizationList)
+	std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement>> ownedEndContainer = getOwnedEnd();
+	for(auto _ownedEnd : *obj.getOwnedEnd()) 
 	{
-		this->getGeneralization()->add(std::shared_ptr<uml::Generalization>(std::dynamic_pointer_cast<uml::Generalization>(_generalization->copy())));
+		ownedEndContainer->push_back(std::dynamic_pointer_cast<uml::Property>(_ownedEnd->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_generalization" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageableElement>> _importedMemberList = obj.getImportedMember();
-	for(std::shared_ptr<uml::PackageableElement> _importedMember : *_importedMemberList)
-	{
-		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_importedMember" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::NamedElement>> _inheritedMemberList = obj.getInheritedMember();
-	for(std::shared_ptr<uml::NamedElement> _inheritedMember : *_inheritedMemberList)
-	{
-		this->getInheritedMember()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_inheritedMember->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inheritedMember" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Property>> _memberEndList = obj.getMemberEnd();
-	for(std::shared_ptr<uml::Property> _memberEnd : *_memberEndList)
-	{
-		this->getMemberEnd()->add(std::shared_ptr<uml::Property>(std::dynamic_pointer_cast<uml::Property>(_memberEnd->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_memberEnd" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Property>> _navigableOwnedEndList = obj.getNavigableOwnedEnd();
-	for(std::shared_ptr<uml::Property> _navigableOwnedEnd : *_navigableOwnedEndList)
-	{
-		this->getNavigableOwnedEnd()->add(std::shared_ptr<uml::Property>(std::dynamic_pointer_cast<uml::Property>(_navigableOwnedEnd->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_navigableOwnedEnd" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Property>> _ownedEndList = obj.getOwnedEnd();
-	for(std::shared_ptr<uml::Property> _ownedEnd : *_ownedEndList)
-	{
-		this->getOwnedEnd()->add(std::shared_ptr<uml::Property>(std::dynamic_pointer_cast<uml::Property>(_ownedEnd->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedEnd" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
-	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
-	{
-		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedRule" << std::endl;
-	#endif
-	if(obj.getOwnedTemplateSignature()!=nullptr)
-	{
-		m_ownedTemplateSignature = std::dynamic_pointer_cast<uml::TemplateSignature>(obj.getOwnedTemplateSignature()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedTemplateSignature" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::UseCase>> _ownedUseCaseList = obj.getOwnedUseCase();
-	for(std::shared_ptr<uml::UseCase> _ownedUseCase : *_ownedUseCaseList)
-	{
-		this->getOwnedUseCase()->add(std::shared_ptr<uml::UseCase>(std::dynamic_pointer_cast<uml::UseCase>(_ownedUseCase->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedUseCase" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
-	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
-	{
-		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Classifier>> _redefinedClassifierList = obj.getRedefinedClassifier();
-	for(std::shared_ptr<uml::Classifier> _redefinedClassifier : *_redefinedClassifierList)
-	{
-		this->getRedefinedClassifier()->add(std::shared_ptr<uml::Classifier>(std::dynamic_pointer_cast<uml::Classifier>(_redefinedClassifier->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedClassifier" << std::endl;
-	#endif
-	if(obj.getRepresentation()!=nullptr)
-	{
-		m_representation = std::dynamic_pointer_cast<uml::CollaborationUse>(obj.getRepresentation()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_representation" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Substitution>> _substitutionList = obj.getSubstitution();
-	for(std::shared_ptr<uml::Substitution> _substitution : *_substitutionList)
-	{
-		this->getSubstitution()->add(std::shared_ptr<uml::Substitution>(std::dynamic_pointer_cast<uml::Substitution>(_substitution->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_substitution" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::TemplateBinding>> _templateBindingList = obj.getTemplateBinding();
-	for(std::shared_ptr<uml::TemplateBinding> _templateBinding : *_templateBindingList)
-	{
-		this->getTemplateBinding()->add(std::shared_ptr<uml::TemplateBinding>(std::dynamic_pointer_cast<uml::TemplateBinding>(_templateBinding->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_templateBinding" << std::endl;
-	#endif
-
 	/*SubsetUnion*/
 	m_ownedEnd->initSubsetUnion(getMemberEnd(),getFeature(),getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
@@ -364,30 +190,28 @@ bool AssociationImpl::getIsDerived() const
 {
 	return m_isDerived;
 }
-
 void AssociationImpl::setIsDerived(bool _isDerived)
 {
 	m_isDerived = _isDerived;
 } 
 
 
-
 //*********************************
 // Operations
 //*********************************
-bool AssociationImpl::association_ends(Any diagnostics,std::map <  Any ,  Any > context)
+bool AssociationImpl::association_ends(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::binary_associations(Any diagnostics,std::map <  Any ,  Any > context)
+bool AssociationImpl::binary_associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::ends_must_be_typed(Any diagnostics,std::map <  Any ,  Any > context)
+bool AssociationImpl::ends_must_be_typed(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -405,13 +229,13 @@ bool AssociationImpl::isBinary()
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::specialized_end_number(Any diagnostics,std::map <  Any ,  Any > context)
+bool AssociationImpl::specialized_end_number(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool AssociationImpl::specialized_end_types(Any diagnostics,std::map <  Any ,  Any > context)
+bool AssociationImpl::specialized_end_types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -446,8 +270,6 @@ std::shared_ptr<Subset<uml::Type, uml::Element>> AssociationImpl::getEndType() c
 
 
 
-
-
 /*
 Getter & Setter for reference memberEnd
 */
@@ -471,8 +293,6 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> AssociationImpl::
 //assert(m_memberEnd);
     return m_memberEnd;
 }
-
-
 
 
 
@@ -502,8 +322,6 @@ std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference 
 
 
 
-
-
 /*
 Getter & Setter for reference ownedEnd
 */
@@ -527,8 +345,6 @@ std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not refer
 
     return m_ownedEnd;
 }
-
-
 
 
 
@@ -570,7 +386,7 @@ std::shared_ptr<Union<uml::NamedElement>> AssociationImpl::getMember() const
 	return m_member;
 }
 
-std::weak_ptr<uml::Namespace > AssociationImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> AssociationImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -610,7 +426,7 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> 
 	return m_ownedMember;
 }
 
-std::weak_ptr<uml::Element > AssociationImpl::getOwner() const
+std::weak_ptr<uml::Element> AssociationImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -940,7 +756,6 @@ void AssociationImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 
 void AssociationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -951,12 +766,9 @@ void AssociationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "Property";
 			}
-			std::shared_ptr<ecore::EObject> ownedEnd = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION);
-			if (ownedEnd != nullptr)
-			{
-				loadHandler->handleChild(ownedEnd);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Property>(this->getOwnedEnd());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -978,28 +790,28 @@ void AssociationImpl::resolveReferences(const int featureID, std::vector<std::sh
 	{
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
-			std::shared_ptr<Bag<uml::Property>> _memberEnd = getMemberEnd();
+			std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> _memberEnd = getMemberEnd();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Property> _r = std::dynamic_pointer_cast<uml::Property>(ref);
+				std::shared_ptr<uml::Property>  _r = std::dynamic_pointer_cast<uml::Property>(ref);
 				if (_r != nullptr)
 				{
 					_memberEnd->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
 
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
-			std::shared_ptr<Bag<uml::Property>> _navigableOwnedEnd = getNavigableOwnedEnd();
+			std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> _navigableOwnedEnd = getNavigableOwnedEnd();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Property> _r = std::dynamic_pointer_cast<uml::Property>(ref);
+				std::shared_ptr<uml::Property>  _r = std::dynamic_pointer_cast<uml::Property>(ref);
 				if (_r != nullptr)
 				{
 					_navigableOwnedEnd->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -1048,21 +860,16 @@ void AssociationImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		{
 			saveHandler->addAttribute("isDerived", this->getIsDerived());
 		}
-
 	// Add references
 		saveHandler->addReferences<uml::Property>("memberEnd", this->getMemberEnd());
 		saveHandler->addReferences<uml::Property>("navigableOwnedEnd", this->getNavigableOwnedEnd());
-
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'ownedEnd'
-		std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement>> list_ownedEnd = this->getOwnedEnd();
-		for (std::shared_ptr<uml::Property> ownedEnd : *list_ownedEnd) 
-		{
-			saveHandler->addReference(ownedEnd, "ownedEnd", ownedEnd->eClass() !=uml::umlPackage::eInstance()->getProperty_Class());
-		}
+
+		saveHandler->addReferences<uml::Property>("ownedEnd", this->getOwnedEnd());
 	}
 	catch (std::exception& e)
 	{

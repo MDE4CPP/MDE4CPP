@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -36,13 +37,11 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
-#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
-
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -64,30 +63,21 @@ ObjectTokenImpl::~ObjectTokenImpl()
 }
 
 
-
-ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj):ObjectTokenImpl()
+ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj): TokenImpl(obj), ObjectToken(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ObjectToken "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_withdrawn = obj.isWithdrawn();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_holder  = obj.getHolder();
-
 
 	//Clone references with containment (deep copy)
-
 	if(obj.getValue()!=nullptr)
 	{
 		m_value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(obj.getValue()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_value" << std::endl;
-	#endif
-
 	
 }
 
@@ -146,17 +136,15 @@ bool ObjectTokenImpl::isControl()
 /*
 Getter & Setter for reference value
 */
-std::shared_ptr<fUML::Semantics::Values::Value > ObjectTokenImpl::getValue() const
+std::shared_ptr<fUML::Semantics::Values::Value> ObjectTokenImpl::getValue() const
 {
 
     return m_value;
 }
-
 void ObjectTokenImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
 {
     m_value = _value;
 }
-
 
 
 //*********************************
@@ -244,7 +232,6 @@ void ObjectTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 
 void ObjectTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
 	try
 	{
@@ -256,13 +243,9 @@ void ObjectTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<fUML::Semantics::Values::Value> value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(modelFactory->create(typeName));
-			if (value != nullptr)
-			{
-				this->setValue(value);
-				loadHandler->handleChild(value);
-			}
-			return;
+			loadHandler->handleChild(this->getValue()); 
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -297,17 +280,13 @@ void ObjectTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'value'
-		std::shared_ptr<fUML::Semantics::Values::Value > value = this->getValue();
-		if (value != nullptr)
-		{
-			saveHandler->addReference(value, "value", value->eClass() != fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
-		}
+
+		saveHandler->addReference(this->getValue(), "value", getValue()->eClass() != fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	}
 	catch (std::exception& e)
 	{

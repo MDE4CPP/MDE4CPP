@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Locus.hpp"
 
@@ -26,7 +27,7 @@ virtual public Locus
 			LocusImpl(const LocusImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			LocusImpl& operator=(LocusImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public Locus
 			LocusImpl();
 			virtual std::shared_ptr<Locus> getThisLocusPtr() const;
 			virtual void setThisLocusPtr(std::weak_ptr<Locus> thisLocusPtr);
-
 
 
 		public:
@@ -45,27 +45,13 @@ virtual public Locus
 			// Operations
 			//*********************************
 			 
-			virtual void add(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) ;
-			
-			 
-			virtual void assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> executor) ;
-			
-			 
-			virtual void assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory) ;
-			
-			 
-			virtual bool conforms(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class> type) ;
-			
-			 
-			virtual void remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) ;
-			
-			 
+			virtual void add(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) ; 
+			virtual void assignExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> executor) ; 
+			virtual void assignFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> factory) ; 
+			virtual bool conforms(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) ; 
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class> type) ; 
+			virtual void remove(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) ; 
 			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> > retrieveExtent(std::shared_ptr<uml::Classifier> classifier) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -76,22 +62,17 @@ virtual public Locus
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Loci::Executor > getExecutor() const ;
+			virtual std::shared_ptr<fUML::Semantics::Loci::Executor> getExecutor() const ;
 			
-			
-			virtual void setExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor> _executor) ;
-			
+			virtual void setExecutor(std::shared_ptr<fUML::Semantics::Loci::Executor>) ;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> getExtensionalValues() const ;
 			
 			
+			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> getFactory() const ;
 			
-			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory > getFactory() const ;
+			virtual void setFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory>) ;
 			
-			
-			virtual void setFactory(std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> _factory) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

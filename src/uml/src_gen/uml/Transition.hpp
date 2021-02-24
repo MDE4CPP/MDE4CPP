@@ -83,13 +83,13 @@ namespace uml
 			Transition(){}
 
 			//Additional constructors for the containments back reference
-			Transition(std::weak_ptr<uml::Region > par_container);
+			Transition(std::weak_ptr<uml::Region> par_container);
 
 			//Additional constructors for the containments back reference
-			Transition(std::weak_ptr<uml::Namespace > par_namespace);
+			Transition(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-			Transition(std::weak_ptr<uml::Element > par_owner);
+			Transition(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -106,52 +106,38 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() = 0;/*!
 			A fork segment must not have Guards or Triggers.
 			(source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (guard = null and trigger->isEmpty())
 			*/
 			 
-			virtual bool fork_segment_guards(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool fork_segment_guards(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A fork segment must always target a State.
 			(source.oclIsKindOf(Pseudostate) and  source.oclAsType(Pseudostate).kind = PseudostateKind::fork) implies (target.oclIsKindOf(State))
 			*/
 			 
-			virtual bool fork_segment_state(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool fork_segment_state(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			An initial Transition at the topmost level Region of a StateMachine that has no Trigger.
 			(source.oclIsKindOf(Pseudostate) and container.stateMachine->notEmpty()) implies
 				trigger->isEmpty()
 			*/
 			 
-			virtual bool initial_transition(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool initial_transition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A join segment must not have Guards or Triggers.
 			(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (guard = null and trigger->isEmpty())
 			*/
 			 
-			virtual bool join_segment_guards(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool join_segment_guards(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A join segment must always originate from a State.
 			(target.oclIsKindOf(Pseudostate) and target.oclAsType(Pseudostate).kind = PseudostateKind::join) implies (source.oclIsKindOf(State))
 			*/
 			 
-			virtual bool join_segment_state(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool join_segment_state(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			Transitions outgoing Pseudostates may not have a Trigger.
 			source.oclIsKindOf(Pseudostate) and (source.oclAsType(Pseudostate).kind <> PseudostateKind::initial) implies trigger->isEmpty()
 			*/
 			 
-			virtual bool outgoing_pseudostates(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool outgoing_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The redefinition context of a Transition is the nearest containing StateMachine.
 			result = (let sm : StateMachine = containingStateMachine() in
 			if sm._'context' = null or sm.general->notEmpty() then
@@ -162,34 +148,26 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Classifier> redefinitionContext() = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Classifier> redefinitionContext() = 0;/*!
 			A Transition with kind external can source any Vertex except entry points.
 			(kind = TransitionKind::external) implies
 				not (source.oclIsKindOf(Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::entryPoint)
 			*/
 			 
-			virtual bool state_is_external(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool state_is_external(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A Transition with kind internal must have a State as its source, and its source and target must be equal.
 			(kind = TransitionKind::internal) implies
 					(source.oclIsKindOf (State) and source = target)
 			*/
 			 
-			virtual bool state_is_internal(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool state_is_internal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A Transition with kind local must have a composite State or an entry point as its source.
 			(kind = TransitionKind::local) implies
 					((source.oclIsKindOf (State) and source.oclAsType(State).isComposite) or
 					(source.oclIsKindOf (Pseudostate) and source.oclAsType(Pseudostate).kind = PseudostateKind::entryPoint))
 			*/
 			 
-			virtual bool state_is_local(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool state_is_local(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -199,13 +177,13 @@ namespace uml
 			*/
 			 
 			virtual uml::TransitionKind getKind() const = 0;
-			
 			/*!
 			Indicates the precise type of the Transition.
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
 			virtual void setKind (uml::TransitionKind _kind)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -214,92 +192,79 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Region > getContainer() const = 0;
-			
+			virtual std::weak_ptr<uml::Region> getContainer() const = 0;
 			/*!
 			Designates the Region that owns this Transition.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setContainer(std::shared_ptr<uml::Region> _container) = 0;
-			
+			virtual void setContainer(std::weak_ptr<uml::Region>) = 0;
 			/*!
 			Specifies an optional behavior to be performed when the Transition fires.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior > getEffect() const = 0;
-			
+			virtual std::shared_ptr<uml::Behavior> getEffect() const = 0;
 			/*!
 			Specifies an optional behavior to be performed when the Transition fires.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setEffect(std::shared_ptr<uml::Behavior> _effect) = 0;
-			
+			virtual void setEffect(std::shared_ptr<uml::Behavior>) = 0;
 			/*!
 			A guard is a Constraint that provides a fine-grained control over the firing of the Transition. The guard is evaluated when an Event occurrence is dispatched by the StateMachine. If the guard is true at that time, the Transition may be enabled, otherwise, it is disabled. Guards should be pure expressions without side effects. Guard expressions with side effects are ill formed.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint > getGuard() const = 0;
-			
+			virtual std::shared_ptr<uml::Constraint> getGuard() const = 0;
 			/*!
 			A guard is a Constraint that provides a fine-grained control over the firing of the Transition. The guard is evaluated when an Event occurrence is dispatched by the StateMachine. If the guard is true at that time, the Transition may be enabled, otherwise, it is disabled. Guards should be pure expressions without side effects. Guard expressions with side effects are ill formed.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setGuard(std::shared_ptr<uml::Constraint> _guard) = 0;
-			
+			virtual void setGuard(std::shared_ptr<uml::Constraint>) = 0;
 			/*!
 			The Transition that is redefined by this Transition.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Transition > getRedefinedTransition() const = 0;
-			
+			virtual std::shared_ptr<uml::Transition> getRedefinedTransition() const = 0;
 			/*!
 			The Transition that is redefined by this Transition.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setRedefinedTransition(std::shared_ptr<uml::Transition> _redefinedTransition) = 0;
-			
+			virtual void setRedefinedTransition(std::shared_ptr<uml::Transition>) = 0;
 			/*!
 			Designates the originating Vertex (State or Pseudostate) of the Transition.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Vertex > getSource() const = 0;
-			
+			virtual std::shared_ptr<uml::Vertex> getSource() const = 0;
 			/*!
 			Designates the originating Vertex (State or Pseudostate) of the Transition.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setSource(std::shared_ptr<uml::Vertex> _source) = 0;
-			
+			virtual void setSource(std::shared_ptr<uml::Vertex>) = 0;
 			/*!
 			Designates the target Vertex that is reached when the Transition is taken.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Vertex > getTarget() const = 0;
-			
+			virtual std::shared_ptr<uml::Vertex> getTarget() const = 0;
 			/*!
 			Designates the target Vertex that is reached when the Transition is taken.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::Vertex> _target) = 0;
-			
+			virtual void setTarget(std::shared_ptr<uml::Vertex>) = 0;
 			/*!
 			Specifies the Triggers that may fire the transition.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Trigger, uml::Element>> getTrigger() const = 0;
-			
 			
 			
 
@@ -323,32 +288,32 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			std::weak_ptr<uml::Region > m_container;/*!
+			std::weak_ptr<uml::Region> m_container;/*!
 			Specifies an optional behavior to be performed when the Transition fires.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			std::shared_ptr<uml::Behavior > m_effect;/*!
+			std::shared_ptr<uml::Behavior> m_effect;/*!
 			A guard is a Constraint that provides a fine-grained control over the firing of the Transition. The guard is evaluated when an Event occurrence is dispatched by the StateMachine. If the guard is true at that time, the Transition may be enabled, otherwise, it is disabled. Guards should be pure expressions without side effects. Guard expressions with side effects are ill formed.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			std::shared_ptr<uml::Constraint > m_guard;/*!
+			std::shared_ptr<uml::Constraint> m_guard;/*!
 			The Transition that is redefined by this Transition.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			std::shared_ptr<uml::Transition > m_redefinedTransition;/*!
+			std::shared_ptr<uml::Transition> m_redefinedTransition;/*!
 			Designates the originating Vertex (State or Pseudostate) of the Transition.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			std::shared_ptr<uml::Vertex > m_source;/*!
+			std::shared_ptr<uml::Vertex> m_source;/*!
 			Designates the target Vertex that is reached when the Transition is taken.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			std::shared_ptr<uml::Vertex > m_target;/*!
+			std::shared_ptr<uml::Vertex> m_target;/*!
 			Specifies the Triggers that may fire the transition.
 			<p>From package UML::StateMachines.</p>
 			*/
@@ -369,7 +334,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -384,7 +349,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

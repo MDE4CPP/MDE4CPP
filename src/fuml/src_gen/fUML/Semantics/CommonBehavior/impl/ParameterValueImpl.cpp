@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -37,13 +38,12 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
-
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -65,30 +65,24 @@ ParameterValueImpl::~ParameterValueImpl()
 }
 
 
-
-ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj):ParameterValueImpl()
+ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj): ecore::EModelElementImpl(obj),
+ParameterValue(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ParameterValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_parameter  = obj.getParameter();
 
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _valuesList = obj.getValues();
-	for(std::shared_ptr<fUML::Semantics::Values::Value> _values : *_valuesList)
+	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> valuesContainer = getValues();
+	for(auto _values : *obj.getValues()) 
 	{
-		this->getValues()->add(std::shared_ptr<fUML::Semantics::Values::Value>(std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_values->copy())));
+		valuesContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_values->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_values" << std::endl;
-	#endif
-
 	
 }
 
@@ -140,17 +134,15 @@ return newValue;
 /*
 Getter & Setter for reference parameter
 */
-std::shared_ptr<uml::Parameter > ParameterValueImpl::getParameter() const
+std::shared_ptr<uml::Parameter> ParameterValueImpl::getParameter() const
 {
 //assert(m_parameter);
     return m_parameter;
 }
-
 void ParameterValueImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter)
 {
     m_parameter = _parameter;
 }
-
 
 
 /*
@@ -167,8 +159,6 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ParameterValueImpl::getValu
 
     return m_values;
 }
-
-
 
 
 
@@ -317,7 +307,6 @@ void ParameterValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void ParameterValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
 	try
 	{
@@ -329,14 +318,9 @@ void ParameterValueImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<fUML::Semantics::Values::Value> values = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(modelFactory->create(typeName));
-			if (values != nullptr)
-			{
-				std::shared_ptr<Bag<fUML::Semantics::Values::Value>> list_values = this->getValues();
-				list_values->push_back(values);
-				loadHandler->handleChild(values);
-			}
-			return;
+			loadHandler->handleChildContainer<fUML::Semantics::Values::Value>(this->getValues());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -383,20 +367,15 @@ void ParameterValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("parameter", this->getParameter()); 
-
+		saveHandler->addReference(this->getParameter(), "parameter", getParameter()->eClass() != uml::umlPackage::eInstance()->getParameter_Class()); 
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'values'
-		std::shared_ptr<Bag<fUML::Semantics::Values::Value>> list_values = this->getValues();
-		for (std::shared_ptr<fUML::Semantics::Values::Value> values : *list_values) 
-		{
-			saveHandler->addReference(values, "values", values->eClass() !=fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
-		}
+
+		saveHandler->addReferences<fUML::Semantics::Values::Value>("values", this->getValues());
 	}
 	catch (std::exception& e)
 	{

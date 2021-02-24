@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../DurationObservation.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			DurationObservationImpl(const DurationObservationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			DurationObservationImpl& operator=(DurationObservationImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisDurationObservationPtr(std::weak_ptr<DurationObservation> thisDurationObservationPtr);
 
 			//Additional constructors for the containments back reference
-			DurationObservationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			DurationObservationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			DurationObservationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			DurationObservationImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			DurationObservationImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			DurationObservationImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			DurationObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			DurationObservationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -64,9 +56,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool first_event_multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool first_event_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -77,6 +67,8 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<bool>> isFirstEvent() const ;
+			
+			
 			
 			//*********************************
 			// Reference
@@ -89,7 +81,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::NamedElement>> getEvent() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -99,7 +90,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -109,7 +100,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../SemanticVisitor.hpp"
 
@@ -26,7 +27,7 @@ virtual public SemanticVisitor
 			SemanticVisitorImpl(const SemanticVisitorImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			SemanticVisitorImpl& operator=(SemanticVisitorImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public SemanticVisitor
 			SemanticVisitorImpl();
 			virtual std::shared_ptr<SemanticVisitor> getThisSemanticVisitorPtr() const;
 			virtual void setThisSemanticVisitorPtr(std::weak_ptr<SemanticVisitor> thisSemanticVisitorPtr);
-
 
 
 		public:
@@ -45,12 +45,8 @@ virtual public SemanticVisitor
 			// Operations
 			//*********************************
 			 
-			virtual void _beginIsolation() ;
-			
-			 
+			virtual void _beginIsolation() ; 
 			virtual void _endIsolation() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -60,7 +56,7 @@ virtual public SemanticVisitor
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

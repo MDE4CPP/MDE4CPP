@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../WriteVariableAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			WriteVariableActionImpl(const WriteVariableActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			WriteVariableActionImpl& operator=(WriteVariableActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisWriteVariableActionPtr(std::weak_ptr<WriteVariableAction> thisWriteVariableActionPtr);
 
 			//Additional constructors for the containments back reference
-			WriteVariableActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			WriteVariableActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			WriteVariableActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			WriteVariableActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			WriteVariableActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			WriteVariableActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			WriteVariableActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			WriteVariableActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,16 +54,12 @@ namespace uml
 			value<>null implies value.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type of the value InputPin must conform to the type of the variable.
 			value <> null implies value.type.conformsTo(variable.type)
 			*/
 			 
-			virtual bool value_type(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool value_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -86,16 +74,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getValue() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getValue() const ;
 			/*!
 			The InputPin that gives the value to be added or removed from the Variable.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::InputPin> _value) ;
+			virtual void setValue(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -120,7 +106,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

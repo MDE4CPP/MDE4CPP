@@ -100,13 +100,13 @@ namespace uml
 			*/
 			 
 			virtual uml::ExpansionKind getMode() const = 0;
-			
 			/*!
 			The mode in which the ExpansionRegion executes its contents. If parallel, executions are concurrent. If iterative, executions are sequential. If stream, a stream of values flows into a single execution.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setMode (uml::ExpansionKind _mode)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -117,14 +117,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ExpansionNode>> getInputElement() const = 0;
 			
-			
 			/*!
 			The ExpansionNodes that form the output collections of the ExpansionRegion.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::ExpansionNode>> getOutputElement() const = 0;
-			
 			
 			
 
@@ -204,7 +202,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

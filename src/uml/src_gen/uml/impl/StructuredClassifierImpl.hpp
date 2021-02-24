@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../StructuredClassifier.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			StructuredClassifierImpl(const StructuredClassifierImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			StructuredClassifierImpl& operator=(StructuredClassifierImpl const&) = delete;
 
 		protected:
@@ -33,25 +34,14 @@ namespace uml
 			virtual void setThisStructuredClassifierPtr(std::weak_ptr<StructuredClassifier> thisStructuredClassifierPtr);
 
 			//Additional constructors for the containments back reference
-			StructuredClassifierImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			StructuredClassifierImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			StructuredClassifierImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			StructuredClassifierImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			StructuredClassifierImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			StructuredClassifierImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			StructuredClassifierImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			StructuredClassifierImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -66,23 +56,17 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::ConnectableElement> > allRoles() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::ConnectableElement> > allRoles() ;/*!
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this structured classifier.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) ;/*!
 			Derivation for StructuredClassifier::/part
 			result = (ownedAttribute->select(isComposite)->asSet())
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::Property> > getParts() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -99,14 +83,12 @@ namespace uml
 			
 			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement>> getOwnedAttribute() const ;
 			
-			
 			/*!
 			The connectors owned by the StructuredClassifier.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Connector, uml::Feature,uml::NamedElement>> getOwnedConnector() const ;
-			
 			
 			/*!
 			The Properties specifying instances that the StructuredClassifier owns by composition. This collection is derived, selecting those owned Properties where isComposite is true.
@@ -118,7 +100,6 @@ namespace uml
 			
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -143,7 +124,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -158,7 +139,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

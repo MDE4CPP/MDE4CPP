@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Interaction.hpp"
 
@@ -24,7 +25,7 @@ namespace uml
 			InteractionImpl(const InteractionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			InteractionImpl& operator=(InteractionImpl const&) = delete;
 
 		protected:
@@ -34,37 +35,20 @@ namespace uml
 			virtual void setThisInteractionPtr(std::weak_ptr<Interaction> thisInteractionPtr);
 
 			//Additional constructors for the containments back reference
-			InteractionImpl(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier);
-
-
+			InteractionImpl(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier);
 			//Additional constructors for the containments back reference
-			InteractionImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
-
-
+			InteractionImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
 			//Additional constructors for the containments back reference
-			InteractionImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
-
-
+			InteractionImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand);
 			//Additional constructors for the containments back reference
-			InteractionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			InteractionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			InteractionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			InteractionImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			InteractionImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			InteractionImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			InteractionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			InteractionImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -78,9 +62,7 @@ namespace uml
 			enclosingInteraction->isEmpty()
 			*/
 			 
-			virtual bool not_contained(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -97,14 +79,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Action, uml::Element>> getAction() const ;
 			
-			
 			/*!
 			Specifies the gates that form the message interface between this Interaction and any InteractionUses which reference it.
 			<p>From package UML::Interactions.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> getFormalGate() const ;
-			
 			
 			/*!
 			The ordered set of fragments in the Interaction.
@@ -113,14 +93,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> getFragment() const ;
 			
-			
 			/*!
 			Specifies the participants in this Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> getLifeline() const ;
-			
 			
 			/*!
 			The Messages contained in this Interaction.
@@ -130,7 +108,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Message, uml::NamedElement>> getMessage() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -155,7 +132,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -170,7 +147,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

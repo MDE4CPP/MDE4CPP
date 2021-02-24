@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../SemanticStrategy.hpp"
 
@@ -26,7 +27,7 @@ virtual public SemanticStrategy
 			SemanticStrategyImpl(const SemanticStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			SemanticStrategyImpl& operator=(SemanticStrategyImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public SemanticStrategy
 			SemanticStrategyImpl();
 			virtual std::shared_ptr<SemanticStrategy> getThisSemanticStrategyPtr() const;
 			virtual void setThisSemanticStrategyPtr(std::weak_ptr<SemanticStrategy> thisSemanticStrategyPtr);
-
 
 
 		public:
@@ -47,8 +47,6 @@ virtual public SemanticStrategy
 			 
 			virtual std::string getName() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -57,7 +55,7 @@ virtual public SemanticStrategy
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

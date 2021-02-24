@@ -92,11 +92,9 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getCurrentExecution() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCurrentExecution() const = 0;
 			
-			
-			virtual void setCurrentExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _currentExecution) = 0;
-			
+			virtual void setCurrentExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>) = 0;
 			
 
 		protected:
@@ -109,7 +107,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > m_currentExecution;
+			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> m_currentExecution;
 
 		public:
 			//*********************************

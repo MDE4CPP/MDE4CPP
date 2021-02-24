@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ParameterValue.hpp"
 
@@ -26,7 +27,7 @@ virtual public ParameterValue
 			ParameterValueImpl(const ParameterValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ParameterValueImpl& operator=(ParameterValueImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public ParameterValue
 			ParameterValueImpl();
 			virtual std::shared_ptr<ParameterValue> getThisParameterValuePtr() const;
 			virtual void setThisParameterValuePtr(std::weak_ptr<ParameterValue> thisParameterValuePtr);
-
 
 
 		public:
@@ -47,8 +47,6 @@ virtual public ParameterValue
 			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _copy() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -58,16 +56,13 @@ virtual public ParameterValue
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Parameter > getParameter() const ;
+			virtual std::shared_ptr<uml::Parameter> getParameter() const ;
 			
-			
-			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter) ;
-			
+			virtual void setParameter(std::shared_ptr<uml::Parameter>) ;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter

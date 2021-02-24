@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ClassifierBehaviorInvocationEventAccepter.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::CommonBehavior
 			ClassifierBehaviorInvocationEventAccepterImpl(const ClassifierBehaviorInvocationEventAccepterImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ClassifierBehaviorInvocationEventAccepterImpl& operator=(ClassifierBehaviorInvocationEventAccepterImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::CommonBehavior
 			ClassifierBehaviorInvocationEventAccepterImpl();
 			virtual std::shared_ptr<ClassifierBehaviorInvocationEventAccepter> getThisClassifierBehaviorInvocationEventAccepterPtr() const;
 			virtual void setThisClassifierBehaviorInvocationEventAccepterPtr(std::weak_ptr<ClassifierBehaviorInvocationEventAccepter> thisClassifierBehaviorInvocationEventAccepterPtr);
-
 
 
 		public:
@@ -43,17 +43,9 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ;
-			
-			
-			
-			 
-			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ;
-			
-			 
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ; 
+			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ; 
 			virtual void terminate() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -64,24 +56,18 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Class > getClassifier() const ;
+			virtual std::shared_ptr<uml::Class> getClassifier() const ;
 			
+			virtual void setClassifier(std::shared_ptr<uml::Class>) ;
 			
-			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getExecution() const ;
 			
+			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>) ;
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getExecution() const ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> getObjectActivation() const ;
 			
+			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>) ;
 			
-			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution) ;
-			
-			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > getObjectActivation() const ;
-			
-			
-			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

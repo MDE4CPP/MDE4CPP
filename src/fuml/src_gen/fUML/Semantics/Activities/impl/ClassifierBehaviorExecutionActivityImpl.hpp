@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ClassifierBehaviorExecutionActivity.hpp"
 
@@ -26,7 +27,7 @@ virtual public ClassifierBehaviorExecutionActivity
 			ClassifierBehaviorExecutionActivityImpl(const ClassifierBehaviorExecutionActivityImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ClassifierBehaviorExecutionActivityImpl& operator=(ClassifierBehaviorExecutionActivityImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public ClassifierBehaviorExecutionActivity
 			ClassifierBehaviorExecutionActivityImpl();
 			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity> getThisClassifierBehaviorExecutionActivityPtr() const;
 			virtual void setThisClassifierBehaviorExecutionActivityPtr(std::weak_ptr<ClassifierBehaviorExecutionActivity> thisClassifierBehaviorExecutionActivityPtr);
-
 
 
 		public:
@@ -54,7 +54,7 @@ virtual public ClassifierBehaviorExecutionActivity
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

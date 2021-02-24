@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../InterfaceRealization.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			InterfaceRealizationImpl(const InterfaceRealizationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			InterfaceRealizationImpl& operator=(InterfaceRealizationImpl const&) = delete;
 
 		protected:
@@ -33,26 +34,15 @@ namespace uml
 			virtual void setThisInterfaceRealizationPtr(std::weak_ptr<InterfaceRealization> thisInterfaceRealizationPtr);
 
 			//Additional constructors for the containments back reference
-			InterfaceRealizationImpl(std::weak_ptr<uml::BehavioredClassifier > par_implementingClassifier);
-
-
+			InterfaceRealizationImpl(std::weak_ptr<uml::BehavioredClassifier> par_implementingClassifier);
 			//Additional constructors for the containments back reference
-			InterfaceRealizationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			InterfaceRealizationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			InterfaceRealizationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			InterfaceRealizationImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			InterfaceRealizationImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			InterfaceRealizationImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			InterfaceRealizationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			InterfaceRealizationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -76,30 +66,26 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Interface > getContract() const ;
-			
+			virtual std::shared_ptr<uml::Interface> getContract() const ;
 			/*!
 			References the Interface specifying the conformance contract.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setContract(std::shared_ptr<uml::Interface> _contract) ;
-			
+			virtual void setContract(std::shared_ptr<uml::Interface>) ;
 			/*!
 			References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::BehavioredClassifier > getImplementingClassifier() const ;
-			
+			virtual std::weak_ptr<uml::BehavioredClassifier> getImplementingClassifier() const ;
 			/*!
 			References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setImplementingClassifier(std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier) ;
+			virtual void setImplementingClassifier(std::weak_ptr<uml::BehavioredClassifier>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -109,7 +95,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -119,7 +105,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/

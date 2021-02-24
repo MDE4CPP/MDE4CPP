@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -52,13 +53,15 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
-
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -80,52 +83,24 @@ ExecutionImpl::~ExecutionImpl()
 }
 
 
-
-ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj):ExecutionImpl()
+ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj): fUML::Semantics::StructuredClassifiers::ObjectImpl(obj), Execution(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Execution "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_behavior  = obj.getBehavior();
-
 	m_context  = obj.getContext();
 
-	m_locus  = obj.getLocus();
-
-	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
-	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> _featureValuesList = obj.getFeatureValues();
-	for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _featureValues : *_featureValuesList)
+	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValuesContainer = getParameterValues();
+	for(auto _parameterValues : *obj.getParameterValues()) 
 	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(_featureValues->copy())));
+		parameterValuesContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(_parameterValues->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
-	#endif
-	if(obj.getObjectActivation()!=nullptr)
-	{
-		m_objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(obj.getObjectActivation()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_objectActivation" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> _parameterValuesList = obj.getParameterValues();
-	for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _parameterValues : *_parameterValuesList)
-	{
-		this->getParameterValues()->add(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(_parameterValues->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_parameterValues" << std::endl;
-	#endif
-
 	
 }
 
@@ -258,39 +233,45 @@ void ExecutionImpl::terminate()
 /*
 Getter & Setter for reference behavior
 */
-std::shared_ptr<uml::Behavior > ExecutionImpl::getBehavior() const
+std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior() const
 {
 	//generated from getterbody annotation
 if(!m_behavior)
 {
-	m_behavior = std::dynamic_pointer_cast<uml::Behavior>(this->getTypes()->front());
+	auto type = this->getTypes();
+	if(nullptr != type)
+	{
+		m_behavior = std::dynamic_pointer_cast<uml::Behavior>(this->getTypes()->front());
+		std::cout << "Type: " <<m_behavior ->getName() << std::endl;
+	}
+	else
+	{
+		std::cout <<"Element has no type: " << this->m_metaElementID << std::endl;
+
+	}
 }
 
 return m_behavior;
 	//end of body
 }
-
 void ExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
 }
 
 
-
 /*
 Getter & Setter for reference context
 */
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object > ExecutionImpl::getContext() const
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ExecutionImpl::getContext() const
 {
 //assert(m_context);
     return m_context;
 }
-
 void ExecutionImpl::setContext(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _context)
 {
     m_context = _context;
 }
-
 
 
 /*
@@ -307,8 +288,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> ExecutionI
 
     return m_parameterValues;
 }
-
-
 
 
 
@@ -477,7 +456,6 @@ void ExecutionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 
 void ExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
 	try
 	{
@@ -488,14 +466,9 @@ void ExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "ParameterValue";
 			}
-			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValues = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(modelFactory->create(typeName));
-			if (parameterValues != nullptr)
-			{
-				std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> list_parameterValues = this->getParameterValues();
-				list_parameterValues->push_back(parameterValues);
-				loadHandler->handleChild(parameterValues);
-			}
-			return;
+			loadHandler->handleChildContainer<fUML::Semantics::CommonBehavior::ParameterValue>(this->getParameterValues());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -571,21 +544,16 @@ void ExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-
 	// Add references
-		saveHandler->addReference("behavior", this->getBehavior()); 
-		saveHandler->addReference("context", this->getContext()); 
-
+		saveHandler->addReference(this->getBehavior(), "behavior", getBehavior()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+		saveHandler->addReference(this->getContext(), "context", getContext()->eClass() != fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class()); 
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'parameterValues'
-		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> list_parameterValues = this->getParameterValues();
-		for (std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValues : *list_parameterValues) 
-		{
-			saveHandler->addReference(parameterValues, "parameterValues", parameterValues->eClass() !=fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
-		}
+
+		saveHandler->addReferences<fUML::Semantics::CommonBehavior::ParameterValue>("parameterValues", this->getParameterValues());
 	}
 	catch (std::exception& e)
 	{

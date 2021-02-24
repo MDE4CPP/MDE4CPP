@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Feature.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			FeatureImpl(const FeatureImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			FeatureImpl& operator=(FeatureImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace uml
 			virtual void setThisFeaturePtr(std::weak_ptr<Feature> thisFeaturePtr);
 
 			//Additional constructors for the containments back reference
-			FeatureImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			FeatureImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			FeatureImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			FeatureImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -60,7 +56,6 @@ namespace uml
 			*/
 			 
 			virtual bool getIsStatic() const ;
-			
 			/*!
 			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
 			<p>From package UML::Classification.</p>
@@ -68,12 +63,13 @@ namespace uml
 			 
 			virtual void setIsStatic (bool _isStatic);
 			
+			
 			//*********************************
 			// Reference
 			//*********************************
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -93,7 +89,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

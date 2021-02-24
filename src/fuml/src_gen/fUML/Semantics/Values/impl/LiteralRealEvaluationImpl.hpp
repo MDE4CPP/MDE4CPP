@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../LiteralRealEvaluation.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Values
 			LiteralRealEvaluationImpl(const LiteralRealEvaluationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			LiteralRealEvaluationImpl& operator=(LiteralRealEvaluationImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::Values
 			LiteralRealEvaluationImpl();
 			virtual std::shared_ptr<LiteralRealEvaluation> getThisLiteralRealEvaluationPtr() const;
 			virtual void setThisLiteralRealEvaluationPtr(std::weak_ptr<LiteralRealEvaluation> thisLiteralRealEvaluationPtr);
-
 
 
 		public:
@@ -45,8 +45,6 @@ namespace fUML::Semantics::Values
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -55,7 +53,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

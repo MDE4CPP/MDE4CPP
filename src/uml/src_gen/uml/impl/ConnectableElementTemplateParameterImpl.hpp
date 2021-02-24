@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ConnectableElementTemplateParameter.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ConnectableElementTemplateParameterImpl(const ConnectableElementTemplateParameterImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ConnectableElementTemplateParameterImpl& operator=(ConnectableElementTemplateParameterImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace uml
 			virtual void setThisConnectableElementTemplateParameterPtr(std::weak_ptr<ConnectableElementTemplateParameter> thisConnectableElementTemplateParameterPtr);
 
 			//Additional constructors for the containments back reference
-			ConnectableElementTemplateParameterImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ConnectableElementTemplateParameterImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ConnectableElementTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature);
-
-
-
+			ConnectableElementTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature> par_signature);
 
 		public:
 			//destructor
@@ -59,7 +55,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -74,7 +70,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

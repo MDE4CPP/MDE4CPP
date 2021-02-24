@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,13 +35,11 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
-#include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
-
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -62,23 +61,20 @@ ValuesImpl::~ValuesImpl()
 }
 
 
-
-ValuesImpl::ValuesImpl(const ValuesImpl & obj):ValuesImpl()
+ValuesImpl::ValuesImpl(const ValuesImpl & obj): ecore::EModelElementImpl(obj),
+Values(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Values "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _values = obj.getValues();
 	m_values.reset(new Bag<fUML::Semantics::Values::Value>(*(obj.getValues().get())));
 
-
 	//Clone references with containment (deep copy)
-
-
 }
 
 std::shared_ptr<ecore::EObject>  ValuesImpl::copy() const
@@ -118,8 +114,6 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ValuesImpl::getValues() con
 
     return m_values;
 }
-
-
 
 
 
@@ -256,7 +250,6 @@ void ValuesImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 
 void ValuesImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
 	//load BasePackage Nodes
 }
@@ -270,11 +263,11 @@ void ValuesImpl::resolveReferences(const int featureID, std::vector<std::shared_
 			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> _values = getValues();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<fUML::Semantics::Values::Value> _r = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(ref);
+				std::shared_ptr<fUML::Semantics::Values::Value>  _r = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(ref);
 				if (_r != nullptr)
 				{
 					_values->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -296,7 +289,6 @@ void ValuesImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
 	// Add references
 		saveHandler->addReferences<fUML::Semantics::Values::Value>("values", this->getValues());
 	}

@@ -78,21 +78,11 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::Operation> getOperation() = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
-			
-			 
-			virtual bool match(std::shared_ptr<uml::Trigger> trigger) = 0;
-			
-			 
-			virtual void releaseCaller() = 0;
-			
-			 
+			virtual std::shared_ptr<uml::Operation> getOperation() = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0; 
+			virtual bool match(std::shared_ptr<uml::Trigger> trigger) = 0; 
+			virtual void releaseCaller() = 0; 
 			virtual void setOutputParameterValues(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> parameterValues) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -101,11 +91,9 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution > getExecution() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> getExecution() const = 0;
 			
-			
-			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> _execution) = 0;
-			
+			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution>) = 0;
 			
 
 		protected:
@@ -118,7 +106,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution > m_execution;
+			std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> m_execution;
 
 		public:
 			//*********************************

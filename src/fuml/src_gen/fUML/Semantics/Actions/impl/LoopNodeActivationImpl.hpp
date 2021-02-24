@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../LoopNodeActivation.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Actions
 			LoopNodeActivationImpl(const LoopNodeActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			LoopNodeActivationImpl& operator=(LoopNodeActivationImpl const&) = delete;
 
 		protected:
@@ -34,10 +35,7 @@ namespace fUML::Semantics::Actions
 			virtual void setThisLoopNodeActivationPtr(std::weak_ptr<LoopNodeActivation> thisLoopNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
-			LoopNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			LoopNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -47,18 +45,10 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList() ;
-			
-			 
-			virtual void runBody() ;
-			
-			 
-			virtual void runLoopVariables() ;
-			
-			 
+			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList() ; 
+			virtual void runBody() ; 
+			virtual void runLoopVariables() ; 
 			virtual bool runTest() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -72,7 +62,6 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> getBodyOutputLists() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter

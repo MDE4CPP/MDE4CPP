@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -43,8 +44,8 @@
 #include "uml/Profile.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -67,7 +68,7 @@ ProfileApplicationImpl::~ProfileApplicationImpl()
 }
 
 //Additional constructor for the containments back reference
-ProfileApplicationImpl::ProfileApplicationImpl(std::weak_ptr<uml::Package > par_applyingPackage)
+ProfileApplicationImpl::ProfileApplicationImpl(std::weak_ptr<uml::Package> par_applyingPackage)
 :ProfileApplicationImpl()
 {
 	m_applyingPackage = par_applyingPackage;
@@ -75,49 +76,29 @@ ProfileApplicationImpl::ProfileApplicationImpl(std::weak_ptr<uml::Package > par_
 }
 
 //Additional constructor for the containments back reference
-ProfileApplicationImpl::ProfileApplicationImpl(std::weak_ptr<uml::Element > par_owner)
+ProfileApplicationImpl::ProfileApplicationImpl(std::weak_ptr<uml::Element> par_owner)
 :ProfileApplicationImpl()
 {
 	m_owner = par_owner;
 }
 
-
-ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & obj):ProfileApplicationImpl()
+ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & obj): DirectedRelationshipImpl(obj), ProfileApplication(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ProfileApplication "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_isStrict = obj.getIsStrict();
 
 	//copy references with no containment (soft copy)
-	
 	m_applyingPackage  = obj.getApplyingPackage();
 
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
-
 	//Clone references with containment (deep copy)
-
 	if(obj.getAppliedProfile()!=nullptr)
 	{
 		m_appliedProfile = std::dynamic_pointer_cast<uml::Profile>(obj.getAppliedProfile()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_appliedProfile" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  ProfileApplicationImpl::copy() const
@@ -142,12 +123,10 @@ bool ProfileApplicationImpl::getIsStrict() const
 {
 	return m_isStrict;
 }
-
 void ProfileApplicationImpl::setIsStrict(bool _isStrict)
 {
 	m_isStrict = _isStrict;
 } 
-
 
 
 //*********************************
@@ -171,33 +150,29 @@ std::shared_ptr<ecore::ENamedElement> ProfileApplicationImpl::getAppliedDefiniti
 /*
 Getter & Setter for reference appliedProfile
 */
-std::shared_ptr<uml::Profile > ProfileApplicationImpl::getAppliedProfile() const
+std::shared_ptr<uml::Profile> ProfileApplicationImpl::getAppliedProfile() const
 {
 //assert(m_appliedProfile);
     return m_appliedProfile;
 }
-
 void ProfileApplicationImpl::setAppliedProfile(std::shared_ptr<uml::Profile> _appliedProfile)
 {
     m_appliedProfile = _appliedProfile;
 }
 
 
-
 /*
 Getter & Setter for reference applyingPackage
 */
-std::weak_ptr<uml::Package > ProfileApplicationImpl::getApplyingPackage() const
+std::weak_ptr<uml::Package> ProfileApplicationImpl::getApplyingPackage() const
 {
 //assert(m_applyingPackage);
     return m_applyingPackage;
 }
-
-void ProfileApplicationImpl::setApplyingPackage(std::shared_ptr<uml::Package> _applyingPackage)
+void ProfileApplicationImpl::setApplyingPackage(std::weak_ptr<uml::Package> _applyingPackage)
 {
     m_applyingPackage = _applyingPackage;
 }
-
 
 
 //*********************************
@@ -218,7 +193,7 @@ std::shared_ptr<Union<uml::Element>> ProfileApplicationImpl::getOwnedElement() c
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > ProfileApplicationImpl::getOwner() const
+std::weak_ptr<uml::Element> ProfileApplicationImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -420,7 +395,6 @@ void ProfileApplicationImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void ProfileApplicationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
@@ -486,9 +460,8 @@ void ProfileApplicationImpl::saveContent(std::shared_ptr<persistence::interfaces
 		{
 			saveHandler->addAttribute("isStrict", this->getIsStrict());
 		}
-
 	// Add references
-		saveHandler->addReference("appliedProfile", this->getAppliedProfile()); 
+		saveHandler->addReference(this->getAppliedProfile(), "appliedProfile", getAppliedProfile()->eClass() != uml::umlPackage::eInstance()->getProfile_Class()); 
 	}
 	catch (std::exception& e)
 	{

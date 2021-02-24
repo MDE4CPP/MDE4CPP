@@ -74,19 +74,19 @@ namespace uml
 			EnumerationLiteral(){}
 
 			//Additional constructors for the containments back reference
-			EnumerationLiteral(std::weak_ptr<uml::Enumeration > par_enumeration);
+			EnumerationLiteral(std::weak_ptr<uml::Enumeration> par_enumeration);
 
 			//Additional constructors for the containments back reference
-			EnumerationLiteral(std::weak_ptr<uml::Namespace > par_namespace);
+			EnumerationLiteral(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-			EnumerationLiteral(std::weak_ptr<uml::Element > par_owner);
+			EnumerationLiteral(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-			EnumerationLiteral(std::weak_ptr<uml::Package > par_owningPackage);
+			EnumerationLiteral(std::weak_ptr<uml::Package> par_owningPackage);
 
 			//Additional constructors for the containments back reference
-			EnumerationLiteral(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+			EnumerationLiteral(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -97,12 +97,8 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 			 
 			virtual std::shared_ptr<Bag<uml::Classifier> > getClassifiers() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -115,15 +111,13 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Enumeration > getEnumeration() const = 0;
-			
+			virtual std::weak_ptr<uml::Enumeration> getEnumeration() const = 0;
 			/*!
 			The Enumeration that this EnumerationLiteral is a member of.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setEnumeration(std::shared_ptr<uml::Enumeration> _enumeration) = 0;
-			
+			virtual void setEnumeration(std::weak_ptr<uml::Enumeration>) = 0;
 			
 
 		protected:
@@ -140,7 +134,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			std::weak_ptr<uml::Enumeration > m_enumeration;
+			std::weak_ptr<uml::Enumeration> m_enumeration;
 
 		public:
 			//*********************************
@@ -151,7 +145,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -161,7 +155,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

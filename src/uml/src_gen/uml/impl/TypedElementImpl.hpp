@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../TypedElement.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			TypedElementImpl(const TypedElementImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			TypedElementImpl& operator=(TypedElementImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace uml
 			virtual void setThisTypedElementPtr(std::weak_ptr<TypedElement> thisTypedElementPtr);
 
 			//Additional constructors for the containments back reference
-			TypedElementImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			TypedElementImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			TypedElementImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			TypedElementImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -64,16 +60,14 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Type > getType() const ;
-			
+			virtual std::shared_ptr<uml::Type> getType() const ;
 			/*!
 			The type of the TypedElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setType(std::shared_ptr<uml::Type> _type) ;
+			virtual void setType(std::shared_ptr<uml::Type>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -88,7 +82,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

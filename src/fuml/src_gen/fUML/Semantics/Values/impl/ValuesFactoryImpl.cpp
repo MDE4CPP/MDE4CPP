@@ -114,6 +114,7 @@ std::shared_ptr<fUML::Semantics::Values::LiteralBooleanEvaluation> ValuesFactory
 	element->setThisLiteralBooleanEvaluationPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::Values::LiteralIntegerEvaluation> ValuesFactoryImpl::createLiteralIntegerEvaluation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::Values::LiteralIntegerEvaluationImpl> element(new fUML::Semantics::Values::LiteralIntegerEvaluationImpl());
@@ -121,6 +122,7 @@ std::shared_ptr<fUML::Semantics::Values::LiteralIntegerEvaluation> ValuesFactory
 	element->setThisLiteralIntegerEvaluationPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::Values::LiteralNullEvaluation> ValuesFactoryImpl::createLiteralNullEvaluation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::Values::LiteralNullEvaluationImpl> element(new fUML::Semantics::Values::LiteralNullEvaluationImpl());
@@ -128,6 +130,7 @@ std::shared_ptr<fUML::Semantics::Values::LiteralNullEvaluation> ValuesFactoryImp
 	element->setThisLiteralNullEvaluationPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::Values::LiteralRealEvaluation> ValuesFactoryImpl::createLiteralRealEvaluation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::Values::LiteralRealEvaluationImpl> element(new fUML::Semantics::Values::LiteralRealEvaluationImpl());
@@ -135,6 +138,7 @@ std::shared_ptr<fUML::Semantics::Values::LiteralRealEvaluation> ValuesFactoryImp
 	element->setThisLiteralRealEvaluationPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::Values::LiteralStringEvaluation> ValuesFactoryImpl::createLiteralStringEvaluation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::Values::LiteralStringEvaluationImpl> element(new fUML::Semantics::Values::LiteralStringEvaluationImpl());
@@ -142,6 +146,7 @@ std::shared_ptr<fUML::Semantics::Values::LiteralStringEvaluation> ValuesFactoryI
 	element->setThisLiteralStringEvaluationPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation> ValuesFactoryImpl::createLiteralUnlimitedNaturalEvaluation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluationImpl> element(new fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluationImpl());
@@ -149,4 +154,5 @@ std::shared_ptr<fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation> Valu
 	element->setThisLiteralUnlimitedNaturalEvaluationPtr(element);
 	return element;
 }
+
 

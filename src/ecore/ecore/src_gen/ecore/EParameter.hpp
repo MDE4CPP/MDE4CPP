@@ -87,7 +87,6 @@ namespace ecore
 			virtual std::weak_ptr<ecore::EOperation> getEOperation() const = 0;
 			
 			
-			
 
 		protected:
 			//*********************************

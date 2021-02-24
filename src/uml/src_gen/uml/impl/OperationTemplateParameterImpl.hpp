@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../OperationTemplateParameter.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			OperationTemplateParameterImpl(const OperationTemplateParameterImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			OperationTemplateParameterImpl& operator=(OperationTemplateParameterImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace uml
 			virtual void setThisOperationTemplateParameterPtr(std::weak_ptr<OperationTemplateParameter> thisOperationTemplateParameterPtr);
 
 			//Additional constructors for the containments back reference
-			OperationTemplateParameterImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			OperationTemplateParameterImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			OperationTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature);
-
-
-
+			OperationTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature> par_signature);
 
 		public:
 			//destructor
@@ -57,9 +53,7 @@ namespace uml
 			          p1.type = p2.type and p1.upper = p2.upper and p1.lower = p2.lower and p1.direction = p2.direction and p1.isOrdered = p2.isOrdered and p1.isUnique = p2.isUnique)))
 			*/
 			 
-			virtual bool match_default_signature(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool match_default_signature(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -69,7 +63,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -84,7 +78,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

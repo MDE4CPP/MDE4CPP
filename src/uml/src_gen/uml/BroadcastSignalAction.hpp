@@ -95,16 +95,12 @@ namespace uml
 			onPort=null
 			*/
 			 
-			virtual bool no_onport(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool no_onport(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The number of argument InputPins must be the same as the number of attributes in the signal.
 			argument->size() = signal.allAttributes()->size()
 			*/
 			 
-			virtual bool number_of_arguments(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool number_of_arguments(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
 			let attribute: OrderedSet(Property) = signal.allAttributes() in
 			Sequence{1..argument->size()}->forAll(i | 
@@ -113,9 +109,7 @@ namespace uml
 				argument->at(i).compatibleWith(attribute->at(i)))
 			*/
 			 
-			virtual bool type_ordering_multiplicity(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool type_ordering_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -128,15 +122,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal > getSignal() const = 0;
-			
+			virtual std::shared_ptr<uml::Signal> getSignal() const = 0;
 			/*!
 			The Signal whose instances are to be sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setSignal(std::shared_ptr<uml::Signal> _signal) = 0;
-			
+			virtual void setSignal(std::shared_ptr<uml::Signal>) = 0;
 			
 
 		protected:
@@ -153,7 +145,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::Signal > m_signal;
+			std::shared_ptr<uml::Signal> m_signal;
 
 		public:
 			//*********************************
@@ -179,7 +171,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

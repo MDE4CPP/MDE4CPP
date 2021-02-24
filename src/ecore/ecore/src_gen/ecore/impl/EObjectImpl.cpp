@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Union.hpp"
 #include "abstractDataTypes/Any.hpp"
@@ -39,8 +40,7 @@
 #include "ecore/EStructuralFeature.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -144,13 +144,13 @@ std::shared_ptr<ecore::EReference> EObjectImpl::eContainmentFeature() const
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag < ecore::EObject>> EObjectImpl::eContents() const
+std::shared_ptr<std::list < ecore::EObject>> EObjectImpl::eContents() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag < ecore::EObject>> EObjectImpl::eCrossReferences() const
+std::shared_ptr<std::list < ecore::EObject>> EObjectImpl::eCrossReferences() const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -172,7 +172,7 @@ Any EObjectImpl::eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool re
 	//end of body
 }
 
-Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<Bag < Any>> arguments) const
+Any EObjectImpl::eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -415,7 +415,6 @@ void EObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 
 void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	try
 	{
@@ -426,7 +425,7 @@ void EObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::in
 			{
 				typeName = "EObject";
 			}
-		loadHandler->handleChildContainer<ecore::EObject>(this->getEContens());  
+			loadHandler->handleChildContainer<ecore::EObject>(this->getEContens());  
 
 			return; 
 		}

@@ -157,6 +157,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventBehavior> CommonBehavi
 	element->setThisCallEventBehaviorPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> CommonBehaviorFactoryImpl::createCallEventExecution(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecutionImpl> element(new fUML::Semantics::CommonBehavior::CallEventExecutionImpl());
@@ -164,6 +165,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> CommonBehav
 	element->setThisCallEventExecutionPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> CommonBehaviorFactoryImpl::createCallEventOccurrence(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrenceImpl> element(new fUML::Semantics::CommonBehavior::CallEventOccurrenceImpl());
@@ -171,6 +173,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> CommonBeha
 	element->setThisCallEventOccurrencePtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> CommonBehaviorFactoryImpl::createClassifierBehaviorExecution(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecutionImpl> element(new fUML::Semantics::CommonBehavior::ClassifierBehaviorExecutionImpl());
@@ -178,6 +181,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution> Co
 	element->setThisClassifierBehaviorExecutionPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepter> CommonBehaviorFactoryImpl::createClassifierBehaviorInvocationEventAccepter(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepterImpl> element(new fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEventAccepterImpl());
@@ -185,6 +189,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ClassifierBehaviorInvocationEve
 	element->setThisClassifierBehaviorInvocationEventAccepterPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoop> CommonBehaviorFactoryImpl::createEventDispatchLoop(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoopImpl> element(new fUML::Semantics::CommonBehavior::EventDispatchLoopImpl());
@@ -192,6 +197,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::EventDispatchLoop> CommonBehavi
 	element->setThisEventDispatchLoopPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CommonBehaviorFactoryImpl::createEventOccurrence(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrenceImpl> element(new fUML::Semantics::CommonBehavior::EventOccurrenceImpl());
@@ -199,6 +205,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CommonBehavior
 	element->setThisEventOccurrencePtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategy> CommonBehaviorFactoryImpl::createFIFOGetNextEventStrategy(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategyImpl> element(new fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategyImpl());
@@ -206,6 +213,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::FIFOGetNextEventStrategy> Commo
 	element->setThisFIFOGetNextEventStrategyPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::CommonBehavior::InvocationEventOccurrence> CommonBehaviorFactoryImpl::createInvocationEventOccurrence(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::InvocationEventOccurrenceImpl> element(new fUML::Semantics::CommonBehavior::InvocationEventOccurrenceImpl());
@@ -213,6 +221,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::InvocationEventOccurrence> Comm
 	element->setThisInvocationEventOccurrencePtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> CommonBehaviorFactoryImpl::createObjectActivation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivationImpl> element(new fUML::Semantics::CommonBehavior::ObjectActivationImpl());
@@ -220,6 +229,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> CommonBehavio
 	element->setThisObjectActivationPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> CommonBehaviorFactoryImpl::createParameterValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValueImpl> element(new fUML::Semantics::CommonBehavior::ParameterValueImpl());
@@ -227,6 +237,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> CommonBehaviorF
 	element->setThisParameterValuePtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> CommonBehaviorFactoryImpl::createSignalEventOccurrence(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrenceImpl> element(new fUML::Semantics::CommonBehavior::SignalEventOccurrenceImpl());
@@ -234,4 +245,5 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::SignalEventOccurrence> CommonBe
 	element->setThisSignalEventOccurrencePtr(element);
 	return element;
 }
+
 

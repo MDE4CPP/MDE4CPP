@@ -76,8 +76,6 @@ namespace fUML::Semantics::Values
 			//*********************************
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -86,17 +84,13 @@ namespace fUML::Semantics::Values
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const = 0;
 			
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) = 0;
 			
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const = 0;
 			
-			
-			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const = 0;
-			
-			
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) = 0;
-			
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification>) = 0;
 			
 
 		protected:
@@ -109,8 +103,8 @@ namespace fUML::Semantics::Values
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::Loci::Locus > m_locus;
-			std::shared_ptr<uml::ValueSpecification > m_specification;
+			std::shared_ptr<fUML::Semantics::Loci::Locus> m_locus;
+			std::shared_ptr<uml::ValueSpecification> m_specification;
 
 		public:
 			//*********************************

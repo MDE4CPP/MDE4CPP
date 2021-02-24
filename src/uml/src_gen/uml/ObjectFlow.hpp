@@ -90,9 +90,7 @@ namespace uml
 			ObjectNodes connected by an ObjectFlow, with optionally intervening ControlNodes, must have compatible types. In particular, the downstream ObjectNode type must be the same or a supertype of the upstream ObjectNode type.
 			*/
 			 
-			virtual bool compatible_types(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool compatible_types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A selection Behavior has one input Parameter and one output Parameter. The input Parameter must have the same as or a supertype of the type of the source ObjectNode, be non-unique and have multiplicity 0..*. The output Parameter must be the same or a subtype of the type of source ObjectNode. The Behavior cannot have side effects.
 			selection<>null implies
 				selection.inputParameters()->size()=1 and
@@ -100,51 +98,37 @@ namespace uml
 				selection.outputParameters()->size()=1
 			*/
 			 
-			virtual bool input_and_output_parameter(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool input_and_output_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			isMulticast and isMultireceive cannot both be true.
 			not (isMulticast and isMultireceive)
 			*/
 			 
-			virtual bool is_multicast_or_is_multireceive(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool is_multicast_or_is_multireceive(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			ObjectFlows may not have ExecutableNodes at either end.
 			not (source.oclIsKindOf(ExecutableNode) or target.oclIsKindOf(ExecutableNode))
 			*/
 			 
-			virtual bool no_executable_nodes(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool no_executable_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			ObjectNodes connected by an ObjectFlow, with optionally intervening ControlNodes, must have the same upperBounds.
 			*/
 			 
-			virtual bool same_upper_bounds(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool same_upper_bounds(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			An ObjectFlow may have a selection Behavior only if it has an ObjectNode as its source.
 			selection<>null implies source.oclIsKindOf(ObjectNode)
 			*/
 			 
-			virtual bool selection_behavior(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool selection_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			An ObjectFlow with a constant weight may not target an ObjectNode, with optionally intervening ControlNodes, that has an upper bound less than the weight.
 			*/
 			 
-			virtual bool target(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool target(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A transformation Behavior has one input Parameter and one output Parameter. The input Parameter must be the same as or a supertype of the type of object token coming from the source end. The output Parameter must be the same or a subtype of the type of object token expected downstream. The Behavior cannot have side effects.
 			transformation<>null implies
 				transformation.inputParameters()->size()=1 and
 				transformation.outputParameters()->size()=1
 			*/
 			 
-			virtual bool transformation_behavior(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool transformation_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -154,25 +138,25 @@ namespace uml
 			*/
 			 
 			virtual bool getIsMulticast() const = 0;
-			
 			/*!
 			Indicates whether the objects in the ObjectFlow are passed by multicasting.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsMulticast (bool _isMulticast)= 0;/*!
+			virtual void setIsMulticast (bool _isMulticast)= 0;
+			/*!
 			Indicates whether the objects in the ObjectFlow are gathered from respondents to multicasting.
 			<p>From package UML::Activities.</p>
 			*/
 			 
 			virtual bool getIsMultireceive() const = 0;
-			
 			/*!
 			Indicates whether the objects in the ObjectFlow are gathered from respondents to multicasting.
 			<p>From package UML::Activities.</p>
 			*/
 			 
 			virtual void setIsMultireceive (bool _isMultireceive)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -181,29 +165,25 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior > getSelection() const = 0;
-			
+			virtual std::shared_ptr<uml::Behavior> getSelection() const = 0;
 			/*!
 			A Behavior used to select tokens from a source ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setSelection(std::shared_ptr<uml::Behavior> _selection) = 0;
-			
+			virtual void setSelection(std::shared_ptr<uml::Behavior>) = 0;
 			/*!
 			A Behavior used to change or replace object tokens flowing along the ObjectFlow.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior > getTransformation() const = 0;
-			
+			virtual std::shared_ptr<uml::Behavior> getTransformation() const = 0;
 			/*!
 			A Behavior used to change or replace object tokens flowing along the ObjectFlow.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setTransformation(std::shared_ptr<uml::Behavior> _transformation) = 0;
-			
+			virtual void setTransformation(std::shared_ptr<uml::Behavior>) = 0;
 			
 
 		protected:
@@ -232,12 +212,12 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			std::shared_ptr<uml::Behavior > m_selection;/*!
+			std::shared_ptr<uml::Behavior> m_selection;/*!
 			A Behavior used to change or replace object tokens flowing along the ObjectFlow.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			std::shared_ptr<uml::Behavior > m_transformation;
+			std::shared_ptr<uml::Behavior> m_transformation;
 
 		public:
 			//*********************************
@@ -258,7 +238,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

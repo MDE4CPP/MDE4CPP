@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../DeploymentTarget.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			DeploymentTargetImpl(const DeploymentTargetImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			DeploymentTargetImpl& operator=(DeploymentTargetImpl const&) = delete;
 
 		protected:
@@ -33,14 +34,9 @@ namespace uml
 			virtual void setThisDeploymentTargetPtr(std::weak_ptr<DeploymentTarget> thisDeploymentTargetPtr);
 
 			//Additional constructors for the containments back reference
-			DeploymentTargetImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			DeploymentTargetImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			DeploymentTargetImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			DeploymentTargetImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -57,8 +53,6 @@ namespace uml
 			 
 			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -74,7 +68,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::PackageableElement>> getDeployedElement() const ;
 			
-			
 			/*!
 			The set of Deployments for a DeploymentTarget.
 			<p>From package UML::Deployments.</p>
@@ -83,7 +76,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Deployment, uml::Element>> getDeployment() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -98,7 +90,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -39,8 +40,7 @@
 #include "uml/TemplateableElement.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -63,57 +63,39 @@ TemplateSignatureImpl::~TemplateSignatureImpl()
 }
 
 //Additional constructor for the containments back reference
-TemplateSignatureImpl::TemplateSignatureImpl(std::weak_ptr<uml::Element > par_owner)
+TemplateSignatureImpl::TemplateSignatureImpl(std::weak_ptr<uml::Element> par_owner)
 :TemplateSignatureImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-TemplateSignatureImpl::TemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement > par_template)
+TemplateSignatureImpl::TemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement> par_template)
 :TemplateSignatureImpl()
 {
 	m_template = par_template;
 	m_owner = par_template;
 }
 
-
-TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj):TemplateSignatureImpl()
+TemplateSignatureImpl::TemplateSignatureImpl(const TemplateSignatureImpl & obj): ElementImpl(obj), TemplateSignature(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TemplateSignature "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_owner  = obj.getOwner();
-
 	std::shared_ptr<Union<uml::TemplateParameter>> _parameter = obj.getParameter();
 	m_parameter.reset(new Union<uml::TemplateParameter>(*(obj.getParameter().get())));
-
 	m_template  = obj.getTemplate();
 
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
+	std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParameter>> ownedParameterContainer = getOwnedParameter();
+	for(auto _ownedParameter : *obj.getOwnedParameter()) 
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
+		ownedParameterContainer->push_back(std::dynamic_pointer_cast<uml::TemplateParameter>(_ownedParameter->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::TemplateParameter>> _ownedParameterList = obj.getOwnedParameter();
-	for(std::shared_ptr<uml::TemplateParameter> _ownedParameter : *_ownedParameterList)
-	{
-		this->getOwnedParameter()->add(std::shared_ptr<uml::TemplateParameter>(std::dynamic_pointer_cast<uml::TemplateParameter>(_ownedParameter->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedParameter" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_ownedParameter->initSubset(getOwnedElement(),getParameter());
 	#ifdef SHOW_SUBSET_UNION
@@ -141,13 +123,13 @@ std::shared_ptr<ecore::EClass> TemplateSignatureImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateSignatureImpl::own_elements(Any diagnostics,std::map <  Any ,  Any > context)
+bool TemplateSignatureImpl::own_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TemplateSignatureImpl::unique_parameters(Any diagnostics,std::map <  Any ,  Any > context)
+bool TemplateSignatureImpl::unique_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -182,8 +164,6 @@ std::shared_ptr<Subset<uml::TemplateParameter, uml::Element,uml::TemplateParamet
 
 
 
-
-
 /*
 Getter & Setter for reference parameter
 */
@@ -191,22 +171,18 @@ Getter & Setter for reference parameter
 
 
 
-
-
 /*
 Getter & Setter for reference template
 */
-std::weak_ptr<uml::TemplateableElement > TemplateSignatureImpl::getTemplate() const
+std::weak_ptr<uml::TemplateableElement> TemplateSignatureImpl::getTemplate() const
 {
 //assert(m_template);
     return m_template;
 }
-
-void TemplateSignatureImpl::setTemplate(std::shared_ptr<uml::TemplateableElement> _template)
+void TemplateSignatureImpl::setTemplate(std::weak_ptr<uml::TemplateableElement> _template)
 {
     m_template = _template;
 }
-
 
 
 //*********************************
@@ -227,7 +203,7 @@ std::shared_ptr<Union<uml::Element>> TemplateSignatureImpl::getOwnedElement() co
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > TemplateSignatureImpl::getOwner() const
+std::weak_ptr<uml::Element> TemplateSignatureImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -441,7 +417,6 @@ void TemplateSignatureImpl::loadAttributes(std::shared_ptr<persistence::interfac
 
 void TemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -452,12 +427,9 @@ void TemplateSignatureImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 			{
 				typeName = "TemplateParameter";
 			}
-			std::shared_ptr<ecore::EObject> ownedParameter = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE);
-			if (ownedParameter != nullptr)
-			{
-				loadHandler->handleChild(ownedParameter);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::TemplateParameter>(this->getOwnedParameter());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -478,14 +450,14 @@ void TemplateSignatureImpl::resolveReferences(const int featureID, std::vector<s
 	{
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
-			std::shared_ptr<Bag<uml::TemplateParameter>> _parameter = getParameter();
+			std::shared_ptr<Union<uml::TemplateParameter>> _parameter = getParameter();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::TemplateParameter> _r = std::dynamic_pointer_cast<uml::TemplateParameter>(ref);
+				std::shared_ptr<uml::TemplateParameter>  _r = std::dynamic_pointer_cast<uml::TemplateParameter>(ref);
 				if (_r != nullptr)
 				{
 					_parameter->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -528,7 +500,6 @@ void TemplateSignatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		{
 			saveHandler->addReference(ownedParameter, "ownedParameter", ownedParameter->eClass() != package->getTemplateParameter_Class());
 		}
-
 	// Add references
 		saveHandler->addReferences<uml::TemplateParameter>("parameter", this->getParameter());
 	}

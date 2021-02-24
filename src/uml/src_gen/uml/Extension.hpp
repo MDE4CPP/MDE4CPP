@@ -92,51 +92,37 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 			/*!
 			Retrieves the stereotype that extends a metaclass through this extension.
 			*/
 			 
-			virtual std::shared_ptr<uml::Stereotype> getStereotype() = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Stereotype> getStereotype() = 0;/*!
 			Retrieves the extension end that is typed by a stereotype (as opposed to a metaclass).
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> getStereotypeEnd() = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Property> getStereotypeEnd() = 0;/*!
 			The query isRequired() is true if the owned end has a multiplicity with the lower bound of 1.
 			result = (ownedEnd.lowerBound() = 1)
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual bool isRequired() = 0;
-			
-			/*!
+			virtual bool isRequired() = 0;/*!
 			An Extension is binary, i.e., it has only two memberEnds.
 			memberEnd->size() = 2
 			*/
 			 
-			virtual bool is_binary(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool is_binary(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The query metaclassEnd() returns the Property that is typed by a metaclass (as opposed to a stereotype).
 			result = (memberEnd->reject(p | ownedEnd->includes(p.oclAsType(ExtensionEnd)))->any(true))
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> metaclassEnd() = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Property> metaclassEnd() = 0;/*!
 			The non-owned end of an Extension is typed by a Class.
 			metaclassEnd()->notEmpty() and metaclassEnd().type.oclIsKindOf(Class)
 			*/
 			 
-			virtual bool non_owned_end(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool non_owned_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -146,6 +132,8 @@ namespace uml
 			*/
 			 
 			virtual bool getIsRequired() const = 0;
+			
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -154,8 +142,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Class > getMetaclass() const = 0;
-			
+			virtual std::shared_ptr<uml::Class> getMetaclass() const = 0;
 			
 			
 
@@ -179,7 +166,7 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			std::shared_ptr<uml::Class > m_metaclass;
+			std::shared_ptr<uml::Class> m_metaclass;
 
 		public:
 			//*********************************
@@ -200,7 +187,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -215,7 +202,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

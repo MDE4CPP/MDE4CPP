@@ -92,9 +92,7 @@ namespace uml
 			(parentInteraction->size() = 1) and self.action.interaction->asSet() = parentInteraction
 			*/
 			 
-			virtual bool action_referenced(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool action_referenced(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -107,15 +105,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Action > getAction() const = 0;
-			
+			virtual std::shared_ptr<uml::Action> getAction() const = 0;
 			/*!
 			Action whose execution is occurring.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
-			
+			virtual void setAction(std::shared_ptr<uml::Action>) = 0;
 			
 
 		protected:
@@ -132,7 +128,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::Action > m_action;
+			std::shared_ptr<uml::Action> m_action;
 
 		public:
 			//*********************************
@@ -143,7 +139,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -153,7 +149,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

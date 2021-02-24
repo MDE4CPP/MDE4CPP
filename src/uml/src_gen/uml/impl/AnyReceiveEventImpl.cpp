@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -43,8 +44,7 @@
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -67,7 +67,7 @@ AnyReceiveEventImpl::~AnyReceiveEventImpl()
 }
 
 //Additional constructor for the containments back reference
-AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
+AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :AnyReceiveEventImpl()
 {
 	m_namespace = par_namespace;
@@ -75,14 +75,14 @@ AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Namespace > par_name
 }
 
 //Additional constructor for the containments back reference
-AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Element > par_owner)
+AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Element> par_owner)
 :AnyReceiveEventImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :AnyReceiveEventImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -90,58 +90,24 @@ AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::Package > par_owning
 }
 
 //Additional constructor for the containments back reference
-AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :AnyReceiveEventImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-AnyReceiveEventImpl::AnyReceiveEventImpl(const AnyReceiveEventImpl & obj):AnyReceiveEventImpl()
+AnyReceiveEventImpl::AnyReceiveEventImpl(const AnyReceiveEventImpl & obj): MessageEventImpl(obj), AnyReceiveEvent(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AnyReceiveEvent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
 
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  AnyReceiveEventImpl::copy() const
@@ -171,7 +137,7 @@ std::shared_ptr<ecore::EClass> AnyReceiveEventImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > AnyReceiveEventImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> AnyReceiveEventImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -191,7 +157,7 @@ std::shared_ptr<Union<uml::Element>> AnyReceiveEventImpl::getOwnedElement() cons
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > AnyReceiveEventImpl::getOwner() const
+std::weak_ptr<uml::Element> AnyReceiveEventImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -285,7 +251,6 @@ void AnyReceiveEventImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 
 void AnyReceiveEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	MessageEventImpl::loadNode(nodeName, loadHandler);

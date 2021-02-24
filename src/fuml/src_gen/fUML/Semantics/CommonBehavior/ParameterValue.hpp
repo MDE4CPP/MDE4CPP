@@ -73,8 +73,6 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _copy() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -83,14 +81,11 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Parameter > getParameter() const = 0;
+			virtual std::shared_ptr<uml::Parameter> getParameter() const = 0;
 			
-			
-			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter) = 0;
-			
+			virtual void setParameter(std::shared_ptr<uml::Parameter>) = 0;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const = 0;
-			
 			
 			
 
@@ -104,7 +99,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Parameter > m_parameter;
+			std::shared_ptr<uml::Parameter> m_parameter;
 			mutable std::shared_ptr<Bag<fUML::Semantics::Values::Value>> m_values;
 
 		public:

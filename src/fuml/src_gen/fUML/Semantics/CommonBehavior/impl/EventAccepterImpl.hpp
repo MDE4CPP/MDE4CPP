@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../EventAccepter.hpp"
 
@@ -26,7 +27,7 @@ virtual public EventAccepter
 			EventAccepterImpl(const EventAccepterImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			EventAccepterImpl& operator=(EventAccepterImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public EventAccepter
 			EventAccepterImpl();
 			virtual std::shared_ptr<EventAccepter> getThisEventAccepterPtr() const;
 			virtual void setThisEventAccepterPtr(std::weak_ptr<EventAccepter> thisEventAccepterPtr);
-
 
 
 		public:
@@ -45,12 +45,8 @@ virtual public EventAccepter
 			// Operations
 			//*********************************
 			 
-			virtual void accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) ;
-			
-			 
+			virtual void accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) ; 
 			virtual bool match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -60,7 +56,7 @@ virtual public EventAccepter
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

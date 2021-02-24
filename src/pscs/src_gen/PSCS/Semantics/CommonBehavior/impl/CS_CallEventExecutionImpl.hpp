@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CS_CallEventExecution.hpp"
 
@@ -24,7 +25,7 @@ namespace PSCS::Semantics::CommonBehavior
 			CS_CallEventExecutionImpl(const CS_CallEventExecutionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CS_CallEventExecutionImpl& operator=(CS_CallEventExecutionImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace PSCS::Semantics::CommonBehavior
 			CS_CallEventExecutionImpl();
 			virtual std::shared_ptr<CS_CallEventExecution> getThisCS_CallEventExecutionPtr() const;
 			virtual void setThisCS_CallEventExecutionPtr(std::weak_ptr<CS_CallEventExecution> thisCS_CallEventExecutionPtr);
-
 
 
 		public:
@@ -43,15 +43,9 @@ namespace PSCS::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() ; 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -62,12 +56,10 @@ namespace PSCS::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint > getInteractionPoint() const ;
+			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> getInteractionPoint() const ;
 			
+			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>) ;
 			
-			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

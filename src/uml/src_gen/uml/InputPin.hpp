@@ -91,40 +91,40 @@ namespace uml
 			InputPin(){}
 
 			//Additional constructors for the containments back reference
-			InputPin(std::weak_ptr<uml::Action > par_action);
+			InputPin(std::weak_ptr<uml::Action> par_action);
 
 			//Additional constructors for the containments back reference
-			InputPin(std::weak_ptr<uml::Activity > par_activity);
+			InputPin(std::weak_ptr<uml::Activity> par_activity);
 
 			//Additional constructors for the containments back reference
-			InputPin(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction);
+			InputPin(std::weak_ptr<uml::AddStructuralFeatureValueAction> par_addStructuralFeatureValueAction);
 
 			//Additional constructors for the containments back reference
-			InputPin(std::weak_ptr<uml::CallOperationAction > par_callOperationAction);
+			InputPin(std::weak_ptr<uml::CallOperationAction> par_callOperationAction);
 
 			//Additional constructors for the containments back reference
-			InputPin(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction);
+			InputPin(std::weak_ptr<uml::DestroyObjectAction> par_destroyObjectAction);
 
 			//Additional constructors for the containments back reference
-			InputPin(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
+			InputPin(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 
 			//Additional constructors for the containments back reference
-			InputPin(std::weak_ptr<uml::InvocationAction > par_invocationAction);
+			InputPin(std::weak_ptr<uml::InvocationAction> par_invocationAction);
 
 			//Additional constructors for the containments back reference
-			InputPin(std::weak_ptr<uml::Namespace > par_namespace);
+			InputPin(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-			InputPin(std::weak_ptr<uml::Element > par_owner);
+			InputPin(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-			InputPin(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction);
+			InputPin(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> par_removeStructuralFeatureValueAction);
 
 			//Additional constructors for the containments back reference
-			InputPin(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction);
+			InputPin(std::weak_ptr<uml::StructuralFeatureAction> par_structuralFeatureAction);
 
 			//Additional constructors for the containments back reference
-			InputPin(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction);
+			InputPin(std::weak_ptr<uml::WriteStructuralFeatureAction> par_writeStructuralFeatureAction);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -143,9 +143,7 @@ namespace uml
 				action.oclAsType(StructuredActivityNode).allOwnedNodes()->includesAll(outgoing.target)
 			*/
 			 
-			virtual bool outgoing_edges_structured_only(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool outgoing_edges_structured_only(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -154,51 +152,36 @@ namespace uml
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<uml::Action > getAction() const = 0;
+			virtual std::weak_ptr<uml::Action> getAction() const = 0;
 			
 			
+			virtual std::weak_ptr<uml::AddStructuralFeatureValueAction> getAddStructuralFeatureValueAction() const = 0;
 			
-			virtual std::weak_ptr<uml::AddStructuralFeatureValueAction > getAddStructuralFeatureValueAction() const = 0;
+			virtual void setAddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction>) = 0;
 			
+			virtual std::weak_ptr<uml::CallOperationAction> getCallOperationAction() const = 0;
 			
-			virtual void setAddStructuralFeatureValueAction(std::shared_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction) = 0;
+			virtual void setCallOperationAction(std::weak_ptr<uml::CallOperationAction>) = 0;
 			
+			virtual std::weak_ptr<uml::DestroyObjectAction> getDestroyObjectAction() const = 0;
 			
-			virtual std::weak_ptr<uml::CallOperationAction > getCallOperationAction() const = 0;
+			virtual void setDestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction>) = 0;
 			
+			virtual std::weak_ptr<uml::InvocationAction> getInvocationAction() const = 0;
 			
-			virtual void setCallOperationAction(std::shared_ptr<uml::CallOperationAction> _callOperationAction) = 0;
+			virtual void setInvocationAction(std::weak_ptr<uml::InvocationAction>) = 0;
 			
+			virtual std::weak_ptr<uml::RemoveStructuralFeatureValueAction> getRemoveStructuralFeatureValueAction() const = 0;
 			
-			virtual std::weak_ptr<uml::DestroyObjectAction > getDestroyObjectAction() const = 0;
+			virtual void setRemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction>) = 0;
 			
+			virtual std::weak_ptr<uml::StructuralFeatureAction> getStructuralFeatureAction() const = 0;
 			
-			virtual void setDestroyObjectAction(std::shared_ptr<uml::DestroyObjectAction> _destroyObjectAction) = 0;
+			virtual void setStructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction>) = 0;
 			
+			virtual std::weak_ptr<uml::WriteStructuralFeatureAction> getWriteStructuralFeatureAction() const = 0;
 			
-			virtual std::weak_ptr<uml::InvocationAction > getInvocationAction() const = 0;
-			
-			
-			virtual void setInvocationAction(std::shared_ptr<uml::InvocationAction> _invocationAction) = 0;
-			
-			
-			virtual std::weak_ptr<uml::RemoveStructuralFeatureValueAction > getRemoveStructuralFeatureValueAction() const = 0;
-			
-			
-			virtual void setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction) = 0;
-			
-			
-			virtual std::weak_ptr<uml::StructuralFeatureAction > getStructuralFeatureAction() const = 0;
-			
-			
-			virtual void setStructuralFeatureAction(std::shared_ptr<uml::StructuralFeatureAction> _structuralFeatureAction) = 0;
-			
-			
-			virtual std::weak_ptr<uml::WriteStructuralFeatureAction > getWriteStructuralFeatureAction() const = 0;
-			
-			
-			virtual void setWriteStructuralFeatureAction(std::shared_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction) = 0;
-			
+			virtual void setWriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction>) = 0;
 			
 
 		protected:
@@ -211,14 +194,14 @@ namespace uml
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<uml::Action > m_action;
-			std::weak_ptr<uml::AddStructuralFeatureValueAction > m_addStructuralFeatureValueAction;
-			std::weak_ptr<uml::CallOperationAction > m_callOperationAction;
-			std::weak_ptr<uml::DestroyObjectAction > m_destroyObjectAction;
-			std::weak_ptr<uml::InvocationAction > m_invocationAction;
-			std::weak_ptr<uml::RemoveStructuralFeatureValueAction > m_removeStructuralFeatureValueAction;
-			std::weak_ptr<uml::StructuralFeatureAction > m_structuralFeatureAction;
-			std::weak_ptr<uml::WriteStructuralFeatureAction > m_writeStructuralFeatureAction;
+			std::weak_ptr<uml::Action> m_action;
+			std::weak_ptr<uml::AddStructuralFeatureValueAction> m_addStructuralFeatureValueAction;
+			std::weak_ptr<uml::CallOperationAction> m_callOperationAction;
+			std::weak_ptr<uml::DestroyObjectAction> m_destroyObjectAction;
+			std::weak_ptr<uml::InvocationAction> m_invocationAction;
+			std::weak_ptr<uml::RemoveStructuralFeatureValueAction> m_removeStructuralFeatureValueAction;
+			std::weak_ptr<uml::StructuralFeatureAction> m_structuralFeatureAction;
+			std::weak_ptr<uml::WriteStructuralFeatureAction> m_writeStructuralFeatureAction;
 
 		public:
 			//*********************************
@@ -239,7 +222,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

@@ -563,7 +563,8 @@ std::shared_ptr<fUML::Semantics::Actions::AcceptCallActionActivation> ActionsFac
 	element->setThisAcceptCallActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::AcceptCallActionActivation> ActionsFactoryImpl::createAcceptCallActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::AcceptCallActionActivation> ActionsFactoryImpl::createAcceptCallActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::AcceptCallActionActivationImpl> element(new fUML::Semantics::Actions::AcceptCallActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -582,6 +583,7 @@ std::shared_ptr<fUML::Semantics::Actions::AcceptCallActionActivations> ActionsFa
 	element->setThisAcceptCallActionActivationsPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> ActionsFactoryImpl::createAcceptEventActionActivation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivationImpl> element(new fUML::Semantics::Actions::AcceptEventActionActivationImpl());
@@ -589,7 +591,8 @@ std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> ActionsFa
 	element->setThisAcceptEventActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> ActionsFactoryImpl::createAcceptEventActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> ActionsFactoryImpl::createAcceptEventActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivationImpl> element(new fUML::Semantics::Actions::AcceptEventActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -608,6 +611,7 @@ std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> Action
 	element->setThisAcceptEventActionEventAccepterPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation> ActionsFactoryImpl::createAddStructuralFeatureValueActionActivation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl> element(new fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl());
@@ -615,7 +619,8 @@ std::shared_ptr<fUML::Semantics::Actions::AddStructuralFeatureValueActionActivat
 	element->setThisAddStructuralFeatureValueActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation> ActionsFactoryImpl::createAddStructuralFeatureValueActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation> ActionsFactoryImpl::createAddStructuralFeatureValueActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl> element(new fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -634,7 +639,8 @@ std::shared_ptr<fUML::Semantics::Actions::CallBehaviorActionActivation> ActionsF
 	element->setThisCallBehaviorActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::CallBehaviorActionActivation> ActionsFactoryImpl::createCallBehaviorActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::CallBehaviorActionActivation> ActionsFactoryImpl::createCallBehaviorActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::CallBehaviorActionActivationImpl> element(new fUML::Semantics::Actions::CallBehaviorActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -653,7 +659,8 @@ std::shared_ptr<fUML::Semantics::Actions::CallOperationActionActivation> Actions
 	element->setThisCallOperationActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::CallOperationActionActivation> ActionsFactoryImpl::createCallOperationActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::CallOperationActionActivation> ActionsFactoryImpl::createCallOperationActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::CallOperationActionActivationImpl> element(new fUML::Semantics::Actions::CallOperationActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -672,6 +679,7 @@ std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> ActionsFactoryImpl::
 	element->setThisClauseActivationPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::Actions::ClearAssociationActionActivation> ActionsFactoryImpl::createClearAssociationActionActivation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::ClearAssociationActionActivationImpl> element(new fUML::Semantics::Actions::ClearAssociationActionActivationImpl());
@@ -679,7 +687,8 @@ std::shared_ptr<fUML::Semantics::Actions::ClearAssociationActionActivation> Acti
 	element->setThisClearAssociationActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::ClearAssociationActionActivation> ActionsFactoryImpl::createClearAssociationActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::ClearAssociationActionActivation> ActionsFactoryImpl::createClearAssociationActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::ClearAssociationActionActivationImpl> element(new fUML::Semantics::Actions::ClearAssociationActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -698,7 +707,8 @@ std::shared_ptr<fUML::Semantics::Actions::ClearStructuralFeatureActionActivation
 	element->setThisClearStructuralFeatureActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::ClearStructuralFeatureActionActivation> ActionsFactoryImpl::createClearStructuralFeatureActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::ClearStructuralFeatureActionActivation> ActionsFactoryImpl::createClearStructuralFeatureActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl> element(new fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -717,7 +727,8 @@ std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> ActionsFact
 	element->setThisConditionalNodeActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> ActionsFactoryImpl::createConditionalNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> ActionsFactoryImpl::createConditionalNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivationImpl> element(new fUML::Semantics::Actions::ConditionalNodeActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -736,7 +747,8 @@ std::shared_ptr<fUML::Semantics::Actions::CreateLinkActionActivation> ActionsFac
 	element->setThisCreateLinkActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::CreateLinkActionActivation> ActionsFactoryImpl::createCreateLinkActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::CreateLinkActionActivation> ActionsFactoryImpl::createCreateLinkActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::CreateLinkActionActivationImpl> element(new fUML::Semantics::Actions::CreateLinkActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -755,7 +767,8 @@ std::shared_ptr<fUML::Semantics::Actions::CreateObjectActionActivation> ActionsF
 	element->setThisCreateObjectActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::CreateObjectActionActivation> ActionsFactoryImpl::createCreateObjectActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::CreateObjectActionActivation> ActionsFactoryImpl::createCreateObjectActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::CreateObjectActionActivationImpl> element(new fUML::Semantics::Actions::CreateObjectActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -774,7 +787,8 @@ std::shared_ptr<fUML::Semantics::Actions::DestroyLinkActionActivation> ActionsFa
 	element->setThisDestroyLinkActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::DestroyLinkActionActivation> ActionsFactoryImpl::createDestroyLinkActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::DestroyLinkActionActivation> ActionsFactoryImpl::createDestroyLinkActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::DestroyLinkActionActivationImpl> element(new fUML::Semantics::Actions::DestroyLinkActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -793,7 +807,8 @@ std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation> Actions
 	element->setThisDestroyObjectActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation> ActionsFactoryImpl::createDestroyObjectActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivation> ActionsFactoryImpl::createDestroyObjectActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::DestroyObjectActionActivationImpl> element(new fUML::Semantics::Actions::DestroyObjectActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -812,7 +827,8 @@ std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> ActionsFactoryImpl
 	element->setThisInputPinActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> ActionsFactoryImpl::createInputPinActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> ActionsFactoryImpl::createInputPinActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::InputPinActivationImpl> element(new fUML::Semantics::Actions::InputPinActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -831,7 +847,8 @@ std::shared_ptr<fUML::Semantics::Actions::LoopNodeActivation> ActionsFactoryImpl
 	element->setThisLoopNodeActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::LoopNodeActivation> ActionsFactoryImpl::createLoopNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::LoopNodeActivation> ActionsFactoryImpl::createLoopNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::LoopNodeActivationImpl> element(new fUML::Semantics::Actions::LoopNodeActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -850,7 +867,8 @@ std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> ActionsFactoryImp
 	element->setThisOutputPinActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> ActionsFactoryImpl::createOutputPinActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> ActionsFactoryImpl::createOutputPinActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::OutputPinActivationImpl> element(new fUML::Semantics::Actions::OutputPinActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -869,7 +887,8 @@ std::shared_ptr<fUML::Semantics::Actions::ReadExtentActionActivation> ActionsFac
 	element->setThisReadExtentActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::ReadExtentActionActivation> ActionsFactoryImpl::createReadExtentActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::ReadExtentActionActivation> ActionsFactoryImpl::createReadExtentActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::ReadExtentActionActivationImpl> element(new fUML::Semantics::Actions::ReadExtentActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -888,7 +907,8 @@ std::shared_ptr<fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation
 	element->setThisReadIsClassifiedObjectActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation> ActionsFactoryImpl::createReadIsClassifiedObjectActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivation> ActionsFactoryImpl::createReadIsClassifiedObjectActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivationImpl> element(new fUML::Semantics::Actions::ReadIsClassifiedObjectActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -907,7 +927,8 @@ std::shared_ptr<fUML::Semantics::Actions::ReadLinkActionActivation> ActionsFacto
 	element->setThisReadLinkActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::ReadLinkActionActivation> ActionsFactoryImpl::createReadLinkActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::ReadLinkActionActivation> ActionsFactoryImpl::createReadLinkActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::ReadLinkActionActivationImpl> element(new fUML::Semantics::Actions::ReadLinkActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -926,7 +947,8 @@ std::shared_ptr<fUML::Semantics::Actions::ReadSelfActionActivation> ActionsFacto
 	element->setThisReadSelfActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::ReadSelfActionActivation> ActionsFactoryImpl::createReadSelfActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::ReadSelfActionActivation> ActionsFactoryImpl::createReadSelfActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::ReadSelfActionActivationImpl> element(new fUML::Semantics::Actions::ReadSelfActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -945,7 +967,8 @@ std::shared_ptr<fUML::Semantics::Actions::ReadStructuralFeatureActionActivation>
 	element->setThisReadStructuralFeatureActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::ReadStructuralFeatureActionActivation> ActionsFactoryImpl::createReadStructuralFeatureActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::ReadStructuralFeatureActionActivation> ActionsFactoryImpl::createReadStructuralFeatureActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::ReadStructuralFeatureActionActivationImpl> element(new fUML::Semantics::Actions::ReadStructuralFeatureActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -964,7 +987,8 @@ std::shared_ptr<fUML::Semantics::Actions::ReclassifyObjectActionActivation> Acti
 	element->setThisReclassifyObjectActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::ReclassifyObjectActionActivation> ActionsFactoryImpl::createReclassifyObjectActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::ReclassifyObjectActionActivation> ActionsFactoryImpl::createReclassifyObjectActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::ReclassifyObjectActionActivationImpl> element(new fUML::Semantics::Actions::ReclassifyObjectActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -983,7 +1007,8 @@ std::shared_ptr<fUML::Semantics::Actions::ReduceActionActivation> ActionsFactory
 	element->setThisReduceActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::ReduceActionActivation> ActionsFactoryImpl::createReduceActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::ReduceActionActivation> ActionsFactoryImpl::createReduceActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::ReduceActionActivationImpl> element(new fUML::Semantics::Actions::ReduceActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -1002,7 +1027,8 @@ std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation
 	element->setThisRemoveStructuralFeatureValueActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation> ActionsFactoryImpl::createRemoveStructuralFeatureValueActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation> ActionsFactoryImpl::createRemoveStructuralFeatureValueActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl> element(new fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -1021,7 +1047,8 @@ std::shared_ptr<fUML::Semantics::Actions::ReplyActionActivation> ActionsFactoryI
 	element->setThisReplyActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::ReplyActionActivation> ActionsFactoryImpl::createReplyActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::ReplyActionActivation> ActionsFactoryImpl::createReplyActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::ReplyActionActivationImpl> element(new fUML::Semantics::Actions::ReplyActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -1040,6 +1067,7 @@ std::shared_ptr<fUML::Semantics::Actions::ReturnInformation> ActionsFactoryImpl:
 	element->setThisReturnInformationPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation> ActionsFactoryImpl::createSendSignalActionActivation(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivationImpl> element(new fUML::Semantics::Actions::SendSignalActionActivationImpl());
@@ -1047,7 +1075,8 @@ std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation> ActionsFac
 	element->setThisSendSignalActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation> ActionsFactoryImpl::createSendSignalActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivation> ActionsFactoryImpl::createSendSignalActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::SendSignalActionActivationImpl> element(new fUML::Semantics::Actions::SendSignalActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -1066,7 +1095,8 @@ std::shared_ptr<fUML::Semantics::Actions::StartClassifierBehaviorActionActivatio
 	element->setThisStartClassifierBehaviorActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::StartClassifierBehaviorActionActivation> ActionsFactoryImpl::createStartClassifierBehaviorActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::StartClassifierBehaviorActionActivation> ActionsFactoryImpl::createStartClassifierBehaviorActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::StartClassifierBehaviorActionActivationImpl> element(new fUML::Semantics::Actions::StartClassifierBehaviorActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -1085,7 +1115,8 @@ std::shared_ptr<fUML::Semantics::Actions::StartObjectBehaviorActionActivation> A
 	element->setThisStartObjectBehaviorActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::StartObjectBehaviorActionActivation> ActionsFactoryImpl::createStartObjectBehaviorActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::StartObjectBehaviorActionActivation> ActionsFactoryImpl::createStartObjectBehaviorActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::StartObjectBehaviorActionActivationImpl> element(new fUML::Semantics::Actions::StartObjectBehaviorActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -1104,7 +1135,8 @@ std::shared_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> Acti
 	element->setThisStructuredActivityNodeActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> ActionsFactoryImpl::createStructuredActivityNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> ActionsFactoryImpl::createStructuredActivityNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivationImpl> element(new fUML::Semantics::Actions::StructuredActivityNodeActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -1123,7 +1155,8 @@ std::shared_ptr<fUML::Semantics::Actions::TestIdentityActionActivation> ActionsF
 	element->setThisTestIdentityActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::TestIdentityActionActivation> ActionsFactoryImpl::createTestIdentityActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::TestIdentityActionActivation> ActionsFactoryImpl::createTestIdentityActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::TestIdentityActionActivationImpl> element(new fUML::Semantics::Actions::TestIdentityActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -1142,7 +1175,8 @@ std::shared_ptr<fUML::Semantics::Actions::ValueSpecificationActionActivation> Ac
 	element->setThisValueSpecificationActionActivationPtr(element);
 	return element;
 }
-std::shared_ptr<fUML::Semantics::Actions::ValueSpecificationActionActivation> ActionsFactoryImpl::createValueSpecificationActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID) const
+
+std::shared_ptr<fUML::Semantics::Actions::ValueSpecificationActionActivation> ActionsFactoryImpl::createValueSpecificationActionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID) const
 {
 	std::shared_ptr<fUML::Semantics::Actions::ValueSpecificationActionActivationImpl> element(new fUML::Semantics::Actions::ValueSpecificationActionActivationImpl(par_group));
 	element->setMetaElementID(metaElementID);
@@ -1161,4 +1195,5 @@ std::shared_ptr<fUML::Semantics::Actions::Values> ActionsFactoryImpl::createValu
 	element->setThisValuesPtr(element);
 	return element;
 }
+
 

@@ -100,16 +100,12 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool insertAt_pin(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool insertAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A value InputPin is required.
 			value<>null
 			*/
 			 
-			virtual bool required_value(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool required_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -119,13 +115,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsReplaceAll() const = 0;
-			
 			/*!
 			Specifies whether existing values of the StructuralFeature should be removed before adding the new value.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setIsReplaceAll (bool _isReplaceAll)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -134,15 +130,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getInsertAt() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getInsertAt() const = 0;
 			/*!
 			The InputPin that gives the position at which to insert the value in an ordered StructuralFeature. The type of the insertAt InputPin is UnlimitedNatural, but the value cannot be zero. It is omitted for unordered StructuralFeatures.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setInsertAt(std::shared_ptr<uml::InputPin> _insertAt) = 0;
-			
+			virtual void setInsertAt(std::shared_ptr<uml::InputPin>) = 0;
 			
 
 		protected:
@@ -165,7 +159,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_insertAt;
+			std::shared_ptr<uml::InputPin> m_insertAt;
 
 		public:
 			//*********************************
@@ -196,7 +190,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

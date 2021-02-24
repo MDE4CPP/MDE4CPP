@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../FinalState.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			FinalStateImpl(const FinalStateImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			FinalStateImpl& operator=(FinalStateImpl const&) = delete;
 
 		protected:
@@ -33,18 +34,11 @@ namespace uml
 			virtual void setThisFinalStatePtr(std::weak_ptr<FinalState> thisFinalStatePtr);
 
 			//Additional constructors for the containments back reference
-			FinalStateImpl(std::weak_ptr<uml::Region > par_container);
-
-
+			FinalStateImpl(std::weak_ptr<uml::Region> par_container);
 			//Additional constructors for the containments back reference
-			FinalStateImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			FinalStateImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			FinalStateImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			FinalStateImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -58,44 +52,32 @@ namespace uml
 			submachine->isEmpty()
 			*/
 			 
-			virtual bool cannot_reference_submachine(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool cannot_reference_submachine(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A FinalState has no entry Behavior.
 			entry->isEmpty()
 			*/
 			 
-			virtual bool no_entry_behavior(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool no_entry_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A FinalState has no exit Behavior.
 			exit->isEmpty()
 			*/
 			 
-			virtual bool no_exit_behavior(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool no_exit_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A FinalState cannot have any outgoing Transitions.
 			outgoing->size() = 0
 			*/
 			 
-			virtual bool no_outgoing_transitions(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool no_outgoing_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A FinalState cannot have Regions.
 			region->size() = 0
 			*/
 			 
-			virtual bool no_regions(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool no_regions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A FinalState has no state (doActivity) Behavior.
 			doActivity->isEmpty()
 			*/
 			 
-			virtual bool no_state_behavior(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool no_state_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -105,7 +87,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -120,7 +102,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -135,7 +117,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

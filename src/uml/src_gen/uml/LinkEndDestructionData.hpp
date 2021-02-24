@@ -86,9 +86,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool destroyAt_pin(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool destroyAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -98,13 +96,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsDestroyDuplicates() const = 0;
-			
 			/*!
 			Specifies whether to destroy duplicates of the value in nonunique Association ends.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setIsDestroyDuplicates (bool _isDestroyDuplicates)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -113,15 +111,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getDestroyAt() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getDestroyAt() const = 0;
 			/*!
 			The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt) = 0;
-			
+			virtual void setDestroyAt(std::shared_ptr<uml::InputPin>) = 0;
 			
 
 		protected:
@@ -144,7 +140,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_destroyAt;
+			std::shared_ptr<uml::InputPin> m_destroyAt;
 
 		public:
 			//*********************************

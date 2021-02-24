@@ -69,13 +69,13 @@ namespace uml
 			Include(){}
 
 			//Additional constructors for the containments back reference
-			Include(std::weak_ptr<uml::UseCase > par_includingCase);
+			Include(std::weak_ptr<uml::UseCase> par_includingCase);
 
 			//Additional constructors for the containments back reference
-			Include(std::weak_ptr<uml::Namespace > par_namespace);
+			Include(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-			Include(std::weak_ptr<uml::Element > par_owner);
+			Include(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -99,29 +99,25 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::UseCase > getAddition() const = 0;
-			
+			virtual std::shared_ptr<uml::UseCase> getAddition() const = 0;
 			/*!
 			The UseCase that is to be included.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setAddition(std::shared_ptr<uml::UseCase> _addition) = 0;
-			
+			virtual void setAddition(std::shared_ptr<uml::UseCase>) = 0;
 			/*!
 			The UseCase which includes the addition and owns the Include relationship.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::UseCase > getIncludingCase() const = 0;
-			
+			virtual std::weak_ptr<uml::UseCase> getIncludingCase() const = 0;
 			/*!
 			The UseCase which includes the addition and owns the Include relationship.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setIncludingCase(std::shared_ptr<uml::UseCase> _includingCase) = 0;
-			
+			virtual void setIncludingCase(std::weak_ptr<uml::UseCase>) = 0;
 			
 
 		protected:
@@ -138,12 +134,12 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			std::shared_ptr<uml::UseCase > m_addition;/*!
+			std::shared_ptr<uml::UseCase> m_addition;/*!
 			The UseCase which includes the addition and owns the Include relationship.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			std::weak_ptr<uml::UseCase > m_includingCase;
+			std::weak_ptr<uml::UseCase> m_includingCase;
 
 		public:
 			//*********************************
@@ -154,7 +150,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -164,7 +160,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/

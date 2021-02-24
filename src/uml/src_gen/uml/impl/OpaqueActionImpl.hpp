@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../OpaqueAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			OpaqueActionImpl(const OpaqueActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			OpaqueActionImpl& operator=(OpaqueActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisOpaqueActionPtr(std::weak_ptr<OpaqueAction> thisOpaqueActionPtr);
 
 			//Additional constructors for the containments back reference
-			OpaqueActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			OpaqueActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			OpaqueActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			OpaqueActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			OpaqueActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			OpaqueActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			OpaqueActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			OpaqueActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,9 +54,7 @@ namespace uml
 			language->notEmpty() implies (_'body'->size() = language->size())
 			*/
 			 
-			virtual bool language_body_size(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -74,12 +64,16 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string>> getBody() const ;/*!
+			virtual std::shared_ptr<Bag<std::string>> getBody() const ;
+			
+			/*!
 			If provided, a specification of the language used for each of the body Strings.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual std::shared_ptr<Bag<std::string>> getLanguage() const ;
+			
+			
 			
 			//*********************************
 			// Reference
@@ -91,7 +85,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getInputValue() const ;
 			
-			
 			/*!
 			The OutputPins on which the OpaqueAction provides outputs.
 			<p>From package UML::Actions.</p>
@@ -100,7 +93,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> getOutputValue() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -130,7 +122,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

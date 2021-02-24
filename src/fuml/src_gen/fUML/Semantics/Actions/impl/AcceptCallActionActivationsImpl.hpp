@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../AcceptCallActionActivations.hpp"
 
@@ -26,7 +27,7 @@ virtual public AcceptCallActionActivations
 			AcceptCallActionActivationsImpl(const AcceptCallActionActivationsImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			AcceptCallActionActivationsImpl& operator=(AcceptCallActionActivationsImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public AcceptCallActionActivations
 			AcceptCallActionActivationsImpl();
 			virtual std::shared_ptr<AcceptCallActionActivations> getThisAcceptCallActionActivationsPtr() const;
 			virtual void setThisAcceptCallActionActivationsPtr(std::weak_ptr<AcceptCallActionActivations> thisAcceptCallActionActivationsPtr);
-
 
 
 		public:
@@ -54,7 +54,7 @@ virtual public AcceptCallActionActivations
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

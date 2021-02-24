@@ -78,12 +78,8 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual bool isReady() = 0;
-			
-			 
+			virtual bool isReady() = 0; 
 			virtual void receiveOffer() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************

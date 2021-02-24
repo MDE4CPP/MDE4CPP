@@ -87,9 +87,7 @@ namespace uml
 			start.covered = finish.covered
 			*/
 			 
-			virtual bool same_lifeline(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool same_lifeline(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -102,29 +100,25 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification > getFinish() const = 0;
-			
+			virtual std::shared_ptr<uml::OccurrenceSpecification> getFinish() const = 0;
 			/*!
 			References the OccurrenceSpecification that designates the finish of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish) = 0;
-			
+			virtual void setFinish(std::shared_ptr<uml::OccurrenceSpecification>) = 0;
 			/*!
 			References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification > getStart() const = 0;
-			
+			virtual std::shared_ptr<uml::OccurrenceSpecification> getStart() const = 0;
 			/*!
 			References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setStart(std::shared_ptr<uml::OccurrenceSpecification> _start) = 0;
-			
+			virtual void setStart(std::shared_ptr<uml::OccurrenceSpecification>) = 0;
 			
 
 		protected:
@@ -141,12 +135,12 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::OccurrenceSpecification > m_finish;/*!
+			std::shared_ptr<uml::OccurrenceSpecification> m_finish;/*!
 			References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::OccurrenceSpecification > m_start;
+			std::shared_ptr<uml::OccurrenceSpecification> m_start;
 
 		public:
 			//*********************************
@@ -157,7 +151,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -167,7 +161,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

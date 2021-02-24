@@ -96,16 +96,12 @@ namespace uml
 			isControl implies isControlType
 			*/
 			 
-			virtual bool control_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool control_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			Pin multiplicity is not unique.
 			not isUnique
 			*/
 			 
-			virtual bool not_unique(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool not_unique(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -115,13 +111,13 @@ namespace uml
 			*/
 			 
 			virtual bool getIsControl() const = 0;
-			
 			/*!
 			Indicates whether the Pin provides data to the Action or just controls how the Action executes.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual void setIsControl (bool _isControl)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -163,7 +159,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

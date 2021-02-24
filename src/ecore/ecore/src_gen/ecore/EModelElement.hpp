@@ -80,7 +80,6 @@ namespace ecore
 			virtual std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> getEAnnotations() const = 0;
 			
 			
-			
 
 		protected:
 			//*********************************

@@ -79,7 +79,6 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const = 0;
 			
 			
-			
 
 		protected:
 			//*********************************

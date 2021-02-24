@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../DispatchStrategy.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			DispatchStrategyImpl(const DispatchStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			DispatchStrategyImpl& operator=(DispatchStrategyImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::StructuredClassifiers
 			DispatchStrategyImpl();
 			virtual std::shared_ptr<DispatchStrategy> getThisDispatchStrategyPtr() const;
 			virtual void setThisDispatchStrategyPtr(std::weak_ptr<DispatchStrategy> thisDispatchStrategyPtr);
-
 
 
 		public:
@@ -43,15 +43,9 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation) ;
-			
-			 
-			virtual std::string getName() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation) ; 
+			virtual std::string getName() ; 
 			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -61,7 +55,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter

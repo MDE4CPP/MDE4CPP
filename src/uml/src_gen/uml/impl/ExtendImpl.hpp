@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Extend.hpp"
 
@@ -24,7 +25,7 @@ namespace uml
 			ExtendImpl(const ExtendImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ExtendImpl& operator=(ExtendImpl const&) = delete;
 
 		protected:
@@ -34,18 +35,11 @@ namespace uml
 			virtual void setThisExtendPtr(std::weak_ptr<Extend> thisExtendPtr);
 
 			//Additional constructors for the containments back reference
-			ExtendImpl(std::weak_ptr<uml::UseCase > par_extension);
-
-
+			ExtendImpl(std::weak_ptr<uml::UseCase> par_extension);
 			//Additional constructors for the containments back reference
-			ExtendImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ExtendImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ExtendImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ExtendImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -59,9 +53,7 @@ namespace uml
 			extensionLocation->forAll (xp | extendedCase.extensionPoint->includes(xp))
 			*/
 			 
-			virtual bool extension_points(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool extension_points(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -76,43 +68,37 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint > getCondition() const ;
-			
+			virtual std::shared_ptr<uml::Constraint> getCondition() const ;
 			/*!
 			References the condition that must hold when the first ExtensionPoint is reached for the extension to take place. If no constraint is associated with the Extend relationship, the extension is unconditional.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setCondition(std::shared_ptr<uml::Constraint> _condition) ;
-			
+			virtual void setCondition(std::shared_ptr<uml::Constraint>) ;
 			/*!
 			The UseCase that is being extended.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::UseCase > getExtendedCase() const ;
-			
+			virtual std::shared_ptr<uml::UseCase> getExtendedCase() const ;
 			/*!
 			The UseCase that is being extended.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setExtendedCase(std::shared_ptr<uml::UseCase> _extendedCase) ;
-			
+			virtual void setExtendedCase(std::shared_ptr<uml::UseCase>) ;
 			/*!
 			The UseCase that represents the extension and owns the Extend relationship.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::UseCase > getExtension() const ;
-			
+			virtual std::weak_ptr<uml::UseCase> getExtension() const ;
 			/*!
 			The UseCase that represents the extension and owns the Extend relationship.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setExtension(std::shared_ptr<uml::UseCase> _extension) ;
-			
+			virtual void setExtension(std::weak_ptr<uml::UseCase>) ;
 			/*!
 			An ordered list of ExtensionPoints belonging to the extended UseCase, specifying where the respective behavioral fragments of the extending UseCase are to be inserted. The first fragment in the extending UseCase is associated with the first extension point in the list, the second fragment with the second point, and so on. Note that, in most practical cases, the extending UseCase has just a single behavior fragment, so that the list of ExtensionPoints is trivial.
 			<p>From package UML::UseCases.</p>
@@ -121,7 +107,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::ExtensionPoint>> getExtensionLocation() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -131,7 +116,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -141,7 +126,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/

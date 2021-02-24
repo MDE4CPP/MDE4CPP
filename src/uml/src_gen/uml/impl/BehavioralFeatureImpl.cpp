@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -53,8 +54,7 @@
 #include "uml/Type.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -77,7 +77,7 @@ BehavioralFeatureImpl::~BehavioralFeatureImpl()
 }
 
 //Additional constructor for the containments back reference
-BehavioralFeatureImpl::BehavioralFeatureImpl(std::weak_ptr<uml::Namespace > par_namespace)
+BehavioralFeatureImpl::BehavioralFeatureImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :BehavioralFeatureImpl()
 {
 	m_namespace = par_namespace;
@@ -85,128 +85,45 @@ BehavioralFeatureImpl::BehavioralFeatureImpl(std::weak_ptr<uml::Namespace > par_
 }
 
 //Additional constructor for the containments back reference
-BehavioralFeatureImpl::BehavioralFeatureImpl(std::weak_ptr<uml::Element > par_owner)
+BehavioralFeatureImpl::BehavioralFeatureImpl(std::weak_ptr<uml::Element> par_owner)
 :BehavioralFeatureImpl()
 {
 	m_owner = par_owner;
 }
 
-
-BehavioralFeatureImpl::BehavioralFeatureImpl(const BehavioralFeatureImpl & obj):BehavioralFeatureImpl()
+BehavioralFeatureImpl::BehavioralFeatureImpl(const BehavioralFeatureImpl & obj): FeatureImpl(obj), NamespaceImpl(obj), BehavioralFeature(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy BehavioralFeature "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_concurrency = obj.getConcurrency();
 	m_isAbstract = obj.getIsAbstract();
-	m_isLeaf = obj.getIsLeaf();
-	m_isStatic = obj.getIsStatic();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _featuringClassifier = obj.getFeaturingClassifier();
-	m_featuringClassifier.reset(new Union<uml::Classifier>(*(obj.getFeaturingClassifier().get())));
-
-	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
-	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
-
 	std::shared_ptr<Bag<uml::Behavior>> _method = obj.getMethod();
 	m_method.reset(new Bag<uml::Behavior>(*(obj.getMethod().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
 	std::shared_ptr<Bag<uml::Type>> _raisedException = obj.getRaisedException();
 	m_raisedException.reset(new Bag<uml::Type>(*(obj.getRaisedException().get())));
 
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
-	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
+	std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> ownedParameterContainer = getOwnedParameter();
+	for(auto _ownedParameter : *obj.getOwnedParameter()) 
 	{
-		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy())));
+		ownedParameterContainer->push_back(std::dynamic_pointer_cast<uml::Parameter>(_ownedParameter->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageableElement>> _importedMemberList = obj.getImportedMember();
-	for(std::shared_ptr<uml::PackageableElement> _importedMember : *_importedMemberList)
+	std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> ownedParameterSetContainer = getOwnedParameterSet();
+	for(auto _ownedParameterSet : *obj.getOwnedParameterSet()) 
 	{
-		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy())));
+		ownedParameterSetContainer->push_back(std::dynamic_pointer_cast<uml::ParameterSet>(_ownedParameterSet->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_importedMember" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Parameter>> _ownedParameterList = obj.getOwnedParameter();
-	for(std::shared_ptr<uml::Parameter> _ownedParameter : *_ownedParameterList)
-	{
-		this->getOwnedParameter()->add(std::shared_ptr<uml::Parameter>(std::dynamic_pointer_cast<uml::Parameter>(_ownedParameter->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedParameter" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ParameterSet>> _ownedParameterSetList = obj.getOwnedParameterSet();
-	for(std::shared_ptr<uml::ParameterSet> _ownedParameterSet : *_ownedParameterSetList)
-	{
-		this->getOwnedParameterSet()->add(std::shared_ptr<uml::ParameterSet>(std::dynamic_pointer_cast<uml::ParameterSet>(_ownedParameterSet->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedParameterSet" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
-	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
-	{
-		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedRule" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
-	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
-	{
-		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_ownedParameter->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_ownedParameter - Subset<uml::Parameter, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-
 	/*Subset*/
 	m_ownedParameterSet->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
@@ -237,12 +154,10 @@ uml::CallConcurrencyKind BehavioralFeatureImpl::getConcurrency() const
 {
 	return m_concurrency;
 }
-
 void BehavioralFeatureImpl::setConcurrency(uml::CallConcurrencyKind _concurrency)
 {
 	m_concurrency = _concurrency;
 } 
-
 
 
 /*
@@ -252,18 +167,16 @@ bool BehavioralFeatureImpl::getIsAbstract() const
 {
 	return m_isAbstract;
 }
-
 void BehavioralFeatureImpl::setIsAbstract(bool _isAbstract)
 {
 	m_isAbstract = _isAbstract;
 } 
 
 
-
 //*********************************
 // Operations
 //*********************************
-bool BehavioralFeatureImpl::abstract_no_method(Any diagnostics,std::map <  Any ,  Any > context)
+bool BehavioralFeatureImpl::abstract_no_method(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -307,8 +220,6 @@ std::shared_ptr<Bag<uml::Behavior>> BehavioralFeatureImpl::getMethod() const
 
 
 
-
-
 /*
 Getter & Setter for reference ownedParameter
 */
@@ -332,8 +243,6 @@ std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> BehavioralFeatureImpl
 
     return m_ownedParameter;
 }
-
-
 
 
 
@@ -363,8 +272,6 @@ std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> BehavioralFeatureI
 
 
 
-
-
 /*
 Getter & Setter for reference raisedException
 */
@@ -379,8 +286,6 @@ std::shared_ptr<Bag<uml::Type>> BehavioralFeatureImpl::getRaisedException() cons
 
     return m_raisedException;
 }
-
-
 
 
 
@@ -437,7 +342,7 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> 
 	return m_ownedMember;
 }
 
-std::weak_ptr<uml::Element > BehavioralFeatureImpl::getOwner() const
+std::weak_ptr<uml::Element> BehavioralFeatureImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -789,7 +694,6 @@ void BehavioralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfac
 
 void BehavioralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -800,14 +704,9 @@ void BehavioralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 			{
 				typeName = "Parameter";
 			}
-			std::shared_ptr<uml::Parameter> ownedParameter = std::dynamic_pointer_cast<uml::Parameter>(modelFactory->create(typeName));
-			if (ownedParameter != nullptr)
-			{
-				std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> list_ownedParameter = this->getOwnedParameter();
-				list_ownedParameter->push_back(ownedParameter);
-				loadHandler->handleChild(ownedParameter);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Parameter>(this->getOwnedParameter());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("ownedParameterSet") == 0 )
@@ -817,14 +716,9 @@ void BehavioralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 			{
 				typeName = "ParameterSet";
 			}
-			std::shared_ptr<uml::ParameterSet> ownedParameterSet = std::dynamic_pointer_cast<uml::ParameterSet>(modelFactory->create(typeName));
-			if (ownedParameterSet != nullptr)
-			{
-				std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> list_ownedParameterSet = this->getOwnedParameterSet();
-				list_ownedParameterSet->push_back(ownedParameterSet);
-				loadHandler->handleChild(ownedParameterSet);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::ParameterSet>(this->getOwnedParameterSet());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -849,11 +743,11 @@ void BehavioralFeatureImpl::resolveReferences(const int featureID, std::vector<s
 			std::shared_ptr<Bag<uml::Behavior>> _method = getMethod();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Behavior> _r = std::dynamic_pointer_cast<uml::Behavior>(ref);
+				std::shared_ptr<uml::Behavior>  _r = std::dynamic_pointer_cast<uml::Behavior>(ref);
 				if (_r != nullptr)
 				{
 					_method->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -863,11 +757,11 @@ void BehavioralFeatureImpl::resolveReferences(const int featureID, std::vector<s
 			std::shared_ptr<Bag<uml::Type>> _raisedException = getRaisedException();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Type> _r = std::dynamic_pointer_cast<uml::Type>(ref);
+				std::shared_ptr<uml::Type>  _r = std::dynamic_pointer_cast<uml::Type>(ref);
 				if (_r != nullptr)
 				{
 					_raisedException->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -939,7 +833,6 @@ void BehavioralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces:
 		{
 			saveHandler->addAttribute("isAbstract", this->getIsAbstract());
 		}
-
 	// Add references
 		saveHandler->addReferences<uml::Behavior>("method", this->getMethod());
 		saveHandler->addReferences<uml::Type>("raisedException", this->getRaisedException());

@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Connector.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ConnectorImpl(const ConnectorImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ConnectorImpl& operator=(ConnectorImpl const&) = delete;
 
 		protected:
@@ -33,18 +34,11 @@ namespace uml
 			virtual void setThisConnectorPtr(std::weak_ptr<Connector> thisConnectorPtr);
 
 			//Additional constructors for the containments back reference
-			ConnectorImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ConnectorImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ConnectorImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ConnectorImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ConnectorImpl(std::weak_ptr<uml::StructuredClassifier > par_structuredClassifier);
-
-
-
+			ConnectorImpl(std::weak_ptr<uml::StructuredClassifier> par_structuredClassifier);
 
 		public:
 			//destructor
@@ -65,9 +59,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual uml::ConnectorKind getKind() ;
-			
-			/*!
+			virtual uml::ConnectorKind getKind() ;/*!
 			The ConnectableElements attached as roles to each ConnectorEnd owned by a Connector must be owned or inherited roles of the Classifier that owned the Connector, or they must be Ports of such roles.
 			structuredClassifier <> null
 			and
@@ -76,18 +68,14 @@ namespace uml
 			  e.role.oclIsKindOf(Port) and structuredClassifier.allRoles()->includes(e.partWithPort))
 			*/
 			 
-			virtual bool roles(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool roles(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The types of the ConnectableElements that the ends of a Connector are attached to must conform to the types of the ends of the Association that types the Connector, if any.
 			type<>null implies 
 			  let noOfEnds : Integer = end->size() in 
 			  (type.memberEnd->size() = noOfEnds) and Sequence{1..noOfEnds}->forAll(i | end->at(i).role.type.conformsTo(type.memberEnd->at(i).type))
 			*/
 			 
-			virtual bool types(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -99,6 +87,8 @@ namespace uml
 			 
 			virtual uml::ConnectorKind getKind() const ;
 			
+			
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -109,14 +99,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Behavior>> getContract() const ;
 			
-			
 			/*!
 			A Connector has at least two ConnectorEnds, each representing the participation of instances of the Classifiers typing the ConnectableElements attached to the end. The set of ConnectorEnds is ordered.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> getEnd() const ;
-			
 			
 			/*!
 			A Connector may be redefined when its containing Classifier is specialized. The redefining Connector may have a type that specializes the type of the redefined Connector. The types of the ConnectorEnds of the redefining Connector may specialize the types of the ConnectorEnds of the redefined Connector. The properties of the ConnectorEnds of the redefining Connector may be replaced.
@@ -126,27 +114,22 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> getRedefinedConnector() const ;
 			
 			
+			virtual std::weak_ptr<uml::StructuredClassifier> getStructuredClassifier() const ;
 			
-			virtual std::weak_ptr<uml::StructuredClassifier > getStructuredClassifier() const ;
-			
-			
-			virtual void setStructuredClassifier(std::shared_ptr<uml::StructuredClassifier> _structuredClassifier) ;
-			
+			virtual void setStructuredClassifier(std::weak_ptr<uml::StructuredClassifier>) ;
 			/*!
 			An optional Association that classifies links corresponding to this Connector.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Association > getType() const ;
-			
+			virtual std::shared_ptr<uml::Association> getType() const ;
 			/*!
 			An optional Association that classifies links corresponding to this Connector.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setType(std::shared_ptr<uml::Association> _type) ;
+			virtual void setType(std::shared_ptr<uml::Association>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -161,7 +144,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -171,7 +154,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

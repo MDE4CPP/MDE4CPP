@@ -135,6 +135,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> SimpleClassifi
 	element->setThisBooleanValuePtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> SimpleClassifiersFactoryImpl::createDataValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValueImpl> element(new fUML::Semantics::SimpleClassifiers::DataValueImpl());
@@ -142,6 +143,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> SimpleClassifiers
 	element->setThisDataValuePtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> SimpleClassifiersFactoryImpl::createEnumerationValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValueImpl> element(new fUML::Semantics::SimpleClassifiers::EnumerationValueImpl());
@@ -149,6 +151,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> SimpleClas
 	element->setThisEnumerationValuePtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> SimpleClassifiersFactoryImpl::createFeatureValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValueImpl> element(new fUML::Semantics::SimpleClassifiers::FeatureValueImpl());
@@ -156,6 +159,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> SimpleClassifi
 	element->setThisFeatureValuePtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> SimpleClassifiersFactoryImpl::createIntegerValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValueImpl> element(new fUML::Semantics::SimpleClassifiers::IntegerValueImpl());
@@ -163,6 +167,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> SimpleClassifi
 	element->setThisIntegerValuePtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> SimpleClassifiersFactoryImpl::createRealValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValueImpl> element(new fUML::Semantics::SimpleClassifiers::RealValueImpl());
@@ -170,6 +175,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> SimpleClassifiers
 	element->setThisRealValuePtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassifiersFactoryImpl::createSignalInstance(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstanceImpl> element(new fUML::Semantics::SimpleClassifiers::SignalInstanceImpl());
@@ -177,6 +183,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassi
 	element->setThisSignalInstancePtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> SimpleClassifiersFactoryImpl::createStringValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValueImpl> element(new fUML::Semantics::SimpleClassifiers::StringValueImpl());
@@ -184,6 +191,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> SimpleClassifie
 	element->setThisStringValuePtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> SimpleClassifiersFactoryImpl::createUnlimitedNaturalValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValueImpl> element(new fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValueImpl());
@@ -191,4 +199,5 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> Simpl
 	element->setThisUnlimitedNaturalValuePtr(element);
 	return element;
 }
+
 

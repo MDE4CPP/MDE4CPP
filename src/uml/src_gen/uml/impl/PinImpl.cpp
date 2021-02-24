@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -56,8 +57,7 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -80,7 +80,7 @@ PinImpl::~PinImpl()
 }
 
 //Additional constructor for the containments back reference
-PinImpl::PinImpl(std::weak_ptr<uml::Activity > par_activity)
+PinImpl::PinImpl(std::weak_ptr<uml::Activity> par_activity)
 :PinImpl()
 {
 	m_activity = par_activity;
@@ -88,7 +88,7 @@ PinImpl::PinImpl(std::weak_ptr<uml::Activity > par_activity)
 }
 
 //Additional constructor for the containments back reference
-PinImpl::PinImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+PinImpl::PinImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :PinImpl()
 {
 	m_inStructuredNode = par_inStructuredNode;
@@ -96,7 +96,7 @@ PinImpl::PinImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNod
 }
 
 //Additional constructor for the containments back reference
-PinImpl::PinImpl(std::weak_ptr<uml::Namespace > par_namespace)
+PinImpl::PinImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :PinImpl()
 {
 	m_namespace = par_namespace;
@@ -104,130 +104,24 @@ PinImpl::PinImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-PinImpl::PinImpl(std::weak_ptr<uml::Element > par_owner)
+PinImpl::PinImpl(std::weak_ptr<uml::Element> par_owner)
 :PinImpl()
 {
 	m_owner = par_owner;
 }
 
-
-PinImpl::PinImpl(const PinImpl & obj):PinImpl()
+PinImpl::PinImpl(const PinImpl & obj): MultiplicityElementImpl(obj), ObjectNodeImpl(obj), Pin(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Pin "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_isControl = obj.getIsControl();
-	m_isControlType = obj.getIsControlType();
-	m_isLeaf = obj.getIsLeaf();
-	m_isOrdered = obj.getIsOrdered();
-	m_isUnique = obj.getIsUnique();
-	m_lower = obj.getLower();
-	m_name = obj.getName();
-	m_ordering = obj.getOrdering();
-	m_qualifiedName = obj.getQualifiedName();
-	m_upper = obj.getUpper();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	m_activity  = obj.getActivity();
-
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
-	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
-
-	std::shared_ptr<Bag<uml::State>> _inState = obj.getInState();
-	m_inState.reset(new Bag<uml::State>(*(obj.getInState().get())));
-
-	m_inStructuredNode  = obj.getInStructuredNode();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
-	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
-	m_selection  = obj.getSelection();
-
-	m_type  = obj.getType();
-
 
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
-	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
-	{
-		this->getInInterruptibleRegion()->add(std::shared_ptr<uml::InterruptibleActivityRegion>(std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_inInterruptibleRegion->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inInterruptibleRegion" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityPartition>> _inPartitionList = obj.getInPartition();
-	for(std::shared_ptr<uml::ActivityPartition> _inPartition : *_inPartitionList)
-	{
-		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(std::dynamic_pointer_cast<uml::ActivityPartition>(_inPartition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	if(obj.getLowerValue()!=nullptr)
-	{
-		m_lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getLowerValue()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_lowerValue" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNodeList = obj.getRedefinedNode();
-	for(std::shared_ptr<uml::ActivityNode> _redefinedNode : *_redefinedNodeList)
-	{
-		this->getRedefinedNode()->add(std::shared_ptr<uml::ActivityNode>(std::dynamic_pointer_cast<uml::ActivityNode>(_redefinedNode->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
-	#endif
-	if(obj.getUpperBound()!=nullptr)
-	{
-		m_upperBound = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getUpperBound()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_upperBound" << std::endl;
-	#endif
-	if(obj.getUpperValue()!=nullptr)
-	{
-		m_upperValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getUpperValue()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_upperValue" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  PinImpl::copy() const
@@ -252,24 +146,22 @@ bool PinImpl::getIsControl() const
 {
 	return m_isControl;
 }
-
 void PinImpl::setIsControl(bool _isControl)
 {
 	m_isControl = _isControl;
 } 
 
 
-
 //*********************************
 // Operations
 //*********************************
-bool PinImpl::control_pins(Any diagnostics,std::map <  Any ,  Any > context)
+bool PinImpl::control_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PinImpl::not_unique(Any diagnostics,std::map <  Any ,  Any > context)
+bool PinImpl::not_unique(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -312,7 +204,7 @@ std::shared_ptr<Union<uml::Element>> PinImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > PinImpl::getOwner() const
+std::weak_ptr<uml::Element> PinImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -476,7 +368,6 @@ void PinImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandl
 
 void PinImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	MultiplicityElementImpl::loadNode(nodeName, loadHandler);

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -42,8 +43,7 @@
 #include "uml/TemplateableElement.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -66,7 +66,7 @@ TemplateBindingImpl::~TemplateBindingImpl()
 }
 
 //Additional constructor for the containments back reference
-TemplateBindingImpl::TemplateBindingImpl(std::weak_ptr<uml::TemplateableElement > par_boundElement)
+TemplateBindingImpl::TemplateBindingImpl(std::weak_ptr<uml::TemplateableElement> par_boundElement)
 :TemplateBindingImpl()
 {
 	m_boundElement = par_boundElement;
@@ -74,56 +74,33 @@ TemplateBindingImpl::TemplateBindingImpl(std::weak_ptr<uml::TemplateableElement 
 }
 
 //Additional constructor for the containments back reference
-TemplateBindingImpl::TemplateBindingImpl(std::weak_ptr<uml::Element > par_owner)
+TemplateBindingImpl::TemplateBindingImpl(std::weak_ptr<uml::Element> par_owner)
 :TemplateBindingImpl()
 {
 	m_owner = par_owner;
 }
 
-
-TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj):TemplateBindingImpl()
+TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj): DirectedRelationshipImpl(obj), TemplateBinding(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TemplateBinding "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_boundElement  = obj.getBoundElement();
 
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
+	std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> parameterSubstitutionContainer = getParameterSubstitution();
+	for(auto _parameterSubstitution : *obj.getParameterSubstitution()) 
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
+		parameterSubstitutionContainer->push_back(std::dynamic_pointer_cast<uml::TemplateParameterSubstitution>(_parameterSubstitution->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::TemplateParameterSubstitution>> _parameterSubstitutionList = obj.getParameterSubstitution();
-	for(std::shared_ptr<uml::TemplateParameterSubstitution> _parameterSubstitution : *_parameterSubstitutionList)
-	{
-		this->getParameterSubstitution()->add(std::shared_ptr<uml::TemplateParameterSubstitution>(std::dynamic_pointer_cast<uml::TemplateParameterSubstitution>(_parameterSubstitution->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_parameterSubstitution" << std::endl;
-	#endif
 	if(obj.getSignature()!=nullptr)
 	{
 		m_signature = std::dynamic_pointer_cast<uml::TemplateSignature>(obj.getSignature()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_signature" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_parameterSubstitution->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
@@ -151,13 +128,13 @@ std::shared_ptr<ecore::EClass> TemplateBindingImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool TemplateBindingImpl::one_parameter_substitution(Any diagnostics,std::map <  Any ,  Any > context)
+bool TemplateBindingImpl::one_parameter_substitution(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool TemplateBindingImpl::parameter_substitution_formal(Any diagnostics,std::map <  Any ,  Any > context)
+bool TemplateBindingImpl::parameter_substitution_formal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -169,17 +146,15 @@ bool TemplateBindingImpl::parameter_substitution_formal(Any diagnostics,std::map
 /*
 Getter & Setter for reference boundElement
 */
-std::weak_ptr<uml::TemplateableElement > TemplateBindingImpl::getBoundElement() const
+std::weak_ptr<uml::TemplateableElement> TemplateBindingImpl::getBoundElement() const
 {
 //assert(m_boundElement);
     return m_boundElement;
 }
-
-void TemplateBindingImpl::setBoundElement(std::shared_ptr<uml::TemplateableElement> _boundElement)
+void TemplateBindingImpl::setBoundElement(std::weak_ptr<uml::TemplateableElement> _boundElement)
 {
     m_boundElement = _boundElement;
 }
-
 
 
 /*
@@ -208,22 +183,18 @@ std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> Templa
 
 
 
-
-
 /*
 Getter & Setter for reference signature
 */
-std::shared_ptr<uml::TemplateSignature > TemplateBindingImpl::getSignature() const
+std::shared_ptr<uml::TemplateSignature> TemplateBindingImpl::getSignature() const
 {
 //assert(m_signature);
     return m_signature;
 }
-
 void TemplateBindingImpl::setSignature(std::shared_ptr<uml::TemplateSignature> _signature)
 {
     m_signature = _signature;
 }
-
 
 
 //*********************************
@@ -244,7 +215,7 @@ std::shared_ptr<Union<uml::Element>> TemplateBindingImpl::getOwnedElement() cons
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > TemplateBindingImpl::getOwner() const
+std::weak_ptr<uml::Element> TemplateBindingImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -468,7 +439,6 @@ void TemplateBindingImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 
 void TemplateBindingImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -479,12 +449,9 @@ void TemplateBindingImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 			{
 				typeName = "TemplateParameterSubstitution";
 			}
-			std::shared_ptr<ecore::EObject> parameterSubstitution = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING);
-			if (parameterSubstitution != nullptr)
-			{
-				loadHandler->handleChild(parameterSubstitution);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::TemplateParameterSubstitution>(this->getParameterSubstitution());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -559,9 +526,8 @@ void TemplateBindingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		{
 			saveHandler->addReference(parameterSubstitution, "parameterSubstitution", parameterSubstitution->eClass() != package->getTemplateParameterSubstitution_Class());
 		}
-
 	// Add references
-		saveHandler->addReference("signature", this->getSignature()); 
+		saveHandler->addReference(this->getSignature(), "signature", getSignature()->eClass() != uml::umlPackage::eInstance()->getTemplateSignature_Class()); 
 	}
 	catch (std::exception& e)
 	{

@@ -91,9 +91,7 @@ namespace uml
 			incoming->includes(decisionInputFlow)
 			*/
 			 
-			virtual bool decision_input_flow_incoming(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool decision_input_flow_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The ActivityEdges incoming to and outgoing from a DecisionNode, other than the decisionInputFlow (if any), must be either all ObjectFlows or all ControlFlows.
 			let allEdges: Set(ActivityEdge) = incoming->union(outgoing) in
 			let allRelevantEdges: Set(ActivityEdge) = if decisionInputFlow->notEmpty() then allEdges->excluding(decisionInputFlow) else allEdges endif in
@@ -101,32 +99,24 @@ namespace uml
 			
 			*/
 			 
-			virtual bool edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			If the DecisionNode has a decisionInputFlow and an incoming ControlFlow, then any decisionInput Behavior has one in Parameter whose type is the same as or a supertype of the type of object tokens offered on the decisionInputFlow.
 			(decisionInput<>null and decisionInputFlow<>null and incoming->exists(oclIsKindOf(ControlFlow))) implies
 				decisionInput.inputParameters()->size()=1
 			*/
 			 
-			virtual bool incoming_control_one_input_parameter(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool incoming_control_one_input_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			If the DecisionNode has no decisionInputFlow and an incoming ObjectFlow, then any decisionInput Behavior has one in Parameter whose type is the same as or a supertype of the type of object tokens offered on the incoming ObjectFlow.
 			(decisionInput<>null and decisionInputFlow=null and incoming->forAll(oclIsKindOf(ObjectFlow))) implies
 				decisionInput.inputParameters()->size()=1
 			*/
 			 
-			virtual bool incoming_object_one_input_parameter(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool incoming_object_one_input_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A DecisionNode has one or two incoming ActivityEdges and at least one outgoing ActivityEdge.
 			(incoming->size() = 1 or incoming->size() = 2) and outgoing->size() > 0
 			*/
 			 
-			virtual bool incoming_outgoing_edges(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool incoming_outgoing_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A decisionInput Behavior has no out parameters, no inout parameters, and one return parameter.
 			decisionInput<>null implies 
 			  (decisionInput.ownedParameter->forAll(par | 
@@ -136,25 +126,19 @@ namespace uml
 			     par.direction <> ParameterDirectionKind::return))
 			*/
 			 
-			virtual bool parameters(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			If the DecisionNode has a decisionInputFlow and an second incoming ObjectFlow, then any decisionInput has two in Parameters, the first of which has a type that is the same as or a supertype of the type of object tokens offered on the non-decisionInputFlow and the second of which has a type that is the same as or a supertype of the type of object tokens offered on the decisionInputFlow.
 			(decisionInput<>null and decisionInputFlow<>null and incoming->forAll(oclIsKindOf(ObjectFlow))) implies
 				decisionInput.inputParameters()->size()=2
 			*/
 			 
-			virtual bool two_input_parameters(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool two_input_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			If the DecisionNode has no decisionInputFlow and an incoming ControlFlow, then any decisionInput Behavior has no in parameters.
 			(decisionInput<>null and decisionInputFlow=null and incoming->exists(oclIsKindOf(ControlFlow))) implies
 			   decisionInput.inputParameters()->isEmpty()
 			*/
 			 
-			virtual bool zero_input_parameters(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool zero_input_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -167,29 +151,25 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior > getDecisionInput() const = 0;
-			
+			virtual std::shared_ptr<uml::Behavior> getDecisionInput() const = 0;
 			/*!
 			A Behavior that is executed to provide an input to guard ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setDecisionInput(std::shared_ptr<uml::Behavior> _decisionInput) = 0;
-			
+			virtual void setDecisionInput(std::shared_ptr<uml::Behavior>) = 0;
 			/*!
 			An additional ActivityEdge incoming to the DecisionNode that provides a decision input value for the guards ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ObjectFlow > getDecisionInputFlow() const = 0;
-			
+			virtual std::shared_ptr<uml::ObjectFlow> getDecisionInputFlow() const = 0;
 			/*!
 			An additional ActivityEdge incoming to the DecisionNode that provides a decision input value for the guards ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setDecisionInputFlow(std::shared_ptr<uml::ObjectFlow> _decisionInputFlow) = 0;
-			
+			virtual void setDecisionInputFlow(std::shared_ptr<uml::ObjectFlow>) = 0;
 			
 
 		protected:
@@ -206,12 +186,12 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			std::shared_ptr<uml::Behavior > m_decisionInput;/*!
+			std::shared_ptr<uml::Behavior> m_decisionInput;/*!
 			An additional ActivityEdge incoming to the DecisionNode that provides a decision input value for the guards ValueSpecifications on ActivityEdges outgoing from the DecisionNode.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			std::shared_ptr<uml::ObjectFlow > m_decisionInputFlow;
+			std::shared_ptr<uml::ObjectFlow> m_decisionInputFlow;
 
 		public:
 			//*********************************
@@ -232,7 +212,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

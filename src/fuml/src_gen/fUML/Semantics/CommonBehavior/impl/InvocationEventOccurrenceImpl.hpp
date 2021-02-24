@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../InvocationEventOccurrence.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::CommonBehavior
 			InvocationEventOccurrenceImpl(const InvocationEventOccurrenceImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			InvocationEventOccurrenceImpl& operator=(InvocationEventOccurrenceImpl const&) = delete;
 
 		protected:
@@ -32,7 +33,6 @@ namespace fUML::Semantics::CommonBehavior
 			InvocationEventOccurrenceImpl();
 			virtual std::shared_ptr<InvocationEventOccurrence> getThisInvocationEventOccurrencePtr() const;
 			virtual void setThisInvocationEventOccurrencePtr(std::weak_ptr<InvocationEventOccurrence> thisInvocationEventOccurrencePtr);
-
 
 
 		public:
@@ -43,12 +43,8 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
-			
-			 
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ; 
 			virtual bool match(std::shared_ptr<uml::Trigger> trigger) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -59,12 +55,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getExecution() const ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getExecution() const ;
 			
+			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>) ;
 			
-			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

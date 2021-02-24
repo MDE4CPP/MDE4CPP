@@ -51,10 +51,11 @@ namespace ecore
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual int getOperationID() const ;
-			
 			 
 			virtual void setOperationID (int _operationID);
+			
 			
 			//*********************************
 			// Reference
@@ -63,21 +64,16 @@ namespace ecore
 			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const ;
 			
 			
-			
 			virtual std::shared_ptr<Bag<ecore::EClassifier>> getEExceptions() const ;
-			
 			
 			
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEGenericExceptions() const ;
 			
 			
-			
 			virtual std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> getEParameters() const ;
 			
 			
-			
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const ;
-			
 			
 			
 			

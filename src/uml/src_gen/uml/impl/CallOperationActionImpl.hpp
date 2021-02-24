@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../CallOperationAction.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			CallOperationActionImpl(const CallOperationActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CallOperationActionImpl& operator=(CallOperationActionImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisCallOperationActionPtr(std::weak_ptr<CallOperationAction> thisCallOperationActionPtr);
 
 			//Additional constructors for the containments back reference
-			CallOperationActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			CallOperationActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			CallOperationActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			CallOperationActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			CallOperationActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			CallOperationActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			CallOperationActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			CallOperationActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -64,9 +56,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool type_target_pin(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -81,30 +71,26 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Operation > getOperation() const ;
-			
+			virtual std::shared_ptr<uml::Operation> getOperation() const ;
 			/*!
 			The Operation being invoked.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setOperation(std::shared_ptr<uml::Operation> _operation) ;
-			
+			virtual void setOperation(std::shared_ptr<uml::Operation>) ;
 			/*!
 			The InputPin that provides the target object to which the Operation call request is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getTarget() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getTarget() const ;
 			/*!
 			The InputPin that provides the target object to which the Operation call request is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::InputPin> _target) ;
+			virtual void setTarget(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -134,7 +120,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

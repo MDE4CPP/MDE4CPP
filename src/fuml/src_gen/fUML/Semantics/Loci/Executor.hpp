@@ -78,7 +78,7 @@ namespace fUML::Semantics::Loci
 			Executor(){}
 
 			//Additional constructors for the containments back reference
-			Executor(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus);
+			Executor(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -90,15 +90,9 @@ namespace fUML::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate(std::shared_ptr<uml::ValueSpecification> specification) = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > execute(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate(std::shared_ptr<uml::ValueSpecification> specification) = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > execute(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) = 0; 
 			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<uml::Class> type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -107,11 +101,9 @@ namespace fUML::Semantics::Loci
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<fUML::Semantics::Loci::Locus > getLocus() const = 0;
+			virtual std::weak_ptr<fUML::Semantics::Loci::Locus> getLocus() const = 0;
 			
-			
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) = 0;
-			
+			virtual void setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus>) = 0;
 			
 
 		protected:
@@ -124,7 +116,7 @@ namespace fUML::Semantics::Loci
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<fUML::Semantics::Loci::Locus > m_locus;
+			std::weak_ptr<fUML::Semantics::Loci::Locus> m_locus;
 
 		public:
 			//*********************************

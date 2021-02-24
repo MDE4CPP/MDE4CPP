@@ -73,16 +73,16 @@ namespace uml
 			PackageableElement(){}
 
 			//Additional constructors for the containments back reference
-			PackageableElement(std::weak_ptr<uml::Namespace > par_namespace);
+			PackageableElement(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-			PackageableElement(std::weak_ptr<uml::Element > par_owner);
+			PackageableElement(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-			PackageableElement(std::weak_ptr<uml::Package > par_owningPackage);
+			PackageableElement(std::weak_ptr<uml::Package> par_owningPackage);
 
 			//Additional constructors for the containments back reference
-			PackageableElement(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+			PackageableElement(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -98,9 +98,7 @@ namespace uml
 			visibility = null implies namespace = null
 			*/
 			 
-			virtual bool namespace_needs_visibility(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool namespace_needs_visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -109,11 +107,9 @@ namespace uml
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<uml::Package > getOwningPackage() const = 0;
+			virtual std::weak_ptr<uml::Package> getOwningPackage() const = 0;
 			
-			
-			virtual void setOwningPackage(std::shared_ptr<uml::Package> _owningPackage) = 0;
-			
+			virtual void setOwningPackage(std::weak_ptr<uml::Package>) = 0;
 			
 
 		protected:
@@ -126,7 +122,7 @@ namespace uml
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<uml::Package > m_owningPackage;
+			std::weak_ptr<uml::Package> m_owningPackage;
 
 		public:
 			//*********************************
@@ -137,7 +133,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -147,7 +143,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

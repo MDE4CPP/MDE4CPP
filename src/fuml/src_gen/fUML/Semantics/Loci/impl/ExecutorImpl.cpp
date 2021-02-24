@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -47,13 +48,14 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
-#include "fUML/Semantics/Loci/impl/LociPackageImpl.hpp"
-
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -75,28 +77,25 @@ ExecutorImpl::~ExecutorImpl()
 }
 
 //Additional constructor for the containments back reference
-ExecutorImpl::ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
+ExecutorImpl::ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus)
 :ExecutorImpl()
 {
 	m_locus = par_locus;
 }
 
-
-ExecutorImpl::ExecutorImpl(const ExecutorImpl & obj):ExecutorImpl()
+ExecutorImpl::ExecutorImpl(const ExecutorImpl & obj): ecore::EModelElementImpl(obj),
+Executor(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Executor "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_locus  = obj.getLocus();
 
-
 	//Clone references with containment (deep copy)
-
-
 }
 
 std::shared_ptr<ecore::EObject>  ExecutorImpl::copy() const
@@ -192,17 +191,15 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> ExecutorImpl:
 /*
 Getter & Setter for reference locus
 */
-std::weak_ptr<fUML::Semantics::Loci::Locus > ExecutorImpl::getLocus() const
+std::weak_ptr<fUML::Semantics::Loci::Locus> ExecutorImpl::getLocus() const
 {
 
     return m_locus;
 }
-
-void ExecutorImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
+void ExecutorImpl::setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
 }
-
 
 
 //*********************************
@@ -293,7 +290,6 @@ void ExecutorImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void ExecutorImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Loci::LociFactory> modelFactory=fUML::Semantics::Loci::LociFactory::eInstance();
 
 	//load BasePackage Nodes
 }

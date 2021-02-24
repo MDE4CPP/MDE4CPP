@@ -80,7 +80,6 @@ namespace ecore
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEBounds() const = 0;
 			
 			
-			
 
 		protected:
 			//*********************************

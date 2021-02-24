@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -33,8 +34,7 @@
 #include "uml/Object.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -57,23 +57,20 @@ ArgumentImpl::~ArgumentImpl()
 }
 
 
-
-ArgumentImpl::ArgumentImpl(const ArgumentImpl & obj):ArgumentImpl()
+ArgumentImpl::ArgumentImpl(const ArgumentImpl & obj): ecore::EModelElementImpl(obj),
+Argument(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Argument "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
-	
 	m_value  = obj.getValue();
 
-
 	//Clone references with containment (deep copy)
-
-
 }
 
 std::shared_ptr<ecore::EObject>  ArgumentImpl::copy() const
@@ -98,12 +95,10 @@ std::string ArgumentImpl::getName() const
 {
 	return m_name;
 }
-
 void ArgumentImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
-
 
 
 //*********************************
@@ -116,17 +111,15 @@ void ArgumentImpl::setName(std::string _name)
 /*
 Getter & Setter for reference value
 */
-std::shared_ptr<uml::Object > ArgumentImpl::getValue() const
+std::shared_ptr<uml::Object> ArgumentImpl::getValue() const
 {
 
     return m_value;
 }
-
 void ArgumentImpl::setValue(std::shared_ptr<uml::Object> _value)
 {
     m_value = _value;
 }
-
 
 
 //*********************************
@@ -252,7 +245,6 @@ void ArgumentImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void ArgumentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 }
@@ -295,9 +287,8 @@ void ArgumentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		{
 			saveHandler->addAttribute("name", this->getName());
 		}
-
 	// Add references
-		saveHandler->addReference("value", this->getValue()); 
+		saveHandler->addReference(this->getValue(), "value", getValue()->eClass() != uml::umlPackage::eInstance()->getObject_Class()); 
 	}
 	catch (std::exception& e)
 	{

@@ -68,10 +68,10 @@ namespace uml
 			TemplateSignature(){}
 
 			//Additional constructors for the containments back reference
-			TemplateSignature(std::weak_ptr<uml::Element > par_owner);
+			TemplateSignature(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-			TemplateSignature(std::weak_ptr<uml::TemplateableElement > par_template);
+			TemplateSignature(std::weak_ptr<uml::TemplateableElement> par_template);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -87,17 +87,13 @@ namespace uml
 			template.ownedElement->includesAll(parameter.parameteredElement->asSet() - parameter.ownedParameteredElement->asSet())
 			*/
 			 
-			virtual bool own_elements(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool own_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The names of the parameters of a TemplateSignature are unique.
 			parameter->forAll( p1, p2 | (p1 <> p2 and p1.parameteredElement.oclIsKindOf(NamedElement) and p2.parameteredElement.oclIsKindOf(NamedElement) ) implies
 			   p1.parameteredElement.oclAsType(NamedElement).name <> p2.parameteredElement.oclAsType(NamedElement).name)
 			*/
 			 
-			virtual bool unique_parameters(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool unique_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -114,21 +110,18 @@ namespace uml
 			
 			
 			
-			
 			/*!
 			The TemplateableElement that owns this TemplateSignature.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::TemplateableElement > getTemplate() const = 0;
-			
+			virtual std::weak_ptr<uml::TemplateableElement> getTemplate() const = 0;
 			/*!
 			The TemplateableElement that owns this TemplateSignature.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setTemplate(std::shared_ptr<uml::TemplateableElement> _template) = 0;
-			
+			virtual void setTemplate(std::weak_ptr<uml::TemplateableElement>) = 0;
 			
 
 		protected:
@@ -155,7 +148,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			std::weak_ptr<uml::TemplateableElement > m_template;
+			std::weak_ptr<uml::TemplateableElement> m_template;
 
 		public:
 			//*********************************
@@ -171,7 +164,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The ordered set of all formal TemplateParameters for this TemplateSignature.
 			<p>From package UML::CommonStructure.</p>
 			*/

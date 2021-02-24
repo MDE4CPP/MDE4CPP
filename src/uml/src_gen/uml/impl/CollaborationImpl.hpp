@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Collaboration.hpp"
 
@@ -24,7 +25,7 @@ namespace uml
 			CollaborationImpl(const CollaborationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			CollaborationImpl& operator=(CollaborationImpl const&) = delete;
 
 		protected:
@@ -34,25 +35,14 @@ namespace uml
 			virtual void setThisCollaborationPtr(std::weak_ptr<Collaboration> thisCollaborationPtr);
 
 			//Additional constructors for the containments back reference
-			CollaborationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			CollaborationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			CollaborationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			CollaborationImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			CollaborationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			CollaborationImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			CollaborationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			CollaborationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -79,7 +69,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> getCollaborationRole() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -104,7 +93,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -119,7 +108,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

@@ -110,27 +110,21 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::InteractionFragment> > enclosingFragment() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::InteractionFragment> > enclosingFragment() = 0;/*!
 			This query returns value true if this MessageEnd is a receiveEvent.
 			message->notEmpty()
 			result = (message.receiveEvent->asSet()->includes(self))
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual bool isReceive() = 0;
-			
-			/*!
+			virtual bool isReceive() = 0;/*!
 			This query returns value true if this MessageEnd is a sendEvent.
 			message->notEmpty()
 			result = (message.sendEvent->asSet()->includes(self))
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual bool isSend() = 0;
-			
-			/*!
+			virtual bool isSend() = 0;/*!
 			This query returns a set including the MessageEnd (if exists) at the opposite end of the Message for this MessageEnd.
 			result = (message->asSet().messageEnd->asSet()->excluding(self))
 			message->notEmpty()
@@ -138,8 +132,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::MessageEnd> > oppositeEnd() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -152,15 +144,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Message > getMessage() const = 0;
-			
+			virtual std::shared_ptr<uml::Message> getMessage() const = 0;
 			/*!
 			References a Message.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setMessage(std::shared_ptr<uml::Message> _message) = 0;
-			
+			virtual void setMessage(std::shared_ptr<uml::Message>) = 0;
 			
 
 		protected:
@@ -177,7 +167,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::Message > m_message;
+			std::shared_ptr<uml::Message> m_message;
 
 		public:
 			//*********************************
@@ -193,7 +183,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

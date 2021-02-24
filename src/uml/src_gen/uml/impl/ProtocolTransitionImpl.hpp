@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ProtocolTransition.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ProtocolTransitionImpl(const ProtocolTransitionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ProtocolTransitionImpl& operator=(ProtocolTransitionImpl const&) = delete;
 
 		protected:
@@ -33,18 +34,11 @@ namespace uml
 			virtual void setThisProtocolTransitionPtr(std::weak_ptr<ProtocolTransition> thisProtocolTransitionPtr);
 
 			//Additional constructors for the containments back reference
-			ProtocolTransitionImpl(std::weak_ptr<uml::Region > par_container);
-
-
+			ProtocolTransitionImpl(std::weak_ptr<uml::Region> par_container);
 			//Additional constructors for the containments back reference
-			ProtocolTransitionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ProtocolTransitionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ProtocolTransitionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ProtocolTransitionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -58,33 +52,25 @@ namespace uml
 			effect = null
 			*/
 			 
-			virtual bool associated_actions(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool associated_actions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A ProtocolTransition always belongs to a ProtocolStateMachine.
 			container.belongsToPSM()
 			*/
 			 
-			virtual bool belongs_to_psm(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool belongs_to_psm(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Derivation for ProtocolTransition::/referred
 			result = (trigger->collect(event)->select(oclIsKindOf(CallEvent))->collect(oclAsType(CallEvent).operation)->asSet())
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Operation> > getReferreds() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Operation> > getReferreds() ;/*!
 			If a ProtocolTransition refers to an Operation (i.e., has a CallEvent trigger corresponding to an Operation), then that Operation should apply to the context Classifier of the StateMachine of the ProtocolTransition.
 			if (referred()->notEmpty() and containingStateMachine()._'context'->notEmpty()) then 
 			    containingStateMachine()._'context'.oclAsType(BehavioredClassifier).allFeatures()->includesAll(referred())
 			else true endif
 			*/
 			 
-			virtual bool refers_to_operation(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool refers_to_operation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -99,29 +85,25 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint > getPostCondition() const ;
-			
+			virtual std::shared_ptr<uml::Constraint> getPostCondition() const ;
 			/*!
 			Specifies the post condition of the Transition which is the Condition that should be obtained once the Transition is triggered. This post condition is part of the post condition of the Operation connected to the Transition.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setPostCondition(std::shared_ptr<uml::Constraint> _postCondition) ;
-			
+			virtual void setPostCondition(std::shared_ptr<uml::Constraint>) ;
 			/*!
 			Specifies the precondition of the Transition. It specifies the Condition that should be verified before triggering the Transition. This guard condition added to the source State will be evaluated as part of the precondition of the Operation referred by the Transition if any.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint > getPreCondition() const ;
-			
+			virtual std::shared_ptr<uml::Constraint> getPreCondition() const ;
 			/*!
 			Specifies the precondition of the Transition. It specifies the Condition that should be verified before triggering the Transition. This guard condition added to the source State will be evaluated as part of the precondition of the Operation referred by the Transition if any.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setPreCondition(std::shared_ptr<uml::Constraint> _preCondition) ;
-			
+			virtual void setPreCondition(std::shared_ptr<uml::Constraint>) ;
 			/*!
 			This association refers to the associated Operation. It is derived from the Operation of the CallEvent Trigger when applicable.
 			<p>From package UML::StateMachines.</p>
@@ -130,7 +112,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Operation>> getReferred() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -145,7 +126,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -160,7 +141,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

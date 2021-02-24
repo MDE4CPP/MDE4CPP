@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../Extension.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			ExtensionImpl(const ExtensionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ExtensionImpl& operator=(ExtensionImpl const&) = delete;
 
 		protected:
@@ -33,25 +34,14 @@ namespace uml
 			virtual void setThisExtensionPtr(std::weak_ptr<Extension> thisExtensionPtr);
 
 			//Additional constructors for the containments back reference
-			ExtensionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ExtensionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ExtensionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ExtensionImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ExtensionImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			ExtensionImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			ExtensionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			ExtensionImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -60,51 +50,37 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 			/*!
 			Retrieves the stereotype that extends a metaclass through this extension.
 			*/
 			 
-			virtual std::shared_ptr<uml::Stereotype> getStereotype() ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Stereotype> getStereotype() ;/*!
 			Retrieves the extension end that is typed by a stereotype (as opposed to a metaclass).
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> getStereotypeEnd() ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Property> getStereotypeEnd() ;/*!
 			The query isRequired() is true if the owned end has a multiplicity with the lower bound of 1.
 			result = (ownedEnd.lowerBound() = 1)
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual bool isRequired() ;
-			
-			/*!
+			virtual bool isRequired() ;/*!
 			An Extension is binary, i.e., it has only two memberEnds.
 			memberEnd->size() = 2
 			*/
 			 
-			virtual bool is_binary(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool is_binary(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The query metaclassEnd() returns the Property that is typed by a metaclass (as opposed to a stereotype).
 			result = (memberEnd->reject(p | ownedEnd->includes(p.oclAsType(ExtensionEnd)))->any(true))
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> metaclassEnd() ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Property> metaclassEnd() ;/*!
 			The non-owned end of an Extension is typed by a Class.
 			metaclassEnd()->notEmpty() and metaclassEnd().type.oclIsKindOf(Class)
 			*/
 			 
-			virtual bool non_owned_end(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool non_owned_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -116,6 +92,8 @@ namespace uml
 			 
 			virtual bool getIsRequired() const ;
 			
+			
+			
 			//*********************************
 			// Reference
 			//*********************************
@@ -124,10 +102,9 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Class > getMetaclass() const ;
+			virtual std::shared_ptr<uml::Class> getMetaclass() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -147,7 +124,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -162,7 +139,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

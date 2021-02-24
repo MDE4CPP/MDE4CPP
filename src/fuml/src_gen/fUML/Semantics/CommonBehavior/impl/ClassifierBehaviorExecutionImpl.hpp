@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ClassifierBehaviorExecution.hpp"
 
@@ -26,7 +27,7 @@ virtual public ClassifierBehaviorExecution
 			ClassifierBehaviorExecutionImpl(const ClassifierBehaviorExecutionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ClassifierBehaviorExecutionImpl& operator=(ClassifierBehaviorExecutionImpl const&) = delete;
 
 		protected:
@@ -34,7 +35,6 @@ virtual public ClassifierBehaviorExecution
 			ClassifierBehaviorExecutionImpl();
 			virtual std::shared_ptr<ClassifierBehaviorExecution> getThisClassifierBehaviorExecutionPtr() const;
 			virtual void setThisClassifierBehaviorExecutionPtr(std::weak_ptr<ClassifierBehaviorExecution> thisClassifierBehaviorExecutionPtr);
-
 
 
 		public:
@@ -45,15 +45,9 @@ virtual public ClassifierBehaviorExecution
 			// Operations
 			//*********************************
 			 
-			virtual void _startObjectBehavior() ;
-			
-			 
-			virtual void execute(std::shared_ptr<Bag<uml::Class>> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) ;
-			
-			 
+			virtual void _startObjectBehavior() ; 
+			virtual void execute(std::shared_ptr<Bag<uml::Class>> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) ; 
 			virtual void terminate() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -64,24 +58,18 @@ virtual public ClassifierBehaviorExecution
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Class > getClassifier() const ;
+			virtual std::shared_ptr<uml::Class> getClassifier() const ;
 			
+			virtual void setClassifier(std::shared_ptr<uml::Class>) ;
 			
-			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getExecution() const ;
 			
+			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>) ;
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getExecution() const ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> getObjectActivation() const ;
 			
+			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>) ;
 			
-			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution) ;
-			
-			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > getObjectActivation() const ;
-			
-			
-			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation) ;
-			
-							
 			
 			//*********************************
 			// Union Getter

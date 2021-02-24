@@ -92,9 +92,7 @@ namespace uml
 			      ce1.collaboration = ce2.collaboration)
 			*/
 			 
-			virtual bool client_elements(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool client_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
 			type.ownedConnector->forAll(connector |
 			  let rolesConnectedInCollab : Set(ConnectableElement) = connector.end.role->asSet(),
@@ -107,16 +105,12 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool connectors(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool connectors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			Every collaborationRole in the Collaboration is bound within the CollaborationUse.
 			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role)))
 			*/
 			 
-			virtual bool every_role(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool every_role(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -131,21 +125,18 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Dependency, uml::Element>> getRoleBinding() const = 0;
 			
-			
 			/*!
 			The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Collaboration > getType() const = 0;
-			
+			virtual std::shared_ptr<uml::Collaboration> getType() const = 0;
 			/*!
 			The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setType(std::shared_ptr<uml::Collaboration> _type) = 0;
-			
+			virtual void setType(std::shared_ptr<uml::Collaboration>) = 0;
 			
 
 		protected:
@@ -167,7 +158,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			std::shared_ptr<uml::Collaboration > m_type;
+			std::shared_ptr<uml::Collaboration> m_type;
 
 		public:
 			//*********************************
@@ -183,7 +174,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -56,8 +57,7 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -80,7 +80,7 @@ PortImpl::~PortImpl()
 }
 
 //Additional constructor for the containments back reference
-PortImpl::PortImpl(std::weak_ptr<uml::Property > par_associationEnd)
+PortImpl::PortImpl(std::weak_ptr<uml::Property> par_associationEnd)
 :PortImpl()
 {
 	m_associationEnd = par_associationEnd;
@@ -88,7 +88,7 @@ PortImpl::PortImpl(std::weak_ptr<uml::Property > par_associationEnd)
 }
 
 //Additional constructor for the containments back reference
-PortImpl::PortImpl(std::weak_ptr<uml::Class > par_class)
+PortImpl::PortImpl(std::weak_ptr<uml::Class> par_class)
 :PortImpl()
 {
 	m_class = par_class;
@@ -96,7 +96,7 @@ PortImpl::PortImpl(std::weak_ptr<uml::Class > par_class)
 }
 
 //Additional constructor for the containments back reference
-PortImpl::PortImpl(std::weak_ptr<uml::DataType > par_datatype)
+PortImpl::PortImpl(std::weak_ptr<uml::DataType> par_datatype)
 :PortImpl()
 {
 	m_datatype = par_datatype;
@@ -104,7 +104,7 @@ PortImpl::PortImpl(std::weak_ptr<uml::DataType > par_datatype)
 }
 
 //Additional constructor for the containments back reference
-PortImpl::PortImpl(std::weak_ptr<uml::Interface > par_interface)
+PortImpl::PortImpl(std::weak_ptr<uml::Interface> par_interface)
 :PortImpl()
 {
 	m_interface = par_interface;
@@ -112,7 +112,7 @@ PortImpl::PortImpl(std::weak_ptr<uml::Interface > par_interface)
 }
 
 //Additional constructor for the containments back reference
-PortImpl::PortImpl(std::weak_ptr<uml::Namespace > par_namespace)
+PortImpl::PortImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :PortImpl()
 {
 	m_namespace = par_namespace;
@@ -120,14 +120,14 @@ PortImpl::PortImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-PortImpl::PortImpl(std::weak_ptr<uml::Element > par_owner)
+PortImpl::PortImpl(std::weak_ptr<uml::Element> par_owner)
 :PortImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-PortImpl::PortImpl(std::weak_ptr<uml::Association > par_owningAssociation)
+PortImpl::PortImpl(std::weak_ptr<uml::Association> par_owningAssociation)
 :PortImpl()
 {
 	m_owningAssociation = par_owningAssociation;
@@ -135,167 +135,37 @@ PortImpl::PortImpl(std::weak_ptr<uml::Association > par_owningAssociation)
 }
 
 //Additional constructor for the containments back reference
-PortImpl::PortImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+PortImpl::PortImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :PortImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-PortImpl::PortImpl(const PortImpl & obj):PortImpl()
+PortImpl::PortImpl(const PortImpl & obj): PropertyImpl(obj), Port(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Port "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_aggregation = obj.getAggregation();
-	m_default = obj.getDefault();
+	//Clone Attributes with (deep copy)
 	m_isBehavior = obj.getIsBehavior();
-	m_isComposite = obj.getIsComposite();
 	m_isConjugated = obj.getIsConjugated();
-	m_isDerived = obj.getIsDerived();
-	m_isDerivedUnion = obj.getIsDerivedUnion();
-	m_isID = obj.getIsID();
-	m_isLeaf = obj.getIsLeaf();
-	m_isOrdered = obj.getIsOrdered();
-	m_isReadOnly = obj.getIsReadOnly();
 	m_isService = obj.getIsService();
-	m_isStatic = obj.getIsStatic();
-	m_isUnique = obj.getIsUnique();
-	m_lower = obj.getLower();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_upper = obj.getUpper();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	m_association  = obj.getAssociation();
-
-	m_associationEnd  = obj.getAssociationEnd();
-
-	m_class  = obj.getClass();
-
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_datatype  = obj.getDatatype();
-
-	std::shared_ptr<Bag<uml::PackageableElement>> _deployedElement = obj.getDeployedElement();
-	m_deployedElement.reset(new Bag<uml::PackageableElement>(*(obj.getDeployedElement().get())));
-
-	std::shared_ptr<Bag<uml::ConnectorEnd>> _end = obj.getEnd();
-	m_end.reset(new Bag<uml::ConnectorEnd>(*(obj.getEnd().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _featuringClassifier = obj.getFeaturingClassifier();
-	m_featuringClassifier.reset(new Union<uml::Classifier>(*(obj.getFeaturingClassifier().get())));
-
-	m_interface  = obj.getInterface();
-
-	m_namespace  = obj.getNamespace();
-
-	m_opposite  = obj.getOpposite();
-
-	m_owner  = obj.getOwner();
-
-	m_owningAssociation  = obj.getOwningAssociation();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
 	m_protocol  = obj.getProtocol();
-
 	std::shared_ptr<Bag<uml::Interface>> _provided = obj.getProvided();
 	m_provided.reset(new Bag<uml::Interface>(*(obj.getProvided().get())));
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
 	std::shared_ptr<Bag<uml::Interface>> _required = obj.getRequired();
 	m_required.reset(new Bag<uml::Interface>(*(obj.getRequired().get())));
 
-	std::shared_ptr<Bag<uml::Property>> _subsettedProperty = obj.getSubsettedProperty();
-	m_subsettedProperty.reset(new Bag<uml::Property>(*(obj.getSubsettedProperty().get())));
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-	m_type  = obj.getType();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getDefaultValue()!=nullptr)
+	std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> redefinedPortContainer = getRedefinedPort();
+	for(auto _redefinedPort : *obj.getRedefinedPort()) 
 	{
-		m_defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getDefaultValue()->copy());
+		redefinedPortContainer->push_back(std::dynamic_pointer_cast<uml::Port>(_redefinedPort->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_defaultValue" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Deployment>> _deploymentList = obj.getDeployment();
-	for(std::shared_ptr<uml::Deployment> _deployment : *_deploymentList)
-	{
-		this->getDeployment()->add(std::shared_ptr<uml::Deployment>(std::dynamic_pointer_cast<uml::Deployment>(_deployment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_deployment" << std::endl;
-	#endif
-	if(obj.getLowerValue()!=nullptr)
-	{
-		m_lowerValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getLowerValue()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_lowerValue" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Property>> _qualifierList = obj.getQualifier();
-	for(std::shared_ptr<uml::Property> _qualifier : *_qualifierList)
-	{
-		this->getQualifier()->add(std::shared_ptr<uml::Property>(std::dynamic_pointer_cast<uml::Property>(_qualifier->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_qualifier" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Port>> _redefinedPortList = obj.getRedefinedPort();
-	for(std::shared_ptr<uml::Port> _redefinedPort : *_redefinedPortList)
-	{
-		this->getRedefinedPort()->add(std::shared_ptr<uml::Port>(std::dynamic_pointer_cast<uml::Port>(_redefinedPort->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedPort" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Property>> _redefinedPropertyList = obj.getRedefinedProperty();
-	for(std::shared_ptr<uml::Property> _redefinedProperty : *_redefinedPropertyList)
-	{
-		this->getRedefinedProperty()->add(std::shared_ptr<uml::Property>(std::dynamic_pointer_cast<uml::Property>(_redefinedProperty->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedProperty" << std::endl;
-	#endif
-	if(obj.getUpperValue()!=nullptr)
-	{
-		m_upperValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getUpperValue()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_upperValue" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  PortImpl::copy() const
@@ -320,12 +190,10 @@ bool PortImpl::getIsBehavior() const
 {
 	return m_isBehavior;
 }
-
 void PortImpl::setIsBehavior(bool _isBehavior)
 {
 	m_isBehavior = _isBehavior;
 } 
-
 
 
 /*
@@ -335,12 +203,10 @@ bool PortImpl::getIsConjugated() const
 {
 	return m_isConjugated;
 }
-
 void PortImpl::setIsConjugated(bool _isConjugated)
 {
 	m_isConjugated = _isConjugated;
 } 
-
 
 
 /*
@@ -350,12 +216,10 @@ bool PortImpl::getIsService() const
 {
 	return m_isService;
 }
-
 void PortImpl::setIsService(bool _isService)
 {
 	m_isService = _isService;
 } 
-
 
 
 //*********************************
@@ -395,13 +259,13 @@ std::shared_ptr<Bag<uml::Interface> > PortImpl::basicRequired()
 	//end of body
 }
 
-bool PortImpl::default_value(Any diagnostics,std::map <  Any ,  Any > context)
+bool PortImpl::default_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool PortImpl::encapsulated_owner(Any diagnostics,std::map <  Any ,  Any > context)
+bool PortImpl::encapsulated_owner(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -425,7 +289,7 @@ std::shared_ptr<Bag<uml::Interface> > PortImpl::getRequireds()
 	//end of body
 }
 
-bool PortImpl::port_aggregation(Any diagnostics,std::map <  Any ,  Any > context)
+bool PortImpl::port_aggregation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -437,17 +301,15 @@ bool PortImpl::port_aggregation(Any diagnostics,std::map <  Any ,  Any > context
 /*
 Getter & Setter for reference protocol
 */
-std::shared_ptr<uml::ProtocolStateMachine > PortImpl::getProtocol() const
+std::shared_ptr<uml::ProtocolStateMachine> PortImpl::getProtocol() const
 {
 
     return m_protocol;
 }
-
 void PortImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
 {
     m_protocol = _protocol;
 }
-
 
 
 /*
@@ -464,8 +326,6 @@ std::shared_ptr<Bag<uml::Interface>> PortImpl::getProvided() const
 
     return m_provided;
 }
-
-
 
 
 
@@ -495,8 +355,6 @@ std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a un
 
 
 
-
-
 /*
 Getter & Setter for reference required
 */
@@ -511,8 +369,6 @@ std::shared_ptr<Bag<uml::Interface>> PortImpl::getRequired() const
 
     return m_required;
 }
-
-
 
 
 
@@ -534,7 +390,7 @@ std::shared_ptr<Union<uml::Classifier>> PortImpl::getFeaturingClassifier() const
 	return m_featuringClassifier;
 }
 
-std::weak_ptr<uml::Namespace > PortImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> PortImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -554,7 +410,7 @@ std::shared_ptr<Union<uml::Element>> PortImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > PortImpl::getOwner() const
+std::weak_ptr<uml::Element> PortImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -850,7 +706,6 @@ void PortImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHand
 
 void PortImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	PropertyImpl::loadNode(nodeName, loadHandler);
@@ -874,14 +729,14 @@ void PortImpl::resolveReferences(const int featureID, std::vector<std::shared_pt
 
 		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
 		{
-			std::shared_ptr<Bag<uml::Port>> _redefinedPort = getRedefinedPort();
+			std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> _redefinedPort = getRedefinedPort();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Port> _r = std::dynamic_pointer_cast<uml::Port>(ref);
+				std::shared_ptr<uml::Port>  _r = std::dynamic_pointer_cast<uml::Port>(ref);
 				if (_r != nullptr)
 				{
 					_redefinedPort->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -942,9 +797,8 @@ void PortImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler
 		{
 			saveHandler->addAttribute("isService", this->getIsService());
 		}
-
 	// Add references
-		saveHandler->addReference("protocol", this->getProtocol()); 
+		saveHandler->addReference(this->getProtocol(), "protocol", getProtocol()->eClass() != uml::umlPackage::eInstance()->getProtocolStateMachine_Class()); 
 		saveHandler->addReferences<uml::Port>("redefinedPort", this->getRedefinedPort());
 	}
 	catch (std::exception& e)

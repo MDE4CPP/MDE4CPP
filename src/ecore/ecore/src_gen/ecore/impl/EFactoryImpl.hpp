@@ -59,9 +59,7 @@ namespace ecore
 			
 			virtual std::shared_ptr<ecore::EPackage> getEPackage() const ;
 			
-			
 			virtual void setEPackage(std::shared_ptr<ecore::EPackage>) ;
-			
 			
 			
 			//*********************************

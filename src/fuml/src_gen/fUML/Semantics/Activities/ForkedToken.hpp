@@ -71,40 +71,30 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken) = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
-			
-			 
-			virtual bool isControl() = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken) = 0; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0; 
+			virtual bool isControl() = 0; 
 			virtual void withdraw() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
-			virtual bool isBaseTokenIsWithdrawn() const = 0;
-			
 			 
-			virtual void setBaseTokenIsWithdrawn (bool _baseTokenIsWithdrawn)= 0;virtual int getRemainingOffersCount() const = 0;
-			
+			virtual bool isBaseTokenIsWithdrawn() const = 0;
+			 
+			virtual void setBaseTokenIsWithdrawn (bool _baseTokenIsWithdrawn)= 0;
+			 
+			virtual int getRemainingOffersCount() const = 0;
 			 
 			virtual void setRemainingOffersCount (int _remainingOffersCount)= 0;
+			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token > getBaseToken() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> getBaseToken() const = 0;
 			
-			
-			virtual void setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token> _baseToken) = 0;
-			
+			virtual void setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token>) = 0;
 			
 
 		protected:
@@ -121,7 +111,7 @@ namespace fUML::Semantics::Activities
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::Activities::Token > m_baseToken;
+			std::shared_ptr<fUML::Semantics::Activities::Token> m_baseToken;
 
 		public:
 			//*********************************

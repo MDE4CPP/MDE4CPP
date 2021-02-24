@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -54,13 +55,12 @@
 #include "fUML/Semantics/Activities/TokenSet.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
-#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
-
-#include "fUML/fUMLFactory.hpp"
-#include "fUML/fUMLPackage.hpp"
-#include "fUML/Semantics/SemanticsFactory.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -82,77 +82,30 @@ ExpansionRegionActivationImpl::~ExpansionRegionActivationImpl()
 }
 
 //Additional constructor for the containments back reference
-ExpansionRegionActivationImpl::ExpansionRegionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+ExpansionRegionActivationImpl::ExpansionRegionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :ExpansionRegionActivationImpl()
 {
 	m_group = par_group;
 }
 
-
-ExpansionRegionActivationImpl::ExpansionRegionActivationImpl(const ExpansionRegionActivationImpl & obj):ExpansionRegionActivationImpl()
+ExpansionRegionActivationImpl::ExpansionRegionActivationImpl(const ExpansionRegionActivationImpl & obj): fUML::Semantics::Actions::ActionActivationImpl(obj), ExpansionRegionActivation(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExpansionRegionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_firing = obj.isFiring();
+	//Clone Attributes with (deep copy)
 	m_next = obj.getNext();
-	m_running = obj.isRunning();
 
 	//copy references with no containment (soft copy)
-	
-	m_action  = obj.getAction();
-
 	std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> _activationGroups = obj.getActivationGroups();
 	m_activationGroups.reset(new Bag<fUML::Semantics::Activities::ExpansionActivationGroup>(*(obj.getActivationGroups().get())));
-
-	m_group  = obj.getGroup();
-
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
-
 	std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputExpansionTokens = obj.getInputExpansionTokens();
 	m_inputExpansionTokens.reset(new Bag<fUML::Semantics::Activities::TokenSet>(*(obj.getInputExpansionTokens().get())));
-
 	std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputTokens = obj.getInputTokens();
 	m_inputTokens.reset(new Bag<fUML::Semantics::Activities::TokenSet>(*(obj.getInputTokens().get())));
 
-	m_node  = obj.getNode();
-
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
-
-	std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>(*(obj.getPinActivation().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _heldTokensList = obj.getHeldTokens();
-	for(std::shared_ptr<fUML::Semantics::Activities::Token> _heldTokens : *_heldTokensList)
-	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Semantics::Activities::Token>(std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_heldTokens->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
-	for(std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
-	{
-		this->getInputPinActivation()->add(std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>(std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>(_inputPinActivation->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
-	for(std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
-	{
-		this->getOutputPinActivation()->add(std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>(std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(_outputPinActivation->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
-	#endif
-
 }
 
 std::shared_ptr<ecore::EObject>  ExpansionRegionActivationImpl::copy() const
@@ -177,12 +130,10 @@ int ExpansionRegionActivationImpl::getNext() const
 {
 	return m_next;
 }
-
 void ExpansionRegionActivationImpl::setNext(int _next)
 {
 	m_next = _next;
 } 
-
 
 
 //*********************************
@@ -623,8 +574,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> Expa
 
 
 
-
-
 /*
 Getter & Setter for reference inputExpansionTokens
 */
@@ -642,8 +591,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActiv
 
 
 
-
-
 /*
 Getter & Setter for reference inputTokens
 */
@@ -658,8 +605,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> ExpansionRegionActiv
 
     return m_inputTokens;
 }
-
-
 
 
 
@@ -934,7 +879,6 @@ void ExpansionRegionActivationImpl::loadAttributes(std::shared_ptr<persistence::
 
 void ExpansionRegionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Actions::ActionActivationImpl::loadNode(nodeName, loadHandler);
@@ -949,11 +893,11 @@ void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::
 			std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> _activationGroups = getActivationGroups();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionActivationGroup>(ref);
+				std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::ExpansionActivationGroup>(ref);
 				if (_r != nullptr)
 				{
 					_activationGroups->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -963,11 +907,11 @@ void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::
 			std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputExpansionTokens = getInputExpansionTokens();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<fUML::Semantics::Activities::TokenSet> _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(ref);
+				std::shared_ptr<fUML::Semantics::Activities::TokenSet>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(ref);
 				if (_r != nullptr)
 				{
 					_inputExpansionTokens->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -977,11 +921,11 @@ void ExpansionRegionActivationImpl::resolveReferences(const int featureID, std::
 			std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> _inputTokens = getInputTokens();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<fUML::Semantics::Activities::TokenSet> _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(ref);
+				std::shared_ptr<fUML::Semantics::Activities::TokenSet>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::TokenSet>(ref);
 				if (_r != nullptr)
 				{
 					_inputTokens->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -1015,7 +959,6 @@ void ExpansionRegionActivationImpl::saveContent(std::shared_ptr<persistence::int
 		{
 			saveHandler->addAttribute("next", this->getNext());
 		}
-
 	// Add references
 		saveHandler->addReferences<fUML::Semantics::Activities::ExpansionActivationGroup>("activationGroups", this->getActivationGroups());
 		saveHandler->addReferences<fUML::Semantics::Activities::TokenSet>("inputExpansionTokens", this->getInputExpansionTokens());

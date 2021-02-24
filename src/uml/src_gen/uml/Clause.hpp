@@ -81,25 +81,19 @@ namespace uml
 			_'body'.oclAsType(Action).allActions().output->includesAll(bodyOutput)
 			*/
 			 
-			virtual bool body_output_pins(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool body_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The decider Pin must be on an Action in the test section of the Clause and must be of type Boolean with multiplicity 1..1.
 			test.oclAsType(Action).allActions().output->includes(decider) and
 			decider.type = Boolean and
 			decider.is(1,1)
 			*/
 			 
-			virtual bool decider_output(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			/*!
+			virtual bool decider_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The test and body parts of a ConditionalNode must be disjoint with each other.
 			test->intersection(_'body')->isEmpty()
 			*/
 			 
-			virtual bool test_and_body(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -114,7 +108,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getBody() const = 0;
 			
-			
 			/*!
 			The OutputPins on Actions within the body section whose values are moved to the result OutputPins of the containing ConditionalNode after execution of the body.
 			<p>From package UML::Actions.</p>
@@ -122,28 +115,24 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::OutputPin>> getBodyOutput() const = 0;
 			
-			
 			/*!
 			An OutputPin on an Action in the test section whose Boolean value determines the result of the test.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getDecider() const = 0;
-			
+			virtual std::shared_ptr<uml::OutputPin> getDecider() const = 0;
 			/*!
 			An OutputPin on an Action in the test section whose Boolean value determines the result of the test.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setDecider(std::shared_ptr<uml::OutputPin> _decider) = 0;
-			
+			virtual void setDecider(std::shared_ptr<uml::OutputPin>) = 0;
 			/*!
 			A set of Clauses whose tests must all evaluate to false before this Clause can evaluate its test.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Clause>> getPredecessorClause() const = 0;
-			
 			
 			/*!
 			A set of Clauses that may not evaluate their tests unless the test for this Clause evaluates to false.
@@ -152,14 +141,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Clause>> getSuccessorClause() const = 0;
 			
-			
 			/*!
 			The set of ExecutableNodes that are executed in order to provide a test result for the Clause.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getTest() const = 0;
-			
 			
 			
 
@@ -187,7 +174,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::OutputPin > m_decider;/*!
+			std::shared_ptr<uml::OutputPin> m_decider;/*!
 			A set of Clauses whose tests must all evaluate to false before this Clause can evaluate its test.
 			<p>From package UML::Actions.</p>
 			*/

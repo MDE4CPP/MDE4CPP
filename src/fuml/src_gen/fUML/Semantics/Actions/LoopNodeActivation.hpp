@@ -82,18 +82,10 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList() = 0;
-			
-			 
-			virtual void runBody() = 0;
-			
-			 
-			virtual void runLoopVariables() = 0;
-			
-			 
+			virtual std::shared_ptr<uml::ActivityNode> makeLoopVariableList() = 0; 
+			virtual void runBody() = 0; 
+			virtual void runLoopVariables() = 0; 
 			virtual bool runTest() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -103,7 +95,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::Values>> getBodyOutputLists() const = 0;
-			
 			
 			
 

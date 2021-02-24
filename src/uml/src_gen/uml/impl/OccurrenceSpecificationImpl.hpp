@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../OccurrenceSpecification.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			OccurrenceSpecificationImpl(const OccurrenceSpecificationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			OccurrenceSpecificationImpl& operator=(OccurrenceSpecificationImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisOccurrenceSpecificationPtr(std::weak_ptr<OccurrenceSpecification> thisOccurrenceSpecificationPtr);
 
 			//Additional constructors for the containments back reference
-			OccurrenceSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
-
-
+			OccurrenceSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
 			//Additional constructors for the containments back reference
-			OccurrenceSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
-
-
+			OccurrenceSpecificationImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand);
 			//Additional constructors for the containments back reference
-			OccurrenceSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			OccurrenceSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			OccurrenceSpecificationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			OccurrenceSpecificationImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -57,15 +49,11 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 			/*!
 			Sets the Lifeline on which the OccurrenceSpecification appears.
 			*/
 			 
 			virtual void setCovered(std::shared_ptr<uml::Lifeline> value) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -82,7 +70,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToAfter() const ;
 			
-			
 			/*!
 			References the GeneralOrderings that specify EventOcurrences that must occur before this OccurrenceSpecification.
 			<p>From package UML::Interactions.</p>
@@ -91,7 +78,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::GeneralOrdering>> getToBefore() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -101,7 +87,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -111,7 +97,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

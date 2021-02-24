@@ -85,7 +85,6 @@ namespace ecore
 			virtual std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> getELiterals() const = 0;
 			
 			
-			
 
 		protected:
 			//*********************************

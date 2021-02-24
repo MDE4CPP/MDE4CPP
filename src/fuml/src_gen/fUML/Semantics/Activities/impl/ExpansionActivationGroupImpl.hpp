@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../ExpansionActivationGroup.hpp"
 
@@ -24,7 +25,7 @@ namespace fUML::Semantics::Activities
 			ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			ExpansionActivationGroupImpl& operator=(ExpansionActivationGroupImpl const&) = delete;
 
 		protected:
@@ -34,14 +35,9 @@ namespace fUML::Semantics::Activities
 			virtual void setThisExpansionActivationGroupPtr(std::weak_ptr<ExpansionActivationGroup> thisExpansionActivationGroupPtr);
 
 			//Additional constructors for the containments back reference
-			ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution > par_activityExecution);
-
-
+			ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> par_activityExecution);
 			//Additional constructors for the containments back reference
-			ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation > par_containingNodeActivation);
-
-
-
+			ExpansionActivationGroupImpl(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> par_containingNodeActivation);
 
 		public:
 			//destructor
@@ -51,26 +47,19 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() const ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) ;
-			
-			 
-			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) ;
-			
-			 
+			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> getActivityExecution() const ; 
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getNodeActivation(std::shared_ptr<uml::ActivityNode> node) ; 
+			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) ; 
 			virtual void suspend(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> activation) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
+			 
 			virtual int getIndex() const ;
-			
 			 
 			virtual void setIndex (int _index);
+			
 			
 			//*********************************
 			// Reference
@@ -79,21 +68,16 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> getGroupInputs() const ;
 			
 			
-			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionNodeActivation>> getGroupOutputs() const ;
 			
 			
+			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> getRegionActivation() const ;
 			
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation > getRegionActivation() const ;
-			
-			
-			virtual void setRegionActivation(std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> _regionActivation) ;
-			
+			virtual void setRegionActivation(std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation>) ;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> getRegionInputs() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter

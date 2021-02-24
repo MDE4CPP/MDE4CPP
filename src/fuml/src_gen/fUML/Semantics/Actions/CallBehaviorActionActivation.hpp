@@ -87,8 +87,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -97,21 +95,16 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::CallBehaviorAction > getCallBehaviorAction() const = 0;
+			virtual std::shared_ptr<uml::CallBehaviorAction> getCallBehaviorAction() const = 0;
 			
-			
-			virtual void setCallBehaviorAction(std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction) = 0;
-			
+			virtual void setCallBehaviorAction(std::shared_ptr<uml::CallBehaviorAction>) = 0;
 			/*Additional Setter for 'CallActionActivation::callAction' redefined by reference 'callBehaviorAction'*/
 			
-			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction) = 0;
-			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callBehaviorAction'*/
+			virtual void setCallAction(std::shared_ptr<uml::CallAction>) = 0;/*Additional Setter for 'ActionActivation::action' redefined by reference 'callBehaviorAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
-			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callBehaviorAction'*/
+			virtual void setAction(std::shared_ptr<uml::Action>) = 0;/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callBehaviorAction'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
 
 		protected:
 			//*********************************
@@ -123,7 +116,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::CallBehaviorAction > m_callBehaviorAction;
+			std::shared_ptr<uml::CallBehaviorAction> m_callBehaviorAction;
 
 		public:
 			//*********************************

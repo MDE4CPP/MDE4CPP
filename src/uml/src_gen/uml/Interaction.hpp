@@ -113,9 +113,7 @@ namespace uml
 			enclosingInteraction->isEmpty()
 			*/
 			 
-			virtual bool not_contained(Any diagnostics,std::map <  Any ,  Any > context) = 0;
-			
-			
+			virtual bool not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -130,14 +128,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Action, uml::Element>> getAction() const = 0;
 			
-			
 			/*!
 			Specifies the gates that form the message interface between this Interaction and any InteractionUses which reference it.
 			<p>From package UML::Interactions.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> getFormalGate() const = 0;
-			
 			
 			/*!
 			The ordered set of fragments in the Interaction.
@@ -146,7 +142,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> getFragment() const = 0;
 			
-			
 			/*!
 			Specifies the participants in this Interaction.
 			<p>From package UML::Interactions.</p>
@@ -154,14 +149,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> getLifeline() const = 0;
 			
-			
 			/*!
 			The Messages contained in this Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Message, uml::NamedElement>> getMessage() const = 0;
-			
 			
 			
 
@@ -225,7 +218,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -240,7 +233,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/

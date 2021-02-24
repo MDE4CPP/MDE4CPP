@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -46,8 +47,7 @@
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -70,7 +70,7 @@ ExpressionImpl::~ExpressionImpl()
 }
 
 //Additional constructor for the containments back reference
-ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ExpressionImpl()
 {
 	m_namespace = par_namespace;
@@ -78,14 +78,14 @@ ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::Element > par_owner)
+ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::Element> par_owner)
 :ExpressionImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
+ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :ExpressionImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -93,7 +93,7 @@ ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
 }
 
 //Additional constructor for the containments back reference
-ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 :ExpressionImpl()
 {
 	m_owningSlot = par_owningSlot;
@@ -101,7 +101,7 @@ ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
 }
 
 //Additional constructor for the containments back reference
-ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :ExpressionImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
@@ -109,73 +109,30 @@ ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owning
 }
 
 //Additional constructor for the containments back reference
-ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction)
 :ExpressionImpl()
 {
 	m_valueSpecificationAction = par_valueSpecificationAction;
 	m_owner = par_valueSpecificationAction;
 }
 
-
-ExpressionImpl::ExpressionImpl(const ExpressionImpl & obj):ExpressionImpl()
+ExpressionImpl::ExpressionImpl(const ExpressionImpl & obj): ValueSpecificationImpl(obj), Expression(obj)
 {
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Expression "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
+	//Clone Attributes with (deep copy)
 	m_symbol = obj.getSymbol();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningSlot  = obj.getOwningSlot();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-	m_type  = obj.getType();
-
-	m_valueSpecificationAction  = obj.getValueSpecificationAction();
-
 
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
+	std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> operandContainer = getOperand();
+	for(auto _operand : *obj.getOperand()) 
 	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
+		operandContainer->push_back(std::dynamic_pointer_cast<uml::ValueSpecification>(_operand->copy()));
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ValueSpecification>> _operandList = obj.getOperand();
-	for(std::shared_ptr<uml::ValueSpecification> _operand : *_operandList)
-	{
-		this->getOperand()->add(std::shared_ptr<uml::ValueSpecification>(std::dynamic_pointer_cast<uml::ValueSpecification>(_operand->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_operand" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_operand->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
@@ -206,12 +163,10 @@ std::string ExpressionImpl::getSymbol() const
 {
 	return m_symbol;
 }
-
 void ExpressionImpl::setSymbol(std::string _symbol)
 {
 	m_symbol = _symbol;
 } 
-
 
 
 //*********************************
@@ -247,12 +202,10 @@ std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> ExpressionImpl::g
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > ExpressionImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> ExpressionImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -272,7 +225,7 @@ std::shared_ptr<Union<uml::Element>> ExpressionImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > ExpressionImpl::getOwner() const
+std::weak_ptr<uml::Element> ExpressionImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -450,7 +403,6 @@ void ExpressionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void ExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -462,14 +414,9 @@ void ExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<uml::ValueSpecification> operand = std::dynamic_pointer_cast<uml::ValueSpecification>(modelFactory->create(typeName));
-			if (operand != nullptr)
-			{
-				std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> list_operand = this->getOperand();
-				list_operand->push_back(operand);
-				loadHandler->handleChild(operand);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::ValueSpecification>(this->getOperand());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)

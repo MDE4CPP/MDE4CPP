@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../LiteralBoolean.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			LiteralBooleanImpl(const LiteralBooleanImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			LiteralBooleanImpl& operator=(LiteralBooleanImpl const&) = delete;
 
 		protected:
@@ -33,30 +34,17 @@ namespace uml
 			virtual void setThisLiteralBooleanPtr(std::weak_ptr<LiteralBoolean> thisLiteralBooleanPtr);
 
 			//Additional constructors for the containments back reference
-			LiteralBooleanImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			LiteralBooleanImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			LiteralBooleanImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			LiteralBooleanImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			LiteralBooleanImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			LiteralBooleanImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			LiteralBooleanImpl(std::weak_ptr<uml::Slot > par_owningSlot);
-
-
+			LiteralBooleanImpl(std::weak_ptr<uml::Slot> par_owningSlot);
 			//Additional constructors for the containments back reference
-			LiteralBooleanImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			LiteralBooleanImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-			LiteralBooleanImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
-
-
-
+			LiteralBooleanImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction);
 
 		public:
 			//destructor
@@ -71,17 +59,13 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool booleanValue() ;
-			
-			/*!
+			virtual bool booleanValue() ;/*!
 			The query isComputable() is redefined to be true.
 			result = (true)
 			<p>From package UML::Values.</p>
 			*/
 			 
 			virtual bool isComputable() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -92,7 +76,6 @@ namespace uml
 			*/
 			 
 			virtual bool getValue() const ;
-			
 			/*!
 			The specified Boolean value.
 			<p>From package UML::Values.</p>
@@ -100,10 +83,11 @@ namespace uml
 			 
 			virtual void setValue (bool _value);
 			
+			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -113,7 +97,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -123,7 +107,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter

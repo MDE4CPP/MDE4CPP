@@ -9,6 +9,7 @@
 
 //*********************************
 // generated Includes
+
 //Model includes
 #include "../InitialNode.hpp"
 
@@ -23,7 +24,7 @@ namespace uml
 			InitialNodeImpl(const InitialNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:    
+		private:
 			InitialNodeImpl& operator=(InitialNodeImpl const&) = delete;
 
 		protected:
@@ -33,22 +34,13 @@ namespace uml
 			virtual void setThisInitialNodePtr(std::weak_ptr<InitialNode> thisInitialNodePtr);
 
 			//Additional constructors for the containments back reference
-			InitialNodeImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			InitialNodeImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			InitialNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			InitialNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			InitialNodeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			InitialNodeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			InitialNodeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			InitialNodeImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,16 +54,12 @@ namespace uml
 			outgoing->forAll(oclIsKindOf(ControlFlow))
 			*/
 			 
-			virtual bool control_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			/*!
+			virtual bool control_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			An InitialNode has no incoming ActivityEdges.
 			incoming->isEmpty()
 			*/
 			 
-			virtual bool no_incoming_edges(Any diagnostics,std::map <  Any ,  Any > context) ;
-			
-			
+			virtual bool no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -81,7 +69,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -101,7 +89,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
