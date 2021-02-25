@@ -90,33 +90,9 @@ using namespace [aClass.generateNamespaceDefinition()/];
 //*********************************
 [className/]::[className/]()
 {	
-	[comment]
-	//*********************************
-	// Attribute Members
-	//*********************************
-	
-	[for (aAttribute : EAttribute | aClass.eAttributes->asOrderedSet()->sortedBy(name)) separator ('\n')]
-	[aAttribute.generateAttributeInit()/][/for]
-
-	//*********************************
-	// Reference Members
-	//*********************************
-	[comment]References must be initialized in this order:
-	1st Unions
-	2nd Subset Unions
-	3rd Subsets that should be unions
-	4th all the rest.
-	[/comment]
-	//References
-	[for (aReference : EReference | aClass.eReferences->asOrderedSet()->sortedBy(name)) separator ('\n')]
-	[aReference.generateReferenceInit()/]
-	[/for]
-
-	//Init references
-	[for (aReference : EReference | aClass.eReferences->asOrderedSet()->sortedBy(name)) separator ('\n')]
-	[aReference.InitReferences()/]
-	[/for]
-	[/comment]
+	/*
+	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	*/
 }
 
 [className/]::~[className/]()
@@ -167,11 +143,23 @@ using namespace [aClass.generateNamespaceDefinition()/];
 [/let]
 
 [comment]Don't forget to call the class contructor before initializing the unions and subsets![/comment]
-[className/]::[className/](const [className/] & obj): [for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator (', ') after (', ')]
-[ClassWithNamespace(aClass, sClass)/]Impl(obj)[/for][if (aClass.eSuperTypes->isEmpty())]
-[if (not(aClass.name='EObject'))]ecore::EModelElementImpl(obj),[/if]
-[/if][aClass.name.toUpperFirst()/](obj)
+[className/]::[className/](const [className/] & obj): [className/]()
 {
+	*this = obj;
+}
+
+[className/]& [className/]::operator=(const [className/] & obj)
+{
+	//call overloaded =Operator for each base class
+	[if (aClass.eSuperTypes->isEmpty() and not(aClass.name='EObject'))]
+	ecore::EModelElementImpl::operator=(obj);
+	[else]
+	[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet())]
+	[ClassWithNamespace(aClass, sClass)/]Impl::operator=(obj);
+	[/for]
+	[/if]
+	[aClass.name.toUpperFirst()/]::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;

@@ -134,12 +134,11 @@ namespace [aClass.generateNamespaceDefinition()/]
 [/if][if(aClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[aClass.name.toUpperFirst()/]>[/if]	{
 		public:
  			[aClass.name.toUpperFirst()/](const [aClass.name.toUpperFirst()/] &) {}
-			[aClass.name.toUpperFirst()/]& operator=([aClass.name.toUpperFirst()/] const&) = delete;
 
 		protected:
 			[aClass.name.toUpperFirst()/](){}
+			[aClass.name.toUpperFirst()/]& operator=([aClass.name.toUpperFirst()/] const&) {};
 			[if(aClass.containsContainerAttribute())]
-
 			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
 			[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
 			//Additional constructors for the containments back reference
