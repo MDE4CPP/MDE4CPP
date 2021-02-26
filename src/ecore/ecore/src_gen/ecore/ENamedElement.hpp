@@ -52,10 +52,10 @@ namespace ecore
 	{
 		public:
  			ENamedElement(const ENamedElement &) {}
-			ENamedElement& operator=(ENamedElement const&) = delete;
 
 		protected:
 			ENamedElement(){}
+			ENamedElement& operator=(const ENamedElement &) = default;
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

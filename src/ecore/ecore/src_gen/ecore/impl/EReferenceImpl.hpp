@@ -24,10 +24,8 @@ namespace ecore
 			EReferenceImpl(const EReferenceImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:
-			EReferenceImpl& operator=(EReferenceImpl const&) = delete;
-
 		protected:
+			EReferenceImpl& operator=(EReferenceImpl const&);
 			friend class ecoreFactoryImpl;
 			EReferenceImpl();
 			virtual std::shared_ptr<EReference> getThisEReferencePtr() const;

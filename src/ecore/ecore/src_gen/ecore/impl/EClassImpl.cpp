@@ -83,8 +83,17 @@ EClassImpl::EClassImpl(std::weak_ptr<ecore::EPackage> par_ePackage)
 	m_ePackage = par_ePackage;
 }
 
-EClassImpl::EClassImpl(const EClassImpl & obj): EClassifierImpl(obj), EClass(obj)
+EClassImpl::EClassImpl(const EClassImpl & obj): EClassImpl()
 {
+	*this = obj;
+}
+
+EClassImpl& EClassImpl::operator=(const EClassImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EClassifierImpl::operator=(obj);
+	EClass::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EClass "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -140,11 +149,13 @@ EClassImpl::EClassImpl(const EClassImpl & obj): EClassifierImpl(obj), EClass(obj
 		std::cout << "Initialising value Subset: " << "m_eOperations - Subset<ecore::EOperation, ecore::EObject >(getEContens())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EClassImpl::copy() const
+std::shared_ptr<ecore::EObject> EClassImpl::copy() const
 {
-	std::shared_ptr<EClassImpl> element(new EClassImpl(*this));
+	std::shared_ptr<EClassImpl> element(new EClassImpl());
+	*element =(*this);
 	element->setThisEClassPtr(element);
 	return element;
 }

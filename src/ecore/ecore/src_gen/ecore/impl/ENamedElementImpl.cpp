@@ -67,8 +67,17 @@ ENamedElementImpl::ENamedElementImpl(std::weak_ptr<ecore::EObject> par_eContaine
 	m_eContainer = par_eContainer;
 }
 
-ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj): EModelElementImpl(obj), ENamedElement(obj)
+ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj): ENamedElementImpl()
 {
+	*this = obj;
+}
+
+ENamedElementImpl& ENamedElementImpl::operator=(const ENamedElementImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EModelElementImpl::operator=(obj);
+	ENamedElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ENamedElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -79,11 +88,13 @@ ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj): EModelEleme
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ENamedElementImpl::copy() const
+std::shared_ptr<ecore::EObject> ENamedElementImpl::copy() const
 {
-	std::shared_ptr<ENamedElementImpl> element(new ENamedElementImpl(*this));
+	std::shared_ptr<ENamedElementImpl> element(new ENamedElementImpl());
+	*element =(*this);
 	element->setThisENamedElementPtr(element);
 	return element;
 }

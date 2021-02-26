@@ -54,11 +54,10 @@ namespace ecore
 	{
 		public:
  			EEnumLiteral(const EEnumLiteral &) {}
-			EEnumLiteral& operator=(EEnumLiteral const&) = delete;
 
 		protected:
 			EEnumLiteral(){}
-
+			EEnumLiteral& operator=(const EEnumLiteral &) = default;
 			//Additional constructors for the containments back reference
 			EEnumLiteral(std::weak_ptr<ecore::EObject> par_eContainer);
 

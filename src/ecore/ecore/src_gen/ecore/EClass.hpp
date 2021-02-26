@@ -62,10 +62,10 @@ namespace ecore
 	{
 		public:
  			EClass(const EClass &) {}
-			EClass& operator=(EClass const&) = delete;
 
 		protected:
 			EClass(){}
+			EClass& operator=(const EClass &) = default;
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

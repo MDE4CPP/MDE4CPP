@@ -71,8 +71,17 @@ EFactoryImpl::EFactoryImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 	m_eContainer = par_eContainer;
 }
 
-EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj): EModelElementImpl(obj), EFactory(obj)
+EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj): EFactoryImpl()
 {
+	*this = obj;
+}
+
+EFactoryImpl& EFactoryImpl::operator=(const EFactoryImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EModelElementImpl::operator=(obj);
+	EFactory::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EFactory "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -83,11 +92,13 @@ EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj): EModelElementImpl(obj), EF
 	m_ePackage  = obj.getEPackage();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EFactoryImpl::copy() const
+std::shared_ptr<ecore::EObject> EFactoryImpl::copy() const
 {
-	std::shared_ptr<EFactoryImpl> element(new EFactoryImpl(*this));
+	std::shared_ptr<EFactoryImpl> element(new EFactoryImpl());
+	*element =(*this);
 	element->setThisEFactoryPtr(element);
 	return element;
 }

@@ -54,10 +54,10 @@ namespace ecore
 	{
 		public:
  			ETypeParameter(const ETypeParameter &) {}
-			ETypeParameter& operator=(ETypeParameter const&) = delete;
 
 		protected:
 			ETypeParameter(){}
+			ETypeParameter& operator=(const ETypeParameter &) = default;
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

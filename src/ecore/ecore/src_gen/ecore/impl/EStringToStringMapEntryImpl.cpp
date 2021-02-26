@@ -56,9 +56,17 @@ EStringToStringMapEntryImpl::~EStringToStringMapEntryImpl()
 }
 
 
-EStringToStringMapEntryImpl::EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj): ecore::EModelElementImpl(obj),
-EStringToStringMapEntry(obj)
+EStringToStringMapEntryImpl::EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj): EStringToStringMapEntryImpl()
 {
+	*this = obj;
+}
+
+EStringToStringMapEntryImpl& EStringToStringMapEntryImpl::operator=(const EStringToStringMapEntryImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	EStringToStringMapEntry::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EStringToStringMapEntry "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -70,11 +78,13 @@ EStringToStringMapEntry(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EStringToStringMapEntryImpl::copy() const
+std::shared_ptr<ecore::EObject> EStringToStringMapEntryImpl::copy() const
 {
-	std::shared_ptr<EStringToStringMapEntryImpl> element(new EStringToStringMapEntryImpl(*this));
+	std::shared_ptr<EStringToStringMapEntryImpl> element(new EStringToStringMapEntryImpl());
+	*element =(*this);
 	element->setThisEStringToStringMapEntryPtr(element);
 	return element;
 }

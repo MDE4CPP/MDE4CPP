@@ -78,8 +78,17 @@ EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EClass> par_
 	m_eContainingClass = par_eContainingClass;
 }
 
-EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & obj): ETypedElementImpl(obj), EStructuralFeature(obj)
+EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & obj): EStructuralFeatureImpl()
 {
+	*this = obj;
+}
+
+EStructuralFeatureImpl& EStructuralFeatureImpl::operator=(const EStructuralFeatureImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ETypedElementImpl::operator=(obj);
+	EStructuralFeature::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EStructuralFeature "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -98,11 +107,13 @@ EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & ob
 	m_eContainingClass  = obj.getEContainingClass();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EStructuralFeatureImpl::copy() const
+std::shared_ptr<ecore::EObject> EStructuralFeatureImpl::copy() const
 {
-	std::shared_ptr<EStructuralFeatureImpl> element(new EStructuralFeatureImpl(*this));
+	std::shared_ptr<EStructuralFeatureImpl> element(new EStructuralFeatureImpl());
+	*element =(*this);
 	element->setThisEStructuralFeaturePtr(element);
 	return element;
 }

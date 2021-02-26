@@ -56,10 +56,10 @@ namespace ecore
 	{
 		public:
  			EEnum(const EEnum &) {}
-			EEnum& operator=(EEnum const&) = delete;
 
 		protected:
 			EEnum(){}
+			EEnum& operator=(const EEnum &) = default;
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

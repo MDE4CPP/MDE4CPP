@@ -54,10 +54,10 @@ namespace ecore
 	{
 		public:
  			EDataType(const EDataType &) {}
-			EDataType& operator=(EDataType const&) = delete;
 
 		protected:
 			EDataType(){}
+			EDataType& operator=(const EDataType &) = default;
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

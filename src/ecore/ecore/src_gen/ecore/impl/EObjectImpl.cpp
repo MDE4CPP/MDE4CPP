@@ -69,9 +69,16 @@ EObjectImpl::EObjectImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 	m_eContainer = par_eContainer;
 }
 
-EObjectImpl::EObjectImpl(const EObjectImpl & obj): 
-EObject(obj)
+EObjectImpl::EObjectImpl(const EObjectImpl & obj): EObjectImpl()
 {
+	*this = obj;
+}
+
+EObjectImpl& EObjectImpl::operator=(const EObjectImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EObject::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EObject "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -83,11 +90,13 @@ EObject(obj)
 	m_eContainer  = obj.getEContainer();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EObjectImpl::copy() const
+std::shared_ptr<ecore::EObject> EObjectImpl::copy() const
 {
-	std::shared_ptr<EObjectImpl> element(new EObjectImpl(*this));
+	std::shared_ptr<EObjectImpl> element(new EObjectImpl());
+	*element =(*this);
 	element->setThisEObjectPtr(element);
 	return element;
 }

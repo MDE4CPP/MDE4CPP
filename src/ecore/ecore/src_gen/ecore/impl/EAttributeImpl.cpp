@@ -79,8 +79,17 @@ EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EClass> par_eContainingClass
 	m_eContainingClass = par_eContainingClass;
 }
 
-EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj): EStructuralFeatureImpl(obj), EAttribute(obj)
+EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj): EAttributeImpl()
 {
+	*this = obj;
+}
+
+EAttributeImpl& EAttributeImpl::operator=(const EAttributeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EStructuralFeatureImpl::operator=(obj);
+	EAttribute::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EAttribute "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -92,11 +101,13 @@ EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj): EStructuralFeatureIm
 	m_eAttributeType  = obj.getEAttributeType();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EAttributeImpl::copy() const
+std::shared_ptr<ecore::EObject> EAttributeImpl::copy() const
 {
-	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl(*this));
+	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl());
+	*element =(*this);
 	element->setThisEAttributePtr(element);
 	return element;
 }

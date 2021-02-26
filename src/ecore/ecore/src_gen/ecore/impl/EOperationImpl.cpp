@@ -80,8 +80,17 @@ EOperationImpl::EOperationImpl(std::weak_ptr<ecore::EClass> par_eContainingClass
 	m_eContainingClass = par_eContainingClass;
 }
 
-EOperationImpl::EOperationImpl(const EOperationImpl & obj): ETypedElementImpl(obj), EOperation(obj)
+EOperationImpl::EOperationImpl(const EOperationImpl & obj): EOperationImpl()
 {
+	*this = obj;
+}
+
+EOperationImpl& EOperationImpl::operator=(const EOperationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ETypedElementImpl::operator=(obj);
+	EOperation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EOperation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -118,11 +127,13 @@ EOperationImpl::EOperationImpl(const EOperationImpl & obj): ETypedElementImpl(ob
 	#endif
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EOperationImpl::copy() const
+std::shared_ptr<ecore::EObject> EOperationImpl::copy() const
 {
-	std::shared_ptr<EOperationImpl> element(new EOperationImpl(*this));
+	std::shared_ptr<EOperationImpl> element(new EOperationImpl());
+	*element =(*this);
 	element->setThisEOperationPtr(element);
 	return element;
 }

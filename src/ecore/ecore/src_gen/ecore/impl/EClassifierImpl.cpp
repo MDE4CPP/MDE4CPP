@@ -76,8 +76,17 @@ EClassifierImpl::EClassifierImpl(std::weak_ptr<ecore::EPackage> par_ePackage)
 	m_ePackage = par_ePackage;
 }
 
-EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj): ENamedElementImpl(obj), EClassifier(obj)
+EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj): EClassifierImpl()
 {
+	*this = obj;
+}
+
+EClassifierImpl& EClassifierImpl::operator=(const EClassifierImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ENamedElementImpl::operator=(obj);
+	EClassifier::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EClassifier "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -98,11 +107,13 @@ EClassifierImpl::EClassifierImpl(const EClassifierImpl & obj): ENamedElementImpl
 		eTypeParametersContainer->push_back(std::dynamic_pointer_cast<ecore::ETypeParameter>(_eTypeParameters->copy()));
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EClassifierImpl::copy() const
+std::shared_ptr<ecore::EObject> EClassifierImpl::copy() const
 {
-	std::shared_ptr<EClassifierImpl> element(new EClassifierImpl(*this));
+	std::shared_ptr<EClassifierImpl> element(new EClassifierImpl());
+	*element =(*this);
 	element->setThisEClassifierPtr(element);
 	return element;
 }

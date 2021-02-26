@@ -24,10 +24,8 @@ namespace ecore
 			EAnnotationImpl(const EAnnotationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:
-			EAnnotationImpl& operator=(EAnnotationImpl const&) = delete;
-
 		protected:
+			EAnnotationImpl& operator=(EAnnotationImpl const&);
 			friend class ecoreFactoryImpl;
 			EAnnotationImpl();
 			virtual std::shared_ptr<EAnnotation> getThisEAnnotationPtr() const;

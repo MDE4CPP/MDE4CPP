@@ -61,9 +61,17 @@ EGenericTypeImpl::~EGenericTypeImpl()
 }
 
 
-EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj): ecore::EModelElementImpl(obj),
-EGenericType(obj)
+EGenericTypeImpl::EGenericTypeImpl(const EGenericTypeImpl & obj): EGenericTypeImpl()
 {
+	*this = obj;
+}
+
+EGenericTypeImpl& EGenericTypeImpl::operator=(const EGenericTypeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	EGenericType::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EGenericType "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -92,11 +100,13 @@ EGenericType(obj)
 	
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EGenericTypeImpl::copy() const
+std::shared_ptr<ecore::EObject> EGenericTypeImpl::copy() const
 {
-	std::shared_ptr<EGenericTypeImpl> element(new EGenericTypeImpl(*this));
+	std::shared_ptr<EGenericTypeImpl> element(new EGenericTypeImpl());
+	*element =(*this);
 	element->setThisEGenericTypePtr(element);
 	return element;
 }

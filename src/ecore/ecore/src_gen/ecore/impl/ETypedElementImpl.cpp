@@ -69,8 +69,17 @@ ETypedElementImpl::ETypedElementImpl(std::weak_ptr<ecore::EObject> par_eContaine
 	m_eContainer = par_eContainer;
 }
 
-ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj): ENamedElementImpl(obj), ETypedElement(obj)
+ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj): ETypedElementImpl()
 {
+	*this = obj;
+}
+
+ETypedElementImpl& ETypedElementImpl::operator=(const ETypedElementImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ENamedElementImpl::operator=(obj);
+	ETypedElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ETypedElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -92,11 +101,13 @@ ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj): ENamedEleme
 		m_eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEGenericType()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ETypedElementImpl::copy() const
+std::shared_ptr<ecore::EObject> ETypedElementImpl::copy() const
 {
-	std::shared_ptr<ETypedElementImpl> element(new ETypedElementImpl(*this));
+	std::shared_ptr<ETypedElementImpl> element(new ETypedElementImpl());
+	*element =(*this);
 	element->setThisETypedElementPtr(element);
 	return element;
 }

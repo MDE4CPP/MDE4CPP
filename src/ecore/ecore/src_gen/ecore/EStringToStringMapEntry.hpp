@@ -48,10 +48,10 @@ namespace ecore
 	{
 		public:
  			EStringToStringMapEntry(const EStringToStringMapEntry &) {}
-			EStringToStringMapEntry& operator=(EStringToStringMapEntry const&) = delete;
 
 		protected:
 			EStringToStringMapEntry(){}
+			EStringToStringMapEntry& operator=(const EStringToStringMapEntry &) = default;
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

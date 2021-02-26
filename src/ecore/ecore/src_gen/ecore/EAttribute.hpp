@@ -56,10 +56,10 @@ namespace ecore
 	{
 		public:
  			EAttribute(const EAttribute &) {}
-			EAttribute& operator=(EAttribute const&) = delete;
 
 		protected:
 			EAttribute(){}
+			EAttribute& operator=(const EAttribute &) = default;
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

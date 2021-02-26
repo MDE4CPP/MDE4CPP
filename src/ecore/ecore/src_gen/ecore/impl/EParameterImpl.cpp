@@ -77,8 +77,17 @@ EParameterImpl::EParameterImpl(std::weak_ptr<ecore::EOperation> par_eOperation)
 	m_eOperation = par_eOperation;
 }
 
-EParameterImpl::EParameterImpl(const EParameterImpl & obj): ETypedElementImpl(obj), EParameter(obj)
+EParameterImpl::EParameterImpl(const EParameterImpl & obj): EParameterImpl()
 {
+	*this = obj;
+}
+
+EParameterImpl& EParameterImpl::operator=(const EParameterImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ETypedElementImpl::operator=(obj);
+	EParameter::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EParameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -89,11 +98,13 @@ EParameterImpl::EParameterImpl(const EParameterImpl & obj): ETypedElementImpl(ob
 	m_eOperation  = obj.getEOperation();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EParameterImpl::copy() const
+std::shared_ptr<ecore::EObject> EParameterImpl::copy() const
 {
-	std::shared_ptr<EParameterImpl> element(new EParameterImpl(*this));
+	std::shared_ptr<EParameterImpl> element(new EParameterImpl());
+	*element =(*this);
 	element->setThisEParameterPtr(element);
 	return element;
 }

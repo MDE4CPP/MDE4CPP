@@ -238,17 +238,7 @@ std::shared_ptr<uml::Behavior> ExecutionImpl::getBehavior() const
 	//generated from getterbody annotation
 if(!m_behavior)
 {
-	auto type = this->getTypes();
-	if(nullptr != type)
-	{
-		m_behavior = std::dynamic_pointer_cast<uml::Behavior>(this->getTypes()->front());
-		std::cout << "Type: " <<m_behavior ->getName() << std::endl;
-	}
-	else
-	{
-		std::cout <<"Element has no type: " << this->m_metaElementID << std::endl;
-
-	}
+	m_behavior = std::dynamic_pointer_cast<uml::Behavior>(this->getTypes()->front());
 }
 
 return m_behavior;

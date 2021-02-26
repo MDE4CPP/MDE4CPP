@@ -54,10 +54,10 @@ namespace ecore
 	{
 		public:
  			ETypedElement(const ETypedElement &) {}
-			ETypedElement& operator=(ETypedElement const&) = delete;
 
 		protected:
 			ETypedElement(){}
+			ETypedElement& operator=(const ETypedElement &) = default;
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

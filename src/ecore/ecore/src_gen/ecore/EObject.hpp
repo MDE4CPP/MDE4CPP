@@ -58,11 +58,10 @@ namespace ecore
 	{
 		public:
  			EObject(const EObject &) {}
-			EObject& operator=(EObject const&) = delete;
 
 		protected:
 			EObject(){}
-
+			EObject& operator=(const EObject &) = default;
 			//Additional constructors for the containments back reference
 			EObject(std::weak_ptr<ecore::EObject> par_eContainer);
 

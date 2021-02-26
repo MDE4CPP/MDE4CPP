@@ -76,8 +76,17 @@ EDataTypeImpl::EDataTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage)
 	m_ePackage = par_ePackage;
 }
 
-EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj): EClassifierImpl(obj), EDataType(obj)
+EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj): EDataTypeImpl()
 {
+	*this = obj;
+}
+
+EDataTypeImpl& EDataTypeImpl::operator=(const EDataTypeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EClassifierImpl::operator=(obj);
+	EDataType::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EDataType "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -88,11 +97,13 @@ EDataTypeImpl::EDataTypeImpl(const EDataTypeImpl & obj): EClassifierImpl(obj), E
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EDataTypeImpl::copy() const
+std::shared_ptr<ecore::EObject> EDataTypeImpl::copy() const
 {
-	std::shared_ptr<EDataTypeImpl> element(new EDataTypeImpl(*this));
+	std::shared_ptr<EDataTypeImpl> element(new EDataTypeImpl());
+	*element =(*this);
 	element->setThisEDataTypePtr(element);
 	return element;
 }

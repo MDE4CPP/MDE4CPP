@@ -24,10 +24,8 @@ namespace ecore
 			EClassifierImpl(const EClassifierImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:
-			EClassifierImpl& operator=(EClassifierImpl const&) = delete;
-
 		protected:
+			EClassifierImpl& operator=(EClassifierImpl const&);
 			friend class ecoreFactoryImpl;
 			EClassifierImpl();
 			virtual std::shared_ptr<EClassifier> getThisEClassifierPtr() const;

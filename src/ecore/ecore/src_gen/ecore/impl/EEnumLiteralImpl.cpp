@@ -75,8 +75,17 @@ EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EEnum> par_eEnum)
 	m_eEnum = par_eEnum;
 }
 
-EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj): ENamedElementImpl(obj), EEnumLiteral(obj)
+EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj): EEnumLiteralImpl()
 {
+	*this = obj;
+}
+
+EEnumLiteralImpl& EEnumLiteralImpl::operator=(const EEnumLiteralImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ENamedElementImpl::operator=(obj);
+	EEnumLiteral::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EEnumLiteral "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -90,11 +99,13 @@ EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj): ENamedElementI
 	m_eEnum  = obj.getEEnum();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EEnumLiteralImpl::copy() const
+std::shared_ptr<ecore::EObject> EEnumLiteralImpl::copy() const
 {
-	std::shared_ptr<EEnumLiteralImpl> element(new EEnumLiteralImpl(*this));
+	std::shared_ptr<EEnumLiteralImpl> element(new EEnumLiteralImpl());
+	*element =(*this);
 	element->setThisEEnumLiteralPtr(element);
 	return element;
 }

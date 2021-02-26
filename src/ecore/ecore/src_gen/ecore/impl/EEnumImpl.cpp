@@ -77,8 +77,17 @@ EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EPackage> par_ePackage)
 	m_ePackage = par_ePackage;
 }
 
-EEnumImpl::EEnumImpl(const EEnumImpl & obj): EDataTypeImpl(obj), EEnum(obj)
+EEnumImpl::EEnumImpl(const EEnumImpl & obj): EEnumImpl()
 {
+	*this = obj;
+}
+
+EEnumImpl& EEnumImpl::operator=(const EEnumImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EDataTypeImpl::operator=(obj);
+	EEnum::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EEnum "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -99,11 +108,13 @@ EEnumImpl::EEnumImpl(const EEnumImpl & obj): EDataTypeImpl(obj), EEnum(obj)
 		std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContens())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EEnumImpl::copy() const
+std::shared_ptr<ecore::EObject> EEnumImpl::copy() const
 {
-	std::shared_ptr<EEnumImpl> element(new EEnumImpl(*this));
+	std::shared_ptr<EEnumImpl> element(new EEnumImpl());
+	*element =(*this);
 	element->setThisEEnumPtr(element);
 	return element;
 }

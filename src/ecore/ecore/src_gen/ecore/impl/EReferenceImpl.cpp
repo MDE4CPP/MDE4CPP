@@ -80,8 +80,17 @@ EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EClass> par_eContainingClass
 	m_eContainingClass = par_eContainingClass;
 }
 
-EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj): EStructuralFeatureImpl(obj), EReference(obj)
+EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj): EReferenceImpl()
 {
+	*this = obj;
+}
+
+EReferenceImpl& EReferenceImpl::operator=(const EReferenceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EStructuralFeatureImpl::operator=(obj);
+	EReference::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EReference "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -98,11 +107,13 @@ EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj): EStructuralFeatureIm
 	m_eReferenceType  = obj.getEReferenceType();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EReferenceImpl::copy() const
+std::shared_ptr<ecore::EObject> EReferenceImpl::copy() const
 {
-	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl(*this));
+	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl());
+	*element =(*this);
 	element->setThisEReferencePtr(element);
 	return element;
 }

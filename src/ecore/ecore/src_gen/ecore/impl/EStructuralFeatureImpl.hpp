@@ -24,10 +24,8 @@ namespace ecore
 			EStructuralFeatureImpl(const EStructuralFeatureImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:
-			EStructuralFeatureImpl& operator=(EStructuralFeatureImpl const&) = delete;
-
 		protected:
+			EStructuralFeatureImpl& operator=(EStructuralFeatureImpl const&);
 			friend class ecoreFactoryImpl;
 			EStructuralFeatureImpl();
 			virtual std::shared_ptr<EStructuralFeature> getThisEStructuralFeaturePtr() const;

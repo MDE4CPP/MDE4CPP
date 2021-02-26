@@ -137,7 +137,7 @@ namespace [aClass.generateNamespaceDefinition()/]
 
 		protected:
 			[aClass.name.toUpperFirst()/](){}
-			[aClass.name.toUpperFirst()/]& operator=([aClass.name.toUpperFirst()/] const&) {};
+			[aClass.name.toUpperFirst()/]& operator=(const [aClass.name.toUpperFirst()/] &) = default;
 			[if(aClass.containsContainerAttribute())]
 			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
 			[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]

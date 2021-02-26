@@ -26,10 +26,8 @@ virtual public EStringToStringMapEntry
 			EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
 
-		private:
-			EStringToStringMapEntryImpl& operator=(EStringToStringMapEntryImpl const&) = delete;
-
 		protected:
+			EStringToStringMapEntryImpl& operator=(EStringToStringMapEntryImpl const&);
 			friend class ecoreFactoryImpl;
 			EStringToStringMapEntryImpl();
 			virtual std::shared_ptr<EStringToStringMapEntry> getThisEStringToStringMapEntryPtr() const;

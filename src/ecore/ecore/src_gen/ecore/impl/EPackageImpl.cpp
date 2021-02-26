@@ -77,8 +77,17 @@ EPackageImpl::EPackageImpl(std::weak_ptr<ecore::EPackage> par_eSuperPackage)
 	m_eSuperPackage = par_eSuperPackage;
 }
 
-EPackageImpl::EPackageImpl(const EPackageImpl & obj): ENamedElementImpl(obj), EPackage(obj)
+EPackageImpl::EPackageImpl(const EPackageImpl & obj): EPackageImpl()
 {
+	*this = obj;
+}
+
+EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ENamedElementImpl::operator=(obj);
+	EPackage::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EPackage "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -109,11 +118,13 @@ EPackageImpl::EPackageImpl(const EPackageImpl & obj): ENamedElementImpl(obj), EP
 	#endif
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EPackageImpl::copy() const
+std::shared_ptr<ecore::EObject> EPackageImpl::copy() const
 {
-	std::shared_ptr<EPackageImpl> element(new EPackageImpl(*this));
+	std::shared_ptr<EPackageImpl> element(new EPackageImpl());
+	*element =(*this);
 	element->setThisEPackagePtr(element);
 	return element;
 }

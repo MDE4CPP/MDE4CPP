@@ -66,8 +66,17 @@ EModelElementImpl::EModelElementImpl(std::weak_ptr<ecore::EObject> par_eContaine
 	m_eContainer = par_eContainer;
 }
 
-EModelElementImpl::EModelElementImpl(const EModelElementImpl & obj): EObjectImpl(obj), EModelElement(obj)
+EModelElementImpl::EModelElementImpl(const EModelElementImpl & obj): EModelElementImpl()
 {
+	*this = obj;
+}
+
+EModelElementImpl& EModelElementImpl::operator=(const EModelElementImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EObjectImpl::operator=(obj);
+	EModelElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EModelElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -88,11 +97,13 @@ EModelElementImpl::EModelElementImpl(const EModelElementImpl & obj): EObjectImpl
 		std::cout << "Initialising value Subset: " << "m_eAnnotations - Subset<ecore::EAnnotation, ecore::EObject >(getEContens())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EModelElementImpl::copy() const
+std::shared_ptr<ecore::EObject> EModelElementImpl::copy() const
 {
-	std::shared_ptr<EModelElementImpl> element(new EModelElementImpl(*this));
+	std::shared_ptr<EModelElementImpl> element(new EModelElementImpl());
+	*element =(*this);
 	element->setThisEModelElementPtr(element);
 	return element;
 }
