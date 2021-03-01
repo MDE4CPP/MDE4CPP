@@ -170,7 +170,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 [className/]::[className/](const [className/] & obj): [className/]()
 {
 [comment]
-	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
+	NOTE: Due to virtual inheritance, base class copy constrcutors may not be called correctly
 	*/
 [/comment]
 	*this = obj;
@@ -178,10 +178,11 @@ using namespace [aClass.generateNamespaceDefinition()/];
 
 [className/]& [className/]::operator=(const [className/] & obj)
 {
-	//call overloaded =Operator for each base class
 	[if (aClass.eSuperTypes->isEmpty() and not(aClass.name='EObject'))]
+	//call overloaded =Operator for each base class
 	ecore::EModelElementImpl::operator=(obj);
 	[else]
+	//call overloaded =Operator for each base class
 	[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet())]
 	[ClassWithNamespace(aClass, sClass)/]Impl::operator=(obj);
 	[/for]

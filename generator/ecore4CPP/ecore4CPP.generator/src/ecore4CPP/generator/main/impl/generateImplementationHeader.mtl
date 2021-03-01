@@ -56,9 +56,9 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 		public: 
 			[className/](const [className/] & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
+			[className/]& operator=([className/] const&); [comment partial =operator is possible/]
 
 		protected:
-			[className/]& operator=([className/] const&);
 			[if (not (aClass.ePackage = aClass.getRootPackage()))]
 			friend class [aClass.getRootPackage().name/][aClass.getPackageAccess(true)/]::[aClass.ePackage.name/]FactoryImpl;
 			[else]
