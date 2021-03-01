@@ -1,0 +1,175 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_3kvXEHbBEeuHKM93Id1DkQ" name="copyTestUML" URI="http://sse.tu-ilmenau.de/copyTestUML">
+  <eAnnotations xmi:id="_3kvXEXbBEeuHKM93Id1DkQ" source="prepareApplication">
+    <details xmi:id="_3kvXEnbBEeuHKM93Id1DkQ" key="sourceCodeMain" value="&#xA;&#x9;std::cout &lt;&lt; &quot;init _____&quot; &lt;&lt; std::endl;&#xA;&#x9;std::shared_ptr&lt;Merge> m1 = factory->createMerge();&#xA;&#x9;std::shared_ptr&lt;Merge> m2 = factory->createMerge();&#xA;&#x9;std::shared_ptr&lt;Merge> e1 = factory->createMerge();&#xA;&#x9;std::shared_ptr&lt;Merge> e2 = factory->createMerge();&#xA;&#xA;&#x9;m1->init(1);&#xA;&#x9;m2->init(2);&#xA;&#x9;e1->init(3);&#xA;&#x9;e2->init(4);&#xA;&#xA;&#x9;std::cout &lt;&lt; &quot;m1:&quot; &lt;&lt;m1->toString();&#xA;&#x9;std::cout &lt;&lt; &quot;m2:&quot; &lt;&lt;m2->toString();&#xA;&#x9;std::cout &lt;&lt; &quot;e1:&quot; &lt;&lt;e1->toString();&#xA;&#x9;std::cout &lt;&lt; &quot;e2:&quot; &lt;&lt;e2->toString();&#xA;&#xA;&#x9;std::cout &lt;&lt; &quot;copy _____&quot; &lt;&lt; std::endl;&#xA;&#x9;std::shared_ptr&lt;Merge> m3(new MergeImpl(*(std::dynamic_pointer_cast&lt;MergeImpl>(m1))));&#xA;&#x9;std::shared_ptr&lt;Merge> m4(std::dynamic_pointer_cast&lt;Merge>(m2->copy()));&#xA;&#x9;std::shared_ptr&lt;Sub1> s1(std::dynamic_pointer_cast&lt;Sub1>(m2->copy()));&#xA;&#x9;std::shared_ptr&lt;Sub2> s2(new Sub2Impl(*(std::dynamic_pointer_cast&lt;Sub2Impl>(m2))));&#xA;&#xA;&#x9;std::cout &lt;&lt; &quot;m3:&quot; &lt;&lt; m3->toString();&#xA;&#x9;std::cout &lt;&lt; &quot;m4:&quot; &lt;&lt; m4->toString();&#xA;&#x9;std::cout &lt;&lt; &quot;s1:&quot; &lt;&lt; s1->toString();&#xA;&#x9;std::cout &lt;&lt; &quot;s2:&quot; &lt;&lt; s2->toString() &lt;&lt; std::endl;&#xA;&#xA;&#x9;std::cout &lt;&lt; &quot;assignment using = operator _____&quot; &lt;&lt; std::endl;&#xA;&#x9;*e1=(*m1);&#xA;&#x9;std::shared_ptr&lt;Sub2> e2Sub2Ptr=e2;&#xA;&#x9;*e2Sub2Ptr=(*s2);&#xA;&#xA;&#x9;std::cout &lt;&lt; &quot;e1:&quot; &lt;&lt; e1->toString();&#xA;&#x9;std::cout &lt;&lt; &quot;Attention! partial =operator&quot; &lt;&lt; std::endl;&#xA;&#x9;std::cout &lt;&lt; &quot;e2:&quot; &lt;&lt; e2->toString();&#xA;&#xA;&#x9;std::cout &lt;&lt; &quot;Test: &quot; &lt;&lt; std::endl;&#xA;#ifdef _WIN32&#xA;&#x9;HANDLE hOut = GetStdHandle(STD_OUTPUT_HANDLE);&#xA;&#x9;if (hOut == INVALID_HANDLE_VALUE) { return GetLastError(); }&#xA;&#x9;DWORD dwMode = 0;&#xA;&#x9;if (!GetConsoleMode(hOut, &amp;dwMode)) { return GetLastError(); }&#xA;&#x9;dwMode |=  0x0004; //ENABLE_VIRTUAL_TERMINAL_PROCESSING&#xA;&#x9;if (!SetConsoleMode(hOut, dwMode)) { return GetLastError(); }&#xA;#endif&#xA;&#x9;std::string testResult1=&quot;b:1,s1:1,b:1,s2:1,m:1\n&quot;;&#xA;&#x9;std::string testResult2=&quot;b:2,s1:2,b:2,s2:2,m:2\n&quot;;&#xA;&#x9;std::string testResult3=&quot;b:2,s2:2,&quot;;&#xA;&#x9;std::string testResult4=&quot;b:2,s1:4,b:2,s2:2,m:4\n&quot;;&#xA;&#x9;if(&#xA;&#x9;&#x9;  (m3->toString() == testResult1)&#xA;&#x9;&#x9;&amp;&amp;(m4->toString() == testResult2)&#xA;&#x9;&#x9;&amp;&amp;(s1->toString() == testResult2)&#xA;&#x9;&#x9;&amp;&amp;(s2->toString() == testResult3)&#xA;&#x9;&#x9;&amp;&amp;(e1->toString() == testResult1)&#xA;&#x9;&#x9;&amp;&amp;(e2->toString() == testResult4)&#xA;&#x9;)&#xA;&#x9;{&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;\033[92m&quot; &lt;&lt; &quot;success&quot; &lt;&lt; &quot;\033[0m&quot; &lt;&lt; std::endl;&#xA;&#x9;}&#xA;&#x9;else&#xA;&#x9;{&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;\033[91m&quot; &lt;&lt; &quot;failure!&quot; &lt;&lt; &quot;\033[0m&quot; &lt;&lt; std::endl;&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;Result should be:&quot;&lt;&lt; std::endl;&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;m3:&quot; &lt;&lt; testResult1;&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;m4:&quot; &lt;&lt; testResult2;&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;s1:&quot; &lt;&lt; testResult2;&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;s2:&quot; &lt;&lt; testResult3&lt;&lt; std::endl;&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;e1:&quot; &lt;&lt; testResult1;&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;e2:&quot; &lt;&lt; testResult4;&#xA;&#x9;&#x9;return -1;&#xA;&#x9;}"/>
+    <details xmi:id="_3kvXE3bBEeuHKM93Id1DkQ" key="sourceCodeMainIncludes" value="#include &quot;copyTestUML/impl/MergeImpl.hpp&quot;&#xA;#ifdef _WIN32&#xA;&#x9;#include &quot;windows.h&quot;&#xA;#endif"/>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_3kv-IHbBEeuHKM93Id1DkQ" name="Base">
+    <ownedAttribute xmi:id="_3kv-I3bBEeuHKM93Id1DkQ" name="b" visibility="public" isOrdered="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_3kv-JHbBEeuHKM93Id1DkQ">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EString"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_R9Sl4HbHEeuHKM93Id1DkQ" name="obToString" specification="_3kv-JXbBEeuHKM93Id1DkQ">
+      <ownedParameter xmi:id="_q3n8gHbHEeuHKM93Id1DkQ" name="returnStr" isOrdered="true" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_q3n8gXbHEeuHKM93Id1DkQ" value="1"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <language>INCLUDE</language>
+      <body>std::stringstream stream;&#xD;
+stream &lt;&lt; &quot;b:&quot; &lt;&lt; m_b &lt;&lt; &quot;,&quot;;&#xD;
+return stream.str();</body>
+      <body>#include &lt;sstream></body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_lILtcHbHEeuHKM93Id1DkQ" name="obInit" specification="_3kv-K3bBEeuHKM93Id1DkQ">
+      <ownedParameter xmi:id="_p3EecHbHEeuHKM93Id1DkQ" name="i" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_p3EecXbHEeuHKM93Id1DkQ"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>m_b = i;</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_3kv-JXbBEeuHKM93Id1DkQ" name="toString" visibility="public" method="_R9Sl4HbHEeuHKM93Id1DkQ" isQuery="true">
+      <ownedParameter xmi:id="_3kv-KXbBEeuHKM93Id1DkQ" name="returnStr" isOrdered="true" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3kv-KnbBEeuHKM93Id1DkQ" value="1"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_3kv-K3bBEeuHKM93Id1DkQ" name="init" visibility="public" method="_lILtcHbHEeuHKM93Id1DkQ">
+      <ownedParameter xmi:id="_3kv-MHbBEeuHKM93Id1DkQ" name="i" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3kv-MXbBEeuHKM93Id1DkQ"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_3kv-MnbBEeuHKM93Id1DkQ" name="Sub1">
+    <generalization xmi:id="_3kv-M3bBEeuHKM93Id1DkQ" general="_3kv-IHbBEeuHKM93Id1DkQ"/>
+    <ownedAttribute xmi:id="_3kv-NHbBEeuHKM93Id1DkQ" name="s1" visibility="public" isOrdered="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_3kv-NXbBEeuHKM93Id1DkQ">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_G298QHbIEeuHKM93Id1DkQ" name="obToString" specification="_3kv-NnbBEeuHKM93Id1DkQ">
+      <ownedParameter xmi:id="_G298QXbIEeuHKM93Id1DkQ" name="returnStr" isOrdered="true" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_G298QnbIEeuHKM93Id1DkQ" value="1"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <language>INCLUDE</language>
+      <body>std::stringstream stream;&#xD;
+stream &lt;&lt; BaseImpl::toString() &lt;&lt; &quot;s1:&quot; &lt;&lt; m_s1 &lt;&lt; &quot;,&quot;;&#xD;
+return stream.str();</body>
+      <body>#include &lt;sstream></body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_SFRnwHbIEeuHKM93Id1DkQ" name="obInit" specification="_3kv-PHbBEeuHKM93Id1DkQ">
+      <ownedParameter xmi:id="_SFRnwXbIEeuHKM93Id1DkQ" name="i" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_SFRnwnbIEeuHKM93Id1DkQ"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>BaseImpl::init(i);&#xD;
+m_s1 = i;</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_3kv-NnbBEeuHKM93Id1DkQ" name="toString" visibility="public" method="_G298QHbIEeuHKM93Id1DkQ" isQuery="true">
+      <ownedParameter xmi:id="_3kv-OnbBEeuHKM93Id1DkQ" name="returnStr" isOrdered="true" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3kv-O3bBEeuHKM93Id1DkQ" value="1"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_3kv-PHbBEeuHKM93Id1DkQ" name="init" visibility="public" method="_SFRnwHbIEeuHKM93Id1DkQ">
+      <ownedParameter xmi:id="_3kv-QXbBEeuHKM93Id1DkQ" name="i" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3kv-QnbBEeuHKM93Id1DkQ" value="1"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_3kv-Q3bBEeuHKM93Id1DkQ" name="Sub2">
+    <generalization xmi:id="_3kv-RHbBEeuHKM93Id1DkQ" general="_3kv-IHbBEeuHKM93Id1DkQ"/>
+    <ownedAttribute xmi:id="_3kv-RXbBEeuHKM93Id1DkQ" name="s2" visibility="public" isOrdered="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_3kv-RnbBEeuHKM93Id1DkQ">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_bTQaQHbIEeuHKM93Id1DkQ" name="obInit" specification="_3kv-TXbBEeuHKM93Id1DkQ">
+      <ownedParameter xmi:id="_bTQaQXbIEeuHKM93Id1DkQ" name="i" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_bTQaQnbIEeuHKM93Id1DkQ"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>BaseImpl::init(i);&#xD;
+m_s2 = i;</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_a6Kk0HbIEeuHKM93Id1DkQ" name="obToString" specification="_3kv-R3bBEeuHKM93Id1DkQ">
+      <ownedParameter xmi:id="_a6Kk0XbIEeuHKM93Id1DkQ" name="returnStr" isOrdered="true" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_a6Kk0nbIEeuHKM93Id1DkQ" value="1"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <language>INCLUDE</language>
+      <body>std::stringstream stream;&#xD;
+stream &lt;&lt; BaseImpl::toString() &lt;&lt; &quot;s2:&quot; &lt;&lt; m_s2 &lt;&lt; &quot;,&quot;;&#xD;
+return stream.str();</body>
+      <body>#include &lt;sstream></body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_3kv-R3bBEeuHKM93Id1DkQ" name="toString" visibility="public" method="_a6Kk0HbIEeuHKM93Id1DkQ" isQuery="true">
+      <ownedParameter xmi:id="_3kv-S3bBEeuHKM93Id1DkQ" name="returnStr" isOrdered="true" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3kv-THbBEeuHKM93Id1DkQ" value="1"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_3kv-TXbBEeuHKM93Id1DkQ" name="init" visibility="public" method="_bTQaQHbIEeuHKM93Id1DkQ">
+      <ownedParameter xmi:id="_3kv-UnbBEeuHKM93Id1DkQ" name="i" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3kv-U3bBEeuHKM93Id1DkQ" value="1"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_3kv-VHbBEeuHKM93Id1DkQ" name="Merge">
+    <generalization xmi:id="_3kv-VXbBEeuHKM93Id1DkQ" general="_3kv-Q3bBEeuHKM93Id1DkQ"/>
+    <generalization xmi:id="_3kv-VnbBEeuHKM93Id1DkQ" general="_3kv-MnbBEeuHKM93Id1DkQ"/>
+    <ownedAttribute xmi:id="_3kv-V3bBEeuHKM93Id1DkQ" name="m" visibility="public" isOrdered="true">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_3kv-WHbBEeuHKM93Id1DkQ">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml#EInt"/>
+      </defaultValue>
+    </ownedAttribute>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_7GN1kHbIEeuHKM93Id1DkQ" name="obInit" specification="_3kv-X3bBEeuHKM93Id1DkQ">
+      <ownedParameter xmi:id="_7GN1kXbIEeuHKM93Id1DkQ" name="i" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7GN1knbIEeuHKM93Id1DkQ"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>Sub1Impl::init(i);&#xD;
+Sub2Impl::init(i);&#xD;
+m_m = i;</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_7GN1k3bIEeuHKM93Id1DkQ" name="obToString" specification="_3kv-WXbBEeuHKM93Id1DkQ">
+      <ownedParameter xmi:id="_7GN1lHbIEeuHKM93Id1DkQ" name="returnStr" isOrdered="true" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_7GN1lXbIEeuHKM93Id1DkQ" value="1"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <language>INCLUDE</language>
+      <body>	std::stringstream stream;&#xD;
+	stream &lt;&lt; Sub1Impl::toString() &lt;&lt; Sub2Impl::toString() &lt;&lt; &quot;m:&quot; &lt;&lt; m_m &lt;&lt; std::endl;&#xD;
+	return stream.str();</body>
+      <body>#include &lt;sstream></body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_3kv-WXbBEeuHKM93Id1DkQ" name="toString" visibility="public" method="_7GN1k3bIEeuHKM93Id1DkQ" isQuery="true">
+      <ownedParameter xmi:id="_3kv-XXbBEeuHKM93Id1DkQ" name="returnStr" isOrdered="true" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3kv-XnbBEeuHKM93Id1DkQ" value="1"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_3kv-X3bBEeuHKM93Id1DkQ" name="init" visibility="public" method="_7GN1kHbIEeuHKM93Id1DkQ">
+      <ownedParameter xmi:id="_3kv-ZHbBEeuHKM93Id1DkQ" name="i" isOrdered="true">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_3kv-ZXbBEeuHKM93Id1DkQ" value="1"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+</uml:Model>
