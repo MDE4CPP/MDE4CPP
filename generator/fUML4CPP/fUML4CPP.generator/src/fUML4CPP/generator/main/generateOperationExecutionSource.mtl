@@ -55,18 +55,20 @@ using namespace [aPackage.generateNamespace(false)/];
 
 [behaviorName/]::[behaviorName/](const [behaviorName/] &obj)
 {
-	OpaqueBehaviorExecutionImpl::operator=(obj);
+	*this = obj;
 }
 
 std::shared_ptr<ecore::EObject> [behaviorName/]::copy() const
 {
-	std::shared_ptr<[behaviorName/]> element(new [behaviorName/](*this));
+	std::shared_ptr<[behaviorName/]> element(new [behaviorName/]());
+	*element=(*this); 
 	element->setThisExecutionPtr(element);
 	return element;
 }
 
 [behaviorName/]& [behaviorName/]::operator=(const [behaviorName/] & obj)
 {
+	fUML::Semantics::CommonBehavior::OpaqueBehaviorExecutionImpl::operator=(const [behaviorName/] & obj);
 	return *this;
 }
 

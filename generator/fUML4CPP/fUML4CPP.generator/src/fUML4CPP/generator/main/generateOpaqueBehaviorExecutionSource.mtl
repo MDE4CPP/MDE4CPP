@@ -60,13 +60,15 @@ using namespace [aPackage.generateNamespace(false)/];
 
 std::shared_ptr<ecore::EObject> [behaviorName/]::copy() const
 {
-	std::shared_ptr<[behaviorName/]> element(new [behaviorName/](*this));
+	std::shared_ptr<[behaviorName/]> element(new [behaviorName/]());
+	*element=(*this);
 	element->setThisExecutionPtr(element);
 	return element;
 }
 
 [behaviorName/]& [behaviorName/]::operator=(const [behaviorName/] & obj)
 {
+	fUML::Semantics::CommonBehavior::OpaqueBehaviorExecutionImpl::operator=(obj); 
 	return *this;
 }
 
