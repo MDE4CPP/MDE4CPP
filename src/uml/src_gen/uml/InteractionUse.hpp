@@ -71,8 +71,6 @@ namespace uml
 	{
 		public:
  			InteractionUse(const InteractionUse &) {}
-			InteractionUse& operator=(InteractionUse const&) = delete;
-
 		protected:
 			InteractionUse(){}
 

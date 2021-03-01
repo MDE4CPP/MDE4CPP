@@ -53,8 +53,6 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public:
  			RealValue(const RealValue &) {}
-			RealValue& operator=(RealValue const&) = delete;
-
 		protected:
 			RealValue(){}
 

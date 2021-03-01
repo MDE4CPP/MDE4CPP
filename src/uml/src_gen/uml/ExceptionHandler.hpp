@@ -64,11 +64,8 @@ namespace uml
 	{
 		public:
  			ExceptionHandler(const ExceptionHandler &) {}
-			ExceptionHandler& operator=(ExceptionHandler const&) = delete;
-
 		protected:
 			ExceptionHandler(){}
-
 			//Additional constructors for the containments back reference
 			ExceptionHandler(std::weak_ptr<uml::Element> par_owner);
 

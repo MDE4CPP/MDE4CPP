@@ -81,11 +81,8 @@ namespace uml
 	{
 		public:
  			Property(const Property &) {}
-			Property& operator=(Property const&) = delete;
-
 		protected:
 			Property(){}
-
 			//Additional constructors for the containments back reference
 			Property(std::weak_ptr<uml::Property> par_associationEnd);
 

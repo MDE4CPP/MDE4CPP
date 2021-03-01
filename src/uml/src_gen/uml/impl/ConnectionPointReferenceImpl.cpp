@@ -100,8 +100,17 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::St
 	m_namespace = par_state;
 }
 
-ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPointReferenceImpl & obj): VertexImpl(obj), ConnectionPointReference(obj)
+ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPointReferenceImpl & obj): ConnectionPointReferenceImpl()
 {
+	*this = obj;
+}
+
+ConnectionPointReferenceImpl& ConnectionPointReferenceImpl::operator=(const ConnectionPointReferenceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	VertexImpl::operator=(obj);
+	ConnectionPointReference::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ConnectionPointReference "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -116,11 +125,13 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPoint
 	m_state  = obj.getState();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ConnectionPointReferenceImpl::copy() const
+std::shared_ptr<ecore::EObject> ConnectionPointReferenceImpl::copy() const
 {
-	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl(*this));
+	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl());
+	*element =(*this);
 	element->setThisConnectionPointReferencePtr(element);
 	return element;
 }

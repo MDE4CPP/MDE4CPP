@@ -129,8 +129,17 @@ ActorImpl::ActorImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplatePar
 }
 
 
-ActorImpl::ActorImpl(const ActorImpl & obj): BehavioredClassifierImpl(obj), Actor(obj)
+ActorImpl::ActorImpl(const ActorImpl & obj): ActorImpl()
 {
+	*this = obj;
+}
+
+ActorImpl& ActorImpl::operator=(const ActorImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	BehavioredClassifierImpl::operator=(obj);
+	Actor::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Actor "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -140,11 +149,13 @@ ActorImpl::ActorImpl(const ActorImpl & obj): BehavioredClassifierImpl(obj), Acto
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActorImpl::copy() const
+std::shared_ptr<ecore::EObject> ActorImpl::copy() const
 {
-	std::shared_ptr<ActorImpl> element(new ActorImpl(*this));
+	std::shared_ptr<ActorImpl> element(new ActorImpl());
+	*element =(*this);
 	element->setThisActorPtr(element);
 	return element;
 }

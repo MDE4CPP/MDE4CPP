@@ -110,8 +110,17 @@ AddStructuralFeatureValueActionImpl::AddStructuralFeatureValueActionImpl(std::we
 	m_owner = par_owner;
 }
 
-AddStructuralFeatureValueActionImpl::AddStructuralFeatureValueActionImpl(const AddStructuralFeatureValueActionImpl & obj): WriteStructuralFeatureActionImpl(obj), AddStructuralFeatureValueAction(obj)
+AddStructuralFeatureValueActionImpl::AddStructuralFeatureValueActionImpl(const AddStructuralFeatureValueActionImpl & obj): AddStructuralFeatureValueActionImpl()
 {
+	*this = obj;
+}
+
+AddStructuralFeatureValueActionImpl& AddStructuralFeatureValueActionImpl::operator=(const AddStructuralFeatureValueActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	WriteStructuralFeatureActionImpl::operator=(obj);
+	AddStructuralFeatureValueAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AddStructuralFeatureValueAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -127,11 +136,13 @@ AddStructuralFeatureValueActionImpl::AddStructuralFeatureValueActionImpl(const A
 		m_insertAt = std::dynamic_pointer_cast<uml::InputPin>(obj.getInsertAt()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  AddStructuralFeatureValueActionImpl::copy() const
+std::shared_ptr<ecore::EObject> AddStructuralFeatureValueActionImpl::copy() const
 {
-	std::shared_ptr<AddStructuralFeatureValueActionImpl> element(new AddStructuralFeatureValueActionImpl(*this));
+	std::shared_ptr<AddStructuralFeatureValueActionImpl> element(new AddStructuralFeatureValueActionImpl());
+	*element =(*this);
 	element->setThisAddStructuralFeatureValueActionPtr(element);
 	return element;
 }

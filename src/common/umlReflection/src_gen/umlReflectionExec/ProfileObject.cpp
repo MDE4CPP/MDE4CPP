@@ -94,20 +94,18 @@
 using namespace UML;
 
 ProfileObject::ProfileObject(std::shared_ptr<uml::Profile> _element):
-
 	m_ProfileValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Profile());
+{
 }
 
 ProfileObject::ProfileObject(ProfileObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ProfileObject::ProfileObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Profile());
 }
 
 ProfileObject::~ProfileObject()
@@ -116,10 +114,18 @@ ProfileObject::~ProfileObject()
 
 std::shared_ptr<ecore::EObject> ProfileObject::copy()
 {
-	std::shared_ptr<ProfileObject> element(new ProfileObject(*this));
+	std::shared_ptr<ProfileObject> element(new ProfileObject());
+	*element=(*this);
 	element->setThisProfileObjectPtr(element);
 	return element;
 }
+
+ProfileObject& ProfileObject::operator=(const ProfileObject & obj)
+{
+	UML::PackageObject::operator=(obj);
+	return *this;
+}
+
 
 void ProfileObject::destroy()
 {	

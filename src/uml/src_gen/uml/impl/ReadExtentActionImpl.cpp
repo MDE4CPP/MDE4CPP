@@ -109,8 +109,17 @@ ReadExtentActionImpl::ReadExtentActionImpl(std::weak_ptr<uml::Element> par_owner
 	m_owner = par_owner;
 }
 
-ReadExtentActionImpl::ReadExtentActionImpl(const ReadExtentActionImpl & obj): ActionImpl(obj), ReadExtentAction(obj)
+ReadExtentActionImpl::ReadExtentActionImpl(const ReadExtentActionImpl & obj): ReadExtentActionImpl()
 {
+	*this = obj;
+}
+
+ReadExtentActionImpl& ReadExtentActionImpl::operator=(const ReadExtentActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	ReadExtentAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReadExtentAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -126,11 +135,13 @@ ReadExtentActionImpl::ReadExtentActionImpl(const ReadExtentActionImpl & obj): Ac
 		m_result = std::dynamic_pointer_cast<uml::OutputPin>(obj.getResult()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReadExtentActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ReadExtentActionImpl::copy() const
 {
-	std::shared_ptr<ReadExtentActionImpl> element(new ReadExtentActionImpl(*this));
+	std::shared_ptr<ReadExtentActionImpl> element(new ReadExtentActionImpl());
+	*element =(*this);
 	element->setThisReadExtentActionPtr(element);
 	return element;
 }

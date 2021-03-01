@@ -174,8 +174,17 @@ ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::WriteStructuralFeature
 	m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
 }
 
-ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj): InputPinImpl(obj), ActionInputPin(obj)
+ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj): ActionInputPinImpl()
 {
+	*this = obj;
+}
+
+ActionInputPinImpl& ActionInputPinImpl::operator=(const ActionInputPinImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	InputPinImpl::operator=(obj);
+	ActionInputPin::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActionInputPin "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -190,11 +199,13 @@ ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj): InputPin
 		m_fromAction = std::dynamic_pointer_cast<uml::Action>(obj.getFromAction()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActionInputPinImpl::copy() const
+std::shared_ptr<ecore::EObject> ActionInputPinImpl::copy() const
 {
-	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(*this));
+	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl());
+	*element =(*this);
 	element->setThisActionInputPinPtr(element);
 	return element;
 }

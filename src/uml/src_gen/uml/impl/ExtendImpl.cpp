@@ -92,8 +92,18 @@ ExtendImpl::ExtendImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ExtendImpl::ExtendImpl(const ExtendImpl & obj): DirectedRelationshipImpl(obj), NamedElementImpl(obj), Extend(obj)
+ExtendImpl::ExtendImpl(const ExtendImpl & obj): ExtendImpl()
 {
+	*this = obj;
+}
+
+ExtendImpl& ExtendImpl::operator=(const ExtendImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	DirectedRelationshipImpl::operator=(obj);
+	Extend::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Extend "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -115,11 +125,13 @@ ExtendImpl::ExtendImpl(const ExtendImpl & obj): DirectedRelationshipImpl(obj), N
 		m_extendedCase = std::dynamic_pointer_cast<uml::UseCase>(obj.getExtendedCase()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExtendImpl::copy() const
+std::shared_ptr<ecore::EObject> ExtendImpl::copy() const
 {
-	std::shared_ptr<ExtendImpl> element(new ExtendImpl(*this));
+	std::shared_ptr<ExtendImpl> element(new ExtendImpl());
+	*element =(*this);
 	element->setThisExtendPtr(element);
 	return element;
 }

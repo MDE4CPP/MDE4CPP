@@ -122,20 +122,18 @@
 using namespace UML;
 
 ConditionalNodeObject::ConditionalNodeObject(std::shared_ptr<uml::ConditionalNode> _element):
-
 	m_ConditionalNodeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ConditionalNode());
+{
 }
 
 ConditionalNodeObject::ConditionalNodeObject(ConditionalNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ConditionalNodeObject::ConditionalNodeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ConditionalNode());
 }
 
 ConditionalNodeObject::~ConditionalNodeObject()
@@ -144,10 +142,18 @@ ConditionalNodeObject::~ConditionalNodeObject()
 
 std::shared_ptr<ecore::EObject> ConditionalNodeObject::copy()
 {
-	std::shared_ptr<ConditionalNodeObject> element(new ConditionalNodeObject(*this));
+	std::shared_ptr<ConditionalNodeObject> element(new ConditionalNodeObject());
+	*element=(*this);
 	element->setThisConditionalNodeObjectPtr(element);
 	return element;
 }
+
+ConditionalNodeObject& ConditionalNodeObject::operator=(const ConditionalNodeObject & obj)
+{
+	UML::StructuredActivityNodeObject::operator=(obj);
+	return *this;
+}
+
 
 void ConditionalNodeObject::destroy()
 {	

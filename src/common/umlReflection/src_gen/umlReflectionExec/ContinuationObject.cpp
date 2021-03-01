@@ -62,20 +62,18 @@
 using namespace UML;
 
 ContinuationObject::ContinuationObject(std::shared_ptr<uml::Continuation> _element):
-
 	m_ContinuationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Continuation());
+{
 }
 
 ContinuationObject::ContinuationObject(ContinuationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ContinuationObject::ContinuationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Continuation());
 }
 
 ContinuationObject::~ContinuationObject()
@@ -84,10 +82,18 @@ ContinuationObject::~ContinuationObject()
 
 std::shared_ptr<ecore::EObject> ContinuationObject::copy()
 {
-	std::shared_ptr<ContinuationObject> element(new ContinuationObject(*this));
+	std::shared_ptr<ContinuationObject> element(new ContinuationObject());
+	*element=(*this);
 	element->setThisContinuationObjectPtr(element);
 	return element;
 }
+
+ContinuationObject& ContinuationObject::operator=(const ContinuationObject & obj)
+{
+	UML::InteractionFragmentObject::operator=(obj);
+	return *this;
+}
+
 
 void ContinuationObject::destroy()
 {	

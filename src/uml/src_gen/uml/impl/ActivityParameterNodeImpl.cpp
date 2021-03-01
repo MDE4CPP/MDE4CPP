@@ -110,8 +110,17 @@ ActivityParameterNodeImpl::ActivityParameterNodeImpl(std::weak_ptr<uml::Element>
 	m_owner = par_owner;
 }
 
-ActivityParameterNodeImpl::ActivityParameterNodeImpl(const ActivityParameterNodeImpl & obj): ObjectNodeImpl(obj), ActivityParameterNode(obj)
+ActivityParameterNodeImpl::ActivityParameterNodeImpl(const ActivityParameterNodeImpl & obj): ActivityParameterNodeImpl()
 {
+	*this = obj;
+}
+
+ActivityParameterNodeImpl& ActivityParameterNodeImpl::operator=(const ActivityParameterNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ObjectNodeImpl::operator=(obj);
+	ActivityParameterNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityParameterNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -122,11 +131,13 @@ ActivityParameterNodeImpl::ActivityParameterNodeImpl(const ActivityParameterNode
 	m_parameter  = obj.getParameter();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityParameterNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> ActivityParameterNodeImpl::copy() const
 {
-	std::shared_ptr<ActivityParameterNodeImpl> element(new ActivityParameterNodeImpl(*this));
+	std::shared_ptr<ActivityParameterNodeImpl> element(new ActivityParameterNodeImpl());
+	*element =(*this);
 	element->setThisActivityParameterNodePtr(element);
 	return element;
 }

@@ -23,9 +23,9 @@ namespace ecore
 		public: 
 			ETypedElementImpl(const ETypedElementImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ETypedElementImpl& operator=(ETypedElementImpl const&); 
 
 		protected:
-			ETypedElementImpl& operator=(ETypedElementImpl const&);
 			friend class ecoreFactoryImpl;
 			ETypedElementImpl();
 			virtual std::shared_ptr<ETypedElement> getThisETypedElementPtr() const;

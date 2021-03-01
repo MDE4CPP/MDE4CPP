@@ -62,20 +62,18 @@
 using namespace UML;
 
 LiteralRealObject::LiteralRealObject(std::shared_ptr<uml::LiteralReal> _element):
-
 	m_LiteralRealValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LiteralReal());
+{
 }
 
 LiteralRealObject::LiteralRealObject(LiteralRealObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LiteralRealObject::LiteralRealObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LiteralReal());
 }
 
 LiteralRealObject::~LiteralRealObject()
@@ -84,10 +82,18 @@ LiteralRealObject::~LiteralRealObject()
 
 std::shared_ptr<ecore::EObject> LiteralRealObject::copy()
 {
-	std::shared_ptr<LiteralRealObject> element(new LiteralRealObject(*this));
+	std::shared_ptr<LiteralRealObject> element(new LiteralRealObject());
+	*element=(*this);
 	element->setThisLiteralRealObjectPtr(element);
 	return element;
 }
+
+LiteralRealObject& LiteralRealObject::operator=(const LiteralRealObject & obj)
+{
+	UML::LiteralSpecificationObject::operator=(obj);
+	return *this;
+}
+
 
 void LiteralRealObject::destroy()
 {	

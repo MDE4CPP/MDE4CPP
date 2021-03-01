@@ -56,10 +56,8 @@ namespace ecore
 	{
 		public:
  			EPackage(const EPackage &) {}
-
 		protected:
 			EPackage(){}
-			EPackage& operator=(const EPackage &) = default;
 			//Additional constructors for the containments back reference
 			EPackage(std::weak_ptr<ecore::EObject> par_eContainer);
 

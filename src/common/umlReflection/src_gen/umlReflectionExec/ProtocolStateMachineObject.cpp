@@ -156,20 +156,18 @@
 using namespace UML;
 
 ProtocolStateMachineObject::ProtocolStateMachineObject(std::shared_ptr<uml::ProtocolStateMachine> _element):
-
 	m_ProtocolStateMachineValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ProtocolStateMachine());
+{
 }
 
 ProtocolStateMachineObject::ProtocolStateMachineObject(ProtocolStateMachineObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ProtocolStateMachineObject::ProtocolStateMachineObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ProtocolStateMachine());
 }
 
 ProtocolStateMachineObject::~ProtocolStateMachineObject()
@@ -178,10 +176,18 @@ ProtocolStateMachineObject::~ProtocolStateMachineObject()
 
 std::shared_ptr<ecore::EObject> ProtocolStateMachineObject::copy()
 {
-	std::shared_ptr<ProtocolStateMachineObject> element(new ProtocolStateMachineObject(*this));
+	std::shared_ptr<ProtocolStateMachineObject> element(new ProtocolStateMachineObject());
+	*element=(*this);
 	element->setThisProtocolStateMachineObjectPtr(element);
 	return element;
 }
+
+ProtocolStateMachineObject& ProtocolStateMachineObject::operator=(const ProtocolStateMachineObject & obj)
+{
+	UML::StateMachineObject::operator=(obj);
+	return *this;
+}
+
 
 void ProtocolStateMachineObject::destroy()
 {	

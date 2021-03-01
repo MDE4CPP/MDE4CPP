@@ -117,8 +117,18 @@ ValueSpecificationImpl::ValueSpecificationImpl(std::weak_ptr<uml::ValueSpecifica
 	m_owner = par_valueSpecificationAction;
 }
 
-ValueSpecificationImpl::ValueSpecificationImpl(const ValueSpecificationImpl & obj): PackageableElementImpl(obj), TypedElementImpl(obj), ValueSpecification(obj)
+ValueSpecificationImpl::ValueSpecificationImpl(const ValueSpecificationImpl & obj): ValueSpecificationImpl()
 {
+	*this = obj;
+}
+
+ValueSpecificationImpl& ValueSpecificationImpl::operator=(const ValueSpecificationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PackageableElementImpl::operator=(obj);
+	TypedElementImpl::operator=(obj);
+	ValueSpecification::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ValueSpecification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -130,11 +140,13 @@ ValueSpecificationImpl::ValueSpecificationImpl(const ValueSpecificationImpl & ob
 	m_valueSpecificationAction  = obj.getValueSpecificationAction();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ValueSpecificationImpl::copy() const
+std::shared_ptr<ecore::EObject> ValueSpecificationImpl::copy() const
 {
-	std::shared_ptr<ValueSpecificationImpl> element(new ValueSpecificationImpl(*this));
+	std::shared_ptr<ValueSpecificationImpl> element(new ValueSpecificationImpl());
+	*element =(*this);
 	element->setThisValueSpecificationPtr(element);
 	return element;
 }

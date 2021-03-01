@@ -26,9 +26,7 @@ virtual public Values
 		public: 
 			ValuesImpl(const ValuesImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ValuesImpl& operator=(ValuesImpl const&) = delete;
+			ValuesImpl& operator=(ValuesImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

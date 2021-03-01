@@ -57,20 +57,18 @@
 using namespace UML;
 
 ConnectorEndObject::ConnectorEndObject(std::shared_ptr<uml::ConnectorEnd> _element):
-
 	m_ConnectorEndValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ConnectorEnd());
+{
 }
 
 ConnectorEndObject::ConnectorEndObject(ConnectorEndObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ConnectorEndObject::ConnectorEndObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ConnectorEnd());
 }
 
 ConnectorEndObject::~ConnectorEndObject()
@@ -79,10 +77,18 @@ ConnectorEndObject::~ConnectorEndObject()
 
 std::shared_ptr<ecore::EObject> ConnectorEndObject::copy()
 {
-	std::shared_ptr<ConnectorEndObject> element(new ConnectorEndObject(*this));
+	std::shared_ptr<ConnectorEndObject> element(new ConnectorEndObject());
+	*element=(*this);
 	element->setThisConnectorEndObjectPtr(element);
 	return element;
 }
+
+ConnectorEndObject& ConnectorEndObject::operator=(const ConnectorEndObject & obj)
+{
+	UML::MultiplicityElementObject::operator=(obj);
+	return *this;
+}
+
 
 void ConnectorEndObject::destroy()
 {	

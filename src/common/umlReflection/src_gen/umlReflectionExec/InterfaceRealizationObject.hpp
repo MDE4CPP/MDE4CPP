@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~InterfaceRealizationObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			InterfaceRealizationObject& operator=(InterfaceRealizationObject const&);
 
 			virtual void destroy();
 			

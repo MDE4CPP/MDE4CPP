@@ -66,8 +66,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			RemoveStructuralFeatureValueActivation(const RemoveStructuralFeatureValueActivation &) {}
-			RemoveStructuralFeatureValueActivation& operator=(RemoveStructuralFeatureValueActivation const&) = delete;
-
 		protected:
 			RemoveStructuralFeatureValueActivation(){}
 

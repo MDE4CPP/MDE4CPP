@@ -70,8 +70,17 @@ StringValueImpl::~StringValueImpl()
 }
 
 
-StringValueImpl::StringValueImpl(const StringValueImpl & obj): PrimitiveValueImpl(obj), StringValue(obj)
+StringValueImpl::StringValueImpl(const StringValueImpl & obj): StringValueImpl()
 {
+	*this = obj;
+}
+
+StringValueImpl& StringValueImpl::operator=(const StringValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PrimitiveValueImpl::operator=(obj);
+	StringValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy StringValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -82,11 +91,13 @@ StringValueImpl::StringValueImpl(const StringValueImpl & obj): PrimitiveValueImp
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StringValueImpl::copy() const
+std::shared_ptr<ecore::EObject> StringValueImpl::copy() const
 {
-	std::shared_ptr<StringValueImpl> element(new StringValueImpl(*this));
+	std::shared_ptr<StringValueImpl> element(new StringValueImpl());
+	*element =(*this);
 	element->setThisStringValuePtr(element);
 	return element;
 }

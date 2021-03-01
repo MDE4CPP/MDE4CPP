@@ -89,8 +89,18 @@ IncludeImpl::IncludeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-IncludeImpl::IncludeImpl(const IncludeImpl & obj): DirectedRelationshipImpl(obj), NamedElementImpl(obj), Include(obj)
+IncludeImpl::IncludeImpl(const IncludeImpl & obj): IncludeImpl()
 {
+	*this = obj;
+}
+
+IncludeImpl& IncludeImpl::operator=(const IncludeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	DirectedRelationshipImpl::operator=(obj);
+	Include::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Include "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -105,11 +115,13 @@ IncludeImpl::IncludeImpl(const IncludeImpl & obj): DirectedRelationshipImpl(obj)
 	{
 		m_addition = std::dynamic_pointer_cast<uml::UseCase>(obj.getAddition()->copy());
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  IncludeImpl::copy() const
+std::shared_ptr<ecore::EObject> IncludeImpl::copy() const
 {
-	std::shared_ptr<IncludeImpl> element(new IncludeImpl(*this));
+	std::shared_ptr<IncludeImpl> element(new IncludeImpl());
+	*element =(*this);
 	element->setThisIncludePtr(element);
 	return element;
 }

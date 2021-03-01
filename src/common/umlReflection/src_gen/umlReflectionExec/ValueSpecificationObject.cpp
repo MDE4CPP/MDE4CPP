@@ -61,20 +61,18 @@
 using namespace UML;
 
 ValueSpecificationObject::ValueSpecificationObject(std::shared_ptr<uml::ValueSpecification> _element):
-
 	m_ValueSpecificationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ValueSpecification());
+{
 }
 
 ValueSpecificationObject::ValueSpecificationObject(ValueSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ValueSpecificationObject::ValueSpecificationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ValueSpecification());
 }
 
 ValueSpecificationObject::~ValueSpecificationObject()
@@ -83,10 +81,19 @@ ValueSpecificationObject::~ValueSpecificationObject()
 
 std::shared_ptr<ecore::EObject> ValueSpecificationObject::copy()
 {
-	std::shared_ptr<ValueSpecificationObject> element(new ValueSpecificationObject(*this));
+	std::shared_ptr<ValueSpecificationObject> element(new ValueSpecificationObject());
+	*element=(*this);
 	element->setThisValueSpecificationObjectPtr(element);
 	return element;
 }
+
+ValueSpecificationObject& ValueSpecificationObject::operator=(const ValueSpecificationObject & obj)
+{
+	UML::PackageableElementObject::operator=(obj);
+	UML::TypedElementObject::operator=(obj);
+	return *this;
+}
+
 
 void ValueSpecificationObject::destroy()
 {	

@@ -66,8 +66,17 @@ ValueImpl::~ValueImpl()
 }
 
 
-ValueImpl::ValueImpl(const ValueImpl & obj): fUML::Semantics::Loci::SemanticVisitorImpl(obj), Value(obj)
+ValueImpl::ValueImpl(const ValueImpl & obj): ValueImpl()
 {
+	*this = obj;
+}
+
+ValueImpl& ValueImpl::operator=(const ValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::SemanticVisitorImpl::operator=(obj);
+	Value::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Value "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -77,11 +86,13 @@ ValueImpl::ValueImpl(const ValueImpl & obj): fUML::Semantics::Loci::SemanticVisi
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ValueImpl::copy() const
+std::shared_ptr<ecore::EObject> ValueImpl::copy() const
 {
-	std::shared_ptr<ValueImpl> element(new ValueImpl(*this));
+	std::shared_ptr<ValueImpl> element(new ValueImpl());
+	*element =(*this);
 	element->setThisValuePtr(element);
 	return element;
 }

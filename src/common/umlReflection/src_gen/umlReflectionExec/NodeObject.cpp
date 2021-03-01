@@ -139,20 +139,18 @@
 using namespace UML;
 
 NodeObject::NodeObject(std::shared_ptr<uml::Node> _element):
-
 	m_NodeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Node());
+{
 }
 
 NodeObject::NodeObject(NodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 NodeObject::NodeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Node());
 }
 
 NodeObject::~NodeObject()
@@ -161,10 +159,19 @@ NodeObject::~NodeObject()
 
 std::shared_ptr<ecore::EObject> NodeObject::copy()
 {
-	std::shared_ptr<NodeObject> element(new NodeObject(*this));
+	std::shared_ptr<NodeObject> element(new NodeObject());
+	*element=(*this);
 	element->setThisNodeObjectPtr(element);
 	return element;
 }
+
+NodeObject& NodeObject::operator=(const NodeObject & obj)
+{
+	UML::ClassObject::operator=(obj);
+	UML::DeploymentTargetObject::operator=(obj);
+	return *this;
+}
+
 
 void NodeObject::destroy()
 {	

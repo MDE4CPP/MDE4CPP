@@ -75,8 +75,6 @@ namespace uml
 	{
 		public:
  			OpaqueAction(const OpaqueAction &) {}
-			OpaqueAction& operator=(OpaqueAction const&) = delete;
-
 		protected:
 			OpaqueAction(){}
 

@@ -90,8 +90,17 @@ StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(std::
 	m_group = par_group;
 }
 
-StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const StructuredActivityNodeActivationImpl & obj): ActionActivationImpl(obj), StructuredActivityNodeActivation(obj)
+StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const StructuredActivityNodeActivationImpl & obj): StructuredActivityNodeActivationImpl()
 {
+	*this = obj;
+}
+
+StructuredActivityNodeActivationImpl& StructuredActivityNodeActivationImpl::operator=(const StructuredActivityNodeActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	StructuredActivityNodeActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy StructuredActivityNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -106,11 +115,13 @@ StructuredActivityNodeActivationImpl::StructuredActivityNodeActivationImpl(const
 		m_activationGroup = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(obj.getActivationGroup()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StructuredActivityNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> StructuredActivityNodeActivationImpl::copy() const
 {
-	std::shared_ptr<StructuredActivityNodeActivationImpl> element(new StructuredActivityNodeActivationImpl(*this));
+	std::shared_ptr<StructuredActivityNodeActivationImpl> element(new StructuredActivityNodeActivationImpl());
+	*element =(*this);
 	element->setThisStructuredActivityNodeActivationPtr(element);
 	return element;
 }

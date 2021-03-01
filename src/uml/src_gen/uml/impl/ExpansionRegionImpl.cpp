@@ -134,8 +134,17 @@ ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::ActivityGroup> par_s
 	m_owner = par_superGroup;
 }
 
-ExpansionRegionImpl::ExpansionRegionImpl(const ExpansionRegionImpl & obj): StructuredActivityNodeImpl(obj), ExpansionRegion(obj)
+ExpansionRegionImpl::ExpansionRegionImpl(const ExpansionRegionImpl & obj): ExpansionRegionImpl()
 {
+	*this = obj;
+}
+
+ExpansionRegionImpl& ExpansionRegionImpl::operator=(const ExpansionRegionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuredActivityNodeImpl::operator=(obj);
+	ExpansionRegion::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExpansionRegion "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -150,11 +159,13 @@ ExpansionRegionImpl::ExpansionRegionImpl(const ExpansionRegionImpl & obj): Struc
 	m_outputElement.reset(new Bag<uml::ExpansionNode>(*(obj.getOutputElement().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExpansionRegionImpl::copy() const
+std::shared_ptr<ecore::EObject> ExpansionRegionImpl::copy() const
 {
-	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(*this));
+	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl());
+	*element =(*this);
 	element->setThisExpansionRegionPtr(element);
 	return element;
 }

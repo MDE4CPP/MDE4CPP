@@ -48,20 +48,18 @@
 using namespace UML;
 
 TemplateSignatureObject::TemplateSignatureObject(std::shared_ptr<uml::TemplateSignature> _element):
-
 	m_TemplateSignatureValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TemplateSignature());
+{
 }
 
 TemplateSignatureObject::TemplateSignatureObject(TemplateSignatureObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TemplateSignatureObject::TemplateSignatureObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TemplateSignature());
 }
 
 TemplateSignatureObject::~TemplateSignatureObject()
@@ -70,10 +68,18 @@ TemplateSignatureObject::~TemplateSignatureObject()
 
 std::shared_ptr<ecore::EObject> TemplateSignatureObject::copy()
 {
-	std::shared_ptr<TemplateSignatureObject> element(new TemplateSignatureObject(*this));
+	std::shared_ptr<TemplateSignatureObject> element(new TemplateSignatureObject());
+	*element=(*this);
 	element->setThisTemplateSignatureObjectPtr(element);
 	return element;
 }
+
+TemplateSignatureObject& TemplateSignatureObject::operator=(const TemplateSignatureObject & obj)
+{
+	UML::ElementObject::operator=(obj);
+	return *this;
+}
+
 
 void TemplateSignatureObject::destroy()
 {	

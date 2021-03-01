@@ -81,8 +81,6 @@ namespace uml
 	{
 		public:
  			Interface(const Interface &) {}
-			Interface& operator=(Interface const&) = delete;
-
 		protected:
 			Interface(){}
 

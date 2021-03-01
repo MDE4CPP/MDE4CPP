@@ -74,8 +74,17 @@ OutputPinActivationImpl::OutputPinActivationImpl(std::weak_ptr<fUML::Semantics::
 	m_group = par_group;
 }
 
-OutputPinActivationImpl::OutputPinActivationImpl(const OutputPinActivationImpl & obj): PinActivationImpl(obj), OutputPinActivation(obj)
+OutputPinActivationImpl::OutputPinActivationImpl(const OutputPinActivationImpl & obj): OutputPinActivationImpl()
 {
+	*this = obj;
+}
+
+OutputPinActivationImpl& OutputPinActivationImpl::operator=(const OutputPinActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PinActivationImpl::operator=(obj);
+	OutputPinActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OutputPinActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -85,11 +94,13 @@ OutputPinActivationImpl::OutputPinActivationImpl(const OutputPinActivationImpl &
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  OutputPinActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> OutputPinActivationImpl::copy() const
 {
-	std::shared_ptr<OutputPinActivationImpl> element(new OutputPinActivationImpl(*this));
+	std::shared_ptr<OutputPinActivationImpl> element(new OutputPinActivationImpl());
+	*element =(*this);
 	element->setThisOutputPinActivationPtr(element);
 	return element;
 }

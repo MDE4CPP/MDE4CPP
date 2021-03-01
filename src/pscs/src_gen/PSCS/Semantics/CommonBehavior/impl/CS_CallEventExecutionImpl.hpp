@@ -24,9 +24,7 @@ namespace PSCS::Semantics::CommonBehavior
 		public: 
 			CS_CallEventExecutionImpl(const CS_CallEventExecutionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CS_CallEventExecutionImpl& operator=(CS_CallEventExecutionImpl const&) = delete;
+			CS_CallEventExecutionImpl& operator=(CS_CallEventExecutionImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

@@ -24,9 +24,7 @@ namespace fUML::Semantics::Actions
 		public: 
 			ReadIsClassifiedObjectActionActivationImpl(const ReadIsClassifiedObjectActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ReadIsClassifiedObjectActionActivationImpl& operator=(ReadIsClassifiedObjectActionActivationImpl const&) = delete;
+			ReadIsClassifiedObjectActionActivationImpl& operator=(ReadIsClassifiedObjectActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

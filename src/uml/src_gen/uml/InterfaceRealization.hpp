@@ -65,11 +65,8 @@ namespace uml
 	{
 		public:
  			InterfaceRealization(const InterfaceRealization &) {}
-			InterfaceRealization& operator=(InterfaceRealization const&) = delete;
-
 		protected:
 			InterfaceRealization(){}
-
 			//Additional constructors for the containments back reference
 			InterfaceRealization(std::weak_ptr<uml::BehavioredClassifier> par_implementingClassifier);
 

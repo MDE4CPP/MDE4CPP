@@ -65,11 +65,8 @@ namespace uml
 	{
 		public:
  			ProfileApplication(const ProfileApplication &) {}
-			ProfileApplication& operator=(ProfileApplication const&) = delete;
-
 		protected:
 			ProfileApplication(){}
-
 			//Additional constructors for the containments back reference
 			ProfileApplication(std::weak_ptr<uml::Package> par_applyingPackage);
 

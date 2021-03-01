@@ -77,8 +77,6 @@ namespace uml
 	{
 		public:
  			LoopNode(const LoopNode &) {}
-			LoopNode& operator=(LoopNode const&) = delete;
-
 		protected:
 			LoopNode(){}
 

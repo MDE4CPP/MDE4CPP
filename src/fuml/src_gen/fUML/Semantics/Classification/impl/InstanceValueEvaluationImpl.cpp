@@ -88,8 +88,17 @@ InstanceValueEvaluationImpl::~InstanceValueEvaluationImpl()
 }
 
 
-InstanceValueEvaluationImpl::InstanceValueEvaluationImpl(const InstanceValueEvaluationImpl & obj): fUML::Semantics::Values::EvaluationImpl(obj), InstanceValueEvaluation(obj)
+InstanceValueEvaluationImpl::InstanceValueEvaluationImpl(const InstanceValueEvaluationImpl & obj): InstanceValueEvaluationImpl()
 {
+	*this = obj;
+}
+
+InstanceValueEvaluationImpl& InstanceValueEvaluationImpl::operator=(const InstanceValueEvaluationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Values::EvaluationImpl::operator=(obj);
+	InstanceValueEvaluation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InstanceValueEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -99,11 +108,13 @@ InstanceValueEvaluationImpl::InstanceValueEvaluationImpl(const InstanceValueEval
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InstanceValueEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject> InstanceValueEvaluationImpl::copy() const
 {
-	std::shared_ptr<InstanceValueEvaluationImpl> element(new InstanceValueEvaluationImpl(*this));
+	std::shared_ptr<InstanceValueEvaluationImpl> element(new InstanceValueEvaluationImpl());
+	*element =(*this);
 	element->setThisInstanceValueEvaluationPtr(element);
 	return element;
 }

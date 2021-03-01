@@ -63,8 +63,6 @@ namespace uml
 	{
 		public:
  			SignalEvent(const SignalEvent &) {}
-			SignalEvent& operator=(SignalEvent const&) = delete;
-
 		protected:
 			SignalEvent(){}
 

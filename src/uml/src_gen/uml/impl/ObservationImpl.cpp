@@ -97,8 +97,17 @@ ObservationImpl::ObservationImpl(std::weak_ptr<uml::TemplateParameter> par_ownin
 	m_owner = par_owningTemplateParameter;
 }
 
-ObservationImpl::ObservationImpl(const ObservationImpl & obj): PackageableElementImpl(obj), Observation(obj)
+ObservationImpl::ObservationImpl(const ObservationImpl & obj): ObservationImpl()
 {
+	*this = obj;
+}
+
+ObservationImpl& ObservationImpl::operator=(const ObservationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PackageableElementImpl::operator=(obj);
+	Observation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Observation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -108,11 +117,13 @@ ObservationImpl::ObservationImpl(const ObservationImpl & obj): PackageableElemen
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ObservationImpl::copy() const
+std::shared_ptr<ecore::EObject> ObservationImpl::copy() const
 {
-	std::shared_ptr<ObservationImpl> element(new ObservationImpl(*this));
+	std::shared_ptr<ObservationImpl> element(new ObservationImpl());
+	*element =(*this);
 	element->setThisObservationPtr(element);
 	return element;
 }

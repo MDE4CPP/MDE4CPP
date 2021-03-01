@@ -78,8 +78,17 @@ GeneralizationImpl::GeneralizationImpl(std::weak_ptr<uml::Classifier> par_specif
 	m_owner = par_specific;
 }
 
-GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj): DirectedRelationshipImpl(obj), Generalization(obj)
+GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj): GeneralizationImpl()
 {
+	*this = obj;
+}
+
+GeneralizationImpl& GeneralizationImpl::operator=(const GeneralizationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	DirectedRelationshipImpl::operator=(obj);
+	Generalization::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Generalization "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -97,11 +106,13 @@ GeneralizationImpl::GeneralizationImpl(const GeneralizationImpl & obj): Directed
 	{
 		m_general = std::dynamic_pointer_cast<uml::Classifier>(obj.getGeneral()->copy());
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  GeneralizationImpl::copy() const
+std::shared_ptr<ecore::EObject> GeneralizationImpl::copy() const
 {
-	std::shared_ptr<GeneralizationImpl> element(new GeneralizationImpl(*this));
+	std::shared_ptr<GeneralizationImpl> element(new GeneralizationImpl());
+	*element =(*this);
 	element->setThisGeneralizationPtr(element);
 	return element;
 }

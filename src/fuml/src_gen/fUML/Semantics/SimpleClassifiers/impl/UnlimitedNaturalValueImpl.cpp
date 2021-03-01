@@ -72,8 +72,17 @@ UnlimitedNaturalValueImpl::~UnlimitedNaturalValueImpl()
 }
 
 
-UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl(const UnlimitedNaturalValueImpl & obj): PrimitiveValueImpl(obj), UnlimitedNaturalValue(obj)
+UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl(const UnlimitedNaturalValueImpl & obj): UnlimitedNaturalValueImpl()
 {
+	*this = obj;
+}
+
+UnlimitedNaturalValueImpl& UnlimitedNaturalValueImpl::operator=(const UnlimitedNaturalValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PrimitiveValueImpl::operator=(obj);
+	UnlimitedNaturalValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy UnlimitedNaturalValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -84,11 +93,13 @@ UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl(const UnlimitedNaturalValue
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  UnlimitedNaturalValueImpl::copy() const
+std::shared_ptr<ecore::EObject> UnlimitedNaturalValueImpl::copy() const
 {
-	std::shared_ptr<UnlimitedNaturalValueImpl> element(new UnlimitedNaturalValueImpl(*this));
+	std::shared_ptr<UnlimitedNaturalValueImpl> element(new UnlimitedNaturalValueImpl());
+	*element =(*this);
 	element->setThisUnlimitedNaturalValuePtr(element);
 	return element;
 }

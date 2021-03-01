@@ -93,8 +93,17 @@ LifelineImpl::LifelineImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-LifelineImpl::LifelineImpl(const LifelineImpl & obj): NamedElementImpl(obj), Lifeline(obj)
+LifelineImpl::LifelineImpl(const LifelineImpl & obj): LifelineImpl()
 {
+	*this = obj;
+}
+
+LifelineImpl& LifelineImpl::operator=(const LifelineImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	Lifeline::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Lifeline "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -114,11 +123,13 @@ LifelineImpl::LifelineImpl(const LifelineImpl & obj): NamedElementImpl(obj), Lif
 		m_selector = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getSelector()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LifelineImpl::copy() const
+std::shared_ptr<ecore::EObject> LifelineImpl::copy() const
 {
-	std::shared_ptr<LifelineImpl> element(new LifelineImpl(*this));
+	std::shared_ptr<LifelineImpl> element(new LifelineImpl());
+	*element =(*this);
 	element->setThisLifelinePtr(element);
 	return element;
 }

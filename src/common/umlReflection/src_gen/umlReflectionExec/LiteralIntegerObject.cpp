@@ -62,20 +62,18 @@
 using namespace UML;
 
 LiteralIntegerObject::LiteralIntegerObject(std::shared_ptr<uml::LiteralInteger> _element):
-
 	m_LiteralIntegerValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LiteralInteger());
+{
 }
 
 LiteralIntegerObject::LiteralIntegerObject(LiteralIntegerObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LiteralIntegerObject::LiteralIntegerObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LiteralInteger());
 }
 
 LiteralIntegerObject::~LiteralIntegerObject()
@@ -84,10 +82,18 @@ LiteralIntegerObject::~LiteralIntegerObject()
 
 std::shared_ptr<ecore::EObject> LiteralIntegerObject::copy()
 {
-	std::shared_ptr<LiteralIntegerObject> element(new LiteralIntegerObject(*this));
+	std::shared_ptr<LiteralIntegerObject> element(new LiteralIntegerObject());
+	*element=(*this);
 	element->setThisLiteralIntegerObjectPtr(element);
 	return element;
 }
+
+LiteralIntegerObject& LiteralIntegerObject::operator=(const LiteralIntegerObject & obj)
+{
+	UML::LiteralSpecificationObject::operator=(obj);
+	return *this;
+}
+
 
 void LiteralIntegerObject::destroy()
 {	

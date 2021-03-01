@@ -72,20 +72,18 @@
 using namespace UML;
 
 StructuralFeatureObject::StructuralFeatureObject(std::shared_ptr<uml::StructuralFeature> _element):
-
 	m_StructuralFeatureValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_StructuralFeature());
+{
 }
 
 StructuralFeatureObject::StructuralFeatureObject(StructuralFeatureObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StructuralFeatureObject::StructuralFeatureObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_StructuralFeature());
 }
 
 StructuralFeatureObject::~StructuralFeatureObject()
@@ -94,10 +92,20 @@ StructuralFeatureObject::~StructuralFeatureObject()
 
 std::shared_ptr<ecore::EObject> StructuralFeatureObject::copy()
 {
-	std::shared_ptr<StructuralFeatureObject> element(new StructuralFeatureObject(*this));
+	std::shared_ptr<StructuralFeatureObject> element(new StructuralFeatureObject());
+	*element=(*this);
 	element->setThisStructuralFeatureObjectPtr(element);
 	return element;
 }
+
+StructuralFeatureObject& StructuralFeatureObject::operator=(const StructuralFeatureObject & obj)
+{
+	UML::FeatureObject::operator=(obj);
+	UML::MultiplicityElementObject::operator=(obj);
+	UML::TypedElementObject::operator=(obj);
+	return *this;
+}
+
 
 void StructuralFeatureObject::destroy()
 {	

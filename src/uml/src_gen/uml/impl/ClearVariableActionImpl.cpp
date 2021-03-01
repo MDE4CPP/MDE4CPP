@@ -109,8 +109,17 @@ ClearVariableActionImpl::ClearVariableActionImpl(std::weak_ptr<uml::Element> par
 	m_owner = par_owner;
 }
 
-ClearVariableActionImpl::ClearVariableActionImpl(const ClearVariableActionImpl & obj): VariableActionImpl(obj), ClearVariableAction(obj)
+ClearVariableActionImpl::ClearVariableActionImpl(const ClearVariableActionImpl & obj): ClearVariableActionImpl()
 {
+	*this = obj;
+}
+
+ClearVariableActionImpl& ClearVariableActionImpl::operator=(const ClearVariableActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	VariableActionImpl::operator=(obj);
+	ClearVariableAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClearVariableAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -120,11 +129,13 @@ ClearVariableActionImpl::ClearVariableActionImpl(const ClearVariableActionImpl &
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ClearVariableActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ClearVariableActionImpl::copy() const
 {
-	std::shared_ptr<ClearVariableActionImpl> element(new ClearVariableActionImpl(*this));
+	std::shared_ptr<ClearVariableActionImpl> element(new ClearVariableActionImpl());
+	*element =(*this);
 	element->setThisClearVariableActionPtr(element);
 	return element;
 }

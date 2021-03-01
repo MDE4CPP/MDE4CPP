@@ -57,8 +57,6 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public:
  			DataValue(const DataValue &) {}
-			DataValue& operator=(DataValue const&) = delete;
-
 		protected:
 			DataValue(){}
 

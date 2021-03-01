@@ -53,8 +53,8 @@
 //Factories an Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -85,8 +85,17 @@ CS_ReadSelfActionActivationImpl::CS_ReadSelfActionActivationImpl(std::weak_ptr<f
 	m_group = par_group;
 }
 
-CS_ReadSelfActionActivationImpl::CS_ReadSelfActionActivationImpl(const CS_ReadSelfActionActivationImpl & obj): fUML::Semantics::Actions::ReadSelfActionActivationImpl(obj), CS_ReadSelfActionActivation(obj)
+CS_ReadSelfActionActivationImpl::CS_ReadSelfActionActivationImpl(const CS_ReadSelfActionActivationImpl & obj): CS_ReadSelfActionActivationImpl()
 {
+	*this = obj;
+}
+
+CS_ReadSelfActionActivationImpl& CS_ReadSelfActionActivationImpl::operator=(const CS_ReadSelfActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Actions::ReadSelfActionActivationImpl::operator=(obj);
+	CS_ReadSelfActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_ReadSelfActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -96,11 +105,13 @@ CS_ReadSelfActionActivationImpl::CS_ReadSelfActionActivationImpl(const CS_ReadSe
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_ReadSelfActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_ReadSelfActionActivationImpl::copy() const
 {
-	std::shared_ptr<CS_ReadSelfActionActivationImpl> element(new CS_ReadSelfActionActivationImpl(*this));
+	std::shared_ptr<CS_ReadSelfActionActivationImpl> element(new CS_ReadSelfActionActivationImpl());
+	*element =(*this);
 	element->setThisCS_ReadSelfActionActivationPtr(element);
 	return element;
 }

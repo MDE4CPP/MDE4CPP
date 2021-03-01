@@ -64,8 +64,6 @@ namespace uml
 	{
 		public:
  			GeneralOrdering(const GeneralOrdering &) {}
-			GeneralOrdering& operator=(GeneralOrdering const&) = delete;
-
 		protected:
 			GeneralOrdering(){}
 

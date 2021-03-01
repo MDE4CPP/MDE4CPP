@@ -131,20 +131,18 @@
 using namespace UML;
 
 LoopNodeObject::LoopNodeObject(std::shared_ptr<uml::LoopNode> _element):
-
 	m_LoopNodeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LoopNode());
+{
 }
 
 LoopNodeObject::LoopNodeObject(LoopNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LoopNodeObject::LoopNodeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LoopNode());
 }
 
 LoopNodeObject::~LoopNodeObject()
@@ -153,10 +151,18 @@ LoopNodeObject::~LoopNodeObject()
 
 std::shared_ptr<ecore::EObject> LoopNodeObject::copy()
 {
-	std::shared_ptr<LoopNodeObject> element(new LoopNodeObject(*this));
+	std::shared_ptr<LoopNodeObject> element(new LoopNodeObject());
+	*element=(*this);
 	element->setThisLoopNodeObjectPtr(element);
 	return element;
 }
+
+LoopNodeObject& LoopNodeObject::operator=(const LoopNodeObject & obj)
+{
+	UML::StructuredActivityNodeObject::operator=(obj);
+	return *this;
+}
+
 
 void LoopNodeObject::destroy()
 {	

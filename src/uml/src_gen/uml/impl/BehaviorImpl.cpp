@@ -147,8 +147,17 @@ BehaviorImpl::BehaviorImpl(std::weak_ptr<uml::TemplateParameter> par_owningTempl
 }
 
 
-BehaviorImpl::BehaviorImpl(const BehaviorImpl & obj): ClassImpl(obj), Behavior(obj)
+BehaviorImpl::BehaviorImpl(const BehaviorImpl & obj): BehaviorImpl()
 {
+	*this = obj;
+}
+
+BehaviorImpl& BehaviorImpl::operator=(const BehaviorImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ClassImpl::operator=(obj);
+	Behavior::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Behavior "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -202,11 +211,13 @@ BehaviorImpl::BehaviorImpl(const BehaviorImpl & obj): ClassImpl(obj), Behavior(o
 		std::cout << "Initialising value Subset: " << "m_ownedParameterSet - Subset<uml::ParameterSet, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  BehaviorImpl::copy() const
+std::shared_ptr<ecore::EObject> BehaviorImpl::copy() const
 {
-	std::shared_ptr<BehaviorImpl> element(new BehaviorImpl(*this));
+	std::shared_ptr<BehaviorImpl> element(new BehaviorImpl());
+	*element =(*this);
 	element->setThisBehaviorPtr(element);
 	return element;
 }

@@ -59,8 +59,6 @@ namespace uml
 	{
 		public:
  			Factory(const Factory &) {}
-			Factory& operator=(Factory const&) = delete;
-
 		protected:
 			Factory(){}
 

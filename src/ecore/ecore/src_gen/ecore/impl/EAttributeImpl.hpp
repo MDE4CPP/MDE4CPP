@@ -23,9 +23,9 @@ namespace ecore
 		public: 
 			EAttributeImpl(const EAttributeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EAttributeImpl& operator=(EAttributeImpl const&); 
 
 		protected:
-			EAttributeImpl& operator=(EAttributeImpl const&);
 			friend class ecoreFactoryImpl;
 			EAttributeImpl();
 			virtual std::shared_ptr<EAttribute> getThisEAttributePtr() const;

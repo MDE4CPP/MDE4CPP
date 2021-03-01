@@ -24,9 +24,7 @@ namespace fUML::Semantics::Activities
 		public: 
 			DataStoreNodeActivationImpl(const DataStoreNodeActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			DataStoreNodeActivationImpl& operator=(DataStoreNodeActivationImpl const&) = delete;
+			DataStoreNodeActivationImpl& operator=(DataStoreNodeActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

@@ -61,20 +61,18 @@
 using namespace UML;
 
 LiteralSpecificationObject::LiteralSpecificationObject(std::shared_ptr<uml::LiteralSpecification> _element):
-
 	m_LiteralSpecificationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LiteralSpecification());
+{
 }
 
 LiteralSpecificationObject::LiteralSpecificationObject(LiteralSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LiteralSpecificationObject::LiteralSpecificationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LiteralSpecification());
 }
 
 LiteralSpecificationObject::~LiteralSpecificationObject()
@@ -83,10 +81,18 @@ LiteralSpecificationObject::~LiteralSpecificationObject()
 
 std::shared_ptr<ecore::EObject> LiteralSpecificationObject::copy()
 {
-	std::shared_ptr<LiteralSpecificationObject> element(new LiteralSpecificationObject(*this));
+	std::shared_ptr<LiteralSpecificationObject> element(new LiteralSpecificationObject());
+	*element=(*this);
 	element->setThisLiteralSpecificationObjectPtr(element);
 	return element;
 }
+
+LiteralSpecificationObject& LiteralSpecificationObject::operator=(const LiteralSpecificationObject & obj)
+{
+	UML::ValueSpecificationObject::operator=(obj);
+	return *this;
+}
+
 
 void LiteralSpecificationObject::destroy()
 {	

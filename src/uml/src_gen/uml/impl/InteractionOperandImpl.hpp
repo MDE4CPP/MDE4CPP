@@ -24,9 +24,7 @@ namespace uml
 		public: 
 			InteractionOperandImpl(const InteractionOperandImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			InteractionOperandImpl& operator=(InteractionOperandImpl const&) = delete;
+			InteractionOperandImpl& operator=(InteractionOperandImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

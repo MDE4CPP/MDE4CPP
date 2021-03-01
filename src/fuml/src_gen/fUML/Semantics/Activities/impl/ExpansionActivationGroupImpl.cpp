@@ -84,8 +84,17 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(std::weak_ptr<fUML::S
 	m_containingNodeActivation = par_containingNodeActivation;
 }
 
-ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj): ActivityNodeActivationGroupImpl(obj), ExpansionActivationGroup(obj)
+ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj): ExpansionActivationGroupImpl()
 {
+	*this = obj;
+}
+
+ExpansionActivationGroupImpl& ExpansionActivationGroupImpl::operator=(const ExpansionActivationGroupImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActivityNodeActivationGroupImpl::operator=(obj);
+	ExpansionActivationGroup::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExpansionActivationGroup "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -103,11 +112,13 @@ ExpansionActivationGroupImpl::ExpansionActivationGroupImpl(const ExpansionActiva
 	m_regionInputs.reset(new Bag<fUML::Semantics::Actions::OutputPinActivation>(*(obj.getRegionInputs().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExpansionActivationGroupImpl::copy() const
+std::shared_ptr<ecore::EObject> ExpansionActivationGroupImpl::copy() const
 {
-	std::shared_ptr<ExpansionActivationGroupImpl> element(new ExpansionActivationGroupImpl(*this));
+	std::shared_ptr<ExpansionActivationGroupImpl> element(new ExpansionActivationGroupImpl());
+	*element =(*this);
 	element->setThisExpansionActivationGroupPtr(element);
 	return element;
 }

@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			InterruptibleActivityRegionImpl& operator=(InterruptibleActivityRegionImpl const&) = delete;
+			InterruptibleActivityRegionImpl& operator=(InterruptibleActivityRegionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

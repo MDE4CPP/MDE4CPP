@@ -32,13 +32,13 @@ namespace PSCS
 }
 
 //Forward Declaration for used types 
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Object;
-}
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Object;
+}
+namespace PSCS::Semantics::StructuredClassifiers 
+{
+	class CS_Object;
 }
 namespace uml 
 {
@@ -60,8 +60,6 @@ namespace PSCS::Semantics::Actions
 	{
 		public:
  			CS_ConstructStrategy(const CS_ConstructStrategy &) {}
-			CS_ConstructStrategy& operator=(CS_ConstructStrategy const&) = delete;
-
 		protected:
 			CS_ConstructStrategy(){}
 

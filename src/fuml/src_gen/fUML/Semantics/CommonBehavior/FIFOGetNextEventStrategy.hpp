@@ -48,8 +48,6 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public:
  			FIFOGetNextEventStrategy(const FIFOGetNextEventStrategy &) {}
-			FIFOGetNextEventStrategy& operator=(FIFOGetNextEventStrategy const&) = delete;
-
 		protected:
 			FIFOGetNextEventStrategy(){}
 

@@ -104,8 +104,17 @@ ActivityFinalNodeImpl::ActivityFinalNodeImpl(std::weak_ptr<uml::Element> par_own
 	m_owner = par_owner;
 }
 
-ActivityFinalNodeImpl::ActivityFinalNodeImpl(const ActivityFinalNodeImpl & obj): FinalNodeImpl(obj), ActivityFinalNode(obj)
+ActivityFinalNodeImpl::ActivityFinalNodeImpl(const ActivityFinalNodeImpl & obj): ActivityFinalNodeImpl()
 {
+	*this = obj;
+}
+
+ActivityFinalNodeImpl& ActivityFinalNodeImpl::operator=(const ActivityFinalNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	FinalNodeImpl::operator=(obj);
+	ActivityFinalNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityFinalNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -115,11 +124,13 @@ ActivityFinalNodeImpl::ActivityFinalNodeImpl(const ActivityFinalNodeImpl & obj):
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityFinalNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> ActivityFinalNodeImpl::copy() const
 {
-	std::shared_ptr<ActivityFinalNodeImpl> element(new ActivityFinalNodeImpl(*this));
+	std::shared_ptr<ActivityFinalNodeImpl> element(new ActivityFinalNodeImpl());
+	*element =(*this);
 	element->setThisActivityFinalNodePtr(element);
 	return element;
 }

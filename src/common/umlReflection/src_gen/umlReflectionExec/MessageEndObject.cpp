@@ -55,20 +55,18 @@
 using namespace UML;
 
 MessageEndObject::MessageEndObject(std::shared_ptr<uml::MessageEnd> _element):
-
 	m_MessageEndValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_MessageEnd());
+{
 }
 
 MessageEndObject::MessageEndObject(MessageEndObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 MessageEndObject::MessageEndObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_MessageEnd());
 }
 
 MessageEndObject::~MessageEndObject()
@@ -77,10 +75,18 @@ MessageEndObject::~MessageEndObject()
 
 std::shared_ptr<ecore::EObject> MessageEndObject::copy()
 {
-	std::shared_ptr<MessageEndObject> element(new MessageEndObject(*this));
+	std::shared_ptr<MessageEndObject> element(new MessageEndObject());
+	*element=(*this);
 	element->setThisMessageEndObjectPtr(element);
 	return element;
 }
+
+MessageEndObject& MessageEndObject::operator=(const MessageEndObject & obj)
+{
+	UML::NamedElementObject::operator=(obj);
+	return *this;
+}
+
 
 void MessageEndObject::destroy()
 {	

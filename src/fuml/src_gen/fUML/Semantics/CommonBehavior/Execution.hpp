@@ -68,8 +68,6 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public:
  			Execution(const Execution &) {}
-			Execution& operator=(Execution const&) = delete;
-
 		protected:
 			Execution(){}
 

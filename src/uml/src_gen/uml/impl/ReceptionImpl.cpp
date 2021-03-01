@@ -92,8 +92,17 @@ ReceptionImpl::ReceptionImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ReceptionImpl::ReceptionImpl(const ReceptionImpl & obj): BehavioralFeatureImpl(obj), Reception(obj)
+ReceptionImpl::ReceptionImpl(const ReceptionImpl & obj): ReceptionImpl()
 {
+	*this = obj;
+}
+
+ReceptionImpl& ReceptionImpl::operator=(const ReceptionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	BehavioralFeatureImpl::operator=(obj);
+	Reception::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Reception "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -104,11 +113,13 @@ ReceptionImpl::ReceptionImpl(const ReceptionImpl & obj): BehavioralFeatureImpl(o
 	m_signal  = obj.getSignal();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReceptionImpl::copy() const
+std::shared_ptr<ecore::EObject> ReceptionImpl::copy() const
 {
-	std::shared_ptr<ReceptionImpl> element(new ReceptionImpl(*this));
+	std::shared_ptr<ReceptionImpl> element(new ReceptionImpl());
+	*element =(*this);
 	element->setThisReceptionPtr(element);
 	return element;
 }

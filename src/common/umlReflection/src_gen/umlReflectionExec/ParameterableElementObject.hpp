@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ParameterableElementObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ParameterableElementObject& operator=(ParameterableElementObject const&);
 
 			virtual void destroy();
 			

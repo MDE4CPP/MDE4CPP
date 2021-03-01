@@ -105,8 +105,17 @@ ControlFlowImpl::ControlFlowImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ControlFlowImpl::ControlFlowImpl(const ControlFlowImpl & obj): ActivityEdgeImpl(obj), ControlFlow(obj)
+ControlFlowImpl::ControlFlowImpl(const ControlFlowImpl & obj): ControlFlowImpl()
 {
+	*this = obj;
+}
+
+ControlFlowImpl& ControlFlowImpl::operator=(const ControlFlowImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActivityEdgeImpl::operator=(obj);
+	ControlFlow::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ControlFlow "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -116,11 +125,13 @@ ControlFlowImpl::ControlFlowImpl(const ControlFlowImpl & obj): ActivityEdgeImpl(
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ControlFlowImpl::copy() const
+std::shared_ptr<ecore::EObject> ControlFlowImpl::copy() const
 {
-	std::shared_ptr<ControlFlowImpl> element(new ControlFlowImpl(*this));
+	std::shared_ptr<ControlFlowImpl> element(new ControlFlowImpl());
+	*element =(*this);
 	element->setThisControlFlowPtr(element);
 	return element;
 }

@@ -65,20 +65,18 @@
 using namespace UML;
 
 DurationObject::DurationObject(std::shared_ptr<uml::Duration> _element):
-
 	m_DurationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Duration());
+{
 }
 
 DurationObject::DurationObject(DurationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DurationObject::DurationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Duration());
 }
 
 DurationObject::~DurationObject()
@@ -87,10 +85,18 @@ DurationObject::~DurationObject()
 
 std::shared_ptr<ecore::EObject> DurationObject::copy()
 {
-	std::shared_ptr<DurationObject> element(new DurationObject(*this));
+	std::shared_ptr<DurationObject> element(new DurationObject());
+	*element=(*this);
 	element->setThisDurationObjectPtr(element);
 	return element;
 }
+
+DurationObject& DurationObject::operator=(const DurationObject & obj)
+{
+	UML::ValueSpecificationObject::operator=(obj);
+	return *this;
+}
+
 
 void DurationObject::destroy()
 {	

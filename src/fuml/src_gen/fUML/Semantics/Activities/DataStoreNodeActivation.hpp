@@ -58,8 +58,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			DataStoreNodeActivation(const DataStoreNodeActivation &) {}
-			DataStoreNodeActivation& operator=(DataStoreNodeActivation const&) = delete;
-
 		protected:
 			DataStoreNodeActivation(){}
 

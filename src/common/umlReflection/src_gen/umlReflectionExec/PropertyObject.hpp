@@ -39,6 +39,7 @@ namespace UML
 		    virtual ~PropertyObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			PropertyObject& operator=(PropertyObject const&);
 
 			virtual void destroy();
 			

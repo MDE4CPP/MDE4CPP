@@ -58,9 +58,17 @@ SemanticStrategyImpl::~SemanticStrategyImpl()
 }
 
 
-SemanticStrategyImpl::SemanticStrategyImpl(const SemanticStrategyImpl & obj): ecore::EModelElementImpl(obj),
-SemanticStrategy(obj)
+SemanticStrategyImpl::SemanticStrategyImpl(const SemanticStrategyImpl & obj): SemanticStrategyImpl()
 {
+	*this = obj;
+}
+
+SemanticStrategyImpl& SemanticStrategyImpl::operator=(const SemanticStrategyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	SemanticStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SemanticStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -70,11 +78,13 @@ SemanticStrategy(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  SemanticStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject> SemanticStrategyImpl::copy() const
 {
-	std::shared_ptr<SemanticStrategyImpl> element(new SemanticStrategyImpl(*this));
+	std::shared_ptr<SemanticStrategyImpl> element(new SemanticStrategyImpl());
+	*element =(*this);
 	element->setThisSemanticStrategyPtr(element);
 	return element;
 }

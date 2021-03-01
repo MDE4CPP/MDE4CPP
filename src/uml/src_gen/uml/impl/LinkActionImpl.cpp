@@ -111,8 +111,17 @@ LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-LinkActionImpl::LinkActionImpl(const LinkActionImpl & obj): ActionImpl(obj), LinkAction(obj)
+LinkActionImpl::LinkActionImpl(const LinkActionImpl & obj): LinkActionImpl()
 {
+	*this = obj;
+}
+
+LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	LinkAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LinkAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -144,11 +153,13 @@ LinkActionImpl::LinkActionImpl(const LinkActionImpl & obj): ActionImpl(obj), Lin
 		std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LinkActionImpl::copy() const
+std::shared_ptr<ecore::EObject> LinkActionImpl::copy() const
 {
-	std::shared_ptr<LinkActionImpl> element(new LinkActionImpl(*this));
+	std::shared_ptr<LinkActionImpl> element(new LinkActionImpl());
+	*element =(*this);
 	element->setThisLinkActionPtr(element);
 	return element;
 }

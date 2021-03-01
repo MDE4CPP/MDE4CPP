@@ -65,8 +65,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ReclassifyObjectActionActivation(const ReclassifyObjectActionActivation &) {}
-			ReclassifyObjectActionActivation& operator=(ReclassifyObjectActionActivation const&) = delete;
-
 		protected:
 			ReclassifyObjectActionActivation(){}
 

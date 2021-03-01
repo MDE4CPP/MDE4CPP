@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~NodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			NodeObject& operator=(NodeObject const&);
 
 			virtual void destroy();
 			

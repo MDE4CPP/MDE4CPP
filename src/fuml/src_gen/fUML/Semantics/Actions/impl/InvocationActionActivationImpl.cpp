@@ -77,8 +77,17 @@ InvocationActionActivationImpl::InvocationActionActivationImpl(std::weak_ptr<fUM
 	m_group = par_group;
 }
 
-InvocationActionActivationImpl::InvocationActionActivationImpl(const InvocationActionActivationImpl & obj): ActionActivationImpl(obj), InvocationActionActivation(obj)
+InvocationActionActivationImpl::InvocationActionActivationImpl(const InvocationActionActivationImpl & obj): InvocationActionActivationImpl()
 {
+	*this = obj;
+}
+
+InvocationActionActivationImpl& InvocationActionActivationImpl::operator=(const InvocationActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	InvocationActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InvocationActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -88,11 +97,13 @@ InvocationActionActivationImpl::InvocationActionActivationImpl(const InvocationA
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InvocationActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> InvocationActionActivationImpl::copy() const
 {
-	std::shared_ptr<InvocationActionActivationImpl> element(new InvocationActionActivationImpl(*this));
+	std::shared_ptr<InvocationActionActivationImpl> element(new InvocationActionActivationImpl());
+	*element =(*this);
 	element->setThisInvocationActionActivationPtr(element);
 	return element;
 }

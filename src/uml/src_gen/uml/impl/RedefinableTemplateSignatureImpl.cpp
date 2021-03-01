@@ -93,8 +93,18 @@ RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(std::weak_ptr
 	m_owner = par_template;
 }
 
-RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const RedefinableTemplateSignatureImpl & obj): RedefinableElementImpl(obj), TemplateSignatureImpl(obj), RedefinableTemplateSignature(obj)
+RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const RedefinableTemplateSignatureImpl & obj): RedefinableTemplateSignatureImpl()
 {
+	*this = obj;
+}
+
+RedefinableTemplateSignatureImpl& RedefinableTemplateSignatureImpl::operator=(const RedefinableTemplateSignatureImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	RedefinableElementImpl::operator=(obj);
+	TemplateSignatureImpl::operator=(obj);
+	RedefinableTemplateSignature::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy RedefinableTemplateSignature "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -115,11 +125,13 @@ RedefinableTemplateSignatureImpl::RedefinableTemplateSignatureImpl(const Redefin
 	{
 		inheritedParameterContainer->push_back(std::dynamic_pointer_cast<uml::TemplateParameter>(_inheritedParameter->copy()));
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  RedefinableTemplateSignatureImpl::copy() const
+std::shared_ptr<ecore::EObject> RedefinableTemplateSignatureImpl::copy() const
 {
-	std::shared_ptr<RedefinableTemplateSignatureImpl> element(new RedefinableTemplateSignatureImpl(*this));
+	std::shared_ptr<RedefinableTemplateSignatureImpl> element(new RedefinableTemplateSignatureImpl());
+	*element =(*this);
 	element->setThisRedefinableTemplateSignaturePtr(element);
 	return element;
 }

@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ReplyActionImpl(const ReplyActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ReplyActionImpl& operator=(ReplyActionImpl const&) = delete;
+			ReplyActionImpl& operator=(ReplyActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

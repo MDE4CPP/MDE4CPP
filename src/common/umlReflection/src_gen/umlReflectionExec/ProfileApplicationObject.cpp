@@ -54,20 +54,18 @@
 using namespace UML;
 
 ProfileApplicationObject::ProfileApplicationObject(std::shared_ptr<uml::ProfileApplication> _element):
-
 	m_ProfileApplicationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ProfileApplication());
+{
 }
 
 ProfileApplicationObject::ProfileApplicationObject(ProfileApplicationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ProfileApplicationObject::ProfileApplicationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ProfileApplication());
 }
 
 ProfileApplicationObject::~ProfileApplicationObject()
@@ -76,10 +74,18 @@ ProfileApplicationObject::~ProfileApplicationObject()
 
 std::shared_ptr<ecore::EObject> ProfileApplicationObject::copy()
 {
-	std::shared_ptr<ProfileApplicationObject> element(new ProfileApplicationObject(*this));
+	std::shared_ptr<ProfileApplicationObject> element(new ProfileApplicationObject());
+	*element=(*this);
 	element->setThisProfileApplicationObjectPtr(element);
 	return element;
 }
+
+ProfileApplicationObject& ProfileApplicationObject::operator=(const ProfileApplicationObject & obj)
+{
+	UML::DirectedRelationshipObject::operator=(obj);
+	return *this;
+}
+
 
 void ProfileApplicationObject::destroy()
 {	

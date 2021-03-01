@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ActivityParameterNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ActivityParameterNodeObject& operator=(ActivityParameterNodeObject const&);
 
 			virtual void destroy();
 			

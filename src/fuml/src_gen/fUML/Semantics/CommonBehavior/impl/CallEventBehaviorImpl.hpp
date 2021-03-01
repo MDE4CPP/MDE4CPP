@@ -26,9 +26,7 @@ virtual public CallEventBehavior
 		public: 
 			CallEventBehaviorImpl(const CallEventBehaviorImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CallEventBehaviorImpl& operator=(CallEventBehaviorImpl const&) = delete;
+			CallEventBehaviorImpl& operator=(CallEventBehaviorImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

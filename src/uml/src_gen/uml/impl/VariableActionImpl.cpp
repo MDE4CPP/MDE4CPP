@@ -110,8 +110,17 @@ VariableActionImpl::VariableActionImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-VariableActionImpl::VariableActionImpl(const VariableActionImpl & obj): ActionImpl(obj), VariableAction(obj)
+VariableActionImpl::VariableActionImpl(const VariableActionImpl & obj): VariableActionImpl()
 {
+	*this = obj;
+}
+
+VariableActionImpl& VariableActionImpl::operator=(const VariableActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	VariableAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy VariableAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -122,11 +131,13 @@ VariableActionImpl::VariableActionImpl(const VariableActionImpl & obj): ActionIm
 	m_variable  = obj.getVariable();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  VariableActionImpl::copy() const
+std::shared_ptr<ecore::EObject> VariableActionImpl::copy() const
 {
-	std::shared_ptr<VariableActionImpl> element(new VariableActionImpl(*this));
+	std::shared_ptr<VariableActionImpl> element(new VariableActionImpl());
+	*element =(*this);
 	element->setThisVariableActionPtr(element);
 	return element;
 }

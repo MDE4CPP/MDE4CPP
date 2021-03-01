@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragmentImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ConsiderIgnoreFragmentImpl& operator=(ConsiderIgnoreFragmentImpl const&) = delete;
+			ConsiderIgnoreFragmentImpl& operator=(ConsiderIgnoreFragmentImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

@@ -74,8 +74,17 @@ ExpansionNodeActivationImpl::ExpansionNodeActivationImpl(std::weak_ptr<fUML::Sem
 	m_group = par_group;
 }
 
-ExpansionNodeActivationImpl::ExpansionNodeActivationImpl(const ExpansionNodeActivationImpl & obj): ObjectNodeActivationImpl(obj), ExpansionNodeActivation(obj)
+ExpansionNodeActivationImpl::ExpansionNodeActivationImpl(const ExpansionNodeActivationImpl & obj): ExpansionNodeActivationImpl()
 {
+	*this = obj;
+}
+
+ExpansionNodeActivationImpl& ExpansionNodeActivationImpl::operator=(const ExpansionNodeActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ObjectNodeActivationImpl::operator=(obj);
+	ExpansionNodeActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExpansionNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -85,11 +94,13 @@ ExpansionNodeActivationImpl::ExpansionNodeActivationImpl(const ExpansionNodeActi
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExpansionNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ExpansionNodeActivationImpl::copy() const
 {
-	std::shared_ptr<ExpansionNodeActivationImpl> element(new ExpansionNodeActivationImpl(*this));
+	std::shared_ptr<ExpansionNodeActivationImpl> element(new ExpansionNodeActivationImpl());
+	*element =(*this);
 	element->setThisExpansionNodeActivationPtr(element);
 	return element;
 }

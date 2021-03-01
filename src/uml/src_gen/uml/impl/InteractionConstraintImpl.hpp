@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			InteractionConstraintImpl(const InteractionConstraintImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			InteractionConstraintImpl& operator=(InteractionConstraintImpl const&) = delete;
+			InteractionConstraintImpl& operator=(InteractionConstraintImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

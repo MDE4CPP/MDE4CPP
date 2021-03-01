@@ -76,8 +76,17 @@ StructuredValueImpl::~StructuredValueImpl()
 }
 
 
-StructuredValueImpl::StructuredValueImpl(const StructuredValueImpl & obj): fUML::Semantics::Values::ValueImpl(obj), StructuredValue(obj)
+StructuredValueImpl::StructuredValueImpl(const StructuredValueImpl & obj): StructuredValueImpl()
 {
+	*this = obj;
+}
+
+StructuredValueImpl& StructuredValueImpl::operator=(const StructuredValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Values::ValueImpl::operator=(obj);
+	StructuredValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy StructuredValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -87,11 +96,13 @@ StructuredValueImpl::StructuredValueImpl(const StructuredValueImpl & obj): fUML:
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StructuredValueImpl::copy() const
+std::shared_ptr<ecore::EObject> StructuredValueImpl::copy() const
 {
-	std::shared_ptr<StructuredValueImpl> element(new StructuredValueImpl(*this));
+	std::shared_ptr<StructuredValueImpl> element(new StructuredValueImpl());
+	*element =(*this);
 	element->setThisStructuredValuePtr(element);
 	return element;
 }

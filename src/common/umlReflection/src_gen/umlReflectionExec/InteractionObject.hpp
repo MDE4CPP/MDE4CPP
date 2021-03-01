@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~InteractionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			InteractionObject& operator=(InteractionObject const&);
 
 			virtual void destroy();
 			

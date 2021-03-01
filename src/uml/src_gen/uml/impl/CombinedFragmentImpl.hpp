@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			CombinedFragmentImpl(const CombinedFragmentImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CombinedFragmentImpl& operator=(CombinedFragmentImpl const&) = delete;
+			CombinedFragmentImpl& operator=(CombinedFragmentImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

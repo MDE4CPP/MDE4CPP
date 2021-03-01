@@ -65,8 +65,6 @@ namespace PSCS::Semantics::Actions
 	{
 		public:
  			CS_ReadExtentActionActivation(const CS_ReadExtentActionActivation &) {}
-			CS_ReadExtentActionActivation& operator=(CS_ReadExtentActionActivation const&) = delete;
-
 		protected:
 			CS_ReadExtentActionActivation(){}
 

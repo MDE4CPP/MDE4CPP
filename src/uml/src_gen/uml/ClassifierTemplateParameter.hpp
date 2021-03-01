@@ -63,8 +63,6 @@ namespace uml
 	{
 		public:
  			ClassifierTemplateParameter(const ClassifierTemplateParameter &) {}
-			ClassifierTemplateParameter& operator=(ClassifierTemplateParameter const&) = delete;
-
 		protected:
 			ClassifierTemplateParameter(){}
 

@@ -112,8 +112,17 @@ ConstraintImpl::ConstraintImpl(std::weak_ptr<uml::TemplateParameter> par_owningT
 	m_owner = par_owningTemplateParameter;
 }
 
-ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj): PackageableElementImpl(obj), Constraint(obj)
+ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj): ConstraintImpl()
 {
+	*this = obj;
+}
+
+ConstraintImpl& ConstraintImpl::operator=(const ConstraintImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PackageableElementImpl::operator=(obj);
+	Constraint::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Constraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -131,11 +140,13 @@ ConstraintImpl::ConstraintImpl(const ConstraintImpl & obj): PackageableElementIm
 		m_specification = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getSpecification()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ConstraintImpl::copy() const
+std::shared_ptr<ecore::EObject> ConstraintImpl::copy() const
 {
-	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(*this));
+	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl());
+	*element =(*this);
 	element->setThisConstraintPtr(element);
 	return element;
 }

@@ -24,9 +24,7 @@ namespace fUML::Semantics::SimpleClassifiers
 		public: 
 			UnlimitedNaturalValueImpl(const UnlimitedNaturalValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			UnlimitedNaturalValueImpl& operator=(UnlimitedNaturalValueImpl const&) = delete;
+			UnlimitedNaturalValueImpl& operator=(UnlimitedNaturalValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;

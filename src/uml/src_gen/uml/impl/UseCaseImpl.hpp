@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			UseCaseImpl(const UseCaseImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			UseCaseImpl& operator=(UseCaseImpl const&) = delete;
+			UseCaseImpl& operator=(UseCaseImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

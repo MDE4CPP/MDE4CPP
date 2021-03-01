@@ -51,10 +51,8 @@ namespace ecore
 	{
 		public:
  			EAnnotation(const EAnnotation &) {}
-
 		protected:
 			EAnnotation(){}
-			EAnnotation& operator=(const EAnnotation &) = default;
 			//Additional constructors for the containments back reference
 			EAnnotation(std::weak_ptr<ecore::EObject> par_eContainer);
 

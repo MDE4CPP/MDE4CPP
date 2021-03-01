@@ -62,8 +62,6 @@ namespace uml
 	{
 		public:
  			Realization(const Realization &) {}
-			Realization& operator=(Realization const&) = delete;
-
 		protected:
 			Realization(){}
 

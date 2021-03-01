@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			CommunicationPathImpl(const CommunicationPathImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CommunicationPathImpl& operator=(CommunicationPathImpl const&) = delete;
+			CommunicationPathImpl& operator=(CommunicationPathImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

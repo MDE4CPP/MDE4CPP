@@ -87,8 +87,17 @@ ReadStructuralFeatureActionActivationImpl::ReadStructuralFeatureActionActivation
 	m_group = par_group;
 }
 
-ReadStructuralFeatureActionActivationImpl::ReadStructuralFeatureActionActivationImpl(const ReadStructuralFeatureActionActivationImpl & obj): StructuralFeatureActionActivationImpl(obj), ReadStructuralFeatureActionActivation(obj)
+ReadStructuralFeatureActionActivationImpl::ReadStructuralFeatureActionActivationImpl(const ReadStructuralFeatureActionActivationImpl & obj): ReadStructuralFeatureActionActivationImpl()
 {
+	*this = obj;
+}
+
+ReadStructuralFeatureActionActivationImpl& ReadStructuralFeatureActionActivationImpl::operator=(const ReadStructuralFeatureActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuralFeatureActionActivationImpl::operator=(obj);
+	ReadStructuralFeatureActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReadStructuralFeatureActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -99,11 +108,13 @@ ReadStructuralFeatureActionActivationImpl::ReadStructuralFeatureActionActivation
 	m_readStructuralFeatureAction  = obj.getReadStructuralFeatureAction();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReadStructuralFeatureActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ReadStructuralFeatureActionActivationImpl::copy() const
 {
-	std::shared_ptr<ReadStructuralFeatureActionActivationImpl> element(new ReadStructuralFeatureActionActivationImpl(*this));
+	std::shared_ptr<ReadStructuralFeatureActionActivationImpl> element(new ReadStructuralFeatureActionActivationImpl());
+	*element =(*this);
 	element->setThisReadStructuralFeatureActionActivationPtr(element);
 	return element;
 }

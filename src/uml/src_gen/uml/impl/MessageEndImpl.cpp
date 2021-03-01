@@ -82,8 +82,17 @@ MessageEndImpl::MessageEndImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj): NamedElementImpl(obj), MessageEnd(obj)
+MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj): MessageEndImpl()
 {
+	*this = obj;
+}
+
+MessageEndImpl& MessageEndImpl::operator=(const MessageEndImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	MessageEnd::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy MessageEnd "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -94,11 +103,13 @@ MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj): NamedElementImpl(obj
 	m_message  = obj.getMessage();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  MessageEndImpl::copy() const
+std::shared_ptr<ecore::EObject> MessageEndImpl::copy() const
 {
-	std::shared_ptr<MessageEndImpl> element(new MessageEndImpl(*this));
+	std::shared_ptr<MessageEndImpl> element(new MessageEndImpl());
+	*element =(*this);
 	element->setThisMessageEndPtr(element);
 	return element;
 }

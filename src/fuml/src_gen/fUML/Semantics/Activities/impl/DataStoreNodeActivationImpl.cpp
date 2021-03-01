@@ -72,8 +72,17 @@ DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(std::weak_ptr<fUML::Sem
 	m_group = par_group;
 }
 
-DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(const DataStoreNodeActivationImpl & obj): CentralBufferNodeActivationImpl(obj), DataStoreNodeActivation(obj)
+DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(const DataStoreNodeActivationImpl & obj): DataStoreNodeActivationImpl()
 {
+	*this = obj;
+}
+
+DataStoreNodeActivationImpl& DataStoreNodeActivationImpl::operator=(const DataStoreNodeActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	CentralBufferNodeActivationImpl::operator=(obj);
+	DataStoreNodeActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DataStoreNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -83,11 +92,13 @@ DataStoreNodeActivationImpl::DataStoreNodeActivationImpl(const DataStoreNodeActi
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DataStoreNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> DataStoreNodeActivationImpl::copy() const
 {
-	std::shared_ptr<DataStoreNodeActivationImpl> element(new DataStoreNodeActivationImpl(*this));
+	std::shared_ptr<DataStoreNodeActivationImpl> element(new DataStoreNodeActivationImpl());
+	*element =(*this);
 	element->setThisDataStoreNodeActivationPtr(element);
 	return element;
 }

@@ -80,8 +80,17 @@ FeatureImpl::FeatureImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-FeatureImpl::FeatureImpl(const FeatureImpl & obj): RedefinableElementImpl(obj), Feature(obj)
+FeatureImpl::FeatureImpl(const FeatureImpl & obj): FeatureImpl()
 {
+	*this = obj;
+}
+
+FeatureImpl& FeatureImpl::operator=(const FeatureImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	RedefinableElementImpl::operator=(obj);
+	Feature::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Feature "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -94,11 +103,13 @@ FeatureImpl::FeatureImpl(const FeatureImpl & obj): RedefinableElementImpl(obj), 
 	m_featuringClassifier.reset(new Union<uml::Classifier>(*(obj.getFeaturingClassifier().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  FeatureImpl::copy() const
+std::shared_ptr<ecore::EObject> FeatureImpl::copy() const
 {
-	std::shared_ptr<FeatureImpl> element(new FeatureImpl(*this));
+	std::shared_ptr<FeatureImpl> element(new FeatureImpl());
+	*element =(*this);
 	element->setThisFeaturePtr(element);
 	return element;
 }

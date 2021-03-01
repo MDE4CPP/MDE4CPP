@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			StructuredClassifierImpl(const StructuredClassifierImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			StructuredClassifierImpl& operator=(StructuredClassifierImpl const&) = delete;
+			StructuredClassifierImpl& operator=(StructuredClassifierImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

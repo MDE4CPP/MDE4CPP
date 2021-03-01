@@ -100,8 +100,18 @@ TransitionImpl::TransitionImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-TransitionImpl::TransitionImpl(const TransitionImpl & obj): NamespaceImpl(obj), RedefinableElementImpl(obj), Transition(obj)
+TransitionImpl::TransitionImpl(const TransitionImpl & obj): TransitionImpl()
 {
+	*this = obj;
+}
+
+TransitionImpl& TransitionImpl::operator=(const TransitionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamespaceImpl::operator=(obj);
+	RedefinableElementImpl::operator=(obj);
+	Transition::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Transition "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -139,11 +149,13 @@ TransitionImpl::TransitionImpl(const TransitionImpl & obj): NamespaceImpl(obj), 
 		std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TransitionImpl::copy() const
+std::shared_ptr<ecore::EObject> TransitionImpl::copy() const
 {
-	std::shared_ptr<TransitionImpl> element(new TransitionImpl(*this));
+	std::shared_ptr<TransitionImpl> element(new TransitionImpl());
+	*element =(*this);
 	element->setThisTransitionPtr(element);
 	return element;
 }

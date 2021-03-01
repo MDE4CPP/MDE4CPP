@@ -59,20 +59,18 @@
 using namespace UML;
 
 TypeObject::TypeObject(std::shared_ptr<uml::Type> _element):
-
 	m_TypeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Type());
+{
 }
 
 TypeObject::TypeObject(TypeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TypeObject::TypeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Type());
 }
 
 TypeObject::~TypeObject()
@@ -81,10 +79,18 @@ TypeObject::~TypeObject()
 
 std::shared_ptr<ecore::EObject> TypeObject::copy()
 {
-	std::shared_ptr<TypeObject> element(new TypeObject(*this));
+	std::shared_ptr<TypeObject> element(new TypeObject());
+	*element=(*this);
 	element->setThisTypeObjectPtr(element);
 	return element;
 }
+
+TypeObject& TypeObject::operator=(const TypeObject & obj)
+{
+	UML::PackageableElementObject::operator=(obj);
+	return *this;
+}
+
 
 void TypeObject::destroy()
 {	

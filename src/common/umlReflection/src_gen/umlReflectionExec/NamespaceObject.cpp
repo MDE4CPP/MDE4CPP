@@ -65,20 +65,18 @@
 using namespace UML;
 
 NamespaceObject::NamespaceObject(std::shared_ptr<uml::Namespace> _element):
-
 	m_NamespaceValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Namespace());
+{
 }
 
 NamespaceObject::NamespaceObject(NamespaceObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 NamespaceObject::NamespaceObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Namespace());
 }
 
 NamespaceObject::~NamespaceObject()
@@ -87,10 +85,18 @@ NamespaceObject::~NamespaceObject()
 
 std::shared_ptr<ecore::EObject> NamespaceObject::copy()
 {
-	std::shared_ptr<NamespaceObject> element(new NamespaceObject(*this));
+	std::shared_ptr<NamespaceObject> element(new NamespaceObject());
+	*element=(*this);
 	element->setThisNamespaceObjectPtr(element);
 	return element;
 }
+
+NamespaceObject& NamespaceObject::operator=(const NamespaceObject & obj)
+{
+	UML::NamedElementObject::operator=(obj);
+	return *this;
+}
+
 
 void NamespaceObject::destroy()
 {	

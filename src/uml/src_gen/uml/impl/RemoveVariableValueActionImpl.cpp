@@ -110,8 +110,17 @@ RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(std::weak_ptr<uml::
 	m_owner = par_owner;
 }
 
-RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(const RemoveVariableValueActionImpl & obj): WriteVariableActionImpl(obj), RemoveVariableValueAction(obj)
+RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(const RemoveVariableValueActionImpl & obj): RemoveVariableValueActionImpl()
 {
+	*this = obj;
+}
+
+RemoveVariableValueActionImpl& RemoveVariableValueActionImpl::operator=(const RemoveVariableValueActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	WriteVariableActionImpl::operator=(obj);
+	RemoveVariableValueAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy RemoveVariableValueAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -127,11 +136,13 @@ RemoveVariableValueActionImpl::RemoveVariableValueActionImpl(const RemoveVariabl
 		m_removeAt = std::dynamic_pointer_cast<uml::InputPin>(obj.getRemoveAt()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  RemoveVariableValueActionImpl::copy() const
+std::shared_ptr<ecore::EObject> RemoveVariableValueActionImpl::copy() const
 {
-	std::shared_ptr<RemoveVariableValueActionImpl> element(new RemoveVariableValueActionImpl(*this));
+	std::shared_ptr<RemoveVariableValueActionImpl> element(new RemoveVariableValueActionImpl());
+	*element =(*this);
 	element->setThisRemoveVariableValueActionPtr(element);
 	return element;
 }

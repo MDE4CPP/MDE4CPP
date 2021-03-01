@@ -70,8 +70,17 @@ CallEventOccurrenceImpl::~CallEventOccurrenceImpl()
 }
 
 
-CallEventOccurrenceImpl::CallEventOccurrenceImpl(const CallEventOccurrenceImpl & obj): EventOccurrenceImpl(obj), CallEventOccurrence(obj)
+CallEventOccurrenceImpl::CallEventOccurrenceImpl(const CallEventOccurrenceImpl & obj): CallEventOccurrenceImpl()
 {
+	*this = obj;
+}
+
+CallEventOccurrenceImpl& CallEventOccurrenceImpl::operator=(const CallEventOccurrenceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EventOccurrenceImpl::operator=(obj);
+	CallEventOccurrence::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CallEventOccurrence "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -82,11 +91,13 @@ CallEventOccurrenceImpl::CallEventOccurrenceImpl(const CallEventOccurrenceImpl &
 	m_execution  = obj.getExecution();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CallEventOccurrenceImpl::copy() const
+std::shared_ptr<ecore::EObject> CallEventOccurrenceImpl::copy() const
 {
-	std::shared_ptr<CallEventOccurrenceImpl> element(new CallEventOccurrenceImpl(*this));
+	std::shared_ptr<CallEventOccurrenceImpl> element(new CallEventOccurrenceImpl());
+	*element =(*this);
 	element->setThisCallEventOccurrencePtr(element);
 	return element;
 }

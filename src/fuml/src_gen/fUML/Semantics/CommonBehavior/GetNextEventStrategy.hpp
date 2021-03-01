@@ -56,8 +56,6 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public:
  			GetNextEventStrategy(const GetNextEventStrategy &) {}
-			GetNextEventStrategy& operator=(GetNextEventStrategy const&) = delete;
-
 		protected:
 			GetNextEventStrategy(){}
 

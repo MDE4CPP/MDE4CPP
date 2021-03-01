@@ -105,8 +105,17 @@ ActivityEdgeImpl::ActivityEdgeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj): RedefinableElementImpl(obj), ActivityEdge(obj)
+ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj): ActivityEdgeImpl()
 {
+	*this = obj;
+}
+
+ActivityEdgeImpl& ActivityEdgeImpl::operator=(const ActivityEdgeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	RedefinableElementImpl::operator=(obj);
+	ActivityEdge::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityEdge "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -143,11 +152,13 @@ ActivityEdgeImpl::ActivityEdgeImpl(const ActivityEdgeImpl & obj): RedefinableEle
 	}
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityEdgeImpl::copy() const
+std::shared_ptr<ecore::EObject> ActivityEdgeImpl::copy() const
 {
-	std::shared_ptr<ActivityEdgeImpl> element(new ActivityEdgeImpl(*this));
+	std::shared_ptr<ActivityEdgeImpl> element(new ActivityEdgeImpl());
+	*element =(*this);
 	element->setThisActivityEdgePtr(element);
 	return element;
 }

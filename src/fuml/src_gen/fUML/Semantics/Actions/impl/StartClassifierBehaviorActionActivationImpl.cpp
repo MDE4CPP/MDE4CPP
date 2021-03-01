@@ -82,8 +82,17 @@ StartClassifierBehaviorActionActivationImpl::StartClassifierBehaviorActionActiva
 	m_group = par_group;
 }
 
-StartClassifierBehaviorActionActivationImpl::StartClassifierBehaviorActionActivationImpl(const StartClassifierBehaviorActionActivationImpl & obj): ActionActivationImpl(obj), StartClassifierBehaviorActionActivation(obj)
+StartClassifierBehaviorActionActivationImpl::StartClassifierBehaviorActionActivationImpl(const StartClassifierBehaviorActionActivationImpl & obj): StartClassifierBehaviorActionActivationImpl()
 {
+	*this = obj;
+}
+
+StartClassifierBehaviorActionActivationImpl& StartClassifierBehaviorActionActivationImpl::operator=(const StartClassifierBehaviorActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	StartClassifierBehaviorActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy StartClassifierBehaviorActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -93,11 +102,13 @@ StartClassifierBehaviorActionActivationImpl::StartClassifierBehaviorActionActiva
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StartClassifierBehaviorActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> StartClassifierBehaviorActionActivationImpl::copy() const
 {
-	std::shared_ptr<StartClassifierBehaviorActionActivationImpl> element(new StartClassifierBehaviorActionActivationImpl(*this));
+	std::shared_ptr<StartClassifierBehaviorActionActivationImpl> element(new StartClassifierBehaviorActionActivationImpl());
+	*element =(*this);
 	element->setThisStartClassifierBehaviorActionActivationPtr(element);
 	return element;
 }

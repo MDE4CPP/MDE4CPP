@@ -109,8 +109,17 @@ InvocationActionImpl::InvocationActionImpl(std::weak_ptr<uml::Element> par_owner
 	m_owner = par_owner;
 }
 
-InvocationActionImpl::InvocationActionImpl(const InvocationActionImpl & obj): ActionImpl(obj), InvocationAction(obj)
+InvocationActionImpl::InvocationActionImpl(const InvocationActionImpl & obj): InvocationActionImpl()
 {
+	*this = obj;
+}
+
+InvocationActionImpl& InvocationActionImpl::operator=(const InvocationActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	InvocationAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InvocationAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -132,11 +141,13 @@ InvocationActionImpl::InvocationActionImpl(const InvocationActionImpl & obj): Ac
 		std::cout << "Initialising value SubsetUnion: " << "m_argument - SubsetUnion<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InvocationActionImpl::copy() const
+std::shared_ptr<ecore::EObject> InvocationActionImpl::copy() const
 {
-	std::shared_ptr<InvocationActionImpl> element(new InvocationActionImpl(*this));
+	std::shared_ptr<InvocationActionImpl> element(new InvocationActionImpl());
+	*element =(*this);
 	element->setThisInvocationActionPtr(element);
 	return element;
 }

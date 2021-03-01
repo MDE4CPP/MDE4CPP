@@ -24,9 +24,7 @@ namespace uml
 		public: 
 			TransitionImpl(const TransitionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			TransitionImpl& operator=(TransitionImpl const&) = delete;
+			TransitionImpl& operator=(TransitionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

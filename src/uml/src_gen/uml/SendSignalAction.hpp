@@ -77,8 +77,6 @@ namespace uml
 	{
 		public:
  			SendSignalAction(const SendSignalAction &) {}
-			SendSignalAction& operator=(SendSignalAction const&) = delete;
-
 		protected:
 			SendSignalAction(){}
 

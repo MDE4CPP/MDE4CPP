@@ -131,8 +131,18 @@ CollaborationImpl::CollaborationImpl(std::weak_ptr<uml::TemplateParameter> par_o
 }
 
 
-CollaborationImpl::CollaborationImpl(const CollaborationImpl & obj): BehavioredClassifierImpl(obj), StructuredClassifierImpl(obj), Collaboration(obj)
+CollaborationImpl::CollaborationImpl(const CollaborationImpl & obj): CollaborationImpl()
 {
+	*this = obj;
+}
+
+CollaborationImpl& CollaborationImpl::operator=(const CollaborationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuredClassifierImpl::operator=(obj);
+	BehavioredClassifierImpl::operator=(obj);
+	Collaboration::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Collaboration "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -147,11 +157,13 @@ CollaborationImpl::CollaborationImpl(const CollaborationImpl & obj): BehavioredC
 	{
 		collaborationRoleContainer->push_back(std::dynamic_pointer_cast<uml::ConnectableElement>(_collaborationRole->copy()));
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CollaborationImpl::copy() const
+std::shared_ptr<ecore::EObject> CollaborationImpl::copy() const
 {
-	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(*this));
+	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl());
+	*element =(*this);
 	element->setThisCollaborationPtr(element);
 	return element;
 }

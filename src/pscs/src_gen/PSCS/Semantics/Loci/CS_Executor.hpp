@@ -65,8 +65,6 @@ namespace PSCS::Semantics::Loci
 	{
 		public:
  			CS_Executor(const CS_Executor &) {}
-			CS_Executor& operator=(CS_Executor const&) = delete;
-
 		protected:
 			CS_Executor(){}
 

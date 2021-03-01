@@ -26,9 +26,7 @@ virtual public Locus
 		public: 
 			LocusImpl(const LocusImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			LocusImpl& operator=(LocusImpl const&) = delete;
+			LocusImpl& operator=(LocusImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;

@@ -53,8 +53,6 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public:
  			PrimitiveValue(const PrimitiveValue &) {}
-			PrimitiveValue& operator=(PrimitiveValue const&) = delete;
-
 		protected:
 			PrimitiveValue(){}
 

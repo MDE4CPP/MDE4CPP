@@ -127,8 +127,17 @@ DataTypeImpl::DataTypeImpl(std::weak_ptr<uml::TemplateParameter> par_owningTempl
 }
 
 
-DataTypeImpl::DataTypeImpl(const DataTypeImpl & obj): ClassifierImpl(obj), DataType(obj)
+DataTypeImpl::DataTypeImpl(const DataTypeImpl & obj): DataTypeImpl()
 {
+	*this = obj;
+}
+
+DataTypeImpl& DataTypeImpl::operator=(const DataTypeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ClassifierImpl::operator=(obj);
+	DataType::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DataType "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -160,11 +169,13 @@ DataTypeImpl::DataTypeImpl(const DataTypeImpl & obj): ClassifierImpl(obj), DataT
 		std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature,uml::NamedElement >(getFeature(),getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DataTypeImpl::copy() const
+std::shared_ptr<ecore::EObject> DataTypeImpl::copy() const
 {
-	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(*this));
+	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl());
+	*element =(*this);
 	element->setThisDataTypePtr(element);
 	return element;
 }

@@ -64,8 +64,6 @@ namespace uml
 	{
 		public:
  			RedefinableElement(const RedefinableElement &) {}
-			RedefinableElement& operator=(RedefinableElement const&) = delete;
-
 		protected:
 			RedefinableElement(){}
 

@@ -60,8 +60,6 @@ namespace uml
 	{
 		public:
  			DeployedArtifact(const DeployedArtifact &) {}
-			DeployedArtifact& operator=(DeployedArtifact const&) = delete;
-
 		protected:
 			DeployedArtifact(){}
 

@@ -105,8 +105,17 @@ FinalNodeImpl::FinalNodeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-FinalNodeImpl::FinalNodeImpl(const FinalNodeImpl & obj): ControlNodeImpl(obj), FinalNode(obj)
+FinalNodeImpl::FinalNodeImpl(const FinalNodeImpl & obj): FinalNodeImpl()
 {
+	*this = obj;
+}
+
+FinalNodeImpl& FinalNodeImpl::operator=(const FinalNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ControlNodeImpl::operator=(obj);
+	FinalNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FinalNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -116,11 +125,13 @@ FinalNodeImpl::FinalNodeImpl(const FinalNodeImpl & obj): ControlNodeImpl(obj), F
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  FinalNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> FinalNodeImpl::copy() const
 {
-	std::shared_ptr<FinalNodeImpl> element(new FinalNodeImpl(*this));
+	std::shared_ptr<FinalNodeImpl> element(new FinalNodeImpl());
+	*element =(*this);
 	element->setThisFinalNodePtr(element);
 	return element;
 }

@@ -58,11 +58,8 @@ namespace uml
 	{
 		public:
  			PackageMerge(const PackageMerge &) {}
-			PackageMerge& operator=(PackageMerge const&) = delete;
-
 		protected:
 			PackageMerge(){}
-
 			//Additional constructors for the containments back reference
 			PackageMerge(std::weak_ptr<uml::Element> par_owner);
 

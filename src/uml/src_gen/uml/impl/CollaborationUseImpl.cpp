@@ -81,8 +81,17 @@ CollaborationUseImpl::CollaborationUseImpl(std::weak_ptr<uml::Element> par_owner
 	m_owner = par_owner;
 }
 
-CollaborationUseImpl::CollaborationUseImpl(const CollaborationUseImpl & obj): NamedElementImpl(obj), CollaborationUse(obj)
+CollaborationUseImpl::CollaborationUseImpl(const CollaborationUseImpl & obj): CollaborationUseImpl()
 {
+	*this = obj;
+}
+
+CollaborationUseImpl& CollaborationUseImpl::operator=(const CollaborationUseImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	CollaborationUse::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CollaborationUse "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -104,11 +113,13 @@ CollaborationUseImpl::CollaborationUseImpl(const CollaborationUseImpl & obj): Na
 		std::cout << "Initialising value Subset: " << "m_roleBinding - Subset<uml::Dependency, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CollaborationUseImpl::copy() const
+std::shared_ptr<ecore::EObject> CollaborationUseImpl::copy() const
 {
-	std::shared_ptr<CollaborationUseImpl> element(new CollaborationUseImpl(*this));
+	std::shared_ptr<CollaborationUseImpl> element(new CollaborationUseImpl());
+	*element =(*this);
 	element->setThisCollaborationUsePtr(element);
 	return element;
 }

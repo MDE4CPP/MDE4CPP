@@ -144,8 +144,19 @@ PropertyImpl::PropertyImpl(std::weak_ptr<uml::TemplateParameter> par_owningTempl
 	m_owner = par_owningTemplateParameter;
 }
 
-PropertyImpl::PropertyImpl(const PropertyImpl & obj): ConnectableElementImpl(obj), DeploymentTargetImpl(obj), StructuralFeatureImpl(obj), Property(obj)
+PropertyImpl::PropertyImpl(const PropertyImpl & obj): PropertyImpl()
 {
+	*this = obj;
+}
+
+PropertyImpl& PropertyImpl::operator=(const PropertyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuralFeatureImpl::operator=(obj);
+	ConnectableElementImpl::operator=(obj);
+	DeploymentTargetImpl::operator=(obj);
+	Property::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Property "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -191,11 +202,13 @@ PropertyImpl::PropertyImpl(const PropertyImpl & obj): ConnectableElementImpl(obj
 		std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::Property, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  PropertyImpl::copy() const
+std::shared_ptr<ecore::EObject> PropertyImpl::copy() const
 {
-	std::shared_ptr<PropertyImpl> element(new PropertyImpl(*this));
+	std::shared_ptr<PropertyImpl> element(new PropertyImpl());
+	*element =(*this);
 	element->setThisPropertyPtr(element);
 	return element;
 }

@@ -23,9 +23,9 @@ namespace ecore
 		public: 
 			EModelElementImpl(const EModelElementImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EModelElementImpl& operator=(EModelElementImpl const&); 
 
 		protected:
-			EModelElementImpl& operator=(EModelElementImpl const&);
 			friend class ecoreFactoryImpl;
 			EModelElementImpl();
 			virtual std::shared_ptr<EModelElement> getThisEModelElementPtr() const;

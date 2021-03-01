@@ -111,8 +111,17 @@ CallOperationActionImpl::CallOperationActionImpl(std::weak_ptr<uml::Element> par
 	m_owner = par_owner;
 }
 
-CallOperationActionImpl::CallOperationActionImpl(const CallOperationActionImpl & obj): CallActionImpl(obj), CallOperationAction(obj)
+CallOperationActionImpl::CallOperationActionImpl(const CallOperationActionImpl & obj): CallOperationActionImpl()
 {
+	*this = obj;
+}
+
+CallOperationActionImpl& CallOperationActionImpl::operator=(const CallOperationActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	CallActionImpl::operator=(obj);
+	CallOperationAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CallOperationAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -128,11 +137,13 @@ CallOperationActionImpl::CallOperationActionImpl(const CallOperationActionImpl &
 		m_target = std::dynamic_pointer_cast<uml::InputPin>(obj.getTarget()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CallOperationActionImpl::copy() const
+std::shared_ptr<ecore::EObject> CallOperationActionImpl::copy() const
 {
-	std::shared_ptr<CallOperationActionImpl> element(new CallOperationActionImpl(*this));
+	std::shared_ptr<CallOperationActionImpl> element(new CallOperationActionImpl());
+	*element =(*this);
 	element->setThisCallOperationActionPtr(element);
 	return element;
 }

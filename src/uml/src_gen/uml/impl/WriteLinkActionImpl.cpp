@@ -110,8 +110,17 @@ WriteLinkActionImpl::WriteLinkActionImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-WriteLinkActionImpl::WriteLinkActionImpl(const WriteLinkActionImpl & obj): LinkActionImpl(obj), WriteLinkAction(obj)
+WriteLinkActionImpl::WriteLinkActionImpl(const WriteLinkActionImpl & obj): WriteLinkActionImpl()
 {
+	*this = obj;
+}
+
+WriteLinkActionImpl& WriteLinkActionImpl::operator=(const WriteLinkActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	LinkActionImpl::operator=(obj);
+	WriteLinkAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy WriteLinkAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -121,11 +130,13 @@ WriteLinkActionImpl::WriteLinkActionImpl(const WriteLinkActionImpl & obj): LinkA
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  WriteLinkActionImpl::copy() const
+std::shared_ptr<ecore::EObject> WriteLinkActionImpl::copy() const
 {
-	std::shared_ptr<WriteLinkActionImpl> element(new WriteLinkActionImpl(*this));
+	std::shared_ptr<WriteLinkActionImpl> element(new WriteLinkActionImpl());
+	*element =(*this);
 	element->setThisWriteLinkActionPtr(element);
 	return element;
 }

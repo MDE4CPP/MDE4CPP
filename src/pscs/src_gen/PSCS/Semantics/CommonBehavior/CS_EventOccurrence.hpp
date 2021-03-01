@@ -36,14 +36,14 @@ namespace fUML::Semantics::CommonBehavior
 {
 	class ParameterValue;
 }
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Reference;
+}
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	class CS_InteractionPoint;
 	class CS_Reference;
-}
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Reference;
 }
 namespace uml 
 {
@@ -66,8 +66,6 @@ namespace PSCS::Semantics::CommonBehavior
 	{
 		public:
  			CS_EventOccurrence(const CS_EventOccurrence &) {}
-			CS_EventOccurrence& operator=(CS_EventOccurrence const&) = delete;
-
 		protected:
 			CS_EventOccurrence(){}
 

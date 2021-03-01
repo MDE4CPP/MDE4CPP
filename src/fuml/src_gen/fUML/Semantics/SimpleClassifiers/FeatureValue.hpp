@@ -57,8 +57,6 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public:
  			FeatureValue(const FeatureValue &) {}
-			FeatureValue& operator=(FeatureValue const&) = delete;
-
 		protected:
 			FeatureValue(){}
 

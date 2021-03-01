@@ -24,9 +24,7 @@ namespace fUML::Semantics::CommonBehavior
 		public: 
 			ExecutionImpl(const ExecutionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ExecutionImpl& operator=(ExecutionImpl const&) = delete;
+			ExecutionImpl& operator=(ExecutionImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

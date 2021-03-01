@@ -69,8 +69,6 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public:
  			CallEventExecution(const CallEventExecution &) {}
-			CallEventExecution& operator=(CallEventExecution const&) = delete;
-
 		protected:
 			CallEventExecution(){}
 

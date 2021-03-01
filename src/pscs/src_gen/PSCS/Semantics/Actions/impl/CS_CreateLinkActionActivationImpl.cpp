@@ -60,8 +60,8 @@
 //Factories an Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -92,8 +92,17 @@ CS_CreateLinkActionActivationImpl::CS_CreateLinkActionActivationImpl(std::weak_p
 	m_group = par_group;
 }
 
-CS_CreateLinkActionActivationImpl::CS_CreateLinkActionActivationImpl(const CS_CreateLinkActionActivationImpl & obj): fUML::Semantics::Actions::CreateLinkActionActivationImpl(obj), CS_CreateLinkActionActivation(obj)
+CS_CreateLinkActionActivationImpl::CS_CreateLinkActionActivationImpl(const CS_CreateLinkActionActivationImpl & obj): CS_CreateLinkActionActivationImpl()
 {
+	*this = obj;
+}
+
+CS_CreateLinkActionActivationImpl& CS_CreateLinkActionActivationImpl::operator=(const CS_CreateLinkActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Actions::CreateLinkActionActivationImpl::operator=(obj);
+	CS_CreateLinkActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_CreateLinkActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -103,11 +112,13 @@ CS_CreateLinkActionActivationImpl::CS_CreateLinkActionActivationImpl(const CS_Cr
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_CreateLinkActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_CreateLinkActionActivationImpl::copy() const
 {
-	std::shared_ptr<CS_CreateLinkActionActivationImpl> element(new CS_CreateLinkActionActivationImpl(*this));
+	std::shared_ptr<CS_CreateLinkActionActivationImpl> element(new CS_CreateLinkActionActivationImpl());
+	*element =(*this);
 	element->setThisCS_CreateLinkActionActivationPtr(element);
 	return element;
 }

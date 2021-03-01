@@ -108,20 +108,18 @@
 using namespace UML;
 
 ClassifierObject::ClassifierObject(std::shared_ptr<uml::Classifier> _element):
-
 	m_ClassifierValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Classifier());
+{
 }
 
 ClassifierObject::ClassifierObject(ClassifierObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ClassifierObject::ClassifierObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Classifier());
 }
 
 ClassifierObject::~ClassifierObject()
@@ -130,10 +128,21 @@ ClassifierObject::~ClassifierObject()
 
 std::shared_ptr<ecore::EObject> ClassifierObject::copy()
 {
-	std::shared_ptr<ClassifierObject> element(new ClassifierObject(*this));
+	std::shared_ptr<ClassifierObject> element(new ClassifierObject());
+	*element=(*this);
 	element->setThisClassifierObjectPtr(element);
 	return element;
 }
+
+ClassifierObject& ClassifierObject::operator=(const ClassifierObject & obj)
+{
+	UML::NamespaceObject::operator=(obj);
+	UML::RedefinableElementObject::operator=(obj);
+	UML::TemplateableElementObject::operator=(obj);
+	UML::TypeObject::operator=(obj);
+	return *this;
+}
+
 
 void ClassifierObject::destroy()
 {	

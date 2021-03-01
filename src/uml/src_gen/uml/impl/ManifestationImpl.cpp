@@ -100,8 +100,17 @@ ManifestationImpl::ManifestationImpl(std::weak_ptr<uml::TemplateParameter> par_o
 	m_owner = par_owningTemplateParameter;
 }
 
-ManifestationImpl::ManifestationImpl(const ManifestationImpl & obj): AbstractionImpl(obj), Manifestation(obj)
+ManifestationImpl::ManifestationImpl(const ManifestationImpl & obj): ManifestationImpl()
 {
+	*this = obj;
+}
+
+ManifestationImpl& ManifestationImpl::operator=(const ManifestationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	AbstractionImpl::operator=(obj);
+	Manifestation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Manifestation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -115,11 +124,13 @@ ManifestationImpl::ManifestationImpl(const ManifestationImpl & obj): Abstraction
 	{
 		m_utilizedElement = std::dynamic_pointer_cast<uml::PackageableElement>(obj.getUtilizedElement()->copy());
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ManifestationImpl::copy() const
+std::shared_ptr<ecore::EObject> ManifestationImpl::copy() const
 {
-	std::shared_ptr<ManifestationImpl> element(new ManifestationImpl(*this));
+	std::shared_ptr<ManifestationImpl> element(new ManifestationImpl());
+	*element =(*this);
 	element->setThisManifestationPtr(element);
 	return element;
 }

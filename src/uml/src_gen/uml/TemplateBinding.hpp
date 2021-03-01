@@ -63,11 +63,8 @@ namespace uml
 	{
 		public:
  			TemplateBinding(const TemplateBinding &) {}
-			TemplateBinding& operator=(TemplateBinding const&) = delete;
-
 		protected:
 			TemplateBinding(){}
-
 			//Additional constructors for the containments back reference
 			TemplateBinding(std::weak_ptr<uml::TemplateableElement> par_boundElement);
 

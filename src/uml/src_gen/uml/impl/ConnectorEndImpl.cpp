@@ -79,8 +79,17 @@ ConnectorEndImpl::ConnectorEndImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj): MultiplicityElementImpl(obj), ConnectorEnd(obj)
+ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj): ConnectorEndImpl()
 {
+	*this = obj;
+}
+
+ConnectorEndImpl& ConnectorEndImpl::operator=(const ConnectorEndImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	MultiplicityElementImpl::operator=(obj);
+	ConnectorEnd::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ConnectorEnd "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -94,11 +103,13 @@ ConnectorEndImpl::ConnectorEndImpl(const ConnectorEndImpl & obj): MultiplicityEl
 	m_role  = obj.getRole();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ConnectorEndImpl::copy() const
+std::shared_ptr<ecore::EObject> ConnectorEndImpl::copy() const
 {
-	std::shared_ptr<ConnectorEndImpl> element(new ConnectorEndImpl(*this));
+	std::shared_ptr<ConnectorEndImpl> element(new ConnectorEndImpl());
+	*element =(*this);
 	element->setThisConnectorEndPtr(element);
 	return element;
 }

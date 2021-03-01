@@ -108,8 +108,17 @@ DataStoreNodeImpl::DataStoreNodeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-DataStoreNodeImpl::DataStoreNodeImpl(const DataStoreNodeImpl & obj): CentralBufferNodeImpl(obj), DataStoreNode(obj)
+DataStoreNodeImpl::DataStoreNodeImpl(const DataStoreNodeImpl & obj): DataStoreNodeImpl()
 {
+	*this = obj;
+}
+
+DataStoreNodeImpl& DataStoreNodeImpl::operator=(const DataStoreNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	CentralBufferNodeImpl::operator=(obj);
+	DataStoreNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DataStoreNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -119,11 +128,13 @@ DataStoreNodeImpl::DataStoreNodeImpl(const DataStoreNodeImpl & obj): CentralBuff
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DataStoreNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> DataStoreNodeImpl::copy() const
 {
-	std::shared_ptr<DataStoreNodeImpl> element(new DataStoreNodeImpl(*this));
+	std::shared_ptr<DataStoreNodeImpl> element(new DataStoreNodeImpl());
+	*element =(*this);
 	element->setThisDataStoreNodePtr(element);
 	return element;
 }

@@ -65,8 +65,17 @@ SignalInstanceImpl::~SignalInstanceImpl()
 }
 
 
-SignalInstanceImpl::SignalInstanceImpl(const SignalInstanceImpl & obj): CompoundValueImpl(obj), SignalInstance(obj)
+SignalInstanceImpl::SignalInstanceImpl(const SignalInstanceImpl & obj): SignalInstanceImpl()
 {
+	*this = obj;
+}
+
+SignalInstanceImpl& SignalInstanceImpl::operator=(const SignalInstanceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	CompoundValueImpl::operator=(obj);
+	SignalInstance::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SignalInstance "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -77,11 +86,13 @@ SignalInstanceImpl::SignalInstanceImpl(const SignalInstanceImpl & obj): Compound
 	m_type  = obj.getType();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  SignalInstanceImpl::copy() const
+std::shared_ptr<ecore::EObject> SignalInstanceImpl::copy() const
 {
-	std::shared_ptr<SignalInstanceImpl> element(new SignalInstanceImpl(*this));
+	std::shared_ptr<SignalInstanceImpl> element(new SignalInstanceImpl());
+	*element =(*this);
 	element->setThisSignalInstancePtr(element);
 	return element;
 }

@@ -59,20 +59,18 @@
 using namespace UML;
 
 VertexObject::VertexObject(std::shared_ptr<uml::Vertex> _element):
-
 	m_VertexValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Vertex());
+{
 }
 
 VertexObject::VertexObject(VertexObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 VertexObject::VertexObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Vertex());
 }
 
 VertexObject::~VertexObject()
@@ -81,10 +79,18 @@ VertexObject::~VertexObject()
 
 std::shared_ptr<ecore::EObject> VertexObject::copy()
 {
-	std::shared_ptr<VertexObject> element(new VertexObject(*this));
+	std::shared_ptr<VertexObject> element(new VertexObject());
+	*element=(*this);
 	element->setThisVertexObjectPtr(element);
 	return element;
 }
+
+VertexObject& VertexObject::operator=(const VertexObject & obj)
+{
+	UML::NamedElementObject::operator=(obj);
+	return *this;
+}
+
 
 void VertexObject::destroy()
 {	

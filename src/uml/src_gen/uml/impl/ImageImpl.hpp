@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ImageImpl(const ImageImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ImageImpl& operator=(ImageImpl const&) = delete;
+			ImageImpl& operator=(ImageImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

@@ -67,8 +67,6 @@ namespace uml
 	{
 		public:
  			FlowFinalNode(const FlowFinalNode &) {}
-			FlowFinalNode& operator=(FlowFinalNode const&) = delete;
-
 		protected:
 			FlowFinalNode(){}
 

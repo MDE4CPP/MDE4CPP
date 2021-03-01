@@ -24,9 +24,7 @@ namespace fUML::Semantics::SimpleClassifiers
 		public: 
 			IntegerValueImpl(const IntegerValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			IntegerValueImpl& operator=(IntegerValueImpl const&) = delete;
+			IntegerValueImpl& operator=(IntegerValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;

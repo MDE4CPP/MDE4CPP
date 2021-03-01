@@ -79,8 +79,17 @@ ElementImpl::ElementImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ElementImpl::ElementImpl(const ElementImpl & obj): ObjectImpl(obj), Element(obj)
+ElementImpl::ElementImpl(const ElementImpl & obj): ElementImpl()
 {
+	*this = obj;
+}
+
+ElementImpl& ElementImpl::operator=(const ElementImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ObjectImpl::operator=(obj);
+	Element::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Element "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -102,11 +111,13 @@ ElementImpl::ElementImpl(const ElementImpl & obj): ObjectImpl(obj), Element(obj)
 		std::cout << "Initialising value Subset: " << "m_ownedComment - Subset<uml::Comment, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ElementImpl::copy() const
+std::shared_ptr<ecore::EObject> ElementImpl::copy() const
 {
-	std::shared_ptr<ElementImpl> element(new ElementImpl(*this));
+	std::shared_ptr<ElementImpl> element(new ElementImpl());
+	*element =(*this);
 	element->setThisElementPtr(element);
 	return element;
 }

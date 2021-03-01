@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			OutputPinImpl(const OutputPinImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			OutputPinImpl& operator=(OutputPinImpl const&) = delete;
+			OutputPinImpl& operator=(OutputPinImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

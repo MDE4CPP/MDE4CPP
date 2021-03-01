@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~DirectedRelationshipObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			DirectedRelationshipObject& operator=(DirectedRelationshipObject const&);
 
 			virtual void destroy();
 			

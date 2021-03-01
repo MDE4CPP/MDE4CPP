@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ReadSelfActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ReadSelfActionObject& operator=(ReadSelfActionObject const&);
 
 			virtual void destroy();
 			

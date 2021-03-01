@@ -74,8 +74,8 @@
 //Factories an Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -106,8 +106,17 @@ CS_AddStructuralFeatureValueActionActivationImpl::CS_AddStructuralFeatureValueAc
 	m_group = par_group;
 }
 
-CS_AddStructuralFeatureValueActionActivationImpl::CS_AddStructuralFeatureValueActionActivationImpl(const CS_AddStructuralFeatureValueActionActivationImpl & obj): fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl(obj), CS_AddStructuralFeatureValueActionActivation(obj)
+CS_AddStructuralFeatureValueActionActivationImpl::CS_AddStructuralFeatureValueActionActivationImpl(const CS_AddStructuralFeatureValueActionActivationImpl & obj): CS_AddStructuralFeatureValueActionActivationImpl()
 {
+	*this = obj;
+}
+
+CS_AddStructuralFeatureValueActionActivationImpl& CS_AddStructuralFeatureValueActionActivationImpl::operator=(const CS_AddStructuralFeatureValueActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Actions::AddStructuralFeatureValueActionActivationImpl::operator=(obj);
+	CS_AddStructuralFeatureValueActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_AddStructuralFeatureValueActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -117,11 +126,13 @@ CS_AddStructuralFeatureValueActionActivationImpl::CS_AddStructuralFeatureValueAc
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_AddStructuralFeatureValueActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_AddStructuralFeatureValueActionActivationImpl::copy() const
 {
-	std::shared_ptr<CS_AddStructuralFeatureValueActionActivationImpl> element(new CS_AddStructuralFeatureValueActionActivationImpl(*this));
+	std::shared_ptr<CS_AddStructuralFeatureValueActionActivationImpl> element(new CS_AddStructuralFeatureValueActionActivationImpl());
+	*element =(*this);
 	element->setThisCS_AddStructuralFeatureValueActionActivationPtr(element);
 	return element;
 }

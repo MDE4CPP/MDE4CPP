@@ -69,8 +69,6 @@ namespace uml
 	{
 		public:
  			ExecutableNode(const ExecutableNode &) {}
-			ExecutableNode& operator=(ExecutableNode const&) = delete;
-
 		protected:
 			ExecutableNode(){}
 

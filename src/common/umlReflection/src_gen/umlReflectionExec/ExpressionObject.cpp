@@ -64,20 +64,18 @@
 using namespace UML;
 
 ExpressionObject::ExpressionObject(std::shared_ptr<uml::Expression> _element):
-
 	m_ExpressionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Expression());
+{
 }
 
 ExpressionObject::ExpressionObject(ExpressionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExpressionObject::ExpressionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Expression());
 }
 
 ExpressionObject::~ExpressionObject()
@@ -86,10 +84,18 @@ ExpressionObject::~ExpressionObject()
 
 std::shared_ptr<ecore::EObject> ExpressionObject::copy()
 {
-	std::shared_ptr<ExpressionObject> element(new ExpressionObject(*this));
+	std::shared_ptr<ExpressionObject> element(new ExpressionObject());
+	*element=(*this);
 	element->setThisExpressionObjectPtr(element);
 	return element;
 }
+
+ExpressionObject& ExpressionObject::operator=(const ExpressionObject & obj)
+{
+	UML::ValueSpecificationObject::operator=(obj);
+	return *this;
+}
+
 
 void ExpressionObject::destroy()
 {	

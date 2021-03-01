@@ -98,9 +98,17 @@ ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(std::weak_ptr<f
 	m_containingNodeActivation = par_containingNodeActivation;
 }
 
-ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityNodeActivationGroupImpl & obj): ecore::EModelElementImpl(obj),
-ActivityNodeActivationGroup(obj)
+ActivityNodeActivationGroupImpl::ActivityNodeActivationGroupImpl(const ActivityNodeActivationGroupImpl & obj): ActivityNodeActivationGroupImpl()
 {
+	*this = obj;
+}
+
+ActivityNodeActivationGroupImpl& ActivityNodeActivationGroupImpl::operator=(const ActivityNodeActivationGroupImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	ActivityNodeActivationGroup::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityNodeActivationGroup "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -126,11 +134,13 @@ ActivityNodeActivationGroup(obj)
 	}
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityNodeActivationGroupImpl::copy() const
+std::shared_ptr<ecore::EObject> ActivityNodeActivationGroupImpl::copy() const
 {
-	std::shared_ptr<ActivityNodeActivationGroupImpl> element(new ActivityNodeActivationGroupImpl(*this));
+	std::shared_ptr<ActivityNodeActivationGroupImpl> element(new ActivityNodeActivationGroupImpl());
+	*element =(*this);
 	element->setThisActivityNodeActivationGroupPtr(element);
 	return element;
 }

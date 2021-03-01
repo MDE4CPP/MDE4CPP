@@ -67,8 +67,17 @@ FactoryImpl::FactoryImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-FactoryImpl::FactoryImpl(const FactoryImpl & obj): ElementImpl(obj), Factory(obj)
+FactoryImpl::FactoryImpl(const FactoryImpl & obj): FactoryImpl()
 {
+	*this = obj;
+}
+
+FactoryImpl& FactoryImpl::operator=(const FactoryImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	Factory::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Factory "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -78,11 +87,13 @@ FactoryImpl::FactoryImpl(const FactoryImpl & obj): ElementImpl(obj), Factory(obj
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  FactoryImpl::copy() const
+std::shared_ptr<ecore::EObject> FactoryImpl::copy() const
 {
-	std::shared_ptr<FactoryImpl> element(new FactoryImpl(*this));
+	std::shared_ptr<FactoryImpl> element(new FactoryImpl());
+	*element =(*this);
 	element->setThisFactoryPtr(element);
 	return element;
 }

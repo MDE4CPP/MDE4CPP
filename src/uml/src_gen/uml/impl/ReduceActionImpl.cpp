@@ -110,8 +110,17 @@ ReduceActionImpl::ReduceActionImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ReduceActionImpl::ReduceActionImpl(const ReduceActionImpl & obj): ActionImpl(obj), ReduceAction(obj)
+ReduceActionImpl::ReduceActionImpl(const ReduceActionImpl & obj): ReduceActionImpl()
 {
+	*this = obj;
+}
+
+ReduceActionImpl& ReduceActionImpl::operator=(const ReduceActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	ReduceAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReduceAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -133,11 +142,13 @@ ReduceActionImpl::ReduceActionImpl(const ReduceActionImpl & obj): ActionImpl(obj
 	}
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReduceActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ReduceActionImpl::copy() const
 {
-	std::shared_ptr<ReduceActionImpl> element(new ReduceActionImpl(*this));
+	std::shared_ptr<ReduceActionImpl> element(new ReduceActionImpl());
+	*element =(*this);
 	element->setThisReduceActionPtr(element);
 	return element;
 }

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ConditionalNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ConditionalNodeObject& operator=(ConditionalNodeObject const&);
 
 			virtual void destroy();
 			

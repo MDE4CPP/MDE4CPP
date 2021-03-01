@@ -136,8 +136,20 @@ ClassifierImpl::ClassifierImpl(std::weak_ptr<uml::TemplateParameter> par_owningT
 }
 
 
-ClassifierImpl::ClassifierImpl(const ClassifierImpl & obj): NamespaceImpl(obj), RedefinableElementImpl(obj), TemplateableElementImpl(obj), TypeImpl(obj), Classifier(obj)
+ClassifierImpl::ClassifierImpl(const ClassifierImpl & obj): ClassifierImpl()
 {
+	*this = obj;
+}
+
+ClassifierImpl& ClassifierImpl::operator=(const ClassifierImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamespaceImpl::operator=(obj);
+	RedefinableElementImpl::operator=(obj);
+	TypeImpl::operator=(obj);
+	TemplateableElementImpl::operator=(obj);
+	Classifier::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Classifier "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -213,11 +225,13 @@ ClassifierImpl::ClassifierImpl(const ClassifierImpl & obj): NamespaceImpl(obj), 
 		std::cout << "Initialising value Subset: " << "m_substitution - Subset<uml::Substitution, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ClassifierImpl::copy() const
+std::shared_ptr<ecore::EObject> ClassifierImpl::copy() const
 {
-	std::shared_ptr<ClassifierImpl> element(new ClassifierImpl(*this));
+	std::shared_ptr<ClassifierImpl> element(new ClassifierImpl());
+	*element =(*this);
 	element->setThisClassifierPtr(element);
 	return element;
 }

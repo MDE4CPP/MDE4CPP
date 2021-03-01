@@ -67,11 +67,8 @@ namespace uml
 	{
 		public:
  			PackageableElement(const PackageableElement &) {}
-			PackageableElement& operator=(PackageableElement const&) = delete;
-
 		protected:
 			PackageableElement(){}
-
 			//Additional constructors for the containments back reference
 			PackageableElement(std::weak_ptr<uml::Namespace> par_namespace);
 

@@ -86,8 +86,17 @@ StartObjectBehaviorActionActivationImpl::StartObjectBehaviorActionActivationImpl
 	m_group = par_group;
 }
 
-StartObjectBehaviorActionActivationImpl::StartObjectBehaviorActionActivationImpl(const StartObjectBehaviorActionActivationImpl & obj): InvocationActionActivationImpl(obj), StartObjectBehaviorActionActivation(obj)
+StartObjectBehaviorActionActivationImpl::StartObjectBehaviorActionActivationImpl(const StartObjectBehaviorActionActivationImpl & obj): StartObjectBehaviorActionActivationImpl()
 {
+	*this = obj;
+}
+
+StartObjectBehaviorActionActivationImpl& StartObjectBehaviorActionActivationImpl::operator=(const StartObjectBehaviorActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	InvocationActionActivationImpl::operator=(obj);
+	StartObjectBehaviorActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy StartObjectBehaviorActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -97,11 +106,13 @@ StartObjectBehaviorActionActivationImpl::StartObjectBehaviorActionActivationImpl
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StartObjectBehaviorActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> StartObjectBehaviorActionActivationImpl::copy() const
 {
-	std::shared_ptr<StartObjectBehaviorActionActivationImpl> element(new StartObjectBehaviorActionActivationImpl(*this));
+	std::shared_ptr<StartObjectBehaviorActionActivationImpl> element(new StartObjectBehaviorActionActivationImpl());
+	*element =(*this);
 	element->setThisStartObjectBehaviorActionActivationPtr(element);
 	return element;
 }

@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			StereotypeImpl(const StereotypeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			StereotypeImpl& operator=(StereotypeImpl const&) = delete;
+			StereotypeImpl& operator=(StereotypeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

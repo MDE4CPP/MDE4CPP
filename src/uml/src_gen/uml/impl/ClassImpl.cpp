@@ -138,8 +138,18 @@ ClassImpl::ClassImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplatePar
 }
 
 
-ClassImpl::ClassImpl(const ClassImpl & obj): BehavioredClassifierImpl(obj), EncapsulatedClassifierImpl(obj), Class(obj)
+ClassImpl::ClassImpl(const ClassImpl & obj): ClassImpl()
 {
+	*this = obj;
+}
+
+ClassImpl& ClassImpl::operator=(const ClassImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EncapsulatedClassifierImpl::operator=(obj);
+	BehavioredClassifierImpl::operator=(obj);
+	Class::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Class "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -187,11 +197,13 @@ ClassImpl::ClassImpl(const ClassImpl & obj): BehavioredClassifierImpl(obj), Enca
 		std::cout << "Initialising value Subset: " << "m_ownedReception - Subset<uml::Reception, uml::Feature,uml::NamedElement >(getFeature(),getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ClassImpl::copy() const
+std::shared_ptr<ecore::EObject> ClassImpl::copy() const
 {
-	std::shared_ptr<ClassImpl> element(new ClassImpl(*this));
+	std::shared_ptr<ClassImpl> element(new ClassImpl());
+	*element =(*this);
 	element->setThisClassPtr(element);
 	return element;
 }

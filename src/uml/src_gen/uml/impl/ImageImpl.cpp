@@ -66,8 +66,17 @@ ImageImpl::ImageImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ImageImpl::ImageImpl(const ImageImpl & obj): ElementImpl(obj), Image(obj)
+ImageImpl::ImageImpl(const ImageImpl & obj): ImageImpl()
 {
+	*this = obj;
+}
+
+ImageImpl& ImageImpl::operator=(const ImageImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	Image::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Image "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -80,11 +89,13 @@ ImageImpl::ImageImpl(const ImageImpl & obj): ElementImpl(obj), Image(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ImageImpl::copy() const
+std::shared_ptr<ecore::EObject> ImageImpl::copy() const
 {
-	std::shared_ptr<ImageImpl> element(new ImageImpl(*this));
+	std::shared_ptr<ImageImpl> element(new ImageImpl());
+	*element =(*this);
 	element->setThisImagePtr(element);
 	return element;
 }

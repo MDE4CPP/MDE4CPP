@@ -23,9 +23,9 @@ namespace ecore
 		public: 
 			EEnumLiteralImpl(const EEnumLiteralImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EEnumLiteralImpl& operator=(EEnumLiteralImpl const&); 
 
 		protected:
-			EEnumLiteralImpl& operator=(EEnumLiteralImpl const&);
 			friend class ecoreFactoryImpl;
 			EEnumLiteralImpl();
 			virtual std::shared_ptr<EEnumLiteral> getThisEEnumLiteralPtr() const;

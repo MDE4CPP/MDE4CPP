@@ -62,9 +62,17 @@ CallEventBehaviorImpl::~CallEventBehaviorImpl()
 }
 
 
-CallEventBehaviorImpl::CallEventBehaviorImpl(const CallEventBehaviorImpl & obj): ecore::EModelElementImpl(obj),
-CallEventBehavior(obj)
+CallEventBehaviorImpl::CallEventBehaviorImpl(const CallEventBehaviorImpl & obj): CallEventBehaviorImpl()
 {
+	*this = obj;
+}
+
+CallEventBehaviorImpl& CallEventBehaviorImpl::operator=(const CallEventBehaviorImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	CallEventBehavior::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CallEventBehavior "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -75,11 +83,13 @@ CallEventBehavior(obj)
 	m_operation  = obj.getOperation();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CallEventBehaviorImpl::copy() const
+std::shared_ptr<ecore::EObject> CallEventBehaviorImpl::copy() const
 {
-	std::shared_ptr<CallEventBehaviorImpl> element(new CallEventBehaviorImpl(*this));
+	std::shared_ptr<CallEventBehaviorImpl> element(new CallEventBehaviorImpl());
+	*element =(*this);
 	element->setThisCallEventBehaviorPtr(element);
 	return element;
 }

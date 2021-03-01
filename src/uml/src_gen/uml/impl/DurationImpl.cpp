@@ -118,8 +118,17 @@ DurationImpl::DurationImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valu
 	m_owner = par_valueSpecificationAction;
 }
 
-DurationImpl::DurationImpl(const DurationImpl & obj): ValueSpecificationImpl(obj), Duration(obj)
+DurationImpl::DurationImpl(const DurationImpl & obj): DurationImpl()
 {
+	*this = obj;
+}
+
+DurationImpl& DurationImpl::operator=(const DurationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ValueSpecificationImpl::operator=(obj);
+	Duration::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Duration "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -136,11 +145,13 @@ DurationImpl::DurationImpl(const DurationImpl & obj): ValueSpecificationImpl(obj
 		m_expr = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getExpr()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DurationImpl::copy() const
+std::shared_ptr<ecore::EObject> DurationImpl::copy() const
 {
-	std::shared_ptr<DurationImpl> element(new DurationImpl(*this));
+	std::shared_ptr<DurationImpl> element(new DurationImpl());
+	*element =(*this);
 	element->setThisDurationPtr(element);
 	return element;
 }

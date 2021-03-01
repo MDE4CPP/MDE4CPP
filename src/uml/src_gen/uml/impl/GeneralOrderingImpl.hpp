@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			GeneralOrderingImpl(const GeneralOrderingImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			GeneralOrderingImpl& operator=(GeneralOrderingImpl const&) = delete;
+			GeneralOrderingImpl& operator=(GeneralOrderingImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

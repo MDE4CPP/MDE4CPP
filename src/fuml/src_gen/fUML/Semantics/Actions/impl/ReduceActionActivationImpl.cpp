@@ -79,8 +79,17 @@ ReduceActionActivationImpl::ReduceActionActivationImpl(std::weak_ptr<fUML::Seman
 	m_group = par_group;
 }
 
-ReduceActionActivationImpl::ReduceActionActivationImpl(const ReduceActionActivationImpl & obj): ActionActivationImpl(obj), ReduceActionActivation(obj)
+ReduceActionActivationImpl::ReduceActionActivationImpl(const ReduceActionActivationImpl & obj): ReduceActionActivationImpl()
 {
+	*this = obj;
+}
+
+ReduceActionActivationImpl& ReduceActionActivationImpl::operator=(const ReduceActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	ReduceActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReduceActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -91,11 +100,13 @@ ReduceActionActivationImpl::ReduceActionActivationImpl(const ReduceActionActivat
 	m_currentExecution  = obj.getCurrentExecution();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReduceActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ReduceActionActivationImpl::copy() const
 {
-	std::shared_ptr<ReduceActionActivationImpl> element(new ReduceActionActivationImpl(*this));
+	std::shared_ptr<ReduceActionActivationImpl> element(new ReduceActionActivationImpl());
+	*element =(*this);
 	element->setThisReduceActionActivationPtr(element);
 	return element;
 }

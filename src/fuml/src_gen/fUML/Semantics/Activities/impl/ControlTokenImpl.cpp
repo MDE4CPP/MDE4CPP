@@ -61,8 +61,17 @@ ControlTokenImpl::~ControlTokenImpl()
 }
 
 
-ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj): TokenImpl(obj), ControlToken(obj)
+ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj): ControlTokenImpl()
 {
+	*this = obj;
+}
+
+ControlTokenImpl& ControlTokenImpl::operator=(const ControlTokenImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	TokenImpl::operator=(obj);
+	ControlToken::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ControlToken "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -72,11 +81,13 @@ ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj): TokenImpl(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ControlTokenImpl::copy() const
+std::shared_ptr<ecore::EObject> ControlTokenImpl::copy() const
 {
-	std::shared_ptr<ControlTokenImpl> element(new ControlTokenImpl(*this));
+	std::shared_ptr<ControlTokenImpl> element(new ControlTokenImpl());
+	*element =(*this);
 	element->setThisControlTokenPtr(element);
 	return element;
 }

@@ -111,8 +111,17 @@ IntervalConstraintImpl::IntervalConstraintImpl(std::weak_ptr<uml::TemplateParame
 	m_owner = par_owningTemplateParameter;
 }
 
-IntervalConstraintImpl::IntervalConstraintImpl(const IntervalConstraintImpl & obj): ConstraintImpl(obj), IntervalConstraint(obj)
+IntervalConstraintImpl::IntervalConstraintImpl(const IntervalConstraintImpl & obj): IntervalConstraintImpl()
 {
+	*this = obj;
+}
+
+IntervalConstraintImpl& IntervalConstraintImpl::operator=(const IntervalConstraintImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ConstraintImpl::operator=(obj);
+	IntervalConstraint::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy IntervalConstraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -122,11 +131,13 @@ IntervalConstraintImpl::IntervalConstraintImpl(const IntervalConstraintImpl & ob
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  IntervalConstraintImpl::copy() const
+std::shared_ptr<ecore::EObject> IntervalConstraintImpl::copy() const
 {
-	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(*this));
+	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl());
+	*element =(*this);
 	element->setThisIntervalConstraintPtr(element);
 	return element;
 }

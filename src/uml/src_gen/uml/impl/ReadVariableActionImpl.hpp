@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ReadVariableActionImpl(const ReadVariableActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ReadVariableActionImpl& operator=(ReadVariableActionImpl const&) = delete;
+			ReadVariableActionImpl& operator=(ReadVariableActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

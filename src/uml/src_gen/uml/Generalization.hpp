@@ -60,11 +60,8 @@ namespace uml
 	{
 		public:
  			Generalization(const Generalization &) {}
-			Generalization& operator=(Generalization const&) = delete;
-
 		protected:
 			Generalization(){}
-
 			//Additional constructors for the containments back reference
 			Generalization(std::weak_ptr<uml::Element> par_owner);
 

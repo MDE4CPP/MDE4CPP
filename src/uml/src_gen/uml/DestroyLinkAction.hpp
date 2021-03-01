@@ -72,8 +72,6 @@ namespace uml
 	{
 		public:
  			DestroyLinkAction(const DestroyLinkAction &) {}
-			DestroyLinkAction& operator=(DestroyLinkAction const&) = delete;
-
 		protected:
 			DestroyLinkAction(){}
 

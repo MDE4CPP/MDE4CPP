@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~MessageEventObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			MessageEventObject& operator=(MessageEventObject const&);
 
 			virtual void destroy();
 			

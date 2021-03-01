@@ -92,20 +92,18 @@
 using namespace UML;
 
 AcceptEventActionObject::AcceptEventActionObject(std::shared_ptr<uml::AcceptEventAction> _element):
-
 	m_AcceptEventActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_AcceptEventAction());
+{
 }
 
 AcceptEventActionObject::AcceptEventActionObject(AcceptEventActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 AcceptEventActionObject::AcceptEventActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_AcceptEventAction());
 }
 
 AcceptEventActionObject::~AcceptEventActionObject()
@@ -114,10 +112,18 @@ AcceptEventActionObject::~AcceptEventActionObject()
 
 std::shared_ptr<ecore::EObject> AcceptEventActionObject::copy()
 {
-	std::shared_ptr<AcceptEventActionObject> element(new AcceptEventActionObject(*this));
+	std::shared_ptr<AcceptEventActionObject> element(new AcceptEventActionObject());
+	*element=(*this);
 	element->setThisAcceptEventActionObjectPtr(element);
 	return element;
 }
+
+AcceptEventActionObject& AcceptEventActionObject::operator=(const AcceptEventActionObject & obj)
+{
+	UML::ActionObject::operator=(obj);
+	return *this;
+}
+
 
 void AcceptEventActionObject::destroy()
 {	

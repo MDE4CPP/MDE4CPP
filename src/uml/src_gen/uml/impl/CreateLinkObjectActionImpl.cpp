@@ -110,8 +110,17 @@ CreateLinkObjectActionImpl::CreateLinkObjectActionImpl(std::weak_ptr<uml::Elemen
 	m_owner = par_owner;
 }
 
-CreateLinkObjectActionImpl::CreateLinkObjectActionImpl(const CreateLinkObjectActionImpl & obj): CreateLinkActionImpl(obj), CreateLinkObjectAction(obj)
+CreateLinkObjectActionImpl::CreateLinkObjectActionImpl(const CreateLinkObjectActionImpl & obj): CreateLinkObjectActionImpl()
 {
+	*this = obj;
+}
+
+CreateLinkObjectActionImpl& CreateLinkObjectActionImpl::operator=(const CreateLinkObjectActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	CreateLinkActionImpl::operator=(obj);
+	CreateLinkObjectAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CreateLinkObjectAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -126,11 +135,13 @@ CreateLinkObjectActionImpl::CreateLinkObjectActionImpl(const CreateLinkObjectAct
 		m_result = std::dynamic_pointer_cast<uml::OutputPin>(obj.getResult()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CreateLinkObjectActionImpl::copy() const
+std::shared_ptr<ecore::EObject> CreateLinkObjectActionImpl::copy() const
 {
-	std::shared_ptr<CreateLinkObjectActionImpl> element(new CreateLinkObjectActionImpl(*this));
+	std::shared_ptr<CreateLinkObjectActionImpl> element(new CreateLinkObjectActionImpl());
+	*element =(*this);
 	element->setThisCreateLinkObjectActionPtr(element);
 	return element;
 }

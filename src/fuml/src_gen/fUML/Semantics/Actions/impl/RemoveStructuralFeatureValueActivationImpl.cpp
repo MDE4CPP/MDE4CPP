@@ -87,8 +87,17 @@ RemoveStructuralFeatureValueActivationImpl::RemoveStructuralFeatureValueActivati
 	m_group = par_group;
 }
 
-RemoveStructuralFeatureValueActivationImpl::RemoveStructuralFeatureValueActivationImpl(const RemoveStructuralFeatureValueActivationImpl & obj): WriteStructuralFeatureActionActivationImpl(obj), RemoveStructuralFeatureValueActivation(obj)
+RemoveStructuralFeatureValueActivationImpl::RemoveStructuralFeatureValueActivationImpl(const RemoveStructuralFeatureValueActivationImpl & obj): RemoveStructuralFeatureValueActivationImpl()
 {
+	*this = obj;
+}
+
+RemoveStructuralFeatureValueActivationImpl& RemoveStructuralFeatureValueActivationImpl::operator=(const RemoveStructuralFeatureValueActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	WriteStructuralFeatureActionActivationImpl::operator=(obj);
+	RemoveStructuralFeatureValueActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy RemoveStructuralFeatureValueActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -99,11 +108,13 @@ RemoveStructuralFeatureValueActivationImpl::RemoveStructuralFeatureValueActivati
 	m_removeStructuralFeatureValueAction  = obj.getRemoveStructuralFeatureValueAction();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  RemoveStructuralFeatureValueActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> RemoveStructuralFeatureValueActivationImpl::copy() const
 {
-	std::shared_ptr<RemoveStructuralFeatureValueActivationImpl> element(new RemoveStructuralFeatureValueActivationImpl(*this));
+	std::shared_ptr<RemoveStructuralFeatureValueActivationImpl> element(new RemoveStructuralFeatureValueActivationImpl());
+	*element =(*this);
 	element->setThisRemoveStructuralFeatureValueActivationPtr(element);
 	return element;
 }

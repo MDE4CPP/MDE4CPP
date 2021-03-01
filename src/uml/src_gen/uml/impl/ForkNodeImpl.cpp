@@ -105,8 +105,17 @@ ForkNodeImpl::ForkNodeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ForkNodeImpl::ForkNodeImpl(const ForkNodeImpl & obj): ControlNodeImpl(obj), ForkNode(obj)
+ForkNodeImpl::ForkNodeImpl(const ForkNodeImpl & obj): ForkNodeImpl()
 {
+	*this = obj;
+}
+
+ForkNodeImpl& ForkNodeImpl::operator=(const ForkNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ControlNodeImpl::operator=(obj);
+	ForkNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ForkNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -116,11 +125,13 @@ ForkNodeImpl::ForkNodeImpl(const ForkNodeImpl & obj): ControlNodeImpl(obj), Fork
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ForkNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> ForkNodeImpl::copy() const
 {
-	std::shared_ptr<ForkNodeImpl> element(new ForkNodeImpl(*this));
+	std::shared_ptr<ForkNodeImpl> element(new ForkNodeImpl());
+	*element =(*this);
 	element->setThisForkNodePtr(element);
 	return element;
 }

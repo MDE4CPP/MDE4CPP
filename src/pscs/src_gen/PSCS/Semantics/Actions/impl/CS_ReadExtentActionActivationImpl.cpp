@@ -57,8 +57,8 @@
 //Factories an Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -89,8 +89,17 @@ CS_ReadExtentActionActivationImpl::CS_ReadExtentActionActivationImpl(std::weak_p
 	m_group = par_group;
 }
 
-CS_ReadExtentActionActivationImpl::CS_ReadExtentActionActivationImpl(const CS_ReadExtentActionActivationImpl & obj): fUML::Semantics::Actions::ReadExtentActionActivationImpl(obj), CS_ReadExtentActionActivation(obj)
+CS_ReadExtentActionActivationImpl::CS_ReadExtentActionActivationImpl(const CS_ReadExtentActionActivationImpl & obj): CS_ReadExtentActionActivationImpl()
 {
+	*this = obj;
+}
+
+CS_ReadExtentActionActivationImpl& CS_ReadExtentActionActivationImpl::operator=(const CS_ReadExtentActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Actions::ReadExtentActionActivationImpl::operator=(obj);
+	CS_ReadExtentActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_ReadExtentActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -100,11 +109,13 @@ CS_ReadExtentActionActivationImpl::CS_ReadExtentActionActivationImpl(const CS_Re
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_ReadExtentActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_ReadExtentActionActivationImpl::copy() const
 {
-	std::shared_ptr<CS_ReadExtentActionActivationImpl> element(new CS_ReadExtentActionActivationImpl(*this));
+	std::shared_ptr<CS_ReadExtentActionActivationImpl> element(new CS_ReadExtentActionActivationImpl());
+	*element =(*this);
 	element->setThisCS_ReadExtentActionActivationPtr(element);
 	return element;
 }

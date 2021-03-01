@@ -74,20 +74,18 @@
 using namespace UML;
 
 ActivityNodeObject::ActivityNodeObject(std::shared_ptr<uml::ActivityNode> _element):
-
 	m_ActivityNodeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ActivityNode());
+{
 }
 
 ActivityNodeObject::ActivityNodeObject(ActivityNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActivityNodeObject::ActivityNodeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ActivityNode());
 }
 
 ActivityNodeObject::~ActivityNodeObject()
@@ -96,10 +94,18 @@ ActivityNodeObject::~ActivityNodeObject()
 
 std::shared_ptr<ecore::EObject> ActivityNodeObject::copy()
 {
-	std::shared_ptr<ActivityNodeObject> element(new ActivityNodeObject(*this));
+	std::shared_ptr<ActivityNodeObject> element(new ActivityNodeObject());
+	*element=(*this);
 	element->setThisActivityNodeObjectPtr(element);
 	return element;
 }
+
+ActivityNodeObject& ActivityNodeObject::operator=(const ActivityNodeObject & obj)
+{
+	UML::RedefinableElementObject::operator=(obj);
+	return *this;
+}
+
 
 void ActivityNodeObject::destroy()
 {	

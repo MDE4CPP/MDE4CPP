@@ -89,20 +89,18 @@
 using namespace UML;
 
 ClearVariableActionObject::ClearVariableActionObject(std::shared_ptr<uml::ClearVariableAction> _element):
-
 	m_ClearVariableActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ClearVariableAction());
+{
 }
 
 ClearVariableActionObject::ClearVariableActionObject(ClearVariableActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ClearVariableActionObject::ClearVariableActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ClearVariableAction());
 }
 
 ClearVariableActionObject::~ClearVariableActionObject()
@@ -111,10 +109,18 @@ ClearVariableActionObject::~ClearVariableActionObject()
 
 std::shared_ptr<ecore::EObject> ClearVariableActionObject::copy()
 {
-	std::shared_ptr<ClearVariableActionObject> element(new ClearVariableActionObject(*this));
+	std::shared_ptr<ClearVariableActionObject> element(new ClearVariableActionObject());
+	*element=(*this);
 	element->setThisClearVariableActionObjectPtr(element);
 	return element;
 }
+
+ClearVariableActionObject& ClearVariableActionObject::operator=(const ClearVariableActionObject & obj)
+{
+	UML::VariableActionObject::operator=(obj);
+	return *this;
+}
+
 
 void ClearVariableActionObject::destroy()
 {	

@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			IntervalConstraintImpl(const IntervalConstraintImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			IntervalConstraintImpl& operator=(IntervalConstraintImpl const&) = delete;
+			IntervalConstraintImpl& operator=(IntervalConstraintImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

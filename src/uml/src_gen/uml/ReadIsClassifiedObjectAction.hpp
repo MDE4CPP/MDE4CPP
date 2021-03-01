@@ -75,8 +75,6 @@ namespace uml
 	{
 		public:
  			ReadIsClassifiedObjectAction(const ReadIsClassifiedObjectAction &) {}
-			ReadIsClassifiedObjectAction& operator=(ReadIsClassifiedObjectAction const&) = delete;
-
 		protected:
 			ReadIsClassifiedObjectAction(){}
 

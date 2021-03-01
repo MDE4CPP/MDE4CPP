@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~OpaqueExpressionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			OpaqueExpressionObject& operator=(OpaqueExpressionObject const&);
 
 			virtual void destroy();
 			

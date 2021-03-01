@@ -52,20 +52,18 @@
 using namespace UML;
 
 ProtocolConformanceObject::ProtocolConformanceObject(std::shared_ptr<uml::ProtocolConformance> _element):
-
 	m_ProtocolConformanceValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ProtocolConformance());
+{
 }
 
 ProtocolConformanceObject::ProtocolConformanceObject(ProtocolConformanceObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ProtocolConformanceObject::ProtocolConformanceObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ProtocolConformance());
 }
 
 ProtocolConformanceObject::~ProtocolConformanceObject()
@@ -74,10 +72,18 @@ ProtocolConformanceObject::~ProtocolConformanceObject()
 
 std::shared_ptr<ecore::EObject> ProtocolConformanceObject::copy()
 {
-	std::shared_ptr<ProtocolConformanceObject> element(new ProtocolConformanceObject(*this));
+	std::shared_ptr<ProtocolConformanceObject> element(new ProtocolConformanceObject());
+	*element=(*this);
 	element->setThisProtocolConformanceObjectPtr(element);
 	return element;
 }
+
+ProtocolConformanceObject& ProtocolConformanceObject::operator=(const ProtocolConformanceObject & obj)
+{
+	UML::DirectedRelationshipObject::operator=(obj);
+	return *this;
+}
+
 
 void ProtocolConformanceObject::destroy()
 {	

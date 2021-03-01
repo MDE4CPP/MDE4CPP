@@ -26,9 +26,7 @@ virtual public Offer
 		public: 
 			OfferImpl(const OfferImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			OfferImpl& operator=(OfferImpl const&) = delete;
+			OfferImpl& operator=(OfferImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

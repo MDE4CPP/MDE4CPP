@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			TimeConstraintImpl(const TimeConstraintImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			TimeConstraintImpl& operator=(TimeConstraintImpl const&) = delete;
+			TimeConstraintImpl& operator=(TimeConstraintImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

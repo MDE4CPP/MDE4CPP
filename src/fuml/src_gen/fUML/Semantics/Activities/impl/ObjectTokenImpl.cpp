@@ -63,8 +63,17 @@ ObjectTokenImpl::~ObjectTokenImpl()
 }
 
 
-ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj): TokenImpl(obj), ObjectToken(obj)
+ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj): ObjectTokenImpl()
 {
+	*this = obj;
+}
+
+ObjectTokenImpl& ObjectTokenImpl::operator=(const ObjectTokenImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	TokenImpl::operator=(obj);
+	ObjectToken::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ObjectToken "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -79,11 +88,13 @@ ObjectTokenImpl::ObjectTokenImpl(const ObjectTokenImpl & obj): TokenImpl(obj), O
 		m_value = std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(obj.getValue()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ObjectTokenImpl::copy() const
+std::shared_ptr<ecore::EObject> ObjectTokenImpl::copy() const
 {
-	std::shared_ptr<ObjectTokenImpl> element(new ObjectTokenImpl(*this));
+	std::shared_ptr<ObjectTokenImpl> element(new ObjectTokenImpl());
+	*element =(*this);
 	element->setThisObjectTokenPtr(element);
 	return element;
 }

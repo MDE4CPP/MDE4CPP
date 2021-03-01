@@ -76,8 +76,6 @@ namespace uml
 	{
 		public:
  			AddVariableValueAction(const AddVariableValueAction &) {}
-			AddVariableValueAction& operator=(AddVariableValueAction const&) = delete;
-
 		protected:
 			AddVariableValueAction(){}
 

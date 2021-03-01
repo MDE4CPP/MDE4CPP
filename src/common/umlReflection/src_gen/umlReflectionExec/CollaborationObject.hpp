@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~CollaborationObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			CollaborationObject& operator=(CollaborationObject const&);
 
 			virtual void destroy();
 			

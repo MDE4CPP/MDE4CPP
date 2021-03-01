@@ -76,8 +76,6 @@ namespace uml
 	{
 		public:
  			ClearAssociationAction(const ClearAssociationAction &) {}
-			ClearAssociationAction& operator=(ClearAssociationAction const&) = delete;
-
 		protected:
 			ClearAssociationAction(){}
 

@@ -68,8 +68,6 @@ namespace uml
 	{
 		public:
  			InterruptibleActivityRegion(const InterruptibleActivityRegion &) {}
-			InterruptibleActivityRegion& operator=(InterruptibleActivityRegion const&) = delete;
-
 		protected:
 			InterruptibleActivityRegion(){}
 

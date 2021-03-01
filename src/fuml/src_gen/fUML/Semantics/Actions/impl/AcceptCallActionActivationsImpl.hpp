@@ -26,9 +26,7 @@ virtual public AcceptCallActionActivations
 		public: 
 			AcceptCallActionActivationsImpl(const AcceptCallActionActivationsImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			AcceptCallActionActivationsImpl& operator=(AcceptCallActionActivationsImpl const&) = delete;
+			AcceptCallActionActivationsImpl& operator=(AcceptCallActionActivationsImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

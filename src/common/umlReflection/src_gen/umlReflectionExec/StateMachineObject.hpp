@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~StateMachineObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			StateMachineObject& operator=(StateMachineObject const&);
 
 			virtual void destroy();
 			

@@ -110,8 +110,17 @@ ReadVariableActionImpl::ReadVariableActionImpl(std::weak_ptr<uml::Element> par_o
 	m_owner = par_owner;
 }
 
-ReadVariableActionImpl::ReadVariableActionImpl(const ReadVariableActionImpl & obj): VariableActionImpl(obj), ReadVariableAction(obj)
+ReadVariableActionImpl::ReadVariableActionImpl(const ReadVariableActionImpl & obj): ReadVariableActionImpl()
 {
+	*this = obj;
+}
+
+ReadVariableActionImpl& ReadVariableActionImpl::operator=(const ReadVariableActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	VariableActionImpl::operator=(obj);
+	ReadVariableAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReadVariableAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -126,11 +135,13 @@ ReadVariableActionImpl::ReadVariableActionImpl(const ReadVariableActionImpl & ob
 		m_result = std::dynamic_pointer_cast<uml::OutputPin>(obj.getResult()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReadVariableActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ReadVariableActionImpl::copy() const
 {
-	std::shared_ptr<ReadVariableActionImpl> element(new ReadVariableActionImpl(*this));
+	std::shared_ptr<ReadVariableActionImpl> element(new ReadVariableActionImpl());
+	*element =(*this);
 	element->setThisReadVariableActionPtr(element);
 	return element;
 }

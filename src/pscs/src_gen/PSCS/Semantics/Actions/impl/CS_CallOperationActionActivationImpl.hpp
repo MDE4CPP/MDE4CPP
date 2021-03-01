@@ -24,9 +24,7 @@ namespace PSCS::Semantics::Actions
 		public: 
 			CS_CallOperationActionActivationImpl(const CS_CallOperationActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CS_CallOperationActionActivationImpl& operator=(CS_CallOperationActionActivationImpl const&) = delete;
+			CS_CallOperationActionActivationImpl& operator=(CS_CallOperationActionActivationImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;

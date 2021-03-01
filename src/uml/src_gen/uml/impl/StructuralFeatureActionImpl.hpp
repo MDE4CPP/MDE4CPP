@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			StructuralFeatureActionImpl(const StructuralFeatureActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			StructuralFeatureActionImpl& operator=(StructuralFeatureActionImpl const&) = delete;
+			StructuralFeatureActionImpl& operator=(StructuralFeatureActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

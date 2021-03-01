@@ -53,8 +53,6 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public:
  			StringValue(const StringValue &) {}
-			StringValue& operator=(StringValue const&) = delete;
-
 		protected:
 			StringValue(){}
 

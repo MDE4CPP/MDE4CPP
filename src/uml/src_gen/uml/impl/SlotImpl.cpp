@@ -77,8 +77,17 @@ SlotImpl::SlotImpl(std::weak_ptr<uml::InstanceSpecification> par_owningInstance)
 	m_owner = par_owningInstance;
 }
 
-SlotImpl::SlotImpl(const SlotImpl & obj): ElementImpl(obj), Slot(obj)
+SlotImpl::SlotImpl(const SlotImpl & obj): SlotImpl()
 {
+	*this = obj;
+}
+
+SlotImpl& SlotImpl::operator=(const SlotImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	Slot::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Slot "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -101,11 +110,13 @@ SlotImpl::SlotImpl(const SlotImpl & obj): ElementImpl(obj), Slot(obj)
 		std::cout << "Initialising value Subset: " << "m_value - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  SlotImpl::copy() const
+std::shared_ptr<ecore::EObject> SlotImpl::copy() const
 {
-	std::shared_ptr<SlotImpl> element(new SlotImpl(*this));
+	std::shared_ptr<SlotImpl> element(new SlotImpl());
+	*element =(*this);
 	element->setThisSlotPtr(element);
 	return element;
 }

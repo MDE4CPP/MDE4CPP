@@ -63,8 +63,6 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public:
  			Link(const Link &) {}
-			Link& operator=(Link const&) = delete;
-
 		protected:
 			Link(){}
 

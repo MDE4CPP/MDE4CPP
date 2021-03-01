@@ -64,9 +64,17 @@ ClauseActivationImpl::~ClauseActivationImpl()
 }
 
 
-ClauseActivationImpl::ClauseActivationImpl(const ClauseActivationImpl & obj): ecore::EModelElementImpl(obj),
-ClauseActivation(obj)
+ClauseActivationImpl::ClauseActivationImpl(const ClauseActivationImpl & obj): ClauseActivationImpl()
 {
+	*this = obj;
+}
+
+ClauseActivationImpl& ClauseActivationImpl::operator=(const ClauseActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	ClauseActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClauseActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -78,11 +86,13 @@ ClauseActivation(obj)
 	m_conditionalNodeActivation  = obj.getConditionalNodeActivation();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ClauseActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ClauseActivationImpl::copy() const
 {
-	std::shared_ptr<ClauseActivationImpl> element(new ClauseActivationImpl(*this));
+	std::shared_ptr<ClauseActivationImpl> element(new ClauseActivationImpl());
+	*element =(*this);
 	element->setThisClauseActivationPtr(element);
 	return element;
 }

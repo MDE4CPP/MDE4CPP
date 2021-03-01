@@ -59,10 +59,8 @@ namespace ecore
 	{
 		public:
  			EOperation(const EOperation &) {}
-
 		protected:
 			EOperation(){}
-			EOperation& operator=(const EOperation &) = default;
 			//Additional constructors for the containments back reference
 			EOperation(std::weak_ptr<ecore::EObject> par_eContainer);
 

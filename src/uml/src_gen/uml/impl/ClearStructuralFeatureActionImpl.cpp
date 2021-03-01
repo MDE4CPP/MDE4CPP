@@ -110,8 +110,17 @@ ClearStructuralFeatureActionImpl::ClearStructuralFeatureActionImpl(std::weak_ptr
 	m_owner = par_owner;
 }
 
-ClearStructuralFeatureActionImpl::ClearStructuralFeatureActionImpl(const ClearStructuralFeatureActionImpl & obj): StructuralFeatureActionImpl(obj), ClearStructuralFeatureAction(obj)
+ClearStructuralFeatureActionImpl::ClearStructuralFeatureActionImpl(const ClearStructuralFeatureActionImpl & obj): ClearStructuralFeatureActionImpl()
 {
+	*this = obj;
+}
+
+ClearStructuralFeatureActionImpl& ClearStructuralFeatureActionImpl::operator=(const ClearStructuralFeatureActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuralFeatureActionImpl::operator=(obj);
+	ClearStructuralFeatureAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClearStructuralFeatureAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -126,11 +135,13 @@ ClearStructuralFeatureActionImpl::ClearStructuralFeatureActionImpl(const ClearSt
 		m_result = std::dynamic_pointer_cast<uml::OutputPin>(obj.getResult()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ClearStructuralFeatureActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ClearStructuralFeatureActionImpl::copy() const
 {
-	std::shared_ptr<ClearStructuralFeatureActionImpl> element(new ClearStructuralFeatureActionImpl(*this));
+	std::shared_ptr<ClearStructuralFeatureActionImpl> element(new ClearStructuralFeatureActionImpl());
+	*element =(*this);
 	element->setThisClearStructuralFeatureActionPtr(element);
 	return element;
 }

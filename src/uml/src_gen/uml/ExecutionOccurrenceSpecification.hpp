@@ -65,8 +65,6 @@ namespace uml
 	{
 		public:
  			ExecutionOccurrenceSpecification(const ExecutionOccurrenceSpecification &) {}
-			ExecutionOccurrenceSpecification& operator=(ExecutionOccurrenceSpecification const&) = delete;
-
 		protected:
 			ExecutionOccurrenceSpecification(){}
 

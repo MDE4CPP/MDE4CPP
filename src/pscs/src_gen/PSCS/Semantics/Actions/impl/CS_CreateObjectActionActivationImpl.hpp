@@ -24,9 +24,7 @@ namespace PSCS::Semantics::Actions
 		public: 
 			CS_CreateObjectActionActivationImpl(const CS_CreateObjectActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CS_CreateObjectActionActivationImpl& operator=(CS_CreateObjectActionActivationImpl const&) = delete;
+			CS_CreateObjectActionActivationImpl& operator=(CS_CreateObjectActionActivationImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;

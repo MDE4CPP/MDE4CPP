@@ -69,8 +69,17 @@ MultiplicityElementImpl::MultiplicityElementImpl(std::weak_ptr<uml::Element> par
 	m_owner = par_owner;
 }
 
-MultiplicityElementImpl::MultiplicityElementImpl(const MultiplicityElementImpl & obj): ElementImpl(obj), MultiplicityElement(obj)
+MultiplicityElementImpl::MultiplicityElementImpl(const MultiplicityElementImpl & obj): MultiplicityElementImpl()
 {
+	*this = obj;
+}
+
+MultiplicityElementImpl& MultiplicityElementImpl::operator=(const MultiplicityElementImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	MultiplicityElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy MultiplicityElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -94,11 +103,13 @@ MultiplicityElementImpl::MultiplicityElementImpl(const MultiplicityElementImpl &
 	}
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  MultiplicityElementImpl::copy() const
+std::shared_ptr<ecore::EObject> MultiplicityElementImpl::copy() const
 {
-	std::shared_ptr<MultiplicityElementImpl> element(new MultiplicityElementImpl(*this));
+	std::shared_ptr<MultiplicityElementImpl> element(new MultiplicityElementImpl());
+	*element =(*this);
 	element->setThisMultiplicityElementPtr(element);
 	return element;
 }

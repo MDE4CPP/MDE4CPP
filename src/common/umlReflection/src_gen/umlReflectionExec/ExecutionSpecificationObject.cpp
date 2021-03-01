@@ -65,20 +65,18 @@
 using namespace UML;
 
 ExecutionSpecificationObject::ExecutionSpecificationObject(std::shared_ptr<uml::ExecutionSpecification> _element):
-
 	m_ExecutionSpecificationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExecutionSpecification());
+{
 }
 
 ExecutionSpecificationObject::ExecutionSpecificationObject(ExecutionSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExecutionSpecificationObject::ExecutionSpecificationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExecutionSpecification());
 }
 
 ExecutionSpecificationObject::~ExecutionSpecificationObject()
@@ -87,10 +85,18 @@ ExecutionSpecificationObject::~ExecutionSpecificationObject()
 
 std::shared_ptr<ecore::EObject> ExecutionSpecificationObject::copy()
 {
-	std::shared_ptr<ExecutionSpecificationObject> element(new ExecutionSpecificationObject(*this));
+	std::shared_ptr<ExecutionSpecificationObject> element(new ExecutionSpecificationObject());
+	*element=(*this);
 	element->setThisExecutionSpecificationObjectPtr(element);
 	return element;
 }
+
+ExecutionSpecificationObject& ExecutionSpecificationObject::operator=(const ExecutionSpecificationObject & obj)
+{
+	UML::InteractionFragmentObject::operator=(obj);
+	return *this;
+}
+
 
 void ExecutionSpecificationObject::destroy()
 {	

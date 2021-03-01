@@ -93,20 +93,18 @@
 using namespace UML;
 
 SendObjectActionObject::SendObjectActionObject(std::shared_ptr<uml::SendObjectAction> _element):
-
 	m_SendObjectActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_SendObjectAction());
+{
 }
 
 SendObjectActionObject::SendObjectActionObject(SendObjectActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 SendObjectActionObject::SendObjectActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_SendObjectAction());
 }
 
 SendObjectActionObject::~SendObjectActionObject()
@@ -115,10 +113,18 @@ SendObjectActionObject::~SendObjectActionObject()
 
 std::shared_ptr<ecore::EObject> SendObjectActionObject::copy()
 {
-	std::shared_ptr<SendObjectActionObject> element(new SendObjectActionObject(*this));
+	std::shared_ptr<SendObjectActionObject> element(new SendObjectActionObject());
+	*element=(*this);
 	element->setThisSendObjectActionObjectPtr(element);
 	return element;
 }
+
+SendObjectActionObject& SendObjectActionObject::operator=(const SendObjectActionObject & obj)
+{
+	UML::InvocationActionObject::operator=(obj);
+	return *this;
+}
+
 
 void SendObjectActionObject::destroy()
 {	

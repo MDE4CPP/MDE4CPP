@@ -76,8 +76,6 @@ namespace uml
 	{
 		public:
  			WriteStructuralFeatureAction(const WriteStructuralFeatureAction &) {}
-			WriteStructuralFeatureAction& operator=(WriteStructuralFeatureAction const&) = delete;
-
 		protected:
 			WriteStructuralFeatureAction(){}
 

@@ -56,20 +56,18 @@
 using namespace UML;
 
 ClassifierTemplateParameterObject::ClassifierTemplateParameterObject(std::shared_ptr<uml::ClassifierTemplateParameter> _element):
-
 	m_ClassifierTemplateParameterValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ClassifierTemplateParameter());
+{
 }
 
 ClassifierTemplateParameterObject::ClassifierTemplateParameterObject(ClassifierTemplateParameterObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ClassifierTemplateParameterObject::ClassifierTemplateParameterObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ClassifierTemplateParameter());
 }
 
 ClassifierTemplateParameterObject::~ClassifierTemplateParameterObject()
@@ -78,10 +76,18 @@ ClassifierTemplateParameterObject::~ClassifierTemplateParameterObject()
 
 std::shared_ptr<ecore::EObject> ClassifierTemplateParameterObject::copy()
 {
-	std::shared_ptr<ClassifierTemplateParameterObject> element(new ClassifierTemplateParameterObject(*this));
+	std::shared_ptr<ClassifierTemplateParameterObject> element(new ClassifierTemplateParameterObject());
+	*element=(*this);
 	element->setThisClassifierTemplateParameterObjectPtr(element);
 	return element;
 }
+
+ClassifierTemplateParameterObject& ClassifierTemplateParameterObject::operator=(const ClassifierTemplateParameterObject & obj)
+{
+	UML::TemplateParameterObject::operator=(obj);
+	return *this;
+}
+
 
 void ClassifierTemplateParameterObject::destroy()
 {	

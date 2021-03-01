@@ -80,11 +80,8 @@ namespace uml
 	{
 		public:
  			DeploymentSpecification(const DeploymentSpecification &) {}
-			DeploymentSpecification& operator=(DeploymentSpecification const&) = delete;
-
 		protected:
 			DeploymentSpecification(){}
-
 			//Additional constructors for the containments back reference
 			DeploymentSpecification(std::weak_ptr<uml::Deployment> par_deployment);
 

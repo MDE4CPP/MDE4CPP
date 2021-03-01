@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			LiteralNullImpl(const LiteralNullImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			LiteralNullImpl& operator=(LiteralNullImpl const&) = delete;
+			LiteralNullImpl& operator=(LiteralNullImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

@@ -75,8 +75,6 @@ namespace uml
 	{
 		public:
  			CreateLinkAction(const CreateLinkAction &) {}
-			CreateLinkAction& operator=(CreateLinkAction const&) = delete;
-
 		protected:
 			CreateLinkAction(){}
 

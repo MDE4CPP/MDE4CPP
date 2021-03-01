@@ -58,9 +58,17 @@ AcceptCallActionActivationsImpl::~AcceptCallActionActivationsImpl()
 }
 
 
-AcceptCallActionActivationsImpl::AcceptCallActionActivationsImpl(const AcceptCallActionActivationsImpl & obj): ecore::EModelElementImpl(obj),
-AcceptCallActionActivations(obj)
+AcceptCallActionActivationsImpl::AcceptCallActionActivationsImpl(const AcceptCallActionActivationsImpl & obj): AcceptCallActionActivationsImpl()
 {
+	*this = obj;
+}
+
+AcceptCallActionActivationsImpl& AcceptCallActionActivationsImpl::operator=(const AcceptCallActionActivationsImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	AcceptCallActionActivations::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AcceptCallActionActivations "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -70,11 +78,13 @@ AcceptCallActionActivations(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  AcceptCallActionActivationsImpl::copy() const
+std::shared_ptr<ecore::EObject> AcceptCallActionActivationsImpl::copy() const
 {
-	std::shared_ptr<AcceptCallActionActivationsImpl> element(new AcceptCallActionActivationsImpl(*this));
+	std::shared_ptr<AcceptCallActionActivationsImpl> element(new AcceptCallActionActivationsImpl());
+	*element =(*this);
 	element->setThisAcceptCallActionActivationsPtr(element);
 	return element;
 }

@@ -102,8 +102,17 @@ ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Elemen
 	m_owner = par_owner;
 }
 
-ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragmentImpl & obj): CombinedFragmentImpl(obj), ConsiderIgnoreFragment(obj)
+ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragmentImpl & obj): ConsiderIgnoreFragmentImpl()
 {
+	*this = obj;
+}
+
+ConsiderIgnoreFragmentImpl& ConsiderIgnoreFragmentImpl::operator=(const ConsiderIgnoreFragmentImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	CombinedFragmentImpl::operator=(obj);
+	ConsiderIgnoreFragment::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ConsiderIgnoreFragment "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -115,11 +124,13 @@ ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragm
 	m_message.reset(new Bag<uml::NamedElement>(*(obj.getMessage().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ConsiderIgnoreFragmentImpl::copy() const
+std::shared_ptr<ecore::EObject> ConsiderIgnoreFragmentImpl::copy() const
 {
-	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl(*this));
+	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl());
+	*element =(*this);
 	element->setThisConsiderIgnoreFragmentPtr(element);
 	return element;
 }

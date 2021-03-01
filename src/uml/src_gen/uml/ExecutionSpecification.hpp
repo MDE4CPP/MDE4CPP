@@ -68,8 +68,6 @@ namespace uml
 	{
 		public:
  			ExecutionSpecification(const ExecutionSpecification &) {}
-			ExecutionSpecification& operator=(ExecutionSpecification const&) = delete;
-
 		protected:
 			ExecutionSpecification(){}
 

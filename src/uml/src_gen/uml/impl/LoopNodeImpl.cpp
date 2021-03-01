@@ -135,8 +135,17 @@ LoopNodeImpl::LoopNodeImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup)
 	m_owner = par_superGroup;
 }
 
-LoopNodeImpl::LoopNodeImpl(const LoopNodeImpl & obj): StructuredActivityNodeImpl(obj), LoopNode(obj)
+LoopNodeImpl::LoopNodeImpl(const LoopNodeImpl & obj): LoopNodeImpl()
 {
+	*this = obj;
+}
+
+LoopNodeImpl& LoopNodeImpl::operator=(const LoopNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuredActivityNodeImpl::operator=(obj);
+	LoopNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LoopNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -179,11 +188,13 @@ LoopNodeImpl::LoopNodeImpl(const LoopNodeImpl & obj): StructuredActivityNodeImpl
 	
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LoopNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> LoopNodeImpl::copy() const
 {
-	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(*this));
+	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl());
+	*element =(*this);
 	element->setThisLoopNodePtr(element);
 	return element;
 }

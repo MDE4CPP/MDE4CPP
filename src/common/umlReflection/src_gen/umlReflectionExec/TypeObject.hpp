@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~TypeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			TypeObject& operator=(TypeObject const&);
 
 			virtual void destroy();
 			

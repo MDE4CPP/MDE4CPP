@@ -24,9 +24,7 @@ namespace uml
 		public: 
 			StringExpressionImpl(const StringExpressionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			StringExpressionImpl& operator=(StringExpressionImpl const&) = delete;
+			StringExpressionImpl& operator=(StringExpressionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

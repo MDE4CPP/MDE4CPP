@@ -110,8 +110,17 @@ ReplyActionImpl::ReplyActionImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ReplyActionImpl::ReplyActionImpl(const ReplyActionImpl & obj): ActionImpl(obj), ReplyAction(obj)
+ReplyActionImpl::ReplyActionImpl(const ReplyActionImpl & obj): ReplyActionImpl()
 {
+	*this = obj;
+}
+
+ReplyActionImpl& ReplyActionImpl::operator=(const ReplyActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	ReplyAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReplyAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -138,11 +147,13 @@ ReplyActionImpl::ReplyActionImpl(const ReplyActionImpl & obj): ActionImpl(obj), 
 	#endif
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReplyActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ReplyActionImpl::copy() const
 {
-	std::shared_ptr<ReplyActionImpl> element(new ReplyActionImpl(*this));
+	std::shared_ptr<ReplyActionImpl> element(new ReplyActionImpl());
+	*element =(*this);
 	element->setThisReplyActionPtr(element);
 	return element;
 }

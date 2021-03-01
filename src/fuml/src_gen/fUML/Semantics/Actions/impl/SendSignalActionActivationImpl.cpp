@@ -77,8 +77,17 @@ SendSignalActionActivationImpl::SendSignalActionActivationImpl(std::weak_ptr<fUM
 	m_group = par_group;
 }
 
-SendSignalActionActivationImpl::SendSignalActionActivationImpl(const SendSignalActionActivationImpl & obj): InvocationActionActivationImpl(obj), SendSignalActionActivation(obj)
+SendSignalActionActivationImpl::SendSignalActionActivationImpl(const SendSignalActionActivationImpl & obj): SendSignalActionActivationImpl()
 {
+	*this = obj;
+}
+
+SendSignalActionActivationImpl& SendSignalActionActivationImpl::operator=(const SendSignalActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	InvocationActionActivationImpl::operator=(obj);
+	SendSignalActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SendSignalActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -88,11 +97,13 @@ SendSignalActionActivationImpl::SendSignalActionActivationImpl(const SendSignalA
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  SendSignalActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> SendSignalActionActivationImpl::copy() const
 {
-	std::shared_ptr<SendSignalActionActivationImpl> element(new SendSignalActionActivationImpl(*this));
+	std::shared_ptr<SendSignalActionActivationImpl> element(new SendSignalActionActivationImpl());
+	*element =(*this);
 	element->setThisSendSignalActionActivationPtr(element);
 	return element;
 }

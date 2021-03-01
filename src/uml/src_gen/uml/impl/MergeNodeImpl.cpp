@@ -105,8 +105,17 @@ MergeNodeImpl::MergeNodeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-MergeNodeImpl::MergeNodeImpl(const MergeNodeImpl & obj): ControlNodeImpl(obj), MergeNode(obj)
+MergeNodeImpl::MergeNodeImpl(const MergeNodeImpl & obj): MergeNodeImpl()
 {
+	*this = obj;
+}
+
+MergeNodeImpl& MergeNodeImpl::operator=(const MergeNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ControlNodeImpl::operator=(obj);
+	MergeNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy MergeNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -116,11 +125,13 @@ MergeNodeImpl::MergeNodeImpl(const MergeNodeImpl & obj): ControlNodeImpl(obj), M
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  MergeNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> MergeNodeImpl::copy() const
 {
-	std::shared_ptr<MergeNodeImpl> element(new MergeNodeImpl(*this));
+	std::shared_ptr<MergeNodeImpl> element(new MergeNodeImpl());
+	*element =(*this);
 	element->setThisMergeNodePtr(element);
 	return element;
 }

@@ -83,8 +83,17 @@ CreateObjectActionActivationImpl::CreateObjectActionActivationImpl(std::weak_ptr
 	m_group = par_group;
 }
 
-CreateObjectActionActivationImpl::CreateObjectActionActivationImpl(const CreateObjectActionActivationImpl & obj): ActionActivationImpl(obj), CreateObjectActionActivation(obj)
+CreateObjectActionActivationImpl::CreateObjectActionActivationImpl(const CreateObjectActionActivationImpl & obj): CreateObjectActionActivationImpl()
 {
+	*this = obj;
+}
+
+CreateObjectActionActivationImpl& CreateObjectActionActivationImpl::operator=(const CreateObjectActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	CreateObjectActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CreateObjectActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -95,11 +104,13 @@ CreateObjectActionActivationImpl::CreateObjectActionActivationImpl(const CreateO
 	m_createObjectAction  = obj.getCreateObjectAction();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CreateObjectActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> CreateObjectActionActivationImpl::copy() const
 {
-	std::shared_ptr<CreateObjectActionActivationImpl> element(new CreateObjectActionActivationImpl(*this));
+	std::shared_ptr<CreateObjectActionActivationImpl> element(new CreateObjectActionActivationImpl());
+	*element =(*this);
 	element->setThisCreateObjectActionActivationPtr(element);
 	return element;
 }

@@ -67,8 +67,17 @@ PrimitiveValueImpl::~PrimitiveValueImpl()
 }
 
 
-PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj): fUML::Semantics::Values::ValueImpl(obj), PrimitiveValue(obj)
+PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj): PrimitiveValueImpl()
 {
+	*this = obj;
+}
+
+PrimitiveValueImpl& PrimitiveValueImpl::operator=(const PrimitiveValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Values::ValueImpl::operator=(obj);
+	PrimitiveValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PrimitiveValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -79,11 +88,13 @@ PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj): fUML::Se
 	m_type  = obj.getType();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  PrimitiveValueImpl::copy() const
+std::shared_ptr<ecore::EObject> PrimitiveValueImpl::copy() const
 {
-	std::shared_ptr<PrimitiveValueImpl> element(new PrimitiveValueImpl(*this));
+	std::shared_ptr<PrimitiveValueImpl> element(new PrimitiveValueImpl());
+	*element =(*this);
 	element->setThisPrimitiveValuePtr(element);
 	return element;
 }

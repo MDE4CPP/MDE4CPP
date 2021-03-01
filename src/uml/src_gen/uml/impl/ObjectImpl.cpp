@@ -62,9 +62,17 @@ ObjectImpl::~ObjectImpl()
 }
 
 
-ObjectImpl::ObjectImpl(const ObjectImpl & obj): ecore::EModelElementImpl(obj),
-Object(obj)
+ObjectImpl::ObjectImpl(const ObjectImpl & obj): ObjectImpl()
 {
+	*this = obj;
+}
+
+ObjectImpl& ObjectImpl::operator=(const ObjectImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	Object::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Object "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -74,11 +82,13 @@ Object(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
+std::shared_ptr<ecore::EObject> ObjectImpl::copy() const
 {
-	std::shared_ptr<ObjectImpl> element(new ObjectImpl(*this));
+	std::shared_ptr<ObjectImpl> element(new ObjectImpl());
+	*element =(*this);
 	element->setThisObjectPtr(element);
 	return element;
 }

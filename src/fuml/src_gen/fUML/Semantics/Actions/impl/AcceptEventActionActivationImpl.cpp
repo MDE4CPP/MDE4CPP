@@ -80,8 +80,17 @@ AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(std::weak_ptr<f
 	m_group = par_group;
 }
 
-AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEventActionActivationImpl & obj): ActionActivationImpl(obj), AcceptEventActionActivation(obj)
+AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEventActionActivationImpl & obj): AcceptEventActionActivationImpl()
 {
+	*this = obj;
+}
+
+AcceptEventActionActivationImpl& AcceptEventActionActivationImpl::operator=(const AcceptEventActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	AcceptEventActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AcceptEventActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -93,11 +102,13 @@ AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEve
 	m_eventAccepter  = obj.getEventAccepter();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  AcceptEventActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> AcceptEventActionActivationImpl::copy() const
 {
-	std::shared_ptr<AcceptEventActionActivationImpl> element(new AcceptEventActionActivationImpl(*this));
+	std::shared_ptr<AcceptEventActionActivationImpl> element(new AcceptEventActionActivationImpl());
+	*element =(*this);
 	element->setThisAcceptEventActionActivationPtr(element);
 	return element;
 }

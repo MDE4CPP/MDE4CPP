@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			MergeNodeImpl(const MergeNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			MergeNodeImpl& operator=(MergeNodeImpl const&) = delete;
+			MergeNodeImpl& operator=(MergeNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

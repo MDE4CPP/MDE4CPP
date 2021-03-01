@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ConditionalNodeImpl(const ConditionalNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ConditionalNodeImpl& operator=(ConditionalNodeImpl const&) = delete;
+			ConditionalNodeImpl& operator=(ConditionalNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

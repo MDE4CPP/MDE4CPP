@@ -50,20 +50,18 @@
 using namespace UML;
 
 ExceptionHandlerObject::ExceptionHandlerObject(std::shared_ptr<uml::ExceptionHandler> _element):
-
 	m_ExceptionHandlerValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExceptionHandler());
+{
 }
 
 ExceptionHandlerObject::ExceptionHandlerObject(ExceptionHandlerObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExceptionHandlerObject::ExceptionHandlerObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExceptionHandler());
 }
 
 ExceptionHandlerObject::~ExceptionHandlerObject()
@@ -72,10 +70,18 @@ ExceptionHandlerObject::~ExceptionHandlerObject()
 
 std::shared_ptr<ecore::EObject> ExceptionHandlerObject::copy()
 {
-	std::shared_ptr<ExceptionHandlerObject> element(new ExceptionHandlerObject(*this));
+	std::shared_ptr<ExceptionHandlerObject> element(new ExceptionHandlerObject());
+	*element=(*this);
 	element->setThisExceptionHandlerObjectPtr(element);
 	return element;
 }
+
+ExceptionHandlerObject& ExceptionHandlerObject::operator=(const ExceptionHandlerObject & obj)
+{
+	UML::ElementObject::operator=(obj);
+	return *this;
+}
+
 
 void ExceptionHandlerObject::destroy()
 {	

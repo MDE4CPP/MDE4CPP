@@ -57,20 +57,18 @@
 using namespace UML;
 
 TriggerObject::TriggerObject(std::shared_ptr<uml::Trigger> _element):
-
 	m_TriggerValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Trigger());
+{
 }
 
 TriggerObject::TriggerObject(TriggerObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TriggerObject::TriggerObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Trigger());
 }
 
 TriggerObject::~TriggerObject()
@@ -79,10 +77,18 @@ TriggerObject::~TriggerObject()
 
 std::shared_ptr<ecore::EObject> TriggerObject::copy()
 {
-	std::shared_ptr<TriggerObject> element(new TriggerObject(*this));
+	std::shared_ptr<TriggerObject> element(new TriggerObject());
+	*element=(*this);
 	element->setThisTriggerObjectPtr(element);
 	return element;
 }
+
+TriggerObject& TriggerObject::operator=(const TriggerObject & obj)
+{
+	UML::NamedElementObject::operator=(obj);
+	return *this;
+}
+
 
 void TriggerObject::destroy()
 {	

@@ -63,8 +63,6 @@ namespace uml
 	{
 		public:
  			IntervalConstraint(const IntervalConstraint &) {}
-			IntervalConstraint& operator=(IntervalConstraint const&) = delete;
-
 		protected:
 			IntervalConstraint(){}
 

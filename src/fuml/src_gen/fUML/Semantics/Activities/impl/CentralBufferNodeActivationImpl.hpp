@@ -24,9 +24,7 @@ namespace fUML::Semantics::Activities
 		public: 
 			CentralBufferNodeActivationImpl(const CentralBufferNodeActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CentralBufferNodeActivationImpl& operator=(CentralBufferNodeActivationImpl const&) = delete;
+			CentralBufferNodeActivationImpl& operator=(CentralBufferNodeActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

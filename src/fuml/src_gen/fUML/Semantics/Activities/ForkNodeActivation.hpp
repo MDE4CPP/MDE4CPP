@@ -59,8 +59,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ForkNodeActivation(const ForkNodeActivation &) {}
-			ForkNodeActivation& operator=(ForkNodeActivation const&) = delete;
-
 		protected:
 			ForkNodeActivation(){}
 

@@ -55,10 +55,8 @@ namespace ecore
 	{
 		public:
  			EParameter(const EParameter &) {}
-
 		protected:
 			EParameter(){}
-			EParameter& operator=(const EParameter &) = default;
 			//Additional constructors for the containments back reference
 			EParameter(std::weak_ptr<ecore::EObject> par_eContainer);
 

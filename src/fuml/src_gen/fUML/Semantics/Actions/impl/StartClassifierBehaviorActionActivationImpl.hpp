@@ -24,9 +24,7 @@ namespace fUML::Semantics::Actions
 		public: 
 			StartClassifierBehaviorActionActivationImpl(const StartClassifierBehaviorActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			StartClassifierBehaviorActionActivationImpl& operator=(StartClassifierBehaviorActionActivationImpl const&) = delete;
+			StartClassifierBehaviorActionActivationImpl& operator=(StartClassifierBehaviorActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

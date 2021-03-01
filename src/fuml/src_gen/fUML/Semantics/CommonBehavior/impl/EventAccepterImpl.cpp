@@ -60,9 +60,17 @@ EventAccepterImpl::~EventAccepterImpl()
 }
 
 
-EventAccepterImpl::EventAccepterImpl(const EventAccepterImpl & obj): ecore::EModelElementImpl(obj),
-EventAccepter(obj)
+EventAccepterImpl::EventAccepterImpl(const EventAccepterImpl & obj): EventAccepterImpl()
 {
+	*this = obj;
+}
+
+EventAccepterImpl& EventAccepterImpl::operator=(const EventAccepterImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	EventAccepter::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EventAccepter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -72,11 +80,13 @@ EventAccepter(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EventAccepterImpl::copy() const
+std::shared_ptr<ecore::EObject> EventAccepterImpl::copy() const
 {
-	std::shared_ptr<EventAccepterImpl> element(new EventAccepterImpl(*this));
+	std::shared_ptr<EventAccepterImpl> element(new EventAccepterImpl());
+	*element =(*this);
 	element->setThisEventAccepterPtr(element);
 	return element;
 }

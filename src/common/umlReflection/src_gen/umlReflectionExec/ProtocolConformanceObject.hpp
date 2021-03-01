@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ProtocolConformanceObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ProtocolConformanceObject& operator=(ProtocolConformanceObject const&);
 
 			virtual void destroy();
 			

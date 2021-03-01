@@ -61,8 +61,6 @@ namespace uml
 	{
 		public:
  			QualifierValue(const QualifierValue &) {}
-			QualifierValue& operator=(QualifierValue const&) = delete;
-
 		protected:
 			QualifierValue(){}
 

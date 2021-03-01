@@ -80,8 +80,17 @@ CS_ExecutorImpl::CS_ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par
 	m_locus = par_locus;
 }
 
-CS_ExecutorImpl::CS_ExecutorImpl(const CS_ExecutorImpl & obj): fUML::Semantics::Loci::ExecutorImpl(obj), CS_Executor(obj)
+CS_ExecutorImpl::CS_ExecutorImpl(const CS_ExecutorImpl & obj): CS_ExecutorImpl()
 {
+	*this = obj;
+}
+
+CS_ExecutorImpl& CS_ExecutorImpl::operator=(const CS_ExecutorImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::ExecutorImpl::operator=(obj);
+	CS_Executor::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_Executor "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -91,11 +100,13 @@ CS_ExecutorImpl::CS_ExecutorImpl(const CS_ExecutorImpl & obj): fUML::Semantics::
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_ExecutorImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_ExecutorImpl::copy() const
 {
-	std::shared_ptr<CS_ExecutorImpl> element(new CS_ExecutorImpl(*this));
+	std::shared_ptr<CS_ExecutorImpl> element(new CS_ExecutorImpl());
+	*element =(*this);
 	element->setThisCS_ExecutorPtr(element);
 	return element;
 }

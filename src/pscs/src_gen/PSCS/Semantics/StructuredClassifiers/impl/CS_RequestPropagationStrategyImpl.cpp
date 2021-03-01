@@ -41,8 +41,8 @@
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -65,8 +65,17 @@ CS_RequestPropagationStrategyImpl::~CS_RequestPropagationStrategyImpl()
 }
 
 
-CS_RequestPropagationStrategyImpl::CS_RequestPropagationStrategyImpl(const CS_RequestPropagationStrategyImpl & obj): fUML::Semantics::Loci::SemanticStrategyImpl(obj), CS_RequestPropagationStrategy(obj)
+CS_RequestPropagationStrategyImpl::CS_RequestPropagationStrategyImpl(const CS_RequestPropagationStrategyImpl & obj): CS_RequestPropagationStrategyImpl()
 {
+	*this = obj;
+}
+
+CS_RequestPropagationStrategyImpl& CS_RequestPropagationStrategyImpl::operator=(const CS_RequestPropagationStrategyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::SemanticStrategyImpl::operator=(obj);
+	CS_RequestPropagationStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_RequestPropagationStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -76,11 +85,13 @@ CS_RequestPropagationStrategyImpl::CS_RequestPropagationStrategyImpl(const CS_Re
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_RequestPropagationStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_RequestPropagationStrategyImpl::copy() const
 {
-	std::shared_ptr<CS_RequestPropagationStrategyImpl> element(new CS_RequestPropagationStrategyImpl(*this));
+	std::shared_ptr<CS_RequestPropagationStrategyImpl> element(new CS_RequestPropagationStrategyImpl());
+	*element =(*this);
 	element->setThisCS_RequestPropagationStrategyPtr(element);
 	return element;
 }

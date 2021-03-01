@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ReadIsClassifiedObjectActionImpl(const ReadIsClassifiedObjectActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ReadIsClassifiedObjectActionImpl& operator=(ReadIsClassifiedObjectActionImpl const&) = delete;
+			ReadIsClassifiedObjectActionImpl& operator=(ReadIsClassifiedObjectActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

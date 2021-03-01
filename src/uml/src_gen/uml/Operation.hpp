@@ -82,11 +82,8 @@ namespace uml
 	{
 		public:
  			Operation(const Operation &) {}
-			Operation& operator=(Operation const&) = delete;
-
 		protected:
 			Operation(){}
-
 			//Additional constructors for the containments back reference
 			Operation(std::weak_ptr<uml::Class> par_class);
 

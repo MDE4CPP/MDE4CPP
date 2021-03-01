@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~TransitionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			TransitionObject& operator=(TransitionObject const&);
 
 			virtual void destroy();
 			

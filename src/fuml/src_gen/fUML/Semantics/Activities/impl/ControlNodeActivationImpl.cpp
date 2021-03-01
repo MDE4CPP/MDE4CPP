@@ -72,8 +72,17 @@ ControlNodeActivationImpl::ControlNodeActivationImpl(std::weak_ptr<fUML::Semanti
 	m_group = par_group;
 }
 
-ControlNodeActivationImpl::ControlNodeActivationImpl(const ControlNodeActivationImpl & obj): ActivityNodeActivationImpl(obj), ControlNodeActivation(obj)
+ControlNodeActivationImpl::ControlNodeActivationImpl(const ControlNodeActivationImpl & obj): ControlNodeActivationImpl()
 {
+	*this = obj;
+}
+
+ControlNodeActivationImpl& ControlNodeActivationImpl::operator=(const ControlNodeActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActivityNodeActivationImpl::operator=(obj);
+	ControlNodeActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ControlNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -83,11 +92,13 @@ ControlNodeActivationImpl::ControlNodeActivationImpl(const ControlNodeActivation
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ControlNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ControlNodeActivationImpl::copy() const
 {
-	std::shared_ptr<ControlNodeActivationImpl> element(new ControlNodeActivationImpl(*this));
+	std::shared_ptr<ControlNodeActivationImpl> element(new ControlNodeActivationImpl());
+	*element =(*this);
 	element->setThisControlNodeActivationPtr(element);
 	return element;
 }

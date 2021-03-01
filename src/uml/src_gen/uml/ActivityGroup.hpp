@@ -68,11 +68,8 @@ namespace uml
 	{
 		public:
  			ActivityGroup(const ActivityGroup &) {}
-			ActivityGroup& operator=(ActivityGroup const&) = delete;
-
 		protected:
 			ActivityGroup(){}
-
 			//Additional constructors for the containments back reference
 			ActivityGroup(std::weak_ptr<uml::Activity> par_inActivity);
 

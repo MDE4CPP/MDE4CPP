@@ -58,11 +58,8 @@ namespace uml
 	{
 		public:
  			ParameterableElement(const ParameterableElement &) {}
-			ParameterableElement& operator=(ParameterableElement const&) = delete;
-
 		protected:
 			ParameterableElement(){}
-
 			//Additional constructors for the containments back reference
 			ParameterableElement(std::weak_ptr<uml::Element> par_owner);
 

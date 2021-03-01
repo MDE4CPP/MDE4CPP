@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			CreateObjectActionImpl(const CreateObjectActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CreateObjectActionImpl& operator=(CreateObjectActionImpl const&) = delete;
+			CreateObjectActionImpl& operator=(CreateObjectActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

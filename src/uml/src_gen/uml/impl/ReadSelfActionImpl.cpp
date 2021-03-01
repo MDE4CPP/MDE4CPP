@@ -109,8 +109,17 @@ ReadSelfActionImpl::ReadSelfActionImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ReadSelfActionImpl::ReadSelfActionImpl(const ReadSelfActionImpl & obj): ActionImpl(obj), ReadSelfAction(obj)
+ReadSelfActionImpl::ReadSelfActionImpl(const ReadSelfActionImpl & obj): ReadSelfActionImpl()
 {
+	*this = obj;
+}
+
+ReadSelfActionImpl& ReadSelfActionImpl::operator=(const ReadSelfActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	ReadSelfAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReadSelfAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -125,11 +134,13 @@ ReadSelfActionImpl::ReadSelfActionImpl(const ReadSelfActionImpl & obj): ActionIm
 		m_result = std::dynamic_pointer_cast<uml::OutputPin>(obj.getResult()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReadSelfActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ReadSelfActionImpl::copy() const
 {
-	std::shared_ptr<ReadSelfActionImpl> element(new ReadSelfActionImpl(*this));
+	std::shared_ptr<ReadSelfActionImpl> element(new ReadSelfActionImpl());
+	*element =(*this);
 	element->setThisReadSelfActionPtr(element);
 	return element;
 }

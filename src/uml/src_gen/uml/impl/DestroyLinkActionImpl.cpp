@@ -109,8 +109,17 @@ DestroyLinkActionImpl::DestroyLinkActionImpl(std::weak_ptr<uml::Element> par_own
 	m_owner = par_owner;
 }
 
-DestroyLinkActionImpl::DestroyLinkActionImpl(const DestroyLinkActionImpl & obj): WriteLinkActionImpl(obj), DestroyLinkAction(obj)
+DestroyLinkActionImpl::DestroyLinkActionImpl(const DestroyLinkActionImpl & obj): DestroyLinkActionImpl()
 {
+	*this = obj;
+}
+
+DestroyLinkActionImpl& DestroyLinkActionImpl::operator=(const DestroyLinkActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	WriteLinkActionImpl::operator=(obj);
+	DestroyLinkAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DestroyLinkAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -120,11 +129,13 @@ DestroyLinkActionImpl::DestroyLinkActionImpl(const DestroyLinkActionImpl & obj):
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DestroyLinkActionImpl::copy() const
+std::shared_ptr<ecore::EObject> DestroyLinkActionImpl::copy() const
 {
-	std::shared_ptr<DestroyLinkActionImpl> element(new DestroyLinkActionImpl(*this));
+	std::shared_ptr<DestroyLinkActionImpl> element(new DestroyLinkActionImpl());
+	*element =(*this);
 	element->setThisDestroyLinkActionPtr(element);
 	return element;
 }

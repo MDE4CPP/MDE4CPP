@@ -69,8 +69,17 @@ QualifierValueImpl::QualifierValueImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj): ElementImpl(obj), QualifierValue(obj)
+QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj): QualifierValueImpl()
 {
+	*this = obj;
+}
+
+QualifierValueImpl& QualifierValueImpl::operator=(const QualifierValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	QualifierValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy QualifierValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -82,11 +91,13 @@ QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj): ElementI
 	m_value  = obj.getValue();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  QualifierValueImpl::copy() const
+std::shared_ptr<ecore::EObject> QualifierValueImpl::copy() const
 {
-	std::shared_ptr<QualifierValueImpl> element(new QualifierValueImpl(*this));
+	std::shared_ptr<QualifierValueImpl> element(new QualifierValueImpl());
+	*element =(*this);
 	element->setThisQualifierValuePtr(element);
 	return element;
 }

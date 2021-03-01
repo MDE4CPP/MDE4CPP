@@ -24,9 +24,7 @@ namespace fUML::Semantics::SimpleClassifiers
 		public: 
 			PrimitiveValueImpl(const PrimitiveValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			PrimitiveValueImpl& operator=(PrimitiveValueImpl const&) = delete;
+			PrimitiveValueImpl& operator=(PrimitiveValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;

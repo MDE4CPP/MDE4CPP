@@ -110,8 +110,17 @@ AcceptEventActionImpl::AcceptEventActionImpl(std::weak_ptr<uml::Element> par_own
 	m_owner = par_owner;
 }
 
-AcceptEventActionImpl::AcceptEventActionImpl(const AcceptEventActionImpl & obj): ActionImpl(obj), AcceptEventAction(obj)
+AcceptEventActionImpl::AcceptEventActionImpl(const AcceptEventActionImpl & obj): AcceptEventActionImpl()
 {
+	*this = obj;
+}
+
+AcceptEventActionImpl& AcceptEventActionImpl::operator=(const AcceptEventActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	AcceptEventAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AcceptEventAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -144,11 +153,13 @@ AcceptEventActionImpl::AcceptEventActionImpl(const AcceptEventActionImpl & obj):
 		std::cout << "Initialising value Subset: " << "m_trigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  AcceptEventActionImpl::copy() const
+std::shared_ptr<ecore::EObject> AcceptEventActionImpl::copy() const
 {
-	std::shared_ptr<AcceptEventActionImpl> element(new AcceptEventActionImpl(*this));
+	std::shared_ptr<AcceptEventActionImpl> element(new AcceptEventActionImpl());
+	*element =(*this);
 	element->setThisAcceptEventActionPtr(element);
 	return element;
 }

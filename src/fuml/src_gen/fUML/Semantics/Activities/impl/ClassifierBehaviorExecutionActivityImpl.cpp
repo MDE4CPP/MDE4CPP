@@ -58,9 +58,17 @@ ClassifierBehaviorExecutionActivityImpl::~ClassifierBehaviorExecutionActivityImp
 }
 
 
-ClassifierBehaviorExecutionActivityImpl::ClassifierBehaviorExecutionActivityImpl(const ClassifierBehaviorExecutionActivityImpl & obj): ecore::EModelElementImpl(obj),
-ClassifierBehaviorExecutionActivity(obj)
+ClassifierBehaviorExecutionActivityImpl::ClassifierBehaviorExecutionActivityImpl(const ClassifierBehaviorExecutionActivityImpl & obj): ClassifierBehaviorExecutionActivityImpl()
 {
+	*this = obj;
+}
+
+ClassifierBehaviorExecutionActivityImpl& ClassifierBehaviorExecutionActivityImpl::operator=(const ClassifierBehaviorExecutionActivityImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	ClassifierBehaviorExecutionActivity::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClassifierBehaviorExecutionActivity "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -70,11 +78,13 @@ ClassifierBehaviorExecutionActivity(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionActivityImpl::copy() const
+std::shared_ptr<ecore::EObject> ClassifierBehaviorExecutionActivityImpl::copy() const
 {
-	std::shared_ptr<ClassifierBehaviorExecutionActivityImpl> element(new ClassifierBehaviorExecutionActivityImpl(*this));
+	std::shared_ptr<ClassifierBehaviorExecutionActivityImpl> element(new ClassifierBehaviorExecutionActivityImpl());
+	*element =(*this);
 	element->setThisClassifierBehaviorExecutionActivityPtr(element);
 	return element;
 }

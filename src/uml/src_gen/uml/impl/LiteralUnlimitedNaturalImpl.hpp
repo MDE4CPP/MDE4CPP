@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			LiteralUnlimitedNaturalImpl(const LiteralUnlimitedNaturalImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			LiteralUnlimitedNaturalImpl& operator=(LiteralUnlimitedNaturalImpl const&) = delete;
+			LiteralUnlimitedNaturalImpl& operator=(LiteralUnlimitedNaturalImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

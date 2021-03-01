@@ -24,9 +24,7 @@ namespace PSCS::Semantics::Classification
 		public: 
 			CS_InstanceValueEvaluationImpl(const CS_InstanceValueEvaluationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CS_InstanceValueEvaluationImpl& operator=(CS_InstanceValueEvaluationImpl const&) = delete;
+			CS_InstanceValueEvaluationImpl& operator=(CS_InstanceValueEvaluationImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::Classification::ClassificationFactoryImpl;

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~InteractionFragmentObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			InteractionFragmentObject& operator=(InteractionFragmentObject const&);
 
 			virtual void destroy();
 			

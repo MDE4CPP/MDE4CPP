@@ -49,12 +49,12 @@
 //Factories an Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -79,8 +79,17 @@ CS_CallEventExecutionImpl::~CS_CallEventExecutionImpl()
 }
 
 
-CS_CallEventExecutionImpl::CS_CallEventExecutionImpl(const CS_CallEventExecutionImpl & obj): fUML::Semantics::CommonBehavior::CallEventExecutionImpl(obj), CS_CallEventExecution(obj)
+CS_CallEventExecutionImpl::CS_CallEventExecutionImpl(const CS_CallEventExecutionImpl & obj): CS_CallEventExecutionImpl()
 {
+	*this = obj;
+}
+
+CS_CallEventExecutionImpl& CS_CallEventExecutionImpl::operator=(const CS_CallEventExecutionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::CommonBehavior::CallEventExecutionImpl::operator=(obj);
+	CS_CallEventExecution::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_CallEventExecution "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -91,11 +100,13 @@ CS_CallEventExecutionImpl::CS_CallEventExecutionImpl(const CS_CallEventExecution
 	m_interactionPoint  = obj.getInteractionPoint();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_CallEventExecutionImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_CallEventExecutionImpl::copy() const
 {
-	std::shared_ptr<CS_CallEventExecutionImpl> element(new CS_CallEventExecutionImpl(*this));
+	std::shared_ptr<CS_CallEventExecutionImpl> element(new CS_CallEventExecutionImpl());
+	*element =(*this);
 	element->setThisCS_CallEventExecutionPtr(element);
 	return element;
 }

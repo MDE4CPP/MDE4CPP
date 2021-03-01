@@ -76,8 +76,6 @@ namespace uml
 	{
 		public:
  			CallBehaviorAction(const CallBehaviorAction &) {}
-			CallBehaviorAction& operator=(CallBehaviorAction const&) = delete;
-
 		protected:
 			CallBehaviorAction(){}
 

@@ -79,8 +79,17 @@ WriteStructuralFeatureActionActivationImpl::WriteStructuralFeatureActionActivati
 	m_group = par_group;
 }
 
-WriteStructuralFeatureActionActivationImpl::WriteStructuralFeatureActionActivationImpl(const WriteStructuralFeatureActionActivationImpl & obj): StructuralFeatureActionActivationImpl(obj), WriteStructuralFeatureActionActivation(obj)
+WriteStructuralFeatureActionActivationImpl::WriteStructuralFeatureActionActivationImpl(const WriteStructuralFeatureActionActivationImpl & obj): WriteStructuralFeatureActionActivationImpl()
 {
+	*this = obj;
+}
+
+WriteStructuralFeatureActionActivationImpl& WriteStructuralFeatureActionActivationImpl::operator=(const WriteStructuralFeatureActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuralFeatureActionActivationImpl::operator=(obj);
+	WriteStructuralFeatureActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy WriteStructuralFeatureActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -90,11 +99,13 @@ WriteStructuralFeatureActionActivationImpl::WriteStructuralFeatureActionActivati
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  WriteStructuralFeatureActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> WriteStructuralFeatureActionActivationImpl::copy() const
 {
-	std::shared_ptr<WriteStructuralFeatureActionActivationImpl> element(new WriteStructuralFeatureActionActivationImpl(*this));
+	std::shared_ptr<WriteStructuralFeatureActionActivationImpl> element(new WriteStructuralFeatureActionActivationImpl());
+	*element =(*this);
 	element->setThisWriteStructuralFeatureActionActivationPtr(element);
 	return element;
 }

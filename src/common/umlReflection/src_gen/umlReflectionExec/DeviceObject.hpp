@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~DeviceObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			DeviceObject& operator=(DeviceObject const&);
 
 			virtual void destroy();
 			

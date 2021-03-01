@@ -69,8 +69,17 @@ CS_StructuralFeatureOfInterfaceAccessStrategyImpl::~CS_StructuralFeatureOfInterf
 }
 
 
-CS_StructuralFeatureOfInterfaceAccessStrategyImpl::CS_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_StructuralFeatureOfInterfaceAccessStrategyImpl & obj): fUML::Semantics::Loci::SemanticStrategyImpl(obj), CS_StructuralFeatureOfInterfaceAccessStrategy(obj)
+CS_StructuralFeatureOfInterfaceAccessStrategyImpl::CS_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_StructuralFeatureOfInterfaceAccessStrategyImpl & obj): CS_StructuralFeatureOfInterfaceAccessStrategyImpl()
 {
+	*this = obj;
+}
+
+CS_StructuralFeatureOfInterfaceAccessStrategyImpl& CS_StructuralFeatureOfInterfaceAccessStrategyImpl::operator=(const CS_StructuralFeatureOfInterfaceAccessStrategyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::SemanticStrategyImpl::operator=(obj);
+	CS_StructuralFeatureOfInterfaceAccessStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_StructuralFeatureOfInterfaceAccessStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -80,11 +89,13 @@ CS_StructuralFeatureOfInterfaceAccessStrategyImpl::CS_StructuralFeatureOfInterfa
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_StructuralFeatureOfInterfaceAccessStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::copy() const
 {
-	std::shared_ptr<CS_StructuralFeatureOfInterfaceAccessStrategyImpl> element(new CS_StructuralFeatureOfInterfaceAccessStrategyImpl(*this));
+	std::shared_ptr<CS_StructuralFeatureOfInterfaceAccessStrategyImpl> element(new CS_StructuralFeatureOfInterfaceAccessStrategyImpl());
+	*element =(*this);
 	element->setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(element);
 	return element;
 }

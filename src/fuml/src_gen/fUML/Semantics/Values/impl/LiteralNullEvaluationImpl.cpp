@@ -64,8 +64,17 @@ LiteralNullEvaluationImpl::~LiteralNullEvaluationImpl()
 }
 
 
-LiteralNullEvaluationImpl::LiteralNullEvaluationImpl(const LiteralNullEvaluationImpl & obj): LiteralEvaluationImpl(obj), LiteralNullEvaluation(obj)
+LiteralNullEvaluationImpl::LiteralNullEvaluationImpl(const LiteralNullEvaluationImpl & obj): LiteralNullEvaluationImpl()
 {
+	*this = obj;
+}
+
+LiteralNullEvaluationImpl& LiteralNullEvaluationImpl::operator=(const LiteralNullEvaluationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	LiteralEvaluationImpl::operator=(obj);
+	LiteralNullEvaluation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralNullEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -75,11 +84,13 @@ LiteralNullEvaluationImpl::LiteralNullEvaluationImpl(const LiteralNullEvaluation
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LiteralNullEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject> LiteralNullEvaluationImpl::copy() const
 {
-	std::shared_ptr<LiteralNullEvaluationImpl> element(new LiteralNullEvaluationImpl(*this));
+	std::shared_ptr<LiteralNullEvaluationImpl> element(new LiteralNullEvaluationImpl());
+	*element =(*this);
 	element->setThisLiteralNullEvaluationPtr(element);
 	return element;
 }

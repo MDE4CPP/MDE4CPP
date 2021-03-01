@@ -109,8 +109,18 @@ ObjectNodeImpl::ObjectNodeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ObjectNodeImpl::ObjectNodeImpl(const ObjectNodeImpl & obj): ActivityNodeImpl(obj), TypedElementImpl(obj), ObjectNode(obj)
+ObjectNodeImpl::ObjectNodeImpl(const ObjectNodeImpl & obj): ObjectNodeImpl()
 {
+	*this = obj;
+}
+
+ObjectNodeImpl& ObjectNodeImpl::operator=(const ObjectNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActivityNodeImpl::operator=(obj);
+	TypedElementImpl::operator=(obj);
+	ObjectNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ObjectNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -130,11 +140,13 @@ ObjectNodeImpl::ObjectNodeImpl(const ObjectNodeImpl & obj): ActivityNodeImpl(obj
 		m_upperBound = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getUpperBound()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ObjectNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> ObjectNodeImpl::copy() const
 {
-	std::shared_ptr<ObjectNodeImpl> element(new ObjectNodeImpl(*this));
+	std::shared_ptr<ObjectNodeImpl> element(new ObjectNodeImpl());
+	*element =(*this);
 	element->setThisObjectNodePtr(element);
 	return element;
 }

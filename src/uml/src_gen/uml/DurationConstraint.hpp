@@ -66,8 +66,6 @@ namespace uml
 	{
 		public:
  			DurationConstraint(const DurationConstraint &) {}
-			DurationConstraint& operator=(DurationConstraint const&) = delete;
-
 		protected:
 			DurationConstraint(){}
 

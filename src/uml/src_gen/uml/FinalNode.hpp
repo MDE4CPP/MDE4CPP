@@ -70,8 +70,6 @@ namespace uml
 	{
 		public:
  			FinalNode(const FinalNode &) {}
-			FinalNode& operator=(FinalNode const&) = delete;
-
 		protected:
 			FinalNode(){}
 

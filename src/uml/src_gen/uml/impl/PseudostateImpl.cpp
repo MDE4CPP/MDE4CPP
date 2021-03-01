@@ -108,8 +108,17 @@ PseudostateImpl::PseudostateImpl(std::weak_ptr<uml::StateMachine> par_stateMachi
 	m_namespace = par_stateMachine;
 }
 
-PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj): VertexImpl(obj), Pseudostate(obj)
+PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj): PseudostateImpl()
 {
+	*this = obj;
+}
+
+PseudostateImpl& PseudostateImpl::operator=(const PseudostateImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	VertexImpl::operator=(obj);
+	Pseudostate::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Pseudostate "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -122,11 +131,13 @@ PseudostateImpl::PseudostateImpl(const PseudostateImpl & obj): VertexImpl(obj), 
 	m_stateMachine  = obj.getStateMachine();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  PseudostateImpl::copy() const
+std::shared_ptr<ecore::EObject> PseudostateImpl::copy() const
 {
-	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(*this));
+	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl());
+	*element =(*this);
 	element->setThisPseudostatePtr(element);
 	return element;
 }

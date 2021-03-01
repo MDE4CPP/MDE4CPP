@@ -60,20 +60,18 @@
 using namespace UML;
 
 ExtensionPointObject::ExtensionPointObject(std::shared_ptr<uml::ExtensionPoint> _element):
-
 	m_ExtensionPointValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExtensionPoint());
+{
 }
 
 ExtensionPointObject::ExtensionPointObject(ExtensionPointObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExtensionPointObject::ExtensionPointObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExtensionPoint());
 }
 
 ExtensionPointObject::~ExtensionPointObject()
@@ -82,10 +80,18 @@ ExtensionPointObject::~ExtensionPointObject()
 
 std::shared_ptr<ecore::EObject> ExtensionPointObject::copy()
 {
-	std::shared_ptr<ExtensionPointObject> element(new ExtensionPointObject(*this));
+	std::shared_ptr<ExtensionPointObject> element(new ExtensionPointObject());
+	*element=(*this);
 	element->setThisExtensionPointObjectPtr(element);
 	return element;
 }
+
+ExtensionPointObject& ExtensionPointObject::operator=(const ExtensionPointObject & obj)
+{
+	UML::RedefinableElementObject::operator=(obj);
+	return *this;
+}
+
 
 void ExtensionPointObject::destroy()
 {	

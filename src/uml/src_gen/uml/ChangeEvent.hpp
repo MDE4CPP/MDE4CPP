@@ -64,8 +64,6 @@ namespace uml
 	{
 		public:
  			ChangeEvent(const ChangeEvent &) {}
-			ChangeEvent& operator=(ChangeEvent const&) = delete;
-
 		protected:
 			ChangeEvent(){}
 

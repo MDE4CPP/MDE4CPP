@@ -65,8 +65,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 	{
 		public:
  			CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy(const CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy &) {}
-			CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy& operator=(CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy const&) = delete;
-
 		protected:
 			CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy(){}
 

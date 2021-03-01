@@ -112,20 +112,18 @@
 using namespace UML;
 
 DataTypeObject::DataTypeObject(std::shared_ptr<uml::DataType> _element):
-
 	m_DataTypeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DataType());
+{
 }
 
 DataTypeObject::DataTypeObject(DataTypeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DataTypeObject::DataTypeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DataType());
 }
 
 DataTypeObject::~DataTypeObject()
@@ -134,10 +132,18 @@ DataTypeObject::~DataTypeObject()
 
 std::shared_ptr<ecore::EObject> DataTypeObject::copy()
 {
-	std::shared_ptr<DataTypeObject> element(new DataTypeObject(*this));
+	std::shared_ptr<DataTypeObject> element(new DataTypeObject());
+	*element=(*this);
 	element->setThisDataTypeObjectPtr(element);
 	return element;
 }
+
+DataTypeObject& DataTypeObject::operator=(const DataTypeObject & obj)
+{
+	UML::ClassifierObject::operator=(obj);
+	return *this;
+}
+
 
 void DataTypeObject::destroy()
 {	

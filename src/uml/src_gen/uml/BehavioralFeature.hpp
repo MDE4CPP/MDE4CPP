@@ -76,8 +76,6 @@ namespace uml
 	{
 		public:
  			BehavioralFeature(const BehavioralFeature &) {}
-			BehavioralFeature& operator=(BehavioralFeature const&) = delete;
-
 		protected:
 			BehavioralFeature(){}
 

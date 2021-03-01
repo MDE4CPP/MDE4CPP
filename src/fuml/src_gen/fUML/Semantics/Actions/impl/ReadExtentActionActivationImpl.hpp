@@ -24,9 +24,7 @@ namespace fUML::Semantics::Actions
 		public: 
 			ReadExtentActionActivationImpl(const ReadExtentActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ReadExtentActionActivationImpl& operator=(ReadExtentActionActivationImpl const&) = delete;
+			ReadExtentActionActivationImpl& operator=(ReadExtentActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

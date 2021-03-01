@@ -77,8 +77,17 @@ PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Package> par_receivingPack
 	m_owner = par_receivingPackage;
 }
 
-PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj): DirectedRelationshipImpl(obj), PackageMerge(obj)
+PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj): PackageMergeImpl()
 {
+	*this = obj;
+}
+
+PackageMergeImpl& PackageMergeImpl::operator=(const PackageMergeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	DirectedRelationshipImpl::operator=(obj);
+	PackageMerge::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PackageMerge "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -93,11 +102,13 @@ PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj): DirectedRelati
 	{
 		m_mergedPackage = std::dynamic_pointer_cast<uml::Package>(obj.getMergedPackage()->copy());
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  PackageMergeImpl::copy() const
+std::shared_ptr<ecore::EObject> PackageMergeImpl::copy() const
 {
-	std::shared_ptr<PackageMergeImpl> element(new PackageMergeImpl(*this));
+	std::shared_ptr<PackageMergeImpl> element(new PackageMergeImpl());
+	*element =(*this);
 	element->setThisPackageMergePtr(element);
 	return element;
 }

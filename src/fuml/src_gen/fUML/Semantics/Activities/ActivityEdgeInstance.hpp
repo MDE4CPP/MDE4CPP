@@ -60,11 +60,8 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ActivityEdgeInstance(const ActivityEdgeInstance &) {}
-			ActivityEdgeInstance& operator=(ActivityEdgeInstance const&) = delete;
-
 		protected:
 			ActivityEdgeInstance(){}
-
 			//Additional constructors for the containments back reference
 			ActivityEdgeInstance(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 

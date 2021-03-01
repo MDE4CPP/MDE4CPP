@@ -100,8 +100,17 @@ ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::ActivityGroup> par_super
 	m_owner = par_superGroup;
 }
 
-ActivityGroupImpl::ActivityGroupImpl(const ActivityGroupImpl & obj): NamedElementImpl(obj), ActivityGroup(obj)
+ActivityGroupImpl::ActivityGroupImpl(const ActivityGroupImpl & obj): ActivityGroupImpl()
 {
+	*this = obj;
+}
+
+ActivityGroupImpl& ActivityGroupImpl::operator=(const ActivityGroupImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	ActivityGroup::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityGroup "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -117,11 +126,13 @@ ActivityGroupImpl::ActivityGroupImpl(const ActivityGroupImpl & obj): NamedElemen
 	m_superGroup  = obj.getSuperGroup();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityGroupImpl::copy() const
+std::shared_ptr<ecore::EObject> ActivityGroupImpl::copy() const
 {
-	std::shared_ptr<ActivityGroupImpl> element(new ActivityGroupImpl(*this));
+	std::shared_ptr<ActivityGroupImpl> element(new ActivityGroupImpl());
+	*element =(*this);
 	element->setThisActivityGroupPtr(element);
 	return element;
 }

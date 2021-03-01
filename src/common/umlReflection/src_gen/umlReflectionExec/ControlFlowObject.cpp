@@ -78,20 +78,18 @@
 using namespace UML;
 
 ControlFlowObject::ControlFlowObject(std::shared_ptr<uml::ControlFlow> _element):
-
 	m_ControlFlowValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ControlFlow());
+{
 }
 
 ControlFlowObject::ControlFlowObject(ControlFlowObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ControlFlowObject::ControlFlowObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ControlFlow());
 }
 
 ControlFlowObject::~ControlFlowObject()
@@ -100,10 +98,18 @@ ControlFlowObject::~ControlFlowObject()
 
 std::shared_ptr<ecore::EObject> ControlFlowObject::copy()
 {
-	std::shared_ptr<ControlFlowObject> element(new ControlFlowObject(*this));
+	std::shared_ptr<ControlFlowObject> element(new ControlFlowObject());
+	*element=(*this);
 	element->setThisControlFlowObjectPtr(element);
 	return element;
 }
+
+ControlFlowObject& ControlFlowObject::operator=(const ControlFlowObject & obj)
+{
+	UML::ActivityEdgeObject::operator=(obj);
+	return *this;
+}
+
 
 void ControlFlowObject::destroy()
 {	

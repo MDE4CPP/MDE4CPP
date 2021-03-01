@@ -70,8 +70,8 @@
 //Factories an Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -105,8 +105,17 @@ CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureV
 	m_group = par_group;
 }
 
-CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureValueActionActivationImpl(const CS_RemoveStructuralFeatureValueActionActivationImpl & obj): fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl(obj), CS_RemoveStructuralFeatureValueActionActivation(obj)
+CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureValueActionActivationImpl(const CS_RemoveStructuralFeatureValueActionActivationImpl & obj): CS_RemoveStructuralFeatureValueActionActivationImpl()
 {
+	*this = obj;
+}
+
+CS_RemoveStructuralFeatureValueActionActivationImpl& CS_RemoveStructuralFeatureValueActionActivationImpl::operator=(const CS_RemoveStructuralFeatureValueActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::operator=(obj);
+	CS_RemoveStructuralFeatureValueActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_RemoveStructuralFeatureValueActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -116,11 +125,13 @@ CS_RemoveStructuralFeatureValueActionActivationImpl::CS_RemoveStructuralFeatureV
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_RemoveStructuralFeatureValueActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_RemoveStructuralFeatureValueActionActivationImpl::copy() const
 {
-	std::shared_ptr<CS_RemoveStructuralFeatureValueActionActivationImpl> element(new CS_RemoveStructuralFeatureValueActionActivationImpl(*this));
+	std::shared_ptr<CS_RemoveStructuralFeatureValueActionActivationImpl> element(new CS_RemoveStructuralFeatureValueActionActivationImpl());
+	*element =(*this);
 	element->setThisCS_RemoveStructuralFeatureValueActionActivationPtr(element);
 	return element;
 }

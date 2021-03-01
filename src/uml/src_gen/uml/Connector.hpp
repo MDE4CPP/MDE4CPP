@@ -72,11 +72,8 @@ namespace uml
 	{
 		public:
  			Connector(const Connector &) {}
-			Connector& operator=(Connector const&) = delete;
-
 		protected:
 			Connector(){}
-
 			//Additional constructors for the containments back reference
 			Connector(std::weak_ptr<uml::Namespace> par_namespace);
 

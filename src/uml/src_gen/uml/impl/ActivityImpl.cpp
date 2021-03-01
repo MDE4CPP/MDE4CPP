@@ -153,8 +153,17 @@ ActivityImpl::ActivityImpl(std::weak_ptr<uml::TemplateParameter> par_owningTempl
 }
 
 
-ActivityImpl::ActivityImpl(const ActivityImpl & obj): BehaviorImpl(obj), Activity(obj)
+ActivityImpl::ActivityImpl(const ActivityImpl & obj): ActivityImpl()
 {
+	*this = obj;
+}
+
+ActivityImpl& ActivityImpl::operator=(const ActivityImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	BehaviorImpl::operator=(obj);
+	Activity::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Activity "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -237,11 +246,13 @@ ActivityImpl::ActivityImpl(const ActivityImpl & obj): BehaviorImpl(obj), Activit
 		std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityImpl::copy() const
+std::shared_ptr<ecore::EObject> ActivityImpl::copy() const
 {
-	std::shared_ptr<ActivityImpl> element(new ActivityImpl(*this));
+	std::shared_ptr<ActivityImpl> element(new ActivityImpl());
+	*element =(*this);
 	element->setThisActivityPtr(element);
 	return element;
 }

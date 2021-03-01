@@ -82,8 +82,17 @@ CallEventExecutionImpl::~CallEventExecutionImpl()
 }
 
 
-CallEventExecutionImpl::CallEventExecutionImpl(const CallEventExecutionImpl & obj): ExecutionImpl(obj), CallEventExecution(obj)
+CallEventExecutionImpl::CallEventExecutionImpl(const CallEventExecutionImpl & obj): CallEventExecutionImpl()
 {
+	*this = obj;
+}
+
+CallEventExecutionImpl& CallEventExecutionImpl::operator=(const CallEventExecutionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ExecutionImpl::operator=(obj);
+	CallEventExecution::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CallEventExecution "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -94,11 +103,13 @@ CallEventExecutionImpl::CallEventExecutionImpl(const CallEventExecutionImpl & ob
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CallEventExecutionImpl::copy() const
+std::shared_ptr<ecore::EObject> CallEventExecutionImpl::copy() const
 {
-	std::shared_ptr<CallEventExecutionImpl> element(new CallEventExecutionImpl(*this));
+	std::shared_ptr<CallEventExecutionImpl> element(new CallEventExecutionImpl());
+	*element =(*this);
 	element->setThisCallEventExecutionPtr(element);
 	return element;
 }

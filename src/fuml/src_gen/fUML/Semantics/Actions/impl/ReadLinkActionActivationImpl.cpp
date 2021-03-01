@@ -77,8 +77,17 @@ ReadLinkActionActivationImpl::ReadLinkActionActivationImpl(std::weak_ptr<fUML::S
 	m_group = par_group;
 }
 
-ReadLinkActionActivationImpl::ReadLinkActionActivationImpl(const ReadLinkActionActivationImpl & obj): LinkActionActivationImpl(obj), ReadLinkActionActivation(obj)
+ReadLinkActionActivationImpl::ReadLinkActionActivationImpl(const ReadLinkActionActivationImpl & obj): ReadLinkActionActivationImpl()
 {
+	*this = obj;
+}
+
+ReadLinkActionActivationImpl& ReadLinkActionActivationImpl::operator=(const ReadLinkActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	LinkActionActivationImpl::operator=(obj);
+	ReadLinkActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReadLinkActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -88,11 +97,13 @@ ReadLinkActionActivationImpl::ReadLinkActionActivationImpl(const ReadLinkActionA
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReadLinkActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ReadLinkActionActivationImpl::copy() const
 {
-	std::shared_ptr<ReadLinkActionActivationImpl> element(new ReadLinkActionActivationImpl(*this));
+	std::shared_ptr<ReadLinkActionActivationImpl> element(new ReadLinkActionActivationImpl());
+	*element =(*this);
 	element->setThisReadLinkActionActivationPtr(element);
 	return element;
 }

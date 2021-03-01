@@ -139,8 +139,17 @@ StereotypeImpl::StereotypeImpl(std::weak_ptr<uml::TemplateParameter> par_owningT
 }
 
 
-StereotypeImpl::StereotypeImpl(const StereotypeImpl & obj): ClassImpl(obj), Stereotype(obj)
+StereotypeImpl::StereotypeImpl(const StereotypeImpl & obj): StereotypeImpl()
 {
+	*this = obj;
+}
+
+StereotypeImpl& StereotypeImpl::operator=(const StereotypeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ClassImpl::operator=(obj);
+	Stereotype::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Stereotype "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -162,11 +171,13 @@ StereotypeImpl::StereotypeImpl(const StereotypeImpl & obj): ClassImpl(obj), Ster
 		std::cout << "Initialising value Subset: " << "m_icon - Subset<uml::Image, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StereotypeImpl::copy() const
+std::shared_ptr<ecore::EObject> StereotypeImpl::copy() const
 {
-	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(*this));
+	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl());
+	*element =(*this);
 	element->setThisStereotypePtr(element);
 	return element;
 }

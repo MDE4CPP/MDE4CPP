@@ -58,8 +58,6 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public:
  			StructuredValue(const StructuredValue &) {}
-			StructuredValue& operator=(StructuredValue const&) = delete;
-
 		protected:
 			StructuredValue(){}
 

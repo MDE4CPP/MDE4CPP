@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~AbstractionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			AbstractionObject& operator=(AbstractionObject const&);
 
 			virtual void destroy();
 			

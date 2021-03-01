@@ -116,8 +116,17 @@ LiteralStringImpl::LiteralStringImpl(std::weak_ptr<uml::ValueSpecificationAction
 	m_owner = par_valueSpecificationAction;
 }
 
-LiteralStringImpl::LiteralStringImpl(const LiteralStringImpl & obj): LiteralSpecificationImpl(obj), LiteralString(obj)
+LiteralStringImpl::LiteralStringImpl(const LiteralStringImpl & obj): LiteralStringImpl()
 {
+	*this = obj;
+}
+
+LiteralStringImpl& LiteralStringImpl::operator=(const LiteralStringImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	LiteralSpecificationImpl::operator=(obj);
+	LiteralString::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralString "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -128,11 +137,13 @@ LiteralStringImpl::LiteralStringImpl(const LiteralStringImpl & obj): LiteralSpec
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LiteralStringImpl::copy() const
+std::shared_ptr<ecore::EObject> LiteralStringImpl::copy() const
 {
-	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(*this));
+	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl());
+	*element =(*this);
 	element->setThisLiteralStringPtr(element);
 	return element;
 }

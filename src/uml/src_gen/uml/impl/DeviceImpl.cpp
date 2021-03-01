@@ -136,8 +136,17 @@ DeviceImpl::DeviceImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateP
 }
 
 
-DeviceImpl::DeviceImpl(const DeviceImpl & obj): NodeImpl(obj), Device(obj)
+DeviceImpl::DeviceImpl(const DeviceImpl & obj): DeviceImpl()
 {
+	*this = obj;
+}
+
+DeviceImpl& DeviceImpl::operator=(const DeviceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NodeImpl::operator=(obj);
+	Device::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Device "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -147,11 +156,13 @@ DeviceImpl::DeviceImpl(const DeviceImpl & obj): NodeImpl(obj), Device(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DeviceImpl::copy() const
+std::shared_ptr<ecore::EObject> DeviceImpl::copy() const
 {
-	std::shared_ptr<DeviceImpl> element(new DeviceImpl(*this));
+	std::shared_ptr<DeviceImpl> element(new DeviceImpl());
+	*element =(*this);
 	element->setThisDevicePtr(element);
 	return element;
 }

@@ -65,20 +65,18 @@
 using namespace UML;
 
 ConnectionPointReferenceObject::ConnectionPointReferenceObject(std::shared_ptr<uml::ConnectionPointReference> _element):
-
 	m_ConnectionPointReferenceValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ConnectionPointReference());
+{
 }
 
 ConnectionPointReferenceObject::ConnectionPointReferenceObject(ConnectionPointReferenceObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ConnectionPointReferenceObject::ConnectionPointReferenceObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ConnectionPointReference());
 }
 
 ConnectionPointReferenceObject::~ConnectionPointReferenceObject()
@@ -87,10 +85,18 @@ ConnectionPointReferenceObject::~ConnectionPointReferenceObject()
 
 std::shared_ptr<ecore::EObject> ConnectionPointReferenceObject::copy()
 {
-	std::shared_ptr<ConnectionPointReferenceObject> element(new ConnectionPointReferenceObject(*this));
+	std::shared_ptr<ConnectionPointReferenceObject> element(new ConnectionPointReferenceObject());
+	*element=(*this);
 	element->setThisConnectionPointReferenceObjectPtr(element);
 	return element;
 }
+
+ConnectionPointReferenceObject& ConnectionPointReferenceObject::operator=(const ConnectionPointReferenceObject & obj)
+{
+	UML::VertexObject::operator=(obj);
+	return *this;
+}
+
 
 void ConnectionPointReferenceObject::destroy()
 {	

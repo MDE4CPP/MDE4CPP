@@ -24,9 +24,7 @@ namespace fUML::Semantics::Actions
 		public: 
 			AddStructuralFeatureValueActionActivationImpl(const AddStructuralFeatureValueActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			AddStructuralFeatureValueActionActivationImpl& operator=(AddStructuralFeatureValueActionActivationImpl const&) = delete;
+			AddStructuralFeatureValueActionActivationImpl& operator=(AddStructuralFeatureValueActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

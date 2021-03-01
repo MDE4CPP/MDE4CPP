@@ -67,11 +67,8 @@ namespace uml
 	{
 		public:
  			ValueSpecification(const ValueSpecification &) {}
-			ValueSpecification& operator=(ValueSpecification const&) = delete;
-
 		protected:
 			ValueSpecification(){}
-
 			//Additional constructors for the containments back reference
 			ValueSpecification(std::weak_ptr<uml::Namespace> par_namespace);
 

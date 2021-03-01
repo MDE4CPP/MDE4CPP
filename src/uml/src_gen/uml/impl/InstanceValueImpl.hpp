@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			InstanceValueImpl(const InstanceValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			InstanceValueImpl& operator=(InstanceValueImpl const&) = delete;
+			InstanceValueImpl& operator=(InstanceValueImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

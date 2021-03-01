@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ExecutionSpecificationImpl(const ExecutionSpecificationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ExecutionSpecificationImpl& operator=(ExecutionSpecificationImpl const&) = delete;
+			ExecutionSpecificationImpl& operator=(ExecutionSpecificationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

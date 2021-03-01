@@ -61,8 +61,6 @@ namespace uml
 	{
 		public:
  			TypedElement(const TypedElement &) {}
-			TypedElement& operator=(TypedElement const&) = delete;
-
 		protected:
 			TypedElement(){}
 

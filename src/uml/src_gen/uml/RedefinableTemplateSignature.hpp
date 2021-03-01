@@ -68,8 +68,6 @@ namespace uml
 	{
 		public:
  			RedefinableTemplateSignature(const RedefinableTemplateSignature &) {}
-			RedefinableTemplateSignature& operator=(RedefinableTemplateSignature const&) = delete;
-
 		protected:
 			RedefinableTemplateSignature(){}
 

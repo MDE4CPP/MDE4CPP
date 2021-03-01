@@ -40,6 +40,7 @@ namespace UML
 		    virtual ~ClassifierObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ClassifierObject& operator=(ClassifierObject const&);
 
 			virtual void destroy();
 			

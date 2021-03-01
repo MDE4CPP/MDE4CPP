@@ -97,8 +97,17 @@ AnyReceiveEventImpl::AnyReceiveEventImpl(std::weak_ptr<uml::TemplateParameter> p
 	m_owner = par_owningTemplateParameter;
 }
 
-AnyReceiveEventImpl::AnyReceiveEventImpl(const AnyReceiveEventImpl & obj): MessageEventImpl(obj), AnyReceiveEvent(obj)
+AnyReceiveEventImpl::AnyReceiveEventImpl(const AnyReceiveEventImpl & obj): AnyReceiveEventImpl()
 {
+	*this = obj;
+}
+
+AnyReceiveEventImpl& AnyReceiveEventImpl::operator=(const AnyReceiveEventImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	MessageEventImpl::operator=(obj);
+	AnyReceiveEvent::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AnyReceiveEvent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -108,11 +117,13 @@ AnyReceiveEventImpl::AnyReceiveEventImpl(const AnyReceiveEventImpl & obj): Messa
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  AnyReceiveEventImpl::copy() const
+std::shared_ptr<ecore::EObject> AnyReceiveEventImpl::copy() const
 {
-	std::shared_ptr<AnyReceiveEventImpl> element(new AnyReceiveEventImpl(*this));
+	std::shared_ptr<AnyReceiveEventImpl> element(new AnyReceiveEventImpl());
+	*element =(*this);
 	element->setThisAnyReceiveEventPtr(element);
 	return element;
 }

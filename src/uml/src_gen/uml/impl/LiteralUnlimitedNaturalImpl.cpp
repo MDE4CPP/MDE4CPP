@@ -116,8 +116,17 @@ LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Valu
 	m_owner = par_valueSpecificationAction;
 }
 
-LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(const LiteralUnlimitedNaturalImpl & obj): LiteralSpecificationImpl(obj), LiteralUnlimitedNatural(obj)
+LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(const LiteralUnlimitedNaturalImpl & obj): LiteralUnlimitedNaturalImpl()
 {
+	*this = obj;
+}
+
+LiteralUnlimitedNaturalImpl& LiteralUnlimitedNaturalImpl::operator=(const LiteralUnlimitedNaturalImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	LiteralSpecificationImpl::operator=(obj);
+	LiteralUnlimitedNatural::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralUnlimitedNatural "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -128,11 +137,13 @@ LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(const LiteralUnlimitedN
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LiteralUnlimitedNaturalImpl::copy() const
+std::shared_ptr<ecore::EObject> LiteralUnlimitedNaturalImpl::copy() const
 {
-	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(*this));
+	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl());
+	*element =(*this);
 	element->setThisLiteralUnlimitedNaturalPtr(element);
 	return element;
 }

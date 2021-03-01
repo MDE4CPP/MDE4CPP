@@ -110,8 +110,17 @@ ActionActivationImpl::ActionActivationImpl(std::weak_ptr<fUML::Semantics::Activi
 	m_group = par_group;
 }
 
-ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj): fUML::Semantics::Activities::ActivityNodeActivationImpl(obj), ActionActivation(obj)
+ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj): ActionActivationImpl()
 {
+	*this = obj;
+}
+
+ActionActivationImpl& ActionActivationImpl::operator=(const ActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Activities::ActivityNodeActivationImpl::operator=(obj);
+	ActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -135,11 +144,13 @@ ActionActivationImpl::ActionActivationImpl(const ActionActivationImpl & obj): fU
 	{
 		outputPinActivationContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(_outputPinActivation->copy()));
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ActionActivationImpl::copy() const
 {
-	std::shared_ptr<ActionActivationImpl> element(new ActionActivationImpl(*this));
+	std::shared_ptr<ActionActivationImpl> element(new ActionActivationImpl());
+	*element =(*this);
 	element->setThisActionActivationPtr(element);
 	return element;
 }

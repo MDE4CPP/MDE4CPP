@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~LiteralNullObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			LiteralNullObject& operator=(LiteralNullObject const&);
 
 			virtual void destroy();
 			

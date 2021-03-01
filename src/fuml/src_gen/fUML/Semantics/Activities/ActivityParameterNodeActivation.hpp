@@ -59,8 +59,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ActivityParameterNodeActivation(const ActivityParameterNodeActivation &) {}
-			ActivityParameterNodeActivation& operator=(ActivityParameterNodeActivation const&) = delete;
-
 		protected:
 			ActivityParameterNodeActivation(){}
 

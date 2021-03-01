@@ -77,8 +77,6 @@ namespace uml
 	{
 		public:
  			State(const State &) {}
-			State& operator=(State const&) = delete;
-
 		protected:
 			State(){}
 

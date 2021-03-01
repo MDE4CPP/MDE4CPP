@@ -66,8 +66,6 @@ namespace PSCS::Semantics::Actions
 	{
 		public:
  			CS_AddStructuralFeatureValueActionActivation(const CS_AddStructuralFeatureValueActionActivation &) {}
-			CS_AddStructuralFeatureValueActionActivation& operator=(CS_AddStructuralFeatureValueActionActivation const&) = delete;
-
 		protected:
 			CS_AddStructuralFeatureValueActionActivation(){}
 

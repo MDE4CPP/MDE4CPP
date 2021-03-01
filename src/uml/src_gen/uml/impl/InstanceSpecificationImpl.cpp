@@ -104,8 +104,19 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(std::weak_ptr<uml::Template
 	m_owner = par_owningTemplateParameter;
 }
 
-InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecificationImpl & obj): DeployedArtifactImpl(obj), DeploymentTargetImpl(obj), PackageableElementImpl(obj), InstanceSpecification(obj)
+InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecificationImpl & obj): InstanceSpecificationImpl()
 {
+	*this = obj;
+}
+
+InstanceSpecificationImpl& InstanceSpecificationImpl::operator=(const InstanceSpecificationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	DeploymentTargetImpl::operator=(obj);
+	PackageableElementImpl::operator=(obj);
+	DeployedArtifactImpl::operator=(obj);
+	InstanceSpecification::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InstanceSpecification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -133,11 +144,13 @@ InstanceSpecificationImpl::InstanceSpecificationImpl(const InstanceSpecification
 	#endif
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InstanceSpecificationImpl::copy() const
+std::shared_ptr<ecore::EObject> InstanceSpecificationImpl::copy() const
 {
-	std::shared_ptr<InstanceSpecificationImpl> element(new InstanceSpecificationImpl(*this));
+	std::shared_ptr<InstanceSpecificationImpl> element(new InstanceSpecificationImpl());
+	*element =(*this);
 	element->setThisInstanceSpecificationPtr(element);
 	return element;
 }

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~AnyReceiveEventObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			AnyReceiveEventObject& operator=(AnyReceiveEventObject const&);
 
 			virtual void destroy();
 			

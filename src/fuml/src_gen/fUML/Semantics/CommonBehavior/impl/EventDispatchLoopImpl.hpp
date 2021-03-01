@@ -26,9 +26,7 @@ virtual public EventDispatchLoop
 		public: 
 			EventDispatchLoopImpl(const EventDispatchLoopImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			EventDispatchLoopImpl& operator=(EventDispatchLoopImpl const&) = delete;
+			EventDispatchLoopImpl& operator=(EventDispatchLoopImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

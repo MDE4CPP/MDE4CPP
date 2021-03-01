@@ -108,8 +108,17 @@ ActivityPartitionImpl::ActivityPartitionImpl(std::weak_ptr<uml::ActivityPartitio
 	m_superGroup = par_superPartition;
 }
 
-ActivityPartitionImpl::ActivityPartitionImpl(const ActivityPartitionImpl & obj): ActivityGroupImpl(obj), ActivityPartition(obj)
+ActivityPartitionImpl::ActivityPartitionImpl(const ActivityPartitionImpl & obj): ActivityPartitionImpl()
 {
+	*this = obj;
+}
+
+ActivityPartitionImpl& ActivityPartitionImpl::operator=(const ActivityPartitionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActivityGroupImpl::operator=(obj);
+	ActivityPartition::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityPartition "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -144,11 +153,13 @@ ActivityPartitionImpl::ActivityPartitionImpl(const ActivityPartitionImpl & obj):
 		std::cout << "Initialising value Subset: " << "m_subpartition - Subset<uml::ActivityPartition, uml::ActivityGroup >(getSubgroup())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityPartitionImpl::copy() const
+std::shared_ptr<ecore::EObject> ActivityPartitionImpl::copy() const
 {
-	std::shared_ptr<ActivityPartitionImpl> element(new ActivityPartitionImpl(*this));
+	std::shared_ptr<ActivityPartitionImpl> element(new ActivityPartitionImpl());
+	*element =(*this);
 	element->setThisActivityPartitionPtr(element);
 	return element;
 }

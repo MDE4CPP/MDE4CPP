@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ModelObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ModelObject& operator=(ModelObject const&);
 
 			virtual void destroy();
 			

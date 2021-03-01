@@ -82,8 +82,17 @@ ActivityNodeActivationImpl::ActivityNodeActivationImpl(std::weak_ptr<fUML::Seman
 	m_group = par_group;
 }
 
-ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivationImpl & obj): fUML::Semantics::Loci::SemanticVisitorImpl(obj), ActivityNodeActivation(obj)
+ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivationImpl & obj): ActivityNodeActivationImpl()
 {
+	*this = obj;
+}
+
+ActivityNodeActivationImpl& ActivityNodeActivationImpl::operator=(const ActivityNodeActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::SemanticVisitorImpl::operator=(obj);
+	ActivityNodeActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -106,11 +115,13 @@ ActivityNodeActivationImpl::ActivityNodeActivationImpl(const ActivityNodeActivat
 		heldTokensContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_heldTokens->copy()));
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ActivityNodeActivationImpl::copy() const
 {
-	std::shared_ptr<ActivityNodeActivationImpl> element(new ActivityNodeActivationImpl(*this));
+	std::shared_ptr<ActivityNodeActivationImpl> element(new ActivityNodeActivationImpl());
+	*element =(*this);
 	element->setThisActivityNodeActivationPtr(element);
 	return element;
 }

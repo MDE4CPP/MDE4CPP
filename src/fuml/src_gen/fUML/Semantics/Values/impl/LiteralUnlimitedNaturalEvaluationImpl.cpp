@@ -68,8 +68,17 @@ LiteralUnlimitedNaturalEvaluationImpl::~LiteralUnlimitedNaturalEvaluationImpl()
 }
 
 
-LiteralUnlimitedNaturalEvaluationImpl::LiteralUnlimitedNaturalEvaluationImpl(const LiteralUnlimitedNaturalEvaluationImpl & obj): LiteralEvaluationImpl(obj), LiteralUnlimitedNaturalEvaluation(obj)
+LiteralUnlimitedNaturalEvaluationImpl::LiteralUnlimitedNaturalEvaluationImpl(const LiteralUnlimitedNaturalEvaluationImpl & obj): LiteralUnlimitedNaturalEvaluationImpl()
 {
+	*this = obj;
+}
+
+LiteralUnlimitedNaturalEvaluationImpl& LiteralUnlimitedNaturalEvaluationImpl::operator=(const LiteralUnlimitedNaturalEvaluationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	LiteralEvaluationImpl::operator=(obj);
+	LiteralUnlimitedNaturalEvaluation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralUnlimitedNaturalEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -79,11 +88,13 @@ LiteralUnlimitedNaturalEvaluationImpl::LiteralUnlimitedNaturalEvaluationImpl(con
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LiteralUnlimitedNaturalEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject> LiteralUnlimitedNaturalEvaluationImpl::copy() const
 {
-	std::shared_ptr<LiteralUnlimitedNaturalEvaluationImpl> element(new LiteralUnlimitedNaturalEvaluationImpl(*this));
+	std::shared_ptr<LiteralUnlimitedNaturalEvaluationImpl> element(new LiteralUnlimitedNaturalEvaluationImpl());
+	*element =(*this);
 	element->setThisLiteralUnlimitedNaturalEvaluationPtr(element);
 	return element;
 }

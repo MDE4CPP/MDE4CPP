@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~PartDecompositionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			PartDecompositionObject& operator=(PartDecompositionObject const&);
 
 			virtual void destroy();
 			

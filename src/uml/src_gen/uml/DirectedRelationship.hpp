@@ -57,8 +57,6 @@ namespace uml
 	{
 		public:
  			DirectedRelationship(const DirectedRelationship &) {}
-			DirectedRelationship& operator=(DirectedRelationship const&) = delete;
-
 		protected:
 			DirectedRelationship(){}
 

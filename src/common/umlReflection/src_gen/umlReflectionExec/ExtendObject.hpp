@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~ExtendObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ExtendObject& operator=(ExtendObject const&);
 
 			virtual void destroy();
 			

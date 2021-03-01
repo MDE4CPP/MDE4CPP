@@ -91,20 +91,18 @@
 using namespace UML;
 
 InvocationActionObject::InvocationActionObject(std::shared_ptr<uml::InvocationAction> _element):
-
 	m_InvocationActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InvocationAction());
+{
 }
 
 InvocationActionObject::InvocationActionObject(InvocationActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InvocationActionObject::InvocationActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InvocationAction());
 }
 
 InvocationActionObject::~InvocationActionObject()
@@ -113,10 +111,18 @@ InvocationActionObject::~InvocationActionObject()
 
 std::shared_ptr<ecore::EObject> InvocationActionObject::copy()
 {
-	std::shared_ptr<InvocationActionObject> element(new InvocationActionObject(*this));
+	std::shared_ptr<InvocationActionObject> element(new InvocationActionObject());
+	*element=(*this);
 	element->setThisInvocationActionObjectPtr(element);
 	return element;
 }
+
+InvocationActionObject& InvocationActionObject::operator=(const InvocationActionObject & obj)
+{
+	UML::ActionObject::operator=(obj);
+	return *this;
+}
+
 
 void InvocationActionObject::destroy()
 {	

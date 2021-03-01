@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ConstraintObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ConstraintObject& operator=(ConstraintObject const&);
 
 			virtual void destroy();
 			

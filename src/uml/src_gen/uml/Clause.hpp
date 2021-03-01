@@ -62,8 +62,6 @@ namespace uml
 	{
 		public:
  			Clause(const Clause &) {}
-			Clause& operator=(Clause const&) = delete;
-
 		protected:
 			Clause(){}
 

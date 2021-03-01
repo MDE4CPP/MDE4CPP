@@ -68,8 +68,17 @@ DirectedRelationshipImpl::DirectedRelationshipImpl(std::weak_ptr<uml::Element> p
 	m_owner = par_owner;
 }
 
-DirectedRelationshipImpl::DirectedRelationshipImpl(const DirectedRelationshipImpl & obj): RelationshipImpl(obj), DirectedRelationship(obj)
+DirectedRelationshipImpl::DirectedRelationshipImpl(const DirectedRelationshipImpl & obj): DirectedRelationshipImpl()
 {
+	*this = obj;
+}
+
+DirectedRelationshipImpl& DirectedRelationshipImpl::operator=(const DirectedRelationshipImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	RelationshipImpl::operator=(obj);
+	DirectedRelationship::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DirectedRelationship "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -79,11 +88,13 @@ DirectedRelationshipImpl::DirectedRelationshipImpl(const DirectedRelationshipImp
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DirectedRelationshipImpl::copy() const
+std::shared_ptr<ecore::EObject> DirectedRelationshipImpl::copy() const
 {
-	std::shared_ptr<DirectedRelationshipImpl> element(new DirectedRelationshipImpl(*this));
+	std::shared_ptr<DirectedRelationshipImpl> element(new DirectedRelationshipImpl());
+	*element =(*this);
 	element->setThisDirectedRelationshipPtr(element);
 	return element;
 }

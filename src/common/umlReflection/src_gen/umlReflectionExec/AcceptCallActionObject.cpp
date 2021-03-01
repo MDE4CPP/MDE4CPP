@@ -94,20 +94,18 @@
 using namespace UML;
 
 AcceptCallActionObject::AcceptCallActionObject(std::shared_ptr<uml::AcceptCallAction> _element):
-
 	m_AcceptCallActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_AcceptCallAction());
+{
 }
 
 AcceptCallActionObject::AcceptCallActionObject(AcceptCallActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 AcceptCallActionObject::AcceptCallActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_AcceptCallAction());
 }
 
 AcceptCallActionObject::~AcceptCallActionObject()
@@ -116,10 +114,18 @@ AcceptCallActionObject::~AcceptCallActionObject()
 
 std::shared_ptr<ecore::EObject> AcceptCallActionObject::copy()
 {
-	std::shared_ptr<AcceptCallActionObject> element(new AcceptCallActionObject(*this));
+	std::shared_ptr<AcceptCallActionObject> element(new AcceptCallActionObject());
+	*element=(*this);
 	element->setThisAcceptCallActionObjectPtr(element);
 	return element;
 }
+
+AcceptCallActionObject& AcceptCallActionObject::operator=(const AcceptCallActionObject & obj)
+{
+	UML::AcceptEventActionObject::operator=(obj);
+	return *this;
+}
+
 
 void AcceptCallActionObject::destroy()
 {	

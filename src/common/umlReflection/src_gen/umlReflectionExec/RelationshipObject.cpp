@@ -44,20 +44,18 @@
 using namespace UML;
 
 RelationshipObject::RelationshipObject(std::shared_ptr<uml::Relationship> _element):
-
 	m_RelationshipValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Relationship());
+{
 }
 
 RelationshipObject::RelationshipObject(RelationshipObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 RelationshipObject::RelationshipObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Relationship());
 }
 
 RelationshipObject::~RelationshipObject()
@@ -66,10 +64,18 @@ RelationshipObject::~RelationshipObject()
 
 std::shared_ptr<ecore::EObject> RelationshipObject::copy()
 {
-	std::shared_ptr<RelationshipObject> element(new RelationshipObject(*this));
+	std::shared_ptr<RelationshipObject> element(new RelationshipObject());
+	*element=(*this);
 	element->setThisRelationshipObjectPtr(element);
 	return element;
 }
+
+RelationshipObject& RelationshipObject::operator=(const RelationshipObject & obj)
+{
+	UML::ElementObject::operator=(obj);
+	return *this;
+}
+
 
 void RelationshipObject::destroy()
 {	

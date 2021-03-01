@@ -71,20 +71,18 @@
 using namespace UML;
 
 InteractionUseObject::InteractionUseObject(std::shared_ptr<uml::InteractionUse> _element):
-
 	m_InteractionUseValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InteractionUse());
+{
 }
 
 InteractionUseObject::InteractionUseObject(InteractionUseObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InteractionUseObject::InteractionUseObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InteractionUse());
 }
 
 InteractionUseObject::~InteractionUseObject()
@@ -93,10 +91,18 @@ InteractionUseObject::~InteractionUseObject()
 
 std::shared_ptr<ecore::EObject> InteractionUseObject::copy()
 {
-	std::shared_ptr<InteractionUseObject> element(new InteractionUseObject(*this));
+	std::shared_ptr<InteractionUseObject> element(new InteractionUseObject());
+	*element=(*this);
 	element->setThisInteractionUseObjectPtr(element);
 	return element;
 }
+
+InteractionUseObject& InteractionUseObject::operator=(const InteractionUseObject & obj)
+{
+	UML::InteractionFragmentObject::operator=(obj);
+	return *this;
+}
+
 
 void InteractionUseObject::destroy()
 {	

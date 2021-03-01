@@ -81,8 +81,17 @@ ReadSelfActionActivationImpl::ReadSelfActionActivationImpl(std::weak_ptr<fUML::S
 	m_group = par_group;
 }
 
-ReadSelfActionActivationImpl::ReadSelfActionActivationImpl(const ReadSelfActionActivationImpl & obj): ActionActivationImpl(obj), ReadSelfActionActivation(obj)
+ReadSelfActionActivationImpl::ReadSelfActionActivationImpl(const ReadSelfActionActivationImpl & obj): ReadSelfActionActivationImpl()
 {
+	*this = obj;
+}
+
+ReadSelfActionActivationImpl& ReadSelfActionActivationImpl::operator=(const ReadSelfActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	ReadSelfActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReadSelfActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -93,11 +102,13 @@ ReadSelfActionActivationImpl::ReadSelfActionActivationImpl(const ReadSelfActionA
 	m_readSelfAction  = obj.getReadSelfAction();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReadSelfActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ReadSelfActionActivationImpl::copy() const
 {
-	std::shared_ptr<ReadSelfActionActivationImpl> element(new ReadSelfActionActivationImpl(*this));
+	std::shared_ptr<ReadSelfActionActivationImpl> element(new ReadSelfActionActivationImpl());
+	*element =(*this);
 	element->setThisReadSelfActionActivationPtr(element);
 	return element;
 }

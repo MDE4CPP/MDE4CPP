@@ -70,8 +70,17 @@ ClauseImpl::ClauseImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ClauseImpl::ClauseImpl(const ClauseImpl & obj): ElementImpl(obj), Clause(obj)
+ClauseImpl::ClauseImpl(const ClauseImpl & obj): ClauseImpl()
 {
+	*this = obj;
+}
+
+ClauseImpl& ClauseImpl::operator=(const ClauseImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	Clause::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Clause "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -92,11 +101,13 @@ ClauseImpl::ClauseImpl(const ClauseImpl & obj): ElementImpl(obj), Clause(obj)
 	m_test.reset(new Bag<uml::ExecutableNode>(*(obj.getTest().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ClauseImpl::copy() const
+std::shared_ptr<ecore::EObject> ClauseImpl::copy() const
 {
-	std::shared_ptr<ClauseImpl> element(new ClauseImpl(*this));
+	std::shared_ptr<ClauseImpl> element(new ClauseImpl());
+	*element =(*this);
 	element->setThisClausePtr(element);
 	return element;
 }

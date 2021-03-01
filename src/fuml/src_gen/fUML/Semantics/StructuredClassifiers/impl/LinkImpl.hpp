@@ -24,9 +24,7 @@ namespace fUML::Semantics::StructuredClassifiers
 		public: 
 			LinkImpl(const LinkImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			LinkImpl& operator=(LinkImpl const&) = delete;
+			LinkImpl& operator=(LinkImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;

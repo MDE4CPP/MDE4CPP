@@ -65,8 +65,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ClearStructuralFeatureActionActivation(const ClearStructuralFeatureActionActivation &) {}
-			ClearStructuralFeatureActionActivation& operator=(ClearStructuralFeatureActionActivation const&) = delete;
-
 		protected:
 			ClearStructuralFeatureActionActivation(){}
 

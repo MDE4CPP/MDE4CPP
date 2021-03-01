@@ -65,8 +65,6 @@ namespace uml
 	{
 		public:
  			LiteralBoolean(const LiteralBoolean &) {}
-			LiteralBoolean& operator=(LiteralBoolean const&) = delete;
-
 		protected:
 			LiteralBoolean(){}
 

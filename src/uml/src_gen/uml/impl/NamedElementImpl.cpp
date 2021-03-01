@@ -83,8 +83,17 @@ NamedElementImpl::NamedElementImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj): ElementImpl(obj), NamedElement(obj)
+NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj): NamedElementImpl()
 {
+	*this = obj;
+}
+
+NamedElementImpl& NamedElementImpl::operator=(const NamedElementImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	NamedElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy NamedElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -105,11 +114,13 @@ NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj): ElementImpl(ob
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  NamedElementImpl::copy() const
+std::shared_ptr<ecore::EObject> NamedElementImpl::copy() const
 {
-	std::shared_ptr<NamedElementImpl> element(new NamedElementImpl(*this));
+	std::shared_ptr<NamedElementImpl> element(new NamedElementImpl());
+	*element =(*this);
 	element->setThisNamedElementPtr(element);
 	return element;
 }

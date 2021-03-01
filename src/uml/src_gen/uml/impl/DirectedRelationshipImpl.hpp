@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			DirectedRelationshipImpl(const DirectedRelationshipImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			DirectedRelationshipImpl& operator=(DirectedRelationshipImpl const&) = delete;
+			DirectedRelationshipImpl& operator=(DirectedRelationshipImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

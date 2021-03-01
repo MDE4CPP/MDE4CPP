@@ -129,8 +129,17 @@ EnumerationImpl::EnumerationImpl(std::weak_ptr<uml::TemplateParameter> par_ownin
 }
 
 
-EnumerationImpl::EnumerationImpl(const EnumerationImpl & obj): DataTypeImpl(obj), Enumeration(obj)
+EnumerationImpl::EnumerationImpl(const EnumerationImpl & obj): EnumerationImpl()
 {
+	*this = obj;
+}
+
+EnumerationImpl& EnumerationImpl::operator=(const EnumerationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	DataTypeImpl::operator=(obj);
+	Enumeration::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Enumeration "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -151,11 +160,13 @@ EnumerationImpl::EnumerationImpl(const EnumerationImpl & obj): DataTypeImpl(obj)
 		std::cout << "Initialising value Subset: " << "m_ownedLiteral - Subset<uml::EnumerationLiteral, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EnumerationImpl::copy() const
+std::shared_ptr<ecore::EObject> EnumerationImpl::copy() const
 {
-	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(*this));
+	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl());
+	*element =(*this);
 	element->setThisEnumerationPtr(element);
 	return element;
 }

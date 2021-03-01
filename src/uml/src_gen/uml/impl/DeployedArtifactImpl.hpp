@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			DeployedArtifactImpl(const DeployedArtifactImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			DeployedArtifactImpl& operator=(DeployedArtifactImpl const&) = delete;
+			DeployedArtifactImpl& operator=(DeployedArtifactImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

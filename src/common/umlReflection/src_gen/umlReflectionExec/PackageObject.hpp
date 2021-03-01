@@ -39,6 +39,7 @@ namespace UML
 		    virtual ~PackageObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			PackageObject& operator=(PackageObject const&);
 
 			virtual void destroy();
 			

@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~InformationFlowObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			InformationFlowObject& operator=(InformationFlowObject const&);
 
 			virtual void destroy();
 			

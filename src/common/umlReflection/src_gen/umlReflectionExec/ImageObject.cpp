@@ -46,20 +46,18 @@
 using namespace UML;
 
 ImageObject::ImageObject(std::shared_ptr<uml::Image> _element):
-
 	m_ImageValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Image());
+{
 }
 
 ImageObject::ImageObject(ImageObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ImageObject::ImageObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Image());
 }
 
 ImageObject::~ImageObject()
@@ -68,10 +66,18 @@ ImageObject::~ImageObject()
 
 std::shared_ptr<ecore::EObject> ImageObject::copy()
 {
-	std::shared_ptr<ImageObject> element(new ImageObject(*this));
+	std::shared_ptr<ImageObject> element(new ImageObject());
+	*element=(*this);
 	element->setThisImageObjectPtr(element);
 	return element;
 }
+
+ImageObject& ImageObject::operator=(const ImageObject & obj)
+{
+	UML::ElementObject::operator=(obj);
+	return *this;
+}
+
 
 void ImageObject::destroy()
 {	

@@ -78,8 +78,17 @@ ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(std::we
 	m_group = par_group;
 }
 
-ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const ActivityParameterNodeActivationImpl & obj): ObjectNodeActivationImpl(obj), ActivityParameterNodeActivation(obj)
+ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const ActivityParameterNodeActivationImpl & obj): ActivityParameterNodeActivationImpl()
 {
+	*this = obj;
+}
+
+ActivityParameterNodeActivationImpl& ActivityParameterNodeActivationImpl::operator=(const ActivityParameterNodeActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ObjectNodeActivationImpl::operator=(obj);
+	ActivityParameterNodeActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityParameterNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -89,11 +98,13 @@ ActivityParameterNodeActivationImpl::ActivityParameterNodeActivationImpl(const A
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityParameterNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ActivityParameterNodeActivationImpl::copy() const
 {
-	std::shared_ptr<ActivityParameterNodeActivationImpl> element(new ActivityParameterNodeActivationImpl(*this));
+	std::shared_ptr<ActivityParameterNodeActivationImpl> element(new ActivityParameterNodeActivationImpl());
+	*element =(*this);
 	element->setThisActivityParameterNodeActivationPtr(element);
 	return element;
 }

@@ -138,8 +138,17 @@ DeploymentSpecificationImpl::DeploymentSpecificationImpl(std::weak_ptr<uml::Temp
 }
 
 
-DeploymentSpecificationImpl::DeploymentSpecificationImpl(const DeploymentSpecificationImpl & obj): ArtifactImpl(obj), DeploymentSpecification(obj)
+DeploymentSpecificationImpl::DeploymentSpecificationImpl(const DeploymentSpecificationImpl & obj): DeploymentSpecificationImpl()
 {
+	*this = obj;
+}
+
+DeploymentSpecificationImpl& DeploymentSpecificationImpl::operator=(const DeploymentSpecificationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ArtifactImpl::operator=(obj);
+	DeploymentSpecification::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DeploymentSpecification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -152,11 +161,13 @@ DeploymentSpecificationImpl::DeploymentSpecificationImpl(const DeploymentSpecifi
 	m_deployment  = obj.getDeployment();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DeploymentSpecificationImpl::copy() const
+std::shared_ptr<ecore::EObject> DeploymentSpecificationImpl::copy() const
 {
-	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(*this));
+	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl());
+	*element =(*this);
 	element->setThisDeploymentSpecificationPtr(element);
 	return element;
 }

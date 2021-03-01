@@ -66,8 +66,17 @@ CommentImpl::CommentImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-CommentImpl::CommentImpl(const CommentImpl & obj): ElementImpl(obj), Comment(obj)
+CommentImpl::CommentImpl(const CommentImpl & obj): CommentImpl()
 {
+	*this = obj;
+}
+
+CommentImpl& CommentImpl::operator=(const CommentImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	Comment::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Comment "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -80,11 +89,13 @@ CommentImpl::CommentImpl(const CommentImpl & obj): ElementImpl(obj), Comment(obj
 	m_annotatedElement.reset(new Bag<uml::Element>(*(obj.getAnnotatedElement().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CommentImpl::copy() const
+std::shared_ptr<ecore::EObject> CommentImpl::copy() const
 {
-	std::shared_ptr<CommentImpl> element(new CommentImpl(*this));
+	std::shared_ptr<CommentImpl> element(new CommentImpl());
+	*element =(*this);
 	element->setThisCommentPtr(element);
 	return element;
 }

@@ -53,8 +53,6 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public:
  			BooleanValue(const BooleanValue &) {}
-			BooleanValue& operator=(BooleanValue const&) = delete;
-
 		protected:
 			BooleanValue(){}
 

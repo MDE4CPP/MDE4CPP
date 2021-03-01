@@ -57,10 +57,8 @@ namespace ecore
 	{
 		public:
  			EFactory(const EFactory &) {}
-
 		protected:
 			EFactory(){}
-			EFactory& operator=(const EFactory &) = default;
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

@@ -69,11 +69,8 @@ namespace uml
 	{
 		public:
  			Extend(const Extend &) {}
-			Extend& operator=(Extend const&) = delete;
-
 		protected:
 			Extend(){}
-
 			//Additional constructors for the containments back reference
 			Extend(std::weak_ptr<uml::UseCase> par_extension);
 

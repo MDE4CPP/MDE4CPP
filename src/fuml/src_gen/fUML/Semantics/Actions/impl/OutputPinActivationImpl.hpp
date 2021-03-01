@@ -24,9 +24,7 @@ namespace fUML::Semantics::Actions
 		public: 
 			OutputPinActivationImpl(const OutputPinActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			OutputPinActivationImpl& operator=(OutputPinActivationImpl const&) = delete;
+			OutputPinActivationImpl& operator=(OutputPinActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

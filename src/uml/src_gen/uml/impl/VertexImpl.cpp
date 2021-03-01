@@ -91,8 +91,17 @@ VertexImpl::VertexImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-VertexImpl::VertexImpl(const VertexImpl & obj): NamedElementImpl(obj), Vertex(obj)
+VertexImpl::VertexImpl(const VertexImpl & obj): VertexImpl()
 {
+	*this = obj;
+}
+
+VertexImpl& VertexImpl::operator=(const VertexImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	Vertex::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Vertex "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -107,11 +116,13 @@ VertexImpl::VertexImpl(const VertexImpl & obj): NamedElementImpl(obj), Vertex(ob
 	m_outgoing.reset(new Bag<uml::Transition>(*(obj.getOutgoing().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  VertexImpl::copy() const
+std::shared_ptr<ecore::EObject> VertexImpl::copy() const
 {
-	std::shared_ptr<VertexImpl> element(new VertexImpl(*this));
+	std::shared_ptr<VertexImpl> element(new VertexImpl());
+	*element =(*this);
 	element->setThisVertexPtr(element);
 	return element;
 }

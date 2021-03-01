@@ -82,8 +82,17 @@ ParameterSetImpl::ParameterSetImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ParameterSetImpl::ParameterSetImpl(const ParameterSetImpl & obj): NamedElementImpl(obj), ParameterSet(obj)
+ParameterSetImpl::ParameterSetImpl(const ParameterSetImpl & obj): ParameterSetImpl()
 {
+	*this = obj;
+}
+
+ParameterSetImpl& ParameterSetImpl::operator=(const ParameterSetImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	ParameterSet::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ParameterSet "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -106,11 +115,13 @@ ParameterSetImpl::ParameterSetImpl(const ParameterSetImpl & obj): NamedElementIm
 		std::cout << "Initialising value Subset: " << "m_condition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ParameterSetImpl::copy() const
+std::shared_ptr<ecore::EObject> ParameterSetImpl::copy() const
 {
-	std::shared_ptr<ParameterSetImpl> element(new ParameterSetImpl(*this));
+	std::shared_ptr<ParameterSetImpl> element(new ParameterSetImpl());
+	*element =(*this);
 	element->setThisParameterSetPtr(element);
 	return element;
 }

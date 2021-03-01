@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ReceptionImpl(const ReceptionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ReceptionImpl& operator=(ReceptionImpl const&) = delete;
+			ReceptionImpl& operator=(ReceptionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

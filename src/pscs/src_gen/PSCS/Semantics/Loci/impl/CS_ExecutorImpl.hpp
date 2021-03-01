@@ -24,9 +24,7 @@ namespace PSCS::Semantics::Loci
 		public: 
 			CS_ExecutorImpl(const CS_ExecutorImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CS_ExecutorImpl& operator=(CS_ExecutorImpl const&) = delete;
+			CS_ExecutorImpl& operator=(CS_ExecutorImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::Loci::LociFactoryImpl;

@@ -53,10 +53,8 @@ namespace ecore
 	{
 		public:
  			EModelElement(const EModelElement &) {}
-
 		protected:
 			EModelElement(){}
-			EModelElement& operator=(const EModelElement &) = default;
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

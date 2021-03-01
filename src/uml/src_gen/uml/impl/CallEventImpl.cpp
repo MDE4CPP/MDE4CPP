@@ -98,8 +98,17 @@ CallEventImpl::CallEventImpl(std::weak_ptr<uml::TemplateParameter> par_owningTem
 	m_owner = par_owningTemplateParameter;
 }
 
-CallEventImpl::CallEventImpl(const CallEventImpl & obj): MessageEventImpl(obj), CallEvent(obj)
+CallEventImpl::CallEventImpl(const CallEventImpl & obj): CallEventImpl()
 {
+	*this = obj;
+}
+
+CallEventImpl& CallEventImpl::operator=(const CallEventImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	MessageEventImpl::operator=(obj);
+	CallEvent::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CallEvent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -110,11 +119,13 @@ CallEventImpl::CallEventImpl(const CallEventImpl & obj): MessageEventImpl(obj), 
 	m_operation  = obj.getOperation();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CallEventImpl::copy() const
+std::shared_ptr<ecore::EObject> CallEventImpl::copy() const
 {
-	std::shared_ptr<CallEventImpl> element(new CallEventImpl(*this));
+	std::shared_ptr<CallEventImpl> element(new CallEventImpl());
+	*element =(*this);
 	element->setThisCallEventPtr(element);
 	return element;
 }

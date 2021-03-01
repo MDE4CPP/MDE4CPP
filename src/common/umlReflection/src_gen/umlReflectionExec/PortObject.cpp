@@ -122,20 +122,18 @@
 using namespace UML;
 
 PortObject::PortObject(std::shared_ptr<uml::Port> _element):
-
 	m_PortValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Port());
+{
 }
 
 PortObject::PortObject(PortObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 PortObject::PortObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Port());
 }
 
 PortObject::~PortObject()
@@ -144,10 +142,18 @@ PortObject::~PortObject()
 
 std::shared_ptr<ecore::EObject> PortObject::copy()
 {
-	std::shared_ptr<PortObject> element(new PortObject(*this));
+	std::shared_ptr<PortObject> element(new PortObject());
+	*element=(*this);
 	element->setThisPortObjectPtr(element);
 	return element;
 }
+
+PortObject& PortObject::operator=(const PortObject & obj)
+{
+	UML::PropertyObject::operator=(obj);
+	return *this;
+}
+
 
 void PortObject::destroy()
 {	

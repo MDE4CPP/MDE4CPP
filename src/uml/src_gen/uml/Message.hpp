@@ -72,11 +72,8 @@ namespace uml
 	{
 		public:
  			Message(const Message &) {}
-			Message& operator=(Message const&) = delete;
-
 		protected:
 			Message(){}
-
 			//Additional constructors for the containments back reference
 			Message(std::weak_ptr<uml::Interaction> par_interaction);
 

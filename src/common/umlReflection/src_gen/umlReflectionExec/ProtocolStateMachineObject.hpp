@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ProtocolStateMachineObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ProtocolStateMachineObject& operator=(ProtocolStateMachineObject const&);
 
 			virtual void destroy();
 			

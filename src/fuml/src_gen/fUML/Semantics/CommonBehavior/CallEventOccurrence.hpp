@@ -63,8 +63,6 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public:
  			CallEventOccurrence(const CallEventOccurrence &) {}
-			CallEventOccurrence& operator=(CallEventOccurrence const&) = delete;
-
 		protected:
 			CallEventOccurrence(){}
 

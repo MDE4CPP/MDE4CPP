@@ -137,8 +137,18 @@ AssociationClassImpl::AssociationClassImpl(std::weak_ptr<uml::TemplateParameter>
 }
 
 
-AssociationClassImpl::AssociationClassImpl(const AssociationClassImpl & obj): AssociationImpl(obj), ClassImpl(obj), AssociationClass(obj)
+AssociationClassImpl::AssociationClassImpl(const AssociationClassImpl & obj): AssociationClassImpl()
 {
+	*this = obj;
+}
+
+AssociationClassImpl& AssociationClassImpl::operator=(const AssociationClassImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ClassImpl::operator=(obj);
+	AssociationImpl::operator=(obj);
+	AssociationClass::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AssociationClass "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -148,11 +158,13 @@ AssociationClassImpl::AssociationClassImpl(const AssociationClassImpl & obj): As
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  AssociationClassImpl::copy() const
+std::shared_ptr<ecore::EObject> AssociationClassImpl::copy() const
 {
-	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(*this));
+	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl());
+	*element =(*this);
 	element->setThisAssociationClassPtr(element);
 	return element;
 }

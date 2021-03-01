@@ -45,8 +45,8 @@
 #include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -71,8 +71,17 @@ CS_LinkImpl::~CS_LinkImpl()
 }
 
 
-CS_LinkImpl::CS_LinkImpl(const CS_LinkImpl & obj): fUML::Semantics::StructuredClassifiers::LinkImpl(obj), CS_Link(obj)
+CS_LinkImpl::CS_LinkImpl(const CS_LinkImpl & obj): CS_LinkImpl()
 {
+	*this = obj;
+}
+
+CS_LinkImpl& CS_LinkImpl::operator=(const CS_LinkImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::StructuredClassifiers::LinkImpl::operator=(obj);
+	CS_Link::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_Link "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -82,11 +91,13 @@ CS_LinkImpl::CS_LinkImpl(const CS_LinkImpl & obj): fUML::Semantics::StructuredCl
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_LinkImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_LinkImpl::copy() const
 {
-	std::shared_ptr<CS_LinkImpl> element(new CS_LinkImpl(*this));
+	std::shared_ptr<CS_LinkImpl> element(new CS_LinkImpl());
+	*element =(*this);
 	element->setThisCS_LinkPtr(element);
 	return element;
 }

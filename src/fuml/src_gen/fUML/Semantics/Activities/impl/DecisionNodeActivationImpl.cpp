@@ -95,8 +95,17 @@ DecisionNodeActivationImpl::DecisionNodeActivationImpl(std::weak_ptr<fUML::Seman
 	m_group = par_group;
 }
 
-DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivationImpl & obj): ControlNodeActivationImpl(obj), DecisionNodeActivation(obj)
+DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivationImpl & obj): DecisionNodeActivationImpl()
 {
+	*this = obj;
+}
+
+DecisionNodeActivationImpl& DecisionNodeActivationImpl::operator=(const DecisionNodeActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ControlNodeActivationImpl::operator=(obj);
+	DecisionNodeActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DecisionNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -112,11 +121,13 @@ DecisionNodeActivationImpl::DecisionNodeActivationImpl(const DecisionNodeActivat
 		m_decisionInputExecution = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(obj.getDecisionInputExecution()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DecisionNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> DecisionNodeActivationImpl::copy() const
 {
-	std::shared_ptr<DecisionNodeActivationImpl> element(new DecisionNodeActivationImpl(*this));
+	std::shared_ptr<DecisionNodeActivationImpl> element(new DecisionNodeActivationImpl());
+	*element =(*this);
 	element->setThisDecisionNodeActivationPtr(element);
 	return element;
 }

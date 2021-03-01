@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			RealizationImpl(const RealizationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			RealizationImpl& operator=(RealizationImpl const&) = delete;
+			RealizationImpl& operator=(RealizationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

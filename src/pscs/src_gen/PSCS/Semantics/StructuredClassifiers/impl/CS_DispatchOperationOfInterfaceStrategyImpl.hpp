@@ -24,9 +24,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 		public: 
 			CS_DispatchOperationOfInterfaceStrategyImpl(const CS_DispatchOperationOfInterfaceStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CS_DispatchOperationOfInterfaceStrategyImpl& operator=(CS_DispatchOperationOfInterfaceStrategyImpl const&) = delete;
+			CS_DispatchOperationOfInterfaceStrategyImpl& operator=(CS_DispatchOperationOfInterfaceStrategyImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;

@@ -62,8 +62,6 @@ namespace uml
 	{
 		public:
  			AnyReceiveEvent(const AnyReceiveEvent &) {}
-			AnyReceiveEvent& operator=(AnyReceiveEvent const&) = delete;
-
 		protected:
 			AnyReceiveEvent(){}
 

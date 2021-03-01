@@ -26,9 +26,7 @@ virtual public TokenSet
 		public: 
 			TokenSetImpl(const TokenSetImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			TokenSetImpl& operator=(TokenSetImpl const&) = delete;
+			TokenSetImpl& operator=(TokenSetImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

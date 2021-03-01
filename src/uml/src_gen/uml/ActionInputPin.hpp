@@ -85,8 +85,6 @@ namespace uml
 	{
 		public:
  			ActionInputPin(const ActionInputPin &) {}
-			ActionInputPin& operator=(ActionInputPin const&) = delete;
-
 		protected:
 			ActionInputPin(){}
 

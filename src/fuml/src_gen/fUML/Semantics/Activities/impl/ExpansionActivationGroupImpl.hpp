@@ -24,9 +24,7 @@ namespace fUML::Semantics::Activities
 		public: 
 			ExpansionActivationGroupImpl(const ExpansionActivationGroupImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ExpansionActivationGroupImpl& operator=(ExpansionActivationGroupImpl const&) = delete;
+			ExpansionActivationGroupImpl& operator=(ExpansionActivationGroupImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

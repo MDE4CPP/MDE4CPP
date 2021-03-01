@@ -74,8 +74,17 @@ ForkNodeActivationImpl::ForkNodeActivationImpl(std::weak_ptr<fUML::Semantics::Ac
 	m_group = par_group;
 }
 
-ForkNodeActivationImpl::ForkNodeActivationImpl(const ForkNodeActivationImpl & obj): ControlNodeActivationImpl(obj), ForkNodeActivation(obj)
+ForkNodeActivationImpl::ForkNodeActivationImpl(const ForkNodeActivationImpl & obj): ForkNodeActivationImpl()
 {
+	*this = obj;
+}
+
+ForkNodeActivationImpl& ForkNodeActivationImpl::operator=(const ForkNodeActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ControlNodeActivationImpl::operator=(obj);
+	ForkNodeActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ForkNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -85,11 +94,13 @@ ForkNodeActivationImpl::ForkNodeActivationImpl(const ForkNodeActivationImpl & ob
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ForkNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ForkNodeActivationImpl::copy() const
 {
-	std::shared_ptr<ForkNodeActivationImpl> element(new ForkNodeActivationImpl(*this));
+	std::shared_ptr<ForkNodeActivationImpl> element(new ForkNodeActivationImpl());
+	*element =(*this);
 	element->setThisForkNodeActivationPtr(element);
 	return element;
 }

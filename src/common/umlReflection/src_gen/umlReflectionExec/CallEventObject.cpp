@@ -59,20 +59,18 @@
 using namespace UML;
 
 CallEventObject::CallEventObject(std::shared_ptr<uml::CallEvent> _element):
-
 	m_CallEventValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CallEvent());
+{
 }
 
 CallEventObject::CallEventObject(CallEventObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CallEventObject::CallEventObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CallEvent());
 }
 
 CallEventObject::~CallEventObject()
@@ -81,10 +79,18 @@ CallEventObject::~CallEventObject()
 
 std::shared_ptr<ecore::EObject> CallEventObject::copy()
 {
-	std::shared_ptr<CallEventObject> element(new CallEventObject(*this));
+	std::shared_ptr<CallEventObject> element(new CallEventObject());
+	*element=(*this);
 	element->setThisCallEventObjectPtr(element);
 	return element;
 }
+
+CallEventObject& CallEventObject::operator=(const CallEventObject & obj)
+{
+	UML::MessageEventObject::operator=(obj);
+	return *this;
+}
+
 
 void CallEventObject::destroy()
 {	

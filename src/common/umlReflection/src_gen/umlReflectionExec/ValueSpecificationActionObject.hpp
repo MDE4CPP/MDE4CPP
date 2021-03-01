@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ValueSpecificationActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ValueSpecificationActionObject& operator=(ValueSpecificationActionObject const&);
 
 			virtual void destroy();
 			

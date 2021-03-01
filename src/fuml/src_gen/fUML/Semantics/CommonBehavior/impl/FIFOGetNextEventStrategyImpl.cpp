@@ -59,8 +59,17 @@ FIFOGetNextEventStrategyImpl::~FIFOGetNextEventStrategyImpl()
 }
 
 
-FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl(const FIFOGetNextEventStrategyImpl & obj): GetNextEventStrategyImpl(obj), FIFOGetNextEventStrategy(obj)
+FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl(const FIFOGetNextEventStrategyImpl & obj): FIFOGetNextEventStrategyImpl()
 {
+	*this = obj;
+}
+
+FIFOGetNextEventStrategyImpl& FIFOGetNextEventStrategyImpl::operator=(const FIFOGetNextEventStrategyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	GetNextEventStrategyImpl::operator=(obj);
+	FIFOGetNextEventStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FIFOGetNextEventStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -70,11 +79,13 @@ FIFOGetNextEventStrategyImpl::FIFOGetNextEventStrategyImpl(const FIFOGetNextEven
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  FIFOGetNextEventStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject> FIFOGetNextEventStrategyImpl::copy() const
 {
-	std::shared_ptr<FIFOGetNextEventStrategyImpl> element(new FIFOGetNextEventStrategyImpl(*this));
+	std::shared_ptr<FIFOGetNextEventStrategyImpl> element(new FIFOGetNextEventStrategyImpl());
+	*element =(*this);
 	element->setThisFIFOGetNextEventStrategyPtr(element);
 	return element;
 }

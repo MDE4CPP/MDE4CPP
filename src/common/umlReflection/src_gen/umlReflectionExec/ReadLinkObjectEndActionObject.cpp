@@ -93,20 +93,18 @@
 using namespace UML;
 
 ReadLinkObjectEndActionObject::ReadLinkObjectEndActionObject(std::shared_ptr<uml::ReadLinkObjectEndAction> _element):
-
 	m_ReadLinkObjectEndActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReadLinkObjectEndAction());
+{
 }
 
 ReadLinkObjectEndActionObject::ReadLinkObjectEndActionObject(ReadLinkObjectEndActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReadLinkObjectEndActionObject::ReadLinkObjectEndActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReadLinkObjectEndAction());
 }
 
 ReadLinkObjectEndActionObject::~ReadLinkObjectEndActionObject()
@@ -115,10 +113,18 @@ ReadLinkObjectEndActionObject::~ReadLinkObjectEndActionObject()
 
 std::shared_ptr<ecore::EObject> ReadLinkObjectEndActionObject::copy()
 {
-	std::shared_ptr<ReadLinkObjectEndActionObject> element(new ReadLinkObjectEndActionObject(*this));
+	std::shared_ptr<ReadLinkObjectEndActionObject> element(new ReadLinkObjectEndActionObject());
+	*element=(*this);
 	element->setThisReadLinkObjectEndActionObjectPtr(element);
 	return element;
 }
+
+ReadLinkObjectEndActionObject& ReadLinkObjectEndActionObject::operator=(const ReadLinkObjectEndActionObject & obj)
+{
+	UML::ActionObject::operator=(obj);
+	return *this;
+}
+
 
 void ReadLinkObjectEndActionObject::destroy()
 {	

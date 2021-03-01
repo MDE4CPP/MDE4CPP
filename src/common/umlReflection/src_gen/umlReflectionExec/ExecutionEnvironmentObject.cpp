@@ -139,20 +139,18 @@
 using namespace UML;
 
 ExecutionEnvironmentObject::ExecutionEnvironmentObject(std::shared_ptr<uml::ExecutionEnvironment> _element):
-
 	m_ExecutionEnvironmentValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExecutionEnvironment());
+{
 }
 
 ExecutionEnvironmentObject::ExecutionEnvironmentObject(ExecutionEnvironmentObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExecutionEnvironmentObject::ExecutionEnvironmentObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExecutionEnvironment());
 }
 
 ExecutionEnvironmentObject::~ExecutionEnvironmentObject()
@@ -161,10 +159,18 @@ ExecutionEnvironmentObject::~ExecutionEnvironmentObject()
 
 std::shared_ptr<ecore::EObject> ExecutionEnvironmentObject::copy()
 {
-	std::shared_ptr<ExecutionEnvironmentObject> element(new ExecutionEnvironmentObject(*this));
+	std::shared_ptr<ExecutionEnvironmentObject> element(new ExecutionEnvironmentObject());
+	*element=(*this);
 	element->setThisExecutionEnvironmentObjectPtr(element);
 	return element;
 }
+
+ExecutionEnvironmentObject& ExecutionEnvironmentObject::operator=(const ExecutionEnvironmentObject & obj)
+{
+	UML::NodeObject::operator=(obj);
+	return *this;
+}
+
 
 void ExecutionEnvironmentObject::destroy()
 {	

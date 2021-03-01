@@ -112,8 +112,17 @@ InteractionConstraintImpl::InteractionConstraintImpl(std::weak_ptr<uml::Template
 	m_owner = par_owningTemplateParameter;
 }
 
-InteractionConstraintImpl::InteractionConstraintImpl(const InteractionConstraintImpl & obj): ConstraintImpl(obj), InteractionConstraint(obj)
+InteractionConstraintImpl::InteractionConstraintImpl(const InteractionConstraintImpl & obj): InteractionConstraintImpl()
 {
+	*this = obj;
+}
+
+InteractionConstraintImpl& InteractionConstraintImpl::operator=(const InteractionConstraintImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ConstraintImpl::operator=(obj);
+	InteractionConstraint::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InteractionConstraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -133,11 +142,13 @@ InteractionConstraintImpl::InteractionConstraintImpl(const InteractionConstraint
 	}
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InteractionConstraintImpl::copy() const
+std::shared_ptr<ecore::EObject> InteractionConstraintImpl::copy() const
 {
-	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(*this));
+	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl());
+	*element =(*this);
 	element->setThisInteractionConstraintPtr(element);
 	return element;
 }

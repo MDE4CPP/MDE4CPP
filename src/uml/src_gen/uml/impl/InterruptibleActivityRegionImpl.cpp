@@ -99,8 +99,17 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(std::weak_ptr<u
 	m_owner = par_superGroup;
 }
 
-InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj): ActivityGroupImpl(obj), InterruptibleActivityRegion(obj)
+InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj): InterruptibleActivityRegionImpl()
 {
+	*this = obj;
+}
+
+InterruptibleActivityRegionImpl& InterruptibleActivityRegionImpl::operator=(const InterruptibleActivityRegionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActivityGroupImpl::operator=(obj);
+	InterruptibleActivityRegion::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InterruptibleActivityRegion "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -117,11 +126,13 @@ InterruptibleActivityRegionImpl::InterruptibleActivityRegionImpl(const Interrupt
 	{
 		nodeContainer->push_back(std::dynamic_pointer_cast<uml::ActivityNode>(_node->copy()));
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InterruptibleActivityRegionImpl::copy() const
+std::shared_ptr<ecore::EObject> InterruptibleActivityRegionImpl::copy() const
 {
-	std::shared_ptr<InterruptibleActivityRegionImpl> element(new InterruptibleActivityRegionImpl(*this));
+	std::shared_ptr<InterruptibleActivityRegionImpl> element(new InterruptibleActivityRegionImpl());
+	*element =(*this);
 	element->setThisInterruptibleActivityRegionPtr(element);
 	return element;
 }

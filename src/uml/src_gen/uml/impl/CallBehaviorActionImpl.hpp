@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			CallBehaviorActionImpl(const CallBehaviorActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CallBehaviorActionImpl& operator=(CallBehaviorActionImpl const&) = delete;
+			CallBehaviorActionImpl& operator=(CallBehaviorActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

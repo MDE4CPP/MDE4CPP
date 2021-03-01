@@ -171,8 +171,18 @@ InteractionImpl::InteractionImpl(std::weak_ptr<uml::TemplateParameter> par_ownin
 }
 
 
-InteractionImpl::InteractionImpl(const InteractionImpl & obj): BehaviorImpl(obj), InteractionFragmentImpl(obj), Interaction(obj)
+InteractionImpl::InteractionImpl(const InteractionImpl & obj): InteractionImpl()
 {
+	*this = obj;
+}
+
+InteractionImpl& InteractionImpl::operator=(const InteractionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	BehaviorImpl::operator=(obj);
+	InteractionFragmentImpl::operator=(obj);
+	Interaction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Interaction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -237,11 +247,13 @@ InteractionImpl::InteractionImpl(const InteractionImpl & obj): BehaviorImpl(obj)
 		std::cout << "Initialising value Subset: " << "m_message - Subset<uml::Message, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InteractionImpl::copy() const
+std::shared_ptr<ecore::EObject> InteractionImpl::copy() const
 {
-	std::shared_ptr<InteractionImpl> element(new InteractionImpl(*this));
+	std::shared_ptr<InteractionImpl> element(new InteractionImpl());
+	*element =(*this);
 	element->setThisInteractionPtr(element);
 	return element;
 }

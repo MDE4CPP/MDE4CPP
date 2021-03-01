@@ -78,8 +78,17 @@ ReferenceImpl::~ReferenceImpl()
 }
 
 
-ReferenceImpl::ReferenceImpl(const ReferenceImpl & obj): fUML::Semantics::SimpleClassifiers::StructuredValueImpl(obj), Reference(obj)
+ReferenceImpl::ReferenceImpl(const ReferenceImpl & obj): ReferenceImpl()
 {
+	*this = obj;
+}
+
+ReferenceImpl& ReferenceImpl::operator=(const ReferenceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::SimpleClassifiers::StructuredValueImpl::operator=(obj);
+	Reference::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Reference "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -90,11 +99,13 @@ ReferenceImpl::ReferenceImpl(const ReferenceImpl & obj): fUML::Semantics::Simple
 	m_referent  = obj.getReferent();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReferenceImpl::copy() const
+std::shared_ptr<ecore::EObject> ReferenceImpl::copy() const
 {
-	std::shared_ptr<ReferenceImpl> element(new ReferenceImpl(*this));
+	std::shared_ptr<ReferenceImpl> element(new ReferenceImpl());
+	*element =(*this);
 	element->setThisReferencePtr(element);
 	return element;
 }

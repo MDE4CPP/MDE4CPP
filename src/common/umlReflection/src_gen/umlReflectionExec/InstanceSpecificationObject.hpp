@@ -39,6 +39,7 @@ namespace UML
 		    virtual ~InstanceSpecificationObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			InstanceSpecificationObject& operator=(InstanceSpecificationObject const&);
 
 			virtual void destroy();
 			

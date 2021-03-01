@@ -24,9 +24,7 @@ namespace fUML::Semantics::Values
 		public: 
 			LiteralBooleanEvaluationImpl(const LiteralBooleanEvaluationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			LiteralBooleanEvaluationImpl& operator=(LiteralBooleanEvaluationImpl const&) = delete;
+			LiteralBooleanEvaluationImpl& operator=(LiteralBooleanEvaluationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;

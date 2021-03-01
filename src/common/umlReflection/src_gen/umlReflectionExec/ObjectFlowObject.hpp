@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ObjectFlowObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ObjectFlowObject& operator=(ObjectFlowObject const&);
 
 			virtual void destroy();
 			

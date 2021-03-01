@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ConnectableElementTemplateParameterImpl(const ConnectableElementTemplateParameterImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ConnectableElementTemplateParameterImpl& operator=(ConnectableElementTemplateParameterImpl const&) = delete;
+			ConnectableElementTemplateParameterImpl& operator=(ConnectableElementTemplateParameterImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

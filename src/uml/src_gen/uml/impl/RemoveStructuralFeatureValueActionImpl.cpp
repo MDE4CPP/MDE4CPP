@@ -110,8 +110,17 @@ RemoveStructuralFeatureValueActionImpl::RemoveStructuralFeatureValueActionImpl(s
 	m_owner = par_owner;
 }
 
-RemoveStructuralFeatureValueActionImpl::RemoveStructuralFeatureValueActionImpl(const RemoveStructuralFeatureValueActionImpl & obj): WriteStructuralFeatureActionImpl(obj), RemoveStructuralFeatureValueAction(obj)
+RemoveStructuralFeatureValueActionImpl::RemoveStructuralFeatureValueActionImpl(const RemoveStructuralFeatureValueActionImpl & obj): RemoveStructuralFeatureValueActionImpl()
 {
+	*this = obj;
+}
+
+RemoveStructuralFeatureValueActionImpl& RemoveStructuralFeatureValueActionImpl::operator=(const RemoveStructuralFeatureValueActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	WriteStructuralFeatureActionImpl::operator=(obj);
+	RemoveStructuralFeatureValueAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy RemoveStructuralFeatureValueAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -127,11 +136,13 @@ RemoveStructuralFeatureValueActionImpl::RemoveStructuralFeatureValueActionImpl(c
 		m_removeAt = std::dynamic_pointer_cast<uml::InputPin>(obj.getRemoveAt()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  RemoveStructuralFeatureValueActionImpl::copy() const
+std::shared_ptr<ecore::EObject> RemoveStructuralFeatureValueActionImpl::copy() const
 {
-	std::shared_ptr<RemoveStructuralFeatureValueActionImpl> element(new RemoveStructuralFeatureValueActionImpl(*this));
+	std::shared_ptr<RemoveStructuralFeatureValueActionImpl> element(new RemoveStructuralFeatureValueActionImpl());
+	*element =(*this);
 	element->setThisRemoveStructuralFeatureValueActionPtr(element);
 	return element;
 }

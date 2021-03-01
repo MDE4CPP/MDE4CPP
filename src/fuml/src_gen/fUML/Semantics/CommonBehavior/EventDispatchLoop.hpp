@@ -48,8 +48,6 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public:
  			EventDispatchLoop(const EventDispatchLoop &) {}
-			EventDispatchLoop& operator=(EventDispatchLoop const&) = delete;
-
 		protected:
 			EventDispatchLoop(){}
 

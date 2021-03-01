@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			StateMachineImpl(const StateMachineImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			StateMachineImpl& operator=(StateMachineImpl const&) = delete;
+			StateMachineImpl& operator=(StateMachineImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

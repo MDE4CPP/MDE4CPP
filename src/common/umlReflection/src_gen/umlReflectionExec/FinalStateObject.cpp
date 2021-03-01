@@ -100,20 +100,18 @@
 using namespace UML;
 
 FinalStateObject::FinalStateObject(std::shared_ptr<uml::FinalState> _element):
-
 	m_FinalStateValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_FinalState());
+{
 }
 
 FinalStateObject::FinalStateObject(FinalStateObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 FinalStateObject::FinalStateObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_FinalState());
 }
 
 FinalStateObject::~FinalStateObject()
@@ -122,10 +120,18 @@ FinalStateObject::~FinalStateObject()
 
 std::shared_ptr<ecore::EObject> FinalStateObject::copy()
 {
-	std::shared_ptr<FinalStateObject> element(new FinalStateObject(*this));
+	std::shared_ptr<FinalStateObject> element(new FinalStateObject());
+	*element=(*this);
 	element->setThisFinalStateObjectPtr(element);
 	return element;
 }
+
+FinalStateObject& FinalStateObject::operator=(const FinalStateObject & obj)
+{
+	UML::StateObject::operator=(obj);
+	return *this;
+}
+
 
 void FinalStateObject::destroy()
 {	

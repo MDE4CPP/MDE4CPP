@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ReplyActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ReplyActionObject& operator=(ReplyActionObject const&);
 
 			virtual void destroy();
 			

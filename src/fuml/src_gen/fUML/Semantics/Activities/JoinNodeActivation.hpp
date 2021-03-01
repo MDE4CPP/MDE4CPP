@@ -59,8 +59,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			JoinNodeActivation(const JoinNodeActivation &) {}
-			JoinNodeActivation& operator=(JoinNodeActivation const&) = delete;
-
 		protected:
 			JoinNodeActivation(){}
 

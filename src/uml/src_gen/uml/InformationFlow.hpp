@@ -72,8 +72,6 @@ namespace uml
 	{
 		public:
  			InformationFlow(const InformationFlow &) {}
-			InformationFlow& operator=(InformationFlow const&) = delete;
-
 		protected:
 			InformationFlow(){}
 

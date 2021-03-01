@@ -67,8 +67,6 @@ namespace uml
 	{
 		public:
  			Continuation(const Continuation &) {}
-			Continuation& operator=(Continuation const&) = delete;
-
 		protected:
 			Continuation(){}
 

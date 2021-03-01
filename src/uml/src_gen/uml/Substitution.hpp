@@ -64,11 +64,8 @@ namespace uml
 	{
 		public:
  			Substitution(const Substitution &) {}
-			Substitution& operator=(Substitution const&) = delete;
-
 		protected:
 			Substitution(){}
-
 			//Additional constructors for the containments back reference
 			Substitution(std::weak_ptr<uml::Namespace> par_namespace);
 

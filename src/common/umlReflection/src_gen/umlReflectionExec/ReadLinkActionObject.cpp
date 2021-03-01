@@ -93,20 +93,18 @@
 using namespace UML;
 
 ReadLinkActionObject::ReadLinkActionObject(std::shared_ptr<uml::ReadLinkAction> _element):
-
 	m_ReadLinkActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReadLinkAction());
+{
 }
 
 ReadLinkActionObject::ReadLinkActionObject(ReadLinkActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReadLinkActionObject::ReadLinkActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReadLinkAction());
 }
 
 ReadLinkActionObject::~ReadLinkActionObject()
@@ -115,10 +113,18 @@ ReadLinkActionObject::~ReadLinkActionObject()
 
 std::shared_ptr<ecore::EObject> ReadLinkActionObject::copy()
 {
-	std::shared_ptr<ReadLinkActionObject> element(new ReadLinkActionObject(*this));
+	std::shared_ptr<ReadLinkActionObject> element(new ReadLinkActionObject());
+	*element=(*this);
 	element->setThisReadLinkActionObjectPtr(element);
 	return element;
 }
+
+ReadLinkActionObject& ReadLinkActionObject::operator=(const ReadLinkActionObject & obj)
+{
+	UML::LinkActionObject::operator=(obj);
+	return *this;
+}
+
 
 void ReadLinkActionObject::destroy()
 {	

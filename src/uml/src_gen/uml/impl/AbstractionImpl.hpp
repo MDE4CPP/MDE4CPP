@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			AbstractionImpl(const AbstractionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			AbstractionImpl& operator=(AbstractionImpl const&) = delete;
+			AbstractionImpl& operator=(AbstractionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

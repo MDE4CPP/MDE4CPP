@@ -48,8 +48,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ClassifierBehaviorExecutionActivity(const ClassifierBehaviorExecutionActivity &) {}
-			ClassifierBehaviorExecutionActivity& operator=(ClassifierBehaviorExecutionActivity const&) = delete;
-
 		protected:
 			ClassifierBehaviorExecutionActivity(){}
 

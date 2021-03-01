@@ -174,8 +174,17 @@ OutputPinImpl::OutputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction> pa
 	m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
 }
 
-OutputPinImpl::OutputPinImpl(const OutputPinImpl & obj): PinImpl(obj), OutputPin(obj)
+OutputPinImpl::OutputPinImpl(const OutputPinImpl & obj): OutputPinImpl()
 {
+	*this = obj;
+}
+
+OutputPinImpl& OutputPinImpl::operator=(const OutputPinImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PinImpl::operator=(obj);
+	OutputPin::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OutputPin "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -193,11 +202,13 @@ OutputPinImpl::OutputPinImpl(const OutputPinImpl & obj): PinImpl(obj), OutputPin
 	m_writeStructuralFeatureAction  = obj.getWriteStructuralFeatureAction();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  OutputPinImpl::copy() const
+std::shared_ptr<ecore::EObject> OutputPinImpl::copy() const
 {
-	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(*this));
+	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl());
+	*element =(*this);
 	element->setThisOutputPinPtr(element);
 	return element;
 }

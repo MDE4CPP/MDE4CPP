@@ -52,8 +52,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			AcceptEventActionEventAccepter(const AcceptEventActionEventAccepter &) {}
-			AcceptEventActionEventAccepter& operator=(AcceptEventActionEventAccepter const&) = delete;
-
 		protected:
 			AcceptEventActionEventAccepter(){}
 

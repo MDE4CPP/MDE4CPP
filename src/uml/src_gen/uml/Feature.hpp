@@ -61,8 +61,6 @@ namespace uml
 	{
 		public:
  			Feature(const Feature &) {}
-			Feature& operator=(Feature const&) = delete;
-
 		protected:
 			Feature(){}
 

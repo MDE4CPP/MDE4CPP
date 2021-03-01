@@ -68,8 +68,17 @@ LiteralBooleanEvaluationImpl::~LiteralBooleanEvaluationImpl()
 }
 
 
-LiteralBooleanEvaluationImpl::LiteralBooleanEvaluationImpl(const LiteralBooleanEvaluationImpl & obj): LiteralEvaluationImpl(obj), LiteralBooleanEvaluation(obj)
+LiteralBooleanEvaluationImpl::LiteralBooleanEvaluationImpl(const LiteralBooleanEvaluationImpl & obj): LiteralBooleanEvaluationImpl()
 {
+	*this = obj;
+}
+
+LiteralBooleanEvaluationImpl& LiteralBooleanEvaluationImpl::operator=(const LiteralBooleanEvaluationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	LiteralEvaluationImpl::operator=(obj);
+	LiteralBooleanEvaluation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralBooleanEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -79,11 +88,13 @@ LiteralBooleanEvaluationImpl::LiteralBooleanEvaluationImpl(const LiteralBooleanE
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LiteralBooleanEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject> LiteralBooleanEvaluationImpl::copy() const
 {
-	std::shared_ptr<LiteralBooleanEvaluationImpl> element(new LiteralBooleanEvaluationImpl(*this));
+	std::shared_ptr<LiteralBooleanEvaluationImpl> element(new LiteralBooleanEvaluationImpl());
+	*element =(*this);
 	element->setThisLiteralBooleanEvaluationPtr(element);
 	return element;
 }

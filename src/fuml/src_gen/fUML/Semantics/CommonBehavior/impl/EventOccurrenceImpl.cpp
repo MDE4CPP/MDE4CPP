@@ -64,9 +64,17 @@ EventOccurrenceImpl::~EventOccurrenceImpl()
 }
 
 
-EventOccurrenceImpl::EventOccurrenceImpl(const EventOccurrenceImpl & obj): ecore::EModelElementImpl(obj),
-EventOccurrence(obj)
+EventOccurrenceImpl::EventOccurrenceImpl(const EventOccurrenceImpl & obj): EventOccurrenceImpl()
 {
+	*this = obj;
+}
+
+EventOccurrenceImpl& EventOccurrenceImpl::operator=(const EventOccurrenceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	EventOccurrence::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EventOccurrence "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -77,11 +85,13 @@ EventOccurrence(obj)
 	m_target  = obj.getTarget();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EventOccurrenceImpl::copy() const
+std::shared_ptr<ecore::EObject> EventOccurrenceImpl::copy() const
 {
-	std::shared_ptr<EventOccurrenceImpl> element(new EventOccurrenceImpl(*this));
+	std::shared_ptr<EventOccurrenceImpl> element(new EventOccurrenceImpl());
+	*element =(*this);
 	element->setThisEventOccurrencePtr(element);
 	return element;
 }

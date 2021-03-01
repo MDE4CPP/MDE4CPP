@@ -110,8 +110,17 @@ WriteStructuralFeatureActionImpl::WriteStructuralFeatureActionImpl(std::weak_ptr
 	m_owner = par_owner;
 }
 
-WriteStructuralFeatureActionImpl::WriteStructuralFeatureActionImpl(const WriteStructuralFeatureActionImpl & obj): StructuralFeatureActionImpl(obj), WriteStructuralFeatureAction(obj)
+WriteStructuralFeatureActionImpl::WriteStructuralFeatureActionImpl(const WriteStructuralFeatureActionImpl & obj): WriteStructuralFeatureActionImpl()
 {
+	*this = obj;
+}
+
+WriteStructuralFeatureActionImpl& WriteStructuralFeatureActionImpl::operator=(const WriteStructuralFeatureActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuralFeatureActionImpl::operator=(obj);
+	WriteStructuralFeatureAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy WriteStructuralFeatureAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -131,11 +140,13 @@ WriteStructuralFeatureActionImpl::WriteStructuralFeatureActionImpl(const WriteSt
 	}
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  WriteStructuralFeatureActionImpl::copy() const
+std::shared_ptr<ecore::EObject> WriteStructuralFeatureActionImpl::copy() const
 {
-	std::shared_ptr<WriteStructuralFeatureActionImpl> element(new WriteStructuralFeatureActionImpl(*this));
+	std::shared_ptr<WriteStructuralFeatureActionImpl> element(new WriteStructuralFeatureActionImpl());
+	*element =(*this);
 	element->setThisWriteStructuralFeatureActionPtr(element);
 	return element;
 }

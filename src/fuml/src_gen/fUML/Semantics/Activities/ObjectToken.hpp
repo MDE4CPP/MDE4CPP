@@ -56,8 +56,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ObjectToken(const ObjectToken &) {}
-			ObjectToken& operator=(ObjectToken const&) = delete;
-
 		protected:
 			ObjectToken(){}
 

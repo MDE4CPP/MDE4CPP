@@ -48,20 +48,18 @@
 using namespace UML;
 
 SlotObject::SlotObject(std::shared_ptr<uml::Slot> _element):
-
 	m_SlotValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Slot());
+{
 }
 
 SlotObject::SlotObject(SlotObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 SlotObject::SlotObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Slot());
 }
 
 SlotObject::~SlotObject()
@@ -70,10 +68,18 @@ SlotObject::~SlotObject()
 
 std::shared_ptr<ecore::EObject> SlotObject::copy()
 {
-	std::shared_ptr<SlotObject> element(new SlotObject(*this));
+	std::shared_ptr<SlotObject> element(new SlotObject());
+	*element=(*this);
 	element->setThisSlotObjectPtr(element);
 	return element;
 }
+
+SlotObject& SlotObject::operator=(const SlotObject & obj)
+{
+	UML::ElementObject::operator=(obj);
+	return *this;
+}
+
 
 void SlotObject::destroy()
 {	

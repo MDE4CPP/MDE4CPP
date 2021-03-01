@@ -24,9 +24,7 @@ namespace uml
 		public: 
 			InformationFlowImpl(const InformationFlowImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			InformationFlowImpl& operator=(InformationFlowImpl const&) = delete;
+			InformationFlowImpl& operator=(InformationFlowImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

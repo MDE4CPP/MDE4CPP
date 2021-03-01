@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			LinkEndDataImpl(const LinkEndDataImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			LinkEndDataImpl& operator=(LinkEndDataImpl const&) = delete;
+			LinkEndDataImpl& operator=(LinkEndDataImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

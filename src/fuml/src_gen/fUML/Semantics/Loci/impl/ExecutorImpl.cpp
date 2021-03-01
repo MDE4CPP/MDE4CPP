@@ -83,9 +83,17 @@ ExecutorImpl::ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus
 	m_locus = par_locus;
 }
 
-ExecutorImpl::ExecutorImpl(const ExecutorImpl & obj): ecore::EModelElementImpl(obj),
-Executor(obj)
+ExecutorImpl::ExecutorImpl(const ExecutorImpl & obj): ExecutorImpl()
 {
+	*this = obj;
+}
+
+ExecutorImpl& ExecutorImpl::operator=(const ExecutorImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	Executor::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Executor "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -96,11 +104,13 @@ Executor(obj)
 	m_locus  = obj.getLocus();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExecutorImpl::copy() const
+std::shared_ptr<ecore::EObject> ExecutorImpl::copy() const
 {
-	std::shared_ptr<ExecutorImpl> element(new ExecutorImpl(*this));
+	std::shared_ptr<ExecutorImpl> element(new ExecutorImpl());
+	*element =(*this);
 	element->setThisExecutorPtr(element);
 	return element;
 }

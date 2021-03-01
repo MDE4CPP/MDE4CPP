@@ -65,8 +65,6 @@ namespace uml
 	{
 		public:
  			LiteralNull(const LiteralNull &) {}
-			LiteralNull& operator=(LiteralNull const&) = delete;
-
 		protected:
 			LiteralNull(){}
 

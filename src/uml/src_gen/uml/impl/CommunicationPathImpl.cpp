@@ -127,8 +127,17 @@ CommunicationPathImpl::CommunicationPathImpl(std::weak_ptr<uml::TemplateParamete
 }
 
 
-CommunicationPathImpl::CommunicationPathImpl(const CommunicationPathImpl & obj): AssociationImpl(obj), CommunicationPath(obj)
+CommunicationPathImpl::CommunicationPathImpl(const CommunicationPathImpl & obj): CommunicationPathImpl()
 {
+	*this = obj;
+}
+
+CommunicationPathImpl& CommunicationPathImpl::operator=(const CommunicationPathImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	AssociationImpl::operator=(obj);
+	CommunicationPath::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CommunicationPath "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -138,11 +147,13 @@ CommunicationPathImpl::CommunicationPathImpl(const CommunicationPathImpl & obj):
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CommunicationPathImpl::copy() const
+std::shared_ptr<ecore::EObject> CommunicationPathImpl::copy() const
 {
-	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(*this));
+	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl());
+	*element =(*this);
 	element->setThisCommunicationPathPtr(element);
 	return element;
 }

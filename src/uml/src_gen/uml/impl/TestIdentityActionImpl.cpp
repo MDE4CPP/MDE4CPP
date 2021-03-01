@@ -109,8 +109,17 @@ TestIdentityActionImpl::TestIdentityActionImpl(std::weak_ptr<uml::Element> par_o
 	m_owner = par_owner;
 }
 
-TestIdentityActionImpl::TestIdentityActionImpl(const TestIdentityActionImpl & obj): ActionImpl(obj), TestIdentityAction(obj)
+TestIdentityActionImpl::TestIdentityActionImpl(const TestIdentityActionImpl & obj): TestIdentityActionImpl()
 {
+	*this = obj;
+}
+
+TestIdentityActionImpl& TestIdentityActionImpl::operator=(const TestIdentityActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	TestIdentityAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TestIdentityAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -135,11 +144,13 @@ TestIdentityActionImpl::TestIdentityActionImpl(const TestIdentityActionImpl & ob
 	
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TestIdentityActionImpl::copy() const
+std::shared_ptr<ecore::EObject> TestIdentityActionImpl::copy() const
 {
-	std::shared_ptr<TestIdentityActionImpl> element(new TestIdentityActionImpl(*this));
+	std::shared_ptr<TestIdentityActionImpl> element(new TestIdentityActionImpl());
+	*element =(*this);
 	element->setThisTestIdentityActionPtr(element);
 	return element;
 }

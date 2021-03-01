@@ -24,9 +24,7 @@ namespace fUML::Semantics::Values
 		public: 
 			ValueImpl(const ValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ValueImpl& operator=(ValueImpl const&) = delete;
+			ValueImpl& operator=(ValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;

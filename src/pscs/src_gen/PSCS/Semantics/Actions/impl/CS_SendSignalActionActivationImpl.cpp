@@ -63,8 +63,8 @@
 //Factories an Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -95,8 +95,17 @@ CS_SendSignalActionActivationImpl::CS_SendSignalActionActivationImpl(std::weak_p
 	m_group = par_group;
 }
 
-CS_SendSignalActionActivationImpl::CS_SendSignalActionActivationImpl(const CS_SendSignalActionActivationImpl & obj): fUML::Semantics::Actions::SendSignalActionActivationImpl(obj), CS_SendSignalActionActivation(obj)
+CS_SendSignalActionActivationImpl::CS_SendSignalActionActivationImpl(const CS_SendSignalActionActivationImpl & obj): CS_SendSignalActionActivationImpl()
 {
+	*this = obj;
+}
+
+CS_SendSignalActionActivationImpl& CS_SendSignalActionActivationImpl::operator=(const CS_SendSignalActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Actions::SendSignalActionActivationImpl::operator=(obj);
+	CS_SendSignalActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_SendSignalActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -106,11 +115,13 @@ CS_SendSignalActionActivationImpl::CS_SendSignalActionActivationImpl(const CS_Se
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_SendSignalActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_SendSignalActionActivationImpl::copy() const
 {
-	std::shared_ptr<CS_SendSignalActionActivationImpl> element(new CS_SendSignalActionActivationImpl(*this));
+	std::shared_ptr<CS_SendSignalActionActivationImpl> element(new CS_SendSignalActionActivationImpl());
+	*element =(*this);
 	element->setThisCS_SendSignalActionActivationPtr(element);
 	return element;
 }

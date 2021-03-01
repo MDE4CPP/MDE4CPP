@@ -66,8 +66,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ReadStructuralFeatureActionActivation(const ReadStructuralFeatureActionActivation &) {}
-			ReadStructuralFeatureActionActivation& operator=(ReadStructuralFeatureActionActivation const&) = delete;
-
 		protected:
 			ReadStructuralFeatureActionActivation(){}
 

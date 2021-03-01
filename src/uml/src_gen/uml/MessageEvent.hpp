@@ -62,8 +62,6 @@ namespace uml
 	{
 		public:
  			MessageEvent(const MessageEvent &) {}
-			MessageEvent& operator=(MessageEvent const&) = delete;
-
 		protected:
 			MessageEvent(){}
 

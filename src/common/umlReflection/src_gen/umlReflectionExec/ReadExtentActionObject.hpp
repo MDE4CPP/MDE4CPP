@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ReadExtentActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ReadExtentActionObject& operator=(ReadExtentActionObject const&);
 
 			virtual void destroy();
 			

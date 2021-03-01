@@ -78,8 +78,17 @@ ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivati
 	m_group = par_group;
 }
 
-ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivationImpl(const ReadIsClassifiedObjectActionActivationImpl & obj): ActionActivationImpl(obj), ReadIsClassifiedObjectActionActivation(obj)
+ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivationImpl(const ReadIsClassifiedObjectActionActivationImpl & obj): ReadIsClassifiedObjectActionActivationImpl()
 {
+	*this = obj;
+}
+
+ReadIsClassifiedObjectActionActivationImpl& ReadIsClassifiedObjectActionActivationImpl::operator=(const ReadIsClassifiedObjectActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	ReadIsClassifiedObjectActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReadIsClassifiedObjectActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -89,11 +98,13 @@ ReadIsClassifiedObjectActionActivationImpl::ReadIsClassifiedObjectActionActivati
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReadIsClassifiedObjectActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ReadIsClassifiedObjectActionActivationImpl::copy() const
 {
-	std::shared_ptr<ReadIsClassifiedObjectActionActivationImpl> element(new ReadIsClassifiedObjectActionActivationImpl(*this));
+	std::shared_ptr<ReadIsClassifiedObjectActionActivationImpl> element(new ReadIsClassifiedObjectActionActivationImpl());
+	*element =(*this);
 	element->setThisReadIsClassifiedObjectActionActivationPtr(element);
 	return element;
 }

@@ -70,8 +70,17 @@ LinkEndDataImpl::LinkEndDataImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj): ElementImpl(obj), LinkEndData(obj)
+LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj): LinkEndDataImpl()
 {
+	*this = obj;
+}
+
+LinkEndDataImpl& LinkEndDataImpl::operator=(const LinkEndDataImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	LinkEndData::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LinkEndData "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -94,11 +103,13 @@ LinkEndDataImpl::LinkEndDataImpl(const LinkEndDataImpl & obj): ElementImpl(obj),
 		std::cout << "Initialising value Subset: " << "m_qualifier - Subset<uml::QualifierValue, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LinkEndDataImpl::copy() const
+std::shared_ptr<ecore::EObject> LinkEndDataImpl::copy() const
 {
-	std::shared_ptr<LinkEndDataImpl> element(new LinkEndDataImpl(*this));
+	std::shared_ptr<LinkEndDataImpl> element(new LinkEndDataImpl());
+	*element =(*this);
 	element->setThisLinkEndDataPtr(element);
 	return element;
 }

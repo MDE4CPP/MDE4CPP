@@ -61,8 +61,17 @@ AcceptEventActionEventAccepterImpl::~AcceptEventActionEventAccepterImpl()
 }
 
 
-AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl(const AcceptEventActionEventAccepterImpl & obj): fUML::Semantics::CommonBehavior::EventAccepterImpl(obj), AcceptEventActionEventAccepter(obj)
+AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl(const AcceptEventActionEventAccepterImpl & obj): AcceptEventActionEventAccepterImpl()
 {
+	*this = obj;
+}
+
+AcceptEventActionEventAccepterImpl& AcceptEventActionEventAccepterImpl::operator=(const AcceptEventActionEventAccepterImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::CommonBehavior::EventAccepterImpl::operator=(obj);
+	AcceptEventActionEventAccepter::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AcceptEventActionEventAccepter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -73,11 +82,13 @@ AcceptEventActionEventAccepterImpl::AcceptEventActionEventAccepterImpl(const Acc
 	m_actionActivation  = obj.getActionActivation();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  AcceptEventActionEventAccepterImpl::copy() const
+std::shared_ptr<ecore::EObject> AcceptEventActionEventAccepterImpl::copy() const
 {
-	std::shared_ptr<AcceptEventActionEventAccepterImpl> element(new AcceptEventActionEventAccepterImpl(*this));
+	std::shared_ptr<AcceptEventActionEventAccepterImpl> element(new AcceptEventActionEventAccepterImpl());
+	*element =(*this);
 	element->setThisAcceptEventActionEventAccepterPtr(element);
 	return element;
 }

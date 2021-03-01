@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ProfileApplicationImpl(const ProfileApplicationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ProfileApplicationImpl& operator=(ProfileApplicationImpl const&) = delete;
+			ProfileApplicationImpl& operator=(ProfileApplicationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

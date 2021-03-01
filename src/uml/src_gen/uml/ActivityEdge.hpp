@@ -72,11 +72,8 @@ namespace uml
 	{
 		public:
  			ActivityEdge(const ActivityEdge &) {}
-			ActivityEdge& operator=(ActivityEdge const&) = delete;
-
 		protected:
 			ActivityEdge(){}
-
 			//Additional constructors for the containments back reference
 			ActivityEdge(std::weak_ptr<uml::Activity> par_activity);
 

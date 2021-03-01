@@ -99,8 +99,18 @@ DependencyImpl::DependencyImpl(std::weak_ptr<uml::TemplateParameter> par_owningT
 	m_owner = par_owningTemplateParameter;
 }
 
-DependencyImpl::DependencyImpl(const DependencyImpl & obj): DirectedRelationshipImpl(obj), PackageableElementImpl(obj), Dependency(obj)
+DependencyImpl::DependencyImpl(const DependencyImpl & obj): DependencyImpl()
 {
+	*this = obj;
+}
+
+DependencyImpl& DependencyImpl::operator=(const DependencyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PackageableElementImpl::operator=(obj);
+	DirectedRelationshipImpl::operator=(obj);
+	Dependency::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Dependency "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -120,11 +130,13 @@ DependencyImpl::DependencyImpl(const DependencyImpl & obj): DirectedRelationship
 	{
 		supplierContainer->push_back(std::dynamic_pointer_cast<uml::NamedElement>(_supplier->copy()));
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DependencyImpl::copy() const
+std::shared_ptr<ecore::EObject> DependencyImpl::copy() const
 {
-	std::shared_ptr<DependencyImpl> element(new DependencyImpl(*this));
+	std::shared_ptr<DependencyImpl> element(new DependencyImpl());
+	*element =(*this);
 	element->setThisDependencyPtr(element);
 	return element;
 }

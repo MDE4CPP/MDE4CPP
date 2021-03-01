@@ -72,8 +72,17 @@ CompoundValueImpl::~CompoundValueImpl()
 }
 
 
-CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj): StructuredValueImpl(obj), CompoundValue(obj)
+CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj): CompoundValueImpl()
 {
+	*this = obj;
+}
+
+CompoundValueImpl& CompoundValueImpl::operator=(const CompoundValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuredValueImpl::operator=(obj);
+	CompoundValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CompoundValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -89,11 +98,13 @@ CompoundValueImpl::CompoundValueImpl(const CompoundValueImpl & obj): StructuredV
 		featureValuesContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(_featureValues->copy()));
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CompoundValueImpl::copy() const
+std::shared_ptr<ecore::EObject> CompoundValueImpl::copy() const
 {
-	std::shared_ptr<CompoundValueImpl> element(new CompoundValueImpl(*this));
+	std::shared_ptr<CompoundValueImpl> element(new CompoundValueImpl());
+	*element =(*this);
 	element->setThisCompoundValuePtr(element);
 	return element;
 }

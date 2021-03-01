@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			GateImpl(const GateImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			GateImpl& operator=(GateImpl const&) = delete;
+			GateImpl& operator=(GateImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

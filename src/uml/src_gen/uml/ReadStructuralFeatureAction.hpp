@@ -76,8 +76,6 @@ namespace uml
 	{
 		public:
  			ReadStructuralFeatureAction(const ReadStructuralFeatureAction &) {}
-			ReadStructuralFeatureAction& operator=(ReadStructuralFeatureAction const&) = delete;
-
 		protected:
 			ReadStructuralFeatureAction(){}
 

@@ -72,8 +72,17 @@ DataValueImpl::~DataValueImpl()
 }
 
 
-DataValueImpl::DataValueImpl(const DataValueImpl & obj): CompoundValueImpl(obj), DataValue(obj)
+DataValueImpl::DataValueImpl(const DataValueImpl & obj): DataValueImpl()
 {
+	*this = obj;
+}
+
+DataValueImpl& DataValueImpl::operator=(const DataValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	CompoundValueImpl::operator=(obj);
+	DataValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DataValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -84,11 +93,13 @@ DataValueImpl::DataValueImpl(const DataValueImpl & obj): CompoundValueImpl(obj),
 	m_type  = obj.getType();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DataValueImpl::copy() const
+std::shared_ptr<ecore::EObject> DataValueImpl::copy() const
 {
-	std::shared_ptr<DataValueImpl> element(new DataValueImpl(*this));
+	std::shared_ptr<DataValueImpl> element(new DataValueImpl());
+	*element =(*this);
 	element->setThisDataValuePtr(element);
 	return element;
 }

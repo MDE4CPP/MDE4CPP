@@ -65,8 +65,6 @@ namespace uml
 	{
 		public:
  			StructuralFeature(const StructuralFeature &) {}
-			StructuralFeature& operator=(StructuralFeature const&) = delete;
-
 		protected:
 			StructuralFeature(){}
 

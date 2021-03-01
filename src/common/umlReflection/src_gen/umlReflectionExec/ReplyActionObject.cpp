@@ -93,20 +93,18 @@
 using namespace UML;
 
 ReplyActionObject::ReplyActionObject(std::shared_ptr<uml::ReplyAction> _element):
-
 	m_ReplyActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReplyAction());
+{
 }
 
 ReplyActionObject::ReplyActionObject(ReplyActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReplyActionObject::ReplyActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReplyAction());
 }
 
 ReplyActionObject::~ReplyActionObject()
@@ -115,10 +113,18 @@ ReplyActionObject::~ReplyActionObject()
 
 std::shared_ptr<ecore::EObject> ReplyActionObject::copy()
 {
-	std::shared_ptr<ReplyActionObject> element(new ReplyActionObject(*this));
+	std::shared_ptr<ReplyActionObject> element(new ReplyActionObject());
+	*element=(*this);
 	element->setThisReplyActionObjectPtr(element);
 	return element;
 }
+
+ReplyActionObject& ReplyActionObject::operator=(const ReplyActionObject & obj)
+{
+	UML::ActionObject::operator=(obj);
+	return *this;
+}
+
 
 void ReplyActionObject::destroy()
 {	

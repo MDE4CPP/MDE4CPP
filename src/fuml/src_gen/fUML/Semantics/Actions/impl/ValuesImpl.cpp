@@ -61,9 +61,17 @@ ValuesImpl::~ValuesImpl()
 }
 
 
-ValuesImpl::ValuesImpl(const ValuesImpl & obj): ecore::EModelElementImpl(obj),
-Values(obj)
+ValuesImpl::ValuesImpl(const ValuesImpl & obj): ValuesImpl()
 {
+	*this = obj;
+}
+
+ValuesImpl& ValuesImpl::operator=(const ValuesImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	Values::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Values "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -75,11 +83,13 @@ Values(obj)
 	m_values.reset(new Bag<fUML::Semantics::Values::Value>(*(obj.getValues().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ValuesImpl::copy() const
+std::shared_ptr<ecore::EObject> ValuesImpl::copy() const
 {
-	std::shared_ptr<ValuesImpl> element(new ValuesImpl(*this));
+	std::shared_ptr<ValuesImpl> element(new ValuesImpl());
+	*element =(*this);
 	element->setThisValuesPtr(element);
 	return element;
 }

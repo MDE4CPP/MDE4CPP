@@ -68,20 +68,18 @@
 using namespace UML;
 
 RedefinableTemplateSignatureObject::RedefinableTemplateSignatureObject(std::shared_ptr<uml::RedefinableTemplateSignature> _element):
-
 	m_RedefinableTemplateSignatureValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_RedefinableTemplateSignature());
+{
 }
 
 RedefinableTemplateSignatureObject::RedefinableTemplateSignatureObject(RedefinableTemplateSignatureObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 RedefinableTemplateSignatureObject::RedefinableTemplateSignatureObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_RedefinableTemplateSignature());
 }
 
 RedefinableTemplateSignatureObject::~RedefinableTemplateSignatureObject()
@@ -90,10 +88,19 @@ RedefinableTemplateSignatureObject::~RedefinableTemplateSignatureObject()
 
 std::shared_ptr<ecore::EObject> RedefinableTemplateSignatureObject::copy()
 {
-	std::shared_ptr<RedefinableTemplateSignatureObject> element(new RedefinableTemplateSignatureObject(*this));
+	std::shared_ptr<RedefinableTemplateSignatureObject> element(new RedefinableTemplateSignatureObject());
+	*element=(*this);
 	element->setThisRedefinableTemplateSignatureObjectPtr(element);
 	return element;
 }
+
+RedefinableTemplateSignatureObject& RedefinableTemplateSignatureObject::operator=(const RedefinableTemplateSignatureObject & obj)
+{
+	UML::RedefinableElementObject::operator=(obj);
+	UML::TemplateSignatureObject::operator=(obj);
+	return *this;
+}
+
 
 void RedefinableTemplateSignatureObject::destroy()
 {	

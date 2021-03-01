@@ -77,8 +77,6 @@ namespace uml
 	{
 		public:
  			EncapsulatedClassifier(const EncapsulatedClassifier &) {}
-			EncapsulatedClassifier& operator=(EncapsulatedClassifier const&) = delete;
-
 		protected:
 			EncapsulatedClassifier(){}
 

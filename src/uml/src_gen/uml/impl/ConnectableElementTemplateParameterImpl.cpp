@@ -77,8 +77,17 @@ ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl
 	m_owner = par_signature;
 }
 
-ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl(const ConnectableElementTemplateParameterImpl & obj): TemplateParameterImpl(obj), ConnectableElementTemplateParameter(obj)
+ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl(const ConnectableElementTemplateParameterImpl & obj): ConnectableElementTemplateParameterImpl()
 {
+	*this = obj;
+}
+
+ConnectableElementTemplateParameterImpl& ConnectableElementTemplateParameterImpl::operator=(const ConnectableElementTemplateParameterImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	TemplateParameterImpl::operator=(obj);
+	ConnectableElementTemplateParameter::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ConnectableElementTemplateParameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -88,11 +97,13 @@ ConnectableElementTemplateParameterImpl::ConnectableElementTemplateParameterImpl
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ConnectableElementTemplateParameterImpl::copy() const
+std::shared_ptr<ecore::EObject> ConnectableElementTemplateParameterImpl::copy() const
 {
-	std::shared_ptr<ConnectableElementTemplateParameterImpl> element(new ConnectableElementTemplateParameterImpl(*this));
+	std::shared_ptr<ConnectableElementTemplateParameterImpl> element(new ConnectableElementTemplateParameterImpl());
+	*element =(*this);
 	element->setThisConnectableElementTemplateParameterPtr(element);
 	return element;
 }

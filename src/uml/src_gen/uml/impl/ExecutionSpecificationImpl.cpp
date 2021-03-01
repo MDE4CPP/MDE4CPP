@@ -101,8 +101,17 @@ ExecutionSpecificationImpl::ExecutionSpecificationImpl(std::weak_ptr<uml::Elemen
 	m_owner = par_owner;
 }
 
-ExecutionSpecificationImpl::ExecutionSpecificationImpl(const ExecutionSpecificationImpl & obj): InteractionFragmentImpl(obj), ExecutionSpecification(obj)
+ExecutionSpecificationImpl::ExecutionSpecificationImpl(const ExecutionSpecificationImpl & obj): ExecutionSpecificationImpl()
 {
+	*this = obj;
+}
+
+ExecutionSpecificationImpl& ExecutionSpecificationImpl::operator=(const ExecutionSpecificationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	InteractionFragmentImpl::operator=(obj);
+	ExecutionSpecification::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExecutionSpecification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -114,11 +123,13 @@ ExecutionSpecificationImpl::ExecutionSpecificationImpl(const ExecutionSpecificat
 	m_start  = obj.getStart();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExecutionSpecificationImpl::copy() const
+std::shared_ptr<ecore::EObject> ExecutionSpecificationImpl::copy() const
 {
-	std::shared_ptr<ExecutionSpecificationImpl> element(new ExecutionSpecificationImpl(*this));
+	std::shared_ptr<ExecutionSpecificationImpl> element(new ExecutionSpecificationImpl());
+	*element =(*this);
 	element->setThisExecutionSpecificationPtr(element);
 	return element;
 }

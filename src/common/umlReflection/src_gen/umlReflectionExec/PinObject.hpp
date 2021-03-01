@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~PinObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			PinObject& operator=(PinObject const&);
 
 			virtual void destroy();
 			

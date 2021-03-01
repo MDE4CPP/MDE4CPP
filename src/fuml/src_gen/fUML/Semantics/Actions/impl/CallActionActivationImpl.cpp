@@ -94,8 +94,17 @@ CallActionActivationImpl::CallActionActivationImpl(std::weak_ptr<fUML::Semantics
 	m_group = par_group;
 }
 
-CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImpl & obj): InvocationActionActivationImpl(obj), CallActionActivation(obj)
+CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImpl & obj): CallActionActivationImpl()
 {
+	*this = obj;
+}
+
+CallActionActivationImpl& CallActionActivationImpl::operator=(const CallActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	InvocationActionActivationImpl::operator=(obj);
+	CallActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CallActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -112,11 +121,13 @@ CallActionActivationImpl::CallActionActivationImpl(const CallActionActivationImp
 		callExecutionsContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::Execution>(_callExecutions->copy()));
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CallActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> CallActionActivationImpl::copy() const
 {
-	std::shared_ptr<CallActionActivationImpl> element(new CallActionActivationImpl(*this));
+	std::shared_ptr<CallActionActivationImpl> element(new CallActionActivationImpl());
+	*element =(*this);
 	element->setThisCallActionActivationPtr(element);
 	return element;
 }

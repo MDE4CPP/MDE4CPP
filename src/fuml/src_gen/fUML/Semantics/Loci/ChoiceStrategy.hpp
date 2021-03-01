@@ -48,8 +48,6 @@ namespace fUML::Semantics::Loci
 	{
 		public:
  			ChoiceStrategy(const ChoiceStrategy &) {}
-			ChoiceStrategy& operator=(ChoiceStrategy const&) = delete;
-
 		protected:
 			ChoiceStrategy(){}
 

@@ -73,8 +73,6 @@ namespace uml
 	{
 		public:
  			CommunicationPath(const CommunicationPath &) {}
-			CommunicationPath& operator=(CommunicationPath const&) = delete;
-
 		protected:
 			CommunicationPath(){}
 

@@ -64,20 +64,18 @@
 using namespace UML;
 
 TimeConstraintObject::TimeConstraintObject(std::shared_ptr<uml::TimeConstraint> _element):
-
 	m_TimeConstraintValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TimeConstraint());
+{
 }
 
 TimeConstraintObject::TimeConstraintObject(TimeConstraintObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TimeConstraintObject::TimeConstraintObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TimeConstraint());
 }
 
 TimeConstraintObject::~TimeConstraintObject()
@@ -86,10 +84,18 @@ TimeConstraintObject::~TimeConstraintObject()
 
 std::shared_ptr<ecore::EObject> TimeConstraintObject::copy()
 {
-	std::shared_ptr<TimeConstraintObject> element(new TimeConstraintObject(*this));
+	std::shared_ptr<TimeConstraintObject> element(new TimeConstraintObject());
+	*element=(*this);
 	element->setThisTimeConstraintObjectPtr(element);
 	return element;
 }
+
+TimeConstraintObject& TimeConstraintObject::operator=(const TimeConstraintObject & obj)
+{
+	UML::IntervalConstraintObject::operator=(obj);
+	return *this;
+}
+
 
 void TimeConstraintObject::destroy()
 {	

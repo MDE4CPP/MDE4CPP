@@ -48,20 +48,18 @@
 using namespace UML;
 
 DirectedRelationshipObject::DirectedRelationshipObject(std::shared_ptr<uml::DirectedRelationship> _element):
-
 	m_DirectedRelationshipValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DirectedRelationship());
+{
 }
 
 DirectedRelationshipObject::DirectedRelationshipObject(DirectedRelationshipObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DirectedRelationshipObject::DirectedRelationshipObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DirectedRelationship());
 }
 
 DirectedRelationshipObject::~DirectedRelationshipObject()
@@ -70,10 +68,18 @@ DirectedRelationshipObject::~DirectedRelationshipObject()
 
 std::shared_ptr<ecore::EObject> DirectedRelationshipObject::copy()
 {
-	std::shared_ptr<DirectedRelationshipObject> element(new DirectedRelationshipObject(*this));
+	std::shared_ptr<DirectedRelationshipObject> element(new DirectedRelationshipObject());
+	*element=(*this);
 	element->setThisDirectedRelationshipObjectPtr(element);
 	return element;
 }
+
+DirectedRelationshipObject& DirectedRelationshipObject::operator=(const DirectedRelationshipObject & obj)
+{
+	UML::RelationshipObject::operator=(obj);
+	return *this;
+}
+
 
 void DirectedRelationshipObject::destroy()
 {	

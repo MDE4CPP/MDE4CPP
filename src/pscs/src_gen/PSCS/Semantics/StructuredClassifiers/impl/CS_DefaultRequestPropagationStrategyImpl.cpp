@@ -41,8 +41,8 @@
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -65,8 +65,17 @@ CS_DefaultRequestPropagationStrategyImpl::~CS_DefaultRequestPropagationStrategyI
 }
 
 
-CS_DefaultRequestPropagationStrategyImpl::CS_DefaultRequestPropagationStrategyImpl(const CS_DefaultRequestPropagationStrategyImpl & obj): CS_RequestPropagationStrategyImpl(obj), CS_DefaultRequestPropagationStrategy(obj)
+CS_DefaultRequestPropagationStrategyImpl::CS_DefaultRequestPropagationStrategyImpl(const CS_DefaultRequestPropagationStrategyImpl & obj): CS_DefaultRequestPropagationStrategyImpl()
 {
+	*this = obj;
+}
+
+CS_DefaultRequestPropagationStrategyImpl& CS_DefaultRequestPropagationStrategyImpl::operator=(const CS_DefaultRequestPropagationStrategyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	CS_RequestPropagationStrategyImpl::operator=(obj);
+	CS_DefaultRequestPropagationStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_DefaultRequestPropagationStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -76,11 +85,13 @@ CS_DefaultRequestPropagationStrategyImpl::CS_DefaultRequestPropagationStrategyIm
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_DefaultRequestPropagationStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_DefaultRequestPropagationStrategyImpl::copy() const
 {
-	std::shared_ptr<CS_DefaultRequestPropagationStrategyImpl> element(new CS_DefaultRequestPropagationStrategyImpl(*this));
+	std::shared_ptr<CS_DefaultRequestPropagationStrategyImpl> element(new CS_DefaultRequestPropagationStrategyImpl());
+	*element =(*this);
 	element->setThisCS_DefaultRequestPropagationStrategyPtr(element);
 	return element;
 }

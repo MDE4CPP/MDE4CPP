@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ManifestationObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ManifestationObject& operator=(ManifestationObject const&);
 
 			virtual void destroy();
 			

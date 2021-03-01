@@ -87,20 +87,18 @@
 using namespace UML;
 
 ActionObject::ActionObject(std::shared_ptr<uml::Action> _element):
-
 	m_ActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Action());
+{
 }
 
 ActionObject::ActionObject(ActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActionObject::ActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Action());
 }
 
 ActionObject::~ActionObject()
@@ -109,10 +107,18 @@ ActionObject::~ActionObject()
 
 std::shared_ptr<ecore::EObject> ActionObject::copy()
 {
-	std::shared_ptr<ActionObject> element(new ActionObject(*this));
+	std::shared_ptr<ActionObject> element(new ActionObject());
+	*element=(*this);
 	element->setThisActionObjectPtr(element);
 	return element;
 }
+
+ActionObject& ActionObject::operator=(const ActionObject & obj)
+{
+	UML::ExecutableNodeObject::operator=(obj);
+	return *this;
+}
+
 
 void ActionObject::destroy()
 {	

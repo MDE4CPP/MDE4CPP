@@ -52,10 +52,8 @@ namespace ecore
 	{
 		public:
  			ENamedElement(const ENamedElement &) {}
-
 		protected:
 			ENamedElement(){}
-			ENamedElement& operator=(const ENamedElement &) = default;
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

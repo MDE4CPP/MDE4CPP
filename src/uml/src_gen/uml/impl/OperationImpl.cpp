@@ -132,8 +132,19 @@ OperationImpl::OperationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTem
 	m_owner = par_owningTemplateParameter;
 }
 
-OperationImpl::OperationImpl(const OperationImpl & obj): BehavioralFeatureImpl(obj), ParameterableElementImpl(obj), TemplateableElementImpl(obj), Operation(obj)
+OperationImpl::OperationImpl(const OperationImpl & obj): OperationImpl()
 {
+	*this = obj;
+}
+
+OperationImpl& OperationImpl::operator=(const OperationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	BehavioralFeatureImpl::operator=(obj);
+	ParameterableElementImpl::operator=(obj);
+	TemplateableElementImpl::operator=(obj);
+	Operation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Operation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -171,11 +182,13 @@ OperationImpl::OperationImpl(const OperationImpl & obj): BehavioralFeatureImpl(o
 	{
 		redefinedOperationContainer->push_back(std::dynamic_pointer_cast<uml::Operation>(_redefinedOperation->copy()));
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  OperationImpl::copy() const
+std::shared_ptr<ecore::EObject> OperationImpl::copy() const
 {
-	std::shared_ptr<OperationImpl> element(new OperationImpl(*this));
+	std::shared_ptr<OperationImpl> element(new OperationImpl());
+	*element =(*this);
 	element->setThisOperationPtr(element);
 	return element;
 }

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~SlotObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			SlotObject& operator=(SlotObject const&);
 
 			virtual void destroy();
 			

@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			FlowFinalNodeImpl(const FlowFinalNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			FlowFinalNodeImpl& operator=(FlowFinalNodeImpl const&) = delete;
+			FlowFinalNodeImpl& operator=(FlowFinalNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

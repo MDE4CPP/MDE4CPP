@@ -78,20 +78,18 @@
 using namespace UML;
 
 DecisionNodeObject::DecisionNodeObject(std::shared_ptr<uml::DecisionNode> _element):
-
 	m_DecisionNodeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DecisionNode());
+{
 }
 
 DecisionNodeObject::DecisionNodeObject(DecisionNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DecisionNodeObject::DecisionNodeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DecisionNode());
 }
 
 DecisionNodeObject::~DecisionNodeObject()
@@ -100,10 +98,18 @@ DecisionNodeObject::~DecisionNodeObject()
 
 std::shared_ptr<ecore::EObject> DecisionNodeObject::copy()
 {
-	std::shared_ptr<DecisionNodeObject> element(new DecisionNodeObject(*this));
+	std::shared_ptr<DecisionNodeObject> element(new DecisionNodeObject());
+	*element=(*this);
 	element->setThisDecisionNodeObjectPtr(element);
 	return element;
 }
+
+DecisionNodeObject& DecisionNodeObject::operator=(const DecisionNodeObject & obj)
+{
+	UML::ControlNodeObject::operator=(obj);
+	return *this;
+}
+
 
 void DecisionNodeObject::destroy()
 {	

@@ -58,9 +58,17 @@ ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::~ClassifierBehav
 }
 
 
-ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl & obj): ecore::EModelElementImpl(obj),
-ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1(obj)
+ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl & obj): ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl()
 {
+	*this = obj;
+}
+
+ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl& ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::operator=(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -70,11 +78,13 @@ ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::copy() const
+std::shared_ptr<ecore::EObject> ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl::copy() const
 {
-	std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl> element(new ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl(*this));
+	std::shared_ptr<ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl> element(new ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl());
+	*element =(*this);
 	element->setThisClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Ptr(element);
 	return element;
 }

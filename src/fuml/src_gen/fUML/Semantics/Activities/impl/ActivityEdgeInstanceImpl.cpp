@@ -73,9 +73,17 @@ ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(std::weak_ptr<fUML::Semantics
 	m_group = par_group;
 }
 
-ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj): ecore::EModelElementImpl(obj),
-ActivityEdgeInstance(obj)
+ActivityEdgeInstanceImpl::ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj): ActivityEdgeInstanceImpl()
 {
+	*this = obj;
+}
+
+ActivityEdgeInstanceImpl& ActivityEdgeInstanceImpl::operator=(const ActivityEdgeInstanceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	ActivityEdgeInstance::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityEdgeInstance "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -91,11 +99,13 @@ ActivityEdgeInstance(obj)
 	m_target  = obj.getTarget();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityEdgeInstanceImpl::copy() const
+std::shared_ptr<ecore::EObject> ActivityEdgeInstanceImpl::copy() const
 {
-	std::shared_ptr<ActivityEdgeInstanceImpl> element(new ActivityEdgeInstanceImpl(*this));
+	std::shared_ptr<ActivityEdgeInstanceImpl> element(new ActivityEdgeInstanceImpl());
+	*element =(*this);
 	element->setThisActivityEdgeInstancePtr(element);
 	return element;
 }

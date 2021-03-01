@@ -24,9 +24,7 @@ namespace uml
 		public: 
 			RedefinableTemplateSignatureImpl(const RedefinableTemplateSignatureImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			RedefinableTemplateSignatureImpl& operator=(RedefinableTemplateSignatureImpl const&) = delete;
+			RedefinableTemplateSignatureImpl& operator=(RedefinableTemplateSignatureImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

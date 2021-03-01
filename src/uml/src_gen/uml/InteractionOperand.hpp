@@ -72,8 +72,6 @@ namespace uml
 	{
 		public:
  			InteractionOperand(const InteractionOperand &) {}
-			InteractionOperand& operator=(InteractionOperand const&) = delete;
-
 		protected:
 			InteractionOperand(){}
 

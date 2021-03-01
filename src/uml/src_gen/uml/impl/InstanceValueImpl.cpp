@@ -117,8 +117,17 @@ InstanceValueImpl::InstanceValueImpl(std::weak_ptr<uml::ValueSpecificationAction
 	m_owner = par_valueSpecificationAction;
 }
 
-InstanceValueImpl::InstanceValueImpl(const InstanceValueImpl & obj): ValueSpecificationImpl(obj), InstanceValue(obj)
+InstanceValueImpl::InstanceValueImpl(const InstanceValueImpl & obj): InstanceValueImpl()
 {
+	*this = obj;
+}
+
+InstanceValueImpl& InstanceValueImpl::operator=(const InstanceValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ValueSpecificationImpl::operator=(obj);
+	InstanceValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InstanceValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -129,11 +138,13 @@ InstanceValueImpl::InstanceValueImpl(const InstanceValueImpl & obj): ValueSpecif
 	m_instance  = obj.getInstance();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InstanceValueImpl::copy() const
+std::shared_ptr<ecore::EObject> InstanceValueImpl::copy() const
 {
-	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(*this));
+	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl());
+	*element =(*this);
 	element->setThisInstanceValuePtr(element);
 	return element;
 }

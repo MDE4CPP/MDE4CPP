@@ -131,8 +131,17 @@ InterfaceImpl::InterfaceImpl(std::weak_ptr<uml::TemplateParameter> par_owningTem
 }
 
 
-InterfaceImpl::InterfaceImpl(const InterfaceImpl & obj): ClassifierImpl(obj), Interface(obj)
+InterfaceImpl::InterfaceImpl(const InterfaceImpl & obj): InterfaceImpl()
 {
+	*this = obj;
+}
+
+InterfaceImpl& InterfaceImpl::operator=(const InterfaceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ClassifierImpl::operator=(obj);
+	Interface::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Interface "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -196,11 +205,13 @@ InterfaceImpl::InterfaceImpl(const InterfaceImpl & obj): ClassifierImpl(obj), In
 	#endif
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InterfaceImpl::copy() const
+std::shared_ptr<ecore::EObject> InterfaceImpl::copy() const
 {
-	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(*this));
+	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl());
+	*element =(*this);
 	element->setThisInterfacePtr(element);
 	return element;
 }

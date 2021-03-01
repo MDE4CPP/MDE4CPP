@@ -60,8 +60,6 @@ namespace fUML::Semantics::Values
 	{
 		public:
  			LiteralBooleanEvaluation(const LiteralBooleanEvaluation &) {}
-			LiteralBooleanEvaluation& operator=(LiteralBooleanEvaluation const&) = delete;
-
 		protected:
 			LiteralBooleanEvaluation(){}
 

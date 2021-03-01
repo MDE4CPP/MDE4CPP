@@ -26,9 +26,7 @@ virtual public ParameterValue
 		public: 
 			ParameterValueImpl(const ParameterValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ParameterValueImpl& operator=(ParameterValueImpl const&) = delete;
+			ParameterValueImpl& operator=(ParameterValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

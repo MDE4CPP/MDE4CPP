@@ -109,8 +109,17 @@ UnmarshallActionImpl::UnmarshallActionImpl(std::weak_ptr<uml::Element> par_owner
 	m_owner = par_owner;
 }
 
-UnmarshallActionImpl::UnmarshallActionImpl(const UnmarshallActionImpl & obj): ActionImpl(obj), UnmarshallAction(obj)
+UnmarshallActionImpl::UnmarshallActionImpl(const UnmarshallActionImpl & obj): UnmarshallActionImpl()
 {
+	*this = obj;
+}
+
+UnmarshallActionImpl& UnmarshallActionImpl::operator=(const UnmarshallActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	UnmarshallAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy UnmarshallAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -137,11 +146,13 @@ UnmarshallActionImpl::UnmarshallActionImpl(const UnmarshallActionImpl & obj): Ac
 		std::cout << "Initialising value Subset: " << "m_result - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  UnmarshallActionImpl::copy() const
+std::shared_ptr<ecore::EObject> UnmarshallActionImpl::copy() const
 {
-	std::shared_ptr<UnmarshallActionImpl> element(new UnmarshallActionImpl(*this));
+	std::shared_ptr<UnmarshallActionImpl> element(new UnmarshallActionImpl());
+	*element =(*this);
 	element->setThisUnmarshallActionPtr(element);
 	return element;
 }

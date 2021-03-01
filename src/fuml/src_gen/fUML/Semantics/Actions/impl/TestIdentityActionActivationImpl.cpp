@@ -77,8 +77,17 @@ TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(std::weak_ptr
 	m_group = par_group;
 }
 
-TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(const TestIdentityActionActivationImpl & obj): ActionActivationImpl(obj), TestIdentityActionActivation(obj)
+TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(const TestIdentityActionActivationImpl & obj): TestIdentityActionActivationImpl()
 {
+	*this = obj;
+}
+
+TestIdentityActionActivationImpl& TestIdentityActionActivationImpl::operator=(const TestIdentityActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	TestIdentityActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TestIdentityActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -88,11 +97,13 @@ TestIdentityActionActivationImpl::TestIdentityActionActivationImpl(const TestIde
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TestIdentityActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> TestIdentityActionActivationImpl::copy() const
 {
-	std::shared_ptr<TestIdentityActionActivationImpl> element(new TestIdentityActionActivationImpl(*this));
+	std::shared_ptr<TestIdentityActionActivationImpl> element(new TestIdentityActionActivationImpl());
+	*element =(*this);
 	element->setThisTestIdentityActionActivationPtr(element);
 	return element;
 }

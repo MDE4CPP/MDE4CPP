@@ -70,8 +70,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ExpansionRegionActivation(const ExpansionRegionActivation &) {}
-			ExpansionRegionActivation& operator=(ExpansionRegionActivation const&) = delete;
-
 		protected:
 			ExpansionRegionActivation(){}
 

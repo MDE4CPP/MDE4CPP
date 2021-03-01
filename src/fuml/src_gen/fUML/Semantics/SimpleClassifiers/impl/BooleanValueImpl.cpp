@@ -70,8 +70,17 @@ BooleanValueImpl::~BooleanValueImpl()
 }
 
 
-BooleanValueImpl::BooleanValueImpl(const BooleanValueImpl & obj): PrimitiveValueImpl(obj), BooleanValue(obj)
+BooleanValueImpl::BooleanValueImpl(const BooleanValueImpl & obj): BooleanValueImpl()
 {
+	*this = obj;
+}
+
+BooleanValueImpl& BooleanValueImpl::operator=(const BooleanValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PrimitiveValueImpl::operator=(obj);
+	BooleanValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy BooleanValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -82,11 +91,13 @@ BooleanValueImpl::BooleanValueImpl(const BooleanValueImpl & obj): PrimitiveValue
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  BooleanValueImpl::copy() const
+std::shared_ptr<ecore::EObject> BooleanValueImpl::copy() const
 {
-	std::shared_ptr<BooleanValueImpl> element(new BooleanValueImpl(*this));
+	std::shared_ptr<BooleanValueImpl> element(new BooleanValueImpl());
+	*element =(*this);
 	element->setThisBooleanValuePtr(element);
 	return element;
 }

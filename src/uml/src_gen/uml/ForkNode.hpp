@@ -70,8 +70,6 @@ namespace uml
 	{
 		public:
  			ForkNode(const ForkNode &) {}
-			ForkNode& operator=(ForkNode const&) = delete;
-
 		protected:
 			ForkNode(){}
 

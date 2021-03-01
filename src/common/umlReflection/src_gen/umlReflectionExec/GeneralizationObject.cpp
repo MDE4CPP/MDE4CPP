@@ -56,20 +56,18 @@
 using namespace UML;
 
 GeneralizationObject::GeneralizationObject(std::shared_ptr<uml::Generalization> _element):
-
 	m_GeneralizationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Generalization());
+{
 }
 
 GeneralizationObject::GeneralizationObject(GeneralizationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 GeneralizationObject::GeneralizationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Generalization());
 }
 
 GeneralizationObject::~GeneralizationObject()
@@ -78,10 +76,18 @@ GeneralizationObject::~GeneralizationObject()
 
 std::shared_ptr<ecore::EObject> GeneralizationObject::copy()
 {
-	std::shared_ptr<GeneralizationObject> element(new GeneralizationObject(*this));
+	std::shared_ptr<GeneralizationObject> element(new GeneralizationObject());
+	*element=(*this);
 	element->setThisGeneralizationObjectPtr(element);
 	return element;
 }
+
+GeneralizationObject& GeneralizationObject::operator=(const GeneralizationObject & obj)
+{
+	UML::DirectedRelationshipObject::operator=(obj);
+	return *this;
+}
+
 
 void GeneralizationObject::destroy()
 {	

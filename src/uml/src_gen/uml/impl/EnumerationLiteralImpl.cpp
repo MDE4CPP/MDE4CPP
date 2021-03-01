@@ -111,8 +111,17 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(std::weak_ptr<uml::TemplateParame
 	m_owner = par_owningTemplateParameter;
 }
 
-EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & obj): InstanceSpecificationImpl(obj), EnumerationLiteral(obj)
+EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & obj): EnumerationLiteralImpl()
 {
+	*this = obj;
+}
+
+EnumerationLiteralImpl& EnumerationLiteralImpl::operator=(const EnumerationLiteralImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	InstanceSpecificationImpl::operator=(obj);
+	EnumerationLiteral::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EnumerationLiteral "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -123,11 +132,13 @@ EnumerationLiteralImpl::EnumerationLiteralImpl(const EnumerationLiteralImpl & ob
 	m_enumeration  = obj.getEnumeration();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EnumerationLiteralImpl::copy() const
+std::shared_ptr<ecore::EObject> EnumerationLiteralImpl::copy() const
 {
-	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(*this));
+	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl());
+	*element =(*this);
 	element->setThisEnumerationLiteralPtr(element);
 	return element;
 }

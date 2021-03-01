@@ -77,8 +77,17 @@ ProtocolConformanceImpl::ProtocolConformanceImpl(std::weak_ptr<uml::ProtocolStat
 	m_owner = par_specificMachine;
 }
 
-ProtocolConformanceImpl::ProtocolConformanceImpl(const ProtocolConformanceImpl & obj): DirectedRelationshipImpl(obj), ProtocolConformance(obj)
+ProtocolConformanceImpl::ProtocolConformanceImpl(const ProtocolConformanceImpl & obj): ProtocolConformanceImpl()
 {
+	*this = obj;
+}
+
+ProtocolConformanceImpl& ProtocolConformanceImpl::operator=(const ProtocolConformanceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	DirectedRelationshipImpl::operator=(obj);
+	ProtocolConformance::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ProtocolConformance "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -93,11 +102,13 @@ ProtocolConformanceImpl::ProtocolConformanceImpl(const ProtocolConformanceImpl &
 	{
 		m_generalMachine = std::dynamic_pointer_cast<uml::ProtocolStateMachine>(obj.getGeneralMachine()->copy());
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ProtocolConformanceImpl::copy() const
+std::shared_ptr<ecore::EObject> ProtocolConformanceImpl::copy() const
 {
-	std::shared_ptr<ProtocolConformanceImpl> element(new ProtocolConformanceImpl(*this));
+	std::shared_ptr<ProtocolConformanceImpl> element(new ProtocolConformanceImpl());
+	*element =(*this);
 	element->setThisProtocolConformancePtr(element);
 	return element;
 }

@@ -69,8 +69,17 @@ DispatchStrategyImpl::~DispatchStrategyImpl()
 }
 
 
-DispatchStrategyImpl::DispatchStrategyImpl(const DispatchStrategyImpl & obj): fUML::Semantics::Loci::SemanticStrategyImpl(obj), DispatchStrategy(obj)
+DispatchStrategyImpl::DispatchStrategyImpl(const DispatchStrategyImpl & obj): DispatchStrategyImpl()
 {
+	*this = obj;
+}
+
+DispatchStrategyImpl& DispatchStrategyImpl::operator=(const DispatchStrategyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::SemanticStrategyImpl::operator=(obj);
+	DispatchStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DispatchStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -80,11 +89,13 @@ DispatchStrategyImpl::DispatchStrategyImpl(const DispatchStrategyImpl & obj): fU
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DispatchStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject> DispatchStrategyImpl::copy() const
 {
-	std::shared_ptr<DispatchStrategyImpl> element(new DispatchStrategyImpl(*this));
+	std::shared_ptr<DispatchStrategyImpl> element(new DispatchStrategyImpl());
+	*element =(*this);
 	element->setThisDispatchStrategyPtr(element);
 	return element;
 }

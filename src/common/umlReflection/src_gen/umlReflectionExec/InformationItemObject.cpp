@@ -110,20 +110,18 @@
 using namespace UML;
 
 InformationItemObject::InformationItemObject(std::shared_ptr<uml::InformationItem> _element):
-
 	m_InformationItemValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InformationItem());
+{
 }
 
 InformationItemObject::InformationItemObject(InformationItemObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InformationItemObject::InformationItemObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InformationItem());
 }
 
 InformationItemObject::~InformationItemObject()
@@ -132,10 +130,18 @@ InformationItemObject::~InformationItemObject()
 
 std::shared_ptr<ecore::EObject> InformationItemObject::copy()
 {
-	std::shared_ptr<InformationItemObject> element(new InformationItemObject(*this));
+	std::shared_ptr<InformationItemObject> element(new InformationItemObject());
+	*element=(*this);
 	element->setThisInformationItemObjectPtr(element);
 	return element;
 }
+
+InformationItemObject& InformationItemObject::operator=(const InformationItemObject & obj)
+{
+	UML::ClassifierObject::operator=(obj);
+	return *this;
+}
+
 
 void InformationItemObject::destroy()
 {	

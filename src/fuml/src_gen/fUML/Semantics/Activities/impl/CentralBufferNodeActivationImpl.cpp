@@ -71,8 +71,17 @@ CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(std::weak_ptr<f
 	m_group = par_group;
 }
 
-CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(const CentralBufferNodeActivationImpl & obj): ObjectNodeActivationImpl(obj), CentralBufferNodeActivation(obj)
+CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(const CentralBufferNodeActivationImpl & obj): CentralBufferNodeActivationImpl()
 {
+	*this = obj;
+}
+
+CentralBufferNodeActivationImpl& CentralBufferNodeActivationImpl::operator=(const CentralBufferNodeActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ObjectNodeActivationImpl::operator=(obj);
+	CentralBufferNodeActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CentralBufferNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -82,11 +91,13 @@ CentralBufferNodeActivationImpl::CentralBufferNodeActivationImpl(const CentralBu
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CentralBufferNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> CentralBufferNodeActivationImpl::copy() const
 {
-	std::shared_ptr<CentralBufferNodeActivationImpl> element(new CentralBufferNodeActivationImpl(*this));
+	std::shared_ptr<CentralBufferNodeActivationImpl> element(new CentralBufferNodeActivationImpl());
+	*element =(*this);
 	element->setThisCentralBufferNodeActivationPtr(element);
 	return element;
 }

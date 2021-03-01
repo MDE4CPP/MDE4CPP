@@ -126,8 +126,17 @@ SignalImpl::SignalImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateP
 }
 
 
-SignalImpl::SignalImpl(const SignalImpl & obj): ClassifierImpl(obj), Signal(obj)
+SignalImpl::SignalImpl(const SignalImpl & obj): SignalImpl()
 {
+	*this = obj;
+}
+
+SignalImpl& SignalImpl::operator=(const SignalImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ClassifierImpl::operator=(obj);
+	Signal::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Signal "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -148,11 +157,13 @@ SignalImpl::SignalImpl(const SignalImpl & obj): ClassifierImpl(obj), Signal(obj)
 		std::cout << "Initialising value Subset: " << "m_ownedAttribute - Subset<uml::Property, uml::Property,uml::NamedElement >(getAttribute(),getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  SignalImpl::copy() const
+std::shared_ptr<ecore::EObject> SignalImpl::copy() const
 {
-	std::shared_ptr<SignalImpl> element(new SignalImpl(*this));
+	std::shared_ptr<SignalImpl> element(new SignalImpl());
+	*element =(*this);
 	element->setThisSignalPtr(element);
 	return element;
 }

@@ -59,8 +59,6 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public:
  			ClassifierBehaviorExecution(const ClassifierBehaviorExecution &) {}
-			ClassifierBehaviorExecution& operator=(ClassifierBehaviorExecution const&) = delete;
-
 		protected:
 			ClassifierBehaviorExecution(){}
 

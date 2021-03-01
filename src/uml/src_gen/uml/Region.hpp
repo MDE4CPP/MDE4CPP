@@ -73,11 +73,8 @@ namespace uml
 	{
 		public:
  			Region(const Region &) {}
-			Region& operator=(Region const&) = delete;
-
 		protected:
 			Region(){}
-
 			//Additional constructors for the containments back reference
 			Region(std::weak_ptr<uml::Namespace> par_namespace);
 

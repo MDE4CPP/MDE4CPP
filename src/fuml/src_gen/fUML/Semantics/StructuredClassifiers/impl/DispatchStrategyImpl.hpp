@@ -24,9 +24,7 @@ namespace fUML::Semantics::StructuredClassifiers
 		public: 
 			DispatchStrategyImpl(const DispatchStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			DispatchStrategyImpl& operator=(DispatchStrategyImpl const&) = delete;
+			DispatchStrategyImpl& operator=(DispatchStrategyImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;

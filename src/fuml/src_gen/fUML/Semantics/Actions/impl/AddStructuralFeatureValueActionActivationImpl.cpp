@@ -91,8 +91,17 @@ AddStructuralFeatureValueActionActivationImpl::AddStructuralFeatureValueActionAc
 	m_group = par_group;
 }
 
-AddStructuralFeatureValueActionActivationImpl::AddStructuralFeatureValueActionActivationImpl(const AddStructuralFeatureValueActionActivationImpl & obj): WriteStructuralFeatureActionActivationImpl(obj), AddStructuralFeatureValueActionActivation(obj)
+AddStructuralFeatureValueActionActivationImpl::AddStructuralFeatureValueActionActivationImpl(const AddStructuralFeatureValueActionActivationImpl & obj): AddStructuralFeatureValueActionActivationImpl()
 {
+	*this = obj;
+}
+
+AddStructuralFeatureValueActionActivationImpl& AddStructuralFeatureValueActionActivationImpl::operator=(const AddStructuralFeatureValueActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	WriteStructuralFeatureActionActivationImpl::operator=(obj);
+	AddStructuralFeatureValueActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AddStructuralFeatureValueActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -103,11 +112,13 @@ AddStructuralFeatureValueActionActivationImpl::AddStructuralFeatureValueActionAc
 	m_addStructuralFeatureValueAction  = obj.getAddStructuralFeatureValueAction();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  AddStructuralFeatureValueActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> AddStructuralFeatureValueActionActivationImpl::copy() const
 {
-	std::shared_ptr<AddStructuralFeatureValueActionActivationImpl> element(new AddStructuralFeatureValueActionActivationImpl(*this));
+	std::shared_ptr<AddStructuralFeatureValueActionActivationImpl> element(new AddStructuralFeatureValueActionActivationImpl());
+	*element =(*this);
 	element->setThisAddStructuralFeatureValueActionActivationPtr(element);
 	return element;
 }

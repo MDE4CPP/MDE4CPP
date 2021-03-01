@@ -60,8 +60,6 @@ namespace uml
 	{
 		public:
  			TemplateableElement(const TemplateableElement &) {}
-			TemplateableElement& operator=(TemplateableElement const&) = delete;
-
 		protected:
 			TemplateableElement(){}
 

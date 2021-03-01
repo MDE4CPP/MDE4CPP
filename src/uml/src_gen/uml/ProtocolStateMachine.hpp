@@ -91,8 +91,6 @@ namespace uml
 	{
 		public:
  			ProtocolStateMachine(const ProtocolStateMachine &) {}
-			ProtocolStateMachine& operator=(ProtocolStateMachine const&) = delete;
-
 		protected:
 			ProtocolStateMachine(){}
 

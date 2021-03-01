@@ -69,8 +69,17 @@ ReturnInformationImpl::~ReturnInformationImpl()
 }
 
 
-ReturnInformationImpl::ReturnInformationImpl(const ReturnInformationImpl & obj): fUML::Semantics::Values::ValueImpl(obj), ReturnInformation(obj)
+ReturnInformationImpl::ReturnInformationImpl(const ReturnInformationImpl & obj): ReturnInformationImpl()
 {
+	*this = obj;
+}
+
+ReturnInformationImpl& ReturnInformationImpl::operator=(const ReturnInformationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Values::ValueImpl::operator=(obj);
+	ReturnInformation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReturnInformation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -81,11 +90,13 @@ ReturnInformationImpl::ReturnInformationImpl(const ReturnInformationImpl & obj):
 	m_callEventOccurrence  = obj.getCallEventOccurrence();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReturnInformationImpl::copy() const
+std::shared_ptr<ecore::EObject> ReturnInformationImpl::copy() const
 {
-	std::shared_ptr<ReturnInformationImpl> element(new ReturnInformationImpl(*this));
+	std::shared_ptr<ReturnInformationImpl> element(new ReturnInformationImpl());
+	*element =(*this);
 	element->setThisReturnInformationPtr(element);
 	return element;
 }

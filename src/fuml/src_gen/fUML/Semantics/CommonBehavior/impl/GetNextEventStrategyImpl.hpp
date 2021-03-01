@@ -24,9 +24,7 @@ namespace fUML::Semantics::CommonBehavior
 		public: 
 			GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			GetNextEventStrategyImpl& operator=(GetNextEventStrategyImpl const&) = delete;
+			GetNextEventStrategyImpl& operator=(GetNextEventStrategyImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

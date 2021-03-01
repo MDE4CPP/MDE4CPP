@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			TemplateBindingImpl(const TemplateBindingImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			TemplateBindingImpl& operator=(TemplateBindingImpl const&) = delete;
+			TemplateBindingImpl& operator=(TemplateBindingImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

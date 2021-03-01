@@ -130,8 +130,18 @@ ArtifactImpl::ArtifactImpl(std::weak_ptr<uml::TemplateParameter> par_owningTempl
 }
 
 
-ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj): ClassifierImpl(obj), DeployedArtifactImpl(obj), Artifact(obj)
+ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj): ArtifactImpl()
 {
+	*this = obj;
+}
+
+ArtifactImpl& ArtifactImpl::operator=(const ArtifactImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ClassifierImpl::operator=(obj);
+	DeployedArtifactImpl::operator=(obj);
+	Artifact::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Artifact "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -186,11 +196,13 @@ ArtifactImpl::ArtifactImpl(const ArtifactImpl & obj): ClassifierImpl(obj), Deplo
 		std::cout << "Initialising value Subset: " << "m_ownedOperation - Subset<uml::Operation, uml::Feature,uml::NamedElement >(getFeature(),getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ArtifactImpl::copy() const
+std::shared_ptr<ecore::EObject> ArtifactImpl::copy() const
 {
-	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(*this));
+	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl());
+	*element =(*this);
 	element->setThisArtifactPtr(element);
 	return element;
 }

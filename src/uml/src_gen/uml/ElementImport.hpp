@@ -63,11 +63,8 @@ namespace uml
 	{
 		public:
  			ElementImport(const ElementImport &) {}
-			ElementImport& operator=(ElementImport const&) = delete;
-
 		protected:
 			ElementImport(){}
-
 			//Additional constructors for the containments back reference
 			ElementImport(std::weak_ptr<uml::Namespace> par_importingNamespace);
 

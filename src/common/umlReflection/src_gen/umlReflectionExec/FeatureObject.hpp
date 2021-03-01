@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~FeatureObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			FeatureObject& operator=(FeatureObject const&);
 
 			virtual void destroy();
 			

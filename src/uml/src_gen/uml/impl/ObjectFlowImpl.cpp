@@ -106,8 +106,17 @@ ObjectFlowImpl::ObjectFlowImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ObjectFlowImpl::ObjectFlowImpl(const ObjectFlowImpl & obj): ActivityEdgeImpl(obj), ObjectFlow(obj)
+ObjectFlowImpl::ObjectFlowImpl(const ObjectFlowImpl & obj): ObjectFlowImpl()
 {
+	*this = obj;
+}
+
+ObjectFlowImpl& ObjectFlowImpl::operator=(const ObjectFlowImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActivityEdgeImpl::operator=(obj);
+	ObjectFlow::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ObjectFlow "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -121,11 +130,13 @@ ObjectFlowImpl::ObjectFlowImpl(const ObjectFlowImpl & obj): ActivityEdgeImpl(obj
 	m_transformation  = obj.getTransformation();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ObjectFlowImpl::copy() const
+std::shared_ptr<ecore::EObject> ObjectFlowImpl::copy() const
 {
-	std::shared_ptr<ObjectFlowImpl> element(new ObjectFlowImpl(*this));
+	std::shared_ptr<ObjectFlowImpl> element(new ObjectFlowImpl());
+	*element =(*this);
 	element->setThisObjectFlowPtr(element);
 	return element;
 }

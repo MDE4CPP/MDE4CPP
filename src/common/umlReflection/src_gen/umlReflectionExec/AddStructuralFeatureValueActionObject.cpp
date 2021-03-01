@@ -98,20 +98,18 @@
 using namespace UML;
 
 AddStructuralFeatureValueActionObject::AddStructuralFeatureValueActionObject(std::shared_ptr<uml::AddStructuralFeatureValueAction> _element):
-
 	m_AddStructuralFeatureValueActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_AddStructuralFeatureValueAction());
+{
 }
 
 AddStructuralFeatureValueActionObject::AddStructuralFeatureValueActionObject(AddStructuralFeatureValueActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 AddStructuralFeatureValueActionObject::AddStructuralFeatureValueActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_AddStructuralFeatureValueAction());
 }
 
 AddStructuralFeatureValueActionObject::~AddStructuralFeatureValueActionObject()
@@ -120,10 +118,18 @@ AddStructuralFeatureValueActionObject::~AddStructuralFeatureValueActionObject()
 
 std::shared_ptr<ecore::EObject> AddStructuralFeatureValueActionObject::copy()
 {
-	std::shared_ptr<AddStructuralFeatureValueActionObject> element(new AddStructuralFeatureValueActionObject(*this));
+	std::shared_ptr<AddStructuralFeatureValueActionObject> element(new AddStructuralFeatureValueActionObject());
+	*element=(*this);
 	element->setThisAddStructuralFeatureValueActionObjectPtr(element);
 	return element;
 }
+
+AddStructuralFeatureValueActionObject& AddStructuralFeatureValueActionObject::operator=(const AddStructuralFeatureValueActionObject & obj)
+{
+	UML::WriteStructuralFeatureActionObject::operator=(obj);
+	return *this;
+}
+
 
 void AddStructuralFeatureValueActionObject::destroy()
 {	

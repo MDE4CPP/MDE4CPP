@@ -111,8 +111,17 @@ BroadcastSignalActionImpl::BroadcastSignalActionImpl(std::weak_ptr<uml::Element>
 	m_owner = par_owner;
 }
 
-BroadcastSignalActionImpl::BroadcastSignalActionImpl(const BroadcastSignalActionImpl & obj): InvocationActionImpl(obj), BroadcastSignalAction(obj)
+BroadcastSignalActionImpl::BroadcastSignalActionImpl(const BroadcastSignalActionImpl & obj): BroadcastSignalActionImpl()
 {
+	*this = obj;
+}
+
+BroadcastSignalActionImpl& BroadcastSignalActionImpl::operator=(const BroadcastSignalActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	InvocationActionImpl::operator=(obj);
+	BroadcastSignalAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy BroadcastSignalAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -123,11 +132,13 @@ BroadcastSignalActionImpl::BroadcastSignalActionImpl(const BroadcastSignalAction
 	m_signal  = obj.getSignal();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  BroadcastSignalActionImpl::copy() const
+std::shared_ptr<ecore::EObject> BroadcastSignalActionImpl::copy() const
 {
-	std::shared_ptr<BroadcastSignalActionImpl> element(new BroadcastSignalActionImpl(*this));
+	std::shared_ptr<BroadcastSignalActionImpl> element(new BroadcastSignalActionImpl());
+	*element =(*this);
 	element->setThisBroadcastSignalActionPtr(element);
 	return element;
 }

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ConnectorEndObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ConnectorEndObject& operator=(ConnectorEndObject const&);
 
 			virtual void destroy();
 			

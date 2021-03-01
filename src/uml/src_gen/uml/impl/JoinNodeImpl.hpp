@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			JoinNodeImpl(const JoinNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			JoinNodeImpl& operator=(JoinNodeImpl const&) = delete;
+			JoinNodeImpl& operator=(JoinNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

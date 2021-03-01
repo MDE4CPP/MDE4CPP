@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ParameterableElementImpl(const ParameterableElementImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ParameterableElementImpl& operator=(ParameterableElementImpl const&) = delete;
+			ParameterableElementImpl& operator=(ParameterableElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

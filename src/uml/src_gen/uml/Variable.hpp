@@ -69,11 +69,8 @@ namespace uml
 	{
 		public:
  			Variable(const Variable &) {}
-			Variable& operator=(Variable const&) = delete;
-
 		protected:
 			Variable(){}
-
 			//Additional constructors for the containments back reference
 			Variable(std::weak_ptr<uml::Activity> par_activityScope);
 

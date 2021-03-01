@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			DestructionOccurrenceSpecificationImpl(const DestructionOccurrenceSpecificationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			DestructionOccurrenceSpecificationImpl& operator=(DestructionOccurrenceSpecificationImpl const&) = delete;
+			DestructionOccurrenceSpecificationImpl& operator=(DestructionOccurrenceSpecificationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

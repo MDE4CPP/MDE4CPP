@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			SequenceNodeImpl(const SequenceNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			SequenceNodeImpl& operator=(SequenceNodeImpl const&) = delete;
+			SequenceNodeImpl& operator=(SequenceNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

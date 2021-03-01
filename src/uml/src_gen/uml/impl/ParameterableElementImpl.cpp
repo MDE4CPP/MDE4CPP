@@ -76,8 +76,17 @@ ParameterableElementImpl::ParameterableElementImpl(std::weak_ptr<uml::TemplatePa
 	m_owner = par_owningTemplateParameter;
 }
 
-ParameterableElementImpl::ParameterableElementImpl(const ParameterableElementImpl & obj): ElementImpl(obj), ParameterableElement(obj)
+ParameterableElementImpl::ParameterableElementImpl(const ParameterableElementImpl & obj): ParameterableElementImpl()
 {
+	*this = obj;
+}
+
+ParameterableElementImpl& ParameterableElementImpl::operator=(const ParameterableElementImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	ParameterableElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ParameterableElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -89,11 +98,13 @@ ParameterableElementImpl::ParameterableElementImpl(const ParameterableElementImp
 	m_templateParameter  = obj.getTemplateParameter();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ParameterableElementImpl::copy() const
+std::shared_ptr<ecore::EObject> ParameterableElementImpl::copy() const
 {
-	std::shared_ptr<ParameterableElementImpl> element(new ParameterableElementImpl(*this));
+	std::shared_ptr<ParameterableElementImpl> element(new ParameterableElementImpl());
+	*element =(*this);
 	element->setThisParameterableElementPtr(element);
 	return element;
 }

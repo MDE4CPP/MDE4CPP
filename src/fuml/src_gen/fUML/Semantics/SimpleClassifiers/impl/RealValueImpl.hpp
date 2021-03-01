@@ -24,9 +24,7 @@ namespace fUML::Semantics::SimpleClassifiers
 		public: 
 			RealValueImpl(const RealValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			RealValueImpl& operator=(RealValueImpl const&) = delete;
+			RealValueImpl& operator=(RealValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;

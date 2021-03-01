@@ -65,8 +65,6 @@ namespace uml
 	{
 		public:
  			Interval(const Interval &) {}
-			Interval& operator=(Interval const&) = delete;
-
 		protected:
 			Interval(){}
 

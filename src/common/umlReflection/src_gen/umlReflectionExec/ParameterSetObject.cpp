@@ -57,20 +57,18 @@
 using namespace UML;
 
 ParameterSetObject::ParameterSetObject(std::shared_ptr<uml::ParameterSet> _element):
-
 	m_ParameterSetValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ParameterSet());
+{
 }
 
 ParameterSetObject::ParameterSetObject(ParameterSetObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ParameterSetObject::ParameterSetObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ParameterSet());
 }
 
 ParameterSetObject::~ParameterSetObject()
@@ -79,10 +77,18 @@ ParameterSetObject::~ParameterSetObject()
 
 std::shared_ptr<ecore::EObject> ParameterSetObject::copy()
 {
-	std::shared_ptr<ParameterSetObject> element(new ParameterSetObject(*this));
+	std::shared_ptr<ParameterSetObject> element(new ParameterSetObject());
+	*element=(*this);
 	element->setThisParameterSetObjectPtr(element);
 	return element;
 }
+
+ParameterSetObject& ParameterSetObject::operator=(const ParameterSetObject & obj)
+{
+	UML::NamedElementObject::operator=(obj);
+	return *this;
+}
+
 
 void ParameterSetObject::destroy()
 {	

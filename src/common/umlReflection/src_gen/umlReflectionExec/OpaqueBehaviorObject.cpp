@@ -150,20 +150,18 @@
 using namespace UML;
 
 OpaqueBehaviorObject::OpaqueBehaviorObject(std::shared_ptr<uml::OpaqueBehavior> _element):
-
 	m_OpaqueBehaviorValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_OpaqueBehavior());
+{
 }
 
 OpaqueBehaviorObject::OpaqueBehaviorObject(OpaqueBehaviorObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 OpaqueBehaviorObject::OpaqueBehaviorObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_OpaqueBehavior());
 }
 
 OpaqueBehaviorObject::~OpaqueBehaviorObject()
@@ -172,10 +170,18 @@ OpaqueBehaviorObject::~OpaqueBehaviorObject()
 
 std::shared_ptr<ecore::EObject> OpaqueBehaviorObject::copy()
 {
-	std::shared_ptr<OpaqueBehaviorObject> element(new OpaqueBehaviorObject(*this));
+	std::shared_ptr<OpaqueBehaviorObject> element(new OpaqueBehaviorObject());
+	*element=(*this);
 	element->setThisOpaqueBehaviorObjectPtr(element);
 	return element;
 }
+
+OpaqueBehaviorObject& OpaqueBehaviorObject::operator=(const OpaqueBehaviorObject & obj)
+{
+	UML::BehaviorObject::operator=(obj);
+	return *this;
+}
+
 
 void OpaqueBehaviorObject::destroy()
 {	

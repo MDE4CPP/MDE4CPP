@@ -54,20 +54,18 @@
 using namespace UML;
 
 TemplateBindingObject::TemplateBindingObject(std::shared_ptr<uml::TemplateBinding> _element):
-
 	m_TemplateBindingValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TemplateBinding());
+{
 }
 
 TemplateBindingObject::TemplateBindingObject(TemplateBindingObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TemplateBindingObject::TemplateBindingObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TemplateBinding());
 }
 
 TemplateBindingObject::~TemplateBindingObject()
@@ -76,10 +74,18 @@ TemplateBindingObject::~TemplateBindingObject()
 
 std::shared_ptr<ecore::EObject> TemplateBindingObject::copy()
 {
-	std::shared_ptr<TemplateBindingObject> element(new TemplateBindingObject(*this));
+	std::shared_ptr<TemplateBindingObject> element(new TemplateBindingObject());
+	*element=(*this);
 	element->setThisTemplateBindingObjectPtr(element);
 	return element;
 }
+
+TemplateBindingObject& TemplateBindingObject::operator=(const TemplateBindingObject & obj)
+{
+	UML::DirectedRelationshipObject::operator=(obj);
+	return *this;
+}
+
 
 void TemplateBindingObject::destroy()
 {	

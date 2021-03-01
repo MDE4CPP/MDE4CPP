@@ -94,20 +94,18 @@
 using namespace UML;
 
 PinObject::PinObject(std::shared_ptr<uml::Pin> _element):
-
 	m_PinValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Pin());
+{
 }
 
 PinObject::PinObject(PinObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 PinObject::PinObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Pin());
 }
 
 PinObject::~PinObject()
@@ -116,10 +114,19 @@ PinObject::~PinObject()
 
 std::shared_ptr<ecore::EObject> PinObject::copy()
 {
-	std::shared_ptr<PinObject> element(new PinObject(*this));
+	std::shared_ptr<PinObject> element(new PinObject());
+	*element=(*this);
 	element->setThisPinObjectPtr(element);
 	return element;
 }
+
+PinObject& PinObject::operator=(const PinObject & obj)
+{
+	UML::MultiplicityElementObject::operator=(obj);
+	UML::ObjectNodeObject::operator=(obj);
+	return *this;
+}
+
 
 void PinObject::destroy()
 {	

@@ -110,8 +110,17 @@ ActionImpl::ActionImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ActionImpl::ActionImpl(const ActionImpl & obj): ExecutableNodeImpl(obj), Action(obj)
+ActionImpl::ActionImpl(const ActionImpl & obj): ActionImpl()
 {
+	*this = obj;
+}
+
+ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ExecutableNodeImpl::operator=(obj);
+	Action::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Action "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -145,11 +154,13 @@ ActionImpl::ActionImpl(const ActionImpl & obj): ExecutableNodeImpl(obj), Action(
 		std::cout << "Initialising value Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ActionImpl::copy() const
 {
-	std::shared_ptr<ActionImpl> element(new ActionImpl(*this));
+	std::shared_ptr<ActionImpl> element(new ActionImpl());
+	*element =(*this);
 	element->setThisActionPtr(element);
 	return element;
 }

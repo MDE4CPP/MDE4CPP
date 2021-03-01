@@ -65,8 +65,6 @@ namespace uml
 	{
 		public:
  			DurationInterval(const DurationInterval &) {}
-			DurationInterval& operator=(DurationInterval const&) = delete;
-
 		protected:
 			DurationInterval(){}
 

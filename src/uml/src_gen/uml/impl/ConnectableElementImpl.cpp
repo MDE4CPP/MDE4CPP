@@ -91,8 +91,18 @@ ConnectableElementImpl::ConnectableElementImpl(std::weak_ptr<uml::TemplateParame
 	m_owner = par_owningTemplateParameter;
 }
 
-ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & obj): ParameterableElementImpl(obj), TypedElementImpl(obj), ConnectableElement(obj)
+ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & obj): ConnectableElementImpl()
 {
+	*this = obj;
+}
+
+ConnectableElementImpl& ConnectableElementImpl::operator=(const ConnectableElementImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	TypedElementImpl::operator=(obj);
+	ParameterableElementImpl::operator=(obj);
+	ConnectableElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ConnectableElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -104,11 +114,13 @@ ConnectableElementImpl::ConnectableElementImpl(const ConnectableElementImpl & ob
 	m_end.reset(new Bag<uml::ConnectorEnd>(*(obj.getEnd().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ConnectableElementImpl::copy() const
+std::shared_ptr<ecore::EObject> ConnectableElementImpl::copy() const
 {
-	std::shared_ptr<ConnectableElementImpl> element(new ConnectableElementImpl(*this));
+	std::shared_ptr<ConnectableElementImpl> element(new ConnectableElementImpl());
+	*element =(*this);
 	element->setThisConnectableElementPtr(element);
 	return element;
 }

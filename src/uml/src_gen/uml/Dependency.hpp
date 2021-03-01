@@ -63,8 +63,6 @@ namespace uml
 	{
 		public:
  			Dependency(const Dependency &) {}
-			Dependency& operator=(Dependency const&) = delete;
-
 		protected:
 			Dependency(){}
 

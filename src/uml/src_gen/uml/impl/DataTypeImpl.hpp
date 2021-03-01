@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			DataTypeImpl(const DataTypeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			DataTypeImpl& operator=(DataTypeImpl const&) = delete;
+			DataTypeImpl& operator=(DataTypeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

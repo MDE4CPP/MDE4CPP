@@ -77,8 +77,17 @@ ReadExtentActionActivationImpl::ReadExtentActionActivationImpl(std::weak_ptr<fUM
 	m_group = par_group;
 }
 
-ReadExtentActionActivationImpl::ReadExtentActionActivationImpl(const ReadExtentActionActivationImpl & obj): ActionActivationImpl(obj), ReadExtentActionActivation(obj)
+ReadExtentActionActivationImpl::ReadExtentActionActivationImpl(const ReadExtentActionActivationImpl & obj): ReadExtentActionActivationImpl()
 {
+	*this = obj;
+}
+
+ReadExtentActionActivationImpl& ReadExtentActionActivationImpl::operator=(const ReadExtentActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	ReadExtentActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReadExtentActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -88,11 +97,13 @@ ReadExtentActionActivationImpl::ReadExtentActionActivationImpl(const ReadExtentA
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReadExtentActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ReadExtentActionActivationImpl::copy() const
 {
-	std::shared_ptr<ReadExtentActionActivationImpl> element(new ReadExtentActionActivationImpl(*this));
+	std::shared_ptr<ReadExtentActionActivationImpl> element(new ReadExtentActionActivationImpl());
+	*element =(*this);
 	element->setThisReadExtentActionActivationPtr(element);
 	return element;
 }

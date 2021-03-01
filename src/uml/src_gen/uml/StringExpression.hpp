@@ -71,11 +71,8 @@ namespace uml
 	{
 		public:
  			StringExpression(const StringExpression &) {}
-			StringExpression& operator=(StringExpression const&) = delete;
-
 		protected:
 			StringExpression(){}
-
 			//Additional constructors for the containments back reference
 			StringExpression(std::weak_ptr<uml::Namespace> par_namespace);
 

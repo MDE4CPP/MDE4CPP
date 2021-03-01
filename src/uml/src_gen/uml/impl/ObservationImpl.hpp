@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ObservationImpl(const ObservationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ObservationImpl& operator=(ObservationImpl const&) = delete;
+			ObservationImpl& operator=(ObservationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

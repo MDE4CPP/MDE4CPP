@@ -124,20 +124,18 @@
 using namespace UML;
 
 CollaborationObject::CollaborationObject(std::shared_ptr<uml::Collaboration> _element):
-
 	m_CollaborationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Collaboration());
+{
 }
 
 CollaborationObject::CollaborationObject(CollaborationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CollaborationObject::CollaborationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Collaboration());
 }
 
 CollaborationObject::~CollaborationObject()
@@ -146,10 +144,19 @@ CollaborationObject::~CollaborationObject()
 
 std::shared_ptr<ecore::EObject> CollaborationObject::copy()
 {
-	std::shared_ptr<CollaborationObject> element(new CollaborationObject(*this));
+	std::shared_ptr<CollaborationObject> element(new CollaborationObject());
+	*element=(*this);
 	element->setThisCollaborationObjectPtr(element);
 	return element;
 }
+
+CollaborationObject& CollaborationObject::operator=(const CollaborationObject & obj)
+{
+	UML::BehavioredClassifierObject::operator=(obj);
+	UML::StructuredClassifierObject::operator=(obj);
+	return *this;
+}
+
 
 void CollaborationObject::destroy()
 {	

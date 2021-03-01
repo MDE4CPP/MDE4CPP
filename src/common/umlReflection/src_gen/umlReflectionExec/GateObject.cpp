@@ -55,20 +55,18 @@
 using namespace UML;
 
 GateObject::GateObject(std::shared_ptr<uml::Gate> _element):
-
 	m_GateValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Gate());
+{
 }
 
 GateObject::GateObject(GateObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 GateObject::GateObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Gate());
 }
 
 GateObject::~GateObject()
@@ -77,10 +75,18 @@ GateObject::~GateObject()
 
 std::shared_ptr<ecore::EObject> GateObject::copy()
 {
-	std::shared_ptr<GateObject> element(new GateObject(*this));
+	std::shared_ptr<GateObject> element(new GateObject());
+	*element=(*this);
 	element->setThisGateObjectPtr(element);
 	return element;
 }
+
+GateObject& GateObject::operator=(const GateObject & obj)
+{
+	UML::MessageEndObject::operator=(obj);
+	return *this;
+}
+
 
 void GateObject::destroy()
 {	

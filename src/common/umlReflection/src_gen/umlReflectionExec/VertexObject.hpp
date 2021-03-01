@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~VertexObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			VertexObject& operator=(VertexObject const&);
 
 			virtual void destroy();
 			

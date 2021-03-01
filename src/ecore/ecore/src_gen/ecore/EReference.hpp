@@ -57,10 +57,8 @@ namespace ecore
 	{
 		public:
  			EReference(const EReference &) {}
-
 		protected:
 			EReference(){}
-			EReference& operator=(const EReference &) = default;
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

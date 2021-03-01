@@ -72,11 +72,8 @@ namespace uml
 	{
 		public:
  			Element(const Element &) {}
-			Element& operator=(Element const&) = delete;
-
 		protected:
 			Element(){}
-
 			//Additional constructors for the containments back reference
 			Element(std::weak_ptr<uml::Element> par_owner);
 

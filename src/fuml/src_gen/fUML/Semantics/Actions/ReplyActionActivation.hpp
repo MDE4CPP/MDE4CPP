@@ -65,8 +65,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ReplyActionActivation(const ReplyActionActivation &) {}
-			ReplyActionActivation& operator=(ReplyActionActivation const&) = delete;
-
 		protected:
 			ReplyActionActivation(){}
 

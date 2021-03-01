@@ -77,8 +77,6 @@ namespace uml
 	{
 		public:
  			ReadLinkAction(const ReadLinkAction &) {}
-			ReadLinkAction& operator=(ReadLinkAction const&) = delete;
-
 		protected:
 			ReadLinkAction(){}
 

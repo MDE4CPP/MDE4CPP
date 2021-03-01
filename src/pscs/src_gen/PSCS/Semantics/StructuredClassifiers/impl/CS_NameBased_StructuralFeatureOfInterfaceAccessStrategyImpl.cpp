@@ -68,8 +68,17 @@ CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::~CS_NameBased_Struc
 }
 
 
-CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl & obj): CS_StructuralFeatureOfInterfaceAccessStrategyImpl(obj), CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy(obj)
+CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl & obj): CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl()
 {
+	*this = obj;
+}
+
+CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl& CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::operator=(const CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	CS_StructuralFeatureOfInterfaceAccessStrategyImpl::operator=(obj);
+	CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -79,11 +88,13 @@ CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::CS_NameBased_Struct
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl::copy() const
 {
-	std::shared_ptr<CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl> element(new CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl(*this));
+	std::shared_ptr<CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl> element(new CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl());
+	*element =(*this);
 	element->setThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr(element);
 	return element;
 }

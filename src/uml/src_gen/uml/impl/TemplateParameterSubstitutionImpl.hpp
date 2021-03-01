@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			TemplateParameterSubstitutionImpl(const TemplateParameterSubstitutionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			TemplateParameterSubstitutionImpl& operator=(TemplateParameterSubstitutionImpl const&) = delete;
+			TemplateParameterSubstitutionImpl& operator=(TemplateParameterSubstitutionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

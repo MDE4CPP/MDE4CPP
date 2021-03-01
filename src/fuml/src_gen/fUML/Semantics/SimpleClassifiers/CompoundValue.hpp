@@ -58,8 +58,6 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public:
  			CompoundValue(const CompoundValue &) {}
-			CompoundValue& operator=(CompoundValue const&) = delete;
-
 		protected:
 			CompoundValue(){}
 

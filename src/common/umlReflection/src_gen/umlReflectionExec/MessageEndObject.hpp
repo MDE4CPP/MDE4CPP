@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~MessageEndObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			MessageEndObject& operator=(MessageEndObject const&);
 
 			virtual void destroy();
 			

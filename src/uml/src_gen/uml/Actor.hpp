@@ -78,8 +78,6 @@ namespace uml
 	{
 		public:
  			Actor(const Actor &) {}
-			Actor& operator=(Actor const&) = delete;
-
 		protected:
 			Actor(){}
 

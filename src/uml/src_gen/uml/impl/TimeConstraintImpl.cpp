@@ -112,8 +112,17 @@ TimeConstraintImpl::TimeConstraintImpl(std::weak_ptr<uml::TemplateParameter> par
 	m_owner = par_owningTemplateParameter;
 }
 
-TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj): IntervalConstraintImpl(obj), TimeConstraint(obj)
+TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj): TimeConstraintImpl()
 {
+	*this = obj;
+}
+
+TimeConstraintImpl& TimeConstraintImpl::operator=(const TimeConstraintImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	IntervalConstraintImpl::operator=(obj);
+	TimeConstraint::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TimeConstraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -124,11 +133,13 @@ TimeConstraintImpl::TimeConstraintImpl(const TimeConstraintImpl & obj): Interval
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TimeConstraintImpl::copy() const
+std::shared_ptr<ecore::EObject> TimeConstraintImpl::copy() const
 {
-	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(*this));
+	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl());
+	*element =(*this);
 	element->setThisTimeConstraintPtr(element);
 	return element;
 }

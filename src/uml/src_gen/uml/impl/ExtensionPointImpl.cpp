@@ -90,8 +90,17 @@ ExtensionPointImpl::ExtensionPointImpl(std::weak_ptr<uml::UseCase> par_useCase)
 	m_namespace = par_useCase;
 }
 
-ExtensionPointImpl::ExtensionPointImpl(const ExtensionPointImpl & obj): RedefinableElementImpl(obj), ExtensionPoint(obj)
+ExtensionPointImpl::ExtensionPointImpl(const ExtensionPointImpl & obj): ExtensionPointImpl()
 {
+	*this = obj;
+}
+
+ExtensionPointImpl& ExtensionPointImpl::operator=(const ExtensionPointImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	RedefinableElementImpl::operator=(obj);
+	ExtensionPoint::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExtensionPoint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -102,11 +111,13 @@ ExtensionPointImpl::ExtensionPointImpl(const ExtensionPointImpl & obj): Redefina
 	m_useCase  = obj.getUseCase();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExtensionPointImpl::copy() const
+std::shared_ptr<ecore::EObject> ExtensionPointImpl::copy() const
 {
-	std::shared_ptr<ExtensionPointImpl> element(new ExtensionPointImpl(*this));
+	std::shared_ptr<ExtensionPointImpl> element(new ExtensionPointImpl());
+	*element =(*this);
 	element->setThisExtensionPointPtr(element);
 	return element;
 }

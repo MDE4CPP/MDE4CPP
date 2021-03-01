@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ClauseObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ClauseObject& operator=(ClauseObject const&);
 
 			virtual void destroy();
 			

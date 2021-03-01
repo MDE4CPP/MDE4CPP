@@ -109,8 +109,17 @@ InterfaceRealizationImpl::InterfaceRealizationImpl(std::weak_ptr<uml::TemplatePa
 	m_owner = par_owningTemplateParameter;
 }
 
-InterfaceRealizationImpl::InterfaceRealizationImpl(const InterfaceRealizationImpl & obj): RealizationImpl(obj), InterfaceRealization(obj)
+InterfaceRealizationImpl::InterfaceRealizationImpl(const InterfaceRealizationImpl & obj): InterfaceRealizationImpl()
 {
+	*this = obj;
+}
+
+InterfaceRealizationImpl& InterfaceRealizationImpl::operator=(const InterfaceRealizationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	RealizationImpl::operator=(obj);
+	InterfaceRealization::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InterfaceRealization "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -125,11 +134,13 @@ InterfaceRealizationImpl::InterfaceRealizationImpl(const InterfaceRealizationImp
 	{
 		m_contract = std::dynamic_pointer_cast<uml::Interface>(obj.getContract()->copy());
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InterfaceRealizationImpl::copy() const
+std::shared_ptr<ecore::EObject> InterfaceRealizationImpl::copy() const
 {
-	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl(*this));
+	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl());
+	*element =(*this);
 	element->setThisInterfaceRealizationPtr(element);
 	return element;
 }

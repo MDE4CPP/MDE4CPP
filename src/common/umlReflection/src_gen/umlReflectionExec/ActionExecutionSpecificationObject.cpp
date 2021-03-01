@@ -67,20 +67,18 @@
 using namespace UML;
 
 ActionExecutionSpecificationObject::ActionExecutionSpecificationObject(std::shared_ptr<uml::ActionExecutionSpecification> _element):
-
 	m_ActionExecutionSpecificationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ActionExecutionSpecification());
+{
 }
 
 ActionExecutionSpecificationObject::ActionExecutionSpecificationObject(ActionExecutionSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActionExecutionSpecificationObject::ActionExecutionSpecificationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ActionExecutionSpecification());
 }
 
 ActionExecutionSpecificationObject::~ActionExecutionSpecificationObject()
@@ -89,10 +87,18 @@ ActionExecutionSpecificationObject::~ActionExecutionSpecificationObject()
 
 std::shared_ptr<ecore::EObject> ActionExecutionSpecificationObject::copy()
 {
-	std::shared_ptr<ActionExecutionSpecificationObject> element(new ActionExecutionSpecificationObject(*this));
+	std::shared_ptr<ActionExecutionSpecificationObject> element(new ActionExecutionSpecificationObject());
+	*element=(*this);
 	element->setThisActionExecutionSpecificationObjectPtr(element);
 	return element;
 }
+
+ActionExecutionSpecificationObject& ActionExecutionSpecificationObject::operator=(const ActionExecutionSpecificationObject & obj)
+{
+	UML::ExecutionSpecificationObject::operator=(obj);
+	return *this;
+}
+
 
 void ActionExecutionSpecificationObject::destroy()
 {	

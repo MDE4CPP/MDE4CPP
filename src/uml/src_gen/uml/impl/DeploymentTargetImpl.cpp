@@ -81,8 +81,17 @@ DeploymentTargetImpl::DeploymentTargetImpl(std::weak_ptr<uml::Element> par_owner
 	m_owner = par_owner;
 }
 
-DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj): NamedElementImpl(obj), DeploymentTarget(obj)
+DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj): DeploymentTargetImpl()
 {
+	*this = obj;
+}
+
+DeploymentTargetImpl& DeploymentTargetImpl::operator=(const DeploymentTargetImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	DeploymentTarget::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DeploymentTarget "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -105,11 +114,13 @@ DeploymentTargetImpl::DeploymentTargetImpl(const DeploymentTargetImpl & obj): Na
 		std::cout << "Initialising value Subset: " << "m_deployment - Subset<uml::Deployment, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DeploymentTargetImpl::copy() const
+std::shared_ptr<ecore::EObject> DeploymentTargetImpl::copy() const
 {
-	std::shared_ptr<DeploymentTargetImpl> element(new DeploymentTargetImpl(*this));
+	std::shared_ptr<DeploymentTargetImpl> element(new DeploymentTargetImpl());
+	*element =(*this);
 	element->setThisDeploymentTargetPtr(element);
 	return element;
 }

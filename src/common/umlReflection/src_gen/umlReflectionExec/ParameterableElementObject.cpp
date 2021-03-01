@@ -46,20 +46,18 @@
 using namespace UML;
 
 ParameterableElementObject::ParameterableElementObject(std::shared_ptr<uml::ParameterableElement> _element):
-
 	m_ParameterableElementValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ParameterableElement());
+{
 }
 
 ParameterableElementObject::ParameterableElementObject(ParameterableElementObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ParameterableElementObject::ParameterableElementObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ParameterableElement());
 }
 
 ParameterableElementObject::~ParameterableElementObject()
@@ -68,10 +66,18 @@ ParameterableElementObject::~ParameterableElementObject()
 
 std::shared_ptr<ecore::EObject> ParameterableElementObject::copy()
 {
-	std::shared_ptr<ParameterableElementObject> element(new ParameterableElementObject(*this));
+	std::shared_ptr<ParameterableElementObject> element(new ParameterableElementObject());
+	*element=(*this);
 	element->setThisParameterableElementObjectPtr(element);
 	return element;
 }
+
+ParameterableElementObject& ParameterableElementObject::operator=(const ParameterableElementObject & obj)
+{
+	UML::ElementObject::operator=(obj);
+	return *this;
+}
+
 
 void ParameterableElementObject::destroy()
 {	

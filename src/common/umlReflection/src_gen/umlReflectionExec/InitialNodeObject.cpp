@@ -74,20 +74,18 @@
 using namespace UML;
 
 InitialNodeObject::InitialNodeObject(std::shared_ptr<uml::InitialNode> _element):
-
 	m_InitialNodeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InitialNode());
+{
 }
 
 InitialNodeObject::InitialNodeObject(InitialNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InitialNodeObject::InitialNodeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InitialNode());
 }
 
 InitialNodeObject::~InitialNodeObject()
@@ -96,10 +94,18 @@ InitialNodeObject::~InitialNodeObject()
 
 std::shared_ptr<ecore::EObject> InitialNodeObject::copy()
 {
-	std::shared_ptr<InitialNodeObject> element(new InitialNodeObject(*this));
+	std::shared_ptr<InitialNodeObject> element(new InitialNodeObject());
+	*element=(*this);
 	element->setThisInitialNodeObjectPtr(element);
 	return element;
 }
+
+InitialNodeObject& InitialNodeObject::operator=(const InitialNodeObject & obj)
+{
+	UML::ControlNodeObject::operator=(obj);
+	return *this;
+}
+
 
 void InitialNodeObject::destroy()
 {	

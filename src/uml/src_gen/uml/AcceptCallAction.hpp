@@ -76,8 +76,6 @@ namespace uml
 	{
 		public:
  			AcceptCallAction(const AcceptCallAction &) {}
-			AcceptCallAction& operator=(AcceptCallAction const&) = delete;
-
 		protected:
 			AcceptCallAction(){}
 

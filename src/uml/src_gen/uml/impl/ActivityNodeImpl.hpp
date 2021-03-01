@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ActivityNodeImpl(const ActivityNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ActivityNodeImpl& operator=(ActivityNodeImpl const&) = delete;
+			ActivityNodeImpl& operator=(ActivityNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

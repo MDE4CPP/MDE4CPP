@@ -98,8 +98,17 @@ AbstractionImpl::AbstractionImpl(std::weak_ptr<uml::TemplateParameter> par_ownin
 	m_owner = par_owningTemplateParameter;
 }
 
-AbstractionImpl::AbstractionImpl(const AbstractionImpl & obj): DependencyImpl(obj), Abstraction(obj)
+AbstractionImpl::AbstractionImpl(const AbstractionImpl & obj): AbstractionImpl()
 {
+	*this = obj;
+}
+
+AbstractionImpl& AbstractionImpl::operator=(const AbstractionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	DependencyImpl::operator=(obj);
+	Abstraction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Abstraction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -114,11 +123,13 @@ AbstractionImpl::AbstractionImpl(const AbstractionImpl & obj): DependencyImpl(ob
 		m_mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(obj.getMapping()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  AbstractionImpl::copy() const
+std::shared_ptr<ecore::EObject> AbstractionImpl::copy() const
 {
-	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl(*this));
+	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl());
+	*element =(*this);
 	element->setThisAbstractionPtr(element);
 	return element;
 }

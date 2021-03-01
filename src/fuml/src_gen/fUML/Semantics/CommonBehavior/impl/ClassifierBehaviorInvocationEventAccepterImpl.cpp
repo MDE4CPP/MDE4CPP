@@ -70,8 +70,17 @@ ClassifierBehaviorInvocationEventAccepterImpl::~ClassifierBehaviorInvocationEven
 }
 
 
-ClassifierBehaviorInvocationEventAccepterImpl::ClassifierBehaviorInvocationEventAccepterImpl(const ClassifierBehaviorInvocationEventAccepterImpl & obj): EventAccepterImpl(obj), ClassifierBehaviorInvocationEventAccepter(obj)
+ClassifierBehaviorInvocationEventAccepterImpl::ClassifierBehaviorInvocationEventAccepterImpl(const ClassifierBehaviorInvocationEventAccepterImpl & obj): ClassifierBehaviorInvocationEventAccepterImpl()
 {
+	*this = obj;
+}
+
+ClassifierBehaviorInvocationEventAccepterImpl& ClassifierBehaviorInvocationEventAccepterImpl::operator=(const ClassifierBehaviorInvocationEventAccepterImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EventAccepterImpl::operator=(obj);
+	ClassifierBehaviorInvocationEventAccepter::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClassifierBehaviorInvocationEventAccepter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -84,11 +93,13 @@ ClassifierBehaviorInvocationEventAccepterImpl::ClassifierBehaviorInvocationEvent
 	m_objectActivation  = obj.getObjectActivation();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ClassifierBehaviorInvocationEventAccepterImpl::copy() const
+std::shared_ptr<ecore::EObject> ClassifierBehaviorInvocationEventAccepterImpl::copy() const
 {
-	std::shared_ptr<ClassifierBehaviorInvocationEventAccepterImpl> element(new ClassifierBehaviorInvocationEventAccepterImpl(*this));
+	std::shared_ptr<ClassifierBehaviorInvocationEventAccepterImpl> element(new ClassifierBehaviorInvocationEventAccepterImpl());
+	*element =(*this);
 	element->setThisClassifierBehaviorInvocationEventAccepterPtr(element);
 	return element;
 }

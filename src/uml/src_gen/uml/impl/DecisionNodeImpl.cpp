@@ -107,8 +107,17 @@ DecisionNodeImpl::DecisionNodeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-DecisionNodeImpl::DecisionNodeImpl(const DecisionNodeImpl & obj): ControlNodeImpl(obj), DecisionNode(obj)
+DecisionNodeImpl::DecisionNodeImpl(const DecisionNodeImpl & obj): DecisionNodeImpl()
 {
+	*this = obj;
+}
+
+DecisionNodeImpl& DecisionNodeImpl::operator=(const DecisionNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ControlNodeImpl::operator=(obj);
+	DecisionNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DecisionNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -120,11 +129,13 @@ DecisionNodeImpl::DecisionNodeImpl(const DecisionNodeImpl & obj): ControlNodeImp
 	m_decisionInputFlow  = obj.getDecisionInputFlow();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DecisionNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> DecisionNodeImpl::copy() const
 {
-	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl(*this));
+	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl());
+	*element =(*this);
 	element->setThisDecisionNodePtr(element);
 	return element;
 }

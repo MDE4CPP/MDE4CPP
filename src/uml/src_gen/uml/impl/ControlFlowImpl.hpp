@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ControlFlowImpl(const ControlFlowImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ControlFlowImpl& operator=(ControlFlowImpl const&) = delete;
+			ControlFlowImpl& operator=(ControlFlowImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

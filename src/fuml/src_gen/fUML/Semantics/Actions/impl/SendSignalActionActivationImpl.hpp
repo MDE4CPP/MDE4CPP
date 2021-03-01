@@ -24,9 +24,7 @@ namespace fUML::Semantics::Actions
 		public: 
 			SendSignalActionActivationImpl(const SendSignalActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			SendSignalActionActivationImpl& operator=(SendSignalActionActivationImpl const&) = delete;
+			SendSignalActionActivationImpl& operator=(SendSignalActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

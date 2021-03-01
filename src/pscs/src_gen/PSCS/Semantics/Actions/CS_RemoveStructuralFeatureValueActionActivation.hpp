@@ -80,8 +80,6 @@ namespace PSCS::Semantics::Actions
 	{
 		public:
  			CS_RemoveStructuralFeatureValueActionActivation(const CS_RemoveStructuralFeatureValueActionActivation &) {}
-			CS_RemoveStructuralFeatureValueActionActivation& operator=(CS_RemoveStructuralFeatureValueActionActivation const&) = delete;
-
 		protected:
 			CS_RemoveStructuralFeatureValueActionActivation(){}
 

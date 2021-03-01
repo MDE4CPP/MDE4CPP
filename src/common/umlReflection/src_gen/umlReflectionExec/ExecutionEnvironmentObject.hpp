@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ExecutionEnvironmentObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ExecutionEnvironmentObject& operator=(ExecutionEnvironmentObject const&);
 
 			virtual void destroy();
 			

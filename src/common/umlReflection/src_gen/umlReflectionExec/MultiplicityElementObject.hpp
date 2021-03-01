@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~MultiplicityElementObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			MultiplicityElementObject& operator=(MultiplicityElementObject const&);
 
 			virtual void destroy();
 			

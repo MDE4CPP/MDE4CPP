@@ -57,8 +57,6 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public:
  			ParameterValue(const ParameterValue &) {}
-			ParameterValue& operator=(ParameterValue const&) = delete;
-
 		protected:
 			ParameterValue(){}
 

@@ -107,8 +107,18 @@ RegionImpl::RegionImpl(std::weak_ptr<uml::StateMachine> par_stateMachine)
 	m_namespace = par_stateMachine;
 }
 
-RegionImpl::RegionImpl(const RegionImpl & obj): NamespaceImpl(obj), RedefinableElementImpl(obj), Region(obj)
+RegionImpl::RegionImpl(const RegionImpl & obj): RegionImpl()
 {
+	*this = obj;
+}
+
+RegionImpl& RegionImpl::operator=(const RegionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamespaceImpl::operator=(obj);
+	RedefinableElementImpl::operator=(obj);
+	Region::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Region "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -146,11 +156,13 @@ RegionImpl::RegionImpl(const RegionImpl & obj): NamespaceImpl(obj), RedefinableE
 		std::cout << "Initialising value Subset: " << "m_transition - Subset<uml::Transition, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  RegionImpl::copy() const
+std::shared_ptr<ecore::EObject> RegionImpl::copy() const
 {
-	std::shared_ptr<RegionImpl> element(new RegionImpl(*this));
+	std::shared_ptr<RegionImpl> element(new RegionImpl());
+	*element =(*this);
 	element->setThisRegionPtr(element);
 	return element;
 }

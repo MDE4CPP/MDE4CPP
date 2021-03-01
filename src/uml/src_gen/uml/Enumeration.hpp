@@ -79,8 +79,6 @@ namespace uml
 	{
 		public:
  			Enumeration(const Enumeration &) {}
-			Enumeration& operator=(Enumeration const&) = delete;
-
 		protected:
 			Enumeration(){}
 

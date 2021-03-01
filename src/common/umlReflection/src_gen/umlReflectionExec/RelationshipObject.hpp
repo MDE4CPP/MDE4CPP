@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~RelationshipObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			RelationshipObject& operator=(RelationshipObject const&);
 
 			virtual void destroy();
 			

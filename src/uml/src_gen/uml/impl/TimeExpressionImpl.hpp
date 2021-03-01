@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			TimeExpressionImpl(const TimeExpressionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			TimeExpressionImpl& operator=(TimeExpressionImpl const&) = delete;
+			TimeExpressionImpl& operator=(TimeExpressionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

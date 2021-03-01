@@ -152,8 +152,17 @@ StateMachineImpl::StateMachineImpl(std::weak_ptr<uml::TemplateParameter> par_own
 }
 
 
-StateMachineImpl::StateMachineImpl(const StateMachineImpl & obj): BehaviorImpl(obj), StateMachine(obj)
+StateMachineImpl::StateMachineImpl(const StateMachineImpl & obj): StateMachineImpl()
 {
+	*this = obj;
+}
+
+StateMachineImpl& StateMachineImpl::operator=(const StateMachineImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	BehaviorImpl::operator=(obj);
+	StateMachine::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy StateMachine "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -189,11 +198,13 @@ StateMachineImpl::StateMachineImpl(const StateMachineImpl & obj): BehaviorImpl(o
 		std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StateMachineImpl::copy() const
+std::shared_ptr<ecore::EObject> StateMachineImpl::copy() const
 {
-	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(*this));
+	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl());
+	*element =(*this);
 	element->setThisStateMachinePtr(element);
 	return element;
 }

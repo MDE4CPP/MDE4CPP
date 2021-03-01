@@ -71,8 +71,17 @@ MergeNodeActivationImpl::MergeNodeActivationImpl(std::weak_ptr<fUML::Semantics::
 	m_group = par_group;
 }
 
-MergeNodeActivationImpl::MergeNodeActivationImpl(const MergeNodeActivationImpl & obj): ControlNodeActivationImpl(obj), MergeNodeActivation(obj)
+MergeNodeActivationImpl::MergeNodeActivationImpl(const MergeNodeActivationImpl & obj): MergeNodeActivationImpl()
 {
+	*this = obj;
+}
+
+MergeNodeActivationImpl& MergeNodeActivationImpl::operator=(const MergeNodeActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ControlNodeActivationImpl::operator=(obj);
+	MergeNodeActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy MergeNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -82,11 +91,13 @@ MergeNodeActivationImpl::MergeNodeActivationImpl(const MergeNodeActivationImpl &
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  MergeNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> MergeNodeActivationImpl::copy() const
 {
-	std::shared_ptr<MergeNodeActivationImpl> element(new MergeNodeActivationImpl(*this));
+	std::shared_ptr<MergeNodeActivationImpl> element(new MergeNodeActivationImpl());
+	*element =(*this);
 	element->setThisMergeNodeActivationPtr(element);
 	return element;
 }

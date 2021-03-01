@@ -83,8 +83,17 @@ ReplyActionActivationImpl::ReplyActionActivationImpl(std::weak_ptr<fUML::Semanti
 	m_group = par_group;
 }
 
-ReplyActionActivationImpl::ReplyActionActivationImpl(const ReplyActionActivationImpl & obj): ActionActivationImpl(obj), ReplyActionActivation(obj)
+ReplyActionActivationImpl::ReplyActionActivationImpl(const ReplyActionActivationImpl & obj): ReplyActionActivationImpl()
 {
+	*this = obj;
+}
+
+ReplyActionActivationImpl& ReplyActionActivationImpl::operator=(const ReplyActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	ReplyActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReplyActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -94,11 +103,13 @@ ReplyActionActivationImpl::ReplyActionActivationImpl(const ReplyActionActivation
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReplyActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ReplyActionActivationImpl::copy() const
 {
-	std::shared_ptr<ReplyActionActivationImpl> element(new ReplyActionActivationImpl(*this));
+	std::shared_ptr<ReplyActionActivationImpl> element(new ReplyActionActivationImpl());
+	*element =(*this);
 	element->setThisReplyActionActivationPtr(element);
 	return element;
 }

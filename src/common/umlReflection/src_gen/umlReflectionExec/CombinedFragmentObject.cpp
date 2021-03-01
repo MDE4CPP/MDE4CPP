@@ -67,20 +67,18 @@
 using namespace UML;
 
 CombinedFragmentObject::CombinedFragmentObject(std::shared_ptr<uml::CombinedFragment> _element):
-
 	m_CombinedFragmentValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CombinedFragment());
+{
 }
 
 CombinedFragmentObject::CombinedFragmentObject(CombinedFragmentObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CombinedFragmentObject::CombinedFragmentObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CombinedFragment());
 }
 
 CombinedFragmentObject::~CombinedFragmentObject()
@@ -89,10 +87,18 @@ CombinedFragmentObject::~CombinedFragmentObject()
 
 std::shared_ptr<ecore::EObject> CombinedFragmentObject::copy()
 {
-	std::shared_ptr<CombinedFragmentObject> element(new CombinedFragmentObject(*this));
+	std::shared_ptr<CombinedFragmentObject> element(new CombinedFragmentObject());
+	*element=(*this);
 	element->setThisCombinedFragmentObjectPtr(element);
 	return element;
 }
+
+CombinedFragmentObject& CombinedFragmentObject::operator=(const CombinedFragmentObject & obj)
+{
+	UML::InteractionFragmentObject::operator=(obj);
+	return *this;
+}
+
 
 void CombinedFragmentObject::destroy()
 {	

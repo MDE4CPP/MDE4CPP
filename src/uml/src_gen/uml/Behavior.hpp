@@ -87,11 +87,8 @@ namespace uml
 	{
 		public:
  			Behavior(const Behavior &) {}
-			Behavior& operator=(Behavior const&) = delete;
-
 		protected:
 			Behavior(){}
-
 			//Additional constructors for the containments back reference
 			Behavior(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier);
 

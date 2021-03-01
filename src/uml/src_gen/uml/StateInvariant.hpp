@@ -66,8 +66,6 @@ namespace uml
 	{
 		public:
  			StateInvariant(const StateInvariant &) {}
-			StateInvariant& operator=(StateInvariant const&) = delete;
-
 		protected:
 			StateInvariant(){}
 

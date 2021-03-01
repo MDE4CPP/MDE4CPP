@@ -95,20 +95,18 @@
 using namespace UML;
 
 WriteStructuralFeatureActionObject::WriteStructuralFeatureActionObject(std::shared_ptr<uml::WriteStructuralFeatureAction> _element):
-
 	m_WriteStructuralFeatureActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_WriteStructuralFeatureAction());
+{
 }
 
 WriteStructuralFeatureActionObject::WriteStructuralFeatureActionObject(WriteStructuralFeatureActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 WriteStructuralFeatureActionObject::WriteStructuralFeatureActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_WriteStructuralFeatureAction());
 }
 
 WriteStructuralFeatureActionObject::~WriteStructuralFeatureActionObject()
@@ -117,10 +115,18 @@ WriteStructuralFeatureActionObject::~WriteStructuralFeatureActionObject()
 
 std::shared_ptr<ecore::EObject> WriteStructuralFeatureActionObject::copy()
 {
-	std::shared_ptr<WriteStructuralFeatureActionObject> element(new WriteStructuralFeatureActionObject(*this));
+	std::shared_ptr<WriteStructuralFeatureActionObject> element(new WriteStructuralFeatureActionObject());
+	*element=(*this);
 	element->setThisWriteStructuralFeatureActionObjectPtr(element);
 	return element;
 }
+
+WriteStructuralFeatureActionObject& WriteStructuralFeatureActionObject::operator=(const WriteStructuralFeatureActionObject & obj)
+{
+	UML::StructuralFeatureActionObject::operator=(obj);
+	return *this;
+}
+
 
 void WriteStructuralFeatureActionObject::destroy()
 {	

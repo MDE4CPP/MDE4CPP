@@ -74,20 +74,18 @@
 using namespace UML;
 
 ControlNodeObject::ControlNodeObject(std::shared_ptr<uml::ControlNode> _element):
-
 	m_ControlNodeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ControlNode());
+{
 }
 
 ControlNodeObject::ControlNodeObject(ControlNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ControlNodeObject::ControlNodeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ControlNode());
 }
 
 ControlNodeObject::~ControlNodeObject()
@@ -96,10 +94,18 @@ ControlNodeObject::~ControlNodeObject()
 
 std::shared_ptr<ecore::EObject> ControlNodeObject::copy()
 {
-	std::shared_ptr<ControlNodeObject> element(new ControlNodeObject(*this));
+	std::shared_ptr<ControlNodeObject> element(new ControlNodeObject());
+	*element=(*this);
 	element->setThisControlNodeObjectPtr(element);
 	return element;
 }
+
+ControlNodeObject& ControlNodeObject::operator=(const ControlNodeObject & obj)
+{
+	UML::ActivityNodeObject::operator=(obj);
+	return *this;
+}
+
 
 void ControlNodeObject::destroy()
 {	

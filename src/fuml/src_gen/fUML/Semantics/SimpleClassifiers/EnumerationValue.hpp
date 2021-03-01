@@ -55,8 +55,6 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public:
  			EnumerationValue(const EnumerationValue &) {}
-			EnumerationValue& operator=(EnumerationValue const&) = delete;
-
 		protected:
 			EnumerationValue(){}
 

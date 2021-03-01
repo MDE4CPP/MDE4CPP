@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ClearAssociationActionImpl(const ClearAssociationActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ClearAssociationActionImpl& operator=(ClearAssociationActionImpl const&) = delete;
+			ClearAssociationActionImpl& operator=(ClearAssociationActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

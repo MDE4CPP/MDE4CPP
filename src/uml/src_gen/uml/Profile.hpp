@@ -84,8 +84,6 @@ namespace uml
 	{
 		public:
  			Profile(const Profile &) {}
-			Profile& operator=(Profile const&) = delete;
-
 		protected:
 			Profile(){}
 

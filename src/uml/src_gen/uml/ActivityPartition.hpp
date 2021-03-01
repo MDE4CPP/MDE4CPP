@@ -67,11 +67,8 @@ namespace uml
 	{
 		public:
  			ActivityPartition(const ActivityPartition &) {}
-			ActivityPartition& operator=(ActivityPartition const&) = delete;
-
 		protected:
 			ActivityPartition(){}
-
 			//Additional constructors for the containments back reference
 			ActivityPartition(std::weak_ptr<uml::Activity> par_inActivity);
 

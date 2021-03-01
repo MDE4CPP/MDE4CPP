@@ -97,8 +97,17 @@ EventImpl::EventImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplatePar
 	m_owner = par_owningTemplateParameter;
 }
 
-EventImpl::EventImpl(const EventImpl & obj): PackageableElementImpl(obj), Event(obj)
+EventImpl::EventImpl(const EventImpl & obj): EventImpl()
 {
+	*this = obj;
+}
+
+EventImpl& EventImpl::operator=(const EventImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PackageableElementImpl::operator=(obj);
+	Event::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Event "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -108,11 +117,13 @@ EventImpl::EventImpl(const EventImpl & obj): PackageableElementImpl(obj), Event(
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EventImpl::copy() const
+std::shared_ptr<ecore::EObject> EventImpl::copy() const
 {
-	std::shared_ptr<EventImpl> element(new EventImpl(*this));
+	std::shared_ptr<EventImpl> element(new EventImpl());
+	*element =(*this);
 	element->setThisEventPtr(element);
 	return element;
 }

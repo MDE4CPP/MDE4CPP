@@ -39,6 +39,7 @@ namespace UML
 		    virtual ~StructuredActivityNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			StructuredActivityNodeObject& operator=(StructuredActivityNodeObject const&);
 
 			virtual void destroy();
 			

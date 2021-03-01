@@ -99,8 +99,17 @@ TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::TemplateParameter> par_owningTem
 	m_owner = par_owningTemplateParameter;
 }
 
-TimeEventImpl::TimeEventImpl(const TimeEventImpl & obj): EventImpl(obj), TimeEvent(obj)
+TimeEventImpl::TimeEventImpl(const TimeEventImpl & obj): TimeEventImpl()
 {
+	*this = obj;
+}
+
+TimeEventImpl& TimeEventImpl::operator=(const TimeEventImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EventImpl::operator=(obj);
+	TimeEvent::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TimeEvent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -116,11 +125,13 @@ TimeEventImpl::TimeEventImpl(const TimeEventImpl & obj): EventImpl(obj), TimeEve
 		m_when = std::dynamic_pointer_cast<uml::TimeExpression>(obj.getWhen()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TimeEventImpl::copy() const
+std::shared_ptr<ecore::EObject> TimeEventImpl::copy() const
 {
-	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl(*this));
+	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl());
+	*element =(*this);
 	element->setThisTimeEventPtr(element);
 	return element;
 }

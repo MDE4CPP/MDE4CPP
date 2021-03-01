@@ -139,8 +139,18 @@ NodeImpl::NodeImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParam
 }
 
 
-NodeImpl::NodeImpl(const NodeImpl & obj): ClassImpl(obj), DeploymentTargetImpl(obj), Node(obj)
+NodeImpl::NodeImpl(const NodeImpl & obj): NodeImpl()
 {
+	*this = obj;
+}
+
+NodeImpl& NodeImpl::operator=(const NodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ClassImpl::operator=(obj);
+	DeploymentTargetImpl::operator=(obj);
+	Node::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Node "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -161,11 +171,13 @@ NodeImpl::NodeImpl(const NodeImpl & obj): ClassImpl(obj), DeploymentTargetImpl(o
 		std::cout << "Initialising value Subset: " << "m_nestedNode - Subset<uml::Node, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  NodeImpl::copy() const
+std::shared_ptr<ecore::EObject> NodeImpl::copy() const
 {
-	std::shared_ptr<NodeImpl> element(new NodeImpl(*this));
+	std::shared_ptr<NodeImpl> element(new NodeImpl());
+	*element =(*this);
 	element->setThisNodePtr(element);
 	return element;
 }

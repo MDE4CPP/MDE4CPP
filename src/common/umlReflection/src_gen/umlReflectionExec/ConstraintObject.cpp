@@ -63,20 +63,18 @@
 using namespace UML;
 
 ConstraintObject::ConstraintObject(std::shared_ptr<uml::Constraint> _element):
-
 	m_ConstraintValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Constraint());
+{
 }
 
 ConstraintObject::ConstraintObject(ConstraintObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ConstraintObject::ConstraintObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Constraint());
 }
 
 ConstraintObject::~ConstraintObject()
@@ -85,10 +83,18 @@ ConstraintObject::~ConstraintObject()
 
 std::shared_ptr<ecore::EObject> ConstraintObject::copy()
 {
-	std::shared_ptr<ConstraintObject> element(new ConstraintObject(*this));
+	std::shared_ptr<ConstraintObject> element(new ConstraintObject());
+	*element=(*this);
 	element->setThisConstraintObjectPtr(element);
 	return element;
 }
+
+ConstraintObject& ConstraintObject::operator=(const ConstraintObject & obj)
+{
+	UML::PackageableElementObject::operator=(obj);
+	return *this;
+}
+
 
 void ConstraintObject::destroy()
 {	

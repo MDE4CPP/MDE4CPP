@@ -66,9 +66,17 @@ FeatureValueImpl::~FeatureValueImpl()
 }
 
 
-FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj): ecore::EModelElementImpl(obj),
-FeatureValue(obj)
+FeatureValueImpl::FeatureValueImpl(const FeatureValueImpl & obj): FeatureValueImpl()
 {
+	*this = obj;
+}
+
+FeatureValueImpl& FeatureValueImpl::operator=(const FeatureValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	FeatureValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FeatureValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -86,11 +94,13 @@ FeatureValue(obj)
 		valuesContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_values->copy()));
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  FeatureValueImpl::copy() const
+std::shared_ptr<ecore::EObject> FeatureValueImpl::copy() const
 {
-	std::shared_ptr<FeatureValueImpl> element(new FeatureValueImpl(*this));
+	std::shared_ptr<FeatureValueImpl> element(new FeatureValueImpl());
+	*element =(*this);
 	element->setThisFeatureValuePtr(element);
 	return element;
 }

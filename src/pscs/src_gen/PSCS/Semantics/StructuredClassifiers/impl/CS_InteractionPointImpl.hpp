@@ -24,9 +24,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 		public: 
 			CS_InteractionPointImpl(const CS_InteractionPointImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CS_InteractionPointImpl& operator=(CS_InteractionPointImpl const&) = delete;
+			CS_InteractionPointImpl& operator=(CS_InteractionPointImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;

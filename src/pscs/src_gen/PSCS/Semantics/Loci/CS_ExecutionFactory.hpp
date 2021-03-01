@@ -71,8 +71,6 @@ namespace PSCS::Semantics::Loci
 	{
 		public:
  			CS_ExecutionFactory(const CS_ExecutionFactory &) {}
-			CS_ExecutionFactory& operator=(CS_ExecutionFactory const&) = delete;
-
 		protected:
 			CS_ExecutionFactory(){}
 

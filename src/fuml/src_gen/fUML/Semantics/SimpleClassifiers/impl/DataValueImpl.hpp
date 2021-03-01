@@ -24,9 +24,7 @@ namespace fUML::Semantics::SimpleClassifiers
 		public: 
 			DataValueImpl(const DataValueImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			DataValueImpl& operator=(DataValueImpl const&) = delete;
+			DataValueImpl& operator=(DataValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;

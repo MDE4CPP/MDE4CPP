@@ -48,8 +48,6 @@ namespace fUML::Semantics::Loci
 	{
 		public:
  			SemanticVisitor(const SemanticVisitor &) {}
-			SemanticVisitor& operator=(SemanticVisitor const&) = delete;
-
 		protected:
 			SemanticVisitor(){}
 

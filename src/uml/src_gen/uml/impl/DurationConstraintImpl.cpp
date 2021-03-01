@@ -112,8 +112,17 @@ DurationConstraintImpl::DurationConstraintImpl(std::weak_ptr<uml::TemplateParame
 	m_owner = par_owningTemplateParameter;
 }
 
-DurationConstraintImpl::DurationConstraintImpl(const DurationConstraintImpl & obj): IntervalConstraintImpl(obj), DurationConstraint(obj)
+DurationConstraintImpl::DurationConstraintImpl(const DurationConstraintImpl & obj): DurationConstraintImpl()
 {
+	*this = obj;
+}
+
+DurationConstraintImpl& DurationConstraintImpl::operator=(const DurationConstraintImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	IntervalConstraintImpl::operator=(obj);
+	DurationConstraint::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationConstraint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -128,11 +137,13 @@ DurationConstraintImpl::DurationConstraintImpl(const DurationConstraintImpl & ob
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DurationConstraintImpl::copy() const
+std::shared_ptr<ecore::EObject> DurationConstraintImpl::copy() const
 {
-	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(*this));
+	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl());
+	*element =(*this);
 	element->setThisDurationConstraintPtr(element);
 	return element;
 }

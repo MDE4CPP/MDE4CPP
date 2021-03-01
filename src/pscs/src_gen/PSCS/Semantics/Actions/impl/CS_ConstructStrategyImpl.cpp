@@ -42,8 +42,8 @@
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 
@@ -67,8 +67,17 @@ CS_ConstructStrategyImpl::~CS_ConstructStrategyImpl()
 }
 
 
-CS_ConstructStrategyImpl::CS_ConstructStrategyImpl(const CS_ConstructStrategyImpl & obj): fUML::Semantics::Loci::SemanticStrategyImpl(obj), CS_ConstructStrategy(obj)
+CS_ConstructStrategyImpl::CS_ConstructStrategyImpl(const CS_ConstructStrategyImpl & obj): CS_ConstructStrategyImpl()
 {
+	*this = obj;
+}
+
+CS_ConstructStrategyImpl& CS_ConstructStrategyImpl::operator=(const CS_ConstructStrategyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::SemanticStrategyImpl::operator=(obj);
+	CS_ConstructStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_ConstructStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -78,11 +87,13 @@ CS_ConstructStrategyImpl::CS_ConstructStrategyImpl(const CS_ConstructStrategyImp
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_ConstructStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_ConstructStrategyImpl::copy() const
 {
-	std::shared_ptr<CS_ConstructStrategyImpl> element(new CS_ConstructStrategyImpl(*this));
+	std::shared_ptr<CS_ConstructStrategyImpl> element(new CS_ConstructStrategyImpl());
+	*element =(*this);
 	element->setThisCS_ConstructStrategyPtr(element);
 	return element;
 }

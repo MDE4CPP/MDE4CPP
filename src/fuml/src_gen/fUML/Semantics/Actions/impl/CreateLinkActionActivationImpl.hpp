@@ -24,9 +24,7 @@ namespace fUML::Semantics::Actions
 		public: 
 			CreateLinkActionActivationImpl(const CreateLinkActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CreateLinkActionActivationImpl& operator=(CreateLinkActionActivationImpl const&) = delete;
+			CreateLinkActionActivationImpl& operator=(CreateLinkActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

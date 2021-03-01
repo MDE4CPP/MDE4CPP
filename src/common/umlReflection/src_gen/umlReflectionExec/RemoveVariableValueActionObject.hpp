@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~RemoveVariableValueActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			RemoveVariableValueActionObject& operator=(RemoveVariableValueActionObject const&);
 
 			virtual void destroy();
 			

@@ -66,11 +66,8 @@ namespace uml
 	{
 		public:
  			Vertex(const Vertex &) {}
-			Vertex& operator=(Vertex const&) = delete;
-
 		protected:
 			Vertex(){}
-
 			//Additional constructors for the containments back reference
 			Vertex(std::weak_ptr<uml::Region> par_container);
 

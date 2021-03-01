@@ -65,11 +65,8 @@ namespace uml
 	{
 		public:
  			ComponentRealization(const ComponentRealization &) {}
-			ComponentRealization& operator=(ComponentRealization const&) = delete;
-
 		protected:
 			ComponentRealization(){}
-
 			//Additional constructors for the containments back reference
 			ComponentRealization(std::weak_ptr<uml::Component> par_abstraction);
 

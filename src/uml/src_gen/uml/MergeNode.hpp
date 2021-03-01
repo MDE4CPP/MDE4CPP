@@ -70,8 +70,6 @@ namespace uml
 	{
 		public:
  			MergeNode(const MergeNode &) {}
-			MergeNode& operator=(MergeNode const&) = delete;
-
 		protected:
 			MergeNode(){}
 

@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ElementImpl(const ElementImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ElementImpl& operator=(ElementImpl const&) = delete;
+			ElementImpl& operator=(ElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

@@ -65,8 +65,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ClearAssociationActionActivation(const ClearAssociationActionActivation &) {}
-			ClearAssociationActionActivation& operator=(ClearAssociationActionActivation const&) = delete;
-
 		protected:
 			ClearAssociationActionActivation(){}
 

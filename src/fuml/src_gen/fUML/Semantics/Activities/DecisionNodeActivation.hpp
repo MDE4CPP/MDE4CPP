@@ -69,8 +69,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			DecisionNodeActivation(const DecisionNodeActivation &) {}
-			DecisionNodeActivation& operator=(DecisionNodeActivation const&) = delete;
-
 		protected:
 			DecisionNodeActivation(){}
 

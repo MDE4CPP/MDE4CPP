@@ -109,8 +109,17 @@ ReclassifyObjectActionImpl::ReclassifyObjectActionImpl(std::weak_ptr<uml::Elemen
 	m_owner = par_owner;
 }
 
-ReclassifyObjectActionImpl::ReclassifyObjectActionImpl(const ReclassifyObjectActionImpl & obj): ActionImpl(obj), ReclassifyObjectAction(obj)
+ReclassifyObjectActionImpl::ReclassifyObjectActionImpl(const ReclassifyObjectActionImpl & obj): ReclassifyObjectActionImpl()
 {
+	*this = obj;
+}
+
+ReclassifyObjectActionImpl& ReclassifyObjectActionImpl::operator=(const ReclassifyObjectActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	ReclassifyObjectAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReclassifyObjectAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -130,11 +139,13 @@ ReclassifyObjectActionImpl::ReclassifyObjectActionImpl(const ReclassifyObjectAct
 		m_object = std::dynamic_pointer_cast<uml::InputPin>(obj.getObject()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReclassifyObjectActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ReclassifyObjectActionImpl::copy() const
 {
-	std::shared_ptr<ReclassifyObjectActionImpl> element(new ReclassifyObjectActionImpl(*this));
+	std::shared_ptr<ReclassifyObjectActionImpl> element(new ReclassifyObjectActionImpl());
+	*element =(*this);
 	element->setThisReclassifyObjectActionPtr(element);
 	return element;
 }

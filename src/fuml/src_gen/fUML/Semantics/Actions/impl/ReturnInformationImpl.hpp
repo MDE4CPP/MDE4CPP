@@ -24,9 +24,7 @@ namespace fUML::Semantics::Actions
 		public: 
 			ReturnInformationImpl(const ReturnInformationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ReturnInformationImpl& operator=(ReturnInformationImpl const&) = delete;
+			ReturnInformationImpl& operator=(ReturnInformationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

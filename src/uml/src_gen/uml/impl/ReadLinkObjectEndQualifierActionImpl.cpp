@@ -110,8 +110,17 @@ ReadLinkObjectEndQualifierActionImpl::ReadLinkObjectEndQualifierActionImpl(std::
 	m_owner = par_owner;
 }
 
-ReadLinkObjectEndQualifierActionImpl::ReadLinkObjectEndQualifierActionImpl(const ReadLinkObjectEndQualifierActionImpl & obj): ActionImpl(obj), ReadLinkObjectEndQualifierAction(obj)
+ReadLinkObjectEndQualifierActionImpl::ReadLinkObjectEndQualifierActionImpl(const ReadLinkObjectEndQualifierActionImpl & obj): ReadLinkObjectEndQualifierActionImpl()
 {
+	*this = obj;
+}
+
+ReadLinkObjectEndQualifierActionImpl& ReadLinkObjectEndQualifierActionImpl::operator=(const ReadLinkObjectEndQualifierActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	ReadLinkObjectEndQualifierAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReadLinkObjectEndQualifierAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -132,11 +141,13 @@ ReadLinkObjectEndQualifierActionImpl::ReadLinkObjectEndQualifierActionImpl(const
 	}
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReadLinkObjectEndQualifierActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ReadLinkObjectEndQualifierActionImpl::copy() const
 {
-	std::shared_ptr<ReadLinkObjectEndQualifierActionImpl> element(new ReadLinkObjectEndQualifierActionImpl(*this));
+	std::shared_ptr<ReadLinkObjectEndQualifierActionImpl> element(new ReadLinkObjectEndQualifierActionImpl());
+	*element =(*this);
 	element->setThisReadLinkObjectEndQualifierActionPtr(element);
 	return element;
 }

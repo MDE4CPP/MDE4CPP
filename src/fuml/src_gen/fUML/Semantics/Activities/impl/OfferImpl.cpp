@@ -60,9 +60,17 @@ OfferImpl::~OfferImpl()
 }
 
 
-OfferImpl::OfferImpl(const OfferImpl & obj): ecore::EModelElementImpl(obj),
-Offer(obj)
+OfferImpl::OfferImpl(const OfferImpl & obj): OfferImpl()
 {
+	*this = obj;
+}
+
+OfferImpl& OfferImpl::operator=(const OfferImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	Offer::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Offer "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -74,11 +82,13 @@ Offer(obj)
 	m_offeredTokens.reset(new Bag<fUML::Semantics::Activities::Token>(*(obj.getOfferedTokens().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  OfferImpl::copy() const
+std::shared_ptr<ecore::EObject> OfferImpl::copy() const
 {
-	std::shared_ptr<OfferImpl> element(new OfferImpl(*this));
+	std::shared_ptr<OfferImpl> element(new OfferImpl());
+	*element =(*this);
 	element->setThisOfferPtr(element);
 	return element;
 }

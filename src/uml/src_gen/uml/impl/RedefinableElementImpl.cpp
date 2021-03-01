@@ -82,8 +82,17 @@ RedefinableElementImpl::RedefinableElementImpl(std::weak_ptr<uml::Element> par_o
 	m_owner = par_owner;
 }
 
-RedefinableElementImpl::RedefinableElementImpl(const RedefinableElementImpl & obj): NamedElementImpl(obj), RedefinableElement(obj)
+RedefinableElementImpl::RedefinableElementImpl(const RedefinableElementImpl & obj): RedefinableElementImpl()
 {
+	*this = obj;
+}
+
+RedefinableElementImpl& RedefinableElementImpl::operator=(const RedefinableElementImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	RedefinableElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy RedefinableElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -98,11 +107,13 @@ RedefinableElementImpl::RedefinableElementImpl(const RedefinableElementImpl & ob
 	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  RedefinableElementImpl::copy() const
+std::shared_ptr<ecore::EObject> RedefinableElementImpl::copy() const
 {
-	std::shared_ptr<RedefinableElementImpl> element(new RedefinableElementImpl(*this));
+	std::shared_ptr<RedefinableElementImpl> element(new RedefinableElementImpl());
+	*element =(*this);
 	element->setThisRedefinableElementPtr(element);
 	return element;
 }

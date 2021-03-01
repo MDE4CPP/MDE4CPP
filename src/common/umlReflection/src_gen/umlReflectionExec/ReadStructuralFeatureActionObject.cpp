@@ -93,20 +93,18 @@
 using namespace UML;
 
 ReadStructuralFeatureActionObject::ReadStructuralFeatureActionObject(std::shared_ptr<uml::ReadStructuralFeatureAction> _element):
-
 	m_ReadStructuralFeatureActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReadStructuralFeatureAction());
+{
 }
 
 ReadStructuralFeatureActionObject::ReadStructuralFeatureActionObject(ReadStructuralFeatureActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReadStructuralFeatureActionObject::ReadStructuralFeatureActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReadStructuralFeatureAction());
 }
 
 ReadStructuralFeatureActionObject::~ReadStructuralFeatureActionObject()
@@ -115,10 +113,18 @@ ReadStructuralFeatureActionObject::~ReadStructuralFeatureActionObject()
 
 std::shared_ptr<ecore::EObject> ReadStructuralFeatureActionObject::copy()
 {
-	std::shared_ptr<ReadStructuralFeatureActionObject> element(new ReadStructuralFeatureActionObject(*this));
+	std::shared_ptr<ReadStructuralFeatureActionObject> element(new ReadStructuralFeatureActionObject());
+	*element=(*this);
 	element->setThisReadStructuralFeatureActionObjectPtr(element);
 	return element;
 }
+
+ReadStructuralFeatureActionObject& ReadStructuralFeatureActionObject::operator=(const ReadStructuralFeatureActionObject & obj)
+{
+	UML::StructuralFeatureActionObject::operator=(obj);
+	return *this;
+}
+
 
 void ReadStructuralFeatureActionObject::destroy()
 {	

@@ -24,9 +24,7 @@ namespace fUML::Semantics::Actions
 		public: 
 			RemoveStructuralFeatureValueActivationImpl(const RemoveStructuralFeatureValueActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			RemoveStructuralFeatureValueActivationImpl& operator=(RemoveStructuralFeatureValueActivationImpl const&) = delete;
+			RemoveStructuralFeatureValueActivationImpl& operator=(RemoveStructuralFeatureValueActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

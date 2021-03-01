@@ -66,8 +66,6 @@ namespace uml
 	{
 		public:
  			Trigger(const Trigger &) {}
-			Trigger& operator=(Trigger const&) = delete;
-
 		protected:
 			Trigger(){}
 

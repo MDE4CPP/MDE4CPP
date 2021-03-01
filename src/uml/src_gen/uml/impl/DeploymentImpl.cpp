@@ -108,8 +108,17 @@ DeploymentImpl::DeploymentImpl(std::weak_ptr<uml::TemplateParameter> par_owningT
 	m_owner = par_owningTemplateParameter;
 }
 
-DeploymentImpl::DeploymentImpl(const DeploymentImpl & obj): DependencyImpl(obj), Deployment(obj)
+DeploymentImpl::DeploymentImpl(const DeploymentImpl & obj): DeploymentImpl()
 {
+	*this = obj;
+}
+
+DeploymentImpl& DeploymentImpl::operator=(const DeploymentImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	DependencyImpl::operator=(obj);
+	Deployment::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Deployment "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -136,11 +145,13 @@ DeploymentImpl::DeploymentImpl(const DeploymentImpl & obj): DependencyImpl(obj),
 		std::cout << "Initialising value Subset: " << "m_configuration - Subset<uml::DeploymentSpecification, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DeploymentImpl::copy() const
+std::shared_ptr<ecore::EObject> DeploymentImpl::copy() const
 {
-	std::shared_ptr<DeploymentImpl> element(new DeploymentImpl(*this));
+	std::shared_ptr<DeploymentImpl> element(new DeploymentImpl());
+	*element =(*this);
 	element->setThisDeploymentPtr(element);
 	return element;
 }

@@ -76,8 +76,6 @@ namespace uml
 	{
 		public:
  			BroadcastSignalAction(const BroadcastSignalAction &) {}
-			BroadcastSignalAction& operator=(BroadcastSignalAction const&) = delete;
-
 		protected:
 			BroadcastSignalAction(){}
 

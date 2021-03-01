@@ -24,9 +24,7 @@ namespace fUML::Semantics::CommonBehavior
 		public: 
 			CallEventOccurrenceImpl(const CallEventOccurrenceImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CallEventOccurrenceImpl& operator=(CallEventOccurrenceImpl const&) = delete;
+			CallEventOccurrenceImpl& operator=(CallEventOccurrenceImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

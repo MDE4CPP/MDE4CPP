@@ -85,11 +85,8 @@ namespace uml
 	{
 		public:
  			OutputPin(const OutputPin &) {}
-			OutputPin& operator=(OutputPin const&) = delete;
-
 		protected:
 			OutputPin(){}
-
 			//Additional constructors for the containments back reference
 			OutputPin(std::weak_ptr<uml::Action> par_action);
 

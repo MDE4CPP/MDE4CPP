@@ -67,8 +67,17 @@ SignalEventOccurrenceImpl::~SignalEventOccurrenceImpl()
 }
 
 
-SignalEventOccurrenceImpl::SignalEventOccurrenceImpl(const SignalEventOccurrenceImpl & obj): EventOccurrenceImpl(obj), SignalEventOccurrence(obj)
+SignalEventOccurrenceImpl::SignalEventOccurrenceImpl(const SignalEventOccurrenceImpl & obj): SignalEventOccurrenceImpl()
 {
+	*this = obj;
+}
+
+SignalEventOccurrenceImpl& SignalEventOccurrenceImpl::operator=(const SignalEventOccurrenceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EventOccurrenceImpl::operator=(obj);
+	SignalEventOccurrence::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SignalEventOccurrence "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -79,11 +88,13 @@ SignalEventOccurrenceImpl::SignalEventOccurrenceImpl(const SignalEventOccurrence
 	m_signalInstance  = obj.getSignalInstance();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  SignalEventOccurrenceImpl::copy() const
+std::shared_ptr<ecore::EObject> SignalEventOccurrenceImpl::copy() const
 {
-	std::shared_ptr<SignalEventOccurrenceImpl> element(new SignalEventOccurrenceImpl(*this));
+	std::shared_ptr<SignalEventOccurrenceImpl> element(new SignalEventOccurrenceImpl());
+	*element =(*this);
 	element->setThisSignalEventOccurrencePtr(element);
 	return element;
 }

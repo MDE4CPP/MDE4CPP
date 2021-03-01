@@ -82,8 +82,6 @@ namespace uml
 	{
 		public:
  			ExecutionEnvironment(const ExecutionEnvironment &) {}
-			ExecutionEnvironment& operator=(ExecutionEnvironment const&) = delete;
-
 		protected:
 			ExecutionEnvironment(){}
 

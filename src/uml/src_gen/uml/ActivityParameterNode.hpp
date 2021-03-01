@@ -77,8 +77,6 @@ namespace uml
 	{
 		public:
  			ActivityParameterNode(const ActivityParameterNode &) {}
-			ActivityParameterNode& operator=(ActivityParameterNode const&) = delete;
-
 		protected:
 			ActivityParameterNode(){}
 

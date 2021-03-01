@@ -58,8 +58,6 @@ namespace uml
 	{
 		public:
  			ConnectableElementTemplateParameter(const ConnectableElementTemplateParameter &) {}
-			ConnectableElementTemplateParameter& operator=(ConnectableElementTemplateParameter const&) = delete;
-
 		protected:
 			ConnectableElementTemplateParameter(){}
 

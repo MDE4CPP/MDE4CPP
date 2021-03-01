@@ -103,8 +103,17 @@ ActivityNodeImpl::ActivityNodeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ActivityNodeImpl::ActivityNodeImpl(const ActivityNodeImpl & obj): RedefinableElementImpl(obj), ActivityNode(obj)
+ActivityNodeImpl::ActivityNodeImpl(const ActivityNodeImpl & obj): ActivityNodeImpl()
 {
+	*this = obj;
+}
+
+ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	RedefinableElementImpl::operator=(obj);
+	ActivityNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -137,11 +146,13 @@ ActivityNodeImpl::ActivityNodeImpl(const ActivityNodeImpl & obj): RedefinableEle
 	{
 		redefinedNodeContainer->push_back(std::dynamic_pointer_cast<uml::ActivityNode>(_redefinedNode->copy()));
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> ActivityNodeImpl::copy() const
 {
-	std::shared_ptr<ActivityNodeImpl> element(new ActivityNodeImpl(*this));
+	std::shared_ptr<ActivityNodeImpl> element(new ActivityNodeImpl());
+	*element =(*this);
 	element->setThisActivityNodePtr(element);
 	return element;
 }

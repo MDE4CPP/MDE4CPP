@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~AssociationClassObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			AssociationClassObject& operator=(AssociationClassObject const&);
 
 			virtual void destroy();
 			

@@ -139,8 +139,17 @@ ComponentImpl::ComponentImpl(std::weak_ptr<uml::TemplateParameter> par_owningTem
 }
 
 
-ComponentImpl::ComponentImpl(const ComponentImpl & obj): ClassImpl(obj), Component(obj)
+ComponentImpl::ComponentImpl(const ComponentImpl & obj): ComponentImpl()
 {
+	*this = obj;
+}
+
+ComponentImpl& ComponentImpl::operator=(const ComponentImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ClassImpl::operator=(obj);
+	Component::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Component "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -177,11 +186,13 @@ ComponentImpl::ComponentImpl(const ComponentImpl & obj): ClassImpl(obj), Compone
 		std::cout << "Initialising value Subset: " << "m_realization - Subset<uml::ComponentRealization, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ComponentImpl::copy() const
+std::shared_ptr<ecore::EObject> ComponentImpl::copy() const
 {
-	std::shared_ptr<ComponentImpl> element(new ComponentImpl(*this));
+	std::shared_ptr<ComponentImpl> element(new ComponentImpl());
+	*element =(*this);
 	element->setThisComponentPtr(element);
 	return element;
 }

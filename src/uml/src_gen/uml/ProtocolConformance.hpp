@@ -58,11 +58,8 @@ namespace uml
 	{
 		public:
  			ProtocolConformance(const ProtocolConformance &) {}
-			ProtocolConformance& operator=(ProtocolConformance const&) = delete;
-
 		protected:
 			ProtocolConformance(){}
-
 			//Additional constructors for the containments back reference
 			ProtocolConformance(std::weak_ptr<uml::Element> par_owner);
 

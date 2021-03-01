@@ -100,8 +100,17 @@ StateInvariantImpl::StateInvariantImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-StateInvariantImpl::StateInvariantImpl(const StateInvariantImpl & obj): InteractionFragmentImpl(obj), StateInvariant(obj)
+StateInvariantImpl::StateInvariantImpl(const StateInvariantImpl & obj): StateInvariantImpl()
 {
+	*this = obj;
+}
+
+StateInvariantImpl& StateInvariantImpl::operator=(const StateInvariantImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	InteractionFragmentImpl::operator=(obj);
+	StateInvariant::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy StateInvariant "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -116,11 +125,13 @@ StateInvariantImpl::StateInvariantImpl(const StateInvariantImpl & obj): Interact
 		m_invariant = std::dynamic_pointer_cast<uml::Constraint>(obj.getInvariant()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StateInvariantImpl::copy() const
+std::shared_ptr<ecore::EObject> StateInvariantImpl::copy() const
 {
-	std::shared_ptr<StateInvariantImpl> element(new StateInvariantImpl(*this));
+	std::shared_ptr<StateInvariantImpl> element(new StateInvariantImpl());
+	*element =(*this);
 	element->setThisStateInvariantPtr(element);
 	return element;
 }

@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			NamespaceImpl(const NamespaceImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			NamespaceImpl& operator=(NamespaceImpl const&) = delete;
+			NamespaceImpl& operator=(NamespaceImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

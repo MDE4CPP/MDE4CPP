@@ -109,8 +109,17 @@ OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-OpaqueActionImpl::OpaqueActionImpl(const OpaqueActionImpl & obj): ActionImpl(obj), OpaqueAction(obj)
+OpaqueActionImpl::OpaqueActionImpl(const OpaqueActionImpl & obj): OpaqueActionImpl()
 {
+	*this = obj;
+}
+
+OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	OpaqueAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OpaqueAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -152,11 +161,13 @@ OpaqueActionImpl::OpaqueActionImpl(const OpaqueActionImpl & obj): ActionImpl(obj
 		std::cout << "Initialising value Subset: " << "m_outputValue - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  OpaqueActionImpl::copy() const
+std::shared_ptr<ecore::EObject> OpaqueActionImpl::copy() const
 {
-	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl(*this));
+	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl());
+	*element =(*this);
 	element->setThisOpaqueActionPtr(element);
 	return element;
 }

@@ -119,20 +119,18 @@
 using namespace UML;
 
 AssociationObject::AssociationObject(std::shared_ptr<uml::Association> _element):
-
 	m_AssociationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Association());
+{
 }
 
 AssociationObject::AssociationObject(AssociationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 AssociationObject::AssociationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Association());
 }
 
 AssociationObject::~AssociationObject()
@@ -141,10 +139,19 @@ AssociationObject::~AssociationObject()
 
 std::shared_ptr<ecore::EObject> AssociationObject::copy()
 {
-	std::shared_ptr<AssociationObject> element(new AssociationObject(*this));
+	std::shared_ptr<AssociationObject> element(new AssociationObject());
+	*element=(*this);
 	element->setThisAssociationObjectPtr(element);
 	return element;
 }
+
+AssociationObject& AssociationObject::operator=(const AssociationObject & obj)
+{
+	UML::ClassifierObject::operator=(obj);
+	UML::RelationshipObject::operator=(obj);
+	return *this;
+}
+
 
 void AssociationObject::destroy()
 {	

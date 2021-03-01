@@ -24,9 +24,7 @@ namespace fUML::Semantics::CommonBehavior
 		public: 
 			OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExecutionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			OpaqueBehaviorExecutionImpl& operator=(OpaqueBehaviorExecutionImpl const&) = delete;
+			OpaqueBehaviorExecutionImpl& operator=(OpaqueBehaviorExecutionImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

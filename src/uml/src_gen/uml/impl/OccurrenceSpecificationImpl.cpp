@@ -99,8 +99,17 @@ OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(std::weak_ptr<uml::Elem
 	m_owner = par_owner;
 }
 
-OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(const OccurrenceSpecificationImpl & obj): InteractionFragmentImpl(obj), OccurrenceSpecification(obj)
+OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(const OccurrenceSpecificationImpl & obj): OccurrenceSpecificationImpl()
 {
+	*this = obj;
+}
+
+OccurrenceSpecificationImpl& OccurrenceSpecificationImpl::operator=(const OccurrenceSpecificationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	InteractionFragmentImpl::operator=(obj);
+	OccurrenceSpecification::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OccurrenceSpecification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -114,11 +123,13 @@ OccurrenceSpecificationImpl::OccurrenceSpecificationImpl(const OccurrenceSpecifi
 	m_toBefore.reset(new Bag<uml::GeneralOrdering>(*(obj.getToBefore().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  OccurrenceSpecificationImpl::copy() const
+std::shared_ptr<ecore::EObject> OccurrenceSpecificationImpl::copy() const
 {
-	std::shared_ptr<OccurrenceSpecificationImpl> element(new OccurrenceSpecificationImpl(*this));
+	std::shared_ptr<OccurrenceSpecificationImpl> element(new OccurrenceSpecificationImpl());
+	*element =(*this);
 	element->setThisOccurrenceSpecificationPtr(element);
 	return element;
 }

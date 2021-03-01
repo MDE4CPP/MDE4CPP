@@ -67,9 +67,17 @@ TokenImpl::~TokenImpl()
 }
 
 
-TokenImpl::TokenImpl(const TokenImpl & obj): ecore::EModelElementImpl(obj),
-Token(obj)
+TokenImpl::TokenImpl(const TokenImpl & obj): TokenImpl()
 {
+	*this = obj;
+}
+
+TokenImpl& TokenImpl::operator=(const TokenImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	Token::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Token "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -81,11 +89,13 @@ Token(obj)
 	m_holder  = obj.getHolder();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TokenImpl::copy() const
+std::shared_ptr<ecore::EObject> TokenImpl::copy() const
 {
-	std::shared_ptr<TokenImpl> element(new TokenImpl(*this));
+	std::shared_ptr<TokenImpl> element(new TokenImpl());
+	*element =(*this);
 	element->setThisTokenPtr(element);
 	return element;
 }

@@ -111,8 +111,18 @@ VariableImpl::VariableImpl(std::weak_ptr<uml::StructuredActivityNode> par_scope)
 	m_namespace = par_scope;
 }
 
-VariableImpl::VariableImpl(const VariableImpl & obj): ConnectableElementImpl(obj), MultiplicityElementImpl(obj), Variable(obj)
+VariableImpl::VariableImpl(const VariableImpl & obj): VariableImpl()
 {
+	*this = obj;
+}
+
+VariableImpl& VariableImpl::operator=(const VariableImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ConnectableElementImpl::operator=(obj);
+	MultiplicityElementImpl::operator=(obj);
+	Variable::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Variable "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -124,11 +134,13 @@ VariableImpl::VariableImpl(const VariableImpl & obj): ConnectableElementImpl(obj
 	m_scope  = obj.getScope();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  VariableImpl::copy() const
+std::shared_ptr<ecore::EObject> VariableImpl::copy() const
 {
-	std::shared_ptr<VariableImpl> element(new VariableImpl(*this));
+	std::shared_ptr<VariableImpl> element(new VariableImpl());
+	*element =(*this);
 	element->setThisVariablePtr(element);
 	return element;
 }

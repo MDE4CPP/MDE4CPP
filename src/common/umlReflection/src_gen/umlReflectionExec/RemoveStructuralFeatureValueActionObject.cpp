@@ -98,20 +98,18 @@
 using namespace UML;
 
 RemoveStructuralFeatureValueActionObject::RemoveStructuralFeatureValueActionObject(std::shared_ptr<uml::RemoveStructuralFeatureValueAction> _element):
-
 	m_RemoveStructuralFeatureValueActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_RemoveStructuralFeatureValueAction());
+{
 }
 
 RemoveStructuralFeatureValueActionObject::RemoveStructuralFeatureValueActionObject(RemoveStructuralFeatureValueActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 RemoveStructuralFeatureValueActionObject::RemoveStructuralFeatureValueActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_RemoveStructuralFeatureValueAction());
 }
 
 RemoveStructuralFeatureValueActionObject::~RemoveStructuralFeatureValueActionObject()
@@ -120,10 +118,18 @@ RemoveStructuralFeatureValueActionObject::~RemoveStructuralFeatureValueActionObj
 
 std::shared_ptr<ecore::EObject> RemoveStructuralFeatureValueActionObject::copy()
 {
-	std::shared_ptr<RemoveStructuralFeatureValueActionObject> element(new RemoveStructuralFeatureValueActionObject(*this));
+	std::shared_ptr<RemoveStructuralFeatureValueActionObject> element(new RemoveStructuralFeatureValueActionObject());
+	*element=(*this);
 	element->setThisRemoveStructuralFeatureValueActionObjectPtr(element);
 	return element;
 }
+
+RemoveStructuralFeatureValueActionObject& RemoveStructuralFeatureValueActionObject::operator=(const RemoveStructuralFeatureValueActionObject & obj)
+{
+	UML::WriteStructuralFeatureActionObject::operator=(obj);
+	return *this;
+}
+
 
 void RemoveStructuralFeatureValueActionObject::destroy()
 {	

@@ -99,8 +99,17 @@ DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::TemplatePara
 	m_owner = par_owningTemplateParameter;
 }
 
-DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl & obj): ObservationImpl(obj), DurationObservation(obj)
+DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl & obj): DurationObservationImpl()
 {
+	*this = obj;
+}
+
+DurationObservationImpl& DurationObservationImpl::operator=(const DurationObservationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ObservationImpl::operator=(obj);
+	DurationObservation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationObservation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -117,11 +126,13 @@ DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl &
 	m_event.reset(new Bag<uml::NamedElement>(*(obj.getEvent().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DurationObservationImpl::copy() const
+std::shared_ptr<ecore::EObject> DurationObservationImpl::copy() const
 {
-	std::shared_ptr<DurationObservationImpl> element(new DurationObservationImpl(*this));
+	std::shared_ptr<DurationObservationImpl> element(new DurationObservationImpl());
+	*element =(*this);
 	element->setThisDurationObservationPtr(element);
 	return element;
 }

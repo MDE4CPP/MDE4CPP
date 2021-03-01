@@ -111,8 +111,17 @@ SendSignalActionImpl::SendSignalActionImpl(std::weak_ptr<uml::Element> par_owner
 	m_owner = par_owner;
 }
 
-SendSignalActionImpl::SendSignalActionImpl(const SendSignalActionImpl & obj): InvocationActionImpl(obj), SendSignalAction(obj)
+SendSignalActionImpl::SendSignalActionImpl(const SendSignalActionImpl & obj): SendSignalActionImpl()
 {
+	*this = obj;
+}
+
+SendSignalActionImpl& SendSignalActionImpl::operator=(const SendSignalActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	InvocationActionImpl::operator=(obj);
+	SendSignalAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SendSignalAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -128,11 +137,13 @@ SendSignalActionImpl::SendSignalActionImpl(const SendSignalActionImpl & obj): In
 		m_target = std::dynamic_pointer_cast<uml::InputPin>(obj.getTarget()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  SendSignalActionImpl::copy() const
+std::shared_ptr<ecore::EObject> SendSignalActionImpl::copy() const
 {
-	std::shared_ptr<SendSignalActionImpl> element(new SendSignalActionImpl(*this));
+	std::shared_ptr<SendSignalActionImpl> element(new SendSignalActionImpl());
+	*element =(*this);
 	element->setThisSendSignalActionPtr(element);
 	return element;
 }

@@ -52,20 +52,18 @@
 using namespace UML;
 
 OperationTemplateParameterObject::OperationTemplateParameterObject(std::shared_ptr<uml::OperationTemplateParameter> _element):
-
 	m_OperationTemplateParameterValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_OperationTemplateParameter());
+{
 }
 
 OperationTemplateParameterObject::OperationTemplateParameterObject(OperationTemplateParameterObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 OperationTemplateParameterObject::OperationTemplateParameterObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_OperationTemplateParameter());
 }
 
 OperationTemplateParameterObject::~OperationTemplateParameterObject()
@@ -74,10 +72,18 @@ OperationTemplateParameterObject::~OperationTemplateParameterObject()
 
 std::shared_ptr<ecore::EObject> OperationTemplateParameterObject::copy()
 {
-	std::shared_ptr<OperationTemplateParameterObject> element(new OperationTemplateParameterObject(*this));
+	std::shared_ptr<OperationTemplateParameterObject> element(new OperationTemplateParameterObject());
+	*element=(*this);
 	element->setThisOperationTemplateParameterObjectPtr(element);
 	return element;
 }
+
+OperationTemplateParameterObject& OperationTemplateParameterObject::operator=(const OperationTemplateParameterObject & obj)
+{
+	UML::TemplateParameterObject::operator=(obj);
+	return *this;
+}
+
 
 void OperationTemplateParameterObject::destroy()
 {	

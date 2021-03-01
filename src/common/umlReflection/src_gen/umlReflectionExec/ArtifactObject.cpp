@@ -117,20 +117,18 @@
 using namespace UML;
 
 ArtifactObject::ArtifactObject(std::shared_ptr<uml::Artifact> _element):
-
 	m_ArtifactValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Artifact());
+{
 }
 
 ArtifactObject::ArtifactObject(ArtifactObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ArtifactObject::ArtifactObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Artifact());
 }
 
 ArtifactObject::~ArtifactObject()
@@ -139,10 +137,19 @@ ArtifactObject::~ArtifactObject()
 
 std::shared_ptr<ecore::EObject> ArtifactObject::copy()
 {
-	std::shared_ptr<ArtifactObject> element(new ArtifactObject(*this));
+	std::shared_ptr<ArtifactObject> element(new ArtifactObject());
+	*element=(*this);
 	element->setThisArtifactObjectPtr(element);
 	return element;
 }
+
+ArtifactObject& ArtifactObject::operator=(const ArtifactObject & obj)
+{
+	UML::ClassifierObject::operator=(obj);
+	UML::DeployedArtifactObject::operator=(obj);
+	return *this;
+}
+
 
 void ArtifactObject::destroy()
 {	

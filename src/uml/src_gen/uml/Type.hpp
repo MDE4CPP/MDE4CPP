@@ -66,11 +66,8 @@ namespace uml
 	{
 		public:
  			Type(const Type &) {}
-			Type& operator=(Type const&) = delete;
-
 		protected:
 			Type(){}
-
 			//Additional constructors for the containments back reference
 			Type(std::weak_ptr<uml::Namespace> par_namespace);
 

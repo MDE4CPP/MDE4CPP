@@ -116,8 +116,17 @@ LiteralBooleanImpl::LiteralBooleanImpl(std::weak_ptr<uml::ValueSpecificationActi
 	m_owner = par_valueSpecificationAction;
 }
 
-LiteralBooleanImpl::LiteralBooleanImpl(const LiteralBooleanImpl & obj): LiteralSpecificationImpl(obj), LiteralBoolean(obj)
+LiteralBooleanImpl::LiteralBooleanImpl(const LiteralBooleanImpl & obj): LiteralBooleanImpl()
 {
+	*this = obj;
+}
+
+LiteralBooleanImpl& LiteralBooleanImpl::operator=(const LiteralBooleanImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	LiteralSpecificationImpl::operator=(obj);
+	LiteralBoolean::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralBoolean "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -128,11 +137,13 @@ LiteralBooleanImpl::LiteralBooleanImpl(const LiteralBooleanImpl & obj): LiteralS
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LiteralBooleanImpl::copy() const
+std::shared_ptr<ecore::EObject> LiteralBooleanImpl::copy() const
 {
-	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(*this));
+	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl());
+	*element =(*this);
 	element->setThisLiteralBooleanPtr(element);
 	return element;
 }

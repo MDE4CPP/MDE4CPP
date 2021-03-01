@@ -99,8 +99,17 @@ InteractionFragmentImpl::InteractionFragmentImpl(std::weak_ptr<uml::Element> par
 	m_owner = par_owner;
 }
 
-InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl & obj): NamedElementImpl(obj), InteractionFragment(obj)
+InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl & obj): InteractionFragmentImpl()
 {
+	*this = obj;
+}
+
+InteractionFragmentImpl& InteractionFragmentImpl::operator=(const InteractionFragmentImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	InteractionFragment::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InteractionFragment "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -125,11 +134,13 @@ InteractionFragmentImpl::InteractionFragmentImpl(const InteractionFragmentImpl &
 		std::cout << "Initialising value Subset: " << "m_generalOrdering - Subset<uml::GeneralOrdering, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InteractionFragmentImpl::copy() const
+std::shared_ptr<ecore::EObject> InteractionFragmentImpl::copy() const
 {
-	std::shared_ptr<InteractionFragmentImpl> element(new InteractionFragmentImpl(*this));
+	std::shared_ptr<InteractionFragmentImpl> element(new InteractionFragmentImpl());
+	*element =(*this);
 	element->setThisInteractionFragmentPtr(element);
 	return element;
 }

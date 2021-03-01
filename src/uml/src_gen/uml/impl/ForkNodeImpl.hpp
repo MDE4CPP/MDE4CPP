@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ForkNodeImpl(const ForkNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ForkNodeImpl& operator=(ForkNodeImpl const&) = delete;
+			ForkNodeImpl& operator=(ForkNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

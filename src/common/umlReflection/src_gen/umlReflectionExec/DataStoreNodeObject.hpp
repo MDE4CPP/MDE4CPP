@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~DataStoreNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			DataStoreNodeObject& operator=(DataStoreNodeObject const&);
 
 			virtual void destroy();
 			

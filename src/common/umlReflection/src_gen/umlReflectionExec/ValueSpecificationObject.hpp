@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~ValueSpecificationObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ValueSpecificationObject& operator=(ValueSpecificationObject const&);
 
 			virtual void destroy();
 			

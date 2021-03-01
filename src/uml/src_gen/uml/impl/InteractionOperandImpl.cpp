@@ -106,8 +106,18 @@ InteractionOperandImpl::InteractionOperandImpl(std::weak_ptr<uml::Element> par_o
 	m_owner = par_owner;
 }
 
-InteractionOperandImpl::InteractionOperandImpl(const InteractionOperandImpl & obj): InteractionFragmentImpl(obj), NamespaceImpl(obj), InteractionOperand(obj)
+InteractionOperandImpl::InteractionOperandImpl(const InteractionOperandImpl & obj): InteractionOperandImpl()
 {
+	*this = obj;
+}
+
+InteractionOperandImpl& InteractionOperandImpl::operator=(const InteractionOperandImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamespaceImpl::operator=(obj);
+	InteractionFragmentImpl::operator=(obj);
+	InteractionOperand::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InteractionOperand "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -133,11 +143,13 @@ InteractionOperandImpl::InteractionOperandImpl(const InteractionOperandImpl & ob
 	#endif
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InteractionOperandImpl::copy() const
+std::shared_ptr<ecore::EObject> InteractionOperandImpl::copy() const
 {
-	std::shared_ptr<InteractionOperandImpl> element(new InteractionOperandImpl(*this));
+	std::shared_ptr<InteractionOperandImpl> element(new InteractionOperandImpl());
+	*element =(*this);
 	element->setThisInteractionOperandPtr(element);
 	return element;
 }

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~TriggerObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			TriggerObject& operator=(TriggerObject const&);
 
 			virtual void destroy();
 			

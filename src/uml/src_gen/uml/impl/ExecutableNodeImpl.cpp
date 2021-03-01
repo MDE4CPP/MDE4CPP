@@ -104,8 +104,17 @@ ExecutableNodeImpl::ExecutableNodeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ExecutableNodeImpl::ExecutableNodeImpl(const ExecutableNodeImpl & obj): ActivityNodeImpl(obj), ExecutableNode(obj)
+ExecutableNodeImpl::ExecutableNodeImpl(const ExecutableNodeImpl & obj): ExecutableNodeImpl()
 {
+	*this = obj;
+}
+
+ExecutableNodeImpl& ExecutableNodeImpl::operator=(const ExecutableNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActivityNodeImpl::operator=(obj);
+	ExecutableNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExecutableNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -126,11 +135,13 @@ ExecutableNodeImpl::ExecutableNodeImpl(const ExecutableNodeImpl & obj): Activity
 		std::cout << "Initialising value Subset: " << "m_handler - Subset<uml::ExceptionHandler, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExecutableNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> ExecutableNodeImpl::copy() const
 {
-	std::shared_ptr<ExecutableNodeImpl> element(new ExecutableNodeImpl(*this));
+	std::shared_ptr<ExecutableNodeImpl> element(new ExecutableNodeImpl());
+	*element =(*this);
 	element->setThisExecutableNodePtr(element);
 	return element;
 }

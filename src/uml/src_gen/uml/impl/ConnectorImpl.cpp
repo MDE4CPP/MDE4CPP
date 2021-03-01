@@ -95,8 +95,17 @@ ConnectorImpl::ConnectorImpl(std::weak_ptr<uml::StructuredClassifier> par_struct
 	m_namespace = par_structuredClassifier;
 }
 
-ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj): FeatureImpl(obj), Connector(obj)
+ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj): ConnectorImpl()
 {
+	*this = obj;
+}
+
+ConnectorImpl& ConnectorImpl::operator=(const ConnectorImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	FeatureImpl::operator=(obj);
+	Connector::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Connector "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -127,11 +136,13 @@ ConnectorImpl::ConnectorImpl(const ConnectorImpl & obj): FeatureImpl(obj), Conne
 		std::cout << "Initialising value Subset: " << "m_end - Subset<uml::ConnectorEnd, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ConnectorImpl::copy() const
+std::shared_ptr<ecore::EObject> ConnectorImpl::copy() const
 {
-	std::shared_ptr<ConnectorImpl> element(new ConnectorImpl(*this));
+	std::shared_ptr<ConnectorImpl> element(new ConnectorImpl());
+	*element =(*this);
 	element->setThisConnectorPtr(element);
 	return element;
 }

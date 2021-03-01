@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~NamespaceObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			NamespaceObject& operator=(NamespaceObject const&);
 
 			virtual void destroy();
 			

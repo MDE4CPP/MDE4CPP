@@ -100,8 +100,17 @@ ContinuationImpl::ContinuationImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ContinuationImpl::ContinuationImpl(const ContinuationImpl & obj): InteractionFragmentImpl(obj), Continuation(obj)
+ContinuationImpl::ContinuationImpl(const ContinuationImpl & obj): ContinuationImpl()
 {
+	*this = obj;
+}
+
+ContinuationImpl& ContinuationImpl::operator=(const ContinuationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	InteractionFragmentImpl::operator=(obj);
+	Continuation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Continuation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -112,11 +121,13 @@ ContinuationImpl::ContinuationImpl(const ContinuationImpl & obj): InteractionFra
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ContinuationImpl::copy() const
+std::shared_ptr<ecore::EObject> ContinuationImpl::copy() const
 {
-	std::shared_ptr<ContinuationImpl> element(new ContinuationImpl(*this));
+	std::shared_ptr<ContinuationImpl> element(new ContinuationImpl());
+	*element =(*this);
 	element->setThisContinuationPtr(element);
 	return element;
 }

@@ -110,8 +110,18 @@ PinImpl::PinImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-PinImpl::PinImpl(const PinImpl & obj): MultiplicityElementImpl(obj), ObjectNodeImpl(obj), Pin(obj)
+PinImpl::PinImpl(const PinImpl & obj): PinImpl()
 {
+	*this = obj;
+}
+
+PinImpl& PinImpl::operator=(const PinImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ObjectNodeImpl::operator=(obj);
+	MultiplicityElementImpl::operator=(obj);
+	Pin::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Pin "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -122,11 +132,13 @@ PinImpl::PinImpl(const PinImpl & obj): MultiplicityElementImpl(obj), ObjectNodeI
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  PinImpl::copy() const
+std::shared_ptr<ecore::EObject> PinImpl::copy() const
 {
-	std::shared_ptr<PinImpl> element(new PinImpl(*this));
+	std::shared_ptr<PinImpl> element(new PinImpl());
+	*element =(*this);
 	element->setThisPinPtr(element);
 	return element;
 }

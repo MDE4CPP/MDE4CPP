@@ -46,20 +46,18 @@
 using namespace UML;
 
 TemplateableElementObject::TemplateableElementObject(std::shared_ptr<uml::TemplateableElement> _element):
-
 	m_TemplateableElementValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TemplateableElement());
+{
 }
 
 TemplateableElementObject::TemplateableElementObject(TemplateableElementObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TemplateableElementObject::TemplateableElementObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TemplateableElement());
 }
 
 TemplateableElementObject::~TemplateableElementObject()
@@ -68,10 +66,18 @@ TemplateableElementObject::~TemplateableElementObject()
 
 std::shared_ptr<ecore::EObject> TemplateableElementObject::copy()
 {
-	std::shared_ptr<TemplateableElementObject> element(new TemplateableElementObject(*this));
+	std::shared_ptr<TemplateableElementObject> element(new TemplateableElementObject());
+	*element=(*this);
 	element->setThisTemplateableElementObjectPtr(element);
 	return element;
 }
+
+TemplateableElementObject& TemplateableElementObject::operator=(const TemplateableElementObject & obj)
+{
+	UML::ElementObject::operator=(obj);
+	return *this;
+}
+
 
 void TemplateableElementObject::destroy()
 {	

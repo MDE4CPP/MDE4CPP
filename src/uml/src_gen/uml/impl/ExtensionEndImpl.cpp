@@ -140,8 +140,17 @@ ExtensionEndImpl::ExtensionEndImpl(std::weak_ptr<uml::TemplateParameter> par_own
 	m_owner = par_owningTemplateParameter;
 }
 
-ExtensionEndImpl::ExtensionEndImpl(const ExtensionEndImpl & obj): PropertyImpl(obj), ExtensionEnd(obj)
+ExtensionEndImpl::ExtensionEndImpl(const ExtensionEndImpl & obj): ExtensionEndImpl()
 {
+	*this = obj;
+}
+
+ExtensionEndImpl& ExtensionEndImpl::operator=(const ExtensionEndImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PropertyImpl::operator=(obj);
+	ExtensionEnd::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExtensionEnd "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -151,11 +160,13 @@ ExtensionEndImpl::ExtensionEndImpl(const ExtensionEndImpl & obj): PropertyImpl(o
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExtensionEndImpl::copy() const
+std::shared_ptr<ecore::EObject> ExtensionEndImpl::copy() const
 {
-	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(*this));
+	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl());
+	*element =(*this);
 	element->setThisExtensionEndPtr(element);
 	return element;
 }

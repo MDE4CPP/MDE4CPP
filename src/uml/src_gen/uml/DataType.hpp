@@ -76,8 +76,6 @@ namespace uml
 	{
 		public:
  			DataType(const DataType &) {}
-			DataType& operator=(DataType const&) = delete;
-
 		protected:
 			DataType(){}
 

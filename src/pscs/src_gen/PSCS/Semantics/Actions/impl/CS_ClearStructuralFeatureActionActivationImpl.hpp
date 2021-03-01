@@ -24,9 +24,7 @@ namespace PSCS::Semantics::Actions
 		public: 
 			CS_ClearStructuralFeatureActionActivationImpl(const CS_ClearStructuralFeatureActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CS_ClearStructuralFeatureActionActivationImpl& operator=(CS_ClearStructuralFeatureActionActivationImpl const&) = delete;
+			CS_ClearStructuralFeatureActionActivationImpl& operator=(CS_ClearStructuralFeatureActionActivationImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;

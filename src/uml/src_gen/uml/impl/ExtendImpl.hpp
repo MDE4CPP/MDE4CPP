@@ -24,9 +24,7 @@ namespace uml
 		public: 
 			ExtendImpl(const ExtendImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ExtendImpl& operator=(ExtendImpl const&) = delete;
+			ExtendImpl& operator=(ExtendImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

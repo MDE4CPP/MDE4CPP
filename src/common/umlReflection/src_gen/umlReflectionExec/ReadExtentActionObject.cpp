@@ -91,20 +91,18 @@
 using namespace UML;
 
 ReadExtentActionObject::ReadExtentActionObject(std::shared_ptr<uml::ReadExtentAction> _element):
-
 	m_ReadExtentActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReadExtentAction());
+{
 }
 
 ReadExtentActionObject::ReadExtentActionObject(ReadExtentActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReadExtentActionObject::ReadExtentActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReadExtentAction());
 }
 
 ReadExtentActionObject::~ReadExtentActionObject()
@@ -113,10 +111,18 @@ ReadExtentActionObject::~ReadExtentActionObject()
 
 std::shared_ptr<ecore::EObject> ReadExtentActionObject::copy()
 {
-	std::shared_ptr<ReadExtentActionObject> element(new ReadExtentActionObject(*this));
+	std::shared_ptr<ReadExtentActionObject> element(new ReadExtentActionObject());
+	*element=(*this);
 	element->setThisReadExtentActionObjectPtr(element);
 	return element;
 }
+
+ReadExtentActionObject& ReadExtentActionObject::operator=(const ReadExtentActionObject & obj)
+{
+	UML::ActionObject::operator=(obj);
+	return *this;
+}
+
 
 void ReadExtentActionObject::destroy()
 {	

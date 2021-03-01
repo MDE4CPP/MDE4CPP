@@ -91,20 +91,18 @@
 using namespace UML;
 
 DestroyLinkActionObject::DestroyLinkActionObject(std::shared_ptr<uml::DestroyLinkAction> _element):
-
 	m_DestroyLinkActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DestroyLinkAction());
+{
 }
 
 DestroyLinkActionObject::DestroyLinkActionObject(DestroyLinkActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DestroyLinkActionObject::DestroyLinkActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DestroyLinkAction());
 }
 
 DestroyLinkActionObject::~DestroyLinkActionObject()
@@ -113,10 +111,18 @@ DestroyLinkActionObject::~DestroyLinkActionObject()
 
 std::shared_ptr<ecore::EObject> DestroyLinkActionObject::copy()
 {
-	std::shared_ptr<DestroyLinkActionObject> element(new DestroyLinkActionObject(*this));
+	std::shared_ptr<DestroyLinkActionObject> element(new DestroyLinkActionObject());
+	*element=(*this);
 	element->setThisDestroyLinkActionObjectPtr(element);
 	return element;
 }
+
+DestroyLinkActionObject& DestroyLinkActionObject::operator=(const DestroyLinkActionObject & obj)
+{
+	UML::WriteLinkActionObject::operator=(obj);
+	return *this;
+}
+
 
 void DestroyLinkActionObject::destroy()
 {	

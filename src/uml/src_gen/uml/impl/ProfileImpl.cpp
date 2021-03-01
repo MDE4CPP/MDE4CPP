@@ -129,8 +129,17 @@ ProfileImpl::ProfileImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplat
 	m_owner = par_owningTemplateParameter;
 }
 
-ProfileImpl::ProfileImpl(const ProfileImpl & obj): PackageImpl(obj), Profile(obj)
+ProfileImpl::ProfileImpl(const ProfileImpl & obj): ProfileImpl()
 {
+	*this = obj;
+}
+
+ProfileImpl& ProfileImpl::operator=(const ProfileImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PackageImpl::operator=(obj);
+	Profile::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Profile "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -150,11 +159,13 @@ ProfileImpl::ProfileImpl(const ProfileImpl & obj): PackageImpl(obj), Profile(obj
 	{
 		metamodelReferenceContainer->push_back(std::dynamic_pointer_cast<uml::PackageImport>(_metamodelReference->copy()));
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ProfileImpl::copy() const
+std::shared_ptr<ecore::EObject> ProfileImpl::copy() const
 {
-	std::shared_ptr<ProfileImpl> element(new ProfileImpl(*this));
+	std::shared_ptr<ProfileImpl> element(new ProfileImpl());
+	*element =(*this);
 	element->setThisProfilePtr(element);
 	return element;
 }

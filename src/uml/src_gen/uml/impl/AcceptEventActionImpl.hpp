@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			AcceptEventActionImpl(const AcceptEventActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			AcceptEventActionImpl& operator=(AcceptEventActionImpl const&) = delete;
+			AcceptEventActionImpl& operator=(AcceptEventActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

@@ -64,8 +64,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			PinActivation(const PinActivation &) {}
-			PinActivation& operator=(PinActivation const&) = delete;
-
 		protected:
 			PinActivation(){}
 

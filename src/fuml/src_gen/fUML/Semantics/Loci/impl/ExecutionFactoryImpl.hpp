@@ -26,9 +26,7 @@ virtual public ExecutionFactory
 		public: 
 			ExecutionFactoryImpl(const ExecutionFactoryImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ExecutionFactoryImpl& operator=(ExecutionFactoryImpl const&) = delete;
+			ExecutionFactoryImpl& operator=(ExecutionFactoryImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;

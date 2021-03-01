@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ActivityGroupImpl(const ActivityGroupImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ActivityGroupImpl& operator=(ActivityGroupImpl const&) = delete;
+			ActivityGroupImpl& operator=(ActivityGroupImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

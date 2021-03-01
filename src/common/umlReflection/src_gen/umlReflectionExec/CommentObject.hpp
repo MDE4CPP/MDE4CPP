@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~CommentObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			CommentObject& operator=(CommentObject const&);
 
 			virtual void destroy();
 			

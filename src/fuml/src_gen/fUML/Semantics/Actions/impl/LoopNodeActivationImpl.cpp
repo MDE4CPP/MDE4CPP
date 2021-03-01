@@ -78,8 +78,17 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(std::weak_ptr<fUML::Semantics::Ac
 	m_group = par_group;
 }
 
-LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & obj): StructuredActivityNodeActivationImpl(obj), LoopNodeActivation(obj)
+LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & obj): LoopNodeActivationImpl()
 {
+	*this = obj;
+}
+
+LoopNodeActivationImpl& LoopNodeActivationImpl::operator=(const LoopNodeActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuredActivityNodeActivationImpl::operator=(obj);
+	LoopNodeActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LoopNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -95,11 +104,13 @@ LoopNodeActivationImpl::LoopNodeActivationImpl(const LoopNodeActivationImpl & ob
 		bodyOutputListsContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Actions::Values>(_bodyOutputLists->copy()));
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LoopNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> LoopNodeActivationImpl::copy() const
 {
-	std::shared_ptr<LoopNodeActivationImpl> element(new LoopNodeActivationImpl(*this));
+	std::shared_ptr<LoopNodeActivationImpl> element(new LoopNodeActivationImpl());
+	*element =(*this);
 	element->setThisLoopNodeActivationPtr(element);
 	return element;
 }

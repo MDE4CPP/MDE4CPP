@@ -77,8 +77,17 @@ ClearAssociationActionActivationImpl::ClearAssociationActionActivationImpl(std::
 	m_group = par_group;
 }
 
-ClearAssociationActionActivationImpl::ClearAssociationActionActivationImpl(const ClearAssociationActionActivationImpl & obj): ActionActivationImpl(obj), ClearAssociationActionActivation(obj)
+ClearAssociationActionActivationImpl::ClearAssociationActionActivationImpl(const ClearAssociationActionActivationImpl & obj): ClearAssociationActionActivationImpl()
 {
+	*this = obj;
+}
+
+ClearAssociationActionActivationImpl& ClearAssociationActionActivationImpl::operator=(const ClearAssociationActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	ClearAssociationActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClearAssociationActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -88,11 +97,13 @@ ClearAssociationActionActivationImpl::ClearAssociationActionActivationImpl(const
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ClearAssociationActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ClearAssociationActionActivationImpl::copy() const
 {
-	std::shared_ptr<ClearAssociationActionActivationImpl> element(new ClearAssociationActionActivationImpl(*this));
+	std::shared_ptr<ClearAssociationActionActivationImpl> element(new ClearAssociationActionActivationImpl());
+	*element =(*this);
 	element->setThisClearAssociationActionActivationPtr(element);
 	return element;
 }

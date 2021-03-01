@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ActionInputPinImpl(const ActionInputPinImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ActionInputPinImpl& operator=(ActionInputPinImpl const&) = delete;
+			ActionInputPinImpl& operator=(ActionInputPinImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

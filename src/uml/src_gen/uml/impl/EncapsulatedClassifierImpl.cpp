@@ -129,8 +129,17 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(std::weak_ptr<uml::Templa
 }
 
 
-EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassifierImpl & obj): StructuredClassifierImpl(obj), EncapsulatedClassifier(obj)
+EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassifierImpl & obj): EncapsulatedClassifierImpl()
 {
+	*this = obj;
+}
+
+EncapsulatedClassifierImpl& EncapsulatedClassifierImpl::operator=(const EncapsulatedClassifierImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuredClassifierImpl::operator=(obj);
+	EncapsulatedClassifier::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EncapsulatedClassifier "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -145,11 +154,13 @@ EncapsulatedClassifierImpl::EncapsulatedClassifierImpl(const EncapsulatedClassif
 	{
 		ownedPortContainer->push_back(std::dynamic_pointer_cast<uml::Port>(_ownedPort->copy()));
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EncapsulatedClassifierImpl::copy() const
+std::shared_ptr<ecore::EObject> EncapsulatedClassifierImpl::copy() const
 {
-	std::shared_ptr<EncapsulatedClassifierImpl> element(new EncapsulatedClassifierImpl(*this));
+	std::shared_ptr<EncapsulatedClassifierImpl> element(new EncapsulatedClassifierImpl());
+	*element =(*this);
 	element->setThisEncapsulatedClassifierPtr(element);
 	return element;
 }

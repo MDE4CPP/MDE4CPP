@@ -97,8 +97,17 @@ MessageEventImpl::MessageEventImpl(std::weak_ptr<uml::TemplateParameter> par_own
 	m_owner = par_owningTemplateParameter;
 }
 
-MessageEventImpl::MessageEventImpl(const MessageEventImpl & obj): EventImpl(obj), MessageEvent(obj)
+MessageEventImpl::MessageEventImpl(const MessageEventImpl & obj): MessageEventImpl()
 {
+	*this = obj;
+}
+
+MessageEventImpl& MessageEventImpl::operator=(const MessageEventImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EventImpl::operator=(obj);
+	MessageEvent::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy MessageEvent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -108,11 +117,13 @@ MessageEventImpl::MessageEventImpl(const MessageEventImpl & obj): EventImpl(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  MessageEventImpl::copy() const
+std::shared_ptr<ecore::EObject> MessageEventImpl::copy() const
 {
-	std::shared_ptr<MessageEventImpl> element(new MessageEventImpl(*this));
+	std::shared_ptr<MessageEventImpl> element(new MessageEventImpl());
+	*element =(*this);
 	element->setThisMessageEventPtr(element);
 	return element;
 }

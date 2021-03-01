@@ -134,8 +134,17 @@ SequenceNodeImpl::SequenceNodeImpl(std::weak_ptr<uml::ActivityGroup> par_superGr
 	m_owner = par_superGroup;
 }
 
-SequenceNodeImpl::SequenceNodeImpl(const SequenceNodeImpl & obj): StructuredActivityNodeImpl(obj), SequenceNode(obj)
+SequenceNodeImpl::SequenceNodeImpl(const SequenceNodeImpl & obj): SequenceNodeImpl()
 {
+	*this = obj;
+}
+
+SequenceNodeImpl& SequenceNodeImpl::operator=(const SequenceNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuredActivityNodeImpl::operator=(obj);
+	SequenceNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SequenceNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -151,11 +160,13 @@ SequenceNodeImpl::SequenceNodeImpl(const SequenceNodeImpl & obj): StructuredActi
 		executableNodeContainer->push_back(std::dynamic_pointer_cast<uml::ExecutableNode>(_executableNode->copy()));
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  SequenceNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> SequenceNodeImpl::copy() const
 {
-	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(*this));
+	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl());
+	*element =(*this);
 	element->setThisSequenceNodePtr(element);
 	return element;
 }

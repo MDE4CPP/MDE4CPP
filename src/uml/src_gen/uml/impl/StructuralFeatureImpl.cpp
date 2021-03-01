@@ -85,8 +85,19 @@ StructuralFeatureImpl::StructuralFeatureImpl(std::weak_ptr<uml::Element> par_own
 	m_owner = par_owner;
 }
 
-StructuralFeatureImpl::StructuralFeatureImpl(const StructuralFeatureImpl & obj): FeatureImpl(obj), MultiplicityElementImpl(obj), TypedElementImpl(obj), StructuralFeature(obj)
+StructuralFeatureImpl::StructuralFeatureImpl(const StructuralFeatureImpl & obj): StructuralFeatureImpl()
 {
+	*this = obj;
+}
+
+StructuralFeatureImpl& StructuralFeatureImpl::operator=(const StructuralFeatureImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	FeatureImpl::operator=(obj);
+	TypedElementImpl::operator=(obj);
+	MultiplicityElementImpl::operator=(obj);
+	StructuralFeature::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy StructuralFeature "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -97,11 +108,13 @@ StructuralFeatureImpl::StructuralFeatureImpl(const StructuralFeatureImpl & obj):
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StructuralFeatureImpl::copy() const
+std::shared_ptr<ecore::EObject> StructuralFeatureImpl::copy() const
 {
-	std::shared_ptr<StructuralFeatureImpl> element(new StructuralFeatureImpl(*this));
+	std::shared_ptr<StructuralFeatureImpl> element(new StructuralFeatureImpl());
+	*element =(*this);
 	element->setThisStructuralFeaturePtr(element);
 	return element;
 }

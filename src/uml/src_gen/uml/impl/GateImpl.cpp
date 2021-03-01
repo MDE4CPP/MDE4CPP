@@ -83,8 +83,17 @@ GateImpl::GateImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-GateImpl::GateImpl(const GateImpl & obj): MessageEndImpl(obj), Gate(obj)
+GateImpl::GateImpl(const GateImpl & obj): GateImpl()
 {
+	*this = obj;
+}
+
+GateImpl& GateImpl::operator=(const GateImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	MessageEndImpl::operator=(obj);
+	Gate::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Gate "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -94,11 +103,13 @@ GateImpl::GateImpl(const GateImpl & obj): MessageEndImpl(obj), Gate(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  GateImpl::copy() const
+std::shared_ptr<ecore::EObject> GateImpl::copy() const
 {
-	std::shared_ptr<GateImpl> element(new GateImpl(*this));
+	std::shared_ptr<GateImpl> element(new GateImpl());
+	*element =(*this);
 	element->setThisGatePtr(element);
 	return element;
 }

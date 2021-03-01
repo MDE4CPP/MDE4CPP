@@ -72,8 +72,6 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public:
  			Object(const Object &) {}
-			Object& operator=(Object const&) = delete;
-
 		protected:
 			Object(){}
 

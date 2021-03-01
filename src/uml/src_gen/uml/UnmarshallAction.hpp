@@ -75,8 +75,6 @@ namespace uml
 	{
 		public:
  			UnmarshallAction(const UnmarshallAction &) {}
-			UnmarshallAction& operator=(UnmarshallAction const&) = delete;
-
 		protected:
 			UnmarshallAction(){}
 

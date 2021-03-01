@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~SendSignalActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			SendSignalActionObject& operator=(SendSignalActionObject const&);
 
 			virtual void destroy();
 			

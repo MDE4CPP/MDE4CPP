@@ -75,8 +75,6 @@ namespace uml
 	{
 		public:
  			WriteLinkAction(const WriteLinkAction &) {}
-			WriteLinkAction& operator=(WriteLinkAction const&) = delete;
-
 		protected:
 			WriteLinkAction(){}
 

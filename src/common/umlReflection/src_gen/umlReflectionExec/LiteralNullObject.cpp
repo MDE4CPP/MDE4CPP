@@ -61,20 +61,18 @@
 using namespace UML;
 
 LiteralNullObject::LiteralNullObject(std::shared_ptr<uml::LiteralNull> _element):
-
 	m_LiteralNullValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LiteralNull());
+{
 }
 
 LiteralNullObject::LiteralNullObject(LiteralNullObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LiteralNullObject::LiteralNullObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LiteralNull());
 }
 
 LiteralNullObject::~LiteralNullObject()
@@ -83,10 +81,18 @@ LiteralNullObject::~LiteralNullObject()
 
 std::shared_ptr<ecore::EObject> LiteralNullObject::copy()
 {
-	std::shared_ptr<LiteralNullObject> element(new LiteralNullObject(*this));
+	std::shared_ptr<LiteralNullObject> element(new LiteralNullObject());
+	*element=(*this);
 	element->setThisLiteralNullObjectPtr(element);
 	return element;
 }
+
+LiteralNullObject& LiteralNullObject::operator=(const LiteralNullObject & obj)
+{
+	UML::LiteralSpecificationObject::operator=(obj);
+	return *this;
+}
+
 
 void LiteralNullObject::destroy()
 {	

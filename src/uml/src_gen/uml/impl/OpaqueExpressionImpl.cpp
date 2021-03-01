@@ -119,8 +119,17 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::ValueSpecification
 	m_owner = par_valueSpecificationAction;
 }
 
-OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj): ValueSpecificationImpl(obj), OpaqueExpression(obj)
+OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj): OpaqueExpressionImpl()
 {
+	*this = obj;
+}
+
+OpaqueExpressionImpl& OpaqueExpressionImpl::operator=(const OpaqueExpressionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ValueSpecificationImpl::operator=(obj);
+	OpaqueExpression::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OpaqueExpression "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -142,11 +151,13 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj): Va
 	m_result  = obj.getResult();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  OpaqueExpressionImpl::copy() const
+std::shared_ptr<ecore::EObject> OpaqueExpressionImpl::copy() const
 {
-	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(*this));
+	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl());
+	*element =(*this);
 	element->setThisOpaqueExpressionPtr(element);
 	return element;
 }

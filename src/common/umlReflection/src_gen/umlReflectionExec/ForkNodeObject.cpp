@@ -74,20 +74,18 @@
 using namespace UML;
 
 ForkNodeObject::ForkNodeObject(std::shared_ptr<uml::ForkNode> _element):
-
 	m_ForkNodeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ForkNode());
+{
 }
 
 ForkNodeObject::ForkNodeObject(ForkNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ForkNodeObject::ForkNodeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ForkNode());
 }
 
 ForkNodeObject::~ForkNodeObject()
@@ -96,10 +94,18 @@ ForkNodeObject::~ForkNodeObject()
 
 std::shared_ptr<ecore::EObject> ForkNodeObject::copy()
 {
-	std::shared_ptr<ForkNodeObject> element(new ForkNodeObject(*this));
+	std::shared_ptr<ForkNodeObject> element(new ForkNodeObject());
+	*element=(*this);
 	element->setThisForkNodeObjectPtr(element);
 	return element;
 }
+
+ForkNodeObject& ForkNodeObject::operator=(const ForkNodeObject & obj)
+{
+	UML::ControlNodeObject::operator=(obj);
+	return *this;
+}
+
 
 void ForkNodeObject::destroy()
 {	

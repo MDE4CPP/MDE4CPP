@@ -146,8 +146,17 @@ OpaqueBehaviorImpl::OpaqueBehaviorImpl(std::weak_ptr<uml::TemplateParameter> par
 }
 
 
-OpaqueBehaviorImpl::OpaqueBehaviorImpl(const OpaqueBehaviorImpl & obj): BehaviorImpl(obj), OpaqueBehavior(obj)
+OpaqueBehaviorImpl::OpaqueBehaviorImpl(const OpaqueBehaviorImpl & obj): OpaqueBehaviorImpl()
 {
+	*this = obj;
+}
+
+OpaqueBehaviorImpl& OpaqueBehaviorImpl::operator=(const OpaqueBehaviorImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	BehaviorImpl::operator=(obj);
+	OpaqueBehavior::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OpaqueBehavior "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -167,11 +176,13 @@ OpaqueBehaviorImpl::OpaqueBehaviorImpl(const OpaqueBehaviorImpl & obj): Behavior
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  OpaqueBehaviorImpl::copy() const
+std::shared_ptr<ecore::EObject> OpaqueBehaviorImpl::copy() const
 {
-	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(*this));
+	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl());
+	*element =(*this);
 	element->setThisOpaqueBehaviorPtr(element);
 	return element;
 }

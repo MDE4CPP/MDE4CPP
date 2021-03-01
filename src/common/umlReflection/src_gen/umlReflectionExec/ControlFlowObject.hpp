@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ControlFlowObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ControlFlowObject& operator=(ControlFlowObject const&);
 
 			virtual void destroy();
 			

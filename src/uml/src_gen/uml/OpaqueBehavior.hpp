@@ -83,8 +83,6 @@ namespace uml
 	{
 		public:
  			OpaqueBehavior(const OpaqueBehavior &) {}
-			OpaqueBehavior& operator=(OpaqueBehavior const&) = delete;
-
 		protected:
 			OpaqueBehavior(){}
 

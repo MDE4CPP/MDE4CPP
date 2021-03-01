@@ -82,8 +82,17 @@ TriggerImpl::TriggerImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-TriggerImpl::TriggerImpl(const TriggerImpl & obj): NamedElementImpl(obj), Trigger(obj)
+TriggerImpl::TriggerImpl(const TriggerImpl & obj): TriggerImpl()
 {
+	*this = obj;
+}
+
+TriggerImpl& TriggerImpl::operator=(const TriggerImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	Trigger::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Trigger "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -96,11 +105,13 @@ TriggerImpl::TriggerImpl(const TriggerImpl & obj): NamedElementImpl(obj), Trigge
 	m_port.reset(new Bag<uml::Port>(*(obj.getPort().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TriggerImpl::copy() const
+std::shared_ptr<ecore::EObject> TriggerImpl::copy() const
 {
-	std::shared_ptr<TriggerImpl> element(new TriggerImpl(*this));
+	std::shared_ptr<TriggerImpl> element(new TriggerImpl());
+	*element =(*this);
 	element->setThisTriggerPtr(element);
 	return element;
 }

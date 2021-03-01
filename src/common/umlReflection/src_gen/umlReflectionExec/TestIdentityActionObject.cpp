@@ -93,20 +93,18 @@
 using namespace UML;
 
 TestIdentityActionObject::TestIdentityActionObject(std::shared_ptr<uml::TestIdentityAction> _element):
-
 	m_TestIdentityActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TestIdentityAction());
+{
 }
 
 TestIdentityActionObject::TestIdentityActionObject(TestIdentityActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TestIdentityActionObject::TestIdentityActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TestIdentityAction());
 }
 
 TestIdentityActionObject::~TestIdentityActionObject()
@@ -115,10 +113,18 @@ TestIdentityActionObject::~TestIdentityActionObject()
 
 std::shared_ptr<ecore::EObject> TestIdentityActionObject::copy()
 {
-	std::shared_ptr<TestIdentityActionObject> element(new TestIdentityActionObject(*this));
+	std::shared_ptr<TestIdentityActionObject> element(new TestIdentityActionObject());
+	*element=(*this);
 	element->setThisTestIdentityActionObjectPtr(element);
 	return element;
 }
+
+TestIdentityActionObject& TestIdentityActionObject::operator=(const TestIdentityActionObject & obj)
+{
+	UML::ActionObject::operator=(obj);
+	return *this;
+}
+
 
 void TestIdentityActionObject::destroy()
 {	

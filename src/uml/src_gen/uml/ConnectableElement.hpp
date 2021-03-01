@@ -65,8 +65,6 @@ namespace uml
 	{
 		public:
  			ConnectableElement(const ConnectableElement &) {}
-			ConnectableElement& operator=(ConnectableElement const&) = delete;
-
 		protected:
 			ConnectableElement(){}
 

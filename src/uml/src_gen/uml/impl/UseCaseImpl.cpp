@@ -132,8 +132,17 @@ UseCaseImpl::UseCaseImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplat
 }
 
 
-UseCaseImpl::UseCaseImpl(const UseCaseImpl & obj): BehavioredClassifierImpl(obj), UseCase(obj)
+UseCaseImpl::UseCaseImpl(const UseCaseImpl & obj): UseCaseImpl()
 {
+	*this = obj;
+}
+
+UseCaseImpl& UseCaseImpl::operator=(const UseCaseImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	BehavioredClassifierImpl::operator=(obj);
+	UseCase::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy UseCase "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -178,11 +187,13 @@ UseCaseImpl::UseCaseImpl(const UseCaseImpl & obj): BehavioredClassifierImpl(obj)
 		std::cout << "Initialising value Subset: " << "m_include - Subset<uml::Include, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  UseCaseImpl::copy() const
+std::shared_ptr<ecore::EObject> UseCaseImpl::copy() const
 {
-	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(*this));
+	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl());
+	*element =(*this);
 	element->setThisUseCasePtr(element);
 	return element;
 }

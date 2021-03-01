@@ -86,20 +86,18 @@
 using namespace UML;
 
 ReceptionObject::ReceptionObject(std::shared_ptr<uml::Reception> _element):
-
 	m_ReceptionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Reception());
+{
 }
 
 ReceptionObject::ReceptionObject(ReceptionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReceptionObject::ReceptionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Reception());
 }
 
 ReceptionObject::~ReceptionObject()
@@ -108,10 +106,18 @@ ReceptionObject::~ReceptionObject()
 
 std::shared_ptr<ecore::EObject> ReceptionObject::copy()
 {
-	std::shared_ptr<ReceptionObject> element(new ReceptionObject(*this));
+	std::shared_ptr<ReceptionObject> element(new ReceptionObject());
+	*element=(*this);
 	element->setThisReceptionObjectPtr(element);
 	return element;
 }
+
+ReceptionObject& ReceptionObject::operator=(const ReceptionObject & obj)
+{
+	UML::BehavioralFeatureObject::operator=(obj);
+	return *this;
+}
+
 
 void ReceptionObject::destroy()
 {	

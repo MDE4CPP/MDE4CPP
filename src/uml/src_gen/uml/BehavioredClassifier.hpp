@@ -81,8 +81,6 @@ namespace uml
 	{
 		public:
  			BehavioredClassifier(const BehavioredClassifier &) {}
-			BehavioredClassifier& operator=(BehavioredClassifier const&) = delete;
-
 		protected:
 			BehavioredClassifier(){}
 

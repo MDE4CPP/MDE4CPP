@@ -96,20 +96,18 @@
 using namespace UML;
 
 CallBehaviorActionObject::CallBehaviorActionObject(std::shared_ptr<uml::CallBehaviorAction> _element):
-
 	m_CallBehaviorActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CallBehaviorAction());
+{
 }
 
 CallBehaviorActionObject::CallBehaviorActionObject(CallBehaviorActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CallBehaviorActionObject::CallBehaviorActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CallBehaviorAction());
 }
 
 CallBehaviorActionObject::~CallBehaviorActionObject()
@@ -118,10 +116,18 @@ CallBehaviorActionObject::~CallBehaviorActionObject()
 
 std::shared_ptr<ecore::EObject> CallBehaviorActionObject::copy()
 {
-	std::shared_ptr<CallBehaviorActionObject> element(new CallBehaviorActionObject(*this));
+	std::shared_ptr<CallBehaviorActionObject> element(new CallBehaviorActionObject());
+	*element=(*this);
 	element->setThisCallBehaviorActionObjectPtr(element);
 	return element;
 }
+
+CallBehaviorActionObject& CallBehaviorActionObject::operator=(const CallBehaviorActionObject & obj)
+{
+	UML::CallActionObject::operator=(obj);
+	return *this;
+}
+
 
 void CallBehaviorActionObject::destroy()
 {	

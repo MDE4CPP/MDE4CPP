@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ConnectionPointReferenceImpl(const ConnectionPointReferenceImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ConnectionPointReferenceImpl& operator=(ConnectionPointReferenceImpl const&) = delete;
+			ConnectionPointReferenceImpl& operator=(ConnectionPointReferenceImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

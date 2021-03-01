@@ -78,8 +78,17 @@ ExceptionHandlerImpl::ExceptionHandlerImpl(std::weak_ptr<uml::ExecutableNode> pa
 	m_owner = par_protectedNode;
 }
 
-ExceptionHandlerImpl::ExceptionHandlerImpl(const ExceptionHandlerImpl & obj): ElementImpl(obj), ExceptionHandler(obj)
+ExceptionHandlerImpl::ExceptionHandlerImpl(const ExceptionHandlerImpl & obj): ExceptionHandlerImpl()
 {
+	*this = obj;
+}
+
+ExceptionHandlerImpl& ExceptionHandlerImpl::operator=(const ExceptionHandlerImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	ExceptionHandler::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExceptionHandler "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -94,11 +103,13 @@ ExceptionHandlerImpl::ExceptionHandlerImpl(const ExceptionHandlerImpl & obj): El
 	m_protectedNode  = obj.getProtectedNode();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExceptionHandlerImpl::copy() const
+std::shared_ptr<ecore::EObject> ExceptionHandlerImpl::copy() const
 {
-	std::shared_ptr<ExceptionHandlerImpl> element(new ExceptionHandlerImpl(*this));
+	std::shared_ptr<ExceptionHandlerImpl> element(new ExceptionHandlerImpl());
+	*element =(*this);
 	element->setThisExceptionHandlerPtr(element);
 	return element;
 }

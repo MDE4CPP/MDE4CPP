@@ -61,8 +61,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 	{
 		public:
  			CS_Link(const CS_Link &) {}
-			CS_Link& operator=(CS_Link const&) = delete;
-
 		protected:
 			CS_Link(){}
 

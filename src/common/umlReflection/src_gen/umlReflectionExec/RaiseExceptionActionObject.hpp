@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~RaiseExceptionActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			RaiseExceptionActionObject& operator=(RaiseExceptionActionObject const&);
 
 			virtual void destroy();
 			

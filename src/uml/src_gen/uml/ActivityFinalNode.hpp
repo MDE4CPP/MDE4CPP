@@ -67,8 +67,6 @@ namespace uml
 	{
 		public:
  			ActivityFinalNode(const ActivityFinalNode &) {}
-			ActivityFinalNode& operator=(ActivityFinalNode const&) = delete;
-
 		protected:
 			ActivityFinalNode(){}
 

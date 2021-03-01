@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			VertexImpl(const VertexImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			VertexImpl& operator=(VertexImpl const&) = delete;
+			VertexImpl& operator=(VertexImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

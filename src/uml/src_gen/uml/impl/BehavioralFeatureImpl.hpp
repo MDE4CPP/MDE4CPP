@@ -24,9 +24,7 @@ namespace uml
 		public: 
 			BehavioralFeatureImpl(const BehavioralFeatureImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			BehavioralFeatureImpl& operator=(BehavioralFeatureImpl const&) = delete;
+			BehavioralFeatureImpl& operator=(BehavioralFeatureImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

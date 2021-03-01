@@ -135,8 +135,17 @@ ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::ActivityGroup> par_s
 	m_owner = par_superGroup;
 }
 
-ConditionalNodeImpl::ConditionalNodeImpl(const ConditionalNodeImpl & obj): StructuredActivityNodeImpl(obj), ConditionalNode(obj)
+ConditionalNodeImpl::ConditionalNodeImpl(const ConditionalNodeImpl & obj): ConditionalNodeImpl()
 {
+	*this = obj;
+}
+
+ConditionalNodeImpl& ConditionalNodeImpl::operator=(const ConditionalNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuredActivityNodeImpl::operator=(obj);
+	ConditionalNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ConditionalNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -165,11 +174,13 @@ ConditionalNodeImpl::ConditionalNodeImpl(const ConditionalNodeImpl & obj): Struc
 	#endif
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ConditionalNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> ConditionalNodeImpl::copy() const
 {
-	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(*this));
+	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl());
+	*element =(*this);
 	element->setThisConditionalNodePtr(element);
 	return element;
 }

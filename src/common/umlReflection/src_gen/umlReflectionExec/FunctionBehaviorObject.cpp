@@ -150,20 +150,18 @@
 using namespace UML;
 
 FunctionBehaviorObject::FunctionBehaviorObject(std::shared_ptr<uml::FunctionBehavior> _element):
-
 	m_FunctionBehaviorValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_FunctionBehavior());
+{
 }
 
 FunctionBehaviorObject::FunctionBehaviorObject(FunctionBehaviorObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 FunctionBehaviorObject::FunctionBehaviorObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_FunctionBehavior());
 }
 
 FunctionBehaviorObject::~FunctionBehaviorObject()
@@ -172,10 +170,18 @@ FunctionBehaviorObject::~FunctionBehaviorObject()
 
 std::shared_ptr<ecore::EObject> FunctionBehaviorObject::copy()
 {
-	std::shared_ptr<FunctionBehaviorObject> element(new FunctionBehaviorObject(*this));
+	std::shared_ptr<FunctionBehaviorObject> element(new FunctionBehaviorObject());
+	*element=(*this);
 	element->setThisFunctionBehaviorObjectPtr(element);
 	return element;
 }
+
+FunctionBehaviorObject& FunctionBehaviorObject::operator=(const FunctionBehaviorObject & obj)
+{
+	UML::OpaqueBehaviorObject::operator=(obj);
+	return *this;
+}
+
 
 void FunctionBehaviorObject::destroy()
 {	

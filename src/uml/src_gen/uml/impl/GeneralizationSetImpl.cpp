@@ -100,8 +100,17 @@ GeneralizationSetImpl::GeneralizationSetImpl(std::weak_ptr<uml::TemplateParamete
 	m_owner = par_owningTemplateParameter;
 }
 
-GeneralizationSetImpl::GeneralizationSetImpl(const GeneralizationSetImpl & obj): PackageableElementImpl(obj), GeneralizationSet(obj)
+GeneralizationSetImpl::GeneralizationSetImpl(const GeneralizationSetImpl & obj): GeneralizationSetImpl()
 {
+	*this = obj;
+}
+
+GeneralizationSetImpl& GeneralizationSetImpl::operator=(const GeneralizationSetImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PackageableElementImpl::operator=(obj);
+	GeneralizationSet::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy GeneralizationSet "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -116,11 +125,13 @@ GeneralizationSetImpl::GeneralizationSetImpl(const GeneralizationSetImpl & obj):
 	m_powertype  = obj.getPowertype();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  GeneralizationSetImpl::copy() const
+std::shared_ptr<ecore::EObject> GeneralizationSetImpl::copy() const
 {
-	std::shared_ptr<GeneralizationSetImpl> element(new GeneralizationSetImpl(*this));
+	std::shared_ptr<GeneralizationSetImpl> element(new GeneralizationSetImpl());
+	*element =(*this);
 	element->setThisGeneralizationSetPtr(element);
 	return element;
 }

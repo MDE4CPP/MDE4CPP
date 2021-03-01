@@ -110,8 +110,17 @@ WriteVariableActionImpl::WriteVariableActionImpl(std::weak_ptr<uml::Element> par
 	m_owner = par_owner;
 }
 
-WriteVariableActionImpl::WriteVariableActionImpl(const WriteVariableActionImpl & obj): VariableActionImpl(obj), WriteVariableAction(obj)
+WriteVariableActionImpl::WriteVariableActionImpl(const WriteVariableActionImpl & obj): WriteVariableActionImpl()
 {
+	*this = obj;
+}
+
+WriteVariableActionImpl& WriteVariableActionImpl::operator=(const WriteVariableActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	VariableActionImpl::operator=(obj);
+	WriteVariableAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy WriteVariableAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -126,11 +135,13 @@ WriteVariableActionImpl::WriteVariableActionImpl(const WriteVariableActionImpl &
 		m_value = std::dynamic_pointer_cast<uml::InputPin>(obj.getValue()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  WriteVariableActionImpl::copy() const
+std::shared_ptr<ecore::EObject> WriteVariableActionImpl::copy() const
 {
-	std::shared_ptr<WriteVariableActionImpl> element(new WriteVariableActionImpl(*this));
+	std::shared_ptr<WriteVariableActionImpl> element(new WriteVariableActionImpl());
+	*element =(*this);
 	element->setThisWriteVariableActionPtr(element);
 	return element;
 }

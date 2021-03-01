@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			OpaqueActionImpl(const OpaqueActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			OpaqueActionImpl& operator=(OpaqueActionImpl const&) = delete;
+			OpaqueActionImpl& operator=(OpaqueActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

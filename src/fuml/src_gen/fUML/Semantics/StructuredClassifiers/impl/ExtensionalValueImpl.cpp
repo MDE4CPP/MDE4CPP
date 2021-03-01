@@ -67,8 +67,17 @@ ExtensionalValueImpl::~ExtensionalValueImpl()
 }
 
 
-ExtensionalValueImpl::ExtensionalValueImpl(const ExtensionalValueImpl & obj): fUML::Semantics::SimpleClassifiers::CompoundValueImpl(obj), ExtensionalValue(obj)
+ExtensionalValueImpl::ExtensionalValueImpl(const ExtensionalValueImpl & obj): ExtensionalValueImpl()
 {
+	*this = obj;
+}
+
+ExtensionalValueImpl& ExtensionalValueImpl::operator=(const ExtensionalValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::SimpleClassifiers::CompoundValueImpl::operator=(obj);
+	ExtensionalValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExtensionalValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -79,11 +88,13 @@ ExtensionalValueImpl::ExtensionalValueImpl(const ExtensionalValueImpl & obj): fU
 	m_locus  = obj.getLocus();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExtensionalValueImpl::copy() const
+std::shared_ptr<ecore::EObject> ExtensionalValueImpl::copy() const
 {
-	std::shared_ptr<ExtensionalValueImpl> element(new ExtensionalValueImpl(*this));
+	std::shared_ptr<ExtensionalValueImpl> element(new ExtensionalValueImpl());
+	*element =(*this);
 	element->setThisExtensionalValuePtr(element);
 	return element;
 }

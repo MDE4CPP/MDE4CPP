@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ReadSelfActionImpl(const ReadSelfActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ReadSelfActionImpl& operator=(ReadSelfActionImpl const&) = delete;
+			ReadSelfActionImpl& operator=(ReadSelfActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

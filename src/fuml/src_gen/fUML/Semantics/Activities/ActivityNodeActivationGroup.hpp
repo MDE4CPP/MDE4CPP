@@ -65,11 +65,8 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ActivityNodeActivationGroup(const ActivityNodeActivationGroup &) {}
-			ActivityNodeActivationGroup& operator=(ActivityNodeActivationGroup const&) = delete;
-
 		protected:
 			ActivityNodeActivationGroup(){}
-
 			//Additional constructors for the containments back reference
 			ActivityNodeActivationGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> par_activityExecution);
 

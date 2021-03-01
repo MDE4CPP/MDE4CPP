@@ -77,8 +77,6 @@ namespace uml
 	{
 		public:
  			CallAction(const CallAction &) {}
-			CallAction& operator=(CallAction const&) = delete;
-
 		protected:
 			CallAction(){}
 

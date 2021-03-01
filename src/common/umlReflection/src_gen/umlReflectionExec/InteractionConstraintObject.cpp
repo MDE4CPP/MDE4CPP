@@ -67,20 +67,18 @@
 using namespace UML;
 
 InteractionConstraintObject::InteractionConstraintObject(std::shared_ptr<uml::InteractionConstraint> _element):
-
 	m_InteractionConstraintValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InteractionConstraint());
+{
 }
 
 InteractionConstraintObject::InteractionConstraintObject(InteractionConstraintObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 InteractionConstraintObject::InteractionConstraintObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InteractionConstraint());
 }
 
 InteractionConstraintObject::~InteractionConstraintObject()
@@ -89,10 +87,18 @@ InteractionConstraintObject::~InteractionConstraintObject()
 
 std::shared_ptr<ecore::EObject> InteractionConstraintObject::copy()
 {
-	std::shared_ptr<InteractionConstraintObject> element(new InteractionConstraintObject(*this));
+	std::shared_ptr<InteractionConstraintObject> element(new InteractionConstraintObject());
+	*element=(*this);
 	element->setThisInteractionConstraintObjectPtr(element);
 	return element;
 }
+
+InteractionConstraintObject& InteractionConstraintObject::operator=(const InteractionConstraintObject & obj)
+{
+	UML::ConstraintObject::operator=(obj);
+	return *this;
+}
+
 
 void InteractionConstraintObject::destroy()
 {	

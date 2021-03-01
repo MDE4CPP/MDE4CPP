@@ -65,20 +65,18 @@
 using namespace UML;
 
 IntervalObject::IntervalObject(std::shared_ptr<uml::Interval> _element):
-
 	m_IntervalValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Interval());
+{
 }
 
 IntervalObject::IntervalObject(IntervalObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 IntervalObject::IntervalObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Interval());
 }
 
 IntervalObject::~IntervalObject()
@@ -87,10 +85,18 @@ IntervalObject::~IntervalObject()
 
 std::shared_ptr<ecore::EObject> IntervalObject::copy()
 {
-	std::shared_ptr<IntervalObject> element(new IntervalObject(*this));
+	std::shared_ptr<IntervalObject> element(new IntervalObject());
+	*element=(*this);
 	element->setThisIntervalObjectPtr(element);
 	return element;
 }
+
+IntervalObject& IntervalObject::operator=(const IntervalObject & obj)
+{
+	UML::ValueSpecificationObject::operator=(obj);
+	return *this;
+}
+
 
 void IntervalObject::destroy()
 {	

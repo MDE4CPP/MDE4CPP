@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			OpaqueBehaviorImpl(const OpaqueBehaviorImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			OpaqueBehaviorImpl& operator=(OpaqueBehaviorImpl const&) = delete;
+			OpaqueBehaviorImpl& operator=(OpaqueBehaviorImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

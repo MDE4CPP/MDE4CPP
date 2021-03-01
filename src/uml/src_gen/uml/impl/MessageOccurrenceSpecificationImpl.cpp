@@ -101,8 +101,18 @@ MessageOccurrenceSpecificationImpl::MessageOccurrenceSpecificationImpl(std::weak
 	m_owner = par_owner;
 }
 
-MessageOccurrenceSpecificationImpl::MessageOccurrenceSpecificationImpl(const MessageOccurrenceSpecificationImpl & obj): MessageEndImpl(obj), OccurrenceSpecificationImpl(obj), MessageOccurrenceSpecification(obj)
+MessageOccurrenceSpecificationImpl::MessageOccurrenceSpecificationImpl(const MessageOccurrenceSpecificationImpl & obj): MessageOccurrenceSpecificationImpl()
 {
+	*this = obj;
+}
+
+MessageOccurrenceSpecificationImpl& MessageOccurrenceSpecificationImpl::operator=(const MessageOccurrenceSpecificationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	OccurrenceSpecificationImpl::operator=(obj);
+	MessageEndImpl::operator=(obj);
+	MessageOccurrenceSpecification::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy MessageOccurrenceSpecification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -112,11 +122,13 @@ MessageOccurrenceSpecificationImpl::MessageOccurrenceSpecificationImpl(const Mes
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  MessageOccurrenceSpecificationImpl::copy() const
+std::shared_ptr<ecore::EObject> MessageOccurrenceSpecificationImpl::copy() const
 {
-	std::shared_ptr<MessageOccurrenceSpecificationImpl> element(new MessageOccurrenceSpecificationImpl(*this));
+	std::shared_ptr<MessageOccurrenceSpecificationImpl> element(new MessageOccurrenceSpecificationImpl());
+	*element =(*this);
 	element->setThisMessageOccurrenceSpecificationPtr(element);
 	return element;
 }

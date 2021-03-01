@@ -71,8 +71,6 @@ namespace uml
 	{
 		public:
  			Duration(const Duration &) {}
-			Duration& operator=(Duration const&) = delete;
-
 		protected:
 			Duration(){}
 

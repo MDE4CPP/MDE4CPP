@@ -66,8 +66,17 @@ InvocationEventOccurrenceImpl::~InvocationEventOccurrenceImpl()
 }
 
 
-InvocationEventOccurrenceImpl::InvocationEventOccurrenceImpl(const InvocationEventOccurrenceImpl & obj): EventOccurrenceImpl(obj), InvocationEventOccurrence(obj)
+InvocationEventOccurrenceImpl::InvocationEventOccurrenceImpl(const InvocationEventOccurrenceImpl & obj): InvocationEventOccurrenceImpl()
 {
+	*this = obj;
+}
+
+InvocationEventOccurrenceImpl& InvocationEventOccurrenceImpl::operator=(const InvocationEventOccurrenceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EventOccurrenceImpl::operator=(obj);
+	InvocationEventOccurrence::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InvocationEventOccurrence "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -78,11 +87,13 @@ InvocationEventOccurrenceImpl::InvocationEventOccurrenceImpl(const InvocationEve
 	m_execution  = obj.getExecution();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InvocationEventOccurrenceImpl::copy() const
+std::shared_ptr<ecore::EObject> InvocationEventOccurrenceImpl::copy() const
 {
-	std::shared_ptr<InvocationEventOccurrenceImpl> element(new InvocationEventOccurrenceImpl(*this));
+	std::shared_ptr<InvocationEventOccurrenceImpl> element(new InvocationEventOccurrenceImpl());
+	*element =(*this);
 	element->setThisInvocationEventOccurrencePtr(element);
 	return element;
 }

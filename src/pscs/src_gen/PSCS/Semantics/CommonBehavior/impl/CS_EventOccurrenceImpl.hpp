@@ -24,9 +24,7 @@ namespace PSCS::Semantics::CommonBehavior
 		public: 
 			CS_EventOccurrenceImpl(const CS_EventOccurrenceImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CS_EventOccurrenceImpl& operator=(CS_EventOccurrenceImpl const&) = delete;
+			CS_EventOccurrenceImpl& operator=(CS_EventOccurrenceImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

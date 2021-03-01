@@ -24,9 +24,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 		public: 
 			CS_ReferenceImpl(const CS_ReferenceImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CS_ReferenceImpl& operator=(CS_ReferenceImpl const&) = delete;
+			CS_ReferenceImpl& operator=(CS_ReferenceImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;

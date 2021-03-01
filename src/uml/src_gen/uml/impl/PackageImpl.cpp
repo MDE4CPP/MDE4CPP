@@ -129,8 +129,19 @@ PackageImpl::PackageImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplat
 	m_owner = par_owningTemplateParameter;
 }
 
-PackageImpl::PackageImpl(const PackageImpl & obj): NamespaceImpl(obj), PackageableElementImpl(obj), TemplateableElementImpl(obj), Package(obj)
+PackageImpl::PackageImpl(const PackageImpl & obj): PackageImpl()
 {
+	*this = obj;
+}
+
+PackageImpl& PackageImpl::operator=(const PackageImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamespaceImpl::operator=(obj);
+	PackageableElementImpl::operator=(obj);
+	TemplateableElementImpl::operator=(obj);
+	Package::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Package "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -208,11 +219,13 @@ PackageImpl::PackageImpl(const PackageImpl & obj): NamespaceImpl(obj), Packageab
 		std::cout << "Initialising value Subset: " << "m_profileApplication - Subset<uml::ProfileApplication, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  PackageImpl::copy() const
+std::shared_ptr<ecore::EObject> PackageImpl::copy() const
 {
-	std::shared_ptr<PackageImpl> element(new PackageImpl(*this));
+	std::shared_ptr<PackageImpl> element(new PackageImpl());
+	*element =(*this);
 	element->setThisPackagePtr(element);
 	return element;
 }

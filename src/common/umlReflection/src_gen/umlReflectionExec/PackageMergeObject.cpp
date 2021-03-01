@@ -52,20 +52,18 @@
 using namespace UML;
 
 PackageMergeObject::PackageMergeObject(std::shared_ptr<uml::PackageMerge> _element):
-
 	m_PackageMergeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_PackageMerge());
+{
 }
 
 PackageMergeObject::PackageMergeObject(PackageMergeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 PackageMergeObject::PackageMergeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_PackageMerge());
 }
 
 PackageMergeObject::~PackageMergeObject()
@@ -74,10 +72,18 @@ PackageMergeObject::~PackageMergeObject()
 
 std::shared_ptr<ecore::EObject> PackageMergeObject::copy()
 {
-	std::shared_ptr<PackageMergeObject> element(new PackageMergeObject(*this));
+	std::shared_ptr<PackageMergeObject> element(new PackageMergeObject());
+	*element=(*this);
 	element->setThisPackageMergeObjectPtr(element);
 	return element;
 }
+
+PackageMergeObject& PackageMergeObject::operator=(const PackageMergeObject & obj)
+{
+	UML::DirectedRelationshipObject::operator=(obj);
+	return *this;
+}
+
 
 void PackageMergeObject::destroy()
 {	

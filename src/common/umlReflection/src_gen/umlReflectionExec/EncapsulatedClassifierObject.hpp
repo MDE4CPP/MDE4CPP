@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~EncapsulatedClassifierObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			EncapsulatedClassifierObject& operator=(EncapsulatedClassifierObject const&);
 
 			virtual void destroy();
 			

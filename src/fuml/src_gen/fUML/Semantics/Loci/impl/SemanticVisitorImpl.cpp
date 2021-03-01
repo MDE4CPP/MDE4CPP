@@ -58,9 +58,17 @@ SemanticVisitorImpl::~SemanticVisitorImpl()
 }
 
 
-SemanticVisitorImpl::SemanticVisitorImpl(const SemanticVisitorImpl & obj): ecore::EModelElementImpl(obj),
-SemanticVisitor(obj)
+SemanticVisitorImpl::SemanticVisitorImpl(const SemanticVisitorImpl & obj): SemanticVisitorImpl()
 {
+	*this = obj;
+}
+
+SemanticVisitorImpl& SemanticVisitorImpl::operator=(const SemanticVisitorImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	SemanticVisitor::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SemanticVisitor "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -70,11 +78,13 @@ SemanticVisitor(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  SemanticVisitorImpl::copy() const
+std::shared_ptr<ecore::EObject> SemanticVisitorImpl::copy() const
 {
-	std::shared_ptr<SemanticVisitorImpl> element(new SemanticVisitorImpl(*this));
+	std::shared_ptr<SemanticVisitorImpl> element(new SemanticVisitorImpl());
+	*element =(*this);
 	element->setThisSemanticVisitorPtr(element);
 	return element;
 }

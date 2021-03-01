@@ -71,8 +71,17 @@ IntegerValueImpl::~IntegerValueImpl()
 }
 
 
-IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj): PrimitiveValueImpl(obj), IntegerValue(obj)
+IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj): IntegerValueImpl()
 {
+	*this = obj;
+}
+
+IntegerValueImpl& IntegerValueImpl::operator=(const IntegerValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PrimitiveValueImpl::operator=(obj);
+	IntegerValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy IntegerValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -83,11 +92,13 @@ IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj): PrimitiveValue
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  IntegerValueImpl::copy() const
+std::shared_ptr<ecore::EObject> IntegerValueImpl::copy() const
 {
-	std::shared_ptr<IntegerValueImpl> element(new IntegerValueImpl(*this));
+	std::shared_ptr<IntegerValueImpl> element(new IntegerValueImpl());
+	*element =(*this);
 	element->setThisIntegerValuePtr(element);
 	return element;
 }

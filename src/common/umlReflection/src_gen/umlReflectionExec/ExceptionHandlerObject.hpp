@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ExceptionHandlerObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ExceptionHandlerObject& operator=(ExceptionHandlerObject const&);
 
 			virtual void destroy();
 			

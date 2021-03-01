@@ -24,9 +24,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 		public: 
 			CS_DefaultRequestPropagationStrategyImpl(const CS_DefaultRequestPropagationStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CS_DefaultRequestPropagationStrategyImpl& operator=(CS_DefaultRequestPropagationStrategyImpl const&) = delete;
+			CS_DefaultRequestPropagationStrategyImpl& operator=(CS_DefaultRequestPropagationStrategyImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;

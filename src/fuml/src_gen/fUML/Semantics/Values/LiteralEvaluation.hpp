@@ -57,8 +57,6 @@ namespace fUML::Semantics::Values
 	{
 		public:
  			LiteralEvaluation(const LiteralEvaluation &) {}
-			LiteralEvaluation& operator=(LiteralEvaluation const&) = delete;
-
 		protected:
 			LiteralEvaluation(){}
 

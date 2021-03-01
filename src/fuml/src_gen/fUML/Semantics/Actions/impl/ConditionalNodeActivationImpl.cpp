@@ -79,8 +79,17 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(std::weak_ptr<fUML:
 	m_group = par_group;
 }
 
-ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNodeActivationImpl & obj): StructuredActivityNodeActivationImpl(obj), ConditionalNodeActivation(obj)
+ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNodeActivationImpl & obj): ConditionalNodeActivationImpl()
 {
+	*this = obj;
+}
+
+ConditionalNodeActivationImpl& ConditionalNodeActivationImpl::operator=(const ConditionalNodeActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuredActivityNodeActivationImpl::operator=(obj);
+	ConditionalNodeActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ConditionalNodeActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -98,11 +107,13 @@ ConditionalNodeActivationImpl::ConditionalNodeActivationImpl(const ConditionalNo
 		clauseActivationsContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Actions::ClauseActivation>(_clauseActivations->copy()));
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ConditionalNodeActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ConditionalNodeActivationImpl::copy() const
 {
-	std::shared_ptr<ConditionalNodeActivationImpl> element(new ConditionalNodeActivationImpl(*this));
+	std::shared_ptr<ConditionalNodeActivationImpl> element(new ConditionalNodeActivationImpl());
+	*element =(*this);
 	element->setThisConditionalNodeActivationPtr(element);
 	return element;
 }

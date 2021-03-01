@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			CentralBufferNodeImpl(const CentralBufferNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CentralBufferNodeImpl& operator=(CentralBufferNodeImpl const&) = delete;
+			CentralBufferNodeImpl& operator=(CentralBufferNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

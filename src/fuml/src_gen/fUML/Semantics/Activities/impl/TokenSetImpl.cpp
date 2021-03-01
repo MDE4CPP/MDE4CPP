@@ -60,9 +60,17 @@ TokenSetImpl::~TokenSetImpl()
 }
 
 
-TokenSetImpl::TokenSetImpl(const TokenSetImpl & obj): ecore::EModelElementImpl(obj),
-TokenSet(obj)
+TokenSetImpl::TokenSetImpl(const TokenSetImpl & obj): TokenSetImpl()
 {
+	*this = obj;
+}
+
+TokenSetImpl& TokenSetImpl::operator=(const TokenSetImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	TokenSet::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TokenSet "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -74,11 +82,13 @@ TokenSet(obj)
 	m_tokens.reset(new Bag<fUML::Semantics::Activities::Token>(*(obj.getTokens().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TokenSetImpl::copy() const
+std::shared_ptr<ecore::EObject> TokenSetImpl::copy() const
 {
-	std::shared_ptr<TokenSetImpl> element(new TokenSetImpl(*this));
+	std::shared_ptr<TokenSetImpl> element(new TokenSetImpl());
+	*element =(*this);
 	element->setThisTokenSetPtr(element);
 	return element;
 }

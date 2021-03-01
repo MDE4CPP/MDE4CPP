@@ -104,8 +104,17 @@ FlowFinalNodeImpl::FlowFinalNodeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-FlowFinalNodeImpl::FlowFinalNodeImpl(const FlowFinalNodeImpl & obj): FinalNodeImpl(obj), FlowFinalNode(obj)
+FlowFinalNodeImpl::FlowFinalNodeImpl(const FlowFinalNodeImpl & obj): FlowFinalNodeImpl()
 {
+	*this = obj;
+}
+
+FlowFinalNodeImpl& FlowFinalNodeImpl::operator=(const FlowFinalNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	FinalNodeImpl::operator=(obj);
+	FlowFinalNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FlowFinalNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -115,11 +124,13 @@ FlowFinalNodeImpl::FlowFinalNodeImpl(const FlowFinalNodeImpl & obj): FinalNodeIm
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  FlowFinalNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> FlowFinalNodeImpl::copy() const
 {
-	std::shared_ptr<FlowFinalNodeImpl> element(new FlowFinalNodeImpl(*this));
+	std::shared_ptr<FlowFinalNodeImpl> element(new FlowFinalNodeImpl());
+	*element =(*this);
 	element->setThisFlowFinalNodePtr(element);
 	return element;
 }

@@ -98,8 +98,17 @@ TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::TemplateParameter> p
 	m_owner = par_owningTemplateParameter;
 }
 
-TimeObservationImpl::TimeObservationImpl(const TimeObservationImpl & obj): ObservationImpl(obj), TimeObservation(obj)
+TimeObservationImpl::TimeObservationImpl(const TimeObservationImpl & obj): TimeObservationImpl()
 {
+	*this = obj;
+}
+
+TimeObservationImpl& TimeObservationImpl::operator=(const TimeObservationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ObservationImpl::operator=(obj);
+	TimeObservation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TimeObservation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -111,11 +120,13 @@ TimeObservationImpl::TimeObservationImpl(const TimeObservationImpl & obj): Obser
 	m_event  = obj.getEvent();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TimeObservationImpl::copy() const
+std::shared_ptr<ecore::EObject> TimeObservationImpl::copy() const
 {
-	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl(*this));
+	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl());
+	*element =(*this);
 	element->setThisTimeObservationPtr(element);
 	return element;
 }

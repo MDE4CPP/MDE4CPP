@@ -59,8 +59,17 @@ ChoiceStrategyImpl::~ChoiceStrategyImpl()
 }
 
 
-ChoiceStrategyImpl::ChoiceStrategyImpl(const ChoiceStrategyImpl & obj): SemanticStrategyImpl(obj), ChoiceStrategy(obj)
+ChoiceStrategyImpl::ChoiceStrategyImpl(const ChoiceStrategyImpl & obj): ChoiceStrategyImpl()
 {
+	*this = obj;
+}
+
+ChoiceStrategyImpl& ChoiceStrategyImpl::operator=(const ChoiceStrategyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	SemanticStrategyImpl::operator=(obj);
+	ChoiceStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ChoiceStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -70,11 +79,13 @@ ChoiceStrategyImpl::ChoiceStrategyImpl(const ChoiceStrategyImpl & obj): Semantic
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ChoiceStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject> ChoiceStrategyImpl::copy() const
 {
-	std::shared_ptr<ChoiceStrategyImpl> element(new ChoiceStrategyImpl(*this));
+	std::shared_ptr<ChoiceStrategyImpl> element(new ChoiceStrategyImpl());
+	*element =(*this);
 	element->setThisChoiceStrategyPtr(element);
 	return element;
 }

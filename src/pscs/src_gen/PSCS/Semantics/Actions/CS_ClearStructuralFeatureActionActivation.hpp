@@ -79,8 +79,6 @@ namespace PSCS::Semantics::Actions
 	{
 		public:
  			CS_ClearStructuralFeatureActionActivation(const CS_ClearStructuralFeatureActionActivation &) {}
-			CS_ClearStructuralFeatureActionActivation& operator=(CS_ClearStructuralFeatureActionActivation const&) = delete;
-
 		protected:
 			CS_ClearStructuralFeatureActionActivation(){}
 

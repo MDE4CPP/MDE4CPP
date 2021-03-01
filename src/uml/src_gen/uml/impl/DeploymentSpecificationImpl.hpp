@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			DeploymentSpecificationImpl(const DeploymentSpecificationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			DeploymentSpecificationImpl& operator=(DeploymentSpecificationImpl const&) = delete;
+			DeploymentSpecificationImpl& operator=(DeploymentSpecificationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

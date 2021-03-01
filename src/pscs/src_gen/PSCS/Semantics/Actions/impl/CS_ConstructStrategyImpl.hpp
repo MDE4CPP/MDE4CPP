@@ -24,9 +24,7 @@ namespace PSCS::Semantics::Actions
 		public: 
 			CS_ConstructStrategyImpl(const CS_ConstructStrategyImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			CS_ConstructStrategyImpl& operator=(CS_ConstructStrategyImpl const&) = delete;
+			CS_ConstructStrategyImpl& operator=(CS_ConstructStrategyImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;

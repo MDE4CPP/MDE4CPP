@@ -91,20 +91,18 @@
 using namespace UML;
 
 CreateObjectActionObject::CreateObjectActionObject(std::shared_ptr<uml::CreateObjectAction> _element):
-
 	m_CreateObjectActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CreateObjectAction());
+{
 }
 
 CreateObjectActionObject::CreateObjectActionObject(CreateObjectActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CreateObjectActionObject::CreateObjectActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CreateObjectAction());
 }
 
 CreateObjectActionObject::~CreateObjectActionObject()
@@ -113,10 +111,18 @@ CreateObjectActionObject::~CreateObjectActionObject()
 
 std::shared_ptr<ecore::EObject> CreateObjectActionObject::copy()
 {
-	std::shared_ptr<CreateObjectActionObject> element(new CreateObjectActionObject(*this));
+	std::shared_ptr<CreateObjectActionObject> element(new CreateObjectActionObject());
+	*element=(*this);
 	element->setThisCreateObjectActionObjectPtr(element);
 	return element;
 }
+
+CreateObjectActionObject& CreateObjectActionObject::operator=(const CreateObjectActionObject & obj)
+{
+	UML::ActionObject::operator=(obj);
+	return *this;
+}
+
 
 void CreateObjectActionObject::destroy()
 {	

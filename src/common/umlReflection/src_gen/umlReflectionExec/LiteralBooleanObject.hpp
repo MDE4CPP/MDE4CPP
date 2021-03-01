@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~LiteralBooleanObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			LiteralBooleanObject& operator=(LiteralBooleanObject const&);
 
 			virtual void destroy();
 			

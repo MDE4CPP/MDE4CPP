@@ -108,8 +108,17 @@ CentralBufferNodeImpl::CentralBufferNodeImpl(std::weak_ptr<uml::Element> par_own
 	m_owner = par_owner;
 }
 
-CentralBufferNodeImpl::CentralBufferNodeImpl(const CentralBufferNodeImpl & obj): ObjectNodeImpl(obj), CentralBufferNode(obj)
+CentralBufferNodeImpl::CentralBufferNodeImpl(const CentralBufferNodeImpl & obj): CentralBufferNodeImpl()
 {
+	*this = obj;
+}
+
+CentralBufferNodeImpl& CentralBufferNodeImpl::operator=(const CentralBufferNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ObjectNodeImpl::operator=(obj);
+	CentralBufferNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CentralBufferNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -119,11 +128,13 @@ CentralBufferNodeImpl::CentralBufferNodeImpl(const CentralBufferNodeImpl & obj):
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CentralBufferNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> CentralBufferNodeImpl::copy() const
 {
-	std::shared_ptr<CentralBufferNodeImpl> element(new CentralBufferNodeImpl(*this));
+	std::shared_ptr<CentralBufferNodeImpl> element(new CentralBufferNodeImpl());
+	*element =(*this);
 	element->setThisCentralBufferNodePtr(element);
 	return element;
 }

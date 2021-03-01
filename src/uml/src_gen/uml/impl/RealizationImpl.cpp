@@ -99,8 +99,17 @@ RealizationImpl::RealizationImpl(std::weak_ptr<uml::TemplateParameter> par_ownin
 	m_owner = par_owningTemplateParameter;
 }
 
-RealizationImpl::RealizationImpl(const RealizationImpl & obj): AbstractionImpl(obj), Realization(obj)
+RealizationImpl::RealizationImpl(const RealizationImpl & obj): RealizationImpl()
 {
+	*this = obj;
+}
+
+RealizationImpl& RealizationImpl::operator=(const RealizationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	AbstractionImpl::operator=(obj);
+	Realization::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Realization "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -110,11 +119,13 @@ RealizationImpl::RealizationImpl(const RealizationImpl & obj): AbstractionImpl(o
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  RealizationImpl::copy() const
+std::shared_ptr<ecore::EObject> RealizationImpl::copy() const
 {
-	std::shared_ptr<RealizationImpl> element(new RealizationImpl(*this));
+	std::shared_ptr<RealizationImpl> element(new RealizationImpl());
+	*element =(*this);
 	element->setThisRealizationPtr(element);
 	return element;
 }

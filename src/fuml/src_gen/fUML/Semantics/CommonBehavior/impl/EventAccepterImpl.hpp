@@ -26,9 +26,7 @@ virtual public EventAccepter
 		public: 
 			EventAccepterImpl(const EventAccepterImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			EventAccepterImpl& operator=(EventAccepterImpl const&) = delete;
+			EventAccepterImpl& operator=(EventAccepterImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;

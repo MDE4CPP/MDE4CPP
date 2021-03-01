@@ -149,8 +149,17 @@ FunctionBehaviorImpl::FunctionBehaviorImpl(std::weak_ptr<uml::TemplateParameter>
 }
 
 
-FunctionBehaviorImpl::FunctionBehaviorImpl(const FunctionBehaviorImpl & obj): OpaqueBehaviorImpl(obj), FunctionBehavior(obj)
+FunctionBehaviorImpl::FunctionBehaviorImpl(const FunctionBehaviorImpl & obj): FunctionBehaviorImpl()
 {
+	*this = obj;
+}
+
+FunctionBehaviorImpl& FunctionBehaviorImpl::operator=(const FunctionBehaviorImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	OpaqueBehaviorImpl::operator=(obj);
+	FunctionBehavior::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FunctionBehavior "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -160,11 +169,13 @@ FunctionBehaviorImpl::FunctionBehaviorImpl(const FunctionBehaviorImpl & obj): Op
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  FunctionBehaviorImpl::copy() const
+std::shared_ptr<ecore::EObject> FunctionBehaviorImpl::copy() const
 {
-	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(*this));
+	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl());
+	*element =(*this);
 	element->setThisFunctionBehaviorPtr(element);
 	return element;
 }

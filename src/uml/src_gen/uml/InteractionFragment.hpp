@@ -66,11 +66,8 @@ namespace uml
 	{
 		public:
  			InteractionFragment(const InteractionFragment &) {}
-			InteractionFragment& operator=(InteractionFragment const&) = delete;
-
 		protected:
 			InteractionFragment(){}
-
 			//Additional constructors for the containments back reference
 			InteractionFragment(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
 

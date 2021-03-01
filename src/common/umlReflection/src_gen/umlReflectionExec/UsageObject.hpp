@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~UsageObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			UsageObject& operator=(UsageObject const&);
 
 			virtual void destroy();
 			

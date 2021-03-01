@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ReadLinkActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ReadLinkActionObject& operator=(ReadLinkActionObject const&);
 
 			virtual void destroy();
 			

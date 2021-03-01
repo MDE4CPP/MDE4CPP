@@ -85,8 +85,17 @@ CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl(std::weak_ptr
 	m_group = par_group;
 }
 
-CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl(const CallBehaviorActionActivationImpl & obj): CallActionActivationImpl(obj), CallBehaviorActionActivation(obj)
+CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl(const CallBehaviorActionActivationImpl & obj): CallBehaviorActionActivationImpl()
 {
+	*this = obj;
+}
+
+CallBehaviorActionActivationImpl& CallBehaviorActionActivationImpl::operator=(const CallBehaviorActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	CallActionActivationImpl::operator=(obj);
+	CallBehaviorActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CallBehaviorActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -97,11 +106,13 @@ CallBehaviorActionActivationImpl::CallBehaviorActionActivationImpl(const CallBeh
 	m_callBehaviorAction  = obj.getCallBehaviorAction();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CallBehaviorActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> CallBehaviorActionActivationImpl::copy() const
 {
-	std::shared_ptr<CallBehaviorActionActivationImpl> element(new CallBehaviorActionActivationImpl(*this));
+	std::shared_ptr<CallBehaviorActionActivationImpl> element(new CallBehaviorActionActivationImpl());
+	*element =(*this);
 	element->setThisCallBehaviorActionActivationPtr(element);
 	return element;
 }

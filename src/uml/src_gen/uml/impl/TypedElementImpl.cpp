@@ -80,8 +80,17 @@ TypedElementImpl::TypedElementImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-TypedElementImpl::TypedElementImpl(const TypedElementImpl & obj): NamedElementImpl(obj), TypedElement(obj)
+TypedElementImpl::TypedElementImpl(const TypedElementImpl & obj): TypedElementImpl()
 {
+	*this = obj;
+}
+
+TypedElementImpl& TypedElementImpl::operator=(const TypedElementImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	TypedElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TypedElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -92,11 +101,13 @@ TypedElementImpl::TypedElementImpl(const TypedElementImpl & obj): NamedElementIm
 	m_type  = obj.getType();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TypedElementImpl::copy() const
+std::shared_ptr<ecore::EObject> TypedElementImpl::copy() const
 {
-	std::shared_ptr<TypedElementImpl> element(new TypedElementImpl(*this));
+	std::shared_ptr<TypedElementImpl> element(new TypedElementImpl());
+	*element =(*this);
 	element->setThisTypedElementPtr(element);
 	return element;
 }

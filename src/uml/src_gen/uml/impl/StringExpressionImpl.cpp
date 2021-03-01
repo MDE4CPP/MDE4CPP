@@ -129,8 +129,18 @@ StringExpressionImpl::StringExpressionImpl(std::weak_ptr<uml::ValueSpecification
 	m_owner = par_valueSpecificationAction;
 }
 
-StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj): ExpressionImpl(obj), TemplateableElementImpl(obj), StringExpression(obj)
+StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj): StringExpressionImpl()
 {
+	*this = obj;
+}
+
+StringExpressionImpl& StringExpressionImpl::operator=(const StringExpressionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ExpressionImpl::operator=(obj);
+	TemplateableElementImpl::operator=(obj);
+	StringExpression::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy StringExpression "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -152,11 +162,13 @@ StringExpressionImpl::StringExpressionImpl(const StringExpressionImpl & obj): Ex
 		std::cout << "Initialising value Subset: " << "m_subExpression - Subset<uml::StringExpression, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StringExpressionImpl::copy() const
+std::shared_ptr<ecore::EObject> StringExpressionImpl::copy() const
 {
-	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(*this));
+	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl());
+	*element =(*this);
 	element->setThisStringExpressionPtr(element);
 	return element;
 }

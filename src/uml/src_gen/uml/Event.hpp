@@ -62,8 +62,6 @@ namespace uml
 	{
 		public:
  			Event(const Event &) {}
-			Event& operator=(Event const&) = delete;
-
 		protected:
 			Event(){}
 

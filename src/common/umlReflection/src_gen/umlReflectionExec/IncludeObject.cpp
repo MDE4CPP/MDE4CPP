@@ -63,20 +63,18 @@
 using namespace UML;
 
 IncludeObject::IncludeObject(std::shared_ptr<uml::Include> _element):
-
 	m_IncludeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Include());
+{
 }
 
 IncludeObject::IncludeObject(IncludeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 IncludeObject::IncludeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Include());
 }
 
 IncludeObject::~IncludeObject()
@@ -85,10 +83,19 @@ IncludeObject::~IncludeObject()
 
 std::shared_ptr<ecore::EObject> IncludeObject::copy()
 {
-	std::shared_ptr<IncludeObject> element(new IncludeObject(*this));
+	std::shared_ptr<IncludeObject> element(new IncludeObject());
+	*element=(*this);
 	element->setThisIncludeObjectPtr(element);
 	return element;
 }
+
+IncludeObject& IncludeObject::operator=(const IncludeObject & obj)
+{
+	UML::DirectedRelationshipObject::operator=(obj);
+	UML::NamedElementObject::operator=(obj);
+	return *this;
+}
+
 
 void IncludeObject::destroy()
 {	

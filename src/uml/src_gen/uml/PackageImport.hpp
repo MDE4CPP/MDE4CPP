@@ -63,11 +63,8 @@ namespace uml
 	{
 		public:
  			PackageImport(const PackageImport &) {}
-			PackageImport& operator=(PackageImport const&) = delete;
-
 		protected:
 			PackageImport(){}
-
 			//Additional constructors for the containments back reference
 			PackageImport(std::weak_ptr<uml::Namespace> par_importingNamespace);
 

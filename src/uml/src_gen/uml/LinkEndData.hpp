@@ -63,8 +63,6 @@ namespace uml
 	{
 		public:
  			LinkEndData(const LinkEndData &) {}
-			LinkEndData& operator=(LinkEndData const&) = delete;
-
 		protected:
 			LinkEndData(){}
 

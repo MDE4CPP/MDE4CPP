@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~DeployedArtifactObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			DeployedArtifactObject& operator=(DeployedArtifactObject const&);
 
 			virtual void destroy();
 			

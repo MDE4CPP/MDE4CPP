@@ -77,11 +77,8 @@ namespace uml
 	{
 		public:
  			Parameter(const Parameter &) {}
-			Parameter& operator=(Parameter const&) = delete;
-
 		protected:
 			Parameter(){}
-
 			//Additional constructors for the containments back reference
 			Parameter(std::weak_ptr<uml::Behavior> par_behavior);
 

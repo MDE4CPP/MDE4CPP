@@ -63,8 +63,17 @@ GetNextEventStrategyImpl::~GetNextEventStrategyImpl()
 }
 
 
-GetNextEventStrategyImpl::GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj): fUML::Semantics::Loci::SemanticStrategyImpl(obj), GetNextEventStrategy(obj)
+GetNextEventStrategyImpl::GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj): GetNextEventStrategyImpl()
 {
+	*this = obj;
+}
+
+GetNextEventStrategyImpl& GetNextEventStrategyImpl::operator=(const GetNextEventStrategyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::SemanticStrategyImpl::operator=(obj);
+	GetNextEventStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy GetNextEventStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -74,11 +83,13 @@ GetNextEventStrategyImpl::GetNextEventStrategyImpl(const GetNextEventStrategyImp
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  GetNextEventStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject> GetNextEventStrategyImpl::copy() const
 {
-	std::shared_ptr<GetNextEventStrategyImpl> element(new GetNextEventStrategyImpl(*this));
+	std::shared_ptr<GetNextEventStrategyImpl> element(new GetNextEventStrategyImpl());
+	*element =(*this);
 	element->setThisGetNextEventStrategyPtr(element);
 	return element;
 }

@@ -103,8 +103,19 @@ StateImpl::StateImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-StateImpl::StateImpl(const StateImpl & obj): NamespaceImpl(obj), RedefinableElementImpl(obj), VertexImpl(obj), State(obj)
+StateImpl::StateImpl(const StateImpl & obj): StateImpl()
 {
+	*this = obj;
+}
+
+StateImpl& StateImpl::operator=(const StateImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamespaceImpl::operator=(obj);
+	RedefinableElementImpl::operator=(obj);
+	VertexImpl::operator=(obj);
+	State::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy State "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -186,11 +197,13 @@ StateImpl::StateImpl(const StateImpl & obj): NamespaceImpl(obj), RedefinableElem
 		std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StateImpl::copy() const
+std::shared_ptr<ecore::EObject> StateImpl::copy() const
 {
-	std::shared_ptr<StateImpl> element(new StateImpl(*this));
+	std::shared_ptr<StateImpl> element(new StateImpl());
+	*element =(*this);
 	element->setThisStatePtr(element);
 	return element;
 }

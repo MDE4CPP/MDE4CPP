@@ -101,8 +101,17 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(s
 	m_owner = par_owner;
 }
 
-DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(const DestructionOccurrenceSpecificationImpl & obj): MessageOccurrenceSpecificationImpl(obj), DestructionOccurrenceSpecification(obj)
+DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(const DestructionOccurrenceSpecificationImpl & obj): DestructionOccurrenceSpecificationImpl()
 {
+	*this = obj;
+}
+
+DestructionOccurrenceSpecificationImpl& DestructionOccurrenceSpecificationImpl::operator=(const DestructionOccurrenceSpecificationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	MessageOccurrenceSpecificationImpl::operator=(obj);
+	DestructionOccurrenceSpecification::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DestructionOccurrenceSpecification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -112,11 +121,13 @@ DestructionOccurrenceSpecificationImpl::DestructionOccurrenceSpecificationImpl(c
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DestructionOccurrenceSpecificationImpl::copy() const
+std::shared_ptr<ecore::EObject> DestructionOccurrenceSpecificationImpl::copy() const
 {
-	std::shared_ptr<DestructionOccurrenceSpecificationImpl> element(new DestructionOccurrenceSpecificationImpl(*this));
+	std::shared_ptr<DestructionOccurrenceSpecificationImpl> element(new DestructionOccurrenceSpecificationImpl());
+	*element =(*this);
 	element->setThisDestructionOccurrenceSpecificationPtr(element);
 	return element;
 }

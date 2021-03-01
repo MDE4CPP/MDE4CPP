@@ -83,8 +83,17 @@ ExecutionImpl::~ExecutionImpl()
 }
 
 
-ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj): fUML::Semantics::StructuredClassifiers::ObjectImpl(obj), Execution(obj)
+ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj): ExecutionImpl()
 {
+	*this = obj;
+}
+
+ExecutionImpl& ExecutionImpl::operator=(const ExecutionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::StructuredClassifiers::ObjectImpl::operator=(obj);
+	Execution::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Execution "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -102,11 +111,13 @@ ExecutionImpl::ExecutionImpl(const ExecutionImpl & obj): fUML::Semantics::Struct
 		parameterValuesContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(_parameterValues->copy()));
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExecutionImpl::copy() const
+std::shared_ptr<ecore::EObject> ExecutionImpl::copy() const
 {
-	std::shared_ptr<ExecutionImpl> element(new ExecutionImpl(*this));
+	std::shared_ptr<ExecutionImpl> element(new ExecutionImpl());
+	*element =(*this);
 	element->setThisExecutionPtr(element);
 	return element;
 }

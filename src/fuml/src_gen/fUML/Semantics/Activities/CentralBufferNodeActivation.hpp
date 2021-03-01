@@ -59,8 +59,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			CentralBufferNodeActivation(const CentralBufferNodeActivation &) {}
-			CentralBufferNodeActivation& operator=(CentralBufferNodeActivation const&) = delete;
-
 		protected:
 			CentralBufferNodeActivation(){}
 

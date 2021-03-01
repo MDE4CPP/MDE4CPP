@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ControlNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ControlNodeObject& operator=(ControlNodeObject const&);
 
 			virtual void destroy();
 			

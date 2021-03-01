@@ -77,8 +77,6 @@ namespace uml
 	{
 		public:
  			InformationItem(const InformationItem &) {}
-			InformationItem& operator=(InformationItem const&) = delete;
-
 		protected:
 			InformationItem(){}
 

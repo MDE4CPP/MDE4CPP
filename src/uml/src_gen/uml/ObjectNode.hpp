@@ -79,8 +79,6 @@ namespace uml
 	{
 		public:
  			ObjectNode(const ObjectNode &) {}
-			ObjectNode& operator=(ObjectNode const&) = delete;
-
 		protected:
 			ObjectNode(){}
 

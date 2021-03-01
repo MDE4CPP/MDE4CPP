@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~StructuredClassifierObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			StructuredClassifierObject& operator=(StructuredClassifierObject const&);
 
 			virtual void destroy();
 			

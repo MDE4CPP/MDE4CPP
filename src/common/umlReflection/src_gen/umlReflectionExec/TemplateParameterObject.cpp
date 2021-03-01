@@ -52,20 +52,18 @@
 using namespace UML;
 
 TemplateParameterObject::TemplateParameterObject(std::shared_ptr<uml::TemplateParameter> _element):
-
 	m_TemplateParameterValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TemplateParameter());
+{
 }
 
 TemplateParameterObject::TemplateParameterObject(TemplateParameterObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 TemplateParameterObject::TemplateParameterObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TemplateParameter());
 }
 
 TemplateParameterObject::~TemplateParameterObject()
@@ -74,10 +72,18 @@ TemplateParameterObject::~TemplateParameterObject()
 
 std::shared_ptr<ecore::EObject> TemplateParameterObject::copy()
 {
-	std::shared_ptr<TemplateParameterObject> element(new TemplateParameterObject(*this));
+	std::shared_ptr<TemplateParameterObject> element(new TemplateParameterObject());
+	*element=(*this);
 	element->setThisTemplateParameterObjectPtr(element);
 	return element;
 }
+
+TemplateParameterObject& TemplateParameterObject::operator=(const TemplateParameterObject & obj)
+{
+	UML::ElementObject::operator=(obj);
+	return *this;
+}
+
 
 void TemplateParameterObject::destroy()
 {	

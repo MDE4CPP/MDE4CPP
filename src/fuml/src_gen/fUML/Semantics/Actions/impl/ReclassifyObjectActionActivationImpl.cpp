@@ -77,8 +77,17 @@ ReclassifyObjectActionActivationImpl::ReclassifyObjectActionActivationImpl(std::
 	m_group = par_group;
 }
 
-ReclassifyObjectActionActivationImpl::ReclassifyObjectActionActivationImpl(const ReclassifyObjectActionActivationImpl & obj): ActionActivationImpl(obj), ReclassifyObjectActionActivation(obj)
+ReclassifyObjectActionActivationImpl::ReclassifyObjectActionActivationImpl(const ReclassifyObjectActionActivationImpl & obj): ReclassifyObjectActionActivationImpl()
 {
+	*this = obj;
+}
+
+ReclassifyObjectActionActivationImpl& ReclassifyObjectActionActivationImpl::operator=(const ReclassifyObjectActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	ReclassifyObjectActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReclassifyObjectActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -88,11 +97,13 @@ ReclassifyObjectActionActivationImpl::ReclassifyObjectActionActivationImpl(const
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReclassifyObjectActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ReclassifyObjectActionActivationImpl::copy() const
 {
-	std::shared_ptr<ReclassifyObjectActionActivationImpl> element(new ReclassifyObjectActionActivationImpl(*this));
+	std::shared_ptr<ReclassifyObjectActionActivationImpl> element(new ReclassifyObjectActionActivationImpl());
+	*element =(*this);
 	element->setThisReclassifyObjectActionActivationPtr(element);
 	return element;
 }

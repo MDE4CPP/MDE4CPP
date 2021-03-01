@@ -98,8 +98,17 @@ ChangeEventImpl::ChangeEventImpl(std::weak_ptr<uml::TemplateParameter> par_ownin
 	m_owner = par_owningTemplateParameter;
 }
 
-ChangeEventImpl::ChangeEventImpl(const ChangeEventImpl & obj): EventImpl(obj), ChangeEvent(obj)
+ChangeEventImpl::ChangeEventImpl(const ChangeEventImpl & obj): ChangeEventImpl()
 {
+	*this = obj;
+}
+
+ChangeEventImpl& ChangeEventImpl::operator=(const ChangeEventImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	EventImpl::operator=(obj);
+	ChangeEvent::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ChangeEvent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -114,11 +123,13 @@ ChangeEventImpl::ChangeEventImpl(const ChangeEventImpl & obj): EventImpl(obj), C
 		m_changeExpression = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getChangeExpression()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ChangeEventImpl::copy() const
+std::shared_ptr<ecore::EObject> ChangeEventImpl::copy() const
 {
-	std::shared_ptr<ChangeEventImpl> element(new ChangeEventImpl(*this));
+	std::shared_ptr<ChangeEventImpl> element(new ChangeEventImpl());
+	*element =(*this);
 	element->setThisChangeEventPtr(element);
 	return element;
 }

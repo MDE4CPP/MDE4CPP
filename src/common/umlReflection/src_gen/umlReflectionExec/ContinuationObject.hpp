@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ContinuationObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ContinuationObject& operator=(ContinuationObject const&);
 
 			virtual void destroy();
 			

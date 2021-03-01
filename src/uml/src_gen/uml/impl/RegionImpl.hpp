@@ -24,9 +24,7 @@ namespace uml
 		public: 
 			RegionImpl(const RegionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			RegionImpl& operator=(RegionImpl const&) = delete;
+			RegionImpl& operator=(RegionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

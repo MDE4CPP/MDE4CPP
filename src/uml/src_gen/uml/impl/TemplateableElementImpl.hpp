@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			TemplateableElementImpl(const TemplateableElementImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			TemplateableElementImpl& operator=(TemplateableElementImpl const&) = delete;
+			TemplateableElementImpl& operator=(TemplateableElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

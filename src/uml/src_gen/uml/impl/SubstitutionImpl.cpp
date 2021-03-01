@@ -108,8 +108,17 @@ SubstitutionImpl::SubstitutionImpl(std::weak_ptr<uml::Classifier> par_substituti
 	m_owner = par_substitutingClassifier;
 }
 
-SubstitutionImpl::SubstitutionImpl(const SubstitutionImpl & obj): RealizationImpl(obj), Substitution(obj)
+SubstitutionImpl::SubstitutionImpl(const SubstitutionImpl & obj): SubstitutionImpl()
 {
+	*this = obj;
+}
+
+SubstitutionImpl& SubstitutionImpl::operator=(const SubstitutionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	RealizationImpl::operator=(obj);
+	Substitution::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Substitution "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -124,11 +133,13 @@ SubstitutionImpl::SubstitutionImpl(const SubstitutionImpl & obj): RealizationImp
 	{
 		m_contract = std::dynamic_pointer_cast<uml::Classifier>(obj.getContract()->copy());
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  SubstitutionImpl::copy() const
+std::shared_ptr<ecore::EObject> SubstitutionImpl::copy() const
 {
-	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(*this));
+	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl());
+	*element =(*this);
 	element->setThisSubstitutionPtr(element);
 	return element;
 }

@@ -66,8 +66,6 @@ namespace uml
 	{
 		public:
  			DurationObservation(const DurationObservation &) {}
-			DurationObservation& operator=(DurationObservation const&) = delete;
-
 		protected:
 			DurationObservation(){}
 

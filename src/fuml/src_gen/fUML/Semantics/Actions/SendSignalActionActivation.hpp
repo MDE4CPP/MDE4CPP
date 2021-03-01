@@ -65,8 +65,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			SendSignalActionActivation(const SendSignalActionActivation &) {}
-			SendSignalActionActivation& operator=(SendSignalActionActivation const&) = delete;
-
 		protected:
 			SendSignalActionActivation(){}
 

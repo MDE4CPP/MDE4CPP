@@ -128,8 +128,18 @@ AssociationImpl::AssociationImpl(std::weak_ptr<uml::TemplateParameter> par_ownin
 }
 
 
-AssociationImpl::AssociationImpl(const AssociationImpl & obj): ClassifierImpl(obj), RelationshipImpl(obj), Association(obj)
+AssociationImpl::AssociationImpl(const AssociationImpl & obj): AssociationImpl()
 {
+	*this = obj;
+}
+
+AssociationImpl& AssociationImpl::operator=(const AssociationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ClassifierImpl::operator=(obj);
+	RelationshipImpl::operator=(obj);
+	Association::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Association "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -166,11 +176,13 @@ AssociationImpl::AssociationImpl(const AssociationImpl & obj): ClassifierImpl(ob
 		std::cout << "Initialising value SubsetUnion: " << "m_ownedEnd - SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement >(getMemberEnd(),getFeature(),getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  AssociationImpl::copy() const
+std::shared_ptr<ecore::EObject> AssociationImpl::copy() const
 {
-	std::shared_ptr<AssociationImpl> element(new AssociationImpl(*this));
+	std::shared_ptr<AssociationImpl> element(new AssociationImpl());
+	*element =(*this);
 	element->setThisAssociationPtr(element);
 	return element;
 }

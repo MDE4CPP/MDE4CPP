@@ -66,11 +66,8 @@ namespace uml
 	{
 		public:
  			Deployment(const Deployment &) {}
-			Deployment& operator=(Deployment const&) = delete;
-
 		protected:
 			Deployment(){}
-
 			//Additional constructors for the containments back reference
 			Deployment(std::weak_ptr<uml::DeploymentTarget> par_location);
 

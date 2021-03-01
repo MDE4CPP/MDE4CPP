@@ -77,11 +77,8 @@ namespace uml
 	{
 		public:
  			Transition(const Transition &) {}
-			Transition& operator=(Transition const&) = delete;
-
 		protected:
 			Transition(){}
-
 			//Additional constructors for the containments back reference
 			Transition(std::weak_ptr<uml::Region> par_container);
 

@@ -60,8 +60,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ReturnInformation(const ReturnInformation &) {}
-			ReturnInformation& operator=(ReturnInformation const&) = delete;
-
 		protected:
 			ReturnInformation(){}
 

@@ -112,20 +112,18 @@
 using namespace UML;
 
 ExtensionEndObject::ExtensionEndObject(std::shared_ptr<uml::ExtensionEnd> _element):
-
 	m_ExtensionEndValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExtensionEnd());
+{
 }
 
 ExtensionEndObject::ExtensionEndObject(ExtensionEndObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExtensionEndObject::ExtensionEndObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExtensionEnd());
 }
 
 ExtensionEndObject::~ExtensionEndObject()
@@ -134,10 +132,18 @@ ExtensionEndObject::~ExtensionEndObject()
 
 std::shared_ptr<ecore::EObject> ExtensionEndObject::copy()
 {
-	std::shared_ptr<ExtensionEndObject> element(new ExtensionEndObject(*this));
+	std::shared_ptr<ExtensionEndObject> element(new ExtensionEndObject());
+	*element=(*this);
 	element->setThisExtensionEndObjectPtr(element);
 	return element;
 }
+
+ExtensionEndObject& ExtensionEndObject::operator=(const ExtensionEndObject & obj)
+{
+	UML::PropertyObject::operator=(obj);
+	return *this;
+}
+
 
 void ExtensionEndObject::destroy()
 {	

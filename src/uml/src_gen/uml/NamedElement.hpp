@@ -68,11 +68,8 @@ namespace uml
 	{
 		public:
  			NamedElement(const NamedElement &) {}
-			NamedElement& operator=(NamedElement const&) = delete;
-
 		protected:
 			NamedElement(){}
-
 			//Additional constructors for the containments back reference
 			NamedElement(std::weak_ptr<uml::Namespace> par_namespace);
 

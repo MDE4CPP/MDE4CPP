@@ -62,20 +62,18 @@
 using namespace UML;
 
 LiteralUnlimitedNaturalObject::LiteralUnlimitedNaturalObject(std::shared_ptr<uml::LiteralUnlimitedNatural> _element):
-
 	m_LiteralUnlimitedNaturalValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LiteralUnlimitedNatural());
+{
 }
 
 LiteralUnlimitedNaturalObject::LiteralUnlimitedNaturalObject(LiteralUnlimitedNaturalObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LiteralUnlimitedNaturalObject::LiteralUnlimitedNaturalObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LiteralUnlimitedNatural());
 }
 
 LiteralUnlimitedNaturalObject::~LiteralUnlimitedNaturalObject()
@@ -84,10 +82,18 @@ LiteralUnlimitedNaturalObject::~LiteralUnlimitedNaturalObject()
 
 std::shared_ptr<ecore::EObject> LiteralUnlimitedNaturalObject::copy()
 {
-	std::shared_ptr<LiteralUnlimitedNaturalObject> element(new LiteralUnlimitedNaturalObject(*this));
+	std::shared_ptr<LiteralUnlimitedNaturalObject> element(new LiteralUnlimitedNaturalObject());
+	*element=(*this);
 	element->setThisLiteralUnlimitedNaturalObjectPtr(element);
 	return element;
 }
+
+LiteralUnlimitedNaturalObject& LiteralUnlimitedNaturalObject::operator=(const LiteralUnlimitedNaturalObject & obj)
+{
+	UML::LiteralSpecificationObject::operator=(obj);
+	return *this;
+}
+
 
 void LiteralUnlimitedNaturalObject::destroy()
 {	

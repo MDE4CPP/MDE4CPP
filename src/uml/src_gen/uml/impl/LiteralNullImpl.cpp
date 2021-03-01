@@ -116,8 +116,17 @@ LiteralNullImpl::LiteralNullImpl(std::weak_ptr<uml::ValueSpecificationAction> pa
 	m_owner = par_valueSpecificationAction;
 }
 
-LiteralNullImpl::LiteralNullImpl(const LiteralNullImpl & obj): LiteralSpecificationImpl(obj), LiteralNull(obj)
+LiteralNullImpl::LiteralNullImpl(const LiteralNullImpl & obj): LiteralNullImpl()
 {
+	*this = obj;
+}
+
+LiteralNullImpl& LiteralNullImpl::operator=(const LiteralNullImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	LiteralSpecificationImpl::operator=(obj);
+	LiteralNull::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralNull "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -127,11 +136,13 @@ LiteralNullImpl::LiteralNullImpl(const LiteralNullImpl & obj): LiteralSpecificat
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LiteralNullImpl::copy() const
+std::shared_ptr<ecore::EObject> LiteralNullImpl::copy() const
 {
-	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(*this));
+	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl());
+	*element =(*this);
 	element->setThisLiteralNullPtr(element);
 	return element;
 }

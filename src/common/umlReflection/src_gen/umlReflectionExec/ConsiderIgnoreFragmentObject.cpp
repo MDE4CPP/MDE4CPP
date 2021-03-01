@@ -69,20 +69,18 @@
 using namespace UML;
 
 ConsiderIgnoreFragmentObject::ConsiderIgnoreFragmentObject(std::shared_ptr<uml::ConsiderIgnoreFragment> _element):
-
 	m_ConsiderIgnoreFragmentValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ConsiderIgnoreFragment());
+{
 }
 
 ConsiderIgnoreFragmentObject::ConsiderIgnoreFragmentObject(ConsiderIgnoreFragmentObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ConsiderIgnoreFragmentObject::ConsiderIgnoreFragmentObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ConsiderIgnoreFragment());
 }
 
 ConsiderIgnoreFragmentObject::~ConsiderIgnoreFragmentObject()
@@ -91,10 +89,18 @@ ConsiderIgnoreFragmentObject::~ConsiderIgnoreFragmentObject()
 
 std::shared_ptr<ecore::EObject> ConsiderIgnoreFragmentObject::copy()
 {
-	std::shared_ptr<ConsiderIgnoreFragmentObject> element(new ConsiderIgnoreFragmentObject(*this));
+	std::shared_ptr<ConsiderIgnoreFragmentObject> element(new ConsiderIgnoreFragmentObject());
+	*element=(*this);
 	element->setThisConsiderIgnoreFragmentObjectPtr(element);
 	return element;
 }
+
+ConsiderIgnoreFragmentObject& ConsiderIgnoreFragmentObject::operator=(const ConsiderIgnoreFragmentObject & obj)
+{
+	UML::CombinedFragmentObject::operator=(obj);
+	return *this;
+}
+
 
 void ConsiderIgnoreFragmentObject::destroy()
 {	

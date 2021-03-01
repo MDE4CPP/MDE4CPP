@@ -112,8 +112,17 @@ TypeImpl::TypeImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParam
 }
 
 
-TypeImpl::TypeImpl(const TypeImpl & obj): PackageableElementImpl(obj), Type(obj)
+TypeImpl::TypeImpl(const TypeImpl & obj): TypeImpl()
 {
+	*this = obj;
+}
+
+TypeImpl& TypeImpl::operator=(const TypeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PackageableElementImpl::operator=(obj);
+	Type::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Type "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -124,11 +133,13 @@ TypeImpl::TypeImpl(const TypeImpl & obj): PackageableElementImpl(obj), Type(obj)
 	m_package  = obj.getPackage();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TypeImpl::copy() const
+std::shared_ptr<ecore::EObject> TypeImpl::copy() const
 {
-	std::shared_ptr<TypeImpl> element(new TypeImpl(*this));
+	std::shared_ptr<TypeImpl> element(new TypeImpl());
+	*element =(*this);
 	element->setThisTypePtr(element);
 	return element;
 }

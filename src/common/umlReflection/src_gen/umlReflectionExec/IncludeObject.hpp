@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~IncludeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			IncludeObject& operator=(IncludeObject const&);
 
 			virtual void destroy();
 			

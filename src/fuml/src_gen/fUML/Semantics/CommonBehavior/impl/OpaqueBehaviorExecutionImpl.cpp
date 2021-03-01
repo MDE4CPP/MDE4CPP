@@ -77,8 +77,17 @@ OpaqueBehaviorExecutionImpl::~OpaqueBehaviorExecutionImpl()
 }
 
 
-OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExecutionImpl & obj): ExecutionImpl(obj), OpaqueBehaviorExecution(obj)
+OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExecutionImpl & obj): OpaqueBehaviorExecutionImpl()
 {
+	*this = obj;
+}
+
+OpaqueBehaviorExecutionImpl& OpaqueBehaviorExecutionImpl::operator=(const OpaqueBehaviorExecutionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ExecutionImpl::operator=(obj);
+	OpaqueBehaviorExecution::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OpaqueBehaviorExecution "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -88,11 +97,13 @@ OpaqueBehaviorExecutionImpl::OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExe
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  OpaqueBehaviorExecutionImpl::copy() const
+std::shared_ptr<ecore::EObject> OpaqueBehaviorExecutionImpl::copy() const
 {
-	std::shared_ptr<OpaqueBehaviorExecutionImpl> element(new OpaqueBehaviorExecutionImpl(*this));
+	std::shared_ptr<OpaqueBehaviorExecutionImpl> element(new OpaqueBehaviorExecutionImpl());
+	*element =(*this);
 	element->setThisOpaqueBehaviorExecutionPtr(element);
 	return element;
 }

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~InformationItemObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			InformationItemObject& operator=(InformationItemObject const&);
 
 			virtual void destroy();
 			

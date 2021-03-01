@@ -63,8 +63,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			OutputPinActivation(const OutputPinActivation &) {}
-			OutputPinActivation& operator=(OutputPinActivation const&) = delete;
-
 		protected:
 			OutputPinActivation(){}
 

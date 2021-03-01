@@ -63,11 +63,8 @@ namespace uml
 	{
 		public:
  			ConnectorEnd(const ConnectorEnd &) {}
-			ConnectorEnd& operator=(ConnectorEnd const&) = delete;
-
 		protected:
 			ConnectorEnd(){}
-
 			//Additional constructors for the containments back reference
 			ConnectorEnd(std::weak_ptr<uml::Connector> par_connector);
 

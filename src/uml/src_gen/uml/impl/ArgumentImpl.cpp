@@ -57,9 +57,17 @@ ArgumentImpl::~ArgumentImpl()
 }
 
 
-ArgumentImpl::ArgumentImpl(const ArgumentImpl & obj): ecore::EModelElementImpl(obj),
-Argument(obj)
+ArgumentImpl::ArgumentImpl(const ArgumentImpl & obj): ArgumentImpl()
 {
+	*this = obj;
+}
+
+ArgumentImpl& ArgumentImpl::operator=(const ArgumentImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	Argument::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Argument "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -71,11 +79,13 @@ Argument(obj)
 	m_value  = obj.getValue();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ArgumentImpl::copy() const
+std::shared_ptr<ecore::EObject> ArgumentImpl::copy() const
 {
-	std::shared_ptr<ArgumentImpl> element(new ArgumentImpl(*this));
+	std::shared_ptr<ArgumentImpl> element(new ArgumentImpl());
+	*element =(*this);
 	element->setThisArgumentPtr(element);
 	return element;
 }

@@ -126,8 +126,17 @@ InformationItemImpl::InformationItemImpl(std::weak_ptr<uml::TemplateParameter> p
 }
 
 
-InformationItemImpl::InformationItemImpl(const InformationItemImpl & obj): ClassifierImpl(obj), InformationItem(obj)
+InformationItemImpl::InformationItemImpl(const InformationItemImpl & obj): InformationItemImpl()
 {
+	*this = obj;
+}
+
+InformationItemImpl& InformationItemImpl::operator=(const InformationItemImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ClassifierImpl::operator=(obj);
+	InformationItem::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InformationItem "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -139,11 +148,13 @@ InformationItemImpl::InformationItemImpl(const InformationItemImpl & obj): Class
 	m_represented.reset(new Bag<uml::Classifier>(*(obj.getRepresented().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InformationItemImpl::copy() const
+std::shared_ptr<ecore::EObject> InformationItemImpl::copy() const
 {
-	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(*this));
+	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl());
+	*element =(*this);
 	element->setThisInformationItemPtr(element);
 	return element;
 }

@@ -76,8 +76,6 @@ namespace uml
 	{
 		public:
  			ReclassifyObjectAction(const ReclassifyObjectAction &) {}
-			ReclassifyObjectAction& operator=(ReclassifyObjectAction const&) = delete;
-
 		protected:
 			ReclassifyObjectAction(){}
 

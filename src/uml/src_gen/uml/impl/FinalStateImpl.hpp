@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			FinalStateImpl(const FinalStateImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			FinalStateImpl& operator=(FinalStateImpl const&) = delete;
+			FinalStateImpl& operator=(FinalStateImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

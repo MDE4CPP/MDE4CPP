@@ -74,20 +74,18 @@
 using namespace UML;
 
 FinalNodeObject::FinalNodeObject(std::shared_ptr<uml::FinalNode> _element):
-
 	m_FinalNodeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_FinalNode());
+{
 }
 
 FinalNodeObject::FinalNodeObject(FinalNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 FinalNodeObject::FinalNodeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_FinalNode());
 }
 
 FinalNodeObject::~FinalNodeObject()
@@ -96,10 +94,18 @@ FinalNodeObject::~FinalNodeObject()
 
 std::shared_ptr<ecore::EObject> FinalNodeObject::copy()
 {
-	std::shared_ptr<FinalNodeObject> element(new FinalNodeObject(*this));
+	std::shared_ptr<FinalNodeObject> element(new FinalNodeObject());
+	*element=(*this);
 	element->setThisFinalNodeObjectPtr(element);
 	return element;
 }
+
+FinalNodeObject& FinalNodeObject::operator=(const FinalNodeObject & obj)
+{
+	UML::ControlNodeObject::operator=(obj);
+	return *this;
+}
+
 
 void FinalNodeObject::destroy()
 {	

@@ -110,8 +110,17 @@ ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(std::weak_ptr<u
 	m_owner = par_owner;
 }
 
-ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(const ReadStructuralFeatureActionImpl & obj): StructuralFeatureActionImpl(obj), ReadStructuralFeatureAction(obj)
+ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(const ReadStructuralFeatureActionImpl & obj): ReadStructuralFeatureActionImpl()
 {
+	*this = obj;
+}
+
+ReadStructuralFeatureActionImpl& ReadStructuralFeatureActionImpl::operator=(const ReadStructuralFeatureActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	StructuralFeatureActionImpl::operator=(obj);
+	ReadStructuralFeatureAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReadStructuralFeatureAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -126,11 +135,13 @@ ReadStructuralFeatureActionImpl::ReadStructuralFeatureActionImpl(const ReadStruc
 		m_result = std::dynamic_pointer_cast<uml::OutputPin>(obj.getResult()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReadStructuralFeatureActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ReadStructuralFeatureActionImpl::copy() const
 {
-	std::shared_ptr<ReadStructuralFeatureActionImpl> element(new ReadStructuralFeatureActionImpl(*this));
+	std::shared_ptr<ReadStructuralFeatureActionImpl> element(new ReadStructuralFeatureActionImpl());
+	*element =(*this);
 	element->setThisReadStructuralFeatureActionPtr(element);
 	return element;
 }

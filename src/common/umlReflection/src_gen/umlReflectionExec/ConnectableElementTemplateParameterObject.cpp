@@ -52,20 +52,18 @@
 using namespace UML;
 
 ConnectableElementTemplateParameterObject::ConnectableElementTemplateParameterObject(std::shared_ptr<uml::ConnectableElementTemplateParameter> _element):
-
 	m_ConnectableElementTemplateParameterValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ConnectableElementTemplateParameter());
+{
 }
 
 ConnectableElementTemplateParameterObject::ConnectableElementTemplateParameterObject(ConnectableElementTemplateParameterObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ConnectableElementTemplateParameterObject::ConnectableElementTemplateParameterObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ConnectableElementTemplateParameter());
 }
 
 ConnectableElementTemplateParameterObject::~ConnectableElementTemplateParameterObject()
@@ -74,10 +72,18 @@ ConnectableElementTemplateParameterObject::~ConnectableElementTemplateParameterO
 
 std::shared_ptr<ecore::EObject> ConnectableElementTemplateParameterObject::copy()
 {
-	std::shared_ptr<ConnectableElementTemplateParameterObject> element(new ConnectableElementTemplateParameterObject(*this));
+	std::shared_ptr<ConnectableElementTemplateParameterObject> element(new ConnectableElementTemplateParameterObject());
+	*element=(*this);
 	element->setThisConnectableElementTemplateParameterObjectPtr(element);
 	return element;
 }
+
+ConnectableElementTemplateParameterObject& ConnectableElementTemplateParameterObject::operator=(const ConnectableElementTemplateParameterObject & obj)
+{
+	UML::TemplateParameterObject::operator=(obj);
+	return *this;
+}
+
 
 void ConnectableElementTemplateParameterObject::destroy()
 {	

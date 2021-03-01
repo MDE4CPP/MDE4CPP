@@ -48,8 +48,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			AcceptCallActionActivations(const AcceptCallActionActivations &) {}
-			AcceptCallActionActivations& operator=(AcceptCallActionActivations const&) = delete;
-
 		protected:
 			AcceptCallActionActivations(){}
 

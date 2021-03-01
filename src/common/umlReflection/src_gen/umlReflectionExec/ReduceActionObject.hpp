@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ReduceActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ReduceActionObject& operator=(ReduceActionObject const&);
 
 			virtual void destroy();
 			

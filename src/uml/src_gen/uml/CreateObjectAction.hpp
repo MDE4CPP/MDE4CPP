@@ -75,8 +75,6 @@ namespace uml
 	{
 		public:
  			CreateObjectAction(const CreateObjectAction &) {}
-			CreateObjectAction& operator=(CreateObjectAction const&) = delete;
-
 		protected:
 			CreateObjectAction(){}
 

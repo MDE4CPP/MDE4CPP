@@ -72,8 +72,6 @@ namespace uml
 	{
 		public:
  			DecisionNode(const DecisionNode &) {}
-			DecisionNode& operator=(DecisionNode const&) = delete;
-
 		protected:
 			DecisionNode(){}
 

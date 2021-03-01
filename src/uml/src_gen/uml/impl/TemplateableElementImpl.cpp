@@ -69,8 +69,17 @@ TemplateableElementImpl::TemplateableElementImpl(std::weak_ptr<uml::Element> par
 	m_owner = par_owner;
 }
 
-TemplateableElementImpl::TemplateableElementImpl(const TemplateableElementImpl & obj): ElementImpl(obj), TemplateableElement(obj)
+TemplateableElementImpl::TemplateableElementImpl(const TemplateableElementImpl & obj): TemplateableElementImpl()
 {
+	*this = obj;
+}
+
+TemplateableElementImpl& TemplateableElementImpl::operator=(const TemplateableElementImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	TemplateableElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TemplateableElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -96,11 +105,13 @@ TemplateableElementImpl::TemplateableElementImpl(const TemplateableElementImpl &
 		std::cout << "Initialising value Subset: " << "m_templateBinding - Subset<uml::TemplateBinding, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TemplateableElementImpl::copy() const
+std::shared_ptr<ecore::EObject> TemplateableElementImpl::copy() const
 {
-	std::shared_ptr<TemplateableElementImpl> element(new TemplateableElementImpl(*this));
+	std::shared_ptr<TemplateableElementImpl> element(new TemplateableElementImpl());
+	*element =(*this);
 	element->setThisTemplateableElementPtr(element);
 	return element;
 }

@@ -58,8 +58,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			FlowFinalNodeActivation(const FlowFinalNodeActivation &) {}
-			FlowFinalNodeActivation& operator=(FlowFinalNodeActivation const&) = delete;
-
 		protected:
 			FlowFinalNodeActivation(){}
 

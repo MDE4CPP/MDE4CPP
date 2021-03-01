@@ -74,9 +74,17 @@ ObjectActivationImpl::~ObjectActivationImpl()
 }
 
 
-ObjectActivationImpl::ObjectActivationImpl(const ObjectActivationImpl & obj): ecore::EModelElementImpl(obj),
-ObjectActivation(obj)
+ObjectActivationImpl::ObjectActivationImpl(const ObjectActivationImpl & obj): ObjectActivationImpl()
 {
+	*this = obj;
+}
+
+ObjectActivationImpl& ObjectActivationImpl::operator=(const ObjectActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	ObjectActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ObjectActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -101,11 +109,13 @@ ObjectActivation(obj)
 	}
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ObjectActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ObjectActivationImpl::copy() const
 {
-	std::shared_ptr<ObjectActivationImpl> element(new ObjectActivationImpl(*this));
+	std::shared_ptr<ObjectActivationImpl> element(new ObjectActivationImpl());
+	*element =(*this);
 	element->setThisObjectActivationPtr(element);
 	return element;
 }

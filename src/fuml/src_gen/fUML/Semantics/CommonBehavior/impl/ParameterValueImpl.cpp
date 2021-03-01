@@ -65,9 +65,17 @@ ParameterValueImpl::~ParameterValueImpl()
 }
 
 
-ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj): ecore::EModelElementImpl(obj),
-ParameterValue(obj)
+ParameterValueImpl::ParameterValueImpl(const ParameterValueImpl & obj): ParameterValueImpl()
 {
+	*this = obj;
+}
+
+ParameterValueImpl& ParameterValueImpl::operator=(const ParameterValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	ParameterValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ParameterValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -84,11 +92,13 @@ ParameterValue(obj)
 		valuesContainer->push_back(std::dynamic_pointer_cast<fUML::Semantics::Values::Value>(_values->copy()));
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ParameterValueImpl::copy() const
+std::shared_ptr<ecore::EObject> ParameterValueImpl::copy() const
 {
-	std::shared_ptr<ParameterValueImpl> element(new ParameterValueImpl(*this));
+	std::shared_ptr<ParameterValueImpl> element(new ParameterValueImpl());
+	*element =(*this);
 	element->setThisParameterValuePtr(element);
 	return element;
 }

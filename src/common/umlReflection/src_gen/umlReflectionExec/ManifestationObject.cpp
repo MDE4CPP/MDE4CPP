@@ -71,20 +71,18 @@
 using namespace UML;
 
 ManifestationObject::ManifestationObject(std::shared_ptr<uml::Manifestation> _element):
-
 	m_ManifestationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Manifestation());
+{
 }
 
 ManifestationObject::ManifestationObject(ManifestationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ManifestationObject::ManifestationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Manifestation());
 }
 
 ManifestationObject::~ManifestationObject()
@@ -93,10 +91,18 @@ ManifestationObject::~ManifestationObject()
 
 std::shared_ptr<ecore::EObject> ManifestationObject::copy()
 {
-	std::shared_ptr<ManifestationObject> element(new ManifestationObject(*this));
+	std::shared_ptr<ManifestationObject> element(new ManifestationObject());
+	*element=(*this);
 	element->setThisManifestationObjectPtr(element);
 	return element;
 }
+
+ManifestationObject& ManifestationObject::operator=(const ManifestationObject & obj)
+{
+	UML::AbstractionObject::operator=(obj);
+	return *this;
+}
+
 
 void ManifestationObject::destroy()
 {	

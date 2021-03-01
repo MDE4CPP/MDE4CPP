@@ -79,8 +79,17 @@ PackageImportImpl::PackageImportImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-PackageImportImpl::PackageImportImpl(const PackageImportImpl & obj): DirectedRelationshipImpl(obj), PackageImport(obj)
+PackageImportImpl::PackageImportImpl(const PackageImportImpl & obj): PackageImportImpl()
 {
+	*this = obj;
+}
+
+PackageImportImpl& PackageImportImpl::operator=(const PackageImportImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	DirectedRelationshipImpl::operator=(obj);
+	PackageImport::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PackageImport "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -96,11 +105,13 @@ PackageImportImpl::PackageImportImpl(const PackageImportImpl & obj): DirectedRel
 	{
 		m_importedPackage = std::dynamic_pointer_cast<uml::Package>(obj.getImportedPackage()->copy());
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  PackageImportImpl::copy() const
+std::shared_ptr<ecore::EObject> PackageImportImpl::copy() const
 {
-	std::shared_ptr<PackageImportImpl> element(new PackageImportImpl(*this));
+	std::shared_ptr<PackageImportImpl> element(new PackageImportImpl());
+	*element =(*this);
 	element->setThisPackageImportPtr(element);
 	return element;
 }

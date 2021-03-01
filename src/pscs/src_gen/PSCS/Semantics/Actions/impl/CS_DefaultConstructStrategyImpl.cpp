@@ -68,8 +68,8 @@
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -94,8 +94,17 @@ CS_DefaultConstructStrategyImpl::~CS_DefaultConstructStrategyImpl()
 }
 
 
-CS_DefaultConstructStrategyImpl::CS_DefaultConstructStrategyImpl(const CS_DefaultConstructStrategyImpl & obj): CS_ConstructStrategyImpl(obj), CS_DefaultConstructStrategy(obj)
+CS_DefaultConstructStrategyImpl::CS_DefaultConstructStrategyImpl(const CS_DefaultConstructStrategyImpl & obj): CS_DefaultConstructStrategyImpl()
 {
+	*this = obj;
+}
+
+CS_DefaultConstructStrategyImpl& CS_DefaultConstructStrategyImpl::operator=(const CS_DefaultConstructStrategyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	CS_ConstructStrategyImpl::operator=(obj);
+	CS_DefaultConstructStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_DefaultConstructStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -117,11 +126,13 @@ CS_DefaultConstructStrategyImpl::CS_DefaultConstructStrategyImpl(const CS_Defaul
 	}
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_DefaultConstructStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_DefaultConstructStrategyImpl::copy() const
 {
-	std::shared_ptr<CS_DefaultConstructStrategyImpl> element(new CS_DefaultConstructStrategyImpl(*this));
+	std::shared_ptr<CS_DefaultConstructStrategyImpl> element(new CS_DefaultConstructStrategyImpl());
+	*element =(*this);
 	element->setThisCS_DefaultConstructStrategyPtr(element);
 	return element;
 }

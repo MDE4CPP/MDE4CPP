@@ -24,9 +24,7 @@ namespace fUML::Semantics::Activities
 		public: 
 			ObjectTokenImpl(const ObjectTokenImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ObjectTokenImpl& operator=(ObjectTokenImpl const&) = delete;
+			ObjectTokenImpl& operator=(ObjectTokenImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;

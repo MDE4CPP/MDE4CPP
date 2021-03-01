@@ -61,20 +61,18 @@
 using namespace UML;
 
 FeatureObject::FeatureObject(std::shared_ptr<uml::Feature> _element):
-
 	m_FeatureValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Feature());
+{
 }
 
 FeatureObject::FeatureObject(FeatureObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 FeatureObject::FeatureObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Feature());
 }
 
 FeatureObject::~FeatureObject()
@@ -83,10 +81,18 @@ FeatureObject::~FeatureObject()
 
 std::shared_ptr<ecore::EObject> FeatureObject::copy()
 {
-	std::shared_ptr<FeatureObject> element(new FeatureObject(*this));
+	std::shared_ptr<FeatureObject> element(new FeatureObject());
+	*element=(*this);
 	element->setThisFeatureObjectPtr(element);
 	return element;
 }
+
+FeatureObject& FeatureObject::operator=(const FeatureObject & obj)
+{
+	UML::RedefinableElementObject::operator=(obj);
+	return *this;
+}
+
 
 void FeatureObject::destroy()
 {	

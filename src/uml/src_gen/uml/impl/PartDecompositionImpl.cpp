@@ -103,8 +103,17 @@ PartDecompositionImpl::PartDecompositionImpl(std::weak_ptr<uml::Element> par_own
 	m_owner = par_owner;
 }
 
-PartDecompositionImpl::PartDecompositionImpl(const PartDecompositionImpl & obj): InteractionUseImpl(obj), PartDecomposition(obj)
+PartDecompositionImpl::PartDecompositionImpl(const PartDecompositionImpl & obj): PartDecompositionImpl()
 {
+	*this = obj;
+}
+
+PartDecompositionImpl& PartDecompositionImpl::operator=(const PartDecompositionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	InteractionUseImpl::operator=(obj);
+	PartDecomposition::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PartDecomposition "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -114,11 +123,13 @@ PartDecompositionImpl::PartDecompositionImpl(const PartDecompositionImpl & obj):
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  PartDecompositionImpl::copy() const
+std::shared_ptr<ecore::EObject> PartDecompositionImpl::copy() const
 {
-	std::shared_ptr<PartDecompositionImpl> element(new PartDecompositionImpl(*this));
+	std::shared_ptr<PartDecompositionImpl> element(new PartDecompositionImpl());
+	*element =(*this);
 	element->setThisPartDecompositionPtr(element);
 	return element;
 }

@@ -56,8 +56,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ForkedToken(const ForkedToken &) {}
-			ForkedToken& operator=(ForkedToken const&) = delete;
-
 		protected:
 			ForkedToken(){}
 

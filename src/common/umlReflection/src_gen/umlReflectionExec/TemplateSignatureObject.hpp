@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~TemplateSignatureObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			TemplateSignatureObject& operator=(TemplateSignatureObject const&);
 
 			virtual void destroy();
 			

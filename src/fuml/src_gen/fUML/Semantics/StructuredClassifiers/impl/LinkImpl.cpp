@@ -73,8 +73,17 @@ LinkImpl::~LinkImpl()
 }
 
 
-LinkImpl::LinkImpl(const LinkImpl & obj): ExtensionalValueImpl(obj), Link(obj)
+LinkImpl::LinkImpl(const LinkImpl & obj): LinkImpl()
 {
+	*this = obj;
+}
+
+LinkImpl& LinkImpl::operator=(const LinkImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ExtensionalValueImpl::operator=(obj);
+	Link::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Link "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -85,11 +94,13 @@ LinkImpl::LinkImpl(const LinkImpl & obj): ExtensionalValueImpl(obj), Link(obj)
 	m_type  = obj.getType();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LinkImpl::copy() const
+std::shared_ptr<ecore::EObject> LinkImpl::copy() const
 {
-	std::shared_ptr<LinkImpl> element(new LinkImpl(*this));
+	std::shared_ptr<LinkImpl> element(new LinkImpl());
+	*element =(*this);
 	element->setThisLinkPtr(element);
 	return element;
 }

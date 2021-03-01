@@ -24,9 +24,7 @@ namespace fUML::Semantics::StructuredClassifiers
 		public: 
 			ReferenceImpl(const ReferenceImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ReferenceImpl& operator=(ReferenceImpl const&) = delete;
+			ReferenceImpl& operator=(ReferenceImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;

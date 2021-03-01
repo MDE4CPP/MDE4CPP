@@ -109,8 +109,17 @@ ComponentRealizationImpl::ComponentRealizationImpl(std::weak_ptr<uml::TemplatePa
 	m_owner = par_owningTemplateParameter;
 }
 
-ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImpl & obj): RealizationImpl(obj), ComponentRealization(obj)
+ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImpl & obj): ComponentRealizationImpl()
 {
+	*this = obj;
+}
+
+ComponentRealizationImpl& ComponentRealizationImpl::operator=(const ComponentRealizationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	RealizationImpl::operator=(obj);
+	ComponentRealization::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ComponentRealization "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -126,11 +135,13 @@ ComponentRealizationImpl::ComponentRealizationImpl(const ComponentRealizationImp
 	{
 		realizingClassifierContainer->push_back(std::dynamic_pointer_cast<uml::Classifier>(_realizingClassifier->copy()));
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ComponentRealizationImpl::copy() const
+std::shared_ptr<ecore::EObject> ComponentRealizationImpl::copy() const
 {
-	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(*this));
+	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl());
+	*element =(*this);
 	element->setThisComponentRealizationPtr(element);
 	return element;
 }

@@ -63,8 +63,6 @@ namespace uml
 	{
 		public:
  			Object(const Object &) {}
-			Object& operator=(Object const&) = delete;
-
 		protected:
 			Object(){}
 

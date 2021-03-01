@@ -118,20 +118,18 @@
 using namespace UML;
 
 StructuredActivityNodeObject::StructuredActivityNodeObject(std::shared_ptr<uml::StructuredActivityNode> _element):
-
 	m_StructuredActivityNodeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode());
+{
 }
 
 StructuredActivityNodeObject::StructuredActivityNodeObject(StructuredActivityNodeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StructuredActivityNodeObject::StructuredActivityNodeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode());
 }
 
 StructuredActivityNodeObject::~StructuredActivityNodeObject()
@@ -140,10 +138,20 @@ StructuredActivityNodeObject::~StructuredActivityNodeObject()
 
 std::shared_ptr<ecore::EObject> StructuredActivityNodeObject::copy()
 {
-	std::shared_ptr<StructuredActivityNodeObject> element(new StructuredActivityNodeObject(*this));
+	std::shared_ptr<StructuredActivityNodeObject> element(new StructuredActivityNodeObject());
+	*element=(*this);
 	element->setThisStructuredActivityNodeObjectPtr(element);
 	return element;
 }
+
+StructuredActivityNodeObject& StructuredActivityNodeObject::operator=(const StructuredActivityNodeObject & obj)
+{
+	UML::ActionObject::operator=(obj);
+	UML::ActivityGroupObject::operator=(obj);
+	UML::NamespaceObject::operator=(obj);
+	return *this;
+}
+
 
 void StructuredActivityNodeObject::destroy()
 {	

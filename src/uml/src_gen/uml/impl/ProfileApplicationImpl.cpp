@@ -82,8 +82,17 @@ ProfileApplicationImpl::ProfileApplicationImpl(std::weak_ptr<uml::Element> par_o
 	m_owner = par_owner;
 }
 
-ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & obj): DirectedRelationshipImpl(obj), ProfileApplication(obj)
+ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & obj): ProfileApplicationImpl()
 {
+	*this = obj;
+}
+
+ProfileApplicationImpl& ProfileApplicationImpl::operator=(const ProfileApplicationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	DirectedRelationshipImpl::operator=(obj);
+	ProfileApplication::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ProfileApplication "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -99,11 +108,13 @@ ProfileApplicationImpl::ProfileApplicationImpl(const ProfileApplicationImpl & ob
 	{
 		m_appliedProfile = std::dynamic_pointer_cast<uml::Profile>(obj.getAppliedProfile()->copy());
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ProfileApplicationImpl::copy() const
+std::shared_ptr<ecore::EObject> ProfileApplicationImpl::copy() const
 {
-	std::shared_ptr<ProfileApplicationImpl> element(new ProfileApplicationImpl(*this));
+	std::shared_ptr<ProfileApplicationImpl> element(new ProfileApplicationImpl());
+	*element =(*this);
 	element->setThisProfileApplicationPtr(element);
 	return element;
 }

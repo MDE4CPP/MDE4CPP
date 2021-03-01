@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			PartDecompositionImpl(const PartDecompositionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			PartDecompositionImpl& operator=(PartDecompositionImpl const&) = delete;
+			PartDecompositionImpl& operator=(PartDecompositionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

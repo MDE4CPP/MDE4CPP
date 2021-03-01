@@ -100,8 +100,17 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(std::weak_ptr<uml::Element> par_o
 	m_owner = par_owner;
 }
 
-ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & obj): TransitionImpl(obj), ProtocolTransition(obj)
+ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & obj): ProtocolTransitionImpl()
 {
+	*this = obj;
+}
+
+ProtocolTransitionImpl& ProtocolTransitionImpl::operator=(const ProtocolTransitionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	TransitionImpl::operator=(obj);
+	ProtocolTransition::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ProtocolTransition "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -121,11 +130,13 @@ ProtocolTransitionImpl::ProtocolTransitionImpl(const ProtocolTransitionImpl & ob
 	{
 		m_preCondition = std::dynamic_pointer_cast<uml::Constraint>(obj.getPreCondition()->copy());
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ProtocolTransitionImpl::copy() const
+std::shared_ptr<ecore::EObject> ProtocolTransitionImpl::copy() const
 {
-	std::shared_ptr<ProtocolTransitionImpl> element(new ProtocolTransitionImpl(*this));
+	std::shared_ptr<ProtocolTransitionImpl> element(new ProtocolTransitionImpl());
+	*element =(*this);
 	element->setThisProtocolTransitionPtr(element);
 	return element;
 }

@@ -70,11 +70,8 @@ namespace uml
 	{
 		public:
  			Pseudostate(const Pseudostate &) {}
-			Pseudostate& operator=(Pseudostate const&) = delete;
-
 		protected:
 			Pseudostate(){}
-
 			//Additional constructors for the containments back reference
 			Pseudostate(std::weak_ptr<uml::Region> par_container);
 

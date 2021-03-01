@@ -66,8 +66,17 @@ RelationshipImpl::RelationshipImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj): ElementImpl(obj), Relationship(obj)
+RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj): RelationshipImpl()
 {
+	*this = obj;
+}
+
+RelationshipImpl& RelationshipImpl::operator=(const RelationshipImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	Relationship::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Relationship "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -79,11 +88,13 @@ RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj): ElementImpl(ob
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  RelationshipImpl::copy() const
+std::shared_ptr<ecore::EObject> RelationshipImpl::copy() const
 {
-	std::shared_ptr<RelationshipImpl> element(new RelationshipImpl(*this));
+	std::shared_ptr<RelationshipImpl> element(new RelationshipImpl());
+	*element =(*this);
 	element->setThisRelationshipPtr(element);
 	return element;
 }

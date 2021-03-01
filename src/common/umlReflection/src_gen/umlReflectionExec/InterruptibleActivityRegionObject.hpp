@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~InterruptibleActivityRegionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			InterruptibleActivityRegionObject& operator=(InterruptibleActivityRegionObject const&);
 
 			virtual void destroy();
 			

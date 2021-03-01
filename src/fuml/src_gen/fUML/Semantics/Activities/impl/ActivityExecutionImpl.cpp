@@ -90,8 +90,17 @@ ActivityExecutionImpl::~ActivityExecutionImpl()
 }
 
 
-ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj): fUML::Semantics::CommonBehavior::ExecutionImpl(obj), ActivityExecution(obj)
+ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj): ActivityExecutionImpl()
 {
+	*this = obj;
+}
+
+ActivityExecutionImpl& ActivityExecutionImpl::operator=(const ActivityExecutionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::CommonBehavior::ExecutionImpl::operator=(obj);
+	ActivityExecution::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityExecution "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -107,11 +116,13 @@ ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj):
 		m_activationGroup = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(obj.getActivationGroup()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityExecutionImpl::copy() const
+std::shared_ptr<ecore::EObject> ActivityExecutionImpl::copy() const
 {
-	std::shared_ptr<ActivityExecutionImpl> element(new ActivityExecutionImpl(*this));
+	std::shared_ptr<ActivityExecutionImpl> element(new ActivityExecutionImpl());
+	*element =(*this);
 	element->setThisActivityExecutionPtr(element);
 	return element;
 }

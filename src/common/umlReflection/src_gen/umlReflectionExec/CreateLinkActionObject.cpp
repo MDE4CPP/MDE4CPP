@@ -91,20 +91,18 @@
 using namespace UML;
 
 CreateLinkActionObject::CreateLinkActionObject(std::shared_ptr<uml::CreateLinkAction> _element):
-
 	m_CreateLinkActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CreateLinkAction());
+{
 }
 
 CreateLinkActionObject::CreateLinkActionObject(CreateLinkActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 CreateLinkActionObject::CreateLinkActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CreateLinkAction());
 }
 
 CreateLinkActionObject::~CreateLinkActionObject()
@@ -113,10 +111,18 @@ CreateLinkActionObject::~CreateLinkActionObject()
 
 std::shared_ptr<ecore::EObject> CreateLinkActionObject::copy()
 {
-	std::shared_ptr<CreateLinkActionObject> element(new CreateLinkActionObject(*this));
+	std::shared_ptr<CreateLinkActionObject> element(new CreateLinkActionObject());
+	*element=(*this);
 	element->setThisCreateLinkActionObjectPtr(element);
 	return element;
 }
+
+CreateLinkActionObject& CreateLinkActionObject::operator=(const CreateLinkActionObject & obj)
+{
+	UML::WriteLinkActionObject::operator=(obj);
+	return *this;
+}
+
 
 void CreateLinkActionObject::destroy()
 {	

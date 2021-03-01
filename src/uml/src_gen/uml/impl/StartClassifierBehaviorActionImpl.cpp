@@ -109,8 +109,17 @@ StartClassifierBehaviorActionImpl::StartClassifierBehaviorActionImpl(std::weak_p
 	m_owner = par_owner;
 }
 
-StartClassifierBehaviorActionImpl::StartClassifierBehaviorActionImpl(const StartClassifierBehaviorActionImpl & obj): ActionImpl(obj), StartClassifierBehaviorAction(obj)
+StartClassifierBehaviorActionImpl::StartClassifierBehaviorActionImpl(const StartClassifierBehaviorActionImpl & obj): StartClassifierBehaviorActionImpl()
 {
+	*this = obj;
+}
+
+StartClassifierBehaviorActionImpl& StartClassifierBehaviorActionImpl::operator=(const StartClassifierBehaviorActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	StartClassifierBehaviorAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy StartClassifierBehaviorAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -125,11 +134,13 @@ StartClassifierBehaviorActionImpl::StartClassifierBehaviorActionImpl(const Start
 		m_object = std::dynamic_pointer_cast<uml::InputPin>(obj.getObject()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StartClassifierBehaviorActionImpl::copy() const
+std::shared_ptr<ecore::EObject> StartClassifierBehaviorActionImpl::copy() const
 {
-	std::shared_ptr<StartClassifierBehaviorActionImpl> element(new StartClassifierBehaviorActionImpl(*this));
+	std::shared_ptr<StartClassifierBehaviorActionImpl> element(new StartClassifierBehaviorActionImpl());
+	*element =(*this);
 	element->setThisStartClassifierBehaviorActionPtr(element);
 	return element;
 }

@@ -24,9 +24,9 @@ virtual public EObject
 		public: 
 			EObjectImpl(const EObjectImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EObjectImpl& operator=(EObjectImpl const&); 
 
 		protected:
-			EObjectImpl& operator=(EObjectImpl const&);
 			friend class ecoreFactoryImpl;
 			EObjectImpl();
 			virtual std::shared_ptr<EObject> getThisEObjectPtr() const;

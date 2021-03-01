@@ -76,8 +76,17 @@ InputPinActivationImpl::InputPinActivationImpl(std::weak_ptr<fUML::Semantics::Ac
 	m_group = par_group;
 }
 
-InputPinActivationImpl::InputPinActivationImpl(const InputPinActivationImpl & obj): PinActivationImpl(obj), InputPinActivation(obj)
+InputPinActivationImpl::InputPinActivationImpl(const InputPinActivationImpl & obj): InputPinActivationImpl()
 {
+	*this = obj;
+}
+
+InputPinActivationImpl& InputPinActivationImpl::operator=(const InputPinActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PinActivationImpl::operator=(obj);
+	InputPinActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InputPinActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -87,11 +96,13 @@ InputPinActivationImpl::InputPinActivationImpl(const InputPinActivationImpl & ob
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InputPinActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> InputPinActivationImpl::copy() const
 {
-	std::shared_ptr<InputPinActivationImpl> element(new InputPinActivationImpl(*this));
+	std::shared_ptr<InputPinActivationImpl> element(new InputPinActivationImpl());
+	*element =(*this);
 	element->setThisInputPinActivationPtr(element);
 	return element;
 }

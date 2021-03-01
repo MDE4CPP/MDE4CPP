@@ -94,20 +94,18 @@
 using namespace UML;
 
 ReclassifyObjectActionObject::ReclassifyObjectActionObject(std::shared_ptr<uml::ReclassifyObjectAction> _element):
-
 	m_ReclassifyObjectActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReclassifyObjectAction());
+{
 }
 
 ReclassifyObjectActionObject::ReclassifyObjectActionObject(ReclassifyObjectActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ReclassifyObjectActionObject::ReclassifyObjectActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReclassifyObjectAction());
 }
 
 ReclassifyObjectActionObject::~ReclassifyObjectActionObject()
@@ -116,10 +114,18 @@ ReclassifyObjectActionObject::~ReclassifyObjectActionObject()
 
 std::shared_ptr<ecore::EObject> ReclassifyObjectActionObject::copy()
 {
-	std::shared_ptr<ReclassifyObjectActionObject> element(new ReclassifyObjectActionObject(*this));
+	std::shared_ptr<ReclassifyObjectActionObject> element(new ReclassifyObjectActionObject());
+	*element=(*this);
 	element->setThisReclassifyObjectActionObjectPtr(element);
 	return element;
 }
+
+ReclassifyObjectActionObject& ReclassifyObjectActionObject::operator=(const ReclassifyObjectActionObject & obj)
+{
+	UML::ActionObject::operator=(obj);
+	return *this;
+}
+
 
 void ReclassifyObjectActionObject::destroy()
 {	

@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			InvocationActionImpl(const InvocationActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			InvocationActionImpl& operator=(InvocationActionImpl const&) = delete;
+			InvocationActionImpl& operator=(InvocationActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

@@ -76,8 +76,6 @@ namespace uml
 	{
 		public:
  			RemoveStructuralFeatureValueAction(const RemoveStructuralFeatureValueAction &) {}
-			RemoveStructuralFeatureValueAction& operator=(RemoveStructuralFeatureValueAction const&) = delete;
-
 		protected:
 			RemoveStructuralFeatureValueAction(){}
 

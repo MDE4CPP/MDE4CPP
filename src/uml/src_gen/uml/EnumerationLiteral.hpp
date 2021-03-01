@@ -68,11 +68,8 @@ namespace uml
 	{
 		public:
  			EnumerationLiteral(const EnumerationLiteral &) {}
-			EnumerationLiteral& operator=(EnumerationLiteral const&) = delete;
-
 		protected:
 			EnumerationLiteral(){}
-
 			//Additional constructors for the containments back reference
 			EnumerationLiteral(std::weak_ptr<uml::Enumeration> par_enumeration);
 

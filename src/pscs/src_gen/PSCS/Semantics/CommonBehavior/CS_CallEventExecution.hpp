@@ -71,8 +71,6 @@ namespace PSCS::Semantics::CommonBehavior
 	{
 		public:
  			CS_CallEventExecution(const CS_CallEventExecution &) {}
-			CS_CallEventExecution& operator=(CS_CallEventExecution const&) = delete;
-
 		protected:
 			CS_CallEventExecution(){}
 

@@ -96,20 +96,18 @@
 using namespace UML;
 
 ActionInputPinObject::ActionInputPinObject(std::shared_ptr<uml::ActionInputPin> _element):
-
 	m_ActionInputPinValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ActionInputPin());
+{
 }
 
 ActionInputPinObject::ActionInputPinObject(ActionInputPinObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ActionInputPinObject::ActionInputPinObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ActionInputPin());
 }
 
 ActionInputPinObject::~ActionInputPinObject()
@@ -118,10 +116,18 @@ ActionInputPinObject::~ActionInputPinObject()
 
 std::shared_ptr<ecore::EObject> ActionInputPinObject::copy()
 {
-	std::shared_ptr<ActionInputPinObject> element(new ActionInputPinObject(*this));
+	std::shared_ptr<ActionInputPinObject> element(new ActionInputPinObject());
+	*element=(*this);
 	element->setThisActionInputPinObjectPtr(element);
 	return element;
 }
+
+ActionInputPinObject& ActionInputPinObject::operator=(const ActionInputPinObject & obj)
+{
+	UML::InputPinObject::operator=(obj);
+	return *this;
+}
+
 
 void ActionInputPinObject::destroy()
 {	

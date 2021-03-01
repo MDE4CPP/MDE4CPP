@@ -56,10 +56,8 @@ namespace ecore
 	{
 		public:
  			EGenericType(const EGenericType &) {}
-
 		protected:
 			EGenericType(){}
-			EGenericType& operator=(const EGenericType &) = default;
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;

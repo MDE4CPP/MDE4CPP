@@ -71,8 +71,6 @@ namespace uml
 	{
 		public:
  			ConsiderIgnoreFragment(const ConsiderIgnoreFragment &) {}
-			ConsiderIgnoreFragment& operator=(ConsiderIgnoreFragment const&) = delete;
-
 		protected:
 			ConsiderIgnoreFragment(){}
 

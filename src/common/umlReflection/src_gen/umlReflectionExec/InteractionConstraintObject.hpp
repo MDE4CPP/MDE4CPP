@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~InteractionConstraintObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			InteractionConstraintObject& operator=(InteractionConstraintObject const&);
 
 			virtual void destroy();
 			

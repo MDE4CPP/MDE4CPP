@@ -62,11 +62,8 @@ namespace uml
 	{
 		public:
  			TemplateParameter(const TemplateParameter &) {}
-			TemplateParameter& operator=(TemplateParameter const&) = delete;
-
 		protected:
 			TemplateParameter(){}
-
 			//Additional constructors for the containments back reference
 			TemplateParameter(std::weak_ptr<uml::Element> par_owner);
 

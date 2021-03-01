@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ProfileApplicationObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ProfileApplicationObject& operator=(ProfileApplicationObject const&);
 
 			virtual void destroy();
 			

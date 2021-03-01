@@ -105,8 +105,17 @@ InitialNodeImpl::InitialNodeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-InitialNodeImpl::InitialNodeImpl(const InitialNodeImpl & obj): ControlNodeImpl(obj), InitialNode(obj)
+InitialNodeImpl::InitialNodeImpl(const InitialNodeImpl & obj): InitialNodeImpl()
 {
+	*this = obj;
+}
+
+InitialNodeImpl& InitialNodeImpl::operator=(const InitialNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ControlNodeImpl::operator=(obj);
+	InitialNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InitialNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -116,11 +125,13 @@ InitialNodeImpl::InitialNodeImpl(const InitialNodeImpl & obj): ControlNodeImpl(o
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InitialNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> InitialNodeImpl::copy() const
 {
-	std::shared_ptr<InitialNodeImpl> element(new InitialNodeImpl(*this));
+	std::shared_ptr<InitialNodeImpl> element(new InitialNodeImpl());
+	*element =(*this);
 	element->setThisInitialNodePtr(element);
 	return element;
 }

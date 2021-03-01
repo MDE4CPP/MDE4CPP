@@ -24,9 +24,7 @@ namespace fUML::Semantics::Actions
 		public: 
 			ClearAssociationActionActivationImpl(const ClearAssociationActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ClearAssociationActionActivationImpl& operator=(ClearAssociationActionActivationImpl const&) = delete;
+			ClearAssociationActionActivationImpl& operator=(ClearAssociationActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

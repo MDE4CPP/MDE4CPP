@@ -56,8 +56,6 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public:
  			ExtensionalValue(const ExtensionalValue &) {}
-			ExtensionalValue& operator=(ExtensionalValue const&) = delete;
-
 		protected:
 			ExtensionalValue(){}
 

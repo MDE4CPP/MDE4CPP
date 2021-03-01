@@ -84,20 +84,18 @@
 using namespace UML;
 
 BehavioralFeatureObject::BehavioralFeatureObject(std::shared_ptr<uml::BehavioralFeature> _element):
-
 	m_BehavioralFeatureValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_BehavioralFeature());
+{
 }
 
 BehavioralFeatureObject::BehavioralFeatureObject(BehavioralFeatureObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 BehavioralFeatureObject::BehavioralFeatureObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_BehavioralFeature());
 }
 
 BehavioralFeatureObject::~BehavioralFeatureObject()
@@ -106,10 +104,19 @@ BehavioralFeatureObject::~BehavioralFeatureObject()
 
 std::shared_ptr<ecore::EObject> BehavioralFeatureObject::copy()
 {
-	std::shared_ptr<BehavioralFeatureObject> element(new BehavioralFeatureObject(*this));
+	std::shared_ptr<BehavioralFeatureObject> element(new BehavioralFeatureObject());
+	*element=(*this);
 	element->setThisBehavioralFeatureObjectPtr(element);
 	return element;
 }
+
+BehavioralFeatureObject& BehavioralFeatureObject::operator=(const BehavioralFeatureObject & obj)
+{
+	UML::FeatureObject::operator=(obj);
+	UML::NamespaceObject::operator=(obj);
+	return *this;
+}
+
 
 void BehavioralFeatureObject::destroy()
 {	

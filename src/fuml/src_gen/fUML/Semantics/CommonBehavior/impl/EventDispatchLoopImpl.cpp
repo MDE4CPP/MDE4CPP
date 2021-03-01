@@ -58,9 +58,17 @@ EventDispatchLoopImpl::~EventDispatchLoopImpl()
 }
 
 
-EventDispatchLoopImpl::EventDispatchLoopImpl(const EventDispatchLoopImpl & obj): ecore::EModelElementImpl(obj),
-EventDispatchLoop(obj)
+EventDispatchLoopImpl::EventDispatchLoopImpl(const EventDispatchLoopImpl & obj): EventDispatchLoopImpl()
 {
+	*this = obj;
+}
+
+EventDispatchLoopImpl& EventDispatchLoopImpl::operator=(const EventDispatchLoopImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	EventDispatchLoop::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EventDispatchLoop "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -70,11 +78,13 @@ EventDispatchLoop(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EventDispatchLoopImpl::copy() const
+std::shared_ptr<ecore::EObject> EventDispatchLoopImpl::copy() const
 {
-	std::shared_ptr<EventDispatchLoopImpl> element(new EventDispatchLoopImpl(*this));
+	std::shared_ptr<EventDispatchLoopImpl> element(new EventDispatchLoopImpl());
+	*element =(*this);
 	element->setThisEventDispatchLoopPtr(element);
 	return element;
 }

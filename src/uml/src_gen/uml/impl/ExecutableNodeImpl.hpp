@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ExecutableNodeImpl(const ExecutableNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ExecutableNodeImpl& operator=(ExecutableNodeImpl const&) = delete;
+			ExecutableNodeImpl& operator=(ExecutableNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

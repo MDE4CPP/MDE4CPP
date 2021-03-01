@@ -67,20 +67,18 @@
 using namespace UML;
 
 ExecutionOccurrenceSpecificationObject::ExecutionOccurrenceSpecificationObject(std::shared_ptr<uml::ExecutionOccurrenceSpecification> _element):
-
 	m_ExecutionOccurrenceSpecificationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExecutionOccurrenceSpecification());
+{
 }
 
 ExecutionOccurrenceSpecificationObject::ExecutionOccurrenceSpecificationObject(ExecutionOccurrenceSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExecutionOccurrenceSpecificationObject::ExecutionOccurrenceSpecificationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExecutionOccurrenceSpecification());
 }
 
 ExecutionOccurrenceSpecificationObject::~ExecutionOccurrenceSpecificationObject()
@@ -89,10 +87,18 @@ ExecutionOccurrenceSpecificationObject::~ExecutionOccurrenceSpecificationObject(
 
 std::shared_ptr<ecore::EObject> ExecutionOccurrenceSpecificationObject::copy()
 {
-	std::shared_ptr<ExecutionOccurrenceSpecificationObject> element(new ExecutionOccurrenceSpecificationObject(*this));
+	std::shared_ptr<ExecutionOccurrenceSpecificationObject> element(new ExecutionOccurrenceSpecificationObject());
+	*element=(*this);
 	element->setThisExecutionOccurrenceSpecificationObjectPtr(element);
 	return element;
 }
+
+ExecutionOccurrenceSpecificationObject& ExecutionOccurrenceSpecificationObject::operator=(const ExecutionOccurrenceSpecificationObject & obj)
+{
+	UML::OccurrenceSpecificationObject::operator=(obj);
+	return *this;
+}
+
 
 void ExecutionOccurrenceSpecificationObject::destroy()
 {	

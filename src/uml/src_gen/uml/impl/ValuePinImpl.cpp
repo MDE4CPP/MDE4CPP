@@ -174,8 +174,17 @@ ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction> par_
 	m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
 }
 
-ValuePinImpl::ValuePinImpl(const ValuePinImpl & obj): InputPinImpl(obj), ValuePin(obj)
+ValuePinImpl::ValuePinImpl(const ValuePinImpl & obj): ValuePinImpl()
 {
+	*this = obj;
+}
+
+ValuePinImpl& ValuePinImpl::operator=(const ValuePinImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	InputPinImpl::operator=(obj);
+	ValuePin::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ValuePin "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -190,11 +199,13 @@ ValuePinImpl::ValuePinImpl(const ValuePinImpl & obj): InputPinImpl(obj), ValuePi
 		m_value = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getValue()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ValuePinImpl::copy() const
+std::shared_ptr<ecore::EObject> ValuePinImpl::copy() const
 {
-	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(*this));
+	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl());
+	*element =(*this);
 	element->setThisValuePinPtr(element);
 	return element;
 }

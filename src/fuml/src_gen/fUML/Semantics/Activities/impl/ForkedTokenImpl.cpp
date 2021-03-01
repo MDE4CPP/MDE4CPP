@@ -64,8 +64,17 @@ ForkedTokenImpl::~ForkedTokenImpl()
 }
 
 
-ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj): TokenImpl(obj), ForkedToken(obj)
+ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj): ForkedTokenImpl()
 {
+	*this = obj;
+}
+
+ForkedTokenImpl& ForkedTokenImpl::operator=(const ForkedTokenImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	TokenImpl::operator=(obj);
+	ForkedToken::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ForkedToken "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -78,11 +87,13 @@ ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj): TokenImpl(obj), F
 	m_baseToken  = obj.getBaseToken();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ForkedTokenImpl::copy() const
+std::shared_ptr<ecore::EObject> ForkedTokenImpl::copy() const
 {
-	std::shared_ptr<ForkedTokenImpl> element(new ForkedTokenImpl(*this));
+	std::shared_ptr<ForkedTokenImpl> element(new ForkedTokenImpl());
+	*element =(*this);
 	element->setThisForkedTokenPtr(element);
 	return element;
 }

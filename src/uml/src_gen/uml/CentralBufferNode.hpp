@@ -73,8 +73,6 @@ namespace uml
 	{
 		public:
  			CentralBufferNode(const CentralBufferNode &) {}
-			CentralBufferNode& operator=(CentralBufferNode const&) = delete;
-
 		protected:
 			CentralBufferNode(){}
 

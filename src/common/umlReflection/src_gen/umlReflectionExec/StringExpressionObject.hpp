@@ -38,6 +38,7 @@ namespace UML
 		    virtual ~StringExpressionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			StringExpressionObject& operator=(StringExpressionObject const&);
 
 			virtual void destroy();
 			

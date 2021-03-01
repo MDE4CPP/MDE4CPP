@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			SendSignalActionImpl(const SendSignalActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			SendSignalActionImpl& operator=(SendSignalActionImpl const&) = delete;
+			SendSignalActionImpl& operator=(SendSignalActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

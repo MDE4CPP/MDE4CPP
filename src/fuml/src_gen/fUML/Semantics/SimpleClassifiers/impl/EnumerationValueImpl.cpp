@@ -72,8 +72,17 @@ EnumerationValueImpl::~EnumerationValueImpl()
 }
 
 
-EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj): fUML::Semantics::Values::ValueImpl(obj), EnumerationValue(obj)
+EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj): EnumerationValueImpl()
 {
+	*this = obj;
+}
+
+EnumerationValueImpl& EnumerationValueImpl::operator=(const EnumerationValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Values::ValueImpl::operator=(obj);
+	EnumerationValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EnumerationValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -85,11 +94,13 @@ EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj): fU
 	m_type  = obj.getType();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EnumerationValueImpl::copy() const
+std::shared_ptr<ecore::EObject> EnumerationValueImpl::copy() const
 {
-	std::shared_ptr<EnumerationValueImpl> element(new EnumerationValueImpl(*this));
+	std::shared_ptr<EnumerationValueImpl> element(new EnumerationValueImpl());
+	*element =(*this);
 	element->setThisEnumerationValuePtr(element);
 	return element;
 }

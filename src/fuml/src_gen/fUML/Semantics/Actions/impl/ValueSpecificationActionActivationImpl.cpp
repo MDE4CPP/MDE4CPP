@@ -81,8 +81,17 @@ ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl(s
 	m_group = par_group;
 }
 
-ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl(const ValueSpecificationActionActivationImpl & obj): ActionActivationImpl(obj), ValueSpecificationActionActivation(obj)
+ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl(const ValueSpecificationActionActivationImpl & obj): ValueSpecificationActionActivationImpl()
 {
+	*this = obj;
+}
+
+ValueSpecificationActionActivationImpl& ValueSpecificationActionActivationImpl::operator=(const ValueSpecificationActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	ValueSpecificationActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ValueSpecificationActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -92,11 +101,13 @@ ValueSpecificationActionActivationImpl::ValueSpecificationActionActivationImpl(c
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ValueSpecificationActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> ValueSpecificationActionActivationImpl::copy() const
 {
-	std::shared_ptr<ValueSpecificationActionActivationImpl> element(new ValueSpecificationActionActivationImpl(*this));
+	std::shared_ptr<ValueSpecificationActionActivationImpl> element(new ValueSpecificationActionActivationImpl());
+	*element =(*this);
 	element->setThisValueSpecificationActionActivationPtr(element);
 	return element;
 }

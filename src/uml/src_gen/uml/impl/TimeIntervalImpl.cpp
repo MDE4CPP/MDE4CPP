@@ -117,8 +117,17 @@ TimeIntervalImpl::TimeIntervalImpl(std::weak_ptr<uml::ValueSpecificationAction> 
 	m_owner = par_valueSpecificationAction;
 }
 
-TimeIntervalImpl::TimeIntervalImpl(const TimeIntervalImpl & obj): IntervalImpl(obj), TimeInterval(obj)
+TimeIntervalImpl::TimeIntervalImpl(const TimeIntervalImpl & obj): TimeIntervalImpl()
 {
+	*this = obj;
+}
+
+TimeIntervalImpl& TimeIntervalImpl::operator=(const TimeIntervalImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	IntervalImpl::operator=(obj);
+	TimeInterval::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TimeInterval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -128,11 +137,13 @@ TimeIntervalImpl::TimeIntervalImpl(const TimeIntervalImpl & obj): IntervalImpl(o
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TimeIntervalImpl::copy() const
+std::shared_ptr<ecore::EObject> TimeIntervalImpl::copy() const
 {
-	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(*this));
+	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl());
+	*element =(*this);
 	element->setThisTimeIntervalPtr(element);
 	return element;
 }

@@ -79,9 +79,17 @@ LocusImpl::~LocusImpl()
 }
 
 
-LocusImpl::LocusImpl(const LocusImpl & obj): ecore::EModelElementImpl(obj),
-Locus(obj)
+LocusImpl::LocusImpl(const LocusImpl & obj): LocusImpl()
 {
+	*this = obj;
+}
+
+LocusImpl& LocusImpl::operator=(const LocusImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	Locus::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Locus "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -107,11 +115,13 @@ Locus(obj)
 	
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LocusImpl::copy() const
+std::shared_ptr<ecore::EObject> LocusImpl::copy() const
 {
-	std::shared_ptr<LocusImpl> element(new LocusImpl(*this));
+	std::shared_ptr<LocusImpl> element(new LocusImpl());
+	*element =(*this);
 	element->setThisLocusPtr(element);
 	return element;
 }

@@ -96,20 +96,18 @@
 using namespace UML;
 
 StartObjectBehaviorActionObject::StartObjectBehaviorActionObject(std::shared_ptr<uml::StartObjectBehaviorAction> _element):
-
 	m_StartObjectBehaviorActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_StartObjectBehaviorAction());
+{
 }
 
 StartObjectBehaviorActionObject::StartObjectBehaviorActionObject(StartObjectBehaviorActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StartObjectBehaviorActionObject::StartObjectBehaviorActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_StartObjectBehaviorAction());
 }
 
 StartObjectBehaviorActionObject::~StartObjectBehaviorActionObject()
@@ -118,10 +116,18 @@ StartObjectBehaviorActionObject::~StartObjectBehaviorActionObject()
 
 std::shared_ptr<ecore::EObject> StartObjectBehaviorActionObject::copy()
 {
-	std::shared_ptr<StartObjectBehaviorActionObject> element(new StartObjectBehaviorActionObject(*this));
+	std::shared_ptr<StartObjectBehaviorActionObject> element(new StartObjectBehaviorActionObject());
+	*element=(*this);
 	element->setThisStartObjectBehaviorActionObjectPtr(element);
 	return element;
 }
+
+StartObjectBehaviorActionObject& StartObjectBehaviorActionObject::operator=(const StartObjectBehaviorActionObject & obj)
+{
+	UML::CallActionObject::operator=(obj);
+	return *this;
+}
+
 
 void StartObjectBehaviorActionObject::destroy()
 {	

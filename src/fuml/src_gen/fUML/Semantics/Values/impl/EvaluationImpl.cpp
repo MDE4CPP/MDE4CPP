@@ -64,8 +64,17 @@ EvaluationImpl::~EvaluationImpl()
 }
 
 
-EvaluationImpl::EvaluationImpl(const EvaluationImpl & obj): fUML::Semantics::Loci::SemanticVisitorImpl(obj), Evaluation(obj)
+EvaluationImpl::EvaluationImpl(const EvaluationImpl & obj): EvaluationImpl()
 {
+	*this = obj;
+}
+
+EvaluationImpl& EvaluationImpl::operator=(const EvaluationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::SemanticVisitorImpl::operator=(obj);
+	Evaluation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Evaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -77,11 +86,13 @@ EvaluationImpl::EvaluationImpl(const EvaluationImpl & obj): fUML::Semantics::Loc
 	m_specification  = obj.getSpecification();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  EvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject> EvaluationImpl::copy() const
 {
-	std::shared_ptr<EvaluationImpl> element(new EvaluationImpl(*this));
+	std::shared_ptr<EvaluationImpl> element(new EvaluationImpl());
+	*element =(*this);
 	element->setThisEvaluationPtr(element);
 	return element;
 }

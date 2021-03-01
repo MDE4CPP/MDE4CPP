@@ -136,8 +136,17 @@ ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(std::weak_ptr<uml::TemplatePa
 }
 
 
-ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(const ExecutionEnvironmentImpl & obj): NodeImpl(obj), ExecutionEnvironment(obj)
+ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(const ExecutionEnvironmentImpl & obj): ExecutionEnvironmentImpl()
 {
+	*this = obj;
+}
+
+ExecutionEnvironmentImpl& ExecutionEnvironmentImpl::operator=(const ExecutionEnvironmentImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NodeImpl::operator=(obj);
+	ExecutionEnvironment::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExecutionEnvironment "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -147,11 +156,13 @@ ExecutionEnvironmentImpl::ExecutionEnvironmentImpl(const ExecutionEnvironmentImp
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExecutionEnvironmentImpl::copy() const
+std::shared_ptr<ecore::EObject> ExecutionEnvironmentImpl::copy() const
 {
-	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(*this));
+	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl());
+	*element =(*this);
 	element->setThisExecutionEnvironmentPtr(element);
 	return element;
 }

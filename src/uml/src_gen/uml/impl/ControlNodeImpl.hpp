@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ControlNodeImpl(const ControlNodeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ControlNodeImpl& operator=(ControlNodeImpl const&) = delete;
+			ControlNodeImpl& operator=(ControlNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

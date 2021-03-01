@@ -65,8 +65,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			TestIdentityActionActivation(const TestIdentityActionActivation &) {}
-			TestIdentityActionActivation& operator=(TestIdentityActionActivation const&) = delete;
-
 		protected:
 			TestIdentityActionActivation(){}
 

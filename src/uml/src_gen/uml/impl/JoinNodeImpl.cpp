@@ -106,8 +106,17 @@ JoinNodeImpl::JoinNodeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-JoinNodeImpl::JoinNodeImpl(const JoinNodeImpl & obj): ControlNodeImpl(obj), JoinNode(obj)
+JoinNodeImpl::JoinNodeImpl(const JoinNodeImpl & obj): JoinNodeImpl()
 {
+	*this = obj;
+}
+
+JoinNodeImpl& JoinNodeImpl::operator=(const JoinNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ControlNodeImpl::operator=(obj);
+	JoinNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy JoinNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -123,11 +132,13 @@ JoinNodeImpl::JoinNodeImpl(const JoinNodeImpl & obj): ControlNodeImpl(obj), Join
 		m_joinSpec = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getJoinSpec()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  JoinNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> JoinNodeImpl::copy() const
 {
-	std::shared_ptr<JoinNodeImpl> element(new JoinNodeImpl(*this));
+	std::shared_ptr<JoinNodeImpl> element(new JoinNodeImpl());
+	*element =(*this);
 	element->setThisJoinNodePtr(element);
 	return element;
 }

@@ -70,11 +70,8 @@ namespace uml
 	{
 		public:
  			Lifeline(const Lifeline &) {}
-			Lifeline& operator=(Lifeline const&) = delete;
-
 		protected:
 			Lifeline(){}
-
 			//Additional constructors for the containments back reference
 			Lifeline(std::weak_ptr<uml::Interaction> par_interaction);
 

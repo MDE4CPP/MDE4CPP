@@ -139,20 +139,18 @@
 using namespace UML;
 
 DeviceObject::DeviceObject(std::shared_ptr<uml::Device> _element):
-
 	m_DeviceValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Device());
+{
 }
 
 DeviceObject::DeviceObject(DeviceObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DeviceObject::DeviceObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Device());
 }
 
 DeviceObject::~DeviceObject()
@@ -161,10 +159,18 @@ DeviceObject::~DeviceObject()
 
 std::shared_ptr<ecore::EObject> DeviceObject::copy()
 {
-	std::shared_ptr<DeviceObject> element(new DeviceObject(*this));
+	std::shared_ptr<DeviceObject> element(new DeviceObject());
+	*element=(*this);
 	element->setThisDeviceObjectPtr(element);
 	return element;
 }
+
+DeviceObject& DeviceObject::operator=(const DeviceObject & obj)
+{
+	UML::NodeObject::operator=(obj);
+	return *this;
+}
+
 
 void DeviceObject::destroy()
 {	

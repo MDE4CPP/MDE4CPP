@@ -69,11 +69,8 @@ namespace uml
 	{
 		public:
  			ActivityNode(const ActivityNode &) {}
-			ActivityNode& operator=(ActivityNode const&) = delete;
-
 		protected:
 			ActivityNode(){}
-
 			//Additional constructors for the containments back reference
 			ActivityNode(std::weak_ptr<uml::Activity> par_activity);
 

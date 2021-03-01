@@ -51,20 +51,18 @@
 using namespace UML;
 
 MultiplicityElementObject::MultiplicityElementObject(std::shared_ptr<uml::MultiplicityElement> _element):
-
 	m_MultiplicityElementValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_MultiplicityElement());
+{
 }
 
 MultiplicityElementObject::MultiplicityElementObject(MultiplicityElementObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 MultiplicityElementObject::MultiplicityElementObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_MultiplicityElement());
 }
 
 MultiplicityElementObject::~MultiplicityElementObject()
@@ -73,10 +71,18 @@ MultiplicityElementObject::~MultiplicityElementObject()
 
 std::shared_ptr<ecore::EObject> MultiplicityElementObject::copy()
 {
-	std::shared_ptr<MultiplicityElementObject> element(new MultiplicityElementObject(*this));
+	std::shared_ptr<MultiplicityElementObject> element(new MultiplicityElementObject());
+	*element=(*this);
 	element->setThisMultiplicityElementObjectPtr(element);
 	return element;
 }
+
+MultiplicityElementObject& MultiplicityElementObject::operator=(const MultiplicityElementObject & obj)
+{
+	UML::ElementObject::operator=(obj);
+	return *this;
+}
+
 
 void MultiplicityElementObject::destroy()
 {	

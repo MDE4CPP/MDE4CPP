@@ -63,20 +63,18 @@
 using namespace UML;
 
 LifelineObject::LifelineObject(std::shared_ptr<uml::Lifeline> _element):
-
 	m_LifelineValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Lifeline());
+{
 }
 
 LifelineObject::LifelineObject(LifelineObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 LifelineObject::LifelineObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Lifeline());
 }
 
 LifelineObject::~LifelineObject()
@@ -85,10 +83,18 @@ LifelineObject::~LifelineObject()
 
 std::shared_ptr<ecore::EObject> LifelineObject::copy()
 {
-	std::shared_ptr<LifelineObject> element(new LifelineObject(*this));
+	std::shared_ptr<LifelineObject> element(new LifelineObject());
+	*element=(*this);
 	element->setThisLifelineObjectPtr(element);
 	return element;
 }
+
+LifelineObject& LifelineObject::operator=(const LifelineObject & obj)
+{
+	UML::NamedElementObject::operator=(obj);
+	return *this;
+}
+
 
 void LifelineObject::destroy()
 {	

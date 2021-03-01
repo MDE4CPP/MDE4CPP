@@ -101,8 +101,17 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(std::weak
 	m_owner = par_owner;
 }
 
-BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const BehaviorExecutionSpecificationImpl & obj): ExecutionSpecificationImpl(obj), BehaviorExecutionSpecification(obj)
+BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const BehaviorExecutionSpecificationImpl & obj): BehaviorExecutionSpecificationImpl()
 {
+	*this = obj;
+}
+
+BehaviorExecutionSpecificationImpl& BehaviorExecutionSpecificationImpl::operator=(const BehaviorExecutionSpecificationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ExecutionSpecificationImpl::operator=(obj);
+	BehaviorExecutionSpecification::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy BehaviorExecutionSpecification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -113,11 +122,13 @@ BehaviorExecutionSpecificationImpl::BehaviorExecutionSpecificationImpl(const Beh
 	m_behavior  = obj.getBehavior();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  BehaviorExecutionSpecificationImpl::copy() const
+std::shared_ptr<ecore::EObject> BehaviorExecutionSpecificationImpl::copy() const
 {
-	std::shared_ptr<BehaviorExecutionSpecificationImpl> element(new BehaviorExecutionSpecificationImpl(*this));
+	std::shared_ptr<BehaviorExecutionSpecificationImpl> element(new BehaviorExecutionSpecificationImpl());
+	*element =(*this);
 	element->setThisBehaviorExecutionSpecificationPtr(element);
 	return element;
 }

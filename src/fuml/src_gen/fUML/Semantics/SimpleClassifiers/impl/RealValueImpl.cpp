@@ -71,8 +71,17 @@ RealValueImpl::~RealValueImpl()
 }
 
 
-RealValueImpl::RealValueImpl(const RealValueImpl & obj): PrimitiveValueImpl(obj), RealValue(obj)
+RealValueImpl::RealValueImpl(const RealValueImpl & obj): RealValueImpl()
 {
+	*this = obj;
+}
+
+RealValueImpl& RealValueImpl::operator=(const RealValueImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PrimitiveValueImpl::operator=(obj);
+	RealValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy RealValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -83,11 +92,13 @@ RealValueImpl::RealValueImpl(const RealValueImpl & obj): PrimitiveValueImpl(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  RealValueImpl::copy() const
+std::shared_ptr<ecore::EObject> RealValueImpl::copy() const
 {
-	std::shared_ptr<RealValueImpl> element(new RealValueImpl(*this));
+	std::shared_ptr<RealValueImpl> element(new RealValueImpl());
+	*element =(*this);
 	element->setThisRealValuePtr(element);
 	return element;
 }

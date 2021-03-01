@@ -102,8 +102,17 @@ ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(std::weak_ptr
 	m_owner = par_owner;
 }
 
-ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(const ActionExecutionSpecificationImpl & obj): ExecutionSpecificationImpl(obj), ActionExecutionSpecification(obj)
+ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(const ActionExecutionSpecificationImpl & obj): ActionExecutionSpecificationImpl()
 {
+	*this = obj;
+}
+
+ActionExecutionSpecificationImpl& ActionExecutionSpecificationImpl::operator=(const ActionExecutionSpecificationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ExecutionSpecificationImpl::operator=(obj);
+	ActionExecutionSpecification::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActionExecutionSpecification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -114,11 +123,13 @@ ActionExecutionSpecificationImpl::ActionExecutionSpecificationImpl(const ActionE
 	m_action  = obj.getAction();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ActionExecutionSpecificationImpl::copy() const
+std::shared_ptr<ecore::EObject> ActionExecutionSpecificationImpl::copy() const
 {
-	std::shared_ptr<ActionExecutionSpecificationImpl> element(new ActionExecutionSpecificationImpl(*this));
+	std::shared_ptr<ActionExecutionSpecificationImpl> element(new ActionExecutionSpecificationImpl());
+	*element =(*this);
 	element->setThisActionExecutionSpecificationPtr(element);
 	return element;
 }

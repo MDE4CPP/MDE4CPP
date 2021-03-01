@@ -110,8 +110,17 @@ ClearAssociationActionImpl::ClearAssociationActionImpl(std::weak_ptr<uml::Elemen
 	m_owner = par_owner;
 }
 
-ClearAssociationActionImpl::ClearAssociationActionImpl(const ClearAssociationActionImpl & obj): ActionImpl(obj), ClearAssociationAction(obj)
+ClearAssociationActionImpl::ClearAssociationActionImpl(const ClearAssociationActionImpl & obj): ClearAssociationActionImpl()
 {
+	*this = obj;
+}
+
+ClearAssociationActionImpl& ClearAssociationActionImpl::operator=(const ClearAssociationActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	ClearAssociationAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClearAssociationAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -127,11 +136,13 @@ ClearAssociationActionImpl::ClearAssociationActionImpl(const ClearAssociationAct
 		m_object = std::dynamic_pointer_cast<uml::InputPin>(obj.getObject()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ClearAssociationActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ClearAssociationActionImpl::copy() const
 {
-	std::shared_ptr<ClearAssociationActionImpl> element(new ClearAssociationActionImpl(*this));
+	std::shared_ptr<ClearAssociationActionImpl> element(new ClearAssociationActionImpl());
+	*element =(*this);
 	element->setThisClearAssociationActionPtr(element);
 	return element;
 }

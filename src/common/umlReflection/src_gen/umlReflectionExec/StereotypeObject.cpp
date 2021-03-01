@@ -137,20 +137,18 @@
 using namespace UML;
 
 StereotypeObject::StereotypeObject(std::shared_ptr<uml::Stereotype> _element):
-
 	m_StereotypeValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Stereotype());
+{
 }
 
 StereotypeObject::StereotypeObject(StereotypeObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StereotypeObject::StereotypeObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Stereotype());
 }
 
 StereotypeObject::~StereotypeObject()
@@ -159,10 +157,18 @@ StereotypeObject::~StereotypeObject()
 
 std::shared_ptr<ecore::EObject> StereotypeObject::copy()
 {
-	std::shared_ptr<StereotypeObject> element(new StereotypeObject(*this));
+	std::shared_ptr<StereotypeObject> element(new StereotypeObject());
+	*element=(*this);
 	element->setThisStereotypeObjectPtr(element);
 	return element;
 }
+
+StereotypeObject& StereotypeObject::operator=(const StereotypeObject & obj)
+{
+	UML::ClassObject::operator=(obj);
+	return *this;
+}
+
 
 void StereotypeObject::destroy()
 {	

@@ -135,8 +135,19 @@ StructuredActivityNodeImpl::StructuredActivityNodeImpl(std::weak_ptr<uml::Activi
 	m_owner = par_superGroup;
 }
 
-StructuredActivityNodeImpl::StructuredActivityNodeImpl(const StructuredActivityNodeImpl & obj): ActionImpl(obj), ActivityGroupImpl(obj), NamespaceImpl(obj), StructuredActivityNode(obj)
+StructuredActivityNodeImpl::StructuredActivityNodeImpl(const StructuredActivityNodeImpl & obj): StructuredActivityNodeImpl()
 {
+	*this = obj;
+}
+
+StructuredActivityNodeImpl& StructuredActivityNodeImpl::operator=(const StructuredActivityNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	NamespaceImpl::operator=(obj);
+	ActivityGroupImpl::operator=(obj);
+	StructuredActivityNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy StructuredActivityNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -202,11 +213,13 @@ StructuredActivityNodeImpl::StructuredActivityNodeImpl(const StructuredActivityN
 		std::cout << "Initialising value Subset: " << "m_variable - Subset<uml::Variable, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StructuredActivityNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> StructuredActivityNodeImpl::copy() const
 {
-	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(*this));
+	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl());
+	*element =(*this);
 	element->setThisStructuredActivityNodePtr(element);
 	return element;
 }

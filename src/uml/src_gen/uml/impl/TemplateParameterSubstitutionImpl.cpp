@@ -78,8 +78,17 @@ TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_p
 	m_owner = par_templateBinding;
 }
 
-TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const TemplateParameterSubstitutionImpl & obj): ElementImpl(obj), TemplateParameterSubstitution(obj)
+TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const TemplateParameterSubstitutionImpl & obj): TemplateParameterSubstitutionImpl()
 {
+	*this = obj;
+}
+
+TemplateParameterSubstitutionImpl& TemplateParameterSubstitutionImpl::operator=(const TemplateParameterSubstitutionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	TemplateParameterSubstitution::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TemplateParameterSubstitution "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -97,11 +106,13 @@ TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const Templ
 		m_ownedActual = std::dynamic_pointer_cast<uml::ParameterableElement>(obj.getOwnedActual()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TemplateParameterSubstitutionImpl::copy() const
+std::shared_ptr<ecore::EObject> TemplateParameterSubstitutionImpl::copy() const
 {
-	std::shared_ptr<TemplateParameterSubstitutionImpl> element(new TemplateParameterSubstitutionImpl(*this));
+	std::shared_ptr<TemplateParameterSubstitutionImpl> element(new TemplateParameterSubstitutionImpl());
+	*element =(*this);
 	element->setThisTemplateParameterSubstitutionPtr(element);
 	return element;
 }

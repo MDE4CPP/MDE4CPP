@@ -68,11 +68,8 @@ namespace uml
 	{
 		public:
  			Constraint(const Constraint &) {}
-			Constraint& operator=(Constraint const&) = delete;
-
 		protected:
 			Constraint(){}
-
 			//Additional constructors for the containments back reference
 			Constraint(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id);
 

@@ -103,8 +103,17 @@ ControlNodeImpl::ControlNodeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ControlNodeImpl::ControlNodeImpl(const ControlNodeImpl & obj): ActivityNodeImpl(obj), ControlNode(obj)
+ControlNodeImpl::ControlNodeImpl(const ControlNodeImpl & obj): ControlNodeImpl()
 {
+	*this = obj;
+}
+
+ControlNodeImpl& ControlNodeImpl::operator=(const ControlNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActivityNodeImpl::operator=(obj);
+	ControlNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ControlNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -114,11 +123,13 @@ ControlNodeImpl::ControlNodeImpl(const ControlNodeImpl & obj): ActivityNodeImpl(
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ControlNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> ControlNodeImpl::copy() const
 {
-	std::shared_ptr<ControlNodeImpl> element(new ControlNodeImpl(*this));
+	std::shared_ptr<ControlNodeImpl> element(new ControlNodeImpl());
+	*element =(*this);
 	element->setThisControlNodePtr(element);
 	return element;
 }

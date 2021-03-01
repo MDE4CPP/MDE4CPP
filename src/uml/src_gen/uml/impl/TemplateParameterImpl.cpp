@@ -77,8 +77,17 @@ TemplateParameterImpl::TemplateParameterImpl(std::weak_ptr<uml::TemplateSignatur
 	m_owner = par_signature;
 }
 
-TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj): ElementImpl(obj), TemplateParameter(obj)
+TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj): TemplateParameterImpl()
 {
+	*this = obj;
+}
+
+TemplateParameterImpl& TemplateParameterImpl::operator=(const TemplateParameterImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	TemplateParameter::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TemplateParameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -101,11 +110,13 @@ TemplateParameterImpl::TemplateParameterImpl(const TemplateParameterImpl & obj):
 	}
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TemplateParameterImpl::copy() const
+std::shared_ptr<ecore::EObject> TemplateParameterImpl::copy() const
 {
-	std::shared_ptr<TemplateParameterImpl> element(new TemplateParameterImpl(*this));
+	std::shared_ptr<TemplateParameterImpl> element(new TemplateParameterImpl());
+	*element =(*this);
 	element->setThisTemplateParameterPtr(element);
 	return element;
 }

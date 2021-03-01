@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ConsiderIgnoreFragmentObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ConsiderIgnoreFragmentObject& operator=(ConsiderIgnoreFragmentObject const&);
 
 			virtual void destroy();
 			

@@ -24,9 +24,7 @@ namespace fUML::Semantics::Actions
 		public: 
 			ReduceActionActivationImpl(const ReduceActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ReduceActionActivationImpl& operator=(ReduceActionActivationImpl const&) = delete;
+			ReduceActionActivationImpl& operator=(ReduceActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

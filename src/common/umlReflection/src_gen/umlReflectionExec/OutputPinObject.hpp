@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~OutputPinObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			OutputPinObject& operator=(OutputPinObject const&);
 
 			virtual void destroy();
 			

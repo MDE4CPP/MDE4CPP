@@ -109,8 +109,17 @@ ReadIsClassifiedObjectActionImpl::ReadIsClassifiedObjectActionImpl(std::weak_ptr
 	m_owner = par_owner;
 }
 
-ReadIsClassifiedObjectActionImpl::ReadIsClassifiedObjectActionImpl(const ReadIsClassifiedObjectActionImpl & obj): ActionImpl(obj), ReadIsClassifiedObjectAction(obj)
+ReadIsClassifiedObjectActionImpl::ReadIsClassifiedObjectActionImpl(const ReadIsClassifiedObjectActionImpl & obj): ReadIsClassifiedObjectActionImpl()
 {
+	*this = obj;
+}
+
+ReadIsClassifiedObjectActionImpl& ReadIsClassifiedObjectActionImpl::operator=(const ReadIsClassifiedObjectActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	ReadIsClassifiedObjectAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReadIsClassifiedObjectAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -132,11 +141,13 @@ ReadIsClassifiedObjectActionImpl::ReadIsClassifiedObjectActionImpl(const ReadIsC
 	}
 	
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReadIsClassifiedObjectActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ReadIsClassifiedObjectActionImpl::copy() const
 {
-	std::shared_ptr<ReadIsClassifiedObjectActionImpl> element(new ReadIsClassifiedObjectActionImpl(*this));
+	std::shared_ptr<ReadIsClassifiedObjectActionImpl> element(new ReadIsClassifiedObjectActionImpl());
+	*element =(*this);
 	element->setThisReadIsClassifiedObjectActionPtr(element);
 	return element;
 }

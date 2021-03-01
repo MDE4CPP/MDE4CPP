@@ -116,8 +116,17 @@ ExpressionImpl::ExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction> par_
 	m_owner = par_valueSpecificationAction;
 }
 
-ExpressionImpl::ExpressionImpl(const ExpressionImpl & obj): ValueSpecificationImpl(obj), Expression(obj)
+ExpressionImpl::ExpressionImpl(const ExpressionImpl & obj): ExpressionImpl()
 {
+	*this = obj;
+}
+
+ExpressionImpl& ExpressionImpl::operator=(const ExpressionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ValueSpecificationImpl::operator=(obj);
+	Expression::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Expression "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -139,11 +148,13 @@ ExpressionImpl::ExpressionImpl(const ExpressionImpl & obj): ValueSpecificationIm
 		std::cout << "Initialising value Subset: " << "m_operand - Subset<uml::ValueSpecification, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExpressionImpl::copy() const
+std::shared_ptr<ecore::EObject> ExpressionImpl::copy() const
 {
-	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(*this));
+	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl());
+	*element =(*this);
 	element->setThisExpressionPtr(element);
 	return element;
 }

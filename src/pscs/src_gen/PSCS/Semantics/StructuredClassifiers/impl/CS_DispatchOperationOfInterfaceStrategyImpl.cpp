@@ -43,8 +43,8 @@
 //Factories an Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 
@@ -68,8 +68,17 @@ CS_DispatchOperationOfInterfaceStrategyImpl::~CS_DispatchOperationOfInterfaceStr
 }
 
 
-CS_DispatchOperationOfInterfaceStrategyImpl::CS_DispatchOperationOfInterfaceStrategyImpl(const CS_DispatchOperationOfInterfaceStrategyImpl & obj): fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl(obj), CS_DispatchOperationOfInterfaceStrategy(obj)
+CS_DispatchOperationOfInterfaceStrategyImpl::CS_DispatchOperationOfInterfaceStrategyImpl(const CS_DispatchOperationOfInterfaceStrategyImpl & obj): CS_DispatchOperationOfInterfaceStrategyImpl()
 {
+	*this = obj;
+}
+
+CS_DispatchOperationOfInterfaceStrategyImpl& CS_DispatchOperationOfInterfaceStrategyImpl::operator=(const CS_DispatchOperationOfInterfaceStrategyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::operator=(obj);
+	CS_DispatchOperationOfInterfaceStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_DispatchOperationOfInterfaceStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -79,11 +88,13 @@ CS_DispatchOperationOfInterfaceStrategyImpl::CS_DispatchOperationOfInterfaceStra
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_DispatchOperationOfInterfaceStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_DispatchOperationOfInterfaceStrategyImpl::copy() const
 {
-	std::shared_ptr<CS_DispatchOperationOfInterfaceStrategyImpl> element(new CS_DispatchOperationOfInterfaceStrategyImpl(*this));
+	std::shared_ptr<CS_DispatchOperationOfInterfaceStrategyImpl> element(new CS_DispatchOperationOfInterfaceStrategyImpl());
+	*element =(*this);
 	element->setThisCS_DispatchOperationOfInterfaceStrategyPtr(element);
 	return element;
 }

@@ -127,8 +127,17 @@ PrimitiveTypeImpl::PrimitiveTypeImpl(std::weak_ptr<uml::TemplateParameter> par_o
 }
 
 
-PrimitiveTypeImpl::PrimitiveTypeImpl(const PrimitiveTypeImpl & obj): DataTypeImpl(obj), PrimitiveType(obj)
+PrimitiveTypeImpl::PrimitiveTypeImpl(const PrimitiveTypeImpl & obj): PrimitiveTypeImpl()
 {
+	*this = obj;
+}
+
+PrimitiveTypeImpl& PrimitiveTypeImpl::operator=(const PrimitiveTypeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	DataTypeImpl::operator=(obj);
+	PrimitiveType::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PrimitiveType "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -138,11 +147,13 @@ PrimitiveTypeImpl::PrimitiveTypeImpl(const PrimitiveTypeImpl & obj): DataTypeImp
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  PrimitiveTypeImpl::copy() const
+std::shared_ptr<ecore::EObject> PrimitiveTypeImpl::copy() const
 {
-	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(*this));
+	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl());
+	*element =(*this);
 	element->setThisPrimitiveTypePtr(element);
 	return element;
 }

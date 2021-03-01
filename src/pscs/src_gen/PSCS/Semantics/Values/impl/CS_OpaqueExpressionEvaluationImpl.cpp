@@ -72,8 +72,17 @@ CS_OpaqueExpressionEvaluationImpl::~CS_OpaqueExpressionEvaluationImpl()
 }
 
 
-CS_OpaqueExpressionEvaluationImpl::CS_OpaqueExpressionEvaluationImpl(const CS_OpaqueExpressionEvaluationImpl & obj): fUML::Semantics::Values::EvaluationImpl(obj), CS_OpaqueExpressionEvaluation(obj)
+CS_OpaqueExpressionEvaluationImpl::CS_OpaqueExpressionEvaluationImpl(const CS_OpaqueExpressionEvaluationImpl & obj): CS_OpaqueExpressionEvaluationImpl()
 {
+	*this = obj;
+}
+
+CS_OpaqueExpressionEvaluationImpl& CS_OpaqueExpressionEvaluationImpl::operator=(const CS_OpaqueExpressionEvaluationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Values::EvaluationImpl::operator=(obj);
+	CS_OpaqueExpressionEvaluation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_OpaqueExpressionEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -83,11 +92,13 @@ CS_OpaqueExpressionEvaluationImpl::CS_OpaqueExpressionEvaluationImpl(const CS_Op
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_OpaqueExpressionEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_OpaqueExpressionEvaluationImpl::copy() const
 {
-	std::shared_ptr<CS_OpaqueExpressionEvaluationImpl> element(new CS_OpaqueExpressionEvaluationImpl(*this));
+	std::shared_ptr<CS_OpaqueExpressionEvaluationImpl> element(new CS_OpaqueExpressionEvaluationImpl());
+	*element =(*this);
 	element->setThisCS_OpaqueExpressionEvaluationPtr(element);
 	return element;
 }

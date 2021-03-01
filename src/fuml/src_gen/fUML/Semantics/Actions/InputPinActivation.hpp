@@ -63,8 +63,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			InputPinActivation(const InputPinActivation &) {}
-			InputPinActivation& operator=(InputPinActivation const&) = delete;
-
 		protected:
 			InputPinActivation(){}
 

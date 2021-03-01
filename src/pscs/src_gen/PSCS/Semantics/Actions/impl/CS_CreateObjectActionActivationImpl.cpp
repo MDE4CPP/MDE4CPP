@@ -59,8 +59,8 @@
 //Factories an Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -91,8 +91,17 @@ CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(std::we
 	m_group = par_group;
 }
 
-CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(const CS_CreateObjectActionActivationImpl & obj): fUML::Semantics::Actions::CreateObjectActionActivationImpl(obj), CS_CreateObjectActionActivation(obj)
+CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(const CS_CreateObjectActionActivationImpl & obj): CS_CreateObjectActionActivationImpl()
 {
+	*this = obj;
+}
+
+CS_CreateObjectActionActivationImpl& CS_CreateObjectActionActivationImpl::operator=(const CS_CreateObjectActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Actions::CreateObjectActionActivationImpl::operator=(obj);
+	CS_CreateObjectActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_CreateObjectActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -102,11 +111,13 @@ CS_CreateObjectActionActivationImpl::CS_CreateObjectActionActivationImpl(const C
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_CreateObjectActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_CreateObjectActionActivationImpl::copy() const
 {
-	std::shared_ptr<CS_CreateObjectActionActivationImpl> element(new CS_CreateObjectActionActivationImpl(*this));
+	std::shared_ptr<CS_CreateObjectActionActivationImpl> element(new CS_CreateObjectActionActivationImpl());
+	*element =(*this);
 	element->setThisCS_CreateObjectActionActivationPtr(element);
 	return element;
 }

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~QualifierValueObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			QualifierValueObject& operator=(QualifierValueObject const&);
 
 			virtual void destroy();
 			

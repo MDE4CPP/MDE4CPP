@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			TestIdentityActionImpl(const TestIdentityActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			TestIdentityActionImpl& operator=(TestIdentityActionImpl const&) = delete;
+			TestIdentityActionImpl& operator=(TestIdentityActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

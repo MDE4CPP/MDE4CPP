@@ -59,8 +59,17 @@ FirstChoiceStrategyImpl::~FirstChoiceStrategyImpl()
 }
 
 
-FirstChoiceStrategyImpl::FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl & obj): ChoiceStrategyImpl(obj), FirstChoiceStrategy(obj)
+FirstChoiceStrategyImpl::FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl & obj): FirstChoiceStrategyImpl()
 {
+	*this = obj;
+}
+
+FirstChoiceStrategyImpl& FirstChoiceStrategyImpl::operator=(const FirstChoiceStrategyImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ChoiceStrategyImpl::operator=(obj);
+	FirstChoiceStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FirstChoiceStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -70,11 +79,13 @@ FirstChoiceStrategyImpl::FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl &
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  FirstChoiceStrategyImpl::copy() const
+std::shared_ptr<ecore::EObject> FirstChoiceStrategyImpl::copy() const
 {
-	std::shared_ptr<FirstChoiceStrategyImpl> element(new FirstChoiceStrategyImpl(*this));
+	std::shared_ptr<FirstChoiceStrategyImpl> element(new FirstChoiceStrategyImpl());
+	*element =(*this);
 	element->setThisFirstChoiceStrategyPtr(element);
 	return element;
 }

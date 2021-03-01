@@ -142,8 +142,17 @@ PortImpl::PortImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParam
 	m_owner = par_owningTemplateParameter;
 }
 
-PortImpl::PortImpl(const PortImpl & obj): PropertyImpl(obj), Port(obj)
+PortImpl::PortImpl(const PortImpl & obj): PortImpl()
 {
+	*this = obj;
+}
+
+PortImpl& PortImpl::operator=(const PortImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PropertyImpl::operator=(obj);
+	Port::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Port "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -166,11 +175,13 @@ PortImpl::PortImpl(const PortImpl & obj): PropertyImpl(obj), Port(obj)
 	{
 		redefinedPortContainer->push_back(std::dynamic_pointer_cast<uml::Port>(_redefinedPort->copy()));
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  PortImpl::copy() const
+std::shared_ptr<ecore::EObject> PortImpl::copy() const
 {
-	std::shared_ptr<PortImpl> element(new PortImpl(*this));
+	std::shared_ptr<PortImpl> element(new PortImpl());
+	*element =(*this);
 	element->setThisPortPtr(element);
 	return element;
 }

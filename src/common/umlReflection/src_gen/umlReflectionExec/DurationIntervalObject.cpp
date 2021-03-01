@@ -65,20 +65,18 @@
 using namespace UML;
 
 DurationIntervalObject::DurationIntervalObject(std::shared_ptr<uml::DurationInterval> _element):
-
 	m_DurationIntervalValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DurationInterval());
+{
 }
 
 DurationIntervalObject::DurationIntervalObject(DurationIntervalObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DurationIntervalObject::DurationIntervalObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DurationInterval());
 }
 
 DurationIntervalObject::~DurationIntervalObject()
@@ -87,10 +85,18 @@ DurationIntervalObject::~DurationIntervalObject()
 
 std::shared_ptr<ecore::EObject> DurationIntervalObject::copy()
 {
-	std::shared_ptr<DurationIntervalObject> element(new DurationIntervalObject(*this));
+	std::shared_ptr<DurationIntervalObject> element(new DurationIntervalObject());
+	*element=(*this);
 	element->setThisDurationIntervalObjectPtr(element);
 	return element;
 }
+
+DurationIntervalObject& DurationIntervalObject::operator=(const DurationIntervalObject & obj)
+{
+	UML::IntervalObject::operator=(obj);
+	return *this;
+}
+
 
 void DurationIntervalObject::destroy()
 {	

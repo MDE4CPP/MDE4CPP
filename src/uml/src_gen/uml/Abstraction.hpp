@@ -63,8 +63,6 @@ namespace uml
 	{
 		public:
  			Abstraction(const Abstraction &) {}
-			Abstraction& operator=(Abstraction const&) = delete;
-
 		protected:
 			Abstraction(){}
 

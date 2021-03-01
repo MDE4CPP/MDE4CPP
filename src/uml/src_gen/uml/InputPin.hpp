@@ -85,11 +85,8 @@ namespace uml
 	{
 		public:
  			InputPin(const InputPin &) {}
-			InputPin& operator=(InputPin const&) = delete;
-
 		protected:
 			InputPin(){}
-
 			//Additional constructors for the containments back reference
 			InputPin(std::weak_ptr<uml::Action> par_action);
 

@@ -56,10 +56,8 @@ namespace ecore
 	{
 		public:
  			EStructuralFeature(const EStructuralFeature &) {}
-
 		protected:
 			EStructuralFeature(){}
-			EStructuralFeature& operator=(const EStructuralFeature &) = default;
 			//Additional constructors for the containments back reference
 			EStructuralFeature(std::weak_ptr<ecore::EObject> par_eContainer);
 

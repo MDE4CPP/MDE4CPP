@@ -98,8 +98,17 @@ SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::TemplateParameter> par_ownin
 	m_owner = par_owningTemplateParameter;
 }
 
-SignalEventImpl::SignalEventImpl(const SignalEventImpl & obj): MessageEventImpl(obj), SignalEvent(obj)
+SignalEventImpl::SignalEventImpl(const SignalEventImpl & obj): SignalEventImpl()
 {
+	*this = obj;
+}
+
+SignalEventImpl& SignalEventImpl::operator=(const SignalEventImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	MessageEventImpl::operator=(obj);
+	SignalEvent::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SignalEvent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -110,11 +119,13 @@ SignalEventImpl::SignalEventImpl(const SignalEventImpl & obj): MessageEventImpl(
 	m_signal  = obj.getSignal();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  SignalEventImpl::copy() const
+std::shared_ptr<ecore::EObject> SignalEventImpl::copy() const
 {
-	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl(*this));
+	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl());
+	*element =(*this);
 	element->setThisSignalEventPtr(element);
 	return element;
 }

@@ -56,10 +56,8 @@ namespace ecore
 	{
 		public:
  			EClassifier(const EClassifier &) {}
-
 		protected:
 			EClassifier(){}
-			EClassifier& operator=(const EClassifier &) = default;
 			//Additional constructors for the containments back reference
 			EClassifier(std::weak_ptr<ecore::EObject> par_eContainer);
 

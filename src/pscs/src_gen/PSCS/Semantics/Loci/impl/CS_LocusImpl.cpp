@@ -71,8 +71,17 @@ CS_LocusImpl::~CS_LocusImpl()
 }
 
 
-CS_LocusImpl::CS_LocusImpl(const CS_LocusImpl & obj): fUML::Semantics::Loci::LocusImpl(obj), CS_Locus(obj)
+CS_LocusImpl::CS_LocusImpl(const CS_LocusImpl & obj): CS_LocusImpl()
 {
+	*this = obj;
+}
+
+CS_LocusImpl& CS_LocusImpl::operator=(const CS_LocusImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::LocusImpl::operator=(obj);
+	CS_Locus::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_Locus "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -82,11 +91,13 @@ CS_LocusImpl::CS_LocusImpl(const CS_LocusImpl & obj): fUML::Semantics::Loci::Loc
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_LocusImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_LocusImpl::copy() const
 {
-	std::shared_ptr<CS_LocusImpl> element(new CS_LocusImpl(*this));
+	std::shared_ptr<CS_LocusImpl> element(new CS_LocusImpl());
+	*element =(*this);
 	element->setThisCS_LocusPtr(element);
 	return element;
 }

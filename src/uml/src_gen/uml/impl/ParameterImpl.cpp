@@ -112,8 +112,18 @@ ParameterImpl::ParameterImpl(std::weak_ptr<uml::TemplateParameter> par_owningTem
 	m_owner = par_owningTemplateParameter;
 }
 
-ParameterImpl::ParameterImpl(const ParameterImpl & obj): ConnectableElementImpl(obj), MultiplicityElementImpl(obj), Parameter(obj)
+ParameterImpl::ParameterImpl(const ParameterImpl & obj): ParameterImpl()
 {
+	*this = obj;
+}
+
+ParameterImpl& ParameterImpl::operator=(const ParameterImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ConnectableElementImpl::operator=(obj);
+	MultiplicityElementImpl::operator=(obj);
+	Parameter::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Parameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -137,11 +147,13 @@ ParameterImpl::ParameterImpl(const ParameterImpl & obj): ConnectableElementImpl(
 		m_defaultValue = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getDefaultValue()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ParameterImpl::copy() const
+std::shared_ptr<ecore::EObject> ParameterImpl::copy() const
 {
-	std::shared_ptr<ParameterImpl> element(new ParameterImpl(*this));
+	std::shared_ptr<ParameterImpl> element(new ParameterImpl());
+	*element =(*this);
 	element->setThisParameterPtr(element);
 	return element;
 }

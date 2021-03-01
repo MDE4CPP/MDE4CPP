@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ConnectionPointReferenceObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ConnectionPointReferenceObject& operator=(ConnectionPointReferenceObject const&);
 
 			virtual void destroy();
 			

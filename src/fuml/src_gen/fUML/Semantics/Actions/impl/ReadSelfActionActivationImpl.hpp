@@ -24,9 +24,7 @@ namespace fUML::Semantics::Actions
 		public: 
 			ReadSelfActionActivationImpl(const ReadSelfActionActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ReadSelfActionActivationImpl& operator=(ReadSelfActionActivationImpl const&) = delete;
+			ReadSelfActionActivationImpl& operator=(ReadSelfActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

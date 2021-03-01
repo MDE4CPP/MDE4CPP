@@ -100,8 +100,17 @@ ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(std::
 	m_owner = par_owner;
 }
 
-ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(const ExecutionOccurrenceSpecificationImpl & obj): OccurrenceSpecificationImpl(obj), ExecutionOccurrenceSpecification(obj)
+ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(const ExecutionOccurrenceSpecificationImpl & obj): ExecutionOccurrenceSpecificationImpl()
 {
+	*this = obj;
+}
+
+ExecutionOccurrenceSpecificationImpl& ExecutionOccurrenceSpecificationImpl::operator=(const ExecutionOccurrenceSpecificationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	OccurrenceSpecificationImpl::operator=(obj);
+	ExecutionOccurrenceSpecification::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExecutionOccurrenceSpecification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -112,11 +121,13 @@ ExecutionOccurrenceSpecificationImpl::ExecutionOccurrenceSpecificationImpl(const
 	m_execution  = obj.getExecution();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExecutionOccurrenceSpecificationImpl::copy() const
+std::shared_ptr<ecore::EObject> ExecutionOccurrenceSpecificationImpl::copy() const
 {
-	std::shared_ptr<ExecutionOccurrenceSpecificationImpl> element(new ExecutionOccurrenceSpecificationImpl(*this));
+	std::shared_ptr<ExecutionOccurrenceSpecificationImpl> element(new ExecutionOccurrenceSpecificationImpl());
+	*element =(*this);
 	element->setThisExecutionOccurrenceSpecificationPtr(element);
 	return element;
 }

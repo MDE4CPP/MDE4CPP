@@ -76,8 +76,17 @@ PinActivationImpl::PinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::
 	m_group = par_group;
 }
 
-PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj): fUML::Semantics::Activities::ObjectNodeActivationImpl(obj), PinActivation(obj)
+PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj): PinActivationImpl()
 {
+	*this = obj;
+}
+
+PinActivationImpl& PinActivationImpl::operator=(const PinActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Activities::ObjectNodeActivationImpl::operator=(obj);
+	PinActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PinActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -89,11 +98,13 @@ PinActivationImpl::PinActivationImpl(const PinActivationImpl & obj): fUML::Seman
 	m_pin  = obj.getPin();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  PinActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> PinActivationImpl::copy() const
 {
-	std::shared_ptr<PinActivationImpl> element(new PinActivationImpl(*this));
+	std::shared_ptr<PinActivationImpl> element(new PinActivationImpl());
+	*element =(*this);
 	element->setThisPinActivationPtr(element);
 	return element;
 }

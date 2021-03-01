@@ -116,8 +116,17 @@ IntervalImpl::IntervalImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valu
 	m_owner = par_valueSpecificationAction;
 }
 
-IntervalImpl::IntervalImpl(const IntervalImpl & obj): ValueSpecificationImpl(obj), Interval(obj)
+IntervalImpl::IntervalImpl(const IntervalImpl & obj): IntervalImpl()
 {
+	*this = obj;
+}
+
+IntervalImpl& IntervalImpl::operator=(const IntervalImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ValueSpecificationImpl::operator=(obj);
+	Interval::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Interval "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -129,11 +138,13 @@ IntervalImpl::IntervalImpl(const IntervalImpl & obj): ValueSpecificationImpl(obj
 	m_min  = obj.getMin();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  IntervalImpl::copy() const
+std::shared_ptr<ecore::EObject> IntervalImpl::copy() const
 {
-	std::shared_ptr<IntervalImpl> element(new IntervalImpl(*this));
+	std::shared_ptr<IntervalImpl> element(new IntervalImpl());
+	*element =(*this);
 	element->setThisIntervalPtr(element);
 	return element;
 }

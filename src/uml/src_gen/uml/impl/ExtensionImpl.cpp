@@ -130,8 +130,17 @@ ExtensionImpl::ExtensionImpl(std::weak_ptr<uml::TemplateParameter> par_owningTem
 }
 
 
-ExtensionImpl::ExtensionImpl(const ExtensionImpl & obj): AssociationImpl(obj), Extension(obj)
+ExtensionImpl::ExtensionImpl(const ExtensionImpl & obj): ExtensionImpl()
 {
+	*this = obj;
+}
+
+ExtensionImpl& ExtensionImpl::operator=(const ExtensionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	AssociationImpl::operator=(obj);
+	Extension::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Extension "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -143,11 +152,13 @@ ExtensionImpl::ExtensionImpl(const ExtensionImpl & obj): AssociationImpl(obj), E
 	m_metaclass  = obj.getMetaclass();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExtensionImpl::copy() const
+std::shared_ptr<ecore::EObject> ExtensionImpl::copy() const
 {
-	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(*this));
+	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl());
+	*element =(*this);
 	element->setThisExtensionPtr(element);
 	return element;
 }

@@ -67,20 +67,18 @@
 using namespace UML;
 
 ExtendObject::ExtendObject(std::shared_ptr<uml::Extend> _element):
-
 	m_ExtendValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Extend());
+{
 }
 
 ExtendObject::ExtendObject(ExtendObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 ExtendObject::ExtendObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Extend());
 }
 
 ExtendObject::~ExtendObject()
@@ -89,10 +87,19 @@ ExtendObject::~ExtendObject()
 
 std::shared_ptr<ecore::EObject> ExtendObject::copy()
 {
-	std::shared_ptr<ExtendObject> element(new ExtendObject(*this));
+	std::shared_ptr<ExtendObject> element(new ExtendObject());
+	*element=(*this);
 	element->setThisExtendObjectPtr(element);
 	return element;
 }
+
+ExtendObject& ExtendObject::operator=(const ExtendObject & obj)
+{
+	UML::DirectedRelationshipObject::operator=(obj);
+	UML::NamedElementObject::operator=(obj);
+	return *this;
+}
+
 
 void ExtendObject::destroy()
 {	

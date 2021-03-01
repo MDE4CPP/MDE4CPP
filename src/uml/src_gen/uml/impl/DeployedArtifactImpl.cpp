@@ -79,8 +79,17 @@ DeployedArtifactImpl::DeployedArtifactImpl(std::weak_ptr<uml::Element> par_owner
 	m_owner = par_owner;
 }
 
-DeployedArtifactImpl::DeployedArtifactImpl(const DeployedArtifactImpl & obj): NamedElementImpl(obj), DeployedArtifact(obj)
+DeployedArtifactImpl::DeployedArtifactImpl(const DeployedArtifactImpl & obj): DeployedArtifactImpl()
 {
+	*this = obj;
+}
+
+DeployedArtifactImpl& DeployedArtifactImpl::operator=(const DeployedArtifactImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	DeployedArtifact::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DeployedArtifact "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -90,11 +99,13 @@ DeployedArtifactImpl::DeployedArtifactImpl(const DeployedArtifactImpl & obj): Na
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  DeployedArtifactImpl::copy() const
+std::shared_ptr<ecore::EObject> DeployedArtifactImpl::copy() const
 {
-	std::shared_ptr<DeployedArtifactImpl> element(new DeployedArtifactImpl(*this));
+	std::shared_ptr<DeployedArtifactImpl> element(new DeployedArtifactImpl());
+	*element =(*this);
 	element->setThisDeployedArtifactPtr(element);
 	return element;
 }

@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~CentralBufferNodeObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			CentralBufferNodeObject& operator=(CentralBufferNodeObject const&);
 
 			virtual void destroy();
 			

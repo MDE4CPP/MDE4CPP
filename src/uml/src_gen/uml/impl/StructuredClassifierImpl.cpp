@@ -128,8 +128,17 @@ StructuredClassifierImpl::StructuredClassifierImpl(std::weak_ptr<uml::TemplatePa
 }
 
 
-StructuredClassifierImpl::StructuredClassifierImpl(const StructuredClassifierImpl & obj): ClassifierImpl(obj), StructuredClassifier(obj)
+StructuredClassifierImpl::StructuredClassifierImpl(const StructuredClassifierImpl & obj): StructuredClassifierImpl()
 {
+	*this = obj;
+}
+
+StructuredClassifierImpl& StructuredClassifierImpl::operator=(const StructuredClassifierImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ClassifierImpl::operator=(obj);
+	StructuredClassifier::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy StructuredClassifier "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -163,11 +172,13 @@ StructuredClassifierImpl::StructuredClassifierImpl(const StructuredClassifierImp
 		std::cout << "Initialising value Subset: " << "m_ownedConnector - Subset<uml::Connector, uml::Feature,uml::NamedElement >(getFeature(),getOwnedMember())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  StructuredClassifierImpl::copy() const
+std::shared_ptr<ecore::EObject> StructuredClassifierImpl::copy() const
 {
-	std::shared_ptr<StructuredClassifierImpl> element(new StructuredClassifierImpl(*this));
+	std::shared_ptr<StructuredClassifierImpl> element(new StructuredClassifierImpl());
+	*element =(*this);
 	element->setThisStructuredClassifierPtr(element);
 	return element;
 }

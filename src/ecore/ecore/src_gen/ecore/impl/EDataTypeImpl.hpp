@@ -23,9 +23,9 @@ namespace ecore
 		public: 
 			EDataTypeImpl(const EDataTypeImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EDataTypeImpl& operator=(EDataTypeImpl const&); 
 
 		protected:
-			EDataTypeImpl& operator=(EDataTypeImpl const&);
 			friend class ecoreFactoryImpl;
 			EDataTypeImpl();
 			virtual std::shared_ptr<EDataType> getThisEDataTypePtr() const;

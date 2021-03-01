@@ -64,8 +64,6 @@ namespace uml
 	{
 		public:
  			DeploymentTarget(const DeploymentTarget &) {}
-			DeploymentTarget& operator=(DeploymentTarget const&) = delete;
-
 		protected:
 			DeploymentTarget(){}
 

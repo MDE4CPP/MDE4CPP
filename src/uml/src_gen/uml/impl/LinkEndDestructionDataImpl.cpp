@@ -71,8 +71,17 @@ LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(std::weak_ptr<uml::Elemen
 	m_owner = par_owner;
 }
 
-LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj): LinkEndDataImpl(obj), LinkEndDestructionData(obj)
+LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj): LinkEndDestructionDataImpl()
 {
+	*this = obj;
+}
+
+LinkEndDestructionDataImpl& LinkEndDestructionDataImpl::operator=(const LinkEndDestructionDataImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	LinkEndDataImpl::operator=(obj);
+	LinkEndDestructionData::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LinkEndDestructionData "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -84,11 +93,13 @@ LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionD
 	m_destroyAt  = obj.getDestroyAt();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  LinkEndDestructionDataImpl::copy() const
+std::shared_ptr<ecore::EObject> LinkEndDestructionDataImpl::copy() const
 {
-	std::shared_ptr<LinkEndDestructionDataImpl> element(new LinkEndDestructionDataImpl(*this));
+	std::shared_ptr<LinkEndDestructionDataImpl> element(new LinkEndDestructionDataImpl());
+	*element =(*this);
 	element->setThisLinkEndDestructionDataPtr(element);
 	return element;
 }

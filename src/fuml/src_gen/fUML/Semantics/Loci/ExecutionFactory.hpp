@@ -76,11 +76,8 @@ namespace fUML::Semantics::Loci
 	{
 		public:
  			ExecutionFactory(const ExecutionFactory &) {}
-			ExecutionFactory& operator=(ExecutionFactory const&) = delete;
-
 		protected:
 			ExecutionFactory(){}
-
 			//Additional constructors for the containments back reference
 			ExecutionFactory(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus);
 

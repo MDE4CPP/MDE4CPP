@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			LiteralSpecificationImpl(const LiteralSpecificationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			LiteralSpecificationImpl& operator=(LiteralSpecificationImpl const&) = delete;
+			LiteralSpecificationImpl& operator=(LiteralSpecificationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

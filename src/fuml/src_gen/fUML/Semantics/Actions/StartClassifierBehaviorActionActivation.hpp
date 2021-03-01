@@ -65,8 +65,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			StartClassifierBehaviorActionActivation(const StartClassifierBehaviorActionActivation &) {}
-			StartClassifierBehaviorActionActivation& operator=(StartClassifierBehaviorActionActivation const&) = delete;
-
 		protected:
 			StartClassifierBehaviorActionActivation(){}
 

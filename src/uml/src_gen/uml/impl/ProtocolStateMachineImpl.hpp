@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			ProtocolStateMachineImpl(const ProtocolStateMachineImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ProtocolStateMachineImpl& operator=(ProtocolStateMachineImpl const&) = delete;
+			ProtocolStateMachineImpl& operator=(ProtocolStateMachineImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

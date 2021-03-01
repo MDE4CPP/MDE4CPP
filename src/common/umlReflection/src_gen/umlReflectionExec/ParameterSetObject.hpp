@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~ParameterSetObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			ParameterSetObject& operator=(ParameterSetObject const&);
 
 			virtual void destroy();
 			

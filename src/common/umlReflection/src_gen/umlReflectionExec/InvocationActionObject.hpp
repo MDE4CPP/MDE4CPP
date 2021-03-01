@@ -37,6 +37,7 @@ namespace UML
 		    virtual ~InvocationActionObject();
 		
 		    virtual std::shared_ptr<ecore::EObject> copy();
+			InvocationActionObject& operator=(InvocationActionObject const&);
 
 			virtual void destroy();
 			

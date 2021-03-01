@@ -108,8 +108,17 @@ RaiseExceptionActionImpl::RaiseExceptionActionImpl(std::weak_ptr<uml::Element> p
 	m_owner = par_owner;
 }
 
-RaiseExceptionActionImpl::RaiseExceptionActionImpl(const RaiseExceptionActionImpl & obj): ActionImpl(obj), RaiseExceptionAction(obj)
+RaiseExceptionActionImpl::RaiseExceptionActionImpl(const RaiseExceptionActionImpl & obj): RaiseExceptionActionImpl()
 {
+	*this = obj;
+}
+
+RaiseExceptionActionImpl& RaiseExceptionActionImpl::operator=(const RaiseExceptionActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	RaiseExceptionAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy RaiseExceptionAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -124,11 +133,13 @@ RaiseExceptionActionImpl::RaiseExceptionActionImpl(const RaiseExceptionActionImp
 		m_exception = std::dynamic_pointer_cast<uml::InputPin>(obj.getException()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  RaiseExceptionActionImpl::copy() const
+std::shared_ptr<ecore::EObject> RaiseExceptionActionImpl::copy() const
 {
-	std::shared_ptr<RaiseExceptionActionImpl> element(new RaiseExceptionActionImpl(*this));
+	std::shared_ptr<RaiseExceptionActionImpl> element(new RaiseExceptionActionImpl());
+	*element =(*this);
 	element->setThisRaiseExceptionActionPtr(element);
 	return element;
 }

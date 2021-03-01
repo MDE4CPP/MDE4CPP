@@ -86,8 +86,17 @@ CS_InstanceValueEvaluationImpl::~CS_InstanceValueEvaluationImpl()
 }
 
 
-CS_InstanceValueEvaluationImpl::CS_InstanceValueEvaluationImpl(const CS_InstanceValueEvaluationImpl & obj): fUML::Semantics::Classification::InstanceValueEvaluationImpl(obj), CS_InstanceValueEvaluation(obj)
+CS_InstanceValueEvaluationImpl::CS_InstanceValueEvaluationImpl(const CS_InstanceValueEvaluationImpl & obj): CS_InstanceValueEvaluationImpl()
 {
+	*this = obj;
+}
+
+CS_InstanceValueEvaluationImpl& CS_InstanceValueEvaluationImpl::operator=(const CS_InstanceValueEvaluationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Classification::InstanceValueEvaluationImpl::operator=(obj);
+	CS_InstanceValueEvaluation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_InstanceValueEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -97,11 +106,13 @@ CS_InstanceValueEvaluationImpl::CS_InstanceValueEvaluationImpl(const CS_Instance
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_InstanceValueEvaluationImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_InstanceValueEvaluationImpl::copy() const
 {
-	std::shared_ptr<CS_InstanceValueEvaluationImpl> element(new CS_InstanceValueEvaluationImpl(*this));
+	std::shared_ptr<CS_InstanceValueEvaluationImpl> element(new CS_InstanceValueEvaluationImpl());
+	*element =(*this);
 	element->setThisCS_InstanceValueEvaluationPtr(element);
 	return element;
 }

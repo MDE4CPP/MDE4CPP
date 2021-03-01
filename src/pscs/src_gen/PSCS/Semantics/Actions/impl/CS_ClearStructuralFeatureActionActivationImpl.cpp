@@ -66,8 +66,8 @@
 //Factories an Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -101,8 +101,17 @@ CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionAc
 	m_group = par_group;
 }
 
-CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionActivationImpl(const CS_ClearStructuralFeatureActionActivationImpl & obj): fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl(obj), CS_ClearStructuralFeatureActionActivation(obj)
+CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionActivationImpl(const CS_ClearStructuralFeatureActionActivationImpl & obj): CS_ClearStructuralFeatureActionActivationImpl()
 {
+	*this = obj;
+}
+
+CS_ClearStructuralFeatureActionActivationImpl& CS_ClearStructuralFeatureActionActivationImpl::operator=(const CS_ClearStructuralFeatureActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::operator=(obj);
+	CS_ClearStructuralFeatureActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_ClearStructuralFeatureActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -112,11 +121,13 @@ CS_ClearStructuralFeatureActionActivationImpl::CS_ClearStructuralFeatureActionAc
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_ClearStructuralFeatureActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_ClearStructuralFeatureActionActivationImpl::copy() const
 {
-	std::shared_ptr<CS_ClearStructuralFeatureActionActivationImpl> element(new CS_ClearStructuralFeatureActionActivationImpl(*this));
+	std::shared_ptr<CS_ClearStructuralFeatureActionActivationImpl> element(new CS_ClearStructuralFeatureActionActivationImpl());
+	*element =(*this);
 	element->setThisCS_ClearStructuralFeatureActionActivationPtr(element);
 	return element;
 }

@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			MultiplicityElementImpl(const MultiplicityElementImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			MultiplicityElementImpl& operator=(MultiplicityElementImpl const&) = delete;
+			MultiplicityElementImpl& operator=(MultiplicityElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

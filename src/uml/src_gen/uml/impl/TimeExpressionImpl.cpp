@@ -118,8 +118,17 @@ TimeExpressionImpl::TimeExpressionImpl(std::weak_ptr<uml::ValueSpecificationActi
 	m_owner = par_valueSpecificationAction;
 }
 
-TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj): ValueSpecificationImpl(obj), TimeExpression(obj)
+TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj): TimeExpressionImpl()
 {
+	*this = obj;
+}
+
+TimeExpressionImpl& TimeExpressionImpl::operator=(const TimeExpressionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ValueSpecificationImpl::operator=(obj);
+	TimeExpression::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TimeExpression "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -136,11 +145,13 @@ TimeExpressionImpl::TimeExpressionImpl(const TimeExpressionImpl & obj): ValueSpe
 		m_expr = std::dynamic_pointer_cast<uml::ValueSpecification>(obj.getExpr()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TimeExpressionImpl::copy() const
+std::shared_ptr<ecore::EObject> TimeExpressionImpl::copy() const
 {
-	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(*this));
+	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl());
+	*element =(*this);
 	element->setThisTimeExpressionPtr(element);
 	return element;
 }

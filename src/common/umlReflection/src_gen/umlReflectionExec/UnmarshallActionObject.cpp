@@ -93,20 +93,18 @@
 using namespace UML;
 
 UnmarshallActionObject::UnmarshallActionObject(std::shared_ptr<uml::UnmarshallAction> _element):
-
 	m_UnmarshallActionValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_UnmarshallAction());
+{
 }
 
 UnmarshallActionObject::UnmarshallActionObject(UnmarshallActionObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 UnmarshallActionObject::UnmarshallActionObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_UnmarshallAction());
 }
 
 UnmarshallActionObject::~UnmarshallActionObject()
@@ -115,10 +113,18 @@ UnmarshallActionObject::~UnmarshallActionObject()
 
 std::shared_ptr<ecore::EObject> UnmarshallActionObject::copy()
 {
-	std::shared_ptr<UnmarshallActionObject> element(new UnmarshallActionObject(*this));
+	std::shared_ptr<UnmarshallActionObject> element(new UnmarshallActionObject());
+	*element=(*this);
 	element->setThisUnmarshallActionObjectPtr(element);
 	return element;
 }
+
+UnmarshallActionObject& UnmarshallActionObject::operator=(const UnmarshallActionObject & obj)
+{
+	UML::ActionObject::operator=(obj);
+	return *this;
+}
+
 
 void UnmarshallActionObject::destroy()
 {	

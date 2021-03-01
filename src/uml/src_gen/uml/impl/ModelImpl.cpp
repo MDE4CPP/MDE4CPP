@@ -120,8 +120,17 @@ ModelImpl::ModelImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplatePar
 	m_owner = par_owningTemplateParameter;
 }
 
-ModelImpl::ModelImpl(const ModelImpl & obj): PackageImpl(obj), Model(obj)
+ModelImpl::ModelImpl(const ModelImpl & obj): ModelImpl()
 {
+	*this = obj;
+}
+
+ModelImpl& ModelImpl::operator=(const ModelImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PackageImpl::operator=(obj);
+	Model::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Model "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -132,11 +141,13 @@ ModelImpl::ModelImpl(const ModelImpl & obj): PackageImpl(obj), Model(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ModelImpl::copy() const
+std::shared_ptr<ecore::EObject> ModelImpl::copy() const
 {
-	std::shared_ptr<ModelImpl> element(new ModelImpl(*this));
+	std::shared_ptr<ModelImpl> element(new ModelImpl());
+	*element =(*this);
 	element->setThisModelPtr(element);
 	return element;
 }

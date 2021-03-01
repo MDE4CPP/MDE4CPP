@@ -79,8 +79,17 @@ ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(std::weak_ptr<u
 	m_owner = par_signature;
 }
 
-ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const ClassifierTemplateParameterImpl & obj): TemplateParameterImpl(obj), ClassifierTemplateParameter(obj)
+ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const ClassifierTemplateParameterImpl & obj): ClassifierTemplateParameterImpl()
 {
+	*this = obj;
+}
+
+ClassifierTemplateParameterImpl& ClassifierTemplateParameterImpl::operator=(const ClassifierTemplateParameterImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	TemplateParameterImpl::operator=(obj);
+	ClassifierTemplateParameter::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ClassifierTemplateParameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -93,11 +102,13 @@ ClassifierTemplateParameterImpl::ClassifierTemplateParameterImpl(const Classifie
 	m_constrainingClassifier.reset(new Bag<uml::Classifier>(*(obj.getConstrainingClassifier().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ClassifierTemplateParameterImpl::copy() const
+std::shared_ptr<ecore::EObject> ClassifierTemplateParameterImpl::copy() const
 {
-	std::shared_ptr<ClassifierTemplateParameterImpl> element(new ClassifierTemplateParameterImpl(*this));
+	std::shared_ptr<ClassifierTemplateParameterImpl> element(new ClassifierTemplateParameterImpl());
+	*element =(*this);
 	element->setThisClassifierTemplateParameterPtr(element);
 	return element;
 }

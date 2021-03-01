@@ -85,8 +85,17 @@ NamespaceImpl::NamespaceImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-NamespaceImpl::NamespaceImpl(const NamespaceImpl & obj): NamedElementImpl(obj), Namespace(obj)
+NamespaceImpl::NamespaceImpl(const NamespaceImpl & obj): NamespaceImpl()
 {
+	*this = obj;
+}
+
+NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	Namespace::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Namespace "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -136,11 +145,13 @@ NamespaceImpl::NamespaceImpl(const NamespaceImpl & obj): NamedElementImpl(obj), 
 		std::cout << "Initialising value SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  NamespaceImpl::copy() const
+std::shared_ptr<ecore::EObject> NamespaceImpl::copy() const
 {
-	std::shared_ptr<NamespaceImpl> element(new NamespaceImpl(*this));
+	std::shared_ptr<NamespaceImpl> element(new NamespaceImpl());
+	*element =(*this);
 	element->setThisNamespacePtr(element);
 	return element;
 }

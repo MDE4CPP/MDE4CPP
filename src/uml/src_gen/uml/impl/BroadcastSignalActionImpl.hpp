@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			BroadcastSignalActionImpl(const BroadcastSignalActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			BroadcastSignalActionImpl& operator=(BroadcastSignalActionImpl const&) = delete;
+			BroadcastSignalActionImpl& operator=(BroadcastSignalActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

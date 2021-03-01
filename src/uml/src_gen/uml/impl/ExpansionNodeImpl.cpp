@@ -110,8 +110,17 @@ ExpansionNodeImpl::ExpansionNodeImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ExpansionNodeImpl::ExpansionNodeImpl(const ExpansionNodeImpl & obj): ObjectNodeImpl(obj), ExpansionNode(obj)
+ExpansionNodeImpl::ExpansionNodeImpl(const ExpansionNodeImpl & obj): ExpansionNodeImpl()
 {
+	*this = obj;
+}
+
+ExpansionNodeImpl& ExpansionNodeImpl::operator=(const ExpansionNodeImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ObjectNodeImpl::operator=(obj);
+	ExpansionNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExpansionNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -123,11 +132,13 @@ ExpansionNodeImpl::ExpansionNodeImpl(const ExpansionNodeImpl & obj): ObjectNodeI
 	m_regionAsOutput  = obj.getRegionAsOutput();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExpansionNodeImpl::copy() const
+std::shared_ptr<ecore::EObject> ExpansionNodeImpl::copy() const
 {
-	std::shared_ptr<ExpansionNodeImpl> element(new ExpansionNodeImpl(*this));
+	std::shared_ptr<ExpansionNodeImpl> element(new ExpansionNodeImpl());
+	*element =(*this);
 	element->setThisExpansionNodePtr(element);
 	return element;
 }

@@ -47,8 +47,8 @@
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -73,8 +73,17 @@ CS_ReferenceImpl::~CS_ReferenceImpl()
 }
 
 
-CS_ReferenceImpl::CS_ReferenceImpl(const CS_ReferenceImpl & obj): fUML::Semantics::StructuredClassifiers::ReferenceImpl(obj), CS_Reference(obj)
+CS_ReferenceImpl::CS_ReferenceImpl(const CS_ReferenceImpl & obj): CS_ReferenceImpl()
 {
+	*this = obj;
+}
+
+CS_ReferenceImpl& CS_ReferenceImpl::operator=(const CS_ReferenceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::StructuredClassifiers::ReferenceImpl::operator=(obj);
+	CS_Reference::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_Reference "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -85,11 +94,13 @@ CS_ReferenceImpl::CS_ReferenceImpl(const CS_ReferenceImpl & obj): fUML::Semantic
 	m_compositeReferent  = obj.getCompositeReferent();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_ReferenceImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_ReferenceImpl::copy() const
 {
-	std::shared_ptr<CS_ReferenceImpl> element(new CS_ReferenceImpl(*this));
+	std::shared_ptr<CS_ReferenceImpl> element(new CS_ReferenceImpl());
+	*element =(*this);
 	element->setThisCS_ReferencePtr(element);
 	return element;
 }

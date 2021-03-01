@@ -23,9 +23,7 @@ namespace uml
 		public: 
 			DestroyLinkActionImpl(const DestroyLinkActionImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			DestroyLinkActionImpl& operator=(DestroyLinkActionImpl const&) = delete;
+			DestroyLinkActionImpl& operator=(DestroyLinkActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;

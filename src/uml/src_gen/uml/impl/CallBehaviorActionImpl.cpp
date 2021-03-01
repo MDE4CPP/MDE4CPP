@@ -111,8 +111,17 @@ CallBehaviorActionImpl::CallBehaviorActionImpl(std::weak_ptr<uml::Element> par_o
 	m_owner = par_owner;
 }
 
-CallBehaviorActionImpl::CallBehaviorActionImpl(const CallBehaviorActionImpl & obj): CallActionImpl(obj), CallBehaviorAction(obj)
+CallBehaviorActionImpl::CallBehaviorActionImpl(const CallBehaviorActionImpl & obj): CallBehaviorActionImpl()
 {
+	*this = obj;
+}
+
+CallBehaviorActionImpl& CallBehaviorActionImpl::operator=(const CallBehaviorActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	CallActionImpl::operator=(obj);
+	CallBehaviorAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CallBehaviorAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -123,11 +132,13 @@ CallBehaviorActionImpl::CallBehaviorActionImpl(const CallBehaviorActionImpl & ob
 	m_behavior  = obj.getBehavior();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CallBehaviorActionImpl::copy() const
+std::shared_ptr<ecore::EObject> CallBehaviorActionImpl::copy() const
 {
-	std::shared_ptr<CallBehaviorActionImpl> element(new CallBehaviorActionImpl(*this));
+	std::shared_ptr<CallBehaviorActionImpl> element(new CallBehaviorActionImpl());
+	*element =(*this);
 	element->setThisCallBehaviorActionPtr(element);
 	return element;
 }

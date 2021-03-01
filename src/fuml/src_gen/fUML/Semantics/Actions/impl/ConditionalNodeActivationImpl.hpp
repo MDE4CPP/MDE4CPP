@@ -24,9 +24,7 @@ namespace fUML::Semantics::Actions
 		public: 
 			ConditionalNodeActivationImpl(const ConditionalNodeActivationImpl & obj);
 			virtual std::shared_ptr<ecore::EObject> copy() const;
-
-		private:
-			ConditionalNodeActivationImpl& operator=(ConditionalNodeActivationImpl const&) = delete;
+			ConditionalNodeActivationImpl& operator=(ConditionalNodeActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;

@@ -81,8 +81,17 @@ GeneralOrderingImpl::GeneralOrderingImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-GeneralOrderingImpl::GeneralOrderingImpl(const GeneralOrderingImpl & obj): NamedElementImpl(obj), GeneralOrdering(obj)
+GeneralOrderingImpl::GeneralOrderingImpl(const GeneralOrderingImpl & obj): GeneralOrderingImpl()
 {
+	*this = obj;
+}
+
+GeneralOrderingImpl& GeneralOrderingImpl::operator=(const GeneralOrderingImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	GeneralOrdering::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy GeneralOrdering "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -94,11 +103,13 @@ GeneralOrderingImpl::GeneralOrderingImpl(const GeneralOrderingImpl & obj): Named
 	m_before  = obj.getBefore();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  GeneralOrderingImpl::copy() const
+std::shared_ptr<ecore::EObject> GeneralOrderingImpl::copy() const
 {
-	std::shared_ptr<GeneralOrderingImpl> element(new GeneralOrderingImpl(*this));
+	std::shared_ptr<GeneralOrderingImpl> element(new GeneralOrderingImpl());
+	*element =(*this);
 	element->setThisGeneralOrderingPtr(element);
 	return element;
 }

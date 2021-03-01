@@ -97,8 +97,17 @@ UsageImpl::UsageImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplatePar
 	m_owner = par_owningTemplateParameter;
 }
 
-UsageImpl::UsageImpl(const UsageImpl & obj): DependencyImpl(obj), Usage(obj)
+UsageImpl::UsageImpl(const UsageImpl & obj): UsageImpl()
 {
+	*this = obj;
+}
+
+UsageImpl& UsageImpl::operator=(const UsageImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	DependencyImpl::operator=(obj);
+	Usage::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Usage "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -108,11 +117,13 @@ UsageImpl::UsageImpl(const UsageImpl & obj): DependencyImpl(obj), Usage(obj)
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  UsageImpl::copy() const
+std::shared_ptr<ecore::EObject> UsageImpl::copy() const
 {
-	std::shared_ptr<UsageImpl> element(new UsageImpl(*this));
+	std::shared_ptr<UsageImpl> element(new UsageImpl());
+	*element =(*this);
 	element->setThisUsagePtr(element);
 	return element;
 }

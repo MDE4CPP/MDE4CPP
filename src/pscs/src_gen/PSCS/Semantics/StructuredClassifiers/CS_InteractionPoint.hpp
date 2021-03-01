@@ -39,13 +39,13 @@ namespace fUML::Semantics::CommonBehavior
 	class Execution;
 	class ParameterValue;
 }
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Reference;
-}
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Object;
+}
+namespace PSCS::Semantics::StructuredClassifiers 
+{
+	class CS_Reference;
 }
 namespace uml 
 {
@@ -70,8 +70,6 @@ namespace PSCS::Semantics::StructuredClassifiers
 	{
 		public:
  			CS_InteractionPoint(const CS_InteractionPoint &) {}
-			CS_InteractionPoint& operator=(CS_InteractionPoint const&) = delete;
-
 		protected:
 			CS_InteractionPoint(){}
 

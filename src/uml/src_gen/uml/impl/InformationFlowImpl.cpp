@@ -105,8 +105,18 @@ InformationFlowImpl::InformationFlowImpl(std::weak_ptr<uml::TemplateParameter> p
 	m_owner = par_owningTemplateParameter;
 }
 
-InformationFlowImpl::InformationFlowImpl(const InformationFlowImpl & obj): DirectedRelationshipImpl(obj), PackageableElementImpl(obj), InformationFlow(obj)
+InformationFlowImpl::InformationFlowImpl(const InformationFlowImpl & obj): InformationFlowImpl()
 {
+	*this = obj;
+}
+
+InformationFlowImpl& InformationFlowImpl::operator=(const InformationFlowImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	PackageableElementImpl::operator=(obj);
+	DirectedRelationshipImpl::operator=(obj);
+	InformationFlow::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InformationFlow "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -136,11 +146,13 @@ InformationFlowImpl::InformationFlowImpl(const InformationFlowImpl & obj): Direc
 	{
 		informationTargetContainer->push_back(std::dynamic_pointer_cast<uml::NamedElement>(_informationTarget->copy()));
 	}
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  InformationFlowImpl::copy() const
+std::shared_ptr<ecore::EObject> InformationFlowImpl::copy() const
 {
-	std::shared_ptr<InformationFlowImpl> element(new InformationFlowImpl(*this));
+	std::shared_ptr<InformationFlowImpl> element(new InformationFlowImpl());
+	*element =(*this);
 	element->setThisInformationFlowPtr(element);
 	return element;
 }

@@ -82,8 +82,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			ActionActivation(const ActionActivation &) {}
-			ActionActivation& operator=(ActionActivation const&) = delete;
-
 		protected:
 			ActionActivation(){}
 

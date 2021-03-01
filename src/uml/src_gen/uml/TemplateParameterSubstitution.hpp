@@ -63,11 +63,8 @@ namespace uml
 	{
 		public:
  			TemplateParameterSubstitution(const TemplateParameterSubstitution &) {}
-			TemplateParameterSubstitution& operator=(TemplateParameterSubstitution const&) = delete;
-
 		protected:
 			TemplateParameterSubstitution(){}
-
 			//Additional constructors for the containments back reference
 			TemplateParameterSubstitution(std::weak_ptr<uml::Element> par_owner);
 

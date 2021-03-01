@@ -66,8 +66,6 @@ namespace fUML::Semantics::Activities
 	{
 		public:
  			ExpansionActivationGroup(const ExpansionActivationGroup &) {}
-			ExpansionActivationGroup& operator=(ExpansionActivationGroup const&) = delete;
-
 		protected:
 			ExpansionActivationGroup(){}
 

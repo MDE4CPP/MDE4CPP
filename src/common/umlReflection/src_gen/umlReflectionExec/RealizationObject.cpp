@@ -69,20 +69,18 @@
 using namespace UML;
 
 RealizationObject::RealizationObject(std::shared_ptr<uml::Realization> _element):
-
 	m_RealizationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Realization());
+{
 }
 
 RealizationObject::RealizationObject(RealizationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 RealizationObject::RealizationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Realization());
 }
 
 RealizationObject::~RealizationObject()
@@ -91,10 +89,18 @@ RealizationObject::~RealizationObject()
 
 std::shared_ptr<ecore::EObject> RealizationObject::copy()
 {
-	std::shared_ptr<RealizationObject> element(new RealizationObject(*this));
+	std::shared_ptr<RealizationObject> element(new RealizationObject());
+	*element=(*this);
 	element->setThisRealizationObjectPtr(element);
 	return element;
 }
+
+RealizationObject& RealizationObject::operator=(const RealizationObject & obj)
+{
+	UML::AbstractionObject::operator=(obj);
+	return *this;
+}
+
 
 void RealizationObject::destroy()
 {	

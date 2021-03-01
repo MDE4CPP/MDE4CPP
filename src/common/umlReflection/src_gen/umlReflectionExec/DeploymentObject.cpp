@@ -73,20 +73,18 @@
 using namespace UML;
 
 DeploymentObject::DeploymentObject(std::shared_ptr<uml::Deployment> _element):
-
 	m_DeploymentValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Deployment());
+{
 }
 
 DeploymentObject::DeploymentObject(DeploymentObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DeploymentObject::DeploymentObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Deployment());
 }
 
 DeploymentObject::~DeploymentObject()
@@ -95,10 +93,18 @@ DeploymentObject::~DeploymentObject()
 
 std::shared_ptr<ecore::EObject> DeploymentObject::copy()
 {
-	std::shared_ptr<DeploymentObject> element(new DeploymentObject(*this));
+	std::shared_ptr<DeploymentObject> element(new DeploymentObject());
+	*element=(*this);
 	element->setThisDeploymentObjectPtr(element);
 	return element;
 }
+
+DeploymentObject& DeploymentObject::operator=(const DeploymentObject & obj)
+{
+	UML::DependencyObject::operator=(obj);
+	return *this;
+}
+
 
 void DeploymentObject::destroy()
 {	

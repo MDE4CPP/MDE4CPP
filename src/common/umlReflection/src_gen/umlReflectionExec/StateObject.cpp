@@ -100,20 +100,18 @@
 using namespace UML;
 
 StateObject::StateObject(std::shared_ptr<uml::State> _element):
-
 	m_StateValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_State());
+{
 }
 
 StateObject::StateObject(StateObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 StateObject::StateObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_State());
 }
 
 StateObject::~StateObject()
@@ -122,10 +120,20 @@ StateObject::~StateObject()
 
 std::shared_ptr<ecore::EObject> StateObject::copy()
 {
-	std::shared_ptr<StateObject> element(new StateObject(*this));
+	std::shared_ptr<StateObject> element(new StateObject());
+	*element=(*this);
 	element->setThisStateObjectPtr(element);
 	return element;
 }
+
+StateObject& StateObject::operator=(const StateObject & obj)
+{
+	UML::NamespaceObject::operator=(obj);
+	UML::RedefinableElementObject::operator=(obj);
+	UML::VertexObject::operator=(obj);
+	return *this;
+}
+
 
 void StateObject::destroy()
 {	

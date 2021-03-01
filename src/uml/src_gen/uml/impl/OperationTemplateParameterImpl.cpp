@@ -78,8 +78,17 @@ OperationTemplateParameterImpl::OperationTemplateParameterImpl(std::weak_ptr<uml
 	m_owner = par_signature;
 }
 
-OperationTemplateParameterImpl::OperationTemplateParameterImpl(const OperationTemplateParameterImpl & obj): TemplateParameterImpl(obj), OperationTemplateParameter(obj)
+OperationTemplateParameterImpl::OperationTemplateParameterImpl(const OperationTemplateParameterImpl & obj): OperationTemplateParameterImpl()
 {
+	*this = obj;
+}
+
+OperationTemplateParameterImpl& OperationTemplateParameterImpl::operator=(const OperationTemplateParameterImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	TemplateParameterImpl::operator=(obj);
+	OperationTemplateParameter::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OperationTemplateParameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -89,11 +98,13 @@ OperationTemplateParameterImpl::OperationTemplateParameterImpl(const OperationTe
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  OperationTemplateParameterImpl::copy() const
+std::shared_ptr<ecore::EObject> OperationTemplateParameterImpl::copy() const
 {
-	std::shared_ptr<OperationTemplateParameterImpl> element(new OperationTemplateParameterImpl(*this));
+	std::shared_ptr<OperationTemplateParameterImpl> element(new OperationTemplateParameterImpl());
+	*element =(*this);
 	element->setThisOperationTemplateParameterPtr(element);
 	return element;
 }

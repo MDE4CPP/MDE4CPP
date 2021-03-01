@@ -120,8 +120,17 @@ CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::
 	m_locus = par_locus;
 }
 
-CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj): fUML::Semantics::Loci::ExecutionFactoryImpl(obj), CS_ExecutionFactory(obj)
+CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj): CS_ExecutionFactoryImpl()
 {
+	*this = obj;
+}
+
+CS_ExecutionFactoryImpl& CS_ExecutionFactoryImpl::operator=(const CS_ExecutionFactoryImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::ExecutionFactoryImpl::operator=(obj);
+	CS_ExecutionFactory::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_ExecutionFactory "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -133,11 +142,13 @@ CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl &
 	m_appliedProfiles.reset(new Bag<uml::Package>(*(obj.getAppliedProfiles().get())));
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_ExecutionFactoryImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_ExecutionFactoryImpl::copy() const
 {
-	std::shared_ptr<CS_ExecutionFactoryImpl> element(new CS_ExecutionFactoryImpl(*this));
+	std::shared_ptr<CS_ExecutionFactoryImpl> element(new CS_ExecutionFactoryImpl());
+	*element =(*this);
 	element->setThisCS_ExecutionFactoryPtr(element);
 	return element;
 }

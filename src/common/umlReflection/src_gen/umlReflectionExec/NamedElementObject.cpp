@@ -53,20 +53,18 @@
 using namespace UML;
 
 NamedElementObject::NamedElementObject(std::shared_ptr<uml::NamedElement> _element):
-
 	m_NamedElementValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_NamedElement());
+{
 }
 
 NamedElementObject::NamedElementObject(NamedElementObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 NamedElementObject::NamedElementObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_NamedElement());
 }
 
 NamedElementObject::~NamedElementObject()
@@ -75,10 +73,18 @@ NamedElementObject::~NamedElementObject()
 
 std::shared_ptr<ecore::EObject> NamedElementObject::copy()
 {
-	std::shared_ptr<NamedElementObject> element(new NamedElementObject(*this));
+	std::shared_ptr<NamedElementObject> element(new NamedElementObject());
+	*element=(*this);
 	element->setThisNamedElementObjectPtr(element);
 	return element;
 }
+
+NamedElementObject& NamedElementObject::operator=(const NamedElementObject & obj)
+{
+	UML::ElementObject::operator=(obj);
+	return *this;
+}
+
 
 void NamedElementObject::destroy()
 {	

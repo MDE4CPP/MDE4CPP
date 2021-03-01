@@ -66,8 +66,17 @@ ExtensionalValueListImpl::~ExtensionalValueListImpl()
 }
 
 
-ExtensionalValueListImpl::ExtensionalValueListImpl(const ExtensionalValueListImpl & obj): ExtensionalValueImpl(obj), ExtensionalValueList(obj)
+ExtensionalValueListImpl::ExtensionalValueListImpl(const ExtensionalValueListImpl & obj): ExtensionalValueListImpl()
 {
+	*this = obj;
+}
+
+ExtensionalValueListImpl& ExtensionalValueListImpl::operator=(const ExtensionalValueListImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	ExtensionalValueImpl::operator=(obj);
+	ExtensionalValueList::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExtensionalValueList "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -77,11 +86,13 @@ ExtensionalValueListImpl::ExtensionalValueListImpl(const ExtensionalValueListImp
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ExtensionalValueListImpl::copy() const
+std::shared_ptr<ecore::EObject> ExtensionalValueListImpl::copy() const
 {
-	std::shared_ptr<ExtensionalValueListImpl> element(new ExtensionalValueListImpl(*this));
+	std::shared_ptr<ExtensionalValueListImpl> element(new ExtensionalValueListImpl());
+	*element =(*this);
 	element->setThisExtensionalValueListPtr(element);
 	return element;
 }

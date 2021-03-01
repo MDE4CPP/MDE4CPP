@@ -65,8 +65,6 @@ namespace fUML::Semantics::Actions
 	{
 		public:
  			CreateLinkActionActivation(const CreateLinkActionActivation &) {}
-			CreateLinkActionActivation& operator=(CreateLinkActionActivation const&) = delete;
-
 		protected:
 			CreateLinkActionActivation(){}
 

@@ -51,8 +51,8 @@
 //Factories an Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -84,8 +84,17 @@ CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl(std::weak
 	m_group = par_group;
 }
 
-CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl(const CS_AcceptEventActionActivationImpl & obj): fUML::Semantics::Actions::AcceptEventActionActivationImpl(obj), CS_AcceptEventActionActivation(obj)
+CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl(const CS_AcceptEventActionActivationImpl & obj): CS_AcceptEventActionActivationImpl()
 {
+	*this = obj;
+}
+
+CS_AcceptEventActionActivationImpl& CS_AcceptEventActionActivationImpl::operator=(const CS_AcceptEventActionActivationImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Actions::AcceptEventActionActivationImpl::operator=(obj);
+	CS_AcceptEventActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_AcceptEventActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -95,11 +104,13 @@ CS_AcceptEventActionActivationImpl::CS_AcceptEventActionActivationImpl(const CS_
 	//copy references with no containment (soft copy)
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_AcceptEventActionActivationImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_AcceptEventActionActivationImpl::copy() const
 {
-	std::shared_ptr<CS_AcceptEventActionActivationImpl> element(new CS_AcceptEventActionActivationImpl(*this));
+	std::shared_ptr<CS_AcceptEventActionActivationImpl> element(new CS_AcceptEventActionActivationImpl());
+	*element =(*this);
 	element->setThisCS_AcceptEventActionActivationPtr(element);
 	return element;
 }

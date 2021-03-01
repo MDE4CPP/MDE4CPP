@@ -63,11 +63,8 @@ namespace uml
 	{
 		public:
  			Include(const Include &) {}
-			Include& operator=(Include const&) = delete;
-
 		protected:
 			Include(){}
-
 			//Additional constructors for the containments back reference
 			Include(std::weak_ptr<uml::UseCase> par_includingCase);
 

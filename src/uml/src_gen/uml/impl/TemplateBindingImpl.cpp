@@ -80,8 +80,17 @@ TemplateBindingImpl::TemplateBindingImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj): DirectedRelationshipImpl(obj), TemplateBinding(obj)
+TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj): TemplateBindingImpl()
 {
+	*this = obj;
+}
+
+TemplateBindingImpl& TemplateBindingImpl::operator=(const TemplateBindingImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	DirectedRelationshipImpl::operator=(obj);
+	TemplateBinding::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TemplateBinding "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -107,11 +116,13 @@ TemplateBindingImpl::TemplateBindingImpl(const TemplateBindingImpl & obj): Direc
 		std::cout << "Initialising value Subset: " << "m_parameterSubstitution - Subset<uml::TemplateParameterSubstitution, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  TemplateBindingImpl::copy() const
+std::shared_ptr<ecore::EObject> TemplateBindingImpl::copy() const
 {
-	std::shared_ptr<TemplateBindingImpl> element(new TemplateBindingImpl(*this));
+	std::shared_ptr<TemplateBindingImpl> element(new TemplateBindingImpl());
+	*element =(*this);
 	element->setThisTemplateBindingPtr(element);
 	return element;
 }

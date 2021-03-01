@@ -61,8 +61,6 @@ namespace uml
 	{
 		public:
  			Usage(const Usage &) {}
-			Usage& operator=(Usage const&) = delete;
-
 		protected:
 			Usage(){}
 

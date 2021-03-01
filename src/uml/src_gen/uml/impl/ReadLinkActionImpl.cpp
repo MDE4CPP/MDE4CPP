@@ -111,8 +111,17 @@ ReadLinkActionImpl::ReadLinkActionImpl(std::weak_ptr<uml::Element> par_owner)
 	m_owner = par_owner;
 }
 
-ReadLinkActionImpl::ReadLinkActionImpl(const ReadLinkActionImpl & obj): LinkActionImpl(obj), ReadLinkAction(obj)
+ReadLinkActionImpl::ReadLinkActionImpl(const ReadLinkActionImpl & obj): ReadLinkActionImpl()
 {
+	*this = obj;
+}
+
+ReadLinkActionImpl& ReadLinkActionImpl::operator=(const ReadLinkActionImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	LinkActionImpl::operator=(obj);
+	ReadLinkAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReadLinkAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -127,11 +136,13 @@ ReadLinkActionImpl::ReadLinkActionImpl(const ReadLinkActionImpl & obj): LinkActi
 		m_result = std::dynamic_pointer_cast<uml::OutputPin>(obj.getResult()->copy());
 	}
 	
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  ReadLinkActionImpl::copy() const
+std::shared_ptr<ecore::EObject> ReadLinkActionImpl::copy() const
 {
-	std::shared_ptr<ReadLinkActionImpl> element(new ReadLinkActionImpl(*this));
+	std::shared_ptr<ReadLinkActionImpl> element(new ReadLinkActionImpl());
+	*element =(*this);
 	element->setThisReadLinkActionPtr(element);
 	return element;
 }

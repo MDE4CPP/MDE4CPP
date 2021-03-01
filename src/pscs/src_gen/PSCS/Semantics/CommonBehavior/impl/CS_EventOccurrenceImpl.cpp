@@ -44,10 +44,10 @@
 //Factories an Package includes
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 
@@ -71,8 +71,17 @@ CS_EventOccurrenceImpl::~CS_EventOccurrenceImpl()
 }
 
 
-CS_EventOccurrenceImpl::CS_EventOccurrenceImpl(const CS_EventOccurrenceImpl & obj): fUML::Semantics::CommonBehavior::EventOccurrenceImpl(obj), CS_EventOccurrence(obj)
+CS_EventOccurrenceImpl::CS_EventOccurrenceImpl(const CS_EventOccurrenceImpl & obj): CS_EventOccurrenceImpl()
 {
+	*this = obj;
+}
+
+CS_EventOccurrenceImpl& CS_EventOccurrenceImpl::operator=(const CS_EventOccurrenceImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::CommonBehavior::EventOccurrenceImpl::operator=(obj);
+	CS_EventOccurrence::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_EventOccurrence "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -86,11 +95,13 @@ CS_EventOccurrenceImpl::CS_EventOccurrenceImpl(const CS_EventOccurrenceImpl & ob
 	m_wrappedEventOccurrence  = obj.getWrappedEventOccurrence();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_EventOccurrenceImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_EventOccurrenceImpl::copy() const
 {
-	std::shared_ptr<CS_EventOccurrenceImpl> element(new CS_EventOccurrenceImpl(*this));
+	std::shared_ptr<CS_EventOccurrenceImpl> element(new CS_EventOccurrenceImpl());
+	*element =(*this);
 	element->setThisCS_EventOccurrencePtr(element);
 	return element;
 }

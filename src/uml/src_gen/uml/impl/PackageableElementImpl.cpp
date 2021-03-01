@@ -99,8 +99,18 @@ PackageableElementImpl::PackageableElementImpl(std::weak_ptr<uml::TemplateParame
 	m_owner = par_owningTemplateParameter;
 }
 
-PackageableElementImpl::PackageableElementImpl(const PackageableElementImpl & obj): NamedElementImpl(obj), ParameterableElementImpl(obj), PackageableElement(obj)
+PackageableElementImpl::PackageableElementImpl(const PackageableElementImpl & obj): PackageableElementImpl()
 {
+	*this = obj;
+}
+
+PackageableElementImpl& PackageableElementImpl::operator=(const PackageableElementImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	ParameterableElementImpl::operator=(obj);
+	PackageableElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PackageableElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -111,11 +121,13 @@ PackageableElementImpl::PackageableElementImpl(const PackageableElementImpl & ob
 	m_owningPackage  = obj.getOwningPackage();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  PackageableElementImpl::copy() const
+std::shared_ptr<ecore::EObject> PackageableElementImpl::copy() const
 {
-	std::shared_ptr<PackageableElementImpl> element(new PackageableElementImpl(*this));
+	std::shared_ptr<PackageableElementImpl> element(new PackageableElementImpl());
+	*element =(*this);
 	element->setThisPackageableElementPtr(element);
 	return element;
 }

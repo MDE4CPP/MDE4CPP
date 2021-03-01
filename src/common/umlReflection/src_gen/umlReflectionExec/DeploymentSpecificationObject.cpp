@@ -121,20 +121,18 @@
 using namespace UML;
 
 DeploymentSpecificationObject::DeploymentSpecificationObject(std::shared_ptr<uml::DeploymentSpecification> _element):
-
 	m_DeploymentSpecificationValue(_element)
-{		
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DeploymentSpecification());
+{
 }
 
 DeploymentSpecificationObject::DeploymentSpecificationObject(DeploymentSpecificationObject &obj):
 	CS_ObjectImpl(obj)
 {
+	*this = obj;
 }
 
 DeploymentSpecificationObject::DeploymentSpecificationObject()
 {	
-	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DeploymentSpecification());
 }
 
 DeploymentSpecificationObject::~DeploymentSpecificationObject()
@@ -143,10 +141,18 @@ DeploymentSpecificationObject::~DeploymentSpecificationObject()
 
 std::shared_ptr<ecore::EObject> DeploymentSpecificationObject::copy()
 {
-	std::shared_ptr<DeploymentSpecificationObject> element(new DeploymentSpecificationObject(*this));
+	std::shared_ptr<DeploymentSpecificationObject> element(new DeploymentSpecificationObject());
+	*element=(*this);
 	element->setThisDeploymentSpecificationObjectPtr(element);
 	return element;
 }
+
+DeploymentSpecificationObject& DeploymentSpecificationObject::operator=(const DeploymentSpecificationObject & obj)
+{
+	UML::ArtifactObject::operator=(obj);
+	return *this;
+}
+
 
 void DeploymentSpecificationObject::destroy()
 {	

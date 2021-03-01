@@ -49,8 +49,8 @@
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 
@@ -74,8 +74,17 @@ CS_InteractionPointImpl::~CS_InteractionPointImpl()
 }
 
 
-CS_InteractionPointImpl::CS_InteractionPointImpl(const CS_InteractionPointImpl & obj): fUML::Semantics::StructuredClassifiers::ReferenceImpl(obj), CS_InteractionPoint(obj)
+CS_InteractionPointImpl::CS_InteractionPointImpl(const CS_InteractionPointImpl & obj): CS_InteractionPointImpl()
 {
+	*this = obj;
+}
+
+CS_InteractionPointImpl& CS_InteractionPointImpl::operator=(const CS_InteractionPointImpl & obj)
+{
+	//call overloaded =Operator for each base class
+	fUML::Semantics::StructuredClassifiers::ReferenceImpl::operator=(obj);
+	CS_InteractionPoint::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_InteractionPoint "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -87,11 +96,13 @@ CS_InteractionPointImpl::CS_InteractionPointImpl(const CS_InteractionPointImpl &
 	m_owner  = obj.getOwner();
 
 	//Clone references with containment (deep copy)
+	return *this;
 }
 
-std::shared_ptr<ecore::EObject>  CS_InteractionPointImpl::copy() const
+std::shared_ptr<ecore::EObject> CS_InteractionPointImpl::copy() const
 {
-	std::shared_ptr<CS_InteractionPointImpl> element(new CS_InteractionPointImpl(*this));
+	std::shared_ptr<CS_InteractionPointImpl> element(new CS_InteractionPointImpl());
+	*element =(*this);
 	element->setThisCS_InteractionPointPtr(element);
 	return element;
 }
