@@ -147,10 +147,10 @@ std::shared_ptr<ecore::EObject> [className/]::copy()
 [className/]& [className/]::operator=(const [className/] & obj)
 {
  [if (aClassifier.collectInheritedTypes()->isEmpty())]
-	PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl::operator=(const [className/] & obj);
+	PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl::operator=( obj);
 [else]
 [for(inheritedType : Classifier | aClassifier.collectInheritedTypes()) ]
-	[inheritedType.getNearestPackage().generateNamespace(false)/]::[inheritedType.objectClassName()/]::operator=(const [className/] & obj);
+	[inheritedType.getNearestPackage().generateNamespace(false)/]::[inheritedType.objectClassName()/]::operator=(obj);
 [/for][/if]
 	return *this;
 }
