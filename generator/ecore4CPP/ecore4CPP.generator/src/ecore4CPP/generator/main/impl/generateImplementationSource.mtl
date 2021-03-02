@@ -263,16 +263,25 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	m_[ref.name/] = std::dynamic_pointer_cast<[ref.generateReferenceType()/]>>(obj.[ref.GetterName()/]()->copy());
 		[else]
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
-	for(auto _[ref.name/] : *obj.[ref.GetterName()/]()) 
+	if(nullptr != [ref.name/]Container )
 	{
-		if(nullptr != _[ref.name/])
+		int size = [ref.name/]Container->size();
+		for(int i=0; i<size ; i++)
 		{
-			[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.generateType()/]>(_[ref.name/]->copy()));
+			auto _[ref.name/]=(*[ref.GetterName()/])[i]; 
+			if(nullptr != _[ref.name/])
+			{
+				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.generateType()/]>(_[ref.name/]->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
+			}
 		}
-		else
-		{
-			DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
-		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [ref.name/]."<< std::endl;)
 	}
 		[/if]
 	[elseif ((ref.eType.oclIsUndefined()) or (not ref.hasSetter()) )]// unknown Reference Type or missing setter for [ref.name/]
@@ -293,16 +302,25 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	}
 			[else]
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
-	for(auto _[ref.name/] : *obj.[ref.GetterName()/]())
+	if(nullptr != [ref.name/]Container )
 	{
-		if(nullptr != _[ref.name/])
+		int size = [ref.name/]Container->size();
+		for(int i=0; i<size ; i++)
 		{
-			[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eTypeArguments->first().generateCppType(false)/]>(_[ref.name/]->copy()));
+			auto _[ref.name/]=(*[ref.GetterName()/])[i]; 
+			if(nullptr != _[ref.name/])
+			{
+				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eTypeArguments->first().generateCppType(false)/]>(_[ref.name/]->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
+			}
 		}
-		else
-		{
-			DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
-		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [ref.name/]."<< std::endl;)
 	}
 			[/if]
 		[else]
@@ -314,26 +332,43 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[elseif (ref.eType.eTypeParameters->size()>0) ]
 		[if (ref.eType.name.equalsIgnoreCase('EMap'))]
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
-	for(const auto pair_[ref.name/] : *obj.[ref.GetterName()/]())
+	if(nullptr != [ref.name/]Container )
 	{
-		[if (ref.eGenericType.eTypeArguments->last().eClassifier.oclIsKindOf(EDataType))] [comment if second Type is an Ecore type /]
-		[ref.name/]Container->insert(std::make_pair(pair_[ref.name/].first, pair_[ref.name/].second));
-		[else] [comment otherwise it is a shared_ptr/]
-		[ref.name/]Container->insert(std::make_pair(pair_[ref.name/].first, std::dynamic_pointer_cast<[ref.eGenericType.eTypeArguments->last().generateCppType(false)/]>(pair_[ref.name/].second->copy())));
-		[/if]
+		for(const auto pair_[ref.name/] : *obj.[ref.GetterName()/]())
+		{
+			[if (ref.eGenericType.eTypeArguments->last().eClassifier.oclIsKindOf(EDataType))] [comment if second Type is an Ecore type /]
+			[ref.name/]Container->insert(std::make_pair(pair_[ref.name/].first, pair_[ref.name/].second));
+			[else] [comment otherwise it is a shared_ptr/]
+			[ref.name/]Container->insert(std::make_pair(pair_[ref.name/].first, std::dynamic_pointer_cast<[ref.eGenericType.eTypeArguments->last().generateCppType(false)/]>(pair_[ref.name/].second->copy())));
+			[/if]
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [ref.name/]."<< std::endl;)
 	}
 		[else] [comment EEList/]
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
-	for(auto _[ref.name/] : *obj.[ref.GetterName()/]())
+	if(nullptr != [ref.name/]Container )
 	{
-		if(nullptr != _[ref.name/])
+		int size = [ref.name/]Container->size();
+		for(int i=0; i<size ; i++)
 		{
-			[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[ref.name/]->copy()));
+			auto _[ref.name/]=(*[ref.GetterName()/])[i]; 
+			if(nullptr != _[ref.name/])
+			{
+				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[ref.name/]->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
+			}
 		}
-		else
-		{
-			DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
-		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [ref.name/]."<< std::endl;)
+	}
 		[/if]
 	[elseif (not(ref.lowerBound = 0))] [comment copy simple attribute ptr/]
 	*(m_[ref.name/]) = *(obj.[ref.GetterName()/]());
