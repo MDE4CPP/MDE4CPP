@@ -18,7 +18,8 @@ task generateAllExamples() {
 		}
 	
 		[  	'./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion/model/', 
-			'./ecoreExamples/TestSuiteSubsetUnionExample/SubsetUnionDepth/model/', 
+			'./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnionDepth/model/', 
+			'./ecoreExamples/TestSuite/templateTest/model/', 		
 			'./ecoreExamples/ecoreModelExample/model/',
 			'./UMLExamples/UMLModelExample/model/',		
 			'./fUMLExamples/Calculator/model/', 
