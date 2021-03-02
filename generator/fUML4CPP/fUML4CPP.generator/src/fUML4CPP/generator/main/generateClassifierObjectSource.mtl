@@ -108,12 +108,9 @@ using namespace [aClassifier.getNearestPackage().generateNamespace(false)/];
 [className/]::[className/](std::shared_ptr<[pointerName/]> _element):
 	[aClassifier.UMLValueName()/](_element)
 {
-	[comment] [if(not aClassifier.oclIsTypeOf(Interface))] [/comment]
-	[comment]
-	use copy constructor! or =operator 
+	[if(not aClassifier.oclIsTypeOf(Interface))]
 	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
-	[/comment]
-	[comment] [/if] [/comment]
+	[/if]
 }
 
 [className/]::[className/]([className/] &obj):
@@ -124,12 +121,9 @@ using namespace [aClassifier.getNearestPackage().generateNamespace(false)/];
 
 [className/]::[className/]()
 {	
-	[comment] [if(not aClassifier.oclIsTypeOf(Interface))] [/comment]
-	[comment]
-	use copy constructor! or =operator 
+	[if(not aClassifier.oclIsTypeOf(Interface))]
 	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
-	[/comment]
-	[comment] [/if] [/comment]
+	[/if]
 }
 
 [className/]::~[className/]()
