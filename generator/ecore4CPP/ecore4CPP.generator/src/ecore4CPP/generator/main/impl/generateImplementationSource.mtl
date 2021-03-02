@@ -198,16 +198,48 @@ using namespace [aClass.generateNamespaceDefinition()/];
 		[if (not(att.upperBound = 1))] [comment it is a Bag of Elements /]
 			[if (not att.eGenericType.eClassifier.oclIsKindOf(EDataType))] [comment it is an Bag/Subset of non standard Elements /]
 	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
-	for(auto _[att.name/] : *obj.[att.GetterName()/]())
+	if(nullptr != [att.name/]Container )
 	{
-		[att.name/]Container->push_back(std::dynamic_pointer_cast<[att.generateStructuralFeatureType(true)/]>(_[att.name/]->copy()));
-	} 
+		int size = [att.name/]Container->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _[att.name/]=(*[att.name/]Container)['['/]i[']'/]; 	
+			if(nullptr != _[att.name/])
+			{
+				[att.name/]Container->push_back(std::dynamic_pointer_cast<[att.generateStructuralFeatureType(true)/]>(_[att.name/]->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [att.name/]."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [att.name/]."<< std::endl;)
+	}
 			[else]	[comment it is an Bag/Subset of standard Datatype Elements /]
 	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
-	for(auto _[att.name/] : *obj.[att.GetterName()/]())
+	if(nullptr != [att.name/]Container )
 	{
-		[att.name/]Container->push_back(_[att.name/]);
-	} 
+		int size = [att.name/]Container->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _[att.name/]=(*[att.name/]Container)['['/]i[']'/];	
+			if(nullptr != _[att.name/])
+			{
+				[att.name/]Container->push_back(_[att.name/]);
+			} 
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [att.name/]."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [att.name/]."<< std::endl;)
+	}
 			[/if]
 		[elseif (att.eType.oclIsUndefined())]// unknown attribute type for [att.name/]
 	[comment]Handling of Templates:
@@ -227,9 +259,25 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	}
 			[elseif (att.eType.name.equalsIgnoreCase('EEList'))] 
 	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
-	for(auto _[att.name/] : *obj.[att.GetterName()/]())
+	if(nullptr != [att.name/]Container )
 	{
-		[att.name/]Container->push_back(std::dynamic_pointer_cast<[att.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[att.name/]->copy()));
+		int size = [att.name/]Container->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _[att.name/]=(*[att.name/]Container)['['/]i[']'/];	
+			if(nullptr != _[att.name/])
+			{
+				[att.name/]Container->push_back(std::dynamic_pointer_cast<[att.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[att.name/]->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [att.name/]."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [att.name/]."<< std::endl;)
 	}
 			[else] [comment invalid Generic for instance: EJavaClass<T> --> generated as void* /]
 	m_[att.name/] = obj.[att.GetterName()/]();
@@ -250,7 +298,6 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));
 	[/if]
 	[/for]
-
 	[comment]References must be copied in this order:
 	1st Unions
 	2nd Subset Unions
@@ -268,7 +315,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 		int size = [ref.name/]Container->size();
 		for(int i=0; i<size ; i++)
 		{
-			auto _[ref.name/]=(*[ref.GetterName()/])[i]; 
+			auto _[ref.name/]=(*[ref.name/]Container)['['/]i[']'/];
 			if(nullptr != _[ref.name/])
 			{
 				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.generateType()/]>(_[ref.name/]->copy()));
@@ -307,7 +354,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 		int size = [ref.name/]Container->size();
 		for(int i=0; i<size ; i++)
 		{
-			auto _[ref.name/]=(*[ref.GetterName()/])[i]; 
+			auto _[ref.name/]=(*[ref.name/]Container)['['/]i[']'/];
 			if(nullptr != _[ref.name/])
 			{
 				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eTypeArguments->first().generateCppType(false)/]>(_[ref.name/]->copy()));
@@ -354,7 +401,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 		int size = [ref.name/]Container->size();
 		for(int i=0; i<size ; i++)
 		{
-			auto _[ref.name/]=(*[ref.GetterName()/])[i]; 
+			auto _[ref.name/]=(*[ref.name/]Container)['['/]i[']'/];
 			if(nullptr != _[ref.name/])
 			{
 				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[ref.name/]->copy()));
