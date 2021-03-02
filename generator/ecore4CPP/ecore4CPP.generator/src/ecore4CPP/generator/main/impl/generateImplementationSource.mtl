@@ -265,7 +265,14 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
 	for(auto _[ref.name/] : *obj.[ref.GetterName()/]()) 
 	{
-		[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.generateType()/]>(_[ref.name/]->copy()));
+		if(nullptr != _[ref.name/])
+		{
+			[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.generateType()/]>(_[ref.name/]->copy()));
+		}
+		else
+		{
+			DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
+		}
 	}
 		[/if]
 	[elseif ((ref.eType.oclIsUndefined()) or (not ref.hasSetter()) )]// unknown Reference Type or missing setter for [ref.name/]
@@ -288,7 +295,14 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
 	for(auto _[ref.name/] : *obj.[ref.GetterName()/]())
 	{
-		[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eTypeArguments->first().generateCppType(false)/]>(_[ref.name/]->copy()));
+		if(nullptr != _[ref.name/])
+		{
+			[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eTypeArguments->first().generateCppType(false)/]>(_[ref.name/]->copy()));
+		}
+		else
+		{
+			DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
+		}
 	}
 			[/if]
 		[else]
@@ -312,8 +326,14 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
 	for(auto _[ref.name/] : *obj.[ref.GetterName()/]())
 	{
-		[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[ref.name/]->copy()));
-	}
+		if(nullptr != _[ref.name/])
+		{
+			[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[ref.name/]->copy()));
+		}
+		else
+		{
+			DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
+		}
 		[/if]
 	[elseif (not(ref.lowerBound = 0))] [comment copy simple attribute ptr/]
 	*(m_[ref.name/]) = *(obj.[ref.GetterName()/]());
