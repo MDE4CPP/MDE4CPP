@@ -82,13 +82,12 @@ void StructuredClassifiersPackageImpl::initializeCS_DefaultRequestPropagationStr
 	
 	
 	
-	m_cS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class());
 	m_cS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setName("select");
+	m_cS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class());
 	m_cS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setLowerBound(0);
 	m_cS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setUpperBound(-1);
 	m_cS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setUnique(true);
 	m_cS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultRequestPropagationStrategy_Operation_select_Reference_SemanticVisitor);
 		parameter->setName("potentialTargets");
@@ -120,13 +119,12 @@ void StructuredClassifiersPackageImpl::initializeCS_DispatchOperationOfInterface
 	
 	
 	
-	m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation->setName("operationsMatch");
+	m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation->setLowerBound(1);
 	m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation->setUpperBound(1);
 	m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation->setUnique(true);
 	m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DispatchOperationOfInterfaceStrategy_Operation_operationsMatch_Operation_Operation);
 		parameter->setName("ownedOperation");
@@ -202,13 +200,12 @@ void StructuredClassifiersPackageImpl::initializeCS_InteractionPointContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_cS_InteractionPoint_Operation_checkAllParents_Classifier_Classifier->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_InteractionPoint_Operation_checkAllParents_Classifier_Classifier->setName("checkAllParents");
+	m_cS_InteractionPoint_Operation_checkAllParents_Classifier_Classifier->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_InteractionPoint_Operation_checkAllParents_Classifier_Classifier->setLowerBound(1);
 	m_cS_InteractionPoint_Operation_checkAllParents_Classifier_Classifier->setUpperBound(1);
 	m_cS_InteractionPoint_Operation_checkAllParents_Classifier_Classifier->setUnique(true);
 	m_cS_InteractionPoint_Operation_checkAllParents_Classifier_Classifier->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_InteractionPoint_Operation_checkAllParents_Classifier_Classifier);
 		parameter->setName("type");
@@ -229,13 +226,12 @@ void StructuredClassifiersPackageImpl::initializeCS_InteractionPointContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_InteractionPoint_Operation_dispatch_Operation->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_InteractionPoint_Operation_dispatch_Operation->setName("dispatch");
+	m_cS_InteractionPoint_Operation_dispatch_Operation->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_InteractionPoint_Operation_dispatch_Operation->setLowerBound(1);
 	m_cS_InteractionPoint_Operation_dispatch_Operation->setUpperBound(1);
 	m_cS_InteractionPoint_Operation_dispatch_Operation->setUnique(true);
 	m_cS_InteractionPoint_Operation_dispatch_Operation->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_InteractionPoint_Operation_dispatch_Operation);
 		parameter->setName("operation");
@@ -246,13 +242,18 @@ void StructuredClassifiersPackageImpl::initializeCS_InteractionPointContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_InteractionPoint_Operation_send_EventOccurrence->setEType(nullptr);
 	m_cS_InteractionPoint_Operation_send_EventOccurrence->setName("send");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_InteractionPoint_Operation_send_EventOccurrence->setEType(unknownClass);
+	}
 	m_cS_InteractionPoint_Operation_send_EventOccurrence->setLowerBound(1);
 	m_cS_InteractionPoint_Operation_send_EventOccurrence->setUpperBound(1);
 	m_cS_InteractionPoint_Operation_send_EventOccurrence->setUnique(true);
 	m_cS_InteractionPoint_Operation_send_EventOccurrence->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_InteractionPoint_Operation_send_EventOccurrence);
 		parameter->setName("eventOccurrence");
@@ -263,13 +264,18 @@ void StructuredClassifiersPackageImpl::initializeCS_InteractionPointContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_InteractionPoint_Operation_startBehavior_Class_ParameterValue->setEType(nullptr);
 	m_cS_InteractionPoint_Operation_startBehavior_Class_ParameterValue->setName("startBehavior");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_InteractionPoint_Operation_startBehavior_Class_ParameterValue->setEType(unknownClass);
+	}
 	m_cS_InteractionPoint_Operation_startBehavior_Class_ParameterValue->setLowerBound(1);
 	m_cS_InteractionPoint_Operation_startBehavior_Class_ParameterValue->setUpperBound(1);
 	m_cS_InteractionPoint_Operation_startBehavior_Class_ParameterValue->setUnique(true);
 	m_cS_InteractionPoint_Operation_startBehavior_Class_ParameterValue->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_InteractionPoint_Operation_startBehavior_Class_ParameterValue);
 		parameter->setName("classifier");
@@ -301,13 +307,12 @@ void StructuredClassifiersPackageImpl::initializeCS_LinkContent()
 	
 	
 	
-	m_cS_Link_Operation_getFeature_Value->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 	m_cS_Link_Operation_getFeature_Value->setName("getFeature");
+	m_cS_Link_Operation_getFeature_Value->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 	m_cS_Link_Operation_getFeature_Value->setLowerBound(1);
 	m_cS_Link_Operation_getFeature_Value->setUpperBound(1);
 	m_cS_Link_Operation_getFeature_Value->setUnique(true);
 	m_cS_Link_Operation_getFeature_Value->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Link_Operation_getFeature_Value);
 		parameter->setName("value");
@@ -318,13 +323,12 @@ void StructuredClassifiersPackageImpl::initializeCS_LinkContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Link_Operation_hasValueForAFeature_Value->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Link_Operation_hasValueForAFeature_Value->setName("hasValueForAFeature");
+	m_cS_Link_Operation_hasValueForAFeature_Value->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Link_Operation_hasValueForAFeature_Value->setLowerBound(1);
 	m_cS_Link_Operation_hasValueForAFeature_Value->setUpperBound(1);
 	m_cS_Link_Operation_hasValueForAFeature_Value->setUnique(true);
 	m_cS_Link_Operation_hasValueForAFeature_Value->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Link_Operation_hasValueForAFeature_Value);
 		parameter->setName("value");
@@ -346,13 +350,12 @@ void StructuredClassifiersPackageImpl::initializeCS_NameBased_StructuralFeatureO
 	
 	
 	
-	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getFeatureValue_Class());
 	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setName("read");
+	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getFeatureValue_Class());
 	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setLowerBound(1);
 	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setUpperBound(1);
 	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setUnique(true);
 	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature);
 		parameter->setName("cs_Object");
@@ -373,13 +376,18 @@ void StructuredClassifiersPackageImpl::initializeCS_NameBased_StructuralFeatureO
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt->setEType(nullptr);
 	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt->setName("write");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt->setEType(unknownClass);
+	}
 	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt->setLowerBound(1);
 	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt->setUpperBound(1);
 	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt->setUnique(true);
 	m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_NameBased_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_EInt);
 		parameter->setName("cs_Object");
@@ -431,13 +439,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 	
 	
 	
-	m_cS_Object_Operation_checkAllParents_Classifier_Classifier->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_checkAllParents_Classifier_Classifier->setName("checkAllParents");
+	m_cS_Object_Operation_checkAllParents_Classifier_Classifier->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_checkAllParents_Classifier_Classifier->setLowerBound(1);
 	m_cS_Object_Operation_checkAllParents_Classifier_Classifier->setUpperBound(1);
 	m_cS_Object_Operation_checkAllParents_Classifier_Classifier->setUnique(true);
 	m_cS_Object_Operation_checkAllParents_Classifier_Classifier->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_checkAllParents_Classifier_Classifier);
 		parameter->setName("type");
@@ -458,13 +465,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_contains_Object->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_contains_Object->setName("contains");
+	m_cS_Object_Operation_contains_Object->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_contains_Object->setLowerBound(1);
 	m_cS_Object_Operation_contains_Object->setUpperBound(1);
 	m_cS_Object_Operation_contains_Object->setUnique(true);
 	m_cS_Object_Operation_contains_Object->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_contains_Object);
 		parameter->setName("object");
@@ -475,13 +481,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_directlyContains_Object->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_directlyContains_Object->setName("directlyContains");
+	m_cS_Object_Operation_directlyContains_Object->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_directlyContains_Object->setLowerBound(1);
 	m_cS_Object_Operation_directlyContains_Object->setUpperBound(1);
 	m_cS_Object_Operation_directlyContains_Object->setUnique(true);
 	m_cS_Object_Operation_directlyContains_Object->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_directlyContains_Object);
 		parameter->setName("object");
@@ -492,13 +497,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_dispatchIn_Operation_CS_InteractionPoint->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Object_Operation_dispatchIn_Operation_CS_InteractionPoint->setName("dispatchIn");
+	m_cS_Object_Operation_dispatchIn_Operation_CS_InteractionPoint->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Object_Operation_dispatchIn_Operation_CS_InteractionPoint->setLowerBound(1);
 	m_cS_Object_Operation_dispatchIn_Operation_CS_InteractionPoint->setUpperBound(1);
 	m_cS_Object_Operation_dispatchIn_Operation_CS_InteractionPoint->setUnique(true);
 	m_cS_Object_Operation_dispatchIn_Operation_CS_InteractionPoint->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_dispatchIn_Operation_CS_InteractionPoint);
 		parameter->setName("operation");
@@ -519,13 +523,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_dispatchIn_Operation_Port->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Object_Operation_dispatchIn_Operation_Port->setName("dispatchIn");
+	m_cS_Object_Operation_dispatchIn_Operation_Port->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Object_Operation_dispatchIn_Operation_Port->setLowerBound(1);
 	m_cS_Object_Operation_dispatchIn_Operation_Port->setUpperBound(1);
 	m_cS_Object_Operation_dispatchIn_Operation_Port->setUnique(true);
 	m_cS_Object_Operation_dispatchIn_Operation_Port->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_dispatchIn_Operation_Port);
 		parameter->setName("operation");
@@ -546,13 +549,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_dispatchOut_Operation_CS_InteractionPoint->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Object_Operation_dispatchOut_Operation_CS_InteractionPoint->setName("dispatchOut");
+	m_cS_Object_Operation_dispatchOut_Operation_CS_InteractionPoint->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Object_Operation_dispatchOut_Operation_CS_InteractionPoint->setLowerBound(1);
 	m_cS_Object_Operation_dispatchOut_Operation_CS_InteractionPoint->setUpperBound(1);
 	m_cS_Object_Operation_dispatchOut_Operation_CS_InteractionPoint->setUnique(true);
 	m_cS_Object_Operation_dispatchOut_Operation_CS_InteractionPoint->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_dispatchOut_Operation_CS_InteractionPoint);
 		parameter->setName("operation");
@@ -573,13 +575,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_dispatchOut_Operation_Port->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Object_Operation_dispatchOut_Operation_Port->setName("dispatchOut");
+	m_cS_Object_Operation_dispatchOut_Operation_Port->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Object_Operation_dispatchOut_Operation_Port->setLowerBound(1);
 	m_cS_Object_Operation_dispatchOut_Operation_Port->setUpperBound(1);
 	m_cS_Object_Operation_dispatchOut_Operation_Port->setUnique(true);
 	m_cS_Object_Operation_dispatchOut_Operation_Port->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_dispatchOut_Operation_Port);
 		parameter->setName("operation");
@@ -600,21 +601,19 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_getDirectContainers->setEType(getCS_Object_Class());
 	m_cS_Object_Operation_getDirectContainers->setName("getDirectContainers");
+	m_cS_Object_Operation_getDirectContainers->setEType(getCS_Object_Class());
 	m_cS_Object_Operation_getDirectContainers->setLowerBound(0);
 	m_cS_Object_Operation_getDirectContainers->setUpperBound(-1);
 	m_cS_Object_Operation_getDirectContainers->setUnique(true);
 	m_cS_Object_Operation_getDirectContainers->setOrdered(false);
 	
-	
-	m_cS_Object_Operation_getFeatureValue_StructuralFeature->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getFeatureValue_Class());
 	m_cS_Object_Operation_getFeatureValue_StructuralFeature->setName("getFeatureValue");
+	m_cS_Object_Operation_getFeatureValue_StructuralFeature->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getFeatureValue_Class());
 	m_cS_Object_Operation_getFeatureValue_StructuralFeature->setLowerBound(1);
 	m_cS_Object_Operation_getFeatureValue_StructuralFeature->setUpperBound(1);
 	m_cS_Object_Operation_getFeatureValue_StructuralFeature->setUnique(true);
 	m_cS_Object_Operation_getFeatureValue_StructuralFeature->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_getFeatureValue_StructuralFeature);
 		parameter->setName("feature");
@@ -625,13 +624,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_getLinkKind_CS_Link_CS_InteractionPoint->setEType(getCS_LinkKind_Class());
 	m_cS_Object_Operation_getLinkKind_CS_Link_CS_InteractionPoint->setName("getLinkKind");
+	m_cS_Object_Operation_getLinkKind_CS_Link_CS_InteractionPoint->setEType(getCS_LinkKind_Class());
 	m_cS_Object_Operation_getLinkKind_CS_Link_CS_InteractionPoint->setLowerBound(1);
 	m_cS_Object_Operation_getLinkKind_CS_Link_CS_InteractionPoint->setUpperBound(1);
 	m_cS_Object_Operation_getLinkKind_CS_Link_CS_InteractionPoint->setUnique(true);
 	m_cS_Object_Operation_getLinkKind_CS_Link_CS_InteractionPoint->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_getLinkKind_CS_Link_CS_InteractionPoint);
 		parameter->setName("link");
@@ -652,13 +650,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_getLinks_CS_InteractionPoint->setEType(getCS_Link_Class());
 	m_cS_Object_Operation_getLinks_CS_InteractionPoint->setName("getLinks");
+	m_cS_Object_Operation_getLinks_CS_InteractionPoint->setEType(getCS_Link_Class());
 	m_cS_Object_Operation_getLinks_CS_InteractionPoint->setLowerBound(0);
 	m_cS_Object_Operation_getLinks_CS_InteractionPoint->setUpperBound(-1);
 	m_cS_Object_Operation_getLinks_CS_InteractionPoint->setUnique(true);
 	m_cS_Object_Operation_getLinks_CS_InteractionPoint->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_getLinks_CS_InteractionPoint);
 		parameter->setName("interactionPoint");
@@ -669,13 +666,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_hasValueForAFeature_Value->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_hasValueForAFeature_Value->setName("hasValueForAFeature");
+	m_cS_Object_Operation_hasValueForAFeature_Value->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_hasValueForAFeature_Value->setLowerBound(1);
 	m_cS_Object_Operation_hasValueForAFeature_Value->setUpperBound(1);
 	m_cS_Object_Operation_hasValueForAFeature_Value->setUnique(true);
 	m_cS_Object_Operation_hasValueForAFeature_Value->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_hasValueForAFeature_Value);
 		parameter->setName("value");
@@ -686,13 +682,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_isDescendant_Interface_Interface->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_isDescendant_Interface_Interface->setName("isDescendant");
+	m_cS_Object_Operation_isDescendant_Interface_Interface->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_isDescendant_Interface_Interface->setLowerBound(1);
 	m_cS_Object_Operation_isDescendant_Interface_Interface->setUpperBound(1);
 	m_cS_Object_Operation_isDescendant_Interface_Interface->setUnique(true);
 	m_cS_Object_Operation_isDescendant_Interface_Interface->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_isDescendant_Interface_Interface);
 		parameter->setName("contract");
@@ -713,13 +708,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_isOperationProvided_Reference_Operation->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_isOperationProvided_Reference_Operation->setName("isOperationProvided");
+	m_cS_Object_Operation_isOperationProvided_Reference_Operation->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_isOperationProvided_Reference_Operation->setLowerBound(1);
 	m_cS_Object_Operation_isOperationProvided_Reference_Operation->setUpperBound(1);
 	m_cS_Object_Operation_isOperationProvided_Reference_Operation->setUnique(true);
 	m_cS_Object_Operation_isOperationProvided_Reference_Operation->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_isOperationProvided_Reference_Operation);
 		parameter->setName("reference");
@@ -740,13 +734,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_isOperationRequired_Reference_Operation->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_isOperationRequired_Reference_Operation->setName("isOperationRequired");
+	m_cS_Object_Operation_isOperationRequired_Reference_Operation->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_isOperationRequired_Reference_Operation->setLowerBound(1);
 	m_cS_Object_Operation_isOperationRequired_Reference_Operation->setUpperBound(1);
 	m_cS_Object_Operation_isOperationRequired_Reference_Operation->setUnique(true);
 	m_cS_Object_Operation_isOperationRequired_Reference_Operation->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_isOperationRequired_Reference_Operation);
 		parameter->setName("reference");
@@ -767,13 +760,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_realizesInterface_Class_Interface->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_realizesInterface_Class_Interface->setName("realizesInterface");
+	m_cS_Object_Operation_realizesInterface_Class_Interface->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_cS_Object_Operation_realizesInterface_Class_Interface->setLowerBound(1);
 	m_cS_Object_Operation_realizesInterface_Class_Interface->setUpperBound(1);
 	m_cS_Object_Operation_realizesInterface_Class_Interface->setUnique(true);
 	m_cS_Object_Operation_realizesInterface_Class_Interface->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_realizesInterface_Class_Interface);
 		parameter->setName("type");
@@ -794,13 +786,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class());
 	m_cS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean->setName("selectTargetsForDispatching");
+	m_cS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class());
 	m_cS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean->setLowerBound(0);
 	m_cS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean->setUpperBound(-1);
 	m_cS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean->setUnique(true);
 	m_cS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_selectTargetsForDispatching_CS_Link_EBoolean);
 		parameter->setName("link");
@@ -851,13 +842,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class());
 	m_cS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean->setName("selectTargetsForSending");
+	m_cS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class());
 	m_cS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean->setLowerBound(0);
 	m_cS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean->setUpperBound(-1);
 	m_cS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean->setUnique(true);
 	m_cS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_selectTargetsForSending_CS_Link_EBoolean);
 		parameter->setName("link");
@@ -898,13 +888,18 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setEType(nullptr);
 	m_cS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setName("sendIn");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setEType(unknownClass);
+	}
 	m_cS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setLowerBound(1);
 	m_cS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setUpperBound(1);
 	m_cS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setUnique(true);
 	m_cS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_sendIn_EventOccurrence_CS_InteractionPoint);
 		parameter->setName("eventOccurrence");
@@ -925,13 +920,18 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_sendIn_EventOccurrence_Port->setEType(nullptr);
 	m_cS_Object_Operation_sendIn_EventOccurrence_Port->setName("sendIn");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_Object_Operation_sendIn_EventOccurrence_Port->setEType(unknownClass);
+	}
 	m_cS_Object_Operation_sendIn_EventOccurrence_Port->setLowerBound(1);
 	m_cS_Object_Operation_sendIn_EventOccurrence_Port->setUpperBound(1);
 	m_cS_Object_Operation_sendIn_EventOccurrence_Port->setUnique(true);
 	m_cS_Object_Operation_sendIn_EventOccurrence_Port->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_sendIn_EventOccurrence_Port);
 		parameter->setName("eventOccurrence");
@@ -952,13 +952,18 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setEType(nullptr);
 	m_cS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setName("sendOut");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setEType(unknownClass);
+	}
 	m_cS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setLowerBound(1);
 	m_cS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setUpperBound(1);
 	m_cS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setUnique(true);
 	m_cS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_sendOut_EventOccurrence_CS_InteractionPoint);
 		parameter->setName("eventOccurrence");
@@ -979,13 +984,18 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_sendOut_EventOccurrence_Port->setEType(nullptr);
 	m_cS_Object_Operation_sendOut_EventOccurrence_Port->setName("sendOut");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_Object_Operation_sendOut_EventOccurrence_Port->setEType(unknownClass);
+	}
 	m_cS_Object_Operation_sendOut_EventOccurrence_Port->setLowerBound(1);
 	m_cS_Object_Operation_sendOut_EventOccurrence_Port->setUpperBound(1);
 	m_cS_Object_Operation_sendOut_EventOccurrence_Port->setUnique(true);
 	m_cS_Object_Operation_sendOut_EventOccurrence_Port->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_sendOut_EventOccurrence_Port);
 		parameter->setName("eventOccurrence");
@@ -1006,13 +1016,18 @@ void StructuredClassifiersPackageImpl::initializeCS_ObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Object_Operation_setFeatureValue_StructuralFeature_EInt->setEType(nullptr);
 	m_cS_Object_Operation_setFeatureValue_StructuralFeature_EInt->setName("setFeatureValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_Object_Operation_setFeatureValue_StructuralFeature_EInt->setEType(unknownClass);
+	}
 	m_cS_Object_Operation_setFeatureValue_StructuralFeature_EInt->setLowerBound(1);
 	m_cS_Object_Operation_setFeatureValue_StructuralFeature_EInt->setUpperBound(1);
 	m_cS_Object_Operation_setFeatureValue_StructuralFeature_EInt->setUnique(true);
 	m_cS_Object_Operation_setFeatureValue_StructuralFeature_EInt->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Object_Operation_setFeatureValue_StructuralFeature_EInt);
 		parameter->setName("feature");
@@ -1076,29 +1091,26 @@ void StructuredClassifiersPackageImpl::initializeCS_ReferenceContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_cS_Reference_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_cS_Reference_Operation__copy->setName("_copy");
+	m_cS_Reference_Operation__copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_cS_Reference_Operation__copy->setLowerBound(1);
 	m_cS_Reference_Operation__copy->setUpperBound(1);
 	m_cS_Reference_Operation__copy->setUnique(true);
 	m_cS_Reference_Operation__copy->setOrdered(true);
 	
-	
-	m_cS_Reference_Operation_copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_cS_Reference_Operation_copy->setName("copy");
+	m_cS_Reference_Operation_copy->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_cS_Reference_Operation_copy->setLowerBound(1);
 	m_cS_Reference_Operation_copy->setUpperBound(1);
 	m_cS_Reference_Operation_copy->setUnique(true);
 	m_cS_Reference_Operation_copy->setOrdered(false);
 	
-	
-	m_cS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint->setName("dispatchIn");
+	m_cS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint->setLowerBound(1);
 	m_cS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint->setUpperBound(1);
 	m_cS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint->setUnique(true);
 	m_cS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Reference_Operation_dispatchIn_Operation_CS_InteractionPoint);
 		parameter->setName("operation");
@@ -1119,13 +1131,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ReferenceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Reference_Operation_dispatchIn_Operation_Port->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Reference_Operation_dispatchIn_Operation_Port->setName("dispatchIn");
+	m_cS_Reference_Operation_dispatchIn_Operation_Port->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Reference_Operation_dispatchIn_Operation_Port->setLowerBound(1);
 	m_cS_Reference_Operation_dispatchIn_Operation_Port->setUpperBound(1);
 	m_cS_Reference_Operation_dispatchIn_Operation_Port->setUnique(true);
 	m_cS_Reference_Operation_dispatchIn_Operation_Port->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Reference_Operation_dispatchIn_Operation_Port);
 		parameter->setName("operation");
@@ -1146,13 +1157,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ReferenceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Reference_Operation_dispatchOut_Operation_Port->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Reference_Operation_dispatchOut_Operation_Port->setName("dispatchOut");
+	m_cS_Reference_Operation_dispatchOut_Operation_Port->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Reference_Operation_dispatchOut_Operation_Port->setLowerBound(1);
 	m_cS_Reference_Operation_dispatchOut_Operation_Port->setUpperBound(1);
 	m_cS_Reference_Operation_dispatchOut_Operation_Port->setUnique(true);
 	m_cS_Reference_Operation_dispatchOut_Operation_Port->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Reference_Operation_dispatchOut_Operation_Port);
 		parameter->setName("operation");
@@ -1173,13 +1183,12 @@ void StructuredClassifiersPackageImpl::initializeCS_ReferenceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Reference_Operation_dispatchOut_Operation_CS_InteractionPoint->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Reference_Operation_dispatchOut_Operation_CS_InteractionPoint->setName("dispatchOut");
+	m_cS_Reference_Operation_dispatchOut_Operation_CS_InteractionPoint->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class());
 	m_cS_Reference_Operation_dispatchOut_Operation_CS_InteractionPoint->setLowerBound(1);
 	m_cS_Reference_Operation_dispatchOut_Operation_CS_InteractionPoint->setUpperBound(1);
 	m_cS_Reference_Operation_dispatchOut_Operation_CS_InteractionPoint->setUnique(true);
 	m_cS_Reference_Operation_dispatchOut_Operation_CS_InteractionPoint->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Reference_Operation_dispatchOut_Operation_CS_InteractionPoint);
 		parameter->setName("operation");
@@ -1200,13 +1209,18 @@ void StructuredClassifiersPackageImpl::initializeCS_ReferenceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setEType(nullptr);
 	m_cS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setName("sendIn");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setEType(unknownClass);
+	}
 	m_cS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setLowerBound(1);
 	m_cS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setUpperBound(1);
 	m_cS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setUnique(true);
 	m_cS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Reference_Operation_sendIn_EventOccurrence_CS_InteractionPoint);
 		parameter->setName("eventOccurrence");
@@ -1227,13 +1241,18 @@ void StructuredClassifiersPackageImpl::initializeCS_ReferenceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Reference_Operation_sendIn_EventOccurrence_Port->setEType(nullptr);
 	m_cS_Reference_Operation_sendIn_EventOccurrence_Port->setName("sendIn");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_Reference_Operation_sendIn_EventOccurrence_Port->setEType(unknownClass);
+	}
 	m_cS_Reference_Operation_sendIn_EventOccurrence_Port->setLowerBound(1);
 	m_cS_Reference_Operation_sendIn_EventOccurrence_Port->setUpperBound(1);
 	m_cS_Reference_Operation_sendIn_EventOccurrence_Port->setUnique(true);
 	m_cS_Reference_Operation_sendIn_EventOccurrence_Port->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Reference_Operation_sendIn_EventOccurrence_Port);
 		parameter->setName("eventOccurrence");
@@ -1254,13 +1273,18 @@ void StructuredClassifiersPackageImpl::initializeCS_ReferenceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Reference_Operation_sendOut_EventOccurrence_Port->setEType(nullptr);
 	m_cS_Reference_Operation_sendOut_EventOccurrence_Port->setName("sendOut");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_Reference_Operation_sendOut_EventOccurrence_Port->setEType(unknownClass);
+	}
 	m_cS_Reference_Operation_sendOut_EventOccurrence_Port->setLowerBound(1);
 	m_cS_Reference_Operation_sendOut_EventOccurrence_Port->setUpperBound(1);
 	m_cS_Reference_Operation_sendOut_EventOccurrence_Port->setUnique(true);
 	m_cS_Reference_Operation_sendOut_EventOccurrence_Port->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Reference_Operation_sendOut_EventOccurrence_Port);
 		parameter->setName("eventOccurrence");
@@ -1281,13 +1305,18 @@ void StructuredClassifiersPackageImpl::initializeCS_ReferenceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setEType(nullptr);
 	m_cS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setName("sendOut");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setEType(unknownClass);
+	}
 	m_cS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setLowerBound(1);
 	m_cS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setUpperBound(1);
 	m_cS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setUnique(true);
 	m_cS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_Reference_Operation_sendOut_EventOccurrence_CS_InteractionPoint);
 		parameter->setName("eventOccurrence");
@@ -1319,21 +1348,19 @@ void StructuredClassifiersPackageImpl::initializeCS_RequestPropagationStrategyCo
 	
 	
 	
-	m_cS_RequestPropagationStrategy_Operation_getName->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 	m_cS_RequestPropagationStrategy_Operation_getName->setName("getName");
+	m_cS_RequestPropagationStrategy_Operation_getName->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 	m_cS_RequestPropagationStrategy_Operation_getName->setLowerBound(1);
 	m_cS_RequestPropagationStrategy_Operation_getName->setUpperBound(1);
 	m_cS_RequestPropagationStrategy_Operation_getName->setUnique(true);
 	m_cS_RequestPropagationStrategy_Operation_getName->setOrdered(false);
 	
-	
-	m_cS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class());
 	m_cS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setName("select");
+	m_cS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class());
 	m_cS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setLowerBound(0);
 	m_cS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setUpperBound(-1);
 	m_cS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setUnique(true);
 	m_cS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_RequestPropagationStrategy_Operation_select_Reference_SemanticVisitor);
 		parameter->setName("potentialTargets");
@@ -1365,21 +1392,19 @@ void StructuredClassifiersPackageImpl::initializeCS_StructuralFeatureOfInterface
 	
 	
 	
-	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName->setName("getName");
+	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName->setLowerBound(1);
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName->setUpperBound(1);
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName->setUnique(true);
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_getName->setOrdered(false);
 	
-	
-	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getFeatureValue_Class());
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setName("read");
+	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getFeatureValue_Class());
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setLowerBound(1);
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setUpperBound(1);
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setUnique(true);
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_read_CS_Object_StructuralFeature);
 		parameter->setName("cs_Object");
@@ -1400,13 +1425,18 @@ void StructuredClassifiersPackageImpl::initializeCS_StructuralFeatureOfInterface
 		parameter->setOrdered(true);
 	}
 	
-	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_Integer->setEType(nullptr);
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_Integer->setName("write");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_Integer->setEType(unknownClass);
+	}
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_Integer->setLowerBound(1);
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_Integer->setUpperBound(1);
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_Integer->setUnique(true);
 	m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_Integer->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_StructuralFeatureOfInterfaceAccessStrategy_Operation_write_CS_Object_Integer);
 		parameter->setName("cs_Object");

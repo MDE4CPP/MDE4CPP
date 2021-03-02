@@ -17,12 +17,13 @@
 
 [import ecore4CPP::generator::main::impl::generateImplementationHeader /]
 [import ecore4CPP::generator::main::impl::generateImplementationSource /]
+[import ecore4CPP::generator::main::helper /]
 
 [**
  * The documentation of the template generateElement.
  * @param anEClass
  */]
-[template public generateImplementation(aClass : EClass)]
+[template public generateImplementation(aClass : EClass) ?(not doNotGenerate())]
 [aClass.generateImplementationHeader()/]
 [aClass.generateImplementationSource()/]
 [/template]

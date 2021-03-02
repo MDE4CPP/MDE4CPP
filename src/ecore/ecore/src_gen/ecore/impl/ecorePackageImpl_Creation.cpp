@@ -61,10 +61,10 @@ void ecorePackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pa
 void ecorePackageImpl::createEAnnotationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
 	m_eAnnotation_Class = factory->createEClass_in_EPackage(package, EANNOTATION_CLASS);
+	m_eAnnotation_Attribute_details = factory->createEAttribute_in_EContainingClass(m_eAnnotation_Class, EANNOTATION_ATTRIBUTE_DETAILS);
 	m_eAnnotation_Attribute_source = factory->createEAttribute_in_EContainingClass(m_eAnnotation_Class, EANNOTATION_ATTRIBUTE_SOURCE);
 	
 	m_eAnnotation_Attribute_contents = factory->createEReference_in_EContainingClass(m_eAnnotation_Class, EANNOTATION_ATTRIBUTE_CONTENTS);
-	m_eAnnotation_Attribute_details = factory->createEReference_in_EContainingClass(m_eAnnotation_Class, EANNOTATION_ATTRIBUTE_DETAILS);
 	m_eAnnotation_Attribute_eModelElement = factory->createEReference_in_EContainingClass(m_eAnnotation_Class, EANNOTATION_ATTRIBUTE_EMODELELEMENT);
 	m_eAnnotation_Attribute_references = factory->createEReference_in_EContainingClass(m_eAnnotation_Class, EANNOTATION_ATTRIBUTE_REFERENCES);
 	

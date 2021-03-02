@@ -146,7 +146,7 @@ int main()
 		std::shared_ptr<UMLExecutionModelPlugin> executionPlugin = std::dynamic_pointer_cast<UMLExecutionModelPlugin>(plugin);
 		if (executionPlugin)
 		{
-			DEBUG_MESSAGE(std::cout << "JIHA fumlplugin " << executionPlugin->eNAME() << " is accessable" << std::endl;)
+			DEBUG_MESSAGE(std::cout << "fumlplugin " << executionPlugin->eNAME() << " is accessable" << std::endl;)
 
 			std::shared_ptr<std::vector<Any>> parameterList(new std::vector<Any>());
 			[for (par : Parameter | mainActivity.ownedParameter->select((direction = ParameterDirectionKind::inout) or (direction = ParameterDirectionKind::_in)))]

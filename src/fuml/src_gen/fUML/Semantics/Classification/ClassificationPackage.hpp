@@ -22,7 +22,7 @@ namespace fUML::Semantics::Classification
 {
 	class InstanceValueEvaluation;
 }
-
+ 
 namespace fUML::Semantics::Classification 
 {
 	/*!

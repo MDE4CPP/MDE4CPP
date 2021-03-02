@@ -35,7 +35,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 	class CS_RequestPropagationStrategy;
 	class CS_StructuralFeatureOfInterfaceAccessStrategy;
 }
-
+ 
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	/*!

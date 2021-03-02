@@ -54,13 +54,12 @@ void ClassificationPackageImpl::initializeCS_InstanceValueEvaluationContent()
 	
 	
 	
-	m_cS_InstanceValueEvaluation_Operation_evaluate->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_cS_InstanceValueEvaluation_Operation_evaluate->setName("evaluate");
+	m_cS_InstanceValueEvaluation_Operation_evaluate->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_cS_InstanceValueEvaluation_Operation_evaluate->setLowerBound(1);
 	m_cS_InstanceValueEvaluation_Operation_evaluate->setUpperBound(1);
 	m_cS_InstanceValueEvaluation_Operation_evaluate->setUnique(true);
 	m_cS_InstanceValueEvaluation_Operation_evaluate->setOrdered(false);
-	
 	
 	
 }

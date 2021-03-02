@@ -106,12 +106,21 @@
 
 using namespace [aClassifier.getNearestPackage().generateNamespace(false)/];
 
+<<<<<<< HEAD
 [className/]::[className/](std::shared_ptr<[pointerName/]> _element)
 {		
 	[comment] [if(not aClassifier.oclIsTypeOf(Interface))] [/comment]
 	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
 	[comment] [/if] [/comment]
 	[aClassifier.UMLValueSetterName()/](_element);
+=======
+[className/]::[className/](std::shared_ptr<[pointerName/]> _element):
+	[aClassifier.UMLValueName()/](_element)
+{
+	[if(not aClassifier.oclIsTypeOf(Interface))]
+	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
+	[/if]
+>>>>>>> remotes/origin/Feature_EcoreTemplate
 }
 
 [className/]::[className/]([className/] &obj):
@@ -122,9 +131,9 @@ using namespace [aClassifier.getNearestPackage().generateNamespace(false)/];
 
 [className/]::[className/]()
 {	
-	[comment] [if(not aClassifier.oclIsTypeOf(Interface))] [/comment]
+	[if(not aClassifier.oclIsTypeOf(Interface))]
 	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
-	[comment] [/if] [/comment]
+	[/if]
 }
 
 [className/]::~[className/]()
@@ -133,13 +142,23 @@ using namespace [aClassifier.getNearestPackage().generateNamespace(false)/];
 
 std::shared_ptr<ecore::EObject> [className/]::copy()
 {
-	std::shared_ptr<[className/]> element(new [className/](*this));
+	std::shared_ptr<[className/]> element(new [className/]());
+	*element=(*this); 
 	element->setThis[className/]Ptr(element);
 	return element;
 }
 
 [className/]& [className/]::operator=(const [className/] & obj)
 {
+<<<<<<< HEAD
+=======
+ [if (aClassifier.collectInheritedTypes()->isEmpty())]
+	PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl::operator=( obj);
+[else]
+[for(inheritedType : Classifier | aClassifier.collectInheritedTypes()) ]
+	[inheritedType.getNearestPackage().generateNamespace(false)/]::[inheritedType.objectClassName()/]::operator=(obj);
+[/for][/if]
+>>>>>>> remotes/origin/Feature_EcoreTemplate
 	return *this;
 }
 
@@ -241,7 +260,6 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object>> [classNa
 	[/if]
 	return directContainers;
 }
-
 
 [let attributes : OrderedSet(Property) = aClassifier.getMyAttributes() ]
 [if (attributes->size() > 0)]

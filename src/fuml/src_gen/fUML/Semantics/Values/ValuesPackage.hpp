@@ -33,7 +33,7 @@ namespace fUML::Semantics::Values
 	class LiteralUnlimitedNaturalEvaluation;
 	class Value;
 }
-
+ 
 namespace fUML::Semantics::Values 
 {
 	/*!

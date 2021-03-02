@@ -642,13 +642,12 @@ void umlPackageImpl::initializeAcceptCallActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_acceptCallAction_Operation_result_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptCallAction_Operation_result_pins_EDiagnosticChain_EMap->setName("result_pins");
+	m_acceptCallAction_Operation_result_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptCallAction_Operation_result_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_acceptCallAction_Operation_result_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_acceptCallAction_Operation_result_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_acceptCallAction_Operation_result_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_acceptCallAction_Operation_result_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -669,13 +668,12 @@ void umlPackageImpl::initializeAcceptCallActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_acceptCallAction_Operation_trigger_call_event_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptCallAction_Operation_trigger_call_event_EDiagnosticChain_EMap->setName("trigger_call_event");
+	m_acceptCallAction_Operation_trigger_call_event_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptCallAction_Operation_trigger_call_event_EDiagnosticChain_EMap->setLowerBound(0);
 	m_acceptCallAction_Operation_trigger_call_event_EDiagnosticChain_EMap->setUpperBound(1);
 	m_acceptCallAction_Operation_trigger_call_event_EDiagnosticChain_EMap->setUnique(true);
 	m_acceptCallAction_Operation_trigger_call_event_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_acceptCallAction_Operation_trigger_call_event_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -696,13 +694,12 @@ void umlPackageImpl::initializeAcceptCallActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_acceptCallAction_Operation_unmarshall_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptCallAction_Operation_unmarshall_EDiagnosticChain_EMap->setName("unmarshall");
+	m_acceptCallAction_Operation_unmarshall_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptCallAction_Operation_unmarshall_EDiagnosticChain_EMap->setLowerBound(0);
 	m_acceptCallAction_Operation_unmarshall_EDiagnosticChain_EMap->setUpperBound(1);
 	m_acceptCallAction_Operation_unmarshall_EDiagnosticChain_EMap->setUnique(true);
 	m_acceptCallAction_Operation_unmarshall_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_acceptCallAction_Operation_unmarshall_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -734,7 +731,7 @@ void umlPackageImpl::initializeAcceptEventActionContent()
 	
 	m_acceptEventAction_Attribute_isUnmarshall = getAcceptEventAction_Attribute_isUnmarshall();
 	m_acceptEventAction_Attribute_isUnmarshall->setName("isUnmarshall");
-	m_acceptEventAction_Attribute_isUnmarshall->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_acceptEventAction_Attribute_isUnmarshall->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_acceptEventAction_Attribute_isUnmarshall->setLowerBound(1);
 	m_acceptEventAction_Attribute_isUnmarshall->setUpperBound(1);
 	m_acceptEventAction_Attribute_isUnmarshall->setTransient(false);
@@ -798,13 +795,12 @@ void umlPackageImpl::initializeAcceptEventActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_acceptEventAction_Operation_conforming_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptEventAction_Operation_conforming_type_EDiagnosticChain_EMap->setName("conforming_type");
+	m_acceptEventAction_Operation_conforming_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptEventAction_Operation_conforming_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_acceptEventAction_Operation_conforming_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_acceptEventAction_Operation_conforming_type_EDiagnosticChain_EMap->setUnique(true);
 	m_acceptEventAction_Operation_conforming_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_acceptEventAction_Operation_conforming_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -825,13 +821,12 @@ void umlPackageImpl::initializeAcceptEventActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_acceptEventAction_Operation_no_input_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptEventAction_Operation_no_input_pins_EDiagnosticChain_EMap->setName("no_input_pins");
+	m_acceptEventAction_Operation_no_input_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptEventAction_Operation_no_input_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_acceptEventAction_Operation_no_input_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_acceptEventAction_Operation_no_input_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_acceptEventAction_Operation_no_input_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_acceptEventAction_Operation_no_input_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -852,13 +847,12 @@ void umlPackageImpl::initializeAcceptEventActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_acceptEventAction_Operation_no_output_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptEventAction_Operation_no_output_pins_EDiagnosticChain_EMap->setName("no_output_pins");
+	m_acceptEventAction_Operation_no_output_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptEventAction_Operation_no_output_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_acceptEventAction_Operation_no_output_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_acceptEventAction_Operation_no_output_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_acceptEventAction_Operation_no_output_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_acceptEventAction_Operation_no_output_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -879,13 +873,12 @@ void umlPackageImpl::initializeAcceptEventActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_acceptEventAction_Operation_one_output_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptEventAction_Operation_one_output_pin_EDiagnosticChain_EMap->setName("one_output_pin");
+	m_acceptEventAction_Operation_one_output_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptEventAction_Operation_one_output_pin_EDiagnosticChain_EMap->setLowerBound(0);
 	m_acceptEventAction_Operation_one_output_pin_EDiagnosticChain_EMap->setUpperBound(1);
 	m_acceptEventAction_Operation_one_output_pin_EDiagnosticChain_EMap->setUnique(true);
 	m_acceptEventAction_Operation_one_output_pin_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_acceptEventAction_Operation_one_output_pin_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -906,13 +899,12 @@ void umlPackageImpl::initializeAcceptEventActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_acceptEventAction_Operation_unmarshall_signal_events_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptEventAction_Operation_unmarshall_signal_events_EDiagnosticChain_EMap->setName("unmarshall_signal_events");
+	m_acceptEventAction_Operation_unmarshall_signal_events_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_acceptEventAction_Operation_unmarshall_signal_events_EDiagnosticChain_EMap->setLowerBound(0);
 	m_acceptEventAction_Operation_unmarshall_signal_events_EDiagnosticChain_EMap->setUpperBound(1);
 	m_acceptEventAction_Operation_unmarshall_signal_events_EDiagnosticChain_EMap->setUnique(true);
 	m_acceptEventAction_Operation_unmarshall_signal_events_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_acceptEventAction_Operation_unmarshall_signal_events_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -944,7 +936,7 @@ void umlPackageImpl::initializeActionContent()
 	
 	m_action_Attribute_isLocallyReentrant = getAction_Attribute_isLocallyReentrant();
 	m_action_Attribute_isLocallyReentrant->setName("isLocallyReentrant");
-	m_action_Attribute_isLocallyReentrant->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_action_Attribute_isLocallyReentrant->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_action_Attribute_isLocallyReentrant->setLowerBound(1);
 	m_action_Attribute_isLocallyReentrant->setUpperBound(1);
 	m_action_Attribute_isLocallyReentrant->setTransient(false);
@@ -1080,37 +1072,33 @@ void umlPackageImpl::initializeActionContent()
 	    }
 	}
 	
-	m_action_Operation_allActions->setEType(getAction_Class());
 	m_action_Operation_allActions->setName("allActions");
+	m_action_Operation_allActions->setEType(getAction_Class());
 	m_action_Operation_allActions->setLowerBound(0);
 	m_action_Operation_allActions->setUpperBound(-1);
 	m_action_Operation_allActions->setUnique(true);
 	m_action_Operation_allActions->setOrdered(false);
 	
-	
-	m_action_Operation_allOwnedNodes->setEType(getActivityNode_Class());
 	m_action_Operation_allOwnedNodes->setName("allOwnedNodes");
+	m_action_Operation_allOwnedNodes->setEType(getActivityNode_Class());
 	m_action_Operation_allOwnedNodes->setLowerBound(0);
 	m_action_Operation_allOwnedNodes->setUpperBound(-1);
 	m_action_Operation_allOwnedNodes->setUnique(true);
 	m_action_Operation_allOwnedNodes->setOrdered(false);
 	
-	
-	m_action_Operation_containingBehavior->setEType(getBehavior_Class());
 	m_action_Operation_containingBehavior->setName("containingBehavior");
+	m_action_Operation_containingBehavior->setEType(getBehavior_Class());
 	m_action_Operation_containingBehavior->setLowerBound(0);
 	m_action_Operation_containingBehavior->setUpperBound(1);
 	m_action_Operation_containingBehavior->setUnique(true);
 	m_action_Operation_containingBehavior->setOrdered(false);
 	
-	
-	m_action_Operation_getContext->setEType(getClassifier_Class());
 	m_action_Operation_getContext->setName("getContext");
+	m_action_Operation_getContext->setEType(getClassifier_Class());
 	m_action_Operation_getContext->setLowerBound(0);
 	m_action_Operation_getContext->setUpperBound(1);
 	m_action_Operation_getContext->setUnique(true);
 	m_action_Operation_getContext->setOrdered(false);
-	
 	
 	
 }
@@ -1145,13 +1133,12 @@ void umlPackageImpl::initializeActionExecutionSpecificationContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_actionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_actionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap->setName("action_referenced");
+	m_actionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_actionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap->setLowerBound(0);
 	m_actionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap->setUpperBound(1);
 	m_actionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap->setUnique(true);
 	m_actionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_actionExecutionSpecification_Operation_action_referenced_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -1205,13 +1192,12 @@ void umlPackageImpl::initializeActionInputPinContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_actionInputPin_Operation_input_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_actionInputPin_Operation_input_pin_EDiagnosticChain_EMap->setName("input_pin");
+	m_actionInputPin_Operation_input_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_actionInputPin_Operation_input_pin_EDiagnosticChain_EMap->setLowerBound(0);
 	m_actionInputPin_Operation_input_pin_EDiagnosticChain_EMap->setUpperBound(1);
 	m_actionInputPin_Operation_input_pin_EDiagnosticChain_EMap->setUnique(true);
 	m_actionInputPin_Operation_input_pin_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_actionInputPin_Operation_input_pin_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -1232,13 +1218,12 @@ void umlPackageImpl::initializeActionInputPinContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_actionInputPin_Operation_no_control_or_object_flow_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_actionInputPin_Operation_no_control_or_object_flow_EDiagnosticChain_EMap->setName("no_control_or_object_flow");
+	m_actionInputPin_Operation_no_control_or_object_flow_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_actionInputPin_Operation_no_control_or_object_flow_EDiagnosticChain_EMap->setLowerBound(0);
 	m_actionInputPin_Operation_no_control_or_object_flow_EDiagnosticChain_EMap->setUpperBound(1);
 	m_actionInputPin_Operation_no_control_or_object_flow_EDiagnosticChain_EMap->setUnique(true);
 	m_actionInputPin_Operation_no_control_or_object_flow_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_actionInputPin_Operation_no_control_or_object_flow_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -1259,13 +1244,12 @@ void umlPackageImpl::initializeActionInputPinContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_actionInputPin_Operation_one_output_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_actionInputPin_Operation_one_output_pin_EDiagnosticChain_EMap->setName("one_output_pin");
+	m_actionInputPin_Operation_one_output_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_actionInputPin_Operation_one_output_pin_EDiagnosticChain_EMap->setLowerBound(0);
 	m_actionInputPin_Operation_one_output_pin_EDiagnosticChain_EMap->setUpperBound(1);
 	m_actionInputPin_Operation_one_output_pin_EDiagnosticChain_EMap->setUnique(true);
 	m_actionInputPin_Operation_one_output_pin_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_actionInputPin_Operation_one_output_pin_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -1297,7 +1281,7 @@ void umlPackageImpl::initializeActivityContent()
 	
 	m_activity_Attribute_isReadOnly = getActivity_Attribute_isReadOnly();
 	m_activity_Attribute_isReadOnly->setName("isReadOnly");
-	m_activity_Attribute_isReadOnly->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_activity_Attribute_isReadOnly->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_activity_Attribute_isReadOnly->setLowerBound(1);
 	m_activity_Attribute_isReadOnly->setUpperBound(1);
 	m_activity_Attribute_isReadOnly->setTransient(false);
@@ -1317,7 +1301,7 @@ void umlPackageImpl::initializeActivityContent()
 	}
 	m_activity_Attribute_isSingleExecution = getActivity_Attribute_isSingleExecution();
 	m_activity_Attribute_isSingleExecution->setName("isSingleExecution");
-	m_activity_Attribute_isSingleExecution->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_activity_Attribute_isSingleExecution->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_activity_Attribute_isSingleExecution->setLowerBound(1);
 	m_activity_Attribute_isSingleExecution->setUpperBound(1);
 	m_activity_Attribute_isSingleExecution->setTransient(false);
@@ -1525,13 +1509,12 @@ void umlPackageImpl::initializeActivityContent()
 	    }
 	}
 	
-	m_activity_Operation_maximum_one_parameter_node_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activity_Operation_maximum_one_parameter_node_EDiagnosticChain_EMap->setName("maximum_one_parameter_node");
+	m_activity_Operation_maximum_one_parameter_node_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activity_Operation_maximum_one_parameter_node_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activity_Operation_maximum_one_parameter_node_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activity_Operation_maximum_one_parameter_node_EDiagnosticChain_EMap->setUnique(true);
 	m_activity_Operation_maximum_one_parameter_node_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activity_Operation_maximum_one_parameter_node_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -1552,13 +1535,12 @@ void umlPackageImpl::initializeActivityContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_activity_Operation_maximum_two_parameter_nodes_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activity_Operation_maximum_two_parameter_nodes_EDiagnosticChain_EMap->setName("maximum_two_parameter_nodes");
+	m_activity_Operation_maximum_two_parameter_nodes_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activity_Operation_maximum_two_parameter_nodes_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activity_Operation_maximum_two_parameter_nodes_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activity_Operation_maximum_two_parameter_nodes_EDiagnosticChain_EMap->setUnique(true);
 	m_activity_Operation_maximum_two_parameter_nodes_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activity_Operation_maximum_two_parameter_nodes_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -1831,13 +1813,12 @@ void umlPackageImpl::initializeActivityEdgeContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_activityEdge_Operation_source_and_target_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityEdge_Operation_source_and_target_EDiagnosticChain_EMap->setName("source_and_target");
+	m_activityEdge_Operation_source_and_target_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityEdge_Operation_source_and_target_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activityEdge_Operation_source_and_target_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activityEdge_Operation_source_and_target_EDiagnosticChain_EMap->setUnique(true);
 	m_activityEdge_Operation_source_and_target_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activityEdge_Operation_source_and_target_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2005,21 +1986,19 @@ void umlPackageImpl::initializeActivityGroupContent()
 	    }
 	}
 	
-	m_activityGroup_Operation_containingActivity->setEType(getActivity_Class());
 	m_activityGroup_Operation_containingActivity->setName("containingActivity");
+	m_activityGroup_Operation_containingActivity->setEType(getActivity_Class());
 	m_activityGroup_Operation_containingActivity->setLowerBound(0);
 	m_activityGroup_Operation_containingActivity->setUpperBound(1);
 	m_activityGroup_Operation_containingActivity->setUnique(true);
 	m_activityGroup_Operation_containingActivity->setOrdered(false);
 	
-	
-	m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap->setName("nodes_and_edges");
+	m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activityGroup_Operation_nodes_and_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2040,13 +2019,12 @@ void umlPackageImpl::initializeActivityGroupContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_activityGroup_Operation_not_contained_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityGroup_Operation_not_contained_EDiagnosticChain_EMap->setName("not_contained");
+	m_activityGroup_Operation_not_contained_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityGroup_Operation_not_contained_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activityGroup_Operation_not_contained_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activityGroup_Operation_not_contained_EDiagnosticChain_EMap->setUnique(true);
 	m_activityGroup_Operation_not_contained_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activityGroup_Operation_not_contained_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2275,13 +2253,12 @@ void umlPackageImpl::initializeActivityNodeContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_activityNode_Operation_containingActivity->setEType(getActivity_Class());
 	m_activityNode_Operation_containingActivity->setName("containingActivity");
+	m_activityNode_Operation_containingActivity->setEType(getActivity_Class());
 	m_activityNode_Operation_containingActivity->setLowerBound(0);
 	m_activityNode_Operation_containingActivity->setUpperBound(1);
 	m_activityNode_Operation_containingActivity->setUnique(true);
 	m_activityNode_Operation_containingActivity->setOrdered(false);
-	
 	
 	
 }
@@ -2316,13 +2293,12 @@ void umlPackageImpl::initializeActivityParameterNodeContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_activityParameterNode_Operation_has_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityParameterNode_Operation_has_parameters_EDiagnosticChain_EMap->setName("has_parameters");
+	m_activityParameterNode_Operation_has_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityParameterNode_Operation_has_parameters_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activityParameterNode_Operation_has_parameters_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activityParameterNode_Operation_has_parameters_EDiagnosticChain_EMap->setUnique(true);
 	m_activityParameterNode_Operation_has_parameters_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activityParameterNode_Operation_has_parameters_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2343,13 +2319,12 @@ void umlPackageImpl::initializeActivityParameterNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_activityParameterNode_Operation_no_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityParameterNode_Operation_no_edges_EDiagnosticChain_EMap->setName("no_edges");
+	m_activityParameterNode_Operation_no_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityParameterNode_Operation_no_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activityParameterNode_Operation_no_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activityParameterNode_Operation_no_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_activityParameterNode_Operation_no_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activityParameterNode_Operation_no_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2370,13 +2345,12 @@ void umlPackageImpl::initializeActivityParameterNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_activityParameterNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityParameterNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setName("no_incoming_edges");
+	m_activityParameterNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityParameterNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activityParameterNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activityParameterNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_activityParameterNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activityParameterNode_Operation_no_incoming_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2397,13 +2371,12 @@ void umlPackageImpl::initializeActivityParameterNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_activityParameterNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityParameterNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setName("no_outgoing_edges");
+	m_activityParameterNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityParameterNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activityParameterNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activityParameterNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_activityParameterNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activityParameterNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2424,13 +2397,12 @@ void umlPackageImpl::initializeActivityParameterNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_activityParameterNode_Operation_same_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityParameterNode_Operation_same_type_EDiagnosticChain_EMap->setName("same_type");
+	m_activityParameterNode_Operation_same_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityParameterNode_Operation_same_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activityParameterNode_Operation_same_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activityParameterNode_Operation_same_type_EDiagnosticChain_EMap->setUnique(true);
 	m_activityParameterNode_Operation_same_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activityParameterNode_Operation_same_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2462,7 +2434,7 @@ void umlPackageImpl::initializeActivityPartitionContent()
 	
 	m_activityPartition_Attribute_isDimension = getActivityPartition_Attribute_isDimension();
 	m_activityPartition_Attribute_isDimension->setName("isDimension");
-	m_activityPartition_Attribute_isDimension->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_activityPartition_Attribute_isDimension->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_activityPartition_Attribute_isDimension->setLowerBound(1);
 	m_activityPartition_Attribute_isDimension->setUpperBound(1);
 	m_activityPartition_Attribute_isDimension->setTransient(false);
@@ -2482,7 +2454,7 @@ void umlPackageImpl::initializeActivityPartitionContent()
 	}
 	m_activityPartition_Attribute_isExternal = getActivityPartition_Attribute_isExternal();
 	m_activityPartition_Attribute_isExternal->setName("isExternal");
-	m_activityPartition_Attribute_isExternal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_activityPartition_Attribute_isExternal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_activityPartition_Attribute_isExternal->setLowerBound(1);
 	m_activityPartition_Attribute_isExternal->setUpperBound(1);
 	m_activityPartition_Attribute_isExternal->setTransient(false);
@@ -2624,13 +2596,12 @@ void umlPackageImpl::initializeActivityPartitionContent()
 	    }
 	}
 	
-	m_activityPartition_Operation_dimension_not_contained_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityPartition_Operation_dimension_not_contained_EDiagnosticChain_EMap->setName("dimension_not_contained");
+	m_activityPartition_Operation_dimension_not_contained_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityPartition_Operation_dimension_not_contained_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activityPartition_Operation_dimension_not_contained_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activityPartition_Operation_dimension_not_contained_EDiagnosticChain_EMap->setUnique(true);
 	m_activityPartition_Operation_dimension_not_contained_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activityPartition_Operation_dimension_not_contained_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2651,13 +2622,12 @@ void umlPackageImpl::initializeActivityPartitionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_activityPartition_Operation_represents_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityPartition_Operation_represents_classifier_EDiagnosticChain_EMap->setName("represents_classifier");
+	m_activityPartition_Operation_represents_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityPartition_Operation_represents_classifier_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activityPartition_Operation_represents_classifier_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activityPartition_Operation_represents_classifier_EDiagnosticChain_EMap->setUnique(true);
 	m_activityPartition_Operation_represents_classifier_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activityPartition_Operation_represents_classifier_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2678,13 +2648,12 @@ void umlPackageImpl::initializeActivityPartitionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_activityPartition_Operation_represents_property_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityPartition_Operation_represents_property_EDiagnosticChain_EMap->setName("represents_property");
+	m_activityPartition_Operation_represents_property_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityPartition_Operation_represents_property_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activityPartition_Operation_represents_property_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activityPartition_Operation_represents_property_EDiagnosticChain_EMap->setUnique(true);
 	m_activityPartition_Operation_represents_property_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activityPartition_Operation_represents_property_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2705,13 +2674,12 @@ void umlPackageImpl::initializeActivityPartitionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_activityPartition_Operation_represents_property_and_is_contained_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityPartition_Operation_represents_property_and_is_contained_EDiagnosticChain_EMap->setName("represents_property_and_is_contained");
+	m_activityPartition_Operation_represents_property_and_is_contained_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_activityPartition_Operation_represents_property_and_is_contained_EDiagnosticChain_EMap->setLowerBound(0);
 	m_activityPartition_Operation_represents_property_and_is_contained_EDiagnosticChain_EMap->setUpperBound(1);
 	m_activityPartition_Operation_represents_property_and_is_contained_EDiagnosticChain_EMap->setUnique(true);
 	m_activityPartition_Operation_represents_property_and_is_contained_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_activityPartition_Operation_represents_property_and_is_contained_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2743,13 +2711,12 @@ void umlPackageImpl::initializeActorContent()
 	
 	
 	
-	m_actor_Operation_associations_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_actor_Operation_associations_EDiagnosticChain_EMap->setName("associations");
+	m_actor_Operation_associations_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_actor_Operation_associations_EDiagnosticChain_EMap->setLowerBound(0);
 	m_actor_Operation_associations_EDiagnosticChain_EMap->setUpperBound(1);
 	m_actor_Operation_associations_EDiagnosticChain_EMap->setUnique(true);
 	m_actor_Operation_associations_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_actor_Operation_associations_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2770,13 +2737,12 @@ void umlPackageImpl::initializeActorContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_actor_Operation_must_have_name_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_actor_Operation_must_have_name_EDiagnosticChain_EMap->setName("must_have_name");
+	m_actor_Operation_must_have_name_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_actor_Operation_must_have_name_EDiagnosticChain_EMap->setLowerBound(0);
 	m_actor_Operation_must_have_name_EDiagnosticChain_EMap->setUpperBound(1);
 	m_actor_Operation_must_have_name_EDiagnosticChain_EMap->setUnique(true);
 	m_actor_Operation_must_have_name_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_actor_Operation_must_have_name_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2808,7 +2774,7 @@ void umlPackageImpl::initializeAddStructuralFeatureValueActionContent()
 	
 	m_addStructuralFeatureValueAction_Attribute_isReplaceAll = getAddStructuralFeatureValueAction_Attribute_isReplaceAll();
 	m_addStructuralFeatureValueAction_Attribute_isReplaceAll->setName("isReplaceAll");
-	m_addStructuralFeatureValueAction_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_addStructuralFeatureValueAction_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_addStructuralFeatureValueAction_Attribute_isReplaceAll->setLowerBound(1);
 	m_addStructuralFeatureValueAction_Attribute_isReplaceAll->setUpperBound(1);
 	m_addStructuralFeatureValueAction_Attribute_isReplaceAll->setTransient(false);
@@ -2853,13 +2819,12 @@ void umlPackageImpl::initializeAddStructuralFeatureValueActionContent()
 	    }
 	}
 	
-	m_addStructuralFeatureValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_addStructuralFeatureValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setName("insertAt_pin");
+	m_addStructuralFeatureValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_addStructuralFeatureValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setLowerBound(0);
 	m_addStructuralFeatureValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setUpperBound(1);
 	m_addStructuralFeatureValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setUnique(true);
 	m_addStructuralFeatureValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_addStructuralFeatureValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2880,13 +2845,12 @@ void umlPackageImpl::initializeAddStructuralFeatureValueActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_addStructuralFeatureValueAction_Operation_required_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_addStructuralFeatureValueAction_Operation_required_value_EDiagnosticChain_EMap->setName("required_value");
+	m_addStructuralFeatureValueAction_Operation_required_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_addStructuralFeatureValueAction_Operation_required_value_EDiagnosticChain_EMap->setLowerBound(0);
 	m_addStructuralFeatureValueAction_Operation_required_value_EDiagnosticChain_EMap->setUpperBound(1);
 	m_addStructuralFeatureValueAction_Operation_required_value_EDiagnosticChain_EMap->setUnique(true);
 	m_addStructuralFeatureValueAction_Operation_required_value_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_addStructuralFeatureValueAction_Operation_required_value_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2918,7 +2882,7 @@ void umlPackageImpl::initializeAddVariableValueActionContent()
 	
 	m_addVariableValueAction_Attribute_isReplaceAll = getAddVariableValueAction_Attribute_isReplaceAll();
 	m_addVariableValueAction_Attribute_isReplaceAll->setName("isReplaceAll");
-	m_addVariableValueAction_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_addVariableValueAction_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_addVariableValueAction_Attribute_isReplaceAll->setLowerBound(1);
 	m_addVariableValueAction_Attribute_isReplaceAll->setUpperBound(1);
 	m_addVariableValueAction_Attribute_isReplaceAll->setTransient(false);
@@ -2960,13 +2924,12 @@ void umlPackageImpl::initializeAddVariableValueActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_addVariableValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_addVariableValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setName("insertAt_pin");
+	m_addVariableValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_addVariableValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setLowerBound(0);
 	m_addVariableValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setUpperBound(1);
 	m_addVariableValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setUnique(true);
 	m_addVariableValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_addVariableValueAction_Operation_insertAt_pin_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -2987,13 +2950,12 @@ void umlPackageImpl::initializeAddVariableValueActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_addVariableValueAction_Operation_required_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_addVariableValueAction_Operation_required_value_EDiagnosticChain_EMap->setName("required_value");
+	m_addVariableValueAction_Operation_required_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_addVariableValueAction_Operation_required_value_EDiagnosticChain_EMap->setLowerBound(0);
 	m_addVariableValueAction_Operation_required_value_EDiagnosticChain_EMap->setUpperBound(1);
 	m_addVariableValueAction_Operation_required_value_EDiagnosticChain_EMap->setUnique(true);
 	m_addVariableValueAction_Operation_required_value_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_addVariableValueAction_Operation_required_value_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -3036,7 +2998,7 @@ void umlPackageImpl::initializeArgumentContent()
 	
 	m_argument_Attribute_name = getArgument_Attribute_name();
 	m_argument_Attribute_name->setName("name");
-	m_argument_Attribute_name->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
+		m_argument_Attribute_name->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 	m_argument_Attribute_name->setLowerBound(0);
 	m_argument_Attribute_name->setUpperBound(1);
 	m_argument_Attribute_name->setTransient(false);
@@ -3089,7 +3051,7 @@ void umlPackageImpl::initializeArtifactContent()
 	
 	m_artifact_Attribute_fileName = getArtifact_Attribute_fileName();
 	m_artifact_Attribute_fileName->setName("fileName");
-	m_artifact_Attribute_fileName->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_artifact_Attribute_fileName->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_artifact_Attribute_fileName->setLowerBound(0);
 	m_artifact_Attribute_fileName->setUpperBound(1);
 	m_artifact_Attribute_fileName->setTransient(false);
@@ -3197,13 +3159,12 @@ void umlPackageImpl::initializeArtifactContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
 	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setName("createOwnedAttribute");
+	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
 	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setLowerBound(1);
 	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setUpperBound(1);
 	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setUnique(true);
 	m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_artifact_Operation_createOwnedAttribute_String_UnlimitedNatural);
 		parameter->setName("name");
@@ -3244,13 +3205,12 @@ void umlPackageImpl::initializeArtifactContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_artifact_Operation_createOwnedOperation_String_Type->setEType(getOperation_Class());
 	m_artifact_Operation_createOwnedOperation_String_Type->setName("createOwnedOperation");
+	m_artifact_Operation_createOwnedOperation_String_Type->setEType(getOperation_Class());
 	m_artifact_Operation_createOwnedOperation_String_Type->setLowerBound(1);
 	m_artifact_Operation_createOwnedOperation_String_Type->setUpperBound(1);
 	m_artifact_Operation_createOwnedOperation_String_Type->setUnique(true);
 	m_artifact_Operation_createOwnedOperation_String_Type->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_artifact_Operation_createOwnedOperation_String_Type);
 		parameter->setName("name");
@@ -3302,7 +3262,7 @@ void umlPackageImpl::initializeAssociationContent()
 	
 	m_association_Attribute_isDerived = getAssociation_Attribute_isDerived();
 	m_association_Attribute_isDerived->setName("isDerived");
-	m_association_Attribute_isDerived->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_association_Attribute_isDerived->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_association_Attribute_isDerived->setLowerBound(1);
 	m_association_Attribute_isDerived->setUpperBound(1);
 	m_association_Attribute_isDerived->setTransient(false);
@@ -3416,13 +3376,12 @@ void umlPackageImpl::initializeAssociationContent()
 	    }
 	}
 	
-	m_association_Operation_association_ends_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_association_Operation_association_ends_EDiagnosticChain_EMap->setName("association_ends");
+	m_association_Operation_association_ends_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_association_Operation_association_ends_EDiagnosticChain_EMap->setLowerBound(0);
 	m_association_Operation_association_ends_EDiagnosticChain_EMap->setUpperBound(1);
 	m_association_Operation_association_ends_EDiagnosticChain_EMap->setUnique(true);
 	m_association_Operation_association_ends_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_association_Operation_association_ends_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -3443,13 +3402,12 @@ void umlPackageImpl::initializeAssociationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_association_Operation_binary_associations_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_association_Operation_binary_associations_EDiagnosticChain_EMap->setName("binary_associations");
+	m_association_Operation_binary_associations_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_association_Operation_binary_associations_EDiagnosticChain_EMap->setLowerBound(0);
 	m_association_Operation_binary_associations_EDiagnosticChain_EMap->setUpperBound(1);
 	m_association_Operation_binary_associations_EDiagnosticChain_EMap->setUnique(true);
 	m_association_Operation_binary_associations_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_association_Operation_binary_associations_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -3470,13 +3428,12 @@ void umlPackageImpl::initializeAssociationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_association_Operation_ends_must_be_typed_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_association_Operation_ends_must_be_typed_EDiagnosticChain_EMap->setName("ends_must_be_typed");
+	m_association_Operation_ends_must_be_typed_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_association_Operation_ends_must_be_typed_EDiagnosticChain_EMap->setLowerBound(0);
 	m_association_Operation_ends_must_be_typed_EDiagnosticChain_EMap->setUpperBound(1);
 	m_association_Operation_ends_must_be_typed_EDiagnosticChain_EMap->setUnique(true);
 	m_association_Operation_ends_must_be_typed_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_association_Operation_ends_must_be_typed_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -3497,29 +3454,26 @@ void umlPackageImpl::initializeAssociationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_association_Operation_getEndTypes->setEType(getType_Class());
 	m_association_Operation_getEndTypes->setName("getEndTypes");
+	m_association_Operation_getEndTypes->setEType(getType_Class());
 	m_association_Operation_getEndTypes->setLowerBound(1);
 	m_association_Operation_getEndTypes->setUpperBound(-1);
 	m_association_Operation_getEndTypes->setUnique(true);
 	m_association_Operation_getEndTypes->setOrdered(false);
 	
-	
-	m_association_Operation_isBinary->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_association_Operation_isBinary->setName("isBinary");
+	m_association_Operation_isBinary->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_association_Operation_isBinary->setLowerBound(1);
 	m_association_Operation_isBinary->setUpperBound(1);
 	m_association_Operation_isBinary->setUnique(true);
 	m_association_Operation_isBinary->setOrdered(false);
 	
-	
-	m_association_Operation_specialized_end_number_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_association_Operation_specialized_end_number_EDiagnosticChain_EMap->setName("specialized_end_number");
+	m_association_Operation_specialized_end_number_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_association_Operation_specialized_end_number_EDiagnosticChain_EMap->setLowerBound(0);
 	m_association_Operation_specialized_end_number_EDiagnosticChain_EMap->setUpperBound(1);
 	m_association_Operation_specialized_end_number_EDiagnosticChain_EMap->setUnique(true);
 	m_association_Operation_specialized_end_number_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_association_Operation_specialized_end_number_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -3540,13 +3494,12 @@ void umlPackageImpl::initializeAssociationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_association_Operation_specialized_end_types_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_association_Operation_specialized_end_types_EDiagnosticChain_EMap->setName("specialized_end_types");
+	m_association_Operation_specialized_end_types_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_association_Operation_specialized_end_types_EDiagnosticChain_EMap->setLowerBound(0);
 	m_association_Operation_specialized_end_types_EDiagnosticChain_EMap->setUpperBound(1);
 	m_association_Operation_specialized_end_types_EDiagnosticChain_EMap->setUnique(true);
 	m_association_Operation_specialized_end_types_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_association_Operation_specialized_end_types_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -3578,13 +3531,12 @@ void umlPackageImpl::initializeAssociationClassContent()
 	
 	
 	
-	m_associationClass_Operation_cannot_be_defined_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_associationClass_Operation_cannot_be_defined_EDiagnosticChain_EMap->setName("cannot_be_defined");
+	m_associationClass_Operation_cannot_be_defined_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_associationClass_Operation_cannot_be_defined_EDiagnosticChain_EMap->setLowerBound(0);
 	m_associationClass_Operation_cannot_be_defined_EDiagnosticChain_EMap->setUpperBound(1);
 	m_associationClass_Operation_cannot_be_defined_EDiagnosticChain_EMap->setUnique(true);
 	m_associationClass_Operation_cannot_be_defined_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_associationClass_Operation_cannot_be_defined_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -3605,13 +3557,12 @@ void umlPackageImpl::initializeAssociationClassContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_associationClass_Operation_disjoint_attributes_ends_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_associationClass_Operation_disjoint_attributes_ends_EDiagnosticChain_EMap->setName("disjoint_attributes_ends");
+	m_associationClass_Operation_disjoint_attributes_ends_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_associationClass_Operation_disjoint_attributes_ends_EDiagnosticChain_EMap->setLowerBound(0);
 	m_associationClass_Operation_disjoint_attributes_ends_EDiagnosticChain_EMap->setUpperBound(1);
 	m_associationClass_Operation_disjoint_attributes_ends_EDiagnosticChain_EMap->setUnique(true);
 	m_associationClass_Operation_disjoint_attributes_ends_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_associationClass_Operation_disjoint_attributes_ends_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -3643,7 +3594,7 @@ void umlPackageImpl::initializeBehaviorContent()
 	
 	m_behavior_Attribute_isReentrant = getBehavior_Attribute_isReentrant();
 	m_behavior_Attribute_isReentrant->setName("isReentrant");
-	m_behavior_Attribute_isReentrant->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_behavior_Attribute_isReentrant->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_behavior_Attribute_isReentrant->setLowerBound(0);
 	m_behavior_Attribute_isReentrant->setUpperBound(1);
 	m_behavior_Attribute_isReentrant->setTransient(false);
@@ -3848,13 +3799,12 @@ void umlPackageImpl::initializeBehaviorContent()
 	    }
 	}
 	
-	m_behavior_Operation_behavioredClassifier_Element->setEType(getBehavioredClassifier_Class());
 	m_behavior_Operation_behavioredClassifier_Element->setName("behavioredClassifier");
+	m_behavior_Operation_behavioredClassifier_Element->setEType(getBehavioredClassifier_Class());
 	m_behavior_Operation_behavioredClassifier_Element->setLowerBound(0);
 	m_behavior_Operation_behavioredClassifier_Element->setUpperBound(1);
 	m_behavior_Operation_behavioredClassifier_Element->setUnique(true);
 	m_behavior_Operation_behavioredClassifier_Element->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_behavior_Operation_behavioredClassifier_Element);
 		parameter->setName("from");
@@ -3865,13 +3815,12 @@ void umlPackageImpl::initializeBehaviorContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_behavior_Operation_feature_of_context_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_behavior_Operation_feature_of_context_classifier_EDiagnosticChain_EMap->setName("feature_of_context_classifier");
+	m_behavior_Operation_feature_of_context_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_behavior_Operation_feature_of_context_classifier_EDiagnosticChain_EMap->setLowerBound(0);
 	m_behavior_Operation_feature_of_context_classifier_EDiagnosticChain_EMap->setUpperBound(1);
 	m_behavior_Operation_feature_of_context_classifier_EDiagnosticChain_EMap->setUnique(true);
 	m_behavior_Operation_feature_of_context_classifier_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_behavior_Operation_feature_of_context_classifier_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -3892,29 +3841,26 @@ void umlPackageImpl::initializeBehaviorContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_behavior_Operation_getContext->setEType(getBehavioredClassifier_Class());
 	m_behavior_Operation_getContext->setName("getContext");
+	m_behavior_Operation_getContext->setEType(getBehavioredClassifier_Class());
 	m_behavior_Operation_getContext->setLowerBound(0);
 	m_behavior_Operation_getContext->setUpperBound(1);
 	m_behavior_Operation_getContext->setUnique(true);
 	m_behavior_Operation_getContext->setOrdered(false);
 	
-	
-	m_behavior_Operation_inputParameters->setEType(getParameter_Class());
 	m_behavior_Operation_inputParameters->setName("inputParameters");
+	m_behavior_Operation_inputParameters->setEType(getParameter_Class());
 	m_behavior_Operation_inputParameters->setLowerBound(0);
 	m_behavior_Operation_inputParameters->setUpperBound(-1);
 	m_behavior_Operation_inputParameters->setUnique(true);
 	m_behavior_Operation_inputParameters->setOrdered(true);
 	
-	
-	m_behavior_Operation_most_one_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_behavior_Operation_most_one_behavior_EDiagnosticChain_EMap->setName("most_one_behavior");
+	m_behavior_Operation_most_one_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_behavior_Operation_most_one_behavior_EDiagnosticChain_EMap->setLowerBound(0);
 	m_behavior_Operation_most_one_behavior_EDiagnosticChain_EMap->setUpperBound(1);
 	m_behavior_Operation_most_one_behavior_EDiagnosticChain_EMap->setUnique(true);
 	m_behavior_Operation_most_one_behavior_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_behavior_Operation_most_one_behavior_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -3935,21 +3881,19 @@ void umlPackageImpl::initializeBehaviorContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_behavior_Operation_outputParameters->setEType(getParameter_Class());
 	m_behavior_Operation_outputParameters->setName("outputParameters");
+	m_behavior_Operation_outputParameters->setEType(getParameter_Class());
 	m_behavior_Operation_outputParameters->setLowerBound(0);
 	m_behavior_Operation_outputParameters->setUpperBound(-1);
 	m_behavior_Operation_outputParameters->setUnique(true);
 	m_behavior_Operation_outputParameters->setOrdered(true);
 	
-	
-	m_behavior_Operation_parameters_match_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_behavior_Operation_parameters_match_EDiagnosticChain_EMap->setName("parameters_match");
+	m_behavior_Operation_parameters_match_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_behavior_Operation_parameters_match_EDiagnosticChain_EMap->setLowerBound(0);
 	m_behavior_Operation_parameters_match_EDiagnosticChain_EMap->setUpperBound(1);
 	m_behavior_Operation_parameters_match_EDiagnosticChain_EMap->setUnique(true);
 	m_behavior_Operation_parameters_match_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_behavior_Operation_parameters_match_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -4014,7 +3958,7 @@ void umlPackageImpl::initializeBehavioralFeatureContent()
 	
 	m_behavioralFeature_Attribute_concurrency = getBehavioralFeature_Attribute_concurrency();
 	m_behavioralFeature_Attribute_concurrency->setName("concurrency");
-	m_behavioralFeature_Attribute_concurrency->setEType(getCallConcurrencyKind_Class());
+		m_behavioralFeature_Attribute_concurrency->setEType(getCallConcurrencyKind_Class());
 	m_behavioralFeature_Attribute_concurrency->setLowerBound(1);
 	m_behavioralFeature_Attribute_concurrency->setUpperBound(1);
 	m_behavioralFeature_Attribute_concurrency->setTransient(false);
@@ -4034,7 +3978,7 @@ void umlPackageImpl::initializeBehavioralFeatureContent()
 	}
 	m_behavioralFeature_Attribute_isAbstract = getBehavioralFeature_Attribute_isAbstract();
 	m_behavioralFeature_Attribute_isAbstract->setName("isAbstract");
-	m_behavioralFeature_Attribute_isAbstract->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_behavioralFeature_Attribute_isAbstract->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_behavioralFeature_Attribute_isAbstract->setLowerBound(1);
 	m_behavioralFeature_Attribute_isAbstract->setUpperBound(1);
 	m_behavioralFeature_Attribute_isAbstract->setTransient(false);
@@ -4148,13 +4092,12 @@ void umlPackageImpl::initializeBehavioralFeatureContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_behavioralFeature_Operation_abstract_no_method_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_behavioralFeature_Operation_abstract_no_method_EDiagnosticChain_EMap->setName("abstract_no_method");
+	m_behavioralFeature_Operation_abstract_no_method_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_behavioralFeature_Operation_abstract_no_method_EDiagnosticChain_EMap->setLowerBound(0);
 	m_behavioralFeature_Operation_abstract_no_method_EDiagnosticChain_EMap->setUpperBound(1);
 	m_behavioralFeature_Operation_abstract_no_method_EDiagnosticChain_EMap->setUnique(true);
 	m_behavioralFeature_Operation_abstract_no_method_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_behavioralFeature_Operation_abstract_no_method_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -4175,13 +4118,12 @@ void umlPackageImpl::initializeBehavioralFeatureContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_behavioralFeature_Operation_createReturnResult_String_Type->setEType(getParameter_Class());
 	m_behavioralFeature_Operation_createReturnResult_String_Type->setName("createReturnResult");
+	m_behavioralFeature_Operation_createReturnResult_String_Type->setEType(getParameter_Class());
 	m_behavioralFeature_Operation_createReturnResult_String_Type->setLowerBound(1);
 	m_behavioralFeature_Operation_createReturnResult_String_Type->setUpperBound(1);
 	m_behavioralFeature_Operation_createReturnResult_String_Type->setUnique(true);
 	m_behavioralFeature_Operation_createReturnResult_String_Type->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_behavioralFeature_Operation_createReturnResult_String_Type);
 		parameter->setName("name");
@@ -4202,21 +4144,19 @@ void umlPackageImpl::initializeBehavioralFeatureContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_behavioralFeature_Operation_inputParameters->setEType(getParameter_Class());
 	m_behavioralFeature_Operation_inputParameters->setName("inputParameters");
+	m_behavioralFeature_Operation_inputParameters->setEType(getParameter_Class());
 	m_behavioralFeature_Operation_inputParameters->setLowerBound(0);
 	m_behavioralFeature_Operation_inputParameters->setUpperBound(-1);
 	m_behavioralFeature_Operation_inputParameters->setUnique(true);
 	m_behavioralFeature_Operation_inputParameters->setOrdered(true);
 	
-	
-	m_behavioralFeature_Operation_outputParameters->setEType(getParameter_Class());
 	m_behavioralFeature_Operation_outputParameters->setName("outputParameters");
+	m_behavioralFeature_Operation_outputParameters->setEType(getParameter_Class());
 	m_behavioralFeature_Operation_outputParameters->setLowerBound(0);
 	m_behavioralFeature_Operation_outputParameters->setUpperBound(-1);
 	m_behavioralFeature_Operation_outputParameters->setUnique(true);
 	m_behavioralFeature_Operation_outputParameters->setOrdered(true);
-	
 	
 	
 }
@@ -4301,13 +4241,12 @@ void umlPackageImpl::initializeBehavioredClassifierContent()
 	    }
 	}
 	
-	m_behavioredClassifier_Operation_class_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_behavioredClassifier_Operation_class_behavior_EDiagnosticChain_EMap->setName("class_behavior");
+	m_behavioredClassifier_Operation_class_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_behavioredClassifier_Operation_class_behavior_EDiagnosticChain_EMap->setLowerBound(0);
 	m_behavioredClassifier_Operation_class_behavior_EDiagnosticChain_EMap->setUpperBound(1);
 	m_behavioredClassifier_Operation_class_behavior_EDiagnosticChain_EMap->setUnique(true);
 	m_behavioredClassifier_Operation_class_behavior_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_behavioredClassifier_Operation_class_behavior_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -4328,21 +4267,19 @@ void umlPackageImpl::initializeBehavioredClassifierContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_behavioredClassifier_Operation_getAllImplementedInterfaces->setEType(getInterface_Class());
 	m_behavioredClassifier_Operation_getAllImplementedInterfaces->setName("getAllImplementedInterfaces");
+	m_behavioredClassifier_Operation_getAllImplementedInterfaces->setEType(getInterface_Class());
 	m_behavioredClassifier_Operation_getAllImplementedInterfaces->setLowerBound(0);
 	m_behavioredClassifier_Operation_getAllImplementedInterfaces->setUpperBound(-1);
 	m_behavioredClassifier_Operation_getAllImplementedInterfaces->setUnique(true);
 	m_behavioredClassifier_Operation_getAllImplementedInterfaces->setOrdered(false);
 	
-	
-	m_behavioredClassifier_Operation_getImplementedInterfaces->setEType(getInterface_Class());
 	m_behavioredClassifier_Operation_getImplementedInterfaces->setName("getImplementedInterfaces");
+	m_behavioredClassifier_Operation_getImplementedInterfaces->setEType(getInterface_Class());
 	m_behavioredClassifier_Operation_getImplementedInterfaces->setLowerBound(0);
 	m_behavioredClassifier_Operation_getImplementedInterfaces->setUpperBound(-1);
 	m_behavioredClassifier_Operation_getImplementedInterfaces->setUnique(true);
 	m_behavioredClassifier_Operation_getImplementedInterfaces->setOrdered(false);
-	
 	
 	
 }
@@ -4377,13 +4314,12 @@ void umlPackageImpl::initializeBroadcastSignalActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_broadcastSignalAction_Operation_no_onport_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_broadcastSignalAction_Operation_no_onport_EDiagnosticChain_EMap->setName("no_onport");
+	m_broadcastSignalAction_Operation_no_onport_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_broadcastSignalAction_Operation_no_onport_EDiagnosticChain_EMap->setLowerBound(0);
 	m_broadcastSignalAction_Operation_no_onport_EDiagnosticChain_EMap->setUpperBound(1);
 	m_broadcastSignalAction_Operation_no_onport_EDiagnosticChain_EMap->setUnique(true);
 	m_broadcastSignalAction_Operation_no_onport_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_broadcastSignalAction_Operation_no_onport_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -4404,13 +4340,12 @@ void umlPackageImpl::initializeBroadcastSignalActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_broadcastSignalAction_Operation_number_of_arguments_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_broadcastSignalAction_Operation_number_of_arguments_EDiagnosticChain_EMap->setName("number_of_arguments");
+	m_broadcastSignalAction_Operation_number_of_arguments_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_broadcastSignalAction_Operation_number_of_arguments_EDiagnosticChain_EMap->setLowerBound(0);
 	m_broadcastSignalAction_Operation_number_of_arguments_EDiagnosticChain_EMap->setUpperBound(1);
 	m_broadcastSignalAction_Operation_number_of_arguments_EDiagnosticChain_EMap->setUnique(true);
 	m_broadcastSignalAction_Operation_number_of_arguments_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_broadcastSignalAction_Operation_number_of_arguments_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -4431,13 +4366,12 @@ void umlPackageImpl::initializeBroadcastSignalActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_broadcastSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_broadcastSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setName("type_ordering_multiplicity");
+	m_broadcastSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_broadcastSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_broadcastSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_broadcastSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_broadcastSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_broadcastSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -4469,7 +4403,7 @@ void umlPackageImpl::initializeCallActionContent()
 	
 	m_callAction_Attribute_isSynchronous = getCallAction_Attribute_isSynchronous();
 	m_callAction_Attribute_isSynchronous->setName("isSynchronous");
-	m_callAction_Attribute_isSynchronous->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_callAction_Attribute_isSynchronous->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_callAction_Attribute_isSynchronous->setLowerBound(1);
 	m_callAction_Attribute_isSynchronous->setUpperBound(1);
 	m_callAction_Attribute_isSynchronous->setTransient(false);
@@ -4514,13 +4448,12 @@ void umlPackageImpl::initializeCallActionContent()
 	    }
 	}
 	
-	m_callAction_Operation_argument_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_callAction_Operation_argument_pins_EDiagnosticChain_EMap->setName("argument_pins");
+	m_callAction_Operation_argument_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_callAction_Operation_argument_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_callAction_Operation_argument_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_callAction_Operation_argument_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_callAction_Operation_argument_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_callAction_Operation_argument_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -4541,29 +4474,26 @@ void umlPackageImpl::initializeCallActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_callAction_Operation_inputParameters->setEType(getParameter_Class());
 	m_callAction_Operation_inputParameters->setName("inputParameters");
+	m_callAction_Operation_inputParameters->setEType(getParameter_Class());
 	m_callAction_Operation_inputParameters->setLowerBound(0);
 	m_callAction_Operation_inputParameters->setUpperBound(-1);
 	m_callAction_Operation_inputParameters->setUnique(true);
 	m_callAction_Operation_inputParameters->setOrdered(true);
 	
-	
-	m_callAction_Operation_outputParameters->setEType(getParameter_Class());
 	m_callAction_Operation_outputParameters->setName("outputParameters");
+	m_callAction_Operation_outputParameters->setEType(getParameter_Class());
 	m_callAction_Operation_outputParameters->setLowerBound(0);
 	m_callAction_Operation_outputParameters->setUpperBound(-1);
 	m_callAction_Operation_outputParameters->setUnique(true);
 	m_callAction_Operation_outputParameters->setOrdered(true);
 	
-	
-	m_callAction_Operation_result_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_callAction_Operation_result_pins_EDiagnosticChain_EMap->setName("result_pins");
+	m_callAction_Operation_result_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_callAction_Operation_result_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_callAction_Operation_result_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_callAction_Operation_result_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_callAction_Operation_result_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_callAction_Operation_result_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -4584,13 +4514,12 @@ void umlPackageImpl::initializeCallActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_callAction_Operation_synchronous_call_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_callAction_Operation_synchronous_call_EDiagnosticChain_EMap->setName("synchronous_call");
+	m_callAction_Operation_synchronous_call_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_callAction_Operation_synchronous_call_EDiagnosticChain_EMap->setLowerBound(0);
 	m_callAction_Operation_synchronous_call_EDiagnosticChain_EMap->setUpperBound(1);
 	m_callAction_Operation_synchronous_call_EDiagnosticChain_EMap->setUnique(true);
 	m_callAction_Operation_synchronous_call_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_callAction_Operation_synchronous_call_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -4644,13 +4573,12 @@ void umlPackageImpl::initializeCallBehaviorActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_callBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_callBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setName("no_onport");
+	m_callBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_callBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setLowerBound(0);
 	m_callBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setUpperBound(1);
 	m_callBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setUnique(true);
 	m_callBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_callBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -4762,13 +4690,12 @@ void umlPackageImpl::initializeCallOperationActionContent()
 	    }
 	}
 	
-	m_callOperationAction_Operation_type_target_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_callOperationAction_Operation_type_target_pin_EDiagnosticChain_EMap->setName("type_target_pin");
+	m_callOperationAction_Operation_type_target_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_callOperationAction_Operation_type_target_pin_EDiagnosticChain_EMap->setLowerBound(0);
 	m_callOperationAction_Operation_type_target_pin_EDiagnosticChain_EMap->setUpperBound(1);
 	m_callOperationAction_Operation_type_target_pin_EDiagnosticChain_EMap->setUnique(true);
 	m_callOperationAction_Operation_type_target_pin_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_callOperationAction_Operation_type_target_pin_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -4844,7 +4771,7 @@ void umlPackageImpl::initializeClassContent()
 	
 	m_class_Attribute_isActive = getClass_Attribute_isActive();
 	m_class_Attribute_isActive->setName("isActive");
-	m_class_Attribute_isActive->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_class_Attribute_isActive->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_class_Attribute_isActive->setLowerBound(1);
 	m_class_Attribute_isActive->setUpperBound(1);
 	m_class_Attribute_isActive->setTransient(false);
@@ -4980,13 +4907,12 @@ void umlPackageImpl::initializeClassContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_class_Operation_createOwnedOperation_String_Type->setEType(getOperation_Class());
 	m_class_Operation_createOwnedOperation_String_Type->setName("createOwnedOperation");
+	m_class_Operation_createOwnedOperation_String_Type->setEType(getOperation_Class());
 	m_class_Operation_createOwnedOperation_String_Type->setLowerBound(1);
 	m_class_Operation_createOwnedOperation_String_Type->setUpperBound(1);
 	m_class_Operation_createOwnedOperation_String_Type->setUnique(true);
 	m_class_Operation_createOwnedOperation_String_Type->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_class_Operation_createOwnedOperation_String_Type);
 		parameter->setName("name");
@@ -5027,45 +4953,40 @@ void umlPackageImpl::initializeClassContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_class_Operation_getAllOperations->setEType(getOperation_Class());
 	m_class_Operation_getAllOperations->setName("getAllOperations");
+	m_class_Operation_getAllOperations->setEType(getOperation_Class());
 	m_class_Operation_getAllOperations->setLowerBound(0);
 	m_class_Operation_getAllOperations->setUpperBound(-1);
 	m_class_Operation_getAllOperations->setUnique(true);
 	m_class_Operation_getAllOperations->setOrdered(false);
 	
-	
-	m_class_Operation_getExtensions->setEType(getExtension_Class());
 	m_class_Operation_getExtensions->setName("getExtensions");
+	m_class_Operation_getExtensions->setEType(getExtension_Class());
 	m_class_Operation_getExtensions->setLowerBound(0);
 	m_class_Operation_getExtensions->setUpperBound(-1);
 	m_class_Operation_getExtensions->setUnique(true);
 	m_class_Operation_getExtensions->setOrdered(false);
 	
-	
-	m_class_Operation_getSuperClasses->setEType(getClass_Class());
 	m_class_Operation_getSuperClasses->setName("getSuperClasses");
+	m_class_Operation_getSuperClasses->setEType(getClass_Class());
 	m_class_Operation_getSuperClasses->setLowerBound(0);
 	m_class_Operation_getSuperClasses->setUpperBound(-1);
 	m_class_Operation_getSuperClasses->setUnique(true);
 	m_class_Operation_getSuperClasses->setOrdered(false);
 	
-	
-	m_class_Operation_isMetaclass->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_class_Operation_isMetaclass->setName("isMetaclass");
+	m_class_Operation_isMetaclass->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_class_Operation_isMetaclass->setLowerBound(1);
 	m_class_Operation_isMetaclass->setUpperBound(1);
 	m_class_Operation_isMetaclass->setUnique(true);
 	m_class_Operation_isMetaclass->setOrdered(false);
 	
-	
-	m_class_Operation_passive_class_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_class_Operation_passive_class_EDiagnosticChain_EMap->setName("passive_class");
+	m_class_Operation_passive_class_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_class_Operation_passive_class_EDiagnosticChain_EMap->setLowerBound(0);
 	m_class_Operation_passive_class_EDiagnosticChain_EMap->setUpperBound(1);
 	m_class_Operation_passive_class_EDiagnosticChain_EMap->setUnique(true);
 	m_class_Operation_passive_class_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_class_Operation_passive_class_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -5097,7 +5018,7 @@ void umlPackageImpl::initializeClassifierContent()
 	
 	m_classifier_Attribute_isAbstract = getClassifier_Attribute_isAbstract();
 	m_classifier_Attribute_isAbstract->setName("isAbstract");
-	m_classifier_Attribute_isAbstract->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_classifier_Attribute_isAbstract->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_classifier_Attribute_isAbstract->setLowerBound(1);
 	m_classifier_Attribute_isAbstract->setUpperBound(1);
 	m_classifier_Attribute_isAbstract->setTransient(false);
@@ -5117,7 +5038,7 @@ void umlPackageImpl::initializeClassifierContent()
 	}
 	m_classifier_Attribute_isFinalSpecialization = getClassifier_Attribute_isFinalSpecialization();
 	m_classifier_Attribute_isFinalSpecialization->setName("isFinalSpecialization");
-	m_classifier_Attribute_isFinalSpecialization->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_classifier_Attribute_isFinalSpecialization->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_classifier_Attribute_isFinalSpecialization->setLowerBound(1);
 	m_classifier_Attribute_isFinalSpecialization->setUpperBound(1);
 	m_classifier_Attribute_isFinalSpecialization->setTransient(false);
@@ -5416,117 +5337,103 @@ void umlPackageImpl::initializeClassifierContent()
 	    }
 	}
 	
-	m_classifier_Operation_allAttributes->setEType(getProperty_Class());
 	m_classifier_Operation_allAttributes->setName("allAttributes");
+	m_classifier_Operation_allAttributes->setEType(getProperty_Class());
 	m_classifier_Operation_allAttributes->setLowerBound(0);
 	m_classifier_Operation_allAttributes->setUpperBound(-1);
 	m_classifier_Operation_allAttributes->setUnique(true);
 	m_classifier_Operation_allAttributes->setOrdered(true);
 	
-	
-	m_classifier_Operation_allFeatures->setEType(getFeature_Class());
 	m_classifier_Operation_allFeatures->setName("allFeatures");
+	m_classifier_Operation_allFeatures->setEType(getFeature_Class());
 	m_classifier_Operation_allFeatures->setLowerBound(0);
 	m_classifier_Operation_allFeatures->setUpperBound(-1);
 	m_classifier_Operation_allFeatures->setUnique(true);
 	m_classifier_Operation_allFeatures->setOrdered(false);
 	
-	
-	m_classifier_Operation_allParents->setEType(getClassifier_Class());
 	m_classifier_Operation_allParents->setName("allParents");
+	m_classifier_Operation_allParents->setEType(getClassifier_Class());
 	m_classifier_Operation_allParents->setLowerBound(0);
 	m_classifier_Operation_allParents->setUpperBound(-1);
 	m_classifier_Operation_allParents->setUnique(true);
 	m_classifier_Operation_allParents->setOrdered(false);
 	
-	
-	m_classifier_Operation_allRealizedInterfaces->setEType(getInterface_Class());
 	m_classifier_Operation_allRealizedInterfaces->setName("allRealizedInterfaces");
+	m_classifier_Operation_allRealizedInterfaces->setEType(getInterface_Class());
 	m_classifier_Operation_allRealizedInterfaces->setLowerBound(0);
 	m_classifier_Operation_allRealizedInterfaces->setUpperBound(-1);
 	m_classifier_Operation_allRealizedInterfaces->setUnique(true);
 	m_classifier_Operation_allRealizedInterfaces->setOrdered(false);
 	
-	
-	m_classifier_Operation_allSlottableFeatures->setEType(getStructuralFeature_Class());
 	m_classifier_Operation_allSlottableFeatures->setName("allSlottableFeatures");
+	m_classifier_Operation_allSlottableFeatures->setEType(getStructuralFeature_Class());
 	m_classifier_Operation_allSlottableFeatures->setLowerBound(0);
 	m_classifier_Operation_allSlottableFeatures->setUpperBound(-1);
 	m_classifier_Operation_allSlottableFeatures->setUnique(true);
 	m_classifier_Operation_allSlottableFeatures->setOrdered(false);
 	
-	
-	m_classifier_Operation_allUsedInterfaces->setEType(getInterface_Class());
 	m_classifier_Operation_allUsedInterfaces->setName("allUsedInterfaces");
+	m_classifier_Operation_allUsedInterfaces->setEType(getInterface_Class());
 	m_classifier_Operation_allUsedInterfaces->setLowerBound(0);
 	m_classifier_Operation_allUsedInterfaces->setUpperBound(-1);
 	m_classifier_Operation_allUsedInterfaces->setUnique(true);
 	m_classifier_Operation_allUsedInterfaces->setOrdered(false);
 	
-	
-	m_classifier_Operation_directlyRealizedInterfaces->setEType(getInterface_Class());
 	m_classifier_Operation_directlyRealizedInterfaces->setName("directlyRealizedInterfaces");
+	m_classifier_Operation_directlyRealizedInterfaces->setEType(getInterface_Class());
 	m_classifier_Operation_directlyRealizedInterfaces->setLowerBound(0);
 	m_classifier_Operation_directlyRealizedInterfaces->setUpperBound(-1);
 	m_classifier_Operation_directlyRealizedInterfaces->setUnique(true);
 	m_classifier_Operation_directlyRealizedInterfaces->setOrdered(false);
 	
-	
-	m_classifier_Operation_directlyUsedInterfaces->setEType(getInterface_Class());
 	m_classifier_Operation_directlyUsedInterfaces->setName("directlyUsedInterfaces");
+	m_classifier_Operation_directlyUsedInterfaces->setEType(getInterface_Class());
 	m_classifier_Operation_directlyUsedInterfaces->setLowerBound(0);
 	m_classifier_Operation_directlyUsedInterfaces->setUpperBound(-1);
 	m_classifier_Operation_directlyUsedInterfaces->setUnique(true);
 	m_classifier_Operation_directlyUsedInterfaces->setOrdered(false);
 	
-	
-	m_classifier_Operation_getAllAttributes->setEType(getProperty_Class());
 	m_classifier_Operation_getAllAttributes->setName("getAllAttributes");
+	m_classifier_Operation_getAllAttributes->setEType(getProperty_Class());
 	m_classifier_Operation_getAllAttributes->setLowerBound(0);
 	m_classifier_Operation_getAllAttributes->setUpperBound(-1);
 	m_classifier_Operation_getAllAttributes->setUnique(true);
 	m_classifier_Operation_getAllAttributes->setOrdered(false);
 	
-	
-	m_classifier_Operation_getAllOperations->setEType(getOperation_Class());
 	m_classifier_Operation_getAllOperations->setName("getAllOperations");
+	m_classifier_Operation_getAllOperations->setEType(getOperation_Class());
 	m_classifier_Operation_getAllOperations->setLowerBound(0);
 	m_classifier_Operation_getAllOperations->setUpperBound(-1);
 	m_classifier_Operation_getAllOperations->setUnique(true);
 	m_classifier_Operation_getAllOperations->setOrdered(false);
 	
-	
-	m_classifier_Operation_getAllUsedInterfaces->setEType(getInterface_Class());
 	m_classifier_Operation_getAllUsedInterfaces->setName("getAllUsedInterfaces");
+	m_classifier_Operation_getAllUsedInterfaces->setEType(getInterface_Class());
 	m_classifier_Operation_getAllUsedInterfaces->setLowerBound(0);
 	m_classifier_Operation_getAllUsedInterfaces->setUpperBound(-1);
 	m_classifier_Operation_getAllUsedInterfaces->setUnique(true);
 	m_classifier_Operation_getAllUsedInterfaces->setOrdered(false);
 	
-	
-	m_classifier_Operation_getGenerals->setEType(getClassifier_Class());
 	m_classifier_Operation_getGenerals->setName("getGenerals");
+	m_classifier_Operation_getGenerals->setEType(getClassifier_Class());
 	m_classifier_Operation_getGenerals->setLowerBound(0);
 	m_classifier_Operation_getGenerals->setUpperBound(-1);
 	m_classifier_Operation_getGenerals->setUnique(true);
 	m_classifier_Operation_getGenerals->setOrdered(false);
 	
-	
-	m_classifier_Operation_getInheritedMembers->setEType(getNamedElement_Class());
 	m_classifier_Operation_getInheritedMembers->setName("getInheritedMembers");
+	m_classifier_Operation_getInheritedMembers->setEType(getNamedElement_Class());
 	m_classifier_Operation_getInheritedMembers->setLowerBound(0);
 	m_classifier_Operation_getInheritedMembers->setUpperBound(-1);
 	m_classifier_Operation_getInheritedMembers->setUnique(true);
 	m_classifier_Operation_getInheritedMembers->setOrdered(false);
 	
-	
-	m_classifier_Operation_getOperation_String_Type->setEType(getOperation_Class());
 	m_classifier_Operation_getOperation_String_Type->setName("getOperation");
+	m_classifier_Operation_getOperation_String_Type->setEType(getOperation_Class());
 	m_classifier_Operation_getOperation_String_Type->setLowerBound(0);
 	m_classifier_Operation_getOperation_String_Type->setUpperBound(1);
 	m_classifier_Operation_getOperation_String_Type->setUnique(true);
 	m_classifier_Operation_getOperation_String_Type->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifier_Operation_getOperation_String_Type);
 		parameter->setName("name");
@@ -5557,13 +5464,12 @@ void umlPackageImpl::initializeClassifierContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifier_Operation_getOperation_String_Boolean->setEType(getOperation_Class());
 	m_classifier_Operation_getOperation_String_Boolean->setName("getOperation");
+	m_classifier_Operation_getOperation_String_Boolean->setEType(getOperation_Class());
 	m_classifier_Operation_getOperation_String_Boolean->setLowerBound(0);
 	m_classifier_Operation_getOperation_String_Boolean->setUpperBound(1);
 	m_classifier_Operation_getOperation_String_Boolean->setUnique(true);
 	m_classifier_Operation_getOperation_String_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifier_Operation_getOperation_String_Boolean);
 		parameter->setName("name");
@@ -5604,29 +5510,42 @@ void umlPackageImpl::initializeClassifierContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifier_Operation_getOperations->setEType(getOperation_Class());
 	m_classifier_Operation_getOperations->setName("getOperations");
+	m_classifier_Operation_getOperations->setEType(getOperation_Class());
 	m_classifier_Operation_getOperations->setLowerBound(0);
 	m_classifier_Operation_getOperations->setUpperBound(-1);
 	m_classifier_Operation_getOperations->setUnique(true);
 	m_classifier_Operation_getOperations->setOrdered(false);
 	
+	m_classifier_Operation_getPropertyValue_String->setName("getPropertyValue");
+	m_classifier_Operation_getPropertyValue_String->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
+	m_classifier_Operation_getPropertyValue_String->setLowerBound(0);
+	m_classifier_Operation_getPropertyValue_String->setUpperBound(1);
+	m_classifier_Operation_getPropertyValue_String->setUnique(true);
+	m_classifier_Operation_getPropertyValue_String->setOrdered(false);
+	{
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifier_Operation_getPropertyValue_String);
+		parameter->setName("propertyName");
+		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
+		parameter->setLowerBound(0);
+		parameter->setUpperBound(1);
+		parameter->setUnique(true);
+		parameter->setOrdered(true);
+	}
 	
-	m_classifier_Operation_getUsedInterfaces->setEType(getInterface_Class());
 	m_classifier_Operation_getUsedInterfaces->setName("getUsedInterfaces");
+	m_classifier_Operation_getUsedInterfaces->setEType(getInterface_Class());
 	m_classifier_Operation_getUsedInterfaces->setLowerBound(0);
 	m_classifier_Operation_getUsedInterfaces->setUpperBound(-1);
 	m_classifier_Operation_getUsedInterfaces->setUnique(true);
 	m_classifier_Operation_getUsedInterfaces->setOrdered(false);
 	
-	
-	m_classifier_Operation_hasVisibilityOf_NamedElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_classifier_Operation_hasVisibilityOf_NamedElement->setName("hasVisibilityOf");
+	m_classifier_Operation_hasVisibilityOf_NamedElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_classifier_Operation_hasVisibilityOf_NamedElement->setLowerBound(1);
 	m_classifier_Operation_hasVisibilityOf_NamedElement->setUpperBound(1);
 	m_classifier_Operation_hasVisibilityOf_NamedElement->setUnique(true);
 	m_classifier_Operation_hasVisibilityOf_NamedElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifier_Operation_hasVisibilityOf_NamedElement);
 		parameter->setName("n");
@@ -5637,13 +5556,12 @@ void umlPackageImpl::initializeClassifierContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifier_Operation_inherit_NamedElement->setEType(getNamedElement_Class());
 	m_classifier_Operation_inherit_NamedElement->setName("inherit");
+	m_classifier_Operation_inherit_NamedElement->setEType(getNamedElement_Class());
 	m_classifier_Operation_inherit_NamedElement->setLowerBound(0);
 	m_classifier_Operation_inherit_NamedElement->setUpperBound(-1);
 	m_classifier_Operation_inherit_NamedElement->setUnique(true);
 	m_classifier_Operation_inherit_NamedElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifier_Operation_inherit_NamedElement);
 		parameter->setName("inhs");
@@ -5654,13 +5572,12 @@ void umlPackageImpl::initializeClassifierContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifier_Operation_inheritableMembers_Classifier->setEType(getNamedElement_Class());
 	m_classifier_Operation_inheritableMembers_Classifier->setName("inheritableMembers");
+	m_classifier_Operation_inheritableMembers_Classifier->setEType(getNamedElement_Class());
 	m_classifier_Operation_inheritableMembers_Classifier->setLowerBound(0);
 	m_classifier_Operation_inheritableMembers_Classifier->setUpperBound(-1);
 	m_classifier_Operation_inheritableMembers_Classifier->setUnique(true);
 	m_classifier_Operation_inheritableMembers_Classifier->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifier_Operation_inheritableMembers_Classifier);
 		parameter->setName("c");
@@ -5671,13 +5588,12 @@ void umlPackageImpl::initializeClassifierContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifier_Operation_isSubstitutableFor_Classifier->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_classifier_Operation_isSubstitutableFor_Classifier->setName("isSubstitutableFor");
+	m_classifier_Operation_isSubstitutableFor_Classifier->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_classifier_Operation_isSubstitutableFor_Classifier->setLowerBound(1);
 	m_classifier_Operation_isSubstitutableFor_Classifier->setUpperBound(1);
 	m_classifier_Operation_isSubstitutableFor_Classifier->setUnique(true);
 	m_classifier_Operation_isSubstitutableFor_Classifier->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifier_Operation_isSubstitutableFor_Classifier);
 		parameter->setName("contract");
@@ -5688,13 +5604,12 @@ void umlPackageImpl::initializeClassifierContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifier_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifier_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setName("maps_to_generalization_set");
+	m_classifier_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifier_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setLowerBound(0);
 	m_classifier_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setUpperBound(1);
 	m_classifier_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setUnique(true);
 	m_classifier_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifier_Operation_maps_to_generalization_set_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -5715,13 +5630,12 @@ void umlPackageImpl::initializeClassifierContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifier_Operation_maySpecializeType_Classifier->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_classifier_Operation_maySpecializeType_Classifier->setName("maySpecializeType");
+	m_classifier_Operation_maySpecializeType_Classifier->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_classifier_Operation_maySpecializeType_Classifier->setLowerBound(1);
 	m_classifier_Operation_maySpecializeType_Classifier->setUpperBound(1);
 	m_classifier_Operation_maySpecializeType_Classifier->setUnique(true);
 	m_classifier_Operation_maySpecializeType_Classifier->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifier_Operation_maySpecializeType_Classifier);
 		parameter->setName("c");
@@ -5732,13 +5646,12 @@ void umlPackageImpl::initializeClassifierContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifier_Operation_no_cycles_in_generalization_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifier_Operation_no_cycles_in_generalization_EDiagnosticChain_EMap->setName("no_cycles_in_generalization");
+	m_classifier_Operation_no_cycles_in_generalization_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifier_Operation_no_cycles_in_generalization_EDiagnosticChain_EMap->setLowerBound(0);
 	m_classifier_Operation_no_cycles_in_generalization_EDiagnosticChain_EMap->setUpperBound(1);
 	m_classifier_Operation_no_cycles_in_generalization_EDiagnosticChain_EMap->setUnique(true);
 	m_classifier_Operation_no_cycles_in_generalization_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifier_Operation_no_cycles_in_generalization_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -5759,13 +5672,12 @@ void umlPackageImpl::initializeClassifierContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifier_Operation_non_final_parents_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifier_Operation_non_final_parents_EDiagnosticChain_EMap->setName("non_final_parents");
+	m_classifier_Operation_non_final_parents_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifier_Operation_non_final_parents_EDiagnosticChain_EMap->setLowerBound(0);
 	m_classifier_Operation_non_final_parents_EDiagnosticChain_EMap->setUpperBound(1);
 	m_classifier_Operation_non_final_parents_EDiagnosticChain_EMap->setUnique(true);
 	m_classifier_Operation_non_final_parents_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifier_Operation_non_final_parents_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -5786,21 +5698,19 @@ void umlPackageImpl::initializeClassifierContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifier_Operation_parents->setEType(getClassifier_Class());
 	m_classifier_Operation_parents->setName("parents");
+	m_classifier_Operation_parents->setEType(getClassifier_Class());
 	m_classifier_Operation_parents->setLowerBound(0);
 	m_classifier_Operation_parents->setUpperBound(-1);
 	m_classifier_Operation_parents->setUnique(true);
 	m_classifier_Operation_parents->setOrdered(false);
 	
-	
-	m_classifier_Operation_specialize_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifier_Operation_specialize_type_EDiagnosticChain_EMap->setName("specialize_type");
+	m_classifier_Operation_specialize_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifier_Operation_specialize_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_classifier_Operation_specialize_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_classifier_Operation_specialize_type_EDiagnosticChain_EMap->setUnique(true);
 	m_classifier_Operation_specialize_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifier_Operation_specialize_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -5832,7 +5742,7 @@ void umlPackageImpl::initializeClassifierTemplateParameterContent()
 	
 	m_classifierTemplateParameter_Attribute_allowSubstitutable = getClassifierTemplateParameter_Attribute_allowSubstitutable();
 	m_classifierTemplateParameter_Attribute_allowSubstitutable->setName("allowSubstitutable");
-	m_classifierTemplateParameter_Attribute_allowSubstitutable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_classifierTemplateParameter_Attribute_allowSubstitutable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_classifierTemplateParameter_Attribute_allowSubstitutable->setLowerBound(1);
 	m_classifierTemplateParameter_Attribute_allowSubstitutable->setUpperBound(1);
 	m_classifierTemplateParameter_Attribute_allowSubstitutable->setTransient(false);
@@ -5874,13 +5784,12 @@ void umlPackageImpl::initializeClassifierTemplateParameterContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_classifierTemplateParameter_Operation_actual_is_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifierTemplateParameter_Operation_actual_is_classifier_EDiagnosticChain_EMap->setName("actual_is_classifier");
+	m_classifierTemplateParameter_Operation_actual_is_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifierTemplateParameter_Operation_actual_is_classifier_EDiagnosticChain_EMap->setLowerBound(0);
 	m_classifierTemplateParameter_Operation_actual_is_classifier_EDiagnosticChain_EMap->setUpperBound(1);
 	m_classifierTemplateParameter_Operation_actual_is_classifier_EDiagnosticChain_EMap->setUnique(true);
 	m_classifierTemplateParameter_Operation_actual_is_classifier_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifierTemplateParameter_Operation_actual_is_classifier_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -5901,13 +5810,12 @@ void umlPackageImpl::initializeClassifierTemplateParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_args_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_args_EDiagnosticChain_EMap->setName("constraining_classifiers_constrain_args");
+	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_args_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_args_EDiagnosticChain_EMap->setLowerBound(0);
 	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_args_EDiagnosticChain_EMap->setUpperBound(1);
 	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_args_EDiagnosticChain_EMap->setUnique(true);
 	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_args_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_args_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -5928,13 +5836,12 @@ void umlPackageImpl::initializeClassifierTemplateParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_parametered_element_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_parametered_element_EDiagnosticChain_EMap->setName("constraining_classifiers_constrain_parametered_element");
+	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_parametered_element_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_parametered_element_EDiagnosticChain_EMap->setLowerBound(0);
 	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_parametered_element_EDiagnosticChain_EMap->setUpperBound(1);
 	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_parametered_element_EDiagnosticChain_EMap->setUnique(true);
 	m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_parametered_element_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifierTemplateParameter_Operation_constraining_classifiers_constrain_parametered_element_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -5955,13 +5862,12 @@ void umlPackageImpl::initializeClassifierTemplateParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifierTemplateParameter_Operation_has_constraining_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifierTemplateParameter_Operation_has_constraining_classifier_EDiagnosticChain_EMap->setName("has_constraining_classifier");
+	m_classifierTemplateParameter_Operation_has_constraining_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifierTemplateParameter_Operation_has_constraining_classifier_EDiagnosticChain_EMap->setLowerBound(0);
 	m_classifierTemplateParameter_Operation_has_constraining_classifier_EDiagnosticChain_EMap->setUpperBound(1);
 	m_classifierTemplateParameter_Operation_has_constraining_classifier_EDiagnosticChain_EMap->setUnique(true);
 	m_classifierTemplateParameter_Operation_has_constraining_classifier_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifierTemplateParameter_Operation_has_constraining_classifier_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -5982,13 +5888,12 @@ void umlPackageImpl::initializeClassifierTemplateParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifierTemplateParameter_Operation_matching_abstract_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifierTemplateParameter_Operation_matching_abstract_EDiagnosticChain_EMap->setName("matching_abstract");
+	m_classifierTemplateParameter_Operation_matching_abstract_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifierTemplateParameter_Operation_matching_abstract_EDiagnosticChain_EMap->setLowerBound(0);
 	m_classifierTemplateParameter_Operation_matching_abstract_EDiagnosticChain_EMap->setUpperBound(1);
 	m_classifierTemplateParameter_Operation_matching_abstract_EDiagnosticChain_EMap->setUnique(true);
 	m_classifierTemplateParameter_Operation_matching_abstract_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifierTemplateParameter_Operation_matching_abstract_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6009,13 +5914,12 @@ void umlPackageImpl::initializeClassifierTemplateParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_classifierTemplateParameter_Operation_parametered_element_no_features_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifierTemplateParameter_Operation_parametered_element_no_features_EDiagnosticChain_EMap->setName("parametered_element_no_features");
+	m_classifierTemplateParameter_Operation_parametered_element_no_features_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_classifierTemplateParameter_Operation_parametered_element_no_features_EDiagnosticChain_EMap->setLowerBound(0);
 	m_classifierTemplateParameter_Operation_parametered_element_no_features_EDiagnosticChain_EMap->setUpperBound(1);
 	m_classifierTemplateParameter_Operation_parametered_element_no_features_EDiagnosticChain_EMap->setUnique(true);
 	m_classifierTemplateParameter_Operation_parametered_element_no_features_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifierTemplateParameter_Operation_parametered_element_no_features_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6185,13 +6089,12 @@ void umlPackageImpl::initializeClauseContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_clause_Operation_body_output_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clause_Operation_body_output_pins_EDiagnosticChain_EMap->setName("body_output_pins");
+	m_clause_Operation_body_output_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clause_Operation_body_output_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_clause_Operation_body_output_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_clause_Operation_body_output_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_clause_Operation_body_output_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_clause_Operation_body_output_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6212,13 +6115,12 @@ void umlPackageImpl::initializeClauseContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_clause_Operation_decider_output_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clause_Operation_decider_output_EDiagnosticChain_EMap->setName("decider_output");
+	m_clause_Operation_decider_output_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clause_Operation_decider_output_EDiagnosticChain_EMap->setLowerBound(0);
 	m_clause_Operation_decider_output_EDiagnosticChain_EMap->setUpperBound(1);
 	m_clause_Operation_decider_output_EDiagnosticChain_EMap->setUnique(true);
 	m_clause_Operation_decider_output_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_clause_Operation_decider_output_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6239,13 +6141,12 @@ void umlPackageImpl::initializeClauseContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_clause_Operation_test_and_body_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clause_Operation_test_and_body_EDiagnosticChain_EMap->setName("test_and_body");
+	m_clause_Operation_test_and_body_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clause_Operation_test_and_body_EDiagnosticChain_EMap->setLowerBound(0);
 	m_clause_Operation_test_and_body_EDiagnosticChain_EMap->setUpperBound(1);
 	m_clause_Operation_test_and_body_EDiagnosticChain_EMap->setUnique(true);
 	m_clause_Operation_test_and_body_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_clause_Operation_test_and_body_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6321,13 +6222,12 @@ void umlPackageImpl::initializeClearAssociationActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_clearAssociationAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clearAssociationAction_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_clearAssociationAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clearAssociationAction_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_clearAssociationAction_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_clearAssociationAction_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_clearAssociationAction_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_clearAssociationAction_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6348,13 +6248,12 @@ void umlPackageImpl::initializeClearAssociationActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_clearAssociationAction_Operation_same_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clearAssociationAction_Operation_same_type_EDiagnosticChain_EMap->setName("same_type");
+	m_clearAssociationAction_Operation_same_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clearAssociationAction_Operation_same_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_clearAssociationAction_Operation_same_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_clearAssociationAction_Operation_same_type_EDiagnosticChain_EMap->setUnique(true);
 	m_clearAssociationAction_Operation_same_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_clearAssociationAction_Operation_same_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6411,13 +6310,12 @@ void umlPackageImpl::initializeClearStructuralFeatureActionContent()
 	    }
 	}
 	
-	m_clearStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clearStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setName("multiplicity_of_result");
+	m_clearStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clearStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setLowerBound(0);
 	m_clearStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setUpperBound(1);
 	m_clearStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setUnique(true);
 	m_clearStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_clearStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6438,13 +6336,12 @@ void umlPackageImpl::initializeClearStructuralFeatureActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_clearStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clearStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setName("type_of_result");
+	m_clearStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_clearStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setLowerBound(0);
 	m_clearStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setUpperBound(1);
 	m_clearStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setUnique(true);
 	m_clearStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_clearStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6564,13 +6461,12 @@ void umlPackageImpl::initializeCollaborationUseContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_collaborationUse_Operation_client_elements_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_collaborationUse_Operation_client_elements_EDiagnosticChain_EMap->setName("client_elements");
+	m_collaborationUse_Operation_client_elements_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_collaborationUse_Operation_client_elements_EDiagnosticChain_EMap->setLowerBound(0);
 	m_collaborationUse_Operation_client_elements_EDiagnosticChain_EMap->setUpperBound(1);
 	m_collaborationUse_Operation_client_elements_EDiagnosticChain_EMap->setUnique(true);
 	m_collaborationUse_Operation_client_elements_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_collaborationUse_Operation_client_elements_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6591,13 +6487,12 @@ void umlPackageImpl::initializeCollaborationUseContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_collaborationUse_Operation_connectors_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_collaborationUse_Operation_connectors_EDiagnosticChain_EMap->setName("connectors");
+	m_collaborationUse_Operation_connectors_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_collaborationUse_Operation_connectors_EDiagnosticChain_EMap->setLowerBound(0);
 	m_collaborationUse_Operation_connectors_EDiagnosticChain_EMap->setUpperBound(1);
 	m_collaborationUse_Operation_connectors_EDiagnosticChain_EMap->setUnique(true);
 	m_collaborationUse_Operation_connectors_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_collaborationUse_Operation_connectors_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6618,13 +6513,12 @@ void umlPackageImpl::initializeCollaborationUseContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_collaborationUse_Operation_every_role_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_collaborationUse_Operation_every_role_EDiagnosticChain_EMap->setName("every_role");
+	m_collaborationUse_Operation_every_role_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_collaborationUse_Operation_every_role_EDiagnosticChain_EMap->setLowerBound(0);
 	m_collaborationUse_Operation_every_role_EDiagnosticChain_EMap->setUpperBound(1);
 	m_collaborationUse_Operation_every_role_EDiagnosticChain_EMap->setUnique(true);
 	m_collaborationUse_Operation_every_role_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_collaborationUse_Operation_every_role_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6656,7 +6550,7 @@ void umlPackageImpl::initializeCombinedFragmentContent()
 	
 	m_combinedFragment_Attribute_interactionOperator = getCombinedFragment_Attribute_interactionOperator();
 	m_combinedFragment_Attribute_interactionOperator->setName("interactionOperator");
-	m_combinedFragment_Attribute_interactionOperator->setEType(getInteractionOperatorKind_Class());
+		m_combinedFragment_Attribute_interactionOperator->setEType(getInteractionOperatorKind_Class());
 	m_combinedFragment_Attribute_interactionOperator->setLowerBound(1);
 	m_combinedFragment_Attribute_interactionOperator->setUpperBound(1);
 	m_combinedFragment_Attribute_interactionOperator->setTransient(false);
@@ -6720,13 +6614,12 @@ void umlPackageImpl::initializeCombinedFragmentContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_combinedFragment_Operation_break__EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_combinedFragment_Operation_break__EDiagnosticChain_EMap->setName("break_");
+	m_combinedFragment_Operation_break__EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_combinedFragment_Operation_break__EDiagnosticChain_EMap->setLowerBound(0);
 	m_combinedFragment_Operation_break__EDiagnosticChain_EMap->setUpperBound(1);
 	m_combinedFragment_Operation_break__EDiagnosticChain_EMap->setUnique(true);
 	m_combinedFragment_Operation_break__EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_combinedFragment_Operation_break__EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6747,13 +6640,12 @@ void umlPackageImpl::initializeCombinedFragmentContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_combinedFragment_Operation_consider_and_ignore_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_combinedFragment_Operation_consider_and_ignore_EDiagnosticChain_EMap->setName("consider_and_ignore");
+	m_combinedFragment_Operation_consider_and_ignore_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_combinedFragment_Operation_consider_and_ignore_EDiagnosticChain_EMap->setLowerBound(0);
 	m_combinedFragment_Operation_consider_and_ignore_EDiagnosticChain_EMap->setUpperBound(1);
 	m_combinedFragment_Operation_consider_and_ignore_EDiagnosticChain_EMap->setUnique(true);
 	m_combinedFragment_Operation_consider_and_ignore_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_combinedFragment_Operation_consider_and_ignore_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6774,13 +6666,12 @@ void umlPackageImpl::initializeCombinedFragmentContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_combinedFragment_Operation_opt_loop_break_neg_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_combinedFragment_Operation_opt_loop_break_neg_EDiagnosticChain_EMap->setName("opt_loop_break_neg");
+	m_combinedFragment_Operation_opt_loop_break_neg_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_combinedFragment_Operation_opt_loop_break_neg_EDiagnosticChain_EMap->setLowerBound(0);
 	m_combinedFragment_Operation_opt_loop_break_neg_EDiagnosticChain_EMap->setUpperBound(1);
 	m_combinedFragment_Operation_opt_loop_break_neg_EDiagnosticChain_EMap->setUnique(true);
 	m_combinedFragment_Operation_opt_loop_break_neg_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_combinedFragment_Operation_opt_loop_break_neg_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -6812,7 +6703,7 @@ void umlPackageImpl::initializeCommentContent()
 	
 	m_comment_Attribute_body = getComment_Attribute_body();
 	m_comment_Attribute_body->setName("body");
-	m_comment_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_comment_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_comment_Attribute_body->setLowerBound(0);
 	m_comment_Attribute_body->setUpperBound(1);
 	m_comment_Attribute_body->setTransient(false);
@@ -6876,7 +6767,7 @@ void umlPackageImpl::initializeComponentContent()
 	
 	m_component_Attribute_isIndirectlyInstantiated = getComponent_Attribute_isIndirectlyInstantiated();
 	m_component_Attribute_isIndirectlyInstantiated->setName("isIndirectlyInstantiated");
-	m_component_Attribute_isIndirectlyInstantiated->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_component_Attribute_isIndirectlyInstantiated->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_component_Attribute_isIndirectlyInstantiated->setLowerBound(1);
 	m_component_Attribute_isIndirectlyInstantiated->setUpperBound(1);
 	m_component_Attribute_isIndirectlyInstantiated->setTransient(false);
@@ -6987,13 +6878,12 @@ void umlPackageImpl::initializeComponentContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_component_Operation_createOwnedClass_String_Boolean->setEType(getClass_Class());
 	m_component_Operation_createOwnedClass_String_Boolean->setName("createOwnedClass");
+	m_component_Operation_createOwnedClass_String_Boolean->setEType(getClass_Class());
 	m_component_Operation_createOwnedClass_String_Boolean->setLowerBound(1);
 	m_component_Operation_createOwnedClass_String_Boolean->setUpperBound(1);
 	m_component_Operation_createOwnedClass_String_Boolean->setUnique(true);
 	m_component_Operation_createOwnedClass_String_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_component_Operation_createOwnedClass_String_Boolean);
 		parameter->setName("name");
@@ -7014,13 +6904,12 @@ void umlPackageImpl::initializeComponentContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_component_Operation_createOwnedEnumeration_String->setEType(getEnumeration_Class());
 	m_component_Operation_createOwnedEnumeration_String->setName("createOwnedEnumeration");
+	m_component_Operation_createOwnedEnumeration_String->setEType(getEnumeration_Class());
 	m_component_Operation_createOwnedEnumeration_String->setLowerBound(1);
 	m_component_Operation_createOwnedEnumeration_String->setUpperBound(1);
 	m_component_Operation_createOwnedEnumeration_String->setUnique(true);
 	m_component_Operation_createOwnedEnumeration_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_component_Operation_createOwnedEnumeration_String);
 		parameter->setName("name");
@@ -7031,13 +6920,12 @@ void umlPackageImpl::initializeComponentContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_component_Operation_createOwnedInterface_String->setEType(getInterface_Class());
 	m_component_Operation_createOwnedInterface_String->setName("createOwnedInterface");
+	m_component_Operation_createOwnedInterface_String->setEType(getInterface_Class());
 	m_component_Operation_createOwnedInterface_String->setLowerBound(1);
 	m_component_Operation_createOwnedInterface_String->setUpperBound(1);
 	m_component_Operation_createOwnedInterface_String->setUnique(true);
 	m_component_Operation_createOwnedInterface_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_component_Operation_createOwnedInterface_String);
 		parameter->setName("name");
@@ -7048,13 +6936,12 @@ void umlPackageImpl::initializeComponentContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_component_Operation_createOwnedPrimitiveType_String->setEType(getPrimitiveType_Class());
 	m_component_Operation_createOwnedPrimitiveType_String->setName("createOwnedPrimitiveType");
+	m_component_Operation_createOwnedPrimitiveType_String->setEType(getPrimitiveType_Class());
 	m_component_Operation_createOwnedPrimitiveType_String->setLowerBound(1);
 	m_component_Operation_createOwnedPrimitiveType_String->setUpperBound(1);
 	m_component_Operation_createOwnedPrimitiveType_String->setUnique(true);
 	m_component_Operation_createOwnedPrimitiveType_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_component_Operation_createOwnedPrimitiveType_String);
 		parameter->setName("name");
@@ -7065,29 +6952,26 @@ void umlPackageImpl::initializeComponentContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_component_Operation_getProvideds->setEType(getInterface_Class());
 	m_component_Operation_getProvideds->setName("getProvideds");
+	m_component_Operation_getProvideds->setEType(getInterface_Class());
 	m_component_Operation_getProvideds->setLowerBound(0);
 	m_component_Operation_getProvideds->setUpperBound(-1);
 	m_component_Operation_getProvideds->setUnique(true);
 	m_component_Operation_getProvideds->setOrdered(false);
 	
-	
-	m_component_Operation_getRequireds->setEType(getInterface_Class());
 	m_component_Operation_getRequireds->setName("getRequireds");
+	m_component_Operation_getRequireds->setEType(getInterface_Class());
 	m_component_Operation_getRequireds->setLowerBound(0);
 	m_component_Operation_getRequireds->setUpperBound(-1);
 	m_component_Operation_getRequireds->setUnique(true);
 	m_component_Operation_getRequireds->setOrdered(false);
 	
-	
-	m_component_Operation_no_nested_classifiers_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_component_Operation_no_nested_classifiers_EDiagnosticChain_EMap->setName("no_nested_classifiers");
+	m_component_Operation_no_nested_classifiers_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_component_Operation_no_nested_classifiers_EDiagnosticChain_EMap->setLowerBound(0);
 	m_component_Operation_no_nested_classifiers_EDiagnosticChain_EMap->setUpperBound(1);
 	m_component_Operation_no_nested_classifiers_EDiagnosticChain_EMap->setUnique(true);
 	m_component_Operation_no_nested_classifiers_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_component_Operation_no_nested_classifiers_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -7108,13 +6992,12 @@ void umlPackageImpl::initializeComponentContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_component_Operation_no_packaged_elements_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_component_Operation_no_packaged_elements_EDiagnosticChain_EMap->setName("no_packaged_elements");
+	m_component_Operation_no_packaged_elements_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_component_Operation_no_packaged_elements_EDiagnosticChain_EMap->setLowerBound(0);
 	m_component_Operation_no_packaged_elements_EDiagnosticChain_EMap->setUpperBound(1);
 	m_component_Operation_no_packaged_elements_EDiagnosticChain_EMap->setUnique(true);
 	m_component_Operation_no_packaged_elements_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_component_Operation_no_packaged_elements_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -7204,7 +7087,7 @@ void umlPackageImpl::initializeConditionalNodeContent()
 	
 	m_conditionalNode_Attribute_isAssured = getConditionalNode_Attribute_isAssured();
 	m_conditionalNode_Attribute_isAssured->setName("isAssured");
-	m_conditionalNode_Attribute_isAssured->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_conditionalNode_Attribute_isAssured->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_conditionalNode_Attribute_isAssured->setLowerBound(1);
 	m_conditionalNode_Attribute_isAssured->setUpperBound(1);
 	m_conditionalNode_Attribute_isAssured->setTransient(false);
@@ -7224,7 +7107,7 @@ void umlPackageImpl::initializeConditionalNodeContent()
 	}
 	m_conditionalNode_Attribute_isDeterminate = getConditionalNode_Attribute_isDeterminate();
 	m_conditionalNode_Attribute_isDeterminate->setName("isDeterminate");
-	m_conditionalNode_Attribute_isDeterminate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_conditionalNode_Attribute_isDeterminate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_conditionalNode_Attribute_isDeterminate->setLowerBound(1);
 	m_conditionalNode_Attribute_isDeterminate->setUpperBound(1);
 	m_conditionalNode_Attribute_isDeterminate->setTransient(false);
@@ -7288,13 +7171,12 @@ void umlPackageImpl::initializeConditionalNodeContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_conditionalNode_Operation_clause_no_predecessor_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_conditionalNode_Operation_clause_no_predecessor_EDiagnosticChain_EMap->setName("clause_no_predecessor");
+	m_conditionalNode_Operation_clause_no_predecessor_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_conditionalNode_Operation_clause_no_predecessor_EDiagnosticChain_EMap->setLowerBound(0);
 	m_conditionalNode_Operation_clause_no_predecessor_EDiagnosticChain_EMap->setUpperBound(1);
 	m_conditionalNode_Operation_clause_no_predecessor_EDiagnosticChain_EMap->setUnique(true);
 	m_conditionalNode_Operation_clause_no_predecessor_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_conditionalNode_Operation_clause_no_predecessor_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -7315,13 +7197,12 @@ void umlPackageImpl::initializeConditionalNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_conditionalNode_Operation_executable_nodes_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_conditionalNode_Operation_executable_nodes_EDiagnosticChain_EMap->setName("executable_nodes");
+	m_conditionalNode_Operation_executable_nodes_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_conditionalNode_Operation_executable_nodes_EDiagnosticChain_EMap->setLowerBound(0);
 	m_conditionalNode_Operation_executable_nodes_EDiagnosticChain_EMap->setUpperBound(1);
 	m_conditionalNode_Operation_executable_nodes_EDiagnosticChain_EMap->setUnique(true);
 	m_conditionalNode_Operation_executable_nodes_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_conditionalNode_Operation_executable_nodes_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -7342,13 +7223,12 @@ void umlPackageImpl::initializeConditionalNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_conditionalNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_conditionalNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setName("matching_output_pins");
+	m_conditionalNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_conditionalNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_conditionalNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_conditionalNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_conditionalNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_conditionalNode_Operation_matching_output_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -7369,13 +7249,12 @@ void umlPackageImpl::initializeConditionalNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_conditionalNode_Operation_no_input_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_conditionalNode_Operation_no_input_pins_EDiagnosticChain_EMap->setName("no_input_pins");
+	m_conditionalNode_Operation_no_input_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_conditionalNode_Operation_no_input_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_conditionalNode_Operation_no_input_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_conditionalNode_Operation_no_input_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_conditionalNode_Operation_no_input_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_conditionalNode_Operation_no_input_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -7396,13 +7275,12 @@ void umlPackageImpl::initializeConditionalNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_conditionalNode_Operation_one_clause_with_executable_node_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_conditionalNode_Operation_one_clause_with_executable_node_EDiagnosticChain_EMap->setName("one_clause_with_executable_node");
+	m_conditionalNode_Operation_one_clause_with_executable_node_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_conditionalNode_Operation_one_clause_with_executable_node_EDiagnosticChain_EMap->setLowerBound(0);
 	m_conditionalNode_Operation_one_clause_with_executable_node_EDiagnosticChain_EMap->setUpperBound(1);
 	m_conditionalNode_Operation_one_clause_with_executable_node_EDiagnosticChain_EMap->setUnique(true);
 	m_conditionalNode_Operation_one_clause_with_executable_node_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_conditionalNode_Operation_one_clause_with_executable_node_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -7423,13 +7301,12 @@ void umlPackageImpl::initializeConditionalNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_conditionalNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_conditionalNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setName("result_no_incoming");
+	m_conditionalNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_conditionalNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setLowerBound(0);
 	m_conditionalNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setUpperBound(1);
 	m_conditionalNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setUnique(true);
 	m_conditionalNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_conditionalNode_Operation_result_no_incoming_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -7483,13 +7360,12 @@ void umlPackageImpl::initializeConnectableElementContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_connectableElement_Operation_getEnds->setEType(getConnectorEnd_Class());
 	m_connectableElement_Operation_getEnds->setName("getEnds");
+	m_connectableElement_Operation_getEnds->setEType(getConnectorEnd_Class());
 	m_connectableElement_Operation_getEnds->setLowerBound(0);
 	m_connectableElement_Operation_getEnds->setUpperBound(-1);
 	m_connectableElement_Operation_getEnds->setUnique(true);
 	m_connectableElement_Operation_getEnds->setOrdered(false);
-	
 	
 	
 }
@@ -7582,13 +7458,12 @@ void umlPackageImpl::initializeConnectionPointReferenceContent()
 	    }
 	}
 	
-	m_connectionPointReference_Operation_entry_pseudostates_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connectionPointReference_Operation_entry_pseudostates_EDiagnosticChain_EMap->setName("entry_pseudostates");
+	m_connectionPointReference_Operation_entry_pseudostates_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connectionPointReference_Operation_entry_pseudostates_EDiagnosticChain_EMap->setLowerBound(0);
 	m_connectionPointReference_Operation_entry_pseudostates_EDiagnosticChain_EMap->setUpperBound(1);
 	m_connectionPointReference_Operation_entry_pseudostates_EDiagnosticChain_EMap->setUnique(true);
 	m_connectionPointReference_Operation_entry_pseudostates_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_connectionPointReference_Operation_entry_pseudostates_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -7609,13 +7484,12 @@ void umlPackageImpl::initializeConnectionPointReferenceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_connectionPointReference_Operation_exit_pseudostates_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connectionPointReference_Operation_exit_pseudostates_EDiagnosticChain_EMap->setName("exit_pseudostates");
+	m_connectionPointReference_Operation_exit_pseudostates_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connectionPointReference_Operation_exit_pseudostates_EDiagnosticChain_EMap->setLowerBound(0);
 	m_connectionPointReference_Operation_exit_pseudostates_EDiagnosticChain_EMap->setUpperBound(1);
 	m_connectionPointReference_Operation_exit_pseudostates_EDiagnosticChain_EMap->setUnique(true);
 	m_connectionPointReference_Operation_exit_pseudostates_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_connectionPointReference_Operation_exit_pseudostates_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -7647,7 +7521,7 @@ void umlPackageImpl::initializeConnectorContent()
 	
 	m_connector_Attribute_kind = getConnector_Attribute_kind();
 	m_connector_Attribute_kind->setName("kind");
-	m_connector_Attribute_kind->setEType(getConnectorKind_Class());
+		m_connector_Attribute_kind->setEType(getConnectorKind_Class());
 	m_connector_Attribute_kind->setLowerBound(1);
 	m_connector_Attribute_kind->setUpperBound(1);
 	m_connector_Attribute_kind->setTransient(true);
@@ -7783,21 +7657,19 @@ void umlPackageImpl::initializeConnectorContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_connector_Operation_getKind->setEType(getConnectorKind_Class());
 	m_connector_Operation_getKind->setName("getKind");
+	m_connector_Operation_getKind->setEType(getConnectorKind_Class());
 	m_connector_Operation_getKind->setLowerBound(1);
 	m_connector_Operation_getKind->setUpperBound(1);
 	m_connector_Operation_getKind->setUnique(true);
 	m_connector_Operation_getKind->setOrdered(false);
 	
-	
-	m_connector_Operation_roles_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connector_Operation_roles_EDiagnosticChain_EMap->setName("roles");
+	m_connector_Operation_roles_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connector_Operation_roles_EDiagnosticChain_EMap->setLowerBound(0);
 	m_connector_Operation_roles_EDiagnosticChain_EMap->setUpperBound(1);
 	m_connector_Operation_roles_EDiagnosticChain_EMap->setUnique(true);
 	m_connector_Operation_roles_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_connector_Operation_roles_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -7818,13 +7690,12 @@ void umlPackageImpl::initializeConnectorContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_connector_Operation_types_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connector_Operation_types_EDiagnosticChain_EMap->setName("types");
+	m_connector_Operation_types_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connector_Operation_types_EDiagnosticChain_EMap->setLowerBound(0);
 	m_connector_Operation_types_EDiagnosticChain_EMap->setUpperBound(1);
 	m_connector_Operation_types_EDiagnosticChain_EMap->setUnique(true);
 	m_connector_Operation_types_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_connector_Operation_types_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -7947,21 +7818,19 @@ void umlPackageImpl::initializeConnectorEndContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_connectorEnd_Operation_getDefiningEnd->setEType(getProperty_Class());
 	m_connectorEnd_Operation_getDefiningEnd->setName("getDefiningEnd");
+	m_connectorEnd_Operation_getDefiningEnd->setEType(getProperty_Class());
 	m_connectorEnd_Operation_getDefiningEnd->setLowerBound(0);
 	m_connectorEnd_Operation_getDefiningEnd->setUpperBound(1);
 	m_connectorEnd_Operation_getDefiningEnd->setUnique(true);
 	m_connectorEnd_Operation_getDefiningEnd->setOrdered(false);
 	
-	
-	m_connectorEnd_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connectorEnd_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_connectorEnd_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connectorEnd_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_connectorEnd_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_connectorEnd_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_connectorEnd_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_connectorEnd_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -7982,13 +7851,12 @@ void umlPackageImpl::initializeConnectorEndContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_connectorEnd_Operation_part_with_port_empty_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connectorEnd_Operation_part_with_port_empty_EDiagnosticChain_EMap->setName("part_with_port_empty");
+	m_connectorEnd_Operation_part_with_port_empty_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connectorEnd_Operation_part_with_port_empty_EDiagnosticChain_EMap->setLowerBound(0);
 	m_connectorEnd_Operation_part_with_port_empty_EDiagnosticChain_EMap->setUpperBound(1);
 	m_connectorEnd_Operation_part_with_port_empty_EDiagnosticChain_EMap->setUnique(true);
 	m_connectorEnd_Operation_part_with_port_empty_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_connectorEnd_Operation_part_with_port_empty_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8009,13 +7877,12 @@ void umlPackageImpl::initializeConnectorEndContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_connectorEnd_Operation_role_and_part_with_port_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connectorEnd_Operation_role_and_part_with_port_EDiagnosticChain_EMap->setName("role_and_part_with_port");
+	m_connectorEnd_Operation_role_and_part_with_port_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connectorEnd_Operation_role_and_part_with_port_EDiagnosticChain_EMap->setLowerBound(0);
 	m_connectorEnd_Operation_role_and_part_with_port_EDiagnosticChain_EMap->setUpperBound(1);
 	m_connectorEnd_Operation_role_and_part_with_port_EDiagnosticChain_EMap->setUnique(true);
 	m_connectorEnd_Operation_role_and_part_with_port_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_connectorEnd_Operation_role_and_part_with_port_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8036,13 +7903,12 @@ void umlPackageImpl::initializeConnectorEndContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_connectorEnd_Operation_self_part_with_port_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connectorEnd_Operation_self_part_with_port_EDiagnosticChain_EMap->setName("self_part_with_port");
+	m_connectorEnd_Operation_self_part_with_port_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_connectorEnd_Operation_self_part_with_port_EDiagnosticChain_EMap->setLowerBound(0);
 	m_connectorEnd_Operation_self_part_with_port_EDiagnosticChain_EMap->setUpperBound(1);
 	m_connectorEnd_Operation_self_part_with_port_EDiagnosticChain_EMap->setUnique(true);
 	m_connectorEnd_Operation_self_part_with_port_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_connectorEnd_Operation_self_part_with_port_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8096,13 +7962,12 @@ void umlPackageImpl::initializeConsiderIgnoreFragmentContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_considerIgnoreFragment_Operation_consider_or_ignore_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_considerIgnoreFragment_Operation_consider_or_ignore_EDiagnosticChain_EMap->setName("consider_or_ignore");
+	m_considerIgnoreFragment_Operation_consider_or_ignore_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_considerIgnoreFragment_Operation_consider_or_ignore_EDiagnosticChain_EMap->setLowerBound(0);
 	m_considerIgnoreFragment_Operation_consider_or_ignore_EDiagnosticChain_EMap->setUpperBound(1);
 	m_considerIgnoreFragment_Operation_consider_or_ignore_EDiagnosticChain_EMap->setUnique(true);
 	m_considerIgnoreFragment_Operation_consider_or_ignore_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_considerIgnoreFragment_Operation_consider_or_ignore_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8123,13 +7988,12 @@ void umlPackageImpl::initializeConsiderIgnoreFragmentContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_considerIgnoreFragment_Operation_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_considerIgnoreFragment_Operation_type_EDiagnosticChain_EMap->setName("type");
+	m_considerIgnoreFragment_Operation_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_considerIgnoreFragment_Operation_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_considerIgnoreFragment_Operation_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_considerIgnoreFragment_Operation_type_EDiagnosticChain_EMap->setUnique(true);
 	m_considerIgnoreFragment_Operation_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_considerIgnoreFragment_Operation_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8230,13 +8094,12 @@ void umlPackageImpl::initializeConstraintContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_constraint_Operation_boolean_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_constraint_Operation_boolean_value_EDiagnosticChain_EMap->setName("boolean_value");
+	m_constraint_Operation_boolean_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_constraint_Operation_boolean_value_EDiagnosticChain_EMap->setLowerBound(0);
 	m_constraint_Operation_boolean_value_EDiagnosticChain_EMap->setUpperBound(1);
 	m_constraint_Operation_boolean_value_EDiagnosticChain_EMap->setUnique(true);
 	m_constraint_Operation_boolean_value_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_constraint_Operation_boolean_value_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8257,13 +8120,12 @@ void umlPackageImpl::initializeConstraintContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_constraint_Operation_no_side_effects_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_constraint_Operation_no_side_effects_EDiagnosticChain_EMap->setName("no_side_effects");
+	m_constraint_Operation_no_side_effects_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_constraint_Operation_no_side_effects_EDiagnosticChain_EMap->setLowerBound(0);
 	m_constraint_Operation_no_side_effects_EDiagnosticChain_EMap->setUpperBound(1);
 	m_constraint_Operation_no_side_effects_EDiagnosticChain_EMap->setUnique(true);
 	m_constraint_Operation_no_side_effects_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_constraint_Operation_no_side_effects_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8284,13 +8146,12 @@ void umlPackageImpl::initializeConstraintContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_constraint_Operation_not_apply_to_self_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_constraint_Operation_not_apply_to_self_EDiagnosticChain_EMap->setName("not_apply_to_self");
+	m_constraint_Operation_not_apply_to_self_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_constraint_Operation_not_apply_to_self_EDiagnosticChain_EMap->setLowerBound(0);
 	m_constraint_Operation_not_apply_to_self_EDiagnosticChain_EMap->setUpperBound(1);
 	m_constraint_Operation_not_apply_to_self_EDiagnosticChain_EMap->setUnique(true);
 	m_constraint_Operation_not_apply_to_self_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_constraint_Operation_not_apply_to_self_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8322,7 +8183,7 @@ void umlPackageImpl::initializeContinuationContent()
 	
 	m_continuation_Attribute_setting = getContinuation_Attribute_setting();
 	m_continuation_Attribute_setting->setName("setting");
-	m_continuation_Attribute_setting->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_continuation_Attribute_setting->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_continuation_Attribute_setting->setLowerBound(1);
 	m_continuation_Attribute_setting->setUpperBound(1);
 	m_continuation_Attribute_setting->setTransient(false);
@@ -8342,13 +8203,12 @@ void umlPackageImpl::initializeContinuationContent()
 	}
 	
 	
-	m_continuation_Operation_first_or_last_interaction_fragment_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_continuation_Operation_first_or_last_interaction_fragment_EDiagnosticChain_EMap->setName("first_or_last_interaction_fragment");
+	m_continuation_Operation_first_or_last_interaction_fragment_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_continuation_Operation_first_or_last_interaction_fragment_EDiagnosticChain_EMap->setLowerBound(0);
 	m_continuation_Operation_first_or_last_interaction_fragment_EDiagnosticChain_EMap->setUpperBound(1);
 	m_continuation_Operation_first_or_last_interaction_fragment_EDiagnosticChain_EMap->setUnique(true);
 	m_continuation_Operation_first_or_last_interaction_fragment_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_continuation_Operation_first_or_last_interaction_fragment_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8369,13 +8229,12 @@ void umlPackageImpl::initializeContinuationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_continuation_Operation_global_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_continuation_Operation_global_EDiagnosticChain_EMap->setName("global");
+	m_continuation_Operation_global_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_continuation_Operation_global_EDiagnosticChain_EMap->setLowerBound(0);
 	m_continuation_Operation_global_EDiagnosticChain_EMap->setUpperBound(1);
 	m_continuation_Operation_global_EDiagnosticChain_EMap->setUnique(true);
 	m_continuation_Operation_global_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_continuation_Operation_global_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8396,13 +8255,12 @@ void umlPackageImpl::initializeContinuationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_continuation_Operation_same_name_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_continuation_Operation_same_name_EDiagnosticChain_EMap->setName("same_name");
+	m_continuation_Operation_same_name_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_continuation_Operation_same_name_EDiagnosticChain_EMap->setLowerBound(0);
 	m_continuation_Operation_same_name_EDiagnosticChain_EMap->setUpperBound(1);
 	m_continuation_Operation_same_name_EDiagnosticChain_EMap->setUnique(true);
 	m_continuation_Operation_same_name_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_continuation_Operation_same_name_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8434,13 +8292,12 @@ void umlPackageImpl::initializeControlFlowContent()
 	
 	
 	
-	m_controlFlow_Operation_object_nodes_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_controlFlow_Operation_object_nodes_EDiagnosticChain_EMap->setName("object_nodes");
+	m_controlFlow_Operation_object_nodes_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_controlFlow_Operation_object_nodes_EDiagnosticChain_EMap->setLowerBound(0);
 	m_controlFlow_Operation_object_nodes_EDiagnosticChain_EMap->setUpperBound(1);
 	m_controlFlow_Operation_object_nodes_EDiagnosticChain_EMap->setUnique(true);
 	m_controlFlow_Operation_object_nodes_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_controlFlow_Operation_object_nodes_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8483,13 +8340,12 @@ void umlPackageImpl::initializeCreateLinkActionContent()
 	
 	
 	
-	m_createLinkAction_Operation_association_not_abstract_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createLinkAction_Operation_association_not_abstract_EDiagnosticChain_EMap->setName("association_not_abstract");
+	m_createLinkAction_Operation_association_not_abstract_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createLinkAction_Operation_association_not_abstract_EDiagnosticChain_EMap->setLowerBound(0);
 	m_createLinkAction_Operation_association_not_abstract_EDiagnosticChain_EMap->setUpperBound(1);
 	m_createLinkAction_Operation_association_not_abstract_EDiagnosticChain_EMap->setUnique(true);
 	m_createLinkAction_Operation_association_not_abstract_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_createLinkAction_Operation_association_not_abstract_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8543,13 +8399,12 @@ void umlPackageImpl::initializeCreateLinkObjectActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_createLinkObjectAction_Operation_association_class_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createLinkObjectAction_Operation_association_class_EDiagnosticChain_EMap->setName("association_class");
+	m_createLinkObjectAction_Operation_association_class_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createLinkObjectAction_Operation_association_class_EDiagnosticChain_EMap->setLowerBound(0);
 	m_createLinkObjectAction_Operation_association_class_EDiagnosticChain_EMap->setUpperBound(1);
 	m_createLinkObjectAction_Operation_association_class_EDiagnosticChain_EMap->setUnique(true);
 	m_createLinkObjectAction_Operation_association_class_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_createLinkObjectAction_Operation_association_class_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8570,13 +8425,12 @@ void umlPackageImpl::initializeCreateLinkObjectActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_createLinkObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createLinkObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_createLinkObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createLinkObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_createLinkObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_createLinkObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_createLinkObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_createLinkObjectAction_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8597,13 +8451,12 @@ void umlPackageImpl::initializeCreateLinkObjectActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_createLinkObjectAction_Operation_type_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createLinkObjectAction_Operation_type_of_result_EDiagnosticChain_EMap->setName("type_of_result");
+	m_createLinkObjectAction_Operation_type_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createLinkObjectAction_Operation_type_of_result_EDiagnosticChain_EMap->setLowerBound(0);
 	m_createLinkObjectAction_Operation_type_of_result_EDiagnosticChain_EMap->setUpperBound(1);
 	m_createLinkObjectAction_Operation_type_of_result_EDiagnosticChain_EMap->setUnique(true);
 	m_createLinkObjectAction_Operation_type_of_result_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_createLinkObjectAction_Operation_type_of_result_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8682,13 +8535,12 @@ void umlPackageImpl::initializeCreateObjectActionContent()
 	    }
 	}
 	
-	m_createObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setName("classifier_not_abstract");
+	m_createObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setLowerBound(0);
 	m_createObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setUpperBound(1);
 	m_createObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setUnique(true);
 	m_createObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_createObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8709,13 +8561,12 @@ void umlPackageImpl::initializeCreateObjectActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_createObjectAction_Operation_classifier_not_association_class_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createObjectAction_Operation_classifier_not_association_class_EDiagnosticChain_EMap->setName("classifier_not_association_class");
+	m_createObjectAction_Operation_classifier_not_association_class_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createObjectAction_Operation_classifier_not_association_class_EDiagnosticChain_EMap->setLowerBound(0);
 	m_createObjectAction_Operation_classifier_not_association_class_EDiagnosticChain_EMap->setUpperBound(1);
 	m_createObjectAction_Operation_classifier_not_association_class_EDiagnosticChain_EMap->setUnique(true);
 	m_createObjectAction_Operation_classifier_not_association_class_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_createObjectAction_Operation_classifier_not_association_class_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8736,13 +8587,12 @@ void umlPackageImpl::initializeCreateObjectActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_createObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_createObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_createObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_createObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_createObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_createObjectAction_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8763,13 +8613,12 @@ void umlPackageImpl::initializeCreateObjectActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_createObjectAction_Operation_same_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createObjectAction_Operation_same_type_EDiagnosticChain_EMap->setName("same_type");
+	m_createObjectAction_Operation_same_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_createObjectAction_Operation_same_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_createObjectAction_Operation_same_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_createObjectAction_Operation_same_type_EDiagnosticChain_EMap->setUnique(true);
 	m_createObjectAction_Operation_same_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_createObjectAction_Operation_same_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -8862,13 +8711,12 @@ void umlPackageImpl::initializeDataTypeContent()
 	    }
 	}
 	
-	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
 	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->setName("createOwnedAttribute");
+	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
 	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->setLowerBound(1);
 	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->setUpperBound(1);
 	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->setUnique(true);
 	m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_dataType_Operation_createOwnedAttribute_String_UnlimitedNatural);
 		parameter->setName("name");
@@ -8909,13 +8757,12 @@ void umlPackageImpl::initializeDataTypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_dataType_Operation_createOwnedOperation_String_Type->setEType(getOperation_Class());
 	m_dataType_Operation_createOwnedOperation_String_Type->setName("createOwnedOperation");
+	m_dataType_Operation_createOwnedOperation_String_Type->setEType(getOperation_Class());
 	m_dataType_Operation_createOwnedOperation_String_Type->setLowerBound(1);
 	m_dataType_Operation_createOwnedOperation_String_Type->setUpperBound(1);
 	m_dataType_Operation_createOwnedOperation_String_Type->setUnique(true);
 	m_dataType_Operation_createOwnedOperation_String_Type->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_dataType_Operation_createOwnedOperation_String_Type);
 		parameter->setName("name");
@@ -9011,13 +8858,12 @@ void umlPackageImpl::initializeDecisionNodeContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_decisionNode_Operation_decision_input_flow_incoming_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_decision_input_flow_incoming_EDiagnosticChain_EMap->setName("decision_input_flow_incoming");
+	m_decisionNode_Operation_decision_input_flow_incoming_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_decision_input_flow_incoming_EDiagnosticChain_EMap->setLowerBound(0);
 	m_decisionNode_Operation_decision_input_flow_incoming_EDiagnosticChain_EMap->setUpperBound(1);
 	m_decisionNode_Operation_decision_input_flow_incoming_EDiagnosticChain_EMap->setUnique(true);
 	m_decisionNode_Operation_decision_input_flow_incoming_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_decisionNode_Operation_decision_input_flow_incoming_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9038,13 +8884,12 @@ void umlPackageImpl::initializeDecisionNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_decisionNode_Operation_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_edges_EDiagnosticChain_EMap->setName("edges");
+	m_decisionNode_Operation_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_decisionNode_Operation_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_decisionNode_Operation_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_decisionNode_Operation_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_decisionNode_Operation_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9065,13 +8910,12 @@ void umlPackageImpl::initializeDecisionNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_decisionNode_Operation_incoming_control_one_input_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_incoming_control_one_input_parameter_EDiagnosticChain_EMap->setName("incoming_control_one_input_parameter");
+	m_decisionNode_Operation_incoming_control_one_input_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_incoming_control_one_input_parameter_EDiagnosticChain_EMap->setLowerBound(0);
 	m_decisionNode_Operation_incoming_control_one_input_parameter_EDiagnosticChain_EMap->setUpperBound(1);
 	m_decisionNode_Operation_incoming_control_one_input_parameter_EDiagnosticChain_EMap->setUnique(true);
 	m_decisionNode_Operation_incoming_control_one_input_parameter_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_decisionNode_Operation_incoming_control_one_input_parameter_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9092,13 +8936,12 @@ void umlPackageImpl::initializeDecisionNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_decisionNode_Operation_incoming_object_one_input_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_incoming_object_one_input_parameter_EDiagnosticChain_EMap->setName("incoming_object_one_input_parameter");
+	m_decisionNode_Operation_incoming_object_one_input_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_incoming_object_one_input_parameter_EDiagnosticChain_EMap->setLowerBound(0);
 	m_decisionNode_Operation_incoming_object_one_input_parameter_EDiagnosticChain_EMap->setUpperBound(1);
 	m_decisionNode_Operation_incoming_object_one_input_parameter_EDiagnosticChain_EMap->setUnique(true);
 	m_decisionNode_Operation_incoming_object_one_input_parameter_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_decisionNode_Operation_incoming_object_one_input_parameter_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9119,13 +8962,12 @@ void umlPackageImpl::initializeDecisionNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_decisionNode_Operation_incoming_outgoing_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_incoming_outgoing_edges_EDiagnosticChain_EMap->setName("incoming_outgoing_edges");
+	m_decisionNode_Operation_incoming_outgoing_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_incoming_outgoing_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_decisionNode_Operation_incoming_outgoing_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_decisionNode_Operation_incoming_outgoing_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_decisionNode_Operation_incoming_outgoing_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_decisionNode_Operation_incoming_outgoing_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9146,13 +8988,12 @@ void umlPackageImpl::initializeDecisionNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_decisionNode_Operation_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_parameters_EDiagnosticChain_EMap->setName("parameters");
+	m_decisionNode_Operation_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_parameters_EDiagnosticChain_EMap->setLowerBound(0);
 	m_decisionNode_Operation_parameters_EDiagnosticChain_EMap->setUpperBound(1);
 	m_decisionNode_Operation_parameters_EDiagnosticChain_EMap->setUnique(true);
 	m_decisionNode_Operation_parameters_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_decisionNode_Operation_parameters_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9173,13 +9014,12 @@ void umlPackageImpl::initializeDecisionNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_decisionNode_Operation_two_input_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_two_input_parameters_EDiagnosticChain_EMap->setName("two_input_parameters");
+	m_decisionNode_Operation_two_input_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_two_input_parameters_EDiagnosticChain_EMap->setLowerBound(0);
 	m_decisionNode_Operation_two_input_parameters_EDiagnosticChain_EMap->setUpperBound(1);
 	m_decisionNode_Operation_two_input_parameters_EDiagnosticChain_EMap->setUnique(true);
 	m_decisionNode_Operation_two_input_parameters_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_decisionNode_Operation_two_input_parameters_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9200,13 +9040,12 @@ void umlPackageImpl::initializeDecisionNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_decisionNode_Operation_zero_input_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_zero_input_parameters_EDiagnosticChain_EMap->setName("zero_input_parameters");
+	m_decisionNode_Operation_zero_input_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_decisionNode_Operation_zero_input_parameters_EDiagnosticChain_EMap->setLowerBound(0);
 	m_decisionNode_Operation_zero_input_parameters_EDiagnosticChain_EMap->setUpperBound(1);
 	m_decisionNode_Operation_zero_input_parameters_EDiagnosticChain_EMap->setUnique(true);
 	m_decisionNode_Operation_zero_input_parameters_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_decisionNode_Operation_zero_input_parameters_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9387,7 +9226,7 @@ void umlPackageImpl::initializeDeploymentSpecificationContent()
 	
 	m_deploymentSpecification_Attribute_deploymentLocation = getDeploymentSpecification_Attribute_deploymentLocation();
 	m_deploymentSpecification_Attribute_deploymentLocation->setName("deploymentLocation");
-	m_deploymentSpecification_Attribute_deploymentLocation->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_deploymentSpecification_Attribute_deploymentLocation->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_deploymentSpecification_Attribute_deploymentLocation->setLowerBound(0);
 	m_deploymentSpecification_Attribute_deploymentLocation->setUpperBound(1);
 	m_deploymentSpecification_Attribute_deploymentLocation->setTransient(false);
@@ -9407,7 +9246,7 @@ void umlPackageImpl::initializeDeploymentSpecificationContent()
 	}
 	m_deploymentSpecification_Attribute_executionLocation = getDeploymentSpecification_Attribute_executionLocation();
 	m_deploymentSpecification_Attribute_executionLocation->setName("executionLocation");
-	m_deploymentSpecification_Attribute_executionLocation->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_deploymentSpecification_Attribute_executionLocation->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_deploymentSpecification_Attribute_executionLocation->setLowerBound(0);
 	m_deploymentSpecification_Attribute_executionLocation->setUpperBound(1);
 	m_deploymentSpecification_Attribute_executionLocation->setTransient(false);
@@ -9452,13 +9291,12 @@ void umlPackageImpl::initializeDeploymentSpecificationContent()
 	    }
 	}
 	
-	m_deploymentSpecification_Operation_deployed_elements_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_deploymentSpecification_Operation_deployed_elements_EDiagnosticChain_EMap->setName("deployed_elements");
+	m_deploymentSpecification_Operation_deployed_elements_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_deploymentSpecification_Operation_deployed_elements_EDiagnosticChain_EMap->setLowerBound(0);
 	m_deploymentSpecification_Operation_deployed_elements_EDiagnosticChain_EMap->setUpperBound(1);
 	m_deploymentSpecification_Operation_deployed_elements_EDiagnosticChain_EMap->setUnique(true);
 	m_deploymentSpecification_Operation_deployed_elements_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_deploymentSpecification_Operation_deployed_elements_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9479,13 +9317,12 @@ void umlPackageImpl::initializeDeploymentSpecificationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_deploymentSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_deploymentSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setName("deployment_target");
+	m_deploymentSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_deploymentSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setLowerBound(0);
 	m_deploymentSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setUpperBound(1);
 	m_deploymentSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setUnique(true);
 	m_deploymentSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_deploymentSpecification_Operation_deployment_target_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9564,13 +9401,12 @@ void umlPackageImpl::initializeDeploymentTargetContent()
 	    }
 	}
 	
-	m_deploymentTarget_Operation_getDeployedElements->setEType(getPackageableElement_Class());
 	m_deploymentTarget_Operation_getDeployedElements->setName("getDeployedElements");
+	m_deploymentTarget_Operation_getDeployedElements->setEType(getPackageableElement_Class());
 	m_deploymentTarget_Operation_getDeployedElements->setLowerBound(0);
 	m_deploymentTarget_Operation_getDeployedElements->setUpperBound(-1);
 	m_deploymentTarget_Operation_getDeployedElements->setUnique(true);
 	m_deploymentTarget_Operation_getDeployedElements->setOrdered(false);
-	
 	
 	
 }
@@ -9594,7 +9430,7 @@ void umlPackageImpl::initializeDestroyObjectActionContent()
 	
 	m_destroyObjectAction_Attribute_isDestroyLinks = getDestroyObjectAction_Attribute_isDestroyLinks();
 	m_destroyObjectAction_Attribute_isDestroyLinks->setName("isDestroyLinks");
-	m_destroyObjectAction_Attribute_isDestroyLinks->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_destroyObjectAction_Attribute_isDestroyLinks->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_destroyObjectAction_Attribute_isDestroyLinks->setLowerBound(1);
 	m_destroyObjectAction_Attribute_isDestroyLinks->setUpperBound(1);
 	m_destroyObjectAction_Attribute_isDestroyLinks->setTransient(false);
@@ -9614,7 +9450,7 @@ void umlPackageImpl::initializeDestroyObjectActionContent()
 	}
 	m_destroyObjectAction_Attribute_isDestroyOwnedObjects = getDestroyObjectAction_Attribute_isDestroyOwnedObjects();
 	m_destroyObjectAction_Attribute_isDestroyOwnedObjects->setName("isDestroyOwnedObjects");
-	m_destroyObjectAction_Attribute_isDestroyOwnedObjects->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_destroyObjectAction_Attribute_isDestroyOwnedObjects->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_destroyObjectAction_Attribute_isDestroyOwnedObjects->setLowerBound(1);
 	m_destroyObjectAction_Attribute_isDestroyOwnedObjects->setUpperBound(1);
 	m_destroyObjectAction_Attribute_isDestroyOwnedObjects->setTransient(false);
@@ -9659,13 +9495,12 @@ void umlPackageImpl::initializeDestroyObjectActionContent()
 	    }
 	}
 	
-	m_destroyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_destroyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_destroyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_destroyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_destroyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_destroyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_destroyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_destroyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9686,13 +9521,12 @@ void umlPackageImpl::initializeDestroyObjectActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_destroyObjectAction_Operation_no_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_destroyObjectAction_Operation_no_type_EDiagnosticChain_EMap->setName("no_type");
+	m_destroyObjectAction_Operation_no_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_destroyObjectAction_Operation_no_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_destroyObjectAction_Operation_no_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_destroyObjectAction_Operation_no_type_EDiagnosticChain_EMap->setUnique(true);
 	m_destroyObjectAction_Operation_no_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_destroyObjectAction_Operation_no_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9724,13 +9558,12 @@ void umlPackageImpl::initializeDestructionOccurrenceSpecificationContent()
 	
 	
 	
-	m_destructionOccurrenceSpecification_Operation_no_occurrence_specifications_below_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_destructionOccurrenceSpecification_Operation_no_occurrence_specifications_below_EDiagnosticChain_EMap->setName("no_occurrence_specifications_below");
+	m_destructionOccurrenceSpecification_Operation_no_occurrence_specifications_below_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_destructionOccurrenceSpecification_Operation_no_occurrence_specifications_below_EDiagnosticChain_EMap->setLowerBound(0);
 	m_destructionOccurrenceSpecification_Operation_no_occurrence_specifications_below_EDiagnosticChain_EMap->setUpperBound(1);
 	m_destructionOccurrenceSpecification_Operation_no_occurrence_specifications_below_EDiagnosticChain_EMap->setUnique(true);
 	m_destructionOccurrenceSpecification_Operation_no_occurrence_specifications_below_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_destructionOccurrenceSpecification_Operation_no_occurrence_specifications_below_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9872,13 +9705,12 @@ void umlPackageImpl::initializeDurationContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_duration_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_duration_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setName("no_expr_requires_observation");
+	m_duration_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_duration_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setLowerBound(0);
 	m_duration_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setUpperBound(1);
 	m_duration_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setUnique(true);
 	m_duration_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_duration_Operation_no_expr_requires_observation_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9910,7 +9742,7 @@ void umlPackageImpl::initializeDurationConstraintContent()
 	
 	m_durationConstraint_Attribute_firstEvent = getDurationConstraint_Attribute_firstEvent();
 	m_durationConstraint_Attribute_firstEvent->setName("firstEvent");
-	m_durationConstraint_Attribute_firstEvent->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+		m_durationConstraint_Attribute_firstEvent->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_durationConstraint_Attribute_firstEvent->setLowerBound(0);
 	m_durationConstraint_Attribute_firstEvent->setUpperBound(2);
 	m_durationConstraint_Attribute_firstEvent->setTransient(false);
@@ -9930,13 +9762,12 @@ void umlPackageImpl::initializeDurationConstraintContent()
 	}
 	
 	
-	m_durationConstraint_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_durationConstraint_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setName("first_event_multiplicity");
+	m_durationConstraint_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_durationConstraint_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_durationConstraint_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_durationConstraint_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_durationConstraint_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_durationConstraint_Operation_first_event_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -9957,13 +9788,12 @@ void umlPackageImpl::initializeDurationConstraintContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_durationConstraint_Operation_has_one_or_two_constrainedElements_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_durationConstraint_Operation_has_one_or_two_constrainedElements_EDiagnosticChain_EMap->setName("has_one_or_two_constrainedElements");
+	m_durationConstraint_Operation_has_one_or_two_constrainedElements_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_durationConstraint_Operation_has_one_or_two_constrainedElements_EDiagnosticChain_EMap->setLowerBound(0);
 	m_durationConstraint_Operation_has_one_or_two_constrainedElements_EDiagnosticChain_EMap->setUpperBound(1);
 	m_durationConstraint_Operation_has_one_or_two_constrainedElements_EDiagnosticChain_EMap->setUnique(true);
 	m_durationConstraint_Operation_has_one_or_two_constrainedElements_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_durationConstraint_Operation_has_one_or_two_constrainedElements_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -10006,7 +9836,7 @@ void umlPackageImpl::initializeDurationObservationContent()
 	
 	m_durationObservation_Attribute_firstEvent = getDurationObservation_Attribute_firstEvent();
 	m_durationObservation_Attribute_firstEvent->setName("firstEvent");
-	m_durationObservation_Attribute_firstEvent->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
+		m_durationObservation_Attribute_firstEvent->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_durationObservation_Attribute_firstEvent->setLowerBound(0);
 	m_durationObservation_Attribute_firstEvent->setUpperBound(2);
 	m_durationObservation_Attribute_firstEvent->setTransient(false);
@@ -10048,13 +9878,12 @@ void umlPackageImpl::initializeDurationObservationContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_durationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_durationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setName("first_event_multiplicity");
+	m_durationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_durationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_durationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_durationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_durationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_durationObservation_Operation_first_event_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -10158,13 +9987,12 @@ void umlPackageImpl::initializeElementContent()
 	    }
 	}
 	
-	m_element_Operation_addKeyword_String->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_addKeyword_String->setName("addKeyword");
+	m_element_Operation_addKeyword_String->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_addKeyword_String->setLowerBound(1);
 	m_element_Operation_addKeyword_String->setUpperBound(1);
 	m_element_Operation_addKeyword_String->setUnique(true);
 	m_element_Operation_addKeyword_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_addKeyword_String);
 		parameter->setName("keyword");
@@ -10175,21 +10003,19 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_allOwnedElements->setEType(getElement_Class());
 	m_element_Operation_allOwnedElements->setName("allOwnedElements");
+	m_element_Operation_allOwnedElements->setEType(getElement_Class());
 	m_element_Operation_allOwnedElements->setLowerBound(0);
 	m_element_Operation_allOwnedElements->setUpperBound(-1);
 	m_element_Operation_allOwnedElements->setUnique(true);
 	m_element_Operation_allOwnedElements->setOrdered(false);
 	
-	
-	m_element_Operation_applyStereotype_Stereotype->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_element_Operation_applyStereotype_Stereotype->setName("applyStereotype");
+	m_element_Operation_applyStereotype_Stereotype->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_element_Operation_applyStereotype_Stereotype->setLowerBound(1);
 	m_element_Operation_applyStereotype_Stereotype->setUpperBound(1);
 	m_element_Operation_applyStereotype_Stereotype->setUnique(true);
 	m_element_Operation_applyStereotype_Stereotype->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_applyStereotype_Stereotype);
 		parameter->setName("stereotype");
@@ -10200,21 +10026,19 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_container->setEType(getElement_Class());
 	m_element_Operation_container->setName("container");
+	m_element_Operation_container->setEType(getElement_Class());
 	m_element_Operation_container->setLowerBound(0);
 	m_element_Operation_container->setUpperBound(1);
 	m_element_Operation_container->setUnique(true);
 	m_element_Operation_container->setOrdered(true);
 	
-	
-	m_element_Operation_createEAnnotation_String->setEType(ecore::ecorePackage::eInstance()->getEAnnotation_Class());
 	m_element_Operation_createEAnnotation_String->setName("createEAnnotation");
+	m_element_Operation_createEAnnotation_String->setEType(ecore::ecorePackage::eInstance()->getEAnnotation_Class());
 	m_element_Operation_createEAnnotation_String->setLowerBound(1);
 	m_element_Operation_createEAnnotation_String->setUpperBound(1);
 	m_element_Operation_createEAnnotation_String->setUnique(true);
 	m_element_Operation_createEAnnotation_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_createEAnnotation_String);
 		parameter->setName("source");
@@ -10225,21 +10049,25 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_destroy->setEType(nullptr);
 	m_element_Operation_destroy->setName("destroy");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_element_Operation_destroy->setEType(unknownClass);
+	}
 	m_element_Operation_destroy->setLowerBound(1);
 	m_element_Operation_destroy->setUpperBound(1);
 	m_element_Operation_destroy->setUnique(true);
 	m_element_Operation_destroy->setOrdered(false);
 	
-	
-	m_element_Operation_getApplicableStereotype_String->setEType(getStereotype_Class());
 	m_element_Operation_getApplicableStereotype_String->setName("getApplicableStereotype");
+	m_element_Operation_getApplicableStereotype_String->setEType(getStereotype_Class());
 	m_element_Operation_getApplicableStereotype_String->setLowerBound(0);
 	m_element_Operation_getApplicableStereotype_String->setUpperBound(1);
 	m_element_Operation_getApplicableStereotype_String->setUnique(true);
 	m_element_Operation_getApplicableStereotype_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_getApplicableStereotype_String);
 		parameter->setName("qualifiedName");
@@ -10250,21 +10078,19 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_getApplicableStereotypes->setEType(getStereotype_Class());
 	m_element_Operation_getApplicableStereotypes->setName("getApplicableStereotypes");
+	m_element_Operation_getApplicableStereotypes->setEType(getStereotype_Class());
 	m_element_Operation_getApplicableStereotypes->setLowerBound(0);
 	m_element_Operation_getApplicableStereotypes->setUpperBound(-1);
 	m_element_Operation_getApplicableStereotypes->setUnique(true);
 	m_element_Operation_getApplicableStereotypes->setOrdered(false);
 	
-	
-	m_element_Operation_getAppliedStereotype_String->setEType(getStereotype_Class());
 	m_element_Operation_getAppliedStereotype_String->setName("getAppliedStereotype");
+	m_element_Operation_getAppliedStereotype_String->setEType(getStereotype_Class());
 	m_element_Operation_getAppliedStereotype_String->setLowerBound(0);
 	m_element_Operation_getAppliedStereotype_String->setUpperBound(1);
 	m_element_Operation_getAppliedStereotype_String->setUnique(true);
 	m_element_Operation_getAppliedStereotype_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_getAppliedStereotype_String);
 		parameter->setName("qualifiedName");
@@ -10275,21 +10101,19 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_getAppliedStereotypes->setEType(getStereotype_Class());
 	m_element_Operation_getAppliedStereotypes->setName("getAppliedStereotypes");
+	m_element_Operation_getAppliedStereotypes->setEType(getStereotype_Class());
 	m_element_Operation_getAppliedStereotypes->setLowerBound(0);
 	m_element_Operation_getAppliedStereotypes->setUpperBound(-1);
 	m_element_Operation_getAppliedStereotypes->setUnique(true);
 	m_element_Operation_getAppliedStereotypes->setOrdered(false);
 	
-	
-	m_element_Operation_getAppliedSubstereotype_Stereotype_String->setEType(getStereotype_Class());
 	m_element_Operation_getAppliedSubstereotype_Stereotype_String->setName("getAppliedSubstereotype");
+	m_element_Operation_getAppliedSubstereotype_Stereotype_String->setEType(getStereotype_Class());
 	m_element_Operation_getAppliedSubstereotype_Stereotype_String->setLowerBound(0);
 	m_element_Operation_getAppliedSubstereotype_Stereotype_String->setUpperBound(1);
 	m_element_Operation_getAppliedSubstereotype_Stereotype_String->setUnique(true);
 	m_element_Operation_getAppliedSubstereotype_Stereotype_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_getAppliedSubstereotype_Stereotype_String);
 		parameter->setName("stereotype");
@@ -10310,13 +10134,12 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_getAppliedSubstereotypes_Stereotype->setEType(getStereotype_Class());
 	m_element_Operation_getAppliedSubstereotypes_Stereotype->setName("getAppliedSubstereotypes");
+	m_element_Operation_getAppliedSubstereotypes_Stereotype->setEType(getStereotype_Class());
 	m_element_Operation_getAppliedSubstereotypes_Stereotype->setLowerBound(0);
 	m_element_Operation_getAppliedSubstereotypes_Stereotype->setUpperBound(-1);
 	m_element_Operation_getAppliedSubstereotypes_Stereotype->setUnique(true);
 	m_element_Operation_getAppliedSubstereotypes_Stereotype->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_getAppliedSubstereotypes_Stereotype);
 		parameter->setName("stereotype");
@@ -10327,53 +10150,47 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_getKeywords->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_element_Operation_getKeywords->setName("getKeywords");
+	m_element_Operation_getKeywords->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_element_Operation_getKeywords->setLowerBound(0);
 	m_element_Operation_getKeywords->setUpperBound(-1);
 	m_element_Operation_getKeywords->setUnique(true);
 	m_element_Operation_getKeywords->setOrdered(false);
 	
-	
-	m_element_Operation_getMetaClass->setEType(getClass_Class());
 	m_element_Operation_getMetaClass->setName("getMetaClass");
+	m_element_Operation_getMetaClass->setEType(getClass_Class());
 	m_element_Operation_getMetaClass->setLowerBound(0);
 	m_element_Operation_getMetaClass->setUpperBound(1);
 	m_element_Operation_getMetaClass->setUnique(true);
 	m_element_Operation_getMetaClass->setOrdered(true);
 	
-	
-	m_element_Operation_getModel->setEType(getModel_Class());
 	m_element_Operation_getModel->setName("getModel");
+	m_element_Operation_getModel->setEType(getModel_Class());
 	m_element_Operation_getModel->setLowerBound(0);
 	m_element_Operation_getModel->setUpperBound(1);
 	m_element_Operation_getModel->setUnique(true);
 	m_element_Operation_getModel->setOrdered(false);
 	
-	
-	m_element_Operation_getNearestPackage->setEType(getPackage_Class());
 	m_element_Operation_getNearestPackage->setName("getNearestPackage");
+	m_element_Operation_getNearestPackage->setEType(getPackage_Class());
 	m_element_Operation_getNearestPackage->setLowerBound(0);
 	m_element_Operation_getNearestPackage->setUpperBound(1);
 	m_element_Operation_getNearestPackage->setUnique(true);
 	m_element_Operation_getNearestPackage->setOrdered(false);
 	
-	
-	m_element_Operation_getRelationships->setEType(getRelationship_Class());
 	m_element_Operation_getRelationships->setName("getRelationships");
+	m_element_Operation_getRelationships->setEType(getRelationship_Class());
 	m_element_Operation_getRelationships->setLowerBound(0);
 	m_element_Operation_getRelationships->setUpperBound(-1);
 	m_element_Operation_getRelationships->setUnique(true);
 	m_element_Operation_getRelationships->setOrdered(false);
 	
-	
-	m_element_Operation_getRelationships_EClass->setEType(getRelationship_Class());
 	m_element_Operation_getRelationships_EClass->setName("getRelationships");
+	m_element_Operation_getRelationships_EClass->setEType(getRelationship_Class());
 	m_element_Operation_getRelationships_EClass->setLowerBound(0);
 	m_element_Operation_getRelationships_EClass->setUpperBound(-1);
 	m_element_Operation_getRelationships_EClass->setUnique(true);
 	m_element_Operation_getRelationships_EClass->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_getRelationships_EClass);
 		parameter->setName("eClass");
@@ -10384,13 +10201,12 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_getRequiredStereotype_String->setEType(getStereotype_Class());
 	m_element_Operation_getRequiredStereotype_String->setName("getRequiredStereotype");
+	m_element_Operation_getRequiredStereotype_String->setEType(getStereotype_Class());
 	m_element_Operation_getRequiredStereotype_String->setLowerBound(0);
 	m_element_Operation_getRequiredStereotype_String->setUpperBound(1);
 	m_element_Operation_getRequiredStereotype_String->setUnique(true);
 	m_element_Operation_getRequiredStereotype_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_getRequiredStereotype_String);
 		parameter->setName("qualifiedName");
@@ -10401,29 +10217,26 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_getRequiredStereotypes->setEType(getStereotype_Class());
 	m_element_Operation_getRequiredStereotypes->setName("getRequiredStereotypes");
+	m_element_Operation_getRequiredStereotypes->setEType(getStereotype_Class());
 	m_element_Operation_getRequiredStereotypes->setLowerBound(0);
 	m_element_Operation_getRequiredStereotypes->setUpperBound(-1);
 	m_element_Operation_getRequiredStereotypes->setUnique(true);
 	m_element_Operation_getRequiredStereotypes->setOrdered(false);
 	
-	
-	m_element_Operation_getSourceDirectedRelationships->setEType(getDirectedRelationship_Class());
 	m_element_Operation_getSourceDirectedRelationships->setName("getSourceDirectedRelationships");
+	m_element_Operation_getSourceDirectedRelationships->setEType(getDirectedRelationship_Class());
 	m_element_Operation_getSourceDirectedRelationships->setLowerBound(0);
 	m_element_Operation_getSourceDirectedRelationships->setUpperBound(-1);
 	m_element_Operation_getSourceDirectedRelationships->setUnique(true);
 	m_element_Operation_getSourceDirectedRelationships->setOrdered(false);
 	
-	
-	m_element_Operation_getSourceDirectedRelationships_EClass->setEType(getDirectedRelationship_Class());
 	m_element_Operation_getSourceDirectedRelationships_EClass->setName("getSourceDirectedRelationships");
+	m_element_Operation_getSourceDirectedRelationships_EClass->setEType(getDirectedRelationship_Class());
 	m_element_Operation_getSourceDirectedRelationships_EClass->setLowerBound(0);
 	m_element_Operation_getSourceDirectedRelationships_EClass->setUpperBound(-1);
 	m_element_Operation_getSourceDirectedRelationships_EClass->setUnique(true);
 	m_element_Operation_getSourceDirectedRelationships_EClass->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_getSourceDirectedRelationships_EClass);
 		parameter->setName("eClass");
@@ -10434,13 +10247,12 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_getStereotypeApplication_Stereotype->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_element_Operation_getStereotypeApplication_Stereotype->setName("getStereotypeApplication");
+	m_element_Operation_getStereotypeApplication_Stereotype->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_element_Operation_getStereotypeApplication_Stereotype->setLowerBound(0);
 	m_element_Operation_getStereotypeApplication_Stereotype->setUpperBound(1);
 	m_element_Operation_getStereotypeApplication_Stereotype->setUnique(true);
 	m_element_Operation_getStereotypeApplication_Stereotype->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_getStereotypeApplication_Stereotype);
 		parameter->setName("stereotype");
@@ -10451,29 +10263,26 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_getStereotypeApplications->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_element_Operation_getStereotypeApplications->setName("getStereotypeApplications");
+	m_element_Operation_getStereotypeApplications->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_element_Operation_getStereotypeApplications->setLowerBound(0);
 	m_element_Operation_getStereotypeApplications->setUpperBound(-1);
 	m_element_Operation_getStereotypeApplications->setUnique(true);
 	m_element_Operation_getStereotypeApplications->setOrdered(false);
 	
-	
-	m_element_Operation_getTargetDirectedRelationships->setEType(getDirectedRelationship_Class());
 	m_element_Operation_getTargetDirectedRelationships->setName("getTargetDirectedRelationships");
+	m_element_Operation_getTargetDirectedRelationships->setEType(getDirectedRelationship_Class());
 	m_element_Operation_getTargetDirectedRelationships->setLowerBound(0);
 	m_element_Operation_getTargetDirectedRelationships->setUpperBound(-1);
 	m_element_Operation_getTargetDirectedRelationships->setUnique(true);
 	m_element_Operation_getTargetDirectedRelationships->setOrdered(false);
 	
-	
-	m_element_Operation_getTargetDirectedRelationships_EClass->setEType(getDirectedRelationship_Class());
 	m_element_Operation_getTargetDirectedRelationships_EClass->setName("getTargetDirectedRelationships");
+	m_element_Operation_getTargetDirectedRelationships_EClass->setEType(getDirectedRelationship_Class());
 	m_element_Operation_getTargetDirectedRelationships_EClass->setLowerBound(0);
 	m_element_Operation_getTargetDirectedRelationships_EClass->setUpperBound(-1);
 	m_element_Operation_getTargetDirectedRelationships_EClass->setUnique(true);
 	m_element_Operation_getTargetDirectedRelationships_EClass->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_getTargetDirectedRelationships_EClass);
 		parameter->setName("eClass");
@@ -10484,13 +10293,12 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_getValue_Stereotype_String->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_element_Operation_getValue_Stereotype_String->setName("getValue");
+	m_element_Operation_getValue_Stereotype_String->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_element_Operation_getValue_Stereotype_String->setLowerBound(0);
 	m_element_Operation_getValue_Stereotype_String->setUpperBound(1);
 	m_element_Operation_getValue_Stereotype_String->setUnique(true);
 	m_element_Operation_getValue_Stereotype_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_getValue_Stereotype_String);
 		parameter->setName("stereotype");
@@ -10511,13 +10319,12 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_hasKeyword_String->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_hasKeyword_String->setName("hasKeyword");
+	m_element_Operation_hasKeyword_String->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_hasKeyword_String->setLowerBound(1);
 	m_element_Operation_hasKeyword_String->setUpperBound(1);
 	m_element_Operation_hasKeyword_String->setUnique(true);
 	m_element_Operation_hasKeyword_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_hasKeyword_String);
 		parameter->setName("keyword");
@@ -10528,13 +10335,12 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_hasValue_Stereotype_String->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_hasValue_Stereotype_String->setName("hasValue");
+	m_element_Operation_hasValue_Stereotype_String->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_hasValue_Stereotype_String->setLowerBound(1);
 	m_element_Operation_hasValue_Stereotype_String->setUpperBound(1);
 	m_element_Operation_hasValue_Stereotype_String->setUnique(true);
 	m_element_Operation_hasValue_Stereotype_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_hasValue_Stereotype_String);
 		parameter->setName("stereotype");
@@ -10555,13 +10361,12 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_has_owner_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_element_Operation_has_owner_EDiagnosticChain_EMap->setName("has_owner");
+	m_element_Operation_has_owner_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_element_Operation_has_owner_EDiagnosticChain_EMap->setLowerBound(0);
 	m_element_Operation_has_owner_EDiagnosticChain_EMap->setUpperBound(1);
 	m_element_Operation_has_owner_EDiagnosticChain_EMap->setUnique(true);
 	m_element_Operation_has_owner_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_has_owner_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -10582,13 +10387,12 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_isStereotypeApplicable_Stereotype->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_isStereotypeApplicable_Stereotype->setName("isStereotypeApplicable");
+	m_element_Operation_isStereotypeApplicable_Stereotype->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_isStereotypeApplicable_Stereotype->setLowerBound(1);
 	m_element_Operation_isStereotypeApplicable_Stereotype->setUpperBound(1);
 	m_element_Operation_isStereotypeApplicable_Stereotype->setUnique(true);
 	m_element_Operation_isStereotypeApplicable_Stereotype->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_isStereotypeApplicable_Stereotype);
 		parameter->setName("stereotype");
@@ -10599,13 +10403,12 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_isStereotypeApplied_Stereotype->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_isStereotypeApplied_Stereotype->setName("isStereotypeApplied");
+	m_element_Operation_isStereotypeApplied_Stereotype->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_isStereotypeApplied_Stereotype->setLowerBound(1);
 	m_element_Operation_isStereotypeApplied_Stereotype->setUpperBound(1);
 	m_element_Operation_isStereotypeApplied_Stereotype->setUnique(true);
 	m_element_Operation_isStereotypeApplied_Stereotype->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_isStereotypeApplied_Stereotype);
 		parameter->setName("stereotype");
@@ -10616,13 +10419,12 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_isStereotypeRequired_Stereotype->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_isStereotypeRequired_Stereotype->setName("isStereotypeRequired");
+	m_element_Operation_isStereotypeRequired_Stereotype->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_isStereotypeRequired_Stereotype->setLowerBound(1);
 	m_element_Operation_isStereotypeRequired_Stereotype->setUpperBound(1);
 	m_element_Operation_isStereotypeRequired_Stereotype->setUnique(true);
 	m_element_Operation_isStereotypeRequired_Stereotype->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_isStereotypeRequired_Stereotype);
 		parameter->setName("stereotype");
@@ -10633,21 +10435,19 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_mustBeOwned->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_mustBeOwned->setName("mustBeOwned");
+	m_element_Operation_mustBeOwned->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_mustBeOwned->setLowerBound(1);
 	m_element_Operation_mustBeOwned->setUpperBound(1);
 	m_element_Operation_mustBeOwned->setUnique(true);
 	m_element_Operation_mustBeOwned->setOrdered(false);
 	
-	
-	m_element_Operation_not_own_self_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_element_Operation_not_own_self_EDiagnosticChain_EMap->setName("not_own_self");
+	m_element_Operation_not_own_self_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_element_Operation_not_own_self_EDiagnosticChain_EMap->setLowerBound(0);
 	m_element_Operation_not_own_self_EDiagnosticChain_EMap->setUpperBound(1);
 	m_element_Operation_not_own_self_EDiagnosticChain_EMap->setUnique(true);
 	m_element_Operation_not_own_self_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_not_own_self_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -10668,13 +10468,12 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_removeKeyword_String->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_removeKeyword_String->setName("removeKeyword");
+	m_element_Operation_removeKeyword_String->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_element_Operation_removeKeyword_String->setLowerBound(1);
 	m_element_Operation_removeKeyword_String->setUpperBound(1);
 	m_element_Operation_removeKeyword_String->setUnique(true);
 	m_element_Operation_removeKeyword_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_removeKeyword_String);
 		parameter->setName("keyword");
@@ -10685,13 +10484,18 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_setValue_Stereotype_EJavaObject->setEType(nullptr);
 	m_element_Operation_setValue_Stereotype_EJavaObject->setName("setValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_element_Operation_setValue_Stereotype_EJavaObject->setEType(unknownClass);
+	}
 	m_element_Operation_setValue_Stereotype_EJavaObject->setLowerBound(1);
 	m_element_Operation_setValue_Stereotype_EJavaObject->setUpperBound(1);
 	m_element_Operation_setValue_Stereotype_EJavaObject->setUnique(true);
 	m_element_Operation_setValue_Stereotype_EJavaObject->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_setValue_Stereotype_EJavaObject);
 		parameter->setName("stereotype");
@@ -10722,13 +10526,12 @@ void umlPackageImpl::initializeElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_element_Operation_unapplyStereotype_Stereotype->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_element_Operation_unapplyStereotype_Stereotype->setName("unapplyStereotype");
+	m_element_Operation_unapplyStereotype_Stereotype->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_element_Operation_unapplyStereotype_Stereotype->setLowerBound(1);
 	m_element_Operation_unapplyStereotype_Stereotype->setUpperBound(1);
 	m_element_Operation_unapplyStereotype_Stereotype->setUnique(true);
 	m_element_Operation_unapplyStereotype_Stereotype->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_element_Operation_unapplyStereotype_Stereotype);
 		parameter->setName("stereotype");
@@ -10750,7 +10553,7 @@ void umlPackageImpl::initializeElementImportContent()
 	
 	m_elementImport_Attribute_alias = getElementImport_Attribute_alias();
 	m_elementImport_Attribute_alias->setName("alias");
-	m_elementImport_Attribute_alias->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_elementImport_Attribute_alias->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_elementImport_Attribute_alias->setLowerBound(0);
 	m_elementImport_Attribute_alias->setUpperBound(1);
 	m_elementImport_Attribute_alias->setTransient(false);
@@ -10770,7 +10573,7 @@ void umlPackageImpl::initializeElementImportContent()
 	}
 	m_elementImport_Attribute_visibility = getElementImport_Attribute_visibility();
 	m_elementImport_Attribute_visibility->setName("visibility");
-	m_elementImport_Attribute_visibility->setEType(getVisibilityKind_Class());
+		m_elementImport_Attribute_visibility->setEType(getVisibilityKind_Class());
 	m_elementImport_Attribute_visibility->setLowerBound(1);
 	m_elementImport_Attribute_visibility->setUpperBound(1);
 	m_elementImport_Attribute_visibility->setTransient(false);
@@ -10837,21 +10640,19 @@ void umlPackageImpl::initializeElementImportContent()
 	    }
 	}
 	
-	m_elementImport_Operation_getName->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_elementImport_Operation_getName->setName("getName");
+	m_elementImport_Operation_getName->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_elementImport_Operation_getName->setLowerBound(1);
 	m_elementImport_Operation_getName->setUpperBound(1);
 	m_elementImport_Operation_getName->setUnique(true);
 	m_elementImport_Operation_getName->setOrdered(false);
 	
-	
-	m_elementImport_Operation_imported_element_is_public_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_elementImport_Operation_imported_element_is_public_EDiagnosticChain_EMap->setName("imported_element_is_public");
+	m_elementImport_Operation_imported_element_is_public_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_elementImport_Operation_imported_element_is_public_EDiagnosticChain_EMap->setLowerBound(0);
 	m_elementImport_Operation_imported_element_is_public_EDiagnosticChain_EMap->setUpperBound(1);
 	m_elementImport_Operation_imported_element_is_public_EDiagnosticChain_EMap->setUnique(true);
 	m_elementImport_Operation_imported_element_is_public_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_elementImport_Operation_imported_element_is_public_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -10872,13 +10673,12 @@ void umlPackageImpl::initializeElementImportContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_elementImport_Operation_visibility_public_or_private_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_elementImport_Operation_visibility_public_or_private_EDiagnosticChain_EMap->setName("visibility_public_or_private");
+	m_elementImport_Operation_visibility_public_or_private_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_elementImport_Operation_visibility_public_or_private_EDiagnosticChain_EMap->setLowerBound(0);
 	m_elementImport_Operation_visibility_public_or_private_EDiagnosticChain_EMap->setUpperBound(1);
 	m_elementImport_Operation_visibility_public_or_private_EDiagnosticChain_EMap->setUnique(true);
 	m_elementImport_Operation_visibility_public_or_private_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_elementImport_Operation_visibility_public_or_private_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -10932,13 +10732,12 @@ void umlPackageImpl::initializeEncapsulatedClassifierContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_encapsulatedClassifier_Operation_getOwnedPorts->setEType(getPort_Class());
 	m_encapsulatedClassifier_Operation_getOwnedPorts->setName("getOwnedPorts");
+	m_encapsulatedClassifier_Operation_getOwnedPorts->setEType(getPort_Class());
 	m_encapsulatedClassifier_Operation_getOwnedPorts->setLowerBound(0);
 	m_encapsulatedClassifier_Operation_getOwnedPorts->setUpperBound(-1);
 	m_encapsulatedClassifier_Operation_getOwnedPorts->setUnique(true);
 	m_encapsulatedClassifier_Operation_getOwnedPorts->setOrdered(true);
-	
 	
 	
 }
@@ -10976,13 +10775,12 @@ void umlPackageImpl::initializeEnumerationContent()
 	    }
 	}
 	
-	m_enumeration_Operation_immutable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_enumeration_Operation_immutable_EDiagnosticChain_EMap->setName("immutable");
+	m_enumeration_Operation_immutable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_enumeration_Operation_immutable_EDiagnosticChain_EMap->setLowerBound(0);
 	m_enumeration_Operation_immutable_EDiagnosticChain_EMap->setUpperBound(1);
 	m_enumeration_Operation_immutable_EDiagnosticChain_EMap->setUnique(true);
 	m_enumeration_Operation_immutable_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_enumeration_Operation_immutable_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -11039,21 +10837,19 @@ void umlPackageImpl::initializeEnumerationLiteralContent()
 	    }
 	}
 	
-	m_enumerationLiteral_Operation_getClassifier->setEType(getEnumeration_Class());
 	m_enumerationLiteral_Operation_getClassifier->setName("getClassifier");
+	m_enumerationLiteral_Operation_getClassifier->setEType(getEnumeration_Class());
 	m_enumerationLiteral_Operation_getClassifier->setLowerBound(1);
 	m_enumerationLiteral_Operation_getClassifier->setUpperBound(1);
 	m_enumerationLiteral_Operation_getClassifier->setUnique(true);
 	m_enumerationLiteral_Operation_getClassifier->setOrdered(false);
 	
-	
-	m_enumerationLiteral_Operation_getClassifiers->setEType(getClassifier_Class());
 	m_enumerationLiteral_Operation_getClassifiers->setName("getClassifiers");
+	m_enumerationLiteral_Operation_getClassifiers->setEType(getClassifier_Class());
 	m_enumerationLiteral_Operation_getClassifiers->setLowerBound(0);
 	m_enumerationLiteral_Operation_getClassifiers->setUpperBound(-1);
 	m_enumerationLiteral_Operation_getClassifiers->setUnique(true);
 	m_enumerationLiteral_Operation_getClassifiers->setOrdered(false);
-	
 	
 	
 }
@@ -11168,13 +10964,12 @@ void umlPackageImpl::initializeExceptionHandlerContent()
 	    }
 	}
 	
-	m_exceptionHandler_Operation_edge_source_target_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_exceptionHandler_Operation_edge_source_target_EDiagnosticChain_EMap->setName("edge_source_target");
+	m_exceptionHandler_Operation_edge_source_target_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_exceptionHandler_Operation_edge_source_target_EDiagnosticChain_EMap->setLowerBound(0);
 	m_exceptionHandler_Operation_edge_source_target_EDiagnosticChain_EMap->setUpperBound(1);
 	m_exceptionHandler_Operation_edge_source_target_EDiagnosticChain_EMap->setUnique(true);
 	m_exceptionHandler_Operation_edge_source_target_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_exceptionHandler_Operation_edge_source_target_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -11195,13 +10990,12 @@ void umlPackageImpl::initializeExceptionHandlerContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_exceptionHandler_Operation_exception_input_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_exceptionHandler_Operation_exception_input_type_EDiagnosticChain_EMap->setName("exception_input_type");
+	m_exceptionHandler_Operation_exception_input_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_exceptionHandler_Operation_exception_input_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_exceptionHandler_Operation_exception_input_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_exceptionHandler_Operation_exception_input_type_EDiagnosticChain_EMap->setUnique(true);
 	m_exceptionHandler_Operation_exception_input_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_exceptionHandler_Operation_exception_input_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -11222,13 +11016,12 @@ void umlPackageImpl::initializeExceptionHandlerContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_exceptionHandler_Operation_handler_body_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_exceptionHandler_Operation_handler_body_edges_EDiagnosticChain_EMap->setName("handler_body_edges");
+	m_exceptionHandler_Operation_handler_body_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_exceptionHandler_Operation_handler_body_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_exceptionHandler_Operation_handler_body_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_exceptionHandler_Operation_handler_body_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_exceptionHandler_Operation_handler_body_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_exceptionHandler_Operation_handler_body_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -11249,13 +11042,12 @@ void umlPackageImpl::initializeExceptionHandlerContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_exceptionHandler_Operation_handler_body_owner_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_exceptionHandler_Operation_handler_body_owner_EDiagnosticChain_EMap->setName("handler_body_owner");
+	m_exceptionHandler_Operation_handler_body_owner_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_exceptionHandler_Operation_handler_body_owner_EDiagnosticChain_EMap->setLowerBound(0);
 	m_exceptionHandler_Operation_handler_body_owner_EDiagnosticChain_EMap->setUpperBound(1);
 	m_exceptionHandler_Operation_handler_body_owner_EDiagnosticChain_EMap->setUnique(true);
 	m_exceptionHandler_Operation_handler_body_owner_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_exceptionHandler_Operation_handler_body_owner_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -11276,13 +11068,12 @@ void umlPackageImpl::initializeExceptionHandlerContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_exceptionHandler_Operation_one_input_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_exceptionHandler_Operation_one_input_EDiagnosticChain_EMap->setName("one_input");
+	m_exceptionHandler_Operation_one_input_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_exceptionHandler_Operation_one_input_EDiagnosticChain_EMap->setLowerBound(0);
 	m_exceptionHandler_Operation_one_input_EDiagnosticChain_EMap->setUpperBound(1);
 	m_exceptionHandler_Operation_one_input_EDiagnosticChain_EMap->setUnique(true);
 	m_exceptionHandler_Operation_one_input_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_exceptionHandler_Operation_one_input_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -11303,13 +11094,12 @@ void umlPackageImpl::initializeExceptionHandlerContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_exceptionHandler_Operation_output_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_exceptionHandler_Operation_output_pins_EDiagnosticChain_EMap->setName("output_pins");
+	m_exceptionHandler_Operation_output_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_exceptionHandler_Operation_output_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_exceptionHandler_Operation_output_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_exceptionHandler_Operation_output_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_exceptionHandler_Operation_output_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_exceptionHandler_Operation_output_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -11465,13 +11255,12 @@ void umlPackageImpl::initializeExecutionSpecificationContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_executionSpecification_Operation_same_lifeline_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_executionSpecification_Operation_same_lifeline_EDiagnosticChain_EMap->setName("same_lifeline");
+	m_executionSpecification_Operation_same_lifeline_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_executionSpecification_Operation_same_lifeline_EDiagnosticChain_EMap->setLowerBound(0);
 	m_executionSpecification_Operation_same_lifeline_EDiagnosticChain_EMap->setUpperBound(1);
 	m_executionSpecification_Operation_same_lifeline_EDiagnosticChain_EMap->setUnique(true);
 	m_executionSpecification_Operation_same_lifeline_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executionSpecification_Operation_same_lifeline_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -11553,13 +11342,12 @@ void umlPackageImpl::initializeExpansionNodeContent()
 	    }
 	}
 	
-	m_expansionNode_Operation_region_as_input_or_output_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_expansionNode_Operation_region_as_input_or_output_EDiagnosticChain_EMap->setName("region_as_input_or_output");
+	m_expansionNode_Operation_region_as_input_or_output_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_expansionNode_Operation_region_as_input_or_output_EDiagnosticChain_EMap->setLowerBound(0);
 	m_expansionNode_Operation_region_as_input_or_output_EDiagnosticChain_EMap->setUpperBound(1);
 	m_expansionNode_Operation_region_as_input_or_output_EDiagnosticChain_EMap->setUnique(true);
 	m_expansionNode_Operation_region_as_input_or_output_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_expansionNode_Operation_region_as_input_or_output_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -11591,7 +11379,7 @@ void umlPackageImpl::initializeExpansionRegionContent()
 	
 	m_expansionRegion_Attribute_mode = getExpansionRegion_Attribute_mode();
 	m_expansionRegion_Attribute_mode->setName("mode");
-	m_expansionRegion_Attribute_mode->setEType(getExpansionKind_Class());
+		m_expansionRegion_Attribute_mode->setEType(getExpansionKind_Class());
 	m_expansionRegion_Attribute_mode->setLowerBound(1);
 	m_expansionRegion_Attribute_mode->setUpperBound(1);
 	m_expansionRegion_Attribute_mode->setTransient(false);
@@ -11672,7 +11460,7 @@ void umlPackageImpl::initializeExpressionContent()
 	
 	m_expression_Attribute_symbol = getExpression_Attribute_symbol();
 	m_expression_Attribute_symbol->setName("symbol");
-	m_expression_Attribute_symbol->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_expression_Attribute_symbol->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_expression_Attribute_symbol->setLowerBound(0);
 	m_expression_Attribute_symbol->setUpperBound(1);
 	m_expression_Attribute_symbol->setTransient(false);
@@ -11816,13 +11604,12 @@ void umlPackageImpl::initializeExtendContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_extend_Operation_extension_points_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_extend_Operation_extension_points_EDiagnosticChain_EMap->setName("extension_points");
+	m_extend_Operation_extension_points_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_extend_Operation_extension_points_EDiagnosticChain_EMap->setLowerBound(0);
 	m_extend_Operation_extension_points_EDiagnosticChain_EMap->setUpperBound(1);
 	m_extend_Operation_extension_points_EDiagnosticChain_EMap->setUnique(true);
 	m_extend_Operation_extension_points_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_extend_Operation_extension_points_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -11854,7 +11641,7 @@ void umlPackageImpl::initializeExtensionContent()
 	
 	m_extension_Attribute_isRequired = getExtension_Attribute_isRequired();
 	m_extension_Attribute_isRequired->setName("isRequired");
-	m_extension_Attribute_isRequired->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_extension_Attribute_isRequired->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_extension_Attribute_isRequired->setLowerBound(1);
 	m_extension_Attribute_isRequired->setUpperBound(1);
 	m_extension_Attribute_isRequired->setTransient(true);
@@ -11899,45 +11686,40 @@ void umlPackageImpl::initializeExtensionContent()
 	    }
 	}
 	
-	m_extension_Operation_getMetaclass->setEType(getClass_Class());
 	m_extension_Operation_getMetaclass->setName("getMetaclass");
+	m_extension_Operation_getMetaclass->setEType(getClass_Class());
 	m_extension_Operation_getMetaclass->setLowerBound(1);
 	m_extension_Operation_getMetaclass->setUpperBound(1);
 	m_extension_Operation_getMetaclass->setUnique(true);
 	m_extension_Operation_getMetaclass->setOrdered(false);
 	
-	
-	m_extension_Operation_getStereotype->setEType(getStereotype_Class());
 	m_extension_Operation_getStereotype->setName("getStereotype");
+	m_extension_Operation_getStereotype->setEType(getStereotype_Class());
 	m_extension_Operation_getStereotype->setLowerBound(0);
 	m_extension_Operation_getStereotype->setUpperBound(1);
 	m_extension_Operation_getStereotype->setUnique(true);
 	m_extension_Operation_getStereotype->setOrdered(false);
 	
-	
-	m_extension_Operation_getStereotypeEnd->setEType(getProperty_Class());
 	m_extension_Operation_getStereotypeEnd->setName("getStereotypeEnd");
+	m_extension_Operation_getStereotypeEnd->setEType(getProperty_Class());
 	m_extension_Operation_getStereotypeEnd->setLowerBound(0);
 	m_extension_Operation_getStereotypeEnd->setUpperBound(1);
 	m_extension_Operation_getStereotypeEnd->setUnique(true);
 	m_extension_Operation_getStereotypeEnd->setOrdered(false);
 	
-	
-	m_extension_Operation_isRequired->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_extension_Operation_isRequired->setName("isRequired");
+	m_extension_Operation_isRequired->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_extension_Operation_isRequired->setLowerBound(1);
 	m_extension_Operation_isRequired->setUpperBound(1);
 	m_extension_Operation_isRequired->setUnique(true);
 	m_extension_Operation_isRequired->setOrdered(false);
 	
-	
-	m_extension_Operation_is_binary_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_extension_Operation_is_binary_EDiagnosticChain_EMap->setName("is_binary");
+	m_extension_Operation_is_binary_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_extension_Operation_is_binary_EDiagnosticChain_EMap->setLowerBound(0);
 	m_extension_Operation_is_binary_EDiagnosticChain_EMap->setUpperBound(1);
 	m_extension_Operation_is_binary_EDiagnosticChain_EMap->setUnique(true);
 	m_extension_Operation_is_binary_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_extension_Operation_is_binary_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -11958,21 +11740,19 @@ void umlPackageImpl::initializeExtensionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_extension_Operation_metaclassEnd->setEType(getProperty_Class());
 	m_extension_Operation_metaclassEnd->setName("metaclassEnd");
+	m_extension_Operation_metaclassEnd->setEType(getProperty_Class());
 	m_extension_Operation_metaclassEnd->setLowerBound(1);
 	m_extension_Operation_metaclassEnd->setUpperBound(1);
 	m_extension_Operation_metaclassEnd->setUnique(true);
 	m_extension_Operation_metaclassEnd->setOrdered(false);
 	
-	
-	m_extension_Operation_non_owned_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_extension_Operation_non_owned_end_EDiagnosticChain_EMap->setName("non_owned_end");
+	m_extension_Operation_non_owned_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_extension_Operation_non_owned_end_EDiagnosticChain_EMap->setLowerBound(0);
 	m_extension_Operation_non_owned_end_EDiagnosticChain_EMap->setUpperBound(1);
 	m_extension_Operation_non_owned_end_EDiagnosticChain_EMap->setUnique(true);
 	m_extension_Operation_non_owned_end_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_extension_Operation_non_owned_end_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12004,13 +11784,12 @@ void umlPackageImpl::initializeExtensionEndContent()
 	
 	
 	
-	m_extensionEnd_Operation_aggregation_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_extensionEnd_Operation_aggregation_EDiagnosticChain_EMap->setName("aggregation");
+	m_extensionEnd_Operation_aggregation_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_extensionEnd_Operation_aggregation_EDiagnosticChain_EMap->setLowerBound(0);
 	m_extensionEnd_Operation_aggregation_EDiagnosticChain_EMap->setUpperBound(1);
 	m_extensionEnd_Operation_aggregation_EDiagnosticChain_EMap->setUnique(true);
 	m_extensionEnd_Operation_aggregation_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_extensionEnd_Operation_aggregation_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12031,13 +11810,12 @@ void umlPackageImpl::initializeExtensionEndContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_extensionEnd_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_extensionEnd_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_extensionEnd_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_extensionEnd_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_extensionEnd_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_extensionEnd_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_extensionEnd_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_extensionEnd_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12094,13 +11872,12 @@ void umlPackageImpl::initializeExtensionPointContent()
 	    }
 	}
 	
-	m_extensionPoint_Operation_must_have_name_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_extensionPoint_Operation_must_have_name_EDiagnosticChain_EMap->setName("must_have_name");
+	m_extensionPoint_Operation_must_have_name_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_extensionPoint_Operation_must_have_name_EDiagnosticChain_EMap->setLowerBound(0);
 	m_extensionPoint_Operation_must_have_name_EDiagnosticChain_EMap->setUpperBound(1);
 	m_extensionPoint_Operation_must_have_name_EDiagnosticChain_EMap->setUnique(true);
 	m_extensionPoint_Operation_must_have_name_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_extensionPoint_Operation_must_have_name_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12132,13 +11909,12 @@ void umlPackageImpl::initializeFactoryContent()
 	
 	
 	
-	m_factory_Operation_create_Class->setEType(getElement_Class());
 	m_factory_Operation_create_Class->setName("create");
+	m_factory_Operation_create_Class->setEType(getElement_Class());
 	m_factory_Operation_create_Class->setLowerBound(0);
 	m_factory_Operation_create_Class->setUpperBound(1);
 	m_factory_Operation_create_Class->setUnique(true);
 	m_factory_Operation_create_Class->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_factory_Operation_create_Class);
 		parameter->setName("metaClass");
@@ -12160,7 +11936,7 @@ void umlPackageImpl::initializeFeatureContent()
 	
 	m_feature_Attribute_isStatic = getFeature_Attribute_isStatic();
 	m_feature_Attribute_isStatic->setName("isStatic");
-	m_feature_Attribute_isStatic->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_feature_Attribute_isStatic->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_feature_Attribute_isStatic->setLowerBound(1);
 	m_feature_Attribute_isStatic->setUpperBound(1);
 	m_feature_Attribute_isStatic->setTransient(false);
@@ -12216,13 +11992,12 @@ void umlPackageImpl::initializeFinalNodeContent()
 	
 	
 	
-	m_finalNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setName("no_outgoing_edges");
+	m_finalNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_finalNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_finalNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_finalNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_finalNode_Operation_no_outgoing_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12254,13 +12029,12 @@ void umlPackageImpl::initializeFinalStateContent()
 	
 	
 	
-	m_finalState_Operation_cannot_reference_submachine_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalState_Operation_cannot_reference_submachine_EDiagnosticChain_EMap->setName("cannot_reference_submachine");
+	m_finalState_Operation_cannot_reference_submachine_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalState_Operation_cannot_reference_submachine_EDiagnosticChain_EMap->setLowerBound(0);
 	m_finalState_Operation_cannot_reference_submachine_EDiagnosticChain_EMap->setUpperBound(1);
 	m_finalState_Operation_cannot_reference_submachine_EDiagnosticChain_EMap->setUnique(true);
 	m_finalState_Operation_cannot_reference_submachine_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_finalState_Operation_cannot_reference_submachine_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12281,13 +12055,12 @@ void umlPackageImpl::initializeFinalStateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_finalState_Operation_no_entry_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalState_Operation_no_entry_behavior_EDiagnosticChain_EMap->setName("no_entry_behavior");
+	m_finalState_Operation_no_entry_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalState_Operation_no_entry_behavior_EDiagnosticChain_EMap->setLowerBound(0);
 	m_finalState_Operation_no_entry_behavior_EDiagnosticChain_EMap->setUpperBound(1);
 	m_finalState_Operation_no_entry_behavior_EDiagnosticChain_EMap->setUnique(true);
 	m_finalState_Operation_no_entry_behavior_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_finalState_Operation_no_entry_behavior_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12308,13 +12081,12 @@ void umlPackageImpl::initializeFinalStateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_finalState_Operation_no_exit_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalState_Operation_no_exit_behavior_EDiagnosticChain_EMap->setName("no_exit_behavior");
+	m_finalState_Operation_no_exit_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalState_Operation_no_exit_behavior_EDiagnosticChain_EMap->setLowerBound(0);
 	m_finalState_Operation_no_exit_behavior_EDiagnosticChain_EMap->setUpperBound(1);
 	m_finalState_Operation_no_exit_behavior_EDiagnosticChain_EMap->setUnique(true);
 	m_finalState_Operation_no_exit_behavior_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_finalState_Operation_no_exit_behavior_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12335,13 +12107,12 @@ void umlPackageImpl::initializeFinalStateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_finalState_Operation_no_outgoing_transitions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalState_Operation_no_outgoing_transitions_EDiagnosticChain_EMap->setName("no_outgoing_transitions");
+	m_finalState_Operation_no_outgoing_transitions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalState_Operation_no_outgoing_transitions_EDiagnosticChain_EMap->setLowerBound(0);
 	m_finalState_Operation_no_outgoing_transitions_EDiagnosticChain_EMap->setUpperBound(1);
 	m_finalState_Operation_no_outgoing_transitions_EDiagnosticChain_EMap->setUnique(true);
 	m_finalState_Operation_no_outgoing_transitions_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_finalState_Operation_no_outgoing_transitions_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12362,13 +12133,12 @@ void umlPackageImpl::initializeFinalStateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_finalState_Operation_no_regions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalState_Operation_no_regions_EDiagnosticChain_EMap->setName("no_regions");
+	m_finalState_Operation_no_regions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalState_Operation_no_regions_EDiagnosticChain_EMap->setLowerBound(0);
 	m_finalState_Operation_no_regions_EDiagnosticChain_EMap->setUpperBound(1);
 	m_finalState_Operation_no_regions_EDiagnosticChain_EMap->setUnique(true);
 	m_finalState_Operation_no_regions_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_finalState_Operation_no_regions_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12389,13 +12159,12 @@ void umlPackageImpl::initializeFinalStateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_finalState_Operation_no_state_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalState_Operation_no_state_behavior_EDiagnosticChain_EMap->setName("no_state_behavior");
+	m_finalState_Operation_no_state_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_finalState_Operation_no_state_behavior_EDiagnosticChain_EMap->setLowerBound(0);
 	m_finalState_Operation_no_state_behavior_EDiagnosticChain_EMap->setUpperBound(1);
 	m_finalState_Operation_no_state_behavior_EDiagnosticChain_EMap->setUnique(true);
 	m_finalState_Operation_no_state_behavior_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_finalState_Operation_no_state_behavior_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12438,13 +12207,12 @@ void umlPackageImpl::initializeForkNodeContent()
 	
 	
 	
-	m_forkNode_Operation_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_forkNode_Operation_edges_EDiagnosticChain_EMap->setName("edges");
+	m_forkNode_Operation_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_forkNode_Operation_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_forkNode_Operation_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_forkNode_Operation_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_forkNode_Operation_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_forkNode_Operation_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12465,13 +12233,12 @@ void umlPackageImpl::initializeForkNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_forkNode_Operation_one_incoming_edge_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_forkNode_Operation_one_incoming_edge_EDiagnosticChain_EMap->setName("one_incoming_edge");
+	m_forkNode_Operation_one_incoming_edge_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_forkNode_Operation_one_incoming_edge_EDiagnosticChain_EMap->setLowerBound(0);
 	m_forkNode_Operation_one_incoming_edge_EDiagnosticChain_EMap->setUpperBound(1);
 	m_forkNode_Operation_one_incoming_edge_EDiagnosticChain_EMap->setUnique(true);
 	m_forkNode_Operation_one_incoming_edge_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_forkNode_Operation_one_incoming_edge_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12503,13 +12270,12 @@ void umlPackageImpl::initializeFunctionBehaviorContent()
 	
 	
 	
-	m_functionBehavior_Operation_hasAllDataTypeAttributes_DataType->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_functionBehavior_Operation_hasAllDataTypeAttributes_DataType->setName("hasAllDataTypeAttributes");
+	m_functionBehavior_Operation_hasAllDataTypeAttributes_DataType->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_functionBehavior_Operation_hasAllDataTypeAttributes_DataType->setLowerBound(1);
 	m_functionBehavior_Operation_hasAllDataTypeAttributes_DataType->setUpperBound(1);
 	m_functionBehavior_Operation_hasAllDataTypeAttributes_DataType->setUnique(true);
 	m_functionBehavior_Operation_hasAllDataTypeAttributes_DataType->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_functionBehavior_Operation_hasAllDataTypeAttributes_DataType);
 		parameter->setName("d");
@@ -12520,13 +12286,12 @@ void umlPackageImpl::initializeFunctionBehaviorContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_functionBehavior_Operation_one_output_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_functionBehavior_Operation_one_output_parameter_EDiagnosticChain_EMap->setName("one_output_parameter");
+	m_functionBehavior_Operation_one_output_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_functionBehavior_Operation_one_output_parameter_EDiagnosticChain_EMap->setLowerBound(0);
 	m_functionBehavior_Operation_one_output_parameter_EDiagnosticChain_EMap->setUpperBound(1);
 	m_functionBehavior_Operation_one_output_parameter_EDiagnosticChain_EMap->setUnique(true);
 	m_functionBehavior_Operation_one_output_parameter_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_functionBehavior_Operation_one_output_parameter_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12547,13 +12312,12 @@ void umlPackageImpl::initializeFunctionBehaviorContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_functionBehavior_Operation_types_of_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_functionBehavior_Operation_types_of_parameters_EDiagnosticChain_EMap->setName("types_of_parameters");
+	m_functionBehavior_Operation_types_of_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_functionBehavior_Operation_types_of_parameters_EDiagnosticChain_EMap->setLowerBound(0);
 	m_functionBehavior_Operation_types_of_parameters_EDiagnosticChain_EMap->setUpperBound(1);
 	m_functionBehavior_Operation_types_of_parameters_EDiagnosticChain_EMap->setUnique(true);
 	m_functionBehavior_Operation_types_of_parameters_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_functionBehavior_Operation_types_of_parameters_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12585,13 +12349,12 @@ void umlPackageImpl::initializeGateContent()
 	
 	
 	
-	m_gate_Operation_actual_gate_distinguishable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_actual_gate_distinguishable_EDiagnosticChain_EMap->setName("actual_gate_distinguishable");
+	m_gate_Operation_actual_gate_distinguishable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_actual_gate_distinguishable_EDiagnosticChain_EMap->setLowerBound(0);
 	m_gate_Operation_actual_gate_distinguishable_EDiagnosticChain_EMap->setUpperBound(1);
 	m_gate_Operation_actual_gate_distinguishable_EDiagnosticChain_EMap->setUnique(true);
 	m_gate_Operation_actual_gate_distinguishable_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_gate_Operation_actual_gate_distinguishable_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12612,13 +12375,12 @@ void umlPackageImpl::initializeGateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_gate_Operation_actual_gate_matched_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_actual_gate_matched_EDiagnosticChain_EMap->setName("actual_gate_matched");
+	m_gate_Operation_actual_gate_matched_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_actual_gate_matched_EDiagnosticChain_EMap->setLowerBound(0);
 	m_gate_Operation_actual_gate_matched_EDiagnosticChain_EMap->setUpperBound(1);
 	m_gate_Operation_actual_gate_matched_EDiagnosticChain_EMap->setUnique(true);
 	m_gate_Operation_actual_gate_matched_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_gate_Operation_actual_gate_matched_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12639,13 +12401,12 @@ void umlPackageImpl::initializeGateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_gate_Operation_formal_gate_distinguishable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_formal_gate_distinguishable_EDiagnosticChain_EMap->setName("formal_gate_distinguishable");
+	m_gate_Operation_formal_gate_distinguishable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_formal_gate_distinguishable_EDiagnosticChain_EMap->setLowerBound(0);
 	m_gate_Operation_formal_gate_distinguishable_EDiagnosticChain_EMap->setUpperBound(1);
 	m_gate_Operation_formal_gate_distinguishable_EDiagnosticChain_EMap->setUnique(true);
 	m_gate_Operation_formal_gate_distinguishable_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_gate_Operation_formal_gate_distinguishable_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12666,29 +12427,26 @@ void umlPackageImpl::initializeGateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_gate_Operation_getName->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_gate_Operation_getName->setName("getName");
+	m_gate_Operation_getName->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_gate_Operation_getName->setLowerBound(1);
 	m_gate_Operation_getName->setUpperBound(1);
 	m_gate_Operation_getName->setUnique(true);
 	m_gate_Operation_getName->setOrdered(false);
 	
-	
-	m_gate_Operation_getOperand->setEType(getInteractionOperand_Class());
 	m_gate_Operation_getOperand->setName("getOperand");
+	m_gate_Operation_getOperand->setEType(getInteractionOperand_Class());
 	m_gate_Operation_getOperand->setLowerBound(1);
 	m_gate_Operation_getOperand->setUpperBound(1);
 	m_gate_Operation_getOperand->setUnique(true);
 	m_gate_Operation_getOperand->setOrdered(false);
 	
-	
-	m_gate_Operation_inside_cf_gate_distinguishable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_inside_cf_gate_distinguishable_EDiagnosticChain_EMap->setName("inside_cf_gate_distinguishable");
+	m_gate_Operation_inside_cf_gate_distinguishable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_inside_cf_gate_distinguishable_EDiagnosticChain_EMap->setLowerBound(0);
 	m_gate_Operation_inside_cf_gate_distinguishable_EDiagnosticChain_EMap->setUpperBound(1);
 	m_gate_Operation_inside_cf_gate_distinguishable_EDiagnosticChain_EMap->setUnique(true);
 	m_gate_Operation_inside_cf_gate_distinguishable_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_gate_Operation_inside_cf_gate_distinguishable_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12709,13 +12467,12 @@ void umlPackageImpl::initializeGateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_gate_Operation_inside_cf_matched_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_inside_cf_matched_EDiagnosticChain_EMap->setName("inside_cf_matched");
+	m_gate_Operation_inside_cf_matched_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_inside_cf_matched_EDiagnosticChain_EMap->setLowerBound(0);
 	m_gate_Operation_inside_cf_matched_EDiagnosticChain_EMap->setUpperBound(1);
 	m_gate_Operation_inside_cf_matched_EDiagnosticChain_EMap->setUnique(true);
 	m_gate_Operation_inside_cf_matched_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_gate_Operation_inside_cf_matched_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12736,45 +12493,40 @@ void umlPackageImpl::initializeGateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_gate_Operation_isActual->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_gate_Operation_isActual->setName("isActual");
+	m_gate_Operation_isActual->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_gate_Operation_isActual->setLowerBound(1);
 	m_gate_Operation_isActual->setUpperBound(1);
 	m_gate_Operation_isActual->setUnique(true);
 	m_gate_Operation_isActual->setOrdered(false);
 	
-	
-	m_gate_Operation_isFormal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_gate_Operation_isFormal->setName("isFormal");
+	m_gate_Operation_isFormal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_gate_Operation_isFormal->setLowerBound(1);
 	m_gate_Operation_isFormal->setUpperBound(1);
 	m_gate_Operation_isFormal->setUnique(true);
 	m_gate_Operation_isFormal->setOrdered(false);
 	
-	
-	m_gate_Operation_isInsideCF->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_gate_Operation_isInsideCF->setName("isInsideCF");
+	m_gate_Operation_isInsideCF->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_gate_Operation_isInsideCF->setLowerBound(1);
 	m_gate_Operation_isInsideCF->setUpperBound(1);
 	m_gate_Operation_isInsideCF->setUnique(true);
 	m_gate_Operation_isInsideCF->setOrdered(false);
 	
-	
-	m_gate_Operation_isOutsideCF->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_gate_Operation_isOutsideCF->setName("isOutsideCF");
+	m_gate_Operation_isOutsideCF->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_gate_Operation_isOutsideCF->setLowerBound(1);
 	m_gate_Operation_isOutsideCF->setUpperBound(1);
 	m_gate_Operation_isOutsideCF->setUnique(true);
 	m_gate_Operation_isOutsideCF->setOrdered(false);
 	
-	
-	m_gate_Operation_matches_Gate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_gate_Operation_matches_Gate->setName("matches");
+	m_gate_Operation_matches_Gate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_gate_Operation_matches_Gate->setLowerBound(1);
 	m_gate_Operation_matches_Gate->setUpperBound(1);
 	m_gate_Operation_matches_Gate->setUnique(true);
 	m_gate_Operation_matches_Gate->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_gate_Operation_matches_Gate);
 		parameter->setName("gateToMatch");
@@ -12785,13 +12537,12 @@ void umlPackageImpl::initializeGateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_gate_Operation_outside_cf_gate_distinguishable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_outside_cf_gate_distinguishable_EDiagnosticChain_EMap->setName("outside_cf_gate_distinguishable");
+	m_gate_Operation_outside_cf_gate_distinguishable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_outside_cf_gate_distinguishable_EDiagnosticChain_EMap->setLowerBound(0);
 	m_gate_Operation_outside_cf_gate_distinguishable_EDiagnosticChain_EMap->setUpperBound(1);
 	m_gate_Operation_outside_cf_gate_distinguishable_EDiagnosticChain_EMap->setUnique(true);
 	m_gate_Operation_outside_cf_gate_distinguishable_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_gate_Operation_outside_cf_gate_distinguishable_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12812,13 +12563,12 @@ void umlPackageImpl::initializeGateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_gate_Operation_outside_cf_matched_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_outside_cf_matched_EDiagnosticChain_EMap->setName("outside_cf_matched");
+	m_gate_Operation_outside_cf_matched_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_gate_Operation_outside_cf_matched_EDiagnosticChain_EMap->setLowerBound(0);
 	m_gate_Operation_outside_cf_matched_EDiagnosticChain_EMap->setUpperBound(1);
 	m_gate_Operation_outside_cf_matched_EDiagnosticChain_EMap->setUnique(true);
 	m_gate_Operation_outside_cf_matched_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_gate_Operation_outside_cf_matched_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12900,13 +12650,12 @@ void umlPackageImpl::initializeGeneralOrderingContent()
 	    }
 	}
 	
-	m_generalOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_generalOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap->setName("irreflexive_transitive_closure");
+	m_generalOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_generalOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap->setLowerBound(0);
 	m_generalOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap->setUpperBound(1);
 	m_generalOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap->setUnique(true);
 	m_generalOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_generalOrdering_Operation_irreflexive_transitive_closure_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -12938,7 +12687,7 @@ void umlPackageImpl::initializeGeneralizationContent()
 	
 	m_generalization_Attribute_isSubstitutable = getGeneralization_Attribute_isSubstitutable();
 	m_generalization_Attribute_isSubstitutable->setName("isSubstitutable");
-	m_generalization_Attribute_isSubstitutable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_generalization_Attribute_isSubstitutable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_generalization_Attribute_isSubstitutable->setLowerBound(0);
 	m_generalization_Attribute_isSubstitutable->setUpperBound(1);
 	m_generalization_Attribute_isSubstitutable->setTransient(false);
@@ -13041,7 +12790,7 @@ void umlPackageImpl::initializeGeneralizationSetContent()
 	
 	m_generalizationSet_Attribute_isCovering = getGeneralizationSet_Attribute_isCovering();
 	m_generalizationSet_Attribute_isCovering->setName("isCovering");
-	m_generalizationSet_Attribute_isCovering->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_generalizationSet_Attribute_isCovering->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_generalizationSet_Attribute_isCovering->setLowerBound(1);
 	m_generalizationSet_Attribute_isCovering->setUpperBound(1);
 	m_generalizationSet_Attribute_isCovering->setTransient(false);
@@ -13061,7 +12810,7 @@ void umlPackageImpl::initializeGeneralizationSetContent()
 	}
 	m_generalizationSet_Attribute_isDisjoint = getGeneralizationSet_Attribute_isDisjoint();
 	m_generalizationSet_Attribute_isDisjoint->setName("isDisjoint");
-	m_generalizationSet_Attribute_isDisjoint->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_generalizationSet_Attribute_isDisjoint->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_generalizationSet_Attribute_isDisjoint->setLowerBound(1);
 	m_generalizationSet_Attribute_isDisjoint->setUpperBound(1);
 	m_generalizationSet_Attribute_isDisjoint->setTransient(false);
@@ -13131,13 +12880,12 @@ void umlPackageImpl::initializeGeneralizationSetContent()
 	    }
 	}
 	
-	m_generalizationSet_Operation_generalization_same_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_generalizationSet_Operation_generalization_same_classifier_EDiagnosticChain_EMap->setName("generalization_same_classifier");
+	m_generalizationSet_Operation_generalization_same_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_generalizationSet_Operation_generalization_same_classifier_EDiagnosticChain_EMap->setLowerBound(0);
 	m_generalizationSet_Operation_generalization_same_classifier_EDiagnosticChain_EMap->setUpperBound(1);
 	m_generalizationSet_Operation_generalization_same_classifier_EDiagnosticChain_EMap->setUnique(true);
 	m_generalizationSet_Operation_generalization_same_classifier_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_generalizationSet_Operation_generalization_same_classifier_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -13158,13 +12906,12 @@ void umlPackageImpl::initializeGeneralizationSetContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_generalizationSet_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_generalizationSet_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setName("maps_to_generalization_set");
+	m_generalizationSet_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_generalizationSet_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setLowerBound(0);
 	m_generalizationSet_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setUpperBound(1);
 	m_generalizationSet_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setUnique(true);
 	m_generalizationSet_Operation_maps_to_generalization_set_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_generalizationSet_Operation_maps_to_generalization_set_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -13196,7 +12943,7 @@ void umlPackageImpl::initializeImageContent()
 	
 	m_image_Attribute_content = getImage_Attribute_content();
 	m_image_Attribute_content->setName("content");
-	m_image_Attribute_content->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_image_Attribute_content->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_image_Attribute_content->setLowerBound(0);
 	m_image_Attribute_content->setUpperBound(1);
 	m_image_Attribute_content->setTransient(false);
@@ -13216,7 +12963,7 @@ void umlPackageImpl::initializeImageContent()
 	}
 	m_image_Attribute_format = getImage_Attribute_format();
 	m_image_Attribute_format->setName("format");
-	m_image_Attribute_format->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_image_Attribute_format->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_image_Attribute_format->setLowerBound(0);
 	m_image_Attribute_format->setUpperBound(1);
 	m_image_Attribute_format->setTransient(false);
@@ -13236,7 +12983,7 @@ void umlPackageImpl::initializeImageContent()
 	}
 	m_image_Attribute_location = getImage_Attribute_location();
 	m_image_Attribute_location->setName("location");
-	m_image_Attribute_location->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_image_Attribute_location->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_image_Attribute_location->setLowerBound(0);
 	m_image_Attribute_location->setUpperBound(1);
 	m_image_Attribute_location->setTransient(false);
@@ -13479,13 +13226,12 @@ void umlPackageImpl::initializeInformationFlowContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_informationFlow_Operation_convey_classifiers_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_informationFlow_Operation_convey_classifiers_EDiagnosticChain_EMap->setName("convey_classifiers");
+	m_informationFlow_Operation_convey_classifiers_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_informationFlow_Operation_convey_classifiers_EDiagnosticChain_EMap->setLowerBound(0);
 	m_informationFlow_Operation_convey_classifiers_EDiagnosticChain_EMap->setUpperBound(1);
 	m_informationFlow_Operation_convey_classifiers_EDiagnosticChain_EMap->setUnique(true);
 	m_informationFlow_Operation_convey_classifiers_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_informationFlow_Operation_convey_classifiers_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -13506,13 +13252,12 @@ void umlPackageImpl::initializeInformationFlowContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_informationFlow_Operation_must_conform_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_informationFlow_Operation_must_conform_EDiagnosticChain_EMap->setName("must_conform");
+	m_informationFlow_Operation_must_conform_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_informationFlow_Operation_must_conform_EDiagnosticChain_EMap->setLowerBound(0);
 	m_informationFlow_Operation_must_conform_EDiagnosticChain_EMap->setUpperBound(1);
 	m_informationFlow_Operation_must_conform_EDiagnosticChain_EMap->setUnique(true);
 	m_informationFlow_Operation_must_conform_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_informationFlow_Operation_must_conform_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -13533,13 +13278,12 @@ void umlPackageImpl::initializeInformationFlowContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_informationFlow_Operation_sources_and_targets_kind_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_informationFlow_Operation_sources_and_targets_kind_EDiagnosticChain_EMap->setName("sources_and_targets_kind");
+	m_informationFlow_Operation_sources_and_targets_kind_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_informationFlow_Operation_sources_and_targets_kind_EDiagnosticChain_EMap->setLowerBound(0);
 	m_informationFlow_Operation_sources_and_targets_kind_EDiagnosticChain_EMap->setUpperBound(1);
 	m_informationFlow_Operation_sources_and_targets_kind_EDiagnosticChain_EMap->setUnique(true);
 	m_informationFlow_Operation_sources_and_targets_kind_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_informationFlow_Operation_sources_and_targets_kind_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -13593,13 +13337,12 @@ void umlPackageImpl::initializeInformationItemContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_informationItem_Operation_has_no_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_informationItem_Operation_has_no_EDiagnosticChain_EMap->setName("has_no");
+	m_informationItem_Operation_has_no_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_informationItem_Operation_has_no_EDiagnosticChain_EMap->setLowerBound(0);
 	m_informationItem_Operation_has_no_EDiagnosticChain_EMap->setUpperBound(1);
 	m_informationItem_Operation_has_no_EDiagnosticChain_EMap->setUnique(true);
 	m_informationItem_Operation_has_no_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_informationItem_Operation_has_no_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -13620,13 +13363,12 @@ void umlPackageImpl::initializeInformationItemContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_informationItem_Operation_not_instantiable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_informationItem_Operation_not_instantiable_EDiagnosticChain_EMap->setName("not_instantiable");
+	m_informationItem_Operation_not_instantiable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_informationItem_Operation_not_instantiable_EDiagnosticChain_EMap->setLowerBound(0);
 	m_informationItem_Operation_not_instantiable_EDiagnosticChain_EMap->setUpperBound(1);
 	m_informationItem_Operation_not_instantiable_EDiagnosticChain_EMap->setUnique(true);
 	m_informationItem_Operation_not_instantiable_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_informationItem_Operation_not_instantiable_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -13647,13 +13389,12 @@ void umlPackageImpl::initializeInformationItemContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_informationItem_Operation_sources_and_targets_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_informationItem_Operation_sources_and_targets_EDiagnosticChain_EMap->setName("sources_and_targets");
+	m_informationItem_Operation_sources_and_targets_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_informationItem_Operation_sources_and_targets_EDiagnosticChain_EMap->setLowerBound(0);
 	m_informationItem_Operation_sources_and_targets_EDiagnosticChain_EMap->setUpperBound(1);
 	m_informationItem_Operation_sources_and_targets_EDiagnosticChain_EMap->setUnique(true);
 	m_informationItem_Operation_sources_and_targets_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_informationItem_Operation_sources_and_targets_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -13685,13 +13426,12 @@ void umlPackageImpl::initializeInitialNodeContent()
 	
 	
 	
-	m_initialNode_Operation_control_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_initialNode_Operation_control_edges_EDiagnosticChain_EMap->setName("control_edges");
+	m_initialNode_Operation_control_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_initialNode_Operation_control_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_initialNode_Operation_control_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_initialNode_Operation_control_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_initialNode_Operation_control_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_initialNode_Operation_control_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -13712,13 +13452,12 @@ void umlPackageImpl::initializeInitialNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_initialNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_initialNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setName("no_incoming_edges");
+	m_initialNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_initialNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_initialNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_initialNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_initialNode_Operation_no_incoming_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_initialNode_Operation_no_incoming_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -13950,13 +13689,12 @@ void umlPackageImpl::initializeInputPinContent()
 	    }
 	}
 	
-	m_inputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_inputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap->setName("outgoing_edges_structured_only");
+	m_inputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_inputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap->setLowerBound(0);
 	m_inputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap->setUpperBound(1);
 	m_inputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap->setUnique(true);
 	m_inputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_inputPin_Operation_outgoing_edges_structured_only_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14057,13 +13795,12 @@ void umlPackageImpl::initializeInstanceSpecificationContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_instanceSpecification_Operation_defining_feature_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_instanceSpecification_Operation_defining_feature_EDiagnosticChain_EMap->setName("defining_feature");
+	m_instanceSpecification_Operation_defining_feature_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_instanceSpecification_Operation_defining_feature_EDiagnosticChain_EMap->setLowerBound(0);
 	m_instanceSpecification_Operation_defining_feature_EDiagnosticChain_EMap->setUpperBound(1);
 	m_instanceSpecification_Operation_defining_feature_EDiagnosticChain_EMap->setUnique(true);
 	m_instanceSpecification_Operation_defining_feature_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_instanceSpecification_Operation_defining_feature_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14084,13 +13821,12 @@ void umlPackageImpl::initializeInstanceSpecificationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_instanceSpecification_Operation_deployment_artifact_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_instanceSpecification_Operation_deployment_artifact_EDiagnosticChain_EMap->setName("deployment_artifact");
+	m_instanceSpecification_Operation_deployment_artifact_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_instanceSpecification_Operation_deployment_artifact_EDiagnosticChain_EMap->setLowerBound(0);
 	m_instanceSpecification_Operation_deployment_artifact_EDiagnosticChain_EMap->setUpperBound(1);
 	m_instanceSpecification_Operation_deployment_artifact_EDiagnosticChain_EMap->setUnique(true);
 	m_instanceSpecification_Operation_deployment_artifact_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_instanceSpecification_Operation_deployment_artifact_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14111,13 +13847,12 @@ void umlPackageImpl::initializeInstanceSpecificationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_instanceSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_instanceSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setName("deployment_target");
+	m_instanceSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_instanceSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setLowerBound(0);
 	m_instanceSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setUpperBound(1);
 	m_instanceSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setUnique(true);
 	m_instanceSpecification_Operation_deployment_target_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_instanceSpecification_Operation_deployment_target_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14138,13 +13873,12 @@ void umlPackageImpl::initializeInstanceSpecificationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_instanceSpecification_Operation_structural_feature_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_instanceSpecification_Operation_structural_feature_EDiagnosticChain_EMap->setName("structural_feature");
+	m_instanceSpecification_Operation_structural_feature_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_instanceSpecification_Operation_structural_feature_EDiagnosticChain_EMap->setLowerBound(0);
 	m_instanceSpecification_Operation_structural_feature_EDiagnosticChain_EMap->setUpperBound(1);
 	m_instanceSpecification_Operation_structural_feature_EDiagnosticChain_EMap->setUnique(true);
 	m_instanceSpecification_Operation_structural_feature_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_instanceSpecification_Operation_structural_feature_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14328,13 +14062,12 @@ void umlPackageImpl::initializeInteractionContent()
 	    }
 	}
 	
-	m_interaction_Operation_not_contained_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interaction_Operation_not_contained_EDiagnosticChain_EMap->setName("not_contained");
+	m_interaction_Operation_not_contained_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interaction_Operation_not_contained_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interaction_Operation_not_contained_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interaction_Operation_not_contained_EDiagnosticChain_EMap->setUnique(true);
 	m_interaction_Operation_not_contained_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interaction_Operation_not_contained_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14410,13 +14143,12 @@ void umlPackageImpl::initializeInteractionConstraintContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_interactionConstraint_Operation_dynamic_variables_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionConstraint_Operation_dynamic_variables_EDiagnosticChain_EMap->setName("dynamic_variables");
+	m_interactionConstraint_Operation_dynamic_variables_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionConstraint_Operation_dynamic_variables_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionConstraint_Operation_dynamic_variables_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionConstraint_Operation_dynamic_variables_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionConstraint_Operation_dynamic_variables_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionConstraint_Operation_dynamic_variables_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14437,13 +14169,12 @@ void umlPackageImpl::initializeInteractionConstraintContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interactionConstraint_Operation_global_data_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionConstraint_Operation_global_data_EDiagnosticChain_EMap->setName("global_data");
+	m_interactionConstraint_Operation_global_data_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionConstraint_Operation_global_data_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionConstraint_Operation_global_data_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionConstraint_Operation_global_data_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionConstraint_Operation_global_data_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionConstraint_Operation_global_data_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14464,13 +14195,12 @@ void umlPackageImpl::initializeInteractionConstraintContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interactionConstraint_Operation_maxint_greater_equal_minint_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionConstraint_Operation_maxint_greater_equal_minint_EDiagnosticChain_EMap->setName("maxint_greater_equal_minint");
+	m_interactionConstraint_Operation_maxint_greater_equal_minint_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionConstraint_Operation_maxint_greater_equal_minint_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionConstraint_Operation_maxint_greater_equal_minint_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionConstraint_Operation_maxint_greater_equal_minint_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionConstraint_Operation_maxint_greater_equal_minint_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionConstraint_Operation_maxint_greater_equal_minint_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14491,13 +14221,12 @@ void umlPackageImpl::initializeInteractionConstraintContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interactionConstraint_Operation_maxint_positive_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionConstraint_Operation_maxint_positive_EDiagnosticChain_EMap->setName("maxint_positive");
+	m_interactionConstraint_Operation_maxint_positive_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionConstraint_Operation_maxint_positive_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionConstraint_Operation_maxint_positive_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionConstraint_Operation_maxint_positive_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionConstraint_Operation_maxint_positive_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionConstraint_Operation_maxint_positive_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14518,13 +14247,12 @@ void umlPackageImpl::initializeInteractionConstraintContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interactionConstraint_Operation_minint_maxint_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionConstraint_Operation_minint_maxint_EDiagnosticChain_EMap->setName("minint_maxint");
+	m_interactionConstraint_Operation_minint_maxint_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionConstraint_Operation_minint_maxint_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionConstraint_Operation_minint_maxint_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionConstraint_Operation_minint_maxint_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionConstraint_Operation_minint_maxint_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionConstraint_Operation_minint_maxint_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14545,13 +14273,12 @@ void umlPackageImpl::initializeInteractionConstraintContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interactionConstraint_Operation_minint_non_negative_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionConstraint_Operation_minint_non_negative_EDiagnosticChain_EMap->setName("minint_non_negative");
+	m_interactionConstraint_Operation_minint_non_negative_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionConstraint_Operation_minint_non_negative_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionConstraint_Operation_minint_non_negative_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionConstraint_Operation_minint_non_negative_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionConstraint_Operation_minint_non_negative_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionConstraint_Operation_minint_non_negative_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14738,13 +14465,12 @@ void umlPackageImpl::initializeInteractionOperandContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_interactionOperand_Operation_guard_contain_references_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionOperand_Operation_guard_contain_references_EDiagnosticChain_EMap->setName("guard_contain_references");
+	m_interactionOperand_Operation_guard_contain_references_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionOperand_Operation_guard_contain_references_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionOperand_Operation_guard_contain_references_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionOperand_Operation_guard_contain_references_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionOperand_Operation_guard_contain_references_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionOperand_Operation_guard_contain_references_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14765,13 +14491,12 @@ void umlPackageImpl::initializeInteractionOperandContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interactionOperand_Operation_guard_directly_prior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionOperand_Operation_guard_directly_prior_EDiagnosticChain_EMap->setName("guard_directly_prior");
+	m_interactionOperand_Operation_guard_directly_prior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionOperand_Operation_guard_directly_prior_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionOperand_Operation_guard_directly_prior_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionOperand_Operation_guard_directly_prior_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionOperand_Operation_guard_directly_prior_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionOperand_Operation_guard_directly_prior_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14913,13 +14638,12 @@ void umlPackageImpl::initializeInteractionUseContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_interactionUse_Operation_all_lifelines_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionUse_Operation_all_lifelines_EDiagnosticChain_EMap->setName("all_lifelines");
+	m_interactionUse_Operation_all_lifelines_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionUse_Operation_all_lifelines_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionUse_Operation_all_lifelines_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionUse_Operation_all_lifelines_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionUse_Operation_all_lifelines_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionUse_Operation_all_lifelines_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14940,13 +14664,12 @@ void umlPackageImpl::initializeInteractionUseContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interactionUse_Operation_arguments_are_constants_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionUse_Operation_arguments_are_constants_EDiagnosticChain_EMap->setName("arguments_are_constants");
+	m_interactionUse_Operation_arguments_are_constants_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionUse_Operation_arguments_are_constants_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionUse_Operation_arguments_are_constants_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionUse_Operation_arguments_are_constants_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionUse_Operation_arguments_are_constants_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionUse_Operation_arguments_are_constants_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14967,13 +14690,12 @@ void umlPackageImpl::initializeInteractionUseContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interactionUse_Operation_arguments_correspond_to_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionUse_Operation_arguments_correspond_to_parameters_EDiagnosticChain_EMap->setName("arguments_correspond_to_parameters");
+	m_interactionUse_Operation_arguments_correspond_to_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionUse_Operation_arguments_correspond_to_parameters_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionUse_Operation_arguments_correspond_to_parameters_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionUse_Operation_arguments_correspond_to_parameters_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionUse_Operation_arguments_correspond_to_parameters_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionUse_Operation_arguments_correspond_to_parameters_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -14994,13 +14716,12 @@ void umlPackageImpl::initializeInteractionUseContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interactionUse_Operation_gates_match_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionUse_Operation_gates_match_EDiagnosticChain_EMap->setName("gates_match");
+	m_interactionUse_Operation_gates_match_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionUse_Operation_gates_match_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionUse_Operation_gates_match_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionUse_Operation_gates_match_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionUse_Operation_gates_match_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionUse_Operation_gates_match_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -15021,13 +14742,12 @@ void umlPackageImpl::initializeInteractionUseContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interactionUse_Operation_returnValueRecipient_coverage_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionUse_Operation_returnValueRecipient_coverage_EDiagnosticChain_EMap->setName("returnValueRecipient_coverage");
+	m_interactionUse_Operation_returnValueRecipient_coverage_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionUse_Operation_returnValueRecipient_coverage_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionUse_Operation_returnValueRecipient_coverage_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionUse_Operation_returnValueRecipient_coverage_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionUse_Operation_returnValueRecipient_coverage_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionUse_Operation_returnValueRecipient_coverage_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -15048,13 +14768,12 @@ void umlPackageImpl::initializeInteractionUseContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interactionUse_Operation_returnValue_type_recipient_correspondence_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionUse_Operation_returnValue_type_recipient_correspondence_EDiagnosticChain_EMap->setName("returnValue_type_recipient_correspondence");
+	m_interactionUse_Operation_returnValue_type_recipient_correspondence_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interactionUse_Operation_returnValue_type_recipient_correspondence_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interactionUse_Operation_returnValue_type_recipient_correspondence_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interactionUse_Operation_returnValue_type_recipient_correspondence_EDiagnosticChain_EMap->setUnique(true);
 	m_interactionUse_Operation_returnValue_type_recipient_correspondence_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interactionUse_Operation_returnValue_type_recipient_correspondence_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -15224,13 +14943,12 @@ void umlPackageImpl::initializeInterfaceContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
 	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setName("createOwnedAttribute");
+	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
 	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setLowerBound(1);
 	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setUpperBound(1);
 	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setUnique(true);
 	m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interface_Operation_createOwnedAttribute_String_UnlimitedNatural);
 		parameter->setName("name");
@@ -15271,13 +14989,12 @@ void umlPackageImpl::initializeInterfaceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interface_Operation_createOwnedOperation_String_Type->setEType(getOperation_Class());
 	m_interface_Operation_createOwnedOperation_String_Type->setName("createOwnedOperation");
+	m_interface_Operation_createOwnedOperation_String_Type->setEType(getOperation_Class());
 	m_interface_Operation_createOwnedOperation_String_Type->setLowerBound(1);
 	m_interface_Operation_createOwnedOperation_String_Type->setUpperBound(1);
 	m_interface_Operation_createOwnedOperation_String_Type->setUnique(true);
 	m_interface_Operation_createOwnedOperation_String_Type->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interface_Operation_createOwnedOperation_String_Type);
 		parameter->setName("name");
@@ -15318,13 +15035,12 @@ void umlPackageImpl::initializeInterfaceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_interface_Operation_visibility_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interface_Operation_visibility_EDiagnosticChain_EMap->setName("visibility");
+	m_interface_Operation_visibility_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interface_Operation_visibility_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interface_Operation_visibility_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interface_Operation_visibility_EDiagnosticChain_EMap->setUnique(true);
 	m_interface_Operation_visibility_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interface_Operation_visibility_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -15464,13 +15180,12 @@ void umlPackageImpl::initializeInterruptibleActivityRegionContent()
 	    }
 	}
 	
-	m_interruptibleActivityRegion_Operation_interrupting_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interruptibleActivityRegion_Operation_interrupting_edges_EDiagnosticChain_EMap->setName("interrupting_edges");
+	m_interruptibleActivityRegion_Operation_interrupting_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_interruptibleActivityRegion_Operation_interrupting_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_interruptibleActivityRegion_Operation_interrupting_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_interruptibleActivityRegion_Operation_interrupting_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_interruptibleActivityRegion_Operation_interrupting_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_interruptibleActivityRegion_Operation_interrupting_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -15626,7 +15341,7 @@ void umlPackageImpl::initializeJoinNodeContent()
 	
 	m_joinNode_Attribute_isCombineDuplicate = getJoinNode_Attribute_isCombineDuplicate();
 	m_joinNode_Attribute_isCombineDuplicate->setName("isCombineDuplicate");
-	m_joinNode_Attribute_isCombineDuplicate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_joinNode_Attribute_isCombineDuplicate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_joinNode_Attribute_isCombineDuplicate->setLowerBound(1);
 	m_joinNode_Attribute_isCombineDuplicate->setUpperBound(1);
 	m_joinNode_Attribute_isCombineDuplicate->setTransient(false);
@@ -15668,13 +15383,12 @@ void umlPackageImpl::initializeJoinNodeContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_joinNode_Operation_incoming_object_flow_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_joinNode_Operation_incoming_object_flow_EDiagnosticChain_EMap->setName("incoming_object_flow");
+	m_joinNode_Operation_incoming_object_flow_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_joinNode_Operation_incoming_object_flow_EDiagnosticChain_EMap->setLowerBound(0);
 	m_joinNode_Operation_incoming_object_flow_EDiagnosticChain_EMap->setUpperBound(1);
 	m_joinNode_Operation_incoming_object_flow_EDiagnosticChain_EMap->setUnique(true);
 	m_joinNode_Operation_incoming_object_flow_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_joinNode_Operation_incoming_object_flow_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -15695,13 +15409,12 @@ void umlPackageImpl::initializeJoinNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_joinNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_joinNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setName("one_outgoing_edge");
+	m_joinNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_joinNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setLowerBound(0);
 	m_joinNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setUpperBound(1);
 	m_joinNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setUnique(true);
 	m_joinNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_joinNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -15849,13 +15562,12 @@ void umlPackageImpl::initializeLifelineContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_lifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_lifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap->setName("interaction_uses_share_lifeline");
+	m_lifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_lifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap->setLowerBound(0);
 	m_lifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap->setUpperBound(1);
 	m_lifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap->setUnique(true);
 	m_lifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_lifeline_Operation_interaction_uses_share_lifeline_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -15876,13 +15588,12 @@ void umlPackageImpl::initializeLifelineContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_lifeline_Operation_same_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_lifeline_Operation_same_classifier_EDiagnosticChain_EMap->setName("same_classifier");
+	m_lifeline_Operation_same_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_lifeline_Operation_same_classifier_EDiagnosticChain_EMap->setLowerBound(0);
 	m_lifeline_Operation_same_classifier_EDiagnosticChain_EMap->setUpperBound(1);
 	m_lifeline_Operation_same_classifier_EDiagnosticChain_EMap->setUnique(true);
 	m_lifeline_Operation_same_classifier_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_lifeline_Operation_same_classifier_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -15903,13 +15614,12 @@ void umlPackageImpl::initializeLifelineContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_lifeline_Operation_selector_int_or_string_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_lifeline_Operation_selector_int_or_string_EDiagnosticChain_EMap->setName("selector_int_or_string");
+	m_lifeline_Operation_selector_int_or_string_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_lifeline_Operation_selector_int_or_string_EDiagnosticChain_EMap->setLowerBound(0);
 	m_lifeline_Operation_selector_int_or_string_EDiagnosticChain_EMap->setUpperBound(1);
 	m_lifeline_Operation_selector_int_or_string_EDiagnosticChain_EMap->setUnique(true);
 	m_lifeline_Operation_selector_int_or_string_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_lifeline_Operation_selector_int_or_string_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -15930,13 +15640,12 @@ void umlPackageImpl::initializeLifelineContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_lifeline_Operation_selector_specified_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_lifeline_Operation_selector_specified_EDiagnosticChain_EMap->setName("selector_specified");
+	m_lifeline_Operation_selector_specified_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_lifeline_Operation_selector_specified_EDiagnosticChain_EMap->setLowerBound(0);
 	m_lifeline_Operation_selector_specified_EDiagnosticChain_EMap->setUpperBound(1);
 	m_lifeline_Operation_selector_specified_EDiagnosticChain_EMap->setUnique(true);
 	m_lifeline_Operation_selector_specified_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_lifeline_Operation_selector_specified_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -16012,21 +15721,19 @@ void umlPackageImpl::initializeLinkActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_linkAction_Operation_association->setEType(getAssociation_Class());
 	m_linkAction_Operation_association->setName("association");
+	m_linkAction_Operation_association->setEType(getAssociation_Class());
 	m_linkAction_Operation_association->setLowerBound(1);
 	m_linkAction_Operation_association->setUpperBound(1);
 	m_linkAction_Operation_association->setUnique(true);
 	m_linkAction_Operation_association->setOrdered(false);
 	
-	
-	m_linkAction_Operation_not_static_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkAction_Operation_not_static_EDiagnosticChain_EMap->setName("not_static");
+	m_linkAction_Operation_not_static_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkAction_Operation_not_static_EDiagnosticChain_EMap->setLowerBound(0);
 	m_linkAction_Operation_not_static_EDiagnosticChain_EMap->setUpperBound(1);
 	m_linkAction_Operation_not_static_EDiagnosticChain_EMap->setUnique(true);
 	m_linkAction_Operation_not_static_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_linkAction_Operation_not_static_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -16047,13 +15754,12 @@ void umlPackageImpl::initializeLinkActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_linkAction_Operation_same_association_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkAction_Operation_same_association_EDiagnosticChain_EMap->setName("same_association");
+	m_linkAction_Operation_same_association_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkAction_Operation_same_association_EDiagnosticChain_EMap->setLowerBound(0);
 	m_linkAction_Operation_same_association_EDiagnosticChain_EMap->setUpperBound(1);
 	m_linkAction_Operation_same_association_EDiagnosticChain_EMap->setUnique(true);
 	m_linkAction_Operation_same_association_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_linkAction_Operation_same_association_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -16074,13 +15780,12 @@ void umlPackageImpl::initializeLinkActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_linkAction_Operation_same_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkAction_Operation_same_pins_EDiagnosticChain_EMap->setName("same_pins");
+	m_linkAction_Operation_same_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkAction_Operation_same_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_linkAction_Operation_same_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_linkAction_Operation_same_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_linkAction_Operation_same_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_linkAction_Operation_same_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -16112,7 +15817,7 @@ void umlPackageImpl::initializeLinkEndCreationDataContent()
 	
 	m_linkEndCreationData_Attribute_isReplaceAll = getLinkEndCreationData_Attribute_isReplaceAll();
 	m_linkEndCreationData_Attribute_isReplaceAll->setName("isReplaceAll");
-	m_linkEndCreationData_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_linkEndCreationData_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_linkEndCreationData_Attribute_isReplaceAll->setLowerBound(1);
 	m_linkEndCreationData_Attribute_isReplaceAll->setUpperBound(1);
 	m_linkEndCreationData_Attribute_isReplaceAll->setTransient(false);
@@ -16154,13 +15859,12 @@ void umlPackageImpl::initializeLinkEndCreationDataContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_linkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap->setName("insertAt_pin");
+	m_linkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap->setLowerBound(0);
 	m_linkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap->setUpperBound(1);
 	m_linkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap->setUnique(true);
 	m_linkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_linkEndCreationData_Operation_insertAt_pin_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -16258,21 +15962,19 @@ void umlPackageImpl::initializeLinkEndDataContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_linkEndData_Operation_allPins->setEType(getInputPin_Class());
 	m_linkEndData_Operation_allPins->setName("allPins");
+	m_linkEndData_Operation_allPins->setEType(getInputPin_Class());
 	m_linkEndData_Operation_allPins->setLowerBound(0);
 	m_linkEndData_Operation_allPins->setUpperBound(-1);
 	m_linkEndData_Operation_allPins->setUnique(false);
 	m_linkEndData_Operation_allPins->setOrdered(false);
 	
-	
-	m_linkEndData_Operation_end_object_input_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndData_Operation_end_object_input_pin_EDiagnosticChain_EMap->setName("end_object_input_pin");
+	m_linkEndData_Operation_end_object_input_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndData_Operation_end_object_input_pin_EDiagnosticChain_EMap->setLowerBound(0);
 	m_linkEndData_Operation_end_object_input_pin_EDiagnosticChain_EMap->setUpperBound(1);
 	m_linkEndData_Operation_end_object_input_pin_EDiagnosticChain_EMap->setUnique(true);
 	m_linkEndData_Operation_end_object_input_pin_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_linkEndData_Operation_end_object_input_pin_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -16293,13 +15995,12 @@ void umlPackageImpl::initializeLinkEndDataContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_linkEndData_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndData_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_linkEndData_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndData_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_linkEndData_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_linkEndData_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_linkEndData_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_linkEndData_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -16320,13 +16021,12 @@ void umlPackageImpl::initializeLinkEndDataContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_linkEndData_Operation_property_is_association_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndData_Operation_property_is_association_end_EDiagnosticChain_EMap->setName("property_is_association_end");
+	m_linkEndData_Operation_property_is_association_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndData_Operation_property_is_association_end_EDiagnosticChain_EMap->setLowerBound(0);
 	m_linkEndData_Operation_property_is_association_end_EDiagnosticChain_EMap->setUpperBound(1);
 	m_linkEndData_Operation_property_is_association_end_EDiagnosticChain_EMap->setUnique(true);
 	m_linkEndData_Operation_property_is_association_end_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_linkEndData_Operation_property_is_association_end_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -16347,13 +16047,12 @@ void umlPackageImpl::initializeLinkEndDataContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_linkEndData_Operation_qualifiers_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndData_Operation_qualifiers_EDiagnosticChain_EMap->setName("qualifiers");
+	m_linkEndData_Operation_qualifiers_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndData_Operation_qualifiers_EDiagnosticChain_EMap->setLowerBound(0);
 	m_linkEndData_Operation_qualifiers_EDiagnosticChain_EMap->setUpperBound(1);
 	m_linkEndData_Operation_qualifiers_EDiagnosticChain_EMap->setUnique(true);
 	m_linkEndData_Operation_qualifiers_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_linkEndData_Operation_qualifiers_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -16374,13 +16073,12 @@ void umlPackageImpl::initializeLinkEndDataContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_linkEndData_Operation_same_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndData_Operation_same_type_EDiagnosticChain_EMap->setName("same_type");
+	m_linkEndData_Operation_same_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndData_Operation_same_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_linkEndData_Operation_same_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_linkEndData_Operation_same_type_EDiagnosticChain_EMap->setUnique(true);
 	m_linkEndData_Operation_same_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_linkEndData_Operation_same_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -16412,7 +16110,7 @@ void umlPackageImpl::initializeLinkEndDestructionDataContent()
 	
 	m_linkEndDestructionData_Attribute_isDestroyDuplicates = getLinkEndDestructionData_Attribute_isDestroyDuplicates();
 	m_linkEndDestructionData_Attribute_isDestroyDuplicates->setName("isDestroyDuplicates");
-	m_linkEndDestructionData_Attribute_isDestroyDuplicates->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_linkEndDestructionData_Attribute_isDestroyDuplicates->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_linkEndDestructionData_Attribute_isDestroyDuplicates->setLowerBound(1);
 	m_linkEndDestructionData_Attribute_isDestroyDuplicates->setUpperBound(1);
 	m_linkEndDestructionData_Attribute_isDestroyDuplicates->setTransient(false);
@@ -16454,13 +16152,12 @@ void umlPackageImpl::initializeLinkEndDestructionDataContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_linkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap->setName("destroyAt_pin");
+	m_linkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_linkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap->setLowerBound(0);
 	m_linkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap->setUpperBound(1);
 	m_linkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap->setUnique(true);
 	m_linkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_linkEndDestructionData_Operation_destroyAt_pin_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -16492,7 +16189,7 @@ void umlPackageImpl::initializeLiteralBooleanContent()
 	
 	m_literalBoolean_Attribute_value = getLiteralBoolean_Attribute_value();
 	m_literalBoolean_Attribute_value->setName("value");
-	m_literalBoolean_Attribute_value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_literalBoolean_Attribute_value->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalBoolean_Attribute_value->setLowerBound(1);
 	m_literalBoolean_Attribute_value->setUpperBound(1);
 	m_literalBoolean_Attribute_value->setTransient(false);
@@ -16512,21 +16209,19 @@ void umlPackageImpl::initializeLiteralBooleanContent()
 	}
 	
 	
-	m_literalBoolean_Operation_booleanValue->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalBoolean_Operation_booleanValue->setName("booleanValue");
+	m_literalBoolean_Operation_booleanValue->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalBoolean_Operation_booleanValue->setLowerBound(0);
 	m_literalBoolean_Operation_booleanValue->setUpperBound(1);
 	m_literalBoolean_Operation_booleanValue->setUnique(true);
 	m_literalBoolean_Operation_booleanValue->setOrdered(false);
 	
-	
-	m_literalBoolean_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalBoolean_Operation_isComputable->setName("isComputable");
+	m_literalBoolean_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalBoolean_Operation_isComputable->setLowerBound(1);
 	m_literalBoolean_Operation_isComputable->setUpperBound(1);
 	m_literalBoolean_Operation_isComputable->setUnique(true);
 	m_literalBoolean_Operation_isComputable->setOrdered(false);
-	
 	
 	
 }
@@ -16539,7 +16234,7 @@ void umlPackageImpl::initializeLiteralIntegerContent()
 	
 	m_literalInteger_Attribute_value = getLiteralInteger_Attribute_value();
 	m_literalInteger_Attribute_value->setName("value");
-	m_literalInteger_Attribute_value->setEType(types::typesPackage::eInstance()->getInteger_Class());
+		m_literalInteger_Attribute_value->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_literalInteger_Attribute_value->setLowerBound(1);
 	m_literalInteger_Attribute_value->setUpperBound(1);
 	m_literalInteger_Attribute_value->setTransient(false);
@@ -16559,21 +16254,19 @@ void umlPackageImpl::initializeLiteralIntegerContent()
 	}
 	
 	
-	m_literalInteger_Operation_integerValue->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_literalInteger_Operation_integerValue->setName("integerValue");
+	m_literalInteger_Operation_integerValue->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_literalInteger_Operation_integerValue->setLowerBound(0);
 	m_literalInteger_Operation_integerValue->setUpperBound(1);
 	m_literalInteger_Operation_integerValue->setUnique(true);
 	m_literalInteger_Operation_integerValue->setOrdered(false);
 	
-	
-	m_literalInteger_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalInteger_Operation_isComputable->setName("isComputable");
+	m_literalInteger_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalInteger_Operation_isComputable->setLowerBound(1);
 	m_literalInteger_Operation_isComputable->setUpperBound(1);
 	m_literalInteger_Operation_isComputable->setUnique(true);
 	m_literalInteger_Operation_isComputable->setOrdered(false);
-	
 	
 	
 }
@@ -16586,21 +16279,19 @@ void umlPackageImpl::initializeLiteralNullContent()
 	
 	
 	
-	m_literalNull_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalNull_Operation_isComputable->setName("isComputable");
+	m_literalNull_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalNull_Operation_isComputable->setLowerBound(1);
 	m_literalNull_Operation_isComputable->setUpperBound(1);
 	m_literalNull_Operation_isComputable->setUnique(true);
 	m_literalNull_Operation_isComputable->setOrdered(false);
 	
-	
-	m_literalNull_Operation_isNull->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalNull_Operation_isNull->setName("isNull");
+	m_literalNull_Operation_isNull->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalNull_Operation_isNull->setLowerBound(1);
 	m_literalNull_Operation_isNull->setUpperBound(1);
 	m_literalNull_Operation_isNull->setUnique(true);
 	m_literalNull_Operation_isNull->setOrdered(false);
-	
 	
 	
 }
@@ -16613,7 +16304,7 @@ void umlPackageImpl::initializeLiteralRealContent()
 	
 	m_literalReal_Attribute_value = getLiteralReal_Attribute_value();
 	m_literalReal_Attribute_value->setName("value");
-	m_literalReal_Attribute_value->setEType(types::typesPackage::eInstance()->getReal_Class());
+		m_literalReal_Attribute_value->setEType(types::typesPackage::eInstance()->getReal_Class());
 	m_literalReal_Attribute_value->setLowerBound(1);
 	m_literalReal_Attribute_value->setUpperBound(1);
 	m_literalReal_Attribute_value->setTransient(false);
@@ -16633,21 +16324,19 @@ void umlPackageImpl::initializeLiteralRealContent()
 	}
 	
 	
-	m_literalReal_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalReal_Operation_isComputable->setName("isComputable");
+	m_literalReal_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalReal_Operation_isComputable->setLowerBound(1);
 	m_literalReal_Operation_isComputable->setUpperBound(1);
 	m_literalReal_Operation_isComputable->setUnique(true);
 	m_literalReal_Operation_isComputable->setOrdered(false);
 	
-	
-	m_literalReal_Operation_realValue->setEType(types::typesPackage::eInstance()->getReal_Class());
 	m_literalReal_Operation_realValue->setName("realValue");
+	m_literalReal_Operation_realValue->setEType(types::typesPackage::eInstance()->getReal_Class());
 	m_literalReal_Operation_realValue->setLowerBound(0);
 	m_literalReal_Operation_realValue->setUpperBound(1);
 	m_literalReal_Operation_realValue->setUnique(true);
 	m_literalReal_Operation_realValue->setOrdered(false);
-	
 	
 	
 }
@@ -16671,7 +16360,7 @@ void umlPackageImpl::initializeLiteralStringContent()
 	
 	m_literalString_Attribute_value = getLiteralString_Attribute_value();
 	m_literalString_Attribute_value->setName("value");
-	m_literalString_Attribute_value->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_literalString_Attribute_value->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_literalString_Attribute_value->setLowerBound(0);
 	m_literalString_Attribute_value->setUpperBound(1);
 	m_literalString_Attribute_value->setTransient(false);
@@ -16691,21 +16380,19 @@ void umlPackageImpl::initializeLiteralStringContent()
 	}
 	
 	
-	m_literalString_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalString_Operation_isComputable->setName("isComputable");
+	m_literalString_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalString_Operation_isComputable->setLowerBound(1);
 	m_literalString_Operation_isComputable->setUpperBound(1);
 	m_literalString_Operation_isComputable->setUnique(true);
 	m_literalString_Operation_isComputable->setOrdered(false);
 	
-	
-	m_literalString_Operation_stringValue->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_literalString_Operation_stringValue->setName("stringValue");
+	m_literalString_Operation_stringValue->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_literalString_Operation_stringValue->setLowerBound(0);
 	m_literalString_Operation_stringValue->setUpperBound(1);
 	m_literalString_Operation_stringValue->setUnique(true);
 	m_literalString_Operation_stringValue->setOrdered(false);
-	
 	
 	
 }
@@ -16718,7 +16405,7 @@ void umlPackageImpl::initializeLiteralUnlimitedNaturalContent()
 	
 	m_literalUnlimitedNatural_Attribute_value = getLiteralUnlimitedNatural_Attribute_value();
 	m_literalUnlimitedNatural_Attribute_value->setName("value");
-	m_literalUnlimitedNatural_Attribute_value->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
+		m_literalUnlimitedNatural_Attribute_value->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_literalUnlimitedNatural_Attribute_value->setLowerBound(1);
 	m_literalUnlimitedNatural_Attribute_value->setUpperBound(1);
 	m_literalUnlimitedNatural_Attribute_value->setTransient(false);
@@ -16738,21 +16425,19 @@ void umlPackageImpl::initializeLiteralUnlimitedNaturalContent()
 	}
 	
 	
-	m_literalUnlimitedNatural_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalUnlimitedNatural_Operation_isComputable->setName("isComputable");
+	m_literalUnlimitedNatural_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_literalUnlimitedNatural_Operation_isComputable->setLowerBound(1);
 	m_literalUnlimitedNatural_Operation_isComputable->setUpperBound(1);
 	m_literalUnlimitedNatural_Operation_isComputable->setUnique(true);
 	m_literalUnlimitedNatural_Operation_isComputable->setOrdered(false);
 	
-	
-	m_literalUnlimitedNatural_Operation_unlimitedValue->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_literalUnlimitedNatural_Operation_unlimitedValue->setName("unlimitedValue");
+	m_literalUnlimitedNatural_Operation_unlimitedValue->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_literalUnlimitedNatural_Operation_unlimitedValue->setLowerBound(0);
 	m_literalUnlimitedNatural_Operation_unlimitedValue->setUpperBound(1);
 	m_literalUnlimitedNatural_Operation_unlimitedValue->setUnique(true);
 	m_literalUnlimitedNatural_Operation_unlimitedValue->setOrdered(false);
-	
 	
 	
 }
@@ -16765,7 +16450,7 @@ void umlPackageImpl::initializeLoopNodeContent()
 	
 	m_loopNode_Attribute_isTestedFirst = getLoopNode_Attribute_isTestedFirst();
 	m_loopNode_Attribute_isTestedFirst->setName("isTestedFirst");
-	m_loopNode_Attribute_isTestedFirst->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_loopNode_Attribute_isTestedFirst->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_loopNode_Attribute_isTestedFirst->setLowerBound(1);
 	m_loopNode_Attribute_isTestedFirst->setUpperBound(1);
 	m_loopNode_Attribute_isTestedFirst->setTransient(false);
@@ -16961,13 +16646,12 @@ void umlPackageImpl::initializeLoopNodeContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_loopNode_Operation_body_output_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_body_output_pins_EDiagnosticChain_EMap->setName("body_output_pins");
+	m_loopNode_Operation_body_output_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_body_output_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_loopNode_Operation_body_output_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_loopNode_Operation_body_output_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_loopNode_Operation_body_output_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_loopNode_Operation_body_output_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -16988,13 +16672,12 @@ void umlPackageImpl::initializeLoopNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_loopNode_Operation_executable_nodes_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_executable_nodes_EDiagnosticChain_EMap->setName("executable_nodes");
+	m_loopNode_Operation_executable_nodes_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_executable_nodes_EDiagnosticChain_EMap->setLowerBound(0);
 	m_loopNode_Operation_executable_nodes_EDiagnosticChain_EMap->setUpperBound(1);
 	m_loopNode_Operation_executable_nodes_EDiagnosticChain_EMap->setUnique(true);
 	m_loopNode_Operation_executable_nodes_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_loopNode_Operation_executable_nodes_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17015,13 +16698,12 @@ void umlPackageImpl::initializeLoopNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_loopNode_Operation_input_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_input_edges_EDiagnosticChain_EMap->setName("input_edges");
+	m_loopNode_Operation_input_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_input_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_loopNode_Operation_input_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_loopNode_Operation_input_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_loopNode_Operation_input_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_loopNode_Operation_input_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17042,13 +16724,12 @@ void umlPackageImpl::initializeLoopNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_loopNode_Operation_loop_variable_outgoing_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_loop_variable_outgoing_EDiagnosticChain_EMap->setName("loop_variable_outgoing");
+	m_loopNode_Operation_loop_variable_outgoing_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_loop_variable_outgoing_EDiagnosticChain_EMap->setLowerBound(0);
 	m_loopNode_Operation_loop_variable_outgoing_EDiagnosticChain_EMap->setUpperBound(1);
 	m_loopNode_Operation_loop_variable_outgoing_EDiagnosticChain_EMap->setUnique(true);
 	m_loopNode_Operation_loop_variable_outgoing_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_loopNode_Operation_loop_variable_outgoing_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17069,13 +16750,12 @@ void umlPackageImpl::initializeLoopNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_loopNode_Operation_matching_loop_variables_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_matching_loop_variables_EDiagnosticChain_EMap->setName("matching_loop_variables");
+	m_loopNode_Operation_matching_loop_variables_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_matching_loop_variables_EDiagnosticChain_EMap->setLowerBound(0);
 	m_loopNode_Operation_matching_loop_variables_EDiagnosticChain_EMap->setUpperBound(1);
 	m_loopNode_Operation_matching_loop_variables_EDiagnosticChain_EMap->setUnique(true);
 	m_loopNode_Operation_matching_loop_variables_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_loopNode_Operation_matching_loop_variables_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17096,13 +16776,12 @@ void umlPackageImpl::initializeLoopNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_loopNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setName("matching_output_pins");
+	m_loopNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_loopNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_loopNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_loopNode_Operation_matching_output_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_loopNode_Operation_matching_output_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17123,13 +16802,12 @@ void umlPackageImpl::initializeLoopNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_loopNode_Operation_matching_result_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_matching_result_pins_EDiagnosticChain_EMap->setName("matching_result_pins");
+	m_loopNode_Operation_matching_result_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_matching_result_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_loopNode_Operation_matching_result_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_loopNode_Operation_matching_result_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_loopNode_Operation_matching_result_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_loopNode_Operation_matching_result_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17150,13 +16828,12 @@ void umlPackageImpl::initializeLoopNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_loopNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setName("result_no_incoming");
+	m_loopNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setLowerBound(0);
 	m_loopNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setUpperBound(1);
 	m_loopNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setUnique(true);
 	m_loopNode_Operation_result_no_incoming_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_loopNode_Operation_result_no_incoming_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17177,13 +16854,12 @@ void umlPackageImpl::initializeLoopNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_loopNode_Operation_setup_test_and_body_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_setup_test_and_body_EDiagnosticChain_EMap->setName("setup_test_and_body");
+	m_loopNode_Operation_setup_test_and_body_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_loopNode_Operation_setup_test_and_body_EDiagnosticChain_EMap->setLowerBound(0);
 	m_loopNode_Operation_setup_test_and_body_EDiagnosticChain_EMap->setUpperBound(1);
 	m_loopNode_Operation_setup_test_and_body_EDiagnosticChain_EMap->setUnique(true);
 	m_loopNode_Operation_setup_test_and_body_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_loopNode_Operation_setup_test_and_body_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17248,13 +16924,12 @@ void umlPackageImpl::initializeMergeNodeContent()
 	
 	
 	
-	m_mergeNode_Operation_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_mergeNode_Operation_edges_EDiagnosticChain_EMap->setName("edges");
+	m_mergeNode_Operation_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_mergeNode_Operation_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_mergeNode_Operation_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_mergeNode_Operation_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_mergeNode_Operation_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_mergeNode_Operation_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17275,13 +16950,12 @@ void umlPackageImpl::initializeMergeNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_mergeNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_mergeNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setName("one_outgoing_edge");
+	m_mergeNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_mergeNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setLowerBound(0);
 	m_mergeNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setUpperBound(1);
 	m_mergeNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setUnique(true);
 	m_mergeNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_mergeNode_Operation_one_outgoing_edge_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17313,7 +16987,7 @@ void umlPackageImpl::initializeMessageContent()
 	
 	m_message_Attribute_messageKind = getMessage_Attribute_messageKind();
 	m_message_Attribute_messageKind->setName("messageKind");
-	m_message_Attribute_messageKind->setEType(getMessageKind_Class());
+		m_message_Attribute_messageKind->setEType(getMessageKind_Class());
 	m_message_Attribute_messageKind->setLowerBound(1);
 	m_message_Attribute_messageKind->setUpperBound(1);
 	m_message_Attribute_messageKind->setTransient(true);
@@ -17333,7 +17007,7 @@ void umlPackageImpl::initializeMessageContent()
 	}
 	m_message_Attribute_messageSort = getMessage_Attribute_messageSort();
 	m_message_Attribute_messageSort->setName("messageSort");
-	m_message_Attribute_messageSort->setEType(getMessageSort_Class());
+		m_message_Attribute_messageSort->setEType(getMessageSort_Class());
 	m_message_Attribute_messageSort->setLowerBound(1);
 	m_message_Attribute_messageSort->setUpperBound(1);
 	m_message_Attribute_messageSort->setTransient(false);
@@ -17488,13 +17162,12 @@ void umlPackageImpl::initializeMessageContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_message_Operation_arguments_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_arguments_EDiagnosticChain_EMap->setName("arguments");
+	m_message_Operation_arguments_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_arguments_EDiagnosticChain_EMap->setLowerBound(0);
 	m_message_Operation_arguments_EDiagnosticChain_EMap->setUpperBound(1);
 	m_message_Operation_arguments_EDiagnosticChain_EMap->setUnique(true);
 	m_message_Operation_arguments_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_message_Operation_arguments_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17515,13 +17188,12 @@ void umlPackageImpl::initializeMessageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_message_Operation_cannot_cross_boundaries_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_cannot_cross_boundaries_EDiagnosticChain_EMap->setName("cannot_cross_boundaries");
+	m_message_Operation_cannot_cross_boundaries_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_cannot_cross_boundaries_EDiagnosticChain_EMap->setLowerBound(0);
 	m_message_Operation_cannot_cross_boundaries_EDiagnosticChain_EMap->setUpperBound(1);
 	m_message_Operation_cannot_cross_boundaries_EDiagnosticChain_EMap->setUnique(true);
 	m_message_Operation_cannot_cross_boundaries_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_message_Operation_cannot_cross_boundaries_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17542,21 +17214,19 @@ void umlPackageImpl::initializeMessageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_message_Operation_getMessageKind->setEType(getMessageKind_Class());
 	m_message_Operation_getMessageKind->setName("getMessageKind");
+	m_message_Operation_getMessageKind->setEType(getMessageKind_Class());
 	m_message_Operation_getMessageKind->setLowerBound(1);
 	m_message_Operation_getMessageKind->setUpperBound(1);
 	m_message_Operation_getMessageKind->setUnique(true);
 	m_message_Operation_getMessageKind->setOrdered(false);
 	
-	
-	m_message_Operation_occurrence_specifications_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_occurrence_specifications_EDiagnosticChain_EMap->setName("occurrence_specifications");
+	m_message_Operation_occurrence_specifications_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_occurrence_specifications_EDiagnosticChain_EMap->setLowerBound(0);
 	m_message_Operation_occurrence_specifications_EDiagnosticChain_EMap->setUpperBound(1);
 	m_message_Operation_occurrence_specifications_EDiagnosticChain_EMap->setUnique(true);
 	m_message_Operation_occurrence_specifications_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_message_Operation_occurrence_specifications_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17577,13 +17247,12 @@ void umlPackageImpl::initializeMessageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_message_Operation_sending_receiving_message_event_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_sending_receiving_message_event_EDiagnosticChain_EMap->setName("sending_receiving_message_event");
+	m_message_Operation_sending_receiving_message_event_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_sending_receiving_message_event_EDiagnosticChain_EMap->setLowerBound(0);
 	m_message_Operation_sending_receiving_message_event_EDiagnosticChain_EMap->setUpperBound(1);
 	m_message_Operation_sending_receiving_message_event_EDiagnosticChain_EMap->setUnique(true);
 	m_message_Operation_sending_receiving_message_event_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_message_Operation_sending_receiving_message_event_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17604,13 +17273,12 @@ void umlPackageImpl::initializeMessageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_message_Operation_signature_is_operation_reply_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_signature_is_operation_reply_EDiagnosticChain_EMap->setName("signature_is_operation_reply");
+	m_message_Operation_signature_is_operation_reply_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_signature_is_operation_reply_EDiagnosticChain_EMap->setLowerBound(0);
 	m_message_Operation_signature_is_operation_reply_EDiagnosticChain_EMap->setUpperBound(1);
 	m_message_Operation_signature_is_operation_reply_EDiagnosticChain_EMap->setUnique(true);
 	m_message_Operation_signature_is_operation_reply_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_message_Operation_signature_is_operation_reply_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17631,13 +17299,12 @@ void umlPackageImpl::initializeMessageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_message_Operation_signature_is_operation_request_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_signature_is_operation_request_EDiagnosticChain_EMap->setName("signature_is_operation_request");
+	m_message_Operation_signature_is_operation_request_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_signature_is_operation_request_EDiagnosticChain_EMap->setLowerBound(0);
 	m_message_Operation_signature_is_operation_request_EDiagnosticChain_EMap->setUpperBound(1);
 	m_message_Operation_signature_is_operation_request_EDiagnosticChain_EMap->setUnique(true);
 	m_message_Operation_signature_is_operation_request_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_message_Operation_signature_is_operation_request_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17658,13 +17325,12 @@ void umlPackageImpl::initializeMessageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_message_Operation_signature_is_signal_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_signature_is_signal_EDiagnosticChain_EMap->setName("signature_is_signal");
+	m_message_Operation_signature_is_signal_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_signature_is_signal_EDiagnosticChain_EMap->setLowerBound(0);
 	m_message_Operation_signature_is_signal_EDiagnosticChain_EMap->setUpperBound(1);
 	m_message_Operation_signature_is_signal_EDiagnosticChain_EMap->setUnique(true);
 	m_message_Operation_signature_is_signal_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_message_Operation_signature_is_signal_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17685,13 +17351,12 @@ void umlPackageImpl::initializeMessageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_message_Operation_signature_refer_to_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_signature_refer_to_EDiagnosticChain_EMap->setName("signature_refer_to");
+	m_message_Operation_signature_refer_to_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_message_Operation_signature_refer_to_EDiagnosticChain_EMap->setLowerBound(0);
 	m_message_Operation_signature_refer_to_EDiagnosticChain_EMap->setUpperBound(1);
 	m_message_Operation_signature_refer_to_EDiagnosticChain_EMap->setUnique(true);
 	m_message_Operation_signature_refer_to_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_message_Operation_signature_refer_to_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -17745,37 +17410,33 @@ void umlPackageImpl::initializeMessageEndContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_messageEnd_Operation_enclosingFragment->setEType(getInteractionFragment_Class());
 	m_messageEnd_Operation_enclosingFragment->setName("enclosingFragment");
+	m_messageEnd_Operation_enclosingFragment->setEType(getInteractionFragment_Class());
 	m_messageEnd_Operation_enclosingFragment->setLowerBound(0);
 	m_messageEnd_Operation_enclosingFragment->setUpperBound(-1);
 	m_messageEnd_Operation_enclosingFragment->setUnique(true);
 	m_messageEnd_Operation_enclosingFragment->setOrdered(false);
 	
-	
-	m_messageEnd_Operation_isReceive->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_messageEnd_Operation_isReceive->setName("isReceive");
+	m_messageEnd_Operation_isReceive->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_messageEnd_Operation_isReceive->setLowerBound(1);
 	m_messageEnd_Operation_isReceive->setUpperBound(1);
 	m_messageEnd_Operation_isReceive->setUnique(true);
 	m_messageEnd_Operation_isReceive->setOrdered(false);
 	
-	
-	m_messageEnd_Operation_isSend->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_messageEnd_Operation_isSend->setName("isSend");
+	m_messageEnd_Operation_isSend->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_messageEnd_Operation_isSend->setLowerBound(1);
 	m_messageEnd_Operation_isSend->setUpperBound(1);
 	m_messageEnd_Operation_isSend->setUnique(true);
 	m_messageEnd_Operation_isSend->setOrdered(false);
 	
-	
-	m_messageEnd_Operation_oppositeEnd->setEType(getMessageEnd_Class());
 	m_messageEnd_Operation_oppositeEnd->setName("oppositeEnd");
+	m_messageEnd_Operation_oppositeEnd->setEType(getMessageEnd_Class());
 	m_messageEnd_Operation_oppositeEnd->setLowerBound(0);
 	m_messageEnd_Operation_oppositeEnd->setUpperBound(-1);
 	m_messageEnd_Operation_oppositeEnd->setUnique(true);
 	m_messageEnd_Operation_oppositeEnd->setOrdered(false);
-	
 	
 	
 }
@@ -17810,7 +17471,7 @@ void umlPackageImpl::initializeModelContent()
 	
 	m_model_Attribute_viewpoint = getModel_Attribute_viewpoint();
 	m_model_Attribute_viewpoint->setName("viewpoint");
-	m_model_Attribute_viewpoint->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_model_Attribute_viewpoint->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_model_Attribute_viewpoint->setLowerBound(0);
 	m_model_Attribute_viewpoint->setUpperBound(1);
 	m_model_Attribute_viewpoint->setTransient(false);
@@ -17830,13 +17491,12 @@ void umlPackageImpl::initializeModelContent()
 	}
 	
 	
-	m_model_Operation_isMetamodel->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_model_Operation_isMetamodel->setName("isMetamodel");
+	m_model_Operation_isMetamodel->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_model_Operation_isMetamodel->setLowerBound(1);
 	m_model_Operation_isMetamodel->setUpperBound(1);
 	m_model_Operation_isMetamodel->setUnique(true);
 	m_model_Operation_isMetamodel->setOrdered(false);
-	
 	
 	
 }
@@ -17849,7 +17509,7 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 	
 	m_multiplicityElement_Attribute_isOrdered = getMultiplicityElement_Attribute_isOrdered();
 	m_multiplicityElement_Attribute_isOrdered->setName("isOrdered");
-	m_multiplicityElement_Attribute_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_multiplicityElement_Attribute_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_multiplicityElement_Attribute_isOrdered->setLowerBound(1);
 	m_multiplicityElement_Attribute_isOrdered->setUpperBound(1);
 	m_multiplicityElement_Attribute_isOrdered->setTransient(false);
@@ -17869,7 +17529,7 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 	}
 	m_multiplicityElement_Attribute_isUnique = getMultiplicityElement_Attribute_isUnique();
 	m_multiplicityElement_Attribute_isUnique->setName("isUnique");
-	m_multiplicityElement_Attribute_isUnique->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_multiplicityElement_Attribute_isUnique->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_multiplicityElement_Attribute_isUnique->setLowerBound(1);
 	m_multiplicityElement_Attribute_isUnique->setUpperBound(1);
 	m_multiplicityElement_Attribute_isUnique->setTransient(false);
@@ -17889,7 +17549,7 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 	}
 	m_multiplicityElement_Attribute_lower = getMultiplicityElement_Attribute_lower();
 	m_multiplicityElement_Attribute_lower->setName("lower");
-	m_multiplicityElement_Attribute_lower->setEType(types::typesPackage::eInstance()->getInteger_Class());
+		m_multiplicityElement_Attribute_lower->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_multiplicityElement_Attribute_lower->setLowerBound(0);
 	m_multiplicityElement_Attribute_lower->setUpperBound(1);
 	m_multiplicityElement_Attribute_lower->setTransient(true);
@@ -17909,7 +17569,7 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 	}
 	m_multiplicityElement_Attribute_upper = getMultiplicityElement_Attribute_upper();
 	m_multiplicityElement_Attribute_upper->setName("upper");
-	m_multiplicityElement_Attribute_upper->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
+		m_multiplicityElement_Attribute_upper->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_multiplicityElement_Attribute_upper->setLowerBound(1);
 	m_multiplicityElement_Attribute_upper->setUpperBound(1);
 	m_multiplicityElement_Attribute_upper->setTransient(true);
@@ -17973,13 +17633,12 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_multiplicityElement_Operation_compatibleWith_MultiplicityElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_multiplicityElement_Operation_compatibleWith_MultiplicityElement->setName("compatibleWith");
+	m_multiplicityElement_Operation_compatibleWith_MultiplicityElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_multiplicityElement_Operation_compatibleWith_MultiplicityElement->setLowerBound(1);
 	m_multiplicityElement_Operation_compatibleWith_MultiplicityElement->setUpperBound(1);
 	m_multiplicityElement_Operation_compatibleWith_MultiplicityElement->setUnique(true);
 	m_multiplicityElement_Operation_compatibleWith_MultiplicityElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_multiplicityElement_Operation_compatibleWith_MultiplicityElement);
 		parameter->setName("other");
@@ -17990,13 +17649,12 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_multiplicityElement_Operation_includesMultiplicity_MultiplicityElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_multiplicityElement_Operation_includesMultiplicity_MultiplicityElement->setName("includesMultiplicity");
+	m_multiplicityElement_Operation_includesMultiplicity_MultiplicityElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_multiplicityElement_Operation_includesMultiplicity_MultiplicityElement->setLowerBound(1);
 	m_multiplicityElement_Operation_includesMultiplicity_MultiplicityElement->setUpperBound(1);
 	m_multiplicityElement_Operation_includesMultiplicity_MultiplicityElement->setUnique(true);
 	m_multiplicityElement_Operation_includesMultiplicity_MultiplicityElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_multiplicityElement_Operation_includesMultiplicity_MultiplicityElement);
 		parameter->setName("M");
@@ -18007,13 +17665,12 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_multiplicityElement_Operation_is_Integer_UnlimitedNatural->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_multiplicityElement_Operation_is_Integer_UnlimitedNatural->setName("is");
+	m_multiplicityElement_Operation_is_Integer_UnlimitedNatural->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_multiplicityElement_Operation_is_Integer_UnlimitedNatural->setLowerBound(1);
 	m_multiplicityElement_Operation_is_Integer_UnlimitedNatural->setUpperBound(1);
 	m_multiplicityElement_Operation_is_Integer_UnlimitedNatural->setUnique(true);
 	m_multiplicityElement_Operation_is_Integer_UnlimitedNatural->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_multiplicityElement_Operation_is_Integer_UnlimitedNatural);
 		parameter->setName("lowerbound");
@@ -18034,29 +17691,26 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_multiplicityElement_Operation_isMultivalued->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_multiplicityElement_Operation_isMultivalued->setName("isMultivalued");
+	m_multiplicityElement_Operation_isMultivalued->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_multiplicityElement_Operation_isMultivalued->setLowerBound(1);
 	m_multiplicityElement_Operation_isMultivalued->setUpperBound(1);
 	m_multiplicityElement_Operation_isMultivalued->setUnique(true);
 	m_multiplicityElement_Operation_isMultivalued->setOrdered(false);
 	
-	
-	m_multiplicityElement_Operation_lowerBound->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_multiplicityElement_Operation_lowerBound->setName("lowerBound");
+	m_multiplicityElement_Operation_lowerBound->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_multiplicityElement_Operation_lowerBound->setLowerBound(0);
 	m_multiplicityElement_Operation_lowerBound->setUpperBound(1);
 	m_multiplicityElement_Operation_lowerBound->setUnique(true);
 	m_multiplicityElement_Operation_lowerBound->setOrdered(false);
 	
-	
-	m_multiplicityElement_Operation_lower_ge_0_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_multiplicityElement_Operation_lower_ge_0_EDiagnosticChain_EMap->setName("lower_ge_0");
+	m_multiplicityElement_Operation_lower_ge_0_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_multiplicityElement_Operation_lower_ge_0_EDiagnosticChain_EMap->setLowerBound(0);
 	m_multiplicityElement_Operation_lower_ge_0_EDiagnosticChain_EMap->setUpperBound(1);
 	m_multiplicityElement_Operation_lower_ge_0_EDiagnosticChain_EMap->setUnique(true);
 	m_multiplicityElement_Operation_lower_ge_0_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_multiplicityElement_Operation_lower_ge_0_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -18077,13 +17731,12 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_multiplicityElement_Operation_lower_is_integer_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_multiplicityElement_Operation_lower_is_integer_EDiagnosticChain_EMap->setName("lower_is_integer");
+	m_multiplicityElement_Operation_lower_is_integer_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_multiplicityElement_Operation_lower_is_integer_EDiagnosticChain_EMap->setLowerBound(0);
 	m_multiplicityElement_Operation_lower_is_integer_EDiagnosticChain_EMap->setUpperBound(1);
 	m_multiplicityElement_Operation_lower_is_integer_EDiagnosticChain_EMap->setUnique(true);
 	m_multiplicityElement_Operation_lower_is_integer_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_multiplicityElement_Operation_lower_is_integer_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -18104,21 +17757,19 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_multiplicityElement_Operation_upperBound->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_multiplicityElement_Operation_upperBound->setName("upperBound");
+	m_multiplicityElement_Operation_upperBound->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_multiplicityElement_Operation_upperBound->setLowerBound(1);
 	m_multiplicityElement_Operation_upperBound->setUpperBound(1);
 	m_multiplicityElement_Operation_upperBound->setUnique(true);
 	m_multiplicityElement_Operation_upperBound->setOrdered(false);
 	
-	
-	m_multiplicityElement_Operation_upper_ge_lower_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_multiplicityElement_Operation_upper_ge_lower_EDiagnosticChain_EMap->setName("upper_ge_lower");
+	m_multiplicityElement_Operation_upper_ge_lower_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_multiplicityElement_Operation_upper_ge_lower_EDiagnosticChain_EMap->setLowerBound(0);
 	m_multiplicityElement_Operation_upper_ge_lower_EDiagnosticChain_EMap->setUpperBound(1);
 	m_multiplicityElement_Operation_upper_ge_lower_EDiagnosticChain_EMap->setUnique(true);
 	m_multiplicityElement_Operation_upper_ge_lower_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_multiplicityElement_Operation_upper_ge_lower_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -18139,13 +17790,12 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_multiplicityElement_Operation_upper_is_unlimitedNatural_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_multiplicityElement_Operation_upper_is_unlimitedNatural_EDiagnosticChain_EMap->setName("upper_is_unlimitedNatural");
+	m_multiplicityElement_Operation_upper_is_unlimitedNatural_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_multiplicityElement_Operation_upper_is_unlimitedNatural_EDiagnosticChain_EMap->setLowerBound(0);
 	m_multiplicityElement_Operation_upper_is_unlimitedNatural_EDiagnosticChain_EMap->setUpperBound(1);
 	m_multiplicityElement_Operation_upper_is_unlimitedNatural_EDiagnosticChain_EMap->setUnique(true);
 	m_multiplicityElement_Operation_upper_is_unlimitedNatural_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_multiplicityElement_Operation_upper_is_unlimitedNatural_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -18166,13 +17816,12 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_multiplicityElement_Operation_value_specification_constant_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_multiplicityElement_Operation_value_specification_constant_EDiagnosticChain_EMap->setName("value_specification_constant");
+	m_multiplicityElement_Operation_value_specification_constant_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_multiplicityElement_Operation_value_specification_constant_EDiagnosticChain_EMap->setLowerBound(0);
 	m_multiplicityElement_Operation_value_specification_constant_EDiagnosticChain_EMap->setUpperBound(1);
 	m_multiplicityElement_Operation_value_specification_constant_EDiagnosticChain_EMap->setUnique(true);
 	m_multiplicityElement_Operation_value_specification_constant_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_multiplicityElement_Operation_value_specification_constant_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -18193,13 +17842,12 @@ void umlPackageImpl::initializeMultiplicityElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_multiplicityElement_Operation_value_specification_no_side_effects_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_multiplicityElement_Operation_value_specification_no_side_effects_EDiagnosticChain_EMap->setName("value_specification_no_side_effects");
+	m_multiplicityElement_Operation_value_specification_no_side_effects_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_multiplicityElement_Operation_value_specification_no_side_effects_EDiagnosticChain_EMap->setLowerBound(0);
 	m_multiplicityElement_Operation_value_specification_no_side_effects_EDiagnosticChain_EMap->setUpperBound(1);
 	m_multiplicityElement_Operation_value_specification_no_side_effects_EDiagnosticChain_EMap->setUnique(true);
 	m_multiplicityElement_Operation_value_specification_no_side_effects_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_multiplicityElement_Operation_value_specification_no_side_effects_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -18231,7 +17879,7 @@ void umlPackageImpl::initializeNamedElementContent()
 	
 	m_namedElement_Attribute_name = getNamedElement_Attribute_name();
 	m_namedElement_Attribute_name->setName("name");
-	m_namedElement_Attribute_name->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_namedElement_Attribute_name->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namedElement_Attribute_name->setLowerBound(0);
 	m_namedElement_Attribute_name->setUpperBound(1);
 	m_namedElement_Attribute_name->setTransient(false);
@@ -18251,7 +17899,7 @@ void umlPackageImpl::initializeNamedElementContent()
 	}
 	m_namedElement_Attribute_qualifiedName = getNamedElement_Attribute_qualifiedName();
 	m_namedElement_Attribute_qualifiedName->setName("qualifiedName");
-	m_namedElement_Attribute_qualifiedName->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_namedElement_Attribute_qualifiedName->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namedElement_Attribute_qualifiedName->setLowerBound(0);
 	m_namedElement_Attribute_qualifiedName->setUpperBound(1);
 	m_namedElement_Attribute_qualifiedName->setTransient(true);
@@ -18271,7 +17919,7 @@ void umlPackageImpl::initializeNamedElementContent()
 	}
 	m_namedElement_Attribute_visibility = getNamedElement_Attribute_visibility();
 	m_namedElement_Attribute_visibility->setName("visibility");
-	m_namedElement_Attribute_visibility->setEType(getVisibilityKind_Class());
+		m_namedElement_Attribute_visibility->setEType(getVisibilityKind_Class());
 	m_namedElement_Attribute_visibility->setLowerBound(0);
 	m_namedElement_Attribute_visibility->setUpperBound(1);
 	m_namedElement_Attribute_visibility->setTransient(false);
@@ -18360,29 +18008,26 @@ void umlPackageImpl::initializeNamedElementContent()
 	    }
 	}
 	
-	m_namedElement_Operation_allNamespaces->setEType(getNamespace_Class());
 	m_namedElement_Operation_allNamespaces->setName("allNamespaces");
+	m_namedElement_Operation_allNamespaces->setEType(getNamespace_Class());
 	m_namedElement_Operation_allNamespaces->setLowerBound(0);
 	m_namedElement_Operation_allNamespaces->setUpperBound(-1);
 	m_namedElement_Operation_allNamespaces->setUnique(true);
 	m_namedElement_Operation_allNamespaces->setOrdered(true);
 	
-	
-	m_namedElement_Operation_allOwningPackages->setEType(getPackage_Class());
 	m_namedElement_Operation_allOwningPackages->setName("allOwningPackages");
+	m_namedElement_Operation_allOwningPackages->setEType(getPackage_Class());
 	m_namedElement_Operation_allOwningPackages->setLowerBound(0);
 	m_namedElement_Operation_allOwningPackages->setUpperBound(-1);
 	m_namedElement_Operation_allOwningPackages->setUnique(true);
 	m_namedElement_Operation_allOwningPackages->setOrdered(false);
 	
-	
-	m_namedElement_Operation_createDependency_NamedElement->setEType(getDependency_Class());
 	m_namedElement_Operation_createDependency_NamedElement->setName("createDependency");
+	m_namedElement_Operation_createDependency_NamedElement->setEType(getDependency_Class());
 	m_namedElement_Operation_createDependency_NamedElement->setLowerBound(1);
 	m_namedElement_Operation_createDependency_NamedElement->setUpperBound(1);
 	m_namedElement_Operation_createDependency_NamedElement->setUnique(true);
 	m_namedElement_Operation_createDependency_NamedElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namedElement_Operation_createDependency_NamedElement);
 		parameter->setName("supplier");
@@ -18393,13 +18038,12 @@ void umlPackageImpl::initializeNamedElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_namedElement_Operation_createUsage_NamedElement->setEType(getUsage_Class());
 	m_namedElement_Operation_createUsage_NamedElement->setName("createUsage");
+	m_namedElement_Operation_createUsage_NamedElement->setEType(getUsage_Class());
 	m_namedElement_Operation_createUsage_NamedElement->setLowerBound(1);
 	m_namedElement_Operation_createUsage_NamedElement->setUpperBound(1);
 	m_namedElement_Operation_createUsage_NamedElement->setUnique(true);
 	m_namedElement_Operation_createUsage_NamedElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namedElement_Operation_createUsage_NamedElement);
 		parameter->setName("supplier");
@@ -18410,29 +18054,26 @@ void umlPackageImpl::initializeNamedElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_namedElement_Operation_getClientDependencies->setEType(getDependency_Class());
 	m_namedElement_Operation_getClientDependencies->setName("getClientDependencies");
+	m_namedElement_Operation_getClientDependencies->setEType(getDependency_Class());
 	m_namedElement_Operation_getClientDependencies->setLowerBound(0);
 	m_namedElement_Operation_getClientDependencies->setUpperBound(-1);
 	m_namedElement_Operation_getClientDependencies->setUnique(true);
 	m_namedElement_Operation_getClientDependencies->setOrdered(false);
 	
-	
-	m_namedElement_Operation_getLabel->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namedElement_Operation_getLabel->setName("getLabel");
+	m_namedElement_Operation_getLabel->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namedElement_Operation_getLabel->setLowerBound(0);
 	m_namedElement_Operation_getLabel->setUpperBound(1);
 	m_namedElement_Operation_getLabel->setUnique(true);
 	m_namedElement_Operation_getLabel->setOrdered(false);
 	
-	
-	m_namedElement_Operation_getLabel_Boolean->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namedElement_Operation_getLabel_Boolean->setName("getLabel");
+	m_namedElement_Operation_getLabel_Boolean->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namedElement_Operation_getLabel_Boolean->setLowerBound(0);
 	m_namedElement_Operation_getLabel_Boolean->setUpperBound(1);
 	m_namedElement_Operation_getLabel_Boolean->setUnique(true);
 	m_namedElement_Operation_getLabel_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namedElement_Operation_getLabel_Boolean);
 		parameter->setName("localize");
@@ -18443,29 +18084,26 @@ void umlPackageImpl::initializeNamedElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_namedElement_Operation_getNamespace->setEType(getNamespace_Class());
 	m_namedElement_Operation_getNamespace->setName("getNamespace");
+	m_namedElement_Operation_getNamespace->setEType(getNamespace_Class());
 	m_namedElement_Operation_getNamespace->setLowerBound(0);
 	m_namedElement_Operation_getNamespace->setUpperBound(1);
 	m_namedElement_Operation_getNamespace->setUnique(true);
 	m_namedElement_Operation_getNamespace->setOrdered(false);
 	
-	
-	m_namedElement_Operation_getQualifiedName->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namedElement_Operation_getQualifiedName->setName("getQualifiedName");
+	m_namedElement_Operation_getQualifiedName->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namedElement_Operation_getQualifiedName->setLowerBound(0);
 	m_namedElement_Operation_getQualifiedName->setUpperBound(1);
 	m_namedElement_Operation_getQualifiedName->setUnique(true);
 	m_namedElement_Operation_getQualifiedName->setOrdered(false);
 	
-	
-	m_namedElement_Operation_has_no_qualified_name_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_namedElement_Operation_has_no_qualified_name_EDiagnosticChain_EMap->setName("has_no_qualified_name");
+	m_namedElement_Operation_has_no_qualified_name_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_namedElement_Operation_has_no_qualified_name_EDiagnosticChain_EMap->setLowerBound(0);
 	m_namedElement_Operation_has_no_qualified_name_EDiagnosticChain_EMap->setUpperBound(1);
 	m_namedElement_Operation_has_no_qualified_name_EDiagnosticChain_EMap->setUnique(true);
 	m_namedElement_Operation_has_no_qualified_name_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namedElement_Operation_has_no_qualified_name_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -18486,13 +18124,12 @@ void umlPackageImpl::initializeNamedElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_namedElement_Operation_has_qualified_name_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_namedElement_Operation_has_qualified_name_EDiagnosticChain_EMap->setName("has_qualified_name");
+	m_namedElement_Operation_has_qualified_name_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_namedElement_Operation_has_qualified_name_EDiagnosticChain_EMap->setLowerBound(0);
 	m_namedElement_Operation_has_qualified_name_EDiagnosticChain_EMap->setUpperBound(1);
 	m_namedElement_Operation_has_qualified_name_EDiagnosticChain_EMap->setUnique(true);
 	m_namedElement_Operation_has_qualified_name_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namedElement_Operation_has_qualified_name_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -18513,13 +18150,12 @@ void umlPackageImpl::initializeNamedElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_namedElement_Operation_isDistinguishableFrom_NamedElement_Namespace->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_namedElement_Operation_isDistinguishableFrom_NamedElement_Namespace->setName("isDistinguishableFrom");
+	m_namedElement_Operation_isDistinguishableFrom_NamedElement_Namespace->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_namedElement_Operation_isDistinguishableFrom_NamedElement_Namespace->setLowerBound(1);
 	m_namedElement_Operation_isDistinguishableFrom_NamedElement_Namespace->setUpperBound(1);
 	m_namedElement_Operation_isDistinguishableFrom_NamedElement_Namespace->setUnique(true);
 	m_namedElement_Operation_isDistinguishableFrom_NamedElement_Namespace->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namedElement_Operation_isDistinguishableFrom_NamedElement_Namespace);
 		parameter->setName("n");
@@ -18540,21 +18176,19 @@ void umlPackageImpl::initializeNamedElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_namedElement_Operation_separator->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namedElement_Operation_separator->setName("separator");
+	m_namedElement_Operation_separator->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namedElement_Operation_separator->setLowerBound(1);
 	m_namedElement_Operation_separator->setUpperBound(1);
 	m_namedElement_Operation_separator->setUnique(true);
 	m_namedElement_Operation_separator->setOrdered(false);
 	
-	
-	m_namedElement_Operation_visibility_needs_ownership_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_namedElement_Operation_visibility_needs_ownership_EDiagnosticChain_EMap->setName("visibility_needs_ownership");
+	m_namedElement_Operation_visibility_needs_ownership_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_namedElement_Operation_visibility_needs_ownership_EDiagnosticChain_EMap->setLowerBound(0);
 	m_namedElement_Operation_visibility_needs_ownership_EDiagnosticChain_EMap->setUpperBound(1);
 	m_namedElement_Operation_visibility_needs_ownership_EDiagnosticChain_EMap->setUnique(true);
 	m_namedElement_Operation_visibility_needs_ownership_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namedElement_Operation_visibility_needs_ownership_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -18730,13 +18364,12 @@ void umlPackageImpl::initializeNamespaceContent()
 	    }
 	}
 	
-	m_namespace_Operation_cannot_import_ownedMembers_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_namespace_Operation_cannot_import_ownedMembers_EDiagnosticChain_EMap->setName("cannot_import_ownedMembers");
+	m_namespace_Operation_cannot_import_ownedMembers_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_namespace_Operation_cannot_import_ownedMembers_EDiagnosticChain_EMap->setLowerBound(0);
 	m_namespace_Operation_cannot_import_ownedMembers_EDiagnosticChain_EMap->setUpperBound(1);
 	m_namespace_Operation_cannot_import_ownedMembers_EDiagnosticChain_EMap->setUnique(true);
 	m_namespace_Operation_cannot_import_ownedMembers_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namespace_Operation_cannot_import_ownedMembers_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -18757,13 +18390,12 @@ void umlPackageImpl::initializeNamespaceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_namespace_Operation_cannot_import_self_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_namespace_Operation_cannot_import_self_EDiagnosticChain_EMap->setName("cannot_import_self");
+	m_namespace_Operation_cannot_import_self_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_namespace_Operation_cannot_import_self_EDiagnosticChain_EMap->setLowerBound(0);
 	m_namespace_Operation_cannot_import_self_EDiagnosticChain_EMap->setUpperBound(1);
 	m_namespace_Operation_cannot_import_self_EDiagnosticChain_EMap->setUnique(true);
 	m_namespace_Operation_cannot_import_self_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namespace_Operation_cannot_import_self_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -18784,13 +18416,12 @@ void umlPackageImpl::initializeNamespaceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_namespace_Operation_createElementImport_PackageableElement_VisibilityKind->setEType(getElementImport_Class());
 	m_namespace_Operation_createElementImport_PackageableElement_VisibilityKind->setName("createElementImport");
+	m_namespace_Operation_createElementImport_PackageableElement_VisibilityKind->setEType(getElementImport_Class());
 	m_namespace_Operation_createElementImport_PackageableElement_VisibilityKind->setLowerBound(1);
 	m_namespace_Operation_createElementImport_PackageableElement_VisibilityKind->setUpperBound(1);
 	m_namespace_Operation_createElementImport_PackageableElement_VisibilityKind->setUnique(true);
 	m_namespace_Operation_createElementImport_PackageableElement_VisibilityKind->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namespace_Operation_createElementImport_PackageableElement_VisibilityKind);
 		parameter->setName("element");
@@ -18811,13 +18442,12 @@ void umlPackageImpl::initializeNamespaceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_namespace_Operation_createPackageImport_Package_VisibilityKind->setEType(getPackageImport_Class());
 	m_namespace_Operation_createPackageImport_Package_VisibilityKind->setName("createPackageImport");
+	m_namespace_Operation_createPackageImport_Package_VisibilityKind->setEType(getPackageImport_Class());
 	m_namespace_Operation_createPackageImport_Package_VisibilityKind->setLowerBound(1);
 	m_namespace_Operation_createPackageImport_Package_VisibilityKind->setUpperBound(1);
 	m_namespace_Operation_createPackageImport_Package_VisibilityKind->setUnique(true);
 	m_namespace_Operation_createPackageImport_Package_VisibilityKind->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namespace_Operation_createPackageImport_Package_VisibilityKind);
 		parameter->setName("package_");
@@ -18838,13 +18468,12 @@ void umlPackageImpl::initializeNamespaceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_namespace_Operation_excludeCollisions_PackageableElement->setEType(getPackageableElement_Class());
 	m_namespace_Operation_excludeCollisions_PackageableElement->setName("excludeCollisions");
+	m_namespace_Operation_excludeCollisions_PackageableElement->setEType(getPackageableElement_Class());
 	m_namespace_Operation_excludeCollisions_PackageableElement->setLowerBound(0);
 	m_namespace_Operation_excludeCollisions_PackageableElement->setUpperBound(-1);
 	m_namespace_Operation_excludeCollisions_PackageableElement->setUnique(true);
 	m_namespace_Operation_excludeCollisions_PackageableElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namespace_Operation_excludeCollisions_PackageableElement);
 		parameter->setName("imps");
@@ -18855,37 +18484,33 @@ void umlPackageImpl::initializeNamespaceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_namespace_Operation_getImportedElements->setEType(getPackageableElement_Class());
 	m_namespace_Operation_getImportedElements->setName("getImportedElements");
+	m_namespace_Operation_getImportedElements->setEType(getPackageableElement_Class());
 	m_namespace_Operation_getImportedElements->setLowerBound(0);
 	m_namespace_Operation_getImportedElements->setUpperBound(-1);
 	m_namespace_Operation_getImportedElements->setUnique(true);
 	m_namespace_Operation_getImportedElements->setOrdered(false);
 	
-	
-	m_namespace_Operation_getImportedMembers->setEType(getPackageableElement_Class());
 	m_namespace_Operation_getImportedMembers->setName("getImportedMembers");
+	m_namespace_Operation_getImportedMembers->setEType(getPackageableElement_Class());
 	m_namespace_Operation_getImportedMembers->setLowerBound(0);
 	m_namespace_Operation_getImportedMembers->setUpperBound(-1);
 	m_namespace_Operation_getImportedMembers->setUnique(true);
 	m_namespace_Operation_getImportedMembers->setOrdered(false);
 	
-	
-	m_namespace_Operation_getImportedPackages->setEType(getPackage_Class());
 	m_namespace_Operation_getImportedPackages->setName("getImportedPackages");
+	m_namespace_Operation_getImportedPackages->setEType(getPackage_Class());
 	m_namespace_Operation_getImportedPackages->setLowerBound(0);
 	m_namespace_Operation_getImportedPackages->setUpperBound(-1);
 	m_namespace_Operation_getImportedPackages->setUnique(true);
 	m_namespace_Operation_getImportedPackages->setOrdered(false);
 	
-	
-	m_namespace_Operation_getNamesOfMember_NamedElement->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namespace_Operation_getNamesOfMember_NamedElement->setName("getNamesOfMember");
+	m_namespace_Operation_getNamesOfMember_NamedElement->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_namespace_Operation_getNamesOfMember_NamedElement->setLowerBound(0);
 	m_namespace_Operation_getNamesOfMember_NamedElement->setUpperBound(-1);
 	m_namespace_Operation_getNamesOfMember_NamedElement->setUnique(true);
 	m_namespace_Operation_getNamesOfMember_NamedElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namespace_Operation_getNamesOfMember_NamedElement);
 		parameter->setName("element");
@@ -18896,21 +18521,19 @@ void umlPackageImpl::initializeNamespaceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_namespace_Operation_getOwnedMembers->setEType(getNamedElement_Class());
 	m_namespace_Operation_getOwnedMembers->setName("getOwnedMembers");
+	m_namespace_Operation_getOwnedMembers->setEType(getNamedElement_Class());
 	m_namespace_Operation_getOwnedMembers->setLowerBound(0);
 	m_namespace_Operation_getOwnedMembers->setUpperBound(-1);
 	m_namespace_Operation_getOwnedMembers->setUnique(true);
 	m_namespace_Operation_getOwnedMembers->setOrdered(false);
 	
-	
-	m_namespace_Operation_importMembers_PackageableElement->setEType(getPackageableElement_Class());
 	m_namespace_Operation_importMembers_PackageableElement->setName("importMembers");
+	m_namespace_Operation_importMembers_PackageableElement->setEType(getPackageableElement_Class());
 	m_namespace_Operation_importMembers_PackageableElement->setLowerBound(0);
 	m_namespace_Operation_importMembers_PackageableElement->setUpperBound(-1);
 	m_namespace_Operation_importMembers_PackageableElement->setUnique(true);
 	m_namespace_Operation_importMembers_PackageableElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namespace_Operation_importMembers_PackageableElement);
 		parameter->setName("imps");
@@ -18921,21 +18544,19 @@ void umlPackageImpl::initializeNamespaceContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_namespace_Operation_membersAreDistinguishable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_namespace_Operation_membersAreDistinguishable->setName("membersAreDistinguishable");
+	m_namespace_Operation_membersAreDistinguishable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_namespace_Operation_membersAreDistinguishable->setLowerBound(1);
 	m_namespace_Operation_membersAreDistinguishable->setUpperBound(1);
 	m_namespace_Operation_membersAreDistinguishable->setUnique(true);
 	m_namespace_Operation_membersAreDistinguishable->setOrdered(false);
 	
-	
-	m_namespace_Operation_members_distinguishable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_namespace_Operation_members_distinguishable_EDiagnosticChain_EMap->setName("members_distinguishable");
+	m_namespace_Operation_members_distinguishable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_namespace_Operation_members_distinguishable_EDiagnosticChain_EMap->setLowerBound(0);
 	m_namespace_Operation_members_distinguishable_EDiagnosticChain_EMap->setUpperBound(1);
 	m_namespace_Operation_members_distinguishable_EDiagnosticChain_EMap->setUnique(true);
 	m_namespace_Operation_members_distinguishable_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_namespace_Operation_members_distinguishable_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -18989,13 +18610,12 @@ void umlPackageImpl::initializeNodeContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setEType(getCommunicationPath_Class());
 	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setName("createCommunicationPath");
+	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setEType(getCommunicationPath_Class());
 	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setLowerBound(1);
 	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setUpperBound(1);
 	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setUnique(true);
 	m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_node_Operation_createCommunicationPath_Boolean_UnlimitedNatural);
 		parameter->setName("end1IsNavigable");
@@ -19106,21 +18726,19 @@ void umlPackageImpl::initializeNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_node_Operation_getCommunicationPaths->setEType(getCommunicationPath_Class());
 	m_node_Operation_getCommunicationPaths->setName("getCommunicationPaths");
+	m_node_Operation_getCommunicationPaths->setEType(getCommunicationPath_Class());
 	m_node_Operation_getCommunicationPaths->setLowerBound(0);
 	m_node_Operation_getCommunicationPaths->setUpperBound(-1);
 	m_node_Operation_getCommunicationPaths->setUnique(true);
 	m_node_Operation_getCommunicationPaths->setOrdered(false);
 	
-	
-	m_node_Operation_internal_structure_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_node_Operation_internal_structure_EDiagnosticChain_EMap->setName("internal_structure");
+	m_node_Operation_internal_structure_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_node_Operation_internal_structure_EDiagnosticChain_EMap->setLowerBound(0);
 	m_node_Operation_internal_structure_EDiagnosticChain_EMap->setUpperBound(1);
 	m_node_Operation_internal_structure_EDiagnosticChain_EMap->setUnique(true);
 	m_node_Operation_internal_structure_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_node_Operation_internal_structure_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -19152,13 +18770,12 @@ void umlPackageImpl::initializeObjectContent()
 	
 	
 	
-	m_object_Operation_get_Property->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_object_Operation_get_Property->setName("get");
+	m_object_Operation_get_Property->setEType(ecore::ecorePackage::eInstance()->getEJavaObject_Class());
 	m_object_Operation_get_Property->setLowerBound(0);
 	m_object_Operation_get_Property->setUpperBound(1);
 	m_object_Operation_get_Property->setUnique(true);
 	m_object_Operation_get_Property->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_object_Operation_get_Property);
 		parameter->setName("property");
@@ -19169,13 +18786,12 @@ void umlPackageImpl::initializeObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_object_Operation_invoke_Operation_Argument->setEType(getObject_Class());
 	m_object_Operation_invoke_Operation_Argument->setName("invoke");
+	m_object_Operation_invoke_Operation_Argument->setEType(getObject_Class());
 	m_object_Operation_invoke_Operation_Argument->setLowerBound(0);
 	m_object_Operation_invoke_Operation_Argument->setUpperBound(-1);
 	m_object_Operation_invoke_Operation_Argument->setUnique(true);
 	m_object_Operation_invoke_Operation_Argument->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_object_Operation_invoke_Operation_Argument);
 		parameter->setName("op");
@@ -19196,13 +18812,18 @@ void umlPackageImpl::initializeObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_object_Operation_set_Property_EJavaObject->setEType(nullptr);
 	m_object_Operation_set_Property_EJavaObject->setName("set");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_object_Operation_set_Property_EJavaObject->setEType(unknownClass);
+	}
 	m_object_Operation_set_Property_EJavaObject->setLowerBound(0);
 	m_object_Operation_set_Property_EJavaObject->setUpperBound(1);
 	m_object_Operation_set_Property_EJavaObject->setUnique(true);
 	m_object_Operation_set_Property_EJavaObject->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_object_Operation_set_Property_EJavaObject);
 		parameter->setName("property");
@@ -19223,13 +18844,18 @@ void umlPackageImpl::initializeObjectContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_object_Operation_unset_Property->setEType(nullptr);
 	m_object_Operation_unset_Property->setName("unset");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_object_Operation_unset_Property->setEType(unknownClass);
+	}
 	m_object_Operation_unset_Property->setLowerBound(0);
 	m_object_Operation_unset_Property->setUpperBound(1);
 	m_object_Operation_unset_Property->setUnique(true);
 	m_object_Operation_unset_Property->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_object_Operation_unset_Property);
 		parameter->setName("property");
@@ -19251,7 +18877,7 @@ void umlPackageImpl::initializeObjectFlowContent()
 	
 	m_objectFlow_Attribute_isMulticast = getObjectFlow_Attribute_isMulticast();
 	m_objectFlow_Attribute_isMulticast->setName("isMulticast");
-	m_objectFlow_Attribute_isMulticast->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_objectFlow_Attribute_isMulticast->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_objectFlow_Attribute_isMulticast->setLowerBound(1);
 	m_objectFlow_Attribute_isMulticast->setUpperBound(1);
 	m_objectFlow_Attribute_isMulticast->setTransient(false);
@@ -19271,7 +18897,7 @@ void umlPackageImpl::initializeObjectFlowContent()
 	}
 	m_objectFlow_Attribute_isMultireceive = getObjectFlow_Attribute_isMultireceive();
 	m_objectFlow_Attribute_isMultireceive->setName("isMultireceive");
-	m_objectFlow_Attribute_isMultireceive->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_objectFlow_Attribute_isMultireceive->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_objectFlow_Attribute_isMultireceive->setLowerBound(1);
 	m_objectFlow_Attribute_isMultireceive->setUpperBound(1);
 	m_objectFlow_Attribute_isMultireceive->setTransient(false);
@@ -19335,13 +18961,12 @@ void umlPackageImpl::initializeObjectFlowContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_objectFlow_Operation_compatible_types_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_compatible_types_EDiagnosticChain_EMap->setName("compatible_types");
+	m_objectFlow_Operation_compatible_types_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_compatible_types_EDiagnosticChain_EMap->setLowerBound(0);
 	m_objectFlow_Operation_compatible_types_EDiagnosticChain_EMap->setUpperBound(1);
 	m_objectFlow_Operation_compatible_types_EDiagnosticChain_EMap->setUnique(true);
 	m_objectFlow_Operation_compatible_types_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectFlow_Operation_compatible_types_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -19362,13 +18987,12 @@ void umlPackageImpl::initializeObjectFlowContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_objectFlow_Operation_input_and_output_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_input_and_output_parameter_EDiagnosticChain_EMap->setName("input_and_output_parameter");
+	m_objectFlow_Operation_input_and_output_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_input_and_output_parameter_EDiagnosticChain_EMap->setLowerBound(0);
 	m_objectFlow_Operation_input_and_output_parameter_EDiagnosticChain_EMap->setUpperBound(1);
 	m_objectFlow_Operation_input_and_output_parameter_EDiagnosticChain_EMap->setUnique(true);
 	m_objectFlow_Operation_input_and_output_parameter_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectFlow_Operation_input_and_output_parameter_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -19389,13 +19013,12 @@ void umlPackageImpl::initializeObjectFlowContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_objectFlow_Operation_is_multicast_or_is_multireceive_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_is_multicast_or_is_multireceive_EDiagnosticChain_EMap->setName("is_multicast_or_is_multireceive");
+	m_objectFlow_Operation_is_multicast_or_is_multireceive_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_is_multicast_or_is_multireceive_EDiagnosticChain_EMap->setLowerBound(0);
 	m_objectFlow_Operation_is_multicast_or_is_multireceive_EDiagnosticChain_EMap->setUpperBound(1);
 	m_objectFlow_Operation_is_multicast_or_is_multireceive_EDiagnosticChain_EMap->setUnique(true);
 	m_objectFlow_Operation_is_multicast_or_is_multireceive_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectFlow_Operation_is_multicast_or_is_multireceive_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -19416,13 +19039,12 @@ void umlPackageImpl::initializeObjectFlowContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_objectFlow_Operation_no_executable_nodes_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_no_executable_nodes_EDiagnosticChain_EMap->setName("no_executable_nodes");
+	m_objectFlow_Operation_no_executable_nodes_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_no_executable_nodes_EDiagnosticChain_EMap->setLowerBound(0);
 	m_objectFlow_Operation_no_executable_nodes_EDiagnosticChain_EMap->setUpperBound(1);
 	m_objectFlow_Operation_no_executable_nodes_EDiagnosticChain_EMap->setUnique(true);
 	m_objectFlow_Operation_no_executable_nodes_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectFlow_Operation_no_executable_nodes_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -19443,13 +19065,12 @@ void umlPackageImpl::initializeObjectFlowContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_objectFlow_Operation_same_upper_bounds_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_same_upper_bounds_EDiagnosticChain_EMap->setName("same_upper_bounds");
+	m_objectFlow_Operation_same_upper_bounds_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_same_upper_bounds_EDiagnosticChain_EMap->setLowerBound(0);
 	m_objectFlow_Operation_same_upper_bounds_EDiagnosticChain_EMap->setUpperBound(1);
 	m_objectFlow_Operation_same_upper_bounds_EDiagnosticChain_EMap->setUnique(true);
 	m_objectFlow_Operation_same_upper_bounds_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectFlow_Operation_same_upper_bounds_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -19470,13 +19091,12 @@ void umlPackageImpl::initializeObjectFlowContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_objectFlow_Operation_selection_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_selection_behavior_EDiagnosticChain_EMap->setName("selection_behavior");
+	m_objectFlow_Operation_selection_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_selection_behavior_EDiagnosticChain_EMap->setLowerBound(0);
 	m_objectFlow_Operation_selection_behavior_EDiagnosticChain_EMap->setUpperBound(1);
 	m_objectFlow_Operation_selection_behavior_EDiagnosticChain_EMap->setUnique(true);
 	m_objectFlow_Operation_selection_behavior_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectFlow_Operation_selection_behavior_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -19497,13 +19117,12 @@ void umlPackageImpl::initializeObjectFlowContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_objectFlow_Operation_target_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_target_EDiagnosticChain_EMap->setName("target");
+	m_objectFlow_Operation_target_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_target_EDiagnosticChain_EMap->setLowerBound(0);
 	m_objectFlow_Operation_target_EDiagnosticChain_EMap->setUpperBound(1);
 	m_objectFlow_Operation_target_EDiagnosticChain_EMap->setUnique(true);
 	m_objectFlow_Operation_target_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectFlow_Operation_target_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -19524,13 +19143,12 @@ void umlPackageImpl::initializeObjectFlowContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_objectFlow_Operation_transformation_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_transformation_behavior_EDiagnosticChain_EMap->setName("transformation_behavior");
+	m_objectFlow_Operation_transformation_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectFlow_Operation_transformation_behavior_EDiagnosticChain_EMap->setLowerBound(0);
 	m_objectFlow_Operation_transformation_behavior_EDiagnosticChain_EMap->setUpperBound(1);
 	m_objectFlow_Operation_transformation_behavior_EDiagnosticChain_EMap->setUnique(true);
 	m_objectFlow_Operation_transformation_behavior_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectFlow_Operation_transformation_behavior_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -19562,7 +19180,7 @@ void umlPackageImpl::initializeObjectNodeContent()
 	
 	m_objectNode_Attribute_isControlType = getObjectNode_Attribute_isControlType();
 	m_objectNode_Attribute_isControlType->setName("isControlType");
-	m_objectNode_Attribute_isControlType->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_objectNode_Attribute_isControlType->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_objectNode_Attribute_isControlType->setLowerBound(1);
 	m_objectNode_Attribute_isControlType->setUpperBound(1);
 	m_objectNode_Attribute_isControlType->setTransient(false);
@@ -19582,7 +19200,7 @@ void umlPackageImpl::initializeObjectNodeContent()
 	}
 	m_objectNode_Attribute_ordering = getObjectNode_Attribute_ordering();
 	m_objectNode_Attribute_ordering->setName("ordering");
-	m_objectNode_Attribute_ordering->setEType(getObjectNodeOrderingKind_Class());
+		m_objectNode_Attribute_ordering->setEType(getObjectNodeOrderingKind_Class());
 	m_objectNode_Attribute_ordering->setLowerBound(1);
 	m_objectNode_Attribute_ordering->setUpperBound(1);
 	m_objectNode_Attribute_ordering->setTransient(false);
@@ -19668,13 +19286,12 @@ void umlPackageImpl::initializeObjectNodeContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_objectNode_Operation_input_output_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectNode_Operation_input_output_parameter_EDiagnosticChain_EMap->setName("input_output_parameter");
+	m_objectNode_Operation_input_output_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectNode_Operation_input_output_parameter_EDiagnosticChain_EMap->setLowerBound(0);
 	m_objectNode_Operation_input_output_parameter_EDiagnosticChain_EMap->setUpperBound(1);
 	m_objectNode_Operation_input_output_parameter_EDiagnosticChain_EMap->setUnique(true);
 	m_objectNode_Operation_input_output_parameter_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectNode_Operation_input_output_parameter_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -19695,13 +19312,12 @@ void umlPackageImpl::initializeObjectNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_objectNode_Operation_object_flow_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectNode_Operation_object_flow_edges_EDiagnosticChain_EMap->setName("object_flow_edges");
+	m_objectNode_Operation_object_flow_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectNode_Operation_object_flow_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_objectNode_Operation_object_flow_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_objectNode_Operation_object_flow_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_objectNode_Operation_object_flow_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectNode_Operation_object_flow_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -19722,13 +19338,12 @@ void umlPackageImpl::initializeObjectNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_objectNode_Operation_selection_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectNode_Operation_selection_behavior_EDiagnosticChain_EMap->setName("selection_behavior");
+	m_objectNode_Operation_selection_behavior_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_objectNode_Operation_selection_behavior_EDiagnosticChain_EMap->setLowerBound(0);
 	m_objectNode_Operation_selection_behavior_EDiagnosticChain_EMap->setUpperBound(1);
 	m_objectNode_Operation_selection_behavior_EDiagnosticChain_EMap->setUnique(true);
 	m_objectNode_Operation_selection_behavior_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectNode_Operation_selection_behavior_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -19821,21 +19436,25 @@ void umlPackageImpl::initializeOccurrenceSpecificationContent()
 	    }
 	}
 	
-	m_occurrenceSpecification_Operation_getCovered->setEType(getLifeline_Class());
 	m_occurrenceSpecification_Operation_getCovered->setName("getCovered");
+	m_occurrenceSpecification_Operation_getCovered->setEType(getLifeline_Class());
 	m_occurrenceSpecification_Operation_getCovered->setLowerBound(0);
 	m_occurrenceSpecification_Operation_getCovered->setUpperBound(1);
 	m_occurrenceSpecification_Operation_getCovered->setUnique(true);
 	m_occurrenceSpecification_Operation_getCovered->setOrdered(false);
 	
-	
-	m_occurrenceSpecification_Operation_setCovered_Lifeline->setEType(nullptr);
 	m_occurrenceSpecification_Operation_setCovered_Lifeline->setName("setCovered");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_occurrenceSpecification_Operation_setCovered_Lifeline->setEType(unknownClass);
+	}
 	m_occurrenceSpecification_Operation_setCovered_Lifeline->setLowerBound(1);
 	m_occurrenceSpecification_Operation_setCovered_Lifeline->setUpperBound(1);
 	m_occurrenceSpecification_Operation_setCovered_Lifeline->setUnique(true);
 	m_occurrenceSpecification_Operation_setCovered_Lifeline->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_occurrenceSpecification_Operation_setCovered_Lifeline);
 		parameter->setName("value");
@@ -19857,7 +19476,7 @@ void umlPackageImpl::initializeOpaqueActionContent()
 	
 	m_opaqueAction_Attribute_body = getOpaqueAction_Attribute_body();
 	m_opaqueAction_Attribute_body->setName("body");
-	m_opaqueAction_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_opaqueAction_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_opaqueAction_Attribute_body->setLowerBound(0);
 	m_opaqueAction_Attribute_body->setUpperBound(-1);
 	m_opaqueAction_Attribute_body->setTransient(false);
@@ -19877,7 +19496,7 @@ void umlPackageImpl::initializeOpaqueActionContent()
 	}
 	m_opaqueAction_Attribute_language = getOpaqueAction_Attribute_language();
 	m_opaqueAction_Attribute_language->setName("language");
-	m_opaqueAction_Attribute_language->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_opaqueAction_Attribute_language->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_opaqueAction_Attribute_language->setLowerBound(0);
 	m_opaqueAction_Attribute_language->setUpperBound(-1);
 	m_opaqueAction_Attribute_language->setTransient(false);
@@ -19941,13 +19560,12 @@ void umlPackageImpl::initializeOpaqueActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_opaqueAction_Operation_language_body_size_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_opaqueAction_Operation_language_body_size_EDiagnosticChain_EMap->setName("language_body_size");
+	m_opaqueAction_Operation_language_body_size_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_opaqueAction_Operation_language_body_size_EDiagnosticChain_EMap->setLowerBound(0);
 	m_opaqueAction_Operation_language_body_size_EDiagnosticChain_EMap->setUpperBound(1);
 	m_opaqueAction_Operation_language_body_size_EDiagnosticChain_EMap->setUnique(true);
 	m_opaqueAction_Operation_language_body_size_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_opaqueAction_Operation_language_body_size_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -19979,7 +19597,7 @@ void umlPackageImpl::initializeOpaqueBehaviorContent()
 	
 	m_opaqueBehavior_Attribute_body = getOpaqueBehavior_Attribute_body();
 	m_opaqueBehavior_Attribute_body->setName("body");
-	m_opaqueBehavior_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_opaqueBehavior_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_opaqueBehavior_Attribute_body->setLowerBound(0);
 	m_opaqueBehavior_Attribute_body->setUpperBound(-1);
 	m_opaqueBehavior_Attribute_body->setTransient(false);
@@ -19999,7 +19617,7 @@ void umlPackageImpl::initializeOpaqueBehaviorContent()
 	}
 	m_opaqueBehavior_Attribute_language = getOpaqueBehavior_Attribute_language();
 	m_opaqueBehavior_Attribute_language->setName("language");
-	m_opaqueBehavior_Attribute_language->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_opaqueBehavior_Attribute_language->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_opaqueBehavior_Attribute_language->setLowerBound(0);
 	m_opaqueBehavior_Attribute_language->setUpperBound(-1);
 	m_opaqueBehavior_Attribute_language->setTransient(false);
@@ -20030,7 +19648,7 @@ void umlPackageImpl::initializeOpaqueExpressionContent()
 	
 	m_opaqueExpression_Attribute_body = getOpaqueExpression_Attribute_body();
 	m_opaqueExpression_Attribute_body->setName("body");
-	m_opaqueExpression_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_opaqueExpression_Attribute_body->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_opaqueExpression_Attribute_body->setLowerBound(0);
 	m_opaqueExpression_Attribute_body->setUpperBound(-1);
 	m_opaqueExpression_Attribute_body->setTransient(false);
@@ -20050,7 +19668,7 @@ void umlPackageImpl::initializeOpaqueExpressionContent()
 	}
 	m_opaqueExpression_Attribute_language = getOpaqueExpression_Attribute_language();
 	m_opaqueExpression_Attribute_language->setName("language");
-	m_opaqueExpression_Attribute_language->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_opaqueExpression_Attribute_language->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_opaqueExpression_Attribute_language->setLowerBound(0);
 	m_opaqueExpression_Attribute_language->setUpperBound(-1);
 	m_opaqueExpression_Attribute_language->setTransient(false);
@@ -20114,45 +19732,40 @@ void umlPackageImpl::initializeOpaqueExpressionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_opaqueExpression_Operation_getResult->setEType(getParameter_Class());
 	m_opaqueExpression_Operation_getResult->setName("getResult");
+	m_opaqueExpression_Operation_getResult->setEType(getParameter_Class());
 	m_opaqueExpression_Operation_getResult->setLowerBound(0);
 	m_opaqueExpression_Operation_getResult->setUpperBound(1);
 	m_opaqueExpression_Operation_getResult->setUnique(true);
 	m_opaqueExpression_Operation_getResult->setOrdered(false);
 	
-	
-	m_opaqueExpression_Operation_isIntegral->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_opaqueExpression_Operation_isIntegral->setName("isIntegral");
+	m_opaqueExpression_Operation_isIntegral->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_opaqueExpression_Operation_isIntegral->setLowerBound(1);
 	m_opaqueExpression_Operation_isIntegral->setUpperBound(1);
 	m_opaqueExpression_Operation_isIntegral->setUnique(true);
 	m_opaqueExpression_Operation_isIntegral->setOrdered(false);
 	
-	
-	m_opaqueExpression_Operation_isNonNegative->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_opaqueExpression_Operation_isNonNegative->setName("isNonNegative");
+	m_opaqueExpression_Operation_isNonNegative->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_opaqueExpression_Operation_isNonNegative->setLowerBound(1);
 	m_opaqueExpression_Operation_isNonNegative->setUpperBound(1);
 	m_opaqueExpression_Operation_isNonNegative->setUnique(true);
 	m_opaqueExpression_Operation_isNonNegative->setOrdered(false);
 	
-	
-	m_opaqueExpression_Operation_isPositive->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_opaqueExpression_Operation_isPositive->setName("isPositive");
+	m_opaqueExpression_Operation_isPositive->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_opaqueExpression_Operation_isPositive->setLowerBound(1);
 	m_opaqueExpression_Operation_isPositive->setUpperBound(1);
 	m_opaqueExpression_Operation_isPositive->setUnique(true);
 	m_opaqueExpression_Operation_isPositive->setOrdered(false);
 	
-	
-	m_opaqueExpression_Operation_language_body_size_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_opaqueExpression_Operation_language_body_size_EDiagnosticChain_EMap->setName("language_body_size");
+	m_opaqueExpression_Operation_language_body_size_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_opaqueExpression_Operation_language_body_size_EDiagnosticChain_EMap->setLowerBound(0);
 	m_opaqueExpression_Operation_language_body_size_EDiagnosticChain_EMap->setUpperBound(1);
 	m_opaqueExpression_Operation_language_body_size_EDiagnosticChain_EMap->setUnique(true);
 	m_opaqueExpression_Operation_language_body_size_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_opaqueExpression_Operation_language_body_size_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -20173,13 +19786,12 @@ void umlPackageImpl::initializeOpaqueExpressionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_opaqueExpression_Operation_one_return_result_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_opaqueExpression_Operation_one_return_result_parameter_EDiagnosticChain_EMap->setName("one_return_result_parameter");
+	m_opaqueExpression_Operation_one_return_result_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_opaqueExpression_Operation_one_return_result_parameter_EDiagnosticChain_EMap->setLowerBound(0);
 	m_opaqueExpression_Operation_one_return_result_parameter_EDiagnosticChain_EMap->setUpperBound(1);
 	m_opaqueExpression_Operation_one_return_result_parameter_EDiagnosticChain_EMap->setUnique(true);
 	m_opaqueExpression_Operation_one_return_result_parameter_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_opaqueExpression_Operation_one_return_result_parameter_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -20200,13 +19812,12 @@ void umlPackageImpl::initializeOpaqueExpressionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_opaqueExpression_Operation_only_return_result_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_opaqueExpression_Operation_only_return_result_parameters_EDiagnosticChain_EMap->setName("only_return_result_parameters");
+	m_opaqueExpression_Operation_only_return_result_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_opaqueExpression_Operation_only_return_result_parameters_EDiagnosticChain_EMap->setLowerBound(0);
 	m_opaqueExpression_Operation_only_return_result_parameters_EDiagnosticChain_EMap->setUpperBound(1);
 	m_opaqueExpression_Operation_only_return_result_parameters_EDiagnosticChain_EMap->setUnique(true);
 	m_opaqueExpression_Operation_only_return_result_parameters_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_opaqueExpression_Operation_only_return_result_parameters_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -20227,13 +19838,12 @@ void umlPackageImpl::initializeOpaqueExpressionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_opaqueExpression_Operation_value->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_opaqueExpression_Operation_value->setName("value");
+	m_opaqueExpression_Operation_value->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_opaqueExpression_Operation_value->setLowerBound(1);
 	m_opaqueExpression_Operation_value->setUpperBound(1);
 	m_opaqueExpression_Operation_value->setUnique(true);
 	m_opaqueExpression_Operation_value->setOrdered(false);
-	
 	
 	
 }
@@ -20246,7 +19856,7 @@ void umlPackageImpl::initializeOperationContent()
 	
 	m_operation_Attribute_isOrdered = getOperation_Attribute_isOrdered();
 	m_operation_Attribute_isOrdered->setName("isOrdered");
-	m_operation_Attribute_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_operation_Attribute_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_operation_Attribute_isOrdered->setLowerBound(1);
 	m_operation_Attribute_isOrdered->setUpperBound(1);
 	m_operation_Attribute_isOrdered->setTransient(true);
@@ -20266,7 +19876,7 @@ void umlPackageImpl::initializeOperationContent()
 	}
 	m_operation_Attribute_isQuery = getOperation_Attribute_isQuery();
 	m_operation_Attribute_isQuery->setName("isQuery");
-	m_operation_Attribute_isQuery->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_operation_Attribute_isQuery->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_operation_Attribute_isQuery->setLowerBound(1);
 	m_operation_Attribute_isQuery->setUpperBound(1);
 	m_operation_Attribute_isQuery->setTransient(false);
@@ -20286,7 +19896,7 @@ void umlPackageImpl::initializeOperationContent()
 	}
 	m_operation_Attribute_isUnique = getOperation_Attribute_isUnique();
 	m_operation_Attribute_isUnique->setName("isUnique");
-	m_operation_Attribute_isUnique->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_operation_Attribute_isUnique->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_operation_Attribute_isUnique->setLowerBound(1);
 	m_operation_Attribute_isUnique->setUpperBound(1);
 	m_operation_Attribute_isUnique->setTransient(true);
@@ -20306,7 +19916,7 @@ void umlPackageImpl::initializeOperationContent()
 	}
 	m_operation_Attribute_lower = getOperation_Attribute_lower();
 	m_operation_Attribute_lower->setName("lower");
-	m_operation_Attribute_lower->setEType(types::typesPackage::eInstance()->getInteger_Class());
+		m_operation_Attribute_lower->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_operation_Attribute_lower->setLowerBound(0);
 	m_operation_Attribute_lower->setUpperBound(1);
 	m_operation_Attribute_lower->setTransient(true);
@@ -20326,7 +19936,7 @@ void umlPackageImpl::initializeOperationContent()
 	}
 	m_operation_Attribute_upper = getOperation_Attribute_upper();
 	m_operation_Attribute_upper->setName("upper");
-	m_operation_Attribute_upper->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
+		m_operation_Attribute_upper->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_operation_Attribute_upper->setLowerBound(0);
 	m_operation_Attribute_upper->setUpperBound(1);
 	m_operation_Attribute_upper->setTransient(true);
@@ -20531,13 +20141,12 @@ void umlPackageImpl::initializeOperationContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_operation_Operation_at_most_one_return_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_operation_Operation_at_most_one_return_EDiagnosticChain_EMap->setName("at_most_one_return");
+	m_operation_Operation_at_most_one_return_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_operation_Operation_at_most_one_return_EDiagnosticChain_EMap->setLowerBound(0);
 	m_operation_Operation_at_most_one_return_EDiagnosticChain_EMap->setUpperBound(1);
 	m_operation_Operation_at_most_one_return_EDiagnosticChain_EMap->setUnique(true);
 	m_operation_Operation_at_most_one_return_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_operation_Operation_at_most_one_return_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -20558,61 +20167,54 @@ void umlPackageImpl::initializeOperationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_operation_Operation_getLower->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_operation_Operation_getLower->setName("getLower");
+	m_operation_Operation_getLower->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_operation_Operation_getLower->setLowerBound(1);
 	m_operation_Operation_getLower->setUpperBound(1);
 	m_operation_Operation_getLower->setUnique(true);
 	m_operation_Operation_getLower->setOrdered(false);
 	
-	
-	m_operation_Operation_getReturnResult->setEType(getParameter_Class());
 	m_operation_Operation_getReturnResult->setName("getReturnResult");
+	m_operation_Operation_getReturnResult->setEType(getParameter_Class());
 	m_operation_Operation_getReturnResult->setLowerBound(0);
 	m_operation_Operation_getReturnResult->setUpperBound(1);
 	m_operation_Operation_getReturnResult->setUnique(true);
 	m_operation_Operation_getReturnResult->setOrdered(false);
 	
-	
-	m_operation_Operation_getType->setEType(getType_Class());
 	m_operation_Operation_getType->setName("getType");
+	m_operation_Operation_getType->setEType(getType_Class());
 	m_operation_Operation_getType->setLowerBound(1);
 	m_operation_Operation_getType->setUpperBound(1);
 	m_operation_Operation_getType->setUnique(true);
 	m_operation_Operation_getType->setOrdered(false);
 	
-	
-	m_operation_Operation_getUpper->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_operation_Operation_getUpper->setName("getUpper");
+	m_operation_Operation_getUpper->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_operation_Operation_getUpper->setLowerBound(1);
 	m_operation_Operation_getUpper->setUpperBound(1);
 	m_operation_Operation_getUpper->setUnique(true);
 	m_operation_Operation_getUpper->setOrdered(false);
 	
-	
-	m_operation_Operation_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_operation_Operation_isOrdered->setName("isOrdered");
+	m_operation_Operation_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_operation_Operation_isOrdered->setLowerBound(1);
 	m_operation_Operation_isOrdered->setUpperBound(1);
 	m_operation_Operation_isOrdered->setUnique(true);
 	m_operation_Operation_isOrdered->setOrdered(false);
 	
-	
-	m_operation_Operation_isUnique->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_operation_Operation_isUnique->setName("isUnique");
+	m_operation_Operation_isUnique->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_operation_Operation_isUnique->setLowerBound(1);
 	m_operation_Operation_isUnique->setUpperBound(1);
 	m_operation_Operation_isUnique->setUnique(true);
 	m_operation_Operation_isUnique->setOrdered(false);
 	
-	
-	m_operation_Operation_matches_Operation->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_operation_Operation_matches_Operation->setName("matches");
+	m_operation_Operation_matches_Operation->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_operation_Operation_matches_Operation->setLowerBound(1);
 	m_operation_Operation_matches_Operation->setUpperBound(1);
 	m_operation_Operation_matches_Operation->setUnique(true);
 	m_operation_Operation_matches_Operation->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_operation_Operation_matches_Operation);
 		parameter->setName("comparedOperation");
@@ -20623,13 +20225,12 @@ void umlPackageImpl::initializeOperationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap->setName("only_body_for_query");
+	m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap->setLowerBound(0);
 	m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap->setUpperBound(1);
 	m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap->setUnique(true);
 	m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_operation_Operation_only_body_for_query_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -20650,21 +20251,25 @@ void umlPackageImpl::initializeOperationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_operation_Operation_returnResult->setEType(getParameter_Class());
 	m_operation_Operation_returnResult->setName("returnResult");
+	m_operation_Operation_returnResult->setEType(getParameter_Class());
 	m_operation_Operation_returnResult->setLowerBound(0);
-	m_operation_Operation_returnResult->setUpperBound(-1);
+	m_operation_Operation_returnResult->setUpperBound(1);
 	m_operation_Operation_returnResult->setUnique(true);
 	m_operation_Operation_returnResult->setOrdered(false);
 	
-	
-	m_operation_Operation_setIsOrdered_Boolean->setEType(nullptr);
 	m_operation_Operation_setIsOrdered_Boolean->setName("setIsOrdered");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_operation_Operation_setIsOrdered_Boolean->setEType(unknownClass);
+	}
 	m_operation_Operation_setIsOrdered_Boolean->setLowerBound(1);
 	m_operation_Operation_setIsOrdered_Boolean->setUpperBound(1);
 	m_operation_Operation_setIsOrdered_Boolean->setUnique(true);
 	m_operation_Operation_setIsOrdered_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_operation_Operation_setIsOrdered_Boolean);
 		parameter->setName("newIsOrdered");
@@ -20675,13 +20280,18 @@ void umlPackageImpl::initializeOperationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_operation_Operation_setIsUnique_Boolean->setEType(nullptr);
 	m_operation_Operation_setIsUnique_Boolean->setName("setIsUnique");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_operation_Operation_setIsUnique_Boolean->setEType(unknownClass);
+	}
 	m_operation_Operation_setIsUnique_Boolean->setLowerBound(1);
 	m_operation_Operation_setIsUnique_Boolean->setUpperBound(1);
 	m_operation_Operation_setIsUnique_Boolean->setUnique(true);
 	m_operation_Operation_setIsUnique_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_operation_Operation_setIsUnique_Boolean);
 		parameter->setName("newIsUnique");
@@ -20692,13 +20302,18 @@ void umlPackageImpl::initializeOperationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_operation_Operation_setLower_Integer->setEType(nullptr);
 	m_operation_Operation_setLower_Integer->setName("setLower");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_operation_Operation_setLower_Integer->setEType(unknownClass);
+	}
 	m_operation_Operation_setLower_Integer->setLowerBound(1);
 	m_operation_Operation_setLower_Integer->setUpperBound(1);
 	m_operation_Operation_setLower_Integer->setUnique(true);
 	m_operation_Operation_setLower_Integer->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_operation_Operation_setLower_Integer);
 		parameter->setName("newLower");
@@ -20709,13 +20324,18 @@ void umlPackageImpl::initializeOperationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_operation_Operation_setType_Type->setEType(nullptr);
 	m_operation_Operation_setType_Type->setName("setType");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_operation_Operation_setType_Type->setEType(unknownClass);
+	}
 	m_operation_Operation_setType_Type->setLowerBound(1);
 	m_operation_Operation_setType_Type->setUpperBound(1);
 	m_operation_Operation_setType_Type->setUnique(true);
 	m_operation_Operation_setType_Type->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_operation_Operation_setType_Type);
 		parameter->setName("newType");
@@ -20726,13 +20346,18 @@ void umlPackageImpl::initializeOperationContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_operation_Operation_setUpper_UnlimitedNatural->setEType(nullptr);
 	m_operation_Operation_setUpper_UnlimitedNatural->setName("setUpper");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_operation_Operation_setUpper_UnlimitedNatural->setEType(unknownClass);
+	}
 	m_operation_Operation_setUpper_UnlimitedNatural->setLowerBound(1);
 	m_operation_Operation_setUpper_UnlimitedNatural->setUpperBound(1);
 	m_operation_Operation_setUpper_UnlimitedNatural->setUnique(true);
 	m_operation_Operation_setUpper_UnlimitedNatural->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_operation_Operation_setUpper_UnlimitedNatural);
 		parameter->setName("newUpper");
@@ -20754,13 +20379,12 @@ void umlPackageImpl::initializeOperationTemplateParameterContent()
 	
 	
 	
-	m_operationTemplateParameter_Operation_match_default_signature_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_operationTemplateParameter_Operation_match_default_signature_EDiagnosticChain_EMap->setName("match_default_signature");
+	m_operationTemplateParameter_Operation_match_default_signature_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_operationTemplateParameter_Operation_match_default_signature_EDiagnosticChain_EMap->setLowerBound(0);
 	m_operationTemplateParameter_Operation_match_default_signature_EDiagnosticChain_EMap->setUpperBound(1);
 	m_operationTemplateParameter_Operation_match_default_signature_EDiagnosticChain_EMap->setUnique(true);
 	m_operationTemplateParameter_Operation_match_default_signature_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_operationTemplateParameter_Operation_match_default_signature_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -20992,13 +20616,12 @@ void umlPackageImpl::initializeOutputPinContent()
 	    }
 	}
 	
-	m_outputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_outputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap->setName("incoming_edges_structured_only");
+	m_outputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_outputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap->setLowerBound(0);
 	m_outputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap->setUpperBound(1);
 	m_outputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap->setUnique(true);
 	m_outputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_outputPin_Operation_incoming_edges_structured_only_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -21030,7 +20653,7 @@ void umlPackageImpl::initializePackageContent()
 	
 	m_package_Attribute_uRI = getPackage_Attribute_uRI();
 	m_package_Attribute_uRI->setName("URI");
-	m_package_Attribute_uRI->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_package_Attribute_uRI->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_package_Attribute_uRI->setLowerBound(0);
 	m_package_Attribute_uRI->setUpperBound(1);
 	m_package_Attribute_uRI->setTransient(false);
@@ -21222,21 +20845,19 @@ void umlPackageImpl::initializePackageContent()
 	    }
 	}
 	
-	m_package_Operation_allApplicableStereotypes->setEType(getStereotype_Class());
 	m_package_Operation_allApplicableStereotypes->setName("allApplicableStereotypes");
+	m_package_Operation_allApplicableStereotypes->setEType(getStereotype_Class());
 	m_package_Operation_allApplicableStereotypes->setLowerBound(0);
 	m_package_Operation_allApplicableStereotypes->setUpperBound(-1);
 	m_package_Operation_allApplicableStereotypes->setUnique(true);
 	m_package_Operation_allApplicableStereotypes->setOrdered(false);
 	
-	
-	m_package_Operation_applyProfile_Profile->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_package_Operation_applyProfile_Profile->setName("applyProfile");
+	m_package_Operation_applyProfile_Profile->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_package_Operation_applyProfile_Profile->setLowerBound(0);
 	m_package_Operation_applyProfile_Profile->setUpperBound(-1);
 	m_package_Operation_applyProfile_Profile->setUnique(true);
 	m_package_Operation_applyProfile_Profile->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_applyProfile_Profile);
 		parameter->setName("profile");
@@ -21247,21 +20868,19 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_containingProfile->setEType(getProfile_Class());
 	m_package_Operation_containingProfile->setName("containingProfile");
+	m_package_Operation_containingProfile->setEType(getProfile_Class());
 	m_package_Operation_containingProfile->setLowerBound(0);
 	m_package_Operation_containingProfile->setUpperBound(1);
 	m_package_Operation_containingProfile->setUnique(true);
 	m_package_Operation_containingProfile->setOrdered(false);
 	
-	
-	m_package_Operation_createOwnedClass_String_Boolean->setEType(getClass_Class());
 	m_package_Operation_createOwnedClass_String_Boolean->setName("createOwnedClass");
+	m_package_Operation_createOwnedClass_String_Boolean->setEType(getClass_Class());
 	m_package_Operation_createOwnedClass_String_Boolean->setLowerBound(1);
 	m_package_Operation_createOwnedClass_String_Boolean->setUpperBound(1);
 	m_package_Operation_createOwnedClass_String_Boolean->setUnique(true);
 	m_package_Operation_createOwnedClass_String_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_createOwnedClass_String_Boolean);
 		parameter->setName("name");
@@ -21282,13 +20901,12 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_createOwnedEnumeration_String->setEType(getEnumeration_Class());
 	m_package_Operation_createOwnedEnumeration_String->setName("createOwnedEnumeration");
+	m_package_Operation_createOwnedEnumeration_String->setEType(getEnumeration_Class());
 	m_package_Operation_createOwnedEnumeration_String->setLowerBound(1);
 	m_package_Operation_createOwnedEnumeration_String->setUpperBound(1);
 	m_package_Operation_createOwnedEnumeration_String->setUnique(true);
 	m_package_Operation_createOwnedEnumeration_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_createOwnedEnumeration_String);
 		parameter->setName("name");
@@ -21299,13 +20917,12 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_createOwnedInterface_String->setEType(getInterface_Class());
 	m_package_Operation_createOwnedInterface_String->setName("createOwnedInterface");
+	m_package_Operation_createOwnedInterface_String->setEType(getInterface_Class());
 	m_package_Operation_createOwnedInterface_String->setLowerBound(1);
 	m_package_Operation_createOwnedInterface_String->setUpperBound(1);
 	m_package_Operation_createOwnedInterface_String->setUnique(true);
 	m_package_Operation_createOwnedInterface_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_createOwnedInterface_String);
 		parameter->setName("name");
@@ -21316,13 +20933,12 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_createOwnedPrimitiveType_String->setEType(getPrimitiveType_Class());
 	m_package_Operation_createOwnedPrimitiveType_String->setName("createOwnedPrimitiveType");
+	m_package_Operation_createOwnedPrimitiveType_String->setEType(getPrimitiveType_Class());
 	m_package_Operation_createOwnedPrimitiveType_String->setLowerBound(1);
 	m_package_Operation_createOwnedPrimitiveType_String->setUpperBound(1);
 	m_package_Operation_createOwnedPrimitiveType_String->setUnique(true);
 	m_package_Operation_createOwnedPrimitiveType_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_createOwnedPrimitiveType_String);
 		parameter->setName("name");
@@ -21333,13 +20949,12 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_createOwnedStereotype_String_Boolean->setEType(getStereotype_Class());
 	m_package_Operation_createOwnedStereotype_String_Boolean->setName("createOwnedStereotype");
+	m_package_Operation_createOwnedStereotype_String_Boolean->setEType(getStereotype_Class());
 	m_package_Operation_createOwnedStereotype_String_Boolean->setLowerBound(1);
 	m_package_Operation_createOwnedStereotype_String_Boolean->setUpperBound(1);
 	m_package_Operation_createOwnedStereotype_String_Boolean->setUnique(true);
 	m_package_Operation_createOwnedStereotype_String_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_createOwnedStereotype_String_Boolean);
 		parameter->setName("name");
@@ -21360,13 +20975,12 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_elements_public_or_private_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_package_Operation_elements_public_or_private_EDiagnosticChain_EMap->setName("elements_public_or_private");
+	m_package_Operation_elements_public_or_private_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_package_Operation_elements_public_or_private_EDiagnosticChain_EMap->setLowerBound(0);
 	m_package_Operation_elements_public_or_private_EDiagnosticChain_EMap->setUpperBound(1);
 	m_package_Operation_elements_public_or_private_EDiagnosticChain_EMap->setUnique(true);
 	m_package_Operation_elements_public_or_private_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_elements_public_or_private_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -21387,29 +21001,26 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_getAllAppliedProfiles->setEType(getProfile_Class());
 	m_package_Operation_getAllAppliedProfiles->setName("getAllAppliedProfiles");
+	m_package_Operation_getAllAppliedProfiles->setEType(getProfile_Class());
 	m_package_Operation_getAllAppliedProfiles->setLowerBound(0);
 	m_package_Operation_getAllAppliedProfiles->setUpperBound(-1);
 	m_package_Operation_getAllAppliedProfiles->setUnique(true);
 	m_package_Operation_getAllAppliedProfiles->setOrdered(false);
 	
-	
-	m_package_Operation_getAllProfileApplications->setEType(getProfileApplication_Class());
 	m_package_Operation_getAllProfileApplications->setName("getAllProfileApplications");
+	m_package_Operation_getAllProfileApplications->setEType(getProfileApplication_Class());
 	m_package_Operation_getAllProfileApplications->setLowerBound(0);
 	m_package_Operation_getAllProfileApplications->setUpperBound(-1);
 	m_package_Operation_getAllProfileApplications->setUnique(true);
 	m_package_Operation_getAllProfileApplications->setOrdered(false);
 	
-	
-	m_package_Operation_getAppliedProfile_String->setEType(getProfile_Class());
 	m_package_Operation_getAppliedProfile_String->setName("getAppliedProfile");
+	m_package_Operation_getAppliedProfile_String->setEType(getProfile_Class());
 	m_package_Operation_getAppliedProfile_String->setLowerBound(0);
 	m_package_Operation_getAppliedProfile_String->setUpperBound(1);
 	m_package_Operation_getAppliedProfile_String->setUnique(true);
 	m_package_Operation_getAppliedProfile_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_getAppliedProfile_String);
 		parameter->setName("qualifiedName");
@@ -21420,13 +21031,12 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_getAppliedProfile_String_Boolean->setEType(getProfile_Class());
 	m_package_Operation_getAppliedProfile_String_Boolean->setName("getAppliedProfile");
+	m_package_Operation_getAppliedProfile_String_Boolean->setEType(getProfile_Class());
 	m_package_Operation_getAppliedProfile_String_Boolean->setLowerBound(0);
 	m_package_Operation_getAppliedProfile_String_Boolean->setUpperBound(1);
 	m_package_Operation_getAppliedProfile_String_Boolean->setUnique(true);
 	m_package_Operation_getAppliedProfile_String_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_getAppliedProfile_String_Boolean);
 		parameter->setName("qualifiedName");
@@ -21447,45 +21057,40 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_getAppliedProfiles->setEType(getProfile_Class());
 	m_package_Operation_getAppliedProfiles->setName("getAppliedProfiles");
+	m_package_Operation_getAppliedProfiles->setEType(getProfile_Class());
 	m_package_Operation_getAppliedProfiles->setLowerBound(0);
 	m_package_Operation_getAppliedProfiles->setUpperBound(-1);
 	m_package_Operation_getAppliedProfiles->setUnique(true);
 	m_package_Operation_getAppliedProfiles->setOrdered(false);
 	
-	
-	m_package_Operation_getNestedPackages->setEType(getPackage_Class());
 	m_package_Operation_getNestedPackages->setName("getNestedPackages");
+	m_package_Operation_getNestedPackages->setEType(getPackage_Class());
 	m_package_Operation_getNestedPackages->setLowerBound(0);
 	m_package_Operation_getNestedPackages->setUpperBound(-1);
 	m_package_Operation_getNestedPackages->setUnique(true);
 	m_package_Operation_getNestedPackages->setOrdered(false);
 	
-	
-	m_package_Operation_getOwnedStereotypes->setEType(getStereotype_Class());
 	m_package_Operation_getOwnedStereotypes->setName("getOwnedStereotypes");
+	m_package_Operation_getOwnedStereotypes->setEType(getStereotype_Class());
 	m_package_Operation_getOwnedStereotypes->setLowerBound(0);
 	m_package_Operation_getOwnedStereotypes->setUpperBound(-1);
 	m_package_Operation_getOwnedStereotypes->setUnique(true);
 	m_package_Operation_getOwnedStereotypes->setOrdered(false);
 	
-	
-	m_package_Operation_getOwnedTypes->setEType(getType_Class());
 	m_package_Operation_getOwnedTypes->setName("getOwnedTypes");
+	m_package_Operation_getOwnedTypes->setEType(getType_Class());
 	m_package_Operation_getOwnedTypes->setLowerBound(0);
 	m_package_Operation_getOwnedTypes->setUpperBound(-1);
 	m_package_Operation_getOwnedTypes->setUnique(true);
 	m_package_Operation_getOwnedTypes->setOrdered(false);
 	
-	
-	m_package_Operation_getProfileApplication_Profile->setEType(getProfileApplication_Class());
 	m_package_Operation_getProfileApplication_Profile->setName("getProfileApplication");
+	m_package_Operation_getProfileApplication_Profile->setEType(getProfileApplication_Class());
 	m_package_Operation_getProfileApplication_Profile->setLowerBound(0);
 	m_package_Operation_getProfileApplication_Profile->setUpperBound(1);
 	m_package_Operation_getProfileApplication_Profile->setUnique(true);
 	m_package_Operation_getProfileApplication_Profile->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_getProfileApplication_Profile);
 		parameter->setName("profile");
@@ -21496,13 +21101,12 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_getProfileApplication_Profile_Boolean->setEType(getProfileApplication_Class());
 	m_package_Operation_getProfileApplication_Profile_Boolean->setName("getProfileApplication");
+	m_package_Operation_getProfileApplication_Profile_Boolean->setEType(getProfileApplication_Class());
 	m_package_Operation_getProfileApplication_Profile_Boolean->setLowerBound(0);
 	m_package_Operation_getProfileApplication_Profile_Boolean->setUpperBound(1);
 	m_package_Operation_getProfileApplication_Profile_Boolean->setUnique(true);
 	m_package_Operation_getProfileApplication_Profile_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_getProfileApplication_Profile_Boolean);
 		parameter->setName("profile");
@@ -21523,21 +21127,19 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_isModelLibrary->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_package_Operation_isModelLibrary->setName("isModelLibrary");
+	m_package_Operation_isModelLibrary->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_package_Operation_isModelLibrary->setLowerBound(1);
 	m_package_Operation_isModelLibrary->setUpperBound(1);
 	m_package_Operation_isModelLibrary->setUnique(true);
 	m_package_Operation_isModelLibrary->setOrdered(false);
 	
-	
-	m_package_Operation_isProfileApplied_Profile->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_package_Operation_isProfileApplied_Profile->setName("isProfileApplied");
+	m_package_Operation_isProfileApplied_Profile->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_package_Operation_isProfileApplied_Profile->setLowerBound(1);
 	m_package_Operation_isProfileApplied_Profile->setUpperBound(1);
 	m_package_Operation_isProfileApplied_Profile->setUnique(true);
 	m_package_Operation_isProfileApplied_Profile->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_isProfileApplied_Profile);
 		parameter->setName("profile");
@@ -21548,13 +21150,12 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_makesVisible_NamedElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_package_Operation_makesVisible_NamedElement->setName("makesVisible");
+	m_package_Operation_makesVisible_NamedElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_package_Operation_makesVisible_NamedElement->setLowerBound(1);
 	m_package_Operation_makesVisible_NamedElement->setUpperBound(1);
 	m_package_Operation_makesVisible_NamedElement->setUnique(true);
 	m_package_Operation_makesVisible_NamedElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_makesVisible_NamedElement);
 		parameter->setName("el");
@@ -21565,13 +21166,12 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_unapplyProfile_Profile->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_package_Operation_unapplyProfile_Profile->setName("unapplyProfile");
+	m_package_Operation_unapplyProfile_Profile->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_package_Operation_unapplyProfile_Profile->setLowerBound(0);
 	m_package_Operation_unapplyProfile_Profile->setUpperBound(-1);
 	m_package_Operation_unapplyProfile_Profile->setUnique(true);
 	m_package_Operation_unapplyProfile_Profile->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_package_Operation_unapplyProfile_Profile);
 		parameter->setName("profile");
@@ -21582,13 +21182,12 @@ void umlPackageImpl::initializePackageContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_package_Operation_visibleMembers->setEType(getPackageableElement_Class());
 	m_package_Operation_visibleMembers->setName("visibleMembers");
+	m_package_Operation_visibleMembers->setEType(getPackageableElement_Class());
 	m_package_Operation_visibleMembers->setLowerBound(0);
 	m_package_Operation_visibleMembers->setUpperBound(-1);
 	m_package_Operation_visibleMembers->setUnique(true);
 	m_package_Operation_visibleMembers->setOrdered(false);
-	
 	
 	
 }
@@ -21601,7 +21200,7 @@ void umlPackageImpl::initializePackageImportContent()
 	
 	m_packageImport_Attribute_visibility = getPackageImport_Attribute_visibility();
 	m_packageImport_Attribute_visibility->setName("visibility");
-	m_packageImport_Attribute_visibility->setEType(getVisibilityKind_Class());
+		m_packageImport_Attribute_visibility->setEType(getVisibilityKind_Class());
 	m_packageImport_Attribute_visibility->setLowerBound(1);
 	m_packageImport_Attribute_visibility->setUpperBound(1);
 	m_packageImport_Attribute_visibility->setTransient(false);
@@ -21668,13 +21267,12 @@ void umlPackageImpl::initializePackageImportContent()
 	    }
 	}
 	
-	m_packageImport_Operation_public_or_private_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_packageImport_Operation_public_or_private_EDiagnosticChain_EMap->setName("public_or_private");
+	m_packageImport_Operation_public_or_private_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_packageImport_Operation_public_or_private_EDiagnosticChain_EMap->setLowerBound(0);
 	m_packageImport_Operation_public_or_private_EDiagnosticChain_EMap->setUpperBound(1);
 	m_packageImport_Operation_public_or_private_EDiagnosticChain_EMap->setUnique(true);
 	m_packageImport_Operation_public_or_private_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_packageImport_Operation_public_or_private_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -21789,13 +21387,12 @@ void umlPackageImpl::initializePackageableElementContent()
 	    }
 	}
 	
-	m_packageableElement_Operation_namespace_needs_visibility_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_packageableElement_Operation_namespace_needs_visibility_EDiagnosticChain_EMap->setName("namespace_needs_visibility");
+	m_packageableElement_Operation_namespace_needs_visibility_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_packageableElement_Operation_namespace_needs_visibility_EDiagnosticChain_EMap->setLowerBound(0);
 	m_packageableElement_Operation_namespace_needs_visibility_EDiagnosticChain_EMap->setUpperBound(1);
 	m_packageableElement_Operation_namespace_needs_visibility_EDiagnosticChain_EMap->setUnique(true);
 	m_packageableElement_Operation_namespace_needs_visibility_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_packageableElement_Operation_namespace_needs_visibility_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -21827,7 +21424,7 @@ void umlPackageImpl::initializeParameterContent()
 	
 	m_parameter_Attribute_default = getParameter_Attribute_default();
 	m_parameter_Attribute_default->setName("default");
-	m_parameter_Attribute_default->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_parameter_Attribute_default->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_parameter_Attribute_default->setLowerBound(0);
 	m_parameter_Attribute_default->setUpperBound(1);
 	m_parameter_Attribute_default->setTransient(true);
@@ -21847,7 +21444,7 @@ void umlPackageImpl::initializeParameterContent()
 	}
 	m_parameter_Attribute_direction = getParameter_Attribute_direction();
 	m_parameter_Attribute_direction->setName("direction");
-	m_parameter_Attribute_direction->setEType(getParameterDirectionKind_Class());
+		m_parameter_Attribute_direction->setEType(getParameterDirectionKind_Class());
 	m_parameter_Attribute_direction->setLowerBound(1);
 	m_parameter_Attribute_direction->setUpperBound(1);
 	m_parameter_Attribute_direction->setTransient(false);
@@ -21867,7 +21464,7 @@ void umlPackageImpl::initializeParameterContent()
 	}
 	m_parameter_Attribute_effect = getParameter_Attribute_effect();
 	m_parameter_Attribute_effect->setName("effect");
-	m_parameter_Attribute_effect->setEType(getParameterEffectKind_Class());
+		m_parameter_Attribute_effect->setEType(getParameterEffectKind_Class());
 	m_parameter_Attribute_effect->setLowerBound(0);
 	m_parameter_Attribute_effect->setUpperBound(1);
 	m_parameter_Attribute_effect->setTransient(false);
@@ -21887,7 +21484,7 @@ void umlPackageImpl::initializeParameterContent()
 	}
 	m_parameter_Attribute_isException = getParameter_Attribute_isException();
 	m_parameter_Attribute_isException->setName("isException");
-	m_parameter_Attribute_isException->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_parameter_Attribute_isException->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_parameter_Attribute_isException->setLowerBound(1);
 	m_parameter_Attribute_isException->setUpperBound(1);
 	m_parameter_Attribute_isException->setTransient(false);
@@ -21907,7 +21504,7 @@ void umlPackageImpl::initializeParameterContent()
 	}
 	m_parameter_Attribute_isStream = getParameter_Attribute_isStream();
 	m_parameter_Attribute_isStream->setName("isStream");
-	m_parameter_Attribute_isStream->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_parameter_Attribute_isStream->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_parameter_Attribute_isStream->setLowerBound(1);
 	m_parameter_Attribute_isStream->setUpperBound(1);
 	m_parameter_Attribute_isStream->setTransient(false);
@@ -22024,13 +21621,12 @@ void umlPackageImpl::initializeParameterContent()
 	    }
 	}
 	
-	m_parameter_Operation_connector_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameter_Operation_connector_end_EDiagnosticChain_EMap->setName("connector_end");
+	m_parameter_Operation_connector_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameter_Operation_connector_end_EDiagnosticChain_EMap->setLowerBound(0);
 	m_parameter_Operation_connector_end_EDiagnosticChain_EMap->setUpperBound(1);
 	m_parameter_Operation_connector_end_EDiagnosticChain_EMap->setUnique(true);
 	m_parameter_Operation_connector_end_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameter_Operation_connector_end_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22051,13 +21647,12 @@ void umlPackageImpl::initializeParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameter_Operation_in_and_out_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameter_Operation_in_and_out_EDiagnosticChain_EMap->setName("in_and_out");
+	m_parameter_Operation_in_and_out_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameter_Operation_in_and_out_EDiagnosticChain_EMap->setLowerBound(0);
 	m_parameter_Operation_in_and_out_EDiagnosticChain_EMap->setUpperBound(1);
 	m_parameter_Operation_in_and_out_EDiagnosticChain_EMap->setUnique(true);
 	m_parameter_Operation_in_and_out_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameter_Operation_in_and_out_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22078,21 +21673,19 @@ void umlPackageImpl::initializeParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameter_Operation_isSetDefault->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_parameter_Operation_isSetDefault->setName("isSetDefault");
+	m_parameter_Operation_isSetDefault->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_parameter_Operation_isSetDefault->setLowerBound(1);
 	m_parameter_Operation_isSetDefault->setUpperBound(1);
 	m_parameter_Operation_isSetDefault->setUnique(true);
 	m_parameter_Operation_isSetDefault->setOrdered(false);
 	
-	
-	m_parameter_Operation_not_exception_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameter_Operation_not_exception_EDiagnosticChain_EMap->setName("not_exception");
+	m_parameter_Operation_not_exception_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameter_Operation_not_exception_EDiagnosticChain_EMap->setLowerBound(0);
 	m_parameter_Operation_not_exception_EDiagnosticChain_EMap->setUpperBound(1);
 	m_parameter_Operation_not_exception_EDiagnosticChain_EMap->setUnique(true);
 	m_parameter_Operation_not_exception_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameter_Operation_not_exception_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22113,13 +21706,12 @@ void umlPackageImpl::initializeParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameter_Operation_object_effect_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameter_Operation_object_effect_EDiagnosticChain_EMap->setName("object_effect");
+	m_parameter_Operation_object_effect_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameter_Operation_object_effect_EDiagnosticChain_EMap->setLowerBound(0);
 	m_parameter_Operation_object_effect_EDiagnosticChain_EMap->setUpperBound(1);
 	m_parameter_Operation_object_effect_EDiagnosticChain_EMap->setUnique(true);
 	m_parameter_Operation_object_effect_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameter_Operation_object_effect_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22140,13 +21732,12 @@ void umlPackageImpl::initializeParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameter_Operation_reentrant_behaviors_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameter_Operation_reentrant_behaviors_EDiagnosticChain_EMap->setName("reentrant_behaviors");
+	m_parameter_Operation_reentrant_behaviors_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameter_Operation_reentrant_behaviors_EDiagnosticChain_EMap->setLowerBound(0);
 	m_parameter_Operation_reentrant_behaviors_EDiagnosticChain_EMap->setUpperBound(1);
 	m_parameter_Operation_reentrant_behaviors_EDiagnosticChain_EMap->setUnique(true);
 	m_parameter_Operation_reentrant_behaviors_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameter_Operation_reentrant_behaviors_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22167,13 +21758,18 @@ void umlPackageImpl::initializeParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameter_Operation_setBooleanDefaultValue_Boolean->setEType(nullptr);
 	m_parameter_Operation_setBooleanDefaultValue_Boolean->setName("setBooleanDefaultValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_parameter_Operation_setBooleanDefaultValue_Boolean->setEType(unknownClass);
+	}
 	m_parameter_Operation_setBooleanDefaultValue_Boolean->setLowerBound(1);
 	m_parameter_Operation_setBooleanDefaultValue_Boolean->setUpperBound(1);
 	m_parameter_Operation_setBooleanDefaultValue_Boolean->setUnique(true);
 	m_parameter_Operation_setBooleanDefaultValue_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameter_Operation_setBooleanDefaultValue_Boolean);
 		parameter->setName("value");
@@ -22184,13 +21780,18 @@ void umlPackageImpl::initializeParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameter_Operation_setIntegerDefaultValue_Integer->setEType(nullptr);
 	m_parameter_Operation_setIntegerDefaultValue_Integer->setName("setIntegerDefaultValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_parameter_Operation_setIntegerDefaultValue_Integer->setEType(unknownClass);
+	}
 	m_parameter_Operation_setIntegerDefaultValue_Integer->setLowerBound(1);
 	m_parameter_Operation_setIntegerDefaultValue_Integer->setUpperBound(1);
 	m_parameter_Operation_setIntegerDefaultValue_Integer->setUnique(true);
 	m_parameter_Operation_setIntegerDefaultValue_Integer->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameter_Operation_setIntegerDefaultValue_Integer);
 		parameter->setName("value");
@@ -22201,21 +21802,31 @@ void umlPackageImpl::initializeParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameter_Operation_setNullDefaultValue->setEType(nullptr);
 	m_parameter_Operation_setNullDefaultValue->setName("setNullDefaultValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_parameter_Operation_setNullDefaultValue->setEType(unknownClass);
+	}
 	m_parameter_Operation_setNullDefaultValue->setLowerBound(1);
 	m_parameter_Operation_setNullDefaultValue->setUpperBound(1);
 	m_parameter_Operation_setNullDefaultValue->setUnique(true);
 	m_parameter_Operation_setNullDefaultValue->setOrdered(false);
 	
-	
-	m_parameter_Operation_setRealDefaultValue_Real->setEType(nullptr);
 	m_parameter_Operation_setRealDefaultValue_Real->setName("setRealDefaultValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_parameter_Operation_setRealDefaultValue_Real->setEType(unknownClass);
+	}
 	m_parameter_Operation_setRealDefaultValue_Real->setLowerBound(1);
 	m_parameter_Operation_setRealDefaultValue_Real->setUpperBound(1);
 	m_parameter_Operation_setRealDefaultValue_Real->setUnique(true);
 	m_parameter_Operation_setRealDefaultValue_Real->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameter_Operation_setRealDefaultValue_Real);
 		parameter->setName("value");
@@ -22226,13 +21837,18 @@ void umlPackageImpl::initializeParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameter_Operation_setStringDefaultValue_String->setEType(nullptr);
 	m_parameter_Operation_setStringDefaultValue_String->setName("setStringDefaultValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_parameter_Operation_setStringDefaultValue_String->setEType(unknownClass);
+	}
 	m_parameter_Operation_setStringDefaultValue_String->setLowerBound(1);
 	m_parameter_Operation_setStringDefaultValue_String->setUpperBound(1);
 	m_parameter_Operation_setStringDefaultValue_String->setUnique(true);
 	m_parameter_Operation_setStringDefaultValue_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameter_Operation_setStringDefaultValue_String);
 		parameter->setName("value");
@@ -22243,13 +21859,18 @@ void umlPackageImpl::initializeParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameter_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setEType(nullptr);
 	m_parameter_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setName("setUnlimitedNaturalDefaultValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_parameter_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setEType(unknownClass);
+	}
 	m_parameter_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setLowerBound(1);
 	m_parameter_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setUpperBound(1);
 	m_parameter_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setUnique(true);
 	m_parameter_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameter_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural);
 		parameter->setName("value");
@@ -22260,13 +21881,12 @@ void umlPackageImpl::initializeParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameter_Operation_stream_and_exception_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameter_Operation_stream_and_exception_EDiagnosticChain_EMap->setName("stream_and_exception");
+	m_parameter_Operation_stream_and_exception_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameter_Operation_stream_and_exception_EDiagnosticChain_EMap->setLowerBound(0);
 	m_parameter_Operation_stream_and_exception_EDiagnosticChain_EMap->setUpperBound(1);
 	m_parameter_Operation_stream_and_exception_EDiagnosticChain_EMap->setUnique(true);
 	m_parameter_Operation_stream_and_exception_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameter_Operation_stream_and_exception_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22287,13 +21907,18 @@ void umlPackageImpl::initializeParameterContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameter_Operation_unsetDefault->setEType(nullptr);
 	m_parameter_Operation_unsetDefault->setName("unsetDefault");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_parameter_Operation_unsetDefault->setEType(unknownClass);
+	}
 	m_parameter_Operation_unsetDefault->setLowerBound(1);
 	m_parameter_Operation_unsetDefault->setUpperBound(1);
 	m_parameter_Operation_unsetDefault->setUnique(true);
 	m_parameter_Operation_unsetDefault->setOrdered(false);
-	
 	
 	
 }
@@ -22353,13 +21978,12 @@ void umlPackageImpl::initializeParameterSetContent()
 	    }
 	}
 	
-	m_parameterSet_Operation_input_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameterSet_Operation_input_EDiagnosticChain_EMap->setName("input");
+	m_parameterSet_Operation_input_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameterSet_Operation_input_EDiagnosticChain_EMap->setLowerBound(0);
 	m_parameterSet_Operation_input_EDiagnosticChain_EMap->setUpperBound(1);
 	m_parameterSet_Operation_input_EDiagnosticChain_EMap->setUnique(true);
 	m_parameterSet_Operation_input_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameterSet_Operation_input_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22380,13 +22004,12 @@ void umlPackageImpl::initializeParameterSetContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameterSet_Operation_same_parameterized_entity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameterSet_Operation_same_parameterized_entity_EDiagnosticChain_EMap->setName("same_parameterized_entity");
+	m_parameterSet_Operation_same_parameterized_entity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameterSet_Operation_same_parameterized_entity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_parameterSet_Operation_same_parameterized_entity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_parameterSet_Operation_same_parameterized_entity_EDiagnosticChain_EMap->setUnique(true);
 	m_parameterSet_Operation_same_parameterized_entity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameterSet_Operation_same_parameterized_entity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22407,13 +22030,12 @@ void umlPackageImpl::initializeParameterSetContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameterSet_Operation_two_parameter_sets_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameterSet_Operation_two_parameter_sets_EDiagnosticChain_EMap->setName("two_parameter_sets");
+	m_parameterSet_Operation_two_parameter_sets_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_parameterSet_Operation_two_parameter_sets_EDiagnosticChain_EMap->setLowerBound(0);
 	m_parameterSet_Operation_two_parameter_sets_EDiagnosticChain_EMap->setUpperBound(1);
 	m_parameterSet_Operation_two_parameter_sets_EDiagnosticChain_EMap->setUnique(true);
 	m_parameterSet_Operation_two_parameter_sets_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameterSet_Operation_two_parameter_sets_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22495,13 +22117,12 @@ void umlPackageImpl::initializeParameterableElementContent()
 	    }
 	}
 	
-	m_parameterableElement_Operation_isCompatibleWith_ParameterableElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_parameterableElement_Operation_isCompatibleWith_ParameterableElement->setName("isCompatibleWith");
+	m_parameterableElement_Operation_isCompatibleWith_ParameterableElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_parameterableElement_Operation_isCompatibleWith_ParameterableElement->setLowerBound(1);
 	m_parameterableElement_Operation_isCompatibleWith_ParameterableElement->setUpperBound(1);
 	m_parameterableElement_Operation_isCompatibleWith_ParameterableElement->setUnique(true);
 	m_parameterableElement_Operation_isCompatibleWith_ParameterableElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_parameterableElement_Operation_isCompatibleWith_ParameterableElement);
 		parameter->setName("p");
@@ -22512,13 +22133,12 @@ void umlPackageImpl::initializeParameterableElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_parameterableElement_Operation_isTemplateParameter->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_parameterableElement_Operation_isTemplateParameter->setName("isTemplateParameter");
+	m_parameterableElement_Operation_isTemplateParameter->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_parameterableElement_Operation_isTemplateParameter->setLowerBound(1);
 	m_parameterableElement_Operation_isTemplateParameter->setUpperBound(1);
 	m_parameterableElement_Operation_isTemplateParameter->setUnique(true);
 	m_parameterableElement_Operation_isTemplateParameter->setOrdered(false);
-	
 	
 	
 }
@@ -22531,13 +22151,12 @@ void umlPackageImpl::initializePartDecompositionContent()
 	
 	
 	
-	m_partDecomposition_Operation_assume_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_partDecomposition_Operation_assume_EDiagnosticChain_EMap->setName("assume");
+	m_partDecomposition_Operation_assume_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_partDecomposition_Operation_assume_EDiagnosticChain_EMap->setLowerBound(0);
 	m_partDecomposition_Operation_assume_EDiagnosticChain_EMap->setUpperBound(1);
 	m_partDecomposition_Operation_assume_EDiagnosticChain_EMap->setUnique(true);
 	m_partDecomposition_Operation_assume_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_partDecomposition_Operation_assume_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22558,13 +22177,12 @@ void umlPackageImpl::initializePartDecompositionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_partDecomposition_Operation_commutativity_of_decomposition_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_partDecomposition_Operation_commutativity_of_decomposition_EDiagnosticChain_EMap->setName("commutativity_of_decomposition");
+	m_partDecomposition_Operation_commutativity_of_decomposition_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_partDecomposition_Operation_commutativity_of_decomposition_EDiagnosticChain_EMap->setLowerBound(0);
 	m_partDecomposition_Operation_commutativity_of_decomposition_EDiagnosticChain_EMap->setUpperBound(1);
 	m_partDecomposition_Operation_commutativity_of_decomposition_EDiagnosticChain_EMap->setUnique(true);
 	m_partDecomposition_Operation_commutativity_of_decomposition_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_partDecomposition_Operation_commutativity_of_decomposition_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22585,13 +22203,12 @@ void umlPackageImpl::initializePartDecompositionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_partDecomposition_Operation_parts_of_internal_structures_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_partDecomposition_Operation_parts_of_internal_structures_EDiagnosticChain_EMap->setName("parts_of_internal_structures");
+	m_partDecomposition_Operation_parts_of_internal_structures_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_partDecomposition_Operation_parts_of_internal_structures_EDiagnosticChain_EMap->setLowerBound(0);
 	m_partDecomposition_Operation_parts_of_internal_structures_EDiagnosticChain_EMap->setUpperBound(1);
 	m_partDecomposition_Operation_parts_of_internal_structures_EDiagnosticChain_EMap->setUnique(true);
 	m_partDecomposition_Operation_parts_of_internal_structures_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_partDecomposition_Operation_parts_of_internal_structures_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22623,7 +22240,7 @@ void umlPackageImpl::initializePinContent()
 	
 	m_pin_Attribute_isControl = getPin_Attribute_isControl();
 	m_pin_Attribute_isControl->setName("isControl");
-	m_pin_Attribute_isControl->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_pin_Attribute_isControl->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_pin_Attribute_isControl->setLowerBound(1);
 	m_pin_Attribute_isControl->setUpperBound(1);
 	m_pin_Attribute_isControl->setTransient(false);
@@ -22643,13 +22260,12 @@ void umlPackageImpl::initializePinContent()
 	}
 	
 	
-	m_pin_Operation_control_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pin_Operation_control_pins_EDiagnosticChain_EMap->setName("control_pins");
+	m_pin_Operation_control_pins_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pin_Operation_control_pins_EDiagnosticChain_EMap->setLowerBound(0);
 	m_pin_Operation_control_pins_EDiagnosticChain_EMap->setUpperBound(1);
 	m_pin_Operation_control_pins_EDiagnosticChain_EMap->setUnique(true);
 	m_pin_Operation_control_pins_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_pin_Operation_control_pins_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22670,13 +22286,12 @@ void umlPackageImpl::initializePinContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_pin_Operation_not_unique_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pin_Operation_not_unique_EDiagnosticChain_EMap->setName("not_unique");
+	m_pin_Operation_not_unique_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pin_Operation_not_unique_EDiagnosticChain_EMap->setLowerBound(0);
 	m_pin_Operation_not_unique_EDiagnosticChain_EMap->setUpperBound(1);
 	m_pin_Operation_not_unique_EDiagnosticChain_EMap->setUnique(true);
 	m_pin_Operation_not_unique_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_pin_Operation_not_unique_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22708,7 +22323,7 @@ void umlPackageImpl::initializePortContent()
 	
 	m_port_Attribute_isBehavior = getPort_Attribute_isBehavior();
 	m_port_Attribute_isBehavior->setName("isBehavior");
-	m_port_Attribute_isBehavior->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_port_Attribute_isBehavior->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_port_Attribute_isBehavior->setLowerBound(1);
 	m_port_Attribute_isBehavior->setUpperBound(1);
 	m_port_Attribute_isBehavior->setTransient(false);
@@ -22728,7 +22343,7 @@ void umlPackageImpl::initializePortContent()
 	}
 	m_port_Attribute_isConjugated = getPort_Attribute_isConjugated();
 	m_port_Attribute_isConjugated->setName("isConjugated");
-	m_port_Attribute_isConjugated->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_port_Attribute_isConjugated->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_port_Attribute_isConjugated->setLowerBound(1);
 	m_port_Attribute_isConjugated->setUpperBound(1);
 	m_port_Attribute_isConjugated->setTransient(false);
@@ -22748,7 +22363,7 @@ void umlPackageImpl::initializePortContent()
 	}
 	m_port_Attribute_isService = getPort_Attribute_isService();
 	m_port_Attribute_isService->setName("isService");
-	m_port_Attribute_isService->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_port_Attribute_isService->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_port_Attribute_isService->setLowerBound(1);
 	m_port_Attribute_isService->setUpperBound(1);
 	m_port_Attribute_isService->setTransient(false);
@@ -22856,29 +22471,26 @@ void umlPackageImpl::initializePortContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_port_Operation_basicProvided->setEType(getInterface_Class());
 	m_port_Operation_basicProvided->setName("basicProvided");
+	m_port_Operation_basicProvided->setEType(getInterface_Class());
 	m_port_Operation_basicProvided->setLowerBound(0);
 	m_port_Operation_basicProvided->setUpperBound(-1);
 	m_port_Operation_basicProvided->setUnique(true);
 	m_port_Operation_basicProvided->setOrdered(false);
 	
-	
-	m_port_Operation_basicRequired->setEType(getInterface_Class());
 	m_port_Operation_basicRequired->setName("basicRequired");
+	m_port_Operation_basicRequired->setEType(getInterface_Class());
 	m_port_Operation_basicRequired->setLowerBound(0);
 	m_port_Operation_basicRequired->setUpperBound(-1);
 	m_port_Operation_basicRequired->setUnique(true);
 	m_port_Operation_basicRequired->setOrdered(false);
 	
-	
-	m_port_Operation_default_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_port_Operation_default_value_EDiagnosticChain_EMap->setName("default_value");
+	m_port_Operation_default_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_port_Operation_default_value_EDiagnosticChain_EMap->setLowerBound(0);
 	m_port_Operation_default_value_EDiagnosticChain_EMap->setUpperBound(1);
 	m_port_Operation_default_value_EDiagnosticChain_EMap->setUnique(true);
 	m_port_Operation_default_value_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_port_Operation_default_value_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22899,13 +22511,12 @@ void umlPackageImpl::initializePortContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_port_Operation_encapsulated_owner_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_port_Operation_encapsulated_owner_EDiagnosticChain_EMap->setName("encapsulated_owner");
+	m_port_Operation_encapsulated_owner_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_port_Operation_encapsulated_owner_EDiagnosticChain_EMap->setLowerBound(0);
 	m_port_Operation_encapsulated_owner_EDiagnosticChain_EMap->setUpperBound(1);
 	m_port_Operation_encapsulated_owner_EDiagnosticChain_EMap->setUnique(true);
 	m_port_Operation_encapsulated_owner_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_port_Operation_encapsulated_owner_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -22926,29 +22537,26 @@ void umlPackageImpl::initializePortContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_port_Operation_getProvideds->setEType(getInterface_Class());
 	m_port_Operation_getProvideds->setName("getProvideds");
+	m_port_Operation_getProvideds->setEType(getInterface_Class());
 	m_port_Operation_getProvideds->setLowerBound(0);
 	m_port_Operation_getProvideds->setUpperBound(-1);
 	m_port_Operation_getProvideds->setUnique(true);
 	m_port_Operation_getProvideds->setOrdered(false);
 	
-	
-	m_port_Operation_getRequireds->setEType(getInterface_Class());
 	m_port_Operation_getRequireds->setName("getRequireds");
+	m_port_Operation_getRequireds->setEType(getInterface_Class());
 	m_port_Operation_getRequireds->setLowerBound(0);
 	m_port_Operation_getRequireds->setUpperBound(-1);
 	m_port_Operation_getRequireds->setUnique(true);
 	m_port_Operation_getRequireds->setOrdered(false);
 	
-	
-	m_port_Operation_port_aggregation_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_port_Operation_port_aggregation_EDiagnosticChain_EMap->setName("port_aggregation");
+	m_port_Operation_port_aggregation_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_port_Operation_port_aggregation_EDiagnosticChain_EMap->setLowerBound(0);
 	m_port_Operation_port_aggregation_EDiagnosticChain_EMap->setUpperBound(1);
 	m_port_Operation_port_aggregation_EDiagnosticChain_EMap->setUnique(true);
 	m_port_Operation_port_aggregation_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_port_Operation_port_aggregation_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -23035,13 +22643,12 @@ void umlPackageImpl::initializeProfileContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_profile_Operation_create_Classifier->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_profile_Operation_create_Classifier->setName("create");
+	m_profile_Operation_create_Classifier->setEType(ecore::ecorePackage::eInstance()->getEObject_Class());
 	m_profile_Operation_create_Classifier->setLowerBound(1);
 	m_profile_Operation_create_Classifier->setUpperBound(1);
 	m_profile_Operation_create_Classifier->setUnique(true);
 	m_profile_Operation_create_Classifier->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_profile_Operation_create_Classifier);
 		parameter->setName("classifier");
@@ -23052,21 +22659,19 @@ void umlPackageImpl::initializeProfileContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_profile_Operation_define->setEType(ecore::ecorePackage::eInstance()->getEPackage_Class());
 	m_profile_Operation_define->setName("define");
+	m_profile_Operation_define->setEType(ecore::ecorePackage::eInstance()->getEPackage_Class());
 	m_profile_Operation_define->setLowerBound(0);
 	m_profile_Operation_define->setUpperBound(1);
 	m_profile_Operation_define->setUnique(true);
 	m_profile_Operation_define->setOrdered(false);
 	
-	
-	m_profile_Operation_define_EMap_EMap->setEType(ecore::ecorePackage::eInstance()->getEPackage_Class());
 	m_profile_Operation_define_EMap_EMap->setName("define");
+	m_profile_Operation_define_EMap_EMap->setEType(ecore::ecorePackage::eInstance()->getEPackage_Class());
 	m_profile_Operation_define_EMap_EMap->setLowerBound(1);
 	m_profile_Operation_define_EMap_EMap->setUpperBound(1);
 	m_profile_Operation_define_EMap_EMap->setUnique(true);
 	m_profile_Operation_define_EMap_EMap->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_profile_Operation_define_EMap_EMap);
 		parameter->setName("options");
@@ -23097,21 +22702,19 @@ void umlPackageImpl::initializeProfileContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_profile_Operation_getDefinition->setEType(ecore::ecorePackage::eInstance()->getEPackage_Class());
 	m_profile_Operation_getDefinition->setName("getDefinition");
+	m_profile_Operation_getDefinition->setEType(ecore::ecorePackage::eInstance()->getEPackage_Class());
 	m_profile_Operation_getDefinition->setLowerBound(0);
 	m_profile_Operation_getDefinition->setUpperBound(1);
 	m_profile_Operation_getDefinition->setUnique(true);
 	m_profile_Operation_getDefinition->setOrdered(false);
 	
-	
-	m_profile_Operation_getDefinition_NamedElement->setEType(ecore::ecorePackage::eInstance()->getENamedElement_Class());
 	m_profile_Operation_getDefinition_NamedElement->setName("getDefinition");
+	m_profile_Operation_getDefinition_NamedElement->setEType(ecore::ecorePackage::eInstance()->getENamedElement_Class());
 	m_profile_Operation_getDefinition_NamedElement->setLowerBound(0);
 	m_profile_Operation_getDefinition_NamedElement->setUpperBound(1);
 	m_profile_Operation_getDefinition_NamedElement->setUnique(true);
 	m_profile_Operation_getDefinition_NamedElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_profile_Operation_getDefinition_NamedElement);
 		parameter->setName("namedElement");
@@ -23122,13 +22725,12 @@ void umlPackageImpl::initializeProfileContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_profile_Operation_getOwnedExtensions_Boolean->setEType(getExtension_Class());
 	m_profile_Operation_getOwnedExtensions_Boolean->setName("getOwnedExtensions");
+	m_profile_Operation_getOwnedExtensions_Boolean->setEType(getExtension_Class());
 	m_profile_Operation_getOwnedExtensions_Boolean->setLowerBound(0);
 	m_profile_Operation_getOwnedExtensions_Boolean->setUpperBound(-1);
 	m_profile_Operation_getOwnedExtensions_Boolean->setUnique(true);
 	m_profile_Operation_getOwnedExtensions_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_profile_Operation_getOwnedExtensions_Boolean);
 		parameter->setName("requiredOnly");
@@ -23139,37 +22741,33 @@ void umlPackageImpl::initializeProfileContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_profile_Operation_getReferencedMetaclasses->setEType(getClass_Class());
 	m_profile_Operation_getReferencedMetaclasses->setName("getReferencedMetaclasses");
+	m_profile_Operation_getReferencedMetaclasses->setEType(getClass_Class());
 	m_profile_Operation_getReferencedMetaclasses->setLowerBound(0);
 	m_profile_Operation_getReferencedMetaclasses->setUpperBound(-1);
 	m_profile_Operation_getReferencedMetaclasses->setUnique(true);
 	m_profile_Operation_getReferencedMetaclasses->setOrdered(false);
 	
-	
-	m_profile_Operation_getReferencedMetamodels->setEType(getModel_Class());
 	m_profile_Operation_getReferencedMetamodels->setName("getReferencedMetamodels");
+	m_profile_Operation_getReferencedMetamodels->setEType(getModel_Class());
 	m_profile_Operation_getReferencedMetamodels->setLowerBound(0);
 	m_profile_Operation_getReferencedMetamodels->setUpperBound(-1);
 	m_profile_Operation_getReferencedMetamodels->setUnique(true);
 	m_profile_Operation_getReferencedMetamodels->setOrdered(false);
 	
-	
-	m_profile_Operation_isDefined->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_profile_Operation_isDefined->setName("isDefined");
+	m_profile_Operation_isDefined->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_profile_Operation_isDefined->setLowerBound(1);
 	m_profile_Operation_isDefined->setUpperBound(1);
 	m_profile_Operation_isDefined->setUnique(true);
 	m_profile_Operation_isDefined->setOrdered(false);
 	
-	
-	m_profile_Operation_metaclass_reference_not_specialized_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_profile_Operation_metaclass_reference_not_specialized_EDiagnosticChain_EMap->setName("metaclass_reference_not_specialized");
+	m_profile_Operation_metaclass_reference_not_specialized_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_profile_Operation_metaclass_reference_not_specialized_EDiagnosticChain_EMap->setLowerBound(0);
 	m_profile_Operation_metaclass_reference_not_specialized_EDiagnosticChain_EMap->setUpperBound(1);
 	m_profile_Operation_metaclass_reference_not_specialized_EDiagnosticChain_EMap->setUnique(true);
 	m_profile_Operation_metaclass_reference_not_specialized_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_profile_Operation_metaclass_reference_not_specialized_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -23190,13 +22788,12 @@ void umlPackageImpl::initializeProfileContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_profile_Operation_references_same_metamodel_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_profile_Operation_references_same_metamodel_EDiagnosticChain_EMap->setName("references_same_metamodel");
+	m_profile_Operation_references_same_metamodel_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_profile_Operation_references_same_metamodel_EDiagnosticChain_EMap->setLowerBound(0);
 	m_profile_Operation_references_same_metamodel_EDiagnosticChain_EMap->setUpperBound(1);
 	m_profile_Operation_references_same_metamodel_EDiagnosticChain_EMap->setUnique(true);
 	m_profile_Operation_references_same_metamodel_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_profile_Operation_references_same_metamodel_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -23228,7 +22825,7 @@ void umlPackageImpl::initializeProfileApplicationContent()
 	
 	m_profileApplication_Attribute_isStrict = getProfileApplication_Attribute_isStrict();
 	m_profileApplication_Attribute_isStrict->setName("isStrict");
-	m_profileApplication_Attribute_isStrict->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_profileApplication_Attribute_isStrict->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_profileApplication_Attribute_isStrict->setLowerBound(1);
 	m_profileApplication_Attribute_isStrict->setUpperBound(1);
 	m_profileApplication_Attribute_isStrict->setTransient(false);
@@ -23295,21 +22892,19 @@ void umlPackageImpl::initializeProfileApplicationContent()
 	    }
 	}
 	
-	m_profileApplication_Operation_getAppliedDefinition->setEType(ecore::ecorePackage::eInstance()->getEPackage_Class());
 	m_profileApplication_Operation_getAppliedDefinition->setName("getAppliedDefinition");
+	m_profileApplication_Operation_getAppliedDefinition->setEType(ecore::ecorePackage::eInstance()->getEPackage_Class());
 	m_profileApplication_Operation_getAppliedDefinition->setLowerBound(0);
 	m_profileApplication_Operation_getAppliedDefinition->setUpperBound(1);
 	m_profileApplication_Operation_getAppliedDefinition->setUnique(true);
 	m_profileApplication_Operation_getAppliedDefinition->setOrdered(false);
 	
-	
-	m_profileApplication_Operation_getAppliedDefinition_NamedElement->setEType(ecore::ecorePackage::eInstance()->getENamedElement_Class());
 	m_profileApplication_Operation_getAppliedDefinition_NamedElement->setName("getAppliedDefinition");
+	m_profileApplication_Operation_getAppliedDefinition_NamedElement->setEType(ecore::ecorePackage::eInstance()->getENamedElement_Class());
 	m_profileApplication_Operation_getAppliedDefinition_NamedElement->setLowerBound(0);
 	m_profileApplication_Operation_getAppliedDefinition_NamedElement->setUpperBound(1);
 	m_profileApplication_Operation_getAppliedDefinition_NamedElement->setUnique(true);
 	m_profileApplication_Operation_getAppliedDefinition_NamedElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_profileApplication_Operation_getAppliedDefinition_NamedElement);
 		parameter->setName("namedElement");
@@ -23331,7 +22926,7 @@ void umlPackageImpl::initializePropertyContent()
 	
 	m_property_Attribute_aggregation = getProperty_Attribute_aggregation();
 	m_property_Attribute_aggregation->setName("aggregation");
-	m_property_Attribute_aggregation->setEType(getAggregationKind_Class());
+		m_property_Attribute_aggregation->setEType(getAggregationKind_Class());
 	m_property_Attribute_aggregation->setLowerBound(1);
 	m_property_Attribute_aggregation->setUpperBound(1);
 	m_property_Attribute_aggregation->setTransient(false);
@@ -23351,7 +22946,7 @@ void umlPackageImpl::initializePropertyContent()
 	}
 	m_property_Attribute_default = getProperty_Attribute_default();
 	m_property_Attribute_default->setName("default");
-	m_property_Attribute_default->setEType(types::typesPackage::eInstance()->getString_Class());
+		m_property_Attribute_default->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_property_Attribute_default->setLowerBound(0);
 	m_property_Attribute_default->setUpperBound(1);
 	m_property_Attribute_default->setTransient(true);
@@ -23371,7 +22966,7 @@ void umlPackageImpl::initializePropertyContent()
 	}
 	m_property_Attribute_isComposite = getProperty_Attribute_isComposite();
 	m_property_Attribute_isComposite->setName("isComposite");
-	m_property_Attribute_isComposite->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_property_Attribute_isComposite->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Attribute_isComposite->setLowerBound(1);
 	m_property_Attribute_isComposite->setUpperBound(1);
 	m_property_Attribute_isComposite->setTransient(true);
@@ -23391,7 +22986,7 @@ void umlPackageImpl::initializePropertyContent()
 	}
 	m_property_Attribute_isDerived = getProperty_Attribute_isDerived();
 	m_property_Attribute_isDerived->setName("isDerived");
-	m_property_Attribute_isDerived->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_property_Attribute_isDerived->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Attribute_isDerived->setLowerBound(1);
 	m_property_Attribute_isDerived->setUpperBound(1);
 	m_property_Attribute_isDerived->setTransient(false);
@@ -23411,7 +23006,7 @@ void umlPackageImpl::initializePropertyContent()
 	}
 	m_property_Attribute_isDerivedUnion = getProperty_Attribute_isDerivedUnion();
 	m_property_Attribute_isDerivedUnion->setName("isDerivedUnion");
-	m_property_Attribute_isDerivedUnion->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_property_Attribute_isDerivedUnion->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Attribute_isDerivedUnion->setLowerBound(1);
 	m_property_Attribute_isDerivedUnion->setUpperBound(1);
 	m_property_Attribute_isDerivedUnion->setTransient(false);
@@ -23431,7 +23026,7 @@ void umlPackageImpl::initializePropertyContent()
 	}
 	m_property_Attribute_isID = getProperty_Attribute_isID();
 	m_property_Attribute_isID->setName("isID");
-	m_property_Attribute_isID->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_property_Attribute_isID->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Attribute_isID->setLowerBound(1);
 	m_property_Attribute_isID->setUpperBound(1);
 	m_property_Attribute_isID->setTransient(false);
@@ -23714,13 +23309,12 @@ void umlPackageImpl::initializePropertyContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_property_Operation_binding_to_attribute_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_binding_to_attribute_EDiagnosticChain_EMap->setName("binding_to_attribute");
+	m_property_Operation_binding_to_attribute_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_binding_to_attribute_EDiagnosticChain_EMap->setLowerBound(0);
 	m_property_Operation_binding_to_attribute_EDiagnosticChain_EMap->setUpperBound(1);
 	m_property_Operation_binding_to_attribute_EDiagnosticChain_EMap->setUnique(true);
 	m_property_Operation_binding_to_attribute_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_binding_to_attribute_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -23741,13 +23335,12 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_deployment_target_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_deployment_target_EDiagnosticChain_EMap->setName("deployment_target");
+	m_property_Operation_deployment_target_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_deployment_target_EDiagnosticChain_EMap->setLowerBound(0);
 	m_property_Operation_deployment_target_EDiagnosticChain_EMap->setUpperBound(1);
 	m_property_Operation_deployment_target_EDiagnosticChain_EMap->setUnique(true);
 	m_property_Operation_deployment_target_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_deployment_target_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -23768,13 +23361,12 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_derived_union_is_derived_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_derived_union_is_derived_EDiagnosticChain_EMap->setName("derived_union_is_derived");
+	m_property_Operation_derived_union_is_derived_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_derived_union_is_derived_EDiagnosticChain_EMap->setLowerBound(0);
 	m_property_Operation_derived_union_is_derived_EDiagnosticChain_EMap->setUpperBound(1);
 	m_property_Operation_derived_union_is_derived_EDiagnosticChain_EMap->setUnique(true);
 	m_property_Operation_derived_union_is_derived_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_derived_union_is_derived_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -23795,13 +23387,12 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_derived_union_is_read_only_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_derived_union_is_read_only_EDiagnosticChain_EMap->setName("derived_union_is_read_only");
+	m_property_Operation_derived_union_is_read_only_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_derived_union_is_read_only_EDiagnosticChain_EMap->setLowerBound(0);
 	m_property_Operation_derived_union_is_read_only_EDiagnosticChain_EMap->setUpperBound(1);
 	m_property_Operation_derived_union_is_read_only_EDiagnosticChain_EMap->setUnique(true);
 	m_property_Operation_derived_union_is_read_only_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_derived_union_is_read_only_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -23822,61 +23413,54 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_getOpposite->setEType(getProperty_Class());
 	m_property_Operation_getOpposite->setName("getOpposite");
+	m_property_Operation_getOpposite->setEType(getProperty_Class());
 	m_property_Operation_getOpposite->setLowerBound(0);
 	m_property_Operation_getOpposite->setUpperBound(1);
 	m_property_Operation_getOpposite->setUnique(true);
 	m_property_Operation_getOpposite->setOrdered(false);
 	
-	
-	m_property_Operation_getOtherEnd->setEType(getProperty_Class());
 	m_property_Operation_getOtherEnd->setName("getOtherEnd");
+	m_property_Operation_getOtherEnd->setEType(getProperty_Class());
 	m_property_Operation_getOtherEnd->setLowerBound(0);
 	m_property_Operation_getOtherEnd->setUpperBound(1);
 	m_property_Operation_getOtherEnd->setUnique(true);
 	m_property_Operation_getOtherEnd->setOrdered(false);
 	
-	
-	m_property_Operation_isAttribute->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Operation_isAttribute->setName("isAttribute");
+	m_property_Operation_isAttribute->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Operation_isAttribute->setLowerBound(1);
 	m_property_Operation_isAttribute->setUpperBound(1);
 	m_property_Operation_isAttribute->setUnique(true);
 	m_property_Operation_isAttribute->setOrdered(false);
 	
-	
-	m_property_Operation_isComposite->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Operation_isComposite->setName("isComposite");
+	m_property_Operation_isComposite->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Operation_isComposite->setLowerBound(1);
 	m_property_Operation_isComposite->setUpperBound(1);
 	m_property_Operation_isComposite->setUnique(true);
 	m_property_Operation_isComposite->setOrdered(false);
 	
-	
-	m_property_Operation_isNavigable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Operation_isNavigable->setName("isNavigable");
+	m_property_Operation_isNavigable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Operation_isNavigable->setLowerBound(1);
 	m_property_Operation_isNavigable->setUpperBound(1);
 	m_property_Operation_isNavigable->setUnique(true);
 	m_property_Operation_isNavigable->setOrdered(false);
 	
-	
-	m_property_Operation_isSetDefault->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Operation_isSetDefault->setName("isSetDefault");
+	m_property_Operation_isSetDefault->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_property_Operation_isSetDefault->setLowerBound(1);
 	m_property_Operation_isSetDefault->setUpperBound(1);
 	m_property_Operation_isSetDefault->setUnique(true);
 	m_property_Operation_isSetDefault->setOrdered(false);
 	
-	
-	m_property_Operation_multiplicity_of_composite_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_multiplicity_of_composite_EDiagnosticChain_EMap->setName("multiplicity_of_composite");
+	m_property_Operation_multiplicity_of_composite_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_multiplicity_of_composite_EDiagnosticChain_EMap->setLowerBound(0);
 	m_property_Operation_multiplicity_of_composite_EDiagnosticChain_EMap->setUpperBound(1);
 	m_property_Operation_multiplicity_of_composite_EDiagnosticChain_EMap->setUnique(true);
 	m_property_Operation_multiplicity_of_composite_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_multiplicity_of_composite_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -23897,13 +23481,12 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_qualified_is_association_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_qualified_is_association_end_EDiagnosticChain_EMap->setName("qualified_is_association_end");
+	m_property_Operation_qualified_is_association_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_qualified_is_association_end_EDiagnosticChain_EMap->setLowerBound(0);
 	m_property_Operation_qualified_is_association_end_EDiagnosticChain_EMap->setUpperBound(1);
 	m_property_Operation_qualified_is_association_end_EDiagnosticChain_EMap->setUnique(true);
 	m_property_Operation_qualified_is_association_end_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_qualified_is_association_end_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -23924,13 +23507,12 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_redefined_property_inherited_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_redefined_property_inherited_EDiagnosticChain_EMap->setName("redefined_property_inherited");
+	m_property_Operation_redefined_property_inherited_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_redefined_property_inherited_EDiagnosticChain_EMap->setLowerBound(0);
 	m_property_Operation_redefined_property_inherited_EDiagnosticChain_EMap->setUpperBound(1);
 	m_property_Operation_redefined_property_inherited_EDiagnosticChain_EMap->setUnique(true);
 	m_property_Operation_redefined_property_inherited_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_redefined_property_inherited_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -23951,13 +23533,18 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_setBooleanDefaultValue_Boolean->setEType(nullptr);
 	m_property_Operation_setBooleanDefaultValue_Boolean->setName("setBooleanDefaultValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_property_Operation_setBooleanDefaultValue_Boolean->setEType(unknownClass);
+	}
 	m_property_Operation_setBooleanDefaultValue_Boolean->setLowerBound(1);
 	m_property_Operation_setBooleanDefaultValue_Boolean->setUpperBound(1);
 	m_property_Operation_setBooleanDefaultValue_Boolean->setUnique(true);
 	m_property_Operation_setBooleanDefaultValue_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_setBooleanDefaultValue_Boolean);
 		parameter->setName("value");
@@ -23968,13 +23555,18 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_setIntegerDefaultValue_Integer->setEType(nullptr);
 	m_property_Operation_setIntegerDefaultValue_Integer->setName("setIntegerDefaultValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_property_Operation_setIntegerDefaultValue_Integer->setEType(unknownClass);
+	}
 	m_property_Operation_setIntegerDefaultValue_Integer->setLowerBound(1);
 	m_property_Operation_setIntegerDefaultValue_Integer->setUpperBound(1);
 	m_property_Operation_setIntegerDefaultValue_Integer->setUnique(true);
 	m_property_Operation_setIntegerDefaultValue_Integer->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_setIntegerDefaultValue_Integer);
 		parameter->setName("value");
@@ -23985,13 +23577,18 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_setIsNavigable_Boolean->setEType(nullptr);
 	m_property_Operation_setIsNavigable_Boolean->setName("setIsNavigable");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_property_Operation_setIsNavigable_Boolean->setEType(unknownClass);
+	}
 	m_property_Operation_setIsNavigable_Boolean->setLowerBound(1);
 	m_property_Operation_setIsNavigable_Boolean->setUpperBound(1);
 	m_property_Operation_setIsNavigable_Boolean->setUnique(true);
 	m_property_Operation_setIsNavigable_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_setIsNavigable_Boolean);
 		parameter->setName("isNavigable");
@@ -24002,21 +23599,31 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_setNullDefaultValue->setEType(nullptr);
 	m_property_Operation_setNullDefaultValue->setName("setNullDefaultValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_property_Operation_setNullDefaultValue->setEType(unknownClass);
+	}
 	m_property_Operation_setNullDefaultValue->setLowerBound(1);
 	m_property_Operation_setNullDefaultValue->setUpperBound(1);
 	m_property_Operation_setNullDefaultValue->setUnique(true);
 	m_property_Operation_setNullDefaultValue->setOrdered(false);
 	
-	
-	m_property_Operation_setRealDefaultValue_Real->setEType(nullptr);
 	m_property_Operation_setRealDefaultValue_Real->setName("setRealDefaultValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_property_Operation_setRealDefaultValue_Real->setEType(unknownClass);
+	}
 	m_property_Operation_setRealDefaultValue_Real->setLowerBound(1);
 	m_property_Operation_setRealDefaultValue_Real->setUpperBound(1);
 	m_property_Operation_setRealDefaultValue_Real->setUnique(true);
 	m_property_Operation_setRealDefaultValue_Real->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_setRealDefaultValue_Real);
 		parameter->setName("value");
@@ -24027,13 +23634,18 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_setStringDefaultValue_String->setEType(nullptr);
 	m_property_Operation_setStringDefaultValue_String->setName("setStringDefaultValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_property_Operation_setStringDefaultValue_String->setEType(unknownClass);
+	}
 	m_property_Operation_setStringDefaultValue_String->setLowerBound(1);
 	m_property_Operation_setStringDefaultValue_String->setUpperBound(1);
 	m_property_Operation_setStringDefaultValue_String->setUnique(true);
 	m_property_Operation_setStringDefaultValue_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_setStringDefaultValue_String);
 		parameter->setName("value");
@@ -24044,13 +23656,18 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setEType(nullptr);
 	m_property_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setName("setUnlimitedNaturalDefaultValue");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_property_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setEType(unknownClass);
+	}
 	m_property_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setLowerBound(1);
 	m_property_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setUpperBound(1);
 	m_property_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setUnique(true);
 	m_property_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_setUnlimitedNaturalDefaultValue_UnlimitedNatural);
 		parameter->setName("value");
@@ -24061,13 +23678,12 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_subsetted_property_names_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_subsetted_property_names_EDiagnosticChain_EMap->setName("subsetted_property_names");
+	m_property_Operation_subsetted_property_names_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_subsetted_property_names_EDiagnosticChain_EMap->setLowerBound(0);
 	m_property_Operation_subsetted_property_names_EDiagnosticChain_EMap->setUpperBound(1);
 	m_property_Operation_subsetted_property_names_EDiagnosticChain_EMap->setUnique(true);
 	m_property_Operation_subsetted_property_names_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_subsetted_property_names_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24088,21 +23704,19 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_subsettingContext->setEType(getType_Class());
 	m_property_Operation_subsettingContext->setName("subsettingContext");
+	m_property_Operation_subsettingContext->setEType(getType_Class());
 	m_property_Operation_subsettingContext->setLowerBound(0);
 	m_property_Operation_subsettingContext->setUpperBound(-1);
 	m_property_Operation_subsettingContext->setUnique(true);
 	m_property_Operation_subsettingContext->setOrdered(false);
 	
-	
-	m_property_Operation_subsetting_context_conforms_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_subsetting_context_conforms_EDiagnosticChain_EMap->setName("subsetting_context_conforms");
+	m_property_Operation_subsetting_context_conforms_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_subsetting_context_conforms_EDiagnosticChain_EMap->setLowerBound(0);
 	m_property_Operation_subsetting_context_conforms_EDiagnosticChain_EMap->setUpperBound(1);
 	m_property_Operation_subsetting_context_conforms_EDiagnosticChain_EMap->setUnique(true);
 	m_property_Operation_subsetting_context_conforms_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_subsetting_context_conforms_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24123,13 +23737,12 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_subsetting_rules_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_subsetting_rules_EDiagnosticChain_EMap->setName("subsetting_rules");
+	m_property_Operation_subsetting_rules_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_subsetting_rules_EDiagnosticChain_EMap->setLowerBound(0);
 	m_property_Operation_subsetting_rules_EDiagnosticChain_EMap->setUpperBound(1);
 	m_property_Operation_subsetting_rules_EDiagnosticChain_EMap->setUnique(true);
 	m_property_Operation_subsetting_rules_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_subsetting_rules_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24150,13 +23763,12 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_type_of_opposite_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_type_of_opposite_end_EDiagnosticChain_EMap->setName("type_of_opposite_end");
+	m_property_Operation_type_of_opposite_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_property_Operation_type_of_opposite_end_EDiagnosticChain_EMap->setLowerBound(0);
 	m_property_Operation_type_of_opposite_end_EDiagnosticChain_EMap->setUpperBound(1);
 	m_property_Operation_type_of_opposite_end_EDiagnosticChain_EMap->setUnique(true);
 	m_property_Operation_type_of_opposite_end_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_property_Operation_type_of_opposite_end_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24177,13 +23789,18 @@ void umlPackageImpl::initializePropertyContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_property_Operation_unsetDefault->setEType(nullptr);
 	m_property_Operation_unsetDefault->setName("unsetDefault");
+	{ 	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+		std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+	   	unknownClass->setName("invalid");
+		unknownClass->setAbstract(true);
+		unknownClass->setInterface(true);
+		m_property_Operation_unsetDefault->setEType(unknownClass);
+	}
 	m_property_Operation_unsetDefault->setLowerBound(1);
 	m_property_Operation_unsetDefault->setUpperBound(1);
 	m_property_Operation_unsetDefault->setUnique(true);
 	m_property_Operation_unsetDefault->setOrdered(false);
-	
 	
 	
 }
@@ -24279,13 +23896,12 @@ void umlPackageImpl::initializeProtocolStateMachineContent()
 	    }
 	}
 	
-	m_protocolStateMachine_Operation_deep_or_shallow_history_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_protocolStateMachine_Operation_deep_or_shallow_history_EDiagnosticChain_EMap->setName("deep_or_shallow_history");
+	m_protocolStateMachine_Operation_deep_or_shallow_history_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_protocolStateMachine_Operation_deep_or_shallow_history_EDiagnosticChain_EMap->setLowerBound(0);
 	m_protocolStateMachine_Operation_deep_or_shallow_history_EDiagnosticChain_EMap->setUpperBound(1);
 	m_protocolStateMachine_Operation_deep_or_shallow_history_EDiagnosticChain_EMap->setUnique(true);
 	m_protocolStateMachine_Operation_deep_or_shallow_history_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_protocolStateMachine_Operation_deep_or_shallow_history_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24306,13 +23922,12 @@ void umlPackageImpl::initializeProtocolStateMachineContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_protocolStateMachine_Operation_entry_exit_do_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_protocolStateMachine_Operation_entry_exit_do_EDiagnosticChain_EMap->setName("entry_exit_do");
+	m_protocolStateMachine_Operation_entry_exit_do_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_protocolStateMachine_Operation_entry_exit_do_EDiagnosticChain_EMap->setLowerBound(0);
 	m_protocolStateMachine_Operation_entry_exit_do_EDiagnosticChain_EMap->setUpperBound(1);
 	m_protocolStateMachine_Operation_entry_exit_do_EDiagnosticChain_EMap->setUnique(true);
 	m_protocolStateMachine_Operation_entry_exit_do_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_protocolStateMachine_Operation_entry_exit_do_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24333,13 +23948,12 @@ void umlPackageImpl::initializeProtocolStateMachineContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_protocolStateMachine_Operation_protocol_transitions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_protocolStateMachine_Operation_protocol_transitions_EDiagnosticChain_EMap->setName("protocol_transitions");
+	m_protocolStateMachine_Operation_protocol_transitions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_protocolStateMachine_Operation_protocol_transitions_EDiagnosticChain_EMap->setLowerBound(0);
 	m_protocolStateMachine_Operation_protocol_transitions_EDiagnosticChain_EMap->setUpperBound(1);
 	m_protocolStateMachine_Operation_protocol_transitions_EDiagnosticChain_EMap->setUnique(true);
 	m_protocolStateMachine_Operation_protocol_transitions_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_protocolStateMachine_Operation_protocol_transitions_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24437,13 +24051,12 @@ void umlPackageImpl::initializeProtocolTransitionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_protocolTransition_Operation_associated_actions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_protocolTransition_Operation_associated_actions_EDiagnosticChain_EMap->setName("associated_actions");
+	m_protocolTransition_Operation_associated_actions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_protocolTransition_Operation_associated_actions_EDiagnosticChain_EMap->setLowerBound(0);
 	m_protocolTransition_Operation_associated_actions_EDiagnosticChain_EMap->setUpperBound(1);
 	m_protocolTransition_Operation_associated_actions_EDiagnosticChain_EMap->setUnique(true);
 	m_protocolTransition_Operation_associated_actions_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_protocolTransition_Operation_associated_actions_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24464,13 +24077,12 @@ void umlPackageImpl::initializeProtocolTransitionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_protocolTransition_Operation_belongs_to_psm_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_protocolTransition_Operation_belongs_to_psm_EDiagnosticChain_EMap->setName("belongs_to_psm");
+	m_protocolTransition_Operation_belongs_to_psm_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_protocolTransition_Operation_belongs_to_psm_EDiagnosticChain_EMap->setLowerBound(0);
 	m_protocolTransition_Operation_belongs_to_psm_EDiagnosticChain_EMap->setUpperBound(1);
 	m_protocolTransition_Operation_belongs_to_psm_EDiagnosticChain_EMap->setUnique(true);
 	m_protocolTransition_Operation_belongs_to_psm_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_protocolTransition_Operation_belongs_to_psm_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24491,21 +24103,19 @@ void umlPackageImpl::initializeProtocolTransitionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_protocolTransition_Operation_getReferreds->setEType(getOperation_Class());
 	m_protocolTransition_Operation_getReferreds->setName("getReferreds");
+	m_protocolTransition_Operation_getReferreds->setEType(getOperation_Class());
 	m_protocolTransition_Operation_getReferreds->setLowerBound(0);
 	m_protocolTransition_Operation_getReferreds->setUpperBound(-1);
 	m_protocolTransition_Operation_getReferreds->setUnique(true);
 	m_protocolTransition_Operation_getReferreds->setOrdered(false);
 	
-	
-	m_protocolTransition_Operation_refers_to_operation_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_protocolTransition_Operation_refers_to_operation_EDiagnosticChain_EMap->setName("refers_to_operation");
+	m_protocolTransition_Operation_refers_to_operation_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_protocolTransition_Operation_refers_to_operation_EDiagnosticChain_EMap->setLowerBound(0);
 	m_protocolTransition_Operation_refers_to_operation_EDiagnosticChain_EMap->setUpperBound(1);
 	m_protocolTransition_Operation_refers_to_operation_EDiagnosticChain_EMap->setUnique(true);
 	m_protocolTransition_Operation_refers_to_operation_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_protocolTransition_Operation_refers_to_operation_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24537,7 +24147,7 @@ void umlPackageImpl::initializePseudostateContent()
 	
 	m_pseudostate_Attribute_kind = getPseudostate_Attribute_kind();
 	m_pseudostate_Attribute_kind->setName("kind");
-	m_pseudostate_Attribute_kind->setEType(getPseudostateKind_Class());
+		m_pseudostate_Attribute_kind->setEType(getPseudostateKind_Class());
 	m_pseudostate_Attribute_kind->setLowerBound(1);
 	m_pseudostate_Attribute_kind->setUpperBound(1);
 	m_pseudostate_Attribute_kind->setTransient(false);
@@ -24607,13 +24217,12 @@ void umlPackageImpl::initializePseudostateContent()
 	    }
 	}
 	
-	m_pseudostate_Operation_choice_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_choice_vertex_EDiagnosticChain_EMap->setName("choice_vertex");
+	m_pseudostate_Operation_choice_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_choice_vertex_EDiagnosticChain_EMap->setLowerBound(0);
 	m_pseudostate_Operation_choice_vertex_EDiagnosticChain_EMap->setUpperBound(1);
 	m_pseudostate_Operation_choice_vertex_EDiagnosticChain_EMap->setUnique(true);
 	m_pseudostate_Operation_choice_vertex_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_pseudostate_Operation_choice_vertex_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24634,13 +24243,12 @@ void umlPackageImpl::initializePseudostateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_pseudostate_Operation_fork_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_fork_vertex_EDiagnosticChain_EMap->setName("fork_vertex");
+	m_pseudostate_Operation_fork_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_fork_vertex_EDiagnosticChain_EMap->setLowerBound(0);
 	m_pseudostate_Operation_fork_vertex_EDiagnosticChain_EMap->setUpperBound(1);
 	m_pseudostate_Operation_fork_vertex_EDiagnosticChain_EMap->setUnique(true);
 	m_pseudostate_Operation_fork_vertex_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_pseudostate_Operation_fork_vertex_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24661,13 +24269,12 @@ void umlPackageImpl::initializePseudostateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_pseudostate_Operation_history_vertices_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_history_vertices_EDiagnosticChain_EMap->setName("history_vertices");
+	m_pseudostate_Operation_history_vertices_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_history_vertices_EDiagnosticChain_EMap->setLowerBound(0);
 	m_pseudostate_Operation_history_vertices_EDiagnosticChain_EMap->setUpperBound(1);
 	m_pseudostate_Operation_history_vertices_EDiagnosticChain_EMap->setUnique(true);
 	m_pseudostate_Operation_history_vertices_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_pseudostate_Operation_history_vertices_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24688,13 +24295,12 @@ void umlPackageImpl::initializePseudostateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_pseudostate_Operation_initial_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_initial_vertex_EDiagnosticChain_EMap->setName("initial_vertex");
+	m_pseudostate_Operation_initial_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_initial_vertex_EDiagnosticChain_EMap->setLowerBound(0);
 	m_pseudostate_Operation_initial_vertex_EDiagnosticChain_EMap->setUpperBound(1);
 	m_pseudostate_Operation_initial_vertex_EDiagnosticChain_EMap->setUnique(true);
 	m_pseudostate_Operation_initial_vertex_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_pseudostate_Operation_initial_vertex_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24715,13 +24321,12 @@ void umlPackageImpl::initializePseudostateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_pseudostate_Operation_join_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_join_vertex_EDiagnosticChain_EMap->setName("join_vertex");
+	m_pseudostate_Operation_join_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_join_vertex_EDiagnosticChain_EMap->setLowerBound(0);
 	m_pseudostate_Operation_join_vertex_EDiagnosticChain_EMap->setUpperBound(1);
 	m_pseudostate_Operation_join_vertex_EDiagnosticChain_EMap->setUnique(true);
 	m_pseudostate_Operation_join_vertex_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_pseudostate_Operation_join_vertex_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24742,13 +24347,12 @@ void umlPackageImpl::initializePseudostateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_pseudostate_Operation_junction_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_junction_vertex_EDiagnosticChain_EMap->setName("junction_vertex");
+	m_pseudostate_Operation_junction_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_junction_vertex_EDiagnosticChain_EMap->setLowerBound(0);
 	m_pseudostate_Operation_junction_vertex_EDiagnosticChain_EMap->setUpperBound(1);
 	m_pseudostate_Operation_junction_vertex_EDiagnosticChain_EMap->setUnique(true);
 	m_pseudostate_Operation_junction_vertex_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_pseudostate_Operation_junction_vertex_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24769,13 +24373,12 @@ void umlPackageImpl::initializePseudostateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_pseudostate_Operation_outgoing_from_initial_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_outgoing_from_initial_EDiagnosticChain_EMap->setName("outgoing_from_initial");
+	m_pseudostate_Operation_outgoing_from_initial_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_outgoing_from_initial_EDiagnosticChain_EMap->setLowerBound(0);
 	m_pseudostate_Operation_outgoing_from_initial_EDiagnosticChain_EMap->setUpperBound(1);
 	m_pseudostate_Operation_outgoing_from_initial_EDiagnosticChain_EMap->setUnique(true);
 	m_pseudostate_Operation_outgoing_from_initial_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_pseudostate_Operation_outgoing_from_initial_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24796,13 +24399,12 @@ void umlPackageImpl::initializePseudostateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_pseudostate_Operation_transitions_incoming_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_transitions_incoming_EDiagnosticChain_EMap->setName("transitions_incoming");
+	m_pseudostate_Operation_transitions_incoming_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_transitions_incoming_EDiagnosticChain_EMap->setLowerBound(0);
 	m_pseudostate_Operation_transitions_incoming_EDiagnosticChain_EMap->setUpperBound(1);
 	m_pseudostate_Operation_transitions_incoming_EDiagnosticChain_EMap->setUnique(true);
 	m_pseudostate_Operation_transitions_incoming_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_pseudostate_Operation_transitions_incoming_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24823,13 +24425,12 @@ void umlPackageImpl::initializePseudostateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_pseudostate_Operation_transitions_outgoing_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_transitions_outgoing_EDiagnosticChain_EMap->setName("transitions_outgoing");
+	m_pseudostate_Operation_transitions_outgoing_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_pseudostate_Operation_transitions_outgoing_EDiagnosticChain_EMap->setLowerBound(0);
 	m_pseudostate_Operation_transitions_outgoing_EDiagnosticChain_EMap->setUpperBound(1);
 	m_pseudostate_Operation_transitions_outgoing_EDiagnosticChain_EMap->setUnique(true);
 	m_pseudostate_Operation_transitions_outgoing_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_pseudostate_Operation_transitions_outgoing_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24905,13 +24506,12 @@ void umlPackageImpl::initializeQualifierValueContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_qualifierValue_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_qualifierValue_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setName("multiplicity_of_qualifier");
+	m_qualifierValue_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_qualifierValue_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setLowerBound(0);
 	m_qualifierValue_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setUpperBound(1);
 	m_qualifierValue_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setUnique(true);
 	m_qualifierValue_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_qualifierValue_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24932,13 +24532,12 @@ void umlPackageImpl::initializeQualifierValueContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_qualifierValue_Operation_qualifier_attribute_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_qualifierValue_Operation_qualifier_attribute_EDiagnosticChain_EMap->setName("qualifier_attribute");
+	m_qualifierValue_Operation_qualifier_attribute_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_qualifierValue_Operation_qualifier_attribute_EDiagnosticChain_EMap->setLowerBound(0);
 	m_qualifierValue_Operation_qualifier_attribute_EDiagnosticChain_EMap->setUpperBound(1);
 	m_qualifierValue_Operation_qualifier_attribute_EDiagnosticChain_EMap->setUnique(true);
 	m_qualifierValue_Operation_qualifier_attribute_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_qualifierValue_Operation_qualifier_attribute_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -24959,13 +24558,12 @@ void umlPackageImpl::initializeQualifierValueContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_qualifierValue_Operation_type_of_qualifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_qualifierValue_Operation_type_of_qualifier_EDiagnosticChain_EMap->setName("type_of_qualifier");
+	m_qualifierValue_Operation_type_of_qualifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_qualifierValue_Operation_type_of_qualifier_EDiagnosticChain_EMap->setLowerBound(0);
 	m_qualifierValue_Operation_type_of_qualifier_EDiagnosticChain_EMap->setUpperBound(1);
 	m_qualifierValue_Operation_type_of_qualifier_EDiagnosticChain_EMap->setUnique(true);
 	m_qualifierValue_Operation_type_of_qualifier_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_qualifierValue_Operation_type_of_qualifier_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25074,13 +24672,12 @@ void umlPackageImpl::initializeReadExtentActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_readExtentAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readExtentAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setName("multiplicity_of_result");
+	m_readExtentAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readExtentAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readExtentAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readExtentAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setUnique(true);
 	m_readExtentAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readExtentAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25101,13 +24698,12 @@ void umlPackageImpl::initializeReadExtentActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readExtentAction_Operation_type_is_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readExtentAction_Operation_type_is_classifier_EDiagnosticChain_EMap->setName("type_is_classifier");
+	m_readExtentAction_Operation_type_is_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readExtentAction_Operation_type_is_classifier_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readExtentAction_Operation_type_is_classifier_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readExtentAction_Operation_type_is_classifier_EDiagnosticChain_EMap->setUnique(true);
 	m_readExtentAction_Operation_type_is_classifier_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readExtentAction_Operation_type_is_classifier_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25139,7 +24735,7 @@ void umlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 	
 	m_readIsClassifiedObjectAction_Attribute_isDirect = getReadIsClassifiedObjectAction_Attribute_isDirect();
 	m_readIsClassifiedObjectAction_Attribute_isDirect->setName("isDirect");
-	m_readIsClassifiedObjectAction_Attribute_isDirect->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_readIsClassifiedObjectAction_Attribute_isDirect->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_readIsClassifiedObjectAction_Attribute_isDirect->setLowerBound(1);
 	m_readIsClassifiedObjectAction_Attribute_isDirect->setUpperBound(1);
 	m_readIsClassifiedObjectAction_Attribute_isDirect->setTransient(false);
@@ -25225,13 +24821,12 @@ void umlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_readIsClassifiedObjectAction_Operation_boolean_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readIsClassifiedObjectAction_Operation_boolean_result_EDiagnosticChain_EMap->setName("boolean_result");
+	m_readIsClassifiedObjectAction_Operation_boolean_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readIsClassifiedObjectAction_Operation_boolean_result_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readIsClassifiedObjectAction_Operation_boolean_result_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readIsClassifiedObjectAction_Operation_boolean_result_EDiagnosticChain_EMap->setUnique(true);
 	m_readIsClassifiedObjectAction_Operation_boolean_result_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readIsClassifiedObjectAction_Operation_boolean_result_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25252,13 +24847,12 @@ void umlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readIsClassifiedObjectAction_Operation_multiplicity_of_input_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readIsClassifiedObjectAction_Operation_multiplicity_of_input_EDiagnosticChain_EMap->setName("multiplicity_of_input");
+	m_readIsClassifiedObjectAction_Operation_multiplicity_of_input_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readIsClassifiedObjectAction_Operation_multiplicity_of_input_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readIsClassifiedObjectAction_Operation_multiplicity_of_input_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readIsClassifiedObjectAction_Operation_multiplicity_of_input_EDiagnosticChain_EMap->setUnique(true);
 	m_readIsClassifiedObjectAction_Operation_multiplicity_of_input_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readIsClassifiedObjectAction_Operation_multiplicity_of_input_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25279,13 +24873,12 @@ void umlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readIsClassifiedObjectAction_Operation_multiplicity_of_output_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readIsClassifiedObjectAction_Operation_multiplicity_of_output_EDiagnosticChain_EMap->setName("multiplicity_of_output");
+	m_readIsClassifiedObjectAction_Operation_multiplicity_of_output_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readIsClassifiedObjectAction_Operation_multiplicity_of_output_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readIsClassifiedObjectAction_Operation_multiplicity_of_output_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readIsClassifiedObjectAction_Operation_multiplicity_of_output_EDiagnosticChain_EMap->setUnique(true);
 	m_readIsClassifiedObjectAction_Operation_multiplicity_of_output_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readIsClassifiedObjectAction_Operation_multiplicity_of_output_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25306,13 +24899,12 @@ void umlPackageImpl::initializeReadIsClassifiedObjectActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readIsClassifiedObjectAction_Operation_no_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readIsClassifiedObjectAction_Operation_no_type_EDiagnosticChain_EMap->setName("no_type");
+	m_readIsClassifiedObjectAction_Operation_no_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readIsClassifiedObjectAction_Operation_no_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readIsClassifiedObjectAction_Operation_no_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readIsClassifiedObjectAction_Operation_no_type_EDiagnosticChain_EMap->setUnique(true);
 	m_readIsClassifiedObjectAction_Operation_no_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readIsClassifiedObjectAction_Operation_no_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25366,13 +24958,12 @@ void umlPackageImpl::initializeReadLinkActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_readLinkAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setName("compatible_multiplicity");
+	m_readLinkAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25393,13 +24984,12 @@ void umlPackageImpl::initializeReadLinkActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkAction_Operation_navigable_open_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkAction_Operation_navigable_open_end_EDiagnosticChain_EMap->setName("navigable_open_end");
+	m_readLinkAction_Operation_navigable_open_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkAction_Operation_navigable_open_end_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkAction_Operation_navigable_open_end_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkAction_Operation_navigable_open_end_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkAction_Operation_navigable_open_end_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkAction_Operation_navigable_open_end_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25420,13 +25010,12 @@ void umlPackageImpl::initializeReadLinkActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkAction_Operation_one_open_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkAction_Operation_one_open_end_EDiagnosticChain_EMap->setName("one_open_end");
+	m_readLinkAction_Operation_one_open_end_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkAction_Operation_one_open_end_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkAction_Operation_one_open_end_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkAction_Operation_one_open_end_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkAction_Operation_one_open_end_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkAction_Operation_one_open_end_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25447,21 +25036,19 @@ void umlPackageImpl::initializeReadLinkActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkAction_Operation_openEnd->setEType(getProperty_Class());
 	m_readLinkAction_Operation_openEnd->setName("openEnd");
+	m_readLinkAction_Operation_openEnd->setEType(getProperty_Class());
 	m_readLinkAction_Operation_openEnd->setLowerBound(0);
 	m_readLinkAction_Operation_openEnd->setUpperBound(-1);
 	m_readLinkAction_Operation_openEnd->setUnique(true);
 	m_readLinkAction_Operation_openEnd->setOrdered(true);
 	
-	
-	m_readLinkAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setName("type_and_ordering");
+	m_readLinkAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkAction_Operation_type_and_ordering_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25482,13 +25069,12 @@ void umlPackageImpl::initializeReadLinkActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkAction_Operation_visibility_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkAction_Operation_visibility_EDiagnosticChain_EMap->setName("visibility");
+	m_readLinkAction_Operation_visibility_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkAction_Operation_visibility_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkAction_Operation_visibility_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkAction_Operation_visibility_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkAction_Operation_visibility_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkAction_Operation_visibility_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25586,13 +25172,12 @@ void umlPackageImpl::initializeReadLinkObjectEndActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_readLinkObjectEndAction_Operation_association_of_association_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_association_of_association_EDiagnosticChain_EMap->setName("association_of_association");
+	m_readLinkObjectEndAction_Operation_association_of_association_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_association_of_association_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndAction_Operation_association_of_association_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndAction_Operation_association_of_association_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndAction_Operation_association_of_association_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndAction_Operation_association_of_association_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25613,13 +25198,12 @@ void umlPackageImpl::initializeReadLinkObjectEndActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkObjectEndAction_Operation_ends_of_association_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_ends_of_association_EDiagnosticChain_EMap->setName("ends_of_association");
+	m_readLinkObjectEndAction_Operation_ends_of_association_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_ends_of_association_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndAction_Operation_ends_of_association_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndAction_Operation_ends_of_association_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndAction_Operation_ends_of_association_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndAction_Operation_ends_of_association_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25640,13 +25224,12 @@ void umlPackageImpl::initializeReadLinkObjectEndActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkObjectEndAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setName("multiplicity_of_object");
+	m_readLinkObjectEndAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25667,13 +25250,12 @@ void umlPackageImpl::initializeReadLinkObjectEndActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkObjectEndAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setName("multiplicity_of_result");
+	m_readLinkObjectEndAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25694,13 +25276,12 @@ void umlPackageImpl::initializeReadLinkObjectEndActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkObjectEndAction_Operation_property_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_property_EDiagnosticChain_EMap->setName("property");
+	m_readLinkObjectEndAction_Operation_property_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_property_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndAction_Operation_property_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndAction_Operation_property_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndAction_Operation_property_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndAction_Operation_property_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25721,13 +25302,12 @@ void umlPackageImpl::initializeReadLinkObjectEndActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkObjectEndAction_Operation_type_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_type_of_object_EDiagnosticChain_EMap->setName("type_of_object");
+	m_readLinkObjectEndAction_Operation_type_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_type_of_object_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndAction_Operation_type_of_object_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndAction_Operation_type_of_object_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndAction_Operation_type_of_object_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndAction_Operation_type_of_object_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25748,13 +25328,12 @@ void umlPackageImpl::initializeReadLinkObjectEndActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkObjectEndAction_Operation_type_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_type_of_result_EDiagnosticChain_EMap->setName("type_of_result");
+	m_readLinkObjectEndAction_Operation_type_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndAction_Operation_type_of_result_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndAction_Operation_type_of_result_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndAction_Operation_type_of_result_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndAction_Operation_type_of_result_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndAction_Operation_type_of_result_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25852,13 +25431,12 @@ void umlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_readLinkObjectEndQualifierAction_Operation_association_of_association_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_association_of_association_EDiagnosticChain_EMap->setName("association_of_association");
+	m_readLinkObjectEndQualifierAction_Operation_association_of_association_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_association_of_association_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndQualifierAction_Operation_association_of_association_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndQualifierAction_Operation_association_of_association_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndQualifierAction_Operation_association_of_association_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndQualifierAction_Operation_association_of_association_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25879,13 +25457,12 @@ void umlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkObjectEndQualifierAction_Operation_ends_of_association_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_ends_of_association_EDiagnosticChain_EMap->setName("ends_of_association");
+	m_readLinkObjectEndQualifierAction_Operation_ends_of_association_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_ends_of_association_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndQualifierAction_Operation_ends_of_association_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndQualifierAction_Operation_ends_of_association_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndQualifierAction_Operation_ends_of_association_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndQualifierAction_Operation_ends_of_association_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25906,13 +25483,12 @@ void umlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setName("multiplicity_of_object");
+	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25933,13 +25509,12 @@ void umlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setName("multiplicity_of_qualifier");
+	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_qualifier_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25960,13 +25535,12 @@ void umlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setName("multiplicity_of_result");
+	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndQualifierAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -25987,13 +25561,12 @@ void umlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkObjectEndQualifierAction_Operation_qualifier_attribute_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_qualifier_attribute_EDiagnosticChain_EMap->setName("qualifier_attribute");
+	m_readLinkObjectEndQualifierAction_Operation_qualifier_attribute_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_qualifier_attribute_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndQualifierAction_Operation_qualifier_attribute_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndQualifierAction_Operation_qualifier_attribute_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndQualifierAction_Operation_qualifier_attribute_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndQualifierAction_Operation_qualifier_attribute_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26014,13 +25587,12 @@ void umlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkObjectEndQualifierAction_Operation_same_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_same_type_EDiagnosticChain_EMap->setName("same_type");
+	m_readLinkObjectEndQualifierAction_Operation_same_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_same_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndQualifierAction_Operation_same_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndQualifierAction_Operation_same_type_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndQualifierAction_Operation_same_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndQualifierAction_Operation_same_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26041,13 +25613,12 @@ void umlPackageImpl::initializeReadLinkObjectEndQualifierActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readLinkObjectEndQualifierAction_Operation_type_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_type_of_object_EDiagnosticChain_EMap->setName("type_of_object");
+	m_readLinkObjectEndQualifierAction_Operation_type_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readLinkObjectEndQualifierAction_Operation_type_of_object_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readLinkObjectEndQualifierAction_Operation_type_of_object_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readLinkObjectEndQualifierAction_Operation_type_of_object_EDiagnosticChain_EMap->setUnique(true);
 	m_readLinkObjectEndQualifierAction_Operation_type_of_object_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readLinkObjectEndQualifierAction_Operation_type_of_object_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26104,13 +25675,12 @@ void umlPackageImpl::initializeReadSelfActionContent()
 	    }
 	}
 	
-	m_readSelfAction_Operation_contained_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readSelfAction_Operation_contained_EDiagnosticChain_EMap->setName("contained");
+	m_readSelfAction_Operation_contained_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readSelfAction_Operation_contained_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readSelfAction_Operation_contained_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readSelfAction_Operation_contained_EDiagnosticChain_EMap->setUnique(true);
 	m_readSelfAction_Operation_contained_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readSelfAction_Operation_contained_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26131,13 +25701,12 @@ void umlPackageImpl::initializeReadSelfActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readSelfAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readSelfAction_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_readSelfAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readSelfAction_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readSelfAction_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readSelfAction_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_readSelfAction_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readSelfAction_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26158,13 +25727,12 @@ void umlPackageImpl::initializeReadSelfActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readSelfAction_Operation_not_static_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readSelfAction_Operation_not_static_EDiagnosticChain_EMap->setName("not_static");
+	m_readSelfAction_Operation_not_static_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readSelfAction_Operation_not_static_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readSelfAction_Operation_not_static_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readSelfAction_Operation_not_static_EDiagnosticChain_EMap->setUnique(true);
 	m_readSelfAction_Operation_not_static_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readSelfAction_Operation_not_static_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26185,13 +25753,12 @@ void umlPackageImpl::initializeReadSelfActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readSelfAction_Operation_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readSelfAction_Operation_type_EDiagnosticChain_EMap->setName("type");
+	m_readSelfAction_Operation_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readSelfAction_Operation_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readSelfAction_Operation_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readSelfAction_Operation_type_EDiagnosticChain_EMap->setUnique(true);
 	m_readSelfAction_Operation_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readSelfAction_Operation_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26248,13 +25815,12 @@ void umlPackageImpl::initializeReadStructuralFeatureActionContent()
 	    }
 	}
 	
-	m_readStructuralFeatureAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readStructuralFeatureAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setName("type_and_ordering");
+	m_readStructuralFeatureAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readStructuralFeatureAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readStructuralFeatureAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readStructuralFeatureAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setUnique(true);
 	m_readStructuralFeatureAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readStructuralFeatureAction_Operation_type_and_ordering_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26308,13 +25874,12 @@ void umlPackageImpl::initializeReadVariableActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_readVariableAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readVariableAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setName("compatible_multiplicity");
+	m_readVariableAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readVariableAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readVariableAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readVariableAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_readVariableAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readVariableAction_Operation_compatible_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26335,13 +25900,12 @@ void umlPackageImpl::initializeReadVariableActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_readVariableAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readVariableAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setName("type_and_ordering");
+	m_readVariableAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_readVariableAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setLowerBound(0);
 	m_readVariableAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setUpperBound(1);
 	m_readVariableAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setUnique(true);
 	m_readVariableAction_Operation_type_and_ordering_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_readVariableAction_Operation_type_and_ordering_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26406,13 +25970,12 @@ void umlPackageImpl::initializeReceptionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_reception_Operation_same_name_as_signal_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reception_Operation_same_name_as_signal_EDiagnosticChain_EMap->setName("same_name_as_signal");
+	m_reception_Operation_same_name_as_signal_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reception_Operation_same_name_as_signal_EDiagnosticChain_EMap->setLowerBound(0);
 	m_reception_Operation_same_name_as_signal_EDiagnosticChain_EMap->setUpperBound(1);
 	m_reception_Operation_same_name_as_signal_EDiagnosticChain_EMap->setUnique(true);
 	m_reception_Operation_same_name_as_signal_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_reception_Operation_same_name_as_signal_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26433,13 +25996,12 @@ void umlPackageImpl::initializeReceptionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_reception_Operation_same_structure_as_signal_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reception_Operation_same_structure_as_signal_EDiagnosticChain_EMap->setName("same_structure_as_signal");
+	m_reception_Operation_same_structure_as_signal_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reception_Operation_same_structure_as_signal_EDiagnosticChain_EMap->setLowerBound(0);
 	m_reception_Operation_same_structure_as_signal_EDiagnosticChain_EMap->setUpperBound(1);
 	m_reception_Operation_same_structure_as_signal_EDiagnosticChain_EMap->setUnique(true);
 	m_reception_Operation_same_structure_as_signal_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_reception_Operation_same_structure_as_signal_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26471,7 +26033,7 @@ void umlPackageImpl::initializeReclassifyObjectActionContent()
 	
 	m_reclassifyObjectAction_Attribute_isReplaceAll = getReclassifyObjectAction_Attribute_isReplaceAll();
 	m_reclassifyObjectAction_Attribute_isReplaceAll->setName("isReplaceAll");
-	m_reclassifyObjectAction_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_reclassifyObjectAction_Attribute_isReplaceAll->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_reclassifyObjectAction_Attribute_isReplaceAll->setLowerBound(1);
 	m_reclassifyObjectAction_Attribute_isReplaceAll->setUpperBound(1);
 	m_reclassifyObjectAction_Attribute_isReplaceAll->setTransient(false);
@@ -26557,13 +26119,12 @@ void umlPackageImpl::initializeReclassifyObjectActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_reclassifyObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reclassifyObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setName("classifier_not_abstract");
+	m_reclassifyObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reclassifyObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setLowerBound(0);
 	m_reclassifyObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setUpperBound(1);
 	m_reclassifyObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setUnique(true);
 	m_reclassifyObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_reclassifyObjectAction_Operation_classifier_not_abstract_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26584,13 +26145,12 @@ void umlPackageImpl::initializeReclassifyObjectActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_reclassifyObjectAction_Operation_input_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reclassifyObjectAction_Operation_input_pin_EDiagnosticChain_EMap->setName("input_pin");
+	m_reclassifyObjectAction_Operation_input_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reclassifyObjectAction_Operation_input_pin_EDiagnosticChain_EMap->setLowerBound(0);
 	m_reclassifyObjectAction_Operation_input_pin_EDiagnosticChain_EMap->setUpperBound(1);
 	m_reclassifyObjectAction_Operation_input_pin_EDiagnosticChain_EMap->setUnique(true);
 	m_reclassifyObjectAction_Operation_input_pin_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_reclassifyObjectAction_Operation_input_pin_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26611,13 +26171,12 @@ void umlPackageImpl::initializeReclassifyObjectActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_reclassifyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reclassifyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_reclassifyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reclassifyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_reclassifyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_reclassifyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_reclassifyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_reclassifyObjectAction_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26649,7 +26208,7 @@ void umlPackageImpl::initializeRedefinableElementContent()
 	
 	m_redefinableElement_Attribute_isLeaf = getRedefinableElement_Attribute_isLeaf();
 	m_redefinableElement_Attribute_isLeaf->setName("isLeaf");
-	m_redefinableElement_Attribute_isLeaf->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_redefinableElement_Attribute_isLeaf->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_redefinableElement_Attribute_isLeaf->setLowerBound(1);
 	m_redefinableElement_Attribute_isLeaf->setUpperBound(1);
 	m_redefinableElement_Attribute_isLeaf->setTransient(false);
@@ -26713,13 +26272,12 @@ void umlPackageImpl::initializeRedefinableElementContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_redefinableElement_Operation_isConsistentWith_RedefinableElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_redefinableElement_Operation_isConsistentWith_RedefinableElement->setName("isConsistentWith");
+	m_redefinableElement_Operation_isConsistentWith_RedefinableElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_redefinableElement_Operation_isConsistentWith_RedefinableElement->setLowerBound(1);
 	m_redefinableElement_Operation_isConsistentWith_RedefinableElement->setUpperBound(1);
 	m_redefinableElement_Operation_isConsistentWith_RedefinableElement->setUnique(true);
 	m_redefinableElement_Operation_isConsistentWith_RedefinableElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_redefinableElement_Operation_isConsistentWith_RedefinableElement);
 		parameter->setName("redefiningElement");
@@ -26730,13 +26288,12 @@ void umlPackageImpl::initializeRedefinableElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_redefinableElement_Operation_isRedefinitionContextValid_RedefinableElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_redefinableElement_Operation_isRedefinitionContextValid_RedefinableElement->setName("isRedefinitionContextValid");
+	m_redefinableElement_Operation_isRedefinitionContextValid_RedefinableElement->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_redefinableElement_Operation_isRedefinitionContextValid_RedefinableElement->setLowerBound(1);
 	m_redefinableElement_Operation_isRedefinitionContextValid_RedefinableElement->setUpperBound(1);
 	m_redefinableElement_Operation_isRedefinitionContextValid_RedefinableElement->setUnique(true);
 	m_redefinableElement_Operation_isRedefinitionContextValid_RedefinableElement->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_redefinableElement_Operation_isRedefinitionContextValid_RedefinableElement);
 		parameter->setName("redefinedElement");
@@ -26747,13 +26304,12 @@ void umlPackageImpl::initializeRedefinableElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_redefinableElement_Operation_non_leaf_redefinition_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_redefinableElement_Operation_non_leaf_redefinition_EDiagnosticChain_EMap->setName("non_leaf_redefinition");
+	m_redefinableElement_Operation_non_leaf_redefinition_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_redefinableElement_Operation_non_leaf_redefinition_EDiagnosticChain_EMap->setLowerBound(0);
 	m_redefinableElement_Operation_non_leaf_redefinition_EDiagnosticChain_EMap->setUpperBound(1);
 	m_redefinableElement_Operation_non_leaf_redefinition_EDiagnosticChain_EMap->setUnique(true);
 	m_redefinableElement_Operation_non_leaf_redefinition_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_redefinableElement_Operation_non_leaf_redefinition_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26774,13 +26330,12 @@ void umlPackageImpl::initializeRedefinableElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_redefinableElement_Operation_redefinition_consistent_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_redefinableElement_Operation_redefinition_consistent_EDiagnosticChain_EMap->setName("redefinition_consistent");
+	m_redefinableElement_Operation_redefinition_consistent_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_redefinableElement_Operation_redefinition_consistent_EDiagnosticChain_EMap->setLowerBound(0);
 	m_redefinableElement_Operation_redefinition_consistent_EDiagnosticChain_EMap->setUpperBound(1);
 	m_redefinableElement_Operation_redefinition_consistent_EDiagnosticChain_EMap->setUnique(true);
 	m_redefinableElement_Operation_redefinition_consistent_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_redefinableElement_Operation_redefinition_consistent_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26801,13 +26356,12 @@ void umlPackageImpl::initializeRedefinableElementContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_redefinableElement_Operation_redefinition_context_valid_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_redefinableElement_Operation_redefinition_context_valid_EDiagnosticChain_EMap->setName("redefinition_context_valid");
+	m_redefinableElement_Operation_redefinition_context_valid_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_redefinableElement_Operation_redefinition_context_valid_EDiagnosticChain_EMap->setLowerBound(0);
 	m_redefinableElement_Operation_redefinition_context_valid_EDiagnosticChain_EMap->setUpperBound(1);
 	m_redefinableElement_Operation_redefinition_context_valid_EDiagnosticChain_EMap->setUnique(true);
 	m_redefinableElement_Operation_redefinition_context_valid_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_redefinableElement_Operation_redefinition_context_valid_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26905,21 +26459,19 @@ void umlPackageImpl::initializeRedefinableTemplateSignatureContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_redefinableTemplateSignature_Operation_getInheritedParameters->setEType(getTemplateParameter_Class());
 	m_redefinableTemplateSignature_Operation_getInheritedParameters->setName("getInheritedParameters");
+	m_redefinableTemplateSignature_Operation_getInheritedParameters->setEType(getTemplateParameter_Class());
 	m_redefinableTemplateSignature_Operation_getInheritedParameters->setLowerBound(0);
 	m_redefinableTemplateSignature_Operation_getInheritedParameters->setUpperBound(-1);
 	m_redefinableTemplateSignature_Operation_getInheritedParameters->setUnique(true);
 	m_redefinableTemplateSignature_Operation_getInheritedParameters->setOrdered(false);
 	
-	
-	m_redefinableTemplateSignature_Operation_redefines_parents_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_redefinableTemplateSignature_Operation_redefines_parents_EDiagnosticChain_EMap->setName("redefines_parents");
+	m_redefinableTemplateSignature_Operation_redefines_parents_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_redefinableTemplateSignature_Operation_redefines_parents_EDiagnosticChain_EMap->setLowerBound(0);
 	m_redefinableTemplateSignature_Operation_redefines_parents_EDiagnosticChain_EMap->setUpperBound(1);
 	m_redefinableTemplateSignature_Operation_redefines_parents_EDiagnosticChain_EMap->setUnique(true);
 	m_redefinableTemplateSignature_Operation_redefines_parents_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_redefinableTemplateSignature_Operation_redefines_parents_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -26951,7 +26503,7 @@ void umlPackageImpl::initializeReduceActionContent()
 	
 	m_reduceAction_Attribute_isOrdered = getReduceAction_Attribute_isOrdered();
 	m_reduceAction_Attribute_isOrdered->setName("isOrdered");
-	m_reduceAction_Attribute_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_reduceAction_Attribute_isOrdered->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_reduceAction_Attribute_isOrdered->setLowerBound(1);
 	m_reduceAction_Attribute_isOrdered->setUpperBound(1);
 	m_reduceAction_Attribute_isOrdered->setTransient(false);
@@ -27037,13 +26589,12 @@ void umlPackageImpl::initializeReduceActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_reduceAction_Operation_input_type_is_collection_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reduceAction_Operation_input_type_is_collection_EDiagnosticChain_EMap->setName("input_type_is_collection");
+	m_reduceAction_Operation_input_type_is_collection_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reduceAction_Operation_input_type_is_collection_EDiagnosticChain_EMap->setLowerBound(0);
 	m_reduceAction_Operation_input_type_is_collection_EDiagnosticChain_EMap->setUpperBound(1);
 	m_reduceAction_Operation_input_type_is_collection_EDiagnosticChain_EMap->setUnique(true);
 	m_reduceAction_Operation_input_type_is_collection_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_reduceAction_Operation_input_type_is_collection_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27064,13 +26615,12 @@ void umlPackageImpl::initializeReduceActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_reduceAction_Operation_output_types_are_compatible_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reduceAction_Operation_output_types_are_compatible_EDiagnosticChain_EMap->setName("output_types_are_compatible");
+	m_reduceAction_Operation_output_types_are_compatible_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reduceAction_Operation_output_types_are_compatible_EDiagnosticChain_EMap->setLowerBound(0);
 	m_reduceAction_Operation_output_types_are_compatible_EDiagnosticChain_EMap->setUpperBound(1);
 	m_reduceAction_Operation_output_types_are_compatible_EDiagnosticChain_EMap->setUnique(true);
 	m_reduceAction_Operation_output_types_are_compatible_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_reduceAction_Operation_output_types_are_compatible_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27091,13 +26641,12 @@ void umlPackageImpl::initializeReduceActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_reduceAction_Operation_reducer_inputs_output_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reduceAction_Operation_reducer_inputs_output_EDiagnosticChain_EMap->setName("reducer_inputs_output");
+	m_reduceAction_Operation_reducer_inputs_output_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_reduceAction_Operation_reducer_inputs_output_EDiagnosticChain_EMap->setLowerBound(0);
 	m_reduceAction_Operation_reducer_inputs_output_EDiagnosticChain_EMap->setUpperBound(1);
 	m_reduceAction_Operation_reducer_inputs_output_EDiagnosticChain_EMap->setUnique(true);
 	m_reduceAction_Operation_reducer_inputs_output_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_reduceAction_Operation_reducer_inputs_output_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27251,29 +26800,26 @@ void umlPackageImpl::initializeRegionContent()
 	    }
 	}
 	
-	m_region_Operation_belongsToPSM->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_region_Operation_belongsToPSM->setName("belongsToPSM");
+	m_region_Operation_belongsToPSM->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_region_Operation_belongsToPSM->setLowerBound(1);
 	m_region_Operation_belongsToPSM->setUpperBound(1);
 	m_region_Operation_belongsToPSM->setUnique(true);
 	m_region_Operation_belongsToPSM->setOrdered(false);
 	
-	
-	m_region_Operation_containingStateMachine->setEType(getStateMachine_Class());
 	m_region_Operation_containingStateMachine->setName("containingStateMachine");
+	m_region_Operation_containingStateMachine->setEType(getStateMachine_Class());
 	m_region_Operation_containingStateMachine->setLowerBound(1);
 	m_region_Operation_containingStateMachine->setUpperBound(1);
 	m_region_Operation_containingStateMachine->setUnique(true);
 	m_region_Operation_containingStateMachine->setOrdered(false);
 	
-	
-	m_region_Operation_deep_history_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_region_Operation_deep_history_vertex_EDiagnosticChain_EMap->setName("deep_history_vertex");
+	m_region_Operation_deep_history_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_region_Operation_deep_history_vertex_EDiagnosticChain_EMap->setLowerBound(0);
 	m_region_Operation_deep_history_vertex_EDiagnosticChain_EMap->setUpperBound(1);
 	m_region_Operation_deep_history_vertex_EDiagnosticChain_EMap->setUnique(true);
 	m_region_Operation_deep_history_vertex_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_region_Operation_deep_history_vertex_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27294,13 +26840,12 @@ void umlPackageImpl::initializeRegionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_region_Operation_initial_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_region_Operation_initial_vertex_EDiagnosticChain_EMap->setName("initial_vertex");
+	m_region_Operation_initial_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_region_Operation_initial_vertex_EDiagnosticChain_EMap->setLowerBound(0);
 	m_region_Operation_initial_vertex_EDiagnosticChain_EMap->setUpperBound(1);
 	m_region_Operation_initial_vertex_EDiagnosticChain_EMap->setUnique(true);
 	m_region_Operation_initial_vertex_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_region_Operation_initial_vertex_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27321,13 +26866,12 @@ void umlPackageImpl::initializeRegionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_region_Operation_owned_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_region_Operation_owned_EDiagnosticChain_EMap->setName("owned");
+	m_region_Operation_owned_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_region_Operation_owned_EDiagnosticChain_EMap->setLowerBound(0);
 	m_region_Operation_owned_EDiagnosticChain_EMap->setUpperBound(1);
 	m_region_Operation_owned_EDiagnosticChain_EMap->setUnique(true);
 	m_region_Operation_owned_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_region_Operation_owned_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27348,21 +26892,19 @@ void umlPackageImpl::initializeRegionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_region_Operation_redefinitionContext->setEType(getClassifier_Class());
 	m_region_Operation_redefinitionContext->setName("redefinitionContext");
+	m_region_Operation_redefinitionContext->setEType(getClassifier_Class());
 	m_region_Operation_redefinitionContext->setLowerBound(1);
 	m_region_Operation_redefinitionContext->setUpperBound(1);
 	m_region_Operation_redefinitionContext->setUnique(true);
 	m_region_Operation_redefinitionContext->setOrdered(false);
 	
-	
-	m_region_Operation_shallow_history_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_region_Operation_shallow_history_vertex_EDiagnosticChain_EMap->setName("shallow_history_vertex");
+	m_region_Operation_shallow_history_vertex_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_region_Operation_shallow_history_vertex_EDiagnosticChain_EMap->setLowerBound(0);
 	m_region_Operation_shallow_history_vertex_EDiagnosticChain_EMap->setUpperBound(1);
 	m_region_Operation_shallow_history_vertex_EDiagnosticChain_EMap->setUnique(true);
 	m_region_Operation_shallow_history_vertex_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_region_Operation_shallow_history_vertex_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27427,7 +26969,7 @@ void umlPackageImpl::initializeRemoveStructuralFeatureValueActionContent()
 	
 	m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates = getRemoveStructuralFeatureValueAction_Attribute_isRemoveDuplicates();
 	m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates->setName("isRemoveDuplicates");
-	m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates->setLowerBound(1);
 	m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates->setUpperBound(1);
 	m_removeStructuralFeatureValueAction_Attribute_isRemoveDuplicates->setTransient(false);
@@ -27472,13 +27014,12 @@ void umlPackageImpl::initializeRemoveStructuralFeatureValueActionContent()
 	    }
 	}
 	
-	m_removeStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_removeStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setName("removeAt_and_value");
+	m_removeStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_removeStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setLowerBound(0);
 	m_removeStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setUpperBound(1);
 	m_removeStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setUnique(true);
 	m_removeStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_removeStructuralFeatureValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27510,7 +27051,7 @@ void umlPackageImpl::initializeRemoveVariableValueActionContent()
 	
 	m_removeVariableValueAction_Attribute_isRemoveDuplicates = getRemoveVariableValueAction_Attribute_isRemoveDuplicates();
 	m_removeVariableValueAction_Attribute_isRemoveDuplicates->setName("isRemoveDuplicates");
-	m_removeVariableValueAction_Attribute_isRemoveDuplicates->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_removeVariableValueAction_Attribute_isRemoveDuplicates->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_removeVariableValueAction_Attribute_isRemoveDuplicates->setLowerBound(1);
 	m_removeVariableValueAction_Attribute_isRemoveDuplicates->setUpperBound(1);
 	m_removeVariableValueAction_Attribute_isRemoveDuplicates->setTransient(false);
@@ -27552,13 +27093,12 @@ void umlPackageImpl::initializeRemoveVariableValueActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_removeVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_removeVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setName("removeAt_and_value");
+	m_removeVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_removeVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setLowerBound(0);
 	m_removeVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setUpperBound(1);
 	m_removeVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setUnique(true);
 	m_removeVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_removeVariableValueAction_Operation_removeAt_and_value_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27656,13 +27196,12 @@ void umlPackageImpl::initializeReplyActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_replyAction_Operation_event_on_reply_to_call_trigger_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_replyAction_Operation_event_on_reply_to_call_trigger_EDiagnosticChain_EMap->setName("event_on_reply_to_call_trigger");
+	m_replyAction_Operation_event_on_reply_to_call_trigger_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_replyAction_Operation_event_on_reply_to_call_trigger_EDiagnosticChain_EMap->setLowerBound(0);
 	m_replyAction_Operation_event_on_reply_to_call_trigger_EDiagnosticChain_EMap->setUpperBound(1);
 	m_replyAction_Operation_event_on_reply_to_call_trigger_EDiagnosticChain_EMap->setUnique(true);
 	m_replyAction_Operation_event_on_reply_to_call_trigger_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_replyAction_Operation_event_on_reply_to_call_trigger_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27683,13 +27222,12 @@ void umlPackageImpl::initializeReplyActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_replyAction_Operation_pins_match_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_replyAction_Operation_pins_match_parameter_EDiagnosticChain_EMap->setName("pins_match_parameter");
+	m_replyAction_Operation_pins_match_parameter_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_replyAction_Operation_pins_match_parameter_EDiagnosticChain_EMap->setLowerBound(0);
 	m_replyAction_Operation_pins_match_parameter_EDiagnosticChain_EMap->setUpperBound(1);
 	m_replyAction_Operation_pins_match_parameter_EDiagnosticChain_EMap->setUnique(true);
 	m_replyAction_Operation_pins_match_parameter_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_replyAction_Operation_pins_match_parameter_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27765,13 +27303,12 @@ void umlPackageImpl::initializeSendObjectActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_sendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_sendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap->setName("type_target_pin");
+	m_sendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_sendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap->setLowerBound(0);
 	m_sendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap->setUpperBound(1);
 	m_sendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap->setUnique(true);
 	m_sendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_sendObjectAction_Operation_type_target_pin_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27847,13 +27384,12 @@ void umlPackageImpl::initializeSendSignalActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_sendSignalAction_Operation_number_order_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_sendSignalAction_Operation_number_order_EDiagnosticChain_EMap->setName("number_order");
+	m_sendSignalAction_Operation_number_order_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_sendSignalAction_Operation_number_order_EDiagnosticChain_EMap->setLowerBound(0);
 	m_sendSignalAction_Operation_number_order_EDiagnosticChain_EMap->setUpperBound(1);
 	m_sendSignalAction_Operation_number_order_EDiagnosticChain_EMap->setUnique(true);
 	m_sendSignalAction_Operation_number_order_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_sendSignalAction_Operation_number_order_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27874,13 +27410,12 @@ void umlPackageImpl::initializeSendSignalActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_sendSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_sendSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setName("type_ordering_multiplicity");
+	m_sendSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_sendSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_sendSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_sendSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_sendSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_sendSignalAction_Operation_type_ordering_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27901,13 +27436,12 @@ void umlPackageImpl::initializeSendSignalActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_sendSignalAction_Operation_type_target_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_sendSignalAction_Operation_type_target_pin_EDiagnosticChain_EMap->setName("type_target_pin");
+	m_sendSignalAction_Operation_type_target_pin_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_sendSignalAction_Operation_type_target_pin_EDiagnosticChain_EMap->setLowerBound(0);
 	m_sendSignalAction_Operation_type_target_pin_EDiagnosticChain_EMap->setUpperBound(1);
 	m_sendSignalAction_Operation_type_target_pin_EDiagnosticChain_EMap->setUnique(true);
 	m_sendSignalAction_Operation_type_target_pin_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_sendSignalAction_Operation_type_target_pin_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -27994,13 +27528,12 @@ void umlPackageImpl::initializeSignalContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
 	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setName("createOwnedAttribute");
+	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
 	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setLowerBound(1);
 	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setUpperBound(1);
 	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setUnique(true);
 	m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_signal_Operation_createOwnedAttribute_String_UnlimitedNatural);
 		parameter->setName("name");
@@ -28190,13 +27723,12 @@ void umlPackageImpl::initializeStartClassifierBehaviorActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_startClassifierBehaviorAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_startClassifierBehaviorAction_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_startClassifierBehaviorAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_startClassifierBehaviorAction_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_startClassifierBehaviorAction_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_startClassifierBehaviorAction_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_startClassifierBehaviorAction_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_startClassifierBehaviorAction_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -28217,13 +27749,12 @@ void umlPackageImpl::initializeStartClassifierBehaviorActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_startClassifierBehaviorAction_Operation_type_has_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_startClassifierBehaviorAction_Operation_type_has_classifier_EDiagnosticChain_EMap->setName("type_has_classifier");
+	m_startClassifierBehaviorAction_Operation_type_has_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_startClassifierBehaviorAction_Operation_type_has_classifier_EDiagnosticChain_EMap->setLowerBound(0);
 	m_startClassifierBehaviorAction_Operation_type_has_classifier_EDiagnosticChain_EMap->setUpperBound(1);
 	m_startClassifierBehaviorAction_Operation_type_has_classifier_EDiagnosticChain_EMap->setUnique(true);
 	m_startClassifierBehaviorAction_Operation_type_has_classifier_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_startClassifierBehaviorAction_Operation_type_has_classifier_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -28277,21 +27808,19 @@ void umlPackageImpl::initializeStartObjectBehaviorActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_startObjectBehaviorAction_Operation_behavior->setEType(getBehavior_Class());
 	m_startObjectBehaviorAction_Operation_behavior->setName("behavior");
+	m_startObjectBehaviorAction_Operation_behavior->setEType(getBehavior_Class());
 	m_startObjectBehaviorAction_Operation_behavior->setLowerBound(0);
 	m_startObjectBehaviorAction_Operation_behavior->setUpperBound(1);
 	m_startObjectBehaviorAction_Operation_behavior->setUnique(true);
 	m_startObjectBehaviorAction_Operation_behavior->setOrdered(false);
 	
-	
-	m_startObjectBehaviorAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_startObjectBehaviorAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setName("multiplicity_of_object");
+	m_startObjectBehaviorAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_startObjectBehaviorAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setLowerBound(0);
 	m_startObjectBehaviorAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setUpperBound(1);
 	m_startObjectBehaviorAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setUnique(true);
 	m_startObjectBehaviorAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_startObjectBehaviorAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -28312,13 +27841,12 @@ void umlPackageImpl::initializeStartObjectBehaviorActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_startObjectBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_startObjectBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setName("no_onport");
+	m_startObjectBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_startObjectBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setLowerBound(0);
 	m_startObjectBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setUpperBound(1);
 	m_startObjectBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setUnique(true);
 	m_startObjectBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_startObjectBehaviorAction_Operation_no_onport_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -28339,13 +27867,12 @@ void umlPackageImpl::initializeStartObjectBehaviorActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_startObjectBehaviorAction_Operation_type_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_startObjectBehaviorAction_Operation_type_of_object_EDiagnosticChain_EMap->setName("type_of_object");
+	m_startObjectBehaviorAction_Operation_type_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_startObjectBehaviorAction_Operation_type_of_object_EDiagnosticChain_EMap->setLowerBound(0);
 	m_startObjectBehaviorAction_Operation_type_of_object_EDiagnosticChain_EMap->setUpperBound(1);
 	m_startObjectBehaviorAction_Operation_type_of_object_EDiagnosticChain_EMap->setUnique(true);
 	m_startObjectBehaviorAction_Operation_type_of_object_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_startObjectBehaviorAction_Operation_type_of_object_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -28377,7 +27904,7 @@ void umlPackageImpl::initializeStateContent()
 	
 	m_state_Attribute_isComposite = getState_Attribute_isComposite();
 	m_state_Attribute_isComposite->setName("isComposite");
-	m_state_Attribute_isComposite->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_state_Attribute_isComposite->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Attribute_isComposite->setLowerBound(1);
 	m_state_Attribute_isComposite->setUpperBound(1);
 	m_state_Attribute_isComposite->setTransient(true);
@@ -28397,7 +27924,7 @@ void umlPackageImpl::initializeStateContent()
 	}
 	m_state_Attribute_isOrthogonal = getState_Attribute_isOrthogonal();
 	m_state_Attribute_isOrthogonal->setName("isOrthogonal");
-	m_state_Attribute_isOrthogonal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_state_Attribute_isOrthogonal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Attribute_isOrthogonal->setLowerBound(1);
 	m_state_Attribute_isOrthogonal->setUpperBound(1);
 	m_state_Attribute_isOrthogonal->setTransient(true);
@@ -28417,7 +27944,7 @@ void umlPackageImpl::initializeStateContent()
 	}
 	m_state_Attribute_isSimple = getState_Attribute_isSimple();
 	m_state_Attribute_isSimple->setName("isSimple");
-	m_state_Attribute_isSimple->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_state_Attribute_isSimple->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Attribute_isSimple->setLowerBound(1);
 	m_state_Attribute_isSimple->setUpperBound(1);
 	m_state_Attribute_isSimple->setTransient(true);
@@ -28437,7 +27964,7 @@ void umlPackageImpl::initializeStateContent()
 	}
 	m_state_Attribute_isSubmachineState = getState_Attribute_isSubmachineState();
 	m_state_Attribute_isSubmachineState->setName("isSubmachineState");
-	m_state_Attribute_isSubmachineState->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_state_Attribute_isSubmachineState->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Attribute_isSubmachineState->setLowerBound(1);
 	m_state_Attribute_isSubmachineState->setUpperBound(1);
 	m_state_Attribute_isSubmachineState->setTransient(true);
@@ -28689,13 +28216,12 @@ void umlPackageImpl::initializeStateContent()
 	    }
 	}
 	
-	m_state_Operation_composite_states_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_state_Operation_composite_states_EDiagnosticChain_EMap->setName("composite_states");
+	m_state_Operation_composite_states_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_state_Operation_composite_states_EDiagnosticChain_EMap->setLowerBound(0);
 	m_state_Operation_composite_states_EDiagnosticChain_EMap->setUpperBound(1);
 	m_state_Operation_composite_states_EDiagnosticChain_EMap->setUnique(true);
 	m_state_Operation_composite_states_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_state_Operation_composite_states_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -28716,13 +28242,12 @@ void umlPackageImpl::initializeStateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_state_Operation_destinations_or_sources_of_transitions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_state_Operation_destinations_or_sources_of_transitions_EDiagnosticChain_EMap->setName("destinations_or_sources_of_transitions");
+	m_state_Operation_destinations_or_sources_of_transitions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_state_Operation_destinations_or_sources_of_transitions_EDiagnosticChain_EMap->setLowerBound(0);
 	m_state_Operation_destinations_or_sources_of_transitions_EDiagnosticChain_EMap->setUpperBound(1);
 	m_state_Operation_destinations_or_sources_of_transitions_EDiagnosticChain_EMap->setUnique(true);
 	m_state_Operation_destinations_or_sources_of_transitions_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_state_Operation_destinations_or_sources_of_transitions_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -28743,13 +28268,12 @@ void umlPackageImpl::initializeStateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_state_Operation_entry_or_exit_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_state_Operation_entry_or_exit_EDiagnosticChain_EMap->setName("entry_or_exit");
+	m_state_Operation_entry_or_exit_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_state_Operation_entry_or_exit_EDiagnosticChain_EMap->setLowerBound(0);
 	m_state_Operation_entry_or_exit_EDiagnosticChain_EMap->setUpperBound(1);
 	m_state_Operation_entry_or_exit_EDiagnosticChain_EMap->setUnique(true);
 	m_state_Operation_entry_or_exit_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_state_Operation_entry_or_exit_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -28770,53 +28294,47 @@ void umlPackageImpl::initializeStateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_state_Operation_isComposite->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Operation_isComposite->setName("isComposite");
+	m_state_Operation_isComposite->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Operation_isComposite->setLowerBound(1);
 	m_state_Operation_isComposite->setUpperBound(1);
 	m_state_Operation_isComposite->setUnique(true);
 	m_state_Operation_isComposite->setOrdered(false);
 	
-	
-	m_state_Operation_isOrthogonal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Operation_isOrthogonal->setName("isOrthogonal");
+	m_state_Operation_isOrthogonal->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Operation_isOrthogonal->setLowerBound(1);
 	m_state_Operation_isOrthogonal->setUpperBound(1);
 	m_state_Operation_isOrthogonal->setUnique(true);
 	m_state_Operation_isOrthogonal->setOrdered(false);
 	
-	
-	m_state_Operation_isSimple->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Operation_isSimple->setName("isSimple");
+	m_state_Operation_isSimple->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Operation_isSimple->setLowerBound(1);
 	m_state_Operation_isSimple->setUpperBound(1);
 	m_state_Operation_isSimple->setUnique(true);
 	m_state_Operation_isSimple->setOrdered(false);
 	
-	
-	m_state_Operation_isSubmachineState->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Operation_isSubmachineState->setName("isSubmachineState");
+	m_state_Operation_isSubmachineState->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_state_Operation_isSubmachineState->setLowerBound(1);
 	m_state_Operation_isSubmachineState->setUpperBound(1);
 	m_state_Operation_isSubmachineState->setUnique(true);
 	m_state_Operation_isSubmachineState->setOrdered(false);
 	
-	
-	m_state_Operation_redefinitionContext->setEType(getClassifier_Class());
 	m_state_Operation_redefinitionContext->setName("redefinitionContext");
+	m_state_Operation_redefinitionContext->setEType(getClassifier_Class());
 	m_state_Operation_redefinitionContext->setLowerBound(1);
 	m_state_Operation_redefinitionContext->setUpperBound(1);
 	m_state_Operation_redefinitionContext->setUnique(true);
 	m_state_Operation_redefinitionContext->setOrdered(false);
 	
-	
-	m_state_Operation_submachine_or_regions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_state_Operation_submachine_or_regions_EDiagnosticChain_EMap->setName("submachine_or_regions");
+	m_state_Operation_submachine_or_regions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_state_Operation_submachine_or_regions_EDiagnosticChain_EMap->setLowerBound(0);
 	m_state_Operation_submachine_or_regions_EDiagnosticChain_EMap->setUpperBound(1);
 	m_state_Operation_submachine_or_regions_EDiagnosticChain_EMap->setUnique(true);
 	m_state_Operation_submachine_or_regions_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_state_Operation_submachine_or_regions_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -28837,13 +28355,12 @@ void umlPackageImpl::initializeStateContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_state_Operation_submachine_states_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_state_Operation_submachine_states_EDiagnosticChain_EMap->setName("submachine_states");
+	m_state_Operation_submachine_states_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_state_Operation_submachine_states_EDiagnosticChain_EMap->setLowerBound(0);
 	m_state_Operation_submachine_states_EDiagnosticChain_EMap->setUpperBound(1);
 	m_state_Operation_submachine_states_EDiagnosticChain_EMap->setUnique(true);
 	m_state_Operation_submachine_states_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_state_Operation_submachine_states_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29005,13 +28522,12 @@ void umlPackageImpl::initializeStateMachineContent()
 	    }
 	}
 	
-	m_stateMachine_Operation_lCA_Vertex_Vertex->setEType(getRegion_Class());
 	m_stateMachine_Operation_lCA_Vertex_Vertex->setName("LCA");
+	m_stateMachine_Operation_lCA_Vertex_Vertex->setEType(getRegion_Class());
 	m_stateMachine_Operation_lCA_Vertex_Vertex->setLowerBound(1);
 	m_stateMachine_Operation_lCA_Vertex_Vertex->setUpperBound(1);
 	m_stateMachine_Operation_lCA_Vertex_Vertex->setUnique(true);
 	m_stateMachine_Operation_lCA_Vertex_Vertex->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stateMachine_Operation_lCA_Vertex_Vertex);
 		parameter->setName("s1");
@@ -29032,13 +28548,12 @@ void umlPackageImpl::initializeStateMachineContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stateMachine_Operation_lCAState_Vertex_Vertex->setEType(getState_Class());
 	m_stateMachine_Operation_lCAState_Vertex_Vertex->setName("LCAState");
+	m_stateMachine_Operation_lCAState_Vertex_Vertex->setEType(getState_Class());
 	m_stateMachine_Operation_lCAState_Vertex_Vertex->setLowerBound(1);
 	m_stateMachine_Operation_lCAState_Vertex_Vertex->setUpperBound(1);
 	m_stateMachine_Operation_lCAState_Vertex_Vertex->setUnique(true);
 	m_stateMachine_Operation_lCAState_Vertex_Vertex->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stateMachine_Operation_lCAState_Vertex_Vertex);
 		parameter->setName("v1");
@@ -29059,13 +28574,12 @@ void umlPackageImpl::initializeStateMachineContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stateMachine_Operation_ancestor_Vertex_Vertex->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_stateMachine_Operation_ancestor_Vertex_Vertex->setName("ancestor");
+	m_stateMachine_Operation_ancestor_Vertex_Vertex->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_stateMachine_Operation_ancestor_Vertex_Vertex->setLowerBound(1);
 	m_stateMachine_Operation_ancestor_Vertex_Vertex->setUpperBound(1);
 	m_stateMachine_Operation_ancestor_Vertex_Vertex->setUnique(true);
 	m_stateMachine_Operation_ancestor_Vertex_Vertex->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stateMachine_Operation_ancestor_Vertex_Vertex);
 		parameter->setName("s1");
@@ -29086,13 +28600,12 @@ void umlPackageImpl::initializeStateMachineContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stateMachine_Operation_classifier_context_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stateMachine_Operation_classifier_context_EDiagnosticChain_EMap->setName("classifier_context");
+	m_stateMachine_Operation_classifier_context_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stateMachine_Operation_classifier_context_EDiagnosticChain_EMap->setLowerBound(0);
 	m_stateMachine_Operation_classifier_context_EDiagnosticChain_EMap->setUpperBound(1);
 	m_stateMachine_Operation_classifier_context_EDiagnosticChain_EMap->setUnique(true);
 	m_stateMachine_Operation_classifier_context_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stateMachine_Operation_classifier_context_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29113,13 +28626,12 @@ void umlPackageImpl::initializeStateMachineContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stateMachine_Operation_connection_points_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stateMachine_Operation_connection_points_EDiagnosticChain_EMap->setName("connection_points");
+	m_stateMachine_Operation_connection_points_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stateMachine_Operation_connection_points_EDiagnosticChain_EMap->setLowerBound(0);
 	m_stateMachine_Operation_connection_points_EDiagnosticChain_EMap->setUpperBound(1);
 	m_stateMachine_Operation_connection_points_EDiagnosticChain_EMap->setUnique(true);
 	m_stateMachine_Operation_connection_points_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stateMachine_Operation_connection_points_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29140,13 +28652,12 @@ void umlPackageImpl::initializeStateMachineContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stateMachine_Operation_context_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stateMachine_Operation_context_classifier_EDiagnosticChain_EMap->setName("context_classifier");
+	m_stateMachine_Operation_context_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stateMachine_Operation_context_classifier_EDiagnosticChain_EMap->setLowerBound(0);
 	m_stateMachine_Operation_context_classifier_EDiagnosticChain_EMap->setUpperBound(1);
 	m_stateMachine_Operation_context_classifier_EDiagnosticChain_EMap->setUnique(true);
 	m_stateMachine_Operation_context_classifier_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stateMachine_Operation_context_classifier_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29167,13 +28678,12 @@ void umlPackageImpl::initializeStateMachineContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stateMachine_Operation_method_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stateMachine_Operation_method_EDiagnosticChain_EMap->setName("method");
+	m_stateMachine_Operation_method_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stateMachine_Operation_method_EDiagnosticChain_EMap->setLowerBound(0);
 	m_stateMachine_Operation_method_EDiagnosticChain_EMap->setUpperBound(1);
 	m_stateMachine_Operation_method_EDiagnosticChain_EMap->setUnique(true);
 	m_stateMachine_Operation_method_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stateMachine_Operation_method_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29249,13 +28759,12 @@ void umlPackageImpl::initializeStereotypeContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_stereotype_Operation_associationEndOwnership_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_associationEndOwnership_EDiagnosticChain_EMap->setName("associationEndOwnership");
+	m_stereotype_Operation_associationEndOwnership_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_associationEndOwnership_EDiagnosticChain_EMap->setLowerBound(0);
 	m_stereotype_Operation_associationEndOwnership_EDiagnosticChain_EMap->setUpperBound(1);
 	m_stereotype_Operation_associationEndOwnership_EDiagnosticChain_EMap->setUnique(true);
 	m_stereotype_Operation_associationEndOwnership_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stereotype_Operation_associationEndOwnership_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29276,13 +28785,12 @@ void umlPackageImpl::initializeStereotypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stereotype_Operation_base_property_multiplicity_multiple_extension_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_base_property_multiplicity_multiple_extension_EDiagnosticChain_EMap->setName("base_property_multiplicity_multiple_extension");
+	m_stereotype_Operation_base_property_multiplicity_multiple_extension_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_base_property_multiplicity_multiple_extension_EDiagnosticChain_EMap->setLowerBound(0);
 	m_stereotype_Operation_base_property_multiplicity_multiple_extension_EDiagnosticChain_EMap->setUpperBound(1);
 	m_stereotype_Operation_base_property_multiplicity_multiple_extension_EDiagnosticChain_EMap->setUnique(true);
 	m_stereotype_Operation_base_property_multiplicity_multiple_extension_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stereotype_Operation_base_property_multiplicity_multiple_extension_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29303,13 +28811,12 @@ void umlPackageImpl::initializeStereotypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stereotype_Operation_base_property_multiplicity_single_extension_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_base_property_multiplicity_single_extension_EDiagnosticChain_EMap->setName("base_property_multiplicity_single_extension");
+	m_stereotype_Operation_base_property_multiplicity_single_extension_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_base_property_multiplicity_single_extension_EDiagnosticChain_EMap->setLowerBound(0);
 	m_stereotype_Operation_base_property_multiplicity_single_extension_EDiagnosticChain_EMap->setUpperBound(1);
 	m_stereotype_Operation_base_property_multiplicity_single_extension_EDiagnosticChain_EMap->setUnique(true);
 	m_stereotype_Operation_base_property_multiplicity_single_extension_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stereotype_Operation_base_property_multiplicity_single_extension_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29330,13 +28837,12 @@ void umlPackageImpl::initializeStereotypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stereotype_Operation_base_property_upper_bound_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_base_property_upper_bound_EDiagnosticChain_EMap->setName("base_property_upper_bound");
+	m_stereotype_Operation_base_property_upper_bound_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_base_property_upper_bound_EDiagnosticChain_EMap->setLowerBound(0);
 	m_stereotype_Operation_base_property_upper_bound_EDiagnosticChain_EMap->setUpperBound(1);
 	m_stereotype_Operation_base_property_upper_bound_EDiagnosticChain_EMap->setUnique(true);
 	m_stereotype_Operation_base_property_upper_bound_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stereotype_Operation_base_property_upper_bound_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29357,13 +28863,12 @@ void umlPackageImpl::initializeStereotypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stereotype_Operation_binaryAssociationsOnly_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_binaryAssociationsOnly_EDiagnosticChain_EMap->setName("binaryAssociationsOnly");
+	m_stereotype_Operation_binaryAssociationsOnly_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_binaryAssociationsOnly_EDiagnosticChain_EMap->setLowerBound(0);
 	m_stereotype_Operation_binaryAssociationsOnly_EDiagnosticChain_EMap->setUpperBound(1);
 	m_stereotype_Operation_binaryAssociationsOnly_EDiagnosticChain_EMap->setUnique(true);
 	m_stereotype_Operation_binaryAssociationsOnly_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stereotype_Operation_binaryAssociationsOnly_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29384,21 +28889,19 @@ void umlPackageImpl::initializeStereotypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stereotype_Operation_containingProfile->setEType(getProfile_Class());
 	m_stereotype_Operation_containingProfile->setName("containingProfile");
+	m_stereotype_Operation_containingProfile->setEType(getProfile_Class());
 	m_stereotype_Operation_containingProfile->setLowerBound(1);
 	m_stereotype_Operation_containingProfile->setUpperBound(1);
 	m_stereotype_Operation_containingProfile->setUnique(true);
 	m_stereotype_Operation_containingProfile->setOrdered(false);
 	
-	
-	m_stereotype_Operation_createExtension_Class_Boolean->setEType(getExtension_Class());
 	m_stereotype_Operation_createExtension_Class_Boolean->setName("createExtension");
+	m_stereotype_Operation_createExtension_Class_Boolean->setEType(getExtension_Class());
 	m_stereotype_Operation_createExtension_Class_Boolean->setLowerBound(1);
 	m_stereotype_Operation_createExtension_Class_Boolean->setUpperBound(1);
 	m_stereotype_Operation_createExtension_Class_Boolean->setUnique(true);
 	m_stereotype_Operation_createExtension_Class_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stereotype_Operation_createExtension_Class_Boolean);
 		parameter->setName("metaclass");
@@ -29419,13 +28922,12 @@ void umlPackageImpl::initializeStereotypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stereotype_Operation_createIcon_String->setEType(getImage_Class());
 	m_stereotype_Operation_createIcon_String->setName("createIcon");
+	m_stereotype_Operation_createIcon_String->setEType(getImage_Class());
 	m_stereotype_Operation_createIcon_String->setLowerBound(1);
 	m_stereotype_Operation_createIcon_String->setUpperBound(1);
 	m_stereotype_Operation_createIcon_String->setUnique(true);
 	m_stereotype_Operation_createIcon_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stereotype_Operation_createIcon_String);
 		parameter->setName("location");
@@ -29436,13 +28938,12 @@ void umlPackageImpl::initializeStereotypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stereotype_Operation_createIcon_String_String->setEType(getImage_Class());
 	m_stereotype_Operation_createIcon_String_String->setName("createIcon");
+	m_stereotype_Operation_createIcon_String_String->setEType(getImage_Class());
 	m_stereotype_Operation_createIcon_String_String->setLowerBound(1);
 	m_stereotype_Operation_createIcon_String_String->setUpperBound(1);
 	m_stereotype_Operation_createIcon_String_String->setUnique(true);
 	m_stereotype_Operation_createIcon_String_String->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stereotype_Operation_createIcon_String_String);
 		parameter->setName("format");
@@ -29463,13 +28964,12 @@ void umlPackageImpl::initializeStereotypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stereotype_Operation_generalize_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_generalize_EDiagnosticChain_EMap->setName("generalize");
+	m_stereotype_Operation_generalize_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_generalize_EDiagnosticChain_EMap->setLowerBound(0);
 	m_stereotype_Operation_generalize_EDiagnosticChain_EMap->setUpperBound(1);
 	m_stereotype_Operation_generalize_EDiagnosticChain_EMap->setUnique(true);
 	m_stereotype_Operation_generalize_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stereotype_Operation_generalize_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29490,45 +28990,40 @@ void umlPackageImpl::initializeStereotypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stereotype_Operation_getAllExtendedMetaclasses->setEType(getClass_Class());
 	m_stereotype_Operation_getAllExtendedMetaclasses->setName("getAllExtendedMetaclasses");
+	m_stereotype_Operation_getAllExtendedMetaclasses->setEType(getClass_Class());
 	m_stereotype_Operation_getAllExtendedMetaclasses->setLowerBound(0);
 	m_stereotype_Operation_getAllExtendedMetaclasses->setUpperBound(-1);
 	m_stereotype_Operation_getAllExtendedMetaclasses->setUnique(true);
 	m_stereotype_Operation_getAllExtendedMetaclasses->setOrdered(false);
 	
-	
-	m_stereotype_Operation_getDefinition->setEType(ecore::ecorePackage::eInstance()->getEClass_Class());
 	m_stereotype_Operation_getDefinition->setName("getDefinition");
+	m_stereotype_Operation_getDefinition->setEType(ecore::ecorePackage::eInstance()->getEClass_Class());
 	m_stereotype_Operation_getDefinition->setLowerBound(0);
 	m_stereotype_Operation_getDefinition->setUpperBound(1);
 	m_stereotype_Operation_getDefinition->setUnique(true);
 	m_stereotype_Operation_getDefinition->setOrdered(false);
 	
-	
-	m_stereotype_Operation_getExtendedMetaclasses->setEType(getClass_Class());
 	m_stereotype_Operation_getExtendedMetaclasses->setName("getExtendedMetaclasses");
+	m_stereotype_Operation_getExtendedMetaclasses->setEType(getClass_Class());
 	m_stereotype_Operation_getExtendedMetaclasses->setLowerBound(0);
 	m_stereotype_Operation_getExtendedMetaclasses->setUpperBound(-1);
 	m_stereotype_Operation_getExtendedMetaclasses->setUnique(true);
 	m_stereotype_Operation_getExtendedMetaclasses->setOrdered(false);
 	
-	
-	m_stereotype_Operation_getKeyword->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_stereotype_Operation_getKeyword->setName("getKeyword");
+	m_stereotype_Operation_getKeyword->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_stereotype_Operation_getKeyword->setLowerBound(1);
 	m_stereotype_Operation_getKeyword->setUpperBound(1);
 	m_stereotype_Operation_getKeyword->setUnique(true);
 	m_stereotype_Operation_getKeyword->setOrdered(false);
 	
-	
-	m_stereotype_Operation_getKeyword_Boolean->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_stereotype_Operation_getKeyword_Boolean->setName("getKeyword");
+	m_stereotype_Operation_getKeyword_Boolean->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_stereotype_Operation_getKeyword_Boolean->setLowerBound(1);
 	m_stereotype_Operation_getKeyword_Boolean->setUpperBound(1);
 	m_stereotype_Operation_getKeyword_Boolean->setUnique(true);
 	m_stereotype_Operation_getKeyword_Boolean->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stereotype_Operation_getKeyword_Boolean);
 		parameter->setName("localize");
@@ -29539,21 +29034,19 @@ void umlPackageImpl::initializeStereotypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stereotype_Operation_getProfile->setEType(getProfile_Class());
 	m_stereotype_Operation_getProfile->setName("getProfile");
+	m_stereotype_Operation_getProfile->setEType(getProfile_Class());
 	m_stereotype_Operation_getProfile->setLowerBound(1);
 	m_stereotype_Operation_getProfile->setUpperBound(1);
 	m_stereotype_Operation_getProfile->setUnique(true);
 	m_stereotype_Operation_getProfile->setOrdered(false);
 	
-	
-	m_stereotype_Operation_name_not_clash_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_name_not_clash_EDiagnosticChain_EMap->setName("name_not_clash");
+	m_stereotype_Operation_name_not_clash_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stereotype_Operation_name_not_clash_EDiagnosticChain_EMap->setLowerBound(0);
 	m_stereotype_Operation_name_not_clash_EDiagnosticChain_EMap->setUpperBound(1);
 	m_stereotype_Operation_name_not_clash_EDiagnosticChain_EMap->setUnique(true);
 	m_stereotype_Operation_name_not_clash_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stereotype_Operation_name_not_clash_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29635,13 +29128,12 @@ void umlPackageImpl::initializeStringExpressionContent()
 	    }
 	}
 	
-	m_stringExpression_Operation_operands_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stringExpression_Operation_operands_EDiagnosticChain_EMap->setName("operands");
+	m_stringExpression_Operation_operands_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stringExpression_Operation_operands_EDiagnosticChain_EMap->setLowerBound(0);
 	m_stringExpression_Operation_operands_EDiagnosticChain_EMap->setUpperBound(1);
 	m_stringExpression_Operation_operands_EDiagnosticChain_EMap->setUnique(true);
 	m_stringExpression_Operation_operands_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stringExpression_Operation_operands_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29662,13 +29154,12 @@ void umlPackageImpl::initializeStringExpressionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_stringExpression_Operation_subexpressions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stringExpression_Operation_subexpressions_EDiagnosticChain_EMap->setName("subexpressions");
+	m_stringExpression_Operation_subexpressions_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_stringExpression_Operation_subexpressions_EDiagnosticChain_EMap->setLowerBound(0);
 	m_stringExpression_Operation_subexpressions_EDiagnosticChain_EMap->setUpperBound(1);
 	m_stringExpression_Operation_subexpressions_EDiagnosticChain_EMap->setUnique(true);
 	m_stringExpression_Operation_subexpressions_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stringExpression_Operation_subexpressions_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29700,7 +29191,7 @@ void umlPackageImpl::initializeStructuralFeatureContent()
 	
 	m_structuralFeature_Attribute_isReadOnly = getStructuralFeature_Attribute_isReadOnly();
 	m_structuralFeature_Attribute_isReadOnly->setName("isReadOnly");
-	m_structuralFeature_Attribute_isReadOnly->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_structuralFeature_Attribute_isReadOnly->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_structuralFeature_Attribute_isReadOnly->setLowerBound(1);
 	m_structuralFeature_Attribute_isReadOnly->setUpperBound(1);
 	m_structuralFeature_Attribute_isReadOnly->setTransient(false);
@@ -29778,13 +29269,12 @@ void umlPackageImpl::initializeStructuralFeatureActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_structuralFeatureAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuralFeatureAction_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_structuralFeatureAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuralFeatureAction_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_structuralFeatureAction_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_structuralFeatureAction_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_structuralFeatureAction_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuralFeatureAction_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29805,13 +29295,12 @@ void umlPackageImpl::initializeStructuralFeatureActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_structuralFeatureAction_Operation_not_static_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuralFeatureAction_Operation_not_static_EDiagnosticChain_EMap->setName("not_static");
+	m_structuralFeatureAction_Operation_not_static_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuralFeatureAction_Operation_not_static_EDiagnosticChain_EMap->setLowerBound(0);
 	m_structuralFeatureAction_Operation_not_static_EDiagnosticChain_EMap->setUpperBound(1);
 	m_structuralFeatureAction_Operation_not_static_EDiagnosticChain_EMap->setUnique(true);
 	m_structuralFeatureAction_Operation_not_static_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuralFeatureAction_Operation_not_static_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29832,13 +29321,12 @@ void umlPackageImpl::initializeStructuralFeatureActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_structuralFeatureAction_Operation_object_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuralFeatureAction_Operation_object_type_EDiagnosticChain_EMap->setName("object_type");
+	m_structuralFeatureAction_Operation_object_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuralFeatureAction_Operation_object_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_structuralFeatureAction_Operation_object_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_structuralFeatureAction_Operation_object_type_EDiagnosticChain_EMap->setUnique(true);
 	m_structuralFeatureAction_Operation_object_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuralFeatureAction_Operation_object_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29859,13 +29347,12 @@ void umlPackageImpl::initializeStructuralFeatureActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_structuralFeatureAction_Operation_one_featuring_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuralFeatureAction_Operation_one_featuring_classifier_EDiagnosticChain_EMap->setName("one_featuring_classifier");
+	m_structuralFeatureAction_Operation_one_featuring_classifier_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuralFeatureAction_Operation_one_featuring_classifier_EDiagnosticChain_EMap->setLowerBound(0);
 	m_structuralFeatureAction_Operation_one_featuring_classifier_EDiagnosticChain_EMap->setUpperBound(1);
 	m_structuralFeatureAction_Operation_one_featuring_classifier_EDiagnosticChain_EMap->setUnique(true);
 	m_structuralFeatureAction_Operation_one_featuring_classifier_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuralFeatureAction_Operation_one_featuring_classifier_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29886,13 +29373,12 @@ void umlPackageImpl::initializeStructuralFeatureActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_structuralFeatureAction_Operation_visibility_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuralFeatureAction_Operation_visibility_EDiagnosticChain_EMap->setName("visibility");
+	m_structuralFeatureAction_Operation_visibility_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuralFeatureAction_Operation_visibility_EDiagnosticChain_EMap->setLowerBound(0);
 	m_structuralFeatureAction_Operation_visibility_EDiagnosticChain_EMap->setUpperBound(1);
 	m_structuralFeatureAction_Operation_visibility_EDiagnosticChain_EMap->setUnique(true);
 	m_structuralFeatureAction_Operation_visibility_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuralFeatureAction_Operation_visibility_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -29924,7 +29410,7 @@ void umlPackageImpl::initializeStructuredActivityNodeContent()
 	
 	m_structuredActivityNode_Attribute_mustIsolate = getStructuredActivityNode_Attribute_mustIsolate();
 	m_structuredActivityNode_Attribute_mustIsolate->setName("mustIsolate");
-	m_structuredActivityNode_Attribute_mustIsolate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_structuredActivityNode_Attribute_mustIsolate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_structuredActivityNode_Attribute_mustIsolate->setLowerBound(1);
 	m_structuredActivityNode_Attribute_mustIsolate->setUpperBound(1);
 	m_structuredActivityNode_Attribute_mustIsolate->setTransient(false);
@@ -30063,13 +29549,12 @@ void umlPackageImpl::initializeStructuredActivityNodeContent()
 	    }
 	}
 	
-	m_structuredActivityNode_Operation_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuredActivityNode_Operation_edges_EDiagnosticChain_EMap->setName("edges");
+	m_structuredActivityNode_Operation_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuredActivityNode_Operation_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_structuredActivityNode_Operation_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_structuredActivityNode_Operation_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_structuredActivityNode_Operation_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredActivityNode_Operation_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -30090,13 +29575,12 @@ void umlPackageImpl::initializeStructuredActivityNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_structuredActivityNode_Operation_input_pin_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuredActivityNode_Operation_input_pin_edges_EDiagnosticChain_EMap->setName("input_pin_edges");
+	m_structuredActivityNode_Operation_input_pin_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuredActivityNode_Operation_input_pin_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_structuredActivityNode_Operation_input_pin_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_structuredActivityNode_Operation_input_pin_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_structuredActivityNode_Operation_input_pin_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredActivityNode_Operation_input_pin_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -30117,13 +29601,12 @@ void umlPackageImpl::initializeStructuredActivityNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_structuredActivityNode_Operation_output_pin_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuredActivityNode_Operation_output_pin_edges_EDiagnosticChain_EMap->setName("output_pin_edges");
+	m_structuredActivityNode_Operation_output_pin_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_structuredActivityNode_Operation_output_pin_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_structuredActivityNode_Operation_output_pin_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_structuredActivityNode_Operation_output_pin_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_structuredActivityNode_Operation_output_pin_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredActivityNode_Operation_output_pin_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -30144,21 +29627,19 @@ void umlPackageImpl::initializeStructuredActivityNodeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_structuredActivityNode_Operation_sourceNodes->setEType(getActivityNode_Class());
 	m_structuredActivityNode_Operation_sourceNodes->setName("sourceNodes");
+	m_structuredActivityNode_Operation_sourceNodes->setEType(getActivityNode_Class());
 	m_structuredActivityNode_Operation_sourceNodes->setLowerBound(0);
 	m_structuredActivityNode_Operation_sourceNodes->setUpperBound(-1);
 	m_structuredActivityNode_Operation_sourceNodes->setUnique(true);
 	m_structuredActivityNode_Operation_sourceNodes->setOrdered(false);
 	
-	
-	m_structuredActivityNode_Operation_targetNodes->setEType(getActivityNode_Class());
 	m_structuredActivityNode_Operation_targetNodes->setName("targetNodes");
+	m_structuredActivityNode_Operation_targetNodes->setEType(getActivityNode_Class());
 	m_structuredActivityNode_Operation_targetNodes->setLowerBound(0);
 	m_structuredActivityNode_Operation_targetNodes->setUpperBound(-1);
 	m_structuredActivityNode_Operation_targetNodes->setUnique(true);
 	m_structuredActivityNode_Operation_targetNodes->setOrdered(false);
-	
 	
 	
 }
@@ -30265,21 +29746,19 @@ void umlPackageImpl::initializeStructuredClassifierContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_structuredClassifier_Operation_allRoles->setEType(getConnectableElement_Class());
 	m_structuredClassifier_Operation_allRoles->setName("allRoles");
+	m_structuredClassifier_Operation_allRoles->setEType(getConnectableElement_Class());
 	m_structuredClassifier_Operation_allRoles->setLowerBound(0);
 	m_structuredClassifier_Operation_allRoles->setUpperBound(-1);
 	m_structuredClassifier_Operation_allRoles->setUnique(true);
 	m_structuredClassifier_Operation_allRoles->setOrdered(false);
 	
-	
-	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
 	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->setName("createOwnedAttribute");
+	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->setEType(getProperty_Class());
 	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->setLowerBound(1);
 	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->setUpperBound(1);
 	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->setUnique(true);
 	m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredClassifier_Operation_createOwnedAttribute_String_UnlimitedNatural);
 		parameter->setName("name");
@@ -30320,13 +29799,12 @@ void umlPackageImpl::initializeStructuredClassifierContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_structuredClassifier_Operation_getParts->setEType(getProperty_Class());
 	m_structuredClassifier_Operation_getParts->setName("getParts");
+	m_structuredClassifier_Operation_getParts->setEType(getProperty_Class());
 	m_structuredClassifier_Operation_getParts->setLowerBound(0);
 	m_structuredClassifier_Operation_getParts->setUpperBound(-1);
 	m_structuredClassifier_Operation_getParts->setUnique(true);
 	m_structuredClassifier_Operation_getParts->setOrdered(false);
-	
 	
 	
 }
@@ -30469,13 +29947,12 @@ void umlPackageImpl::initializeTemplateBindingContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_templateBinding_Operation_one_parameter_substitution_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_templateBinding_Operation_one_parameter_substitution_EDiagnosticChain_EMap->setName("one_parameter_substitution");
+	m_templateBinding_Operation_one_parameter_substitution_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_templateBinding_Operation_one_parameter_substitution_EDiagnosticChain_EMap->setLowerBound(0);
 	m_templateBinding_Operation_one_parameter_substitution_EDiagnosticChain_EMap->setUpperBound(1);
 	m_templateBinding_Operation_one_parameter_substitution_EDiagnosticChain_EMap->setUnique(true);
 	m_templateBinding_Operation_one_parameter_substitution_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_templateBinding_Operation_one_parameter_substitution_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -30496,13 +29973,12 @@ void umlPackageImpl::initializeTemplateBindingContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_templateBinding_Operation_parameter_substitution_formal_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_templateBinding_Operation_parameter_substitution_formal_EDiagnosticChain_EMap->setName("parameter_substitution_formal");
+	m_templateBinding_Operation_parameter_substitution_formal_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_templateBinding_Operation_parameter_substitution_formal_EDiagnosticChain_EMap->setLowerBound(0);
 	m_templateBinding_Operation_parameter_substitution_formal_EDiagnosticChain_EMap->setUpperBound(1);
 	m_templateBinding_Operation_parameter_substitution_formal_EDiagnosticChain_EMap->setUnique(true);
 	m_templateBinding_Operation_parameter_substitution_formal_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_templateBinding_Operation_parameter_substitution_formal_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -30653,13 +30129,12 @@ void umlPackageImpl::initializeTemplateParameterContent()
 	    }
 	}
 	
-	m_templateParameter_Operation_must_be_compatible_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_templateParameter_Operation_must_be_compatible_EDiagnosticChain_EMap->setName("must_be_compatible");
+	m_templateParameter_Operation_must_be_compatible_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_templateParameter_Operation_must_be_compatible_EDiagnosticChain_EMap->setLowerBound(0);
 	m_templateParameter_Operation_must_be_compatible_EDiagnosticChain_EMap->setUpperBound(1);
 	m_templateParameter_Operation_must_be_compatible_EDiagnosticChain_EMap->setUnique(true);
 	m_templateParameter_Operation_must_be_compatible_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_templateParameter_Operation_must_be_compatible_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -30782,13 +30257,12 @@ void umlPackageImpl::initializeTemplateParameterSubstitutionContent()
 	    }
 	}
 	
-	m_templateParameterSubstitution_Operation_must_be_compatible_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_templateParameterSubstitution_Operation_must_be_compatible_EDiagnosticChain_EMap->setName("must_be_compatible");
+	m_templateParameterSubstitution_Operation_must_be_compatible_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_templateParameterSubstitution_Operation_must_be_compatible_EDiagnosticChain_EMap->setLowerBound(0);
 	m_templateParameterSubstitution_Operation_must_be_compatible_EDiagnosticChain_EMap->setUpperBound(1);
 	m_templateParameterSubstitution_Operation_must_be_compatible_EDiagnosticChain_EMap->setUnique(true);
 	m_templateParameterSubstitution_Operation_must_be_compatible_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_templateParameterSubstitution_Operation_must_be_compatible_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -30892,13 +30366,12 @@ void umlPackageImpl::initializeTemplateSignatureContent()
 	    }
 	}
 	
-	m_templateSignature_Operation_own_elements_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_templateSignature_Operation_own_elements_EDiagnosticChain_EMap->setName("own_elements");
+	m_templateSignature_Operation_own_elements_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_templateSignature_Operation_own_elements_EDiagnosticChain_EMap->setLowerBound(0);
 	m_templateSignature_Operation_own_elements_EDiagnosticChain_EMap->setUpperBound(1);
 	m_templateSignature_Operation_own_elements_EDiagnosticChain_EMap->setUnique(true);
 	m_templateSignature_Operation_own_elements_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_templateSignature_Operation_own_elements_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -30919,13 +30392,12 @@ void umlPackageImpl::initializeTemplateSignatureContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_templateSignature_Operation_unique_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_templateSignature_Operation_unique_parameters_EDiagnosticChain_EMap->setName("unique_parameters");
+	m_templateSignature_Operation_unique_parameters_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_templateSignature_Operation_unique_parameters_EDiagnosticChain_EMap->setLowerBound(0);
 	m_templateSignature_Operation_unique_parameters_EDiagnosticChain_EMap->setUpperBound(1);
 	m_templateSignature_Operation_unique_parameters_EDiagnosticChain_EMap->setUnique(true);
 	m_templateSignature_Operation_unique_parameters_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_templateSignature_Operation_unique_parameters_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31007,21 +30479,19 @@ void umlPackageImpl::initializeTemplateableElementContent()
 	    }
 	}
 	
-	m_templateableElement_Operation_isTemplate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_templateableElement_Operation_isTemplate->setName("isTemplate");
+	m_templateableElement_Operation_isTemplate->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_templateableElement_Operation_isTemplate->setLowerBound(1);
 	m_templateableElement_Operation_isTemplate->setUpperBound(1);
 	m_templateableElement_Operation_isTemplate->setUnique(true);
 	m_templateableElement_Operation_isTemplate->setOrdered(false);
 	
-	
-	m_templateableElement_Operation_parameterableElements->setEType(getParameterableElement_Class());
 	m_templateableElement_Operation_parameterableElements->setName("parameterableElements");
+	m_templateableElement_Operation_parameterableElements->setEType(getParameterableElement_Class());
 	m_templateableElement_Operation_parameterableElements->setLowerBound(0);
 	m_templateableElement_Operation_parameterableElements->setUpperBound(-1);
 	m_templateableElement_Operation_parameterableElements->setUnique(true);
 	m_templateableElement_Operation_parameterableElements->setOrdered(false);
-	
 	
 	
 }
@@ -31100,13 +30570,12 @@ void umlPackageImpl::initializeTestIdentityActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_testIdentityAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_testIdentityAction_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_testIdentityAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_testIdentityAction_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_testIdentityAction_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_testIdentityAction_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_testIdentityAction_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_testIdentityAction_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31127,13 +30596,12 @@ void umlPackageImpl::initializeTestIdentityActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_testIdentityAction_Operation_no_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_testIdentityAction_Operation_no_type_EDiagnosticChain_EMap->setName("no_type");
+	m_testIdentityAction_Operation_no_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_testIdentityAction_Operation_no_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_testIdentityAction_Operation_no_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_testIdentityAction_Operation_no_type_EDiagnosticChain_EMap->setUnique(true);
 	m_testIdentityAction_Operation_no_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_testIdentityAction_Operation_no_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31154,13 +30622,12 @@ void umlPackageImpl::initializeTestIdentityActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_testIdentityAction_Operation_result_is_boolean_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_testIdentityAction_Operation_result_is_boolean_EDiagnosticChain_EMap->setName("result_is_boolean");
+	m_testIdentityAction_Operation_result_is_boolean_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_testIdentityAction_Operation_result_is_boolean_EDiagnosticChain_EMap->setLowerBound(0);
 	m_testIdentityAction_Operation_result_is_boolean_EDiagnosticChain_EMap->setUpperBound(1);
 	m_testIdentityAction_Operation_result_is_boolean_EDiagnosticChain_EMap->setUnique(true);
 	m_testIdentityAction_Operation_result_is_boolean_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_testIdentityAction_Operation_result_is_boolean_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31192,7 +30659,7 @@ void umlPackageImpl::initializeTimeConstraintContent()
 	
 	m_timeConstraint_Attribute_firstEvent = getTimeConstraint_Attribute_firstEvent();
 	m_timeConstraint_Attribute_firstEvent->setName("firstEvent");
-	m_timeConstraint_Attribute_firstEvent->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_timeConstraint_Attribute_firstEvent->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_timeConstraint_Attribute_firstEvent->setLowerBound(0);
 	m_timeConstraint_Attribute_firstEvent->setUpperBound(1);
 	m_timeConstraint_Attribute_firstEvent->setTransient(false);
@@ -31212,13 +30679,12 @@ void umlPackageImpl::initializeTimeConstraintContent()
 	}
 	
 	
-	m_timeConstraint_Operation_has_one_constrainedElement_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_timeConstraint_Operation_has_one_constrainedElement_EDiagnosticChain_EMap->setName("has_one_constrainedElement");
+	m_timeConstraint_Operation_has_one_constrainedElement_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_timeConstraint_Operation_has_one_constrainedElement_EDiagnosticChain_EMap->setLowerBound(0);
 	m_timeConstraint_Operation_has_one_constrainedElement_EDiagnosticChain_EMap->setUpperBound(1);
 	m_timeConstraint_Operation_has_one_constrainedElement_EDiagnosticChain_EMap->setUnique(true);
 	m_timeConstraint_Operation_has_one_constrainedElement_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_timeConstraint_Operation_has_one_constrainedElement_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31250,7 +30716,7 @@ void umlPackageImpl::initializeTimeEventContent()
 	
 	m_timeEvent_Attribute_isRelative = getTimeEvent_Attribute_isRelative();
 	m_timeEvent_Attribute_isRelative->setName("isRelative");
-	m_timeEvent_Attribute_isRelative->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_timeEvent_Attribute_isRelative->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_timeEvent_Attribute_isRelative->setLowerBound(1);
 	m_timeEvent_Attribute_isRelative->setUpperBound(1);
 	m_timeEvent_Attribute_isRelative->setTransient(false);
@@ -31292,13 +30758,12 @@ void umlPackageImpl::initializeTimeEventContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_timeEvent_Operation_when_non_negative_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_timeEvent_Operation_when_non_negative_EDiagnosticChain_EMap->setName("when_non_negative");
+	m_timeEvent_Operation_when_non_negative_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_timeEvent_Operation_when_non_negative_EDiagnosticChain_EMap->setLowerBound(0);
 	m_timeEvent_Operation_when_non_negative_EDiagnosticChain_EMap->setUpperBound(1);
 	m_timeEvent_Operation_when_non_negative_EDiagnosticChain_EMap->setUnique(true);
 	m_timeEvent_Operation_when_non_negative_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_timeEvent_Operation_when_non_negative_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31374,13 +30839,12 @@ void umlPackageImpl::initializeTimeExpressionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_timeExpression_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_timeExpression_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setName("no_expr_requires_observation");
+	m_timeExpression_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_timeExpression_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setLowerBound(0);
 	m_timeExpression_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setUpperBound(1);
 	m_timeExpression_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setUnique(true);
 	m_timeExpression_Operation_no_expr_requires_observation_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_timeExpression_Operation_no_expr_requires_observation_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31423,7 +30887,7 @@ void umlPackageImpl::initializeTimeObservationContent()
 	
 	m_timeObservation_Attribute_firstEvent = getTimeObservation_Attribute_firstEvent();
 	m_timeObservation_Attribute_firstEvent->setName("firstEvent");
-	m_timeObservation_Attribute_firstEvent->setEType(types::typesPackage::eInstance()->getBoolean_Class());
+		m_timeObservation_Attribute_firstEvent->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_timeObservation_Attribute_firstEvent->setLowerBound(1);
 	m_timeObservation_Attribute_firstEvent->setUpperBound(1);
 	m_timeObservation_Attribute_firstEvent->setTransient(false);
@@ -31476,7 +30940,7 @@ void umlPackageImpl::initializeTransitionContent()
 	
 	m_transition_Attribute_kind = getTransition_Attribute_kind();
 	m_transition_Attribute_kind->setName("kind");
-	m_transition_Attribute_kind->setEType(getTransitionKind_Class());
+		m_transition_Attribute_kind->setEType(getTransitionKind_Class());
 	m_transition_Attribute_kind->setLowerBound(1);
 	m_transition_Attribute_kind->setUpperBound(1);
 	m_transition_Attribute_kind->setTransient(false);
@@ -31653,21 +31117,19 @@ void umlPackageImpl::initializeTransitionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_transition_Operation_containingStateMachine->setEType(getStateMachine_Class());
 	m_transition_Operation_containingStateMachine->setName("containingStateMachine");
+	m_transition_Operation_containingStateMachine->setEType(getStateMachine_Class());
 	m_transition_Operation_containingStateMachine->setLowerBound(1);
 	m_transition_Operation_containingStateMachine->setUpperBound(1);
 	m_transition_Operation_containingStateMachine->setUnique(true);
 	m_transition_Operation_containingStateMachine->setOrdered(false);
 	
-	
-	m_transition_Operation_fork_segment_guards_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_fork_segment_guards_EDiagnosticChain_EMap->setName("fork_segment_guards");
+	m_transition_Operation_fork_segment_guards_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_fork_segment_guards_EDiagnosticChain_EMap->setLowerBound(0);
 	m_transition_Operation_fork_segment_guards_EDiagnosticChain_EMap->setUpperBound(1);
 	m_transition_Operation_fork_segment_guards_EDiagnosticChain_EMap->setUnique(true);
 	m_transition_Operation_fork_segment_guards_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_transition_Operation_fork_segment_guards_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31688,13 +31150,12 @@ void umlPackageImpl::initializeTransitionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_transition_Operation_fork_segment_state_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_fork_segment_state_EDiagnosticChain_EMap->setName("fork_segment_state");
+	m_transition_Operation_fork_segment_state_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_fork_segment_state_EDiagnosticChain_EMap->setLowerBound(0);
 	m_transition_Operation_fork_segment_state_EDiagnosticChain_EMap->setUpperBound(1);
 	m_transition_Operation_fork_segment_state_EDiagnosticChain_EMap->setUnique(true);
 	m_transition_Operation_fork_segment_state_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_transition_Operation_fork_segment_state_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31715,13 +31176,12 @@ void umlPackageImpl::initializeTransitionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_transition_Operation_initial_transition_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_initial_transition_EDiagnosticChain_EMap->setName("initial_transition");
+	m_transition_Operation_initial_transition_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_initial_transition_EDiagnosticChain_EMap->setLowerBound(0);
 	m_transition_Operation_initial_transition_EDiagnosticChain_EMap->setUpperBound(1);
 	m_transition_Operation_initial_transition_EDiagnosticChain_EMap->setUnique(true);
 	m_transition_Operation_initial_transition_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_transition_Operation_initial_transition_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31742,13 +31202,12 @@ void umlPackageImpl::initializeTransitionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_transition_Operation_join_segment_guards_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_join_segment_guards_EDiagnosticChain_EMap->setName("join_segment_guards");
+	m_transition_Operation_join_segment_guards_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_join_segment_guards_EDiagnosticChain_EMap->setLowerBound(0);
 	m_transition_Operation_join_segment_guards_EDiagnosticChain_EMap->setUpperBound(1);
 	m_transition_Operation_join_segment_guards_EDiagnosticChain_EMap->setUnique(true);
 	m_transition_Operation_join_segment_guards_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_transition_Operation_join_segment_guards_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31769,13 +31228,12 @@ void umlPackageImpl::initializeTransitionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_transition_Operation_join_segment_state_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_join_segment_state_EDiagnosticChain_EMap->setName("join_segment_state");
+	m_transition_Operation_join_segment_state_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_join_segment_state_EDiagnosticChain_EMap->setLowerBound(0);
 	m_transition_Operation_join_segment_state_EDiagnosticChain_EMap->setUpperBound(1);
 	m_transition_Operation_join_segment_state_EDiagnosticChain_EMap->setUnique(true);
 	m_transition_Operation_join_segment_state_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_transition_Operation_join_segment_state_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31796,13 +31254,12 @@ void umlPackageImpl::initializeTransitionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_transition_Operation_outgoing_pseudostates_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_outgoing_pseudostates_EDiagnosticChain_EMap->setName("outgoing_pseudostates");
+	m_transition_Operation_outgoing_pseudostates_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_outgoing_pseudostates_EDiagnosticChain_EMap->setLowerBound(0);
 	m_transition_Operation_outgoing_pseudostates_EDiagnosticChain_EMap->setUpperBound(1);
 	m_transition_Operation_outgoing_pseudostates_EDiagnosticChain_EMap->setUnique(true);
 	m_transition_Operation_outgoing_pseudostates_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_transition_Operation_outgoing_pseudostates_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31823,21 +31280,19 @@ void umlPackageImpl::initializeTransitionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_transition_Operation_redefinitionContext->setEType(getClassifier_Class());
 	m_transition_Operation_redefinitionContext->setName("redefinitionContext");
+	m_transition_Operation_redefinitionContext->setEType(getClassifier_Class());
 	m_transition_Operation_redefinitionContext->setLowerBound(1);
 	m_transition_Operation_redefinitionContext->setUpperBound(1);
 	m_transition_Operation_redefinitionContext->setUnique(true);
 	m_transition_Operation_redefinitionContext->setOrdered(false);
 	
-	
-	m_transition_Operation_state_is_external_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_state_is_external_EDiagnosticChain_EMap->setName("state_is_external");
+	m_transition_Operation_state_is_external_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_state_is_external_EDiagnosticChain_EMap->setLowerBound(0);
 	m_transition_Operation_state_is_external_EDiagnosticChain_EMap->setUpperBound(1);
 	m_transition_Operation_state_is_external_EDiagnosticChain_EMap->setUnique(true);
 	m_transition_Operation_state_is_external_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_transition_Operation_state_is_external_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31858,13 +31313,12 @@ void umlPackageImpl::initializeTransitionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_transition_Operation_state_is_internal_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_state_is_internal_EDiagnosticChain_EMap->setName("state_is_internal");
+	m_transition_Operation_state_is_internal_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_state_is_internal_EDiagnosticChain_EMap->setLowerBound(0);
 	m_transition_Operation_state_is_internal_EDiagnosticChain_EMap->setUpperBound(1);
 	m_transition_Operation_state_is_internal_EDiagnosticChain_EMap->setUnique(true);
 	m_transition_Operation_state_is_internal_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_transition_Operation_state_is_internal_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31885,13 +31339,12 @@ void umlPackageImpl::initializeTransitionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_transition_Operation_state_is_local_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_state_is_local_EDiagnosticChain_EMap->setName("state_is_local");
+	m_transition_Operation_state_is_local_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_transition_Operation_state_is_local_EDiagnosticChain_EMap->setLowerBound(0);
 	m_transition_Operation_state_is_local_EDiagnosticChain_EMap->setUpperBound(1);
 	m_transition_Operation_state_is_local_EDiagnosticChain_EMap->setUnique(true);
 	m_transition_Operation_state_is_local_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_transition_Operation_state_is_local_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -31967,13 +31420,12 @@ void umlPackageImpl::initializeTriggerContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_trigger_Operation_trigger_with_ports_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_trigger_Operation_trigger_with_ports_EDiagnosticChain_EMap->setName("trigger_with_ports");
+	m_trigger_Operation_trigger_with_ports_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_trigger_Operation_trigger_with_ports_EDiagnosticChain_EMap->setLowerBound(0);
 	m_trigger_Operation_trigger_with_ports_EDiagnosticChain_EMap->setUpperBound(1);
 	m_trigger_Operation_trigger_with_ports_EDiagnosticChain_EMap->setUnique(true);
 	m_trigger_Operation_trigger_with_ports_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_trigger_Operation_trigger_with_ports_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -32030,13 +31482,12 @@ void umlPackageImpl::initializeTypeContent()
 	    }
 	}
 	
-	m_type_Operation_conformsTo_Type->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_type_Operation_conformsTo_Type->setName("conformsTo");
+	m_type_Operation_conformsTo_Type->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_type_Operation_conformsTo_Type->setLowerBound(1);
 	m_type_Operation_conformsTo_Type->setUpperBound(1);
 	m_type_Operation_conformsTo_Type->setUnique(true);
 	m_type_Operation_conformsTo_Type->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_type_Operation_conformsTo_Type);
 		parameter->setName("other");
@@ -32047,13 +31498,12 @@ void umlPackageImpl::initializeTypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->setEType(getAssociation_Class());
 	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->setName("createAssociation");
+	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->setEType(getAssociation_Class());
 	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->setLowerBound(1);
 	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->setUpperBound(1);
 	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->setUnique(true);
 	m_type_Operation_createAssociation_Boolean_UnlimitedNatural->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_type_Operation_createAssociation_Boolean_UnlimitedNatural);
 		parameter->setName("end1IsNavigable");
@@ -32164,13 +31614,12 @@ void umlPackageImpl::initializeTypeContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_type_Operation_getAssociations->setEType(getAssociation_Class());
 	m_type_Operation_getAssociations->setName("getAssociations");
+	m_type_Operation_getAssociations->setEType(getAssociation_Class());
 	m_type_Operation_getAssociations->setLowerBound(0);
 	m_type_Operation_getAssociations->setUpperBound(-1);
 	m_type_Operation_getAssociations->setUnique(true);
 	m_type_Operation_getAssociations->setOrdered(false);
-	
 	
 	
 }
@@ -32282,13 +31731,12 @@ void umlPackageImpl::initializeUnmarshallActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_unmarshallAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_unmarshallAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setName("multiplicity_of_object");
+	m_unmarshallAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_unmarshallAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setLowerBound(0);
 	m_unmarshallAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setUpperBound(1);
 	m_unmarshallAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setUnique(true);
 	m_unmarshallAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_unmarshallAction_Operation_multiplicity_of_object_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -32309,13 +31757,12 @@ void umlPackageImpl::initializeUnmarshallActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_unmarshallAction_Operation_number_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_unmarshallAction_Operation_number_of_result_EDiagnosticChain_EMap->setName("number_of_result");
+	m_unmarshallAction_Operation_number_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_unmarshallAction_Operation_number_of_result_EDiagnosticChain_EMap->setLowerBound(0);
 	m_unmarshallAction_Operation_number_of_result_EDiagnosticChain_EMap->setUpperBound(1);
 	m_unmarshallAction_Operation_number_of_result_EDiagnosticChain_EMap->setUnique(true);
 	m_unmarshallAction_Operation_number_of_result_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_unmarshallAction_Operation_number_of_result_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -32336,13 +31783,12 @@ void umlPackageImpl::initializeUnmarshallActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_unmarshallAction_Operation_object_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_unmarshallAction_Operation_object_type_EDiagnosticChain_EMap->setName("object_type");
+	m_unmarshallAction_Operation_object_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_unmarshallAction_Operation_object_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_unmarshallAction_Operation_object_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_unmarshallAction_Operation_object_type_EDiagnosticChain_EMap->setUnique(true);
 	m_unmarshallAction_Operation_object_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_unmarshallAction_Operation_object_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -32363,13 +31809,12 @@ void umlPackageImpl::initializeUnmarshallActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_unmarshallAction_Operation_structural_feature_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_unmarshallAction_Operation_structural_feature_EDiagnosticChain_EMap->setName("structural_feature");
+	m_unmarshallAction_Operation_structural_feature_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_unmarshallAction_Operation_structural_feature_EDiagnosticChain_EMap->setLowerBound(0);
 	m_unmarshallAction_Operation_structural_feature_EDiagnosticChain_EMap->setUpperBound(1);
 	m_unmarshallAction_Operation_structural_feature_EDiagnosticChain_EMap->setUnique(true);
 	m_unmarshallAction_Operation_structural_feature_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_unmarshallAction_Operation_structural_feature_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -32390,13 +31835,12 @@ void umlPackageImpl::initializeUnmarshallActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_unmarshallAction_Operation_type_ordering_and_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_unmarshallAction_Operation_type_ordering_and_multiplicity_EDiagnosticChain_EMap->setName("type_ordering_and_multiplicity");
+	m_unmarshallAction_Operation_type_ordering_and_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_unmarshallAction_Operation_type_ordering_and_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_unmarshallAction_Operation_type_ordering_and_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_unmarshallAction_Operation_type_ordering_and_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_unmarshallAction_Operation_type_ordering_and_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_unmarshallAction_Operation_type_ordering_and_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -32539,21 +31983,19 @@ void umlPackageImpl::initializeUseCaseContent()
 	    }
 	}
 	
-	m_useCase_Operation_allIncludedUseCases->setEType(getUseCase_Class());
 	m_useCase_Operation_allIncludedUseCases->setName("allIncludedUseCases");
+	m_useCase_Operation_allIncludedUseCases->setEType(getUseCase_Class());
 	m_useCase_Operation_allIncludedUseCases->setLowerBound(0);
 	m_useCase_Operation_allIncludedUseCases->setUpperBound(-1);
 	m_useCase_Operation_allIncludedUseCases->setUnique(true);
 	m_useCase_Operation_allIncludedUseCases->setOrdered(false);
 	
-	
-	m_useCase_Operation_binary_associations_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_useCase_Operation_binary_associations_EDiagnosticChain_EMap->setName("binary_associations");
+	m_useCase_Operation_binary_associations_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_useCase_Operation_binary_associations_EDiagnosticChain_EMap->setLowerBound(0);
 	m_useCase_Operation_binary_associations_EDiagnosticChain_EMap->setUpperBound(1);
 	m_useCase_Operation_binary_associations_EDiagnosticChain_EMap->setUnique(true);
 	m_useCase_Operation_binary_associations_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_useCase_Operation_binary_associations_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -32574,13 +32016,12 @@ void umlPackageImpl::initializeUseCaseContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_useCase_Operation_cannot_include_self_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_useCase_Operation_cannot_include_self_EDiagnosticChain_EMap->setName("cannot_include_self");
+	m_useCase_Operation_cannot_include_self_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_useCase_Operation_cannot_include_self_EDiagnosticChain_EMap->setLowerBound(0);
 	m_useCase_Operation_cannot_include_self_EDiagnosticChain_EMap->setUpperBound(1);
 	m_useCase_Operation_cannot_include_self_EDiagnosticChain_EMap->setUnique(true);
 	m_useCase_Operation_cannot_include_self_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_useCase_Operation_cannot_include_self_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -32601,13 +32042,12 @@ void umlPackageImpl::initializeUseCaseContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_useCase_Operation_must_have_name_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_useCase_Operation_must_have_name_EDiagnosticChain_EMap->setName("must_have_name");
+	m_useCase_Operation_must_have_name_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_useCase_Operation_must_have_name_EDiagnosticChain_EMap->setLowerBound(0);
 	m_useCase_Operation_must_have_name_EDiagnosticChain_EMap->setUpperBound(1);
 	m_useCase_Operation_must_have_name_EDiagnosticChain_EMap->setUnique(true);
 	m_useCase_Operation_must_have_name_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_useCase_Operation_must_have_name_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -32628,13 +32068,12 @@ void umlPackageImpl::initializeUseCaseContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_useCase_Operation_no_association_to_use_case_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_useCase_Operation_no_association_to_use_case_EDiagnosticChain_EMap->setName("no_association_to_use_case");
+	m_useCase_Operation_no_association_to_use_case_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_useCase_Operation_no_association_to_use_case_EDiagnosticChain_EMap->setLowerBound(0);
 	m_useCase_Operation_no_association_to_use_case_EDiagnosticChain_EMap->setUpperBound(1);
 	m_useCase_Operation_no_association_to_use_case_EDiagnosticChain_EMap->setUnique(true);
 	m_useCase_Operation_no_association_to_use_case_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_useCase_Operation_no_association_to_use_case_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -32688,13 +32127,12 @@ void umlPackageImpl::initializeValuePinContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_valuePin_Operation_compatible_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_valuePin_Operation_compatible_type_EDiagnosticChain_EMap->setName("compatible_type");
+	m_valuePin_Operation_compatible_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_valuePin_Operation_compatible_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_valuePin_Operation_compatible_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_valuePin_Operation_compatible_type_EDiagnosticChain_EMap->setUnique(true);
 	m_valuePin_Operation_compatible_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_valuePin_Operation_compatible_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -32715,13 +32153,12 @@ void umlPackageImpl::initializeValuePinContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_valuePin_Operation_no_incoming_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_valuePin_Operation_no_incoming_edges_EDiagnosticChain_EMap->setName("no_incoming_edges");
+	m_valuePin_Operation_no_incoming_edges_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_valuePin_Operation_no_incoming_edges_EDiagnosticChain_EMap->setLowerBound(0);
 	m_valuePin_Operation_no_incoming_edges_EDiagnosticChain_EMap->setUpperBound(1);
 	m_valuePin_Operation_no_incoming_edges_EDiagnosticChain_EMap->setUnique(true);
 	m_valuePin_Operation_no_incoming_edges_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_valuePin_Operation_no_incoming_edges_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -32803,61 +32240,54 @@ void umlPackageImpl::initializeValueSpecificationContent()
 	    }
 	}
 	
-	m_valueSpecification_Operation_booleanValue->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_valueSpecification_Operation_booleanValue->setName("booleanValue");
+	m_valueSpecification_Operation_booleanValue->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_valueSpecification_Operation_booleanValue->setLowerBound(0);
 	m_valueSpecification_Operation_booleanValue->setUpperBound(1);
 	m_valueSpecification_Operation_booleanValue->setUnique(true);
 	m_valueSpecification_Operation_booleanValue->setOrdered(false);
 	
-	
-	m_valueSpecification_Operation_integerValue->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_valueSpecification_Operation_integerValue->setName("integerValue");
+	m_valueSpecification_Operation_integerValue->setEType(types::typesPackage::eInstance()->getInteger_Class());
 	m_valueSpecification_Operation_integerValue->setLowerBound(0);
 	m_valueSpecification_Operation_integerValue->setUpperBound(1);
 	m_valueSpecification_Operation_integerValue->setUnique(true);
 	m_valueSpecification_Operation_integerValue->setOrdered(false);
 	
-	
-	m_valueSpecification_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_valueSpecification_Operation_isComputable->setName("isComputable");
+	m_valueSpecification_Operation_isComputable->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_valueSpecification_Operation_isComputable->setLowerBound(1);
 	m_valueSpecification_Operation_isComputable->setUpperBound(1);
 	m_valueSpecification_Operation_isComputable->setUnique(true);
 	m_valueSpecification_Operation_isComputable->setOrdered(false);
 	
-	
-	m_valueSpecification_Operation_isNull->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_valueSpecification_Operation_isNull->setName("isNull");
+	m_valueSpecification_Operation_isNull->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_valueSpecification_Operation_isNull->setLowerBound(1);
 	m_valueSpecification_Operation_isNull->setUpperBound(1);
 	m_valueSpecification_Operation_isNull->setUnique(true);
 	m_valueSpecification_Operation_isNull->setOrdered(false);
 	
-	
-	m_valueSpecification_Operation_realValue->setEType(types::typesPackage::eInstance()->getReal_Class());
 	m_valueSpecification_Operation_realValue->setName("realValue");
+	m_valueSpecification_Operation_realValue->setEType(types::typesPackage::eInstance()->getReal_Class());
 	m_valueSpecification_Operation_realValue->setLowerBound(0);
 	m_valueSpecification_Operation_realValue->setUpperBound(1);
 	m_valueSpecification_Operation_realValue->setUnique(true);
 	m_valueSpecification_Operation_realValue->setOrdered(false);
 	
-	
-	m_valueSpecification_Operation_stringValue->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_valueSpecification_Operation_stringValue->setName("stringValue");
+	m_valueSpecification_Operation_stringValue->setEType(types::typesPackage::eInstance()->getString_Class());
 	m_valueSpecification_Operation_stringValue->setLowerBound(0);
 	m_valueSpecification_Operation_stringValue->setUpperBound(1);
 	m_valueSpecification_Operation_stringValue->setUnique(true);
 	m_valueSpecification_Operation_stringValue->setOrdered(false);
 	
-	
-	m_valueSpecification_Operation_unlimitedValue->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_valueSpecification_Operation_unlimitedValue->setName("unlimitedValue");
+	m_valueSpecification_Operation_unlimitedValue->setEType(types::typesPackage::eInstance()->getUnlimitedNatural_Class());
 	m_valueSpecification_Operation_unlimitedValue->setLowerBound(0);
 	m_valueSpecification_Operation_unlimitedValue->setUpperBound(1);
 	m_valueSpecification_Operation_unlimitedValue->setUnique(true);
 	m_valueSpecification_Operation_unlimitedValue->setOrdered(false);
-	
 	
 	
 }
@@ -32920,13 +32350,12 @@ void umlPackageImpl::initializeValueSpecificationActionContent()
 	    }
 	}
 	
-	m_valueSpecificationAction_Operation_compatible_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_valueSpecificationAction_Operation_compatible_type_EDiagnosticChain_EMap->setName("compatible_type");
+	m_valueSpecificationAction_Operation_compatible_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_valueSpecificationAction_Operation_compatible_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_valueSpecificationAction_Operation_compatible_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_valueSpecificationAction_Operation_compatible_type_EDiagnosticChain_EMap->setUnique(true);
 	m_valueSpecificationAction_Operation_compatible_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_valueSpecificationAction_Operation_compatible_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -32947,13 +32376,12 @@ void umlPackageImpl::initializeValueSpecificationActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_valueSpecificationAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_valueSpecificationAction_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_valueSpecificationAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_valueSpecificationAction_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_valueSpecificationAction_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_valueSpecificationAction_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_valueSpecificationAction_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_valueSpecificationAction_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -33035,13 +32463,12 @@ void umlPackageImpl::initializeVariableContent()
 	    }
 	}
 	
-	m_variable_Operation_isAccessibleBy_Action->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_variable_Operation_isAccessibleBy_Action->setName("isAccessibleBy");
+	m_variable_Operation_isAccessibleBy_Action->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_variable_Operation_isAccessibleBy_Action->setLowerBound(1);
 	m_variable_Operation_isAccessibleBy_Action->setUpperBound(1);
 	m_variable_Operation_isAccessibleBy_Action->setUnique(true);
 	m_variable_Operation_isAccessibleBy_Action->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_variable_Operation_isAccessibleBy_Action);
 		parameter->setName("a");
@@ -33085,13 +32512,12 @@ void umlPackageImpl::initializeVariableActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_variableAction_Operation_scope_of_variable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_variableAction_Operation_scope_of_variable_EDiagnosticChain_EMap->setName("scope_of_variable");
+	m_variableAction_Operation_scope_of_variable_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_variableAction_Operation_scope_of_variable_EDiagnosticChain_EMap->setLowerBound(0);
 	m_variableAction_Operation_scope_of_variable_EDiagnosticChain_EMap->setUpperBound(1);
 	m_variableAction_Operation_scope_of_variable_EDiagnosticChain_EMap->setUnique(true);
 	m_variableAction_Operation_scope_of_variable_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_variableAction_Operation_scope_of_variable_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -33192,37 +32618,33 @@ void umlPackageImpl::initializeVertexContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_vertex_Operation_containingStateMachine->setEType(getStateMachine_Class());
 	m_vertex_Operation_containingStateMachine->setName("containingStateMachine");
+	m_vertex_Operation_containingStateMachine->setEType(getStateMachine_Class());
 	m_vertex_Operation_containingStateMachine->setLowerBound(1);
 	m_vertex_Operation_containingStateMachine->setUpperBound(1);
 	m_vertex_Operation_containingStateMachine->setUnique(true);
 	m_vertex_Operation_containingStateMachine->setOrdered(false);
 	
-	
-	m_vertex_Operation_getIncomings->setEType(getTransition_Class());
 	m_vertex_Operation_getIncomings->setName("getIncomings");
+	m_vertex_Operation_getIncomings->setEType(getTransition_Class());
 	m_vertex_Operation_getIncomings->setLowerBound(0);
 	m_vertex_Operation_getIncomings->setUpperBound(-1);
 	m_vertex_Operation_getIncomings->setUnique(true);
 	m_vertex_Operation_getIncomings->setOrdered(false);
 	
-	
-	m_vertex_Operation_getOutgoings->setEType(getTransition_Class());
 	m_vertex_Operation_getOutgoings->setName("getOutgoings");
+	m_vertex_Operation_getOutgoings->setEType(getTransition_Class());
 	m_vertex_Operation_getOutgoings->setLowerBound(0);
 	m_vertex_Operation_getOutgoings->setUpperBound(-1);
 	m_vertex_Operation_getOutgoings->setUnique(true);
 	m_vertex_Operation_getOutgoings->setOrdered(false);
 	
-	
-	m_vertex_Operation_isContainedInRegion_Region->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_vertex_Operation_isContainedInRegion_Region->setName("isContainedInRegion");
+	m_vertex_Operation_isContainedInRegion_Region->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_vertex_Operation_isContainedInRegion_Region->setLowerBound(1);
 	m_vertex_Operation_isContainedInRegion_Region->setUpperBound(1);
 	m_vertex_Operation_isContainedInRegion_Region->setUnique(true);
 	m_vertex_Operation_isContainedInRegion_Region->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_vertex_Operation_isContainedInRegion_Region);
 		parameter->setName("r");
@@ -33233,13 +32655,12 @@ void umlPackageImpl::initializeVertexContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_vertex_Operation_isContainedInState_State->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_vertex_Operation_isContainedInState_State->setName("isContainedInState");
+	m_vertex_Operation_isContainedInState_State->setEType(types::typesPackage::eInstance()->getBoolean_Class());
 	m_vertex_Operation_isContainedInState_State->setLowerBound(1);
 	m_vertex_Operation_isContainedInState_State->setUpperBound(1);
 	m_vertex_Operation_isContainedInState_State->setUnique(true);
 	m_vertex_Operation_isContainedInState_State->setOrdered(false);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_vertex_Operation_isContainedInState_State);
 		parameter->setName("s");
@@ -33261,13 +32682,12 @@ void umlPackageImpl::initializeWriteLinkActionContent()
 	
 	
 	
-	m_writeLinkAction_Operation_allow_access_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeLinkAction_Operation_allow_access_EDiagnosticChain_EMap->setName("allow_access");
+	m_writeLinkAction_Operation_allow_access_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeLinkAction_Operation_allow_access_EDiagnosticChain_EMap->setLowerBound(0);
 	m_writeLinkAction_Operation_allow_access_EDiagnosticChain_EMap->setUpperBound(1);
 	m_writeLinkAction_Operation_allow_access_EDiagnosticChain_EMap->setUnique(true);
 	m_writeLinkAction_Operation_allow_access_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_writeLinkAction_Operation_allow_access_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -33349,13 +32769,12 @@ void umlPackageImpl::initializeWriteStructuralFeatureActionContent()
 	    }
 	}
 	
-	m_writeStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setName("multiplicity_of_result");
+	m_writeStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setLowerBound(0);
 	m_writeStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setUpperBound(1);
 	m_writeStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setUnique(true);
 	m_writeStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_writeStructuralFeatureAction_Operation_multiplicity_of_result_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -33376,13 +32795,12 @@ void umlPackageImpl::initializeWriteStructuralFeatureActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_writeStructuralFeatureAction_Operation_multiplicity_of_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeStructuralFeatureAction_Operation_multiplicity_of_value_EDiagnosticChain_EMap->setName("multiplicity_of_value");
+	m_writeStructuralFeatureAction_Operation_multiplicity_of_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeStructuralFeatureAction_Operation_multiplicity_of_value_EDiagnosticChain_EMap->setLowerBound(0);
 	m_writeStructuralFeatureAction_Operation_multiplicity_of_value_EDiagnosticChain_EMap->setUpperBound(1);
 	m_writeStructuralFeatureAction_Operation_multiplicity_of_value_EDiagnosticChain_EMap->setUnique(true);
 	m_writeStructuralFeatureAction_Operation_multiplicity_of_value_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_writeStructuralFeatureAction_Operation_multiplicity_of_value_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -33403,13 +32821,12 @@ void umlPackageImpl::initializeWriteStructuralFeatureActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_writeStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setName("type_of_result");
+	m_writeStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setLowerBound(0);
 	m_writeStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setUpperBound(1);
 	m_writeStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setUnique(true);
 	m_writeStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_writeStructuralFeatureAction_Operation_type_of_result_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -33430,13 +32847,12 @@ void umlPackageImpl::initializeWriteStructuralFeatureActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_writeStructuralFeatureAction_Operation_type_of_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeStructuralFeatureAction_Operation_type_of_value_EDiagnosticChain_EMap->setName("type_of_value");
+	m_writeStructuralFeatureAction_Operation_type_of_value_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeStructuralFeatureAction_Operation_type_of_value_EDiagnosticChain_EMap->setLowerBound(0);
 	m_writeStructuralFeatureAction_Operation_type_of_value_EDiagnosticChain_EMap->setUpperBound(1);
 	m_writeStructuralFeatureAction_Operation_type_of_value_EDiagnosticChain_EMap->setUnique(true);
 	m_writeStructuralFeatureAction_Operation_type_of_value_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_writeStructuralFeatureAction_Operation_type_of_value_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -33490,13 +32906,12 @@ void umlPackageImpl::initializeWriteVariableActionContent()
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	
-	m_writeVariableAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeVariableAction_Operation_multiplicity_EDiagnosticChain_EMap->setName("multiplicity");
+	m_writeVariableAction_Operation_multiplicity_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeVariableAction_Operation_multiplicity_EDiagnosticChain_EMap->setLowerBound(0);
 	m_writeVariableAction_Operation_multiplicity_EDiagnosticChain_EMap->setUpperBound(1);
 	m_writeVariableAction_Operation_multiplicity_EDiagnosticChain_EMap->setUnique(true);
 	m_writeVariableAction_Operation_multiplicity_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_writeVariableAction_Operation_multiplicity_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");
@@ -33517,13 +32932,12 @@ void umlPackageImpl::initializeWriteVariableActionContent()
 		parameter->setOrdered(true);
 	}
 	
-	m_writeVariableAction_Operation_value_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeVariableAction_Operation_value_type_EDiagnosticChain_EMap->setName("value_type");
+	m_writeVariableAction_Operation_value_type_EDiagnosticChain_EMap->setEType(ecore::ecorePackage::eInstance()->getEBoolean_Class());
 	m_writeVariableAction_Operation_value_type_EDiagnosticChain_EMap->setLowerBound(0);
 	m_writeVariableAction_Operation_value_type_EDiagnosticChain_EMap->setUpperBound(1);
 	m_writeVariableAction_Operation_value_type_EDiagnosticChain_EMap->setUnique(true);
 	m_writeVariableAction_Operation_value_type_EDiagnosticChain_EMap->setOrdered(true);
-	
 	{
 		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_writeVariableAction_Operation_value_type_EDiagnosticChain_EMap);
 		parameter->setName("diagnostics");

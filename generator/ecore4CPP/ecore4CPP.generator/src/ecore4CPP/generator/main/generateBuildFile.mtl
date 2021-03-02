@@ -64,7 +64,7 @@ SET(SOURCE_FILES
 	impl/[packageName/]PluginImpl.cpp
 	[packageName/]Plugin.cpp
 # Package content
-[for (aClass : EClass | aPackage.eAllContents(EClass)->asOrderedSet()->sortedBy(name))]
+[for (aClass : EClass | aPackage.eAllContents(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name))]
 	[aClass.getNamespacePathWithoutRoot()/]impl/[aClass.name.toUpperFirst()/]Impl.cpp
 [/for]
 [if (packageName='uml')]
@@ -247,10 +247,10 @@ ENDIF()
 [query private buildModeCMakeProperty(debugMode : Boolean) : String = if (debugMode) then 'debug' else 'optimized' endif/]
 
 [template private generateCMakeFindLibraryCommand(aPackage : EPackage, ending : String, folderName : String, debugMode : Boolean)]
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = aPackage.name))]
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? ((not(pack.name = aPackage.name)) and (not doNotGenerate()))]
 FIND_LIBRARY([pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [pack.name/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/for]
-[for (libName : String | aPackage.eAllContents()->filter(EClass)->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->select(not doNotGenerate())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
 [if (not (libName.oclIsUndefined() or libName = ''))]
 FIND_LIBRARY([libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [libName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/if]
@@ -259,10 +259,10 @@ FIND_LIBRARY([libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [l
 
 [template private generateLibraryLinking(aPackage : EPackage, debugMode : Boolean)]
 TARGET_LINK_LIBRARIES(${PROJECT_NAME}
-[for (pack : EPackage | aPackage.metaModelLibraries()) ? (not(pack.name = aPackage.name))]
+[for (pack : EPackage | aPackage.metaModelLibraries()) ? ((not(pack.name = aPackage.name)) and (not doNotGenerate()))]
 	[buildModeCMakeProperty(debugMode)/] ${[pack.name.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [/for]
-[for (libName : String | aPackage.eAllContents()->filter(EClass)->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
+[for (libName : String | aPackage.eAllContents()->filter(EClass)->select(not doNotGenerate())->select(c : EClass | c.hasKey(keyLibrary())).valueKeys(keyLibrary())->asOrderedSet())]
 [if (not (libName.oclIsUndefined() or libName = ''))]
 	[buildModeCMakeProperty(debugMode)/] ${[libName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [/if]

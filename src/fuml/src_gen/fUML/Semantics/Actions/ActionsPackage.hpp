@@ -68,7 +68,7 @@ namespace fUML::Semantics::Actions
 	class WriteLinkActionActivation;
 	class WriteStructuralFeatureActionActivation;
 }
-
+ 
 namespace fUML::Semantics::Actions 
 {
 	/*!

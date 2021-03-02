@@ -12,3 +12,17 @@ setenv*
 /gradle.properties
 xerces
 /.metadata/
+/src/examples/ecoreExamples/TestSuite/templateTest/.cproject
+/src/examples/UMLExamples/TestSuite/copyTestUML/.cproject
+/src/examples/UMLExamples/TestSuite/copyTestUML/.project
+/src/examples/UMLExamples/TestSuite/copyTestUML/build.gradle
+/src/examples/ecoreExamples/TestSuite/.classpath
+/src/examples/ecoreExamples/TestSuite/.project
+/src/examples/ecoreExamples/TestSuite/copyTest/.classpath
+/src/examples/ecoreExamples/TestSuite/copyTest/.cproject
+/src/examples/ecoreExamples/TestSuite/copyTest/.project
+/src/examples/ecoreExamples/TestSuite/copyTest/META-INF/MANIFEST.MF
+/src/examples/ecoreExamples/TestSuite/copyTest/build.gradle
+/src/examples/ecoreExamples/TestSuite/copyTest/model/copyTest.genmodel
+/src/examples/ecoreExamples/TestSuite/templateTest/.project
+/src/examples/ecoreExamples/TestSuite/templateTest/build.gradle

@@ -77,3 +77,4 @@ std::shared_ptr<fUML::Semantics::Classification::InstanceValueEvaluation> Classi
 	return element;
 }
 
+

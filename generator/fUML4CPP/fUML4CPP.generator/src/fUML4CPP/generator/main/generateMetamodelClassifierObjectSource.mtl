@@ -105,11 +105,13 @@
 using namespace [aClassifier.getNearestPackage().generateNamespace(false)/];
 
 [className/]::[className/](std::shared_ptr<[pointerName/]> _element):
-
 	[aClassifier.UMLValueName()/](_element)
-{		
+{
 	[comment] [if(not aClassifier.oclIsTypeOf(Interface))] [/comment]
+	[comment]
+	use copy constructor! or =operator
 	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
+	[/comment]
 	[comment] [/if] [/comment]
 }
 
@@ -122,7 +124,10 @@ using namespace [aClassifier.getNearestPackage().generateNamespace(false)/];
 [className/]::[className/]()
 {	
 	[comment] [if(not aClassifier.oclIsTypeOf(Interface))] [/comment]
+	[comment]
+	use copy constructor! or =operator 
 	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
+	[/comment]
 	[comment] [/if] [/comment]
 }
 
@@ -132,13 +137,20 @@ using namespace [aClassifier.getNearestPackage().generateNamespace(false)/];
 
 std::shared_ptr<ecore::EObject> [className/]::copy()
 {
-	std::shared_ptr<[className/]> element(new [className/](*this));
+	std::shared_ptr<[className/]> element(new [className/]());
+	*element=(*this);
 	element->setThis[className/]Ptr(element);
 	return element;
 }
 
 [className/]& [className/]::operator=(const [className/] & obj)
 {
+[if (aClassifier.collectInheritedTypes()->isEmpty())]
+	PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl::operator=(obj);
+[else]
+[for(inheritedType : Classifier | aClassifier.collectInheritedTypes())]
+	[inheritedType.getNearestPackage().generateNamespace(false)/]::[inheritedType.objectClassName()/]::operator=(obj);
+[/for][/if]
 	return *this;
 }
 

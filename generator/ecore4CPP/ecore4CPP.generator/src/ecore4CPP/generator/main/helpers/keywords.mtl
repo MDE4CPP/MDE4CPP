@@ -29,6 +29,7 @@
 [query public keyGetterName(any : OclAny) : String = 'getterName'/]	[**	indicates the name of getter function /]
 [query public keySetterName(any : OclAny) : String = 'setterName'/]	[**	indicates the name of setter function /]
 [query public keyIncludes(any : OclAny) : String = 'includes'/]	[**	indicates a header include specification /]
+[query public keyHeaderIncludes(any : OclAny) : String = 'headerIncludes'/]	[**	indicates a header include specification /]
 [query public keyLibrary(any : OclAny) : String = 'library' /] [**	indicates a specification for a library to link /]
 [query public keyAggregationKind(any : OclAny) : String = 'AggregationKind'/]	[** indicates a AggregationKind specifiation, values: 'shared' -> indicates a back reference, otherwise -> no action/]
 [query public keyNoBackReference(any : OclAny) : String = 'no_back_reference'/] [** indicates that no back reference for a reference should exists/]
@@ -64,5 +65,5 @@
  * keywords for source name and keys of prepareApplication annoation
 */]
 [query public sourceNamePrepareApplication(any : OclAny) : String = 'prepareApplication' /]	[** special source for generating class with main function /]
-[query public keyMainIncludes(any : OclAny) : String = 'sourceCodeIncludes'/]	[**	specifiy header to be included for main function /] 
+[query public keyMainIncludes(any : OclAny) : String = 'sourceCodeMainIncludes'/]	[**	specifiy header to be included for main function /] 
 [query public keyMainSourceCode(any : OclAny) : String = 'sourceCodeMain'/]	[**	specifiy source code of main function /] 

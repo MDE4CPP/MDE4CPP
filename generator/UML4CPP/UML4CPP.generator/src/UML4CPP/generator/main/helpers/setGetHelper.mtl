@@ -201,7 +201,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::get(std::shared_ptr<uml::Prope
 	Any value;
 [for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined()))]
 	value = [sClass.owner.oclAsType(NamedElement).name/]::[sClass.name.toUpperFirst()/]Impl::get(_property);
-	if (value != null)
+	if (value != nullptr)
 	{
 		return value;
 	}

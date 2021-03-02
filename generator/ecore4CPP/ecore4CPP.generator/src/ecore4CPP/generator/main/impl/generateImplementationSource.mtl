@@ -35,11 +35,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
-[comment] root factory notwendig? 
-[if (generateObjectMonitoring())]
-#include "[getRootPackage().name/]/[aClass.getRootPackage().name/]Factory.hpp"
-[/if]
-[/comment]
+
 [generateAbstractDataTypesIncludes()/]
 [if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
 #include "abstractDataTypes/Any.hpp"
@@ -54,20 +50,34 @@
 [/if]
 
 //Forward declaration includes
-[generatePersistenceInclude()/]
+[aClass.generatePersitsenceInclude()/]
 
-[for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (element : EClassifier| aClass.includes()->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name))]
 #include "[element.generateNamespacePath()/]/[element.name.toUpperFirst()/].hpp"
 [/for]
 
 //Factories an Package includes
+[comment] root factory notwendig? 
+[if (generateObjectMonitoring())]
+#include "[getRootPackage().name/]/[aClass.getRootPackage().name/]Factory.hpp"
+[/if]
+[/comment]
+[comment] root factory Impl's wirklich notwendig? 
 #include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name/]FactoryImpl.hpp"
 #include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name/]PackageImpl.hpp"
-
+[/comment]
 [for (anEPackage: EPackage| aClass.ePackage->closure(p|p.eSuperPackage)->asSet() )]
-#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Factory.hpp"
+[comment] Factories wirklich notwendig?
+//#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Factory.hpp"
+[/comment]
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
 [/for]
+[comment] nur für saveContent bei saveHandler->addReference() mit Meta-Datentyp-Vergleich nötig siehe generatePersistence.mtl
+[/comment]
+[for (aPackage : EPackage| aClass.includes()->selectByKind(EClass)->select(not doNotGenerate())->including(aClass).ePackage->asOrderedSet()->sortedBy(name))]
+#include "[aPackage.getRootPackage().name/]/[aPackage.getNamespacePathWithoutRoot()/][aPackage.name/]Package.hpp"
+[/for]
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -132,10 +142,19 @@ using namespace [aClass.generateNamespaceDefinition()/];
 [/for]
 [/let]
 
-
 [comment]Don't forget to call the class contructor before initializing the unions and subsets![/comment]
-[className/]::[className/](const [className/] & obj):[className/]()
+[className/]::[className/](const [className/] & obj): [className/]()
 {
+[comment]
+	NOTE: Due to virtual inheritance, base class copy constrcutors may not be called correctly
+	*/
+[/comment]
+	*this = obj;
+}
+
+[className/]& [className/]::operator=(const [className/] & obj)
+{
+<<<<<<< HEAD
 	*this = obj;
 }
 
@@ -151,60 +170,272 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 
 [className/]& [className/]::operator=(const [className/] & obj)
 {
+=======
+	[if (aClass.eSuperTypes->isEmpty() and not(aClass.name='EObject'))]
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	[else]
+	//call overloaded =Operator for each base class
+	[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet())]
+	[ClassWithNamespace(aClass, sClass)/]Impl::operator=(obj);
+	[/for]
+	[/if]
+	[aClass.name.toUpperFirst()/]::operator=(obj);
+
+>>>>>>> remotes/origin/Feature_EcoreTemplate
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	[for (att : EAttribute | aClass.eAllAttributes->asOrderedSet()->sortedBy(name))]
+	//Clone Attributes with (deep copy)
+	[for (att : EAttribute | aClass.eAttributes->asOrderedSet()->sortedBy(name))]
+		[if (not(att.upperBound = 1))] [comment it is a Bag of Elements /]
+			[if (not att.eGenericType.eClassifier.oclIsKindOf(EDataType))] [comment it is an Bag/Subset of non standard Elements /]
+	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
+	if(nullptr != [att.name/]Container )
+	{
+		int size = [att.name/]Container->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _[att.name/]=(*[att.name/]Container)['['/]i[']'/]; 	
+			if(nullptr != _[att.name/])
+			{
+				[att.name/]Container->push_back(std::dynamic_pointer_cast<[att.generateStructuralFeatureType(true)/]>(_[att.name/]->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [att.name/]."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [att.name/]."<< std::endl;)
+	}
+			[else]	[comment it is an Bag/Subset of standard Datatype Elements /]
+	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
+	if(nullptr != [att.name/]Container )
+	{
+		int size = [att.name/]Container->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _[att.name/]=(*[att.name/]Container)['['/]i[']'/];	
+			if(nullptr != _[att.name/])
+			{
+				[att.name/]Container->push_back(_[att.name/]);
+			} 
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [att.name/]."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [att.name/]."<< std::endl;)
+	}
+			[/if]
+		[elseif (att.eType.oclIsUndefined())]// unknown attribute type for [att.name/]
+	[comment]Handling of Templates:
+			If there is an Eore Generic Datatyp it seems to be a Container class. otherwise there exist an copy operation the Ecore Type.
+			only one template parameter are supported (in case of map 2) 
+	[/comment]
+		[elseif (att.eType.eTypeParameters->size()>0) ] [comment it's an Generic Data-Type (List / Map,...)/]
+			[if (att.eType.name.equalsIgnoreCase('EMap'))]
+	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
+	for(const auto pair_[att.name/] : *obj.[att.GetterName()/]())
+	{
+				[if (att.eGenericType.eTypeArguments->last().eClassifier.oclIsKindOf(EDataType))] [comment if second Type is an Ecore type /]
+		[att.name/]Container->insert(std::make_pair(pair_[att.name/].first, pair_[att.name/].second));
+				[else] [comment otherwise it is an shared_ptr/]
+		[att.name/]Container->insert(std::make_pair(pair_[att.name/].first, std::dynamic_pointer_cast<[att.eGenericType.eTypeArguments->last().eClassifier.transformType()/]>(pair_[att.name/].second->copy())));
+				[/if]
+	}
+			[elseif (att.eType.name.equalsIgnoreCase('EEList'))] 
+	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
+	if(nullptr != [att.name/]Container )
+	{
+		int size = [att.name/]Container->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _[att.name/]=(*[att.name/]Container)['['/]i[']'/];	
+			if(nullptr != _[att.name/])
+			{
+				[att.name/]Container->push_back(std::dynamic_pointer_cast<[att.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[att.name/]->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [att.name/]."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [att.name/]."<< std::endl;)
+	}
+			[else] [comment invalid Generic for instance: EJavaClass<T> --> generated as void* /]
 	m_[att.name/] = obj.[att.GetterName()/]();
+			[/if]
+		[elseif ((not(att.lowerBound = 0)) and (not att.eType.oclIsKindOf(EDataType)))] [comment copy simple attribute ptr/]
+	m_[att.name/] = std::dynamic_pointer_cast<[att.generateStructuralFeatureType(false)/]>>(obj.[att.GetterName()/]()->copy());
+		[else] [comment copy simple attribute/]
+	m_[att.name/] = obj.[att.GetterName()/]();
+	[/if]
 	[/for]
 
 	//copy references with no containment (soft copy)
-	
-	[for (ref : EReference | aClass.eAllReferences->select(aRef: EReference | aRef.isBackReference() or (aRef.containment = false and not aRef.hasSubset()))->asOrderedSet()->sortedBy(name))]
+	[for (ref : EReference | aClass.eReferences->select(aRef: EReference | aRef.isBackReference() or (aRef.containment = false and not aRef.hasSubset()))->asOrderedSet()->sortedBy(name))]
 	[if (ref.hasSetter() or ref.upperBound = 1)]
 	m_[ref.name/]  = obj.[ref.GetterName()/]();
 	[else]
 	[ref.generateReferenceType()/] _[ref.name/] = obj.[ref.GetterName()/]();
 	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));
 	[/if]
-
 	[/for]
-
 	[comment]References must be copied in this order:
 	1st Unions
 	2nd Subset Unions
 	3rd all the rest.
 	[/comment]
 	//Clone references with containment (deep copy)
-
-	[for (ref : EReference | aClass.eAllReferences->select(eRef: EReference|(eRef.containment = true or eRef.hasSubset()) and (not eRef.isUnion()) and (not eRef.isBackReference()))->asOrderedSet()->sortedBy(name))]
-	[if (ref.hasSetter() or ref.upperBound = 1)]
+	[for (ref : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = true or eRef.hasSubset()) and (not eRef.isUnion()) and (not eRef.isBackReference()))->asOrderedSet()->sortedBy(name))]
+	[if (not(ref.upperBound = 1))]
+		[if (ref.hasSetter())]
+	m_[ref.name/] = std::dynamic_pointer_cast<[ref.generateReferenceType()/]>>(obj.[ref.GetterName()/]()->copy());
+		[else]
+	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
+	if(nullptr != [ref.name/]Container )
+	{
+		int size = [ref.name/]Container->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _[ref.name/]=(*[ref.name/]Container)['['/]i[']'/];
+			if(nullptr != _[ref.name/])
+			{
+				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.generateType()/]>(_[ref.name/]->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [ref.name/]."<< std::endl;)
+	}
+		[/if]
+	[elseif ((ref.eType.oclIsUndefined()) or (not ref.hasSetter()) )]// unknown Reference Type or missing setter for [ref.name/]
+	[comment]Handling of Templates:
+			If it is not an Eore Generic Datatyp(EMap, EEList) and there is an generic Supertype with an Template parameter, then it seems to be a Container class. 
+				A push_back operation has to be implemented for the container class. (not avbailable for instance for array<>). 
+				Otherwise there should be an copy operation for a user Class.
+			If there is an Eore Generic Datatyp it is then it seems to be a Container class. otherwise there exist an copy operation the Ecore Type.
+			only one template parameter are supported (in case of map 2) 
+	[/comment]
+	[elseif (not ref.eType.oclIsKindOf(EDataType)) ]
+		[if (ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes.eTypeArguments->notEmpty())]
+			[if ((ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eClassifier.name.equalsIgnoreCase('map')) or (ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eClassifier.name.equalsIgnoreCase('EMap')))]
+	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
+	for(const auto pair_[ref.name/] : *obj.[ref.GetterName()/]())
+	{
+		[ref.name/]Container->insert(std::make_pair(pair_[ref.name/].first, std::dynamic_pointer_cast<[ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eTypeArguments->last().generateCppType(false)/]>(pair_[ref.name/].second->copy())));
+	}
+			[else]
+	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
+	if(nullptr != [ref.name/]Container )
+	{
+		int size = [ref.name/]Container->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _[ref.name/]=(*[ref.name/]Container)['['/]i[']'/];
+			if(nullptr != _[ref.name/])
+			{
+				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eTypeArguments->first().generateCppType(false)/]>(_[ref.name/]->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [ref.name/]."<< std::endl;)
+	}
+			[/if]
+		[else]
 	if(obj.[ref.GetterName()/]()!=nullptr)
 	{
-		[if(ref.upperBound=1)]
 		m_[ref.name/] = std::dynamic_pointer_cast<[ref.eType.generateType()/]>(obj.[ref.GetterName()/]()->copy());
-		[else]
-		m_[ref.name/] = std::dynamic_pointer_cast<Bag<[ref.eType.generateType()/]>>(obj.[ref.GetterName()/]()->copy());
+	}
 		[/if]
-	}
-	[else]
-	std::shared_ptr<Bag<[ref.eType.generateType()/]>> _[ref.name/]List = obj.[ref.GetterName()/]();
-	for(std::shared_ptr<[ref.eType.generateType()/]> _[ref.name/] : *_[ref.name/]List)
+	[elseif (ref.eType.eTypeParameters->size()>0) ]
+		[if (ref.eType.name.equalsIgnoreCase('EMap'))]
+	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
+	if(nullptr != [ref.name/]Container )
 	{
-		this->[ref.GetterName()/]()->add(std::shared_ptr<[ref.eType.generateType()/]>(std::dynamic_pointer_cast<[ref.eType.generateType()/]>(_[ref.name/]->copy())));
+		for(const auto pair_[ref.name/] : *obj.[ref.GetterName()/]())
+		{
+			[if (ref.eGenericType.eTypeArguments->last().eClassifier.oclIsKindOf(EDataType))] [comment if second Type is an Ecore type /]
+			[ref.name/]Container->insert(std::make_pair(pair_[ref.name/].first, pair_[ref.name/].second));
+			[else] [comment otherwise it is a shared_ptr/]
+			[ref.name/]Container->insert(std::make_pair(pair_[ref.name/].first, std::dynamic_pointer_cast<[ref.eGenericType.eTypeArguments->last().generateCppType(false)/]>(pair_[ref.name/].second->copy())));
+			[/if]
+		}
 	}
-	[/if]
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_[ref.name/]" << std::endl;
-	#endif
-	[/for]
-
-	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|eRef.containment = true and not eRef.isUnion())->asOrderedSet()->sortedBy(name)) separator ('\n')]
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [ref.name/]."<< std::endl;)
+	}
+		[else] [comment EEList/]
+	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
+	if(nullptr != [ref.name/]Container )
+	{
+		int size = [ref.name/]Container->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _[ref.name/]=(*[ref.name/]Container)['['/]i[']'/];
+			if(nullptr != _[ref.name/])
+			{
+				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[ref.name/]->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [ref.name/]."<< std::endl;)
+	}
+		[/if]
+	[elseif (not(ref.lowerBound = 0))] [comment copy simple attribute ptr/]
+	*(m_[ref.name/]) = *(obj.[ref.GetterName()/]());
+	[else] [comment copy simple attribute/]
+	m_[ref.name/] = obj.[ref.GetterName()/]();
+	[/if][/for]
+	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|eRef.containment = true and not eRef.isUnion())->asOrderedSet()->sortedBy(name))]
 	[aReference.InitReferences()/]
 	[/for]
+<<<<<<< HEAD
 
 	return *this;
+=======
+	return *this;
+}
+
+std::shared_ptr<ecore::EObject> [className/]::copy() const
+{
+	std::shared_ptr<[className/]> element(new [className/]());
+	*element =(*this);
+	element->[generateGetThisPtrPropertySetterName()/](element);
+[if (generateObjectMonitoring())]
+	[aClass.getRootPackage().name/]Factory::eInstance()->add(element);
+[/if]
+	return element;
+>>>>>>> remotes/origin/Feature_EcoreTemplate
 }
 
 std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const

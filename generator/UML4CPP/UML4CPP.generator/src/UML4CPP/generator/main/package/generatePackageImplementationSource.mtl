@@ -104,18 +104,20 @@
 
 //depending model packages
 [for (pack : Package | aPackage.metaModelIncludes()->reject(oclIsUndefined())->sortedBy(myQualifiedName())) ?  (not (pack=aPackage))]
-[if (not ((aPackage.name='Ecore') or (aPackage.name='PrimitiveTypes')))]
-[if ((pack.name = keyUML()) or (pack.name='Ecore') or (pack.name='PrimitiveTypes'))]
+	[if (not ((aPackage.name='Ecore') or (aPackage.name='PrimitiveTypes') or (aPackage.name='EcorePrimitiveTypes') ))]
+		[if (not (pack.name='EcorePrimitiveTypes'))]
+		[if ((pack.name = keyUML()) or (pack.name='Ecore'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('Package')/].hpp"
-[elseif (pack.oclIsKindOf(Profile) and not pack.name.endsWith('Profile'))]
+		[elseif (pack.oclIsKindOf(Profile) and not pack.name.endsWith('Profile'))]
 #include "[pack.getPackageName()/]/[pack.name.concat('ProfilePackage')/].hpp"
-[else]
+		[else]
 #include "[pack.generateNamespacePath(false)/]/[pack.name.concat('Package')/].hpp"
-[/if]
-[/if]
-[if (not((pack.name = keyUML()) or (pack.name='Ecore') or (pack.name='PrimitiveTypes')))]
+		[/if]
+		[/if]
+	[/if]
+	[if (not((pack.name = keyUML()) or (pack.name='Ecore') or (pack.name='PrimitiveTypes') or (pack.name='EcorePrimitiveTypes')))]
 #include "[pack.generateNamespacePath(false)/]/[pack.name.concat('Factory')/].hpp"
-[/if]
+	[/if]
 [/for]
 
 //Subpackages

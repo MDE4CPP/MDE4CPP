@@ -19,8 +19,6 @@
 #include "ecore/EObject.hpp"
 #include "ecore/EPackage.hpp"
 
-#include "uml/UmlFactory.hpp"
-#include "uml/UmlPackage.hpp"
 #include "persistence/base/LoadHandler.hpp"
 
 #include "pluginFramework/MDE4CPPPlugin.hpp"

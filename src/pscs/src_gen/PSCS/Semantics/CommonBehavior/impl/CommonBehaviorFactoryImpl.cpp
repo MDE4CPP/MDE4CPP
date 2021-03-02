@@ -83,6 +83,7 @@ std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> CommonBe
 	element->setThisCS_CallEventExecutionPtr(element);
 	return element;
 }
+
 std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> CommonBehaviorFactoryImpl::createCS_EventOccurrence(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrenceImpl> element(new PSCS::Semantics::CommonBehavior::CS_EventOccurrenceImpl());
@@ -90,4 +91,5 @@ std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> CommonBehav
 	element->setThisCS_EventOccurrencePtr(element);
 	return element;
 }
+
 

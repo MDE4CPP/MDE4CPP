@@ -46,7 +46,7 @@ namespace ecore
 	class ETypeParameter;
 	class ETypedElement;
 }
-
+ 
 namespace ecore 
 {
 	/*!
@@ -74,21 +74,21 @@ namespace ecore
 			static const unsigned long EANNOTATION_CLASS = 1746034582;
 			static const unsigned int EANNOTATION_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int EANNOTATION_CLASS_OPERATION_COUNT = 16;
+			static const int EANNOTATION_ATTRIBUTE_DETAILS = 108;
 			static const int EANNOTATION_ATTRIBUTE_SOURCE = 104;
 			
-			static const int EANNOTATION_ATTRIBUTE_CONTENTS = 107;
-			static const int EANNOTATION_ATTRIBUTE_DETAILS = 105;
-			static const int EANNOTATION_ATTRIBUTE_EMODELELEMENT = 106;
-			static const int EANNOTATION_ATTRIBUTE_REFERENCES = 108;
+			static const int EANNOTATION_ATTRIBUTE_CONTENTS = 106;
+			static const int EANNOTATION_ATTRIBUTE_EMODELELEMENT = 105;
+			static const int EANNOTATION_ATTRIBUTE_REFERENCES = 107;
 			
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEAnnotation_Class() const = 0;
 			
+			virtual std::shared_ptr<ecore::EAttribute> getEAnnotation_Attribute_details() const = 0;
 			virtual std::shared_ptr<ecore::EAttribute> getEAnnotation_Attribute_source() const = 0;
 			
 			virtual std::shared_ptr<ecore::EReference> getEAnnotation_Attribute_contents() const = 0;
-			virtual std::shared_ptr<ecore::EReference> getEAnnotation_Attribute_details() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getEAnnotation_Attribute_eModelElement() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getEAnnotation_Attribute_references() const = 0;
 			

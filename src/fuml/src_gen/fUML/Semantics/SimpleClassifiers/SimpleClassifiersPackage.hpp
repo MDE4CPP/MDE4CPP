@@ -37,7 +37,7 @@ namespace fUML::Semantics::SimpleClassifiers
 	class StructuredValue;
 	class UnlimitedNaturalValue;
 }
-
+ 
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	/*!

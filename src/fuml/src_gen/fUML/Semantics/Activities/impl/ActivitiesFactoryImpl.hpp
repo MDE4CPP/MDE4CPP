@@ -63,27 +63,26 @@ namespace fUML::Semantics::Activities
 			//Creator functions
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> createActivityEdgeInstance(const int metaElementID = ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> createActivityEdgeInstance_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID = ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> createActivityEdgeInstance_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID = ActivitiesPackage::ACTIVITYEDGEINSTANCE_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityExecution> createActivityExecution(const int metaElementID = ActivitiesPackage::ACTIVITYEXECUTION_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityFinalNodeActivation> createActivityFinalNodeActivation(const int metaElementID = ActivitiesPackage::ACTIVITYFINALNODEACTIVATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityFinalNodeActivation> createActivityFinalNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID = ActivitiesPackage::ACTIVITYFINALNODEACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityFinalNodeActivation> createActivityFinalNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID = ActivitiesPackage::ACTIVITYFINALNODEACTIVATION_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> createActivityNodeActivationGroup(const int metaElementID = ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> createActivityNodeActivationGroup_in_ActivityExecution(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution > par_activityExecution, const int metaElementID = ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> createActivityNodeActivationGroup_in_ContainingNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation > par_containingNodeActivation, const int metaElementID = ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> createActivityNodeActivationGroup_in_ActivityExecution(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> par_activityExecution, const int metaElementID = ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> createActivityNodeActivationGroup_in_ContainingNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> par_containingNodeActivation, const int metaElementID = ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation> createActivityParameterNodeActivation(const int metaElementID = ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation> createActivityParameterNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID = ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::ActivityParameterNodeActivation> createActivityParameterNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID = ActivitiesPackage::ACTIVITYPARAMETERNODEACTIVATION_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::CentralBufferNodeActivation> createCentralBufferNodeActivation(const int metaElementID = ActivitiesPackage::CENTRALBUFFERNODEACTIVATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::CentralBufferNodeActivation> createCentralBufferNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID = ActivitiesPackage::CENTRALBUFFERNODEACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::CentralBufferNodeActivation> createCentralBufferNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID = ActivitiesPackage::CENTRALBUFFERNODEACTIVATION_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ClassifierBehaviorExecutionActivity> createClassifierBehaviorExecutionActivity(const int metaElementID = ActivitiesPackage::CLASSIFIERBEHAVIOREXECUTIONACTIVITY_CLASS) const ;
 			 
@@ -93,47 +92,46 @@ namespace fUML::Semantics::Activities
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::DataStoreNodeActivation> createDataStoreNodeActivation(const int metaElementID = ActivitiesPackage::DATASTORENODEACTIVATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::DataStoreNodeActivation> createDataStoreNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID = ActivitiesPackage::DATASTORENODEACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::DataStoreNodeActivation> createDataStoreNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID = ActivitiesPackage::DATASTORENODEACTIVATION_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::DecisionNodeActivation> createDecisionNodeActivation(const int metaElementID = ActivitiesPackage::DECISIONNODEACTIVATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::DecisionNodeActivation> createDecisionNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID = ActivitiesPackage::DECISIONNODEACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::DecisionNodeActivation> createDecisionNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID = ActivitiesPackage::DECISIONNODEACTIVATION_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> createExpansionActivationGroup(const int metaElementID = ActivitiesPackage::EXPANSIONACTIVATIONGROUP_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> createExpansionActivationGroup_in_ActivityExecution(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution > par_activityExecution, const int metaElementID = ActivitiesPackage::EXPANSIONACTIVATIONGROUP_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> createExpansionActivationGroup_in_ContainingNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation > par_containingNodeActivation, const int metaElementID = ActivitiesPackage::EXPANSIONACTIVATIONGROUP_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> createExpansionActivationGroup_in_ActivityExecution(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> par_activityExecution, const int metaElementID = ActivitiesPackage::EXPANSIONACTIVATIONGROUP_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> createExpansionActivationGroup_in_ContainingNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> par_containingNodeActivation, const int metaElementID = ActivitiesPackage::EXPANSIONACTIVATIONGROUP_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> createExpansionNodeActivation(const int metaElementID = ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> createExpansionNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID = ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> createExpansionNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID = ActivitiesPackage::EXPANSIONNODEACTIVATION_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> createExpansionRegionActivation(const int metaElementID = ActivitiesPackage::EXPANSIONREGIONACTIVATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> createExpansionRegionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID = ActivitiesPackage::EXPANSIONREGIONACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> createExpansionRegionActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID = ActivitiesPackage::EXPANSIONREGIONACTIVATION_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::FlowFinalNodeActivation> createFlowFinalNodeActivation(const int metaElementID = ActivitiesPackage::FLOWFINALNODEACTIVATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::FlowFinalNodeActivation> createFlowFinalNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID = ActivitiesPackage::FLOWFINALNODEACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::FlowFinalNodeActivation> createFlowFinalNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID = ActivitiesPackage::FLOWFINALNODEACTIVATION_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ForkNodeActivation> createForkNodeActivation(const int metaElementID = ActivitiesPackage::FORKNODEACTIVATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::ForkNodeActivation> createForkNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID = ActivitiesPackage::FORKNODEACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::ForkNodeActivation> createForkNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID = ActivitiesPackage::FORKNODEACTIVATION_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ForkedToken> createForkedToken(const int metaElementID = ActivitiesPackage::FORKEDTOKEN_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::InitialNodeActivation> createInitialNodeActivation(const int metaElementID = ActivitiesPackage::INITIALNODEACTIVATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::InitialNodeActivation> createInitialNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID = ActivitiesPackage::INITIALNODEACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::InitialNodeActivation> createInitialNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID = ActivitiesPackage::INITIALNODEACTIVATION_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::JoinNodeActivation> createJoinNodeActivation(const int metaElementID = ActivitiesPackage::JOINNODEACTIVATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::JoinNodeActivation> createJoinNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID = ActivitiesPackage::JOINNODEACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::JoinNodeActivation> createJoinNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID = ActivitiesPackage::JOINNODEACTIVATION_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::MergeNodeActivation> createMergeNodeActivation(const int metaElementID = ActivitiesPackage::MERGENODEACTIVATION_CLASS) const ;
 			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Activities::MergeNodeActivation> createMergeNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group, const int metaElementID = ActivitiesPackage::MERGENODEACTIVATION_CLASS) const ;
+			 virtual std::shared_ptr<fUML::Semantics::Activities::MergeNodeActivation> createMergeNodeActivation_in_Group(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group, const int metaElementID = ActivitiesPackage::MERGENODEACTIVATION_CLASS) const ;
 			 
 			 virtual std::shared_ptr<fUML::Semantics::Activities::ObjectToken> createObjectToken(const int metaElementID = ActivitiesPackage::OBJECTTOKEN_CLASS) const ;
 			 

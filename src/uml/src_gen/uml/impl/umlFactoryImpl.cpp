@@ -8469,7 +8469,8 @@ std::shared_ptr<Abstraction> umlFactoryImpl::createAbstraction(const int metaEle
 	element->setThisAbstractionPtr(element);
 	return element;
 }
-std::shared_ptr<Abstraction> umlFactoryImpl::createAbstraction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Abstraction> umlFactoryImpl::createAbstraction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -8481,7 +8482,7 @@ std::shared_ptr<Abstraction> umlFactoryImpl::createAbstraction_in_Namespace(std:
 	return element;
 	
 }
-std::shared_ptr<Abstraction> umlFactoryImpl::createAbstraction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Abstraction> umlFactoryImpl::createAbstraction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -8493,7 +8494,7 @@ std::shared_ptr<Abstraction> umlFactoryImpl::createAbstraction_in_Owner(std::wea
 	return element;
 	
 }
-std::shared_ptr<Abstraction> umlFactoryImpl::createAbstraction_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Abstraction> umlFactoryImpl::createAbstraction_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -8505,7 +8506,7 @@ std::shared_ptr<Abstraction> umlFactoryImpl::createAbstraction_in_OwningPackage(
 	return element;
 	
 }
-std::shared_ptr<Abstraction> umlFactoryImpl::createAbstraction_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Abstraction> umlFactoryImpl::createAbstraction_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -8524,7 +8525,8 @@ std::shared_ptr<AcceptCallAction> umlFactoryImpl::createAcceptCallAction(const i
 	element->setThisAcceptCallActionPtr(element);
 	return element;
 }
-std::shared_ptr<AcceptCallAction> umlFactoryImpl::createAcceptCallAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<AcceptCallAction> umlFactoryImpl::createAcceptCallAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<AcceptCallActionImpl> element(new AcceptCallActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -8536,7 +8538,7 @@ std::shared_ptr<AcceptCallAction> umlFactoryImpl::createAcceptCallAction_in_Acti
 	return element;
 	
 }
-std::shared_ptr<AcceptCallAction> umlFactoryImpl::createAcceptCallAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<AcceptCallAction> umlFactoryImpl::createAcceptCallAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<AcceptCallActionImpl> element(new AcceptCallActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -8548,7 +8550,7 @@ std::shared_ptr<AcceptCallAction> umlFactoryImpl::createAcceptCallAction_in_InSt
 	return element;
 	
 }
-std::shared_ptr<AcceptCallAction> umlFactoryImpl::createAcceptCallAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<AcceptCallAction> umlFactoryImpl::createAcceptCallAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<AcceptCallActionImpl> element(new AcceptCallActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -8560,7 +8562,7 @@ std::shared_ptr<AcceptCallAction> umlFactoryImpl::createAcceptCallAction_in_Name
 	return element;
 	
 }
-std::shared_ptr<AcceptCallAction> umlFactoryImpl::createAcceptCallAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<AcceptCallAction> umlFactoryImpl::createAcceptCallAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<AcceptCallActionImpl> element(new AcceptCallActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -8579,7 +8581,8 @@ std::shared_ptr<AcceptEventAction> umlFactoryImpl::createAcceptEventAction(const
 	element->setThisAcceptEventActionPtr(element);
 	return element;
 }
-std::shared_ptr<AcceptEventAction> umlFactoryImpl::createAcceptEventAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<AcceptEventAction> umlFactoryImpl::createAcceptEventAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<AcceptEventActionImpl> element(new AcceptEventActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -8591,7 +8594,7 @@ std::shared_ptr<AcceptEventAction> umlFactoryImpl::createAcceptEventAction_in_Ac
 	return element;
 	
 }
-std::shared_ptr<AcceptEventAction> umlFactoryImpl::createAcceptEventAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<AcceptEventAction> umlFactoryImpl::createAcceptEventAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<AcceptEventActionImpl> element(new AcceptEventActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -8603,7 +8606,7 @@ std::shared_ptr<AcceptEventAction> umlFactoryImpl::createAcceptEventAction_in_In
 	return element;
 	
 }
-std::shared_ptr<AcceptEventAction> umlFactoryImpl::createAcceptEventAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<AcceptEventAction> umlFactoryImpl::createAcceptEventAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<AcceptEventActionImpl> element(new AcceptEventActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -8615,7 +8618,7 @@ std::shared_ptr<AcceptEventAction> umlFactoryImpl::createAcceptEventAction_in_Na
 	return element;
 	
 }
-std::shared_ptr<AcceptEventAction> umlFactoryImpl::createAcceptEventAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<AcceptEventAction> umlFactoryImpl::createAcceptEventAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<AcceptEventActionImpl> element(new AcceptEventActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -8634,7 +8637,8 @@ std::shared_ptr<ActionExecutionSpecification> umlFactoryImpl::createActionExecut
 	element->setThisActionExecutionSpecificationPtr(element);
 	return element;
 }
-std::shared_ptr<ActionExecutionSpecification> umlFactoryImpl::createActionExecutionSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+
+std::shared_ptr<ActionExecutionSpecification> umlFactoryImpl::createActionExecutionSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<ActionExecutionSpecificationImpl> element(new ActionExecutionSpecificationImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -8646,7 +8650,7 @@ std::shared_ptr<ActionExecutionSpecification> umlFactoryImpl::createActionExecut
 	return element;
 	
 }
-std::shared_ptr<ActionExecutionSpecification> umlFactoryImpl::createActionExecutionSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<ActionExecutionSpecification> umlFactoryImpl::createActionExecutionSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<ActionExecutionSpecificationImpl> element(new ActionExecutionSpecificationImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -8658,7 +8662,7 @@ std::shared_ptr<ActionExecutionSpecification> umlFactoryImpl::createActionExecut
 	return element;
 	
 }
-std::shared_ptr<ActionExecutionSpecification> umlFactoryImpl::createActionExecutionSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ActionExecutionSpecification> umlFactoryImpl::createActionExecutionSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ActionExecutionSpecificationImpl> element(new ActionExecutionSpecificationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -8670,7 +8674,7 @@ std::shared_ptr<ActionExecutionSpecification> umlFactoryImpl::createActionExecut
 	return element;
 	
 }
-std::shared_ptr<ActionExecutionSpecification> umlFactoryImpl::createActionExecutionSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ActionExecutionSpecification> umlFactoryImpl::createActionExecutionSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ActionExecutionSpecificationImpl> element(new ActionExecutionSpecificationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -8689,7 +8693,8 @@ std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin(const int m
 	element->setThisActionInputPinPtr(element);
 	return element;
 }
-std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Action(std::weak_ptr<uml::Action > par_action, const int metaElementID) const
+
+std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Action(std::weak_ptr<uml::Action> par_action, const int metaElementID) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_action));
 	element->setMetaElementID(metaElementID);
@@ -8701,7 +8706,7 @@ std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Action(s
 	return element;
 	
 }
-std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -8713,7 +8718,7 @@ std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Activity
 	return element;
 	
 }
-std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction, const int metaElementID) const
+std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction> par_addStructuralFeatureValueAction, const int metaElementID) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_addStructuralFeatureValueAction));
 	element->setMetaElementID(metaElementID);
@@ -8725,7 +8730,7 @@ std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_AddStruc
 	return element;
 	
 }
-std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction > par_callOperationAction, const int metaElementID) const
+std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction> par_callOperationAction, const int metaElementID) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_callOperationAction));
 	element->setMetaElementID(metaElementID);
@@ -8737,7 +8742,7 @@ std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_CallOper
 	return element;
 	
 }
-std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction, const int metaElementID) const
+std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction> par_destroyObjectAction, const int metaElementID) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_destroyObjectAction));
 	element->setMetaElementID(metaElementID);
@@ -8749,7 +8754,7 @@ std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_DestroyO
 	return element;
 	
 }
-std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -8761,7 +8766,7 @@ std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_InStruct
 	return element;
 	
 }
-std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_InvocationAction(std::weak_ptr<uml::InvocationAction > par_invocationAction, const int metaElementID) const
+std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_InvocationAction(std::weak_ptr<uml::InvocationAction> par_invocationAction, const int metaElementID) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_invocationAction));
 	element->setMetaElementID(metaElementID);
@@ -8773,7 +8778,7 @@ std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Invocati
 	return element;
 	
 }
-std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -8785,7 +8790,7 @@ std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Namespac
 	return element;
 	
 }
-std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -8797,7 +8802,7 @@ std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Owner(st
 	return element;
 	
 }
-std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction, const int metaElementID) const
+std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> par_removeStructuralFeatureValueAction, const int metaElementID) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_removeStructuralFeatureValueAction));
 	element->setMetaElementID(metaElementID);
@@ -8809,7 +8814,7 @@ std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_RemoveSt
 	return element;
 	
 }
-std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction, const int metaElementID) const
+std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction> par_structuralFeatureAction, const int metaElementID) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_structuralFeatureAction));
 	element->setMetaElementID(metaElementID);
@@ -8821,7 +8826,7 @@ std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_Structur
 	return element;
 	
 }
-std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction, const int metaElementID) const
+std::shared_ptr<ActionInputPin> umlFactoryImpl::createActionInputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> par_writeStructuralFeatureAction, const int metaElementID) const
 {
 	std::shared_ptr<ActionInputPinImpl> element(new ActionInputPinImpl(par_writeStructuralFeatureAction));
 	element->setMetaElementID(metaElementID);
@@ -8840,7 +8845,8 @@ std::shared_ptr<Activity> umlFactoryImpl::createActivity(const int metaElementID
 	element->setThisActivityPtr(element);
 	return element;
 }
-std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier, const int metaElementID) const
+
+std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier, const int metaElementID) const
 {
 	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_behavioredClassifier));
 	element->setMetaElementID(metaElementID);
@@ -8852,7 +8858,7 @@ std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_BehavioredClassifier
 	return element;
 	
 }
-std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -8864,7 +8870,7 @@ std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_Namespace(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -8876,7 +8882,7 @@ std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_Owner(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -8888,7 +8894,7 @@ std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_OwningPackage(std::w
 	return element;
 	
 }
-std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -8900,7 +8906,7 @@ std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_OwningTemplateParame
 	return element;
 	
 }
-std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Activity> umlFactoryImpl::createActivity_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<ActivityImpl> element(new ActivityImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -8919,7 +8925,8 @@ std::shared_ptr<ActivityFinalNode> umlFactoryImpl::createActivityFinalNode(const
 	element->setThisActivityFinalNodePtr(element);
 	return element;
 }
-std::shared_ptr<ActivityFinalNode> umlFactoryImpl::createActivityFinalNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ActivityFinalNode> umlFactoryImpl::createActivityFinalNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ActivityFinalNodeImpl> element(new ActivityFinalNodeImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -8931,7 +8938,7 @@ std::shared_ptr<ActivityFinalNode> umlFactoryImpl::createActivityFinalNode_in_Ac
 	return element;
 	
 }
-std::shared_ptr<ActivityFinalNode> umlFactoryImpl::createActivityFinalNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ActivityFinalNode> umlFactoryImpl::createActivityFinalNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ActivityFinalNodeImpl> element(new ActivityFinalNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -8943,7 +8950,7 @@ std::shared_ptr<ActivityFinalNode> umlFactoryImpl::createActivityFinalNode_in_In
 	return element;
 	
 }
-std::shared_ptr<ActivityFinalNode> umlFactoryImpl::createActivityFinalNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ActivityFinalNode> umlFactoryImpl::createActivityFinalNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ActivityFinalNodeImpl> element(new ActivityFinalNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -8955,7 +8962,7 @@ std::shared_ptr<ActivityFinalNode> umlFactoryImpl::createActivityFinalNode_in_Na
 	return element;
 	
 }
-std::shared_ptr<ActivityFinalNode> umlFactoryImpl::createActivityFinalNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ActivityFinalNode> umlFactoryImpl::createActivityFinalNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ActivityFinalNodeImpl> element(new ActivityFinalNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -8974,7 +8981,8 @@ std::shared_ptr<ActivityParameterNode> umlFactoryImpl::createActivityParameterNo
 	element->setThisActivityParameterNodePtr(element);
 	return element;
 }
-std::shared_ptr<ActivityParameterNode> umlFactoryImpl::createActivityParameterNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ActivityParameterNode> umlFactoryImpl::createActivityParameterNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ActivityParameterNodeImpl> element(new ActivityParameterNodeImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -8986,7 +8994,7 @@ std::shared_ptr<ActivityParameterNode> umlFactoryImpl::createActivityParameterNo
 	return element;
 	
 }
-std::shared_ptr<ActivityParameterNode> umlFactoryImpl::createActivityParameterNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ActivityParameterNode> umlFactoryImpl::createActivityParameterNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ActivityParameterNodeImpl> element(new ActivityParameterNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -8998,7 +9006,7 @@ std::shared_ptr<ActivityParameterNode> umlFactoryImpl::createActivityParameterNo
 	return element;
 	
 }
-std::shared_ptr<ActivityParameterNode> umlFactoryImpl::createActivityParameterNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ActivityParameterNode> umlFactoryImpl::createActivityParameterNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ActivityParameterNodeImpl> element(new ActivityParameterNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9010,7 +9018,7 @@ std::shared_ptr<ActivityParameterNode> umlFactoryImpl::createActivityParameterNo
 	return element;
 	
 }
-std::shared_ptr<ActivityParameterNode> umlFactoryImpl::createActivityParameterNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ActivityParameterNode> umlFactoryImpl::createActivityParameterNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ActivityParameterNodeImpl> element(new ActivityParameterNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9029,7 +9037,8 @@ std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition(const
 	element->setThisActivityPartitionPtr(element);
 	return element;
 }
-std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity, const int metaElementID) const
+
+std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID) const
 {
 	std::shared_ptr<ActivityPartitionImpl> element(new ActivityPartitionImpl(par_inActivity));
 	element->setMetaElementID(metaElementID);
@@ -9041,7 +9050,7 @@ std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_In
 	return element;
 	
 }
-std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ActivityPartitionImpl> element(new ActivityPartitionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9053,7 +9062,7 @@ std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_Na
 	return element;
 	
 }
-std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ActivityPartitionImpl> element(new ActivityPartitionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9065,7 +9074,7 @@ std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_Ow
 	return element;
 	
 }
-std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup, const int metaElementID) const
+std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID) const
 {
 	std::shared_ptr<ActivityPartitionImpl> element(new ActivityPartitionImpl(par_superGroup));
 	element->setMetaElementID(metaElementID);
@@ -9077,7 +9086,7 @@ std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_Su
 	return element;
 	
 }
-std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_SuperPartition(std::weak_ptr<uml::ActivityPartition > par_superPartition, const int metaElementID) const
+std::shared_ptr<ActivityPartition> umlFactoryImpl::createActivityPartition_in_SuperPartition(std::weak_ptr<uml::ActivityPartition> par_superPartition, const int metaElementID) const
 {
 	std::shared_ptr<ActivityPartitionImpl> element(new ActivityPartitionImpl(par_superPartition));
 	element->setMetaElementID(metaElementID);
@@ -9096,7 +9105,8 @@ std::shared_ptr<Actor> umlFactoryImpl::createActor(const int metaElementID/*=-1*
 	element->setThisActorPtr(element);
 	return element;
 }
-std::shared_ptr<Actor> umlFactoryImpl::createActor_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Actor> umlFactoryImpl::createActor_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ActorImpl> element(new ActorImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9108,7 +9118,7 @@ std::shared_ptr<Actor> umlFactoryImpl::createActor_in_Namespace(std::weak_ptr<um
 	return element;
 	
 }
-std::shared_ptr<Actor> umlFactoryImpl::createActor_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Actor> umlFactoryImpl::createActor_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ActorImpl> element(new ActorImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9120,7 +9130,7 @@ std::shared_ptr<Actor> umlFactoryImpl::createActor_in_Owner(std::weak_ptr<uml::E
 	return element;
 	
 }
-std::shared_ptr<Actor> umlFactoryImpl::createActor_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Actor> umlFactoryImpl::createActor_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ActorImpl> element(new ActorImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -9132,7 +9142,7 @@ std::shared_ptr<Actor> umlFactoryImpl::createActor_in_OwningPackage(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Actor> umlFactoryImpl::createActor_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Actor> umlFactoryImpl::createActor_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ActorImpl> element(new ActorImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -9144,7 +9154,7 @@ std::shared_ptr<Actor> umlFactoryImpl::createActor_in_OwningTemplateParameter(st
 	return element;
 	
 }
-std::shared_ptr<Actor> umlFactoryImpl::createActor_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Actor> umlFactoryImpl::createActor_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<ActorImpl> element(new ActorImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -9163,7 +9173,8 @@ std::shared_ptr<AddStructuralFeatureValueAction> umlFactoryImpl::createAddStruct
 	element->setThisAddStructuralFeatureValueActionPtr(element);
 	return element;
 }
-std::shared_ptr<AddStructuralFeatureValueAction> umlFactoryImpl::createAddStructuralFeatureValueAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<AddStructuralFeatureValueAction> umlFactoryImpl::createAddStructuralFeatureValueAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<AddStructuralFeatureValueActionImpl> element(new AddStructuralFeatureValueActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -9175,7 +9186,7 @@ std::shared_ptr<AddStructuralFeatureValueAction> umlFactoryImpl::createAddStruct
 	return element;
 	
 }
-std::shared_ptr<AddStructuralFeatureValueAction> umlFactoryImpl::createAddStructuralFeatureValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<AddStructuralFeatureValueAction> umlFactoryImpl::createAddStructuralFeatureValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<AddStructuralFeatureValueActionImpl> element(new AddStructuralFeatureValueActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -9187,7 +9198,7 @@ std::shared_ptr<AddStructuralFeatureValueAction> umlFactoryImpl::createAddStruct
 	return element;
 	
 }
-std::shared_ptr<AddStructuralFeatureValueAction> umlFactoryImpl::createAddStructuralFeatureValueAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<AddStructuralFeatureValueAction> umlFactoryImpl::createAddStructuralFeatureValueAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<AddStructuralFeatureValueActionImpl> element(new AddStructuralFeatureValueActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9199,7 +9210,7 @@ std::shared_ptr<AddStructuralFeatureValueAction> umlFactoryImpl::createAddStruct
 	return element;
 	
 }
-std::shared_ptr<AddStructuralFeatureValueAction> umlFactoryImpl::createAddStructuralFeatureValueAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<AddStructuralFeatureValueAction> umlFactoryImpl::createAddStructuralFeatureValueAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<AddStructuralFeatureValueActionImpl> element(new AddStructuralFeatureValueActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9218,7 +9229,8 @@ std::shared_ptr<AddVariableValueAction> umlFactoryImpl::createAddVariableValueAc
 	element->setThisAddVariableValueActionPtr(element);
 	return element;
 }
-std::shared_ptr<AddVariableValueAction> umlFactoryImpl::createAddVariableValueAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<AddVariableValueAction> umlFactoryImpl::createAddVariableValueAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<AddVariableValueActionImpl> element(new AddVariableValueActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -9230,7 +9242,7 @@ std::shared_ptr<AddVariableValueAction> umlFactoryImpl::createAddVariableValueAc
 	return element;
 	
 }
-std::shared_ptr<AddVariableValueAction> umlFactoryImpl::createAddVariableValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<AddVariableValueAction> umlFactoryImpl::createAddVariableValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<AddVariableValueActionImpl> element(new AddVariableValueActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -9242,7 +9254,7 @@ std::shared_ptr<AddVariableValueAction> umlFactoryImpl::createAddVariableValueAc
 	return element;
 	
 }
-std::shared_ptr<AddVariableValueAction> umlFactoryImpl::createAddVariableValueAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<AddVariableValueAction> umlFactoryImpl::createAddVariableValueAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<AddVariableValueActionImpl> element(new AddVariableValueActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9254,7 +9266,7 @@ std::shared_ptr<AddVariableValueAction> umlFactoryImpl::createAddVariableValueAc
 	return element;
 	
 }
-std::shared_ptr<AddVariableValueAction> umlFactoryImpl::createAddVariableValueAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<AddVariableValueAction> umlFactoryImpl::createAddVariableValueAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<AddVariableValueActionImpl> element(new AddVariableValueActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9273,7 +9285,8 @@ std::shared_ptr<AnyReceiveEvent> umlFactoryImpl::createAnyReceiveEvent(const int
 	element->setThisAnyReceiveEventPtr(element);
 	return element;
 }
-std::shared_ptr<AnyReceiveEvent> umlFactoryImpl::createAnyReceiveEvent_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<AnyReceiveEvent> umlFactoryImpl::createAnyReceiveEvent_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<AnyReceiveEventImpl> element(new AnyReceiveEventImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9285,7 +9298,7 @@ std::shared_ptr<AnyReceiveEvent> umlFactoryImpl::createAnyReceiveEvent_in_Namesp
 	return element;
 	
 }
-std::shared_ptr<AnyReceiveEvent> umlFactoryImpl::createAnyReceiveEvent_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<AnyReceiveEvent> umlFactoryImpl::createAnyReceiveEvent_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<AnyReceiveEventImpl> element(new AnyReceiveEventImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9297,7 +9310,7 @@ std::shared_ptr<AnyReceiveEvent> umlFactoryImpl::createAnyReceiveEvent_in_Owner(
 	return element;
 	
 }
-std::shared_ptr<AnyReceiveEvent> umlFactoryImpl::createAnyReceiveEvent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<AnyReceiveEvent> umlFactoryImpl::createAnyReceiveEvent_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<AnyReceiveEventImpl> element(new AnyReceiveEventImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -9309,7 +9322,7 @@ std::shared_ptr<AnyReceiveEvent> umlFactoryImpl::createAnyReceiveEvent_in_Owning
 	return element;
 	
 }
-std::shared_ptr<AnyReceiveEvent> umlFactoryImpl::createAnyReceiveEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<AnyReceiveEvent> umlFactoryImpl::createAnyReceiveEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<AnyReceiveEventImpl> element(new AnyReceiveEventImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -9328,6 +9341,7 @@ std::shared_ptr<Argument> umlFactoryImpl::createArgument(const int metaElementID
 	element->setThisArgumentPtr(element);
 	return element;
 }
+
 std::shared_ptr<Artifact> umlFactoryImpl::createArtifact(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl());
@@ -9335,7 +9349,8 @@ std::shared_ptr<Artifact> umlFactoryImpl::createArtifact(const int metaElementID
 	element->setThisArtifactPtr(element);
 	return element;
 }
-std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9347,7 +9362,7 @@ std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_Namespace(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9359,7 +9374,7 @@ std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_Owner(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -9371,7 +9386,7 @@ std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_OwningPackage(std::w
 	return element;
 	
 }
-std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -9383,7 +9398,7 @@ std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_OwningTemplateParame
 	return element;
 	
 }
-std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Artifact> umlFactoryImpl::createArtifact_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<ArtifactImpl> element(new ArtifactImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -9402,7 +9417,8 @@ std::shared_ptr<Association> umlFactoryImpl::createAssociation(const int metaEle
 	element->setThisAssociationPtr(element);
 	return element;
 }
-std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9414,7 +9430,7 @@ std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_Namespace(std:
 	return element;
 	
 }
-std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9426,7 +9442,7 @@ std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_Owner(std::wea
 	return element;
 	
 }
-std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -9438,7 +9454,7 @@ std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_OwningPackage(
 	return element;
 	
 }
-std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -9450,7 +9466,7 @@ std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_OwningTemplate
 	return element;
 	
 }
-std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Association> umlFactoryImpl::createAssociation_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<AssociationImpl> element(new AssociationImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -9469,7 +9485,8 @@ std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass(const i
 	element->setThisAssociationClassPtr(element);
 	return element;
 }
-std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9481,7 +9498,7 @@ std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_Name
 	return element;
 	
 }
-std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9493,7 +9510,7 @@ std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_Owne
 	return element;
 	
 }
-std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -9505,7 +9522,7 @@ std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_Owni
 	return element;
 	
 }
-std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -9517,7 +9534,7 @@ std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_Owni
 	return element;
 	
 }
-std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<AssociationClass> umlFactoryImpl::createAssociationClass_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<AssociationClassImpl> element(new AssociationClassImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -9536,7 +9553,8 @@ std::shared_ptr<BehaviorExecutionSpecification> umlFactoryImpl::createBehaviorEx
 	element->setThisBehaviorExecutionSpecificationPtr(element);
 	return element;
 }
-std::shared_ptr<BehaviorExecutionSpecification> umlFactoryImpl::createBehaviorExecutionSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+
+std::shared_ptr<BehaviorExecutionSpecification> umlFactoryImpl::createBehaviorExecutionSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<BehaviorExecutionSpecificationImpl> element(new BehaviorExecutionSpecificationImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -9548,7 +9566,7 @@ std::shared_ptr<BehaviorExecutionSpecification> umlFactoryImpl::createBehaviorEx
 	return element;
 	
 }
-std::shared_ptr<BehaviorExecutionSpecification> umlFactoryImpl::createBehaviorExecutionSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<BehaviorExecutionSpecification> umlFactoryImpl::createBehaviorExecutionSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<BehaviorExecutionSpecificationImpl> element(new BehaviorExecutionSpecificationImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -9560,7 +9578,7 @@ std::shared_ptr<BehaviorExecutionSpecification> umlFactoryImpl::createBehaviorEx
 	return element;
 	
 }
-std::shared_ptr<BehaviorExecutionSpecification> umlFactoryImpl::createBehaviorExecutionSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<BehaviorExecutionSpecification> umlFactoryImpl::createBehaviorExecutionSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<BehaviorExecutionSpecificationImpl> element(new BehaviorExecutionSpecificationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9572,7 +9590,7 @@ std::shared_ptr<BehaviorExecutionSpecification> umlFactoryImpl::createBehaviorEx
 	return element;
 	
 }
-std::shared_ptr<BehaviorExecutionSpecification> umlFactoryImpl::createBehaviorExecutionSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<BehaviorExecutionSpecification> umlFactoryImpl::createBehaviorExecutionSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<BehaviorExecutionSpecificationImpl> element(new BehaviorExecutionSpecificationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9591,7 +9609,8 @@ std::shared_ptr<BroadcastSignalAction> umlFactoryImpl::createBroadcastSignalActi
 	element->setThisBroadcastSignalActionPtr(element);
 	return element;
 }
-std::shared_ptr<BroadcastSignalAction> umlFactoryImpl::createBroadcastSignalAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<BroadcastSignalAction> umlFactoryImpl::createBroadcastSignalAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<BroadcastSignalActionImpl> element(new BroadcastSignalActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -9603,7 +9622,7 @@ std::shared_ptr<BroadcastSignalAction> umlFactoryImpl::createBroadcastSignalActi
 	return element;
 	
 }
-std::shared_ptr<BroadcastSignalAction> umlFactoryImpl::createBroadcastSignalAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<BroadcastSignalAction> umlFactoryImpl::createBroadcastSignalAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<BroadcastSignalActionImpl> element(new BroadcastSignalActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -9615,7 +9634,7 @@ std::shared_ptr<BroadcastSignalAction> umlFactoryImpl::createBroadcastSignalActi
 	return element;
 	
 }
-std::shared_ptr<BroadcastSignalAction> umlFactoryImpl::createBroadcastSignalAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<BroadcastSignalAction> umlFactoryImpl::createBroadcastSignalAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<BroadcastSignalActionImpl> element(new BroadcastSignalActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9627,7 +9646,7 @@ std::shared_ptr<BroadcastSignalAction> umlFactoryImpl::createBroadcastSignalActi
 	return element;
 	
 }
-std::shared_ptr<BroadcastSignalAction> umlFactoryImpl::createBroadcastSignalAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<BroadcastSignalAction> umlFactoryImpl::createBroadcastSignalAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<BroadcastSignalActionImpl> element(new BroadcastSignalActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9646,7 +9665,8 @@ std::shared_ptr<CallBehaviorAction> umlFactoryImpl::createCallBehaviorAction(con
 	element->setThisCallBehaviorActionPtr(element);
 	return element;
 }
-std::shared_ptr<CallBehaviorAction> umlFactoryImpl::createCallBehaviorAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<CallBehaviorAction> umlFactoryImpl::createCallBehaviorAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<CallBehaviorActionImpl> element(new CallBehaviorActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -9658,7 +9678,7 @@ std::shared_ptr<CallBehaviorAction> umlFactoryImpl::createCallBehaviorAction_in_
 	return element;
 	
 }
-std::shared_ptr<CallBehaviorAction> umlFactoryImpl::createCallBehaviorAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<CallBehaviorAction> umlFactoryImpl::createCallBehaviorAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<CallBehaviorActionImpl> element(new CallBehaviorActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -9670,7 +9690,7 @@ std::shared_ptr<CallBehaviorAction> umlFactoryImpl::createCallBehaviorAction_in_
 	return element;
 	
 }
-std::shared_ptr<CallBehaviorAction> umlFactoryImpl::createCallBehaviorAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<CallBehaviorAction> umlFactoryImpl::createCallBehaviorAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<CallBehaviorActionImpl> element(new CallBehaviorActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9682,7 +9702,7 @@ std::shared_ptr<CallBehaviorAction> umlFactoryImpl::createCallBehaviorAction_in_
 	return element;
 	
 }
-std::shared_ptr<CallBehaviorAction> umlFactoryImpl::createCallBehaviorAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<CallBehaviorAction> umlFactoryImpl::createCallBehaviorAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<CallBehaviorActionImpl> element(new CallBehaviorActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9701,7 +9721,8 @@ std::shared_ptr<CallEvent> umlFactoryImpl::createCallEvent(const int metaElement
 	element->setThisCallEventPtr(element);
 	return element;
 }
-std::shared_ptr<CallEvent> umlFactoryImpl::createCallEvent_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<CallEvent> umlFactoryImpl::createCallEvent_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<CallEventImpl> element(new CallEventImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9713,7 +9734,7 @@ std::shared_ptr<CallEvent> umlFactoryImpl::createCallEvent_in_Namespace(std::wea
 	return element;
 	
 }
-std::shared_ptr<CallEvent> umlFactoryImpl::createCallEvent_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<CallEvent> umlFactoryImpl::createCallEvent_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<CallEventImpl> element(new CallEventImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9725,7 +9746,7 @@ std::shared_ptr<CallEvent> umlFactoryImpl::createCallEvent_in_Owner(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<CallEvent> umlFactoryImpl::createCallEvent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<CallEvent> umlFactoryImpl::createCallEvent_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<CallEventImpl> element(new CallEventImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -9737,7 +9758,7 @@ std::shared_ptr<CallEvent> umlFactoryImpl::createCallEvent_in_OwningPackage(std:
 	return element;
 	
 }
-std::shared_ptr<CallEvent> umlFactoryImpl::createCallEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<CallEvent> umlFactoryImpl::createCallEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<CallEventImpl> element(new CallEventImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -9756,7 +9777,8 @@ std::shared_ptr<CallOperationAction> umlFactoryImpl::createCallOperationAction(c
 	element->setThisCallOperationActionPtr(element);
 	return element;
 }
-std::shared_ptr<CallOperationAction> umlFactoryImpl::createCallOperationAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<CallOperationAction> umlFactoryImpl::createCallOperationAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<CallOperationActionImpl> element(new CallOperationActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -9768,7 +9790,7 @@ std::shared_ptr<CallOperationAction> umlFactoryImpl::createCallOperationAction_i
 	return element;
 	
 }
-std::shared_ptr<CallOperationAction> umlFactoryImpl::createCallOperationAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<CallOperationAction> umlFactoryImpl::createCallOperationAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<CallOperationActionImpl> element(new CallOperationActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -9780,7 +9802,7 @@ std::shared_ptr<CallOperationAction> umlFactoryImpl::createCallOperationAction_i
 	return element;
 	
 }
-std::shared_ptr<CallOperationAction> umlFactoryImpl::createCallOperationAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<CallOperationAction> umlFactoryImpl::createCallOperationAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<CallOperationActionImpl> element(new CallOperationActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9792,7 +9814,7 @@ std::shared_ptr<CallOperationAction> umlFactoryImpl::createCallOperationAction_i
 	return element;
 	
 }
-std::shared_ptr<CallOperationAction> umlFactoryImpl::createCallOperationAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<CallOperationAction> umlFactoryImpl::createCallOperationAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<CallOperationActionImpl> element(new CallOperationActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9811,7 +9833,8 @@ std::shared_ptr<CentralBufferNode> umlFactoryImpl::createCentralBufferNode(const
 	element->setThisCentralBufferNodePtr(element);
 	return element;
 }
-std::shared_ptr<CentralBufferNode> umlFactoryImpl::createCentralBufferNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<CentralBufferNode> umlFactoryImpl::createCentralBufferNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<CentralBufferNodeImpl> element(new CentralBufferNodeImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -9823,7 +9846,7 @@ std::shared_ptr<CentralBufferNode> umlFactoryImpl::createCentralBufferNode_in_Ac
 	return element;
 	
 }
-std::shared_ptr<CentralBufferNode> umlFactoryImpl::createCentralBufferNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<CentralBufferNode> umlFactoryImpl::createCentralBufferNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<CentralBufferNodeImpl> element(new CentralBufferNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -9835,7 +9858,7 @@ std::shared_ptr<CentralBufferNode> umlFactoryImpl::createCentralBufferNode_in_In
 	return element;
 	
 }
-std::shared_ptr<CentralBufferNode> umlFactoryImpl::createCentralBufferNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<CentralBufferNode> umlFactoryImpl::createCentralBufferNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<CentralBufferNodeImpl> element(new CentralBufferNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9847,7 +9870,7 @@ std::shared_ptr<CentralBufferNode> umlFactoryImpl::createCentralBufferNode_in_Na
 	return element;
 	
 }
-std::shared_ptr<CentralBufferNode> umlFactoryImpl::createCentralBufferNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<CentralBufferNode> umlFactoryImpl::createCentralBufferNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<CentralBufferNodeImpl> element(new CentralBufferNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9866,7 +9889,8 @@ std::shared_ptr<ChangeEvent> umlFactoryImpl::createChangeEvent(const int metaEle
 	element->setThisChangeEventPtr(element);
 	return element;
 }
-std::shared_ptr<ChangeEvent> umlFactoryImpl::createChangeEvent_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<ChangeEvent> umlFactoryImpl::createChangeEvent_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ChangeEventImpl> element(new ChangeEventImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9878,7 +9902,7 @@ std::shared_ptr<ChangeEvent> umlFactoryImpl::createChangeEvent_in_Namespace(std:
 	return element;
 	
 }
-std::shared_ptr<ChangeEvent> umlFactoryImpl::createChangeEvent_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ChangeEvent> umlFactoryImpl::createChangeEvent_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ChangeEventImpl> element(new ChangeEventImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9890,7 +9914,7 @@ std::shared_ptr<ChangeEvent> umlFactoryImpl::createChangeEvent_in_Owner(std::wea
 	return element;
 	
 }
-std::shared_ptr<ChangeEvent> umlFactoryImpl::createChangeEvent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<ChangeEvent> umlFactoryImpl::createChangeEvent_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ChangeEventImpl> element(new ChangeEventImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -9902,7 +9926,7 @@ std::shared_ptr<ChangeEvent> umlFactoryImpl::createChangeEvent_in_OwningPackage(
 	return element;
 	
 }
-std::shared_ptr<ChangeEvent> umlFactoryImpl::createChangeEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<ChangeEvent> umlFactoryImpl::createChangeEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ChangeEventImpl> element(new ChangeEventImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -9921,7 +9945,8 @@ std::shared_ptr<Class> umlFactoryImpl::createClass(const int metaElementID/*=-1*
 	element->setThisClassPtr(element);
 	return element;
 }
-std::shared_ptr<Class> umlFactoryImpl::createClass_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Class> umlFactoryImpl::createClass_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ClassImpl> element(new ClassImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -9933,7 +9958,7 @@ std::shared_ptr<Class> umlFactoryImpl::createClass_in_Namespace(std::weak_ptr<um
 	return element;
 	
 }
-std::shared_ptr<Class> umlFactoryImpl::createClass_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Class> umlFactoryImpl::createClass_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ClassImpl> element(new ClassImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -9945,7 +9970,7 @@ std::shared_ptr<Class> umlFactoryImpl::createClass_in_Owner(std::weak_ptr<uml::E
 	return element;
 	
 }
-std::shared_ptr<Class> umlFactoryImpl::createClass_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Class> umlFactoryImpl::createClass_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ClassImpl> element(new ClassImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -9957,7 +9982,7 @@ std::shared_ptr<Class> umlFactoryImpl::createClass_in_OwningPackage(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Class> umlFactoryImpl::createClass_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Class> umlFactoryImpl::createClass_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ClassImpl> element(new ClassImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -9969,7 +9994,7 @@ std::shared_ptr<Class> umlFactoryImpl::createClass_in_OwningTemplateParameter(st
 	return element;
 	
 }
-std::shared_ptr<Class> umlFactoryImpl::createClass_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Class> umlFactoryImpl::createClass_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<ClassImpl> element(new ClassImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -9988,7 +10013,8 @@ std::shared_ptr<ClassifierTemplateParameter> umlFactoryImpl::createClassifierTem
 	element->setThisClassifierTemplateParameterPtr(element);
 	return element;
 }
-std::shared_ptr<ClassifierTemplateParameter> umlFactoryImpl::createClassifierTemplateParameter_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<ClassifierTemplateParameter> umlFactoryImpl::createClassifierTemplateParameter_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ClassifierTemplateParameterImpl> element(new ClassifierTemplateParameterImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10000,7 +10026,7 @@ std::shared_ptr<ClassifierTemplateParameter> umlFactoryImpl::createClassifierTem
 	return element;
 	
 }
-std::shared_ptr<ClassifierTemplateParameter> umlFactoryImpl::createClassifierTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature > par_signature, const int metaElementID) const
+std::shared_ptr<ClassifierTemplateParameter> umlFactoryImpl::createClassifierTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature> par_signature, const int metaElementID) const
 {
 	std::shared_ptr<ClassifierTemplateParameterImpl> element(new ClassifierTemplateParameterImpl(par_signature));
 	element->setMetaElementID(metaElementID);
@@ -10019,7 +10045,8 @@ std::shared_ptr<Clause> umlFactoryImpl::createClause(const int metaElementID/*=-
 	element->setThisClausePtr(element);
 	return element;
 }
-std::shared_ptr<Clause> umlFactoryImpl::createClause_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<Clause> umlFactoryImpl::createClause_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ClauseImpl> element(new ClauseImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10038,7 +10065,8 @@ std::shared_ptr<ClearAssociationAction> umlFactoryImpl::createClearAssociationAc
 	element->setThisClearAssociationActionPtr(element);
 	return element;
 }
-std::shared_ptr<ClearAssociationAction> umlFactoryImpl::createClearAssociationAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ClearAssociationAction> umlFactoryImpl::createClearAssociationAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ClearAssociationActionImpl> element(new ClearAssociationActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -10050,7 +10078,7 @@ std::shared_ptr<ClearAssociationAction> umlFactoryImpl::createClearAssociationAc
 	return element;
 	
 }
-std::shared_ptr<ClearAssociationAction> umlFactoryImpl::createClearAssociationAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ClearAssociationAction> umlFactoryImpl::createClearAssociationAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ClearAssociationActionImpl> element(new ClearAssociationActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -10062,7 +10090,7 @@ std::shared_ptr<ClearAssociationAction> umlFactoryImpl::createClearAssociationAc
 	return element;
 	
 }
-std::shared_ptr<ClearAssociationAction> umlFactoryImpl::createClearAssociationAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ClearAssociationAction> umlFactoryImpl::createClearAssociationAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ClearAssociationActionImpl> element(new ClearAssociationActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10074,7 +10102,7 @@ std::shared_ptr<ClearAssociationAction> umlFactoryImpl::createClearAssociationAc
 	return element;
 	
 }
-std::shared_ptr<ClearAssociationAction> umlFactoryImpl::createClearAssociationAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ClearAssociationAction> umlFactoryImpl::createClearAssociationAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ClearAssociationActionImpl> element(new ClearAssociationActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10093,7 +10121,8 @@ std::shared_ptr<ClearStructuralFeatureAction> umlFactoryImpl::createClearStructu
 	element->setThisClearStructuralFeatureActionPtr(element);
 	return element;
 }
-std::shared_ptr<ClearStructuralFeatureAction> umlFactoryImpl::createClearStructuralFeatureAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ClearStructuralFeatureAction> umlFactoryImpl::createClearStructuralFeatureAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ClearStructuralFeatureActionImpl> element(new ClearStructuralFeatureActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -10105,7 +10134,7 @@ std::shared_ptr<ClearStructuralFeatureAction> umlFactoryImpl::createClearStructu
 	return element;
 	
 }
-std::shared_ptr<ClearStructuralFeatureAction> umlFactoryImpl::createClearStructuralFeatureAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ClearStructuralFeatureAction> umlFactoryImpl::createClearStructuralFeatureAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ClearStructuralFeatureActionImpl> element(new ClearStructuralFeatureActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -10117,7 +10146,7 @@ std::shared_ptr<ClearStructuralFeatureAction> umlFactoryImpl::createClearStructu
 	return element;
 	
 }
-std::shared_ptr<ClearStructuralFeatureAction> umlFactoryImpl::createClearStructuralFeatureAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ClearStructuralFeatureAction> umlFactoryImpl::createClearStructuralFeatureAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ClearStructuralFeatureActionImpl> element(new ClearStructuralFeatureActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10129,7 +10158,7 @@ std::shared_ptr<ClearStructuralFeatureAction> umlFactoryImpl::createClearStructu
 	return element;
 	
 }
-std::shared_ptr<ClearStructuralFeatureAction> umlFactoryImpl::createClearStructuralFeatureAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ClearStructuralFeatureAction> umlFactoryImpl::createClearStructuralFeatureAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ClearStructuralFeatureActionImpl> element(new ClearStructuralFeatureActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10148,7 +10177,8 @@ std::shared_ptr<ClearVariableAction> umlFactoryImpl::createClearVariableAction(c
 	element->setThisClearVariableActionPtr(element);
 	return element;
 }
-std::shared_ptr<ClearVariableAction> umlFactoryImpl::createClearVariableAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ClearVariableAction> umlFactoryImpl::createClearVariableAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ClearVariableActionImpl> element(new ClearVariableActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -10160,7 +10190,7 @@ std::shared_ptr<ClearVariableAction> umlFactoryImpl::createClearVariableAction_i
 	return element;
 	
 }
-std::shared_ptr<ClearVariableAction> umlFactoryImpl::createClearVariableAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ClearVariableAction> umlFactoryImpl::createClearVariableAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ClearVariableActionImpl> element(new ClearVariableActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -10172,7 +10202,7 @@ std::shared_ptr<ClearVariableAction> umlFactoryImpl::createClearVariableAction_i
 	return element;
 	
 }
-std::shared_ptr<ClearVariableAction> umlFactoryImpl::createClearVariableAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ClearVariableAction> umlFactoryImpl::createClearVariableAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ClearVariableActionImpl> element(new ClearVariableActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10184,7 +10214,7 @@ std::shared_ptr<ClearVariableAction> umlFactoryImpl::createClearVariableAction_i
 	return element;
 	
 }
-std::shared_ptr<ClearVariableAction> umlFactoryImpl::createClearVariableAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ClearVariableAction> umlFactoryImpl::createClearVariableAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ClearVariableActionImpl> element(new ClearVariableActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10203,7 +10233,8 @@ std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration(const int met
 	element->setThisCollaborationPtr(element);
 	return element;
 }
-std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10215,7 +10246,7 @@ std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_Namespace(
 	return element;
 	
 }
-std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10227,7 +10258,7 @@ std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_Owner(std:
 	return element;
 	
 }
-std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -10239,7 +10270,7 @@ std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_OwningPack
 	return element;
 	
 }
-std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -10251,7 +10282,7 @@ std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_OwningTemp
 	return element;
 	
 }
-std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Collaboration> umlFactoryImpl::createCollaboration_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<CollaborationImpl> element(new CollaborationImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -10270,7 +10301,8 @@ std::shared_ptr<CollaborationUse> umlFactoryImpl::createCollaborationUse(const i
 	element->setThisCollaborationUsePtr(element);
 	return element;
 }
-std::shared_ptr<CollaborationUse> umlFactoryImpl::createCollaborationUse_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<CollaborationUse> umlFactoryImpl::createCollaborationUse_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<CollaborationUseImpl> element(new CollaborationUseImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10282,7 +10314,7 @@ std::shared_ptr<CollaborationUse> umlFactoryImpl::createCollaborationUse_in_Name
 	return element;
 	
 }
-std::shared_ptr<CollaborationUse> umlFactoryImpl::createCollaborationUse_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<CollaborationUse> umlFactoryImpl::createCollaborationUse_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<CollaborationUseImpl> element(new CollaborationUseImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10301,7 +10333,8 @@ std::shared_ptr<CombinedFragment> umlFactoryImpl::createCombinedFragment(const i
 	element->setThisCombinedFragmentPtr(element);
 	return element;
 }
-std::shared_ptr<CombinedFragment> umlFactoryImpl::createCombinedFragment_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+
+std::shared_ptr<CombinedFragment> umlFactoryImpl::createCombinedFragment_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<CombinedFragmentImpl> element(new CombinedFragmentImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -10313,7 +10346,7 @@ std::shared_ptr<CombinedFragment> umlFactoryImpl::createCombinedFragment_in_Encl
 	return element;
 	
 }
-std::shared_ptr<CombinedFragment> umlFactoryImpl::createCombinedFragment_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<CombinedFragment> umlFactoryImpl::createCombinedFragment_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<CombinedFragmentImpl> element(new CombinedFragmentImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -10325,7 +10358,7 @@ std::shared_ptr<CombinedFragment> umlFactoryImpl::createCombinedFragment_in_Encl
 	return element;
 	
 }
-std::shared_ptr<CombinedFragment> umlFactoryImpl::createCombinedFragment_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<CombinedFragment> umlFactoryImpl::createCombinedFragment_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<CombinedFragmentImpl> element(new CombinedFragmentImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10337,7 +10370,7 @@ std::shared_ptr<CombinedFragment> umlFactoryImpl::createCombinedFragment_in_Name
 	return element;
 	
 }
-std::shared_ptr<CombinedFragment> umlFactoryImpl::createCombinedFragment_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<CombinedFragment> umlFactoryImpl::createCombinedFragment_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<CombinedFragmentImpl> element(new CombinedFragmentImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10356,7 +10389,8 @@ std::shared_ptr<Comment> umlFactoryImpl::createComment(const int metaElementID/*
 	element->setThisCommentPtr(element);
 	return element;
 }
-std::shared_ptr<Comment> umlFactoryImpl::createComment_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<Comment> umlFactoryImpl::createComment_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<CommentImpl> element(new CommentImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10375,7 +10409,8 @@ std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath(const
 	element->setThisCommunicationPathPtr(element);
 	return element;
 }
-std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10387,7 +10422,7 @@ std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_Na
 	return element;
 	
 }
-std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10399,7 +10434,7 @@ std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_Ow
 	return element;
 	
 }
-std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -10411,7 +10446,7 @@ std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_Ow
 	return element;
 	
 }
-std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -10423,7 +10458,7 @@ std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_Ow
 	return element;
 	
 }
-std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<CommunicationPath> umlFactoryImpl::createCommunicationPath_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<CommunicationPathImpl> element(new CommunicationPathImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -10442,7 +10477,8 @@ std::shared_ptr<Component> umlFactoryImpl::createComponent(const int metaElement
 	element->setThisComponentPtr(element);
 	return element;
 }
-std::shared_ptr<Component> umlFactoryImpl::createComponent_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Component> umlFactoryImpl::createComponent_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10454,7 +10490,7 @@ std::shared_ptr<Component> umlFactoryImpl::createComponent_in_Namespace(std::wea
 	return element;
 	
 }
-std::shared_ptr<Component> umlFactoryImpl::createComponent_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Component> umlFactoryImpl::createComponent_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10466,7 +10502,7 @@ std::shared_ptr<Component> umlFactoryImpl::createComponent_in_Owner(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Component> umlFactoryImpl::createComponent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Component> umlFactoryImpl::createComponent_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -10478,7 +10514,7 @@ std::shared_ptr<Component> umlFactoryImpl::createComponent_in_OwningPackage(std:
 	return element;
 	
 }
-std::shared_ptr<Component> umlFactoryImpl::createComponent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Component> umlFactoryImpl::createComponent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -10490,7 +10526,7 @@ std::shared_ptr<Component> umlFactoryImpl::createComponent_in_OwningTemplatePara
 	return element;
 	
 }
-std::shared_ptr<Component> umlFactoryImpl::createComponent_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Component> umlFactoryImpl::createComponent_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<ComponentImpl> element(new ComponentImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -10509,7 +10545,8 @@ std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization
 	element->setThisComponentRealizationPtr(element);
 	return element;
 }
-std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization_in_Abstraction(std::weak_ptr<uml::Component > par_abstraction, const int metaElementID) const
+
+std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization_in_Abstraction(std::weak_ptr<uml::Component> par_abstraction, const int metaElementID) const
 {
 	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(par_abstraction));
 	element->setMetaElementID(metaElementID);
@@ -10521,7 +10558,7 @@ std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization
 	return element;
 	
 }
-std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10533,7 +10570,7 @@ std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization
 	return element;
 	
 }
-std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10545,7 +10582,7 @@ std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization
 	return element;
 	
 }
-std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -10557,7 +10594,7 @@ std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization
 	return element;
 	
 }
-std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<ComponentRealization> umlFactoryImpl::createComponentRealization_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ComponentRealizationImpl> element(new ComponentRealizationImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -10576,7 +10613,8 @@ std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode(const int
 	element->setThisConditionalNodePtr(element);
 	return element;
 }
-std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_activity, umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY));
 	element->setMetaElementID(metaElementID);
@@ -10588,7 +10626,7 @@ std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_Activi
 	return element;
 	
 }
-std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity, const int metaElementID) const
+std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID) const
 {
 	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_inActivity, umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY));
 	element->setMetaElementID(metaElementID);
@@ -10600,7 +10638,7 @@ std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_InActi
 	return element;
 	
 }
-std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -10612,7 +10650,7 @@ std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_InStru
 	return element;
 	
 }
-std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10624,7 +10662,7 @@ std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_Namesp
 	return element;
 	
 }
-std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10636,7 +10674,7 @@ std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_Owner(
 	return element;
 	
 }
-std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup, const int metaElementID) const
+std::shared_ptr<ConditionalNode> umlFactoryImpl::createConditionalNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID) const
 {
 	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(par_superGroup));
 	element->setMetaElementID(metaElementID);
@@ -10655,7 +10693,8 @@ std::shared_ptr<ConnectableElementTemplateParameter> umlFactoryImpl::createConne
 	element->setThisConnectableElementTemplateParameterPtr(element);
 	return element;
 }
-std::shared_ptr<ConnectableElementTemplateParameter> umlFactoryImpl::createConnectableElementTemplateParameter_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<ConnectableElementTemplateParameter> umlFactoryImpl::createConnectableElementTemplateParameter_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ConnectableElementTemplateParameterImpl> element(new ConnectableElementTemplateParameterImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10667,7 +10706,7 @@ std::shared_ptr<ConnectableElementTemplateParameter> umlFactoryImpl::createConne
 	return element;
 	
 }
-std::shared_ptr<ConnectableElementTemplateParameter> umlFactoryImpl::createConnectableElementTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature > par_signature, const int metaElementID) const
+std::shared_ptr<ConnectableElementTemplateParameter> umlFactoryImpl::createConnectableElementTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature> par_signature, const int metaElementID) const
 {
 	std::shared_ptr<ConnectableElementTemplateParameterImpl> element(new ConnectableElementTemplateParameterImpl(par_signature));
 	element->setMetaElementID(metaElementID);
@@ -10686,7 +10725,8 @@ std::shared_ptr<ConnectionPointReference> umlFactoryImpl::createConnectionPointR
 	element->setThisConnectionPointReferencePtr(element);
 	return element;
 }
-std::shared_ptr<ConnectionPointReference> umlFactoryImpl::createConnectionPointReference_in_Container(std::weak_ptr<uml::Region > par_container, const int metaElementID) const
+
+std::shared_ptr<ConnectionPointReference> umlFactoryImpl::createConnectionPointReference_in_Container(std::weak_ptr<uml::Region> par_container, const int metaElementID) const
 {
 	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl(par_container));
 	element->setMetaElementID(metaElementID);
@@ -10698,7 +10738,7 @@ std::shared_ptr<ConnectionPointReference> umlFactoryImpl::createConnectionPointR
 	return element;
 	
 }
-std::shared_ptr<ConnectionPointReference> umlFactoryImpl::createConnectionPointReference_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ConnectionPointReference> umlFactoryImpl::createConnectionPointReference_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10710,7 +10750,7 @@ std::shared_ptr<ConnectionPointReference> umlFactoryImpl::createConnectionPointR
 	return element;
 	
 }
-std::shared_ptr<ConnectionPointReference> umlFactoryImpl::createConnectionPointReference_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ConnectionPointReference> umlFactoryImpl::createConnectionPointReference_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10722,7 +10762,7 @@ std::shared_ptr<ConnectionPointReference> umlFactoryImpl::createConnectionPointR
 	return element;
 	
 }
-std::shared_ptr<ConnectionPointReference> umlFactoryImpl::createConnectionPointReference_in_State(std::weak_ptr<uml::State > par_state, const int metaElementID) const
+std::shared_ptr<ConnectionPointReference> umlFactoryImpl::createConnectionPointReference_in_State(std::weak_ptr<uml::State> par_state, const int metaElementID) const
 {
 	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl(par_state));
 	element->setMetaElementID(metaElementID);
@@ -10741,7 +10781,8 @@ std::shared_ptr<Connector> umlFactoryImpl::createConnector(const int metaElement
 	element->setThisConnectorPtr(element);
 	return element;
 }
-std::shared_ptr<Connector> umlFactoryImpl::createConnector_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Connector> umlFactoryImpl::createConnector_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ConnectorImpl> element(new ConnectorImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10753,7 +10794,7 @@ std::shared_ptr<Connector> umlFactoryImpl::createConnector_in_Namespace(std::wea
 	return element;
 	
 }
-std::shared_ptr<Connector> umlFactoryImpl::createConnector_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Connector> umlFactoryImpl::createConnector_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ConnectorImpl> element(new ConnectorImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10765,7 +10806,7 @@ std::shared_ptr<Connector> umlFactoryImpl::createConnector_in_Owner(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Connector> umlFactoryImpl::createConnector_in_StructuredClassifier(std::weak_ptr<uml::StructuredClassifier > par_structuredClassifier, const int metaElementID) const
+std::shared_ptr<Connector> umlFactoryImpl::createConnector_in_StructuredClassifier(std::weak_ptr<uml::StructuredClassifier> par_structuredClassifier, const int metaElementID) const
 {
 	std::shared_ptr<ConnectorImpl> element(new ConnectorImpl(par_structuredClassifier));
 	element->setMetaElementID(metaElementID);
@@ -10784,7 +10825,8 @@ std::shared_ptr<ConnectorEnd> umlFactoryImpl::createConnectorEnd(const int metaE
 	element->setThisConnectorEndPtr(element);
 	return element;
 }
-std::shared_ptr<ConnectorEnd> umlFactoryImpl::createConnectorEnd_in_Connector(std::weak_ptr<uml::Connector > par_connector, const int metaElementID) const
+
+std::shared_ptr<ConnectorEnd> umlFactoryImpl::createConnectorEnd_in_Connector(std::weak_ptr<uml::Connector> par_connector, const int metaElementID) const
 {
 	std::shared_ptr<ConnectorEndImpl> element(new ConnectorEndImpl(par_connector));
 	element->setMetaElementID(metaElementID);
@@ -10796,7 +10838,7 @@ std::shared_ptr<ConnectorEnd> umlFactoryImpl::createConnectorEnd_in_Connector(st
 	return element;
 	
 }
-std::shared_ptr<ConnectorEnd> umlFactoryImpl::createConnectorEnd_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ConnectorEnd> umlFactoryImpl::createConnectorEnd_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ConnectorEndImpl> element(new ConnectorEndImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10815,7 +10857,8 @@ std::shared_ptr<ConsiderIgnoreFragment> umlFactoryImpl::createConsiderIgnoreFrag
 	element->setThisConsiderIgnoreFragmentPtr(element);
 	return element;
 }
-std::shared_ptr<ConsiderIgnoreFragment> umlFactoryImpl::createConsiderIgnoreFragment_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+
+std::shared_ptr<ConsiderIgnoreFragment> umlFactoryImpl::createConsiderIgnoreFragment_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -10827,7 +10870,7 @@ std::shared_ptr<ConsiderIgnoreFragment> umlFactoryImpl::createConsiderIgnoreFrag
 	return element;
 	
 }
-std::shared_ptr<ConsiderIgnoreFragment> umlFactoryImpl::createConsiderIgnoreFragment_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<ConsiderIgnoreFragment> umlFactoryImpl::createConsiderIgnoreFragment_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -10839,7 +10882,7 @@ std::shared_ptr<ConsiderIgnoreFragment> umlFactoryImpl::createConsiderIgnoreFrag
 	return element;
 	
 }
-std::shared_ptr<ConsiderIgnoreFragment> umlFactoryImpl::createConsiderIgnoreFragment_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ConsiderIgnoreFragment> umlFactoryImpl::createConsiderIgnoreFragment_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10851,7 +10894,7 @@ std::shared_ptr<ConsiderIgnoreFragment> umlFactoryImpl::createConsiderIgnoreFrag
 	return element;
 	
 }
-std::shared_ptr<ConsiderIgnoreFragment> umlFactoryImpl::createConsiderIgnoreFragment_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ConsiderIgnoreFragment> umlFactoryImpl::createConsiderIgnoreFragment_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10870,7 +10913,8 @@ std::shared_ptr<Constraint> umlFactoryImpl::createConstraint(const int metaEleme
 	element->setThisConstraintPtr(element);
 	return element;
 }
-std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context, const int metaElementID) const
+
+std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_Context(std::weak_ptr<uml::Namespace> par_context, const int metaElementID) const
 {
 	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_context, umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT));
 	element->setMetaElementID(metaElementID);
@@ -10882,7 +10926,7 @@ std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_Context(std::wea
 	return element;
 	
 }
-std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_namespace, umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE));
 	element->setMetaElementID(metaElementID);
@@ -10894,7 +10938,7 @@ std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_Namespace(std::w
 	return element;
 	
 }
-std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10906,7 +10950,7 @@ std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_Owner(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -10918,7 +10962,7 @@ std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_OwningPackage(st
 	return element;
 	
 }
-std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Constraint> umlFactoryImpl::createConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ConstraintImpl> element(new ConstraintImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -10937,7 +10981,8 @@ std::shared_ptr<Continuation> umlFactoryImpl::createContinuation(const int metaE
 	element->setThisContinuationPtr(element);
 	return element;
 }
-std::shared_ptr<Continuation> umlFactoryImpl::createContinuation_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+
+std::shared_ptr<Continuation> umlFactoryImpl::createContinuation_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<ContinuationImpl> element(new ContinuationImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -10949,7 +10994,7 @@ std::shared_ptr<Continuation> umlFactoryImpl::createContinuation_in_EnclosingInt
 	return element;
 	
 }
-std::shared_ptr<Continuation> umlFactoryImpl::createContinuation_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<Continuation> umlFactoryImpl::createContinuation_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<ContinuationImpl> element(new ContinuationImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -10961,7 +11006,7 @@ std::shared_ptr<Continuation> umlFactoryImpl::createContinuation_in_EnclosingOpe
 	return element;
 	
 }
-std::shared_ptr<Continuation> umlFactoryImpl::createContinuation_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Continuation> umlFactoryImpl::createContinuation_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ContinuationImpl> element(new ContinuationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -10973,7 +11018,7 @@ std::shared_ptr<Continuation> umlFactoryImpl::createContinuation_in_Namespace(st
 	return element;
 	
 }
-std::shared_ptr<Continuation> umlFactoryImpl::createContinuation_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Continuation> umlFactoryImpl::createContinuation_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ContinuationImpl> element(new ContinuationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -10992,7 +11037,8 @@ std::shared_ptr<ControlFlow> umlFactoryImpl::createControlFlow(const int metaEle
 	element->setThisControlFlowPtr(element);
 	return element;
 }
-std::shared_ptr<ControlFlow> umlFactoryImpl::createControlFlow_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ControlFlow> umlFactoryImpl::createControlFlow_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ControlFlowImpl> element(new ControlFlowImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -11004,7 +11050,7 @@ std::shared_ptr<ControlFlow> umlFactoryImpl::createControlFlow_in_Activity(std::
 	return element;
 	
 }
-std::shared_ptr<ControlFlow> umlFactoryImpl::createControlFlow_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ControlFlow> umlFactoryImpl::createControlFlow_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ControlFlowImpl> element(new ControlFlowImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -11016,7 +11062,7 @@ std::shared_ptr<ControlFlow> umlFactoryImpl::createControlFlow_in_InStructuredNo
 	return element;
 	
 }
-std::shared_ptr<ControlFlow> umlFactoryImpl::createControlFlow_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ControlFlow> umlFactoryImpl::createControlFlow_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ControlFlowImpl> element(new ControlFlowImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11028,7 +11074,7 @@ std::shared_ptr<ControlFlow> umlFactoryImpl::createControlFlow_in_Namespace(std:
 	return element;
 	
 }
-std::shared_ptr<ControlFlow> umlFactoryImpl::createControlFlow_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ControlFlow> umlFactoryImpl::createControlFlow_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ControlFlowImpl> element(new ControlFlowImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11047,7 +11093,8 @@ std::shared_ptr<CreateLinkAction> umlFactoryImpl::createCreateLinkAction(const i
 	element->setThisCreateLinkActionPtr(element);
 	return element;
 }
-std::shared_ptr<CreateLinkAction> umlFactoryImpl::createCreateLinkAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<CreateLinkAction> umlFactoryImpl::createCreateLinkAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<CreateLinkActionImpl> element(new CreateLinkActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -11059,7 +11106,7 @@ std::shared_ptr<CreateLinkAction> umlFactoryImpl::createCreateLinkAction_in_Acti
 	return element;
 	
 }
-std::shared_ptr<CreateLinkAction> umlFactoryImpl::createCreateLinkAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<CreateLinkAction> umlFactoryImpl::createCreateLinkAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<CreateLinkActionImpl> element(new CreateLinkActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -11071,7 +11118,7 @@ std::shared_ptr<CreateLinkAction> umlFactoryImpl::createCreateLinkAction_in_InSt
 	return element;
 	
 }
-std::shared_ptr<CreateLinkAction> umlFactoryImpl::createCreateLinkAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<CreateLinkAction> umlFactoryImpl::createCreateLinkAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<CreateLinkActionImpl> element(new CreateLinkActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11083,7 +11130,7 @@ std::shared_ptr<CreateLinkAction> umlFactoryImpl::createCreateLinkAction_in_Name
 	return element;
 	
 }
-std::shared_ptr<CreateLinkAction> umlFactoryImpl::createCreateLinkAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<CreateLinkAction> umlFactoryImpl::createCreateLinkAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<CreateLinkActionImpl> element(new CreateLinkActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11102,7 +11149,8 @@ std::shared_ptr<CreateLinkObjectAction> umlFactoryImpl::createCreateLinkObjectAc
 	element->setThisCreateLinkObjectActionPtr(element);
 	return element;
 }
-std::shared_ptr<CreateLinkObjectAction> umlFactoryImpl::createCreateLinkObjectAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<CreateLinkObjectAction> umlFactoryImpl::createCreateLinkObjectAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<CreateLinkObjectActionImpl> element(new CreateLinkObjectActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -11114,7 +11162,7 @@ std::shared_ptr<CreateLinkObjectAction> umlFactoryImpl::createCreateLinkObjectAc
 	return element;
 	
 }
-std::shared_ptr<CreateLinkObjectAction> umlFactoryImpl::createCreateLinkObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<CreateLinkObjectAction> umlFactoryImpl::createCreateLinkObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<CreateLinkObjectActionImpl> element(new CreateLinkObjectActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -11126,7 +11174,7 @@ std::shared_ptr<CreateLinkObjectAction> umlFactoryImpl::createCreateLinkObjectAc
 	return element;
 	
 }
-std::shared_ptr<CreateLinkObjectAction> umlFactoryImpl::createCreateLinkObjectAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<CreateLinkObjectAction> umlFactoryImpl::createCreateLinkObjectAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<CreateLinkObjectActionImpl> element(new CreateLinkObjectActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11138,7 +11186,7 @@ std::shared_ptr<CreateLinkObjectAction> umlFactoryImpl::createCreateLinkObjectAc
 	return element;
 	
 }
-std::shared_ptr<CreateLinkObjectAction> umlFactoryImpl::createCreateLinkObjectAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<CreateLinkObjectAction> umlFactoryImpl::createCreateLinkObjectAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<CreateLinkObjectActionImpl> element(new CreateLinkObjectActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11157,7 +11205,8 @@ std::shared_ptr<CreateObjectAction> umlFactoryImpl::createCreateObjectAction(con
 	element->setThisCreateObjectActionPtr(element);
 	return element;
 }
-std::shared_ptr<CreateObjectAction> umlFactoryImpl::createCreateObjectAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<CreateObjectAction> umlFactoryImpl::createCreateObjectAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<CreateObjectActionImpl> element(new CreateObjectActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -11169,7 +11218,7 @@ std::shared_ptr<CreateObjectAction> umlFactoryImpl::createCreateObjectAction_in_
 	return element;
 	
 }
-std::shared_ptr<CreateObjectAction> umlFactoryImpl::createCreateObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<CreateObjectAction> umlFactoryImpl::createCreateObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<CreateObjectActionImpl> element(new CreateObjectActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -11181,7 +11230,7 @@ std::shared_ptr<CreateObjectAction> umlFactoryImpl::createCreateObjectAction_in_
 	return element;
 	
 }
-std::shared_ptr<CreateObjectAction> umlFactoryImpl::createCreateObjectAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<CreateObjectAction> umlFactoryImpl::createCreateObjectAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<CreateObjectActionImpl> element(new CreateObjectActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11193,7 +11242,7 @@ std::shared_ptr<CreateObjectAction> umlFactoryImpl::createCreateObjectAction_in_
 	return element;
 	
 }
-std::shared_ptr<CreateObjectAction> umlFactoryImpl::createCreateObjectAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<CreateObjectAction> umlFactoryImpl::createCreateObjectAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<CreateObjectActionImpl> element(new CreateObjectActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11212,7 +11261,8 @@ std::shared_ptr<DataStoreNode> umlFactoryImpl::createDataStoreNode(const int met
 	element->setThisDataStoreNodePtr(element);
 	return element;
 }
-std::shared_ptr<DataStoreNode> umlFactoryImpl::createDataStoreNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<DataStoreNode> umlFactoryImpl::createDataStoreNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<DataStoreNodeImpl> element(new DataStoreNodeImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -11224,7 +11274,7 @@ std::shared_ptr<DataStoreNode> umlFactoryImpl::createDataStoreNode_in_Activity(s
 	return element;
 	
 }
-std::shared_ptr<DataStoreNode> umlFactoryImpl::createDataStoreNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<DataStoreNode> umlFactoryImpl::createDataStoreNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<DataStoreNodeImpl> element(new DataStoreNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -11236,7 +11286,7 @@ std::shared_ptr<DataStoreNode> umlFactoryImpl::createDataStoreNode_in_InStructur
 	return element;
 	
 }
-std::shared_ptr<DataStoreNode> umlFactoryImpl::createDataStoreNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<DataStoreNode> umlFactoryImpl::createDataStoreNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DataStoreNodeImpl> element(new DataStoreNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11248,7 +11298,7 @@ std::shared_ptr<DataStoreNode> umlFactoryImpl::createDataStoreNode_in_Namespace(
 	return element;
 	
 }
-std::shared_ptr<DataStoreNode> umlFactoryImpl::createDataStoreNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<DataStoreNode> umlFactoryImpl::createDataStoreNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DataStoreNodeImpl> element(new DataStoreNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11267,7 +11317,8 @@ std::shared_ptr<DataType> umlFactoryImpl::createDataType(const int metaElementID
 	element->setThisDataTypePtr(element);
 	return element;
 }
-std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11279,7 +11330,7 @@ std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_Namespace(std::weak_
 	return element;
 	
 }
-std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11291,7 +11342,7 @@ std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_Owner(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -11303,7 +11354,7 @@ std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_OwningPackage(std::w
 	return element;
 	
 }
-std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -11315,7 +11366,7 @@ std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_OwningTemplateParame
 	return element;
 	
 }
-std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<DataType> umlFactoryImpl::createDataType_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<DataTypeImpl> element(new DataTypeImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -11334,7 +11385,8 @@ std::shared_ptr<DecisionNode> umlFactoryImpl::createDecisionNode(const int metaE
 	element->setThisDecisionNodePtr(element);
 	return element;
 }
-std::shared_ptr<DecisionNode> umlFactoryImpl::createDecisionNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<DecisionNode> umlFactoryImpl::createDecisionNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -11346,7 +11398,7 @@ std::shared_ptr<DecisionNode> umlFactoryImpl::createDecisionNode_in_Activity(std
 	return element;
 	
 }
-std::shared_ptr<DecisionNode> umlFactoryImpl::createDecisionNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<DecisionNode> umlFactoryImpl::createDecisionNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -11358,7 +11410,7 @@ std::shared_ptr<DecisionNode> umlFactoryImpl::createDecisionNode_in_InStructured
 	return element;
 	
 }
-std::shared_ptr<DecisionNode> umlFactoryImpl::createDecisionNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<DecisionNode> umlFactoryImpl::createDecisionNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11370,7 +11422,7 @@ std::shared_ptr<DecisionNode> umlFactoryImpl::createDecisionNode_in_Namespace(st
 	return element;
 	
 }
-std::shared_ptr<DecisionNode> umlFactoryImpl::createDecisionNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<DecisionNode> umlFactoryImpl::createDecisionNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11389,7 +11441,8 @@ std::shared_ptr<Dependency> umlFactoryImpl::createDependency(const int metaEleme
 	element->setThisDependencyPtr(element);
 	return element;
 }
-std::shared_ptr<Dependency> umlFactoryImpl::createDependency_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Dependency> umlFactoryImpl::createDependency_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DependencyImpl> element(new DependencyImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11401,7 +11454,7 @@ std::shared_ptr<Dependency> umlFactoryImpl::createDependency_in_Namespace(std::w
 	return element;
 	
 }
-std::shared_ptr<Dependency> umlFactoryImpl::createDependency_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Dependency> umlFactoryImpl::createDependency_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DependencyImpl> element(new DependencyImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11413,7 +11466,7 @@ std::shared_ptr<Dependency> umlFactoryImpl::createDependency_in_Owner(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Dependency> umlFactoryImpl::createDependency_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Dependency> umlFactoryImpl::createDependency_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<DependencyImpl> element(new DependencyImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -11425,7 +11478,7 @@ std::shared_ptr<Dependency> umlFactoryImpl::createDependency_in_OwningPackage(st
 	return element;
 	
 }
-std::shared_ptr<Dependency> umlFactoryImpl::createDependency_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Dependency> umlFactoryImpl::createDependency_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<DependencyImpl> element(new DependencyImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -11444,7 +11497,8 @@ std::shared_ptr<Deployment> umlFactoryImpl::createDeployment(const int metaEleme
 	element->setThisDeploymentPtr(element);
 	return element;
 }
-std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_Location(std::weak_ptr<uml::DeploymentTarget > par_location, const int metaElementID) const
+
+std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_Location(std::weak_ptr<uml::DeploymentTarget> par_location, const int metaElementID) const
 {
 	std::shared_ptr<DeploymentImpl> element(new DeploymentImpl(par_location));
 	element->setMetaElementID(metaElementID);
@@ -11456,7 +11510,7 @@ std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_Location(std::we
 	return element;
 	
 }
-std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DeploymentImpl> element(new DeploymentImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11468,7 +11522,7 @@ std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_Namespace(std::w
 	return element;
 	
 }
-std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DeploymentImpl> element(new DeploymentImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11480,7 +11534,7 @@ std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_Owner(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<DeploymentImpl> element(new DeploymentImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -11492,7 +11546,7 @@ std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_OwningPackage(st
 	return element;
 	
 }
-std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Deployment> umlFactoryImpl::createDeployment_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<DeploymentImpl> element(new DeploymentImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -11511,7 +11565,8 @@ std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecifi
 	element->setThisDeploymentSpecificationPtr(element);
 	return element;
 }
-std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecification_in_Deployment(std::weak_ptr<uml::Deployment > par_deployment, const int metaElementID) const
+
+std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecification_in_Deployment(std::weak_ptr<uml::Deployment> par_deployment, const int metaElementID) const
 {
 	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_deployment));
 	element->setMetaElementID(metaElementID);
@@ -11523,7 +11578,7 @@ std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecifi
 	return element;
 	
 }
-std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11535,7 +11590,7 @@ std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecifi
 	return element;
 	
 }
-std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11547,7 +11602,7 @@ std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecifi
 	return element;
 	
 }
-std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecification_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecification_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -11559,7 +11614,7 @@ std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecifi
 	return element;
 	
 }
-std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecification_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecification_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -11571,7 +11626,7 @@ std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecifi
 	return element;
 	
 }
-std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecification_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<DeploymentSpecification> umlFactoryImpl::createDeploymentSpecification_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<DeploymentSpecificationImpl> element(new DeploymentSpecificationImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -11590,7 +11645,8 @@ std::shared_ptr<DestroyLinkAction> umlFactoryImpl::createDestroyLinkAction(const
 	element->setThisDestroyLinkActionPtr(element);
 	return element;
 }
-std::shared_ptr<DestroyLinkAction> umlFactoryImpl::createDestroyLinkAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<DestroyLinkAction> umlFactoryImpl::createDestroyLinkAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<DestroyLinkActionImpl> element(new DestroyLinkActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -11602,7 +11658,7 @@ std::shared_ptr<DestroyLinkAction> umlFactoryImpl::createDestroyLinkAction_in_Ac
 	return element;
 	
 }
-std::shared_ptr<DestroyLinkAction> umlFactoryImpl::createDestroyLinkAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<DestroyLinkAction> umlFactoryImpl::createDestroyLinkAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<DestroyLinkActionImpl> element(new DestroyLinkActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -11614,7 +11670,7 @@ std::shared_ptr<DestroyLinkAction> umlFactoryImpl::createDestroyLinkAction_in_In
 	return element;
 	
 }
-std::shared_ptr<DestroyLinkAction> umlFactoryImpl::createDestroyLinkAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<DestroyLinkAction> umlFactoryImpl::createDestroyLinkAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DestroyLinkActionImpl> element(new DestroyLinkActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11626,7 +11682,7 @@ std::shared_ptr<DestroyLinkAction> umlFactoryImpl::createDestroyLinkAction_in_Na
 	return element;
 	
 }
-std::shared_ptr<DestroyLinkAction> umlFactoryImpl::createDestroyLinkAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<DestroyLinkAction> umlFactoryImpl::createDestroyLinkAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DestroyLinkActionImpl> element(new DestroyLinkActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11645,7 +11701,8 @@ std::shared_ptr<DestroyObjectAction> umlFactoryImpl::createDestroyObjectAction(c
 	element->setThisDestroyObjectActionPtr(element);
 	return element;
 }
-std::shared_ptr<DestroyObjectAction> umlFactoryImpl::createDestroyObjectAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<DestroyObjectAction> umlFactoryImpl::createDestroyObjectAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<DestroyObjectActionImpl> element(new DestroyObjectActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -11657,7 +11714,7 @@ std::shared_ptr<DestroyObjectAction> umlFactoryImpl::createDestroyObjectAction_i
 	return element;
 	
 }
-std::shared_ptr<DestroyObjectAction> umlFactoryImpl::createDestroyObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<DestroyObjectAction> umlFactoryImpl::createDestroyObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<DestroyObjectActionImpl> element(new DestroyObjectActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -11669,7 +11726,7 @@ std::shared_ptr<DestroyObjectAction> umlFactoryImpl::createDestroyObjectAction_i
 	return element;
 	
 }
-std::shared_ptr<DestroyObjectAction> umlFactoryImpl::createDestroyObjectAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<DestroyObjectAction> umlFactoryImpl::createDestroyObjectAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DestroyObjectActionImpl> element(new DestroyObjectActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11681,7 +11738,7 @@ std::shared_ptr<DestroyObjectAction> umlFactoryImpl::createDestroyObjectAction_i
 	return element;
 	
 }
-std::shared_ptr<DestroyObjectAction> umlFactoryImpl::createDestroyObjectAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<DestroyObjectAction> umlFactoryImpl::createDestroyObjectAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DestroyObjectActionImpl> element(new DestroyObjectActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11700,7 +11757,8 @@ std::shared_ptr<DestructionOccurrenceSpecification> umlFactoryImpl::createDestru
 	element->setThisDestructionOccurrenceSpecificationPtr(element);
 	return element;
 }
-std::shared_ptr<DestructionOccurrenceSpecification> umlFactoryImpl::createDestructionOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+
+std::shared_ptr<DestructionOccurrenceSpecification> umlFactoryImpl::createDestructionOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<DestructionOccurrenceSpecificationImpl> element(new DestructionOccurrenceSpecificationImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -11712,7 +11770,7 @@ std::shared_ptr<DestructionOccurrenceSpecification> umlFactoryImpl::createDestru
 	return element;
 	
 }
-std::shared_ptr<DestructionOccurrenceSpecification> umlFactoryImpl::createDestructionOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<DestructionOccurrenceSpecification> umlFactoryImpl::createDestructionOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<DestructionOccurrenceSpecificationImpl> element(new DestructionOccurrenceSpecificationImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -11724,7 +11782,7 @@ std::shared_ptr<DestructionOccurrenceSpecification> umlFactoryImpl::createDestru
 	return element;
 	
 }
-std::shared_ptr<DestructionOccurrenceSpecification> umlFactoryImpl::createDestructionOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<DestructionOccurrenceSpecification> umlFactoryImpl::createDestructionOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DestructionOccurrenceSpecificationImpl> element(new DestructionOccurrenceSpecificationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11736,7 +11794,7 @@ std::shared_ptr<DestructionOccurrenceSpecification> umlFactoryImpl::createDestru
 	return element;
 	
 }
-std::shared_ptr<DestructionOccurrenceSpecification> umlFactoryImpl::createDestructionOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<DestructionOccurrenceSpecification> umlFactoryImpl::createDestructionOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DestructionOccurrenceSpecificationImpl> element(new DestructionOccurrenceSpecificationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11755,7 +11813,8 @@ std::shared_ptr<Device> umlFactoryImpl::createDevice(const int metaElementID/*=-
 	element->setThisDevicePtr(element);
 	return element;
 }
-std::shared_ptr<Device> umlFactoryImpl::createDevice_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Device> umlFactoryImpl::createDevice_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11767,7 +11826,7 @@ std::shared_ptr<Device> umlFactoryImpl::createDevice_in_Namespace(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<Device> umlFactoryImpl::createDevice_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Device> umlFactoryImpl::createDevice_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11779,7 +11838,7 @@ std::shared_ptr<Device> umlFactoryImpl::createDevice_in_Owner(std::weak_ptr<uml:
 	return element;
 	
 }
-std::shared_ptr<Device> umlFactoryImpl::createDevice_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Device> umlFactoryImpl::createDevice_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -11791,7 +11850,7 @@ std::shared_ptr<Device> umlFactoryImpl::createDevice_in_OwningPackage(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Device> umlFactoryImpl::createDevice_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Device> umlFactoryImpl::createDevice_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -11803,7 +11862,7 @@ std::shared_ptr<Device> umlFactoryImpl::createDevice_in_OwningTemplateParameter(
 	return element;
 	
 }
-std::shared_ptr<Device> umlFactoryImpl::createDevice_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Device> umlFactoryImpl::createDevice_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<DeviceImpl> element(new DeviceImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -11822,7 +11881,8 @@ std::shared_ptr<Duration> umlFactoryImpl::createDuration(const int metaElementID
 	element->setThisDurationPtr(element);
 	return element;
 }
-std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DurationImpl> element(new DurationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11834,7 +11894,7 @@ std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_Namespace(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DurationImpl> element(new DurationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11846,7 +11906,7 @@ std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_Owner(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<DurationImpl> element(new DurationImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -11858,7 +11918,7 @@ std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_OwningPackage(std::w
 	return element;
 	
 }
-std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<DurationImpl> element(new DurationImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -11870,7 +11930,7 @@ std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_OwningSlot(std::weak
 	return element;
 	
 }
-std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<DurationImpl> element(new DurationImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -11882,7 +11942,7 @@ std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_OwningTemplateParame
 	return element;
 	
 }
-std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<Duration> umlFactoryImpl::createDuration_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<DurationImpl> element(new DurationImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -11901,7 +11961,8 @@ std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint(con
 	element->setThisDurationConstraintPtr(element);
 	return element;
 }
-std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context, const int metaElementID) const
+
+std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_Context(std::weak_ptr<uml::Namespace> par_context, const int metaElementID) const
 {
 	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_context, umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT));
 	element->setMetaElementID(metaElementID);
@@ -11913,7 +11974,7 @@ std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_
 	return element;
 	
 }
-std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_namespace, umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE));
 	element->setMetaElementID(metaElementID);
@@ -11925,7 +11986,7 @@ std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_
 	return element;
 	
 }
-std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11937,7 +11998,7 @@ std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_
 	return element;
 	
 }
-std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -11949,7 +12010,7 @@ std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_
 	return element;
 	
 }
-std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<DurationConstraint> umlFactoryImpl::createDurationConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<DurationConstraintImpl> element(new DurationConstraintImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -11968,7 +12029,8 @@ std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval(const i
 	element->setThisDurationIntervalPtr(element);
 	return element;
 }
-std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -11980,7 +12042,7 @@ std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_Name
 	return element;
 	
 }
-std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -11992,7 +12054,7 @@ std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_Owne
 	return element;
 	
 }
-std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -12004,7 +12066,7 @@ std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_Owni
 	return element;
 	
 }
-std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -12016,7 +12078,7 @@ std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_Owni
 	return element;
 	
 }
-std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -12028,7 +12090,7 @@ std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_Owni
 	return element;
 	
 }
-std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<DurationInterval> umlFactoryImpl::createDurationInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<DurationIntervalImpl> element(new DurationIntervalImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -12047,7 +12109,8 @@ std::shared_ptr<DurationObservation> umlFactoryImpl::createDurationObservation(c
 	element->setThisDurationObservationPtr(element);
 	return element;
 }
-std::shared_ptr<DurationObservation> umlFactoryImpl::createDurationObservation_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<DurationObservation> umlFactoryImpl::createDurationObservation_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<DurationObservationImpl> element(new DurationObservationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12059,7 +12122,7 @@ std::shared_ptr<DurationObservation> umlFactoryImpl::createDurationObservation_i
 	return element;
 	
 }
-std::shared_ptr<DurationObservation> umlFactoryImpl::createDurationObservation_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<DurationObservation> umlFactoryImpl::createDurationObservation_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<DurationObservationImpl> element(new DurationObservationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12071,7 +12134,7 @@ std::shared_ptr<DurationObservation> umlFactoryImpl::createDurationObservation_i
 	return element;
 	
 }
-std::shared_ptr<DurationObservation> umlFactoryImpl::createDurationObservation_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<DurationObservation> umlFactoryImpl::createDurationObservation_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<DurationObservationImpl> element(new DurationObservationImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -12083,7 +12146,7 @@ std::shared_ptr<DurationObservation> umlFactoryImpl::createDurationObservation_i
 	return element;
 	
 }
-std::shared_ptr<DurationObservation> umlFactoryImpl::createDurationObservation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<DurationObservation> umlFactoryImpl::createDurationObservation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<DurationObservationImpl> element(new DurationObservationImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -12102,7 +12165,8 @@ std::shared_ptr<ElementImport> umlFactoryImpl::createElementImport(const int met
 	element->setThisElementImportPtr(element);
 	return element;
 }
-std::shared_ptr<ElementImport> umlFactoryImpl::createElementImport_in_ImportingNamespace(std::weak_ptr<uml::Namespace > par_importingNamespace, const int metaElementID) const
+
+std::shared_ptr<ElementImport> umlFactoryImpl::createElementImport_in_ImportingNamespace(std::weak_ptr<uml::Namespace> par_importingNamespace, const int metaElementID) const
 {
 	std::shared_ptr<ElementImportImpl> element(new ElementImportImpl(par_importingNamespace));
 	element->setMetaElementID(metaElementID);
@@ -12114,7 +12178,7 @@ std::shared_ptr<ElementImport> umlFactoryImpl::createElementImport_in_ImportingN
 	return element;
 	
 }
-std::shared_ptr<ElementImport> umlFactoryImpl::createElementImport_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ElementImport> umlFactoryImpl::createElementImport_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ElementImportImpl> element(new ElementImportImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12133,7 +12197,8 @@ std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration(const int metaEle
 	element->setThisEnumerationPtr(element);
 	return element;
 }
-std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12145,7 +12210,7 @@ std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_Namespace(std:
 	return element;
 	
 }
-std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12157,7 +12222,7 @@ std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_Owner(std::wea
 	return element;
 	
 }
-std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -12169,7 +12234,7 @@ std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_OwningPackage(
 	return element;
 	
 }
-std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -12181,7 +12246,7 @@ std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_OwningTemplate
 	return element;
 	
 }
-std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Enumeration> umlFactoryImpl::createEnumeration_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<EnumerationImpl> element(new EnumerationImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -12200,7 +12265,8 @@ std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral(con
 	element->setThisEnumerationLiteralPtr(element);
 	return element;
 }
-std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_Enumeration(std::weak_ptr<uml::Enumeration > par_enumeration, const int metaElementID) const
+
+std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_Enumeration(std::weak_ptr<uml::Enumeration> par_enumeration, const int metaElementID) const
 {
 	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(par_enumeration));
 	element->setMetaElementID(metaElementID);
@@ -12212,7 +12278,7 @@ std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_
 	return element;
 	
 }
-std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12224,7 +12290,7 @@ std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_
 	return element;
 	
 }
-std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12236,7 +12302,7 @@ std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_
 	return element;
 	
 }
-std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -12248,7 +12314,7 @@ std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_
 	return element;
 	
 }
-std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<EnumerationLiteral> umlFactoryImpl::createEnumerationLiteral_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<EnumerationLiteralImpl> element(new EnumerationLiteralImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -12267,7 +12333,8 @@ std::shared_ptr<ExceptionHandler> umlFactoryImpl::createExceptionHandler(const i
 	element->setThisExceptionHandlerPtr(element);
 	return element;
 }
-std::shared_ptr<ExceptionHandler> umlFactoryImpl::createExceptionHandler_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<ExceptionHandler> umlFactoryImpl::createExceptionHandler_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ExceptionHandlerImpl> element(new ExceptionHandlerImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12279,7 +12346,7 @@ std::shared_ptr<ExceptionHandler> umlFactoryImpl::createExceptionHandler_in_Owne
 	return element;
 	
 }
-std::shared_ptr<ExceptionHandler> umlFactoryImpl::createExceptionHandler_in_ProtectedNode(std::weak_ptr<uml::ExecutableNode > par_protectedNode, const int metaElementID) const
+std::shared_ptr<ExceptionHandler> umlFactoryImpl::createExceptionHandler_in_ProtectedNode(std::weak_ptr<uml::ExecutableNode> par_protectedNode, const int metaElementID) const
 {
 	std::shared_ptr<ExceptionHandlerImpl> element(new ExceptionHandlerImpl(par_protectedNode));
 	element->setMetaElementID(metaElementID);
@@ -12298,7 +12365,8 @@ std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment
 	element->setThisExecutionEnvironmentPtr(element);
 	return element;
 }
-std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12310,7 +12378,7 @@ std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment
 	return element;
 	
 }
-std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12322,7 +12390,7 @@ std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment
 	return element;
 	
 }
-std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -12334,7 +12402,7 @@ std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment
 	return element;
 	
 }
-std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -12346,7 +12414,7 @@ std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment
 	return element;
 	
 }
-std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<ExecutionEnvironment> umlFactoryImpl::createExecutionEnvironment_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<ExecutionEnvironmentImpl> element(new ExecutionEnvironmentImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -12365,7 +12433,8 @@ std::shared_ptr<ExecutionOccurrenceSpecification> umlFactoryImpl::createExecutio
 	element->setThisExecutionOccurrenceSpecificationPtr(element);
 	return element;
 }
-std::shared_ptr<ExecutionOccurrenceSpecification> umlFactoryImpl::createExecutionOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+
+std::shared_ptr<ExecutionOccurrenceSpecification> umlFactoryImpl::createExecutionOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<ExecutionOccurrenceSpecificationImpl> element(new ExecutionOccurrenceSpecificationImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -12377,7 +12446,7 @@ std::shared_ptr<ExecutionOccurrenceSpecification> umlFactoryImpl::createExecutio
 	return element;
 	
 }
-std::shared_ptr<ExecutionOccurrenceSpecification> umlFactoryImpl::createExecutionOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<ExecutionOccurrenceSpecification> umlFactoryImpl::createExecutionOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<ExecutionOccurrenceSpecificationImpl> element(new ExecutionOccurrenceSpecificationImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -12389,7 +12458,7 @@ std::shared_ptr<ExecutionOccurrenceSpecification> umlFactoryImpl::createExecutio
 	return element;
 	
 }
-std::shared_ptr<ExecutionOccurrenceSpecification> umlFactoryImpl::createExecutionOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ExecutionOccurrenceSpecification> umlFactoryImpl::createExecutionOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ExecutionOccurrenceSpecificationImpl> element(new ExecutionOccurrenceSpecificationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12401,7 +12470,7 @@ std::shared_ptr<ExecutionOccurrenceSpecification> umlFactoryImpl::createExecutio
 	return element;
 	
 }
-std::shared_ptr<ExecutionOccurrenceSpecification> umlFactoryImpl::createExecutionOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ExecutionOccurrenceSpecification> umlFactoryImpl::createExecutionOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ExecutionOccurrenceSpecificationImpl> element(new ExecutionOccurrenceSpecificationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12420,7 +12489,8 @@ std::shared_ptr<ExpansionNode> umlFactoryImpl::createExpansionNode(const int met
 	element->setThisExpansionNodePtr(element);
 	return element;
 }
-std::shared_ptr<ExpansionNode> umlFactoryImpl::createExpansionNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ExpansionNode> umlFactoryImpl::createExpansionNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ExpansionNodeImpl> element(new ExpansionNodeImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -12432,7 +12502,7 @@ std::shared_ptr<ExpansionNode> umlFactoryImpl::createExpansionNode_in_Activity(s
 	return element;
 	
 }
-std::shared_ptr<ExpansionNode> umlFactoryImpl::createExpansionNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ExpansionNode> umlFactoryImpl::createExpansionNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ExpansionNodeImpl> element(new ExpansionNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -12444,7 +12514,7 @@ std::shared_ptr<ExpansionNode> umlFactoryImpl::createExpansionNode_in_InStructur
 	return element;
 	
 }
-std::shared_ptr<ExpansionNode> umlFactoryImpl::createExpansionNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ExpansionNode> umlFactoryImpl::createExpansionNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ExpansionNodeImpl> element(new ExpansionNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12456,7 +12526,7 @@ std::shared_ptr<ExpansionNode> umlFactoryImpl::createExpansionNode_in_Namespace(
 	return element;
 	
 }
-std::shared_ptr<ExpansionNode> umlFactoryImpl::createExpansionNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ExpansionNode> umlFactoryImpl::createExpansionNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ExpansionNodeImpl> element(new ExpansionNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12475,7 +12545,8 @@ std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion(const int
 	element->setThisExpansionRegionPtr(element);
 	return element;
 }
-std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_activity, umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY));
 	element->setMetaElementID(metaElementID);
@@ -12487,7 +12558,7 @@ std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_Activi
 	return element;
 	
 }
-std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity, const int metaElementID) const
+std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID) const
 {
 	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_inActivity, umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY));
 	element->setMetaElementID(metaElementID);
@@ -12499,7 +12570,7 @@ std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_InActi
 	return element;
 	
 }
-std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -12511,7 +12582,7 @@ std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_InStru
 	return element;
 	
 }
-std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12523,7 +12594,7 @@ std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_Namesp
 	return element;
 	
 }
-std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12535,7 +12606,7 @@ std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_Owner(
 	return element;
 	
 }
-std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup, const int metaElementID) const
+std::shared_ptr<ExpansionRegion> umlFactoryImpl::createExpansionRegion_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID) const
 {
 	std::shared_ptr<ExpansionRegionImpl> element(new ExpansionRegionImpl(par_superGroup));
 	element->setMetaElementID(metaElementID);
@@ -12554,7 +12625,8 @@ std::shared_ptr<Expression> umlFactoryImpl::createExpression(const int metaEleme
 	element->setThisExpressionPtr(element);
 	return element;
 }
-std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12566,7 +12638,7 @@ std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_Namespace(std::w
 	return element;
 	
 }
-std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12578,7 +12650,7 @@ std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_Owner(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -12590,7 +12662,7 @@ std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_OwningPackage(st
 	return element;
 	
 }
-std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -12602,7 +12674,7 @@ std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_OwningSlot(std::
 	return element;
 	
 }
-std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -12614,7 +12686,7 @@ std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_OwningTemplatePa
 	return element;
 	
 }
-std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<Expression> umlFactoryImpl::createExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<ExpressionImpl> element(new ExpressionImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -12633,7 +12705,8 @@ std::shared_ptr<Extend> umlFactoryImpl::createExtend(const int metaElementID/*=-
 	element->setThisExtendPtr(element);
 	return element;
 }
-std::shared_ptr<Extend> umlFactoryImpl::createExtend_in_Extension(std::weak_ptr<uml::UseCase > par_extension, const int metaElementID) const
+
+std::shared_ptr<Extend> umlFactoryImpl::createExtend_in_Extension(std::weak_ptr<uml::UseCase> par_extension, const int metaElementID) const
 {
 	std::shared_ptr<ExtendImpl> element(new ExtendImpl(par_extension));
 	element->setMetaElementID(metaElementID);
@@ -12645,7 +12718,7 @@ std::shared_ptr<Extend> umlFactoryImpl::createExtend_in_Extension(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<Extend> umlFactoryImpl::createExtend_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Extend> umlFactoryImpl::createExtend_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ExtendImpl> element(new ExtendImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12657,7 +12730,7 @@ std::shared_ptr<Extend> umlFactoryImpl::createExtend_in_Namespace(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<Extend> umlFactoryImpl::createExtend_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Extend> umlFactoryImpl::createExtend_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ExtendImpl> element(new ExtendImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12676,7 +12749,8 @@ std::shared_ptr<Extension> umlFactoryImpl::createExtension(const int metaElement
 	element->setThisExtensionPtr(element);
 	return element;
 }
-std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12688,7 +12762,7 @@ std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_Namespace(std::wea
 	return element;
 	
 }
-std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12700,7 +12774,7 @@ std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_Owner(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -12712,7 +12786,7 @@ std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_OwningPackage(std:
 	return element;
 	
 }
-std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -12724,7 +12798,7 @@ std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_OwningTemplatePara
 	return element;
 	
 }
-std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Extension> umlFactoryImpl::createExtension_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionImpl> element(new ExtensionImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -12743,7 +12817,8 @@ std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd(const int metaE
 	element->setThisExtensionEndPtr(element);
 	return element;
 }
-std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_AssociationEnd(std::weak_ptr<uml::Property > par_associationEnd, const int metaElementID) const
+
+std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_AssociationEnd(std::weak_ptr<uml::Property> par_associationEnd, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_associationEnd));
 	element->setMetaElementID(metaElementID);
@@ -12755,7 +12830,7 @@ std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_AssociationE
 	return element;
 	
 }
-std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Class(std::weak_ptr<uml::Class > par_class, const int metaElementID) const
+std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Class(std::weak_ptr<uml::Class> par_class, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_class));
 	element->setMetaElementID(metaElementID);
@@ -12767,7 +12842,7 @@ std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Class(std::w
 	return element;
 	
 }
-std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Datatype(std::weak_ptr<uml::DataType > par_datatype, const int metaElementID) const
+std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Datatype(std::weak_ptr<uml::DataType> par_datatype, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_datatype));
 	element->setMetaElementID(metaElementID);
@@ -12779,7 +12854,7 @@ std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Datatype(std
 	return element;
 	
 }
-std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Interface(std::weak_ptr<uml::Interface > par_interface, const int metaElementID) const
+std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Interface(std::weak_ptr<uml::Interface> par_interface, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_interface));
 	element->setMetaElementID(metaElementID);
@@ -12791,7 +12866,7 @@ std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Interface(st
 	return element;
 	
 }
-std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12803,7 +12878,7 @@ std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Namespace(st
 	return element;
 	
 }
-std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12815,7 +12890,7 @@ std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_Owner(std::w
 	return element;
 	
 }
-std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_OwningAssociation(std::weak_ptr<uml::Association > par_owningAssociation, const int metaElementID) const
+std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_OwningAssociation(std::weak_ptr<uml::Association> par_owningAssociation, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_owningAssociation));
 	element->setMetaElementID(metaElementID);
@@ -12827,7 +12902,7 @@ std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_OwningAssoci
 	return element;
 	
 }
-std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -12846,7 +12921,8 @@ std::shared_ptr<ExtensionPoint> umlFactoryImpl::createExtensionPoint(const int m
 	element->setThisExtensionPointPtr(element);
 	return element;
 }
-std::shared_ptr<ExtensionPoint> umlFactoryImpl::createExtensionPoint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<ExtensionPoint> umlFactoryImpl::createExtensionPoint_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionPointImpl> element(new ExtensionPointImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12858,7 +12934,7 @@ std::shared_ptr<ExtensionPoint> umlFactoryImpl::createExtensionPoint_in_Namespac
 	return element;
 	
 }
-std::shared_ptr<ExtensionPoint> umlFactoryImpl::createExtensionPoint_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ExtensionPoint> umlFactoryImpl::createExtensionPoint_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionPointImpl> element(new ExtensionPointImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12870,7 +12946,7 @@ std::shared_ptr<ExtensionPoint> umlFactoryImpl::createExtensionPoint_in_Owner(st
 	return element;
 	
 }
-std::shared_ptr<ExtensionPoint> umlFactoryImpl::createExtensionPoint_in_UseCase(std::weak_ptr<uml::UseCase > par_useCase, const int metaElementID) const
+std::shared_ptr<ExtensionPoint> umlFactoryImpl::createExtensionPoint_in_UseCase(std::weak_ptr<uml::UseCase> par_useCase, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionPointImpl> element(new ExtensionPointImpl(par_useCase));
 	element->setMetaElementID(metaElementID);
@@ -12889,7 +12965,8 @@ std::shared_ptr<Factory> umlFactoryImpl::createFactory(const int metaElementID/*
 	element->setThisFactoryPtr(element);
 	return element;
 }
-std::shared_ptr<Factory> umlFactoryImpl::createFactory_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<Factory> umlFactoryImpl::createFactory_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<FactoryImpl> element(new FactoryImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12908,7 +12985,8 @@ std::shared_ptr<FinalState> umlFactoryImpl::createFinalState(const int metaEleme
 	element->setThisFinalStatePtr(element);
 	return element;
 }
-std::shared_ptr<FinalState> umlFactoryImpl::createFinalState_in_Container(std::weak_ptr<uml::Region > par_container, const int metaElementID) const
+
+std::shared_ptr<FinalState> umlFactoryImpl::createFinalState_in_Container(std::weak_ptr<uml::Region> par_container, const int metaElementID) const
 {
 	std::shared_ptr<FinalStateImpl> element(new FinalStateImpl(par_container));
 	element->setMetaElementID(metaElementID);
@@ -12920,7 +12998,7 @@ std::shared_ptr<FinalState> umlFactoryImpl::createFinalState_in_Container(std::w
 	return element;
 	
 }
-std::shared_ptr<FinalState> umlFactoryImpl::createFinalState_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<FinalState> umlFactoryImpl::createFinalState_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<FinalStateImpl> element(new FinalStateImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12932,7 +13010,7 @@ std::shared_ptr<FinalState> umlFactoryImpl::createFinalState_in_Namespace(std::w
 	return element;
 	
 }
-std::shared_ptr<FinalState> umlFactoryImpl::createFinalState_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<FinalState> umlFactoryImpl::createFinalState_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<FinalStateImpl> element(new FinalStateImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -12951,7 +13029,8 @@ std::shared_ptr<FlowFinalNode> umlFactoryImpl::createFlowFinalNode(const int met
 	element->setThisFlowFinalNodePtr(element);
 	return element;
 }
-std::shared_ptr<FlowFinalNode> umlFactoryImpl::createFlowFinalNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<FlowFinalNode> umlFactoryImpl::createFlowFinalNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<FlowFinalNodeImpl> element(new FlowFinalNodeImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -12963,7 +13042,7 @@ std::shared_ptr<FlowFinalNode> umlFactoryImpl::createFlowFinalNode_in_Activity(s
 	return element;
 	
 }
-std::shared_ptr<FlowFinalNode> umlFactoryImpl::createFlowFinalNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<FlowFinalNode> umlFactoryImpl::createFlowFinalNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<FlowFinalNodeImpl> element(new FlowFinalNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -12975,7 +13054,7 @@ std::shared_ptr<FlowFinalNode> umlFactoryImpl::createFlowFinalNode_in_InStructur
 	return element;
 	
 }
-std::shared_ptr<FlowFinalNode> umlFactoryImpl::createFlowFinalNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<FlowFinalNode> umlFactoryImpl::createFlowFinalNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<FlowFinalNodeImpl> element(new FlowFinalNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -12987,7 +13066,7 @@ std::shared_ptr<FlowFinalNode> umlFactoryImpl::createFlowFinalNode_in_Namespace(
 	return element;
 	
 }
-std::shared_ptr<FlowFinalNode> umlFactoryImpl::createFlowFinalNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<FlowFinalNode> umlFactoryImpl::createFlowFinalNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<FlowFinalNodeImpl> element(new FlowFinalNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13006,7 +13085,8 @@ std::shared_ptr<ForkNode> umlFactoryImpl::createForkNode(const int metaElementID
 	element->setThisForkNodePtr(element);
 	return element;
 }
-std::shared_ptr<ForkNode> umlFactoryImpl::createForkNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ForkNode> umlFactoryImpl::createForkNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ForkNodeImpl> element(new ForkNodeImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -13018,7 +13098,7 @@ std::shared_ptr<ForkNode> umlFactoryImpl::createForkNode_in_Activity(std::weak_p
 	return element;
 	
 }
-std::shared_ptr<ForkNode> umlFactoryImpl::createForkNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ForkNode> umlFactoryImpl::createForkNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ForkNodeImpl> element(new ForkNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -13030,7 +13110,7 @@ std::shared_ptr<ForkNode> umlFactoryImpl::createForkNode_in_InStructuredNode(std
 	return element;
 	
 }
-std::shared_ptr<ForkNode> umlFactoryImpl::createForkNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ForkNode> umlFactoryImpl::createForkNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ForkNodeImpl> element(new ForkNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -13042,7 +13122,7 @@ std::shared_ptr<ForkNode> umlFactoryImpl::createForkNode_in_Namespace(std::weak_
 	return element;
 	
 }
-std::shared_ptr<ForkNode> umlFactoryImpl::createForkNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ForkNode> umlFactoryImpl::createForkNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ForkNodeImpl> element(new ForkNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13061,7 +13141,8 @@ std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior(const i
 	element->setThisFunctionBehaviorPtr(element);
 	return element;
 }
-std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier, const int metaElementID) const
+
+std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier, const int metaElementID) const
 {
 	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_behavioredClassifier));
 	element->setMetaElementID(metaElementID);
@@ -13073,7 +13154,7 @@ std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_Beha
 	return element;
 	
 }
-std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -13085,7 +13166,7 @@ std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_Name
 	return element;
 	
 }
-std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13097,7 +13178,7 @@ std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_Owne
 	return element;
 	
 }
-std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -13109,7 +13190,7 @@ std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_Owni
 	return element;
 	
 }
-std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -13121,7 +13202,7 @@ std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_Owni
 	return element;
 	
 }
-std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<FunctionBehavior> umlFactoryImpl::createFunctionBehavior_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<FunctionBehaviorImpl> element(new FunctionBehaviorImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -13140,7 +13221,8 @@ std::shared_ptr<Gate> umlFactoryImpl::createGate(const int metaElementID/*=-1*/)
 	element->setThisGatePtr(element);
 	return element;
 }
-std::shared_ptr<Gate> umlFactoryImpl::createGate_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Gate> umlFactoryImpl::createGate_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<GateImpl> element(new GateImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -13152,7 +13234,7 @@ std::shared_ptr<Gate> umlFactoryImpl::createGate_in_Namespace(std::weak_ptr<uml:
 	return element;
 	
 }
-std::shared_ptr<Gate> umlFactoryImpl::createGate_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Gate> umlFactoryImpl::createGate_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<GateImpl> element(new GateImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13171,7 +13253,8 @@ std::shared_ptr<GeneralOrdering> umlFactoryImpl::createGeneralOrdering(const int
 	element->setThisGeneralOrderingPtr(element);
 	return element;
 }
-std::shared_ptr<GeneralOrdering> umlFactoryImpl::createGeneralOrdering_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<GeneralOrdering> umlFactoryImpl::createGeneralOrdering_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<GeneralOrderingImpl> element(new GeneralOrderingImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -13183,7 +13266,7 @@ std::shared_ptr<GeneralOrdering> umlFactoryImpl::createGeneralOrdering_in_Namesp
 	return element;
 	
 }
-std::shared_ptr<GeneralOrdering> umlFactoryImpl::createGeneralOrdering_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<GeneralOrdering> umlFactoryImpl::createGeneralOrdering_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<GeneralOrderingImpl> element(new GeneralOrderingImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13202,7 +13285,8 @@ std::shared_ptr<Generalization> umlFactoryImpl::createGeneralization(const int m
 	element->setThisGeneralizationPtr(element);
 	return element;
 }
-std::shared_ptr<Generalization> umlFactoryImpl::createGeneralization_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<Generalization> umlFactoryImpl::createGeneralization_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<GeneralizationImpl> element(new GeneralizationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13214,7 +13298,7 @@ std::shared_ptr<Generalization> umlFactoryImpl::createGeneralization_in_Owner(st
 	return element;
 	
 }
-std::shared_ptr<Generalization> umlFactoryImpl::createGeneralization_in_Specific(std::weak_ptr<uml::Classifier > par_specific, const int metaElementID) const
+std::shared_ptr<Generalization> umlFactoryImpl::createGeneralization_in_Specific(std::weak_ptr<uml::Classifier> par_specific, const int metaElementID) const
 {
 	std::shared_ptr<GeneralizationImpl> element(new GeneralizationImpl(par_specific));
 	element->setMetaElementID(metaElementID);
@@ -13233,7 +13317,8 @@ std::shared_ptr<GeneralizationSet> umlFactoryImpl::createGeneralizationSet(const
 	element->setThisGeneralizationSetPtr(element);
 	return element;
 }
-std::shared_ptr<GeneralizationSet> umlFactoryImpl::createGeneralizationSet_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<GeneralizationSet> umlFactoryImpl::createGeneralizationSet_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<GeneralizationSetImpl> element(new GeneralizationSetImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -13245,7 +13330,7 @@ std::shared_ptr<GeneralizationSet> umlFactoryImpl::createGeneralizationSet_in_Na
 	return element;
 	
 }
-std::shared_ptr<GeneralizationSet> umlFactoryImpl::createGeneralizationSet_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<GeneralizationSet> umlFactoryImpl::createGeneralizationSet_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<GeneralizationSetImpl> element(new GeneralizationSetImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13257,7 +13342,7 @@ std::shared_ptr<GeneralizationSet> umlFactoryImpl::createGeneralizationSet_in_Ow
 	return element;
 	
 }
-std::shared_ptr<GeneralizationSet> umlFactoryImpl::createGeneralizationSet_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<GeneralizationSet> umlFactoryImpl::createGeneralizationSet_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<GeneralizationSetImpl> element(new GeneralizationSetImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -13269,7 +13354,7 @@ std::shared_ptr<GeneralizationSet> umlFactoryImpl::createGeneralizationSet_in_Ow
 	return element;
 	
 }
-std::shared_ptr<GeneralizationSet> umlFactoryImpl::createGeneralizationSet_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<GeneralizationSet> umlFactoryImpl::createGeneralizationSet_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<GeneralizationSetImpl> element(new GeneralizationSetImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -13288,7 +13373,8 @@ std::shared_ptr<Image> umlFactoryImpl::createImage(const int metaElementID/*=-1*
 	element->setThisImagePtr(element);
 	return element;
 }
-std::shared_ptr<Image> umlFactoryImpl::createImage_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<Image> umlFactoryImpl::createImage_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ImageImpl> element(new ImageImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13307,7 +13393,8 @@ std::shared_ptr<Include> umlFactoryImpl::createInclude(const int metaElementID/*
 	element->setThisIncludePtr(element);
 	return element;
 }
-std::shared_ptr<Include> umlFactoryImpl::createInclude_in_IncludingCase(std::weak_ptr<uml::UseCase > par_includingCase, const int metaElementID) const
+
+std::shared_ptr<Include> umlFactoryImpl::createInclude_in_IncludingCase(std::weak_ptr<uml::UseCase> par_includingCase, const int metaElementID) const
 {
 	std::shared_ptr<IncludeImpl> element(new IncludeImpl(par_includingCase));
 	element->setMetaElementID(metaElementID);
@@ -13319,7 +13406,7 @@ std::shared_ptr<Include> umlFactoryImpl::createInclude_in_IncludingCase(std::wea
 	return element;
 	
 }
-std::shared_ptr<Include> umlFactoryImpl::createInclude_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Include> umlFactoryImpl::createInclude_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<IncludeImpl> element(new IncludeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -13331,7 +13418,7 @@ std::shared_ptr<Include> umlFactoryImpl::createInclude_in_Namespace(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Include> umlFactoryImpl::createInclude_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Include> umlFactoryImpl::createInclude_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<IncludeImpl> element(new IncludeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13350,7 +13437,8 @@ std::shared_ptr<InformationFlow> umlFactoryImpl::createInformationFlow(const int
 	element->setThisInformationFlowPtr(element);
 	return element;
 }
-std::shared_ptr<InformationFlow> umlFactoryImpl::createInformationFlow_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<InformationFlow> umlFactoryImpl::createInformationFlow_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<InformationFlowImpl> element(new InformationFlowImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -13362,7 +13450,7 @@ std::shared_ptr<InformationFlow> umlFactoryImpl::createInformationFlow_in_Namesp
 	return element;
 	
 }
-std::shared_ptr<InformationFlow> umlFactoryImpl::createInformationFlow_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<InformationFlow> umlFactoryImpl::createInformationFlow_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<InformationFlowImpl> element(new InformationFlowImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13374,7 +13462,7 @@ std::shared_ptr<InformationFlow> umlFactoryImpl::createInformationFlow_in_Owner(
 	return element;
 	
 }
-std::shared_ptr<InformationFlow> umlFactoryImpl::createInformationFlow_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<InformationFlow> umlFactoryImpl::createInformationFlow_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<InformationFlowImpl> element(new InformationFlowImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -13386,7 +13474,7 @@ std::shared_ptr<InformationFlow> umlFactoryImpl::createInformationFlow_in_Owning
 	return element;
 	
 }
-std::shared_ptr<InformationFlow> umlFactoryImpl::createInformationFlow_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<InformationFlow> umlFactoryImpl::createInformationFlow_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<InformationFlowImpl> element(new InformationFlowImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -13405,7 +13493,8 @@ std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem(const int
 	element->setThisInformationItemPtr(element);
 	return element;
 }
-std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -13417,7 +13506,7 @@ std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_Namesp
 	return element;
 	
 }
-std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13429,7 +13518,7 @@ std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_Owner(
 	return element;
 	
 }
-std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -13441,7 +13530,7 @@ std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_Owning
 	return element;
 	
 }
-std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -13453,7 +13542,7 @@ std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_Owning
 	return element;
 	
 }
-std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<InformationItem> umlFactoryImpl::createInformationItem_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<InformationItemImpl> element(new InformationItemImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -13472,7 +13561,8 @@ std::shared_ptr<InitialNode> umlFactoryImpl::createInitialNode(const int metaEle
 	element->setThisInitialNodePtr(element);
 	return element;
 }
-std::shared_ptr<InitialNode> umlFactoryImpl::createInitialNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<InitialNode> umlFactoryImpl::createInitialNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<InitialNodeImpl> element(new InitialNodeImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -13484,7 +13574,7 @@ std::shared_ptr<InitialNode> umlFactoryImpl::createInitialNode_in_Activity(std::
 	return element;
 	
 }
-std::shared_ptr<InitialNode> umlFactoryImpl::createInitialNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<InitialNode> umlFactoryImpl::createInitialNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<InitialNodeImpl> element(new InitialNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -13496,7 +13586,7 @@ std::shared_ptr<InitialNode> umlFactoryImpl::createInitialNode_in_InStructuredNo
 	return element;
 	
 }
-std::shared_ptr<InitialNode> umlFactoryImpl::createInitialNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<InitialNode> umlFactoryImpl::createInitialNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<InitialNodeImpl> element(new InitialNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -13508,7 +13598,7 @@ std::shared_ptr<InitialNode> umlFactoryImpl::createInitialNode_in_Namespace(std:
 	return element;
 	
 }
-std::shared_ptr<InitialNode> umlFactoryImpl::createInitialNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<InitialNode> umlFactoryImpl::createInitialNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<InitialNodeImpl> element(new InitialNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13527,7 +13617,8 @@ std::shared_ptr<InputPin> umlFactoryImpl::createInputPin(const int metaElementID
 	element->setThisInputPinPtr(element);
 	return element;
 }
-std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_Action(std::weak_ptr<uml::Action > par_action, const int metaElementID) const
+
+std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_Action(std::weak_ptr<uml::Action> par_action, const int metaElementID) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_action));
 	element->setMetaElementID(metaElementID);
@@ -13539,7 +13630,7 @@ std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_Action(std::weak_ptr
 	return element;
 	
 }
-std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -13551,7 +13642,7 @@ std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_Activity(std::weak_p
 	return element;
 	
 }
-std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction, const int metaElementID) const
+std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction> par_addStructuralFeatureValueAction, const int metaElementID) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_addStructuralFeatureValueAction));
 	element->setMetaElementID(metaElementID);
@@ -13563,7 +13654,7 @@ std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_AddStructuralFeature
 	return element;
 	
 }
-std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction > par_callOperationAction, const int metaElementID) const
+std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction> par_callOperationAction, const int metaElementID) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_callOperationAction));
 	element->setMetaElementID(metaElementID);
@@ -13575,7 +13666,7 @@ std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_CallOperationAction(
 	return element;
 	
 }
-std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction, const int metaElementID) const
+std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction> par_destroyObjectAction, const int metaElementID) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_destroyObjectAction));
 	element->setMetaElementID(metaElementID);
@@ -13587,7 +13678,7 @@ std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_DestroyObjectAction(
 	return element;
 	
 }
-std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -13599,7 +13690,7 @@ std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_InStructuredNode(std
 	return element;
 	
 }
-std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_InvocationAction(std::weak_ptr<uml::InvocationAction > par_invocationAction, const int metaElementID) const
+std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_InvocationAction(std::weak_ptr<uml::InvocationAction> par_invocationAction, const int metaElementID) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_invocationAction));
 	element->setMetaElementID(metaElementID);
@@ -13611,7 +13702,7 @@ std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_InvocationAction(std
 	return element;
 	
 }
-std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -13623,7 +13714,7 @@ std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_Namespace(std::weak_
 	return element;
 	
 }
-std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13635,7 +13726,7 @@ std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_Owner(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction, const int metaElementID) const
+std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> par_removeStructuralFeatureValueAction, const int metaElementID) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_removeStructuralFeatureValueAction));
 	element->setMetaElementID(metaElementID);
@@ -13647,7 +13738,7 @@ std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_RemoveStructuralFeat
 	return element;
 	
 }
-std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction, const int metaElementID) const
+std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction> par_structuralFeatureAction, const int metaElementID) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_structuralFeatureAction));
 	element->setMetaElementID(metaElementID);
@@ -13659,7 +13750,7 @@ std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_StructuralFeatureAct
 	return element;
 	
 }
-std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction, const int metaElementID) const
+std::shared_ptr<InputPin> umlFactoryImpl::createInputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> par_writeStructuralFeatureAction, const int metaElementID) const
 {
 	std::shared_ptr<InputPinImpl> element(new InputPinImpl(par_writeStructuralFeatureAction));
 	element->setMetaElementID(metaElementID);
@@ -13678,7 +13769,8 @@ std::shared_ptr<InstanceSpecification> umlFactoryImpl::createInstanceSpecificati
 	element->setThisInstanceSpecificationPtr(element);
 	return element;
 }
-std::shared_ptr<InstanceSpecification> umlFactoryImpl::createInstanceSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<InstanceSpecification> umlFactoryImpl::createInstanceSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<InstanceSpecificationImpl> element(new InstanceSpecificationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -13690,7 +13782,7 @@ std::shared_ptr<InstanceSpecification> umlFactoryImpl::createInstanceSpecificati
 	return element;
 	
 }
-std::shared_ptr<InstanceSpecification> umlFactoryImpl::createInstanceSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<InstanceSpecification> umlFactoryImpl::createInstanceSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<InstanceSpecificationImpl> element(new InstanceSpecificationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13702,7 +13794,7 @@ std::shared_ptr<InstanceSpecification> umlFactoryImpl::createInstanceSpecificati
 	return element;
 	
 }
-std::shared_ptr<InstanceSpecification> umlFactoryImpl::createInstanceSpecification_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<InstanceSpecification> umlFactoryImpl::createInstanceSpecification_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<InstanceSpecificationImpl> element(new InstanceSpecificationImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -13714,7 +13806,7 @@ std::shared_ptr<InstanceSpecification> umlFactoryImpl::createInstanceSpecificati
 	return element;
 	
 }
-std::shared_ptr<InstanceSpecification> umlFactoryImpl::createInstanceSpecification_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<InstanceSpecification> umlFactoryImpl::createInstanceSpecification_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<InstanceSpecificationImpl> element(new InstanceSpecificationImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -13733,7 +13825,8 @@ std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue(const int met
 	element->setThisInstanceValuePtr(element);
 	return element;
 }
-std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -13745,7 +13838,7 @@ std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_Namespace(
 	return element;
 	
 }
-std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13757,7 +13850,7 @@ std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_Owner(std:
 	return element;
 	
 }
-std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -13769,7 +13862,7 @@ std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_OwningPack
 	return element;
 	
 }
-std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -13781,7 +13874,7 @@ std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_OwningSlot
 	return element;
 	
 }
-std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -13793,7 +13886,7 @@ std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_OwningTemp
 	return element;
 	
 }
-std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<InstanceValue> umlFactoryImpl::createInstanceValue_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<InstanceValueImpl> element(new InstanceValueImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -13812,7 +13905,8 @@ std::shared_ptr<Interaction> umlFactoryImpl::createInteraction(const int metaEle
 	element->setThisInteractionPtr(element);
 	return element;
 }
-std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier, const int metaElementID) const
+
+std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier, const int metaElementID) const
 {
 	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_behavioredClassifier));
 	element->setMetaElementID(metaElementID);
@@ -13824,7 +13918,7 @@ std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_BehavioredClas
 	return element;
 	
 }
-std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -13836,7 +13930,7 @@ std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_EnclosingInter
 	return element;
 	
 }
-std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -13848,7 +13942,7 @@ std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_EnclosingOpera
 	return element;
 	
 }
-std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -13860,7 +13954,7 @@ std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_Namespace(std:
 	return element;
 	
 }
-std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13872,7 +13966,7 @@ std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_Owner(std::wea
 	return element;
 	
 }
-std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -13884,7 +13978,7 @@ std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_OwningPackage(
 	return element;
 	
 }
-std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -13896,7 +13990,7 @@ std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_OwningTemplate
 	return element;
 	
 }
-std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Interaction> umlFactoryImpl::createInteraction_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<InteractionImpl> element(new InteractionImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -13915,7 +14009,8 @@ std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstrai
 	element->setThisInteractionConstraintPtr(element);
 	return element;
 }
-std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context, const int metaElementID) const
+
+std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstraint_in_Context(std::weak_ptr<uml::Namespace> par_context, const int metaElementID) const
 {
 	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_context, umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT));
 	element->setMetaElementID(metaElementID);
@@ -13927,7 +14022,7 @@ std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstrai
 	return element;
 	
 }
-std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstraint_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_namespace, umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE));
 	element->setMetaElementID(metaElementID);
@@ -13939,7 +14034,7 @@ std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstrai
 	return element;
 	
 }
-std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstraint_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstraint_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -13951,7 +14046,7 @@ std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstrai
 	return element;
 	
 }
-std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstraint_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstraint_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -13963,7 +14058,7 @@ std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstrai
 	return element;
 	
 }
-std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<InteractionConstraint> umlFactoryImpl::createInteractionConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<InteractionConstraintImpl> element(new InteractionConstraintImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -13982,7 +14077,8 @@ std::shared_ptr<InteractionOperand> umlFactoryImpl::createInteractionOperand(con
 	element->setThisInteractionOperandPtr(element);
 	return element;
 }
-std::shared_ptr<InteractionOperand> umlFactoryImpl::createInteractionOperand_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+
+std::shared_ptr<InteractionOperand> umlFactoryImpl::createInteractionOperand_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<InteractionOperandImpl> element(new InteractionOperandImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -13994,7 +14090,7 @@ std::shared_ptr<InteractionOperand> umlFactoryImpl::createInteractionOperand_in_
 	return element;
 	
 }
-std::shared_ptr<InteractionOperand> umlFactoryImpl::createInteractionOperand_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<InteractionOperand> umlFactoryImpl::createInteractionOperand_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<InteractionOperandImpl> element(new InteractionOperandImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -14006,7 +14102,7 @@ std::shared_ptr<InteractionOperand> umlFactoryImpl::createInteractionOperand_in_
 	return element;
 	
 }
-std::shared_ptr<InteractionOperand> umlFactoryImpl::createInteractionOperand_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<InteractionOperand> umlFactoryImpl::createInteractionOperand_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<InteractionOperandImpl> element(new InteractionOperandImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14018,7 +14114,7 @@ std::shared_ptr<InteractionOperand> umlFactoryImpl::createInteractionOperand_in_
 	return element;
 	
 }
-std::shared_ptr<InteractionOperand> umlFactoryImpl::createInteractionOperand_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<InteractionOperand> umlFactoryImpl::createInteractionOperand_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<InteractionOperandImpl> element(new InteractionOperandImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14037,7 +14133,8 @@ std::shared_ptr<InteractionUse> umlFactoryImpl::createInteractionUse(const int m
 	element->setThisInteractionUsePtr(element);
 	return element;
 }
-std::shared_ptr<InteractionUse> umlFactoryImpl::createInteractionUse_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+
+std::shared_ptr<InteractionUse> umlFactoryImpl::createInteractionUse_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<InteractionUseImpl> element(new InteractionUseImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -14049,7 +14146,7 @@ std::shared_ptr<InteractionUse> umlFactoryImpl::createInteractionUse_in_Enclosin
 	return element;
 	
 }
-std::shared_ptr<InteractionUse> umlFactoryImpl::createInteractionUse_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<InteractionUse> umlFactoryImpl::createInteractionUse_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<InteractionUseImpl> element(new InteractionUseImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -14061,7 +14158,7 @@ std::shared_ptr<InteractionUse> umlFactoryImpl::createInteractionUse_in_Enclosin
 	return element;
 	
 }
-std::shared_ptr<InteractionUse> umlFactoryImpl::createInteractionUse_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<InteractionUse> umlFactoryImpl::createInteractionUse_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<InteractionUseImpl> element(new InteractionUseImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14073,7 +14170,7 @@ std::shared_ptr<InteractionUse> umlFactoryImpl::createInteractionUse_in_Namespac
 	return element;
 	
 }
-std::shared_ptr<InteractionUse> umlFactoryImpl::createInteractionUse_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<InteractionUse> umlFactoryImpl::createInteractionUse_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<InteractionUseImpl> element(new InteractionUseImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14092,7 +14189,8 @@ std::shared_ptr<Interface> umlFactoryImpl::createInterface(const int metaElement
 	element->setThisInterfacePtr(element);
 	return element;
 }
-std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14104,7 +14202,7 @@ std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_Namespace(std::wea
 	return element;
 	
 }
-std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14116,7 +14214,7 @@ std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_Owner(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -14128,7 +14226,7 @@ std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_OwningPackage(std:
 	return element;
 	
 }
-std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -14140,7 +14238,7 @@ std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_OwningTemplatePara
 	return element;
 	
 }
-std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Interface> umlFactoryImpl::createInterface_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<InterfaceImpl> element(new InterfaceImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -14159,7 +14257,8 @@ std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization
 	element->setThisInterfaceRealizationPtr(element);
 	return element;
 }
-std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization_in_ImplementingClassifier(std::weak_ptr<uml::BehavioredClassifier > par_implementingClassifier, const int metaElementID) const
+
+std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization_in_ImplementingClassifier(std::weak_ptr<uml::BehavioredClassifier> par_implementingClassifier, const int metaElementID) const
 {
 	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl(par_implementingClassifier));
 	element->setMetaElementID(metaElementID);
@@ -14171,7 +14270,7 @@ std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization
 	return element;
 	
 }
-std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14183,7 +14282,7 @@ std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization
 	return element;
 	
 }
-std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14195,7 +14294,7 @@ std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization
 	return element;
 	
 }
-std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -14207,7 +14306,7 @@ std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization
 	return element;
 	
 }
-std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<InterfaceRealization> umlFactoryImpl::createInterfaceRealization_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<InterfaceRealizationImpl> element(new InterfaceRealizationImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -14226,7 +14325,8 @@ std::shared_ptr<InterruptibleActivityRegion> umlFactoryImpl::createInterruptible
 	element->setThisInterruptibleActivityRegionPtr(element);
 	return element;
 }
-std::shared_ptr<InterruptibleActivityRegion> umlFactoryImpl::createInterruptibleActivityRegion_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity, const int metaElementID) const
+
+std::shared_ptr<InterruptibleActivityRegion> umlFactoryImpl::createInterruptibleActivityRegion_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID) const
 {
 	std::shared_ptr<InterruptibleActivityRegionImpl> element(new InterruptibleActivityRegionImpl(par_inActivity));
 	element->setMetaElementID(metaElementID);
@@ -14238,7 +14338,7 @@ std::shared_ptr<InterruptibleActivityRegion> umlFactoryImpl::createInterruptible
 	return element;
 	
 }
-std::shared_ptr<InterruptibleActivityRegion> umlFactoryImpl::createInterruptibleActivityRegion_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<InterruptibleActivityRegion> umlFactoryImpl::createInterruptibleActivityRegion_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<InterruptibleActivityRegionImpl> element(new InterruptibleActivityRegionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14250,7 +14350,7 @@ std::shared_ptr<InterruptibleActivityRegion> umlFactoryImpl::createInterruptible
 	return element;
 	
 }
-std::shared_ptr<InterruptibleActivityRegion> umlFactoryImpl::createInterruptibleActivityRegion_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<InterruptibleActivityRegion> umlFactoryImpl::createInterruptibleActivityRegion_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<InterruptibleActivityRegionImpl> element(new InterruptibleActivityRegionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14262,7 +14362,7 @@ std::shared_ptr<InterruptibleActivityRegion> umlFactoryImpl::createInterruptible
 	return element;
 	
 }
-std::shared_ptr<InterruptibleActivityRegion> umlFactoryImpl::createInterruptibleActivityRegion_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup, const int metaElementID) const
+std::shared_ptr<InterruptibleActivityRegion> umlFactoryImpl::createInterruptibleActivityRegion_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID) const
 {
 	std::shared_ptr<InterruptibleActivityRegionImpl> element(new InterruptibleActivityRegionImpl(par_superGroup));
 	element->setMetaElementID(metaElementID);
@@ -14281,7 +14381,8 @@ std::shared_ptr<Interval> umlFactoryImpl::createInterval(const int metaElementID
 	element->setThisIntervalPtr(element);
 	return element;
 }
-std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<IntervalImpl> element(new IntervalImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14293,7 +14394,7 @@ std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_Namespace(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<IntervalImpl> element(new IntervalImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14305,7 +14406,7 @@ std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_Owner(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<IntervalImpl> element(new IntervalImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -14317,7 +14418,7 @@ std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_OwningPackage(std::w
 	return element;
 	
 }
-std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<IntervalImpl> element(new IntervalImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -14329,7 +14430,7 @@ std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_OwningSlot(std::weak
 	return element;
 	
 }
-std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<IntervalImpl> element(new IntervalImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -14341,7 +14442,7 @@ std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_OwningTemplateParame
 	return element;
 	
 }
-std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<Interval> umlFactoryImpl::createInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<IntervalImpl> element(new IntervalImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -14360,7 +14461,8 @@ std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint(con
 	element->setThisIntervalConstraintPtr(element);
 	return element;
 }
-std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context, const int metaElementID) const
+
+std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_Context(std::weak_ptr<uml::Namespace> par_context, const int metaElementID) const
 {
 	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_context, umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT));
 	element->setMetaElementID(metaElementID);
@@ -14372,7 +14474,7 @@ std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_
 	return element;
 	
 }
-std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_namespace, umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE));
 	element->setMetaElementID(metaElementID);
@@ -14384,7 +14486,7 @@ std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_
 	return element;
 	
 }
-std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14396,7 +14498,7 @@ std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_
 	return element;
 	
 }
-std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -14408,7 +14510,7 @@ std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_
 	return element;
 	
 }
-std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<IntervalConstraint> umlFactoryImpl::createIntervalConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<IntervalConstraintImpl> element(new IntervalConstraintImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -14427,7 +14529,8 @@ std::shared_ptr<JoinNode> umlFactoryImpl::createJoinNode(const int metaElementID
 	element->setThisJoinNodePtr(element);
 	return element;
 }
-std::shared_ptr<JoinNode> umlFactoryImpl::createJoinNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<JoinNode> umlFactoryImpl::createJoinNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<JoinNodeImpl> element(new JoinNodeImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -14439,7 +14542,7 @@ std::shared_ptr<JoinNode> umlFactoryImpl::createJoinNode_in_Activity(std::weak_p
 	return element;
 	
 }
-std::shared_ptr<JoinNode> umlFactoryImpl::createJoinNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<JoinNode> umlFactoryImpl::createJoinNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<JoinNodeImpl> element(new JoinNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -14451,7 +14554,7 @@ std::shared_ptr<JoinNode> umlFactoryImpl::createJoinNode_in_InStructuredNode(std
 	return element;
 	
 }
-std::shared_ptr<JoinNode> umlFactoryImpl::createJoinNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<JoinNode> umlFactoryImpl::createJoinNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<JoinNodeImpl> element(new JoinNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14463,7 +14566,7 @@ std::shared_ptr<JoinNode> umlFactoryImpl::createJoinNode_in_Namespace(std::weak_
 	return element;
 	
 }
-std::shared_ptr<JoinNode> umlFactoryImpl::createJoinNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<JoinNode> umlFactoryImpl::createJoinNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<JoinNodeImpl> element(new JoinNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14482,7 +14585,8 @@ std::shared_ptr<Lifeline> umlFactoryImpl::createLifeline(const int metaElementID
 	element->setThisLifelinePtr(element);
 	return element;
 }
-std::shared_ptr<Lifeline> umlFactoryImpl::createLifeline_in_Interaction(std::weak_ptr<uml::Interaction > par_interaction, const int metaElementID) const
+
+std::shared_ptr<Lifeline> umlFactoryImpl::createLifeline_in_Interaction(std::weak_ptr<uml::Interaction> par_interaction, const int metaElementID) const
 {
 	std::shared_ptr<LifelineImpl> element(new LifelineImpl(par_interaction));
 	element->setMetaElementID(metaElementID);
@@ -14494,7 +14598,7 @@ std::shared_ptr<Lifeline> umlFactoryImpl::createLifeline_in_Interaction(std::wea
 	return element;
 	
 }
-std::shared_ptr<Lifeline> umlFactoryImpl::createLifeline_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Lifeline> umlFactoryImpl::createLifeline_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<LifelineImpl> element(new LifelineImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14506,7 +14610,7 @@ std::shared_ptr<Lifeline> umlFactoryImpl::createLifeline_in_Namespace(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Lifeline> umlFactoryImpl::createLifeline_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Lifeline> umlFactoryImpl::createLifeline_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<LifelineImpl> element(new LifelineImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14525,7 +14629,8 @@ std::shared_ptr<LinkEndCreationData> umlFactoryImpl::createLinkEndCreationData(c
 	element->setThisLinkEndCreationDataPtr(element);
 	return element;
 }
-std::shared_ptr<LinkEndCreationData> umlFactoryImpl::createLinkEndCreationData_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<LinkEndCreationData> umlFactoryImpl::createLinkEndCreationData_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<LinkEndCreationDataImpl> element(new LinkEndCreationDataImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14544,7 +14649,8 @@ std::shared_ptr<LinkEndData> umlFactoryImpl::createLinkEndData(const int metaEle
 	element->setThisLinkEndDataPtr(element);
 	return element;
 }
-std::shared_ptr<LinkEndData> umlFactoryImpl::createLinkEndData_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<LinkEndData> umlFactoryImpl::createLinkEndData_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<LinkEndDataImpl> element(new LinkEndDataImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14563,7 +14669,8 @@ std::shared_ptr<LinkEndDestructionData> umlFactoryImpl::createLinkEndDestruction
 	element->setThisLinkEndDestructionDataPtr(element);
 	return element;
 }
-std::shared_ptr<LinkEndDestructionData> umlFactoryImpl::createLinkEndDestructionData_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<LinkEndDestructionData> umlFactoryImpl::createLinkEndDestructionData_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<LinkEndDestructionDataImpl> element(new LinkEndDestructionDataImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14582,7 +14689,8 @@ std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean(const int m
 	element->setThisLiteralBooleanPtr(element);
 	return element;
 }
-std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14594,7 +14702,7 @@ std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_Namespac
 	return element;
 	
 }
-std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14606,7 +14714,7 @@ std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_Owner(st
 	return element;
 	
 }
-std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -14618,7 +14726,7 @@ std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_OwningPa
 	return element;
 	
 }
-std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -14630,7 +14738,7 @@ std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_OwningSl
 	return element;
 	
 }
-std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -14642,7 +14750,7 @@ std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_OwningTe
 	return element;
 	
 }
-std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<LiteralBoolean> umlFactoryImpl::createLiteralBoolean_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<LiteralBooleanImpl> element(new LiteralBooleanImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -14661,7 +14769,8 @@ std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger(const int m
 	element->setThisLiteralIntegerPtr(element);
 	return element;
 }
-std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<LiteralIntegerImpl> element(new LiteralIntegerImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14673,7 +14782,7 @@ std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_Namespac
 	return element;
 	
 }
-std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<LiteralIntegerImpl> element(new LiteralIntegerImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14685,7 +14794,7 @@ std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_Owner(st
 	return element;
 	
 }
-std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<LiteralIntegerImpl> element(new LiteralIntegerImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -14697,7 +14806,7 @@ std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_OwningPa
 	return element;
 	
 }
-std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<LiteralIntegerImpl> element(new LiteralIntegerImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -14709,7 +14818,7 @@ std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_OwningSl
 	return element;
 	
 }
-std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<LiteralIntegerImpl> element(new LiteralIntegerImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -14721,7 +14830,7 @@ std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_OwningTe
 	return element;
 	
 }
-std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<LiteralInteger> umlFactoryImpl::createLiteralInteger_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<LiteralIntegerImpl> element(new LiteralIntegerImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -14740,7 +14849,8 @@ std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull(const int metaEle
 	element->setThisLiteralNullPtr(element);
 	return element;
 }
-std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14752,7 +14862,7 @@ std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_Namespace(std:
 	return element;
 	
 }
-std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14764,7 +14874,7 @@ std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_Owner(std::wea
 	return element;
 	
 }
-std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -14776,7 +14886,7 @@ std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_OwningPackage(
 	return element;
 	
 }
-std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -14788,7 +14898,7 @@ std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_OwningSlot(std
 	return element;
 	
 }
-std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -14800,7 +14910,7 @@ std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_OwningTemplate
 	return element;
 	
 }
-std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<LiteralNull> umlFactoryImpl::createLiteralNull_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<LiteralNullImpl> element(new LiteralNullImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -14819,7 +14929,8 @@ std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal(const int metaEle
 	element->setThisLiteralRealPtr(element);
 	return element;
 }
-std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<LiteralRealImpl> element(new LiteralRealImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14831,7 +14942,7 @@ std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_Namespace(std:
 	return element;
 	
 }
-std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<LiteralRealImpl> element(new LiteralRealImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14843,7 +14954,7 @@ std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_Owner(std::wea
 	return element;
 	
 }
-std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<LiteralRealImpl> element(new LiteralRealImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -14855,7 +14966,7 @@ std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_OwningPackage(
 	return element;
 	
 }
-std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<LiteralRealImpl> element(new LiteralRealImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -14867,7 +14978,7 @@ std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_OwningSlot(std
 	return element;
 	
 }
-std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<LiteralRealImpl> element(new LiteralRealImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -14879,7 +14990,7 @@ std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_OwningTemplate
 	return element;
 	
 }
-std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<LiteralReal> umlFactoryImpl::createLiteralReal_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<LiteralRealImpl> element(new LiteralRealImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -14898,7 +15009,8 @@ std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString(const int met
 	element->setThisLiteralStringPtr(element);
 	return element;
 }
-std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14910,7 +15022,7 @@ std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_Namespace(
 	return element;
 	
 }
-std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -14922,7 +15034,7 @@ std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_Owner(std:
 	return element;
 	
 }
-std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -14934,7 +15046,7 @@ std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_OwningPack
 	return element;
 	
 }
-std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -14946,7 +15058,7 @@ std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_OwningSlot
 	return element;
 	
 }
-std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -14958,7 +15070,7 @@ std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_OwningTemp
 	return element;
 	
 }
-std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<LiteralString> umlFactoryImpl::createLiteralString_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<LiteralStringImpl> element(new LiteralStringImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -14977,7 +15089,8 @@ std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedN
 	element->setThisLiteralUnlimitedNaturalPtr(element);
 	return element;
 }
-std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedNatural_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedNatural_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -14989,7 +15102,7 @@ std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedN
 	return element;
 	
 }
-std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedNatural_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedNatural_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15001,7 +15114,7 @@ std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedN
 	return element;
 	
 }
-std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedNatural_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedNatural_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -15013,7 +15126,7 @@ std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedN
 	return element;
 	
 }
-std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedNatural_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedNatural_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -15025,7 +15138,7 @@ std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedN
 	return element;
 	
 }
-std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedNatural_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedNatural_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -15037,7 +15150,7 @@ std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedN
 	return element;
 	
 }
-std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedNatural_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<LiteralUnlimitedNatural> umlFactoryImpl::createLiteralUnlimitedNatural_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -15056,7 +15169,8 @@ std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode(const int metaElementID
 	element->setThisLoopNodePtr(element);
 	return element;
 }
-std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_activity, umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY));
 	element->setMetaElementID(metaElementID);
@@ -15068,7 +15182,7 @@ std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_Activity(std::weak_p
 	return element;
 	
 }
-std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity, const int metaElementID) const
+std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID) const
 {
 	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_inActivity, umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY));
 	element->setMetaElementID(metaElementID);
@@ -15080,7 +15194,7 @@ std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_InActivity(std::weak
 	return element;
 	
 }
-std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -15092,7 +15206,7 @@ std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_InStructuredNode(std
 	return element;
 	
 }
-std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -15104,7 +15218,7 @@ std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_Namespace(std::weak_
 	return element;
 	
 }
-std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15116,7 +15230,7 @@ std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_Owner(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup, const int metaElementID) const
+std::shared_ptr<LoopNode> umlFactoryImpl::createLoopNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID) const
 {
 	std::shared_ptr<LoopNodeImpl> element(new LoopNodeImpl(par_superGroup));
 	element->setMetaElementID(metaElementID);
@@ -15135,7 +15249,8 @@ std::shared_ptr<Manifestation> umlFactoryImpl::createManifestation(const int met
 	element->setThisManifestationPtr(element);
 	return element;
 }
-std::shared_ptr<Manifestation> umlFactoryImpl::createManifestation_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Manifestation> umlFactoryImpl::createManifestation_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ManifestationImpl> element(new ManifestationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -15147,7 +15262,7 @@ std::shared_ptr<Manifestation> umlFactoryImpl::createManifestation_in_Namespace(
 	return element;
 	
 }
-std::shared_ptr<Manifestation> umlFactoryImpl::createManifestation_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Manifestation> umlFactoryImpl::createManifestation_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ManifestationImpl> element(new ManifestationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15159,7 +15274,7 @@ std::shared_ptr<Manifestation> umlFactoryImpl::createManifestation_in_Owner(std:
 	return element;
 	
 }
-std::shared_ptr<Manifestation> umlFactoryImpl::createManifestation_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Manifestation> umlFactoryImpl::createManifestation_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ManifestationImpl> element(new ManifestationImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -15171,7 +15286,7 @@ std::shared_ptr<Manifestation> umlFactoryImpl::createManifestation_in_OwningPack
 	return element;
 	
 }
-std::shared_ptr<Manifestation> umlFactoryImpl::createManifestation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Manifestation> umlFactoryImpl::createManifestation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ManifestationImpl> element(new ManifestationImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -15190,7 +15305,8 @@ std::shared_ptr<MergeNode> umlFactoryImpl::createMergeNode(const int metaElement
 	element->setThisMergeNodePtr(element);
 	return element;
 }
-std::shared_ptr<MergeNode> umlFactoryImpl::createMergeNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<MergeNode> umlFactoryImpl::createMergeNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<MergeNodeImpl> element(new MergeNodeImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -15202,7 +15318,7 @@ std::shared_ptr<MergeNode> umlFactoryImpl::createMergeNode_in_Activity(std::weak
 	return element;
 	
 }
-std::shared_ptr<MergeNode> umlFactoryImpl::createMergeNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<MergeNode> umlFactoryImpl::createMergeNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<MergeNodeImpl> element(new MergeNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -15214,7 +15330,7 @@ std::shared_ptr<MergeNode> umlFactoryImpl::createMergeNode_in_InStructuredNode(s
 	return element;
 	
 }
-std::shared_ptr<MergeNode> umlFactoryImpl::createMergeNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<MergeNode> umlFactoryImpl::createMergeNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<MergeNodeImpl> element(new MergeNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -15226,7 +15342,7 @@ std::shared_ptr<MergeNode> umlFactoryImpl::createMergeNode_in_Namespace(std::wea
 	return element;
 	
 }
-std::shared_ptr<MergeNode> umlFactoryImpl::createMergeNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<MergeNode> umlFactoryImpl::createMergeNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<MergeNodeImpl> element(new MergeNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15245,7 +15361,8 @@ std::shared_ptr<Message> umlFactoryImpl::createMessage(const int metaElementID/*
 	element->setThisMessagePtr(element);
 	return element;
 }
-std::shared_ptr<Message> umlFactoryImpl::createMessage_in_Interaction(std::weak_ptr<uml::Interaction > par_interaction, const int metaElementID) const
+
+std::shared_ptr<Message> umlFactoryImpl::createMessage_in_Interaction(std::weak_ptr<uml::Interaction> par_interaction, const int metaElementID) const
 {
 	std::shared_ptr<MessageImpl> element(new MessageImpl(par_interaction));
 	element->setMetaElementID(metaElementID);
@@ -15257,7 +15374,7 @@ std::shared_ptr<Message> umlFactoryImpl::createMessage_in_Interaction(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Message> umlFactoryImpl::createMessage_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Message> umlFactoryImpl::createMessage_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<MessageImpl> element(new MessageImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -15269,7 +15386,7 @@ std::shared_ptr<Message> umlFactoryImpl::createMessage_in_Namespace(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Message> umlFactoryImpl::createMessage_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Message> umlFactoryImpl::createMessage_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<MessageImpl> element(new MessageImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15288,7 +15405,8 @@ std::shared_ptr<MessageOccurrenceSpecification> umlFactoryImpl::createMessageOcc
 	element->setThisMessageOccurrenceSpecificationPtr(element);
 	return element;
 }
-std::shared_ptr<MessageOccurrenceSpecification> umlFactoryImpl::createMessageOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+
+std::shared_ptr<MessageOccurrenceSpecification> umlFactoryImpl::createMessageOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<MessageOccurrenceSpecificationImpl> element(new MessageOccurrenceSpecificationImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -15300,7 +15418,7 @@ std::shared_ptr<MessageOccurrenceSpecification> umlFactoryImpl::createMessageOcc
 	return element;
 	
 }
-std::shared_ptr<MessageOccurrenceSpecification> umlFactoryImpl::createMessageOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<MessageOccurrenceSpecification> umlFactoryImpl::createMessageOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<MessageOccurrenceSpecificationImpl> element(new MessageOccurrenceSpecificationImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -15312,7 +15430,7 @@ std::shared_ptr<MessageOccurrenceSpecification> umlFactoryImpl::createMessageOcc
 	return element;
 	
 }
-std::shared_ptr<MessageOccurrenceSpecification> umlFactoryImpl::createMessageOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<MessageOccurrenceSpecification> umlFactoryImpl::createMessageOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<MessageOccurrenceSpecificationImpl> element(new MessageOccurrenceSpecificationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -15324,7 +15442,7 @@ std::shared_ptr<MessageOccurrenceSpecification> umlFactoryImpl::createMessageOcc
 	return element;
 	
 }
-std::shared_ptr<MessageOccurrenceSpecification> umlFactoryImpl::createMessageOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<MessageOccurrenceSpecification> umlFactoryImpl::createMessageOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<MessageOccurrenceSpecificationImpl> element(new MessageOccurrenceSpecificationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15343,7 +15461,8 @@ std::shared_ptr<Model> umlFactoryImpl::createModel(const int metaElementID/*=-1*
 	element->setThisModelPtr(element);
 	return element;
 }
-std::shared_ptr<Model> umlFactoryImpl::createModel_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Model> umlFactoryImpl::createModel_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ModelImpl> element(new ModelImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -15355,7 +15474,7 @@ std::shared_ptr<Model> umlFactoryImpl::createModel_in_Namespace(std::weak_ptr<um
 	return element;
 	
 }
-std::shared_ptr<Model> umlFactoryImpl::createModel_in_NestingPackage(std::weak_ptr<uml::Package > par_nestingPackage, const int metaElementID) const
+std::shared_ptr<Model> umlFactoryImpl::createModel_in_NestingPackage(std::weak_ptr<uml::Package> par_nestingPackage, const int metaElementID) const
 {
 	std::shared_ptr<ModelImpl> element(new ModelImpl(par_nestingPackage, umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -15367,7 +15486,7 @@ std::shared_ptr<Model> umlFactoryImpl::createModel_in_NestingPackage(std::weak_p
 	return element;
 	
 }
-std::shared_ptr<Model> umlFactoryImpl::createModel_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Model> umlFactoryImpl::createModel_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ModelImpl> element(new ModelImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15379,7 +15498,7 @@ std::shared_ptr<Model> umlFactoryImpl::createModel_in_Owner(std::weak_ptr<uml::E
 	return element;
 	
 }
-std::shared_ptr<Model> umlFactoryImpl::createModel_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Model> umlFactoryImpl::createModel_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ModelImpl> element(new ModelImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -15391,7 +15510,7 @@ std::shared_ptr<Model> umlFactoryImpl::createModel_in_OwningPackage(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Model> umlFactoryImpl::createModel_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Model> umlFactoryImpl::createModel_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ModelImpl> element(new ModelImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -15410,7 +15529,8 @@ std::shared_ptr<Node> umlFactoryImpl::createNode(const int metaElementID/*=-1*/)
 	element->setThisNodePtr(element);
 	return element;
 }
-std::shared_ptr<Node> umlFactoryImpl::createNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Node> umlFactoryImpl::createNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<NodeImpl> element(new NodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -15422,7 +15542,7 @@ std::shared_ptr<Node> umlFactoryImpl::createNode_in_Namespace(std::weak_ptr<uml:
 	return element;
 	
 }
-std::shared_ptr<Node> umlFactoryImpl::createNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Node> umlFactoryImpl::createNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<NodeImpl> element(new NodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15434,7 +15554,7 @@ std::shared_ptr<Node> umlFactoryImpl::createNode_in_Owner(std::weak_ptr<uml::Ele
 	return element;
 	
 }
-std::shared_ptr<Node> umlFactoryImpl::createNode_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Node> umlFactoryImpl::createNode_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<NodeImpl> element(new NodeImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -15446,7 +15566,7 @@ std::shared_ptr<Node> umlFactoryImpl::createNode_in_OwningPackage(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<Node> umlFactoryImpl::createNode_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Node> umlFactoryImpl::createNode_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<NodeImpl> element(new NodeImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -15458,7 +15578,7 @@ std::shared_ptr<Node> umlFactoryImpl::createNode_in_OwningTemplateParameter(std:
 	return element;
 	
 }
-std::shared_ptr<Node> umlFactoryImpl::createNode_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Node> umlFactoryImpl::createNode_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<NodeImpl> element(new NodeImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -15477,6 +15597,7 @@ std::shared_ptr<Object> umlFactoryImpl::createObject(const int metaElementID/*=-
 	element->setThisObjectPtr(element);
 	return element;
 }
+
 std::shared_ptr<ObjectFlow> umlFactoryImpl::createObjectFlow(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ObjectFlowImpl> element(new ObjectFlowImpl());
@@ -15484,7 +15605,8 @@ std::shared_ptr<ObjectFlow> umlFactoryImpl::createObjectFlow(const int metaEleme
 	element->setThisObjectFlowPtr(element);
 	return element;
 }
-std::shared_ptr<ObjectFlow> umlFactoryImpl::createObjectFlow_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ObjectFlow> umlFactoryImpl::createObjectFlow_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ObjectFlowImpl> element(new ObjectFlowImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -15496,7 +15618,7 @@ std::shared_ptr<ObjectFlow> umlFactoryImpl::createObjectFlow_in_Activity(std::we
 	return element;
 	
 }
-std::shared_ptr<ObjectFlow> umlFactoryImpl::createObjectFlow_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ObjectFlow> umlFactoryImpl::createObjectFlow_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ObjectFlowImpl> element(new ObjectFlowImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -15508,7 +15630,7 @@ std::shared_ptr<ObjectFlow> umlFactoryImpl::createObjectFlow_in_InStructuredNode
 	return element;
 	
 }
-std::shared_ptr<ObjectFlow> umlFactoryImpl::createObjectFlow_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ObjectFlow> umlFactoryImpl::createObjectFlow_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ObjectFlowImpl> element(new ObjectFlowImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -15520,7 +15642,7 @@ std::shared_ptr<ObjectFlow> umlFactoryImpl::createObjectFlow_in_Namespace(std::w
 	return element;
 	
 }
-std::shared_ptr<ObjectFlow> umlFactoryImpl::createObjectFlow_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ObjectFlow> umlFactoryImpl::createObjectFlow_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ObjectFlowImpl> element(new ObjectFlowImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15539,7 +15661,8 @@ std::shared_ptr<OccurrenceSpecification> umlFactoryImpl::createOccurrenceSpecifi
 	element->setThisOccurrenceSpecificationPtr(element);
 	return element;
 }
-std::shared_ptr<OccurrenceSpecification> umlFactoryImpl::createOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+
+std::shared_ptr<OccurrenceSpecification> umlFactoryImpl::createOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<OccurrenceSpecificationImpl> element(new OccurrenceSpecificationImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -15551,7 +15674,7 @@ std::shared_ptr<OccurrenceSpecification> umlFactoryImpl::createOccurrenceSpecifi
 	return element;
 	
 }
-std::shared_ptr<OccurrenceSpecification> umlFactoryImpl::createOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<OccurrenceSpecification> umlFactoryImpl::createOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<OccurrenceSpecificationImpl> element(new OccurrenceSpecificationImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -15563,7 +15686,7 @@ std::shared_ptr<OccurrenceSpecification> umlFactoryImpl::createOccurrenceSpecifi
 	return element;
 	
 }
-std::shared_ptr<OccurrenceSpecification> umlFactoryImpl::createOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<OccurrenceSpecification> umlFactoryImpl::createOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<OccurrenceSpecificationImpl> element(new OccurrenceSpecificationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -15575,7 +15698,7 @@ std::shared_ptr<OccurrenceSpecification> umlFactoryImpl::createOccurrenceSpecifi
 	return element;
 	
 }
-std::shared_ptr<OccurrenceSpecification> umlFactoryImpl::createOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<OccurrenceSpecification> umlFactoryImpl::createOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<OccurrenceSpecificationImpl> element(new OccurrenceSpecificationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15594,7 +15717,8 @@ std::shared_ptr<OpaqueAction> umlFactoryImpl::createOpaqueAction(const int metaE
 	element->setThisOpaqueActionPtr(element);
 	return element;
 }
-std::shared_ptr<OpaqueAction> umlFactoryImpl::createOpaqueAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<OpaqueAction> umlFactoryImpl::createOpaqueAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -15606,7 +15730,7 @@ std::shared_ptr<OpaqueAction> umlFactoryImpl::createOpaqueAction_in_Activity(std
 	return element;
 	
 }
-std::shared_ptr<OpaqueAction> umlFactoryImpl::createOpaqueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<OpaqueAction> umlFactoryImpl::createOpaqueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -15618,7 +15742,7 @@ std::shared_ptr<OpaqueAction> umlFactoryImpl::createOpaqueAction_in_InStructured
 	return element;
 	
 }
-std::shared_ptr<OpaqueAction> umlFactoryImpl::createOpaqueAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<OpaqueAction> umlFactoryImpl::createOpaqueAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -15630,7 +15754,7 @@ std::shared_ptr<OpaqueAction> umlFactoryImpl::createOpaqueAction_in_Namespace(st
 	return element;
 	
 }
-std::shared_ptr<OpaqueAction> umlFactoryImpl::createOpaqueAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<OpaqueAction> umlFactoryImpl::createOpaqueAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15649,7 +15773,8 @@ std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior(const int m
 	element->setThisOpaqueBehaviorPtr(element);
 	return element;
 }
-std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier, const int metaElementID) const
+
+std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_behavioredClassifier));
 	element->setMetaElementID(metaElementID);
@@ -15661,7 +15786,7 @@ std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_Behavior
 	return element;
 	
 }
-std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -15673,7 +15798,7 @@ std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_Namespac
 	return element;
 	
 }
-std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15685,7 +15810,7 @@ std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_Owner(st
 	return element;
 	
 }
-std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -15697,7 +15822,7 @@ std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_OwningPa
 	return element;
 	
 }
-std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -15709,7 +15834,7 @@ std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_OwningTe
 	return element;
 	
 }
-std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<OpaqueBehavior> umlFactoryImpl::createOpaqueBehavior_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueBehaviorImpl> element(new OpaqueBehaviorImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -15728,7 +15853,8 @@ std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression(const i
 	element->setThisOpaqueExpressionPtr(element);
 	return element;
 }
-std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -15740,7 +15866,7 @@ std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_Name
 	return element;
 	
 }
-std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15752,7 +15878,7 @@ std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_Owne
 	return element;
 	
 }
-std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -15764,7 +15890,7 @@ std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_Owni
 	return element;
 	
 }
-std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -15776,7 +15902,7 @@ std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_Owni
 	return element;
 	
 }
-std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -15788,7 +15914,7 @@ std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_Owni
 	return element;
 	
 }
-std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<OpaqueExpression> umlFactoryImpl::createOpaqueExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -15807,7 +15933,8 @@ std::shared_ptr<Operation> umlFactoryImpl::createOperation(const int metaElement
 	element->setThisOperationPtr(element);
 	return element;
 }
-std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Class(std::weak_ptr<uml::Class > par_class, const int metaElementID) const
+
+std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Class(std::weak_ptr<uml::Class> par_class, const int metaElementID) const
 {
 	std::shared_ptr<OperationImpl> element(new OperationImpl(par_class));
 	element->setMetaElementID(metaElementID);
@@ -15819,7 +15946,7 @@ std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Class(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Datatype(std::weak_ptr<uml::DataType > par_datatype, const int metaElementID) const
+std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Datatype(std::weak_ptr<uml::DataType> par_datatype, const int metaElementID) const
 {
 	std::shared_ptr<OperationImpl> element(new OperationImpl(par_datatype));
 	element->setMetaElementID(metaElementID);
@@ -15831,7 +15958,7 @@ std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Datatype(std::weak
 	return element;
 	
 }
-std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Interface(std::weak_ptr<uml::Interface > par_interface, const int metaElementID) const
+std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Interface(std::weak_ptr<uml::Interface> par_interface, const int metaElementID) const
 {
 	std::shared_ptr<OperationImpl> element(new OperationImpl(par_interface));
 	element->setMetaElementID(metaElementID);
@@ -15843,7 +15970,7 @@ std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Interface(std::wea
 	return element;
 	
 }
-std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<OperationImpl> element(new OperationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -15855,7 +15982,7 @@ std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Namespace(std::wea
 	return element;
 	
 }
-std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<OperationImpl> element(new OperationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15867,7 +15994,7 @@ std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_Owner(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Operation> umlFactoryImpl::createOperation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<OperationImpl> element(new OperationImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -15886,7 +16013,8 @@ std::shared_ptr<OperationTemplateParameter> umlFactoryImpl::createOperationTempl
 	element->setThisOperationTemplateParameterPtr(element);
 	return element;
 }
-std::shared_ptr<OperationTemplateParameter> umlFactoryImpl::createOperationTemplateParameter_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<OperationTemplateParameter> umlFactoryImpl::createOperationTemplateParameter_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<OperationTemplateParameterImpl> element(new OperationTemplateParameterImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -15898,7 +16026,7 @@ std::shared_ptr<OperationTemplateParameter> umlFactoryImpl::createOperationTempl
 	return element;
 	
 }
-std::shared_ptr<OperationTemplateParameter> umlFactoryImpl::createOperationTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature > par_signature, const int metaElementID) const
+std::shared_ptr<OperationTemplateParameter> umlFactoryImpl::createOperationTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature> par_signature, const int metaElementID) const
 {
 	std::shared_ptr<OperationTemplateParameterImpl> element(new OperationTemplateParameterImpl(par_signature));
 	element->setMetaElementID(metaElementID);
@@ -15917,7 +16045,8 @@ std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin(const int metaElement
 	element->setThisOutputPinPtr(element);
 	return element;
 }
-std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_Action(std::weak_ptr<uml::Action > par_action, const int metaElementID) const
+
+std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_Action(std::weak_ptr<uml::Action> par_action, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_action));
 	element->setMetaElementID(metaElementID);
@@ -15929,7 +16058,7 @@ std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_Action(std::weak_p
 	return element;
 	
 }
-std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -15941,7 +16070,7 @@ std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_Activity(std::weak
 	return element;
 	
 }
-std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_CallAction(std::weak_ptr<uml::CallAction > par_callAction, const int metaElementID) const
+std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_CallAction(std::weak_ptr<uml::CallAction> par_callAction, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_callAction));
 	element->setMetaElementID(metaElementID);
@@ -15953,7 +16082,7 @@ std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_CallAction(std::we
 	return element;
 	
 }
-std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_ClearStructuralFeatureAction(std::weak_ptr<uml::ClearStructuralFeatureAction > par_clearStructuralFeatureAction, const int metaElementID) const
+std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_ClearStructuralFeatureAction(std::weak_ptr<uml::ClearStructuralFeatureAction> par_clearStructuralFeatureAction, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_clearStructuralFeatureAction));
 	element->setMetaElementID(metaElementID);
@@ -15965,7 +16094,7 @@ std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_ClearStructuralFea
 	return element;
 	
 }
-std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_CreateObjectAction(std::weak_ptr<uml::CreateObjectAction > par_createObjectAction, const int metaElementID) const
+std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_CreateObjectAction(std::weak_ptr<uml::CreateObjectAction> par_createObjectAction, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_createObjectAction));
 	element->setMetaElementID(metaElementID);
@@ -15977,7 +16106,7 @@ std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_CreateObjectAction
 	return element;
 	
 }
-std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -15989,7 +16118,7 @@ std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_InStructuredNode(s
 	return element;
 	
 }
-std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -16001,7 +16130,7 @@ std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_Namespace(std::wea
 	return element;
 	
 }
-std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16013,7 +16142,7 @@ std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_Owner(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_ReadSelfAction(std::weak_ptr<uml::ReadSelfAction > par_readSelfAction, const int metaElementID) const
+std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_ReadSelfAction(std::weak_ptr<uml::ReadSelfAction> par_readSelfAction, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_readSelfAction));
 	element->setMetaElementID(metaElementID);
@@ -16025,7 +16154,7 @@ std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_ReadSelfAction(std
 	return element;
 	
 }
-std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_ReadStructuralFeatureAction(std::weak_ptr<uml::ReadStructuralFeatureAction > par_readStructuralFeatureAction, const int metaElementID) const
+std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_ReadStructuralFeatureAction(std::weak_ptr<uml::ReadStructuralFeatureAction> par_readStructuralFeatureAction, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_readStructuralFeatureAction));
 	element->setMetaElementID(metaElementID);
@@ -16037,7 +16166,7 @@ std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_ReadStructuralFeat
 	return element;
 	
 }
-std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -16049,7 +16178,7 @@ std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_ValueSpecification
 	return element;
 	
 }
-std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction, const int metaElementID) const
+std::shared_ptr<OutputPin> umlFactoryImpl::createOutputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> par_writeStructuralFeatureAction, const int metaElementID) const
 {
 	std::shared_ptr<OutputPinImpl> element(new OutputPinImpl(par_writeStructuralFeatureAction));
 	element->setMetaElementID(metaElementID);
@@ -16068,7 +16197,8 @@ std::shared_ptr<Package> umlFactoryImpl::createPackage(const int metaElementID/*
 	element->setThisPackagePtr(element);
 	return element;
 }
-std::shared_ptr<Package> umlFactoryImpl::createPackage_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Package> umlFactoryImpl::createPackage_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<PackageImpl> element(new PackageImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -16080,7 +16210,7 @@ std::shared_ptr<Package> umlFactoryImpl::createPackage_in_Namespace(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Package> umlFactoryImpl::createPackage_in_NestingPackage(std::weak_ptr<uml::Package > par_nestingPackage, const int metaElementID) const
+std::shared_ptr<Package> umlFactoryImpl::createPackage_in_NestingPackage(std::weak_ptr<uml::Package> par_nestingPackage, const int metaElementID) const
 {
 	std::shared_ptr<PackageImpl> element(new PackageImpl(par_nestingPackage, umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -16092,7 +16222,7 @@ std::shared_ptr<Package> umlFactoryImpl::createPackage_in_NestingPackage(std::we
 	return element;
 	
 }
-std::shared_ptr<Package> umlFactoryImpl::createPackage_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Package> umlFactoryImpl::createPackage_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<PackageImpl> element(new PackageImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16104,7 +16234,7 @@ std::shared_ptr<Package> umlFactoryImpl::createPackage_in_Owner(std::weak_ptr<um
 	return element;
 	
 }
-std::shared_ptr<Package> umlFactoryImpl::createPackage_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Package> umlFactoryImpl::createPackage_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<PackageImpl> element(new PackageImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -16116,7 +16246,7 @@ std::shared_ptr<Package> umlFactoryImpl::createPackage_in_OwningPackage(std::wea
 	return element;
 	
 }
-std::shared_ptr<Package> umlFactoryImpl::createPackage_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Package> umlFactoryImpl::createPackage_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<PackageImpl> element(new PackageImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -16135,7 +16265,8 @@ std::shared_ptr<PackageImport> umlFactoryImpl::createPackageImport(const int met
 	element->setThisPackageImportPtr(element);
 	return element;
 }
-std::shared_ptr<PackageImport> umlFactoryImpl::createPackageImport_in_ImportingNamespace(std::weak_ptr<uml::Namespace > par_importingNamespace, const int metaElementID) const
+
+std::shared_ptr<PackageImport> umlFactoryImpl::createPackageImport_in_ImportingNamespace(std::weak_ptr<uml::Namespace> par_importingNamespace, const int metaElementID) const
 {
 	std::shared_ptr<PackageImportImpl> element(new PackageImportImpl(par_importingNamespace));
 	element->setMetaElementID(metaElementID);
@@ -16147,7 +16278,7 @@ std::shared_ptr<PackageImport> umlFactoryImpl::createPackageImport_in_ImportingN
 	return element;
 	
 }
-std::shared_ptr<PackageImport> umlFactoryImpl::createPackageImport_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<PackageImport> umlFactoryImpl::createPackageImport_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<PackageImportImpl> element(new PackageImportImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16166,7 +16297,8 @@ std::shared_ptr<PackageMerge> umlFactoryImpl::createPackageMerge(const int metaE
 	element->setThisPackageMergePtr(element);
 	return element;
 }
-std::shared_ptr<PackageMerge> umlFactoryImpl::createPackageMerge_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<PackageMerge> umlFactoryImpl::createPackageMerge_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<PackageMergeImpl> element(new PackageMergeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16178,7 +16310,7 @@ std::shared_ptr<PackageMerge> umlFactoryImpl::createPackageMerge_in_Owner(std::w
 	return element;
 	
 }
-std::shared_ptr<PackageMerge> umlFactoryImpl::createPackageMerge_in_ReceivingPackage(std::weak_ptr<uml::Package > par_receivingPackage, const int metaElementID) const
+std::shared_ptr<PackageMerge> umlFactoryImpl::createPackageMerge_in_ReceivingPackage(std::weak_ptr<uml::Package> par_receivingPackage, const int metaElementID) const
 {
 	std::shared_ptr<PackageMergeImpl> element(new PackageMergeImpl(par_receivingPackage));
 	element->setMetaElementID(metaElementID);
@@ -16197,7 +16329,8 @@ std::shared_ptr<Parameter> umlFactoryImpl::createParameter(const int metaElement
 	element->setThisParameterPtr(element);
 	return element;
 }
-std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_Behavior(std::weak_ptr<uml::Behavior > par_behavior, const int metaElementID) const
+
+std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_Behavior(std::weak_ptr<uml::Behavior> par_behavior, const int metaElementID) const
 {
 	std::shared_ptr<ParameterImpl> element(new ParameterImpl(par_behavior));
 	element->setMetaElementID(metaElementID);
@@ -16209,7 +16342,7 @@ std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_Behavior(std::weak
 	return element;
 	
 }
-std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ParameterImpl> element(new ParameterImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -16221,7 +16354,7 @@ std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_Namespace(std::wea
 	return element;
 	
 }
-std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_Operation(std::weak_ptr<uml::Operation > par_operation, const int metaElementID) const
+std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_Operation(std::weak_ptr<uml::Operation> par_operation, const int metaElementID) const
 {
 	std::shared_ptr<ParameterImpl> element(new ParameterImpl(par_operation));
 	element->setMetaElementID(metaElementID);
@@ -16233,7 +16366,7 @@ std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_Operation(std::wea
 	return element;
 	
 }
-std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ParameterImpl> element(new ParameterImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16245,7 +16378,7 @@ std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_Owner(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Parameter> umlFactoryImpl::createParameter_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ParameterImpl> element(new ParameterImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -16264,7 +16397,8 @@ std::shared_ptr<ParameterSet> umlFactoryImpl::createParameterSet(const int metaE
 	element->setThisParameterSetPtr(element);
 	return element;
 }
-std::shared_ptr<ParameterSet> umlFactoryImpl::createParameterSet_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<ParameterSet> umlFactoryImpl::createParameterSet_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ParameterSetImpl> element(new ParameterSetImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -16276,7 +16410,7 @@ std::shared_ptr<ParameterSet> umlFactoryImpl::createParameterSet_in_Namespace(st
 	return element;
 	
 }
-std::shared_ptr<ParameterSet> umlFactoryImpl::createParameterSet_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ParameterSet> umlFactoryImpl::createParameterSet_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ParameterSetImpl> element(new ParameterSetImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16295,7 +16429,8 @@ std::shared_ptr<PartDecomposition> umlFactoryImpl::createPartDecomposition(const
 	element->setThisPartDecompositionPtr(element);
 	return element;
 }
-std::shared_ptr<PartDecomposition> umlFactoryImpl::createPartDecomposition_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+
+std::shared_ptr<PartDecomposition> umlFactoryImpl::createPartDecomposition_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<PartDecompositionImpl> element(new PartDecompositionImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -16307,7 +16442,7 @@ std::shared_ptr<PartDecomposition> umlFactoryImpl::createPartDecomposition_in_En
 	return element;
 	
 }
-std::shared_ptr<PartDecomposition> umlFactoryImpl::createPartDecomposition_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<PartDecomposition> umlFactoryImpl::createPartDecomposition_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<PartDecompositionImpl> element(new PartDecompositionImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -16319,7 +16454,7 @@ std::shared_ptr<PartDecomposition> umlFactoryImpl::createPartDecomposition_in_En
 	return element;
 	
 }
-std::shared_ptr<PartDecomposition> umlFactoryImpl::createPartDecomposition_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<PartDecomposition> umlFactoryImpl::createPartDecomposition_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<PartDecompositionImpl> element(new PartDecompositionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -16331,7 +16466,7 @@ std::shared_ptr<PartDecomposition> umlFactoryImpl::createPartDecomposition_in_Na
 	return element;
 	
 }
-std::shared_ptr<PartDecomposition> umlFactoryImpl::createPartDecomposition_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<PartDecomposition> umlFactoryImpl::createPartDecomposition_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<PartDecompositionImpl> element(new PartDecompositionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16350,7 +16485,8 @@ std::shared_ptr<Port> umlFactoryImpl::createPort(const int metaElementID/*=-1*/)
 	element->setThisPortPtr(element);
 	return element;
 }
-std::shared_ptr<Port> umlFactoryImpl::createPort_in_AssociationEnd(std::weak_ptr<uml::Property > par_associationEnd, const int metaElementID) const
+
+std::shared_ptr<Port> umlFactoryImpl::createPort_in_AssociationEnd(std::weak_ptr<uml::Property> par_associationEnd, const int metaElementID) const
 {
 	std::shared_ptr<PortImpl> element(new PortImpl(par_associationEnd));
 	element->setMetaElementID(metaElementID);
@@ -16362,7 +16498,7 @@ std::shared_ptr<Port> umlFactoryImpl::createPort_in_AssociationEnd(std::weak_ptr
 	return element;
 	
 }
-std::shared_ptr<Port> umlFactoryImpl::createPort_in_Class(std::weak_ptr<uml::Class > par_class, const int metaElementID) const
+std::shared_ptr<Port> umlFactoryImpl::createPort_in_Class(std::weak_ptr<uml::Class> par_class, const int metaElementID) const
 {
 	std::shared_ptr<PortImpl> element(new PortImpl(par_class));
 	element->setMetaElementID(metaElementID);
@@ -16374,7 +16510,7 @@ std::shared_ptr<Port> umlFactoryImpl::createPort_in_Class(std::weak_ptr<uml::Cla
 	return element;
 	
 }
-std::shared_ptr<Port> umlFactoryImpl::createPort_in_Datatype(std::weak_ptr<uml::DataType > par_datatype, const int metaElementID) const
+std::shared_ptr<Port> umlFactoryImpl::createPort_in_Datatype(std::weak_ptr<uml::DataType> par_datatype, const int metaElementID) const
 {
 	std::shared_ptr<PortImpl> element(new PortImpl(par_datatype));
 	element->setMetaElementID(metaElementID);
@@ -16386,7 +16522,7 @@ std::shared_ptr<Port> umlFactoryImpl::createPort_in_Datatype(std::weak_ptr<uml::
 	return element;
 	
 }
-std::shared_ptr<Port> umlFactoryImpl::createPort_in_Interface(std::weak_ptr<uml::Interface > par_interface, const int metaElementID) const
+std::shared_ptr<Port> umlFactoryImpl::createPort_in_Interface(std::weak_ptr<uml::Interface> par_interface, const int metaElementID) const
 {
 	std::shared_ptr<PortImpl> element(new PortImpl(par_interface));
 	element->setMetaElementID(metaElementID);
@@ -16398,7 +16534,7 @@ std::shared_ptr<Port> umlFactoryImpl::createPort_in_Interface(std::weak_ptr<uml:
 	return element;
 	
 }
-std::shared_ptr<Port> umlFactoryImpl::createPort_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Port> umlFactoryImpl::createPort_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<PortImpl> element(new PortImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -16410,7 +16546,7 @@ std::shared_ptr<Port> umlFactoryImpl::createPort_in_Namespace(std::weak_ptr<uml:
 	return element;
 	
 }
-std::shared_ptr<Port> umlFactoryImpl::createPort_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Port> umlFactoryImpl::createPort_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<PortImpl> element(new PortImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16422,7 +16558,7 @@ std::shared_ptr<Port> umlFactoryImpl::createPort_in_Owner(std::weak_ptr<uml::Ele
 	return element;
 	
 }
-std::shared_ptr<Port> umlFactoryImpl::createPort_in_OwningAssociation(std::weak_ptr<uml::Association > par_owningAssociation, const int metaElementID) const
+std::shared_ptr<Port> umlFactoryImpl::createPort_in_OwningAssociation(std::weak_ptr<uml::Association> par_owningAssociation, const int metaElementID) const
 {
 	std::shared_ptr<PortImpl> element(new PortImpl(par_owningAssociation));
 	element->setMetaElementID(metaElementID);
@@ -16434,7 +16570,7 @@ std::shared_ptr<Port> umlFactoryImpl::createPort_in_OwningAssociation(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Port> umlFactoryImpl::createPort_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Port> umlFactoryImpl::createPort_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<PortImpl> element(new PortImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -16453,7 +16589,8 @@ std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType(const int met
 	element->setThisPrimitiveTypePtr(element);
 	return element;
 }
-std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -16465,7 +16602,7 @@ std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_Namespace(
 	return element;
 	
 }
-std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16477,7 +16614,7 @@ std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_Owner(std:
 	return element;
 	
 }
-std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -16489,7 +16626,7 @@ std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_OwningPack
 	return element;
 	
 }
-std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -16501,7 +16638,7 @@ std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_OwningTemp
 	return element;
 	
 }
-std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<PrimitiveType> umlFactoryImpl::createPrimitiveType_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<PrimitiveTypeImpl> element(new PrimitiveTypeImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -16520,7 +16657,8 @@ std::shared_ptr<Profile> umlFactoryImpl::createProfile(const int metaElementID/*
 	element->setThisProfilePtr(element);
 	return element;
 }
-std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -16532,7 +16670,7 @@ std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_Namespace(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_NestingPackage(std::weak_ptr<uml::Package > par_nestingPackage, const int metaElementID) const
+std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_NestingPackage(std::weak_ptr<uml::Package> par_nestingPackage, const int metaElementID) const
 {
 	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_nestingPackage, umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -16544,7 +16682,7 @@ std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_NestingPackage(std::we
 	return element;
 	
 }
-std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16556,7 +16694,7 @@ std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_Owner(std::weak_ptr<um
 	return element;
 	
 }
-std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -16568,7 +16706,7 @@ std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_OwningPackage(std::wea
 	return element;
 	
 }
-std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Profile> umlFactoryImpl::createProfile_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ProfileImpl> element(new ProfileImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -16587,7 +16725,8 @@ std::shared_ptr<ProfileApplication> umlFactoryImpl::createProfileApplication(con
 	element->setThisProfileApplicationPtr(element);
 	return element;
 }
-std::shared_ptr<ProfileApplication> umlFactoryImpl::createProfileApplication_in_ApplyingPackage(std::weak_ptr<uml::Package > par_applyingPackage, const int metaElementID) const
+
+std::shared_ptr<ProfileApplication> umlFactoryImpl::createProfileApplication_in_ApplyingPackage(std::weak_ptr<uml::Package> par_applyingPackage, const int metaElementID) const
 {
 	std::shared_ptr<ProfileApplicationImpl> element(new ProfileApplicationImpl(par_applyingPackage));
 	element->setMetaElementID(metaElementID);
@@ -16599,7 +16738,7 @@ std::shared_ptr<ProfileApplication> umlFactoryImpl::createProfileApplication_in_
 	return element;
 	
 }
-std::shared_ptr<ProfileApplication> umlFactoryImpl::createProfileApplication_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ProfileApplication> umlFactoryImpl::createProfileApplication_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ProfileApplicationImpl> element(new ProfileApplicationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16618,7 +16757,8 @@ std::shared_ptr<Property> umlFactoryImpl::createProperty(const int metaElementID
 	element->setThisPropertyPtr(element);
 	return element;
 }
-std::shared_ptr<Property> umlFactoryImpl::createProperty_in_AssociationEnd(std::weak_ptr<uml::Property > par_associationEnd, const int metaElementID) const
+
+std::shared_ptr<Property> umlFactoryImpl::createProperty_in_AssociationEnd(std::weak_ptr<uml::Property> par_associationEnd, const int metaElementID) const
 {
 	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_associationEnd));
 	element->setMetaElementID(metaElementID);
@@ -16630,7 +16770,7 @@ std::shared_ptr<Property> umlFactoryImpl::createProperty_in_AssociationEnd(std::
 	return element;
 	
 }
-std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Class(std::weak_ptr<uml::Class > par_class, const int metaElementID) const
+std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Class(std::weak_ptr<uml::Class> par_class, const int metaElementID) const
 {
 	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_class));
 	element->setMetaElementID(metaElementID);
@@ -16642,7 +16782,7 @@ std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Class(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Datatype(std::weak_ptr<uml::DataType > par_datatype, const int metaElementID) const
+std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Datatype(std::weak_ptr<uml::DataType> par_datatype, const int metaElementID) const
 {
 	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_datatype));
 	element->setMetaElementID(metaElementID);
@@ -16654,7 +16794,7 @@ std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Datatype(std::weak_p
 	return element;
 	
 }
-std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Interface(std::weak_ptr<uml::Interface > par_interface, const int metaElementID) const
+std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Interface(std::weak_ptr<uml::Interface> par_interface, const int metaElementID) const
 {
 	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_interface));
 	element->setMetaElementID(metaElementID);
@@ -16666,7 +16806,7 @@ std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Interface(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -16678,7 +16818,7 @@ std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Namespace(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16690,7 +16830,7 @@ std::shared_ptr<Property> umlFactoryImpl::createProperty_in_Owner(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<Property> umlFactoryImpl::createProperty_in_OwningAssociation(std::weak_ptr<uml::Association > par_owningAssociation, const int metaElementID) const
+std::shared_ptr<Property> umlFactoryImpl::createProperty_in_OwningAssociation(std::weak_ptr<uml::Association> par_owningAssociation, const int metaElementID) const
 {
 	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_owningAssociation));
 	element->setMetaElementID(metaElementID);
@@ -16702,7 +16842,7 @@ std::shared_ptr<Property> umlFactoryImpl::createProperty_in_OwningAssociation(st
 	return element;
 	
 }
-std::shared_ptr<Property> umlFactoryImpl::createProperty_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Property> umlFactoryImpl::createProperty_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -16721,7 +16861,8 @@ std::shared_ptr<ProtocolConformance> umlFactoryImpl::createProtocolConformance(c
 	element->setThisProtocolConformancePtr(element);
 	return element;
 }
-std::shared_ptr<ProtocolConformance> umlFactoryImpl::createProtocolConformance_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<ProtocolConformance> umlFactoryImpl::createProtocolConformance_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ProtocolConformanceImpl> element(new ProtocolConformanceImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16733,7 +16874,7 @@ std::shared_ptr<ProtocolConformance> umlFactoryImpl::createProtocolConformance_i
 	return element;
 	
 }
-std::shared_ptr<ProtocolConformance> umlFactoryImpl::createProtocolConformance_in_SpecificMachine(std::weak_ptr<uml::ProtocolStateMachine > par_specificMachine, const int metaElementID) const
+std::shared_ptr<ProtocolConformance> umlFactoryImpl::createProtocolConformance_in_SpecificMachine(std::weak_ptr<uml::ProtocolStateMachine> par_specificMachine, const int metaElementID) const
 {
 	std::shared_ptr<ProtocolConformanceImpl> element(new ProtocolConformanceImpl(par_specificMachine));
 	element->setMetaElementID(metaElementID);
@@ -16752,7 +16893,8 @@ std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine
 	element->setThisProtocolStateMachinePtr(element);
 	return element;
 }
-std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier, const int metaElementID) const
+
+std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier, const int metaElementID) const
 {
 	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_behavioredClassifier));
 	element->setMetaElementID(metaElementID);
@@ -16764,7 +16906,7 @@ std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine
 	return element;
 	
 }
-std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -16776,7 +16918,7 @@ std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine
 	return element;
 	
 }
-std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16788,7 +16930,7 @@ std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine
 	return element;
 	
 }
-std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -16800,7 +16942,7 @@ std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine
 	return element;
 	
 }
-std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -16812,7 +16954,7 @@ std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine
 	return element;
 	
 }
-std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<ProtocolStateMachine> umlFactoryImpl::createProtocolStateMachine_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<ProtocolStateMachineImpl> element(new ProtocolStateMachineImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -16831,7 +16973,8 @@ std::shared_ptr<ProtocolTransition> umlFactoryImpl::createProtocolTransition(con
 	element->setThisProtocolTransitionPtr(element);
 	return element;
 }
-std::shared_ptr<ProtocolTransition> umlFactoryImpl::createProtocolTransition_in_Container(std::weak_ptr<uml::Region > par_container, const int metaElementID) const
+
+std::shared_ptr<ProtocolTransition> umlFactoryImpl::createProtocolTransition_in_Container(std::weak_ptr<uml::Region> par_container, const int metaElementID) const
 {
 	std::shared_ptr<ProtocolTransitionImpl> element(new ProtocolTransitionImpl(par_container));
 	element->setMetaElementID(metaElementID);
@@ -16843,7 +16986,7 @@ std::shared_ptr<ProtocolTransition> umlFactoryImpl::createProtocolTransition_in_
 	return element;
 	
 }
-std::shared_ptr<ProtocolTransition> umlFactoryImpl::createProtocolTransition_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ProtocolTransition> umlFactoryImpl::createProtocolTransition_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ProtocolTransitionImpl> element(new ProtocolTransitionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -16855,7 +16998,7 @@ std::shared_ptr<ProtocolTransition> umlFactoryImpl::createProtocolTransition_in_
 	return element;
 	
 }
-std::shared_ptr<ProtocolTransition> umlFactoryImpl::createProtocolTransition_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ProtocolTransition> umlFactoryImpl::createProtocolTransition_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ProtocolTransitionImpl> element(new ProtocolTransitionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16874,7 +17017,8 @@ std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate(const int metaEle
 	element->setThisPseudostatePtr(element);
 	return element;
 }
-std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_Container(std::weak_ptr<uml::Region > par_container, const int metaElementID) const
+
+std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_Container(std::weak_ptr<uml::Region> par_container, const int metaElementID) const
 {
 	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(par_container));
 	element->setMetaElementID(metaElementID);
@@ -16886,7 +17030,7 @@ std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_Container(std:
 	return element;
 	
 }
-std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -16898,7 +17042,7 @@ std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_Namespace(std:
 	return element;
 	
 }
-std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16910,7 +17054,7 @@ std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_Owner(std::wea
 	return element;
 	
 }
-std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_State(std::weak_ptr<uml::State > par_state, const int metaElementID) const
+std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_State(std::weak_ptr<uml::State> par_state, const int metaElementID) const
 {
 	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(par_state));
 	element->setMetaElementID(metaElementID);
@@ -16922,7 +17066,7 @@ std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_State(std::wea
 	return element;
 	
 }
-std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_StateMachine(std::weak_ptr<uml::StateMachine > par_stateMachine, const int metaElementID) const
+std::shared_ptr<Pseudostate> umlFactoryImpl::createPseudostate_in_StateMachine(std::weak_ptr<uml::StateMachine> par_stateMachine, const int metaElementID) const
 {
 	std::shared_ptr<PseudostateImpl> element(new PseudostateImpl(par_stateMachine));
 	element->setMetaElementID(metaElementID);
@@ -16941,7 +17085,8 @@ std::shared_ptr<QualifierValue> umlFactoryImpl::createQualifierValue(const int m
 	element->setThisQualifierValuePtr(element);
 	return element;
 }
-std::shared_ptr<QualifierValue> umlFactoryImpl::createQualifierValue_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<QualifierValue> umlFactoryImpl::createQualifierValue_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<QualifierValueImpl> element(new QualifierValueImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -16960,7 +17105,8 @@ std::shared_ptr<RaiseExceptionAction> umlFactoryImpl::createRaiseExceptionAction
 	element->setThisRaiseExceptionActionPtr(element);
 	return element;
 }
-std::shared_ptr<RaiseExceptionAction> umlFactoryImpl::createRaiseExceptionAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<RaiseExceptionAction> umlFactoryImpl::createRaiseExceptionAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<RaiseExceptionActionImpl> element(new RaiseExceptionActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -16972,7 +17118,7 @@ std::shared_ptr<RaiseExceptionAction> umlFactoryImpl::createRaiseExceptionAction
 	return element;
 	
 }
-std::shared_ptr<RaiseExceptionAction> umlFactoryImpl::createRaiseExceptionAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<RaiseExceptionAction> umlFactoryImpl::createRaiseExceptionAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<RaiseExceptionActionImpl> element(new RaiseExceptionActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -16984,7 +17130,7 @@ std::shared_ptr<RaiseExceptionAction> umlFactoryImpl::createRaiseExceptionAction
 	return element;
 	
 }
-std::shared_ptr<RaiseExceptionAction> umlFactoryImpl::createRaiseExceptionAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<RaiseExceptionAction> umlFactoryImpl::createRaiseExceptionAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<RaiseExceptionActionImpl> element(new RaiseExceptionActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -16996,7 +17142,7 @@ std::shared_ptr<RaiseExceptionAction> umlFactoryImpl::createRaiseExceptionAction
 	return element;
 	
 }
-std::shared_ptr<RaiseExceptionAction> umlFactoryImpl::createRaiseExceptionAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<RaiseExceptionAction> umlFactoryImpl::createRaiseExceptionAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<RaiseExceptionActionImpl> element(new RaiseExceptionActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17015,7 +17161,8 @@ std::shared_ptr<ReadExtentAction> umlFactoryImpl::createReadExtentAction(const i
 	element->setThisReadExtentActionPtr(element);
 	return element;
 }
-std::shared_ptr<ReadExtentAction> umlFactoryImpl::createReadExtentAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ReadExtentAction> umlFactoryImpl::createReadExtentAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ReadExtentActionImpl> element(new ReadExtentActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17027,7 +17174,7 @@ std::shared_ptr<ReadExtentAction> umlFactoryImpl::createReadExtentAction_in_Acti
 	return element;
 	
 }
-std::shared_ptr<ReadExtentAction> umlFactoryImpl::createReadExtentAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ReadExtentAction> umlFactoryImpl::createReadExtentAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ReadExtentActionImpl> element(new ReadExtentActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17039,7 +17186,7 @@ std::shared_ptr<ReadExtentAction> umlFactoryImpl::createReadExtentAction_in_InSt
 	return element;
 	
 }
-std::shared_ptr<ReadExtentAction> umlFactoryImpl::createReadExtentAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ReadExtentAction> umlFactoryImpl::createReadExtentAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ReadExtentActionImpl> element(new ReadExtentActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17051,7 +17198,7 @@ std::shared_ptr<ReadExtentAction> umlFactoryImpl::createReadExtentAction_in_Name
 	return element;
 	
 }
-std::shared_ptr<ReadExtentAction> umlFactoryImpl::createReadExtentAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ReadExtentAction> umlFactoryImpl::createReadExtentAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ReadExtentActionImpl> element(new ReadExtentActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17070,7 +17217,8 @@ std::shared_ptr<ReadIsClassifiedObjectAction> umlFactoryImpl::createReadIsClassi
 	element->setThisReadIsClassifiedObjectActionPtr(element);
 	return element;
 }
-std::shared_ptr<ReadIsClassifiedObjectAction> umlFactoryImpl::createReadIsClassifiedObjectAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ReadIsClassifiedObjectAction> umlFactoryImpl::createReadIsClassifiedObjectAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ReadIsClassifiedObjectActionImpl> element(new ReadIsClassifiedObjectActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17082,7 +17230,7 @@ std::shared_ptr<ReadIsClassifiedObjectAction> umlFactoryImpl::createReadIsClassi
 	return element;
 	
 }
-std::shared_ptr<ReadIsClassifiedObjectAction> umlFactoryImpl::createReadIsClassifiedObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ReadIsClassifiedObjectAction> umlFactoryImpl::createReadIsClassifiedObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ReadIsClassifiedObjectActionImpl> element(new ReadIsClassifiedObjectActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17094,7 +17242,7 @@ std::shared_ptr<ReadIsClassifiedObjectAction> umlFactoryImpl::createReadIsClassi
 	return element;
 	
 }
-std::shared_ptr<ReadIsClassifiedObjectAction> umlFactoryImpl::createReadIsClassifiedObjectAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ReadIsClassifiedObjectAction> umlFactoryImpl::createReadIsClassifiedObjectAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ReadIsClassifiedObjectActionImpl> element(new ReadIsClassifiedObjectActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17106,7 +17254,7 @@ std::shared_ptr<ReadIsClassifiedObjectAction> umlFactoryImpl::createReadIsClassi
 	return element;
 	
 }
-std::shared_ptr<ReadIsClassifiedObjectAction> umlFactoryImpl::createReadIsClassifiedObjectAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ReadIsClassifiedObjectAction> umlFactoryImpl::createReadIsClassifiedObjectAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ReadIsClassifiedObjectActionImpl> element(new ReadIsClassifiedObjectActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17125,7 +17273,8 @@ std::shared_ptr<ReadLinkAction> umlFactoryImpl::createReadLinkAction(const int m
 	element->setThisReadLinkActionPtr(element);
 	return element;
 }
-std::shared_ptr<ReadLinkAction> umlFactoryImpl::createReadLinkAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ReadLinkAction> umlFactoryImpl::createReadLinkAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ReadLinkActionImpl> element(new ReadLinkActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17137,7 +17286,7 @@ std::shared_ptr<ReadLinkAction> umlFactoryImpl::createReadLinkAction_in_Activity
 	return element;
 	
 }
-std::shared_ptr<ReadLinkAction> umlFactoryImpl::createReadLinkAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ReadLinkAction> umlFactoryImpl::createReadLinkAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ReadLinkActionImpl> element(new ReadLinkActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17149,7 +17298,7 @@ std::shared_ptr<ReadLinkAction> umlFactoryImpl::createReadLinkAction_in_InStruct
 	return element;
 	
 }
-std::shared_ptr<ReadLinkAction> umlFactoryImpl::createReadLinkAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ReadLinkAction> umlFactoryImpl::createReadLinkAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ReadLinkActionImpl> element(new ReadLinkActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17161,7 +17310,7 @@ std::shared_ptr<ReadLinkAction> umlFactoryImpl::createReadLinkAction_in_Namespac
 	return element;
 	
 }
-std::shared_ptr<ReadLinkAction> umlFactoryImpl::createReadLinkAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ReadLinkAction> umlFactoryImpl::createReadLinkAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ReadLinkActionImpl> element(new ReadLinkActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17180,7 +17329,8 @@ std::shared_ptr<ReadLinkObjectEndAction> umlFactoryImpl::createReadLinkObjectEnd
 	element->setThisReadLinkObjectEndActionPtr(element);
 	return element;
 }
-std::shared_ptr<ReadLinkObjectEndAction> umlFactoryImpl::createReadLinkObjectEndAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ReadLinkObjectEndAction> umlFactoryImpl::createReadLinkObjectEndAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ReadLinkObjectEndActionImpl> element(new ReadLinkObjectEndActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17192,7 +17342,7 @@ std::shared_ptr<ReadLinkObjectEndAction> umlFactoryImpl::createReadLinkObjectEnd
 	return element;
 	
 }
-std::shared_ptr<ReadLinkObjectEndAction> umlFactoryImpl::createReadLinkObjectEndAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ReadLinkObjectEndAction> umlFactoryImpl::createReadLinkObjectEndAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ReadLinkObjectEndActionImpl> element(new ReadLinkObjectEndActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17204,7 +17354,7 @@ std::shared_ptr<ReadLinkObjectEndAction> umlFactoryImpl::createReadLinkObjectEnd
 	return element;
 	
 }
-std::shared_ptr<ReadLinkObjectEndAction> umlFactoryImpl::createReadLinkObjectEndAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ReadLinkObjectEndAction> umlFactoryImpl::createReadLinkObjectEndAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ReadLinkObjectEndActionImpl> element(new ReadLinkObjectEndActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17216,7 +17366,7 @@ std::shared_ptr<ReadLinkObjectEndAction> umlFactoryImpl::createReadLinkObjectEnd
 	return element;
 	
 }
-std::shared_ptr<ReadLinkObjectEndAction> umlFactoryImpl::createReadLinkObjectEndAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ReadLinkObjectEndAction> umlFactoryImpl::createReadLinkObjectEndAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ReadLinkObjectEndActionImpl> element(new ReadLinkObjectEndActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17235,7 +17385,8 @@ std::shared_ptr<ReadLinkObjectEndQualifierAction> umlFactoryImpl::createReadLink
 	element->setThisReadLinkObjectEndQualifierActionPtr(element);
 	return element;
 }
-std::shared_ptr<ReadLinkObjectEndQualifierAction> umlFactoryImpl::createReadLinkObjectEndQualifierAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ReadLinkObjectEndQualifierAction> umlFactoryImpl::createReadLinkObjectEndQualifierAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ReadLinkObjectEndQualifierActionImpl> element(new ReadLinkObjectEndQualifierActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17247,7 +17398,7 @@ std::shared_ptr<ReadLinkObjectEndQualifierAction> umlFactoryImpl::createReadLink
 	return element;
 	
 }
-std::shared_ptr<ReadLinkObjectEndQualifierAction> umlFactoryImpl::createReadLinkObjectEndQualifierAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ReadLinkObjectEndQualifierAction> umlFactoryImpl::createReadLinkObjectEndQualifierAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ReadLinkObjectEndQualifierActionImpl> element(new ReadLinkObjectEndQualifierActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17259,7 +17410,7 @@ std::shared_ptr<ReadLinkObjectEndQualifierAction> umlFactoryImpl::createReadLink
 	return element;
 	
 }
-std::shared_ptr<ReadLinkObjectEndQualifierAction> umlFactoryImpl::createReadLinkObjectEndQualifierAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ReadLinkObjectEndQualifierAction> umlFactoryImpl::createReadLinkObjectEndQualifierAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ReadLinkObjectEndQualifierActionImpl> element(new ReadLinkObjectEndQualifierActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17271,7 +17422,7 @@ std::shared_ptr<ReadLinkObjectEndQualifierAction> umlFactoryImpl::createReadLink
 	return element;
 	
 }
-std::shared_ptr<ReadLinkObjectEndQualifierAction> umlFactoryImpl::createReadLinkObjectEndQualifierAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ReadLinkObjectEndQualifierAction> umlFactoryImpl::createReadLinkObjectEndQualifierAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ReadLinkObjectEndQualifierActionImpl> element(new ReadLinkObjectEndQualifierActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17290,7 +17441,8 @@ std::shared_ptr<ReadSelfAction> umlFactoryImpl::createReadSelfAction(const int m
 	element->setThisReadSelfActionPtr(element);
 	return element;
 }
-std::shared_ptr<ReadSelfAction> umlFactoryImpl::createReadSelfAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ReadSelfAction> umlFactoryImpl::createReadSelfAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ReadSelfActionImpl> element(new ReadSelfActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17302,7 +17454,7 @@ std::shared_ptr<ReadSelfAction> umlFactoryImpl::createReadSelfAction_in_Activity
 	return element;
 	
 }
-std::shared_ptr<ReadSelfAction> umlFactoryImpl::createReadSelfAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ReadSelfAction> umlFactoryImpl::createReadSelfAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ReadSelfActionImpl> element(new ReadSelfActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17314,7 +17466,7 @@ std::shared_ptr<ReadSelfAction> umlFactoryImpl::createReadSelfAction_in_InStruct
 	return element;
 	
 }
-std::shared_ptr<ReadSelfAction> umlFactoryImpl::createReadSelfAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ReadSelfAction> umlFactoryImpl::createReadSelfAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ReadSelfActionImpl> element(new ReadSelfActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17326,7 +17478,7 @@ std::shared_ptr<ReadSelfAction> umlFactoryImpl::createReadSelfAction_in_Namespac
 	return element;
 	
 }
-std::shared_ptr<ReadSelfAction> umlFactoryImpl::createReadSelfAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ReadSelfAction> umlFactoryImpl::createReadSelfAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ReadSelfActionImpl> element(new ReadSelfActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17345,7 +17497,8 @@ std::shared_ptr<ReadStructuralFeatureAction> umlFactoryImpl::createReadStructura
 	element->setThisReadStructuralFeatureActionPtr(element);
 	return element;
 }
-std::shared_ptr<ReadStructuralFeatureAction> umlFactoryImpl::createReadStructuralFeatureAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ReadStructuralFeatureAction> umlFactoryImpl::createReadStructuralFeatureAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ReadStructuralFeatureActionImpl> element(new ReadStructuralFeatureActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17357,7 +17510,7 @@ std::shared_ptr<ReadStructuralFeatureAction> umlFactoryImpl::createReadStructura
 	return element;
 	
 }
-std::shared_ptr<ReadStructuralFeatureAction> umlFactoryImpl::createReadStructuralFeatureAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ReadStructuralFeatureAction> umlFactoryImpl::createReadStructuralFeatureAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ReadStructuralFeatureActionImpl> element(new ReadStructuralFeatureActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17369,7 +17522,7 @@ std::shared_ptr<ReadStructuralFeatureAction> umlFactoryImpl::createReadStructura
 	return element;
 	
 }
-std::shared_ptr<ReadStructuralFeatureAction> umlFactoryImpl::createReadStructuralFeatureAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ReadStructuralFeatureAction> umlFactoryImpl::createReadStructuralFeatureAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ReadStructuralFeatureActionImpl> element(new ReadStructuralFeatureActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17381,7 +17534,7 @@ std::shared_ptr<ReadStructuralFeatureAction> umlFactoryImpl::createReadStructura
 	return element;
 	
 }
-std::shared_ptr<ReadStructuralFeatureAction> umlFactoryImpl::createReadStructuralFeatureAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ReadStructuralFeatureAction> umlFactoryImpl::createReadStructuralFeatureAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ReadStructuralFeatureActionImpl> element(new ReadStructuralFeatureActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17400,7 +17553,8 @@ std::shared_ptr<ReadVariableAction> umlFactoryImpl::createReadVariableAction(con
 	element->setThisReadVariableActionPtr(element);
 	return element;
 }
-std::shared_ptr<ReadVariableAction> umlFactoryImpl::createReadVariableAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ReadVariableAction> umlFactoryImpl::createReadVariableAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ReadVariableActionImpl> element(new ReadVariableActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17412,7 +17566,7 @@ std::shared_ptr<ReadVariableAction> umlFactoryImpl::createReadVariableAction_in_
 	return element;
 	
 }
-std::shared_ptr<ReadVariableAction> umlFactoryImpl::createReadVariableAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ReadVariableAction> umlFactoryImpl::createReadVariableAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ReadVariableActionImpl> element(new ReadVariableActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17424,7 +17578,7 @@ std::shared_ptr<ReadVariableAction> umlFactoryImpl::createReadVariableAction_in_
 	return element;
 	
 }
-std::shared_ptr<ReadVariableAction> umlFactoryImpl::createReadVariableAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ReadVariableAction> umlFactoryImpl::createReadVariableAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ReadVariableActionImpl> element(new ReadVariableActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17436,7 +17590,7 @@ std::shared_ptr<ReadVariableAction> umlFactoryImpl::createReadVariableAction_in_
 	return element;
 	
 }
-std::shared_ptr<ReadVariableAction> umlFactoryImpl::createReadVariableAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ReadVariableAction> umlFactoryImpl::createReadVariableAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ReadVariableActionImpl> element(new ReadVariableActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17455,7 +17609,8 @@ std::shared_ptr<Realization> umlFactoryImpl::createRealization(const int metaEle
 	element->setThisRealizationPtr(element);
 	return element;
 }
-std::shared_ptr<Realization> umlFactoryImpl::createRealization_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Realization> umlFactoryImpl::createRealization_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<RealizationImpl> element(new RealizationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17467,7 +17622,7 @@ std::shared_ptr<Realization> umlFactoryImpl::createRealization_in_Namespace(std:
 	return element;
 	
 }
-std::shared_ptr<Realization> umlFactoryImpl::createRealization_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Realization> umlFactoryImpl::createRealization_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<RealizationImpl> element(new RealizationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17479,7 +17634,7 @@ std::shared_ptr<Realization> umlFactoryImpl::createRealization_in_Owner(std::wea
 	return element;
 	
 }
-std::shared_ptr<Realization> umlFactoryImpl::createRealization_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Realization> umlFactoryImpl::createRealization_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<RealizationImpl> element(new RealizationImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -17491,7 +17646,7 @@ std::shared_ptr<Realization> umlFactoryImpl::createRealization_in_OwningPackage(
 	return element;
 	
 }
-std::shared_ptr<Realization> umlFactoryImpl::createRealization_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Realization> umlFactoryImpl::createRealization_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<RealizationImpl> element(new RealizationImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -17510,7 +17665,8 @@ std::shared_ptr<Reception> umlFactoryImpl::createReception(const int metaElement
 	element->setThisReceptionPtr(element);
 	return element;
 }
-std::shared_ptr<Reception> umlFactoryImpl::createReception_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Reception> umlFactoryImpl::createReception_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ReceptionImpl> element(new ReceptionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17522,7 +17678,7 @@ std::shared_ptr<Reception> umlFactoryImpl::createReception_in_Namespace(std::wea
 	return element;
 	
 }
-std::shared_ptr<Reception> umlFactoryImpl::createReception_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Reception> umlFactoryImpl::createReception_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ReceptionImpl> element(new ReceptionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17541,7 +17697,8 @@ std::shared_ptr<ReclassifyObjectAction> umlFactoryImpl::createReclassifyObjectAc
 	element->setThisReclassifyObjectActionPtr(element);
 	return element;
 }
-std::shared_ptr<ReclassifyObjectAction> umlFactoryImpl::createReclassifyObjectAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ReclassifyObjectAction> umlFactoryImpl::createReclassifyObjectAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ReclassifyObjectActionImpl> element(new ReclassifyObjectActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17553,7 +17710,7 @@ std::shared_ptr<ReclassifyObjectAction> umlFactoryImpl::createReclassifyObjectAc
 	return element;
 	
 }
-std::shared_ptr<ReclassifyObjectAction> umlFactoryImpl::createReclassifyObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ReclassifyObjectAction> umlFactoryImpl::createReclassifyObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ReclassifyObjectActionImpl> element(new ReclassifyObjectActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17565,7 +17722,7 @@ std::shared_ptr<ReclassifyObjectAction> umlFactoryImpl::createReclassifyObjectAc
 	return element;
 	
 }
-std::shared_ptr<ReclassifyObjectAction> umlFactoryImpl::createReclassifyObjectAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ReclassifyObjectAction> umlFactoryImpl::createReclassifyObjectAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ReclassifyObjectActionImpl> element(new ReclassifyObjectActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17577,7 +17734,7 @@ std::shared_ptr<ReclassifyObjectAction> umlFactoryImpl::createReclassifyObjectAc
 	return element;
 	
 }
-std::shared_ptr<ReclassifyObjectAction> umlFactoryImpl::createReclassifyObjectAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ReclassifyObjectAction> umlFactoryImpl::createReclassifyObjectAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ReclassifyObjectActionImpl> element(new ReclassifyObjectActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17596,7 +17753,8 @@ std::shared_ptr<RedefinableTemplateSignature> umlFactoryImpl::createRedefinableT
 	element->setThisRedefinableTemplateSignaturePtr(element);
 	return element;
 }
-std::shared_ptr<RedefinableTemplateSignature> umlFactoryImpl::createRedefinableTemplateSignature_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<RedefinableTemplateSignature> umlFactoryImpl::createRedefinableTemplateSignature_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<RedefinableTemplateSignatureImpl> element(new RedefinableTemplateSignatureImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17608,7 +17766,7 @@ std::shared_ptr<RedefinableTemplateSignature> umlFactoryImpl::createRedefinableT
 	return element;
 	
 }
-std::shared_ptr<RedefinableTemplateSignature> umlFactoryImpl::createRedefinableTemplateSignature_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<RedefinableTemplateSignature> umlFactoryImpl::createRedefinableTemplateSignature_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<RedefinableTemplateSignatureImpl> element(new RedefinableTemplateSignatureImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17620,7 +17778,7 @@ std::shared_ptr<RedefinableTemplateSignature> umlFactoryImpl::createRedefinableT
 	return element;
 	
 }
-std::shared_ptr<RedefinableTemplateSignature> umlFactoryImpl::createRedefinableTemplateSignature_in_Template(std::weak_ptr<uml::TemplateableElement > par_template, const int metaElementID) const
+std::shared_ptr<RedefinableTemplateSignature> umlFactoryImpl::createRedefinableTemplateSignature_in_Template(std::weak_ptr<uml::TemplateableElement> par_template, const int metaElementID) const
 {
 	std::shared_ptr<RedefinableTemplateSignatureImpl> element(new RedefinableTemplateSignatureImpl(par_template));
 	element->setMetaElementID(metaElementID);
@@ -17639,7 +17797,8 @@ std::shared_ptr<ReduceAction> umlFactoryImpl::createReduceAction(const int metaE
 	element->setThisReduceActionPtr(element);
 	return element;
 }
-std::shared_ptr<ReduceAction> umlFactoryImpl::createReduceAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ReduceAction> umlFactoryImpl::createReduceAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ReduceActionImpl> element(new ReduceActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17651,7 +17810,7 @@ std::shared_ptr<ReduceAction> umlFactoryImpl::createReduceAction_in_Activity(std
 	return element;
 	
 }
-std::shared_ptr<ReduceAction> umlFactoryImpl::createReduceAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ReduceAction> umlFactoryImpl::createReduceAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ReduceActionImpl> element(new ReduceActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17663,7 +17822,7 @@ std::shared_ptr<ReduceAction> umlFactoryImpl::createReduceAction_in_InStructured
 	return element;
 	
 }
-std::shared_ptr<ReduceAction> umlFactoryImpl::createReduceAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ReduceAction> umlFactoryImpl::createReduceAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ReduceActionImpl> element(new ReduceActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17675,7 +17834,7 @@ std::shared_ptr<ReduceAction> umlFactoryImpl::createReduceAction_in_Namespace(st
 	return element;
 	
 }
-std::shared_ptr<ReduceAction> umlFactoryImpl::createReduceAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ReduceAction> umlFactoryImpl::createReduceAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ReduceActionImpl> element(new ReduceActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17694,7 +17853,8 @@ std::shared_ptr<Region> umlFactoryImpl::createRegion(const int metaElementID/*=-
 	element->setThisRegionPtr(element);
 	return element;
 }
-std::shared_ptr<Region> umlFactoryImpl::createRegion_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Region> umlFactoryImpl::createRegion_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<RegionImpl> element(new RegionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17706,7 +17866,7 @@ std::shared_ptr<Region> umlFactoryImpl::createRegion_in_Namespace(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<Region> umlFactoryImpl::createRegion_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Region> umlFactoryImpl::createRegion_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<RegionImpl> element(new RegionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17718,7 +17878,7 @@ std::shared_ptr<Region> umlFactoryImpl::createRegion_in_Owner(std::weak_ptr<uml:
 	return element;
 	
 }
-std::shared_ptr<Region> umlFactoryImpl::createRegion_in_State(std::weak_ptr<uml::State > par_state, const int metaElementID) const
+std::shared_ptr<Region> umlFactoryImpl::createRegion_in_State(std::weak_ptr<uml::State> par_state, const int metaElementID) const
 {
 	std::shared_ptr<RegionImpl> element(new RegionImpl(par_state));
 	element->setMetaElementID(metaElementID);
@@ -17730,7 +17890,7 @@ std::shared_ptr<Region> umlFactoryImpl::createRegion_in_State(std::weak_ptr<uml:
 	return element;
 	
 }
-std::shared_ptr<Region> umlFactoryImpl::createRegion_in_StateMachine(std::weak_ptr<uml::StateMachine > par_stateMachine, const int metaElementID) const
+std::shared_ptr<Region> umlFactoryImpl::createRegion_in_StateMachine(std::weak_ptr<uml::StateMachine> par_stateMachine, const int metaElementID) const
 {
 	std::shared_ptr<RegionImpl> element(new RegionImpl(par_stateMachine));
 	element->setMetaElementID(metaElementID);
@@ -17749,7 +17909,8 @@ std::shared_ptr<RemoveStructuralFeatureValueAction> umlFactoryImpl::createRemove
 	element->setThisRemoveStructuralFeatureValueActionPtr(element);
 	return element;
 }
-std::shared_ptr<RemoveStructuralFeatureValueAction> umlFactoryImpl::createRemoveStructuralFeatureValueAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<RemoveStructuralFeatureValueAction> umlFactoryImpl::createRemoveStructuralFeatureValueAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<RemoveStructuralFeatureValueActionImpl> element(new RemoveStructuralFeatureValueActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17761,7 +17922,7 @@ std::shared_ptr<RemoveStructuralFeatureValueAction> umlFactoryImpl::createRemove
 	return element;
 	
 }
-std::shared_ptr<RemoveStructuralFeatureValueAction> umlFactoryImpl::createRemoveStructuralFeatureValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<RemoveStructuralFeatureValueAction> umlFactoryImpl::createRemoveStructuralFeatureValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<RemoveStructuralFeatureValueActionImpl> element(new RemoveStructuralFeatureValueActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17773,7 +17934,7 @@ std::shared_ptr<RemoveStructuralFeatureValueAction> umlFactoryImpl::createRemove
 	return element;
 	
 }
-std::shared_ptr<RemoveStructuralFeatureValueAction> umlFactoryImpl::createRemoveStructuralFeatureValueAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<RemoveStructuralFeatureValueAction> umlFactoryImpl::createRemoveStructuralFeatureValueAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<RemoveStructuralFeatureValueActionImpl> element(new RemoveStructuralFeatureValueActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17785,7 +17946,7 @@ std::shared_ptr<RemoveStructuralFeatureValueAction> umlFactoryImpl::createRemove
 	return element;
 	
 }
-std::shared_ptr<RemoveStructuralFeatureValueAction> umlFactoryImpl::createRemoveStructuralFeatureValueAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<RemoveStructuralFeatureValueAction> umlFactoryImpl::createRemoveStructuralFeatureValueAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<RemoveStructuralFeatureValueActionImpl> element(new RemoveStructuralFeatureValueActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17804,7 +17965,8 @@ std::shared_ptr<RemoveVariableValueAction> umlFactoryImpl::createRemoveVariableV
 	element->setThisRemoveVariableValueActionPtr(element);
 	return element;
 }
-std::shared_ptr<RemoveVariableValueAction> umlFactoryImpl::createRemoveVariableValueAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<RemoveVariableValueAction> umlFactoryImpl::createRemoveVariableValueAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<RemoveVariableValueActionImpl> element(new RemoveVariableValueActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17816,7 +17978,7 @@ std::shared_ptr<RemoveVariableValueAction> umlFactoryImpl::createRemoveVariableV
 	return element;
 	
 }
-std::shared_ptr<RemoveVariableValueAction> umlFactoryImpl::createRemoveVariableValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<RemoveVariableValueAction> umlFactoryImpl::createRemoveVariableValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<RemoveVariableValueActionImpl> element(new RemoveVariableValueActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17828,7 +17990,7 @@ std::shared_ptr<RemoveVariableValueAction> umlFactoryImpl::createRemoveVariableV
 	return element;
 	
 }
-std::shared_ptr<RemoveVariableValueAction> umlFactoryImpl::createRemoveVariableValueAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<RemoveVariableValueAction> umlFactoryImpl::createRemoveVariableValueAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<RemoveVariableValueActionImpl> element(new RemoveVariableValueActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17840,7 +18002,7 @@ std::shared_ptr<RemoveVariableValueAction> umlFactoryImpl::createRemoveVariableV
 	return element;
 	
 }
-std::shared_ptr<RemoveVariableValueAction> umlFactoryImpl::createRemoveVariableValueAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<RemoveVariableValueAction> umlFactoryImpl::createRemoveVariableValueAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<RemoveVariableValueActionImpl> element(new RemoveVariableValueActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17859,7 +18021,8 @@ std::shared_ptr<ReplyAction> umlFactoryImpl::createReplyAction(const int metaEle
 	element->setThisReplyActionPtr(element);
 	return element;
 }
-std::shared_ptr<ReplyAction> umlFactoryImpl::createReplyAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ReplyAction> umlFactoryImpl::createReplyAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ReplyActionImpl> element(new ReplyActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17871,7 +18034,7 @@ std::shared_ptr<ReplyAction> umlFactoryImpl::createReplyAction_in_Activity(std::
 	return element;
 	
 }
-std::shared_ptr<ReplyAction> umlFactoryImpl::createReplyAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ReplyAction> umlFactoryImpl::createReplyAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ReplyActionImpl> element(new ReplyActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17883,7 +18046,7 @@ std::shared_ptr<ReplyAction> umlFactoryImpl::createReplyAction_in_InStructuredNo
 	return element;
 	
 }
-std::shared_ptr<ReplyAction> umlFactoryImpl::createReplyAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ReplyAction> umlFactoryImpl::createReplyAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ReplyActionImpl> element(new ReplyActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17895,7 +18058,7 @@ std::shared_ptr<ReplyAction> umlFactoryImpl::createReplyAction_in_Namespace(std:
 	return element;
 	
 }
-std::shared_ptr<ReplyAction> umlFactoryImpl::createReplyAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ReplyAction> umlFactoryImpl::createReplyAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ReplyActionImpl> element(new ReplyActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17914,7 +18077,8 @@ std::shared_ptr<SendObjectAction> umlFactoryImpl::createSendObjectAction(const i
 	element->setThisSendObjectActionPtr(element);
 	return element;
 }
-std::shared_ptr<SendObjectAction> umlFactoryImpl::createSendObjectAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<SendObjectAction> umlFactoryImpl::createSendObjectAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<SendObjectActionImpl> element(new SendObjectActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17926,7 +18090,7 @@ std::shared_ptr<SendObjectAction> umlFactoryImpl::createSendObjectAction_in_Acti
 	return element;
 	
 }
-std::shared_ptr<SendObjectAction> umlFactoryImpl::createSendObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<SendObjectAction> umlFactoryImpl::createSendObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<SendObjectActionImpl> element(new SendObjectActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17938,7 +18102,7 @@ std::shared_ptr<SendObjectAction> umlFactoryImpl::createSendObjectAction_in_InSt
 	return element;
 	
 }
-std::shared_ptr<SendObjectAction> umlFactoryImpl::createSendObjectAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<SendObjectAction> umlFactoryImpl::createSendObjectAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<SendObjectActionImpl> element(new SendObjectActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -17950,7 +18114,7 @@ std::shared_ptr<SendObjectAction> umlFactoryImpl::createSendObjectAction_in_Name
 	return element;
 	
 }
-std::shared_ptr<SendObjectAction> umlFactoryImpl::createSendObjectAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<SendObjectAction> umlFactoryImpl::createSendObjectAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<SendObjectActionImpl> element(new SendObjectActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -17969,7 +18133,8 @@ std::shared_ptr<SendSignalAction> umlFactoryImpl::createSendSignalAction(const i
 	element->setThisSendSignalActionPtr(element);
 	return element;
 }
-std::shared_ptr<SendSignalAction> umlFactoryImpl::createSendSignalAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<SendSignalAction> umlFactoryImpl::createSendSignalAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<SendSignalActionImpl> element(new SendSignalActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -17981,7 +18146,7 @@ std::shared_ptr<SendSignalAction> umlFactoryImpl::createSendSignalAction_in_Acti
 	return element;
 	
 }
-std::shared_ptr<SendSignalAction> umlFactoryImpl::createSendSignalAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<SendSignalAction> umlFactoryImpl::createSendSignalAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<SendSignalActionImpl> element(new SendSignalActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -17993,7 +18158,7 @@ std::shared_ptr<SendSignalAction> umlFactoryImpl::createSendSignalAction_in_InSt
 	return element;
 	
 }
-std::shared_ptr<SendSignalAction> umlFactoryImpl::createSendSignalAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<SendSignalAction> umlFactoryImpl::createSendSignalAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<SendSignalActionImpl> element(new SendSignalActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -18005,7 +18170,7 @@ std::shared_ptr<SendSignalAction> umlFactoryImpl::createSendSignalAction_in_Name
 	return element;
 	
 }
-std::shared_ptr<SendSignalAction> umlFactoryImpl::createSendSignalAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<SendSignalAction> umlFactoryImpl::createSendSignalAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<SendSignalActionImpl> element(new SendSignalActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18024,7 +18189,8 @@ std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode(const int metaE
 	element->setThisSequenceNodePtr(element);
 	return element;
 }
-std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_activity, umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY));
 	element->setMetaElementID(metaElementID);
@@ -18036,7 +18202,7 @@ std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_Activity(std
 	return element;
 	
 }
-std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity, const int metaElementID) const
+std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID) const
 {
 	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_inActivity, umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY));
 	element->setMetaElementID(metaElementID);
@@ -18048,7 +18214,7 @@ std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_InActivity(s
 	return element;
 	
 }
-std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -18060,7 +18226,7 @@ std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_InStructured
 	return element;
 	
 }
-std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -18072,7 +18238,7 @@ std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_Namespace(st
 	return element;
 	
 }
-std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18084,7 +18250,7 @@ std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_Owner(std::w
 	return element;
 	
 }
-std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup, const int metaElementID) const
+std::shared_ptr<SequenceNode> umlFactoryImpl::createSequenceNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID) const
 {
 	std::shared_ptr<SequenceNodeImpl> element(new SequenceNodeImpl(par_superGroup));
 	element->setMetaElementID(metaElementID);
@@ -18103,7 +18269,8 @@ std::shared_ptr<Signal> umlFactoryImpl::createSignal(const int metaElementID/*=-
 	element->setThisSignalPtr(element);
 	return element;
 }
-std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<SignalImpl> element(new SignalImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -18115,7 +18282,7 @@ std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_Namespace(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<SignalImpl> element(new SignalImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18127,7 +18294,7 @@ std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_Owner(std::weak_ptr<uml:
 	return element;
 	
 }
-std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<SignalImpl> element(new SignalImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -18139,7 +18306,7 @@ std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_OwningPackage(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<SignalImpl> element(new SignalImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -18151,7 +18318,7 @@ std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_OwningTemplateParameter(
 	return element;
 	
 }
-std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Signal> umlFactoryImpl::createSignal_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<SignalImpl> element(new SignalImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -18170,7 +18337,8 @@ std::shared_ptr<SignalEvent> umlFactoryImpl::createSignalEvent(const int metaEle
 	element->setThisSignalEventPtr(element);
 	return element;
 }
-std::shared_ptr<SignalEvent> umlFactoryImpl::createSignalEvent_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<SignalEvent> umlFactoryImpl::createSignalEvent_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -18182,7 +18350,7 @@ std::shared_ptr<SignalEvent> umlFactoryImpl::createSignalEvent_in_Namespace(std:
 	return element;
 	
 }
-std::shared_ptr<SignalEvent> umlFactoryImpl::createSignalEvent_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<SignalEvent> umlFactoryImpl::createSignalEvent_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18194,7 +18362,7 @@ std::shared_ptr<SignalEvent> umlFactoryImpl::createSignalEvent_in_Owner(std::wea
 	return element;
 	
 }
-std::shared_ptr<SignalEvent> umlFactoryImpl::createSignalEvent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<SignalEvent> umlFactoryImpl::createSignalEvent_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -18206,7 +18374,7 @@ std::shared_ptr<SignalEvent> umlFactoryImpl::createSignalEvent_in_OwningPackage(
 	return element;
 	
 }
-std::shared_ptr<SignalEvent> umlFactoryImpl::createSignalEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<SignalEvent> umlFactoryImpl::createSignalEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -18225,7 +18393,8 @@ std::shared_ptr<Slot> umlFactoryImpl::createSlot(const int metaElementID/*=-1*/)
 	element->setThisSlotPtr(element);
 	return element;
 }
-std::shared_ptr<Slot> umlFactoryImpl::createSlot_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<Slot> umlFactoryImpl::createSlot_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<SlotImpl> element(new SlotImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18237,7 +18406,7 @@ std::shared_ptr<Slot> umlFactoryImpl::createSlot_in_Owner(std::weak_ptr<uml::Ele
 	return element;
 	
 }
-std::shared_ptr<Slot> umlFactoryImpl::createSlot_in_OwningInstance(std::weak_ptr<uml::InstanceSpecification > par_owningInstance, const int metaElementID) const
+std::shared_ptr<Slot> umlFactoryImpl::createSlot_in_OwningInstance(std::weak_ptr<uml::InstanceSpecification> par_owningInstance, const int metaElementID) const
 {
 	std::shared_ptr<SlotImpl> element(new SlotImpl(par_owningInstance));
 	element->setMetaElementID(metaElementID);
@@ -18256,7 +18425,8 @@ std::shared_ptr<StartClassifierBehaviorAction> umlFactoryImpl::createStartClassi
 	element->setThisStartClassifierBehaviorActionPtr(element);
 	return element;
 }
-std::shared_ptr<StartClassifierBehaviorAction> umlFactoryImpl::createStartClassifierBehaviorAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<StartClassifierBehaviorAction> umlFactoryImpl::createStartClassifierBehaviorAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<StartClassifierBehaviorActionImpl> element(new StartClassifierBehaviorActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -18268,7 +18438,7 @@ std::shared_ptr<StartClassifierBehaviorAction> umlFactoryImpl::createStartClassi
 	return element;
 	
 }
-std::shared_ptr<StartClassifierBehaviorAction> umlFactoryImpl::createStartClassifierBehaviorAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<StartClassifierBehaviorAction> umlFactoryImpl::createStartClassifierBehaviorAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<StartClassifierBehaviorActionImpl> element(new StartClassifierBehaviorActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -18280,7 +18450,7 @@ std::shared_ptr<StartClassifierBehaviorAction> umlFactoryImpl::createStartClassi
 	return element;
 	
 }
-std::shared_ptr<StartClassifierBehaviorAction> umlFactoryImpl::createStartClassifierBehaviorAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<StartClassifierBehaviorAction> umlFactoryImpl::createStartClassifierBehaviorAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<StartClassifierBehaviorActionImpl> element(new StartClassifierBehaviorActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -18292,7 +18462,7 @@ std::shared_ptr<StartClassifierBehaviorAction> umlFactoryImpl::createStartClassi
 	return element;
 	
 }
-std::shared_ptr<StartClassifierBehaviorAction> umlFactoryImpl::createStartClassifierBehaviorAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<StartClassifierBehaviorAction> umlFactoryImpl::createStartClassifierBehaviorAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<StartClassifierBehaviorActionImpl> element(new StartClassifierBehaviorActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18311,7 +18481,8 @@ std::shared_ptr<StartObjectBehaviorAction> umlFactoryImpl::createStartObjectBeha
 	element->setThisStartObjectBehaviorActionPtr(element);
 	return element;
 }
-std::shared_ptr<StartObjectBehaviorAction> umlFactoryImpl::createStartObjectBehaviorAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<StartObjectBehaviorAction> umlFactoryImpl::createStartObjectBehaviorAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<StartObjectBehaviorActionImpl> element(new StartObjectBehaviorActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -18323,7 +18494,7 @@ std::shared_ptr<StartObjectBehaviorAction> umlFactoryImpl::createStartObjectBeha
 	return element;
 	
 }
-std::shared_ptr<StartObjectBehaviorAction> umlFactoryImpl::createStartObjectBehaviorAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<StartObjectBehaviorAction> umlFactoryImpl::createStartObjectBehaviorAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<StartObjectBehaviorActionImpl> element(new StartObjectBehaviorActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -18335,7 +18506,7 @@ std::shared_ptr<StartObjectBehaviorAction> umlFactoryImpl::createStartObjectBeha
 	return element;
 	
 }
-std::shared_ptr<StartObjectBehaviorAction> umlFactoryImpl::createStartObjectBehaviorAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<StartObjectBehaviorAction> umlFactoryImpl::createStartObjectBehaviorAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<StartObjectBehaviorActionImpl> element(new StartObjectBehaviorActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -18347,7 +18518,7 @@ std::shared_ptr<StartObjectBehaviorAction> umlFactoryImpl::createStartObjectBeha
 	return element;
 	
 }
-std::shared_ptr<StartObjectBehaviorAction> umlFactoryImpl::createStartObjectBehaviorAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<StartObjectBehaviorAction> umlFactoryImpl::createStartObjectBehaviorAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<StartObjectBehaviorActionImpl> element(new StartObjectBehaviorActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18366,7 +18537,8 @@ std::shared_ptr<State> umlFactoryImpl::createState(const int metaElementID/*=-1*
 	element->setThisStatePtr(element);
 	return element;
 }
-std::shared_ptr<State> umlFactoryImpl::createState_in_Container(std::weak_ptr<uml::Region > par_container, const int metaElementID) const
+
+std::shared_ptr<State> umlFactoryImpl::createState_in_Container(std::weak_ptr<uml::Region> par_container, const int metaElementID) const
 {
 	std::shared_ptr<StateImpl> element(new StateImpl(par_container));
 	element->setMetaElementID(metaElementID);
@@ -18378,7 +18550,7 @@ std::shared_ptr<State> umlFactoryImpl::createState_in_Container(std::weak_ptr<um
 	return element;
 	
 }
-std::shared_ptr<State> umlFactoryImpl::createState_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<State> umlFactoryImpl::createState_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<StateImpl> element(new StateImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -18390,7 +18562,7 @@ std::shared_ptr<State> umlFactoryImpl::createState_in_Namespace(std::weak_ptr<um
 	return element;
 	
 }
-std::shared_ptr<State> umlFactoryImpl::createState_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<State> umlFactoryImpl::createState_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<StateImpl> element(new StateImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18409,7 +18581,8 @@ std::shared_ptr<StateInvariant> umlFactoryImpl::createStateInvariant(const int m
 	element->setThisStateInvariantPtr(element);
 	return element;
 }
-std::shared_ptr<StateInvariant> umlFactoryImpl::createStateInvariant_in_EnclosingInteraction(std::weak_ptr<uml::Interaction > par_enclosingInteraction, const int metaElementID) const
+
+std::shared_ptr<StateInvariant> umlFactoryImpl::createStateInvariant_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID) const
 {
 	std::shared_ptr<StateInvariantImpl> element(new StateInvariantImpl(par_enclosingInteraction));
 	element->setMetaElementID(metaElementID);
@@ -18421,7 +18594,7 @@ std::shared_ptr<StateInvariant> umlFactoryImpl::createStateInvariant_in_Enclosin
 	return element;
 	
 }
-std::shared_ptr<StateInvariant> umlFactoryImpl::createStateInvariant_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand, const int metaElementID) const
+std::shared_ptr<StateInvariant> umlFactoryImpl::createStateInvariant_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID) const
 {
 	std::shared_ptr<StateInvariantImpl> element(new StateInvariantImpl(par_enclosingOperand));
 	element->setMetaElementID(metaElementID);
@@ -18433,7 +18606,7 @@ std::shared_ptr<StateInvariant> umlFactoryImpl::createStateInvariant_in_Enclosin
 	return element;
 	
 }
-std::shared_ptr<StateInvariant> umlFactoryImpl::createStateInvariant_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<StateInvariant> umlFactoryImpl::createStateInvariant_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<StateInvariantImpl> element(new StateInvariantImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -18445,7 +18618,7 @@ std::shared_ptr<StateInvariant> umlFactoryImpl::createStateInvariant_in_Namespac
 	return element;
 	
 }
-std::shared_ptr<StateInvariant> umlFactoryImpl::createStateInvariant_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<StateInvariant> umlFactoryImpl::createStateInvariant_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<StateInvariantImpl> element(new StateInvariantImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18464,7 +18637,8 @@ std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine(const int metaE
 	element->setThisStateMachinePtr(element);
 	return element;
 }
-std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier, const int metaElementID) const
+
+std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier, const int metaElementID) const
 {
 	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_behavioredClassifier));
 	element->setMetaElementID(metaElementID);
@@ -18476,7 +18650,7 @@ std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_BehavioredCl
 	return element;
 	
 }
-std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -18488,7 +18662,7 @@ std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_Namespace(st
 	return element;
 	
 }
-std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18500,7 +18674,7 @@ std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_Owner(std::w
 	return element;
 	
 }
-std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -18512,7 +18686,7 @@ std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_OwningPackag
 	return element;
 	
 }
-std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -18524,7 +18698,7 @@ std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_OwningTempla
 	return element;
 	
 }
-std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<StateMachine> umlFactoryImpl::createStateMachine_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<StateMachineImpl> element(new StateMachineImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -18543,7 +18717,8 @@ std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype(const int metaEleme
 	element->setThisStereotypePtr(element);
 	return element;
 }
-std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -18555,7 +18730,7 @@ std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_Namespace(std::w
 	return element;
 	
 }
-std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18567,7 +18742,7 @@ std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_Owner(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -18579,7 +18754,7 @@ std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_OwningPackage(st
 	return element;
 	
 }
-std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -18591,7 +18766,7 @@ std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_OwningTemplatePa
 	return element;
 	
 }
-std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<Stereotype> umlFactoryImpl::createStereotype_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<StereotypeImpl> element(new StereotypeImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -18610,7 +18785,8 @@ std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression(const i
 	element->setThisStringExpressionPtr(element);
 	return element;
 }
-std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -18622,7 +18798,7 @@ std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_Name
 	return element;
 	
 }
-std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18634,7 +18810,7 @@ std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_Owne
 	return element;
 	
 }
-std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_OwningExpression(std::weak_ptr<uml::StringExpression > par_owningExpression, const int metaElementID) const
+std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_OwningExpression(std::weak_ptr<uml::StringExpression> par_owningExpression, const int metaElementID) const
 {
 	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_owningExpression));
 	element->setMetaElementID(metaElementID);
@@ -18646,7 +18822,7 @@ std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_Owni
 	return element;
 	
 }
-std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -18658,7 +18834,7 @@ std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_Owni
 	return element;
 	
 }
-std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -18670,7 +18846,7 @@ std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_Owni
 	return element;
 	
 }
-std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -18682,7 +18858,7 @@ std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_Owni
 	return element;
 	
 }
-std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<StringExpression> umlFactoryImpl::createStringExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<StringExpressionImpl> element(new StringExpressionImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -18701,7 +18877,8 @@ std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivity
 	element->setThisStructuredActivityNodePtr(element);
 	return element;
 }
-std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivityNode_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivityNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_activity, umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY));
 	element->setMetaElementID(metaElementID);
@@ -18713,7 +18890,7 @@ std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivity
 	return element;
 	
 }
-std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivityNode_in_InActivity(std::weak_ptr<uml::Activity > par_inActivity, const int metaElementID) const
+std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivityNode_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID) const
 {
 	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_inActivity, umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY));
 	element->setMetaElementID(metaElementID);
@@ -18725,7 +18902,7 @@ std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivity
 	return element;
 	
 }
-std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivityNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivityNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -18737,7 +18914,7 @@ std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivity
 	return element;
 	
 }
-std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivityNode_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivityNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -18749,7 +18926,7 @@ std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivity
 	return element;
 	
 }
-std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivityNode_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivityNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18761,7 +18938,7 @@ std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivity
 	return element;
 	
 }
-std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivityNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup > par_superGroup, const int metaElementID) const
+std::shared_ptr<StructuredActivityNode> umlFactoryImpl::createStructuredActivityNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID) const
 {
 	std::shared_ptr<StructuredActivityNodeImpl> element(new StructuredActivityNodeImpl(par_superGroup));
 	element->setMetaElementID(metaElementID);
@@ -18780,7 +18957,8 @@ std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution(const int metaE
 	element->setThisSubstitutionPtr(element);
 	return element;
 }
-std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -18792,7 +18970,7 @@ std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_Namespace(st
 	return element;
 	
 }
-std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18804,7 +18982,7 @@ std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_Owner(std::w
 	return element;
 	
 }
-std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -18816,7 +18994,7 @@ std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_OwningPackag
 	return element;
 	
 }
-std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -18828,7 +19006,7 @@ std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_OwningTempla
 	return element;
 	
 }
-std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_SubstitutingClassifier(std::weak_ptr<uml::Classifier > par_substitutingClassifier, const int metaElementID) const
+std::shared_ptr<Substitution> umlFactoryImpl::createSubstitution_in_SubstitutingClassifier(std::weak_ptr<uml::Classifier> par_substitutingClassifier, const int metaElementID) const
 {
 	std::shared_ptr<SubstitutionImpl> element(new SubstitutionImpl(par_substitutingClassifier));
 	element->setMetaElementID(metaElementID);
@@ -18847,7 +19025,8 @@ std::shared_ptr<TemplateBinding> umlFactoryImpl::createTemplateBinding(const int
 	element->setThisTemplateBindingPtr(element);
 	return element;
 }
-std::shared_ptr<TemplateBinding> umlFactoryImpl::createTemplateBinding_in_BoundElement(std::weak_ptr<uml::TemplateableElement > par_boundElement, const int metaElementID) const
+
+std::shared_ptr<TemplateBinding> umlFactoryImpl::createTemplateBinding_in_BoundElement(std::weak_ptr<uml::TemplateableElement> par_boundElement, const int metaElementID) const
 {
 	std::shared_ptr<TemplateBindingImpl> element(new TemplateBindingImpl(par_boundElement));
 	element->setMetaElementID(metaElementID);
@@ -18859,7 +19038,7 @@ std::shared_ptr<TemplateBinding> umlFactoryImpl::createTemplateBinding_in_BoundE
 	return element;
 	
 }
-std::shared_ptr<TemplateBinding> umlFactoryImpl::createTemplateBinding_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<TemplateBinding> umlFactoryImpl::createTemplateBinding_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<TemplateBindingImpl> element(new TemplateBindingImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18878,7 +19057,8 @@ std::shared_ptr<TemplateParameter> umlFactoryImpl::createTemplateParameter(const
 	element->setThisTemplateParameterPtr(element);
 	return element;
 }
-std::shared_ptr<TemplateParameter> umlFactoryImpl::createTemplateParameter_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<TemplateParameter> umlFactoryImpl::createTemplateParameter_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<TemplateParameterImpl> element(new TemplateParameterImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18890,7 +19070,7 @@ std::shared_ptr<TemplateParameter> umlFactoryImpl::createTemplateParameter_in_Ow
 	return element;
 	
 }
-std::shared_ptr<TemplateParameter> umlFactoryImpl::createTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature > par_signature, const int metaElementID) const
+std::shared_ptr<TemplateParameter> umlFactoryImpl::createTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature> par_signature, const int metaElementID) const
 {
 	std::shared_ptr<TemplateParameterImpl> element(new TemplateParameterImpl(par_signature));
 	element->setMetaElementID(metaElementID);
@@ -18909,7 +19089,8 @@ std::shared_ptr<TemplateParameterSubstitution> umlFactoryImpl::createTemplatePar
 	element->setThisTemplateParameterSubstitutionPtr(element);
 	return element;
 }
-std::shared_ptr<TemplateParameterSubstitution> umlFactoryImpl::createTemplateParameterSubstitution_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<TemplateParameterSubstitution> umlFactoryImpl::createTemplateParameterSubstitution_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<TemplateParameterSubstitutionImpl> element(new TemplateParameterSubstitutionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18921,7 +19102,7 @@ std::shared_ptr<TemplateParameterSubstitution> umlFactoryImpl::createTemplatePar
 	return element;
 	
 }
-std::shared_ptr<TemplateParameterSubstitution> umlFactoryImpl::createTemplateParameterSubstitution_in_TemplateBinding(std::weak_ptr<uml::TemplateBinding > par_templateBinding, const int metaElementID) const
+std::shared_ptr<TemplateParameterSubstitution> umlFactoryImpl::createTemplateParameterSubstitution_in_TemplateBinding(std::weak_ptr<uml::TemplateBinding> par_templateBinding, const int metaElementID) const
 {
 	std::shared_ptr<TemplateParameterSubstitutionImpl> element(new TemplateParameterSubstitutionImpl(par_templateBinding));
 	element->setMetaElementID(metaElementID);
@@ -18940,7 +19121,8 @@ std::shared_ptr<TemplateSignature> umlFactoryImpl::createTemplateSignature(const
 	element->setThisTemplateSignaturePtr(element);
 	return element;
 }
-std::shared_ptr<TemplateSignature> umlFactoryImpl::createTemplateSignature_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+
+std::shared_ptr<TemplateSignature> umlFactoryImpl::createTemplateSignature_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<TemplateSignatureImpl> element(new TemplateSignatureImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -18952,7 +19134,7 @@ std::shared_ptr<TemplateSignature> umlFactoryImpl::createTemplateSignature_in_Ow
 	return element;
 	
 }
-std::shared_ptr<TemplateSignature> umlFactoryImpl::createTemplateSignature_in_Template(std::weak_ptr<uml::TemplateableElement > par_template, const int metaElementID) const
+std::shared_ptr<TemplateSignature> umlFactoryImpl::createTemplateSignature_in_Template(std::weak_ptr<uml::TemplateableElement> par_template, const int metaElementID) const
 {
 	std::shared_ptr<TemplateSignatureImpl> element(new TemplateSignatureImpl(par_template));
 	element->setMetaElementID(metaElementID);
@@ -18971,7 +19153,8 @@ std::shared_ptr<TestIdentityAction> umlFactoryImpl::createTestIdentityAction(con
 	element->setThisTestIdentityActionPtr(element);
 	return element;
 }
-std::shared_ptr<TestIdentityAction> umlFactoryImpl::createTestIdentityAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<TestIdentityAction> umlFactoryImpl::createTestIdentityAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<TestIdentityActionImpl> element(new TestIdentityActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -18983,7 +19166,7 @@ std::shared_ptr<TestIdentityAction> umlFactoryImpl::createTestIdentityAction_in_
 	return element;
 	
 }
-std::shared_ptr<TestIdentityAction> umlFactoryImpl::createTestIdentityAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<TestIdentityAction> umlFactoryImpl::createTestIdentityAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<TestIdentityActionImpl> element(new TestIdentityActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -18995,7 +19178,7 @@ std::shared_ptr<TestIdentityAction> umlFactoryImpl::createTestIdentityAction_in_
 	return element;
 	
 }
-std::shared_ptr<TestIdentityAction> umlFactoryImpl::createTestIdentityAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<TestIdentityAction> umlFactoryImpl::createTestIdentityAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<TestIdentityActionImpl> element(new TestIdentityActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -19007,7 +19190,7 @@ std::shared_ptr<TestIdentityAction> umlFactoryImpl::createTestIdentityAction_in_
 	return element;
 	
 }
-std::shared_ptr<TestIdentityAction> umlFactoryImpl::createTestIdentityAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<TestIdentityAction> umlFactoryImpl::createTestIdentityAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<TestIdentityActionImpl> element(new TestIdentityActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19026,7 +19209,8 @@ std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint(const int m
 	element->setThisTimeConstraintPtr(element);
 	return element;
 }
-std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_Context(std::weak_ptr<uml::Namespace > par_context, const int metaElementID) const
+
+std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_Context(std::weak_ptr<uml::Namespace> par_context, const int metaElementID) const
 {
 	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_context, umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT));
 	element->setMetaElementID(metaElementID);
@@ -19038,7 +19222,7 @@ std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_Context(
 	return element;
 	
 }
-std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_namespace, umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE));
 	element->setMetaElementID(metaElementID);
@@ -19050,7 +19234,7 @@ std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_Namespac
 	return element;
 	
 }
-std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19062,7 +19246,7 @@ std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_Owner(st
 	return element;
 	
 }
-std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -19074,7 +19258,7 @@ std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_OwningPa
 	return element;
 	
 }
-std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<TimeConstraint> umlFactoryImpl::createTimeConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<TimeConstraintImpl> element(new TimeConstraintImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -19093,7 +19277,8 @@ std::shared_ptr<TimeEvent> umlFactoryImpl::createTimeEvent(const int metaElement
 	element->setThisTimeEventPtr(element);
 	return element;
 }
-std::shared_ptr<TimeEvent> umlFactoryImpl::createTimeEvent_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<TimeEvent> umlFactoryImpl::createTimeEvent_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -19105,7 +19290,7 @@ std::shared_ptr<TimeEvent> umlFactoryImpl::createTimeEvent_in_Namespace(std::wea
 	return element;
 	
 }
-std::shared_ptr<TimeEvent> umlFactoryImpl::createTimeEvent_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<TimeEvent> umlFactoryImpl::createTimeEvent_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19117,7 +19302,7 @@ std::shared_ptr<TimeEvent> umlFactoryImpl::createTimeEvent_in_Owner(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<TimeEvent> umlFactoryImpl::createTimeEvent_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<TimeEvent> umlFactoryImpl::createTimeEvent_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -19129,7 +19314,7 @@ std::shared_ptr<TimeEvent> umlFactoryImpl::createTimeEvent_in_OwningPackage(std:
 	return element;
 	
 }
-std::shared_ptr<TimeEvent> umlFactoryImpl::createTimeEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<TimeEvent> umlFactoryImpl::createTimeEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -19148,7 +19333,8 @@ std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression(const int m
 	element->setThisTimeExpressionPtr(element);
 	return element;
 }
-std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -19160,7 +19346,7 @@ std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_Namespac
 	return element;
 	
 }
-std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19172,7 +19358,7 @@ std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_Owner(st
 	return element;
 	
 }
-std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -19184,7 +19370,7 @@ std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_OwningPa
 	return element;
 	
 }
-std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -19196,7 +19382,7 @@ std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_OwningSl
 	return element;
 	
 }
-std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -19208,7 +19394,7 @@ std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_OwningTe
 	return element;
 	
 }
-std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<TimeExpression> umlFactoryImpl::createTimeExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<TimeExpressionImpl> element(new TimeExpressionImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -19227,7 +19413,8 @@ std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval(const int metaE
 	element->setThisTimeIntervalPtr(element);
 	return element;
 }
-std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -19239,7 +19426,7 @@ std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_Namespace(st
 	return element;
 	
 }
-std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19251,7 +19438,7 @@ std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_Owner(std::w
 	return element;
 	
 }
-std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -19263,7 +19450,7 @@ std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_OwningPackag
 	return element;
 	
 }
-std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_OwningSlot(std::weak_ptr<uml::Slot > par_owningSlot, const int metaElementID) const
+std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID) const
 {
 	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(par_owningSlot));
 	element->setMetaElementID(metaElementID);
@@ -19275,7 +19462,7 @@ std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_OwningSlot(s
 	return element;
 	
 }
-std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -19287,7 +19474,7 @@ std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_OwningTempla
 	return element;
 	
 }
-std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction, const int metaElementID) const
+std::shared_ptr<TimeInterval> umlFactoryImpl::createTimeInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID) const
 {
 	std::shared_ptr<TimeIntervalImpl> element(new TimeIntervalImpl(par_valueSpecificationAction));
 	element->setMetaElementID(metaElementID);
@@ -19306,7 +19493,8 @@ std::shared_ptr<TimeObservation> umlFactoryImpl::createTimeObservation(const int
 	element->setThisTimeObservationPtr(element);
 	return element;
 }
-std::shared_ptr<TimeObservation> umlFactoryImpl::createTimeObservation_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<TimeObservation> umlFactoryImpl::createTimeObservation_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -19318,7 +19506,7 @@ std::shared_ptr<TimeObservation> umlFactoryImpl::createTimeObservation_in_Namesp
 	return element;
 	
 }
-std::shared_ptr<TimeObservation> umlFactoryImpl::createTimeObservation_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<TimeObservation> umlFactoryImpl::createTimeObservation_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19330,7 +19518,7 @@ std::shared_ptr<TimeObservation> umlFactoryImpl::createTimeObservation_in_Owner(
 	return element;
 	
 }
-std::shared_ptr<TimeObservation> umlFactoryImpl::createTimeObservation_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<TimeObservation> umlFactoryImpl::createTimeObservation_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -19342,7 +19530,7 @@ std::shared_ptr<TimeObservation> umlFactoryImpl::createTimeObservation_in_Owning
 	return element;
 	
 }
-std::shared_ptr<TimeObservation> umlFactoryImpl::createTimeObservation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<TimeObservation> umlFactoryImpl::createTimeObservation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -19361,7 +19549,8 @@ std::shared_ptr<Transition> umlFactoryImpl::createTransition(const int metaEleme
 	element->setThisTransitionPtr(element);
 	return element;
 }
-std::shared_ptr<Transition> umlFactoryImpl::createTransition_in_Container(std::weak_ptr<uml::Region > par_container, const int metaElementID) const
+
+std::shared_ptr<Transition> umlFactoryImpl::createTransition_in_Container(std::weak_ptr<uml::Region> par_container, const int metaElementID) const
 {
 	std::shared_ptr<TransitionImpl> element(new TransitionImpl(par_container));
 	element->setMetaElementID(metaElementID);
@@ -19373,7 +19562,7 @@ std::shared_ptr<Transition> umlFactoryImpl::createTransition_in_Container(std::w
 	return element;
 	
 }
-std::shared_ptr<Transition> umlFactoryImpl::createTransition_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Transition> umlFactoryImpl::createTransition_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<TransitionImpl> element(new TransitionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -19385,7 +19574,7 @@ std::shared_ptr<Transition> umlFactoryImpl::createTransition_in_Namespace(std::w
 	return element;
 	
 }
-std::shared_ptr<Transition> umlFactoryImpl::createTransition_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Transition> umlFactoryImpl::createTransition_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<TransitionImpl> element(new TransitionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19404,7 +19593,8 @@ std::shared_ptr<Trigger> umlFactoryImpl::createTrigger(const int metaElementID/*
 	element->setThisTriggerPtr(element);
 	return element;
 }
-std::shared_ptr<Trigger> umlFactoryImpl::createTrigger_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Trigger> umlFactoryImpl::createTrigger_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<TriggerImpl> element(new TriggerImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -19416,7 +19606,7 @@ std::shared_ptr<Trigger> umlFactoryImpl::createTrigger_in_Namespace(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Trigger> umlFactoryImpl::createTrigger_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Trigger> umlFactoryImpl::createTrigger_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<TriggerImpl> element(new TriggerImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19435,7 +19625,8 @@ std::shared_ptr<UnmarshallAction> umlFactoryImpl::createUnmarshallAction(const i
 	element->setThisUnmarshallActionPtr(element);
 	return element;
 }
-std::shared_ptr<UnmarshallAction> umlFactoryImpl::createUnmarshallAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<UnmarshallAction> umlFactoryImpl::createUnmarshallAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<UnmarshallActionImpl> element(new UnmarshallActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -19447,7 +19638,7 @@ std::shared_ptr<UnmarshallAction> umlFactoryImpl::createUnmarshallAction_in_Acti
 	return element;
 	
 }
-std::shared_ptr<UnmarshallAction> umlFactoryImpl::createUnmarshallAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<UnmarshallAction> umlFactoryImpl::createUnmarshallAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<UnmarshallActionImpl> element(new UnmarshallActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -19459,7 +19650,7 @@ std::shared_ptr<UnmarshallAction> umlFactoryImpl::createUnmarshallAction_in_InSt
 	return element;
 	
 }
-std::shared_ptr<UnmarshallAction> umlFactoryImpl::createUnmarshallAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<UnmarshallAction> umlFactoryImpl::createUnmarshallAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<UnmarshallActionImpl> element(new UnmarshallActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -19471,7 +19662,7 @@ std::shared_ptr<UnmarshallAction> umlFactoryImpl::createUnmarshallAction_in_Name
 	return element;
 	
 }
-std::shared_ptr<UnmarshallAction> umlFactoryImpl::createUnmarshallAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<UnmarshallAction> umlFactoryImpl::createUnmarshallAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<UnmarshallActionImpl> element(new UnmarshallActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19490,7 +19681,8 @@ std::shared_ptr<Usage> umlFactoryImpl::createUsage(const int metaElementID/*=-1*
 	element->setThisUsagePtr(element);
 	return element;
 }
-std::shared_ptr<Usage> umlFactoryImpl::createUsage_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<Usage> umlFactoryImpl::createUsage_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<UsageImpl> element(new UsageImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -19502,7 +19694,7 @@ std::shared_ptr<Usage> umlFactoryImpl::createUsage_in_Namespace(std::weak_ptr<um
 	return element;
 	
 }
-std::shared_ptr<Usage> umlFactoryImpl::createUsage_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Usage> umlFactoryImpl::createUsage_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<UsageImpl> element(new UsageImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19514,7 +19706,7 @@ std::shared_ptr<Usage> umlFactoryImpl::createUsage_in_Owner(std::weak_ptr<uml::E
 	return element;
 	
 }
-std::shared_ptr<Usage> umlFactoryImpl::createUsage_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<Usage> umlFactoryImpl::createUsage_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<UsageImpl> element(new UsageImpl(par_owningPackage));
 	element->setMetaElementID(metaElementID);
@@ -19526,7 +19718,7 @@ std::shared_ptr<Usage> umlFactoryImpl::createUsage_in_OwningPackage(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<Usage> umlFactoryImpl::createUsage_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Usage> umlFactoryImpl::createUsage_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<UsageImpl> element(new UsageImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -19545,7 +19737,8 @@ std::shared_ptr<UseCase> umlFactoryImpl::createUseCase(const int metaElementID/*
 	element->setThisUseCasePtr(element);
 	return element;
 }
-std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+
+std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -19557,7 +19750,7 @@ std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_Namespace(std::weak_pt
 	return element;
 	
 }
-std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19569,7 +19762,7 @@ std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_Owner(std::weak_ptr<um
 	return element;
 	
 }
-std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_OwningPackage(std::weak_ptr<uml::Package > par_owningPackage, const int metaElementID) const
+std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID) const
 {
 	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_owningPackage, umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -19581,7 +19774,7 @@ std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_OwningPackage(std::wea
 	return element;
 	
 }
-std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -19593,7 +19786,7 @@ std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_OwningTemplateParamete
 	return element;
 	
 }
-std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_Package(std::weak_ptr<uml::Package > par_package, const int metaElementID) const
+std::shared_ptr<UseCase> umlFactoryImpl::createUseCase_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID) const
 {
 	std::shared_ptr<UseCaseImpl> element(new UseCaseImpl(par_package, umlPackage::TYPE_ATTRIBUTE_PACKAGE));
 	element->setMetaElementID(metaElementID);
@@ -19612,7 +19805,8 @@ std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin(const int metaElementID
 	element->setThisValuePinPtr(element);
 	return element;
 }
-std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_Action(std::weak_ptr<uml::Action > par_action, const int metaElementID) const
+
+std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_Action(std::weak_ptr<uml::Action> par_action, const int metaElementID) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_action));
 	element->setMetaElementID(metaElementID);
@@ -19624,7 +19818,7 @@ std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_Action(std::weak_ptr
 	return element;
 	
 }
-std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -19636,7 +19830,7 @@ std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_Activity(std::weak_p
 	return element;
 	
 }
-std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction, const int metaElementID) const
+std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction> par_addStructuralFeatureValueAction, const int metaElementID) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_addStructuralFeatureValueAction));
 	element->setMetaElementID(metaElementID);
@@ -19648,7 +19842,7 @@ std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_AddStructuralFeature
 	return element;
 	
 }
-std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction > par_callOperationAction, const int metaElementID) const
+std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction> par_callOperationAction, const int metaElementID) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_callOperationAction));
 	element->setMetaElementID(metaElementID);
@@ -19660,7 +19854,7 @@ std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_CallOperationAction(
 	return element;
 	
 }
-std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction, const int metaElementID) const
+std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction> par_destroyObjectAction, const int metaElementID) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_destroyObjectAction));
 	element->setMetaElementID(metaElementID);
@@ -19672,7 +19866,7 @@ std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_DestroyObjectAction(
 	return element;
 	
 }
-std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -19684,7 +19878,7 @@ std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_InStructuredNode(std
 	return element;
 	
 }
-std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_InvocationAction(std::weak_ptr<uml::InvocationAction > par_invocationAction, const int metaElementID) const
+std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_InvocationAction(std::weak_ptr<uml::InvocationAction> par_invocationAction, const int metaElementID) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_invocationAction));
 	element->setMetaElementID(metaElementID);
@@ -19696,7 +19890,7 @@ std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_InvocationAction(std
 	return element;
 	
 }
-std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -19708,7 +19902,7 @@ std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_Namespace(std::weak_
 	return element;
 	
 }
-std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19720,7 +19914,7 @@ std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_Owner(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction, const int metaElementID) const
+std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> par_removeStructuralFeatureValueAction, const int metaElementID) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_removeStructuralFeatureValueAction));
 	element->setMetaElementID(metaElementID);
@@ -19732,7 +19926,7 @@ std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_RemoveStructuralFeat
 	return element;
 	
 }
-std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction, const int metaElementID) const
+std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction> par_structuralFeatureAction, const int metaElementID) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_structuralFeatureAction));
 	element->setMetaElementID(metaElementID);
@@ -19744,7 +19938,7 @@ std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_StructuralFeatureAct
 	return element;
 	
 }
-std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction, const int metaElementID) const
+std::shared_ptr<ValuePin> umlFactoryImpl::createValuePin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> par_writeStructuralFeatureAction, const int metaElementID) const
 {
 	std::shared_ptr<ValuePinImpl> element(new ValuePinImpl(par_writeStructuralFeatureAction));
 	element->setMetaElementID(metaElementID);
@@ -19763,7 +19957,8 @@ std::shared_ptr<ValueSpecificationAction> umlFactoryImpl::createValueSpecificati
 	element->setThisValueSpecificationActionPtr(element);
 	return element;
 }
-std::shared_ptr<ValueSpecificationAction> umlFactoryImpl::createValueSpecificationAction_in_Activity(std::weak_ptr<uml::Activity > par_activity, const int metaElementID) const
+
+std::shared_ptr<ValueSpecificationAction> umlFactoryImpl::createValueSpecificationAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID) const
 {
 	std::shared_ptr<ValueSpecificationActionImpl> element(new ValueSpecificationActionImpl(par_activity));
 	element->setMetaElementID(metaElementID);
@@ -19775,7 +19970,7 @@ std::shared_ptr<ValueSpecificationAction> umlFactoryImpl::createValueSpecificati
 	return element;
 	
 }
-std::shared_ptr<ValueSpecificationAction> umlFactoryImpl::createValueSpecificationAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode, const int metaElementID) const
+std::shared_ptr<ValueSpecificationAction> umlFactoryImpl::createValueSpecificationAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID) const
 {
 	std::shared_ptr<ValueSpecificationActionImpl> element(new ValueSpecificationActionImpl(par_inStructuredNode));
 	element->setMetaElementID(metaElementID);
@@ -19787,7 +19982,7 @@ std::shared_ptr<ValueSpecificationAction> umlFactoryImpl::createValueSpecificati
 	return element;
 	
 }
-std::shared_ptr<ValueSpecificationAction> umlFactoryImpl::createValueSpecificationAction_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<ValueSpecificationAction> umlFactoryImpl::createValueSpecificationAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<ValueSpecificationActionImpl> element(new ValueSpecificationActionImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -19799,7 +19994,7 @@ std::shared_ptr<ValueSpecificationAction> umlFactoryImpl::createValueSpecificati
 	return element;
 	
 }
-std::shared_ptr<ValueSpecificationAction> umlFactoryImpl::createValueSpecificationAction_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<ValueSpecificationAction> umlFactoryImpl::createValueSpecificationAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<ValueSpecificationActionImpl> element(new ValueSpecificationActionImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19818,7 +20013,8 @@ std::shared_ptr<Variable> umlFactoryImpl::createVariable(const int metaElementID
 	element->setThisVariablePtr(element);
 	return element;
 }
-std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_ActivityScope(std::weak_ptr<uml::Activity > par_activityScope, const int metaElementID) const
+
+std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_ActivityScope(std::weak_ptr<uml::Activity> par_activityScope, const int metaElementID) const
 {
 	std::shared_ptr<VariableImpl> element(new VariableImpl(par_activityScope));
 	element->setMetaElementID(metaElementID);
@@ -19830,7 +20026,7 @@ std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_ActivityScope(std::w
 	return element;
 	
 }
-std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_Namespace(std::weak_ptr<uml::Namespace > par_namespace, const int metaElementID) const
+std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID) const
 {
 	std::shared_ptr<VariableImpl> element(new VariableImpl(par_namespace));
 	element->setMetaElementID(metaElementID);
@@ -19842,7 +20038,7 @@ std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_Namespace(std::weak_
 	return element;
 	
 }
-std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_Owner(std::weak_ptr<uml::Element > par_owner, const int metaElementID) const
+std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID) const
 {
 	std::shared_ptr<VariableImpl> element(new VariableImpl(par_owner));
 	element->setMetaElementID(metaElementID);
@@ -19854,7 +20050,7 @@ std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_Owner(std::weak_ptr<
 	return element;
 	
 }
-std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter, const int metaElementID) const
+std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID) const
 {
 	std::shared_ptr<VariableImpl> element(new VariableImpl(par_owningTemplateParameter));
 	element->setMetaElementID(metaElementID);
@@ -19866,7 +20062,7 @@ std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_OwningTemplateParame
 	return element;
 	
 }
-std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_Scope(std::weak_ptr<uml::StructuredActivityNode > par_scope, const int metaElementID) const
+std::shared_ptr<Variable> umlFactoryImpl::createVariable_in_Scope(std::weak_ptr<uml::StructuredActivityNode> par_scope, const int metaElementID) const
 {
 	std::shared_ptr<VariableImpl> element(new VariableImpl(par_scope));
 	element->setMetaElementID(metaElementID);

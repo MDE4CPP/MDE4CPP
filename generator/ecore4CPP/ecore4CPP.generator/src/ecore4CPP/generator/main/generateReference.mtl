@@ -25,29 +25,24 @@
 [template public generateReferenceDecl(anEReference : EReference, impl : EBoolean) ]
 [anEReference.generateReferenceGetterDeclaretaion(impl)/]
 [anEReference.generateReferenceSetterDeclaretaion(impl)/]
-[for (redefinedElement : EObject | anEReference.getAllRedefinedElements())]
-[if (redefinedElement.oclIsKindOf(EReference))]
+[for (redefinedElement : EObject | anEReference.getAllRedefinedElements())][if (redefinedElement.oclIsKindOf(EReference))]
 [let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
 /*Additional Setter for '[redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]' redefined by reference '[anEReference.name/]'*/
-[redefinedEReference.generateReferenceSetterDeclaretaion(impl)/]
-[/let]
-[/if]
-[/for]
+[redefinedEReference.generateReferenceSetterDeclaretaion(impl)/][/let]
+[/if][/for]
 [/template]
 
 [template public generateReferenceGetterDeclaretaion(anEReference : EReference, impl : EBoolean)? (hasGetter() and (not isUnion()) )]
 [anEReference.generateDocumentation()/]
 virtual [anEReference.generateReferenceType()/] [anEReference.GetterName()/]() const [abstractSufix(impl)/];
-
 [/template]
 
 [template public generateReferenceSetterDeclaretaion(anEReference : EReference, impl : EBoolean) ? ( hasSetter() )]
 [anEReference.generateDocumentation()/]
-virtual void [anEReference.SetterName()/]([if (not anEReference.eGenericType.oclIsKindOf(EDataType))]
-[generateReferenceParameter(anEReference)/][else]
-[anEReference.eGenericType.generateCppType()/] _[anEReference.name/][/if]
+virtual void [anEReference.SetterName()/]([if (not anEReference.eGenericType.eClassifier.oclIsKindOf(EDataType))]
+[anEReference.generateReferenceType()/][else]
+[anEReference.eGenericType.generateCppType(true)/] _[anEReference.name/][/if]
 ) [abstractSufix(impl)/];
-
 [/template]
 
 [template public generateProtectedReference(anEReference : EReference) ]
@@ -58,24 +53,24 @@ virtual void [anEReference.SetterName()/]([if (not anEReference.eGenericType.ocl
 [template public generateReferenceInit(eReference : EReference)? (not(eReference.upperBound=1))]
 [if(eReference.isSubsetUnion())]
 /*SubsetUnion*/
-m_[eReference.name/].reset(new SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >());
+m_[eReference.name/].reset(new SubsetUnion<[eReference.eGenericType.generateCppType(false)/], [generateSubsetType(eReference)/] >());
 #ifdef SHOW_SUBSET_UNION
-	std::cout << "Initialising shared pointer SubsetUnion: " << "m_[eReference.name/] - SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >()" << std::endl;
+	std::cout << "Initialising shared pointer SubsetUnion: " << "m_[eReference.name/] - SubsetUnion<[eReference.eGenericType.generateCppType(false)/], [generateSubsetType(eReference)/] >()" << std::endl;
 #endif
 [elseif(eReference.hasSubset())]
 /*Subset*/
-m_[eReference.name/].reset(new Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >());
+m_[eReference.name/].reset(new Subset<[eReference.eGenericType.generateCppType(false)/], [generateSubsetType(eReference)/] >());
 #ifdef SHOW_SUBSET_UNION
-	std::cout << "Initialising shared pointer Subset: " << "m_[eReference.name/] - Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >()" << std::endl;
+	std::cout << "Initialising shared pointer Subset: " << "m_[eReference.name/] - Subset<[eReference.eGenericType.generateCppType(false)/], [generateSubsetType(eReference)/] >()" << std::endl;
 #endif
 [elseif(eReference.isUnion())]
 /*Union*/
-m_[eReference.name/].reset(new Union<[eReference.eGenericType.generateCppType()/]>());
+m_[eReference.name/].reset(new Union<[eReference.eGenericType.generateCppType(false)/]>());
 	#ifdef SHOW_SUBSET_UNION
-	std::cout << "Initialising Union: " << "m_[eReference.name/] - Union<[eReference.eGenericType.generateCppType()/]>()" << std::endl;
+	std::cout << "Initialising Union: " << "m_[eReference.name/] - Union<[eReference.eGenericType.generateCppType(false)/]>()" << std::endl;
 #endif
 [else]
-m_[eReference.name/].reset(new Bag<[eReference.eGenericType.generateCppType()/]>());
+m_[eReference.name/].reset(new [eReference.generateReferenceType(false)/]());
 [/if]
 [/template]
 
@@ -84,22 +79,17 @@ m_[eReference.name/].reset(new Bag<[eReference.eGenericType.generateCppType()/]>
 /*SubsetUnion*/
 m_[eReference.name/]->initSubsetUnion([generateSubsetElements(eReference)/]);
 #ifdef SHOW_SUBSET_UNION
-	std::cout << "Initialising value SubsetUnion: " << "m_[eReference.name/] - SubsetUnion<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >([generateSubsetElements(eReference)/])" << std::endl;
+	std::cout << "Initialising value SubsetUnion: " << "m_[eReference.name/] - SubsetUnion<[eReference.eGenericType.generateCppType(false)/], [generateSubsetType(eReference)/] >([generateSubsetElements(eReference)/])" << std::endl;
 #endif
 [elseif(eReference.hasSubset())]
 /*Subset*/
 m_[eReference.name/]->initSubset([generateSubsetElements(eReference)/]);
 #ifdef SHOW_SUBSET_UNION
-	std::cout << "Initialising value Subset: " << "m_[eReference.name/] - Subset<[eReference.eGenericType.generateCppType()/], [generateSubsetType(eReference)/] >([generateSubsetElements(eReference)/])" << std::endl;
+	std::cout << "Initialising value Subset: " << "m_[eReference.name/] - Subset<[eReference.eGenericType.generateCppType(false)/], [generateSubsetType(eReference)/] >([generateSubsetElements(eReference)/])" << std::endl;
 #endif
 [/if]
 [/template]
 
-[template public generateReferenceParameter(anEReference : EReference)]
-[if(anEReference.upperBound = 1)]
-std::shared_ptr<[anEReference.eGenericType.generateCppType()/]> _[anEReference.name/][else]
-std::shared_ptr<Bag<[anEReference.eGenericType.generateCppType()/]> > _[anEReference.name/][/if]
-[/template]
 
 [***
  * Section for the Reference cpp implementation
@@ -110,17 +100,12 @@ std::shared_ptr<Bag<[anEReference.eGenericType.generateCppType()/]> > _[anERefer
 Getter & Setter for reference [anEReference.name/]
 */
 [anEReference.generateReferenceGetterCpp()/]
-
 [anEReference.generateReferenceSetterCpp()/]
-
-[for (redefinedElement : EObject | anEReference.getAllRedefinedElements())]
-[if (redefinedElement.oclIsKindOf(EReference))]
+[for (redefinedElement : EObject | anEReference.getAllRedefinedElements())][if (redefinedElement.oclIsKindOf(EReference))]
 [let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
 /*Additional Setter for redefined reference '[redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]'*/
 [redefinedEReference.generateRedefinedReferenceSetterCpp(anEReference)/]
-[/let]
-[/if]
-[/for]
+[/let][/if][/for]
 [/template]
 
 [template private generateReferenceGetterCpp(anEReference : EReference) ? (hasGetter() and (not isUnion()))]
@@ -145,7 +130,7 @@ Getter & Setter for reference [anEReference.name/]
 [/template]
 
 [template private generateReferenceSetterCpp(anEReference : EReference) ? (hasSetter())]
-void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.SetterName()/]([generateReferenceParameter(anEReference)/])
+void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.SetterName()/]([anEReference.generateReferenceType()/] _[anEReference.name/])
 {
 [if (hasKey(keySetterBody()))]
 //generated from setterbody annotation
@@ -166,9 +151,13 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.Set
 [/template]
 
 [template private generateRedefinedReferenceSetterCpp(redefinedEReference : EReference, anEReference : EReference) ? (anEReference.hasSetter() and redefinedEReference.hasSetter())]
-void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEReference.SetterName()/]([generateReferenceParameter(redefinedEReference)/])
+void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEReference.SetterName()/]([redefinedEReference.generateReferenceType()/] _[redefinedEReference.name/])
 {
-	std::shared_ptr<[anEReference.eGenericType.generateCppType()/]> _[anEReference.name/] = std::dynamic_pointer_cast<[anEReference.eGenericType.generateCppType()/]>(_[redefinedEReference.name/]);
+	[if(redefinedEReference.isBackReference())]
+	std::shared_ptr<[anEReference.eGenericType.generateCppType(false)/]> _[anEReference.name/] = std::dynamic_pointer_cast<[anEReference.eGenericType.generateCppType(false)/]>(_[redefinedEReference.name/].lock());
+	[else]
+	std::shared_ptr<[anEReference.eGenericType.generateCppType(false)/]> _[anEReference.name/] = std::dynamic_pointer_cast<[anEReference.eGenericType.generateCppType(false)/]>(_[redefinedEReference.name/]);
+	[/if]
 	if(_[anEReference.name/])
 	{
 		m_[anEReference.name/] = _[anEReference.name/];
@@ -184,12 +173,12 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedERefere
 			[/for]
 		[else]
 		//additional setter call for redefined reference [redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]
-		[redefinedEReference.eContainingClass.transformType()/]Impl::set[redefinedEReference.name.toUpperFirst()/](_[redefinedEReference.name/]);
+		[redefinedEReference.eContainingClass.transformType()/]Impl::set[redefinedEReference.name.toUpperFirst()/](_[anEReference.name/]);
 		[/if]
 	}
 	else
 	{
-		std::cerr<<"['['/][anEReference.eContainingClass.name.toUpperFirst()/]::[redefinedEReference.SetterName()/][']'/] : Could not set [redefinedEReference.name/] because provided [redefinedEReference.name/] was not of type '[anEReference.eGenericType.generateCppType()/]'"<<std::endl;
+		std::cerr<<"['['/][anEReference.eContainingClass.name.toUpperFirst()/]::[redefinedEReference.SetterName()/][']'/] : Could not set [redefinedEReference.name/] because provided [redefinedEReference.name/] was not of type '[anEReference.eGenericType.generateCppType(true)/]'"<<std::endl;
 	}
 }
 [/template]
@@ -204,9 +193,21 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedERefere
 
 [/template] 
  
+[** Handling of doNotGenerate: if an Attribute has a Type on an external Class, which is not generated, then create a dummy EClass /]
 [template public generateReferenceInitialization(anEReference : EReference)]
 [anEReference.getClassMemberName()/]->setName("[anEReference.name/]");
+[if (anEReference.eGenericType.eClassifier.doNotGenerate())]
+{
+	std::shared_ptr<ecore::ecoreFactory> factory = ecore::ecoreFactory::eInstance();
+	std::shared_ptr<ecore::EClass> unknownClass = factory ->createEClass(-1);
+   	unknownClass->setName("[anEReference.eType.oclAsType(EDataType).name/]");
+	unknownClass->setAbstract(true);
+	unknownClass->setInterface(true);
+	[anEReference.getClassMemberName()/]->setEType(unknownClass);
+}
+[else]
 [anEReference.getClassMemberName()/]->setEType([anEReference.eGenericType.eClassifier.packageGetter(anEReference)/]);
+[/if]
 [anEReference.getClassMemberName()/]->setLowerBound([anEReference.lowerBound/]);
 [anEReference.getClassMemberName()/]->setUpperBound([anEReference.upperBound/]);
 [anEReference.getClassMemberName()/]->setTransient([anEReference.transient.toString()/]);

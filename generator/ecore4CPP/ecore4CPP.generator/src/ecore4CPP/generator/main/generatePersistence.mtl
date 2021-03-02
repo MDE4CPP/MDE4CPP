@@ -26,8 +26,8 @@
 [/template]
 
 [template public generatePersistenceForwardDeclarations(aClass : EClass)]
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -43,7 +43,7 @@ namespace [aClass.getRootPackage().name/]
 }
 [/template]
 
-[template public generatePersistenceInclude(aClass : EClass) ]
+[template public generatePersitsenceInclude(aClass : EClass) ]
 #include "[generatePersistenceNSPath(true)/]/XLoadHandler.hpp" // used for Persistence
 #include "[generatePersistenceNSPath(true)/]/XSaveHandler.hpp" // used for Persistence
 
@@ -64,7 +64,7 @@ virtual void loadNode(std::string nodeName, std::shared_ptr<[generatePersistence
 [/if]
 [/template]
 [template public generatePersistenceResolveReferenceDecl(aClass: EClass, impl : EBoolean)]
-virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references) [abstractSufix(impl)/];
+virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references) [abstractSufix(impl)/];
 [/template]
 [template public generatePersistenceSaveDecl(aClass: EClass, impl : EBoolean)]
 virtual void save(std::shared_ptr<[generatePersistenceNSPath(false)/]::XSaveHandler> saveHandler) const [abstractSufix(impl)/];
@@ -150,7 +150,7 @@ void [aClass.name.concat('Impl')/]::loadAttributes(std::shared_ptr<[generatePers
 			std::string value;
 			value = iter->second;
 		  [elseif (aAttribute.eType.oclIsKindOf(EEnum))]
-			[aAttribute.generateAttributeType()/] value [aAttribute.generateDefaultValue()/];
+			[aAttribute.generateStructuralFeatureType(true)/] value [aAttribute.generateDefaultValue()/];
 			std::string literal = iter->second;
 [for (aLiteral : EEnumLiteral | aAttribute.eType.oclAsType(EEnum).eLiterals) before ('\t\t\t') separator ('\t\t\telse ')]
 if (literal == "[aLiteral.name/]")
@@ -161,8 +161,7 @@ if (literal == "[aLiteral.name/]")
 		  [else]
 			// TODO this attribute has a non handle type
 			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " handle type of '[aAttribute.name/]'" << " [aAttribute.eType/]" << std::endl; 
-			 [aAttribute.generateAttributeType()/] value;
-		  [/if]
+			[aAttribute.generateStructuralFeatureType(true)/] value; [/if]
 			this->[aAttribute.SetterName()/](value);
 		}
 	  [/if]
@@ -211,7 +210,9 @@ if (literal == "[aLiteral.name/]")
 
 void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_ptr<[generatePersistenceNSPath(false)/]::XLoadHandler> loadHandler)
 {
+[comment]
 	std::shared_ptr<[aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name/]Factory> modelFactory=[aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name/]Factory::eInstance();
+[/comment]
 [let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false) and eAtt.upperBound <> 1)->asOrderedSet()->sortedBy(name)]
 [if (attrList->size() > 0)]
 	try
@@ -221,7 +222,7 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 		{
 	[if (anAttribute.eType.name = 'String')]
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			[anAttribute.generateAttributeType()/] list_[anAttribute.name/] = this->[anAttribute.GetterName()/]();
+			[anAttribute.generateStructuralFeatureType(true)/] list_[anAttribute.name/] = this->[anAttribute.GetterName()/]();
 			list_[anAttribute.name/]->push_back(value);
 	[else]
 			std::cout << "| ERROR    | unhandled attribute with upperbound <> 1" << std::endl;
@@ -260,6 +261,8 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 				return; // no type name given and reference type is abstract
 			[/if]		
 			}
+[comment]
+			old is this really necessary???
 			[if (ref->size() = 1)]
 			std::shared_ptr<ecore::EObject> [aReference.name/] = [if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.getRootPackage().name/][getPackageAccess(aEClass, true)/]::[aEClass.ePackage.name/]Factory::eInstance()[/if]->create(typeName, loadHandler->getCurrentObject(), [ref->first().metamodelPackageNameForEstructuralFeture(aClass)/]::[ref->first().getStaticAttributeIDName()/]);
 			[elseif( ref->size() > 1)]
@@ -270,21 +273,44 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 				[aReference.name/] = [if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.getRootPackage().name/][getPackageAccess(aEClass, true)/][getPackageAccess(aEClass, true)/]::[aClass.ePackage.name/]Factory::eInstance()[/if]->create(typeName, loadHandler->getCurrentObject(), [aBackReference.metamodelPackageNameForEstructuralFeture(aClass)/]::[aBackReference.getStaticAttributeIDName()/]);
 			[/for]
 			[else]
+
 			std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] = std::dynamic_pointer_cast<[aReference.eType.generateType()/]>([if (aEClass.getRootPackage() = aClass.getRootPackage())]modelFactory[else][aEClass.getRootPackage().name/][getPackageAccess(aEClass, true)/]::[aEClass.ePackage.name/]Factory::eInstance()[/if]->create(typeName));
+
 			[/if]
 			if ([aReference.name/] != nullptr)
 			{
-			[if(ref->size() = 0)]
-				[if (aReference.upperBound = 1)]
 				this->[aReference.SetterName()/]([aReference.name/]);
-				[else]
-				[aReference.generateReferenceType()/] list_[aReference.name/] = this->[aReference.GetterName()/]();
-				list_[aReference.name/]->push_back([aReference.name/]);
+[/comment]
+				[if (aReference.upperBound = 1)] [comment List or single Object / Pointer/] 
+					[if (not (aReference.eType.oclIsUndefined()))]	[comment Pointer to EList, map or Pointer to EcoreType/]
+						[if ((aReference.eType.name ='EEList') or (aReference.eType.name ='ETreeIterator') )]		loadHandler->handleChildContainer<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/]>(this->[aReference.GetterName()/]());
+						[elseif (aReference.eType.name ='EMap')]			loadHandler->handleChildContainer<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/], [aReference.eGenericType.eTypeArguments->last().generateCppType(true)/]>(this->[aReference.GetterName()/]());
+						[elseif (aReference.eType.ePackage.name = 'ecore')]			loadHandler->handleChild(this->[aReference.GetterName()/]());
+						[elseif (aReference.eType.oclIsKindOf(ecore::EClass))]
+							[let referenceTypeClass:EClass =aReference.eType.oclAsType(ecore::EClass)]
+							[if (referenceTypeClass.eSuperTypes.eTypeParameters->size()>0)] [comment Pointer to TemplateClass (std:: map,list,vector...) or Pointer to UserClass.../]
+								[if ((referenceTypeClass.eSuperTypes->first().name = 'map') or (referenceTypeClass.eSuperTypes->first().name = 'unordered_map'))]			loadHandler->handleChildContainer<[referenceTypeClass.eGenericSuperTypes.eTypeArguments->first().generateCppType(true)/]>(this->[aReference.GetterName()/]());
+								[elseif ((referenceTypeClass.eSuperTypes->first().name = 'list') or (referenceTypeClass.eSuperTypes->first().name = 'vector'))]			loadHandler->handleChildContainer<[referenceTypeClass.eGenericSuperTypes.eTypeArguments->first().generateCppType(true)/]>(this->[aReference.GetterName()/]());
+								[else] // Unknown Template-Type to load "[referenceTypeClass.eGenericSuperTypes->toString()/]"
+								[/if]
+							[else]			loadHandler->handleChild(this->[aReference.GetterName()/]()); 
+							[/if][/let]
+						[else]			// No Type to load "[aReference.name/]"
+						[/if]
+					[else]			// Unknown EClass to load "[aReference.name/]"
+					[/if]										
+				[else]			loadHandler->handleChildContainer<[aReference.eGenericType.generateCppType(false)/]>(this->[aReference.GetterName()/]()); [comment usual Bags/] 
 				[/if]
-			[/if]
-				loadHandler->handleChild([aReference.name/]);
+[comment]
+ 			ToDo check whate happend by ref !=0 
+			[if (ref->size() = 0)}		this->[aReference.SetterName()/}([aReference.name/});
+			[else}
+				[/if}
+			[/if}
 			}
-			return;
+[/comment]
+
+			return; 
 		[/let]
 	[/let]
 		}
@@ -314,7 +340,7 @@ void [aClass.name.concat('Impl')/]::loadNode(std::string nodeName, std::shared_p
 [/template]
 
 [template public generatePersistenceResolveReferenceImpl(aClass: EClass)]
-void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::list<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references)
+void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::vector<std::shared_ptr<[needNamespace(aClass.ePackage, 'EObject')/]> > references)
 {
 [let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = false) and (eRef.changeable = true))->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
@@ -327,19 +353,19 @@ void [aClass.name.concat('Impl')/]::resolveReferences(const int featureID, std::
 			if (references.size() == 1)
 			{
 				// Cast object to correct type
-				std::shared_ptr<[aReference.eGenericType.generateCppType()/]> _[aReference.name/] = std::dynamic_pointer_cast<[aReference.eGenericType.generateCppType()/]>( references.front() );
+				[aReference.eGenericType.generateCppType(true)/] _[aReference.name/] = std::dynamic_pointer_cast<[aReference.eGenericType.generateCppType(false)/]>( references.front() );
 				[aReference.SetterName()/](_[aReference.name/]);
 			}
 			
 		[else]
-			std::shared_ptr<Bag<[aReference.eGenericType.generateCppType()/]>> _[aReference.name/] = [aReference.GetterName()/]();
+			[aReference.generateReferenceType()/] _[aReference.name/] = [aReference.GetterName()/]();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<[aReference.eGenericType.generateCppType()/]> _r = std::dynamic_pointer_cast<[aReference.eGenericType.generateCppType()/]>(ref);
+				std::shared_ptr<[aReference.eGenericType.generateCppType(false)/]>  _r = std::dynamic_pointer_cast<[aReference.eGenericType.generateCppType(false)/]>(ref);
 				if (_r != nullptr)
 				{
 					_[aReference.name/]->push_back(_r);
-				}				
+				}
 			}
 		[/if]
 			return;
@@ -382,7 +408,6 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 	try
 	{
 		std::shared_ptr<[aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name/]Package> package = [aClass.getRootPackage().name/][getPackageAccess(aClass, true)/]::[aClass.ePackage.name/]Package::eInstance();
-
 [let refList : OrderedSet(EReference) =  aClass.eReferences->select(eRef: EReference|(eRef.containment = true and eRef.hasSubset() and (not eRef.isSubsetUnion())))->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
 [for (aReference : EReference | refList) separator ('\n')]
@@ -400,8 +425,7 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 		}
 		[/if]
 [/for]
-[/if][/let]
-	
+[/if][/let]	
 [let attrList : OrderedSet(EAttribute) = aClass.eAttributes->select(eAtt: EAttribute|(eAtt.transient = false))->asOrderedSet()->sortedBy(name)]
 [if (attrList->size() > 0)]
 		// Add attributes
@@ -413,7 +437,7 @@ void [aClass.name.concat('Impl')/]::saveContent(std::shared_ptr<[generatePersist
 		if ( this->eIsSet(package->get[aAttribute.getMemberNameUpperFirst()/]()) )
 		{
 	[if (aAttribute.eType.oclIsKindOf(EEnum))]
-			[aAttribute.generateAttributeType()/] value = this->[aAttribute.GetterName()/]();
+			[aAttribute.generateStructuralFeatureType(true)/] value = this->[aAttribute.GetterName()/]();
 			std::string literal = "";
 		[for (aLiteral : EEnumLiteral | aAttribute.eType.oclAsType(EEnum).eLiterals) before ('\t\t\t') separator ('\t\t\telse ')]
 if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
@@ -423,7 +447,7 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 [/for]
 			saveHandler->addAttribute("[aAttribute.name/]", literal);
 	[elseif (aAttribute.upperBound <> 1)]
-			for (std::shared_ptr<[aAttribute.eType.transformType()/]> value : *m_[aAttribute.name/])
+			for (std::shared_ptr<[aAttribute.eGenericType.generateCppType(true)/]> value : *m_[aAttribute.name/])
 			{
 				saveHandler->addAttributeAsNode("[aAttribute.name/]", [if (not (aAttribute.eType.name = 'String' or aAttribute.eType.name = 'EString'))]std::to_string([/if]*value[if (not (aAttribute.eType.name = 'String' or aAttribute.eType.name = 'EString'))])[/if]);
 			}
@@ -437,42 +461,64 @@ if (value == [aAttribute.eType.name/]::[aLiteral.name.toUpperCase()/])
 [/for][/if][/let]
 [let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|((eRef.containment = false) and (not eRef.isBackReference()) and (eRef.changeable = true)) or eRef.hasAttributeExtention())->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
-
-		// Add references
+	// Add references
 [for (aReference : EReference | refList)]
-	[if (aReference.upperBound = 1)]
-		saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if]);
-	[else]
-		std::shared_ptr<Bag<[aReference.eType.generateType()/]>> [aReference.name/]_list = this->[aReference.GetterName()/]();
-		for ([aReference.generateReferenceTypeBag()/] object : *[aReference.name/]_list)
-		{ 
-			saveHandler->addReferences("[aReference.name/]", object);
-		}
-	[/if]
+	[if (aReference.upperBound = 1)] 
+		[if (not (aReference.eType.oclIsUndefined()))] 
+			[if ((aReference.eType.name ='EEList') or (aReference.eType.name ='ETreeIterator') )]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+			[elseif (aReference.eType.name ='EMap')]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/], [aReference.eGenericType.eTypeArguments->last().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+			[elseif (aReference.eType.ePackage.name = 'ecore')]		saveHandler->addReference(this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if],"[aReference.name/]", [aReference.GetterName()/]()->eClass() != [aReference.eType.getPackage_eInstance()/]->get[aReference.eType.getMemberNameUpperFirst()/]());
+			[elseif (aReference.eType.oclIsKindOf(ecore::EClass))]
+				[let referenceTypeClass:EClass =aReference.eType.oclAsType(ecore::EClass)]
+				[if (referenceTypeClass.eSuperTypes.eTypeParameters->size()>0)]
+					[if ((referenceTypeClass.eSuperTypes->first().name = 'map') or (referenceTypeClass.eSuperTypes->first().name = 'unordered_map'))]		saveHandler->addReferences<[referenceTypeClass.eGenericSuperTypes.eTypeArguments->first().generateCppType(true)/], [referenceTypeClass.eGenericSuperTypes.eTypeArguments->last().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+					[elseif ((referenceTypeClass.eSuperTypes->first().name = 'list') or (referenceTypeClass.eSuperTypes->first().name = 'vector'))]		saveHandler->addReferences<[referenceTypeClass.eGenericSuperTypes.eTypeArguments->first().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+					[else] // Unknown Template-Type to save "[referenceTypeClass.eGenericSuperTypes->toString()/]"
+					[/if]
+				[comment]wirklich so nötig? aReference.eType.getPackage_eInstance() --> include von entsprechendem Package nötig [/comment]
+				[else]		saveHandler->addReference(this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if], "[aReference.name/]", [aReference.GetterName()/]()->eClass() != [aReference.eType.getPackage_eInstance()/]->get[aReference.eType.getMemberNameUpperFirst()/]()); 
+				[comment][else]		saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if]);[/comment] 				
+				[/if][/let]
+			[else]		// No Type to save "[aReference.name/]"
+			[/if]
+		[else]		// Unknown EClass to save "[aReference.name/]"
+		[/if]
+	[else]		saveHandler->addReferences<[aReference.eGenericType.generateCppType(false)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+	[/if] 
 [/for][/if][/let]
-
 [let refList : OrderedSet(EReference) = aClass.eReferences->select(eRef: EReference|(eRef.containment = true and not (eRef.hasSubset() and not eRef.isSubsetUnion())))->asOrderedSet()->sortedBy(name)]
 [if (refList->size() > 0)]
-
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> metaClass = this->eClass();
 [for (aReference : EReference | refList) separator ('\n')]
 		// Save '[aReference.name/]'
-	[if (aReference.upperBound = 1)]
-		[aReference.generateReferenceType()/] [aReference.name/] = this->[aReference.GetterName()/]();
-		if ([aReference.name/] != nullptr)
-		{
-			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() != [aReference.eType.getPackage_eInstance()/]->get[aReference.eType.getMemberNameUpperFirst()/]());
-		}
-	[else]
-		[aReference.generateReferenceType()/] list_[aReference.name/] = this->[aReference.GetterName()/]();
-		for (std::shared_ptr<[aReference.eType.generateType()/]> [aReference.name/] : *list_[aReference.name/]) 
-		{
-			saveHandler->addReference([aReference.name/], "[aReference.name/]", [aReference.name/]->eClass() !=[aReference.eType.getPackage_eInstance()/]->get[aReference.eType.getMemberNameUpperFirst()/]());
-		}
-	[/if]
+
+	[if (aReference.upperBound = 1)] 
+		[if (not (aReference.eType.oclIsUndefined()))] 
+			[if ((aReference.eType.name ='EEList') or (aReference.eType.name ='ETreeIterator') )]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+			[elseif (aReference.eType.name ='EMap')]		saveHandler->addReferences<[aReference.eGenericType.eTypeArguments->first().generateCppType(true)/], [aReference.eGenericType.eTypeArguments->last().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+			[elseif (aReference.eType.ePackage.name = 'ecore')]		saveHandler->addReference(this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if], "[aReference.name/]", [aReference.GetterName()/]()->eClass() != [aReference.eType.getPackage_eInstance()/]->get[aReference.eType.getMemberNameUpperFirst()/]());
+			[elseif (aReference.eType.oclIsKindOf(ecore::EClass))]
+				[let referenceTypeClass:EClass =aReference.eType.oclAsType(ecore::EClass)]
+				[if (referenceTypeClass.eSuperTypes.eTypeParameters->size()>0)]
+					[if ((referenceTypeClass.eSuperTypes->first().name = 'map') or (referenceTypeClass.eSuperTypes->first().name = 'unordered_map'))]		saveHandler->addReferences<[referenceTypeClass.eGenericSuperTypes.eTypeArguments->first().generateCppType(true)/], [referenceTypeClass.eGenericSuperTypes.eTypeArguments->last().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+					[elseif ((referenceTypeClass.eSuperTypes->first().name = 'list') or (referenceTypeClass.eSuperTypes->first().name = 'vector'))]		saveHandler->addReferences<[referenceTypeClass.eGenericSuperTypes.eTypeArguments->first().generateCppType(true)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+					[else] // Unknown Template-Type to save "[referenceTypeClass.eGenericSuperTypes->toString()/]"
+					[/if]
+				[comment]wirklich so nötig? aReference.eType.getPackage_eInstance() --> include von entsprechendem Package nötig 
+				[/comment]
+				[else]		saveHandler->addReference(this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if], "[aReference.name/]", [aReference.GetterName()/]()->eClass() != [aReference.eType.getPackage_eInstance()/]->get[aReference.eType.getMemberNameUpperFirst()/]());
+				[comment] 
+				[else]		saveHandler->addReference("[aReference.name/]", this->[aReference.GetterName()/]()[if (aReference.isBackReference())].lock()[/if]);[/comment]
+				[/if][/let]
+			[else]		// No Type to save "[aReference.name/]"
+			[/if]
+		[else]		// Unknown EClass to save "[aReference.name/]"
+		[/if]										
+	[else]		saveHandler->addReferences<[aReference.eGenericType.generateCppType(false)/]>("[aReference.name/]", this->[aReference.GetterName()/]());
+	[/if] 
 [/for][/if][/let]
 	}
 	catch (std::exception& e)

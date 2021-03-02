@@ -120,6 +120,7 @@ std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropaga
 	element->setThisCS_DefaultRequestPropagationStrategyPtr(element);
 	return element;
 }
+
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy> StructuredClassifiersFactoryImpl::createCS_DispatchOperationOfInterfaceStrategy(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategyImpl> element(new PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategyImpl());
@@ -127,6 +128,7 @@ std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfIn
 	element->setThisCS_DispatchOperationOfInterfaceStrategyPtr(element);
 	return element;
 }
+
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> StructuredClassifiersFactoryImpl::createCS_InteractionPoint(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPointImpl> element(new PSCS::Semantics::StructuredClassifiers::CS_InteractionPointImpl());
@@ -134,6 +136,7 @@ std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> Str
 	element->setThisCS_InteractionPointPtr(element);
 	return element;
 }
+
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> StructuredClassifiersFactoryImpl::createCS_Link(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_LinkImpl> element(new PSCS::Semantics::StructuredClassifiers::CS_LinkImpl());
@@ -141,6 +144,7 @@ std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> StructuredClass
 	element->setThisCS_LinkPtr(element);
 	return element;
 }
+
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> StructuredClassifiersFactoryImpl::createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl> element(new PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl());
@@ -148,6 +152,7 @@ std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralF
 	element->setThisCS_NameBased_StructuralFeatureOfInterfaceAccessStrategyPtr(element);
 	return element;
 }
+
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> StructuredClassifiersFactoryImpl::createCS_Object(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl> element(new PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl());
@@ -155,6 +160,7 @@ std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> StructuredCla
 	element->setThisCS_ObjectPtr(element);
 	return element;
 }
+
 std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> StructuredClassifiersFactoryImpl::createCS_Reference(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_ReferenceImpl> element(new PSCS::Semantics::StructuredClassifiers::CS_ReferenceImpl());
@@ -162,4 +168,5 @@ std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> Structured
 	element->setThisCS_ReferencePtr(element);
 	return element;
 }
+
 

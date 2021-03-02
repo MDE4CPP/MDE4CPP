@@ -55,8 +55,13 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 	{
 		public: 
 			[className/](const [className/] & obj);
+<<<<<<< HEAD
 			virtual std::shared_ptr<ecore::EObject> copy() const;    
 			[className/]& operator=([className/] const&);
+=======
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			[className/]& operator=([className/] const&); [comment partial =operator is possible/]
+>>>>>>> remotes/origin/Feature_EcoreTemplate
 
 		protected:
 			[if (not (aClass.ePackage = aClass.getRootPackage()))]
@@ -77,11 +82,8 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 	[else]
 			[className/]([aReference.generateReferenceType(true)/] par_[aReference.name/]);
 	[/if]
-
-
 			[/for]
 			[/let]
-
 
 		public:
 			//destructor
@@ -100,7 +102,7 @@ virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuper
 			//*********************************
 			// Reference
 			//*********************************
-			[aClass.eReferences->sortedBy(name).generateReferenceDecl(true)/]				
+			[aClass.eReferences->sortedBy(name).generateReferenceDecl(true)/]
 			
 			//*********************************
 			// Union Getter

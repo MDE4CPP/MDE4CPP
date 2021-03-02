@@ -112,6 +112,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::DispatchStrategy> Struct
 	element->setThisDispatchStrategyPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> StructuredClassifiersFactoryImpl::createExtensionalValueList(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueListImpl> element(new fUML::Semantics::StructuredClassifiers::ExtensionalValueListImpl());
@@ -119,6 +120,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValueList> St
 	element->setThisExtensionalValueListPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> StructuredClassifiersFactoryImpl::createLink(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::LinkImpl> element(new fUML::Semantics::StructuredClassifiers::LinkImpl());
@@ -126,6 +128,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> StructuredClassifi
 	element->setThisLinkPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> StructuredClassifiersFactoryImpl::createObject(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::ObjectImpl> element(new fUML::Semantics::StructuredClassifiers::ObjectImpl());
@@ -133,6 +136,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> StructuredClassi
 	element->setThisObjectPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy> StructuredClassifiersFactoryImpl::createRedefinitionBasedDispatchStrategy(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl> element(new fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl());
@@ -140,6 +144,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatc
 	element->setThisRedefinitionBasedDispatchStrategyPtr(element);
 	return element;
 }
+
 std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> StructuredClassifiersFactoryImpl::createReference(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::StructuredClassifiers::ReferenceImpl> element(new fUML::Semantics::StructuredClassifiers::ReferenceImpl());
@@ -147,4 +152,5 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> StructuredCla
 	element->setThisReferencePtr(element);
 	return element;
 }
+
 

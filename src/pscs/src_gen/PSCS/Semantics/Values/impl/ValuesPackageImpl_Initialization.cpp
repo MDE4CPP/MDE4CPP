@@ -53,21 +53,19 @@ void ValuesPackageImpl::initializeCS_OpaqueExpressionEvaluationContent()
 	
 	
 	
-	m_cS_OpaqueExpressionEvaluation_Operation_evaluate->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_cS_OpaqueExpressionEvaluation_Operation_evaluate->setName("evaluate");
+	m_cS_OpaqueExpressionEvaluation_Operation_evaluate->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_cS_OpaqueExpressionEvaluation_Operation_evaluate->setLowerBound(0);
 	m_cS_OpaqueExpressionEvaluation_Operation_evaluate->setUpperBound(1);
 	m_cS_OpaqueExpressionEvaluation_Operation_evaluate->setUnique(true);
 	m_cS_OpaqueExpressionEvaluation_Operation_evaluate->setOrdered(false);
 	
-	
-	m_cS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_cS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior->setName("executeExpressionBehavior");
+	m_cS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 	m_cS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior->setLowerBound(0);
 	m_cS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior->setUpperBound(-1);
 	m_cS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior->setUnique(true);
 	m_cS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior->setOrdered(false);
-	
 	
 	
 }

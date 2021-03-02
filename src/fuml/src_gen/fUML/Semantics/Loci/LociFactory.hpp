@@ -58,11 +58,11 @@ namespace fUML::Semantics::Loci
 
 			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> createExecutionFactory(const int metaElementID = LociPackage::EXECUTIONFACTORY_CLASS) const = 0;
 			//Add containing object
-			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> createExecutionFactory_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID = LociPackage::EXECUTIONFACTORY_CLASS) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> createExecutionFactory_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus, const int metaElementID = LociPackage::EXECUTIONFACTORY_CLASS) const = 0;
 			
 			virtual std::shared_ptr<fUML::Semantics::Loci::Executor> createExecutor(const int metaElementID = LociPackage::EXECUTOR_CLASS) const = 0;
 			//Add containing object
-			virtual std::shared_ptr<fUML::Semantics::Loci::Executor> createExecutor_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID = LociPackage::EXECUTOR_CLASS) const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Loci::Executor> createExecutor_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus, const int metaElementID = LociPackage::EXECUTOR_CLASS) const = 0;
 			
 			virtual std::shared_ptr<fUML::Semantics::Loci::FirstChoiceStrategy> createFirstChoiceStrategy(const int metaElementID = LociPackage::FIRSTCHOICESTRATEGY_CLASS) const = 0;
 			

@@ -108,7 +108,8 @@ std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> LociFactoryImpl::cre
 	element->setThisCS_ExecutionFactoryPtr(element);
 	return element;
 }
-std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> LociFactoryImpl::createCS_ExecutionFactory_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID) const
+
+std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> LociFactoryImpl::createCS_ExecutionFactory_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus, const int metaElementID) const
 {
 	std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactoryImpl> element(new PSCS::Semantics::Loci::CS_ExecutionFactoryImpl(par_locus));
 	element->setMetaElementID(metaElementID);
@@ -127,7 +128,8 @@ std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> LociFactoryImpl::createCS_Ex
 	element->setThisCS_ExecutorPtr(element);
 	return element;
 }
-std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> LociFactoryImpl::createCS_Executor_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus, const int metaElementID) const
+
+std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> LociFactoryImpl::createCS_Executor_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus, const int metaElementID) const
 {
 	std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutorImpl> element(new PSCS::Semantics::Loci::CS_ExecutorImpl(par_locus));
 	element->setMetaElementID(metaElementID);
@@ -146,4 +148,5 @@ std::shared_ptr<PSCS::Semantics::Loci::CS_Locus> LociFactoryImpl::createCS_Locus
 	element->setThisCS_LocusPtr(element);
 	return element;
 }
+
 

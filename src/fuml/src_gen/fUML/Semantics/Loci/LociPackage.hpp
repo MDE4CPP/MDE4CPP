@@ -31,7 +31,7 @@ namespace fUML::Semantics::Loci
 	class SemanticStrategy;
 	class SemanticVisitor;
 }
-
+ 
 namespace fUML::Semantics::Loci 
 {
 	/*!

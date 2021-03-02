@@ -22,47 +22,91 @@
 [import ecore4CPP::generator::main::generateUnion /]
 [import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
+[import ecore4CPP::generator::main::helpers::keywords /] 
 
-[query public includes(aClass : EClass) : Set(EClassifier) =OrderedSet{aClass.eSuperTypes,aClass.eAllStructuralFeatures.eType,aClass.eOperations.eType,aClass.eOperations.eParameters.eType}->flatten() /]
+[query private templateTypeIncludes(aClass :EClassifier ) : Set(EClassifier) = if (aClass.oclIsUndefined()) then Set(EClassifier){} else if((aClass.oclIsKindOf(EClass)) and (aClass.oclAsType(EClass).eGenericSuperTypes->size()>0) and (aClass.oclAsType(EClass).eGenericSuperTypes.eTypeArguments->size()>0) ) 
+		then OrderedSet{ aClass.oclAsType(EClass).eGenericSuperTypes.eTypeArguments.eClassifier.templateTypeIncludes(),aClass.oclAsType(EClass).eGenericSuperTypes.eClassifier} else OrderedSet{aClass} endif endif/]
 
-[template public generateModel(aClass : EClass)]
+[query public includes(aClass : EClass) : Set(EClassifier) =  OrderedSet{aClass.eSuperTypes
+																		,aClass.eAllStructuralFeatures.eType, aClass.eAllStructuralFeatures.eType.templateTypeIncludes()
+																		,aClass.eOperations.eType, aClass.eOperations.eType.templateTypeIncludes()
+																		,aClass.eOperations.eParameters.eType, aClass.eOperations.eParameters.eType.templateTypeIncludes()
+}->flatten() /]
+
+[query public includesFeatureOrderedFilter(aClass : EClass, isOrdered:Boolean) : Set(EClassifier) = OrderedSet{
+																		 aClass.eAllStructuralFeatures->select(ordered = isOrdered).eType, aClass.eAllStructuralFeatures->select(ordered = isOrdered).eType.templateTypeIncludes()
+																		,aClass.eOperations->select(ordered = isOrdered).eType,aClass.eOperations->select(ordered = isOrdered).eType.templateTypeIncludes()
+																		,aClass.eOperations.eParameters->select(ordered = isOrdered).eType,aClass.eOperations.eParameters->select(ordered = isOrdered).eType.templateTypeIncludes()
+}->flatten() /]
+
+[template public generateModel(aClass : EClass) ?(not doNotGenerate())]
 [file (aClass.generateNamespacePath().concat('/').concat(aClass.name.toUpperFirst()).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aClass)/]
 
-[if (aClass.eOperations.eParameters.eType->select(name = 'EMap')->size() > 0 or aClass.eAttributes.eType->select(name = 'EMap')->size() > 0)]
+[let usedOrderedTypes:Set(EClassifier)= aClass.includesFeatureOrderedFilter(true)->filter(EClassifier)->select(c:EClassifier | not (c.name ->isEmpty()))]
+	[if (usedOrderedTypes->size()>0)]
+		[if ((usedOrderedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('EMap'))->size() > 0) or (usedOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('map'))->size() > 0) )]
 #include <map>
-[/if]
+		[/if]
+	[/if]	
+[/let]
+[let usedUnOrderedTypes:Set(EClassifier)= aClass.includesFeatureOrderedFilter(false)->filter(EClassifier)->select(c:EClassifier | not (c.name ->isEmpty()))]
+	[if (usedUnOrderedTypes->size()>0)]
+		[if ((usedUnOrderedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('EMap'))->size() > 0) or (usedUnOrderedTypes->filter(EClassifier)->select(c:EClassifier| c.name.equalsIgnoreCase('map'))->size() > 0) )]
+#include <unordered_map>
+		[/if]
+	[/if]	
+[/let]
+[let usedTypes:Set(EClassifier)= aClass.includes()->filter(EClassifier)->select(c:EClassifier | not (c.name ->isEmpty()))]
+	[if (usedTypes->size()>0)]
+		[if ( (usedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('EEList'))->size() > 0) or (usedTypes->select(c:EClassifier| c.name.equalsIgnoreCase('list'))->size() > 0))]
 #include <list>
+		[/if]
+		[if ((usedTypes->select(name.equalsIgnoreCase('vector'))->size() > 0))]
+#include <vector>
+		[/if]
+		[if ((usedTypes->select(name.equalsIgnoreCase('unordered_map'))->size() > 0))]
+#include <unordered_map>
+		[/if]
+	[/if]
+[/let]
+
 #include <memory>
 #include <string>
-
 [if (aClass.eAttributes.eType->select(requiresAny())->size() > 0)]
 #include "abstractDataTypes/Any.hpp"
 [/if]
-
 // forward declarations
 [generateAbstractDataTypesForwardDeclaration()/]
-
 [if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
-[/if]
+[/if] 
 
 //*********************************
 // generated Includes
-
 [generatePersistenceForwardDeclarations()/]
 
-//Forward Declaration for used types
-[for (element : EClassifier| aClass.includes()->selectByKind(EClass)->asOrderedSet()->sortedBy(name)) separator ('\n')]
-namespace [element.generateNamespaceDefinition()/] 
+//Forward Declaration for used types 
+[let includeClasses:Set(EClass) = aClass.includes()->selectByKind(EClass)->select(not oclIsUndefined())->select(not doNotGenerate())->select(c:EClass| (not (c = aClass)) and (not (aClass.eAllSuperTypes)->includes(c)))]
+[if (includeClasses->size()>0)]
+[let includeNameSpaces:OrderedSet(EPackage) = includeClasses.ePackage->asOrderedSet()->sortedBy(name)]
+[if (includeNameSpaces->size()>0)]
+[for (includeNamespace: EPackage | includeNameSpaces)]
+namespace [includeNamespace.generateNamespaceDefinition()/] 
 {
+[for (element : EClassifier| includeClasses->select(includeClass: EClass | includeClass.ePackage = includeNamespace)->asOrderedSet()->sortedBy(name))]
 	class [element.name/];
+[/for]
 }
 [/for]
+[/if]
+[/let]
+[/if]
+[/let]
 
 // base class includes
-[for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator ('\n')]
+[for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
 #include "[elements.generateNamespacePath()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
 [/for]
 
@@ -75,28 +119,31 @@ namespace [element.generateNamespaceDefinition()/]
 #include "ecore/EModelElement.hpp"
 [/if]
 
+[if (aClass.hasKey(keyHeaderIncludes()))]
+//Includes from codegen annotation
+[aClass.valueKey(keyHeaderIncludes())/]
+[/if]
+
 //*********************************
 namespace [aClass.generateNamespaceDefinition()/] 
 {
 	[aClass.generateDocumentation()/]
 	class [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EModelElement
 [else]
-[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')]
-virtual public [ClassWithNamespace(aClass,sClass)/][/for]
-[/if][if(aClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[aClass.name.toUpperFirst()/]>[/if]
-	{
+[for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')] virtual public [ClassWithNamespace(aClass,sClass)/][/for]
+[/if][if(aClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[aClass.name.toUpperFirst()/]>[/if]	{
 		public:
  			[aClass.name.toUpperFirst()/](const [aClass.name.toUpperFirst()/] &) {}
+<<<<<<< HEAD
 
+=======
+>>>>>>> remotes/origin/Feature_EcoreTemplate
 		protected:
 			[aClass.name.toUpperFirst()/](){}
-
 			[if(aClass.containsContainerAttribute())]
-
 			[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
 			[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
 			//Additional constructors for the containments back reference
-
 			[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
 					[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
 			[aClass.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.eType.name/], const int reference_id);
