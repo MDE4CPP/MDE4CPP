@@ -1036,7 +1036,7 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="behavior" lowerBound="1"
             eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Behavior">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="getterbody" value="if(!m_behavior)&#xA;{&#xA;&#x9;m_behavior = std::dynamic_pointer_cast&lt;uml::Behavior>(this->getTypes()->front());&#xA;}&#xA;&#xA;return m_behavior;"/>
+            <details key="getterBody" value="if(!m_behavior)&#xA;{&#xA;&#x9;m_behavior = std::dynamic_pointer_cast&lt;uml::Behavior>(this->getTypes()->front());&#xA;}&#xA;&#xA;return m_behavior;"/>
             <details key="qualify" value="mutable"/>
           </eAnnotations>
           <eAnnotations source="MDE4CPP_Substitutes" references="#//Semantics/CommonBehavior/Execution/getBehavior">
@@ -1959,7 +1959,7 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="activity" lowerBound="1"
             eType="ecore:EClass http://www.eclipse.org/uml2/5.0.0/UML#//Activity">
           <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-            <details key="getterbody" value="if(!m_activity)&#xA;{&#xA;&#x9;m_activity = std::dynamic_pointer_cast&lt;uml::Activity>(this->getBehavior());&#xA;}&#xA;&#xA;return m_activity;"/>
+            <details key="getterBody" value="if(!m_activity)&#xA;{&#xA;&#x9;m_activity = std::dynamic_pointer_cast&lt;uml::Activity>(this->getBehavior());&#xA;}&#xA;&#xA;return m_activity;"/>
             <details key="qualify" value="mutable"/>
           </eAnnotations>
           <eAnnotations source="redefines" references="#//Semantics/CommonBehavior/Execution/behavior"/>
