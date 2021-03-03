@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			BroadcastSignalActionImpl(const BroadcastSignalActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			BroadcastSignalActionImpl& operator=(BroadcastSignalActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			BroadcastSignalActionImpl& operator=(BroadcastSignalActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisBroadcastSignalActionPtr(std::weak_ptr<BroadcastSignalAction> thisBroadcastSignalActionPtr);
 
 			//Additional constructors for the containments back reference
-			BroadcastSignalActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			BroadcastSignalActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			BroadcastSignalActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			BroadcastSignalActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			BroadcastSignalActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			BroadcastSignalActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			BroadcastSignalActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			BroadcastSignalActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,16 +52,12 @@ namespace uml
 			onPort=null
 			*/
 			 
-			virtual bool no_onport(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool no_onport(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The number of argument InputPins must be the same as the number of attributes in the signal.
 			argument->size() = signal.allAttributes()->size()
 			*/
 			 
-			virtual bool number_of_arguments(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool number_of_arguments(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type, ordering, and multiplicity of an argument InputPin must be the same as the corresponding attribute of the signal.
 			let attribute: OrderedSet(Property) = signal.allAttributes() in
 			Sequence{1..argument->size()}->forAll(i | 
@@ -79,9 +66,7 @@ namespace uml
 				argument->at(i).compatibleWith(attribute->at(i)))
 			*/
 			 
-			virtual bool type_ordering_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool type_ordering_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -96,16 +81,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal > getSignal() const ;
-			
+			virtual std::shared_ptr<uml::Signal> getSignal() const ;
 			/*!
 			The Signal whose instances are to be sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setSignal(std::shared_ptr<uml::Signal> _signal) ;
+			virtual void setSignal(std::shared_ptr<uml::Signal>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -130,7 +113,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -150,7 +133,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

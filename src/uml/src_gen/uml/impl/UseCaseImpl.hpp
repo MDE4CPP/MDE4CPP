@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			UseCaseImpl(const UseCaseImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			UseCaseImpl& operator=(UseCaseImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			UseCaseImpl& operator=(UseCaseImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,25 +32,14 @@ namespace uml
 			virtual void setThisUseCasePtr(std::weak_ptr<UseCase> thisUseCasePtr);
 
 			//Additional constructors for the containments back reference
-			UseCaseImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			UseCaseImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			UseCaseImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			UseCaseImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			UseCaseImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			UseCaseImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			UseCaseImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			UseCaseImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -65,30 +54,22 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::UseCase> > allIncludedUseCases() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::UseCase> > allIncludedUseCases() ;/*!
 			UseCases can only be involved in binary Associations.
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies a.memberEnd->size() = 2)
 			*/
 			 
-			virtual bool binary_associations(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool binary_associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A UseCase cannot include UseCases that directly or indirectly include it.
 			not allIncludedUseCases()->includes(self)
 			*/
 			 
-			virtual bool cannot_include_self(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool cannot_include_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A UseCase must have a name.
 			name -> notEmpty ()
 			*/
 			 
-			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool must_have_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			UseCases cannot have Associations to UseCases specifying the same subject.
 			Association.allInstances()->forAll(a | a.memberEnd.type->includes(self) implies 
 			   (
@@ -98,9 +79,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool no_association_to_use_case(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool no_association_to_use_case(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -117,7 +96,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Extend, uml::NamedElement>> getExtend() const ;
 			
-			
 			/*!
 			The ExtensionPoints owned by this UseCase.
 			<p>From package UML::UseCases.</p>
@@ -125,14 +103,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::ExtensionPoint, uml::NamedElement>> getExtensionPoint() const ;
 			
-			
 			/*!
 			The Include relationships owned by this UseCase.
 			<p>From package UML::UseCases.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Include, uml::NamedElement>> getInclude() const ;
-			
 			
 			/*!
 			The subjects to which this UseCase applies. Each subject or its parts realize all the UseCases that apply to it.
@@ -142,7 +118,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Classifier>> getSubject() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -162,7 +137,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -177,7 +152,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -197,7 +172,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

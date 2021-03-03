@@ -120,9 +120,8 @@
 using namespace UML;
 
 StructuredClassifierObject::StructuredClassifierObject(std::shared_ptr<uml::StructuredClassifier> _element):
-
 	m_StructuredClassifierValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_StructuredClassifier());
 }
 
@@ -143,13 +142,15 @@ StructuredClassifierObject::~StructuredClassifierObject()
 
 std::shared_ptr<ecore::EObject> StructuredClassifierObject::copy()
 {
-	std::shared_ptr<StructuredClassifierObject> element(new StructuredClassifierObject(*this));
+	std::shared_ptr<StructuredClassifierObject> element(new StructuredClassifierObject());
+	*element=(*this);
 	element->setThisStructuredClassifierObjectPtr(element);
 	return element;
 }
 
 StructuredClassifierObject& StructuredClassifierObject::operator=(const StructuredClassifierObject & obj)
 {
+	UML::ClassifierObject::operator=(obj);
 	return *this;
 }
 

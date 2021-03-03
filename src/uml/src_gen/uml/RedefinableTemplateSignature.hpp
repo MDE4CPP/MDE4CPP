@@ -8,23 +8,19 @@
 #define UML_REDEFINABLETEMPLATESIGNATURE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,69 +35,25 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
-	class RedefinableTemplateSignature;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
-	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class TemplateableElement;
 }
 
 // base class includes
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/TemplateSignature.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
+
 
 
 //*********************************
@@ -112,14 +64,13 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class RedefinableTemplateSignature:virtual public RedefinableElement,virtual public TemplateSignature
+	class RedefinableTemplateSignature: virtual public RedefinableElement, virtual public TemplateSignature
 	{
 		public:
  			RedefinableTemplateSignature(const RedefinableTemplateSignature &) {}
 
 		protected:
 			RedefinableTemplateSignature(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -136,16 +87,12 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters() = 0;/*!
 			If any of the parent Classifiers are a template, then the extendedSignature must include the signature of that Classifier.
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature))
 			*/
 			 
-			virtual bool redefines_parents(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool redefines_parents(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -158,30 +105,25 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Classifier > getClassifier() const = 0;
-			
+			virtual std::weak_ptr<uml::Classifier> getClassifier() const = 0;
 			/*!
 			The Classifier that owns this RedefinableTemplateSignature.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setClassifier(std::shared_ptr<uml::Classifier> _classifier) = 0;
-			
+			virtual void setClassifier(std::weak_ptr<uml::Classifier>) = 0;
 			/*Additional Setter for 'TemplateSignature::template' redefined by reference 'classifier'*/
 			/*!
 			The TemplateableElement that owns this TemplateSignature.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setTemplate(std::shared_ptr<uml::TemplateableElement> _template) = 0;
-			
-			/*!
+			virtual void setTemplate(std::weak_ptr<uml::TemplateableElement>) = 0;/*!
 			The signatures extended by this RedefinableTemplateSignature.
 			<p>From package UML::Classification.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> getExtendedSignature() const = 0;
-			
 			
 			/*!
 			The formal template parameters of the extended signatures.
@@ -189,7 +131,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> getInheritedParameter() const = 0;
-			
 			
 			
 
@@ -207,7 +148,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			std::weak_ptr<uml::Classifier > m_classifier;/*!
+			std::weak_ptr<uml::Classifier> m_classifier;/*!
 			The signatures extended by this RedefinableTemplateSignature.
 			<p>From package UML::Classification.</p>
 			*/
@@ -233,7 +174,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The ordered set of all formal TemplateParameters for this TemplateSignature.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -257,7 +198,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

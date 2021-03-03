@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -72,35 +73,26 @@
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Element.hpp"
-
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
 #include "fUML/Semantics/CommonBehavior/OpaqueBehaviorExecution.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PrimitiveType.hpp"
-
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
-
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/Loci/impl/LociFactoryImpl.hpp"
-#include "PSCS/Semantics/Loci/impl/LociPackageImpl.hpp"
-
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -125,54 +117,42 @@ CS_ExecutionFactoryImpl::~CS_ExecutionFactoryImpl()
 }
 
 //Additional constructor for the containments back reference
-CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
+CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus)
 :CS_ExecutionFactoryImpl()
 {
 	m_locus = par_locus;
 }
 
-
-CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj):CS_ExecutionFactoryImpl()
+CS_ExecutionFactoryImpl::CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj): CS_ExecutionFactoryImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  CS_ExecutionFactoryImpl::copy() const
-{
-	std::shared_ptr<CS_ExecutionFactoryImpl> element(new CS_ExecutionFactoryImpl(*this));
-	element->setThisCS_ExecutionFactoryPtr(element);
-	return element;
-}
-
 CS_ExecutionFactoryImpl& CS_ExecutionFactoryImpl::operator=(const CS_ExecutionFactoryImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::ExecutionFactoryImpl::operator=(obj);
+	CS_ExecutionFactory::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_ExecutionFactory "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	std::shared_ptr<Bag<uml::Package>> _appliedProfiles = obj.getAppliedProfiles();
 	m_appliedProfiles.reset(new Bag<uml::Package>(*(obj.getAppliedProfiles().get())));
-
-	std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = obj.getBuiltInTypes();
-	m_builtInTypes.reset(new Bag<uml::PrimitiveType>(*(obj.getBuiltInTypes().get())));
-
-	m_locus  = obj.getLocus();
-
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
-	m_primitiveBehaviorPrototypes.reset(new Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>(*(obj.getPrimitiveBehaviorPrototypes().get())));
-
-	std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = obj.getStrategies();
-	m_strategies.reset(new Bag<fUML::Semantics::Loci::SemanticStrategy>(*(obj.getStrategies().get())));
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> CS_ExecutionFactoryImpl::copy() const
+{
+	std::shared_ptr<CS_ExecutionFactoryImpl> element(new CS_ExecutionFactoryImpl());
+	*element =(*this);
+	element->setThisCS_ExecutionFactoryPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CS_ExecutionFactoryImpl::eStaticClass() const
@@ -187,7 +167,7 @@ std::shared_ptr<ecore::EClass> CS_ExecutionFactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ExecutionFactoryImpl::getStereotypeApplication(std::shared_ptr<uml::Class>  stereotype,std::shared_ptr<uml::Element>  element)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ExecutionFactoryImpl::getStereotypeApplication(std::shared_ptr<uml::Class> stereotype,std::shared_ptr<uml::Element> element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -215,7 +195,7 @@ std::shared_ptr<uml::Classifier> CS_ExecutionFactoryImpl::getStereotypeClass(std
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element>  element)
+std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> CS_ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element> element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -325,8 +305,6 @@ std::shared_ptr<Bag<uml::Package>> CS_ExecutionFactoryImpl::getAppliedProfiles()
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
@@ -360,15 +338,7 @@ Any CS_ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Package>::iterator iter = m_appliedProfiles->begin();
-			Bag<uml::Package>::iterator end = m_appliedProfiles->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //144
+			return eAny(getAppliedProfiles()); //144			
 		}
 	}
 	return fUML::Semantics::Loci::ExecutionFactoryImpl::eGet(featureID, resolve, coreType);
@@ -409,7 +379,7 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 				}
 				iterAppliedProfiles++;
 			}
-
+ 
 			iterAppliedProfiles = appliedProfilesList->begin();
 			endAppliedProfiles = appliedProfilesList->end();
 			while (iterAppliedProfiles != endAppliedProfiles)
@@ -473,13 +443,12 @@ void CS_ExecutionFactoryImpl::loadAttributes(std::shared_ptr<persistence::interf
 
 void CS_ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::Loci::LociFactory> modelFactory=PSCS::Semantics::Loci::LociFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Loci::ExecutionFactoryImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -488,11 +457,11 @@ void CS_ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<s
 			std::shared_ptr<Bag<uml::Package>> _appliedProfiles = getAppliedProfiles();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Package> _r = std::dynamic_pointer_cast<uml::Package>(ref);
+				std::shared_ptr<uml::Package>  _r = std::dynamic_pointer_cast<uml::Package>(ref);
 				if (_r != nullptr)
 				{
 					_appliedProfiles->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -515,16 +484,8 @@ void CS_ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interface
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::Loci::LociPackage> package = PSCS::Semantics::Loci::LociPackage::eInstance();
-
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::Package>> appliedProfiles_list = this->getAppliedProfiles();
-		for (std::shared_ptr<uml::Package > object : *appliedProfiles_list)
-		{ 
-			saveHandler->addReferences("appliedProfiles", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Package>("appliedProfiles", this->getAppliedProfiles());
 	}
 	catch (std::exception& e)
 	{

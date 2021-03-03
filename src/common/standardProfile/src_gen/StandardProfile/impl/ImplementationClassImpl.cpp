@@ -44,9 +44,7 @@ ImplementationClassImpl::ImplementationClassImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"ImplementationClass is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ ImplementationClassImpl::ImplementationClassImpl(const ImplementationClassImpl &
 
 std::shared_ptr<ecore::EObject>  ImplementationClassImpl::copy() const
 {
-	std::shared_ptr<ImplementationClassImpl> element(new ImplementationClassImpl(*this));
+	std::shared_ptr<ImplementationClassImpl> element(new ImplementationClassImpl());
+	*element=(*this);
 	element->setThisImplementationClassPtr(element);
 	return element;
 }
 
 ImplementationClassImpl& ImplementationClassImpl::operator=(const ImplementationClassImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ImplementationClass "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

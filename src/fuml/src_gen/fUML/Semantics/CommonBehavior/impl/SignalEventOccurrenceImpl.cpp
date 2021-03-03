@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -32,23 +33,19 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
-
 #include "uml/Trigger.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -73,38 +70,35 @@ SignalEventOccurrenceImpl::~SignalEventOccurrenceImpl()
 }
 
 
-
-SignalEventOccurrenceImpl::SignalEventOccurrenceImpl(const SignalEventOccurrenceImpl & obj):SignalEventOccurrenceImpl()
+SignalEventOccurrenceImpl::SignalEventOccurrenceImpl(const SignalEventOccurrenceImpl & obj): SignalEventOccurrenceImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  SignalEventOccurrenceImpl::copy() const
-{
-	std::shared_ptr<SignalEventOccurrenceImpl> element(new SignalEventOccurrenceImpl(*this));
-	element->setThisSignalEventOccurrencePtr(element);
-	return element;
-}
-
 SignalEventOccurrenceImpl& SignalEventOccurrenceImpl::operator=(const SignalEventOccurrenceImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	EventOccurrenceImpl::operator=(obj);
+	SignalEventOccurrence::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SignalEventOccurrence "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_signalInstance  = obj.getSignalInstance();
-
-	m_target  = obj.getTarget();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> SignalEventOccurrenceImpl::copy() const
+{
+	std::shared_ptr<SignalEventOccurrenceImpl> element(new SignalEventOccurrenceImpl());
+	*element =(*this);
+	element->setThisSignalEventOccurrencePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> SignalEventOccurrenceImpl::eStaticClass() const
@@ -125,7 +119,7 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > SignalEve
 	throw "UnsupportedOperationException";
 }
 
-bool SignalEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger>  trigger)
+bool SignalEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -137,17 +131,15 @@ bool SignalEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger>  trigger)
 /*
 Getter & Setter for reference signalInstance
 */
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance > SignalEventOccurrenceImpl::getSignalInstance() const
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SignalEventOccurrenceImpl::getSignalInstance() const
 {
 //assert(m_signalInstance);
     return m_signalInstance;
 }
-
 void SignalEventOccurrenceImpl::setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance)
 {
     m_signalInstance = _signalInstance;
 }
-
 
 
 //*********************************
@@ -178,7 +170,7 @@ Any SignalEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignalInstance())); //1061
+			return eAny(getSignalInstance()); //1061
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }
@@ -254,13 +246,12 @@ void SignalEventOccurrenceImpl::loadAttributes(std::shared_ptr<persistence::inte
 
 void SignalEventOccurrenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
 	//load BasePackage Nodes
 	EventOccurrenceImpl::loadNode(nodeName, loadHandler);
 }
 
-void SignalEventOccurrenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void SignalEventOccurrenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -294,12 +285,8 @@ void SignalEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfa
 	try
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("signalInstance", this->getSignalInstance());
-
+	// Add references
+		saveHandler->addReference(this->getSignalInstance(), "signalInstance", getSignalInstance()->eClass() != fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getSignalInstance_Class()); 
 	}
 	catch (std::exception& e)
 	{

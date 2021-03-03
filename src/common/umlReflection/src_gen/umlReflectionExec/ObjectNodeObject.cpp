@@ -85,9 +85,8 @@
 using namespace UML;
 
 ObjectNodeObject::ObjectNodeObject(std::shared_ptr<uml::ObjectNode> _element):
-
 	m_ObjectNodeValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ObjectNode());
 }
 
@@ -108,13 +107,16 @@ ObjectNodeObject::~ObjectNodeObject()
 
 std::shared_ptr<ecore::EObject> ObjectNodeObject::copy()
 {
-	std::shared_ptr<ObjectNodeObject> element(new ObjectNodeObject(*this));
+	std::shared_ptr<ObjectNodeObject> element(new ObjectNodeObject());
+	*element=(*this);
 	element->setThisObjectNodeObjectPtr(element);
 	return element;
 }
 
 ObjectNodeObject& ObjectNodeObject::operator=(const ObjectNodeObject & obj)
 {
+	UML::ActivityNodeObject::operator=(obj);
+	UML::TypedElementObject::operator=(obj);
 	return *this;
 }
 

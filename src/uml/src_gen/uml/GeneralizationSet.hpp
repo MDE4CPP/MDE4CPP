@@ -8,23 +8,19 @@
 #define UML_GENERALIZATIONSET_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,54 +35,16 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
 }
 
@@ -97,6 +55,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -105,14 +64,13 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class GeneralizationSet:virtual public PackageableElement
+	class GeneralizationSet: virtual public PackageableElement
 	{
 		public:
  			GeneralizationSet(const GeneralizationSet &) {}
 
 		protected:
 			GeneralizationSet(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -128,18 +86,14 @@ namespace uml
 			generalization->collect(general)->asSet()->size() <= 1
 			*/
 			 
-			virtual bool generalization_same_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool generalization_same_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The Classifier that maps to a GeneralizationSet may neither be a specific nor a general Classifier in any of the Generalization relationships defined for that GeneralizationSet. In other words, a power type may not be an instance of itself nor may its instances be its subclasses.
 			powertype <> null implies generalization->forAll( gen | 
 			    not (gen.general = powertype) and not gen.general.allParents()->includes(powertype) and not (gen.specific = powertype) and not powertype.allParents()->includes(gen.specific)
 			  )
 			*/
 			 
-			virtual bool maps_to_generalization_set(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool maps_to_generalization_set(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -149,26 +103,24 @@ namespace uml
 			*/
 			 
 			virtual bool getIsCovering() const = 0;
-			
 			/*!
 			Indicates (via the associated Generalizations) whether or not the set of specific Classifiers are covering for a particular general classifier. When isCovering is true, every instance of a particular general Classifier is also an instance of at least one of its specific Classifiers for the GeneralizationSet. When isCovering is false, there are one or more instances of the particular general Classifier that are not instances of at least one of its specific Classifiers defined for the GeneralizationSet.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsCovering (bool _isCovering)= 0; 
+			virtual void setIsCovering (bool _isCovering)= 0;
 			/*!
 			Indicates whether or not the set of specific Classifiers in a Generalization relationship have instance in common. If isDisjoint is true, the specific Classifiers for a particular GeneralizationSet have no members in common; that is, their intersection is empty. If isDisjoint is false, the specific Classifiers in a particular GeneralizationSet have one or more members in common; that is, their intersection is not empty.
 			<p>From package UML::Classification.</p>
 			*/
 			 
 			virtual bool getIsDisjoint() const = 0;
-			
 			/*!
 			Indicates whether or not the set of specific Classifiers in a Generalization relationship have instance in common. If isDisjoint is true, the specific Classifiers for a particular GeneralizationSet have no members in common; that is, their intersection is empty. If isDisjoint is false, the specific Classifiers in a particular GeneralizationSet have one or more members in common; that is, their intersection is not empty.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsDisjoint (bool _isDisjoint)= 0; 
+			virtual void setIsDisjoint (bool _isDisjoint)= 0;
 			
 			//*********************************
 			// Reference
@@ -180,21 +132,18 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Generalization>> getGeneralization() const = 0;
 			
-			
 			/*!
 			Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier > getPowertype() const = 0;
-			
+			virtual std::shared_ptr<uml::Classifier> getPowertype() const = 0;
 			/*!
 			Designates the Classifier that is defined as the power type for the associated GeneralizationSet, if there is one.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setPowertype(std::shared_ptr<uml::Classifier> _powertype) = 0;
-			
+			virtual void setPowertype(std::shared_ptr<uml::Classifier>) = 0;
 			
 
 		protected:
@@ -228,7 +177,7 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			std::shared_ptr<uml::Classifier > m_powertype;
+			std::shared_ptr<uml::Classifier> m_powertype;
 
 		public:
 			//*********************************
@@ -239,7 +188,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -249,7 +198,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -258,7 +207,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

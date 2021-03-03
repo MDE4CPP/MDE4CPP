@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ReadIsClassifiedObjectActionImpl(const ReadIsClassifiedObjectActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ReadIsClassifiedObjectActionImpl& operator=(ReadIsClassifiedObjectActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ReadIsClassifiedObjectActionImpl& operator=(ReadIsClassifiedObjectActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisReadIsClassifiedObjectActionPtr(std::weak_ptr<ReadIsClassifiedObjectAction> thisReadIsClassifiedObjectActionPtr);
 
 			//Additional constructors for the containments back reference
-			ReadIsClassifiedObjectActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ReadIsClassifiedObjectActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ReadIsClassifiedObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ReadIsClassifiedObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ReadIsClassifiedObjectActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ReadIsClassifiedObjectActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ReadIsClassifiedObjectActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ReadIsClassifiedObjectActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,30 +52,22 @@ namespace uml
 			result.type = Boolean
 			*/
 			 
-			virtual bool boolean_result(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool boolean_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_input(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool multiplicity_of_input(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_output(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool multiplicity_of_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The object InputPin has no type.
 			object.type = null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -95,13 +78,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsDirect() const ;
-			
 			/*!
 			Indicates whether the input object must be directly classified by the given Classifier or whether it may also be an instance of a specialization of the given Classifier.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDirect (bool _isDirect); 
+			virtual void setIsDirect (bool _isDirect);
 			
 			
 			//*********************************
@@ -112,44 +94,38 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier > getClassifier() const ;
-			
+			virtual std::shared_ptr<uml::Classifier> getClassifier() const ;
 			/*!
 			The Classifier against which the classification of the input object is tested.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setClassifier(std::shared_ptr<uml::Classifier> _classifier) ;
-			
+			virtual void setClassifier(std::shared_ptr<uml::Classifier>) ;
 			/*!
 			The InputPin that holds the object whose classification is to be tested.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getObject() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getObject() const ;
 			/*!
 			The InputPin that holds the object whose classification is to be tested.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object) ;
-			
+			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
 			/*!
 			The OutputPin that holds the Boolean result of the test.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
 			/*!
 			The OutputPin that holds the Boolean result of the test.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -179,7 +155,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -199,7 +175,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

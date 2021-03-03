@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,14 +35,11 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Relationship.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -67,53 +65,40 @@ DirectedRelationshipImpl::~DirectedRelationshipImpl()
 }
 
 //Additional constructor for the containments back reference
-DirectedRelationshipImpl::DirectedRelationshipImpl(std::weak_ptr<uml::Element > par_owner)
+DirectedRelationshipImpl::DirectedRelationshipImpl(std::weak_ptr<uml::Element> par_owner)
 :DirectedRelationshipImpl()
 {
 	m_owner = par_owner;
 }
 
-
-DirectedRelationshipImpl::DirectedRelationshipImpl(const DirectedRelationshipImpl & obj):DirectedRelationshipImpl()
+DirectedRelationshipImpl::DirectedRelationshipImpl(const DirectedRelationshipImpl & obj): DirectedRelationshipImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  DirectedRelationshipImpl::copy() const
-{
-	std::shared_ptr<DirectedRelationshipImpl> element(new DirectedRelationshipImpl(*this));
-	element->setThisDirectedRelationshipPtr(element);
-	return element;
-}
-
 DirectedRelationshipImpl& DirectedRelationshipImpl::operator=(const DirectedRelationshipImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	RelationshipImpl::operator=(obj);
+	DirectedRelationship::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DirectedRelationship "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> DirectedRelationshipImpl::copy() const
+{
+	std::shared_ptr<DirectedRelationshipImpl> element(new DirectedRelationshipImpl());
+	*element =(*this);
+	element->setThisDirectedRelationshipPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DirectedRelationshipImpl::eStaticClass() const
@@ -139,13 +124,9 @@ Getter & Setter for reference source
 
 
 
-
-
 /*
 Getter & Setter for reference target
 */
-
-
 
 
 
@@ -253,27 +234,11 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 	{
 		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = m_source->begin();
-			Bag<uml::Element>::iterator end = m_source->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //764
+			return eAny(getSource()); //764			
 		}
 		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = m_target->begin();
-			Bag<uml::Element>::iterator end = m_target->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //765
+			return eAny(getTarget()); //765			
 		}
 	}
 	return RelationshipImpl::eGet(featureID, resolve, coreType);
@@ -325,13 +290,12 @@ void DirectedRelationshipImpl::loadAttributes(std::shared_ptr<persistence::inter
 
 void DirectedRelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	RelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void DirectedRelationshipImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DirectedRelationshipImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	RelationshipImpl::resolveReferences(featureID, references);
 }
@@ -357,9 +321,6 @@ void DirectedRelationshipImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

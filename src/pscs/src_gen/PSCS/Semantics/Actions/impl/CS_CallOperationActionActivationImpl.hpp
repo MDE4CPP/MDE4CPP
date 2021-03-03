@@ -23,8 +23,8 @@ namespace PSCS::Semantics::Actions
 	{
 		public: 
 			CS_CallOperationActionActivationImpl(const CS_CallOperationActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			CS_CallOperationActionActivationImpl& operator=(CS_CallOperationActionActivationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			CS_CallOperationActionActivationImpl& operator=(CS_CallOperationActionActivationImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;
@@ -33,10 +33,7 @@ namespace PSCS::Semantics::Actions
 			virtual void setThisCS_CallOperationActionActivationPtr(std::weak_ptr<CS_CallOperationActionActivation> thisCS_CallOperationActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			CS_CallOperationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			CS_CallOperationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -46,24 +43,12 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual bool _isCreate(std::shared_ptr<uml::Operation>  operation) ;
-			
-			 
-			virtual void doAction() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ;
-			
-			 
-			virtual bool isCreate(std::shared_ptr<uml::Operation>  operation) ;
-			
-			 
-			virtual bool isOperationProvided(std::shared_ptr<uml::Port>  port,std::shared_ptr<uml::Operation>  operation) ;
-			
-			 
-			virtual bool isOperationRequired(std::shared_ptr<uml::Port>  port,std::shared_ptr<uml::Operation>  operation) ;
-			
-			
+			virtual bool _isCreate(std::shared_ptr<uml::Operation> operation) ; 
+			virtual void doAction() ; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() ; 
+			virtual bool isCreate(std::shared_ptr<uml::Operation> operation) ; 
+			virtual bool isOperationProvided(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) ; 
+			virtual bool isOperationRequired(std::shared_ptr<uml::Port> port,std::shared_ptr<uml::Operation> operation) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -73,7 +58,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -94,7 +79,7 @@ namespace PSCS::Semantics::Actions
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

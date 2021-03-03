@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_COMMONBEHAVIOR_OPAQUEBEHAVIOREXECUTION_HPP
 #define FUML_SEMANTICS_COMMONBEHAVIOR_OPAQUEBEHAVIOREXECUTION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,45 +32,24 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Behavior;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
-	class Execution;
+	class ObjectActivation;
+	class ParameterValue;
 }
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
-
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
-namespace fUML::Semantics::StructuredClassifiers 
+namespace fUML::Semantics::SimpleClassifiers 
 {
-	class Object;
+	class FeatureValue;
 }
-
-namespace fUML::Semantics::CommonBehavior 
+namespace uml 
 {
-	class ObjectActivation;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class ParameterValue;
+	class Behavior;
+	class Classifier;
 }
 
 // base class includes
@@ -83,18 +58,18 @@ namespace fUML::Semantics::CommonBehavior
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class OpaqueBehaviorExecution:virtual public Execution
+	class OpaqueBehaviorExecution: virtual public Execution
 	{
 		public:
  			OpaqueBehaviorExecution(const OpaqueBehaviorExecution &) {}
 
 		protected:
 			OpaqueBehaviorExecution(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -106,12 +81,8 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual void doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  outputParameters) = 0;
-			
-			 
+			virtual void doBody(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputParameters,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameters) = 0; 
 			virtual void execute() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -145,7 +116,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

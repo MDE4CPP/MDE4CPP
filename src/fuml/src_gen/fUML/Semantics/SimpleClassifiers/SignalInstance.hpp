@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_SIMPLECLASSIFIERS_SIGNALINSTANCE_HPP
 #define FUML_SEMANTICS_SIMPLECLASSIFIERS_SIGNALINSTANCE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,25 +31,14 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class CompoundValue;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class FeatureValue;
 }
-
 namespace uml 
 {
 	class Signal;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 
 // base class includes
@@ -62,18 +47,18 @@ namespace fUML::Semantics::Values
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	
-	class SignalInstance:virtual public CompoundValue
+	class SignalInstance: virtual public CompoundValue
 	{
 		public:
  			SignalInstance(const SignalInstance &) {}
 
 		protected:
 			SignalInstance(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -86,8 +71,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -96,11 +79,9 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Signal > getType() const = 0;
+			virtual std::shared_ptr<uml::Signal> getType() const = 0;
 			
-			
-			virtual void setType(std::shared_ptr<uml::Signal> _type) = 0;
-			
+			virtual void setType(std::shared_ptr<uml::Signal>) = 0;
 			
 
 		protected:
@@ -113,7 +94,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Signal > m_type;
+			std::shared_ptr<uml::Signal> m_type;
 
 		public:
 			//*********************************
@@ -128,7 +109,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

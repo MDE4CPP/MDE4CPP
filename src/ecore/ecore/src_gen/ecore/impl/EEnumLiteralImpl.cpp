@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -33,16 +34,12 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EEnum.hpp"
-
 #include "ecore/ENamedElement.hpp"
-
 #include "ecore/EObject.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -68,64 +65,51 @@ EEnumLiteralImpl::~EEnumLiteralImpl()
 }
 
 //Additional constructor for the containments back reference
-EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EEnumLiteralImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
 //Additional constructor for the containments back reference
-EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EEnum > par_eEnum)
+EEnumLiteralImpl::EEnumLiteralImpl(std::weak_ptr<ecore::EEnum> par_eEnum)
 :EEnumLiteralImpl()
 {
 	m_eEnum = par_eEnum;
 }
 
-
-EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj):EEnumLiteralImpl()
+EEnumLiteralImpl::EEnumLiteralImpl(const EEnumLiteralImpl & obj): EEnumLiteralImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  EEnumLiteralImpl::copy() const
-{
-	std::shared_ptr<EEnumLiteralImpl> element(new EEnumLiteralImpl(*this));
-	element->setThisEEnumLiteralPtr(element);
-	return element;
-}
-
 EEnumLiteralImpl& EEnumLiteralImpl::operator=(const EEnumLiteralImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ENamedElementImpl::operator=(obj);
+	EEnumLiteral::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EEnumLiteral "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_instance = obj.getInstance();
 	m_literal = obj.getLiteral();
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
 	m_value = obj.getValue();
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
 	m_eEnum  = obj.getEEnum();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> EEnumLiteralImpl::copy() const
+{
+	std::shared_ptr<EEnumLiteralImpl> element(new EEnumLiteralImpl());
+	*element =(*this);
+	element->setThisEEnumLiteralPtr(element);
+	return element;
 }
 
 std::shared_ptr<EClass> EEnumLiteralImpl::eStaticClass() const
@@ -143,12 +127,10 @@ Any EEnumLiteralImpl::getInstance() const
 {
 	return m_instance;
 }
-
 void EEnumLiteralImpl::setInstance(Any _instance)
 {
 	m_instance = _instance;
 } 
-
 
 
 /*
@@ -158,12 +140,10 @@ std::string EEnumLiteralImpl::getLiteral() const
 {
 	return m_literal;
 }
-
 void EEnumLiteralImpl::setLiteral(std::string _literal)
 {
 	m_literal = _literal;
 } 
-
 
 
 /*
@@ -173,12 +153,10 @@ int EEnumLiteralImpl::getValue() const
 {
 	return m_value;
 }
-
 void EEnumLiteralImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
-
 
 
 //*********************************
@@ -191,13 +169,11 @@ void EEnumLiteralImpl::setValue(int _value)
 /*
 Getter & Setter for reference eEnum
 */
-std::weak_ptr<ecore::EEnum > EEnumLiteralImpl::getEEnum() const
+std::weak_ptr<ecore::EEnum> EEnumLiteralImpl::getEEnum() const
 {
 
     return m_eEnum;
 }
-
-
 
 
 
@@ -253,7 +229,7 @@ Any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEEnum().lock())); //218
+			return eAny(getEEnum().lock()); //218
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
 			return eAny(getInstance()); //216
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:
@@ -365,13 +341,12 @@ void EEnumLiteralImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void EEnumLiteralImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	ENamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EEnumLiteralImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EEnumLiteralImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	ENamedElementImpl::resolveReferences(featureID, references);
 }
@@ -397,8 +372,6 @@ void EEnumLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEEnumLiteral_Attribute_literal()) )
 		{
@@ -409,7 +382,6 @@ void EEnumLiteralImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

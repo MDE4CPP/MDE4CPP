@@ -89,9 +89,8 @@
 using namespace UML;
 
 VariableActionObject::VariableActionObject(std::shared_ptr<uml::VariableAction> _element):
-
 	m_VariableActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_VariableAction());
 }
 
@@ -112,13 +111,15 @@ VariableActionObject::~VariableActionObject()
 
 std::shared_ptr<ecore::EObject> VariableActionObject::copy()
 {
-	std::shared_ptr<VariableActionObject> element(new VariableActionObject(*this));
+	std::shared_ptr<VariableActionObject> element(new VariableActionObject());
+	*element=(*this);
 	element->setThisVariableActionObjectPtr(element);
 	return element;
 }
 
 VariableActionObject& VariableActionObject::operator=(const VariableActionObject & obj)
 {
+	UML::ActionObject::operator=(obj);
 	return *this;
 }
 

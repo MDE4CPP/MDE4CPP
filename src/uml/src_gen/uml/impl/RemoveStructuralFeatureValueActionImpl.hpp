@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			RemoveStructuralFeatureValueActionImpl(const RemoveStructuralFeatureValueActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			RemoveStructuralFeatureValueActionImpl& operator=(RemoveStructuralFeatureValueActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			RemoveStructuralFeatureValueActionImpl& operator=(RemoveStructuralFeatureValueActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisRemoveStructuralFeatureValueActionPtr(std::weak_ptr<RemoveStructuralFeatureValueAction> thisRemoveStructuralFeatureValueActionPtr);
 
 			//Additional constructors for the containments back reference
-			RemoveStructuralFeatureValueActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			RemoveStructuralFeatureValueActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			RemoveStructuralFeatureValueActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			RemoveStructuralFeatureValueActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			RemoveStructuralFeatureValueActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			RemoveStructuralFeatureValueActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			RemoveStructuralFeatureValueActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			RemoveStructuralFeatureValueActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -68,9 +59,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool removeAt_and_value(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool removeAt_and_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -81,13 +70,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsRemoveDuplicates() const ;
-			
 			/*!
 			Specifies whether to remove duplicates of the value in nonunique StructuralFeatures.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsRemoveDuplicates (bool _isRemoveDuplicates); 
+			virtual void setIsRemoveDuplicates (bool _isRemoveDuplicates);
 			
 			
 			//*********************************
@@ -98,16 +86,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getRemoveAt() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getRemoveAt() const ;
 			/*!
 			An InputPin that provides the position of an existing value to remove in ordered, nonunique structural features. The type of the removeAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRemoveAt(std::shared_ptr<uml::InputPin> _removeAt) ;
+			virtual void setRemoveAt(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -137,7 +123,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -157,7 +143,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

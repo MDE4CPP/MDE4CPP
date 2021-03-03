@@ -23,8 +23,8 @@ namespace uml
 	{
 		public: 
 			VariableImpl(const VariableImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			VariableImpl& operator=(VariableImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			VariableImpl& operator=(VariableImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -33,26 +33,15 @@ namespace uml
 			virtual void setThisVariablePtr(std::weak_ptr<Variable> thisVariablePtr);
 
 			//Additional constructors for the containments back reference
-			VariableImpl(std::weak_ptr<uml::Activity > par_activityScope);
-
-
+			VariableImpl(std::weak_ptr<uml::Activity> par_activityScope);
 			//Additional constructors for the containments back reference
-			VariableImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			VariableImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			VariableImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			VariableImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			VariableImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			VariableImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-			VariableImpl(std::weak_ptr<uml::StructuredActivityNode > par_scope);
-
-
-
+			VariableImpl(std::weak_ptr<uml::StructuredActivityNode> par_scope);
 
 		public:
 			//destructor
@@ -69,9 +58,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual bool isAccessibleBy(std::shared_ptr<uml::Action>  a) ;
-			
-			
+			virtual bool isAccessibleBy(std::shared_ptr<uml::Action> a) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -86,30 +73,26 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Activity > getActivityScope() const ;
-			
+			virtual std::weak_ptr<uml::Activity> getActivityScope() const ;
 			/*!
 			An Activity that owns the Variable.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setActivityScope(std::shared_ptr<uml::Activity> _activityScope) ;
-			
+			virtual void setActivityScope(std::weak_ptr<uml::Activity>) ;
 			/*!
 			A StructuredActivityNode that owns the Variable.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::StructuredActivityNode > getScope() const ;
-			
+			virtual std::weak_ptr<uml::StructuredActivityNode> getScope() const ;
 			/*!
 			A StructuredActivityNode that owns the Variable.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setScope(std::shared_ptr<uml::StructuredActivityNode> _scope) ;
+			virtual void setScope(std::weak_ptr<uml::StructuredActivityNode>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -119,7 +102,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -129,7 +112,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -144,7 +127,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIVITIES_DATASTORENODEACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIVITIES_DATASTORENODEACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,30 +31,16 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class Token;
 }
-
 namespace uml 
 {
 	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class CentralBufferNodeActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
 }
 
 // base class includes
@@ -67,18 +49,18 @@ namespace fUML::Semantics::Activities
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::Activities 
 {
 	
-	class DataStoreNodeActivation:virtual public CentralBufferNodeActivation
+	class DataStoreNodeActivation: virtual public CentralBufferNodeActivation
 	{
 		public:
  			DataStoreNodeActivation(const DataStoreNodeActivation &) {}
 
 		protected:
 			DataStoreNodeActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -90,12 +72,8 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token) = 0;
-			
-			 
-			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token>  token) = 0;
-			
-			
+			virtual void addToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) = 0; 
+			virtual int removeToken(std::shared_ptr<fUML::Semantics::Activities::Token> token) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -129,7 +107,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

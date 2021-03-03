@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,30 +36,19 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -84,7 +74,7 @@ NamespaceImpl::~NamespaceImpl()
 }
 
 //Additional constructor for the containments back reference
-NamespaceImpl::NamespaceImpl(std::weak_ptr<uml::Namespace > par_namespace)
+NamespaceImpl::NamespaceImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :NamespaceImpl()
 {
 	m_namespace = par_namespace;
@@ -92,120 +82,144 @@ NamespaceImpl::NamespaceImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-NamespaceImpl::NamespaceImpl(std::weak_ptr<uml::Element > par_owner)
+NamespaceImpl::NamespaceImpl(std::weak_ptr<uml::Element> par_owner)
 :NamespaceImpl()
 {
 	m_owner = par_owner;
 }
 
-
-NamespaceImpl::NamespaceImpl(const NamespaceImpl & obj):NamespaceImpl()
+NamespaceImpl::NamespaceImpl(const NamespaceImpl & obj): NamespaceImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  NamespaceImpl::copy() const
-{
-	std::shared_ptr<NamespaceImpl> element(new NamespaceImpl(*this));
-	element->setThisNamespacePtr(element);
-	return element;
-}
-
 NamespaceImpl& NamespaceImpl::operator=(const NamespaceImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	Namespace::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Namespace "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
 	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
-	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
+	std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> elementImportContainer = getElementImport();
+	if(nullptr != elementImportContainer )
 	{
-		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy())));
+		int size = elementImportContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _elementImport=(*elementImportContainer)[i];
+			if(nullptr != _elementImport)
+			{
+				elementImportContainer->push_back(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container elementImport."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageableElement>> _importedMemberList = obj.getImportedMember();
-	for(std::shared_ptr<uml::PackageableElement> _importedMember : *_importedMemberList)
+	else
 	{
-		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr elementImport."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_importedMember" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
+	std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> importedMemberContainer = getImportedMember();
+	if(nullptr != importedMemberContainer )
 	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
+		int size = importedMemberContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _importedMember=(*importedMemberContainer)[i];
+			if(nullptr != _importedMember)
+			{
+				importedMemberContainer->push_back(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container importedMember."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
+	else
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr importedMember."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
-	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
+	std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> ownedRuleContainer = getOwnedRule();
+	if(nullptr != ownedRuleContainer )
 	{
-		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy())));
+		int size = ownedRuleContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _ownedRule=(*ownedRuleContainer)[i];
+			if(nullptr != _ownedRule)
+			{
+				ownedRuleContainer->push_back(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container ownedRule."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedRule" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
-	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
+	else
 	{
-		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr ownedRule."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
-	#endif
-
+	std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> packageImportContainer = getPackageImport();
+	if(nullptr != packageImportContainer )
+	{
+		int size = packageImportContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _packageImport=(*packageImportContainer)[i];
+			if(nullptr != _packageImport)
+			{
+				packageImportContainer->push_back(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container packageImport."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr packageImport."<< std::endl;)
+	}
 	/*SubsetUnion*/
 	m_elementImport->initSubsetUnion(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value SubsetUnion: " << "m_elementImport - SubsetUnion<uml::ElementImport, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-
 	/*SubsetUnion*/
 	m_ownedRule->initSubsetUnion(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value SubsetUnion: " << "m_ownedRule - SubsetUnion<uml::Constraint, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-
 	/*SubsetUnion*/
 	m_packageImport->initSubsetUnion(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value SubsetUnion: " << "m_packageImport - SubsetUnion<uml::PackageImport, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> NamespaceImpl::copy() const
+{
+	std::shared_ptr<NamespaceImpl> element(new NamespaceImpl());
+	*element =(*this);
+	element->setThisNamespacePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> NamespaceImpl::eStaticClass() const
@@ -220,31 +234,31 @@ std::shared_ptr<ecore::EClass> NamespaceImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool NamespaceImpl::cannot_import_ownedMembers(Any diagnostics,std::map <   Any, Any >  context)
+bool NamespaceImpl::cannot_import_ownedMembers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamespaceImpl::cannot_import_self(Any diagnostics,std::map <   Any, Any >  context)
+bool NamespaceImpl::cannot_import_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::ElementImport> NamespaceImpl::createElementImport(std::shared_ptr<uml::PackageableElement>  element,uml::VisibilityKind visibility)
+std::shared_ptr<uml::ElementImport> NamespaceImpl::createElementImport(std::shared_ptr<uml::PackageableElement> element,uml::VisibilityKind visibility)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(std::shared_ptr<uml::Package>  package_,uml::VisibilityKind visibility)
+std::shared_ptr<uml::PackageImport> NamespaceImpl::createPackageImport(std::shared_ptr<uml::Package> package_,uml::VisibilityKind visibility)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement> >  imps)
+std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement>> imps)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -268,7 +282,7 @@ std::shared_ptr<Bag<uml::Package> > NamespaceImpl::getImportedPackages()
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<std::string> > NamespaceImpl::getNamesOfMember(std::shared_ptr<uml::NamedElement>  element)
+std::shared_ptr<Bag<std::string> > NamespaceImpl::getNamesOfMember(std::shared_ptr<uml::NamedElement> element)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -280,7 +294,7 @@ std::shared_ptr<Bag<uml::NamedElement> > NamespaceImpl::getOwnedMembers()
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::importMembers(std::shared_ptr<Bag<uml::PackageableElement> >  imps)
+std::shared_ptr<Bag<uml::PackageableElement> > NamespaceImpl::importMembers(std::shared_ptr<Bag<uml::PackageableElement>> imps)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -292,7 +306,7 @@ bool NamespaceImpl::membersAreDistinguishable()
 	throw "UnsupportedOperationException";
 }
 
-bool NamespaceImpl::members_distinguishable(Any diagnostics,std::map <   Any, Any >  context)
+bool NamespaceImpl::members_distinguishable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -327,8 +341,6 @@ std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> NamespaceImpl::ge
 
 
 
-
-
 /*
 Getter & Setter for reference importedMember
 */
@@ -355,8 +367,6 @@ std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> NamespaceImp
 
 
 
-
-
 /*
 Getter & Setter for reference member
 */
@@ -364,13 +374,9 @@ Getter & Setter for reference member
 
 
 
-
-
 /*
 Getter & Setter for reference ownedMember
 */
-
-
 
 
 
@@ -401,8 +407,6 @@ std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> NamespaceImpl::
 
 
 
-
-
 /*
 Getter & Setter for reference packageImport
 */
@@ -426,8 +430,6 @@ std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> NamespaceImpl::ge
 
     return m_packageImport;
 }
-
-
 
 
 
@@ -484,7 +486,7 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> 
 	return m_ownedMember;
 }
 
-std::weak_ptr<uml::Element > NamespaceImpl::getOwner() const
+std::weak_ptr<uml::Element> NamespaceImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -524,75 +526,27 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ElementImport>::iterator iter = m_elementImport->begin();
-			Bag<uml::ElementImport>::iterator end = m_elementImport->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //15610
+			return eAny(getElementImport()); //15610			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageableElement>::iterator iter = m_importedMember->begin();
-			Bag<uml::PackageableElement>::iterator end = m_importedMember->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //15613
+			return eAny(getImportedMember()); //15613			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_member->begin();
-			Bag<uml::NamedElement>::iterator end = m_member->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //15614
+			return eAny(getMember()); //15614			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_ownedMember->begin();
-			Bag<uml::NamedElement>::iterator end = m_ownedMember->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //15612
+			return eAny(getOwnedMember()); //15612			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_ownedRule->begin();
-			Bag<uml::Constraint>::iterator end = m_ownedRule->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1569
+			return eAny(getOwnedRule()); //1569			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageImport>::iterator iter = m_packageImport->begin();
-			Bag<uml::PackageImport>::iterator end = m_packageImport->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //15611
+			return eAny(getPackageImport()); //15611			
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
@@ -643,7 +597,7 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 				}
 				iterElementImport++;
 			}
-
+ 
 			iterElementImport = elementImportList->begin();
 			endElementImport = elementImportList->end();
 			while (iterElementImport != endElementImport)
@@ -679,7 +633,7 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 				}
 				iterOwnedRule++;
 			}
-
+ 
 			iterOwnedRule = ownedRuleList->begin();
 			endOwnedRule = ownedRuleList->end();
 			while (iterOwnedRule != endOwnedRule)
@@ -715,7 +669,7 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 				}
 				iterPackageImport++;
 			}
-
+ 
 			iterPackageImport = packageImportList->begin();
 			endPackageImport = packageImportList->end();
 			while (iterPackageImport != endPackageImport)
@@ -760,7 +714,6 @@ void NamespaceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 
 void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -771,12 +724,9 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "ElementImport";
 			}
-			std::shared_ptr<ecore::EObject> elementImport = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ELEMENTIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE);
-			if (elementImport != nullptr)
-			{
-				loadHandler->handleChild(elementImport);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::ElementImport>(this->getElementImport());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("ownedMember") == 0 )
@@ -787,12 +737,9 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> ownedMember = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE);
-			if (ownedMember != nullptr)
-			{
-				loadHandler->handleChild(ownedMember);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::NamedElement>(this->getOwnedMember());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("ownedRule") == 0 )
@@ -802,16 +749,9 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "Constraint";
 			}
-			// TODO here are multiple containers of same object. Check this!
-			std::cout << "| ERROR    | " << __PRETTY_FUNCTION__ << " 'ownedRule' has more then one back-reference Object." << std::endl;
-			std::shared_ptr<ecore::EObject> ownedRule;
-				ownedRule = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT);
-				ownedRule = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE);
-			if (ownedRule != nullptr)
-			{
-				loadHandler->handleChild(ownedRule);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Constraint>(this->getOwnedRule());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("packageImport") == 0 )
@@ -821,12 +761,9 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "PackageImport";
 			}
-			std::shared_ptr<ecore::EObject> packageImport = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE);
-			if (packageImport != nullptr)
-			{
-				loadHandler->handleChild(packageImport);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::PackageImport>(this->getPackageImport());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -841,7 +778,7 @@ void NamespaceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void NamespaceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void NamespaceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	NamedElementImpl::resolveReferences(featureID, references);
 }
@@ -867,41 +804,25 @@ void NamespaceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
-
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'elementImport'
-		std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> list_elementImport = this->getElementImport();
-		for (std::shared_ptr<uml::ElementImport> elementImport : *list_elementImport) 
-		{
-			saveHandler->addReference(elementImport, "elementImport", elementImport->eClass() !=uml::umlPackage::eInstance()->getElementImport_Class());
-		}
+
+		saveHandler->addReferences<uml::ElementImport>("elementImport", this->getElementImport());
 
 		// Save 'ownedMember'
-		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> list_ownedMember = this->getOwnedMember();
-		for (std::shared_ptr<uml::NamedElement> ownedMember : *list_ownedMember) 
-		{
-			saveHandler->addReference(ownedMember, "ownedMember", ownedMember->eClass() !=uml::umlPackage::eInstance()->getNamedElement_Class());
-		}
+
+		saveHandler->addReferences<uml::NamedElement>("ownedMember", this->getOwnedMember());
 
 		// Save 'ownedRule'
-		std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> list_ownedRule = this->getOwnedRule();
-		for (std::shared_ptr<uml::Constraint> ownedRule : *list_ownedRule) 
-		{
-			saveHandler->addReference(ownedRule, "ownedRule", ownedRule->eClass() !=uml::umlPackage::eInstance()->getConstraint_Class());
-		}
+
+		saveHandler->addReferences<uml::Constraint>("ownedRule", this->getOwnedRule());
 
 		// Save 'packageImport'
-		std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> list_packageImport = this->getPackageImport();
-		for (std::shared_ptr<uml::PackageImport> packageImport : *list_packageImport) 
-		{
-			saveHandler->addReference(packageImport, "packageImport", packageImport->eClass() !=uml::umlPackage::eInstance()->getPackageImport_Class());
-		}
+
+		saveHandler->addReferences<uml::PackageImport>("packageImport", this->getPackageImport());
 	}
 	catch (std::exception& e)
 	{

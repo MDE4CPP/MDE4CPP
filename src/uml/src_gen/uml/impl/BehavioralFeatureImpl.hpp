@@ -23,8 +23,8 @@ namespace uml
 	{
 		public: 
 			BehavioralFeatureImpl(const BehavioralFeatureImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			BehavioralFeatureImpl& operator=(BehavioralFeatureImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			BehavioralFeatureImpl& operator=(BehavioralFeatureImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -33,14 +33,9 @@ namespace uml
 			virtual void setThisBehavioralFeaturePtr(std::weak_ptr<BehavioralFeature> thisBehavioralFeaturePtr);
 
 			//Additional constructors for the containments back reference
-			BehavioralFeatureImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			BehavioralFeatureImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			BehavioralFeatureImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			BehavioralFeatureImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -54,31 +49,23 @@ namespace uml
 			isAbstract implies method->isEmpty()
 			*/
 			 
-			virtual bool abstract_no_method(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool abstract_no_method(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Creates a return result parameter with the specified name and type.
 			*/
 			 
-			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type>  type) ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Parameter> createReturnResult(std::string name,std::shared_ptr<uml::Type> type) ;/*!
 			The ownedParameters with direction in and inout.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::_'in' or direction=ParameterDirectionKind::inout))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() ;/*!
 			The ownedParameters with direction out, inout, or return.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
 			<p>From package UML::Classification.</p>
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -89,26 +76,24 @@ namespace uml
 			*/
 			 
 			virtual uml::CallConcurrencyKind getConcurrency() const ;
-			
 			/*!
 			Specifies the semantics of concurrent calls to the same passive instance (i.e., an instance originating from a Class with isActive being false). Active instances control access to their own BehavioralFeatures.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setConcurrency (uml::CallConcurrencyKind _concurrency); 
+			virtual void setConcurrency (uml::CallConcurrencyKind _concurrency);
 			/*!
 			If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
 			<p>From package UML::Classification.</p>
 			*/
 			 
 			virtual bool getIsAbstract() const ;
-			
 			/*!
 			If true, then the BehavioralFeature does not have an implementation, and one must be supplied by a more specific Classifier. If false, the BehavioralFeature must have an implementation in the Classifier or one must be inherited.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsAbstract (bool _isAbstract); 
+			virtual void setIsAbstract (bool _isAbstract);
 			
 			
 			//*********************************
@@ -121,7 +106,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Behavior>> getMethod() const ;
 			
-			
 			/*!
 			The ordered set of formal Parameters of this BehavioralFeature.
 			<p>From package UML::Classification.</p>
@@ -129,14 +113,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> getOwnedParameter() const ;
 			
-			
 			/*!
 			The ParameterSets owned by this BehavioralFeature.
 			<p>From package UML::Classification.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> getOwnedParameterSet() const ;
-			
 			
 			/*!
 			The Types representing exceptions that may be raised during an invocation of this BehavioralFeature.
@@ -146,7 +128,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Type>> getRaisedException() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -171,7 +152,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -186,7 +167,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

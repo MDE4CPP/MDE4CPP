@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ConditionalNodeImpl(const ConditionalNodeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ConditionalNodeImpl& operator=(ConditionalNodeImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ConditionalNodeImpl& operator=(ConditionalNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,29 +32,16 @@ namespace uml
 			virtual void setThisConditionalNodePtr(std::weak_ptr<ConditionalNode> thisConditionalNodePtr);
 
 			//Additional constructors for the containments back reference
-			ConditionalNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id);
-
-
+			ConditionalNodeImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id);
 			//Additional constructors for the containments back reference
-
-
 			//Additional constructors for the containments back reference
-			ConditionalNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ConditionalNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ConditionalNodeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ConditionalNodeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ConditionalNodeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ConditionalNodeImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ConditionalNodeImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup);
-
-
-
+			ConditionalNodeImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup);
 
 		public:
 			//destructor
@@ -68,16 +55,12 @@ namespace uml
 			clause->closure(predecessorClause)->intersection(clause)->isEmpty()
 			*/
 			 
-			virtual bool clause_no_predecessor(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool clause_no_predecessor(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The union of the ExecutableNodes in the test and body parts of all clauses must be the same as the subset of nodes contained in the ConditionalNode (considered as a StructuredActivityNode) that are ExecutableNodes.
 			clause.test->union(clause._'body') = node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)
 			*/
 			 
-			virtual bool executable_nodes(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool executable_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Each clause of a ConditionalNode must have the same number of bodyOutput pins as the ConditionalNode has result OutputPins, and each clause bodyOutput Pin must be compatible with the corresponding result OutputPin (by positional order) in type, multiplicity, ordering, and uniqueness.
 			clause->forAll(
 				bodyOutput->size()=self.result->size() and
@@ -88,31 +71,23 @@ namespace uml
 					bodyOutput->at(i).compatibleWith(result->at(i))))
 			*/
 			 
-			virtual bool matching_output_pins(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool matching_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A ConditionalNode has no InputPins.
 			input->isEmpty()
 			*/
 			 
-			virtual bool no_input_pins(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool no_input_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			No ExecutableNode in the ConditionNode may appear in the test or body part of more than one clause of a ConditionalNode.
 			node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)->forAll(n | 
 				self.clause->select(test->union(_'body')->includes(n))->size()=1)
 			*/
 			 
-			virtual bool one_clause_with_executable_node(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool one_clause_with_executable_node(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The result OutputPins have no incoming edges.
 			result.incoming->isEmpty()
 			*/
 			 
-			virtual bool result_no_incoming(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool result_no_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -123,26 +98,24 @@ namespace uml
 			*/
 			 
 			virtual bool getIsAssured() const ;
-			
 			/*!
 			If true, the modeler asserts that the test for at least one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsAssured (bool _isAssured); 
+			virtual void setIsAssured (bool _isAssured);
 			/*!
 			If true, the modeler asserts that the test for at most one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
 			virtual bool getIsDeterminate() const ;
-			
 			/*!
 			If true, the modeler asserts that the test for at most one Clause of the ConditionalNode will succeed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDeterminate (bool _isDeterminate); 
+			virtual void setIsDeterminate (bool _isDeterminate);
 			
 			
 			//*********************************
@@ -155,7 +128,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Clause, uml::Element>> getClause() const ;
 			
-			
 			/*!
 			The OutputPins that onto which are moved values from the bodyOutputs of the Clause selected for execution.
 			<p>From package UML::Actions.</p>
@@ -163,10 +135,8 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::OutputPin>> getResult() const ;
 			
-			
 			/*Additional Setter for 'StructuredActivityNode::structuredNodeOutput' redefined by reference 'result'*/
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -216,7 +186,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -236,7 +206,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

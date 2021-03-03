@@ -7,21 +7,17 @@
 #ifndef UML_INVOCATIONACTION_HPP
 #define UML_INVOCATIONACTION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class SubsetUnion;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,104 +32,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -144,6 +60,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -152,14 +69,13 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class InvocationAction:virtual public Action
+	class InvocationAction: virtual public Action
 	{
 		public:
  			InvocationAction(const InvocationAction &) {}
 
 		protected:
 			InvocationAction(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -185,21 +101,18 @@ namespace uml
 			
 			virtual std::shared_ptr<SubsetUnion<uml::InputPin, uml::InputPin>> getArgument() const = 0;
 			
-			
 			/*!
 			For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Port > getOnPort() const = 0;
-			
+			virtual std::shared_ptr<uml::Port> getOnPort() const = 0;
 			/*!
 			For CallOperationActions, SendSignalActions, and SendObjectActions, an optional Port of the target object through which the invocation request is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setOnPort(std::shared_ptr<uml::Port> _onPort) = 0;
-			
+			virtual void setOnPort(std::shared_ptr<uml::Port>) = 0;
 			
 
 		protected:
@@ -221,7 +134,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::Port > m_onPort;
+			std::shared_ptr<uml::Port> m_onPort;
 
 		public:
 			//*********************************
@@ -247,7 +160,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -261,7 +174,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

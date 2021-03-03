@@ -54,9 +54,8 @@
 using namespace UML;
 
 ClauseObject::ClauseObject(std::shared_ptr<uml::Clause> _element):
-
 	m_ClauseValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Clause());
 }
 
@@ -77,13 +76,15 @@ ClauseObject::~ClauseObject()
 
 std::shared_ptr<ecore::EObject> ClauseObject::copy()
 {
-	std::shared_ptr<ClauseObject> element(new ClauseObject(*this));
+	std::shared_ptr<ClauseObject> element(new ClauseObject());
+	*element=(*this);
 	element->setThisClauseObjectPtr(element);
 	return element;
 }
 
 ClauseObject& ClauseObject::operator=(const ClauseObject & obj)
 {
+	UML::ElementObject::operator=(obj);
 	return *this;
 }
 

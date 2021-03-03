@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_ACTIVITIES_EXPANSIONREGIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIVITIES_EXPANSIONREGIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,70 +32,27 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ActionActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ExpansionActivationGroup;
-}
-
-namespace uml 
-{
-	class ExpansionNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ExpansionNodeActivation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class PinActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class ExpansionActivationGroup;
+	class ExpansionNodeActivation;
 	class Token;
-}
-
-namespace fUML::Semantics::Activities 
-{
 	class TokenSet;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
+	class ExpansionNode;
 }
 
 // base class includes
@@ -108,18 +61,18 @@ namespace fUML::Semantics::Activities
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::Activities 
 {
 	
-	class ExpansionRegionActivation:virtual public fUML::Semantics::Actions::ActionActivation
+	class ExpansionRegionActivation: virtual public fUML::Semantics::Actions::ActionActivation
 	{
 		public:
  			ExpansionRegionActivation(const ExpansionRegionActivation &) {}
 
 		protected:
 			ExpansionRegionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -131,56 +84,27 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual void doAction() = 0;
-			
-			 
-			virtual void doOutput() = 0;
-			
-			 
-			virtual void doStructuredActivity() = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node) = 0;
-			
-			 
-			virtual bool isSuspended() = 0;
-			
-			 
-			virtual int numberOfValues() = 0;
-			
-			 
-			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) = 0;
-			
-			 
-			virtual void runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) = 0;
-			
-			 
-			virtual void runIterative() = 0;
-			
-			 
-			virtual void runParallel() = 0;
-			
-			 
-			virtual void sendOffers() = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0;
-			
-			 
-			virtual void terminate() = 0;
-			
-			 
-			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) = 0;
-			
-			
+			virtual void doAction() = 0; 
+			virtual void doOutput() = 0; 
+			virtual void doStructuredActivity() = 0; 
+			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode> node) = 0; 
+			virtual bool isSuspended() = 0; 
+			virtual int numberOfValues() = 0; 
+			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) = 0; 
+			virtual void runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) = 0; 
+			virtual void runIterative() = 0; 
+			virtual void runParallel() = 0; 
+			virtual void sendOffers() = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() = 0; 
+			virtual void terminate() = 0; 
+			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
 			virtual int getNext() const = 0;
-			
 			 
-			virtual void setNext (int _next)= 0; 
+			virtual void setNext (int _next)= 0;
 			
 			//*********************************
 			// Reference
@@ -189,13 +113,10 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> getActivationGroups() const = 0;
 			
 			
-			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputExpansionTokens() const = 0;
 			
 			
-			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputTokens() const = 0;
-			
 			
 			
 
@@ -229,7 +150,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

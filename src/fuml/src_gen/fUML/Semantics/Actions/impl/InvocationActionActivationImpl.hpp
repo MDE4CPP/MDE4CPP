@@ -23,8 +23,8 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			InvocationActionActivationImpl(const InvocationActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			InvocationActionActivationImpl& operator=(InvocationActionActivationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			InvocationActionActivationImpl& operator=(InvocationActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
@@ -33,10 +33,7 @@ namespace fUML::Semantics::Actions
 			virtual void setThisInvocationActionActivationPtr(std::weak_ptr<InvocationActionActivation> thisInvocationActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			InvocationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			InvocationActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -55,7 +52,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -76,7 +73,7 @@ namespace fUML::Semantics::Actions
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

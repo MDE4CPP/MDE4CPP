@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,26 +36,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Event.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/TimeExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -80,7 +72,7 @@ TimeEventImpl::~TimeEventImpl()
 }
 
 //Additional constructor for the containments back reference
-TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
+TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :TimeEventImpl()
 {
 	m_namespace = par_namespace;
@@ -88,14 +80,14 @@ TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Element > par_owner)
+TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Element> par_owner)
 :TimeEventImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :TimeEventImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -103,81 +95,47 @@ TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
 }
 
 //Additional constructor for the containments back reference
-TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+TimeEventImpl::TimeEventImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :TimeEventImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-TimeEventImpl::TimeEventImpl(const TimeEventImpl & obj):TimeEventImpl()
+TimeEventImpl::TimeEventImpl(const TimeEventImpl & obj): TimeEventImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  TimeEventImpl::copy() const
-{
-	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl(*this));
-	element->setThisTimeEventPtr(element);
-	return element;
-}
-
 TimeEventImpl& TimeEventImpl::operator=(const TimeEventImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	EventImpl::operator=(obj);
+	TimeEvent::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TimeEvent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_isRelative = obj.getIsRelative();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
 	if(obj.getWhen()!=nullptr)
 	{
 		m_when = std::dynamic_pointer_cast<uml::TimeExpression>(obj.getWhen()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_when" << std::endl;
-	#endif
-
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> TimeEventImpl::copy() const
+{
+	std::shared_ptr<TimeEventImpl> element(new TimeEventImpl());
+	*element =(*this);
+	element->setThisTimeEventPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> TimeEventImpl::eStaticClass() const
@@ -195,18 +153,16 @@ bool TimeEventImpl::getIsRelative() const
 {
 	return m_isRelative;
 }
-
 void TimeEventImpl::setIsRelative(bool _isRelative)
 {
 	m_isRelative = _isRelative;
 } 
 
 
-
 //*********************************
 // Operations
 //*********************************
-bool TimeEventImpl::when_non_negative(Any diagnostics,std::map <   Any, Any >  context)
+bool TimeEventImpl::when_non_negative(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -218,23 +174,21 @@ bool TimeEventImpl::when_non_negative(Any diagnostics,std::map <   Any, Any >  c
 /*
 Getter & Setter for reference when
 */
-std::shared_ptr<uml::TimeExpression > TimeEventImpl::getWhen() const
+std::shared_ptr<uml::TimeExpression> TimeEventImpl::getWhen() const
 {
 //assert(m_when);
     return m_when;
 }
-
 void TimeEventImpl::setWhen(std::shared_ptr<uml::TimeExpression> _when)
 {
     m_when = _when;
 }
 
 
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > TimeEventImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> TimeEventImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -254,7 +208,7 @@ std::shared_ptr<Union<uml::Element>> TimeEventImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > TimeEventImpl::getOwner() const
+std::weak_ptr<uml::Element> TimeEventImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -305,7 +259,7 @@ Any TimeEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_ISRELATIVE:
 			return eAny(getIsRelative()); //23712
 		case uml::umlPackage::TIMEEVENT_ATTRIBUTE_WHEN:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getWhen())); //23713
+			return eAny(getWhen()); //23713
 	}
 	return EventImpl::eGet(featureID, resolve, coreType);
 }
@@ -392,7 +346,6 @@ void TimeEventImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 
 void TimeEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -403,13 +356,9 @@ void TimeEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 			{
 				typeName = "TimeExpression";
 			}
-			std::shared_ptr<uml::TimeExpression> when = std::dynamic_pointer_cast<uml::TimeExpression>(modelFactory->create(typeName));
-			if (when != nullptr)
-			{
-				this->setWhen(when);
-				loadHandler->handleChild(when);
-			}
-			return;
+			loadHandler->handleChild(this->getWhen()); 
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -424,7 +373,7 @@ void TimeEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::
 	EventImpl::loadNode(nodeName, loadHandler);
 }
 
-void TimeEventImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TimeEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	EventImpl::resolveReferences(featureID, references);
 }
@@ -457,20 +406,17 @@ void TimeEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'when'
-		std::shared_ptr<uml::TimeExpression > when = this->getWhen();
+		std::shared_ptr<uml::TimeExpression> when = this->getWhen();
 		if (when != nullptr)
 		{
 			saveHandler->addReference(when, "when", when->eClass() != package->getTimeExpression_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getTimeEvent_Attribute_isRelative()) )
 		{
 			saveHandler->addAttribute("isRelative", this->getIsRelative());
 		}
-
 	}
 	catch (std::exception& e)
 	{

@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_COMMONBEHAVIOR_SIGNALEVENTOCCURRENCE_HPP
 #define FUML_SEMANTICS_COMMONBEHAVIOR_SIGNALEVENTOCCURRENCE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,27 +31,19 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::CommonBehavior 
-{
-	class EventOccurrence;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ParameterValue;
 }
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Reference;
-}
-
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class SignalInstance;
 }
-
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Reference;
+}
 namespace uml 
 {
 	class Trigger;
@@ -67,18 +55,18 @@ namespace uml
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class SignalEventOccurrence:virtual public EventOccurrence
+	class SignalEventOccurrence: virtual public EventOccurrence
 	{
 		public:
  			SignalEventOccurrence(const SignalEventOccurrence &) {}
 
 		protected:
 			SignalEventOccurrence(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -90,12 +78,8 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
-			
-			 
-			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) = 0;
-			
-			
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0; 
+			virtual bool match(std::shared_ptr<uml::Trigger> trigger) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -104,11 +88,9 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance > getSignalInstance() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> getSignalInstance() const = 0;
 			
-			
-			virtual void setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance) = 0;
-			
+			virtual void setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>) = 0;
 			
 
 		protected:
@@ -121,7 +103,7 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance > m_signalInstance;
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> m_signalInstance;
 
 		public:
 			//*********************************
@@ -136,7 +118,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

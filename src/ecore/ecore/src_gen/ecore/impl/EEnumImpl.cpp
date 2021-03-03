@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -33,20 +34,14 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EDataType.hpp"
-
 #include "ecore/EEnumLiteral.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EPackage.hpp"
-
 #include "ecore/ETypeParameter.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -72,88 +67,74 @@ EEnumImpl::~EEnumImpl()
 }
 
 //Additional constructor for the containments back reference
-EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EEnumImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
 //Additional constructor for the containments back reference
-EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EPackage > par_ePackage)
+EEnumImpl::EEnumImpl(std::weak_ptr<ecore::EPackage> par_ePackage)
 :EEnumImpl()
 {
 	m_ePackage = par_ePackage;
 }
 
-
-EEnumImpl::EEnumImpl(const EEnumImpl & obj):EEnumImpl()
+EEnumImpl::EEnumImpl(const EEnumImpl & obj): EEnumImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  EEnumImpl::copy() const
-{
-	std::shared_ptr<EEnumImpl> element(new EEnumImpl(*this));
-	element->setThisEEnumPtr(element);
-	return element;
-}
-
 EEnumImpl& EEnumImpl::operator=(const EEnumImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	EDataTypeImpl::operator=(obj);
+	EEnum::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EEnum "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_defaultValue = obj.getDefaultValue();
-	m_instanceClass = obj.getInstanceClass();
-	m_instanceClassName = obj.getInstanceClassName();
-	m_instanceTypeName = obj.getInstanceTypeName();
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
-	m_serializable = obj.isSerializable();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
-	m_ePackage  = obj.getEPackage();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
+	std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> eLiteralsContainer = getELiterals();
+	if(nullptr != eLiteralsContainer )
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
+		int size = eLiteralsContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _eLiterals=(*eLiteralsContainer)[i];
+			if(nullptr != _eLiterals)
+			{
+				eLiteralsContainer->push_back(std::dynamic_pointer_cast<ecore::EEnumLiteral>(_eLiterals->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eLiterals."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EEnumLiteral>> _eLiteralsList = obj.getELiterals();
-	for(std::shared_ptr<ecore::EEnumLiteral> _eLiterals : *_eLiteralsList)
+	else
 	{
-		this->getELiterals()->add(std::shared_ptr<ecore::EEnumLiteral>(std::dynamic_pointer_cast<ecore::EEnumLiteral>(_eLiterals->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eLiterals."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eLiterals" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::ETypeParameter>> _eTypeParametersList = obj.getETypeParameters();
-	for(std::shared_ptr<ecore::ETypeParameter> _eTypeParameters : *_eTypeParametersList)
-	{
-		this->getETypeParameters()->add(std::shared_ptr<ecore::ETypeParameter>(std::dynamic_pointer_cast<ecore::ETypeParameter>(_eTypeParameters->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eTypeParameters" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_eLiterals->initSubset(getEContens());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_eLiterals - Subset<ecore::EEnumLiteral, ecore::EObject >(getEContens())" << std::endl;
 	#endif
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> EEnumImpl::copy() const
+{
+	std::shared_ptr<EEnumImpl> element(new EEnumImpl());
+	*element =(*this);
+	element->setThisEEnumPtr(element);
+	return element;
 }
 
 std::shared_ptr<EClass> EEnumImpl::eStaticClass() const
@@ -243,8 +224,6 @@ std::shared_ptr<Subset<ecore::EEnumLiteral, ecore::EObject>> EEnumImpl::getELite
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
@@ -298,15 +277,7 @@ Any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EENUM_ATTRIBUTE_ELITERALS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EEnumLiteral>::iterator iter = m_eLiterals->begin();
-			Bag<ecore::EEnumLiteral>::iterator end = m_eLiterals->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2012
+			return eAny(getELiterals()); //2012			
 		}
 	}
 	return EDataTypeImpl::eGet(featureID, resolve, coreType);
@@ -347,7 +318,7 @@ bool EEnumImpl::eSet(int featureID, Any newValue)
 				}
 				iterELiterals++;
 			}
-
+ 
 			iterELiterals = eLiteralsList->begin();
 			endELiterals = eLiteralsList->end();
 			while (iterELiterals != endELiterals)
@@ -392,7 +363,6 @@ void EEnumImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 
 void EEnumImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	try
 	{
@@ -403,12 +373,9 @@ void EEnumImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "EEnumLiteral";
 			}
-			std::shared_ptr<ecore::EObject> eLiterals = modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_EENUM);
-			if (eLiterals != nullptr)
-			{
-				loadHandler->handleChild(eLiterals);
-			}
-			return;
+			loadHandler->handleChildContainer<ecore::EEnumLiteral>(this->getELiterals());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -423,7 +390,7 @@ void EEnumImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	EDataTypeImpl::loadNode(nodeName, loadHandler);
 }
 
-void EEnumImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EEnumImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	EDataTypeImpl::resolveReferences(featureID, references);
 }
@@ -455,14 +422,11 @@ void EEnumImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
 		// Save 'eLiterals'
 		for (std::shared_ptr<ecore::EEnumLiteral> eLiterals : *this->getELiterals()) 
 		{
 			saveHandler->addReference(eLiterals, "eLiterals", eLiterals->eClass() != package->getEEnumLiteral_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

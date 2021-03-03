@@ -7,21 +7,17 @@
 #ifndef UML_CONNECTABLEELEMENT_HPP
 #define UML_CONNECTABLEELEMENT_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,64 +32,25 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectorEnd;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class ParameterableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
-	class TypedElement;
 }
 
 // base class includes
 #include "uml/ParameterableElement.hpp"
-
 #include "uml/TypedElement.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
+
 
 
 //*********************************
@@ -104,14 +61,13 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class ConnectableElement:virtual public ParameterableElement,virtual public TypedElement
+	class ConnectableElement: virtual public ParameterableElement, virtual public TypedElement
 	{
 		public:
  			ConnectableElement(const ConnectableElement &) {}
 
 		protected:
 			ConnectableElement(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -129,8 +85,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::ConnectorEnd> > getEnds() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -144,7 +98,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::ConnectorEnd>> getEnd() const = 0;
-			
 			
 			
 
@@ -178,7 +131,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -187,7 +140,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

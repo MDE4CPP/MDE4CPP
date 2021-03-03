@@ -84,9 +84,8 @@
 using namespace UML;
 
 ObjectFlowObject::ObjectFlowObject(std::shared_ptr<uml::ObjectFlow> _element):
-
 	m_ObjectFlowValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ObjectFlow());
 }
 
@@ -107,13 +106,15 @@ ObjectFlowObject::~ObjectFlowObject()
 
 std::shared_ptr<ecore::EObject> ObjectFlowObject::copy()
 {
-	std::shared_ptr<ObjectFlowObject> element(new ObjectFlowObject(*this));
+	std::shared_ptr<ObjectFlowObject> element(new ObjectFlowObject());
+	*element=(*this);
 	element->setThisObjectFlowObjectPtr(element);
 	return element;
 }
 
 ObjectFlowObject& ObjectFlowObject::operator=(const ObjectFlowObject & obj)
 {
+	UML::ActivityEdgeObject::operator=(obj);
 	return *this;
 }
 

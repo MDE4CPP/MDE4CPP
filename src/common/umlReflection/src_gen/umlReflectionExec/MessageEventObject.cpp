@@ -59,9 +59,8 @@
 using namespace UML;
 
 MessageEventObject::MessageEventObject(std::shared_ptr<uml::MessageEvent> _element):
-
 	m_MessageEventValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_MessageEvent());
 }
 
@@ -82,13 +81,15 @@ MessageEventObject::~MessageEventObject()
 
 std::shared_ptr<ecore::EObject> MessageEventObject::copy()
 {
-	std::shared_ptr<MessageEventObject> element(new MessageEventObject(*this));
+	std::shared_ptr<MessageEventObject> element(new MessageEventObject());
+	*element=(*this);
 	element->setThisMessageEventObjectPtr(element);
 	return element;
 }
 
 MessageEventObject& MessageEventObject::operator=(const MessageEventObject & obj)
 {
+	UML::EventObject::operator=(obj);
 	return *this;
 }
 

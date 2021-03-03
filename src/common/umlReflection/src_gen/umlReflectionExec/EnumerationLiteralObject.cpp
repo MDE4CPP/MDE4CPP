@@ -73,9 +73,8 @@
 using namespace UML;
 
 EnumerationLiteralObject::EnumerationLiteralObject(std::shared_ptr<uml::EnumerationLiteral> _element):
-
 	m_EnumerationLiteralValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_EnumerationLiteral());
 }
 
@@ -96,13 +95,15 @@ EnumerationLiteralObject::~EnumerationLiteralObject()
 
 std::shared_ptr<ecore::EObject> EnumerationLiteralObject::copy()
 {
-	std::shared_ptr<EnumerationLiteralObject> element(new EnumerationLiteralObject(*this));
+	std::shared_ptr<EnumerationLiteralObject> element(new EnumerationLiteralObject());
+	*element=(*this);
 	element->setThisEnumerationLiteralObjectPtr(element);
 	return element;
 }
 
 EnumerationLiteralObject& EnumerationLiteralObject::operator=(const EnumerationLiteralObject & obj)
 {
+	UML::InstanceSpecificationObject::operator=(obj);
 	return *this;
 }
 

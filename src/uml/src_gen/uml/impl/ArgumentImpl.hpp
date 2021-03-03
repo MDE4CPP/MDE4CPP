@@ -24,15 +24,14 @@ virtual public Argument
 	{
 		public: 
 			ArgumentImpl(const ArgumentImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ArgumentImpl& operator=(ArgumentImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ArgumentImpl& operator=(ArgumentImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
 			ArgumentImpl();
 			virtual std::shared_ptr<Argument> getThisArgumentPtr() const;
 			virtual void setThisArgumentPtr(std::weak_ptr<Argument> thisArgumentPtr);
-
 
 
 		public:
@@ -49,21 +48,18 @@ virtual public Argument
 			//*********************************
 			 
 			virtual std::string getName() const ;
-			
 			 
-			virtual void setName (std::string _name); 
+			virtual void setName (std::string _name);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Object > getValue() const ;
+			virtual std::shared_ptr<uml::Object> getValue() const ;
 			
+			virtual void setValue(std::shared_ptr<uml::Object>) ;
 			
-			virtual void setValue(std::shared_ptr<uml::Object> _value) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -83,7 +79,7 @@ virtual public Argument
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

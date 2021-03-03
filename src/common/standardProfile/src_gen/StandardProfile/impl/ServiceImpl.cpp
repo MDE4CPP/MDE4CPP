@@ -44,9 +44,7 @@ ServiceImpl::ServiceImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Service is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ ServiceImpl::ServiceImpl(const ServiceImpl & obj):ServiceImpl()
 
 std::shared_ptr<ecore::EObject>  ServiceImpl::copy() const
 {
-	std::shared_ptr<ServiceImpl> element(new ServiceImpl(*this));
+	std::shared_ptr<ServiceImpl> element(new ServiceImpl());
+	*element=(*this);
 	element->setThisServicePtr(element);
 	return element;
 }
 
 ServiceImpl& ServiceImpl::operator=(const ServiceImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Service "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

@@ -7,20 +7,16 @@
 #ifndef UML_STRUCTURALFEATURE_HPP
 #define UML_STRUCTURALFEATURE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,76 +31,26 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class Feature;
-}
-
-namespace uml 
-{
-	class MultiplicityElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
-	class TypedElement;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
 // base class includes
 #include "uml/Feature.hpp"
-
 #include "uml/MultiplicityElement.hpp"
-
 #include "uml/TypedElement.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
+
 
 
 //*********************************
@@ -115,14 +61,13 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class StructuralFeature:virtual public Feature,virtual public MultiplicityElement,virtual public TypedElement
+	class StructuralFeature: virtual public Feature, virtual public MultiplicityElement, virtual public TypedElement
 	{
 		public:
  			StructuralFeature(const StructuralFeature &) {}
 
 		protected:
 			StructuralFeature(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -143,13 +88,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsReadOnly() const = 0;
-			
 			/*!
 			If isReadOnly is true, the StructuralFeature may not be written to after initialization.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsReadOnly (bool _isReadOnly)= 0; 
+			virtual void setIsReadOnly (bool _isReadOnly)= 0;
 			
 			//*********************************
 			// Reference
@@ -187,7 +131,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -196,7 +140,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

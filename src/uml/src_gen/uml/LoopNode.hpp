@@ -8,24 +8,20 @@
 #define UML_LOOPNODE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -40,124 +36,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
-	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
-	class ExecutableNode;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
-	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Variable;
 }
 
@@ -168,6 +64,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -176,14 +73,13 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class LoopNode:virtual public StructuredActivityNode
+	class LoopNode: virtual public StructuredActivityNode
 	{
 		public:
  			LoopNode(const LoopNode &) {}
 
 		protected:
 			LoopNode(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -199,30 +95,22 @@ namespace uml
 			bodyPart.oclAsType(Action).allActions().output->includesAll(bodyOutput)
 			*/
 			 
-			virtual bool body_output_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool body_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The union of the ExecutableNodes in the setupPart, test and bodyPart of a LoopNode must be the same as the subset of nodes contained in the LoopNode (considered as a StructuredActivityNode) that are ExecutableNodes.
 			setupPart->union(test)->union(bodyPart)=node->select(oclIsKindOf(ExecutableNode)).oclAsType(ExecutableNode)->asSet()
 			*/
 			 
-			virtual bool executable_nodes(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool executable_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The loopVariableInputs must not have outgoing edges.
 			loopVariableInput.outgoing->isEmpty()
 			*/
 			 
-			virtual bool input_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool input_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			All ActivityEdges outgoing from loopVariable OutputPins must have targets within the LoopNode.
 			allOwnedNodes()->includesAll(loopVariable.outgoing.target)
 			*/
 			 
-			virtual bool loop_variable_outgoing(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool loop_variable_outgoing(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A LoopNode must have the same number of loopVariableInputs and loopVariables, and they must match in type, uniqueness and multiplicity.
 			loopVariableInput->size()=loopVariable->size() and
 			loopVariableInput.type=loopVariable.type and
@@ -231,9 +119,7 @@ namespace uml
 			loopVariableInput.upper=loopVariable.upper
 			*/
 			 
-			virtual bool matching_loop_variables(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool matching_loop_variables(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A LoopNode must have the same number of bodyOutput Pins as loopVariables, and each bodyOutput Pin must be compatible with the corresponding loopVariable (by positional order) in type, multiplicity, ordering and uniqueness.
 			bodyOutput->size()=loopVariable->size() and
 			Sequence{1..loopVariable->size()}->forAll(i |
@@ -243,9 +129,7 @@ namespace uml
 				loopVariable->at(i).includesMultiplicity(bodyOutput->at(i)))
 			*/
 			 
-			virtual bool matching_output_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool matching_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A LoopNode must have the same number of result OutputPins and loopVariables, and they must match in type, uniqueness and multiplicity.
 			result->size()=loopVariable->size() and
 			result.type=loopVariable.type and
@@ -254,25 +138,19 @@ namespace uml
 			result.upper=loopVariable.upper
 			*/
 			 
-			virtual bool matching_result_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool matching_result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The result OutputPins have no incoming edges.
 			result.incoming->isEmpty()
 			*/
 			 
-			virtual bool result_no_incoming(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool result_no_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The test and body parts of a ConditionalNode must be disjoint with each other.
 			setupPart->intersection(test)->isEmpty() and
 			setupPart->intersection(bodyPart)->isEmpty() and
 			test->intersection(bodyPart)->isEmpty()
 			*/
 			 
-			virtual bool setup_test_and_body(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool setup_test_and_body(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -282,13 +160,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsTestedFirst() const = 0;
-			
 			/*!
 			If true, the test is performed before the first execution of the bodyPart. If false, the bodyPart is executed once before the test is performed.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsTestedFirst (bool _isTestedFirst)= 0; 
+			virtual void setIsTestedFirst (bool _isTestedFirst)= 0;
 			
 			//*********************************
 			// Reference
@@ -300,7 +177,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::OutputPin>> getBodyOutput() const = 0;
 			
-			
 			/*!
 			The set of ExecutableNodes that perform the repetitive computations of the loop. The bodyPart is executed as long as the test section produces a true value.
 			<p>From package UML::Actions.</p>
@@ -308,28 +184,24 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getBodyPart() const = 0;
 			
-			
 			/*!
 			An OutputPin on an Action in the test section whose Boolean value determines whether to continue executing the loop bodyPart.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getDecider() const = 0;
-			
+			virtual std::shared_ptr<uml::OutputPin> getDecider() const = 0;
 			/*!
 			An OutputPin on an Action in the test section whose Boolean value determines whether to continue executing the loop bodyPart.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setDecider(std::shared_ptr<uml::OutputPin> _decider) = 0;
-			
+			virtual void setDecider(std::shared_ptr<uml::OutputPin>) = 0;
 			/*!
 			A list of OutputPins that hold the values of the loop variables during an execution of the loop. When the test fails, the values are moved to the result OutputPins of the loop.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::OutputPin, uml::Element>> getLoopVariable() const = 0;
-			
 			
 			/*!
 			A list of InputPins whose values are moved into the loopVariable Pins before the first iteration of the loop.
@@ -338,9 +210,7 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::InputPin>> getLoopVariableInput() const = 0;
 			
-			
 			/*Additional Setter for 'StructuredActivityNode::structuredNodeInput' redefined by reference 'loopVariableInput'*/
-			
 			/*!
 			A list of OutputPins that receive the loopVariable values after the last iteration of the loop and constitute the output of the LoopNode.
 			<p>From package UML::Actions.</p>
@@ -348,9 +218,7 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::OutputPin>> getResult() const = 0;
 			
-			
 			/*Additional Setter for 'StructuredActivityNode::structuredNodeOutput' redefined by reference 'result'*/
-			
 			/*!
 			The set of ExecutableNodes executed before the first iteration of the loop, in order to initialize values or perform other setup computations.
 			<p>From package UML::Actions.</p>
@@ -358,14 +226,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getSetupPart() const = 0;
 			
-			
 			/*!
 			The set of ExecutableNodes executed in order to provide the test result for the loop.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getTest() const = 0;
-			
 			
 			
 
@@ -399,7 +265,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::OutputPin > m_decider;/*!
+			std::shared_ptr<uml::OutputPin> m_decider;/*!
 			A list of OutputPins that hold the values of the loop variables during an execution of the loop. When the test fails, the values are moved to the result OutputPins of the loop.
 			<p>From package UML::Actions.</p>
 			*/
@@ -475,7 +341,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -489,7 +355,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

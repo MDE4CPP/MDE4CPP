@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,26 +35,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Observation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -79,7 +71,7 @@ TimeObservationImpl::~TimeObservationImpl()
 }
 
 //Additional constructor for the containments back reference
-TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :TimeObservationImpl()
 {
 	m_namespace = par_namespace;
@@ -87,14 +79,14 @@ TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Namespace > par_name
 }
 
 //Additional constructor for the containments back reference
-TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Element > par_owner)
+TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Element> par_owner)
 :TimeObservationImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Package > par_owningPackage)
+TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :TimeObservationImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -102,75 +94,43 @@ TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::Package > par_owning
 }
 
 //Additional constructor for the containments back reference
-TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+TimeObservationImpl::TimeObservationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :TimeObservationImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-TimeObservationImpl::TimeObservationImpl(const TimeObservationImpl & obj):TimeObservationImpl()
+TimeObservationImpl::TimeObservationImpl(const TimeObservationImpl & obj): TimeObservationImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  TimeObservationImpl::copy() const
-{
-	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl(*this));
-	element->setThisTimeObservationPtr(element);
-	return element;
-}
-
 TimeObservationImpl& TimeObservationImpl::operator=(const TimeObservationImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ObservationImpl::operator=(obj);
+	TimeObservation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TimeObservation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_firstEvent = obj.getFirstEvent();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	m_event  = obj.getEvent();
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> TimeObservationImpl::copy() const
+{
+	std::shared_ptr<TimeObservationImpl> element(new TimeObservationImpl());
+	*element =(*this);
+	element->setThisTimeObservationPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> TimeObservationImpl::eStaticClass() const
@@ -188,12 +148,10 @@ bool TimeObservationImpl::getFirstEvent() const
 {
 	return m_firstEvent;
 }
-
 void TimeObservationImpl::setFirstEvent(bool _firstEvent)
 {
 	m_firstEvent = _firstEvent;
 } 
-
 
 
 //*********************************
@@ -206,23 +164,21 @@ void TimeObservationImpl::setFirstEvent(bool _firstEvent)
 /*
 Getter & Setter for reference event
 */
-std::shared_ptr<uml::NamedElement > TimeObservationImpl::getEvent() const
+std::shared_ptr<uml::NamedElement> TimeObservationImpl::getEvent() const
 {
 //assert(m_event);
     return m_event;
 }
-
 void TimeObservationImpl::setEvent(std::shared_ptr<uml::NamedElement> _event)
 {
     m_event = _event;
 }
 
 
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > TimeObservationImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> TimeObservationImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -242,7 +198,7 @@ std::shared_ptr<Union<uml::Element>> TimeObservationImpl::getOwnedElement() cons
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > TimeObservationImpl::getOwner() const
+std::weak_ptr<uml::Element> TimeObservationImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -291,7 +247,7 @@ Any TimeObservationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TIMEOBSERVATION_ATTRIBUTE_EVENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEvent())); //24012
+			return eAny(getEvent()); //24012
 		case uml::umlPackage::TIMEOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(getFirstEvent()); //24013
 	}
@@ -387,13 +343,12 @@ void TimeObservationImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 
 void TimeObservationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ObservationImpl::loadNode(nodeName, loadHandler);
 }
 
-void TimeObservationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TimeObservationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -440,17 +395,13 @@ void TimeObservationImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getTimeObservation_Attribute_firstEvent()) )
 		{
 			saveHandler->addAttribute("firstEvent", this->getFirstEvent());
 		}
-
-		// Add references
-		saveHandler->addReference("event", this->getEvent());
-
+	// Add references
+		saveHandler->addReference(this->getEvent(), "event", getEvent()->eClass() != uml::umlPackage::eInstance()->getNamedElement_Class()); 
 	}
 	catch (std::exception& e)
 	{

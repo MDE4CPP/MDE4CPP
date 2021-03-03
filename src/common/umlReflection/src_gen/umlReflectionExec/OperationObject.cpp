@@ -119,9 +119,8 @@
 using namespace UML;
 
 OperationObject::OperationObject(std::shared_ptr<uml::Operation> _element):
-
 	m_OperationValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Operation());
 }
 
@@ -142,13 +141,17 @@ OperationObject::~OperationObject()
 
 std::shared_ptr<ecore::EObject> OperationObject::copy()
 {
-	std::shared_ptr<OperationObject> element(new OperationObject(*this));
+	std::shared_ptr<OperationObject> element(new OperationObject());
+	*element=(*this);
 	element->setThisOperationObjectPtr(element);
 	return element;
 }
 
 OperationObject& OperationObject::operator=(const OperationObject & obj)
 {
+	UML::BehavioralFeatureObject::operator=(obj);
+	UML::ParameterableElementObject::operator=(obj);
+	UML::TemplateableElementObject::operator=(obj);
 	return *this;
 }
 

@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -38,23 +39,18 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Enumeration.hpp"
-
 #include "uml/EnumerationLiteral.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -79,38 +75,36 @@ EnumerationValueImpl::~EnumerationValueImpl()
 }
 
 
-
-EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj):EnumerationValueImpl()
+EnumerationValueImpl::EnumerationValueImpl(const EnumerationValueImpl & obj): EnumerationValueImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  EnumerationValueImpl::copy() const
-{
-	std::shared_ptr<EnumerationValueImpl> element(new EnumerationValueImpl(*this));
-	element->setThisEnumerationValuePtr(element);
-	return element;
-}
-
 EnumerationValueImpl& EnumerationValueImpl::operator=(const EnumerationValueImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Values::ValueImpl::operator=(obj);
+	EnumerationValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EnumerationValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_literal  = obj.getLiteral();
-
 	m_type  = obj.getType();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> EnumerationValueImpl::copy() const
+{
+	std::shared_ptr<EnumerationValueImpl> element(new EnumerationValueImpl());
+	*element =(*this);
+	element->setThisEnumerationValuePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> EnumerationValueImpl::eStaticClass() const
@@ -138,7 +132,7 @@ return newValue;
 	//end of body
 }
 
-bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
+bool EnumerationValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -199,33 +193,29 @@ std::string EnumerationValueImpl::toString()
 /*
 Getter & Setter for reference literal
 */
-std::shared_ptr<uml::EnumerationLiteral > EnumerationValueImpl::getLiteral() const
+std::shared_ptr<uml::EnumerationLiteral> EnumerationValueImpl::getLiteral() const
 {
 //assert(m_literal);
     return m_literal;
 }
-
 void EnumerationValueImpl::setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal)
 {
     m_literal = _literal;
 }
 
 
-
 /*
 Getter & Setter for reference type
 */
-std::shared_ptr<uml::Enumeration > EnumerationValueImpl::getType() const
+std::shared_ptr<uml::Enumeration> EnumerationValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
-
 void EnumerationValueImpl::setType(std::shared_ptr<uml::Enumeration> _type)
 {
     m_type = _type;
 }
-
 
 
 //*********************************
@@ -256,9 +246,9 @@ Any EnumerationValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_LITERAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLiteral())); //410
+			return eAny(getLiteral()); //410
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::ENUMERATIONVALUE_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //411
+			return eAny(getType()); //411
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -351,13 +341,12 @@ void EnumerationValueImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void EnumerationValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void EnumerationValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void EnumerationValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -406,13 +395,9 @@ void EnumerationValueImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("literal", this->getLiteral());
-		saveHandler->addReference("type", this->getType());
-
+	// Add references
+		saveHandler->addReference(this->getLiteral(), "literal", getLiteral()->eClass() != uml::umlPackage::eInstance()->getEnumerationLiteral_Class()); 
+		saveHandler->addReference(this->getType(), "type", getType()->eClass() != uml::umlPackage::eInstance()->getEnumeration_Class()); 
 	}
 	catch (std::exception& e)
 	{

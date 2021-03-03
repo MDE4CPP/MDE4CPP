@@ -7,23 +7,19 @@
 #ifndef UML_OBJECT_HPP
 #define UML_OBJECT_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -38,24 +34,11 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Argument;
-}
-
-namespace uml 
-{
-	class Object;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace uml 
-{
 	class Property;
 }
 
@@ -64,6 +47,7 @@ namespace uml
 // enum includes
 
 #include "ecore/EModelElement.hpp"
+
 
 //*********************************
 namespace uml 
@@ -76,14 +60,12 @@ namespace uml
 	*/
 	
 	class Object : virtual public ecore::EModelElement
-
 	{
 		public:
  			Object(const Object &) {}
 
 		protected:
 			Object(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -100,27 +82,19 @@ namespace uml
 			Property. If there are no values, the ReflectiveCollection returned is empty. 
 			*/
 			 
-			virtual Any get(std::shared_ptr<uml::Property>  property) const = 0;
-			
-			/*!
+			virtual Any get(std::shared_ptr<uml::Property> property) const = 0;/*!
 			Calls the supplied Operation on the object, passing the supplied Arguments and returning the result.
 			The Operation must be defined on the Class of the Object, and the arguments must refer to Parameters of the Operation.
 			If an Argument is not supplied for a Parameter, its default value, if any, will be used.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Object> > invoke(std::shared_ptr<uml::Operation>  op,std::shared_ptr<Bag<uml::Argument> >  arguments) = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Object> > invoke(std::shared_ptr<uml::Operation> op,std::shared_ptr<Bag<uml::Argument>> arguments) = 0;/*!
 			If the Property has multiplicity upper bound = 1, set() atomically updates the value of the Property to the object
 			parameter. If Property has multiplicity upper bound >1, the Object must be a kind of ReflectiveCollection.
 			*/
 			 
-			virtual void set(std::shared_ptr<uml::Property>  property,Any value) = 0;
-			
-			 
-			virtual void unset(std::shared_ptr<uml::Property>  property) = 0;
-			
-			
+			virtual void set(std::shared_ptr<uml::Property> property,Any value) = 0; 
+			virtual void unset(std::shared_ptr<uml::Property> property) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -154,7 +128,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

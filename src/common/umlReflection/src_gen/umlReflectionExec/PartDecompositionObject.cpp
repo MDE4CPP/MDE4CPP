@@ -71,9 +71,8 @@
 using namespace UML;
 
 PartDecompositionObject::PartDecompositionObject(std::shared_ptr<uml::PartDecomposition> _element):
-
 	m_PartDecompositionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_PartDecomposition());
 }
 
@@ -94,13 +93,15 @@ PartDecompositionObject::~PartDecompositionObject()
 
 std::shared_ptr<ecore::EObject> PartDecompositionObject::copy()
 {
-	std::shared_ptr<PartDecompositionObject> element(new PartDecompositionObject(*this));
+	std::shared_ptr<PartDecompositionObject> element(new PartDecompositionObject());
+	*element=(*this);
 	element->setThisPartDecompositionObjectPtr(element);
 	return element;
 }
 
 PartDecompositionObject& PartDecompositionObject::operator=(const PartDecompositionObject & obj)
 {
+	UML::InteractionUseObject::operator=(obj);
 	return *this;
 }
 

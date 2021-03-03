@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ReadLinkActionImpl(const ReadLinkActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ReadLinkActionImpl& operator=(ReadLinkActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ReadLinkActionImpl& operator=(ReadLinkActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisReadLinkActionPtr(std::weak_ptr<ReadLinkAction> thisReadLinkActionPtr);
 
 			//Additional constructors for the containments back reference
-			ReadLinkActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ReadLinkActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ReadLinkActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ReadLinkActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ReadLinkActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ReadLinkActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ReadLinkActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ReadLinkActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,38 +52,28 @@ namespace uml
 			self.openEnd()->first().compatibleWith(result)
 			*/
 			 
-			virtual bool compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool compatible_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The open end must be navigable.
 			self.openEnd()->first().isNavigable()
 			*/
 			 
-			virtual bool navigable_open_end(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool navigable_open_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Exactly one linkEndData specification (corresponding to the "open" end) must not have an value InputPin.
 			self.openEnd()->size() = 1
 			*/
 			 
-			virtual bool one_open_end(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool one_open_end(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Returns the ends corresponding to endData with no value InputPin. (A well-formed ReadLinkAction is constrained to have only one of these.)
 			result = (endData->select(value=null).end->asOrderedSet())
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Property> > openEnd() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Property> > openEnd() ;/*!
 			The type and ordering of the result OutputPin are same as the type and ordering of the open Association end.
 			self.openEnd()->forAll(type=result.type and isOrdered=result.isOrdered)
 			*/
 			 
-			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool type_and_ordering(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Visibility of the open end must allow access from the object performing the action.
 			let openEnd : Property = self.openEnd()->first() in
 			  openEnd.visibility = VisibilityKind::public or 
@@ -103,9 +84,7 @@ namespace uml
 			        _'context'.conformsTo(oed.end.type.oclAsType(Classifier)))))
 			*/
 			 
-			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -120,16 +99,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
 			/*!
 			The OutputPin on which the objects retrieved from the "open" end of those links whose values on other ends are given by the endData.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -159,7 +136,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -179,7 +156,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

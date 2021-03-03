@@ -8,23 +8,19 @@
 #define UML_ACTIONINPUTPIN_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,139 +35,31 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Action;
-}
-
-namespace uml 
-{
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class AddStructuralFeatureValueAction;
-}
-
-namespace uml 
-{
 	class Behavior;
-}
-
-namespace uml 
-{
 	class CallOperationAction;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
 	class DestroyObjectAction;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class InvocationAction;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class RemoveStructuralFeatureValueAction;
-}
-
-namespace uml 
-{
 	class State;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuralFeatureAction;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
-}
-
-namespace uml 
-{
 	class WriteStructuralFeatureAction;
 }
 
@@ -184,6 +72,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -192,14 +81,13 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class ActionInputPin:virtual public InputPin
+	class ActionInputPin: virtual public InputPin
 	{
 		public:
  			ActionInputPin(const ActionInputPin &) {}
 
 		protected:
 			ActionInputPin(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -215,25 +103,19 @@ namespace uml
 			fromAction.input->forAll(oclIsKindOf(ActionInputPin))
 			*/
 			 
-			virtual bool input_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The fromAction of an ActionInputPin cannot have ActivityEdges coming into or out of it or its Pins.
 			fromAction.incoming->union(outgoing)->isEmpty() and
 			fromAction.input.incoming->isEmpty() and
 			fromAction.output.outgoing->isEmpty()
 			*/
 			 
-			virtual bool no_control_or_object_flow(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool no_control_or_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The fromAction of an ActionInputPin must have exactly one OutputPin.
 			fromAction.output->size() = 1
 			*/
 			 
-			virtual bool one_output_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -246,15 +128,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Action > getFromAction() const = 0;
-			
+			virtual std::shared_ptr<uml::Action> getFromAction() const = 0;
 			/*!
 			The Action used to provide the values of the ActionInputPin.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setFromAction(std::shared_ptr<uml::Action> _fromAction) = 0;
-			
+			virtual void setFromAction(std::shared_ptr<uml::Action>) = 0;
 			
 
 		protected:
@@ -271,7 +151,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::Action > m_fromAction;
+			std::shared_ptr<uml::Action> m_fromAction;
 
 		public:
 			//*********************************
@@ -292,7 +172,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -306,7 +186,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

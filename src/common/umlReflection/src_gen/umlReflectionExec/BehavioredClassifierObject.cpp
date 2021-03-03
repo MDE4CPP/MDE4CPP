@@ -118,9 +118,8 @@
 using namespace UML;
 
 BehavioredClassifierObject::BehavioredClassifierObject(std::shared_ptr<uml::BehavioredClassifier> _element):
-
 	m_BehavioredClassifierValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_BehavioredClassifier());
 }
 
@@ -141,13 +140,15 @@ BehavioredClassifierObject::~BehavioredClassifierObject()
 
 std::shared_ptr<ecore::EObject> BehavioredClassifierObject::copy()
 {
-	std::shared_ptr<BehavioredClassifierObject> element(new BehavioredClassifierObject(*this));
+	std::shared_ptr<BehavioredClassifierObject> element(new BehavioredClassifierObject());
+	*element=(*this);
 	element->setThisBehavioredClassifierObjectPtr(element);
 	return element;
 }
 
 BehavioredClassifierObject& BehavioredClassifierObject::operator=(const BehavioredClassifierObject & obj)
 {
+	UML::ClassifierObject::operator=(obj);
 	return *this;
 }
 

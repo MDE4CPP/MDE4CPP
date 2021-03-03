@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -33,35 +34,25 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Actions/AcceptEventActionEventAccepter.hpp"
-
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
-#include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -86,84 +77,42 @@ AcceptEventActionActivationImpl::~AcceptEventActionActivationImpl()
 }
 
 //Additional constructor for the containments back reference
-AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :AcceptEventActionActivationImpl()
 {
 	m_group = par_group;
 }
 
-
-AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEventActionActivationImpl & obj):AcceptEventActionActivationImpl()
+AcceptEventActionActivationImpl::AcceptEventActionActivationImpl(const AcceptEventActionActivationImpl & obj): AcceptEventActionActivationImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  AcceptEventActionActivationImpl::copy() const
-{
-	std::shared_ptr<AcceptEventActionActivationImpl> element(new AcceptEventActionActivationImpl(*this));
-	element->setThisAcceptEventActionActivationPtr(element);
-	return element;
-}
-
 AcceptEventActionActivationImpl& AcceptEventActionActivationImpl::operator=(const AcceptEventActionActivationImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	AcceptEventActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AcceptEventActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_firing = obj.isFiring();
-	m_running = obj.isRunning();
+	//Clone Attributes with (deep copy)
 	m_waiting = obj.isWaiting();
 
 	//copy references with no containment (soft copy)
-	
-	m_action  = obj.getAction();
-
 	m_eventAccepter  = obj.getEventAccepter();
-
-	m_group  = obj.getGroup();
-
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
-
-	m_node  = obj.getNode();
-
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
-
-	std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>(*(obj.getPinActivation().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _heldTokensList = obj.getHeldTokens();
-	for(std::shared_ptr<fUML::Semantics::Activities::Token> _heldTokens : *_heldTokensList)
-	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Semantics::Activities::Token>(std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_heldTokens->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
-	for(std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
-	{
-		this->getInputPinActivation()->add(std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>(std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>(_inputPinActivation->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
-	for(std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
-	{
-		this->getOutputPinActivation()->add(std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>(std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(_outputPinActivation->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> AcceptEventActionActivationImpl::copy() const
+{
+	std::shared_ptr<AcceptEventActionActivationImpl> element(new AcceptEventActionActivationImpl());
+	*element =(*this);
+	element->setThisAcceptEventActionActivationPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> AcceptEventActionActivationImpl::eStaticClass() const
@@ -181,18 +130,16 @@ bool AcceptEventActionActivationImpl::isWaiting() const
 {
 	return m_waiting;
 }
-
 void AcceptEventActionActivationImpl::setWaiting(bool _waiting)
 {
 	m_waiting = _waiting;
 } 
 
 
-
 //*********************************
 // Operations
 //*********************************
-void AcceptEventActionActivationImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence)
+void AcceptEventActionActivationImpl::accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -204,13 +151,13 @@ void AcceptEventActionActivationImpl::doAction()
 	throw "UnsupportedOperationException";
 }
 
-void AcceptEventActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens)
+void AcceptEventActionActivationImpl::fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void AcceptEventActionActivationImpl::initialize(std::shared_ptr<uml::ActivityNode>  node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>  group)
+void AcceptEventActionActivationImpl::initialize(std::shared_ptr<uml::ActivityNode> node,std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> group)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -222,7 +169,7 @@ bool AcceptEventActionActivationImpl::isReady()
 	throw "UnsupportedOperationException";
 }
 
-bool AcceptEventActionActivationImpl::match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence)
+bool AcceptEventActionActivationImpl::match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -246,17 +193,15 @@ void AcceptEventActionActivationImpl::terminate()
 /*
 Getter & Setter for reference eventAccepter
 */
-std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter > AcceptEventActionActivationImpl::getEventAccepter() const
+std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> AcceptEventActionActivationImpl::getEventAccepter() const
 {
 
     return m_eventAccepter;
 }
-
 void AcceptEventActionActivationImpl::setEventAccepter(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> _eventAccepter)
 {
     m_eventAccepter = _eventAccepter;
 }
-
 
 
 //*********************************
@@ -306,7 +251,7 @@ Any AcceptEventActionActivationImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_EVENTACCEPTER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEventAccepter())); //311
+			return eAny(getEventAccepter()); //311
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONACTIVATION_ATTRIBUTE_WAITING:
 			return eAny(isWaiting()); //312
 	}
@@ -402,13 +347,12 @@ void AcceptEventActionActivationImpl::loadAttributes(std::shared_ptr<persistence
 
 void AcceptEventActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
 	//load BasePackage Nodes
 	ActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void AcceptEventActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void AcceptEventActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -448,17 +392,13 @@ void AcceptEventActionActivationImpl::saveContent(std::shared_ptr<persistence::i
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getAcceptEventActionActivation_Attribute_waiting()) )
 		{
 			saveHandler->addAttribute("waiting", this->isWaiting());
 		}
-
-		// Add references
-		saveHandler->addReference("eventAccepter", this->getEventAccepter());
-
+	// Add references
+		saveHandler->addReference(this->getEventAccepter(), "eventAccepter", getEventAccepter()->eClass() != fUML::Semantics::Actions::ActionsPackage::eInstance()->getAcceptEventActionEventAccepter_Class()); 
 	}
 	catch (std::exception& e)
 	{

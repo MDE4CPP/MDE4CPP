@@ -23,15 +23,14 @@ namespace PSCS::Semantics::Loci
 	{
 		public: 
 			CS_LocusImpl(const CS_LocusImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			CS_LocusImpl& operator=(CS_LocusImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			CS_LocusImpl& operator=(CS_LocusImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::Loci::LociFactoryImpl;
 			CS_LocusImpl();
 			virtual std::shared_ptr<CS_Locus> getThisCS_LocusPtr() const;
 			virtual void setThisCS_LocusPtr(std::weak_ptr<CS_Locus> thisCS_LocusPtr);
-
 
 
 		public:
@@ -42,9 +41,7 @@ namespace PSCS::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class>  type) ;
-			
-			
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> instantiate(std::shared_ptr<uml::Class> type) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -54,7 +51,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -74,7 +71,7 @@ namespace PSCS::Semantics::Loci
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

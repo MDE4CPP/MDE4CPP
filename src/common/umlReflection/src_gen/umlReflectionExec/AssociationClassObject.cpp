@@ -153,9 +153,8 @@
 using namespace UML;
 
 AssociationClassObject::AssociationClassObject(std::shared_ptr<uml::AssociationClass> _element):
-
 	m_AssociationClassValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_AssociationClass());
 }
 
@@ -176,13 +175,16 @@ AssociationClassObject::~AssociationClassObject()
 
 std::shared_ptr<ecore::EObject> AssociationClassObject::copy()
 {
-	std::shared_ptr<AssociationClassObject> element(new AssociationClassObject(*this));
+	std::shared_ptr<AssociationClassObject> element(new AssociationClassObject());
+	*element=(*this);
 	element->setThisAssociationClassObjectPtr(element);
 	return element;
 }
 
 AssociationClassObject& AssociationClassObject::operator=(const AssociationClassObject & obj)
 {
+	UML::AssociationObject::operator=(obj);
+	UML::ClassObject::operator=(obj);
 	return *this;
 }
 

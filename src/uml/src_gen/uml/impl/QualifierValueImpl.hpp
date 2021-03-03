@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			QualifierValueImpl(const QualifierValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			QualifierValueImpl& operator=(QualifierValueImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			QualifierValueImpl& operator=(QualifierValueImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,10 +32,7 @@ namespace uml
 			virtual void setThisQualifierValuePtr(std::weak_ptr<QualifierValue> thisQualifierValuePtr);
 
 			//Additional constructors for the containments back reference
-			QualifierValueImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			QualifierValueImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -49,23 +46,17 @@ namespace uml
 			value.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool multiplicity_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The qualifier must be a qualifier of the Association end of the linkEndData that owns this QualifierValue.
 			linkEndData.end.qualifier->includes(qualifier)
 			*/
 			 
-			virtual bool qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool qualifier_attribute(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type of the value InputPin conforms to the type of the qualifier Property.
 			value.type.conformsTo(qualifier.type)
 			*/
 			 
-			virtual bool type_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool type_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -80,30 +71,26 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property > getQualifier() const ;
-			
+			virtual std::shared_ptr<uml::Property> getQualifier() const ;
 			/*!
 			The qualifier Property for which the value is to be specified.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setQualifier(std::shared_ptr<uml::Property> _qualifier) ;
-			
+			virtual void setQualifier(std::shared_ptr<uml::Property>) ;
 			/*!
 			The InputPin from which the specified value for the qualifier is taken.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getValue() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getValue() const ;
 			/*!
 			The InputPin from which the specified value for the qualifier is taken.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::InputPin> _value) ;
+			virtual void setValue(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -128,7 +115,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

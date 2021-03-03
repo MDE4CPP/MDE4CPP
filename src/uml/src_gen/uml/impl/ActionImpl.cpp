@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,50 +35,29 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/ExecutableNode.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -103,7 +83,7 @@ ActionImpl::~ActionImpl()
 }
 
 //Additional constructor for the containments back reference
-ActionImpl::ActionImpl(std::weak_ptr<uml::Activity > par_activity)
+ActionImpl::ActionImpl(std::weak_ptr<uml::Activity> par_activity)
 :ActionImpl()
 {
 	m_activity = par_activity;
@@ -111,7 +91,7 @@ ActionImpl::ActionImpl(std::weak_ptr<uml::Activity > par_activity)
 }
 
 //Additional constructor for the containments back reference
-ActionImpl::ActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+ActionImpl::ActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :ActionImpl()
 {
 	m_inStructuredNode = par_inStructuredNode;
@@ -119,7 +99,7 @@ ActionImpl::ActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructu
 }
 
 //Additional constructor for the containments back reference
-ActionImpl::ActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+ActionImpl::ActionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ActionImpl()
 {
 	m_namespace = par_namespace;
@@ -127,149 +107,96 @@ ActionImpl::ActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-ActionImpl::ActionImpl(std::weak_ptr<uml::Element > par_owner)
+ActionImpl::ActionImpl(std::weak_ptr<uml::Element> par_owner)
 :ActionImpl()
 {
 	m_owner = par_owner;
 }
 
-
-ActionImpl::ActionImpl(const ActionImpl & obj):ActionImpl()
+ActionImpl::ActionImpl(const ActionImpl & obj): ActionImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ActionImpl::copy() const
-{
-	std::shared_ptr<ActionImpl> element(new ActionImpl(*this));
-	element->setThisActionPtr(element);
-	return element;
-}
-
 ActionImpl& ActionImpl::operator=(const ActionImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ExecutableNodeImpl::operator=(obj);
+	Action::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Action "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_isLeaf = obj.getIsLeaf();
+	//Clone Attributes with (deep copy)
 	m_isLocallyReentrant = obj.getIsLocallyReentrant();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	m_activity  = obj.getActivity();
-
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	m_context  = obj.getContext();
-
-	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
-	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
-
-	m_inStructuredNode  = obj.getInStructuredNode();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
-	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
-	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
+	std::shared_ptr<Subset<uml::Constraint, uml::Element>> localPostconditionContainer = getLocalPostcondition();
+	if(nullptr != localPostconditionContainer )
 	{
-		this->getHandler()->add(std::shared_ptr<uml::ExceptionHandler>(std::dynamic_pointer_cast<uml::ExceptionHandler>(_handler->copy())));
+		int size = localPostconditionContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _localPostcondition=(*localPostconditionContainer)[i];
+			if(nullptr != _localPostcondition)
+			{
+				localPostconditionContainer->push_back(std::dynamic_pointer_cast<uml::Constraint>(_localPostcondition->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container localPostcondition."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_handler" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
-	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
+	else
 	{
-		this->getInInterruptibleRegion()->add(std::shared_ptr<uml::InterruptibleActivityRegion>(std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_inInterruptibleRegion->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr localPostcondition."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inInterruptibleRegion" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityPartition>> _inPartitionList = obj.getInPartition();
-	for(std::shared_ptr<uml::ActivityPartition> _inPartition : *_inPartitionList)
+	std::shared_ptr<Subset<uml::Constraint, uml::Element>> localPreconditionContainer = getLocalPrecondition();
+	if(nullptr != localPreconditionContainer )
 	{
-		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(std::dynamic_pointer_cast<uml::ActivityPartition>(_inPartition->copy())));
+		int size = localPreconditionContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _localPrecondition=(*localPreconditionContainer)[i];
+			if(nullptr != _localPrecondition)
+			{
+				localPreconditionContainer->push_back(std::dynamic_pointer_cast<uml::Constraint>(_localPrecondition->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container localPrecondition."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _localPostconditionList = obj.getLocalPostcondition();
-	for(std::shared_ptr<uml::Constraint> _localPostcondition : *_localPostconditionList)
+	else
 	{
-		this->getLocalPostcondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_localPostcondition->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr localPrecondition."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_localPostcondition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _localPreconditionList = obj.getLocalPrecondition();
-	for(std::shared_ptr<uml::Constraint> _localPrecondition : *_localPreconditionList)
-	{
-		this->getLocalPrecondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_localPrecondition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_localPrecondition" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNodeList = obj.getRedefinedNode();
-	for(std::shared_ptr<uml::ActivityNode> _redefinedNode : *_redefinedNodeList)
-	{
-		this->getRedefinedNode()->add(std::shared_ptr<uml::ActivityNode>(std::dynamic_pointer_cast<uml::ActivityNode>(_redefinedNode->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_localPostcondition->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_localPostcondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-
 	/*Subset*/
 	m_localPrecondition->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_localPrecondition - Subset<uml::Constraint, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ActionImpl::copy() const
+{
+	std::shared_ptr<ActionImpl> element(new ActionImpl());
+	*element =(*this);
+	element->setThisActionPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActionImpl::eStaticClass() const
@@ -287,12 +214,10 @@ bool ActionImpl::getIsLocallyReentrant() const
 {
 	return m_isLocallyReentrant;
 }
-
 void ActionImpl::setIsLocallyReentrant(bool _isLocallyReentrant)
 {
 	m_isLocallyReentrant = _isLocallyReentrant;
 } 
-
 
 
 //*********************************
@@ -324,7 +249,7 @@ std::shared_ptr<uml::Behavior> ActionImpl::containingBehavior()
 /*
 Getter & Setter for reference context
 */
-std::shared_ptr<uml::Classifier > ActionImpl::getContext() const
+std::shared_ptr<uml::Classifier> ActionImpl::getContext() const
 {
 
     return m_context;
@@ -332,13 +257,9 @@ std::shared_ptr<uml::Classifier > ActionImpl::getContext() const
 
 
 
-
-
 /*
 Getter & Setter for reference input
 */
-
-
 
 
 
@@ -369,8 +290,6 @@ std::shared_ptr<Subset<uml::Constraint, uml::Element>> ActionImpl::getLocalPostc
 
 
 
-
-
 /*
 Getter & Setter for reference localPrecondition
 */
@@ -397,13 +316,9 @@ std::shared_ptr<Subset<uml::Constraint, uml::Element>> ActionImpl::getLocalPreco
 
 
 
-
-
 /*
 Getter & Setter for reference output
 */
-
-
 
 
 
@@ -481,7 +396,7 @@ std::shared_ptr<Union<uml::Element>> ActionImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > ActionImpl::getOwner() const
+std::weak_ptr<uml::Element> ActionImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -545,56 +460,24 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTION_ATTRIBUTE_CONTEXT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getContext())); //421
+			return eAny(getContext()); //421
 		case uml::umlPackage::ACTION_ATTRIBUTE_INPUT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_input->begin();
-			Bag<uml::InputPin>::iterator end = m_input->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //422
+			return eAny(getInput()); //422			
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_ISLOCALLYREENTRANT:
 			return eAny(getIsLocallyReentrant()); //423
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_localPostcondition->begin();
-			Bag<uml::Constraint>::iterator end = m_localPostcondition->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //424
+			return eAny(getLocalPostcondition()); //424			
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_localPrecondition->begin();
-			Bag<uml::Constraint>::iterator end = m_localPrecondition->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //425
+			return eAny(getLocalPrecondition()); //425			
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_OUTPUT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_output->begin();
-			Bag<uml::OutputPin>::iterator end = m_output->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //426
+			return eAny(getOutput()); //426			
 		}
 	}
 	return ExecutableNodeImpl::eGet(featureID, resolve, coreType);
@@ -652,7 +535,7 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterLocalPostcondition++;
 			}
-
+ 
 			iterLocalPostcondition = localPostconditionList->begin();
 			endLocalPostcondition = localPostconditionList->end();
 			while (iterLocalPostcondition != endLocalPostcondition)
@@ -688,7 +571,7 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterLocalPrecondition++;
 			}
-
+ 
 			iterLocalPrecondition = localPreconditionList->begin();
 			endLocalPrecondition = localPreconditionList->end();
 			while (iterLocalPrecondition != endLocalPrecondition)
@@ -754,7 +637,6 @@ void ActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 
 void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -765,12 +647,9 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<ecore::EObject> input = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::INPUTPIN_ATTRIBUTE_ACTION);
-			if (input != nullptr)
-			{
-				loadHandler->handleChild(input);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::InputPin>(this->getInput());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("localPostcondition") == 0 )
@@ -780,14 +659,9 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "Constraint";
 			}
-			std::shared_ptr<uml::Constraint> localPostcondition = std::dynamic_pointer_cast<uml::Constraint>(modelFactory->create(typeName));
-			if (localPostcondition != nullptr)
-			{
-				std::shared_ptr<Subset<uml::Constraint, uml::Element>> list_localPostcondition = this->getLocalPostcondition();
-				list_localPostcondition->push_back(localPostcondition);
-				loadHandler->handleChild(localPostcondition);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Constraint>(this->getLocalPostcondition());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("localPrecondition") == 0 )
@@ -797,14 +671,9 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "Constraint";
 			}
-			std::shared_ptr<uml::Constraint> localPrecondition = std::dynamic_pointer_cast<uml::Constraint>(modelFactory->create(typeName));
-			if (localPrecondition != nullptr)
-			{
-				std::shared_ptr<Subset<uml::Constraint, uml::Element>> list_localPrecondition = this->getLocalPrecondition();
-				list_localPrecondition->push_back(localPrecondition);
-				loadHandler->handleChild(localPrecondition);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Constraint>(this->getLocalPrecondition());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("output") == 0 )
@@ -814,12 +683,9 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<ecore::EObject> output = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::OUTPUTPIN_ATTRIBUTE_ACTION);
-			if (output != nullptr)
-			{
-				loadHandler->handleChild(output);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::OutputPin>(this->getOutput());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -834,7 +700,7 @@ void ActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	ExecutableNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ExecutableNodeImpl::resolveReferences(featureID, references);
 }
@@ -869,7 +735,6 @@ void ActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'localPostcondition'
 		for (std::shared_ptr<uml::Constraint> localPostcondition : *this->getLocalPostcondition()) 
 		{
@@ -881,31 +746,22 @@ void ActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		{
 			saveHandler->addReference(localPrecondition, "localPrecondition", localPrecondition->eClass() != package->getConstraint_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getAction_Attribute_isLocallyReentrant()) )
 		{
 			saveHandler->addAttribute("isLocallyReentrant", this->getIsLocallyReentrant());
 		}
-
-
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'input'
-		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> list_input = this->getInput();
-		for (std::shared_ptr<uml::InputPin> input : *list_input) 
-		{
-			saveHandler->addReference(input, "input", input->eClass() !=uml::umlPackage::eInstance()->getInputPin_Class());
-		}
+
+		saveHandler->addReferences<uml::InputPin>("input", this->getInput());
 
 		// Save 'output'
-		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> list_output = this->getOutput();
-		for (std::shared_ptr<uml::OutputPin> output : *list_output) 
-		{
-			saveHandler->addReference(output, "output", output->eClass() !=uml::umlPackage::eInstance()->getOutputPin_Class());
-		}
+
+		saveHandler->addReferences<uml::OutputPin>("output", this->getOutput());
 	}
 	catch (std::exception& e)
 	{

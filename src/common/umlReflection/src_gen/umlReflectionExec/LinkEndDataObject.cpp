@@ -48,9 +48,8 @@
 using namespace UML;
 
 LinkEndDataObject::LinkEndDataObject(std::shared_ptr<uml::LinkEndData> _element):
-
 	m_LinkEndDataValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LinkEndData());
 }
 
@@ -71,13 +70,15 @@ LinkEndDataObject::~LinkEndDataObject()
 
 std::shared_ptr<ecore::EObject> LinkEndDataObject::copy()
 {
-	std::shared_ptr<LinkEndDataObject> element(new LinkEndDataObject(*this));
+	std::shared_ptr<LinkEndDataObject> element(new LinkEndDataObject());
+	*element=(*this);
 	element->setThisLinkEndDataObjectPtr(element);
 	return element;
 }
 
 LinkEndDataObject& LinkEndDataObject::operator=(const LinkEndDataObject & obj)
 {
+	UML::ElementObject::operator=(obj);
 	return *this;
 }
 

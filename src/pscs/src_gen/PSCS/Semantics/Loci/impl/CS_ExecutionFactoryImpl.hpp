@@ -23,8 +23,8 @@ namespace PSCS::Semantics::Loci
 	{
 		public: 
 			CS_ExecutionFactoryImpl(const CS_ExecutionFactoryImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			CS_ExecutionFactoryImpl& operator=(CS_ExecutionFactoryImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			CS_ExecutionFactoryImpl& operator=(CS_ExecutionFactoryImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::Loci::LociFactoryImpl;
@@ -33,10 +33,7 @@ namespace PSCS::Semantics::Loci
 			virtual void setThisCS_ExecutionFactoryPtr(std::weak_ptr<CS_ExecutionFactory> thisCS_ExecutionFactoryPtr);
 
 			//Additional constructors for the containments back reference
-			CS_ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus);
-
-
-
+			CS_ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus);
 
 		public:
 			//destructor
@@ -46,15 +43,9 @@ namespace PSCS::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getStereotypeApplication(std::shared_ptr<uml::Class>  stereotype,std::shared_ptr<uml::Element>  element) ;
-			
-			 
-			virtual std::shared_ptr<uml::Classifier> getStereotypeClass(std::string profileName,std::string stereotypeName) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element) ;
-			
-			
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getStereotypeApplication(std::shared_ptr<uml::Class> stereotype,std::shared_ptr<uml::Element> element) ; 
+			virtual std::shared_ptr<uml::Classifier> getStereotypeClass(std::string profileName,std::string stereotypeName) ; 
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element> element) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -68,7 +59,6 @@ namespace PSCS::Semantics::Loci
 			virtual std::shared_ptr<Bag<uml::Package>> getAppliedProfiles() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -88,7 +78,7 @@ namespace PSCS::Semantics::Loci
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

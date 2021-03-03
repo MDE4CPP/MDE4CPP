@@ -62,9 +62,8 @@
 using namespace UML;
 
 LiteralStringObject::LiteralStringObject(std::shared_ptr<uml::LiteralString> _element):
-
 	m_LiteralStringValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LiteralString());
 }
 
@@ -85,13 +84,15 @@ LiteralStringObject::~LiteralStringObject()
 
 std::shared_ptr<ecore::EObject> LiteralStringObject::copy()
 {
-	std::shared_ptr<LiteralStringObject> element(new LiteralStringObject(*this));
+	std::shared_ptr<LiteralStringObject> element(new LiteralStringObject());
+	*element=(*this);
 	element->setThisLiteralStringObjectPtr(element);
 	return element;
 }
 
 LiteralStringObject& LiteralStringObject::operator=(const LiteralStringObject & obj)
 {
+	UML::LiteralSpecificationObject::operator=(obj);
 	return *this;
 }
 

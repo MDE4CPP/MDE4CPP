@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -33,16 +34,12 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ParameterableElement.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -68,62 +65,50 @@ ParameterableElementImpl::~ParameterableElementImpl()
 }
 
 //Additional constructor for the containments back reference
-ParameterableElementImpl::ParameterableElementImpl(std::weak_ptr<uml::Element > par_owner)
+ParameterableElementImpl::ParameterableElementImpl(std::weak_ptr<uml::Element> par_owner)
 :ParameterableElementImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-ParameterableElementImpl::ParameterableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+ParameterableElementImpl::ParameterableElementImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :ParameterableElementImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-ParameterableElementImpl::ParameterableElementImpl(const ParameterableElementImpl & obj):ParameterableElementImpl()
+ParameterableElementImpl::ParameterableElementImpl(const ParameterableElementImpl & obj): ParameterableElementImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ParameterableElementImpl::copy() const
-{
-	std::shared_ptr<ParameterableElementImpl> element(new ParameterableElementImpl(*this));
-	element->setThisParameterableElementPtr(element);
-	return element;
-}
-
 ParameterableElementImpl& ParameterableElementImpl::operator=(const ParameterableElementImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	ParameterableElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ParameterableElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_owner  = obj.getOwner();
-
 	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
 	m_templateParameter  = obj.getTemplateParameter();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ParameterableElementImpl::copy() const
+{
+	std::shared_ptr<ParameterableElementImpl> element(new ParameterableElementImpl());
+	*element =(*this);
+	element->setThisParameterableElementPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ParameterableElementImpl::eStaticClass() const
@@ -138,7 +123,7 @@ std::shared_ptr<ecore::EClass> ParameterableElementImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ParameterableElementImpl::isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p)
+bool ParameterableElementImpl::isCompatibleWith(std::shared_ptr<uml::ParameterableElement> p)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -156,33 +141,29 @@ bool ParameterableElementImpl::isTemplateParameter()
 /*
 Getter & Setter for reference owningTemplateParameter
 */
-std::weak_ptr<uml::TemplateParameter > ParameterableElementImpl::getOwningTemplateParameter() const
+std::weak_ptr<uml::TemplateParameter> ParameterableElementImpl::getOwningTemplateParameter() const
 {
 
     return m_owningTemplateParameter;
 }
-
-void ParameterableElementImpl::setOwningTemplateParameter(std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter)
+void ParameterableElementImpl::setOwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> _owningTemplateParameter)
 {
     m_owningTemplateParameter = _owningTemplateParameter;
 }
 
 
-
 /*
 Getter & Setter for reference templateParameter
 */
-std::shared_ptr<uml::TemplateParameter > ParameterableElementImpl::getTemplateParameter() const
+std::shared_ptr<uml::TemplateParameter> ParameterableElementImpl::getTemplateParameter() const
 {
 
     return m_templateParameter;
 }
-
 void ParameterableElementImpl::setTemplateParameter(std::shared_ptr<uml::TemplateParameter> _templateParameter)
 {
     m_templateParameter = _templateParameter;
 }
-
 
 
 //*********************************
@@ -203,7 +184,7 @@ std::shared_ptr<Union<uml::Element>> ParameterableElementImpl::getOwnedElement()
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > ParameterableElementImpl::getOwner() const
+std::weak_ptr<uml::Element> ParameterableElementImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -242,9 +223,9 @@ Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwningTemplateParameter().lock())); //1783
+			return eAny(getOwningTemplateParameter().lock()); //1783
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplateParameter())); //1784
+			return eAny(getTemplateParameter()); //1784
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -330,13 +311,12 @@ void ParameterableElementImpl::loadAttributes(std::shared_ptr<persistence::inter
 
 void ParameterableElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ParameterableElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ParameterableElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -385,12 +365,8 @@ void ParameterableElementImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("templateParameter", this->getTemplateParameter());
-
+	// Add references
+		saveHandler->addReference(this->getTemplateParameter(), "templateParameter", getTemplateParameter()->eClass() != uml::umlPackage::eInstance()->getTemplateParameter_Class()); 
 	}
 	catch (std::exception& e)
 	{

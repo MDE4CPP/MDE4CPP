@@ -65,9 +65,8 @@
 using namespace UML;
 
 GeneralizationSetObject::GeneralizationSetObject(std::shared_ptr<uml::GeneralizationSet> _element):
-
 	m_GeneralizationSetValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_GeneralizationSet());
 }
 
@@ -88,13 +87,15 @@ GeneralizationSetObject::~GeneralizationSetObject()
 
 std::shared_ptr<ecore::EObject> GeneralizationSetObject::copy()
 {
-	std::shared_ptr<GeneralizationSetObject> element(new GeneralizationSetObject(*this));
+	std::shared_ptr<GeneralizationSetObject> element(new GeneralizationSetObject());
+	*element=(*this);
 	element->setThisGeneralizationSetObjectPtr(element);
 	return element;
 }
 
 GeneralizationSetObject& GeneralizationSetObject::operator=(const GeneralizationSetObject & obj)
 {
+	UML::PackageableElementObject::operator=(obj);
 	return *this;
 }
 

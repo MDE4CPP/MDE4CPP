@@ -8,24 +8,20 @@
 #define UML_COMPONENT_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -40,184 +36,37 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace uml 
-{
 	class CollaborationUse;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class ComponentRealization;
-}
-
-namespace uml 
-{
 	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class Connector;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Enumeration;
-}
-
-namespace uml 
-{
 	class Extension;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
 	class Interface;
-}
-
-namespace uml 
-{
 	class InterfaceRealization;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace uml 
-{
 	class PrimitiveType;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class Reception;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class UseCase;
 }
 
@@ -228,6 +77,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -236,14 +86,13 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class Component:virtual public Class
+	class Component: virtual public Class
 	{
 		public:
  			Component(const Component &) {}
 
 		protected:
 			Component(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -258,27 +107,19 @@ namespace uml
 			Creates a(n) (abstract) class with the specified name as a packaged element of this component.
 			*/
 			 
-			virtual std::shared_ptr<uml::Class> createOwnedClass(std::string name,bool isAbstract) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Class> createOwnedClass(std::string name,bool isAbstract) = 0;/*!
 			Creates a enumeration with the specified name as a packaged element of this component.
 			*/
 			 
-			virtual std::shared_ptr<uml::Enumeration> createOwnedEnumeration(std::string name) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Enumeration> createOwnedEnumeration(std::string name) = 0;/*!
 			Creates an interface with the specified name as a packaged element of this component.
 			*/
 			 
-			virtual std::shared_ptr<uml::Interface> createOwnedInterface(std::string name) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Interface> createOwnedInterface(std::string name) = 0;/*!
 			Creates a primitive type with the specified name as a packaged element of this component.
 			*/
 			 
-			virtual std::shared_ptr<uml::PrimitiveType> createOwnedPrimitiveType(std::string name) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::PrimitiveType> createOwnedPrimitiveType(std::string name) = 0;/*!
 			Derivation for Component::/provided
 			result = (let 	ris : Set(Interface) = allRealizedInterfaces(),
 			        realizingClassifiers : Set(Classifier) =  self.realization.realizingClassifier->union(self.allParents()->collect(realization.realizingClassifier))->asSet(),
@@ -290,9 +131,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Interface> > getProvideds() = 0;/*!
 			Derivation for Component::/required
 			result = (let 	uis : Set(Interface) = allUsedInterfaces(),
 			        realizingClassifiers : Set(Classifier) = self.realization.realizingClassifier->union(self.allParents()->collect(realization.realizingClassifier))->asSet(),
@@ -305,23 +144,17 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Interface> > getRequireds() = 0;/*!
 			A Component cannot nest Classifiers.
 			nestedClassifier->isEmpty()
 			*/
 			 
-			virtual bool no_nested_classifiers(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool no_nested_classifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A Component nested in a Class cannot have any packaged elements.
 			nestingClass <> null implies packagedElement->isEmpty()
 			*/
 			 
-			virtual bool no_packaged_elements(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool no_packaged_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -331,13 +164,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsIndirectlyInstantiated() const = 0;
-			
 			/*!
 			If true, the Component is defined at design-time, but at run-time (or execution-time) an object specified by the Component does not exist, that is, the Component is instantiated indirectly, through the instantiation of its realizing Classifiers or parts.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual void setIsIndirectlyInstantiated (bool _isIndirectlyInstantiated)= 0; 
+			virtual void setIsIndirectlyInstantiated (bool _isIndirectlyInstantiated)= 0;
 			
 			//*********************************
 			// Reference
@@ -349,14 +181,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> getPackagedElement() const = 0;
 			
-			
 			/*!
 			The Interfaces that the Component exposes to its environment. These Interfaces may be Realized by the Component or any of its realizingClassifiers, or they may be the Interfaces that are provided by its public Ports.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Interface>> getProvided() const = 0;
-			
 			
 			/*!
 			The set of Realizations owned by the Component. Realizations reference the Classifiers of which the Component is an abstraction; i.e., that realize its behavior.
@@ -365,14 +195,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::ComponentRealization, uml::Element>> getRealization() const = 0;
 			
-			
 			/*!
 			The Interfaces that the Component requires from other Components in its environment in order to be able to offer its full set of provided functionality. These Interfaces may be used by the Component or any of its realizingClassifiers, or they may be the Interfaces that are required by its public Ports.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Interface>> getRequired() const = 0;
-			
 			
 			
 
@@ -437,7 +265,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -452,7 +280,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -471,7 +299,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

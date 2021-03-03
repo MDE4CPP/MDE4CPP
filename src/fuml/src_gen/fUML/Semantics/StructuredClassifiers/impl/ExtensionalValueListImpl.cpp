@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -32,21 +33,18 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
-#include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -71,44 +69,34 @@ ExtensionalValueListImpl::~ExtensionalValueListImpl()
 }
 
 
-
-ExtensionalValueListImpl::ExtensionalValueListImpl(const ExtensionalValueListImpl & obj):ExtensionalValueListImpl()
+ExtensionalValueListImpl::ExtensionalValueListImpl(const ExtensionalValueListImpl & obj): ExtensionalValueListImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ExtensionalValueListImpl::copy() const
-{
-	std::shared_ptr<ExtensionalValueListImpl> element(new ExtensionalValueListImpl(*this));
-	element->setThisExtensionalValueListPtr(element);
-	return element;
-}
-
 ExtensionalValueListImpl& ExtensionalValueListImpl::operator=(const ExtensionalValueListImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ExtensionalValueImpl::operator=(obj);
+	ExtensionalValueList::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExtensionalValueList "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_locus  = obj.getLocus();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> _featureValuesList = obj.getFeatureValues();
-	for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _featureValues : *_featureValuesList)
-	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(_featureValues->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ExtensionalValueListImpl::copy() const
+{
+	std::shared_ptr<ExtensionalValueListImpl> element(new ExtensionalValueListImpl());
+	*element =(*this);
+	element->setThisExtensionalValueListPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExtensionalValueListImpl::eStaticClass() const
@@ -123,13 +111,13 @@ std::shared_ptr<ecore::EClass> ExtensionalValueListImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtensionalValueListImpl::addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value)
+bool ExtensionalValueListImpl::addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ExtensionalValueListImpl::addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i)
+void ExtensionalValueListImpl::addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -147,7 +135,7 @@ std::string ExtensionalValueListImpl::removeValue(int i)
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<fUML::Semantics::Values::Value> ExtensionalValueListImpl::setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i)
+std::shared_ptr<fUML::Semantics::Values::Value> ExtensionalValueListImpl::setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -230,13 +218,12 @@ void ExtensionalValueListImpl::loadAttributes(std::shared_ptr<persistence::inter
 
 void ExtensionalValueListImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	ExtensionalValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExtensionalValueListImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExtensionalValueListImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ExtensionalValueImpl::resolveReferences(featureID, references);
 }
@@ -268,9 +255,6 @@ void ExtensionalValueListImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

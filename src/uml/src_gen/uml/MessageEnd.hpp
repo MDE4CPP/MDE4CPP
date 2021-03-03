@@ -7,20 +7,16 @@
 #ifndef UML_MESSAGEEND_HPP
 #define UML_MESSAGEEND_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,49 +31,14 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InteractionFragment;
-}
-
-namespace uml 
-{
 	class Message;
-}
-
-namespace uml 
-{
-	class MessageEnd;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -88,6 +49,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -96,14 +58,13 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class MessageEnd:virtual public NamedElement
+	class MessageEnd: virtual public NamedElement
 	{
 		public:
  			MessageEnd(const MessageEnd &) {}
 
 		protected:
 			MessageEnd(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -148,27 +109,21 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::InteractionFragment> > enclosingFragment() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::InteractionFragment> > enclosingFragment() = 0;/*!
 			This query returns value true if this MessageEnd is a receiveEvent.
 			message->notEmpty()
 			result = (message.receiveEvent->asSet()->includes(self))
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual bool isReceive() = 0;
-			
-			/*!
+			virtual bool isReceive() = 0;/*!
 			This query returns value true if this MessageEnd is a sendEvent.
 			message->notEmpty()
 			result = (message.sendEvent->asSet()->includes(self))
 			<p>From package UML::Interactions.</p>
 			*/
 			 
-			virtual bool isSend() = 0;
-			
-			/*!
+			virtual bool isSend() = 0;/*!
 			This query returns a set including the MessageEnd (if exists) at the opposite end of the Message for this MessageEnd.
 			result = (message->asSet().messageEnd->asSet()->excluding(self))
 			message->notEmpty()
@@ -176,8 +131,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::MessageEnd> > oppositeEnd() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -190,15 +143,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Message > getMessage() const = 0;
-			
+			virtual std::shared_ptr<uml::Message> getMessage() const = 0;
 			/*!
 			References a Message.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setMessage(std::shared_ptr<uml::Message> _message) = 0;
-			
+			virtual void setMessage(std::shared_ptr<uml::Message>) = 0;
 			
 
 		protected:
@@ -215,7 +166,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::Message > m_message;
+			std::shared_ptr<uml::Message> m_message;
 
 		public:
 			//*********************************
@@ -231,7 +182,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -240,7 +191,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

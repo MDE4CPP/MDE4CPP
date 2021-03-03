@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -33,25 +34,22 @@
 #include <exception> // used in Persistence
 
 #include "uml/Association.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Link.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "uml/StructuralFeature.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
-
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -76,46 +74,34 @@ CS_LinkImpl::~CS_LinkImpl()
 }
 
 
-
-CS_LinkImpl::CS_LinkImpl(const CS_LinkImpl & obj):CS_LinkImpl()
+CS_LinkImpl::CS_LinkImpl(const CS_LinkImpl & obj): CS_LinkImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  CS_LinkImpl::copy() const
-{
-	std::shared_ptr<CS_LinkImpl> element(new CS_LinkImpl(*this));
-	element->setThisCS_LinkPtr(element);
-	return element;
-}
-
 CS_LinkImpl& CS_LinkImpl::operator=(const CS_LinkImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::StructuredClassifiers::LinkImpl::operator=(obj);
+	CS_Link::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_Link "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_locus  = obj.getLocus();
-
-	m_type  = obj.getType();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> _featureValuesList = obj.getFeatureValues();
-	for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _featureValues : *_featureValuesList)
-	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(_featureValues->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> CS_LinkImpl::copy() const
+{
+	std::shared_ptr<CS_LinkImpl> element(new CS_LinkImpl());
+	*element =(*this);
+	element->setThisCS_LinkPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CS_LinkImpl::eStaticClass() const
@@ -130,7 +116,7 @@ std::shared_ptr<ecore::EClass> CS_LinkImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<uml::StructuralFeature> CS_LinkImpl::getFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value)
+std::shared_ptr<uml::StructuralFeature> CS_LinkImpl::getFeature(std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -148,7 +134,7 @@ std::shared_ptr<uml::StructuralFeature> CS_LinkImpl::getFeature(std::shared_ptr<
 	//end of body
 }
 
-bool CS_LinkImpl::hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value)
+bool CS_LinkImpl::hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -242,13 +228,12 @@ void CS_LinkImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadH
 
 void CS_LinkImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::StructuredClassifiers::LinkImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_LinkImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_LinkImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::StructuredClassifiers::LinkImpl::resolveReferences(featureID, references);
 }
@@ -283,9 +268,6 @@ void CS_LinkImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHand
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

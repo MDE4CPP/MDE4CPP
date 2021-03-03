@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			InstanceValueImpl(const InstanceValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			InstanceValueImpl& operator=(InstanceValueImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			InstanceValueImpl& operator=(InstanceValueImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,30 +32,17 @@ namespace uml
 			virtual void setThisInstanceValuePtr(std::weak_ptr<InstanceValue> thisInstanceValuePtr);
 
 			//Additional constructors for the containments back reference
-			InstanceValueImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			InstanceValueImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			InstanceValueImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			InstanceValueImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			InstanceValueImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			InstanceValueImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			InstanceValueImpl(std::weak_ptr<uml::Slot > par_owningSlot);
-
-
+			InstanceValueImpl(std::weak_ptr<uml::Slot> par_owningSlot);
 			//Additional constructors for the containments back reference
-			InstanceValueImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			InstanceValueImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-			InstanceValueImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
-
-
-
+			InstanceValueImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction);
 
 		public:
 			//destructor
@@ -79,16 +66,14 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InstanceSpecification > getInstance() const ;
-			
+			virtual std::shared_ptr<uml::InstanceSpecification> getInstance() const ;
 			/*!
 			The InstanceSpecification that represents the specified value.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setInstance(std::shared_ptr<uml::InstanceSpecification> _instance) ;
+			virtual void setInstance(std::shared_ptr<uml::InstanceSpecification>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -98,7 +83,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -108,7 +93,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -123,7 +108,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

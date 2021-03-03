@@ -44,9 +44,7 @@ DestroyImpl::DestroyImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Destroy is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ DestroyImpl::DestroyImpl(const DestroyImpl & obj):DestroyImpl()
 
 std::shared_ptr<ecore::EObject>  DestroyImpl::copy() const
 {
-	std::shared_ptr<DestroyImpl> element(new DestroyImpl(*this));
+	std::shared_ptr<DestroyImpl> element(new DestroyImpl());
+	*element=(*this);
 	element->setThisDestroyPtr(element);
 	return element;
 }
 
 DestroyImpl& DestroyImpl::operator=(const DestroyImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Destroy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_COMMONBEHAVIOR_GETNEXTEVENTSTRATEGY_HPP
 #define FUML_SEMANTICS_COMMONBEHAVIOR_GETNEXTEVENTSTRATEGY_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,17 +31,11 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ObjectActivation;
 }
-
-namespace fUML::Semantics::Loci 
-{
-	class SemanticStrategy;
-}
-
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class SignalInstance;
@@ -57,18 +47,18 @@ namespace fUML::Semantics::SimpleClassifiers
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class GetNextEventStrategy:virtual public fUML::Semantics::Loci::SemanticStrategy
+	class GetNextEventStrategy: virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
  			GetNextEventStrategy(const GetNextEventStrategy &) {}
 
 		protected:
 			GetNextEventStrategy(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -80,12 +70,8 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::string getName() = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>  objectActivation) = 0;
-			
-			
+			virtual std::string getName() = 0; 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -119,7 +105,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

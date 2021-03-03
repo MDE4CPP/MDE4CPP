@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_COMMONBEHAVIOR_CS_EVENTOCCURRENCE_HPP
 #define PSCS_SEMANTICS_COMMONBEHAVIOR_CS_EVENTOCCURRENCE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,39 +31,23 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_InteractionPoint;
-}
-
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Reference;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class EventOccurrence;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class ParameterValue;
 }
-
-namespace uml 
-{
-	class Port;
-}
-
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Reference;
 }
-
+namespace PSCS::Semantics::StructuredClassifiers 
+{
+	class CS_InteractionPoint;
+	class CS_Reference;
+}
 namespace uml 
 {
+	class Port;
 	class Trigger;
 }
 
@@ -77,18 +57,18 @@ namespace uml
 // enum includes
 
 
+
 //*********************************
 namespace PSCS::Semantics::CommonBehavior 
 {
 	
-	class CS_EventOccurrence:virtual public fUML::Semantics::CommonBehavior::EventOccurrence
+	class CS_EventOccurrence: virtual public fUML::Semantics::CommonBehavior::EventOccurrence
 	{
 		public:
  			CS_EventOccurrence(const CS_EventOccurrence &) {}
 
 		protected:
 			CS_EventOccurrence(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -100,51 +80,34 @@ namespace PSCS::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual void doSend() = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0;
-			
-			 
-			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) = 0;
-			
-			 
-			virtual void sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  target,std::shared_ptr<uml::Port>  port) = 0;
-			
-			 
-			virtual void sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  target,std::shared_ptr<uml::Port>  port) = 0;
-			
-			
+			virtual void doSend() = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() = 0; 
+			virtual bool match(std::shared_ptr<uml::Trigger> trigger) = 0; 
+			virtual void sendInTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<uml::Port> port) = 0; 
+			virtual void sendOutTo(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> target,std::shared_ptr<uml::Port> port) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
 			virtual bool isPropagationInward() const = 0;
-			
 			 
-			virtual void setPropagationInward (bool _propagationInward)= 0; 
+			virtual void setPropagationInward (bool _propagationInward)= 0;
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint > getInteractionPoint() const = 0;
+			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> getInteractionPoint() const = 0;
 			
+			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>) = 0;
 			
-			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint) = 0;
+			virtual std::shared_ptr<uml::Port> getOnPort() const = 0;
 			
+			virtual void setOnPort(std::shared_ptr<uml::Port>) = 0;
 			
-			virtual std::shared_ptr<uml::Port > getOnPort() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> getWrappedEventOccurrence() const = 0;
 			
-			
-			virtual void setOnPort(std::shared_ptr<uml::Port> _onPort) = 0;
-			
-			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > getWrappedEventOccurrence() const = 0;
-			
-			
-			virtual void setWrappedEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence) = 0;
-			
+			virtual void setWrappedEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>) = 0;
 			
 
 		protected:
@@ -159,9 +122,9 @@ namespace PSCS::Semantics::CommonBehavior
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint > m_interactionPoint;
-			std::shared_ptr<uml::Port > m_onPort;
-			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence > m_wrappedEventOccurrence;
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> m_interactionPoint;
+			std::shared_ptr<uml::Port> m_onPort;
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> m_wrappedEventOccurrence;
 
 		public:
 			//*********************************
@@ -176,7 +139,7 @@ namespace PSCS::Semantics::CommonBehavior
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -7,20 +7,16 @@
 #ifndef UML_TIMEOBSERVATION_HPP
 #define UML_TIMEOBSERVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,49 +31,14 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class Observation;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
 }
 
@@ -88,6 +49,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -96,14 +58,13 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class TimeObservation:virtual public Observation
+	class TimeObservation: virtual public Observation
 	{
 		public:
  			TimeObservation(const TimeObservation &) {}
 
 		protected:
 			TimeObservation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -124,13 +85,12 @@ namespace uml
 			*/
 			 
 			virtual bool getFirstEvent() const = 0;
-			
 			/*!
 			The value of firstEvent is related to the event. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the event Element. If firstEvent is false, then the corresponding observation event is the time instant the execution exits the event Element.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual void setFirstEvent (bool _firstEvent)= 0; 
+			virtual void setFirstEvent (bool _firstEvent)= 0;
 			
 			//*********************************
 			// Reference
@@ -140,15 +100,13 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::NamedElement > getEvent() const = 0;
-			
+			virtual std::shared_ptr<uml::NamedElement> getEvent() const = 0;
 			/*!
 			The TimeObservation is determined by the entering or exiting of the event Element during execution.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setEvent(std::shared_ptr<uml::NamedElement> _event) = 0;
-			
+			virtual void setEvent(std::shared_ptr<uml::NamedElement>) = 0;
 			
 
 		protected:
@@ -171,7 +129,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			std::shared_ptr<uml::NamedElement > m_event;
+			std::shared_ptr<uml::NamedElement> m_event;
 
 		public:
 			//*********************************
@@ -182,7 +140,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -192,7 +150,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -201,7 +159,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

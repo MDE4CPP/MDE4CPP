@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -46,35 +47,28 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
-#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -99,76 +93,40 @@ ActivityExecutionImpl::~ActivityExecutionImpl()
 }
 
 
-
-ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj):ActivityExecutionImpl()
+ActivityExecutionImpl::ActivityExecutionImpl(const ActivityExecutionImpl & obj): ActivityExecutionImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityExecutionImpl::copy() const
-{
-	std::shared_ptr<ActivityExecutionImpl> element(new ActivityExecutionImpl(*this));
-	element->setThisActivityExecutionPtr(element);
-	return element;
-}
-
 ActivityExecutionImpl& ActivityExecutionImpl::operator=(const ActivityExecutionImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::CommonBehavior::ExecutionImpl::operator=(obj);
+	ActivityExecution::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityExecution "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_activity  = obj.getActivity();
-
-	m_behavior  = obj.getBehavior();
-
-	m_context  = obj.getContext();
-
-	m_locus  = obj.getLocus();
-
-	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
-	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
-
-
 	//Clone references with containment (deep copy)
-
 	if(obj.getActivationGroup()!=nullptr)
 	{
 		m_activationGroup = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityNodeActivationGroup>(obj.getActivationGroup()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_activationGroup" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> _featureValuesList = obj.getFeatureValues();
-	for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _featureValues : *_featureValuesList)
-	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(_featureValues->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
-	#endif
-	if(obj.getObjectActivation()!=nullptr)
-	{
-		m_objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(obj.getObjectActivation()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_objectActivation" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> _parameterValuesList = obj.getParameterValues();
-	for(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _parameterValues : *_parameterValuesList)
-	{
-		this->getParameterValues()->add(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>(std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(_parameterValues->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_parameterValues" << std::endl;
-	#endif
-
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ActivityExecutionImpl::copy() const
+{
+	std::shared_ptr<ActivityExecutionImpl> element(new ActivityExecutionImpl());
+	*element =(*this);
+	element->setThisActivityExecutionPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityExecutionImpl::eStaticClass() const
@@ -292,35 +250,37 @@ void ActivityExecutionImpl::terminate()
 /*
 Getter & Setter for reference activationGroup
 */
-std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > ActivityExecutionImpl::getActivationGroup() const
+std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> ActivityExecutionImpl::getActivationGroup() const
 {
 //assert(m_activationGroup);
     return m_activationGroup;
 }
-
 void ActivityExecutionImpl::setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup)
 {
     m_activationGroup = _activationGroup;
 }
 
 
-
 /*
 Getter & Setter for reference activity
 */
-std::shared_ptr<uml::Activity > ActivityExecutionImpl::getActivity() const
+std::shared_ptr<uml::Activity> ActivityExecutionImpl::getActivity() const
 {
-//assert(m_activity);
-    return m_activity;
+	//generated from getterbody annotation
+if(!m_activity)
+{
+	m_activity = std::dynamic_pointer_cast<uml::Activity>(this->getBehavior());
 }
 
+return m_activity;
+	//end of body
+}
 void ActivityExecutionImpl::setActivity(std::shared_ptr<uml::Activity> _activity)
 {
     m_activity = _activity;
 	//additional setter call for redefined reference Execution::behavior
 	fUML::Semantics::CommonBehavior::ExecutionImpl::setBehavior(_activity);
 }
-
 /*Additional Setter for redefined reference 'Execution::behavior'*/
 void ActivityExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
@@ -330,11 +290,11 @@ void ActivityExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior
 		m_activity = _activity;
 
 		//additional setter call for redefined reference Execution::behavior
-		fUML::Semantics::CommonBehavior::ExecutionImpl::setBehavior(_behavior);
+		fUML::Semantics::CommonBehavior::ExecutionImpl::setBehavior(_activity);
 	}
 	else
 	{
-		std::cerr<<"[ActivityExecution::setBehavior] : Could not set behavior because provided behavior was not of type 'uml::Activity'"<<std::endl;
+		std::cerr<<"[ActivityExecution::setBehavior] : Could not set behavior because provided behavior was not of type 'std::shared_ptr<uml::Activity>'"<<std::endl;
 	}
 }
 
@@ -367,9 +327,9 @@ Any ActivityExecutionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVATIONGROUP:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivationGroup())); //77
+			return eAny(getActivationGroup()); //77
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEXECUTION_ATTRIBUTE_ACTIVITY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivity())); //78
+			return eAny(getActivity()); //78
 	}
 	return fUML::Semantics::CommonBehavior::ExecutionImpl::eGet(featureID, resolve, coreType);
 }
@@ -455,7 +415,6 @@ void ActivityExecutionImpl::loadAttributes(std::shared_ptr<persistence::interfac
 
 void ActivityExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
 	try
 	{
@@ -466,12 +425,9 @@ void ActivityExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 			{
 				typeName = "ActivityNodeActivationGroup";
 			}
-			std::shared_ptr<ecore::EObject> activationGroup = modelFactory->create(typeName, loadHandler->getCurrentObject(), fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION);
-			if (activationGroup != nullptr)
-			{
-				loadHandler->handleChild(activationGroup);
-			}
-			return;
+			loadHandler->handleChild(this->getActivationGroup()); 
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -486,7 +442,7 @@ void ActivityExecutionImpl::loadNode(std::string nodeName, std::shared_ptr<persi
 	fUML::Semantics::CommonBehavior::ExecutionImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityExecutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActivityExecutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -538,23 +494,15 @@ void ActivityExecutionImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("activity", this->getActivity());
-
-
+	// Add references
+		saveHandler->addReference(this->getActivity(), "activity", getActivity()->eClass() != uml::umlPackage::eInstance()->getActivity_Class()); 
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'activationGroup'
-		std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > activationGroup = this->getActivationGroup();
-		if (activationGroup != nullptr)
-		{
-			saveHandler->addReference(activationGroup, "activationGroup", activationGroup->eClass() != fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Class());
-		}
+
+		saveHandler->addReference(this->getActivationGroup(), "activationGroup", getActivationGroup()->eClass() != fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getActivityNodeActivationGroup_Class());
 	}
 	catch (std::exception& e)
 	{

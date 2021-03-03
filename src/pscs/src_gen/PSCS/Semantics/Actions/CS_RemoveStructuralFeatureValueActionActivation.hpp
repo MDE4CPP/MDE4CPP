@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_ACTIONS_CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_HPP
 #define PSCS_SEMANTICS_ACTIONS_CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,80 +31,38 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Link;
-}
-
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Reference;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class PinActivation;
 }
-
-namespace uml 
+namespace fUML::Semantics::Activities 
 {
-	class RemoveStructuralFeatureValueAction;
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class Token;
 }
-
-namespace fUML::Semantics::Actions 
-{
-	class RemoveStructuralFeatureValueActivation;
-}
-
-namespace uml 
-{
-	class StructuralFeature;
-}
-
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class StructuredValue;
 }
-
-namespace fUML::Semantics::Activities 
+namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class Token;
+	class CS_Link;
+	class CS_Reference;
 }
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
+	class RemoveStructuralFeatureValueAction;
+	class StructuralFeature;
 }
 
 // base class includes
@@ -117,18 +71,18 @@ namespace fUML::Semantics::Values
 // enum includes
 
 
+
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_RemoveStructuralFeatureValueActionActivation:virtual public fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation
+	class CS_RemoveStructuralFeatureValueActionActivation: virtual public fUML::Semantics::Actions::RemoveStructuralFeatureValueActivation
 	{
 		public:
  			CS_RemoveStructuralFeatureValueActionActivation(const CS_RemoveStructuralFeatureValueActionActivation &) {}
 
 		protected:
 			CS_RemoveStructuralFeatureValueActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -140,15 +94,9 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void doAction() = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > getLinksToDestroy(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue>  value,std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Semantics::Values::Value>  removedValue) = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPotentialLinkEnds(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference>  context,std::shared_ptr<uml::StructuralFeature>  feature) = 0;
-			
-			
+			virtual void doAction() = 0; 
+			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > getLinksToDestroy(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> value,std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<fUML::Semantics::Values::Value> removedValue) = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getPotentialLinkEnds(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> context,std::shared_ptr<uml::StructuralFeature> feature) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -183,7 +131,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

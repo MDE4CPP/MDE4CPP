@@ -44,9 +44,7 @@ FrameworkImpl::FrameworkImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Framework is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ FrameworkImpl::FrameworkImpl(const FrameworkImpl & obj):FrameworkImpl()
 
 std::shared_ptr<ecore::EObject>  FrameworkImpl::copy() const
 {
-	std::shared_ptr<FrameworkImpl> element(new FrameworkImpl(*this));
+	std::shared_ptr<FrameworkImpl> element(new FrameworkImpl());
+	*element=(*this);
 	element->setThisFrameworkPtr(element);
 	return element;
 }
 
 FrameworkImpl& FrameworkImpl::operator=(const FrameworkImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Framework "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

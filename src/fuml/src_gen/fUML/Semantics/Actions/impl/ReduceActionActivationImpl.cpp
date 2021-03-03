@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -33,33 +34,24 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
-
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "fUML/Semantics/Activities/ActivityNodeActivationGroup.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/Actions/InputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/OutputPinActivation.hpp"
-
 #include "fUML/Semantics/Actions/PinActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
-#include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -84,83 +76,41 @@ ReduceActionActivationImpl::~ReduceActionActivationImpl()
 }
 
 //Additional constructor for the containments back reference
-ReduceActionActivationImpl::ReduceActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group)
+ReduceActionActivationImpl::ReduceActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group)
 :ReduceActionActivationImpl()
 {
 	m_group = par_group;
 }
 
-
-ReduceActionActivationImpl::ReduceActionActivationImpl(const ReduceActionActivationImpl & obj):ReduceActionActivationImpl()
+ReduceActionActivationImpl::ReduceActionActivationImpl(const ReduceActionActivationImpl & obj): ReduceActionActivationImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ReduceActionActivationImpl::copy() const
-{
-	std::shared_ptr<ReduceActionActivationImpl> element(new ReduceActionActivationImpl(*this));
-	element->setThisReduceActionActivationPtr(element);
-	return element;
-}
-
 ReduceActionActivationImpl& ReduceActionActivationImpl::operator=(const ReduceActionActivationImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ActionActivationImpl::operator=(obj);
+	ReduceActionActivation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ReduceActionActivation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_firing = obj.isFiring();
-	m_running = obj.isRunning();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_action  = obj.getAction();
-
 	m_currentExecution  = obj.getCurrentExecution();
-
-	m_group  = obj.getGroup();
-
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _incomingEdges = obj.getIncomingEdges();
-	m_incomingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getIncomingEdges().get())));
-
-	m_node  = obj.getNode();
-
-	std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> _outgoingEdges = obj.getOutgoingEdges();
-	m_outgoingEdges.reset(new Bag<fUML::Semantics::Activities::ActivityEdgeInstance>(*(obj.getOutgoingEdges().get())));
-
-	std::shared_ptr<Union<fUML::Semantics::Actions::PinActivation>> _pinActivation = obj.getPinActivation();
-	m_pinActivation.reset(new Union<fUML::Semantics::Actions::PinActivation>(*(obj.getPinActivation().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _heldTokensList = obj.getHeldTokens();
-	for(std::shared_ptr<fUML::Semantics::Activities::Token> _heldTokens : *_heldTokensList)
-	{
-		this->getHeldTokens()->add(std::shared_ptr<fUML::Semantics::Activities::Token>(std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(_heldTokens->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_heldTokens" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::Semantics::Actions::InputPinActivation>> _inputPinActivationList = obj.getInputPinActivation();
-	for(std::shared_ptr<fUML::Semantics::Actions::InputPinActivation> _inputPinActivation : *_inputPinActivationList)
-	{
-		this->getInputPinActivation()->add(std::shared_ptr<fUML::Semantics::Actions::InputPinActivation>(std::dynamic_pointer_cast<fUML::Semantics::Actions::InputPinActivation>(_inputPinActivation->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inputPinActivation" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::Semantics::Actions::OutputPinActivation>> _outputPinActivationList = obj.getOutputPinActivation();
-	for(std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation> _outputPinActivation : *_outputPinActivationList)
-	{
-		this->getOutputPinActivation()->add(std::shared_ptr<fUML::Semantics::Actions::OutputPinActivation>(std::dynamic_pointer_cast<fUML::Semantics::Actions::OutputPinActivation>(_outputPinActivation->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_outputPinActivation" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ReduceActionActivationImpl::copy() const
+{
+	std::shared_ptr<ReduceActionActivationImpl> element(new ReduceActionActivationImpl());
+	*element =(*this);
+	element->setThisReduceActionActivationPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ReduceActionActivationImpl::eStaticClass() const
@@ -182,17 +132,15 @@ std::shared_ptr<ecore::EClass> ReduceActionActivationImpl::eStaticClass() const
 /*
 Getter & Setter for reference currentExecution
 */
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > ReduceActionActivationImpl::getCurrentExecution() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ReduceActionActivationImpl::getCurrentExecution() const
 {
 
     return m_currentExecution;
 }
-
 void ReduceActionActivationImpl::setCurrentExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _currentExecution)
 {
     m_currentExecution = _currentExecution;
 }
-
 
 
 //*********************************
@@ -242,7 +190,7 @@ Any ReduceActionActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCurrentExecution())); //9811
+			return eAny(getCurrentExecution()); //9811
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }
@@ -318,13 +266,12 @@ void ReduceActionActivationImpl::loadAttributes(std::shared_ptr<persistence::int
 
 void ReduceActionActivationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
 	//load BasePackage Nodes
 	ActionActivationImpl::loadNode(nodeName, loadHandler);
 }
 
-void ReduceActionActivationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ReduceActionActivationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -364,12 +311,8 @@ void ReduceActionActivationImpl::saveContent(std::shared_ptr<persistence::interf
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("currentExecution", this->getCurrentExecution());
-
+	// Add references
+		saveHandler->addReference(this->getCurrentExecution(), "currentExecution", getCurrentExecution()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class()); 
 	}
 	catch (std::exception& e)
 	{

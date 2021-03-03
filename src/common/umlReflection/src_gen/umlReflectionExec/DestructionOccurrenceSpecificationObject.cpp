@@ -69,9 +69,8 @@
 using namespace UML;
 
 DestructionOccurrenceSpecificationObject::DestructionOccurrenceSpecificationObject(std::shared_ptr<uml::DestructionOccurrenceSpecification> _element):
-
 	m_DestructionOccurrenceSpecificationValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DestructionOccurrenceSpecification());
 }
 
@@ -92,13 +91,15 @@ DestructionOccurrenceSpecificationObject::~DestructionOccurrenceSpecificationObj
 
 std::shared_ptr<ecore::EObject> DestructionOccurrenceSpecificationObject::copy()
 {
-	std::shared_ptr<DestructionOccurrenceSpecificationObject> element(new DestructionOccurrenceSpecificationObject(*this));
+	std::shared_ptr<DestructionOccurrenceSpecificationObject> element(new DestructionOccurrenceSpecificationObject());
+	*element=(*this);
 	element->setThisDestructionOccurrenceSpecificationObjectPtr(element);
 	return element;
 }
 
 DestructionOccurrenceSpecificationObject& DestructionOccurrenceSpecificationObject::operator=(const DestructionOccurrenceSpecificationObject & obj)
 {
+	UML::MessageOccurrenceSpecificationObject::operator=(obj);
 	return *this;
 }
 

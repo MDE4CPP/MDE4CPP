@@ -87,9 +87,8 @@
 using namespace UML;
 
 ActivityParameterNodeObject::ActivityParameterNodeObject(std::shared_ptr<uml::ActivityParameterNode> _element):
-
 	m_ActivityParameterNodeValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ActivityParameterNode());
 }
 
@@ -110,13 +109,15 @@ ActivityParameterNodeObject::~ActivityParameterNodeObject()
 
 std::shared_ptr<ecore::EObject> ActivityParameterNodeObject::copy()
 {
-	std::shared_ptr<ActivityParameterNodeObject> element(new ActivityParameterNodeObject(*this));
+	std::shared_ptr<ActivityParameterNodeObject> element(new ActivityParameterNodeObject());
+	*element=(*this);
 	element->setThisActivityParameterNodeObjectPtr(element);
 	return element;
 }
 
 ActivityParameterNodeObject& ActivityParameterNodeObject::operator=(const ActivityParameterNodeObject & obj)
 {
+	UML::ObjectNodeObject::operator=(obj);
 	return *this;
 }
 

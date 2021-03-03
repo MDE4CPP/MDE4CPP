@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -33,18 +34,13 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EClassifier.hpp"
-
 #include "ecore/EGenericType.hpp"
-
 #include "ecore/ENamedElement.hpp"
-
 #include "ecore/EObject.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -70,68 +66,52 @@ ETypedElementImpl::~ETypedElementImpl()
 }
 
 //Additional constructor for the containments back reference
-ETypedElementImpl::ETypedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+ETypedElementImpl::ETypedElementImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :ETypedElementImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
-
-ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj):ETypedElementImpl()
+ETypedElementImpl::ETypedElementImpl(const ETypedElementImpl & obj): ETypedElementImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ETypedElementImpl::copy() const
-{
-	std::shared_ptr<ETypedElementImpl> element(new ETypedElementImpl(*this));
-	element->setThisETypedElementPtr(element);
-	return element;
-}
-
 ETypedElementImpl& ETypedElementImpl::operator=(const ETypedElementImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ENamedElementImpl::operator=(obj);
+	ETypedElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ETypedElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_lowerBound = obj.getLowerBound();
 	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
 	m_ordered = obj.isOrdered();
 	m_required = obj.isRequired();
 	m_unique = obj.isUnique();
 	m_upperBound = obj.getUpperBound();
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
 	m_eType  = obj.getEType();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
 	if(obj.getEGenericType()!=nullptr)
 	{
 		m_eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEGenericType()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
-	#endif
-
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ETypedElementImpl::copy() const
+{
+	std::shared_ptr<ETypedElementImpl> element(new ETypedElementImpl());
+	*element =(*this);
+	element->setThisETypedElementPtr(element);
+	return element;
 }
 
 std::shared_ptr<EClass> ETypedElementImpl::eStaticClass() const
@@ -149,12 +129,10 @@ int ETypedElementImpl::getLowerBound() const
 {
 	return m_lowerBound;
 }
-
 void ETypedElementImpl::setLowerBound(int _lowerBound)
 {
 	m_lowerBound = _lowerBound;
 } 
-
 
 
 /*
@@ -167,8 +145,6 @@ bool ETypedElementImpl::isMany() const
 
 
 
-
-
 /*
 Getter & Setter for attribute ordered
 */
@@ -176,12 +152,10 @@ bool ETypedElementImpl::isOrdered() const
 {
 	return m_ordered;
 }
-
 void ETypedElementImpl::setOrdered(bool _ordered)
 {
 	m_ordered = _ordered;
 } 
-
 
 
 /*
@@ -191,12 +165,10 @@ bool ETypedElementImpl::isRequired() const
 {
 	return m_required;
 }
-
 void ETypedElementImpl::setRequired(bool _required)
 {
 	m_required = _required;
 } 
-
 
 
 /*
@@ -206,12 +178,10 @@ bool ETypedElementImpl::isUnique() const
 {
 	return m_unique;
 }
-
 void ETypedElementImpl::setUnique(bool _unique)
 {
 	m_unique = _unique;
 } 
-
 
 
 /*
@@ -221,12 +191,10 @@ int ETypedElementImpl::getUpperBound() const
 {
 	return m_upperBound;
 }
-
 void ETypedElementImpl::setUpperBound(int _upperBound)
 {
 	m_upperBound = _upperBound;
 } 
-
 
 
 //*********************************
@@ -239,33 +207,29 @@ void ETypedElementImpl::setUpperBound(int _upperBound)
 /*
 Getter & Setter for reference eGenericType
 */
-std::shared_ptr<ecore::EGenericType > ETypedElementImpl::getEGenericType() const
+std::shared_ptr<ecore::EGenericType> ETypedElementImpl::getEGenericType() const
 {
 
     return m_eGenericType;
 }
-
 void ETypedElementImpl::setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType)
 {
     m_eGenericType = _eGenericType;
 }
 
 
-
 /*
 Getter & Setter for reference eType
 */
-std::shared_ptr<ecore::EClassifier > ETypedElementImpl::getEType() const
+std::shared_ptr<ecore::EClassifier> ETypedElementImpl::getEType() const
 {
 
     return m_eType;
 }
-
 void ETypedElementImpl::setEType(std::shared_ptr<ecore::EClassifier> _eType)
 {
     m_eType = _eType;
 }
-
 
 
 //*********************************
@@ -315,9 +279,9 @@ Any ETypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEGenericType())); //5312
+			return eAny(getEGenericType()); //5312
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_ETYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEType())); //5311
+			return eAny(getEType()); //5311
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND:
 			return eAny(getLowerBound()); //537
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_MANY:
@@ -498,7 +462,6 @@ void ETypedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void ETypedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	try
 	{
@@ -509,13 +472,9 @@ void ETypedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 			{
 				typeName = "EGenericType";
 			}
-			std::shared_ptr<ecore::EGenericType> eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(modelFactory->create(typeName));
-			if (eGenericType != nullptr)
-			{
-				this->setEGenericType(eGenericType);
-				loadHandler->handleChild(eGenericType);
-			}
-			return;
+			loadHandler->handleChild(this->getEGenericType());
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -530,7 +489,7 @@ void ETypedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	ENamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ETypedElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void ETypedElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	switch(featureID)
 	{
@@ -570,8 +529,6 @@ void ETypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getETypedElement_Attribute_lowerBound()) )
 		{
@@ -592,21 +549,15 @@ void ETypedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 		{
 			saveHandler->addAttribute("upperBound", this->getUpperBound());
 		}
-
-		// Add references
-		saveHandler->addReference("eType", this->getEType());
-
-
+	// Add references
+		saveHandler->addReference(this->getEType(),"eType", getEType()->eClass() != ecore::ecorePackage::eInstance()->getEClassifier_Class());
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eGenericType'
-		std::shared_ptr<ecore::EGenericType > eGenericType = this->getEGenericType();
-		if (eGenericType != nullptr)
-		{
-			saveHandler->addReference(eGenericType, "eGenericType", eGenericType->eClass() != ecore::ecorePackage::eInstance()->getEGenericType_Class());
-		}
+
+		saveHandler->addReference(this->getEGenericType(), "eGenericType", getEGenericType()->eClass() != ecore::ecorePackage::eInstance()->getEGenericType_Class());
 	}
 	catch (std::exception& e)
 	{

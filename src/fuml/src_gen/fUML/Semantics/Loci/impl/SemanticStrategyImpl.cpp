@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,13 +33,10 @@
 
 
 //Factories an Package includes
-#include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
-#include "fUML/Semantics/Loci/impl/LociPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -63,34 +61,34 @@ SemanticStrategyImpl::~SemanticStrategyImpl()
 }
 
 
-
-SemanticStrategyImpl::SemanticStrategyImpl(const SemanticStrategyImpl & obj):SemanticStrategyImpl()
+SemanticStrategyImpl::SemanticStrategyImpl(const SemanticStrategyImpl & obj): SemanticStrategyImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  SemanticStrategyImpl::copy() const
-{
-	std::shared_ptr<SemanticStrategyImpl> element(new SemanticStrategyImpl(*this));
-	element->setThisSemanticStrategyPtr(element);
-	return element;
-}
-
 SemanticStrategyImpl& SemanticStrategyImpl::operator=(const SemanticStrategyImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	SemanticStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SemanticStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> SemanticStrategyImpl::copy() const
+{
+	std::shared_ptr<SemanticStrategyImpl> element(new SemanticStrategyImpl());
+	*element =(*this);
+	element->setThisSemanticStrategyPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> SemanticStrategyImpl::eStaticClass() const
@@ -187,12 +185,11 @@ void SemanticStrategyImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void SemanticStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Loci::LociFactory> modelFactory=fUML::Semantics::Loci::LociFactory::eInstance();
 
 	//load BasePackage Nodes
 }
 
-void SemanticStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void SemanticStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }
@@ -211,9 +208,6 @@ void SemanticStrategyImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,26 +36,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Observation.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -80,7 +72,7 @@ DurationObservationImpl::~DurationObservationImpl()
 }
 
 //Additional constructor for the containments back reference
-DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Namespace > par_namespace)
+DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :DurationObservationImpl()
 {
 	m_namespace = par_namespace;
@@ -88,14 +80,14 @@ DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Namespace > 
 }
 
 //Additional constructor for the containments back reference
-DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Element > par_owner)
+DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Element> par_owner)
 :DurationObservationImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Package > par_owningPackage)
+DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :DurationObservationImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -103,76 +95,64 @@ DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::Package > pa
 }
 
 //Additional constructor for the containments back reference
-DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+DurationObservationImpl::DurationObservationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :DurationObservationImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl & obj):DurationObservationImpl()
+DurationObservationImpl::DurationObservationImpl(const DurationObservationImpl & obj): DurationObservationImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  DurationObservationImpl::copy() const
-{
-	std::shared_ptr<DurationObservationImpl> element(new DurationObservationImpl(*this));
-	element->setThisDurationObservationPtr(element);
-	return element;
-}
-
 DurationObservationImpl& DurationObservationImpl::operator=(const DurationObservationImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ObservationImpl::operator=(obj);
+	DurationObservation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DurationObservation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_firstEvent = obj.isFirstEvent();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
+	std::shared_ptr<Bag<bool>> firstEventContainer = isFirstEvent();
+	if(nullptr != firstEventContainer )
+	{
+		int size = firstEventContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _firstEvent=(*firstEventContainer)[i];	
+			if(nullptr != _firstEvent)
+			{
+				firstEventContainer->push_back(_firstEvent);
+			} 
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container firstEvent."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr firstEvent."<< std::endl;)
+	}
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	std::shared_ptr<Bag<uml::NamedElement>> _event = obj.getEvent();
 	m_event.reset(new Bag<uml::NamedElement>(*(obj.getEvent().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> DurationObservationImpl::copy() const
+{
+	std::shared_ptr<DurationObservationImpl> element(new DurationObservationImpl());
+	*element =(*this);
+	element->setThisDurationObservationPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
@@ -186,7 +166,7 @@ std::shared_ptr<ecore::EClass> DurationObservationImpl::eStaticClass() const
 /*
 Getter & Setter for attribute firstEvent
 */
-std::shared_ptr<Bag<bool> > DurationObservationImpl::isFirstEvent() const 
+std::shared_ptr<Bag<bool>> DurationObservationImpl::isFirstEvent() const 
 {
 	if(m_firstEvent == nullptr)
 	{
@@ -197,12 +177,10 @@ std::shared_ptr<Bag<bool> > DurationObservationImpl::isFirstEvent() const
 
 
 
-
-
 //*********************************
 // Operations
 //*********************************
-bool DurationObservationImpl::first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context)
+bool DurationObservationImpl::first_event_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -228,12 +206,10 @@ std::shared_ptr<Bag<uml::NamedElement>> DurationObservationImpl::getEvent() cons
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > DurationObservationImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> DurationObservationImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -253,7 +229,7 @@ std::shared_ptr<Union<uml::Element>> DurationObservationImpl::getOwnedElement() 
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > DurationObservationImpl::getOwner() const
+std::weak_ptr<uml::Element> DurationObservationImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -303,15 +279,7 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_event->begin();
-			Bag<uml::NamedElement>::iterator end = m_event->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //8012
+			return eAny(getEvent()); //8012			
 		}
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_FIRSTEVENT:
 			return eAny(isFirstEvent()); //8013
@@ -356,7 +324,7 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 				}
 				iterEvent++;
 			}
-
+ 
 			iterEvent = eventList->begin();
 			endEvent = eventList->end();
 			while (iterEvent != endEvent)
@@ -426,7 +394,6 @@ void DurationObservationImpl::loadAttributes(std::shared_ptr<persistence::interf
 
 void DurationObservationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 	try
 	{
 		if (nodeName.compare("firstEvent") == 0)
@@ -448,7 +415,7 @@ void DurationObservationImpl::loadNode(std::string nodeName, std::shared_ptr<per
 	ObservationImpl::loadNode(nodeName, loadHandler);
 }
 
-void DurationObservationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DurationObservationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -457,11 +424,11 @@ void DurationObservationImpl::resolveReferences(const int featureID, std::list<s
 			std::shared_ptr<Bag<uml::NamedElement>> _event = getEvent();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::NamedElement> _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
+				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
 				if (_r != nullptr)
 				{
 					_event->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -497,8 +464,6 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getDurationObservation_Attribute_firstEvent()) )
 		{
@@ -507,14 +472,8 @@ void DurationObservationImpl::saveContent(std::shared_ptr<persistence::interface
 				saveHandler->addAttributeAsNode("firstEvent", std::to_string(*value));
 			}
 		}
-
-		// Add references
-		std::shared_ptr<Bag<uml::NamedElement>> event_list = this->getEvent();
-		for (std::shared_ptr<uml::NamedElement > object : *event_list)
-		{ 
-			saveHandler->addReferences("event", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::NamedElement>("event", this->getEvent());
 	}
 	catch (std::exception& e)
 	{

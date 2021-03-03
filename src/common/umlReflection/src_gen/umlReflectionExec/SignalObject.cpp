@@ -114,9 +114,8 @@
 using namespace UML;
 
 SignalObject::SignalObject(std::shared_ptr<uml::Signal> _element):
-
 	m_SignalValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Signal());
 }
 
@@ -137,13 +136,15 @@ SignalObject::~SignalObject()
 
 std::shared_ptr<ecore::EObject> SignalObject::copy()
 {
-	std::shared_ptr<SignalObject> element(new SignalObject(*this));
+	std::shared_ptr<SignalObject> element(new SignalObject());
+	*element=(*this);
 	element->setThisSignalObjectPtr(element);
 	return element;
 }
 
 SignalObject& SignalObject::operator=(const SignalObject & obj)
 {
+	UML::ClassifierObject::operator=(obj);
 	return *this;
 }
 

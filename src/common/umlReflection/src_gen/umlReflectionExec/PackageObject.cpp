@@ -90,9 +90,8 @@
 using namespace UML;
 
 PackageObject::PackageObject(std::shared_ptr<uml::Package> _element):
-
 	m_PackageValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Package());
 }
 
@@ -113,13 +112,17 @@ PackageObject::~PackageObject()
 
 std::shared_ptr<ecore::EObject> PackageObject::copy()
 {
-	std::shared_ptr<PackageObject> element(new PackageObject(*this));
+	std::shared_ptr<PackageObject> element(new PackageObject());
+	*element=(*this);
 	element->setThisPackageObjectPtr(element);
 	return element;
 }
 
 PackageObject& PackageObject::operator=(const PackageObject & obj)
 {
+	UML::NamespaceObject::operator=(obj);
+	UML::PackageableElementObject::operator=(obj);
+	UML::TemplateableElementObject::operator=(obj);
 	return *this;
 }
 

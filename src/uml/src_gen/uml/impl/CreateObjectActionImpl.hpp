@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			CreateObjectActionImpl(const CreateObjectActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			CreateObjectActionImpl& operator=(CreateObjectActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			CreateObjectActionImpl& operator=(CreateObjectActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisCreateObjectActionPtr(std::weak_ptr<CreateObjectAction> thisCreateObjectActionPtr);
 
 			//Additional constructors for the containments back reference
-			CreateObjectActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			CreateObjectActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			CreateObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			CreateObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			CreateObjectActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			CreateObjectActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			CreateObjectActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			CreateObjectActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,30 +52,22 @@ namespace uml
 			not classifier.isAbstract
 			*/
 			 
-			virtual bool classifier_not_abstract(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool classifier_not_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The classifier cannot be an AssociationClass.
 			not classifier.oclIsKindOf(AssociationClass)
 			*/
 			 
-			virtual bool classifier_not_association_class(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool classifier_not_association_class(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type of the result OutputPin must be the same as the classifier of the CreateObjectAction.
 			result.type = classifier
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -99,30 +82,26 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier > getClassifier() const ;
-			
+			virtual std::shared_ptr<uml::Classifier> getClassifier() const ;
 			/*!
 			The Classifier to be instantiated.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setClassifier(std::shared_ptr<uml::Classifier> _classifier) ;
-			
+			virtual void setClassifier(std::shared_ptr<uml::Classifier>) ;
 			/*!
 			The OutputPin on which the newly created object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
 			/*!
 			The OutputPin on which the newly created object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -147,7 +126,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -167,7 +146,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

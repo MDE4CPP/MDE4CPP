@@ -7,22 +7,18 @@
 #ifndef ECORE_ECLASSIFIER_HPP
 #define ECORE_ECLASSIFIER_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
 #include "abstractDataTypes/Any.hpp"
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -37,29 +33,11 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
-	class ENamedElement;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
 	class EPackage;
-}
-
-namespace ecore 
-{
 	class ETypeParameter;
 }
 
@@ -69,26 +47,23 @@ namespace ecore
 // enum includes
 
 
+
 //*********************************
 namespace ecore 
 {
 	
-	class EClassifier:virtual public ENamedElement
+	class EClassifier: virtual public ENamedElement
 	{
 		public:
  			EClassifier(const EClassifier &) {}
 
 		protected:
 			EClassifier(){}
-
+			//Additional constructors for the containments back reference
+			EClassifier(std::weak_ptr<ecore::EObject> par_eContainer);
 
 			//Additional constructors for the containments back reference
-
-			EClassifier(std::weak_ptr<ecore::EObject > par_eContainer);
-
-			//Additional constructors for the containments back reference
-
-			EClassifier(std::weak_ptr<ecore::EPackage > par_ePackage);
+			EClassifier(std::weak_ptr<ecore::EPackage> par_ePackage);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -100,45 +75,35 @@ namespace ecore
 			// Operations
 			//*********************************
 			 
-			virtual int getClassifierID() = 0;
-			
-			 
+			virtual int getClassifierID() = 0; 
 			virtual bool isInstance(Any object) const = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
 			virtual Any getDefaultValue() const = 0;
-			
 			 
-			virtual void setDefaultValue (Any _defaultValue)= 0; 
+			virtual void setDefaultValue (Any _defaultValue)= 0;
 			 
-			virtual void *  getInstanceClass() const = 0;
-			
+			virtual void * getInstanceClass() const = 0;
 			
 			 
 			virtual std::string getInstanceClassName() const = 0;
-			
 			 
-			virtual void setInstanceClassName (std::string _instanceClassName)= 0; 
+			virtual void setInstanceClassName (std::string _instanceClassName)= 0;
 			 
 			virtual std::string getInstanceTypeName() const = 0;
-			
 			 
-			virtual void setInstanceTypeName (std::string _instanceTypeName)= 0; 
+			virtual void setInstanceTypeName (std::string _instanceTypeName)= 0;
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EPackage > getEPackage() const = 0;
-			
+			virtual std::weak_ptr<ecore::EPackage> getEPackage() const = 0;
 			
 			
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const = 0;
-			
 			
 			
 
@@ -149,7 +114,7 @@ namespace ecore
 			 
 			Any m_defaultValue = nullptr;
 			 
-			void *  m_instanceClass = nullptr;
+			void * m_instanceClass = nullptr;
 			 
 			std::string m_instanceClassName = "";
 			 
@@ -160,7 +125,7 @@ namespace ecore
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<ecore::EPackage > m_ePackage;
+			std::weak_ptr<ecore::EPackage> m_ePackage;
 			mutable std::shared_ptr<Bag<ecore::ETypeParameter>> m_eTypeParameters;
 
 		public:
@@ -177,7 +142,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

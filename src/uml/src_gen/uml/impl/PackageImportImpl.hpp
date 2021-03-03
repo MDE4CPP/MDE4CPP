@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			PackageImportImpl(const PackageImportImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			PackageImportImpl& operator=(PackageImportImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			PackageImportImpl& operator=(PackageImportImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisPackageImportPtr(std::weak_ptr<PackageImport> thisPackageImportPtr);
 
 			//Additional constructors for the containments back reference
-			PackageImportImpl(std::weak_ptr<uml::Namespace > par_importingNamespace);
-
-
+			PackageImportImpl(std::weak_ptr<uml::Namespace> par_importingNamespace);
 			//Additional constructors for the containments back reference
-			PackageImportImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			PackageImportImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -53,9 +48,7 @@ namespace uml
 			visibility = VisibilityKind::public or visibility = VisibilityKind::private
 			*/
 			 
-			virtual bool public_or_private(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool public_or_private(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -66,13 +59,12 @@ namespace uml
 			*/
 			 
 			virtual uml::VisibilityKind getVisibility() const ;
-			
 			/*!
 			Specifies the visibility of the imported PackageableElements within the importingNamespace, i.e., whether imported Elements will in turn be visible to other Namespaces. If the PackageImport is public, the imported Elements will be visible outside the importingNamespace, while, if the PackageImport is private, they will not.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setVisibility (uml::VisibilityKind _visibility); 
+			virtual void setVisibility (uml::VisibilityKind _visibility);
 			
 			
 			//*********************************
@@ -83,30 +75,26 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Package > getImportedPackage() const ;
-			
+			virtual std::shared_ptr<uml::Package> getImportedPackage() const ;
 			/*!
 			Specifies the Package whose members are imported into a Namespace.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setImportedPackage(std::shared_ptr<uml::Package> _importedPackage) ;
-			
+			virtual void setImportedPackage(std::shared_ptr<uml::Package>) ;
 			/*!
 			Specifies the Namespace that imports the members from a Package.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getImportingNamespace() const ;
-			
+			virtual std::weak_ptr<uml::Namespace> getImportingNamespace() const ;
 			/*!
 			Specifies the Namespace that imports the members from a Package.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setImportingNamespace(std::shared_ptr<uml::Namespace> _importingNamespace) ;
+			virtual void setImportingNamespace(std::weak_ptr<uml::Namespace>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -121,7 +109,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -151,7 +139,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

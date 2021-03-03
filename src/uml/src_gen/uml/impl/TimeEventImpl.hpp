@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			TimeEventImpl(const TimeEventImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			TimeEventImpl& operator=(TimeEventImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			TimeEventImpl& operator=(TimeEventImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisTimeEventPtr(std::weak_ptr<TimeEvent> thisTimeEventPtr);
 
 			//Additional constructors for the containments back reference
-			TimeEventImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			TimeEventImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			TimeEventImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			TimeEventImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			TimeEventImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			TimeEventImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			TimeEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			TimeEventImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -61,9 +52,7 @@ namespace uml
 			when.integerValue() >= 0
 			*/
 			 
-			virtual bool when_non_negative(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool when_non_negative(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -74,13 +63,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsRelative() const ;
-			
 			/*!
 			Specifies whether the TimeEvent is specified as an absolute or relative time.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual void setIsRelative (bool _isRelative); 
+			virtual void setIsRelative (bool _isRelative);
 			
 			
 			//*********************************
@@ -91,16 +79,14 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TimeExpression > getWhen() const ;
-			
+			virtual std::shared_ptr<uml::TimeExpression> getWhen() const ;
 			/*!
 			Specifies the time of the TimeEvent.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setWhen(std::shared_ptr<uml::TimeExpression> _when) ;
+			virtual void setWhen(std::shared_ptr<uml::TimeExpression>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -110,7 +96,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -120,7 +106,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -135,7 +121,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -33,23 +34,20 @@
 #include <exception> // used in Persistence
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
-
 #include "uml/StructuralFeature.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
-
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -74,34 +72,34 @@ CS_StructuralFeatureOfInterfaceAccessStrategyImpl::~CS_StructuralFeatureOfInterf
 }
 
 
-
-CS_StructuralFeatureOfInterfaceAccessStrategyImpl::CS_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_StructuralFeatureOfInterfaceAccessStrategyImpl & obj):CS_StructuralFeatureOfInterfaceAccessStrategyImpl()
+CS_StructuralFeatureOfInterfaceAccessStrategyImpl::CS_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_StructuralFeatureOfInterfaceAccessStrategyImpl & obj): CS_StructuralFeatureOfInterfaceAccessStrategyImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  CS_StructuralFeatureOfInterfaceAccessStrategyImpl::copy() const
-{
-	std::shared_ptr<CS_StructuralFeatureOfInterfaceAccessStrategyImpl> element(new CS_StructuralFeatureOfInterfaceAccessStrategyImpl(*this));
-	element->setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(element);
-	return element;
-}
-
 CS_StructuralFeatureOfInterfaceAccessStrategyImpl& CS_StructuralFeatureOfInterfaceAccessStrategyImpl::operator=(const CS_StructuralFeatureOfInterfaceAccessStrategyImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::SemanticStrategyImpl::operator=(obj);
+	CS_StructuralFeatureOfInterfaceAccessStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_StructuralFeatureOfInterfaceAccessStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::copy() const
+{
+	std::shared_ptr<CS_StructuralFeatureOfInterfaceAccessStrategyImpl> element(new CS_StructuralFeatureOfInterfaceAccessStrategyImpl());
+	*element =(*this);
+	element->setThisCS_StructuralFeatureOfInterfaceAccessStrategyPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eStaticClass() const
@@ -125,13 +123,13 @@ std::string CS_StructuralFeatureOfInterfaceAccessStrategyImpl::getName()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature)
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CS_StructuralFeatureOfInterfaceAccessStrategyImpl::read(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<uml::StructuralFeature> feature)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  cs_Object,std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
+void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::write(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> cs_Object,std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -214,13 +212,12 @@ void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::loadAttributes(std::shar
 
 void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Loci::SemanticStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::Loci::SemanticStrategyImpl::resolveReferences(featureID, references);
 }
@@ -240,9 +237,6 @@ void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::saveContent(std::shared_
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

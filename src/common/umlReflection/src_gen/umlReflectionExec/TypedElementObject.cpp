@@ -55,9 +55,8 @@
 using namespace UML;
 
 TypedElementObject::TypedElementObject(std::shared_ptr<uml::TypedElement> _element):
-
 	m_TypedElementValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TypedElement());
 }
 
@@ -78,13 +77,15 @@ TypedElementObject::~TypedElementObject()
 
 std::shared_ptr<ecore::EObject> TypedElementObject::copy()
 {
-	std::shared_ptr<TypedElementObject> element(new TypedElementObject(*this));
+	std::shared_ptr<TypedElementObject> element(new TypedElementObject());
+	*element=(*this);
 	element->setThisTypedElementObjectPtr(element);
 	return element;
 }
 
 TypedElementObject& TypedElementObject::operator=(const TypedElementObject & obj)
 {
+	UML::NamedElementObject::operator=(obj);
 	return *this;
 }
 

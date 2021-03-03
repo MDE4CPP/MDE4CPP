@@ -22,8 +22,8 @@ namespace ecore
 	{
 		public: 
 			EClassifierImpl(const EClassifierImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EClassifierImpl& operator=(EClassifierImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EClassifierImpl& operator=(EClassifierImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
@@ -32,14 +32,9 @@ namespace ecore
 			virtual void setThisEClassifierPtr(std::weak_ptr<EClassifier> thisEClassifierPtr);
 
 			//Additional constructors for the containments back reference
-			EClassifierImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EClassifierImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EClassifierImpl(std::weak_ptr<ecore::EPackage > par_ePackage);
-
-
-
+			EClassifierImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
 
 		public:
 			//destructor
@@ -49,49 +44,39 @@ namespace ecore
 			// Operations
 			//*********************************
 			 
-			virtual int getClassifierID() ;
-			
-			 
+			virtual int getClassifierID() ; 
 			virtual bool isInstance(Any object) const ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
 			virtual Any getDefaultValue() const ;
-			
 			 
-			virtual void setDefaultValue (Any _defaultValue); 
+			virtual void setDefaultValue (Any _defaultValue);
 			 
-			virtual void *  getInstanceClass() const ;
-			
+			virtual void * getInstanceClass() const ;
 			
 			 
 			virtual std::string getInstanceClassName() const ;
-			
 			 
-			virtual void setInstanceClassName (std::string _instanceClassName); 
+			virtual void setInstanceClassName (std::string _instanceClassName);
 			 
 			virtual std::string getInstanceTypeName() const ;
-			
 			 
-			virtual void setInstanceTypeName (std::string _instanceTypeName); 
+			virtual void setInstanceTypeName (std::string _instanceTypeName);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EPackage > getEPackage() const ;
-			
+			virtual std::weak_ptr<ecore::EPackage> getEPackage() const ;
 			
 			
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -112,7 +97,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

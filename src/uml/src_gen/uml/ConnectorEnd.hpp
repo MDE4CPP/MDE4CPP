@@ -8,22 +8,18 @@
 #define UML_CONNECTOREND_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -38,39 +34,13 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class Connector;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class MultiplicityElement;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -78,6 +48,7 @@ namespace uml
 #include "uml/MultiplicityElement.hpp"
 
 // enum includes
+
 
 
 //*********************************
@@ -88,22 +59,18 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class ConnectorEnd:virtual public MultiplicityElement
+	class ConnectorEnd: virtual public MultiplicityElement
 	{
 		public:
  			ConnectorEnd(const ConnectorEnd &) {}
 
 		protected:
 			ConnectorEnd(){}
-
+			//Additional constructors for the containments back reference
+			ConnectorEnd(std::weak_ptr<uml::Connector> par_connector);
 
 			//Additional constructors for the containments back reference
-
-			ConnectorEnd(std::weak_ptr<uml::Connector > par_connector);
-
-			//Additional constructors for the containments back reference
-
-			ConnectorEnd(std::weak_ptr<uml::Element > par_owner);
+			ConnectorEnd(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -114,38 +81,28 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 			/*!
 			The multiplicity of the ConnectorEnd may not be more general than the multiplicity of the corresponding end of the Association typing the owning Connector, if any.
 			self.compatibleWith(definingEnd)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			If a ConnectorEnd is attached to a Port of the containing Classifier, partWithPort will be empty.
 			(role.oclIsKindOf(Port) and role.owner = connector.owner) implies partWithPort->isEmpty()
 			*/
 			 
-			virtual bool part_with_port_empty(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool part_with_port_empty(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			If a ConnectorEnd references a partWithPort, then the role must be a Port that is defined or inherited by the type of the partWithPort.
 			partWithPort->notEmpty() implies 
 			  (role.oclIsKindOf(Port) and partWithPort.type.oclAsType(Namespace).member->includes(role))
 			*/
 			 
-			virtual bool role_and_part_with_port(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool role_and_part_with_port(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The Property held in self.partWithPort must not be a Port.
 			partWithPort->notEmpty() implies not partWithPort.oclIsKindOf(Port)
 			*/
 			 
-			virtual bool self_part_with_port(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool self_part_with_port(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -154,47 +111,40 @@ namespace uml
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<uml::Connector > getConnector() const = 0;
+			virtual std::weak_ptr<uml::Connector> getConnector() const = 0;
 			
-			
-			virtual void setConnector(std::shared_ptr<uml::Connector> _connector) = 0;
-			
+			virtual void setConnector(std::weak_ptr<uml::Connector>) = 0;
 			/*!
 			A derived property referencing the corresponding end on the Association which types the Connector owing this ConnectorEnd, if any. It is derived by selecting the end at the same place in the ordering of Association ends as this ConnectorEnd.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property > getDefiningEnd() const = 0;
-			
-			
-			/*!
-			Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
-			<p>From package UML::StructuredClassifiers.</p>
-			*/
-			
-			virtual std::shared_ptr<uml::Property > getPartWithPort() const = 0;
+			virtual std::shared_ptr<uml::Property> getDefiningEnd() const = 0;
 			
 			/*!
 			Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setPartWithPort(std::shared_ptr<uml::Property> _partWithPort) = 0;
+			virtual std::shared_ptr<uml::Property> getPartWithPort() const = 0;
+			/*!
+			Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
+			<p>From package UML::StructuredClassifiers.</p>
+			*/
 			
+			virtual void setPartWithPort(std::shared_ptr<uml::Property>) = 0;
 			/*!
 			The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ConnectableElement > getRole() const = 0;
-			
+			virtual std::shared_ptr<uml::ConnectableElement> getRole() const = 0;
 			/*!
 			The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setRole(std::shared_ptr<uml::ConnectableElement> _role) = 0;
-			
+			virtual void setRole(std::shared_ptr<uml::ConnectableElement>) = 0;
 			
 
 		protected:
@@ -207,22 +157,22 @@ namespace uml
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<uml::Connector > m_connector;/*!
+			std::weak_ptr<uml::Connector> m_connector;/*!
 			A derived property referencing the corresponding end on the Association which types the Connector owing this ConnectorEnd, if any. It is derived by selecting the end at the same place in the ordering of Association ends as this ConnectorEnd.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			std::shared_ptr<uml::Property > m_definingEnd;/*!
+			std::shared_ptr<uml::Property> m_definingEnd;/*!
 			Indicates the role of the internal structure of a Classifier with the Port to which the ConnectorEnd is attached.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			std::shared_ptr<uml::Property > m_partWithPort;/*!
+			std::shared_ptr<uml::Property> m_partWithPort;/*!
 			The ConnectableElement attached at this ConnectorEnd. When an instance of the containing Classifier is created, a link may (depending on the multiplicities) be created to an instance of the Classifier that types this ConnectableElement.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			std::shared_ptr<uml::ConnectableElement > m_role;
+			std::shared_ptr<uml::ConnectableElement> m_role;
 
 		public:
 			//*********************************
@@ -242,7 +192,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

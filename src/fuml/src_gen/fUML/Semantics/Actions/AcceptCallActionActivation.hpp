@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIONS_ACCEPTCALLACTIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_ACCEPTCALLACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,60 +31,28 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::Actions 
-{
-	class AcceptEventActionActivation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class AcceptEventActionEventAccepter;
+	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-
-namespace uml 
-{
-	class Action;
-}
-
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
 	class ActivityNodeActivationGroup;
+	class Token;
 }
-
 namespace fUML::Semantics::CommonBehavior 
 {
 	class EventOccurrence;
 }
-
-namespace fUML::Semantics::Actions 
+namespace uml 
 {
-	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class PinActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
+	class Action;
+	class ActivityNode;
 }
 
 // base class includes
@@ -97,18 +61,18 @@ namespace fUML::Semantics::Activities
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class AcceptCallActionActivation:virtual public AcceptEventActionActivation
+	class AcceptCallActionActivation: virtual public AcceptEventActionActivation
 	{
 		public:
  			AcceptCallActionActivation(const AcceptCallActionActivation &) {}
 
 		protected:
 			AcceptCallActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -120,9 +84,7 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
-			
-			
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -157,7 +119,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

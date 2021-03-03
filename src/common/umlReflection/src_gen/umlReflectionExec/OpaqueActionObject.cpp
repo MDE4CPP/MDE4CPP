@@ -93,9 +93,8 @@
 using namespace UML;
 
 OpaqueActionObject::OpaqueActionObject(std::shared_ptr<uml::OpaqueAction> _element):
-
 	m_OpaqueActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_OpaqueAction());
 }
 
@@ -116,13 +115,15 @@ OpaqueActionObject::~OpaqueActionObject()
 
 std::shared_ptr<ecore::EObject> OpaqueActionObject::copy()
 {
-	std::shared_ptr<OpaqueActionObject> element(new OpaqueActionObject(*this));
+	std::shared_ptr<OpaqueActionObject> element(new OpaqueActionObject());
+	*element=(*this);
 	element->setThisOpaqueActionObjectPtr(element);
 	return element;
 }
 
 OpaqueActionObject& OpaqueActionObject::operator=(const OpaqueActionObject & obj)
 {
+	UML::ActionObject::operator=(obj);
 	return *this;
 }
 

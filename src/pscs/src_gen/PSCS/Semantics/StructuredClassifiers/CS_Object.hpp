@@ -7,21 +7,17 @@
 #ifndef PSCS_SEMANTICS_STRUCTUREDCLASSIFIERS_CS_OBJECT_HPP
 #define PSCS_SEMANTICS_STRUCTUREDCLASSIFIERS_CS_OBJECT_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,90 +32,38 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_InteractionPoint;
-}
-
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Link;
-}
-
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Object;
-}
-
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class EventOccurrence;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
 	class Execution;
+	class ObjectActivation;
 }
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
-
-namespace uml 
-{
-	class Interface;
-}
-
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
-namespace fUML::Semantics::StructuredClassifiers 
+namespace fUML::Semantics::SimpleClassifiers 
 {
-	class Object;
+	class FeatureValue;
 }
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class ObjectActivation;
-}
-
-namespace uml 
-{
-	class Operation;
-}
-
-namespace uml 
-{
-	class Port;
-}
-
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Reference;
 }
-
+namespace PSCS::Semantics::StructuredClassifiers 
+{
+	class CS_InteractionPoint;
+	class CS_Link;
+}
 namespace uml 
 {
+	class Class;
+	class Classifier;
+	class Interface;
+	class Operation;
+	class Port;
 	class StructuralFeature;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 
 // base class includes
@@ -131,18 +75,18 @@ namespace fUML::Semantics::Values
 #include "uml/ConnectorKind.hpp"
 
 
+
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	
-	class CS_Object:virtual public fUML::Semantics::StructuredClassifiers::Object
+	class CS_Object: virtual public fUML::Semantics::StructuredClassifiers::Object
 	{
 		public:
  			CS_Object(const CS_Object &) {}
 
 		protected:
 			CS_Object(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -154,75 +98,29 @@ namespace PSCS::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual bool checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) = 0;
-			
-			 
-			virtual bool contains(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object) = 0;
-			
-			 
-			virtual bool directlyContains(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object) = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort) = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort) = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object> > getDirectContainers() = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> getFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) = 0;
-			
-			 
-			virtual PSCS::Semantics::StructuredClassifiers::CS_LinkKind getLinkKind(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link>  link,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
-			
-			 
-			virtual bool hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value) = 0;
-			
-			 
-			virtual bool isDescendant(std::shared_ptr<uml::Interface>  contract,std::shared_ptr<uml::Interface>  interface_) = 0;
-			
-			 
-			virtual bool isOperationProvided(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  reference,std::shared_ptr<uml::Operation>  operation) = 0;
-			
-			 
-			virtual bool isOperationRequired(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  reference,std::shared_ptr<uml::Operation>  operation) = 0;
-			
-			 
-			virtual bool realizesInterface(std::shared_ptr<uml::Class>  type,std::shared_ptr<uml::Interface>  interface_) = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > selectTargetsForDispatching(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link>  link,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint,uml::ConnectorKind connectorKind,std::shared_ptr<uml::Operation>  operation,bool toInternal) = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > selectTargetsForSending(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link>  link,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint,uml::ConnectorKind connectorKind,bool toInternal) = 0;
-			
-			 
-			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
-			
-			 
-			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort) = 0;
-			
-			 
-			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint) = 0;
-			
-			 
-			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort) = 0;
-			
-			 
-			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position) = 0;
-			
-			
+			virtual bool checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) = 0; 
+			virtual bool contains(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object) = 0; 
+			virtual bool directlyContains(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object) = 0; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation> operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchIn(std::shared_ptr<uml::Operation> operation,std::shared_ptr<uml::Port> onPort) = 0; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<uml::Operation> operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatchOut(std::shared_ptr<uml::Operation> operation,std::shared_ptr<uml::Port> onPort) = 0; 
+			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object> > getDirectContainers() = 0; 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> getFeatureValue(std::shared_ptr<uml::StructuralFeature> feature) = 0; 
+			virtual PSCS::Semantics::StructuredClassifiers::CS_LinkKind getLinkKind(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0; 
+			virtual std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0; 
+			virtual bool hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value> value) = 0; 
+			virtual bool isDescendant(std::shared_ptr<uml::Interface> contract,std::shared_ptr<uml::Interface> interface_) = 0; 
+			virtual bool isOperationProvided(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference,std::shared_ptr<uml::Operation> operation) = 0; 
+			virtual bool isOperationRequired(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference,std::shared_ptr<uml::Operation> operation) = 0; 
+			virtual bool realizesInterface(std::shared_ptr<uml::Class> type,std::shared_ptr<uml::Interface> interface_) = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > selectTargetsForDispatching(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint,uml::ConnectorKind connectorKind,std::shared_ptr<uml::Operation> operation,bool toInternal) = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > selectTargetsForSending(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint,uml::ConnectorKind connectorKind,bool toInternal) = 0; 
+			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0; 
+			virtual void sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<uml::Port> onPort) = 0; 
+			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint) = 0; 
+			virtual void sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<uml::Port> onPort) = 0; 
+			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -256,7 +154,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -94,9 +94,8 @@
 using namespace UML;
 
 ProtocolTransitionObject::ProtocolTransitionObject(std::shared_ptr<uml::ProtocolTransition> _element):
-
 	m_ProtocolTransitionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ProtocolTransition());
 }
 
@@ -117,13 +116,15 @@ ProtocolTransitionObject::~ProtocolTransitionObject()
 
 std::shared_ptr<ecore::EObject> ProtocolTransitionObject::copy()
 {
-	std::shared_ptr<ProtocolTransitionObject> element(new ProtocolTransitionObject(*this));
+	std::shared_ptr<ProtocolTransitionObject> element(new ProtocolTransitionObject());
+	*element=(*this);
 	element->setThisProtocolTransitionObjectPtr(element);
 	return element;
 }
 
 ProtocolTransitionObject& ProtocolTransitionObject::operator=(const ProtocolTransitionObject & obj)
 {
+	UML::TransitionObject::operator=(obj);
 	return *this;
 }
 

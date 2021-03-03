@@ -95,9 +95,8 @@
 using namespace UML;
 
 SendSignalActionObject::SendSignalActionObject(std::shared_ptr<uml::SendSignalAction> _element):
-
 	m_SendSignalActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_SendSignalAction());
 }
 
@@ -118,13 +117,15 @@ SendSignalActionObject::~SendSignalActionObject()
 
 std::shared_ptr<ecore::EObject> SendSignalActionObject::copy()
 {
-	std::shared_ptr<SendSignalActionObject> element(new SendSignalActionObject(*this));
+	std::shared_ptr<SendSignalActionObject> element(new SendSignalActionObject());
+	*element=(*this);
 	element->setThisSendSignalActionObjectPtr(element);
 	return element;
 }
 
 SendSignalActionObject& SendSignalActionObject::operator=(const SendSignalActionObject & obj)
 {
+	UML::InvocationActionObject::operator=(obj);
 	return *this;
 }
 

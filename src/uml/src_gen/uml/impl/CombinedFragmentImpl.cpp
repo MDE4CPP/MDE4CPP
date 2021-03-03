@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,30 +36,19 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Gate.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionFragment.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -84,7 +74,7 @@ CombinedFragmentImpl::~CombinedFragmentImpl()
 }
 
 //Additional constructor for the containments back reference
-CombinedFragmentImpl::CombinedFragmentImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+CombinedFragmentImpl::CombinedFragmentImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction)
 :CombinedFragmentImpl()
 {
 	m_enclosingInteraction = par_enclosingInteraction;
@@ -92,7 +82,7 @@ CombinedFragmentImpl::CombinedFragmentImpl(std::weak_ptr<uml::Interaction > par_
 }
 
 //Additional constructor for the containments back reference
-CombinedFragmentImpl::CombinedFragmentImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+CombinedFragmentImpl::CombinedFragmentImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand)
 :CombinedFragmentImpl()
 {
 	m_enclosingOperand = par_enclosingOperand;
@@ -100,7 +90,7 @@ CombinedFragmentImpl::CombinedFragmentImpl(std::weak_ptr<uml::InteractionOperand
 }
 
 //Additional constructor for the containments back reference
-CombinedFragmentImpl::CombinedFragmentImpl(std::weak_ptr<uml::Namespace > par_namespace)
+CombinedFragmentImpl::CombinedFragmentImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :CombinedFragmentImpl()
 {
 	m_namespace = par_namespace;
@@ -108,110 +98,95 @@ CombinedFragmentImpl::CombinedFragmentImpl(std::weak_ptr<uml::Namespace > par_na
 }
 
 //Additional constructor for the containments back reference
-CombinedFragmentImpl::CombinedFragmentImpl(std::weak_ptr<uml::Element > par_owner)
+CombinedFragmentImpl::CombinedFragmentImpl(std::weak_ptr<uml::Element> par_owner)
 :CombinedFragmentImpl()
 {
 	m_owner = par_owner;
 }
 
-
-CombinedFragmentImpl::CombinedFragmentImpl(const CombinedFragmentImpl & obj):CombinedFragmentImpl()
+CombinedFragmentImpl::CombinedFragmentImpl(const CombinedFragmentImpl & obj): CombinedFragmentImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  CombinedFragmentImpl::copy() const
-{
-	std::shared_ptr<CombinedFragmentImpl> element(new CombinedFragmentImpl(*this));
-	element->setThisCombinedFragmentPtr(element);
-	return element;
-}
-
 CombinedFragmentImpl& CombinedFragmentImpl::operator=(const CombinedFragmentImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	InteractionFragmentImpl::operator=(obj);
+	CombinedFragment::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CombinedFragment "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_interactionOperator = obj.getInteractionOperator();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
-	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
-
-	m_enclosingInteraction  = obj.getEnclosingInteraction();
-
-	m_enclosingOperand  = obj.getEnclosingOperand();
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Gate>> _cfragmentGateList = obj.getCfragmentGate();
-	for(std::shared_ptr<uml::Gate> _cfragmentGate : *_cfragmentGateList)
+	std::shared_ptr<Subset<uml::Gate, uml::Element>> cfragmentGateContainer = getCfragmentGate();
+	if(nullptr != cfragmentGateContainer )
 	{
-		this->getCfragmentGate()->add(std::shared_ptr<uml::Gate>(std::dynamic_pointer_cast<uml::Gate>(_cfragmentGate->copy())));
+		int size = cfragmentGateContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _cfragmentGate=(*cfragmentGateContainer)[i];
+			if(nullptr != _cfragmentGate)
+			{
+				cfragmentGateContainer->push_back(std::dynamic_pointer_cast<uml::Gate>(_cfragmentGate->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container cfragmentGate."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_cfragmentGate" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
-	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
+	else
 	{
-		this->getGeneralOrdering()->add(std::shared_ptr<uml::GeneralOrdering>(std::dynamic_pointer_cast<uml::GeneralOrdering>(_generalOrdering->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr cfragmentGate."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_generalOrdering" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
+	std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> operandContainer = getOperand();
+	if(nullptr != operandContainer )
 	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
+		int size = operandContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _operand=(*operandContainer)[i];
+			if(nullptr != _operand)
+			{
+				operandContainer->push_back(std::dynamic_pointer_cast<uml::InteractionOperand>(_operand->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container operand."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::InteractionOperand>> _operandList = obj.getOperand();
-	for(std::shared_ptr<uml::InteractionOperand> _operand : *_operandList)
+	else
 	{
-		this->getOperand()->add(std::shared_ptr<uml::InteractionOperand>(std::dynamic_pointer_cast<uml::InteractionOperand>(_operand->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr operand."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_operand" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_cfragmentGate->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_cfragmentGate - Subset<uml::Gate, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-
 	/*Subset*/
 	m_operand->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_operand - Subset<uml::InteractionOperand, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> CombinedFragmentImpl::copy() const
+{
+	std::shared_ptr<CombinedFragmentImpl> element(new CombinedFragmentImpl());
+	*element =(*this);
+	element->setThisCombinedFragmentPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CombinedFragmentImpl::eStaticClass() const
@@ -229,30 +204,28 @@ uml::InteractionOperatorKind CombinedFragmentImpl::getInteractionOperator() cons
 {
 	return m_interactionOperator;
 }
-
 void CombinedFragmentImpl::setInteractionOperator(uml::InteractionOperatorKind _interactionOperator)
 {
 	m_interactionOperator = _interactionOperator;
 } 
 
 
-
 //*********************************
 // Operations
 //*********************************
-bool CombinedFragmentImpl::break_(Any diagnostics,std::map <   Any, Any >  context)
+bool CombinedFragmentImpl::break_(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CombinedFragmentImpl::consider_and_ignore(Any diagnostics,std::map <   Any, Any >  context)
+bool CombinedFragmentImpl::consider_and_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool CombinedFragmentImpl::opt_loop_break_neg(Any diagnostics,std::map <   Any, Any >  context)
+bool CombinedFragmentImpl::opt_loop_break_neg(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -287,8 +260,6 @@ std::shared_ptr<Subset<uml::Gate, uml::Element>> CombinedFragmentImpl::getCfragm
 
 
 
-
-
 /*
 Getter & Setter for reference operand
 */
@@ -315,12 +286,10 @@ std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> CombinedFragmentI
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > CombinedFragmentImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> CombinedFragmentImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -340,7 +309,7 @@ std::shared_ptr<Union<uml::Element>> CombinedFragmentImpl::getOwnedElement() con
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > CombinedFragmentImpl::getOwner() const
+std::weak_ptr<uml::Element> CombinedFragmentImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -390,29 +359,13 @@ Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Gate>::iterator iter = m_cfragmentGate->begin();
-			Bag<uml::Gate>::iterator end = m_cfragmentGate->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4413
+			return eAny(getCfragmentGate()); //4413			
 		}
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
 			return eAny(getInteractionOperator()); //4414
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InteractionOperand>::iterator iter = m_operand->begin();
-			Bag<uml::InteractionOperand>::iterator end = m_operand->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4415
+			return eAny(getOperand()); //4415			
 		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
@@ -457,7 +410,7 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 				}
 				iterCfragmentGate++;
 			}
-
+ 
 			iterCfragmentGate = cfragmentGateList->begin();
 			endCfragmentGate = cfragmentGateList->end();
 			while (iterCfragmentGate != endCfragmentGate)
@@ -500,7 +453,7 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 				}
 				iterOperand++;
 			}
-
+ 
 			iterOperand = operandList->begin();
 			endOperand = operandList->end();
 			while (iterOperand != endOperand)
@@ -613,7 +566,6 @@ void CombinedFragmentImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void CombinedFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -624,14 +576,9 @@ void CombinedFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "Gate";
 			}
-			std::shared_ptr<uml::Gate> cfragmentGate = std::dynamic_pointer_cast<uml::Gate>(modelFactory->create(typeName));
-			if (cfragmentGate != nullptr)
-			{
-				std::shared_ptr<Subset<uml::Gate, uml::Element>> list_cfragmentGate = this->getCfragmentGate();
-				list_cfragmentGate->push_back(cfragmentGate);
-				loadHandler->handleChild(cfragmentGate);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Gate>(this->getCfragmentGate());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("operand") == 0 )
@@ -641,14 +588,9 @@ void CombinedFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "InteractionOperand";
 			}
-			std::shared_ptr<uml::InteractionOperand> operand = std::dynamic_pointer_cast<uml::InteractionOperand>(modelFactory->create(typeName));
-			if (operand != nullptr)
-			{
-				std::shared_ptr<Subset<uml::InteractionOperand, uml::Element>> list_operand = this->getOperand();
-				list_operand->push_back(operand);
-				loadHandler->handleChild(operand);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::InteractionOperand>(this->getOperand());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -663,7 +605,7 @@ void CombinedFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	InteractionFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void CombinedFragmentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CombinedFragmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	InteractionFragmentImpl::resolveReferences(featureID, references);
 }
@@ -692,7 +634,6 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'cfragmentGate'
 		for (std::shared_ptr<uml::Gate> cfragmentGate : *this->getCfragmentGate()) 
 		{
@@ -704,7 +645,6 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 		{
 			saveHandler->addReference(operand, "operand", operand->eClass() != package->getInteractionOperand_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getCombinedFragment_Attribute_interactionOperator()) )
 		{
@@ -760,7 +700,6 @@ void CombinedFragmentImpl::saveContent(std::shared_ptr<persistence::interfaces::
 			}
 			saveHandler->addAttribute("interactionOperator", literal);
 		}
-
 	}
 	catch (std::exception& e)
 	{

@@ -23,8 +23,8 @@ namespace uml
 	{
 		public: 
 			AssociationClassImpl(const AssociationClassImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			AssociationClassImpl& operator=(AssociationClassImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			AssociationClassImpl& operator=(AssociationClassImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -33,25 +33,14 @@ namespace uml
 			virtual void setThisAssociationClassPtr(std::weak_ptr<AssociationClass> thisAssociationClassPtr);
 
 			//Additional constructors for the containments back reference
-			AssociationClassImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			AssociationClassImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			AssociationClassImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			AssociationClassImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			AssociationClassImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			AssociationClassImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			AssociationClassImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			AssociationClassImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -65,16 +54,12 @@ namespace uml
 			self.endType()->excludes(self) and self.endType()->collect(et|et.oclAsType(Classifier).allParents())->flatten()->excludes(self)
 			*/
 			 
-			virtual bool cannot_be_defined(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool cannot_be_defined(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The owned attributes and owned ends of an AssociationClass are disjoint.
 			ownedAttribute->intersection(ownedEnd)->isEmpty()
 			*/
 			 
-			virtual bool disjoint_attributes_ends(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool disjoint_attributes_ends(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -84,7 +69,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -109,7 +94,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -124,7 +109,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -154,7 +139,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

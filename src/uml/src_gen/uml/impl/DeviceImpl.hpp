@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			DeviceImpl(const DeviceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			DeviceImpl& operator=(DeviceImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			DeviceImpl& operator=(DeviceImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,25 +32,14 @@ namespace uml
 			virtual void setThisDevicePtr(std::weak_ptr<Device> thisDevicePtr);
 
 			//Additional constructors for the containments back reference
-			DeviceImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			DeviceImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			DeviceImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			DeviceImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			DeviceImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			DeviceImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			DeviceImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			DeviceImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -69,7 +58,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -94,7 +83,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -109,7 +98,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -134,7 +123,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

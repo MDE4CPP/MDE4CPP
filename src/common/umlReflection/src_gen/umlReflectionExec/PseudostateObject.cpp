@@ -65,9 +65,8 @@
 using namespace UML;
 
 PseudostateObject::PseudostateObject(std::shared_ptr<uml::Pseudostate> _element):
-
 	m_PseudostateValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Pseudostate());
 }
 
@@ -88,13 +87,15 @@ PseudostateObject::~PseudostateObject()
 
 std::shared_ptr<ecore::EObject> PseudostateObject::copy()
 {
-	std::shared_ptr<PseudostateObject> element(new PseudostateObject(*this));
+	std::shared_ptr<PseudostateObject> element(new PseudostateObject());
+	*element=(*this);
 	element->setThisPseudostateObjectPtr(element);
 	return element;
 }
 
 PseudostateObject& PseudostateObject::operator=(const PseudostateObject & obj)
 {
+	UML::VertexObject::operator=(obj);
 	return *this;
 }
 

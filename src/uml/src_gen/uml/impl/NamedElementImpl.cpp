@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -36,24 +37,16 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Usage.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -79,7 +72,7 @@ NamedElementImpl::~NamedElementImpl()
 }
 
 //Additional constructor for the containments back reference
-NamedElementImpl::NamedElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
+NamedElementImpl::NamedElementImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :NamedElementImpl()
 {
 	m_namespace = par_namespace;
@@ -87,66 +80,51 @@ NamedElementImpl::NamedElementImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-NamedElementImpl::NamedElementImpl(std::weak_ptr<uml::Element > par_owner)
+NamedElementImpl::NamedElementImpl(std::weak_ptr<uml::Element> par_owner)
 :NamedElementImpl()
 {
 	m_owner = par_owner;
 }
 
-
-NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj):NamedElementImpl()
+NamedElementImpl::NamedElementImpl(const NamedElementImpl & obj): NamedElementImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  NamedElementImpl::copy() const
-{
-	std::shared_ptr<NamedElementImpl> element(new NamedElementImpl(*this));
-	element->setThisNamedElementPtr(element);
-	return element;
-}
-
 NamedElementImpl& NamedElementImpl::operator=(const NamedElementImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	NamedElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy NamedElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_name = obj.getName();
 	m_qualifiedName = obj.getQualifiedName();
 	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
 	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
 	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-
 	//Clone references with containment (deep copy)
-
 	if(obj.getNameExpression()!=nullptr)
 	{
 		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> NamedElementImpl::copy() const
+{
+	std::shared_ptr<NamedElementImpl> element(new NamedElementImpl());
+	*element =(*this);
+	element->setThisNamedElementPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> NamedElementImpl::eStaticClass() const
@@ -164,19 +142,15 @@ std::string NamedElementImpl::getName() const
 {
 	return m_name;
 }
-
 void NamedElementImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
 
 
-
 /*
 Getter & Setter for attribute qualifiedName
 */
-
-
 
 
 
@@ -188,12 +162,10 @@ uml::VisibilityKind NamedElementImpl::getVisibility() const
 {
 	return m_visibility;
 }
-
 void NamedElementImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
 } 
-
 
 
 //*********************************
@@ -230,13 +202,13 @@ std::shared_ptr<Bag<uml::Package> > NamedElementImpl::allOwningPackages()
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Dependency> NamedElementImpl::createDependency(std::shared_ptr<uml::NamedElement>  supplier)
+std::shared_ptr<uml::Dependency> NamedElementImpl::createDependency(std::shared_ptr<uml::NamedElement> supplier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<uml::Usage> NamedElementImpl::createUsage(std::shared_ptr<uml::NamedElement>  supplier)
+std::shared_ptr<uml::Usage> NamedElementImpl::createUsage(std::shared_ptr<uml::NamedElement> supplier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -285,19 +257,19 @@ std::string NamedElementImpl::getQualifiedName() const
 	//end of body
 }
 
-bool NamedElementImpl::has_no_qualified_name(Any diagnostics,std::map <   Any, Any >  context)
+bool NamedElementImpl::has_no_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamedElementImpl::has_qualified_name(Any diagnostics,std::map <   Any, Any >  context)
+bool NamedElementImpl::has_qualified_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement>  n,std::shared_ptr<uml::Namespace>  ns)
+bool NamedElementImpl::isDistinguishableFrom(std::shared_ptr<uml::NamedElement> n,std::shared_ptr<uml::Namespace> ns)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -311,7 +283,7 @@ std::string NamedElementImpl::separator() const
 	//end of body
 }
 
-bool NamedElementImpl::visibility_needs_ownership(Any diagnostics,std::map <   Any, Any >  context)
+bool NamedElementImpl::visibility_needs_ownership(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -337,22 +309,18 @@ std::shared_ptr<Bag<uml::Dependency>> NamedElementImpl::getClientDependency() co
 
 
 
-
-
 /*
 Getter & Setter for reference nameExpression
 */
-std::shared_ptr<uml::StringExpression > NamedElementImpl::getNameExpression() const
+std::shared_ptr<uml::StringExpression> NamedElementImpl::getNameExpression() const
 {
 
     return m_nameExpression;
 }
-
 void NamedElementImpl::setNameExpression(std::shared_ptr<uml::StringExpression> _nameExpression)
 {
     m_nameExpression = _nameExpression;
 }
-
 
 
 /*
@@ -362,12 +330,10 @@ Getter & Setter for reference namespace
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > NamedElementImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> NamedElementImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -387,7 +353,7 @@ std::shared_ptr<Union<uml::Element>> NamedElementImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > NamedElementImpl::getOwner() const
+std::weak_ptr<uml::Element> NamedElementImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -427,22 +393,14 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Dependency>::iterator iter = m_clientDependency->begin();
-			Bag<uml::Dependency>::iterator end = m_clientDependency->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1553
+			return eAny(getClientDependency()); //1553			
 		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
 			return eAny(getName()); //1554
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMEEXPRESSION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNameExpression())); //1555
+			return eAny(getNameExpression()); //1555
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getNamespace().lock())); //1556
+			return eAny(getNamespace().lock()); //1556
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_QUALIFIEDNAME:
 			return eAny(getQualifiedName()); //1557
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_VISIBILITY:
@@ -572,7 +530,6 @@ void NamedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void NamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -583,13 +540,9 @@ void NamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "StringExpression";
 			}
-			std::shared_ptr<uml::StringExpression> nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(modelFactory->create(typeName));
-			if (nameExpression != nullptr)
-			{
-				this->setNameExpression(nameExpression);
-				loadHandler->handleChild(nameExpression);
-			}
-			return;
+			loadHandler->handleChild(this->getNameExpression()); 
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -604,7 +557,7 @@ void NamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void NamedElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void NamedElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ElementImpl::resolveReferences(featureID, references);
 }
@@ -627,14 +580,12 @@ void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'nameExpression'
-		std::shared_ptr<uml::StringExpression > nameExpression = this->getNameExpression();
+		std::shared_ptr<uml::StringExpression> nameExpression = this->getNameExpression();
 		if (nameExpression != nullptr)
 		{
 			saveHandler->addReference(nameExpression, "nameExpression", nameExpression->eClass() != package->getStringExpression_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getNamedElement_Attribute_name()) )
 		{
@@ -663,7 +614,6 @@ void NamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 			}
 			saveHandler->addAttribute("visibility", literal);
 		}
-
 	}
 	catch (std::exception& e)
 	{

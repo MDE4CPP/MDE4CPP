@@ -91,9 +91,8 @@
 using namespace UML;
 
 LinkActionObject::LinkActionObject(std::shared_ptr<uml::LinkAction> _element):
-
 	m_LinkActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LinkAction());
 }
 
@@ -114,13 +113,15 @@ LinkActionObject::~LinkActionObject()
 
 std::shared_ptr<ecore::EObject> LinkActionObject::copy()
 {
-	std::shared_ptr<LinkActionObject> element(new LinkActionObject(*this));
+	std::shared_ptr<LinkActionObject> element(new LinkActionObject());
+	*element=(*this);
 	element->setThisLinkActionObjectPtr(element);
 	return element;
 }
 
 LinkActionObject& LinkActionObject::operator=(const LinkActionObject & obj)
 {
+	UML::ActionObject::operator=(obj);
 	return *this;
 }
 

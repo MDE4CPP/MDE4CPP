@@ -7,21 +7,17 @@
 #ifndef UML_STATEINVARIANT_HPP
 #define UML_STATEINVARIANT_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,59 +32,17 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class GeneralOrdering;
-}
-
-namespace uml 
-{
 	class Interaction;
-}
-
-namespace uml 
-{
-	class InteractionFragment;
-}
-
-namespace uml 
-{
 	class InteractionOperand;
-}
-
-namespace uml 
-{
 	class Lifeline;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -99,6 +53,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -107,14 +62,13 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class StateInvariant:virtual public InteractionFragment
+	class StateInvariant: virtual public InteractionFragment
 	{
 		public:
  			StateInvariant(const StateInvariant &) {}
 
 		protected:
 			StateInvariant(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -138,15 +92,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Constraint > getInvariant() const = 0;
-			
+			virtual std::shared_ptr<uml::Constraint> getInvariant() const = 0;
 			/*!
 			A Constraint that should hold at runtime for this StateInvariant.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setInvariant(std::shared_ptr<uml::Constraint> _invariant) = 0;
-			
+			virtual void setInvariant(std::shared_ptr<uml::Constraint>) = 0;
 			
 
 		protected:
@@ -163,7 +115,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::Constraint > m_invariant;
+			std::shared_ptr<uml::Constraint> m_invariant;
 
 		public:
 			//*********************************
@@ -174,7 +126,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -184,7 +136,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -193,7 +145,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

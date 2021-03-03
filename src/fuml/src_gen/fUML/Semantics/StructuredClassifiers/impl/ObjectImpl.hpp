@@ -23,15 +23,14 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public: 
 			ObjectImpl(const ObjectImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ObjectImpl& operator=(ObjectImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ObjectImpl& operator=(ObjectImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			ObjectImpl();
 			virtual std::shared_ptr<Object> getThisObjectPtr() const;
 			virtual void setThisObjectPtr(std::weak_ptr<Object> thisObjectPtr);
-
 
 
 		public:
@@ -42,33 +41,15 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter) ;
-			
-			 
-			virtual void destroy() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<uml::Operation>  operation) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
-			
-			 
-			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) ;
-			
-			 
-			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) ;
-			
-			 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
-			
-			 
-			virtual void unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter) ;
-			
-			
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual void _register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) ; 
+			virtual void destroy() ; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<uml::Operation> operation) ; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ; 
+			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) ; 
+			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ; 
+			virtual void startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) ; 
+			virtual void unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -79,16 +60,13 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > getObjectActivation() const ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> getObjectActivation() const ;
 			
-			
-			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation) ;
-			
+			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>) ;
 			
 			virtual std::shared_ptr<Bag<uml::Classifier>> getTypes() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -108,7 +86,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

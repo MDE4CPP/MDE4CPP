@@ -22,8 +22,8 @@ namespace ecore
 	{
 		public: 
 			ENamedElementImpl(const ENamedElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ENamedElementImpl& operator=(ENamedElementImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ENamedElementImpl& operator=(ENamedElementImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
@@ -32,10 +32,7 @@ namespace ecore
 			virtual void setThisENamedElementPtr(std::weak_ptr<ENamedElement> thisENamedElementPtr);
 
 			//Additional constructors for the containments back reference
-			ENamedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
-
+			ENamedElementImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 
 		public:
 			//destructor
@@ -51,15 +48,14 @@ namespace ecore
 			//*********************************
 			 
 			virtual std::string getName() const ;
-			
 			 
-			virtual void setName (std::string _name); 
+			virtual void setName (std::string _name);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -80,7 +76,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

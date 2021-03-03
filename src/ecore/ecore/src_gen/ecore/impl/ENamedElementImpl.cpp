@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -33,14 +34,11 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EModelElement.hpp"
-
 #include "ecore/EObject.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -66,52 +64,41 @@ ENamedElementImpl::~ENamedElementImpl()
 }
 
 //Additional constructor for the containments back reference
-ENamedElementImpl::ENamedElementImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+ENamedElementImpl::ENamedElementImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :ENamedElementImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
-
-ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj):ENamedElementImpl()
+ENamedElementImpl::ENamedElementImpl(const ENamedElementImpl & obj): ENamedElementImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ENamedElementImpl::copy() const
-{
-	std::shared_ptr<ENamedElementImpl> element(new ENamedElementImpl(*this));
-	element->setThisENamedElementPtr(element);
-	return element;
-}
-
 ENamedElementImpl& ENamedElementImpl::operator=(const ENamedElementImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	EModelElementImpl::operator=(obj);
+	ENamedElement::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ENamedElement "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_metaElementID = obj.getMetaElementID();
+	//Clone Attributes with (deep copy)
 	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ENamedElementImpl::copy() const
+{
+	std::shared_ptr<ENamedElementImpl> element(new ENamedElementImpl());
+	*element =(*this);
+	element->setThisENamedElementPtr(element);
+	return element;
 }
 
 std::shared_ptr<EClass> ENamedElementImpl::eStaticClass() const
@@ -129,12 +116,10 @@ std::string ENamedElementImpl::getName() const
 {
 	return m_name;
 }
-
 void ENamedElementImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
-
 
 
 //*********************************
@@ -269,13 +254,12 @@ void ENamedElementImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void ENamedElementImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	EModelElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ENamedElementImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void ENamedElementImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	EModelElementImpl::resolveReferences(featureID, references);
 }
@@ -298,14 +282,11 @@ void ENamedElementImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getENamedElement_Attribute_name()) )
 		{
 			saveHandler->addAttribute("name", this->getName());
 		}
-
 	}
 	catch (std::exception& e)
 	{

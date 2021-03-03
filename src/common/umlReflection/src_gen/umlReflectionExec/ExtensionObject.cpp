@@ -128,9 +128,8 @@
 using namespace UML;
 
 ExtensionObject::ExtensionObject(std::shared_ptr<uml::Extension> _element):
-
 	m_ExtensionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Extension());
 }
 
@@ -151,13 +150,15 @@ ExtensionObject::~ExtensionObject()
 
 std::shared_ptr<ecore::EObject> ExtensionObject::copy()
 {
-	std::shared_ptr<ExtensionObject> element(new ExtensionObject(*this));
+	std::shared_ptr<ExtensionObject> element(new ExtensionObject());
+	*element=(*this);
 	element->setThisExtensionObjectPtr(element);
 	return element;
 }
 
 ExtensionObject& ExtensionObject::operator=(const ExtensionObject & obj)
 {
+	UML::AssociationObject::operator=(obj);
 	return *this;
 }
 

@@ -23,15 +23,14 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public: 
 			ExtensionalValueImpl(const ExtensionalValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ExtensionalValueImpl& operator=(ExtensionalValueImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ExtensionalValueImpl& operator=(ExtensionalValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			ExtensionalValueImpl();
 			virtual std::shared_ptr<ExtensionalValue> getThisExtensionalValuePtr() const;
 			virtual void setThisExtensionalValuePtr(std::weak_ptr<ExtensionalValue> thisExtensionalValuePtr);
-
 
 
 		public:
@@ -42,12 +41,8 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
 			virtual void destroy() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -58,12 +53,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const ;
+			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const ;
 			
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) ;
 			
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -83,7 +76,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

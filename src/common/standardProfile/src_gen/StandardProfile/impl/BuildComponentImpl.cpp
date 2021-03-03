@@ -44,9 +44,7 @@ BuildComponentImpl::BuildComponentImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"BuildComponent is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ BuildComponentImpl::BuildComponentImpl(const BuildComponentImpl & obj):BuildComp
 
 std::shared_ptr<ecore::EObject>  BuildComponentImpl::copy() const
 {
-	std::shared_ptr<BuildComponentImpl> element(new BuildComponentImpl(*this));
+	std::shared_ptr<BuildComponentImpl> element(new BuildComponentImpl());
+	*element=(*this);
 	element->setThisBuildComponentPtr(element);
 	return element;
 }
 
 BuildComponentImpl& BuildComponentImpl::operator=(const BuildComponentImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy BuildComponent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

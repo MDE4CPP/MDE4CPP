@@ -63,9 +63,8 @@
 using namespace UML;
 
 InstanceValueObject::InstanceValueObject(std::shared_ptr<uml::InstanceValue> _element):
-
 	m_InstanceValueValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InstanceValue());
 }
 
@@ -86,13 +85,15 @@ InstanceValueObject::~InstanceValueObject()
 
 std::shared_ptr<ecore::EObject> InstanceValueObject::copy()
 {
-	std::shared_ptr<InstanceValueObject> element(new InstanceValueObject(*this));
+	std::shared_ptr<InstanceValueObject> element(new InstanceValueObject());
+	*element=(*this);
 	element->setThisInstanceValueObjectPtr(element);
 	return element;
 }
 
 InstanceValueObject& InstanceValueObject::operator=(const InstanceValueObject & obj)
 {
+	UML::ValueSpecificationObject::operator=(obj);
 	return *this;
 }
 

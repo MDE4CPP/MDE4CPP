@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ConnectionPointReferenceImpl(const ConnectionPointReferenceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ConnectionPointReferenceImpl& operator=(ConnectionPointReferenceImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ConnectionPointReferenceImpl& operator=(ConnectionPointReferenceImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisConnectionPointReferencePtr(std::weak_ptr<ConnectionPointReference> thisConnectionPointReferencePtr);
 
 			//Additional constructors for the containments back reference
-			ConnectionPointReferenceImpl(std::weak_ptr<uml::Region > par_container);
-
-
+			ConnectionPointReferenceImpl(std::weak_ptr<uml::Region> par_container);
 			//Additional constructors for the containments back reference
-			ConnectionPointReferenceImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ConnectionPointReferenceImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ConnectionPointReferenceImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ConnectionPointReferenceImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ConnectionPointReferenceImpl(std::weak_ptr<uml::State > par_state);
-
-
-
+			ConnectionPointReferenceImpl(std::weak_ptr<uml::State> par_state);
 
 		public:
 			//destructor
@@ -61,16 +52,12 @@ namespace uml
 			entry->forAll(kind = PseudostateKind::entryPoint)
 			*/
 			 
-			virtual bool entry_pseudostates(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool entry_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The exit Pseudostates must be Pseudostates with kind exitPoint.
 			exit->forAll(kind = PseudostateKind::exitPoint)
 			*/
 			 
-			virtual bool exit_pseudostates(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool exit_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -87,7 +74,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Pseudostate>> getEntry() const ;
 			
-			
 			/*!
 			The exitPoints kind Pseudostates corresponding to this connection point.
 			<p>From package UML::StateMachines.</p>
@@ -95,22 +81,19 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Pseudostate>> getExit() const ;
 			
-			
 			/*!
 			The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::State > getState() const ;
-			
+			virtual std::weak_ptr<uml::State> getState() const ;
 			/*!
 			The State in which the ConnectionPointReference is defined.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setState(std::shared_ptr<uml::State> _state) ;
+			virtual void setState(std::weak_ptr<uml::State>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -120,7 +103,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -130,7 +113,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -145,7 +128,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

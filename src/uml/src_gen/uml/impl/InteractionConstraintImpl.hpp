@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			InteractionConstraintImpl(const InteractionConstraintImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			InteractionConstraintImpl& operator=(InteractionConstraintImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			InteractionConstraintImpl& operator=(InteractionConstraintImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,25 +32,14 @@ namespace uml
 			virtual void setThisInteractionConstraintPtr(std::weak_ptr<InteractionConstraint> thisInteractionConstraintPtr);
 
 			//Additional constructors for the containments back reference
-			InteractionConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id);
-
-
+			InteractionConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id);
 			//Additional constructors for the containments back reference
-
-
 			//Additional constructors for the containments back reference
-			InteractionConstraintImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			InteractionConstraintImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			InteractionConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			InteractionConstraintImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			InteractionConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			InteractionConstraintImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -63,49 +52,37 @@ namespace uml
 			The dynamic variables that take part in the constraint must be owned by the ConnectableElement corresponding to the covered Lifeline.
 			*/
 			 
-			virtual bool dynamic_variables(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool dynamic_variables(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The constraint may contain references to global data or write-once data.
 			*/
 			 
-			virtual bool global_data(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool global_data(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If maxint is specified, then minint must be specified and the evaluation of maxint must be >= the evaluation of minint.
 			maxint->notEmpty() implies (minint->notEmpty() and 
 			maxint->asSequence()->first().integerValue() >=
 			minint->asSequence()->first().integerValue() )
 			*/
 			 
-			virtual bool maxint_greater_equal_minint(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool maxint_greater_equal_minint(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If maxint is specified, then the expression must evaluate to a positive integer.
 			maxint->notEmpty() implies 
 			maxint->asSequence()->first().integerValue() > 0
 			*/
 			 
-			virtual bool maxint_positive(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool maxint_positive(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Minint/maxint can only be present if the InteractionConstraint is associated with the operand of a loop CombinedFragment.
 			maxint->notEmpty() or minint->notEmpty() implies
 			interactionOperand.combinedFragment.interactionOperator =
 			InteractionOperatorKind::loop
 			*/
 			 
-			virtual bool minint_maxint(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool minint_maxint(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If minint is specified, then the expression must evaluate to a non-negative integer.
 			minint->notEmpty() implies 
 			minint->asSequence()->first().integerValue() >= 0
 			*/
 			 
-			virtual bool minint_non_negative(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool minint_non_negative(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -120,30 +97,26 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getMaxint() const ;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getMaxint() const ;
 			/*!
 			The maximum number of iterations of a loop
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setMaxint(std::shared_ptr<uml::ValueSpecification> _maxint) ;
-			
+			virtual void setMaxint(std::shared_ptr<uml::ValueSpecification>) ;
 			/*!
 			The minimum number of iterations of a loop
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getMinint() const ;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getMinint() const ;
 			/*!
 			The minimum number of iterations of a loop
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setMinint(std::shared_ptr<uml::ValueSpecification> _minint) ;
+			virtual void setMinint(std::shared_ptr<uml::ValueSpecification>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -153,7 +126,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -163,7 +136,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -178,7 +151,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

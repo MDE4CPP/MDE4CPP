@@ -118,9 +118,8 @@
 using namespace UML;
 
 ActorObject::ActorObject(std::shared_ptr<uml::Actor> _element):
-
 	m_ActorValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Actor());
 }
 
@@ -141,13 +140,15 @@ ActorObject::~ActorObject()
 
 std::shared_ptr<ecore::EObject> ActorObject::copy()
 {
-	std::shared_ptr<ActorObject> element(new ActorObject(*this));
+	std::shared_ptr<ActorObject> element(new ActorObject());
+	*element=(*this);
 	element->setThisActorObjectPtr(element);
 	return element;
 }
 
 ActorObject& ActorObject::operator=(const ActorObject & obj)
 {
+	UML::BehavioredClassifierObject::operator=(obj);
 	return *this;
 }
 

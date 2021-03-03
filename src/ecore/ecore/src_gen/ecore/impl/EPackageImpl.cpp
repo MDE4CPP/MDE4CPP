@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -33,20 +34,14 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EClassifier.hpp"
-
 #include "ecore/EFactory.hpp"
-
 #include "ecore/ENamedElement.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EPackage.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -72,89 +67,100 @@ EPackageImpl::~EPackageImpl()
 }
 
 //Additional constructor for the containments back reference
-EPackageImpl::EPackageImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EPackageImpl::EPackageImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EPackageImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
 //Additional constructor for the containments back reference
-EPackageImpl::EPackageImpl(std::weak_ptr<ecore::EPackage > par_eSuperPackage)
+EPackageImpl::EPackageImpl(std::weak_ptr<ecore::EPackage> par_eSuperPackage)
 :EPackageImpl()
 {
 	m_eSuperPackage = par_eSuperPackage;
 }
 
-
-EPackageImpl::EPackageImpl(const EPackageImpl & obj):EPackageImpl()
+EPackageImpl::EPackageImpl(const EPackageImpl & obj): EPackageImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  EPackageImpl::copy() const
-{
-	std::shared_ptr<EPackageImpl> element(new EPackageImpl(*this));
-	element->setThisEPackagePtr(element);
-	return element;
-}
-
 EPackageImpl& EPackageImpl::operator=(const EPackageImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ENamedElementImpl::operator=(obj);
+	EPackage::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EPackage "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
+	//Clone Attributes with (deep copy)
 	m_nsPrefix = obj.getNsPrefix();
 	m_nsURI = obj.getNsURI();
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
 	m_eFactoryInstance  = obj.getEFactoryInstance();
-
 	m_eSuperPackage  = obj.getESuperPackage();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
+	std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> eClassifiersContainer = getEClassifiers();
+	if(nullptr != eClassifiersContainer )
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
+		int size = eClassifiersContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _eClassifiers=(*eClassifiersContainer)[i];
+			if(nullptr != _eClassifiers)
+			{
+				eClassifiersContainer->push_back(std::dynamic_pointer_cast<ecore::EClassifier>(_eClassifiers->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eClassifiers."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EClassifier>> _eClassifiersList = obj.getEClassifiers();
-	for(std::shared_ptr<ecore::EClassifier> _eClassifiers : *_eClassifiersList)
+	else
 	{
-		this->getEClassifiers()->add(std::shared_ptr<ecore::EClassifier>(std::dynamic_pointer_cast<ecore::EClassifier>(_eClassifiers->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eClassifiers."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eClassifiers" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EPackage>> _eSubpackagesList = obj.getESubpackages();
-	for(std::shared_ptr<ecore::EPackage> _eSubpackages : *_eSubpackagesList)
+	std::shared_ptr<Bag<ecore::EPackage>> eSubpackagesContainer = getESubpackages();
+	if(nullptr != eSubpackagesContainer )
 	{
-		this->getESubpackages()->add(std::shared_ptr<ecore::EPackage>(std::dynamic_pointer_cast<ecore::EPackage>(_eSubpackages->copy())));
+		int size = eSubpackagesContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _eSubpackages=(*eSubpackagesContainer)[i];
+			if(nullptr != _eSubpackages)
+			{
+				eSubpackagesContainer->push_back(std::dynamic_pointer_cast<ecore::EPackage>(_eSubpackages->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eSubpackages."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eSubpackages" << std::endl;
-	#endif
-
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eSubpackages."<< std::endl;)
+	}
 	/*Subset*/
 	m_eClassifiers->initSubset(getEContens());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_eClassifiers - Subset<ecore::EClassifier, ecore::EObject >(getEContens())" << std::endl;
 	#endif
 	
-
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> EPackageImpl::copy() const
+{
+	std::shared_ptr<EPackageImpl> element(new EPackageImpl());
+	*element =(*this);
+	element->setThisEPackagePtr(element);
+	return element;
 }
 
 std::shared_ptr<EClass> EPackageImpl::eStaticClass() const
@@ -172,12 +178,10 @@ std::string EPackageImpl::getNsPrefix() const
 {
 	return m_nsPrefix;
 }
-
 void EPackageImpl::setNsPrefix(std::string _nsPrefix)
 {
 	m_nsPrefix = _nsPrefix;
 } 
-
 
 
 /*
@@ -187,12 +191,10 @@ std::string EPackageImpl::getNsURI() const
 {
 	return m_nsURI;
 }
-
 void EPackageImpl::setNsURI(std::string _nsURI)
 {
 	m_nsURI = _nsURI;
 } 
-
 
 
 //*********************************
@@ -243,22 +245,18 @@ std::shared_ptr<Subset<ecore::EClassifier, ecore::EObject>> EPackageImpl::getECl
 
 
 
-
-
 /*
 Getter & Setter for reference eFactoryInstance
 */
-std::shared_ptr<ecore::EFactory > EPackageImpl::getEFactoryInstance() const
+std::shared_ptr<ecore::EFactory> EPackageImpl::getEFactoryInstance() const
 {
 //assert(m_eFactoryInstance);
     return m_eFactoryInstance;
 }
-
 void EPackageImpl::setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance)
 {
     m_eFactoryInstance = _eFactoryInstance;
 }
-
 
 
 /*
@@ -278,18 +276,14 @@ std::shared_ptr<Bag<ecore::EPackage>> EPackageImpl::getESubpackages() const
 
 
 
-
-
 /*
 Getter & Setter for reference eSuperPackage
 */
-std::weak_ptr<ecore::EPackage > EPackageImpl::getESuperPackage() const
+std::weak_ptr<ecore::EPackage> EPackageImpl::getESuperPackage() const
 {
 
     return m_eSuperPackage;
 }
-
-
 
 
 
@@ -346,32 +340,16 @@ Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EClassifier>::iterator iter = m_eClassifiers->begin();
-			Bag<ecore::EClassifier>::iterator end = m_eClassifiers->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //418
+			return eAny(getEClassifiers()); //418			
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEFactoryInstance())); //417
+			return eAny(getEFactoryInstance()); //417
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EPackage>::iterator iter = m_eSubpackages->begin();
-			Bag<ecore::EPackage>::iterator end = m_eSubpackages->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //419
+			return eAny(getESubpackages()); //419			
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getESuperPackage().lock())); //4110
+			return eAny(getESuperPackage().lock()); //4110
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
 			return eAny(getNsPrefix()); //416
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:
@@ -425,7 +403,7 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 				}
 				iterEClassifiers++;
 			}
-
+ 
 			iterEClassifiers = eClassifiersList->begin();
 			endEClassifiers = eClassifiersList->end();
 			while (iterEClassifiers != endEClassifiers)
@@ -469,7 +447,7 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 				}
 				iterESubpackages++;
 			}
-
+ 
 			iterESubpackages = eSubpackagesList->begin();
 			endESubpackages = eSubpackagesList->end();
 			while (iterESubpackages != endESubpackages)
@@ -565,7 +543,6 @@ void EPackageImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	try
 	{
@@ -577,12 +554,9 @@ void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> eClassifiers = modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE);
-			if (eClassifiers != nullptr)
-			{
-				loadHandler->handleChild(eClassifiers);
-			}
-			return;
+			loadHandler->handleChildContainer<ecore::EClassifier>(this->getEClassifiers());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("eSubpackages") == 0 )
@@ -592,12 +566,9 @@ void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 			{
 				typeName = "EPackage";
 			}
-			std::shared_ptr<ecore::EObject> eSubpackages = modelFactory->create(typeName, loadHandler->getCurrentObject(), ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE);
-			if (eSubpackages != nullptr)
-			{
-				loadHandler->handleChild(eSubpackages);
-			}
-			return;
+			loadHandler->handleChildContainer<ecore::EPackage>(this->getESubpackages());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -612,7 +583,7 @@ void EPackageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::i
 	ENamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EPackageImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EPackageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	switch(featureID)
 	{
@@ -652,13 +623,11 @@ void EPackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
 		// Save 'eClassifiers'
 		for (std::shared_ptr<ecore::EClassifier> eClassifiers : *this->getEClassifiers()) 
 		{
 			saveHandler->addReference(eClassifiers, "eClassifiers", eClassifiers->eClass() != package->getEClassifier_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEPackage_Attribute_nsPrefix()) )
 		{
@@ -669,21 +638,15 @@ void EPackageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 		{
 			saveHandler->addAttribute("nsURI", this->getNsURI());
 		}
-
-		// Add references
-		saveHandler->addReference("eFactoryInstance", this->getEFactoryInstance());
-
-
+	// Add references
+		saveHandler->addReference(this->getEFactoryInstance(),"eFactoryInstance", getEFactoryInstance()->eClass() != ecore::ecorePackage::eInstance()->getEFactory_Class());
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eSubpackages'
-		std::shared_ptr<Bag<ecore::EPackage>> list_eSubpackages = this->getESubpackages();
-		for (std::shared_ptr<ecore::EPackage> eSubpackages : *list_eSubpackages) 
-		{
-			saveHandler->addReference(eSubpackages, "eSubpackages", eSubpackages->eClass() !=ecore::ecorePackage::eInstance()->getEPackage_Class());
-		}
+
+		saveHandler->addReferences<ecore::EPackage>("eSubpackages", this->getESubpackages());
 	}
 	catch (std::exception& e)
 	{

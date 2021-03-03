@@ -69,9 +69,8 @@
 using namespace UML;
 
 MessageOccurrenceSpecificationObject::MessageOccurrenceSpecificationObject(std::shared_ptr<uml::MessageOccurrenceSpecification> _element):
-
 	m_MessageOccurrenceSpecificationValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_MessageOccurrenceSpecification());
 }
 
@@ -92,13 +91,16 @@ MessageOccurrenceSpecificationObject::~MessageOccurrenceSpecificationObject()
 
 std::shared_ptr<ecore::EObject> MessageOccurrenceSpecificationObject::copy()
 {
-	std::shared_ptr<MessageOccurrenceSpecificationObject> element(new MessageOccurrenceSpecificationObject(*this));
+	std::shared_ptr<MessageOccurrenceSpecificationObject> element(new MessageOccurrenceSpecificationObject());
+	*element=(*this);
 	element->setThisMessageOccurrenceSpecificationObjectPtr(element);
 	return element;
 }
 
 MessageOccurrenceSpecificationObject& MessageOccurrenceSpecificationObject::operator=(const MessageOccurrenceSpecificationObject & obj)
 {
+	UML::MessageEndObject::operator=(obj);
+	UML::OccurrenceSpecificationObject::operator=(obj);
 	return *this;
 }
 

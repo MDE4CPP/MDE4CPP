@@ -44,9 +44,7 @@ InstantiateImpl::InstantiateImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Instantiate is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ InstantiateImpl::InstantiateImpl(const InstantiateImpl & obj):InstantiateImpl()
 
 std::shared_ptr<ecore::EObject>  InstantiateImpl::copy() const
 {
-	std::shared_ptr<InstantiateImpl> element(new InstantiateImpl(*this));
+	std::shared_ptr<InstantiateImpl> element(new InstantiateImpl());
+	*element=(*this);
 	element->setThisInstantiatePtr(element);
 	return element;
 }
 
 InstantiateImpl& InstantiateImpl::operator=(const InstantiateImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Instantiate "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

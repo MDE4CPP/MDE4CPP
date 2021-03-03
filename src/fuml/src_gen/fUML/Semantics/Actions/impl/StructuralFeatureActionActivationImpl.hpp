@@ -23,8 +23,8 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			StructuralFeatureActionActivationImpl(const StructuralFeatureActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			StructuralFeatureActionActivationImpl& operator=(StructuralFeatureActionActivationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			StructuralFeatureActionActivationImpl& operator=(StructuralFeatureActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
@@ -33,10 +33,7 @@ namespace fUML::Semantics::Actions
 			virtual void setThisStructuralFeatureActionActivationPtr(std::weak_ptr<StructuralFeatureActionActivation> thisStructuralFeatureActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			StructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			StructuralFeatureActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -46,18 +43,10 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::Association> getAssociation(std::shared_ptr<uml::StructuralFeature>  feature) ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinks(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Semantics::Values::Value>  oppositeValue) ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinksForEndValue(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end,std::shared_ptr<fUML::Semantics::Values::Value>  oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value>  endValue) ;
-			
-			 
-			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association>  association,std::shared_ptr<uml::StructuralFeature>  end) ;
-			
-			
+			virtual std::shared_ptr<uml::Association> getAssociation(std::shared_ptr<uml::StructuralFeature> feature) ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinks(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue) ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Link> > getMatchingLinksForEndValue(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end,std::shared_ptr<fUML::Semantics::Values::Value> oppositeValue,std::shared_ptr<fUML::Semantics::Values::Value> endValue) ; 
+			virtual std::shared_ptr<uml::Property> getOppositeEnd(std::shared_ptr<uml::Association> association,std::shared_ptr<uml::StructuralFeature> end) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -67,7 +56,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -88,7 +77,7 @@ namespace fUML::Semantics::Actions
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

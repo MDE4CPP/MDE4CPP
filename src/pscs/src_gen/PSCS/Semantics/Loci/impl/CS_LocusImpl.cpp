@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,25 +36,20 @@
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
-
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
-
 #include "fUML/Semantics/Loci/Executor.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/Loci/impl/LociFactoryImpl.hpp"
-#include "PSCS/Semantics/Loci/impl/LociPackageImpl.hpp"
-
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -78,56 +74,34 @@ CS_LocusImpl::~CS_LocusImpl()
 }
 
 
-
-CS_LocusImpl::CS_LocusImpl(const CS_LocusImpl & obj):CS_LocusImpl()
+CS_LocusImpl::CS_LocusImpl(const CS_LocusImpl & obj): CS_LocusImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  CS_LocusImpl::copy() const
-{
-	std::shared_ptr<CS_LocusImpl> element(new CS_LocusImpl(*this));
-	element->setThisCS_LocusPtr(element);
-	return element;
-}
-
 CS_LocusImpl& CS_LocusImpl::operator=(const CS_LocusImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::LocusImpl::operator=(obj);
+	CS_Locus::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_Locus "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getExecutor()!=nullptr)
-	{
-		m_executor = std::dynamic_pointer_cast<fUML::Semantics::Loci::Executor>(obj.getExecutor()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_executor" << std::endl;
-	#endif
-	std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> _extensionalValuesList = obj.getExtensionalValues();
-	for(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> _extensionalValues : *_extensionalValuesList)
-	{
-		this->getExtensionalValues()->add(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>(std::dynamic_pointer_cast<fUML::Semantics::StructuredClassifiers::ExtensionalValue>(_extensionalValues->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_extensionalValues" << std::endl;
-	#endif
-	if(obj.getFactory()!=nullptr)
-	{
-		m_factory = std::dynamic_pointer_cast<fUML::Semantics::Loci::ExecutionFactory>(obj.getFactory()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_factory" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> CS_LocusImpl::copy() const
+{
+	std::shared_ptr<CS_LocusImpl> element(new CS_LocusImpl());
+	*element =(*this);
+	element->setThisCS_LocusPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CS_LocusImpl::eStaticClass() const
@@ -142,7 +116,7 @@ std::shared_ptr<ecore::EClass> CS_LocusImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_LocusImpl::instantiate(std::shared_ptr<uml::Class>  type)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_LocusImpl::instantiate(std::shared_ptr<uml::Class> type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -240,13 +214,12 @@ void CS_LocusImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void CS_LocusImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::Loci::LociFactory> modelFactory=PSCS::Semantics::Loci::LociFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Loci::LocusImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_LocusImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_LocusImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::Loci::LocusImpl::resolveReferences(featureID, references);
 }
@@ -266,9 +239,6 @@ void CS_LocusImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::Loci::LociPackage> package = PSCS::Semantics::Loci::LociPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

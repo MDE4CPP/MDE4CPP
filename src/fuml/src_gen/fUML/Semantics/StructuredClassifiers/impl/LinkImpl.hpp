@@ -23,15 +23,14 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public: 
 			LinkImpl(const LinkImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			LinkImpl& operator=(LinkImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			LinkImpl& operator=(LinkImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			LinkImpl();
 			virtual std::shared_ptr<Link> getThisLinkPtr() const;
 			virtual void setThisLinkPtr(std::weak_ptr<Link> thisLinkPtr);
-
 
 
 		public:
@@ -42,21 +41,11 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual void addTo(std::shared_ptr<fUML::Semantics::Loci::Locus>  locus) ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end) ;
-			
-			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const ;
-			
-			 
-			virtual bool isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) ;
-			
-			
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual void addTo(std::shared_ptr<fUML::Semantics::Loci::Locus> locus) ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent,std::shared_ptr<uml::Property> end) ; 
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const ; 
+			virtual bool isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link,std::shared_ptr<uml::Property> end) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -67,12 +56,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Association > getType() const ;
+			virtual std::shared_ptr<uml::Association> getType() const ;
 			
+			virtual void setType(std::shared_ptr<uml::Association>) ;
 			
-			virtual void setType(std::shared_ptr<uml::Association> _type) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -92,7 +79,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_ACTIONS_CS_CONSTRUCTSTRATEGY_HPP
 #define PSCS_SEMANTICS_ACTIONS_CS_CONSTRUCTSTRATEGY_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,25 +31,18 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_Object;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Object;
 }
-
+namespace PSCS::Semantics::StructuredClassifiers 
+{
+	class CS_Object;
+}
 namespace uml 
 {
 	class Operation;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class SemanticStrategy;
 }
 
 // base class includes
@@ -62,18 +51,18 @@ namespace fUML::Semantics::Loci
 // enum includes
 
 
+
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_ConstructStrategy:virtual public fUML::Semantics::Loci::SemanticStrategy
+	class CS_ConstructStrategy: virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
  			CS_ConstructStrategy(const CS_ConstructStrategy &) {}
 
 		protected:
 			CS_ConstructStrategy(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -85,12 +74,8 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context) = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> construct(std::shared_ptr<uml::Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context) = 0; 
 			virtual std::string getName() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -124,7 +109,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

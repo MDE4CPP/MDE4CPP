@@ -7,21 +7,17 @@
 #ifndef PSCS_SEMANTICS_LOCI_CS_EXECUTIONFACTORY_HPP
 #define PSCS_SEMANTICS_LOCI_CS_EXECUTIONFACTORY_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,60 +32,28 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class ExecutionFactory;
-}
-
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Object;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class OpaqueBehaviorExecution;
 }
-
-namespace uml 
-{
-	class Package;
-}
-
-namespace uml 
-{
-	class PrimitiveType;
-}
-
 namespace fUML::Semantics::Loci 
 {
+	class Locus;
 	class SemanticStrategy;
-}
-
-namespace fUML::Semantics::Loci 
-{
 	class SemanticVisitor;
+}
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
+}
+namespace uml 
+{
+	class Class;
+	class Classifier;
+	class Element;
+	class Package;
+	class PrimitiveType;
 }
 
 // base class includes
@@ -98,18 +62,18 @@ namespace fUML::Semantics::Loci
 // enum includes
 
 
+
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
 	
-	class CS_ExecutionFactory:virtual public fUML::Semantics::Loci::ExecutionFactory
+	class CS_ExecutionFactory: virtual public fUML::Semantics::Loci::ExecutionFactory
 	{
 		public:
  			CS_ExecutionFactory(const CS_ExecutionFactory &) {}
 
 		protected:
 			CS_ExecutionFactory(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -121,15 +85,9 @@ namespace PSCS::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getStereotypeApplication(std::shared_ptr<uml::Class>  stereotype,std::shared_ptr<uml::Element>  element) = 0;
-			
-			 
-			virtual std::shared_ptr<uml::Classifier> getStereotypeClass(std::string profileName,std::string stereotypeName) = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element) = 0;
-			
-			
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getStereotypeApplication(std::shared_ptr<uml::Class> stereotype,std::shared_ptr<uml::Element> element) = 0; 
+			virtual std::shared_ptr<uml::Classifier> getStereotypeClass(std::string profileName,std::string stereotypeName) = 0; 
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element> element) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -139,7 +97,6 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			
 			virtual std::shared_ptr<Bag<uml::Package>> getAppliedProfiles() const = 0;
-			
 			
 			
 
@@ -168,7 +125,7 @@ namespace PSCS::Semantics::Loci
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -8,23 +8,19 @@
 #define UML_EXTENSIONPOINT_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,44 +35,14 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class UseCase;
 }
 
@@ -87,6 +53,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -95,26 +62,21 @@ namespace uml
 	<p>From package UML::UseCases.</p>
 	*/
 	
-	class ExtensionPoint:virtual public RedefinableElement
+	class ExtensionPoint: virtual public RedefinableElement
 	{
 		public:
  			ExtensionPoint(const ExtensionPoint &) {}
 
 		protected:
 			ExtensionPoint(){}
-
+			//Additional constructors for the containments back reference
+			ExtensionPoint(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-
-			ExtensionPoint(std::weak_ptr<uml::Namespace > par_namespace);
-
-			//Additional constructors for the containments back reference
-
-			ExtensionPoint(std::weak_ptr<uml::Element > par_owner);
+			ExtensionPoint(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-
-			ExtensionPoint(std::weak_ptr<uml::UseCase > par_useCase);
+			ExtensionPoint(std::weak_ptr<uml::UseCase> par_useCase);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -130,9 +92,7 @@ namespace uml
 			name->notEmpty ()
 			*/
 			 
-			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool must_have_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -145,15 +105,13 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::UseCase > getUseCase() const = 0;
-			
+			virtual std::weak_ptr<uml::UseCase> getUseCase() const = 0;
 			/*!
 			The UseCase that owns this ExtensionPoint.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setUseCase(std::shared_ptr<uml::UseCase> _useCase) = 0;
-			
+			virtual void setUseCase(std::weak_ptr<uml::UseCase>) = 0;
 			
 
 		protected:
@@ -170,7 +128,7 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			std::weak_ptr<uml::UseCase > m_useCase;
+			std::weak_ptr<uml::UseCase> m_useCase;
 
 		public:
 			//*********************************
@@ -181,7 +139,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -191,7 +149,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -200,7 +158,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

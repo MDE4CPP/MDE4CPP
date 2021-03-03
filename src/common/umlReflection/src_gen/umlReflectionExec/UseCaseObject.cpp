@@ -126,9 +126,8 @@
 using namespace UML;
 
 UseCaseObject::UseCaseObject(std::shared_ptr<uml::UseCase> _element):
-
 	m_UseCaseValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_UseCase());
 }
 
@@ -149,13 +148,15 @@ UseCaseObject::~UseCaseObject()
 
 std::shared_ptr<ecore::EObject> UseCaseObject::copy()
 {
-	std::shared_ptr<UseCaseObject> element(new UseCaseObject(*this));
+	std::shared_ptr<UseCaseObject> element(new UseCaseObject());
+	*element=(*this);
 	element->setThisUseCaseObjectPtr(element);
 	return element;
 }
 
 UseCaseObject& UseCaseObject::operator=(const UseCaseObject & obj)
 {
+	UML::BehavioredClassifierObject::operator=(obj);
 	return *this;
 }
 

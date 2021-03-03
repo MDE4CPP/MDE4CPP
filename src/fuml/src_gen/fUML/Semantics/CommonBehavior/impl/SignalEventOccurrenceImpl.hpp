@@ -23,15 +23,14 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public: 
 			SignalEventOccurrenceImpl(const SignalEventOccurrenceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			SignalEventOccurrenceImpl& operator=(SignalEventOccurrenceImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			SignalEventOccurrenceImpl& operator=(SignalEventOccurrenceImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			SignalEventOccurrenceImpl();
 			virtual std::shared_ptr<SignalEventOccurrence> getThisSignalEventOccurrencePtr() const;
 			virtual void setThisSignalEventOccurrencePtr(std::weak_ptr<SignalEventOccurrence> thisSignalEventOccurrencePtr);
-
 
 
 		public:
@@ -42,12 +41,8 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ;
-			
-			 
-			virtual bool match(std::shared_ptr<uml::Trigger>  trigger) ;
-			
-			
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getParameterValues() ; 
+			virtual bool match(std::shared_ptr<uml::Trigger> trigger) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -58,12 +53,10 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance > getSignalInstance() const ;
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> getSignalInstance() const ;
 			
+			virtual void setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>) ;
 			
-			virtual void setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -83,7 +76,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

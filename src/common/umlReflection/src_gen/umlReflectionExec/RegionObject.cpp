@@ -82,9 +82,8 @@
 using namespace UML;
 
 RegionObject::RegionObject(std::shared_ptr<uml::Region> _element):
-
 	m_RegionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Region());
 }
 
@@ -105,13 +104,16 @@ RegionObject::~RegionObject()
 
 std::shared_ptr<ecore::EObject> RegionObject::copy()
 {
-	std::shared_ptr<RegionObject> element(new RegionObject(*this));
+	std::shared_ptr<RegionObject> element(new RegionObject());
+	*element=(*this);
 	element->setThisRegionObjectPtr(element);
 	return element;
 }
 
 RegionObject& RegionObject::operator=(const RegionObject & obj)
 {
+	UML::NamespaceObject::operator=(obj);
+	UML::RedefinableElementObject::operator=(obj);
 	return *this;
 }
 

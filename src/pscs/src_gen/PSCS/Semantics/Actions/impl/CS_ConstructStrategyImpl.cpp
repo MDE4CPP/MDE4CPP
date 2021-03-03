@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,21 +33,19 @@
 #include <exception> // used in Persistence
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
-#include "PSCS/Semantics/Actions/impl/ActionsPackageImpl.hpp"
-
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -71,34 +70,34 @@ CS_ConstructStrategyImpl::~CS_ConstructStrategyImpl()
 }
 
 
-
-CS_ConstructStrategyImpl::CS_ConstructStrategyImpl(const CS_ConstructStrategyImpl & obj):CS_ConstructStrategyImpl()
+CS_ConstructStrategyImpl::CS_ConstructStrategyImpl(const CS_ConstructStrategyImpl & obj): CS_ConstructStrategyImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  CS_ConstructStrategyImpl::copy() const
-{
-	std::shared_ptr<CS_ConstructStrategyImpl> element(new CS_ConstructStrategyImpl(*this));
-	element->setThisCS_ConstructStrategyPtr(element);
-	return element;
-}
-
 CS_ConstructStrategyImpl& CS_ConstructStrategyImpl::operator=(const CS_ConstructStrategyImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::SemanticStrategyImpl::operator=(obj);
+	CS_ConstructStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_ConstructStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> CS_ConstructStrategyImpl::copy() const
+{
+	std::shared_ptr<CS_ConstructStrategyImpl> element(new CS_ConstructStrategyImpl());
+	*element =(*this);
+	element->setThisCS_ConstructStrategyPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CS_ConstructStrategyImpl::eStaticClass() const
@@ -113,7 +112,7 @@ std::shared_ptr<ecore::EClass> CS_ConstructStrategyImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ConstructStrategyImpl::construct(std::shared_ptr<uml::Operation>  constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object>  context)
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> CS_ConstructStrategyImpl::construct(std::shared_ptr<uml::Operation> constructor,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -205,13 +204,12 @@ void CS_ConstructStrategyImpl::loadAttributes(std::shared_ptr<persistence::inter
 
 void CS_ConstructStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::Actions::ActionsFactory> modelFactory=PSCS::Semantics::Actions::ActionsFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Loci::SemanticStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_ConstructStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_ConstructStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::Loci::SemanticStrategyImpl::resolveReferences(featureID, references);
 }
@@ -231,9 +229,6 @@ void CS_ConstructStrategyImpl::saveContent(std::shared_ptr<persistence::interfac
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::Actions::ActionsPackage> package = PSCS::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

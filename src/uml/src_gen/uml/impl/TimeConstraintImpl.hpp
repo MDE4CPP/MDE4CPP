@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			TimeConstraintImpl(const TimeConstraintImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			TimeConstraintImpl& operator=(TimeConstraintImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			TimeConstraintImpl& operator=(TimeConstraintImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,25 +32,14 @@ namespace uml
 			virtual void setThisTimeConstraintPtr(std::weak_ptr<TimeConstraint> thisTimeConstraintPtr);
 
 			//Additional constructors for the containments back reference
-			TimeConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id);
-
-
+			TimeConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id);
 			//Additional constructors for the containments back reference
-
-
 			//Additional constructors for the containments back reference
-			TimeConstraintImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			TimeConstraintImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			TimeConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			TimeConstraintImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			TimeConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			TimeConstraintImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -64,9 +53,7 @@ namespace uml
 			constrainedElement->size() = 1
 			*/
 			 
-			virtual bool has_one_constrainedElement(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool has_one_constrainedElement(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -77,19 +64,18 @@ namespace uml
 			*/
 			 
 			virtual bool getFirstEvent() const ;
-			
 			/*!
 			The value of firstEvent is related to the constrainedElement. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the constrainedElement. If firstEvent is false, then the corresponding observation event is the last time instant the execution is within the constrainedElement.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual void setFirstEvent (bool _firstEvent); 
+			virtual void setFirstEvent (bool _firstEvent);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -99,7 +85,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -109,7 +95,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -124,7 +110,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

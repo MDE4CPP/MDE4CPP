@@ -8,22 +8,18 @@
 #define UML_FINALSTATE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -38,104 +34,23 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectionPointReference;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Pseudostate;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class Region;
-}
-
-namespace uml 
-{
-	class State;
-}
-
-namespace uml 
-{
 	class StateMachine;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Transition;
-}
-
-namespace uml 
-{
 	class Trigger;
 }
 
@@ -146,6 +61,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -154,14 +70,13 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class FinalState:virtual public State
+	class FinalState: virtual public State
 	{
 		public:
  			FinalState(const FinalState &) {}
 
 		protected:
 			FinalState(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -177,44 +92,32 @@ namespace uml
 			submachine->isEmpty()
 			*/
 			 
-			virtual bool cannot_reference_submachine(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool cannot_reference_submachine(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A FinalState has no entry Behavior.
 			entry->isEmpty()
 			*/
 			 
-			virtual bool no_entry_behavior(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool no_entry_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A FinalState has no exit Behavior.
 			exit->isEmpty()
 			*/
 			 
-			virtual bool no_exit_behavior(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool no_exit_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A FinalState cannot have any outgoing Transitions.
 			outgoing->size() = 0
 			*/
 			 
-			virtual bool no_outgoing_transitions(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool no_outgoing_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A FinalState cannot have Regions.
 			region->size() = 0
 			*/
 			 
-			virtual bool no_regions(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool no_regions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A FinalState has no state (doActivity) Behavior.
 			doActivity->isEmpty()
 			*/
 			 
-			virtual bool no_state_behavior(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool no_state_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -249,7 +152,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -264,7 +167,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -278,7 +181,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

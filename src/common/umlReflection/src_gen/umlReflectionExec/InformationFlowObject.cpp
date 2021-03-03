@@ -79,9 +79,8 @@
 using namespace UML;
 
 InformationFlowObject::InformationFlowObject(std::shared_ptr<uml::InformationFlow> _element):
-
 	m_InformationFlowValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InformationFlow());
 }
 
@@ -102,13 +101,16 @@ InformationFlowObject::~InformationFlowObject()
 
 std::shared_ptr<ecore::EObject> InformationFlowObject::copy()
 {
-	std::shared_ptr<InformationFlowObject> element(new InformationFlowObject(*this));
+	std::shared_ptr<InformationFlowObject> element(new InformationFlowObject());
+	*element=(*this);
 	element->setThisInformationFlowObjectPtr(element);
 	return element;
 }
 
 InformationFlowObject& InformationFlowObject::operator=(const InformationFlowObject & obj)
 {
+	UML::DirectedRelationshipObject::operator=(obj);
+	UML::PackageableElementObject::operator=(obj);
 	return *this;
 }
 

@@ -7,21 +7,17 @@
 #ifndef UML_PARAMETERABLEELEMENT_HPP
 #define UML_PARAMETERABLEELEMENT_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,24 +32,10 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class ParameterableElement;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
 }
 
@@ -61,6 +43,7 @@ namespace uml
 #include "uml/Element.hpp"
 
 // enum includes
+
 
 
 //*********************************
@@ -71,22 +54,18 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class ParameterableElement:virtual public Element
+	class ParameterableElement: virtual public Element
 	{
 		public:
  			ParameterableElement(const ParameterableElement &) {}
 
 		protected:
 			ParameterableElement(){}
-
+			//Additional constructors for the containments back reference
+			ParameterableElement(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-
-			ParameterableElement(std::weak_ptr<uml::Element > par_owner);
-
-			//Additional constructors for the containments back reference
-
-			ParameterableElement(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+			ParameterableElement(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -103,17 +82,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p) = 0;
-			
-			/*!
+			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement> p) = 0;/*!
 			The query isTemplateParameter() determines if this ParameterableElement is exposed as a formal TemplateParameter.
 			result = (templateParameter->notEmpty())
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
 			virtual bool isTemplateParameter() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -126,29 +101,25 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::TemplateParameter > getOwningTemplateParameter() const = 0;
-			
+			virtual std::weak_ptr<uml::TemplateParameter> getOwningTemplateParameter() const = 0;
 			/*!
 			The formal TemplateParameter that owns this ParameterableElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setOwningTemplateParameter(std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter) = 0;
-			
+			virtual void setOwningTemplateParameter(std::weak_ptr<uml::TemplateParameter>) = 0;
 			/*!
 			The TemplateParameter that exposes this ParameterableElement as a formal parameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TemplateParameter > getTemplateParameter() const = 0;
-			
+			virtual std::shared_ptr<uml::TemplateParameter> getTemplateParameter() const = 0;
 			/*!
 			The TemplateParameter that exposes this ParameterableElement as a formal parameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setTemplateParameter(std::shared_ptr<uml::TemplateParameter> _templateParameter) = 0;
-			
+			virtual void setTemplateParameter(std::shared_ptr<uml::TemplateParameter>) = 0;
 			
 
 		protected:
@@ -165,12 +136,12 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			std::weak_ptr<uml::TemplateParameter > m_owningTemplateParameter;/*!
+			std::weak_ptr<uml::TemplateParameter> m_owningTemplateParameter;/*!
 			The TemplateParameter that exposes this ParameterableElement as a formal parameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			std::shared_ptr<uml::TemplateParameter > m_templateParameter;
+			std::shared_ptr<uml::TemplateParameter> m_templateParameter;
 
 		public:
 			//*********************************
@@ -186,7 +157,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -195,7 +166,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

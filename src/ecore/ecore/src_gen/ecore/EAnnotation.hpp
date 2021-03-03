@@ -7,22 +7,19 @@
 #ifndef ECORE_EANNOTATION_HPP
 #define ECORE_EANNOTATION_HPP
 
-#include <list>
+#include <map>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -37,26 +34,7 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
-namespace ecore 
-{
-	class EAnnotation;
-}
-
-namespace ecore 
-{
-	class EModelElement;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
-	class EStringToStringMapEntry;
-}
+//Forward Declaration for used types 
 
 // base class includes
 #include "ecore/EModelElement.hpp"
@@ -64,26 +42,23 @@ namespace ecore
 // enum includes
 
 
+
 //*********************************
 namespace ecore 
 {
 	
-	class EAnnotation:virtual public EModelElement
+	class EAnnotation: virtual public EModelElement
 	{
 		public:
  			EAnnotation(const EAnnotation &) {}
 
 		protected:
 			EAnnotation(){}
-
+			//Additional constructors for the containments back reference
+			EAnnotation(std::weak_ptr<ecore::EObject> par_eContainer);
 
 			//Additional constructors for the containments back reference
-
-			EAnnotation(std::weak_ptr<ecore::EObject > par_eContainer);
-
-			//Additional constructors for the containments back reference
-
-			EAnnotation(std::weak_ptr<ecore::EModelElement > par_eModelElement);
+			EAnnotation(std::weak_ptr<ecore::EModelElement> par_eModelElement);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -99,10 +74,13 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual std::string getSource() const = 0;
-			
+			virtual std::shared_ptr<std::map < std::string, std::string>> getDetails() const = 0;
 			 
-			virtual void setSource (std::string _source)= 0; 
+			virtual void setDetails (std::shared_ptr<std::map < std::string, std::string>> _details)= 0;
+			 
+			virtual std::string getSource() const = 0;
+			 
+			virtual void setSource (std::string _source)= 0;
 			
 			//*********************************
 			// Reference
@@ -111,19 +89,11 @@ namespace ecore
 			virtual std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> getContents() const = 0;
 			
 			
+			virtual std::weak_ptr<ecore::EModelElement> getEModelElement() const = 0;
 			
-			virtual std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> getDetails() const = 0;
-			
-			
-			
-			virtual std::weak_ptr<ecore::EModelElement > getEModelElement() const = 0;
-			
-			
-			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement) = 0;
-			
+			virtual void setEModelElement(std::weak_ptr<ecore::EModelElement>) = 0;
 			
 			virtual std::shared_ptr<Bag<ecore::EObject>> getReferences() const = 0;
-			
 			
 			
 
@@ -131,6 +101,8 @@ namespace ecore
 			//*********************************
 			// Attribute Members
 			//*********************************
+			 
+			std::shared_ptr<std::map < std::string, std::string>> m_details = nullptr;
 			 
 			std::string m_source = "";
 			
@@ -140,8 +112,7 @@ namespace ecore
 			//*********************************
 			
 			mutable std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> m_contents;
-			mutable std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> m_details;
-			std::weak_ptr<ecore::EModelElement > m_eModelElement;
+			std::weak_ptr<ecore::EModelElement> m_eModelElement;
 			mutable std::shared_ptr<Bag<ecore::EObject>> m_references;
 
 		public:
@@ -158,7 +129,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

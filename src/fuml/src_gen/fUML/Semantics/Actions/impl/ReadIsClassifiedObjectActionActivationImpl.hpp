@@ -23,8 +23,8 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			ReadIsClassifiedObjectActionActivationImpl(const ReadIsClassifiedObjectActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ReadIsClassifiedObjectActionActivationImpl& operator=(ReadIsClassifiedObjectActionActivationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ReadIsClassifiedObjectActionActivationImpl& operator=(ReadIsClassifiedObjectActionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
@@ -33,10 +33,7 @@ namespace fUML::Semantics::Actions
 			virtual void setThisReadIsClassifiedObjectActionActivationPtr(std::weak_ptr<ReadIsClassifiedObjectActionActivation> thisReadIsClassifiedObjectActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			ReadIsClassifiedObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			ReadIsClassifiedObjectActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -46,9 +43,7 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual bool checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier) ;
-			
-			
+			virtual bool checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -58,7 +53,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -79,7 +74,7 @@ namespace fUML::Semantics::Actions
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

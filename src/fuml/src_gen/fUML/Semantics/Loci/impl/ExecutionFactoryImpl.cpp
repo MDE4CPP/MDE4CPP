@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -146,37 +147,27 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Element.hpp"
-
 #include "fUML/Semantics/Values/Evaluation.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
 #include "uml/OpaqueBehavior.hpp"
-
 #include "fUML/Semantics/CommonBehavior/OpaqueBehaviorExecution.hpp"
-
 #include "uml/PrimitiveType.hpp"
-
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
-
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
-#include "fUML/Semantics/Loci/impl/LociPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -201,51 +192,47 @@ ExecutionFactoryImpl::~ExecutionFactoryImpl()
 }
 
 //Additional constructor for the containments back reference
-ExecutionFactoryImpl::ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus)
+ExecutionFactoryImpl::ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus)
 :ExecutionFactoryImpl()
 {
 	m_locus = par_locus;
 }
 
-
-ExecutionFactoryImpl::ExecutionFactoryImpl(const ExecutionFactoryImpl & obj):ExecutionFactoryImpl()
+ExecutionFactoryImpl::ExecutionFactoryImpl(const ExecutionFactoryImpl & obj): ExecutionFactoryImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ExecutionFactoryImpl::copy() const
-{
-	std::shared_ptr<ExecutionFactoryImpl> element(new ExecutionFactoryImpl(*this));
-	element->setThisExecutionFactoryPtr(element);
-	return element;
-}
-
 ExecutionFactoryImpl& ExecutionFactoryImpl::operator=(const ExecutionFactoryImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	ExecutionFactory::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExecutionFactory "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = obj.getBuiltInTypes();
 	m_builtInTypes.reset(new Bag<uml::PrimitiveType>(*(obj.getBuiltInTypes().get())));
-
 	m_locus  = obj.getLocus();
-
 	std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes = obj.getPrimitiveBehaviorPrototypes();
 	m_primitiveBehaviorPrototypes.reset(new Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>(*(obj.getPrimitiveBehaviorPrototypes().get())));
-
 	std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = obj.getStrategies();
 	m_strategies.reset(new Bag<fUML::Semantics::Loci::SemanticStrategy>(*(obj.getStrategies().get())));
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ExecutionFactoryImpl::copy() const
+{
+	std::shared_ptr<ExecutionFactoryImpl> element(new ExecutionFactoryImpl());
+	*element =(*this);
+	element->setThisExecutionFactoryPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
@@ -260,7 +247,7 @@ std::shared_ptr<ecore::EClass> ExecutionFactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type)
+void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType> type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -269,7 +256,7 @@ void ExecutionFactoryImpl::addBuiltInType(std::shared_ptr<uml::PrimitiveType>  t
 	//end of body
 }
 
-void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>  execution)
+void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> execution)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -278,7 +265,7 @@ void ExecutionFactoryImpl::addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::S
 	//end of body
 }
 
-void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>  strategy)
+void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> strategy)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -293,7 +280,7 @@ void ExecutionFactoryImpl::assignStrategy(std::shared_ptr<fUML::Semantics::Loci:
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Values::Evaluation> ExecutionFactoryImpl::createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification)
+std::shared_ptr<fUML::Semantics::Values::Evaluation> ExecutionFactoryImpl::createEvaluation(std::shared_ptr<uml::ValueSpecification> specification)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -306,7 +293,7 @@ std::shared_ptr<fUML::Semantics::Values::Evaluation> ExecutionFactoryImpl::creat
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  context)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ExecutionFactoryImpl::createExecution(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -432,7 +419,7 @@ int ExecutionFactoryImpl::getStrategyIndex(std::string name)
 
 
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior>  behavior)
+std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> ExecutionFactoryImpl::instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior> behavior)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -460,7 +447,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> Execut
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element>  element)
+std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> ExecutionFactoryImpl::instantiateVisitor(std::shared_ptr<uml::Element> element)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -743,22 +730,18 @@ std::shared_ptr<Bag<uml::PrimitiveType>> ExecutionFactoryImpl::getBuiltInTypes()
 
 
 
-
-
 /*
 Getter & Setter for reference locus
 */
-std::weak_ptr<fUML::Semantics::Loci::Locus > ExecutionFactoryImpl::getLocus() const
+std::weak_ptr<fUML::Semantics::Loci::Locus> ExecutionFactoryImpl::getLocus() const
 {
 
     return m_locus;
 }
-
-void ExecutionFactoryImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
+void ExecutionFactoryImpl::setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
 }
-
 
 
 /*
@@ -778,8 +761,6 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> E
 
 
 
-
-
 /*
 Getter & Setter for reference strategies
 */
@@ -794,8 +775,6 @@ std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> ExecutionFactoryIm
 
     return m_strategies;
 }
-
-
 
 
 
@@ -831,41 +810,17 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PrimitiveType>::iterator iter = m_builtInTypes->begin();
-			Bag<uml::PrimitiveType>::iterator end = m_builtInTypes->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //473
+			return eAny(getBuiltInTypes()); //473			
 		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_LOCUS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getLocus().lock())); //470
+			return eAny(getLocus().lock()); //470
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>::iterator iter = m_primitiveBehaviorPrototypes->begin();
-			Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>::iterator end = m_primitiveBehaviorPrototypes->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //472
+			return eAny(getPrimitiveBehaviorPrototypes()); //472			
 		}
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Loci::SemanticStrategy>::iterator iter = m_strategies->begin();
-			Bag<fUML::Semantics::Loci::SemanticStrategy>::iterator end = m_strategies->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //471
+			return eAny(getStrategies()); //471			
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -912,7 +867,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 				}
 				iterBuiltInTypes++;
 			}
-
+ 
 			iterBuiltInTypes = builtInTypesList->begin();
 			endBuiltInTypes = builtInTypesList->end();
 			while (iterBuiltInTypes != endBuiltInTypes)
@@ -956,7 +911,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 				}
 				iterPrimitiveBehaviorPrototypes++;
 			}
-
+ 
 			iterPrimitiveBehaviorPrototypes = primitiveBehaviorPrototypesList->begin();
 			endPrimitiveBehaviorPrototypes = primitiveBehaviorPrototypesList->end();
 			while (iterPrimitiveBehaviorPrototypes != endPrimitiveBehaviorPrototypes)
@@ -992,7 +947,7 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 				}
 				iterStrategies++;
 			}
-
+ 
 			iterStrategies = strategiesList->begin();
 			endStrategies = strategiesList->end();
 			while (iterStrategies != endStrategies)
@@ -1070,12 +1025,11 @@ void ExecutionFactoryImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void ExecutionFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Loci::LociFactory> modelFactory=fUML::Semantics::Loci::LociFactory::eInstance();
 
 	//load BasePackage Nodes
 }
 
-void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExecutionFactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1084,11 +1038,11 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std:
 			std::shared_ptr<Bag<uml::PrimitiveType>> _builtInTypes = getBuiltInTypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::PrimitiveType> _r = std::dynamic_pointer_cast<uml::PrimitiveType>(ref);
+				std::shared_ptr<uml::PrimitiveType>  _r = std::dynamic_pointer_cast<uml::PrimitiveType>(ref);
 				if (_r != nullptr)
 				{
 					_builtInTypes->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -1110,11 +1064,11 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std:
 			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> _primitiveBehaviorPrototypes = getPrimitiveBehaviorPrototypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> _r = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>(ref);
+				std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>  _r = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>(ref);
 				if (_r != nullptr)
 				{
 					_primitiveBehaviorPrototypes->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -1124,11 +1078,11 @@ void ExecutionFactoryImpl::resolveReferences(const int featureID, std::list<std:
 			std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> _strategies = getStrategies();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> _r = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticStrategy>(ref);
+				std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>  _r = std::dynamic_pointer_cast<fUML::Semantics::Loci::SemanticStrategy>(ref);
 				if (_r != nullptr)
 				{
 					_strategies->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -1150,26 +1104,10 @@ void ExecutionFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
-
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::PrimitiveType>> builtInTypes_list = this->getBuiltInTypes();
-		for (std::shared_ptr<uml::PrimitiveType > object : *builtInTypes_list)
-		{ 
-			saveHandler->addReferences("builtInTypes", object);
-		}
-		std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> primitiveBehaviorPrototypes_list = this->getPrimitiveBehaviorPrototypes();
-		for (std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution > object : *primitiveBehaviorPrototypes_list)
-		{ 
-			saveHandler->addReferences("primitiveBehaviorPrototypes", object);
-		}
-		std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> strategies_list = this->getStrategies();
-		for (std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy > object : *strategies_list)
-		{ 
-			saveHandler->addReferences("strategies", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::PrimitiveType>("builtInTypes", this->getBuiltInTypes());
+		saveHandler->addReferences<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>("primitiveBehaviorPrototypes", this->getPrimitiveBehaviorPrototypes());
+		saveHandler->addReferences<fUML::Semantics::Loci::SemanticStrategy>("strategies", this->getStrategies());
 	}
 	catch (std::exception& e)
 	{

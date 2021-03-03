@@ -8,22 +8,18 @@
 #define UML_PIN_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -38,116 +34,35 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
-	class MultiplicityElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class ObjectNode;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class State;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
 // base class includes
 #include "uml/MultiplicityElement.hpp"
-
 #include "uml/ObjectNode.hpp"
 
 // enum includes
 #include "uml/ObjectNodeOrderingKind.hpp"
 
 #include "uml/VisibilityKind.hpp"
+
 
 
 //*********************************
@@ -158,14 +73,13 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class Pin:virtual public MultiplicityElement,virtual public ObjectNode
+	class Pin: virtual public MultiplicityElement, virtual public ObjectNode
 	{
 		public:
  			Pin(const Pin &) {}
 
 		protected:
 			Pin(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -181,16 +95,12 @@ namespace uml
 			isControl implies isControlType
 			*/
 			 
-			virtual bool control_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool control_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			Pin multiplicity is not unique.
 			not isUnique
 			*/
 			 
-			virtual bool not_unique(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool not_unique(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -200,13 +110,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsControl() const = 0;
-			
 			/*!
 			Indicates whether the Pin provides data to the Action or just controls how the Action executes.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsControl (bool _isControl)= 0; 
+			virtual void setIsControl (bool _isControl)= 0;
 			
 			//*********************************
 			// Reference
@@ -249,7 +158,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -263,7 +172,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

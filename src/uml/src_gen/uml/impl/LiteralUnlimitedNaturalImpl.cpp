@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,30 +35,19 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/LiteralSpecification.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/Slot.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -83,7 +73,7 @@ LiteralUnlimitedNaturalImpl::~LiteralUnlimitedNaturalImpl()
 }
 
 //Additional constructor for the containments back reference
-LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Namespace > par_namespace)
+LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :LiteralUnlimitedNaturalImpl()
 {
 	m_namespace = par_namespace;
@@ -91,14 +81,14 @@ LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Name
 }
 
 //Additional constructor for the containments back reference
-LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Element > par_owner)
+LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Element> par_owner)
 :LiteralUnlimitedNaturalImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Package > par_owningPackage)
+LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :LiteralUnlimitedNaturalImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -106,7 +96,7 @@ LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Pack
 }
 
 //Additional constructor for the containments back reference
-LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 :LiteralUnlimitedNaturalImpl()
 {
 	m_owningSlot = par_owningSlot;
@@ -114,7 +104,7 @@ LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Slot
 }
 
 //Additional constructor for the containments back reference
-LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :LiteralUnlimitedNaturalImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
@@ -122,79 +112,42 @@ LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::Temp
 }
 
 //Additional constructor for the containments back reference
-LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction)
 :LiteralUnlimitedNaturalImpl()
 {
 	m_valueSpecificationAction = par_valueSpecificationAction;
 	m_owner = par_valueSpecificationAction;
 }
 
-
-LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(const LiteralUnlimitedNaturalImpl & obj):LiteralUnlimitedNaturalImpl()
+LiteralUnlimitedNaturalImpl::LiteralUnlimitedNaturalImpl(const LiteralUnlimitedNaturalImpl & obj): LiteralUnlimitedNaturalImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  LiteralUnlimitedNaturalImpl::copy() const
-{
-	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl(*this));
-	element->setThisLiteralUnlimitedNaturalPtr(element);
-	return element;
-}
-
 LiteralUnlimitedNaturalImpl& LiteralUnlimitedNaturalImpl::operator=(const LiteralUnlimitedNaturalImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	LiteralSpecificationImpl::operator=(obj);
+	LiteralUnlimitedNatural::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralUnlimitedNatural "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
+	//Clone Attributes with (deep copy)
 	m_value = obj.getValue();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningSlot  = obj.getOwningSlot();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-	m_type  = obj.getType();
-
-	m_valueSpecificationAction  = obj.getValueSpecificationAction();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> LiteralUnlimitedNaturalImpl::copy() const
+{
+	std::shared_ptr<LiteralUnlimitedNaturalImpl> element(new LiteralUnlimitedNaturalImpl());
+	*element =(*this);
+	element->setThisLiteralUnlimitedNaturalPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LiteralUnlimitedNaturalImpl::eStaticClass() const
@@ -212,12 +165,10 @@ int LiteralUnlimitedNaturalImpl::getValue() const
 {
 	return m_value;
 }
-
 void LiteralUnlimitedNaturalImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
-
 
 
 //*********************************
@@ -246,7 +197,7 @@ int LiteralUnlimitedNaturalImpl::unlimitedValue()
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > LiteralUnlimitedNaturalImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> LiteralUnlimitedNaturalImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -266,7 +217,7 @@ std::shared_ptr<Union<uml::Element>> LiteralUnlimitedNaturalImpl::getOwnedElemen
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > LiteralUnlimitedNaturalImpl::getOwner() const
+std::weak_ptr<uml::Element> LiteralUnlimitedNaturalImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -402,13 +353,12 @@ void LiteralUnlimitedNaturalImpl::loadAttributes(std::shared_ptr<persistence::in
 
 void LiteralUnlimitedNaturalImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	LiteralSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void LiteralUnlimitedNaturalImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LiteralUnlimitedNaturalImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	LiteralSpecificationImpl::resolveReferences(featureID, references);
 }
@@ -445,14 +395,11 @@ void LiteralUnlimitedNaturalImpl::saveContent(std::shared_ptr<persistence::inter
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getLiteralUnlimitedNatural_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

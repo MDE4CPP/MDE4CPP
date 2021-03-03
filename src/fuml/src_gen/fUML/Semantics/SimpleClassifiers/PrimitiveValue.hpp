@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_SIMPLECLASSIFIERS_PRIMITIVEVALUE_HPP
 #define FUML_SEMANTICS_SIMPLECLASSIFIERS_PRIMITIVEVALUE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,20 +31,11 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class PrimitiveType;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 
 // base class includes
@@ -57,18 +44,18 @@ namespace fUML::Semantics::Values
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	
-	class PrimitiveValue:virtual public fUML::Semantics::Values::Value
+	class PrimitiveValue: virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			PrimitiveValue(const PrimitiveValue &) {}
 
 		protected:
 			PrimitiveValue(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -80,12 +67,8 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0; 
 			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -94,11 +77,9 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::PrimitiveType > getType() const = 0;
+			virtual std::shared_ptr<uml::PrimitiveType> getType() const = 0;
 			
-			
-			virtual void setType(std::shared_ptr<uml::PrimitiveType> _type) = 0;
-			
+			virtual void setType(std::shared_ptr<uml::PrimitiveType>) = 0;
 			
 
 		protected:
@@ -111,7 +92,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::PrimitiveType > m_type;
+			std::shared_ptr<uml::PrimitiveType> m_type;
 
 		public:
 			//*********************************
@@ -126,7 +107,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

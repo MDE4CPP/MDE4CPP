@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ClassifierTemplateParameterImpl(const ClassifierTemplateParameterImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ClassifierTemplateParameterImpl& operator=(ClassifierTemplateParameterImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ClassifierTemplateParameterImpl& operator=(ClassifierTemplateParameterImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisClassifierTemplateParameterPtr(std::weak_ptr<ClassifierTemplateParameter> thisClassifierTemplateParameterPtr);
 
 			//Additional constructors for the containments back reference
-			ClassifierTemplateParameterImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ClassifierTemplateParameterImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ClassifierTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature);
-
-
-
+			ClassifierTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature> par_signature);
 
 		public:
 			//destructor
@@ -53,9 +48,7 @@ namespace uml
 			 templateParameterSubstitution.actual->forAll(a | a.oclIsKindOf(Classifier))
 			*/
 			 
-			virtual bool actual_is_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool actual_is_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If there are any constrainingClassifiers, then every argument must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
 			templateParameterSubstitution.actual->forAll( a |
 			  let arg : Classifier = a.oclAsType(Classifier) in
@@ -66,39 +59,29 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool constraining_classifiers_constrain_args(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool constraining_classifiers_constrain_args(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If there are any constrainingClassifiers, then the parameteredElement must be the same as or a specialization of them, or if allowSubstitutable is true, then it can also be substitutable.
 			constrainingClassifier->forAll(
 			     cc |  parameteredElement = cc or parameteredElement.conformsTo(cc) or (allowSubstitutable and parameteredElement.isSubstitutableFor(cc))
 			)
 			*/
 			 
-			virtual bool constraining_classifiers_constrain_parametered_element(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool constraining_classifiers_constrain_parametered_element(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If allowSubstitutable is true, then there must be a constrainingClassifier.
 			allowSubstitutable implies constrainingClassifier->notEmpty()
 			*/
 			 
-			virtual bool has_constraining_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool has_constraining_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If the parameteredElement is not abstract, then the Classifier used as an argument shall not be abstract.
 			(not parameteredElement.isAbstract) implies templateParameterSubstitution.actual->forAll(a | not a.oclAsType(Classifier).isAbstract)
 			*/
 			 
-			virtual bool matching_abstract(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool matching_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The parameteredElement has no direct features, and if constrainedElement is empty it has no generalizations.
 			parameteredElement.feature->isEmpty() and (constrainingClassifier->isEmpty() implies  parameteredElement.allParents()->isEmpty())
 			*/
 			 
-			virtual bool parametered_element_no_features(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool parametered_element_no_features(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -109,13 +92,12 @@ namespace uml
 			*/
 			 
 			virtual bool getAllowSubstitutable() const ;
-			
 			/*!
 			Constrains the required relationship between an actual parameter and the parameteredElement for this formal parameter.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setAllowSubstitutable (bool _allowSubstitutable); 
+			virtual void setAllowSubstitutable (bool _allowSubstitutable);
 			
 			
 			//*********************************
@@ -129,7 +111,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Classifier>> getConstrainingClassifier() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -144,7 +125,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -159,7 +140,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

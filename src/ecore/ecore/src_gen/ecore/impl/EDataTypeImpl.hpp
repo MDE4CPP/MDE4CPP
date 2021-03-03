@@ -22,8 +22,8 @@ namespace ecore
 	{
 		public: 
 			EDataTypeImpl(const EDataTypeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EDataTypeImpl& operator=(EDataTypeImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EDataTypeImpl& operator=(EDataTypeImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
@@ -32,14 +32,9 @@ namespace ecore
 			virtual void setThisEDataTypePtr(std::weak_ptr<EDataType> thisEDataTypePtr);
 
 			//Additional constructors for the containments back reference
-			EDataTypeImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EDataTypeImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EDataTypeImpl(std::weak_ptr<ecore::EPackage > par_ePackage);
-
-
-
+			EDataTypeImpl(std::weak_ptr<ecore::EPackage> par_ePackage);
 
 		public:
 			//destructor
@@ -55,15 +50,14 @@ namespace ecore
 			//*********************************
 			 
 			virtual bool isSerializable() const ;
-			
 			 
-			virtual void setSerializable (bool _serializable); 
+			virtual void setSerializable (bool _serializable);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -84,7 +78,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

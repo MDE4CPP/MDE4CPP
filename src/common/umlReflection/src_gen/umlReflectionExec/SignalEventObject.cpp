@@ -61,9 +61,8 @@
 using namespace UML;
 
 SignalEventObject::SignalEventObject(std::shared_ptr<uml::SignalEvent> _element):
-
 	m_SignalEventValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_SignalEvent());
 }
 
@@ -84,13 +83,15 @@ SignalEventObject::~SignalEventObject()
 
 std::shared_ptr<ecore::EObject> SignalEventObject::copy()
 {
-	std::shared_ptr<SignalEventObject> element(new SignalEventObject(*this));
+	std::shared_ptr<SignalEventObject> element(new SignalEventObject());
+	*element=(*this);
 	element->setThisSignalEventObjectPtr(element);
 	return element;
 }
 
 SignalEventObject& SignalEventObject::operator=(const SignalEventObject & obj)
 {
+	UML::MessageEventObject::operator=(obj);
 	return *this;
 }
 

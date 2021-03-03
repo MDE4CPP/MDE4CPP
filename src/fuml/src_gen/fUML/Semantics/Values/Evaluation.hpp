@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_VALUES_EVALUATION_HPP
 #define FUML_SEMANTICS_VALUES_EVALUATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,22 +31,15 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
-namespace fUML::Semantics::Loci 
-{
-	class SemanticVisitor;
-}
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
 }
-
 namespace uml 
 {
 	class ValueSpecification;
@@ -62,18 +51,18 @@ namespace uml
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::Values 
 {
 	
-	class Evaluation:virtual public fUML::Semantics::Loci::SemanticVisitor
+	class Evaluation: virtual public fUML::Semantics::Loci::SemanticVisitor
 	{
 		public:
  			Evaluation(const Evaluation &) {}
 
 		protected:
 			Evaluation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -86,8 +75,6 @@ namespace fUML::Semantics::Values
 			//*********************************
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -96,17 +83,13 @@ namespace fUML::Semantics::Values
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const = 0;
 			
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) = 0;
 			
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) = 0;
+			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const = 0;
 			
-			
-			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const = 0;
-			
-			
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) = 0;
-			
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification>) = 0;
 			
 
 		protected:
@@ -119,8 +102,8 @@ namespace fUML::Semantics::Values
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::Loci::Locus > m_locus;
-			std::shared_ptr<uml::ValueSpecification > m_specification;
+			std::shared_ptr<fUML::Semantics::Loci::Locus> m_locus;
+			std::shared_ptr<uml::ValueSpecification> m_specification;
 
 		public:
 			//*********************************
@@ -135,7 +118,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

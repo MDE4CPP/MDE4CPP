@@ -44,9 +44,7 @@ DeriveImpl::DeriveImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Derive is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ DeriveImpl::DeriveImpl(const DeriveImpl & obj):DeriveImpl()
 
 std::shared_ptr<ecore::EObject>  DeriveImpl::copy() const
 {
-	std::shared_ptr<DeriveImpl> element(new DeriveImpl(*this));
+	std::shared_ptr<DeriveImpl> element(new DeriveImpl());
+	*element=(*this);
 	element->setThisDerivePtr(element);
 	return element;
 }
 
 DeriveImpl& DeriveImpl::operator=(const DeriveImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Derive "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

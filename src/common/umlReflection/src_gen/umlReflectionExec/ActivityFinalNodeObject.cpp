@@ -74,9 +74,8 @@
 using namespace UML;
 
 ActivityFinalNodeObject::ActivityFinalNodeObject(std::shared_ptr<uml::ActivityFinalNode> _element):
-
 	m_ActivityFinalNodeValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ActivityFinalNode());
 }
 
@@ -97,13 +96,15 @@ ActivityFinalNodeObject::~ActivityFinalNodeObject()
 
 std::shared_ptr<ecore::EObject> ActivityFinalNodeObject::copy()
 {
-	std::shared_ptr<ActivityFinalNodeObject> element(new ActivityFinalNodeObject(*this));
+	std::shared_ptr<ActivityFinalNodeObject> element(new ActivityFinalNodeObject());
+	*element=(*this);
 	element->setThisActivityFinalNodeObjectPtr(element);
 	return element;
 }
 
 ActivityFinalNodeObject& ActivityFinalNodeObject::operator=(const ActivityFinalNodeObject & obj)
 {
+	UML::FinalNodeObject::operator=(obj);
 	return *this;
 }
 

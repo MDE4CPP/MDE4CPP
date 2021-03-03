@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -33,16 +34,12 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EGenericType.hpp"
-
 #include "ecore/ENamedElement.hpp"
-
 #include "ecore/EObject.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -68,61 +65,62 @@ ETypeParameterImpl::~ETypeParameterImpl()
 }
 
 //Additional constructor for the containments back reference
-ETypeParameterImpl::ETypeParameterImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+ETypeParameterImpl::ETypeParameterImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :ETypeParameterImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
-
-ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj):ETypeParameterImpl()
+ETypeParameterImpl::ETypeParameterImpl(const ETypeParameterImpl & obj): ETypeParameterImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ETypeParameterImpl::copy() const
-{
-	std::shared_ptr<ETypeParameterImpl> element(new ETypeParameterImpl(*this));
-	element->setThisETypeParameterPtr(element);
-	return element;
-}
-
 ETypeParameterImpl& ETypeParameterImpl::operator=(const ETypeParameterImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ENamedElementImpl::operator=(obj);
+	ETypeParameter::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ETypeParameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
+	std::shared_ptr<Bag<ecore::EGenericType>> eBoundsContainer = getEBounds();
+	if(nullptr != eBoundsContainer )
 	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
+		int size = eBoundsContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _eBounds=(*eBoundsContainer)[i];
+			if(nullptr != _eBounds)
+			{
+				eBoundsContainer->push_back(std::dynamic_pointer_cast<ecore::EGenericType>(_eBounds->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container eBounds."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	std::shared_ptr<Bag<ecore::EGenericType>> _eBoundsList = obj.getEBounds();
-	for(std::shared_ptr<ecore::EGenericType> _eBounds : *_eBoundsList)
+	else
 	{
-		this->getEBounds()->add(std::shared_ptr<ecore::EGenericType>(std::dynamic_pointer_cast<ecore::EGenericType>(_eBounds->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr eBounds."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eBounds" << std::endl;
-	#endif
-
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ETypeParameterImpl::copy() const
+{
+	std::shared_ptr<ETypeParameterImpl> element(new ETypeParameterImpl());
+	*element =(*this);
+	element->setThisETypeParameterPtr(element);
+	return element;
 }
 
 std::shared_ptr<EClass> ETypeParameterImpl::eStaticClass() const
@@ -155,8 +153,6 @@ std::shared_ptr<Bag<ecore::EGenericType>> ETypeParameterImpl::getEBounds() const
 
     return m_eBounds;
 }
-
-
 
 
 
@@ -208,15 +204,7 @@ Any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EGenericType>::iterator iter = m_eBounds->begin();
-			Bag<ecore::EGenericType>::iterator end = m_eBounds->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //525
+			return eAny(getEBounds()); //525			
 		}
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);
@@ -257,7 +245,7 @@ bool ETypeParameterImpl::eSet(int featureID, Any newValue)
 				}
 				iterEBounds++;
 			}
-
+ 
 			iterEBounds = eBoundsList->begin();
 			endEBounds = eBoundsList->end();
 			while (iterEBounds != endEBounds)
@@ -302,7 +290,6 @@ void ETypeParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void ETypeParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	try
 	{
@@ -313,14 +300,9 @@ void ETypeParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 			{
 				typeName = "EGenericType";
 			}
-			std::shared_ptr<ecore::EGenericType> eBounds = std::dynamic_pointer_cast<ecore::EGenericType>(modelFactory->create(typeName));
-			if (eBounds != nullptr)
-			{
-				std::shared_ptr<Bag<ecore::EGenericType>> list_eBounds = this->getEBounds();
-				list_eBounds->push_back(eBounds);
-				loadHandler->handleChild(eBounds);
-			}
-			return;
+			loadHandler->handleChildContainer<ecore::EGenericType>(this->getEBounds());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -335,7 +317,7 @@ void ETypeParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persiste
 	ENamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ETypeParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void ETypeParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	ENamedElementImpl::resolveReferences(featureID, references);
 }
@@ -361,20 +343,13 @@ void ETypeParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
-
-
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<EClass> metaClass = this->eClass();
 		// Save 'eBounds'
-		std::shared_ptr<Bag<ecore::EGenericType>> list_eBounds = this->getEBounds();
-		for (std::shared_ptr<ecore::EGenericType> eBounds : *list_eBounds) 
-		{
-			saveHandler->addReference(eBounds, "eBounds", eBounds->eClass() !=ecore::ecorePackage::eInstance()->getEGenericType_Class());
-		}
+
+		saveHandler->addReferences<ecore::EGenericType>("eBounds", this->getEBounds());
 	}
 	catch (std::exception& e)
 	{

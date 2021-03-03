@@ -62,9 +62,8 @@
 using namespace UML;
 
 DurationObservationObject::DurationObservationObject(std::shared_ptr<uml::DurationObservation> _element):
-
 	m_DurationObservationValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DurationObservation());
 }
 
@@ -85,13 +84,15 @@ DurationObservationObject::~DurationObservationObject()
 
 std::shared_ptr<ecore::EObject> DurationObservationObject::copy()
 {
-	std::shared_ptr<DurationObservationObject> element(new DurationObservationObject(*this));
+	std::shared_ptr<DurationObservationObject> element(new DurationObservationObject());
+	*element=(*this);
 	element->setThisDurationObservationObjectPtr(element);
 	return element;
 }
 
 DurationObservationObject& DurationObservationObject::operator=(const DurationObservationObject & obj)
 {
+	UML::ObservationObject::operator=(obj);
 	return *this;
 }
 

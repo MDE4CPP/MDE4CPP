@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,46 +36,27 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -100,7 +82,7 @@ OpaqueActionImpl::~OpaqueActionImpl()
 }
 
 //Additional constructor for the containments back reference
-OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Activity > par_activity)
+OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Activity> par_activity)
 :OpaqueActionImpl()
 {
 	m_activity = par_activity;
@@ -108,7 +90,7 @@ OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Activity > par_activity)
 }
 
 //Additional constructor for the containments back reference
-OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :OpaqueActionImpl()
 {
 	m_inStructuredNode = par_inStructuredNode;
@@ -116,7 +98,7 @@ OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::StructuredActivityNode > p
 }
 
 //Additional constructor for the containments back reference
-OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :OpaqueActionImpl()
 {
 	m_namespace = par_namespace;
@@ -124,167 +106,136 @@ OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Element > par_owner)
+OpaqueActionImpl::OpaqueActionImpl(std::weak_ptr<uml::Element> par_owner)
 :OpaqueActionImpl()
 {
 	m_owner = par_owner;
 }
 
-
-OpaqueActionImpl::OpaqueActionImpl(const OpaqueActionImpl & obj):OpaqueActionImpl()
+OpaqueActionImpl::OpaqueActionImpl(const OpaqueActionImpl & obj): OpaqueActionImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  OpaqueActionImpl::copy() const
-{
-	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl(*this));
-	element->setThisOpaqueActionPtr(element);
-	return element;
-}
-
 OpaqueActionImpl& OpaqueActionImpl::operator=(const OpaqueActionImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	OpaqueAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OpaqueAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_body = obj.getBody();
-	m_isLeaf = obj.getIsLeaf();
-	m_isLocallyReentrant = obj.getIsLocallyReentrant();
-	m_language = obj.getLanguage();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
+	std::shared_ptr<Bag<std::string>> bodyContainer = getBody();
+	if(nullptr != bodyContainer )
+	{
+		int size = bodyContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _body=(*bodyContainer)[i];	
+			if(nullptr != _body)
+			{
+				bodyContainer->push_back(_body);
+			} 
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container body."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr body."<< std::endl;)
+	}
+	std::shared_ptr<Bag<std::string>> languageContainer = getLanguage();
+	if(nullptr != languageContainer )
+	{
+		int size = languageContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _language=(*languageContainer)[i];	
+			if(nullptr != _language)
+			{
+				languageContainer->push_back(_language);
+			} 
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container language."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr language."<< std::endl;)
+	}
 
 	//copy references with no containment (soft copy)
-	
-	m_activity  = obj.getActivity();
-
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_context  = obj.getContext();
-
-	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
-	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
-
-	m_inStructuredNode  = obj.getInStructuredNode();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
-	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
-	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
+	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> inputValueContainer = getInputValue();
+	if(nullptr != inputValueContainer )
 	{
-		this->getHandler()->add(std::shared_ptr<uml::ExceptionHandler>(std::dynamic_pointer_cast<uml::ExceptionHandler>(_handler->copy())));
+		int size = inputValueContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _inputValue=(*inputValueContainer)[i];
+			if(nullptr != _inputValue)
+			{
+				inputValueContainer->push_back(std::dynamic_pointer_cast<uml::InputPin>(_inputValue->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container inputValue."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_handler" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
-	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
+	else
 	{
-		this->getInInterruptibleRegion()->add(std::shared_ptr<uml::InterruptibleActivityRegion>(std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_inInterruptibleRegion->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inputValue."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inInterruptibleRegion" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityPartition>> _inPartitionList = obj.getInPartition();
-	for(std::shared_ptr<uml::ActivityPartition> _inPartition : *_inPartitionList)
+	std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> outputValueContainer = getOutputValue();
+	if(nullptr != outputValueContainer )
 	{
-		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(std::dynamic_pointer_cast<uml::ActivityPartition>(_inPartition->copy())));
+		int size = outputValueContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _outputValue=(*outputValueContainer)[i];
+			if(nullptr != _outputValue)
+			{
+				outputValueContainer->push_back(std::dynamic_pointer_cast<uml::OutputPin>(_outputValue->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container outputValue."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::InputPin>> _inputValueList = obj.getInputValue();
-	for(std::shared_ptr<uml::InputPin> _inputValue : *_inputValueList)
+	else
 	{
-		this->getInputValue()->add(std::shared_ptr<uml::InputPin>(std::dynamic_pointer_cast<uml::InputPin>(_inputValue->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr outputValue."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inputValue" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _localPostconditionList = obj.getLocalPostcondition();
-	for(std::shared_ptr<uml::Constraint> _localPostcondition : *_localPostconditionList)
-	{
-		this->getLocalPostcondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_localPostcondition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_localPostcondition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _localPreconditionList = obj.getLocalPrecondition();
-	for(std::shared_ptr<uml::Constraint> _localPrecondition : *_localPreconditionList)
-	{
-		this->getLocalPrecondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_localPrecondition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_localPrecondition" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::OutputPin>> _outputValueList = obj.getOutputValue();
-	for(std::shared_ptr<uml::OutputPin> _outputValue : *_outputValueList)
-	{
-		this->getOutputValue()->add(std::shared_ptr<uml::OutputPin>(std::dynamic_pointer_cast<uml::OutputPin>(_outputValue->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_outputValue" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNodeList = obj.getRedefinedNode();
-	for(std::shared_ptr<uml::ActivityNode> _redefinedNode : *_redefinedNodeList)
-	{
-		this->getRedefinedNode()->add(std::shared_ptr<uml::ActivityNode>(std::dynamic_pointer_cast<uml::ActivityNode>(_redefinedNode->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_inputValue->initSubset(getInput());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 	#endif
 	
-
 	/*Subset*/
 	m_outputValue->initSubset(getOutput());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_outputValue - Subset<uml::OutputPin, uml::OutputPin >(getOutput())" << std::endl;
 	#endif
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> OpaqueActionImpl::copy() const
+{
+	std::shared_ptr<OpaqueActionImpl> element(new OpaqueActionImpl());
+	*element =(*this);
+	element->setThisOpaqueActionPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const
@@ -298,7 +249,7 @@ std::shared_ptr<ecore::EClass> OpaqueActionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute body
 */
-std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getBody() const 
+std::shared_ptr<Bag<std::string>> OpaqueActionImpl::getBody() const 
 {
 	if(m_body == nullptr)
 	{
@@ -309,12 +260,10 @@ std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getBody() const
 
 
 
-
-
 /*
 Getter & Setter for attribute language
 */
-std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getLanguage() const 
+std::shared_ptr<Bag<std::string>> OpaqueActionImpl::getLanguage() const 
 {
 	if(m_language == nullptr)
 	{
@@ -325,12 +274,10 @@ std::shared_ptr<Bag<std::string> > OpaqueActionImpl::getLanguage() const
 
 
 
-
-
 //*********************************
 // Operations
 //*********************************
-bool OpaqueActionImpl::language_body_size(Any diagnostics,std::map <   Any, Any >  context)
+bool OpaqueActionImpl::language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -365,8 +312,6 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> OpaqueActionImpl::getInput
 
 
 
-
-
 /*
 Getter & Setter for reference outputValue
 */
@@ -390,8 +335,6 @@ std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> OpaqueActionImpl::getOut
 
     return m_outputValue;
 }
-
-
 
 
 
@@ -468,7 +411,7 @@ std::shared_ptr<Union<uml::Element>> OpaqueActionImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > OpaqueActionImpl::getOwner() const
+std::weak_ptr<uml::Element> OpaqueActionImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -535,29 +478,13 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getBody()); //16427
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
-			Bag<uml::InputPin>::iterator end = m_inputValue->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16428
+			return eAny(getInputValue()); //16428			
 		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage()); //16429
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_outputValue->begin();
-			Bag<uml::OutputPin>::iterator end = m_outputValue->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //16430
+			return eAny(getOutputValue()); //16430			
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -610,7 +537,7 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterInputValue++;
 			}
-
+ 
 			iterInputValue = inputValueList->begin();
 			endInputValue = inputValueList->end();
 			while (iterInputValue != endInputValue)
@@ -652,7 +579,7 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterOutputValue++;
 			}
-
+ 
 			iterOutputValue = outputValueList->begin();
 			endOutputValue = outputValueList->end();
 			while (iterOutputValue != endOutputValue)
@@ -697,13 +624,12 @@ void OpaqueActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 	try
 	{
 		if (nodeName.compare("body") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			std::shared_ptr<Bag<std::string> > list_body = this->getBody();
+			std::shared_ptr<Bag<std::string>> list_body = this->getBody();
 			list_body->push_back(value);
 			return;
 		}
@@ -711,7 +637,7 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 		if (nodeName.compare("language") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			std::shared_ptr<Bag<std::string> > list_language = this->getLanguage();
+			std::shared_ptr<Bag<std::string>> list_language = this->getLanguage();
 			list_language->push_back(value);
 			return;
 		}
@@ -734,14 +660,9 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<uml::InputPin> inputValue = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
-			if (inputValue != nullptr)
-			{
-				std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> list_inputValue = this->getInputValue();
-				list_inputValue->push_back(inputValue);
-				loadHandler->handleChild(inputValue);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::InputPin>(this->getInputValue());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("outputValue") == 0 )
@@ -751,14 +672,9 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<uml::OutputPin> outputValue = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName));
-			if (outputValue != nullptr)
-			{
-				std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> list_outputValue = this->getOutputValue();
-				list_outputValue->push_back(outputValue);
-				loadHandler->handleChild(outputValue);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::OutputPin>(this->getOutputValue());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -773,7 +689,7 @@ void OpaqueActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistenc
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void OpaqueActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void OpaqueActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }
@@ -811,7 +727,6 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'inputValue'
 		for (std::shared_ptr<uml::InputPin> inputValue : *this->getInputValue()) 
 		{
@@ -823,7 +738,6 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 		{
 			saveHandler->addReference(outputValue, "outputValue", outputValue->eClass() != package->getOutputPin_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getOpaqueAction_Attribute_body()) )
 		{
@@ -840,7 +754,6 @@ void OpaqueActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 				saveHandler->addAttributeAsNode("language", *value);
 			}
 		}
-
 	}
 	catch (std::exception& e)
 	{

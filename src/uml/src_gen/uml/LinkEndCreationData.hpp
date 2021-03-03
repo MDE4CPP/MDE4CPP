@@ -8,22 +8,18 @@
 #define UML_LINKENDCREATIONDATA_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -38,34 +34,12 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
-	class LinkEndData;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class QualifierValue;
 }
 
@@ -73,6 +47,7 @@ namespace uml
 #include "uml/LinkEndData.hpp"
 
 // enum includes
+
 
 
 //*********************************
@@ -83,14 +58,13 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class LinkEndCreationData:virtual public LinkEndData
+	class LinkEndCreationData: virtual public LinkEndData
 	{
 		public:
  			LinkEndCreationData(const LinkEndCreationData &) {}
 
 		protected:
 			LinkEndCreationData(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -111,9 +85,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool insertAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -123,13 +95,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsReplaceAll() const = 0;
-			
 			/*!
 			Specifies whether the existing links emanating from the object on this end should be destroyed before creating a new link.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsReplaceAll (bool _isReplaceAll)= 0; 
+			virtual void setIsReplaceAll (bool _isReplaceAll)= 0;
 			
 			//*********************************
 			// Reference
@@ -139,15 +110,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getInsertAt() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getInsertAt() const = 0;
 			/*!
 			For ordered Association ends, the InputPin that provides the position where the new link should be inserted or where an existing link should be moved to. The type of the insertAt InputPin is UnlimitedNatural, but the input cannot be zero. It is omitted for Association ends that are not ordered.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setInsertAt(std::shared_ptr<uml::InputPin> _insertAt) = 0;
-			
+			virtual void setInsertAt(std::shared_ptr<uml::InputPin>) = 0;
 			
 
 		protected:
@@ -170,7 +139,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_insertAt;
+			std::shared_ptr<uml::InputPin> m_insertAt;
 
 		public:
 			//*********************************
@@ -190,7 +159,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

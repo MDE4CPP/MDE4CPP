@@ -98,9 +98,8 @@
 using namespace UML;
 
 CallOperationActionObject::CallOperationActionObject(std::shared_ptr<uml::CallOperationAction> _element):
-
 	m_CallOperationActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CallOperationAction());
 }
 
@@ -121,13 +120,15 @@ CallOperationActionObject::~CallOperationActionObject()
 
 std::shared_ptr<ecore::EObject> CallOperationActionObject::copy()
 {
-	std::shared_ptr<CallOperationActionObject> element(new CallOperationActionObject(*this));
+	std::shared_ptr<CallOperationActionObject> element(new CallOperationActionObject());
+	*element=(*this);
 	element->setThisCallOperationActionObjectPtr(element);
 	return element;
 }
 
 CallOperationActionObject& CallOperationActionObject::operator=(const CallOperationActionObject & obj)
 {
+	UML::CallActionObject::operator=(obj);
 	return *this;
 }
 

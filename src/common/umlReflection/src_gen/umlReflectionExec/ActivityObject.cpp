@@ -175,9 +175,8 @@
 using namespace UML;
 
 ActivityObject::ActivityObject(std::shared_ptr<uml::Activity> _element):
-
 	m_ActivityValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Activity());
 }
 
@@ -198,13 +197,15 @@ ActivityObject::~ActivityObject()
 
 std::shared_ptr<ecore::EObject> ActivityObject::copy()
 {
-	std::shared_ptr<ActivityObject> element(new ActivityObject(*this));
+	std::shared_ptr<ActivityObject> element(new ActivityObject());
+	*element=(*this);
 	element->setThisActivityObjectPtr(element);
 	return element;
 }
 
 ActivityObject& ActivityObject::operator=(const ActivityObject & obj)
 {
+	UML::BehaviorObject::operator=(obj);
 	return *this;
 }
 

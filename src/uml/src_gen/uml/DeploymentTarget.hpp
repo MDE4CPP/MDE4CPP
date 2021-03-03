@@ -7,22 +7,18 @@
 #ifndef UML_DEPLOYMENTTARGET_HPP
 #define UML_DEPLOYMENTTARGET_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -37,44 +33,14 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
 	class Deployment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -85,6 +51,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -93,14 +60,13 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class DeploymentTarget:virtual public NamedElement
+	class DeploymentTarget: virtual public NamedElement
 	{
 		public:
  			DeploymentTarget(const DeploymentTarget &) {}
 
 		protected:
 			DeploymentTarget(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -118,8 +84,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::PackageableElement> > getDeployedElements() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -134,14 +98,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::PackageableElement>> getDeployedElement() const = 0;
 			
-			
 			/*!
 			The set of Deployments for a DeploymentTarget.
 			<p>From package UML::Deployments.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Deployment, uml::Element>> getDeployment() const = 0;
-			
 			
 			
 
@@ -180,7 +142,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -189,7 +151,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

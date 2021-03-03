@@ -44,9 +44,7 @@ EntityImpl::EntityImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Entity is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ EntityImpl::EntityImpl(const EntityImpl & obj):EntityImpl()
 
 std::shared_ptr<ecore::EObject>  EntityImpl::copy() const
 {
-	std::shared_ptr<EntityImpl> element(new EntityImpl(*this));
+	std::shared_ptr<EntityImpl> element(new EntityImpl());
+	*element=(*this);
 	element->setThisEntityPtr(element);
 	return element;
 }
 
 EntityImpl& EntityImpl::operator=(const EntityImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Entity "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

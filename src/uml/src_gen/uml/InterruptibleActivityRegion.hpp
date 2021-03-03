@@ -8,24 +8,20 @@
 #define UML_INTERRUPTIBLEACTIVITYREGION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -40,49 +36,15 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
-	class ActivityGroup;
-}
-
-namespace uml 
-{
 	class ActivityNode;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -93,6 +55,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -101,14 +64,13 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class InterruptibleActivityRegion:virtual public ActivityGroup
+	class InterruptibleActivityRegion: virtual public ActivityGroup
 	{
 		public:
  			InterruptibleActivityRegion(const InterruptibleActivityRegion &) {}
 
 		protected:
 			InterruptibleActivityRegion(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -125,9 +87,7 @@ namespace uml
 			  node->includes(edge.source) and node->excludes(edge.target) and edge.target.containingActivity() = inActivity)
 			*/
 			 
-			virtual bool interrupting_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool interrupting_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -142,14 +102,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getInterruptingEdge() const = 0;
 			
-			
 			/*!
 			ActivityNodes immediately contained in the InterruptibleActivityRegion.
 			<p>From package UML::Activities.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> getNode() const = 0;
-			
 			
 			
 
@@ -193,7 +151,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -202,7 +160,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

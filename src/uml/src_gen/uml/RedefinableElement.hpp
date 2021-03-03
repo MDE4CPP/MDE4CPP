@@ -8,22 +8,18 @@
 #define UML_REDEFINABLEELEMENT_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Union;
-
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -38,44 +34,13 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -86,6 +51,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -94,14 +60,13 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class RedefinableElement:virtual public NamedElement
+	class RedefinableElement: virtual public NamedElement
 	{
 		public:
  			RedefinableElement(const RedefinableElement &) {}
 
 		protected:
 			RedefinableElement(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -119,38 +84,28 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement) = 0;
-			
-			/*!
+			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement> redefiningElement) = 0;/*!
 			The query isRedefinitionContextValid() specifies whether the redefinition contexts of this RedefinableElement are properly related to the redefinition contexts of the specified RedefinableElement to allow this element to redefine the other. By default at least one of the redefinition contexts of this element must be a specialization of at least one of the redefinition contexts of the specified element.
 			result = (redefinitionContext->exists(c | c.allParents()->includesAll(redefinedElement.redefinitionContext)))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement) = 0;
-			
-			/*!
+			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement> redefinedElement) = 0;/*!
 			A RedefinableElement can only redefine non-leaf RedefinableElements.
 			redefinedElement->forAll(re | not re.isLeaf)
 			*/
 			 
-			virtual bool non_leaf_redefinition(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool non_leaf_redefinition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A redefining element must be consistent with each redefined element.
 			redefinedElement->forAll(re | re.isConsistentWith(self))
 			*/
 			 
-			virtual bool redefinition_consistent(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool redefinition_consistent(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
 			redefinedElement->forAll(re | self.isRedefinitionContextValid(re))
 			*/
 			 
-			virtual bool redefinition_context_valid(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool redefinition_context_valid(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -160,13 +115,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsLeaf() const = 0;
-			
 			/*!
 			Indicates whether it is possible to further redefine a RedefinableElement. If the value is true, then it is not possible to further redefine the RedefinableElement.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsLeaf (bool _isLeaf)= 0; 
+			virtual void setIsLeaf (bool _isLeaf)= 0;
 			
 			//*********************************
 			// Reference
@@ -218,7 +172,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -237,7 +191,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

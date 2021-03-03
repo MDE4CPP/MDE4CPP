@@ -91,9 +91,8 @@
 using namespace UML;
 
 ClearAssociationActionObject::ClearAssociationActionObject(std::shared_ptr<uml::ClearAssociationAction> _element):
-
 	m_ClearAssociationActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ClearAssociationAction());
 }
 
@@ -114,13 +113,15 @@ ClearAssociationActionObject::~ClearAssociationActionObject()
 
 std::shared_ptr<ecore::EObject> ClearAssociationActionObject::copy()
 {
-	std::shared_ptr<ClearAssociationActionObject> element(new ClearAssociationActionObject(*this));
+	std::shared_ptr<ClearAssociationActionObject> element(new ClearAssociationActionObject());
+	*element=(*this);
 	element->setThisClearAssociationActionObjectPtr(element);
 	return element;
 }
 
 ClearAssociationActionObject& ClearAssociationActionObject::operator=(const ClearAssociationActionObject & obj)
 {
+	UML::ActionObject::operator=(obj);
 	return *this;
 }
 

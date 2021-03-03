@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -51,21 +52,19 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Classification/InstanceValueEvaluation.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/Classification/impl/ClassificationFactoryImpl.hpp"
-#include "PSCS/Semantics/Classification/impl/ClassificationPackageImpl.hpp"
-
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "PSCS/Semantics/Classification/ClassificationPackage.hpp"
+#include "fUML/Semantics/Classification/ClassificationPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -90,38 +89,34 @@ CS_InstanceValueEvaluationImpl::~CS_InstanceValueEvaluationImpl()
 }
 
 
-
-CS_InstanceValueEvaluationImpl::CS_InstanceValueEvaluationImpl(const CS_InstanceValueEvaluationImpl & obj):CS_InstanceValueEvaluationImpl()
+CS_InstanceValueEvaluationImpl::CS_InstanceValueEvaluationImpl(const CS_InstanceValueEvaluationImpl & obj): CS_InstanceValueEvaluationImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  CS_InstanceValueEvaluationImpl::copy() const
-{
-	std::shared_ptr<CS_InstanceValueEvaluationImpl> element(new CS_InstanceValueEvaluationImpl(*this));
-	element->setThisCS_InstanceValueEvaluationPtr(element);
-	return element;
-}
-
 CS_InstanceValueEvaluationImpl& CS_InstanceValueEvaluationImpl::operator=(const CS_InstanceValueEvaluationImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Classification::InstanceValueEvaluationImpl::operator=(obj);
+	CS_InstanceValueEvaluation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_InstanceValueEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_locus  = obj.getLocus();
-
-	m_specification  = obj.getSpecification();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> CS_InstanceValueEvaluationImpl::copy() const
+{
+	std::shared_ptr<CS_InstanceValueEvaluationImpl> element(new CS_InstanceValueEvaluationImpl());
+	*element =(*this);
+	element->setThisCS_InstanceValueEvaluationPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CS_InstanceValueEvaluationImpl::eStaticClass() const
@@ -317,13 +312,12 @@ void CS_InstanceValueEvaluationImpl::loadAttributes(std::shared_ptr<persistence:
 
 void CS_InstanceValueEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::Classification::ClassificationFactory> modelFactory=PSCS::Semantics::Classification::ClassificationFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Classification::InstanceValueEvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_InstanceValueEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_InstanceValueEvaluationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::Classification::InstanceValueEvaluationImpl::resolveReferences(featureID, references);
 }
@@ -349,9 +343,6 @@ void CS_InstanceValueEvaluationImpl::saveContent(std::shared_ptr<persistence::in
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::Classification::ClassificationPackage> package = PSCS::Semantics::Classification::ClassificationPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

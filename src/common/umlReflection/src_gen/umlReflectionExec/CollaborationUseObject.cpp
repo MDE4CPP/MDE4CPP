@@ -57,9 +57,8 @@
 using namespace UML;
 
 CollaborationUseObject::CollaborationUseObject(std::shared_ptr<uml::CollaborationUse> _element):
-
 	m_CollaborationUseValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CollaborationUse());
 }
 
@@ -80,13 +79,15 @@ CollaborationUseObject::~CollaborationUseObject()
 
 std::shared_ptr<ecore::EObject> CollaborationUseObject::copy()
 {
-	std::shared_ptr<CollaborationUseObject> element(new CollaborationUseObject(*this));
+	std::shared_ptr<CollaborationUseObject> element(new CollaborationUseObject());
+	*element=(*this);
 	element->setThisCollaborationUseObjectPtr(element);
 	return element;
 }
 
 CollaborationUseObject& CollaborationUseObject::operator=(const CollaborationUseObject & obj)
 {
+	UML::NamedElementObject::operator=(obj);
 	return *this;
 }
 

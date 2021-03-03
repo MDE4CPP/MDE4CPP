@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -33,8 +34,7 @@
 #include "uml/Object.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -60,37 +60,36 @@ ArgumentImpl::~ArgumentImpl()
 }
 
 
-
-ArgumentImpl::ArgumentImpl(const ArgumentImpl & obj):ArgumentImpl()
+ArgumentImpl::ArgumentImpl(const ArgumentImpl & obj): ArgumentImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ArgumentImpl::copy() const
-{
-	std::shared_ptr<ArgumentImpl> element(new ArgumentImpl(*this));
-	element->setThisArgumentPtr(element);
-	return element;
-}
-
 ArgumentImpl& ArgumentImpl::operator=(const ArgumentImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	Argument::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Argument "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_name = obj.getName();
 
 	//copy references with no containment (soft copy)
-	
 	m_value  = obj.getValue();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ArgumentImpl::copy() const
+{
+	std::shared_ptr<ArgumentImpl> element(new ArgumentImpl());
+	*element =(*this);
+	element->setThisArgumentPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ArgumentImpl::eStaticClass() const
@@ -108,12 +107,10 @@ std::string ArgumentImpl::getName() const
 {
 	return m_name;
 }
-
 void ArgumentImpl::setName(std::string _name)
 {
 	m_name = _name;
 } 
-
 
 
 //*********************************
@@ -126,17 +123,15 @@ void ArgumentImpl::setName(std::string _name)
 /*
 Getter & Setter for reference value
 */
-std::shared_ptr<uml::Object > ArgumentImpl::getValue() const
+std::shared_ptr<uml::Object> ArgumentImpl::getValue() const
 {
 
     return m_value;
 }
-
 void ArgumentImpl::setValue(std::shared_ptr<uml::Object> _value)
 {
     m_value = _value;
 }
-
 
 
 //*********************************
@@ -168,7 +163,7 @@ Any ArgumentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ARGUMENT_ATTRIBUTE_NAME:
 			return eAny(getName()); //190
 		case uml::umlPackage::ARGUMENT_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //191
+			return eAny(getValue()); //191
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -262,12 +257,11 @@ void ArgumentImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void ArgumentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 }
 
-void ArgumentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ArgumentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -300,17 +294,13 @@ void ArgumentImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getArgument_Attribute_name()) )
 		{
 			saveHandler->addAttribute("name", this->getName());
 		}
-
-		// Add references
-		saveHandler->addReference("value", this->getValue());
-
+	// Add references
+		saveHandler->addReference(this->getValue(), "value", getValue()->eClass() != uml::umlPackage::eInstance()->getObject_Class()); 
 	}
 	catch (std::exception& e)
 	{

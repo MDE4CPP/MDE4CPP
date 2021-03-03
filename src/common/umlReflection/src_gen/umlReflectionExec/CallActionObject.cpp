@@ -94,9 +94,8 @@
 using namespace UML;
 
 CallActionObject::CallActionObject(std::shared_ptr<uml::CallAction> _element):
-
 	m_CallActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CallAction());
 }
 
@@ -117,13 +116,15 @@ CallActionObject::~CallActionObject()
 
 std::shared_ptr<ecore::EObject> CallActionObject::copy()
 {
-	std::shared_ptr<CallActionObject> element(new CallActionObject(*this));
+	std::shared_ptr<CallActionObject> element(new CallActionObject());
+	*element=(*this);
 	element->setThisCallActionObjectPtr(element);
 	return element;
 }
 
 CallActionObject& CallActionObject::operator=(const CallActionObject & obj)
 {
+	UML::InvocationActionObject::operator=(obj);
 	return *this;
 }
 

@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ComponentRealizationImpl(const ComponentRealizationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ComponentRealizationImpl& operator=(ComponentRealizationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ComponentRealizationImpl& operator=(ComponentRealizationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,26 +32,15 @@ namespace uml
 			virtual void setThisComponentRealizationPtr(std::weak_ptr<ComponentRealization> thisComponentRealizationPtr);
 
 			//Additional constructors for the containments back reference
-			ComponentRealizationImpl(std::weak_ptr<uml::Component > par_abstraction);
-
-
+			ComponentRealizationImpl(std::weak_ptr<uml::Component> par_abstraction);
 			//Additional constructors for the containments back reference
-			ComponentRealizationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ComponentRealizationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ComponentRealizationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ComponentRealizationImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ComponentRealizationImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			ComponentRealizationImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			ComponentRealizationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			ComponentRealizationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -75,15 +64,13 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Component > getAbstraction() const ;
-			
+			virtual std::weak_ptr<uml::Component> getAbstraction() const ;
 			/*!
 			The Component that owns this ComponentRealization and which is implemented by its realizing Classifiers.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setAbstraction(std::shared_ptr<uml::Component> _abstraction) ;
-			
+			virtual void setAbstraction(std::weak_ptr<uml::Component>) ;
 			/*!
 			The Classifiers that are involved in the implementation of the Component that owns this Realization.
 			<p>From package UML::StructuredClassifiers.</p>
@@ -92,7 +79,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> getRealizingClassifier() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -102,7 +88,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -112,7 +98,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -142,7 +128,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -59,9 +59,8 @@
 using namespace UML;
 
 PackageableElementObject::PackageableElementObject(std::shared_ptr<uml::PackageableElement> _element):
-
 	m_PackageableElementValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_PackageableElement());
 }
 
@@ -82,13 +81,16 @@ PackageableElementObject::~PackageableElementObject()
 
 std::shared_ptr<ecore::EObject> PackageableElementObject::copy()
 {
-	std::shared_ptr<PackageableElementObject> element(new PackageableElementObject(*this));
+	std::shared_ptr<PackageableElementObject> element(new PackageableElementObject());
+	*element=(*this);
 	element->setThisPackageableElementObjectPtr(element);
 	return element;
 }
 
 PackageableElementObject& PackageableElementObject::operator=(const PackageableElementObject & obj)
 {
+	UML::NamedElementObject::operator=(obj);
+	UML::ParameterableElementObject::operator=(obj);
 	return *this;
 }
 

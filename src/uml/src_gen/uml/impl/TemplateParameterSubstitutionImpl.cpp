@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -34,18 +35,13 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ParameterableElement.hpp"
-
 #include "uml/TemplateBinding.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -71,72 +67,56 @@ TemplateParameterSubstitutionImpl::~TemplateParameterSubstitutionImpl()
 }
 
 //Additional constructor for the containments back reference
-TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_ptr<uml::Element > par_owner)
+TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_ptr<uml::Element> par_owner)
 :TemplateParameterSubstitutionImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_ptr<uml::TemplateBinding > par_templateBinding)
+TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(std::weak_ptr<uml::TemplateBinding> par_templateBinding)
 :TemplateParameterSubstitutionImpl()
 {
 	m_templateBinding = par_templateBinding;
 	m_owner = par_templateBinding;
 }
 
-
-TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const TemplateParameterSubstitutionImpl & obj):TemplateParameterSubstitutionImpl()
+TemplateParameterSubstitutionImpl::TemplateParameterSubstitutionImpl(const TemplateParameterSubstitutionImpl & obj): TemplateParameterSubstitutionImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  TemplateParameterSubstitutionImpl::copy() const
-{
-	std::shared_ptr<TemplateParameterSubstitutionImpl> element(new TemplateParameterSubstitutionImpl(*this));
-	element->setThisTemplateParameterSubstitutionPtr(element);
-	return element;
-}
-
 TemplateParameterSubstitutionImpl& TemplateParameterSubstitutionImpl::operator=(const TemplateParameterSubstitutionImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	TemplateParameterSubstitution::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy TemplateParameterSubstitution "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_actual  = obj.getActual();
-
 	m_formal  = obj.getFormal();
-
-	m_owner  = obj.getOwner();
-
 	m_templateBinding  = obj.getTemplateBinding();
-
-
 	//Clone references with containment (deep copy)
-
 	if(obj.getOwnedActual()!=nullptr)
 	{
 		m_ownedActual = std::dynamic_pointer_cast<uml::ParameterableElement>(obj.getOwnedActual()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedActual" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> TemplateParameterSubstitutionImpl::copy() const
+{
+	std::shared_ptr<TemplateParameterSubstitutionImpl> element(new TemplateParameterSubstitutionImpl());
+	*element =(*this);
+	element->setThisTemplateParameterSubstitutionPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> TemplateParameterSubstitutionImpl::eStaticClass() const
@@ -151,7 +131,7 @@ std::shared_ptr<ecore::EClass> TemplateParameterSubstitutionImpl::eStaticClass()
 //*********************************
 // Operations
 //*********************************
-bool TemplateParameterSubstitutionImpl::must_be_compatible(Any diagnostics,std::map <   Any, Any >  context)
+bool TemplateParameterSubstitutionImpl::must_be_compatible(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -163,65 +143,57 @@ bool TemplateParameterSubstitutionImpl::must_be_compatible(Any diagnostics,std::
 /*
 Getter & Setter for reference actual
 */
-std::shared_ptr<uml::ParameterableElement > TemplateParameterSubstitutionImpl::getActual() const
+std::shared_ptr<uml::ParameterableElement> TemplateParameterSubstitutionImpl::getActual() const
 {
 //assert(m_actual);
     return m_actual;
 }
-
 void TemplateParameterSubstitutionImpl::setActual(std::shared_ptr<uml::ParameterableElement> _actual)
 {
     m_actual = _actual;
 }
 
 
-
 /*
 Getter & Setter for reference formal
 */
-std::shared_ptr<uml::TemplateParameter > TemplateParameterSubstitutionImpl::getFormal() const
+std::shared_ptr<uml::TemplateParameter> TemplateParameterSubstitutionImpl::getFormal() const
 {
 //assert(m_formal);
     return m_formal;
 }
-
 void TemplateParameterSubstitutionImpl::setFormal(std::shared_ptr<uml::TemplateParameter> _formal)
 {
     m_formal = _formal;
 }
 
 
-
 /*
 Getter & Setter for reference ownedActual
 */
-std::shared_ptr<uml::ParameterableElement > TemplateParameterSubstitutionImpl::getOwnedActual() const
+std::shared_ptr<uml::ParameterableElement> TemplateParameterSubstitutionImpl::getOwnedActual() const
 {
 
     return m_ownedActual;
 }
-
 void TemplateParameterSubstitutionImpl::setOwnedActual(std::shared_ptr<uml::ParameterableElement> _ownedActual)
 {
     m_ownedActual = _ownedActual;
 }
 
 
-
 /*
 Getter & Setter for reference templateBinding
 */
-std::weak_ptr<uml::TemplateBinding > TemplateParameterSubstitutionImpl::getTemplateBinding() const
+std::weak_ptr<uml::TemplateBinding> TemplateParameterSubstitutionImpl::getTemplateBinding() const
 {
 //assert(m_templateBinding);
     return m_templateBinding;
 }
-
-void TemplateParameterSubstitutionImpl::setTemplateBinding(std::shared_ptr<uml::TemplateBinding> _templateBinding)
+void TemplateParameterSubstitutionImpl::setTemplateBinding(std::weak_ptr<uml::TemplateBinding> _templateBinding)
 {
     m_templateBinding = _templateBinding;
 }
-
 
 
 //*********************************
@@ -242,7 +214,7 @@ std::shared_ptr<Union<uml::Element>> TemplateParameterSubstitutionImpl::getOwned
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > TemplateParameterSubstitutionImpl::getOwner() const
+std::weak_ptr<uml::Element> TemplateParameterSubstitutionImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -281,13 +253,13 @@ Any TemplateParameterSubstitutionImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActual())); //2323
+			return eAny(getActual()); //2323
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getFormal())); //2324
+			return eAny(getFormal()); //2324
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getOwnedActual())); //2325
+			return eAny(getOwnedActual()); //2325
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTemplateBinding().lock())); //2326
+			return eAny(getTemplateBinding().lock()); //2326
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -400,7 +372,6 @@ void TemplateParameterSubstitutionImpl::loadAttributes(std::shared_ptr<persisten
 
 void TemplateParameterSubstitutionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -412,13 +383,9 @@ void TemplateParameterSubstitutionImpl::loadNode(std::string nodeName, std::shar
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<uml::ParameterableElement> ownedActual = std::dynamic_pointer_cast<uml::ParameterableElement>(modelFactory->create(typeName));
-			if (ownedActual != nullptr)
-			{
-				this->setOwnedActual(ownedActual);
-				loadHandler->handleChild(ownedActual);
-			}
-			return;
+			loadHandler->handleChild(this->getOwnedActual()); 
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -433,7 +400,7 @@ void TemplateParameterSubstitutionImpl::loadNode(std::string nodeName, std::shar
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void TemplateParameterSubstitutionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void TemplateParameterSubstitutionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -494,19 +461,15 @@ void TemplateParameterSubstitutionImpl::saveContent(std::shared_ptr<persistence:
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'ownedActual'
-		std::shared_ptr<uml::ParameterableElement > ownedActual = this->getOwnedActual();
+		std::shared_ptr<uml::ParameterableElement> ownedActual = this->getOwnedActual();
 		if (ownedActual != nullptr)
 		{
 			saveHandler->addReference(ownedActual, "ownedActual", ownedActual->eClass() != package->getParameterableElement_Class());
 		}
-	
-
-		// Add references
-		saveHandler->addReference("actual", this->getActual());
-		saveHandler->addReference("formal", this->getFormal());
-
+	// Add references
+		saveHandler->addReference(this->getActual(), "actual", getActual()->eClass() != uml::umlPackage::eInstance()->getParameterableElement_Class()); 
+		saveHandler->addReference(this->getFormal(), "formal", getFormal()->eClass() != uml::umlPackage::eInstance()->getTemplateParameter_Class()); 
 	}
 	catch (std::exception& e)
 	{

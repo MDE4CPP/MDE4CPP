@@ -8,23 +8,19 @@
 #define UML_INTERACTIONOPERAND_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,94 +35,29 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class GeneralOrdering;
-}
-
-namespace uml 
-{
 	class Interaction;
-}
-
-namespace uml 
-{
 	class InteractionConstraint;
-}
-
-namespace uml 
-{
-	class InteractionFragment;
-}
-
-namespace uml 
-{
-	class InteractionOperand;
-}
-
-namespace uml 
-{
 	class Lifeline;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
 // base class includes
 #include "uml/InteractionFragment.hpp"
-
 #include "uml/Namespace.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
+
 
 
 //*********************************
@@ -137,14 +68,13 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class InteractionOperand:virtual public InteractionFragment,virtual public Namespace
+	class InteractionOperand: virtual public InteractionFragment, virtual public Namespace
 	{
 		public:
  			InteractionOperand(const InteractionOperand &) {}
 
 		protected:
 			InteractionOperand(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -159,15 +89,11 @@ namespace uml
 			The guard must contain only references to values local to the Lifeline on which it resides, or values global to the whole Interaction.
 			*/
 			 
-			virtual bool guard_contain_references(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool guard_contain_references(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The guard must be placed directly prior to (above) the OccurrenceSpecification that will become the first OccurrenceSpecification within this InteractionOperand.
 			*/
 			 
-			virtual bool guard_directly_prior(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool guard_directly_prior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -182,21 +108,18 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> getFragment() const = 0;
 			
-			
 			/*!
 			Constraint of the operand.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InteractionConstraint > getGuard() const = 0;
-			
+			virtual std::shared_ptr<uml::InteractionConstraint> getGuard() const = 0;
 			/*!
 			Constraint of the operand.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setGuard(std::shared_ptr<uml::InteractionConstraint> _guard) = 0;
-			
+			virtual void setGuard(std::shared_ptr<uml::InteractionConstraint>) = 0;
 			
 
 		protected:
@@ -218,7 +141,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::InteractionConstraint > m_guard;
+			std::shared_ptr<uml::InteractionConstraint> m_guard;
 
 		public:
 			//*********************************
@@ -234,7 +157,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -249,7 +172,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -258,7 +181,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

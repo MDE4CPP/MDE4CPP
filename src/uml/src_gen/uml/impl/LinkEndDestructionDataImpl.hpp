@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			LinkEndDestructionDataImpl& operator=(LinkEndDestructionDataImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			LinkEndDestructionDataImpl& operator=(LinkEndDestructionDataImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,10 +32,7 @@ namespace uml
 			virtual void setThisLinkEndDestructionDataPtr(std::weak_ptr<LinkEndDestructionData> thisLinkEndDestructionDataPtr);
 
 			//Additional constructors for the containments back reference
-			LinkEndDestructionDataImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			LinkEndDestructionDataImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -54,9 +51,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool destroyAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -67,13 +62,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsDestroyDuplicates() const ;
-			
 			/*!
 			Specifies whether to destroy duplicates of the value in nonunique Association ends.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDestroyDuplicates (bool _isDestroyDuplicates); 
+			virtual void setIsDestroyDuplicates (bool _isDestroyDuplicates);
 			
 			
 			//*********************************
@@ -84,16 +78,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getDestroyAt() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getDestroyAt() const ;
 			/*!
 			The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt) ;
+			virtual void setDestroyAt(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -118,7 +110,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

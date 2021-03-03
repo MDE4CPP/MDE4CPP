@@ -88,9 +88,8 @@
 using namespace UML;
 
 TransitionObject::TransitionObject(std::shared_ptr<uml::Transition> _element):
-
 	m_TransitionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Transition());
 }
 
@@ -111,13 +110,16 @@ TransitionObject::~TransitionObject()
 
 std::shared_ptr<ecore::EObject> TransitionObject::copy()
 {
-	std::shared_ptr<TransitionObject> element(new TransitionObject(*this));
+	std::shared_ptr<TransitionObject> element(new TransitionObject());
+	*element=(*this);
 	element->setThisTransitionObjectPtr(element);
 	return element;
 }
 
 TransitionObject& TransitionObject::operator=(const TransitionObject & obj)
 {
+	UML::NamespaceObject::operator=(obj);
+	UML::RedefinableElementObject::operator=(obj);
 	return *this;
 }
 

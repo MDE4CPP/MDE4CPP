@@ -8,23 +8,19 @@
 #define UML_COLLABORATIONUSE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,39 +35,13 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Collaboration;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -82,6 +52,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -90,14 +61,13 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class CollaborationUse:virtual public NamedElement
+	class CollaborationUse: virtual public NamedElement
 	{
 		public:
  			CollaborationUse(const CollaborationUse &) {}
 
 		protected:
 			CollaborationUse(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -121,9 +91,7 @@ namespace uml
 			      ce1.collaboration = ce2.collaboration)
 			*/
 			 
-			virtual bool client_elements(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool client_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			Connectors in a Collaboration typing a CollaborationUse must have corresponding Connectors between elements bound in the context Classifier, and these corresponding Connectors must have the same or more general type than the Collaboration Connectors.
 			type.ownedConnector->forAll(connector |
 			  let rolesConnectedInCollab : Set(ConnectableElement) = connector.end.role->asSet(),
@@ -136,16 +104,12 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool connectors(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool connectors(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			Every collaborationRole in the Collaboration is bound within the CollaborationUse.
 			type.collaborationRole->forAll(role | roleBinding->exists(rb | rb.supplier->includes(role)))
 			*/
 			 
-			virtual bool every_role(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool every_role(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -160,21 +124,18 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Dependency, uml::Element>> getRoleBinding() const = 0;
 			
-			
 			/*!
 			The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Collaboration > getType() const = 0;
-			
+			virtual std::shared_ptr<uml::Collaboration> getType() const = 0;
 			/*!
 			The Collaboration which is used in this CollaborationUse. The Collaboration defines the cooperation between its roles which are mapped to ConnectableElements relating to the Classifier owning the CollaborationUse.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			virtual void setType(std::shared_ptr<uml::Collaboration> _type) = 0;
-			
+			virtual void setType(std::shared_ptr<uml::Collaboration>) = 0;
 			
 
 		protected:
@@ -196,7 +157,7 @@ namespace uml
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
-			std::shared_ptr<uml::Collaboration > m_type;
+			std::shared_ptr<uml::Collaboration> m_type;
 
 		public:
 			//*********************************
@@ -212,7 +173,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -221,7 +182,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

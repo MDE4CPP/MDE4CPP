@@ -72,9 +72,8 @@
 using namespace UML;
 
 StringExpressionObject::StringExpressionObject(std::shared_ptr<uml::StringExpression> _element):
-
 	m_StringExpressionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_StringExpression());
 }
 
@@ -95,13 +94,16 @@ StringExpressionObject::~StringExpressionObject()
 
 std::shared_ptr<ecore::EObject> StringExpressionObject::copy()
 {
-	std::shared_ptr<StringExpressionObject> element(new StringExpressionObject(*this));
+	std::shared_ptr<StringExpressionObject> element(new StringExpressionObject());
+	*element=(*this);
 	element->setThisStringExpressionObjectPtr(element);
 	return element;
 }
 
 StringExpressionObject& StringExpressionObject::operator=(const StringExpressionObject & obj)
 {
+	UML::ExpressionObject::operator=(obj);
+	UML::TemplateableElementObject::operator=(obj);
 	return *this;
 }
 

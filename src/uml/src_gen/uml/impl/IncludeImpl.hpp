@@ -23,8 +23,8 @@ namespace uml
 	{
 		public: 
 			IncludeImpl(const IncludeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			IncludeImpl& operator=(IncludeImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			IncludeImpl& operator=(IncludeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -33,18 +33,11 @@ namespace uml
 			virtual void setThisIncludePtr(std::weak_ptr<Include> thisIncludePtr);
 
 			//Additional constructors for the containments back reference
-			IncludeImpl(std::weak_ptr<uml::UseCase > par_includingCase);
-
-
+			IncludeImpl(std::weak_ptr<uml::UseCase> par_includingCase);
 			//Additional constructors for the containments back reference
-			IncludeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			IncludeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			IncludeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			IncludeImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -68,30 +61,26 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::UseCase > getAddition() const ;
-			
+			virtual std::shared_ptr<uml::UseCase> getAddition() const ;
 			/*!
 			The UseCase that is to be included.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setAddition(std::shared_ptr<uml::UseCase> _addition) ;
-			
+			virtual void setAddition(std::shared_ptr<uml::UseCase>) ;
 			/*!
 			The UseCase which includes the addition and owns the Include relationship.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::UseCase > getIncludingCase() const ;
-			
+			virtual std::weak_ptr<uml::UseCase> getIncludingCase() const ;
 			/*!
 			The UseCase which includes the addition and owns the Include relationship.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setIncludingCase(std::shared_ptr<uml::UseCase> _includingCase) ;
+			virtual void setIncludingCase(std::weak_ptr<uml::UseCase>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -101,7 +90,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -111,7 +100,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -141,7 +130,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

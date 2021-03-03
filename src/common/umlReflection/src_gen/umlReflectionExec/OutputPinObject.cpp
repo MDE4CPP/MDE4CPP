@@ -94,9 +94,8 @@
 using namespace UML;
 
 OutputPinObject::OutputPinObject(std::shared_ptr<uml::OutputPin> _element):
-
 	m_OutputPinValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_OutputPin());
 }
 
@@ -117,13 +116,15 @@ OutputPinObject::~OutputPinObject()
 
 std::shared_ptr<ecore::EObject> OutputPinObject::copy()
 {
-	std::shared_ptr<OutputPinObject> element(new OutputPinObject(*this));
+	std::shared_ptr<OutputPinObject> element(new OutputPinObject());
+	*element=(*this);
 	element->setThisOutputPinObjectPtr(element);
 	return element;
 }
 
 OutputPinObject& OutputPinObject::operator=(const OutputPinObject & obj)
 {
+	UML::PinObject::operator=(obj);
 	return *this;
 }
 

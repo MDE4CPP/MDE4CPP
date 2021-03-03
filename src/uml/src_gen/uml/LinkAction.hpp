@@ -8,23 +8,19 @@
 #define UML_LINKACTION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,109 +35,25 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Association;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class LinkEndData;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -152,6 +64,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -160,14 +73,13 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class LinkAction:virtual public Action
+	class LinkAction: virtual public Action
 	{
 		public:
  			LinkAction(const LinkAction &) {}
 
 		protected:
 			LinkAction(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -184,30 +96,22 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Association> association() = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::Association> association() = 0;/*!
 			The ends of the endData must not be static.
 			endData->forAll(not end.isStatic)
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The ends of the endData must all be from the same Association and include all and only the memberEnds of that association.
 			endData.end = self.association().memberEnd->asBag()
 			*/
 			 
-			virtual bool same_association(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool same_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The inputValue InputPins is the same as the union of all the InputPins referenced by the endData.
 			inputValue->asBag()=endData.allPins()
 			*/
 			 
-			virtual bool same_pins(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool same_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -222,14 +126,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> getEndData() const = 0;
 			
-			
 			/*!
 			InputPins used by the LinkEndData of the LinkAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getInputValue() const = 0;
-			
 			
 			
 
@@ -278,7 +180,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -292,7 +194,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

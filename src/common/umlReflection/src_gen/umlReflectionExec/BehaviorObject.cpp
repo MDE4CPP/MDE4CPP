@@ -157,9 +157,8 @@
 using namespace UML;
 
 BehaviorObject::BehaviorObject(std::shared_ptr<uml::Behavior> _element):
-
 	m_BehaviorValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Behavior());
 }
 
@@ -180,13 +179,15 @@ BehaviorObject::~BehaviorObject()
 
 std::shared_ptr<ecore::EObject> BehaviorObject::copy()
 {
-	std::shared_ptr<BehaviorObject> element(new BehaviorObject(*this));
+	std::shared_ptr<BehaviorObject> element(new BehaviorObject());
+	*element=(*this);
 	element->setThisBehaviorObjectPtr(element);
 	return element;
 }
 
 BehaviorObject& BehaviorObject::operator=(const BehaviorObject & obj)
 {
+	UML::ClassObject::operator=(obj);
 	return *this;
 }
 

@@ -8,22 +8,18 @@
 #define UML_LINKENDDESTRUCTIONDATA_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -38,34 +34,12 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
-	class LinkEndData;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class QualifierValue;
 }
 
@@ -73,6 +47,7 @@ namespace uml
 #include "uml/LinkEndData.hpp"
 
 // enum includes
+
 
 
 //*********************************
@@ -83,14 +58,13 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class LinkEndDestructionData:virtual public LinkEndData
+	class LinkEndDestructionData: virtual public LinkEndData
 	{
 		public:
  			LinkEndDestructionData(const LinkEndDestructionData &) {}
 
 		protected:
 			LinkEndDestructionData(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -111,9 +85,7 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool destroyAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -123,13 +95,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsDestroyDuplicates() const = 0;
-			
 			/*!
 			Specifies whether to destroy duplicates of the value in nonunique Association ends.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDestroyDuplicates (bool _isDestroyDuplicates)= 0; 
+			virtual void setIsDestroyDuplicates (bool _isDestroyDuplicates)= 0;
 			
 			//*********************************
 			// Reference
@@ -139,15 +110,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getDestroyAt() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getDestroyAt() const = 0;
 			/*!
 			The InputPin that provides the position of an existing link to be destroyed in an ordered, nonunique Association end. The type of the destroyAt InputPin is UnlimitedNatural, but the value cannot be zero or unlimited.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt) = 0;
-			
+			virtual void setDestroyAt(std::shared_ptr<uml::InputPin>) = 0;
 			
 
 		protected:
@@ -170,7 +139,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_destroyAt;
+			std::shared_ptr<uml::InputPin> m_destroyAt;
 
 		public:
 			//*********************************
@@ -190,7 +159,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,28 +36,18 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -82,7 +73,7 @@ ActivityGroupImpl::~ActivityGroupImpl()
 }
 
 //Additional constructor for the containments back reference
-ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Activity > par_inActivity)
+ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Activity> par_inActivity)
 :ActivityGroupImpl()
 {
 	m_inActivity = par_inActivity;
@@ -90,7 +81,7 @@ ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Activity > par_inActivit
 }
 
 //Additional constructor for the containments back reference
-ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Namespace > par_namespace)
+ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ActivityGroupImpl()
 {
 	m_namespace = par_namespace;
@@ -98,83 +89,54 @@ ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Namespace > par_namespac
 }
 
 //Additional constructor for the containments back reference
-ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Element > par_owner)
+ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::Element> par_owner)
 :ActivityGroupImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
+ActivityGroupImpl::ActivityGroupImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup)
 :ActivityGroupImpl()
 {
 	m_superGroup = par_superGroup;
 	m_owner = par_superGroup;
 }
 
-
-ActivityGroupImpl::ActivityGroupImpl(const ActivityGroupImpl & obj):ActivityGroupImpl()
+ActivityGroupImpl::ActivityGroupImpl(const ActivityGroupImpl & obj): ActivityGroupImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityGroupImpl::copy() const
-{
-	std::shared_ptr<ActivityGroupImpl> element(new ActivityGroupImpl(*this));
-	element->setThisActivityGroupPtr(element);
-	return element;
-}
-
 ActivityGroupImpl& ActivityGroupImpl::operator=(const ActivityGroupImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	ActivityGroup::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityGroup "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	std::shared_ptr<Union<uml::ActivityEdge>> _containedEdge = obj.getContainedEdge();
 	m_containedEdge.reset(new Union<uml::ActivityEdge>(*(obj.getContainedEdge().get())));
-
 	std::shared_ptr<Union<uml::ActivityNode>> _containedNode = obj.getContainedNode();
 	m_containedNode.reset(new Union<uml::ActivityNode>(*(obj.getContainedNode().get())));
-
 	m_inActivity  = obj.getInActivity();
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
 	m_superGroup  = obj.getSuperGroup();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ActivityGroupImpl::copy() const
+{
+	std::shared_ptr<ActivityGroupImpl> element(new ActivityGroupImpl());
+	*element =(*this);
+	element->setThisActivityGroupPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityGroupImpl::eStaticClass() const
@@ -195,13 +157,13 @@ std::shared_ptr<uml::Activity> ActivityGroupImpl::containingActivity()
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityGroupImpl::nodes_and_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityGroupImpl::nodes_and_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ActivityGroupImpl::not_contained(Any diagnostics,std::map <   Any, Any >  context)
+bool ActivityGroupImpl::not_contained(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -217,8 +179,6 @@ Getter & Setter for reference containedEdge
 
 
 
-
-
 /*
 Getter & Setter for reference containedNode
 */
@@ -226,22 +186,18 @@ Getter & Setter for reference containedNode
 
 
 
-
-
 /*
 Getter & Setter for reference inActivity
 */
-std::weak_ptr<uml::Activity > ActivityGroupImpl::getInActivity() const
+std::weak_ptr<uml::Activity> ActivityGroupImpl::getInActivity() const
 {
 
     return m_inActivity;
 }
-
-void ActivityGroupImpl::setInActivity(std::shared_ptr<uml::Activity> _inActivity)
+void ActivityGroupImpl::setInActivity(std::weak_ptr<uml::Activity> _inActivity)
 {
     m_inActivity = _inActivity;
 }
-
 
 
 /*
@@ -251,13 +207,9 @@ Getter & Setter for reference subgroup
 
 
 
-
-
 /*
 Getter & Setter for reference superGroup
 */
-
-
 
 
 
@@ -310,7 +262,7 @@ std::shared_ptr<Union<uml::Element>> ActivityGroupImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > ActivityGroupImpl::getOwner() const
+std::weak_ptr<uml::Element> ActivityGroupImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -335,7 +287,7 @@ std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> ActivityGroupImpl
 	return m_subgroup;
 }
 
-std::weak_ptr<uml::ActivityGroup > ActivityGroupImpl::getSuperGroup() const
+std::weak_ptr<uml::ActivityGroup> ActivityGroupImpl::getSuperGroup() const
 {
 	return m_superGroup;
 }
@@ -385,44 +337,20 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_containedEdge->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_containedEdge->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //109
+			return eAny(getContainedEdge()); //109			
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = m_containedNode->begin();
-			Bag<uml::ActivityNode>::iterator end = m_containedNode->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1010
+			return eAny(getContainedNode()); //1010			
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInActivity().lock())); //1011
+			return eAny(getInActivity().lock()); //1011
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityGroup>::iterator iter = m_subgroup->begin();
-			Bag<uml::ActivityGroup>::iterator end = m_subgroup->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1012
+			return eAny(getSubgroup()); //1012			
 		}
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSuperGroup().lock())); //1013
+			return eAny(getSuperGroup().lock()); //1013
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -487,7 +415,6 @@ void ActivityGroupImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void ActivityGroupImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -499,12 +426,9 @@ void ActivityGroupImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> subgroup = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUPERGROUP);
-			if (subgroup != nullptr)
-			{
-				loadHandler->handleChild(subgroup);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::ActivityGroup>(this->getSubgroup());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -519,7 +443,7 @@ void ActivityGroupImpl::loadNode(std::string nodeName, std::shared_ptr<persisten
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityGroupImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActivityGroupImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -559,20 +483,13 @@ void ActivityGroupImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
-
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'subgroup'
-		std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> list_subgroup = this->getSubgroup();
-		for (std::shared_ptr<uml::ActivityGroup> subgroup : *list_subgroup) 
-		{
-			saveHandler->addReference(subgroup, "subgroup", subgroup->eClass() !=uml::umlPackage::eInstance()->getActivityGroup_Class());
-		}
+
+		saveHandler->addReferences<uml::ActivityGroup>("subgroup", this->getSubgroup());
 	}
 	catch (std::exception& e)
 	{

@@ -50,9 +50,8 @@
 using namespace UML;
 
 TemplateParameterSubstitutionObject::TemplateParameterSubstitutionObject(std::shared_ptr<uml::TemplateParameterSubstitution> _element):
-
 	m_TemplateParameterSubstitutionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TemplateParameterSubstitution());
 }
 
@@ -73,13 +72,15 @@ TemplateParameterSubstitutionObject::~TemplateParameterSubstitutionObject()
 
 std::shared_ptr<ecore::EObject> TemplateParameterSubstitutionObject::copy()
 {
-	std::shared_ptr<TemplateParameterSubstitutionObject> element(new TemplateParameterSubstitutionObject(*this));
+	std::shared_ptr<TemplateParameterSubstitutionObject> element(new TemplateParameterSubstitutionObject());
+	*element=(*this);
 	element->setThisTemplateParameterSubstitutionObjectPtr(element);
 	return element;
 }
 
 TemplateParameterSubstitutionObject& TemplateParameterSubstitutionObject::operator=(const TemplateParameterSubstitutionObject & obj)
 {
+	UML::ElementObject::operator=(obj);
 	return *this;
 }
 

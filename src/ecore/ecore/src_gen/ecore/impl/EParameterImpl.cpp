@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -33,20 +34,14 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EClassifier.hpp"
-
 #include "ecore/EGenericType.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EOperation.hpp"
-
 #include "ecore/ETypedElement.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -72,76 +67,48 @@ EParameterImpl::~EParameterImpl()
 }
 
 //Additional constructor for the containments back reference
-EParameterImpl::EParameterImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EParameterImpl::EParameterImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EParameterImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
 //Additional constructor for the containments back reference
-EParameterImpl::EParameterImpl(std::weak_ptr<ecore::EOperation > par_eOperation)
+EParameterImpl::EParameterImpl(std::weak_ptr<ecore::EOperation> par_eOperation)
 :EParameterImpl()
 {
 	m_eOperation = par_eOperation;
 }
 
-
-EParameterImpl::EParameterImpl(const EParameterImpl & obj):EParameterImpl()
+EParameterImpl::EParameterImpl(const EParameterImpl & obj): EParameterImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  EParameterImpl::copy() const
-{
-	std::shared_ptr<EParameterImpl> element(new EParameterImpl(*this));
-	element->setThisEParameterPtr(element);
-	return element;
-}
-
 EParameterImpl& EParameterImpl::operator=(const EParameterImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ETypedElementImpl::operator=(obj);
+	EParameter::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EParameter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_lowerBound = obj.getLowerBound();
-	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
-	m_ordered = obj.isOrdered();
-	m_required = obj.isRequired();
-	m_unique = obj.isUnique();
-	m_upperBound = obj.getUpperBound();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
 	m_eOperation  = obj.getEOperation();
-
-	m_eType  = obj.getEType();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	if(obj.getEGenericType()!=nullptr)
-	{
-		m_eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEGenericType()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> EParameterImpl::copy() const
+{
+	std::shared_ptr<EParameterImpl> element(new EParameterImpl());
+	*element =(*this);
+	element->setThisEParameterPtr(element);
+	return element;
 }
 
 std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
@@ -163,13 +130,11 @@ std::shared_ptr<EClass> EParameterImpl::eStaticClass() const
 /*
 Getter & Setter for reference eOperation
 */
-std::weak_ptr<ecore::EOperation > EParameterImpl::getEOperation() const
+std::weak_ptr<ecore::EOperation> EParameterImpl::getEOperation() const
 {
 
     return m_eOperation;
 }
-
-
 
 
 
@@ -225,7 +190,7 @@ Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEOperation().lock())); //4213
+			return eAny(getEOperation().lock()); //4213
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -274,13 +239,12 @@ void EParameterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void EParameterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EParameterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EParameterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	ETypedElementImpl::resolveReferences(featureID, references);
 }
@@ -309,9 +273,6 @@ void EParameterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

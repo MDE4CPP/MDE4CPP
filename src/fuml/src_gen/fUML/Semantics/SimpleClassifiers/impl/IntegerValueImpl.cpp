@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -38,21 +39,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/PrimitiveType.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/PrimitiveValue.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -77,37 +74,35 @@ IntegerValueImpl::~IntegerValueImpl()
 }
 
 
-
-IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj):IntegerValueImpl()
+IntegerValueImpl::IntegerValueImpl(const IntegerValueImpl & obj): IntegerValueImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  IntegerValueImpl::copy() const
-{
-	std::shared_ptr<IntegerValueImpl> element(new IntegerValueImpl(*this));
-	element->setThisIntegerValuePtr(element);
-	return element;
-}
-
 IntegerValueImpl& IntegerValueImpl::operator=(const IntegerValueImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	PrimitiveValueImpl::operator=(obj);
+	IntegerValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy IntegerValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_value = obj.getValue();
 
 	//copy references with no containment (soft copy)
-	
-	m_type  = obj.getType();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> IntegerValueImpl::copy() const
+{
+	std::shared_ptr<IntegerValueImpl> element(new IntegerValueImpl());
+	*element =(*this);
+	element->setThisIntegerValuePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> IntegerValueImpl::eStaticClass() const
@@ -125,12 +120,10 @@ int IntegerValueImpl::getValue() const
 {
 	return m_value;
 }
-
 void IntegerValueImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
-
 
 
 //*********************************
@@ -149,7 +142,7 @@ return newValue;
 	//end of body
 }
 
-bool IntegerValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
+bool IntegerValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -298,13 +291,12 @@ void IntegerValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void IntegerValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	PrimitiveValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void IntegerValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void IntegerValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	PrimitiveValueImpl::resolveReferences(featureID, references);
 }
@@ -330,14 +322,11 @@ void IntegerValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getIntegerValue_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

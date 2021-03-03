@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,13 +33,10 @@
 
 
 //Factories an Package includes
-#include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
-#include "fUML/Semantics/Actions/impl/ActionsPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Actions/ActionsPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -63,34 +61,34 @@ AcceptCallActionActivationsImpl::~AcceptCallActionActivationsImpl()
 }
 
 
-
-AcceptCallActionActivationsImpl::AcceptCallActionActivationsImpl(const AcceptCallActionActivationsImpl & obj):AcceptCallActionActivationsImpl()
+AcceptCallActionActivationsImpl::AcceptCallActionActivationsImpl(const AcceptCallActionActivationsImpl & obj): AcceptCallActionActivationsImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  AcceptCallActionActivationsImpl::copy() const
-{
-	std::shared_ptr<AcceptCallActionActivationsImpl> element(new AcceptCallActionActivationsImpl(*this));
-	element->setThisAcceptCallActionActivationsPtr(element);
-	return element;
-}
-
 AcceptCallActionActivationsImpl& AcceptCallActionActivationsImpl::operator=(const AcceptCallActionActivationsImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	AcceptCallActionActivations::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy AcceptCallActionActivations "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> AcceptCallActionActivationsImpl::copy() const
+{
+	std::shared_ptr<AcceptCallActionActivationsImpl> element(new AcceptCallActionActivationsImpl());
+	*element =(*this);
+	element->setThisAcceptCallActionActivationsPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> AcceptCallActionActivationsImpl::eStaticClass() const
@@ -182,12 +180,11 @@ void AcceptCallActionActivationsImpl::loadAttributes(std::shared_ptr<persistence
 
 void AcceptCallActionActivationsImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Actions::ActionsFactory> modelFactory=fUML::Semantics::Actions::ActionsFactory::eInstance();
 
 	//load BasePackage Nodes
 }
 
-void AcceptCallActionActivationsImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void AcceptCallActionActivationsImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }
@@ -206,9 +203,6 @@ void AcceptCallActionActivationsImpl::saveContent(std::shared_ptr<persistence::i
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Actions::ActionsPackage> package = fUML::Semantics::Actions::ActionsPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

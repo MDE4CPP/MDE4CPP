@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -39,39 +40,29 @@
 #include <exception> // used in Persistence
 
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
-#include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -96,55 +87,41 @@ ObjectImpl::~ObjectImpl()
 }
 
 
-
-ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
+ObjectImpl::ObjectImpl(const ObjectImpl & obj): ObjectImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
-{
-	std::shared_ptr<ObjectImpl> element(new ObjectImpl(*this));
-	element->setThisObjectPtr(element);
-	return element;
-}
-
 ObjectImpl& ObjectImpl::operator=(const ObjectImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ExtensionalValueImpl::operator=(obj);
+	Object::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Object "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_locus  = obj.getLocus();
-
 	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
 	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> _featureValuesList = obj.getFeatureValues();
-	for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _featureValues : *_featureValuesList)
-	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(_featureValues->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
-	#endif
 	if(obj.getObjectActivation()!=nullptr)
 	{
 		m_objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(obj.getObjectActivation()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_objectActivation" << std::endl;
-	#endif
-
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ObjectImpl::copy() const
+{
+	std::shared_ptr<ObjectImpl> element(new ObjectImpl());
+	*element =(*this);
+	element->setThisObjectPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
@@ -181,7 +158,7 @@ return newObject;
 	//end of body
 }
 
-void ObjectImpl::_register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter)
+void ObjectImpl::_register(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -207,7 +184,7 @@ void ObjectImpl::destroy()
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ObjectImpl::dispatch(std::shared_ptr<uml::Operation>  operation)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ObjectImpl::dispatch(std::shared_ptr<uml::Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -224,7 +201,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ObjectImpl::new_()
 	//end of body
 }
 
-void ObjectImpl::send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance)
+void ObjectImpl::send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -235,7 +212,7 @@ void ObjectImpl::send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::Signal
 	//end of body
 }
 
-void ObjectImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence)
+void ObjectImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -243,7 +220,7 @@ void ObjectImpl::send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccu
 	//end of body
 }
 
-void ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs)
+void ObjectImpl::startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -257,7 +234,7 @@ void ObjectImpl::startBehavior(std::shared_ptr<uml::Class>  classifier,std::shar
 	//end of body
 }
 
-void ObjectImpl::unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter>  accepter)
+void ObjectImpl::unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> accepter)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -274,17 +251,15 @@ void ObjectImpl::unregister(std::shared_ptr<fUML::Semantics::CommonBehavior::Eve
 /*
 Getter & Setter for reference objectActivation
 */
-std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > ObjectImpl::getObjectActivation() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> ObjectImpl::getObjectActivation() const
 {
 
     return m_objectActivation;
 }
-
 void ObjectImpl::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
 {
     m_objectActivation = _objectActivation;
 }
-
 
 
 /*
@@ -301,8 +276,6 @@ std::shared_ptr<Bag<uml::Classifier>> ObjectImpl::getTypes() const
 
     return m_types;
 }
-
-
 
 
 
@@ -334,18 +307,10 @@ Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_ATTRIBUTE_OBJECTACTIVATION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getObjectActivation())); //803
+			return eAny(getObjectActivation()); //803
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_ATTRIBUTE_TYPES:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_types->begin();
-			Bag<uml::Classifier>::iterator end = m_types->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //802
+			return eAny(getTypes()); //802			
 		}
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);
@@ -396,7 +361,7 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 				}
 				iterTypes++;
 			}
-
+ 
 			iterTypes = typesList->begin();
 			endTypes = typesList->end();
 			while (iterTypes != endTypes)
@@ -460,7 +425,6 @@ void ObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 
 void ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
 	try
 	{
@@ -471,13 +435,9 @@ void ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "ObjectActivation";
 			}
-			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(modelFactory->create(typeName));
-			if (objectActivation != nullptr)
-			{
-				this->setObjectActivation(objectActivation);
-				loadHandler->handleChild(objectActivation);
-			}
-			return;
+			loadHandler->handleChild(this->getObjectActivation()); 
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -492,7 +452,7 @@ void ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	ExtensionalValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void ObjectImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -501,11 +461,11 @@ void ObjectImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 			std::shared_ptr<Bag<uml::Classifier>> _types = getTypes();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Classifier> _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
+				std::shared_ptr<uml::Classifier>  _r = std::dynamic_pointer_cast<uml::Classifier>(ref);
 				if (_r != nullptr)
 				{
 					_types->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -540,27 +500,15 @@ void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::Classifier>> types_list = this->getTypes();
-		for (std::shared_ptr<uml::Classifier > object : *types_list)
-		{ 
-			saveHandler->addReferences("types", object);
-		}
-
-
+	// Add references
+		saveHandler->addReferences<uml::Classifier>("types", this->getTypes());
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'objectActivation'
-		std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > objectActivation = this->getObjectActivation();
-		if (objectActivation != nullptr)
-		{
-			saveHandler->addReference(objectActivation, "objectActivation", objectActivation->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getObjectActivation_Class());
-		}
+
+		saveHandler->addReference(this->getObjectActivation(), "objectActivation", getObjectActivation()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getObjectActivation_Class());
 	}
 	catch (std::exception& e)
 	{

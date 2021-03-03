@@ -75,9 +75,8 @@
 using namespace UML;
 
 ComponentRealizationObject::ComponentRealizationObject(std::shared_ptr<uml::ComponentRealization> _element):
-
 	m_ComponentRealizationValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ComponentRealization());
 }
 
@@ -98,13 +97,15 @@ ComponentRealizationObject::~ComponentRealizationObject()
 
 std::shared_ptr<ecore::EObject> ComponentRealizationObject::copy()
 {
-	std::shared_ptr<ComponentRealizationObject> element(new ComponentRealizationObject(*this));
+	std::shared_ptr<ComponentRealizationObject> element(new ComponentRealizationObject());
+	*element=(*this);
 	element->setThisComponentRealizationObjectPtr(element);
 	return element;
 }
 
 ComponentRealizationObject& ComponentRealizationObject::operator=(const ComponentRealizationObject & obj)
 {
+	UML::RealizationObject::operator=(obj);
 	return *this;
 }
 

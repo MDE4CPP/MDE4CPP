@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIVITIES_CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_HPP
 #define FUML_SEMANTICS_ACTIVITIES_CLASSIFIERBEHAVIOREXECUTIONACTIVITY_OWNEDBEHAVIORACTIVITY1_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,7 +31,7 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 
 // base class includes
 
@@ -43,19 +39,18 @@ namespace fUML
 
 #include "ecore/EModelElement.hpp"
 
+
 //*********************************
 namespace fUML::Semantics::Activities 
 {
 	
 	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 : virtual public ecore::EModelElement
-
 	{
 		public:
  			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 &) {}
 
 		protected:
 			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -100,7 +95,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

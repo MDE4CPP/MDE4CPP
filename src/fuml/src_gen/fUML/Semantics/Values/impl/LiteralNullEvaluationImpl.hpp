@@ -23,15 +23,14 @@ namespace fUML::Semantics::Values
 	{
 		public: 
 			LiteralNullEvaluationImpl(const LiteralNullEvaluationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			LiteralNullEvaluationImpl& operator=(LiteralNullEvaluationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			LiteralNullEvaluationImpl& operator=(LiteralNullEvaluationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;
 			LiteralNullEvaluationImpl();
 			virtual std::shared_ptr<LiteralNullEvaluation> getThisLiteralNullEvaluationPtr() const;
 			virtual void setThisLiteralNullEvaluationPtr(std::weak_ptr<LiteralNullEvaluation> thisLiteralNullEvaluationPtr);
-
 
 
 		public:
@@ -44,8 +43,6 @@ namespace fUML::Semantics::Values
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -54,7 +51,7 @@ namespace fUML::Semantics::Values
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -74,7 +71,7 @@ namespace fUML::Semantics::Values
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

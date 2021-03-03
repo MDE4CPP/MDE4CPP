@@ -84,9 +84,8 @@
 using namespace UML;
 
 ParameterObject::ParameterObject(std::shared_ptr<uml::Parameter> _element):
-
 	m_ParameterValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Parameter());
 }
 
@@ -107,13 +106,16 @@ ParameterObject::~ParameterObject()
 
 std::shared_ptr<ecore::EObject> ParameterObject::copy()
 {
-	std::shared_ptr<ParameterObject> element(new ParameterObject(*this));
+	std::shared_ptr<ParameterObject> element(new ParameterObject());
+	*element=(*this);
 	element->setThisParameterObjectPtr(element);
 	return element;
 }
 
 ParameterObject& ParameterObject::operator=(const ParameterObject & obj)
 {
+	UML::ConnectableElementObject::operator=(obj);
+	UML::MultiplicityElementObject::operator=(obj);
 	return *this;
 }
 

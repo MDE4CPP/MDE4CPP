@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			TimeObservationImpl(const TimeObservationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			TimeObservationImpl& operator=(TimeObservationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			TimeObservationImpl& operator=(TimeObservationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisTimeObservationPtr(std::weak_ptr<TimeObservation> thisTimeObservationPtr);
 
 			//Additional constructors for the containments back reference
-			TimeObservationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			TimeObservationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			TimeObservationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			TimeObservationImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			TimeObservationImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			TimeObservationImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			TimeObservationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			TimeObservationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -67,13 +58,12 @@ namespace uml
 			*/
 			 
 			virtual bool getFirstEvent() const ;
-			
 			/*!
 			The value of firstEvent is related to the event. If firstEvent is true, then the corresponding observation event is the first time instant the execution enters the event Element. If firstEvent is false, then the corresponding observation event is the time instant the execution exits the event Element.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual void setFirstEvent (bool _firstEvent); 
+			virtual void setFirstEvent (bool _firstEvent);
 			
 			
 			//*********************************
@@ -84,16 +74,14 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::NamedElement > getEvent() const ;
-			
+			virtual std::shared_ptr<uml::NamedElement> getEvent() const ;
 			/*!
 			The TimeObservation is determined by the entering or exiting of the event Element during execution.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setEvent(std::shared_ptr<uml::NamedElement> _event) ;
+			virtual void setEvent(std::shared_ptr<uml::NamedElement>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -103,7 +91,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -113,7 +101,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -128,7 +116,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

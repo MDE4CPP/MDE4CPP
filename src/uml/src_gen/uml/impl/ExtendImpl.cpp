@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,28 +36,18 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/DirectedRelationship.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExtensionPoint.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/UseCase.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -82,7 +73,7 @@ ExtendImpl::~ExtendImpl()
 }
 
 //Additional constructor for the containments back reference
-ExtendImpl::ExtendImpl(std::weak_ptr<uml::UseCase > par_extension)
+ExtendImpl::ExtendImpl(std::weak_ptr<uml::UseCase> par_extension)
 :ExtendImpl()
 {
 	m_extension = par_extension;
@@ -90,7 +81,7 @@ ExtendImpl::ExtendImpl(std::weak_ptr<uml::UseCase > par_extension)
 }
 
 //Additional constructor for the containments back reference
-ExtendImpl::ExtendImpl(std::weak_ptr<uml::Namespace > par_namespace)
+ExtendImpl::ExtendImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ExtendImpl()
 {
 	m_namespace = par_namespace;
@@ -98,88 +89,53 @@ ExtendImpl::ExtendImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-ExtendImpl::ExtendImpl(std::weak_ptr<uml::Element > par_owner)
+ExtendImpl::ExtendImpl(std::weak_ptr<uml::Element> par_owner)
 :ExtendImpl()
 {
 	m_owner = par_owner;
 }
 
-
-ExtendImpl::ExtendImpl(const ExtendImpl & obj):ExtendImpl()
+ExtendImpl::ExtendImpl(const ExtendImpl & obj): ExtendImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ExtendImpl::copy() const
-{
-	std::shared_ptr<ExtendImpl> element(new ExtendImpl(*this));
-	element->setThisExtendPtr(element);
-	return element;
-}
-
 ExtendImpl& ExtendImpl::operator=(const ExtendImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	DirectedRelationshipImpl::operator=(obj);
+	Extend::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Extend "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	m_extension  = obj.getExtension();
-
 	std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionLocation = obj.getExtensionLocation();
 	m_extensionLocation.reset(new Bag<uml::ExtensionPoint>(*(obj.getExtensionLocation().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
-
 	//Clone references with containment (deep copy)
-
 	if(obj.getCondition()!=nullptr)
 	{
 		m_condition = std::dynamic_pointer_cast<uml::Constraint>(obj.getCondition()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_condition" << std::endl;
-	#endif
 	if(obj.getExtendedCase()!=nullptr)
 	{
 		m_extendedCase = std::dynamic_pointer_cast<uml::UseCase>(obj.getExtendedCase()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_extendedCase" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ExtendImpl::copy() const
+{
+	std::shared_ptr<ExtendImpl> element(new ExtendImpl());
+	*element =(*this);
+	element->setThisExtendPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
@@ -194,7 +150,7 @@ std::shared_ptr<ecore::EClass> ExtendImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ExtendImpl::extension_points(Any diagnostics,std::map <   Any, Any >  context)
+bool ExtendImpl::extension_points(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -206,49 +162,43 @@ bool ExtendImpl::extension_points(Any diagnostics,std::map <   Any, Any >  conte
 /*
 Getter & Setter for reference condition
 */
-std::shared_ptr<uml::Constraint > ExtendImpl::getCondition() const
+std::shared_ptr<uml::Constraint> ExtendImpl::getCondition() const
 {
 
     return m_condition;
 }
-
 void ExtendImpl::setCondition(std::shared_ptr<uml::Constraint> _condition)
 {
     m_condition = _condition;
 }
 
 
-
 /*
 Getter & Setter for reference extendedCase
 */
-std::shared_ptr<uml::UseCase > ExtendImpl::getExtendedCase() const
+std::shared_ptr<uml::UseCase> ExtendImpl::getExtendedCase() const
 {
 //assert(m_extendedCase);
     return m_extendedCase;
 }
-
 void ExtendImpl::setExtendedCase(std::shared_ptr<uml::UseCase> _extendedCase)
 {
     m_extendedCase = _extendedCase;
 }
 
 
-
 /*
 Getter & Setter for reference extension
 */
-std::weak_ptr<uml::UseCase > ExtendImpl::getExtension() const
+std::weak_ptr<uml::UseCase> ExtendImpl::getExtension() const
 {
 //assert(m_extension);
     return m_extension;
 }
-
-void ExtendImpl::setExtension(std::shared_ptr<uml::UseCase> _extension)
+void ExtendImpl::setExtension(std::weak_ptr<uml::UseCase> _extension)
 {
     m_extension = _extension;
 }
-
 
 
 /*
@@ -268,12 +218,10 @@ std::shared_ptr<Bag<uml::ExtensionPoint>> ExtendImpl::getExtensionLocation() con
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > ExtendImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> ExtendImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -293,7 +241,7 @@ std::shared_ptr<Union<uml::Element>> ExtendImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > ExtendImpl::getOwner() const
+std::weak_ptr<uml::Element> ExtendImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -393,22 +341,14 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXTEND_ATTRIBUTE_CONDITION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCondition())); //9612
+			return eAny(getCondition()); //9612
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtendedCase())); //9613
+			return eAny(getExtendedCase()); //9613
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtension().lock())); //9615
+			return eAny(getExtension().lock()); //9615
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExtensionPoint>::iterator iter = m_extensionLocation->begin();
-			Bag<uml::ExtensionPoint>::iterator end = m_extensionLocation->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //9614
+			return eAny(getExtensionLocation()); //9614			
 		}
 	}
 	Any result;
@@ -493,7 +433,7 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 				}
 				iterExtensionLocation++;
 			}
-
+ 
 			iterExtensionLocation = extensionLocationList->begin();
 			endExtensionLocation = extensionLocationList->end();
 			while (iterExtensionLocation != endExtensionLocation)
@@ -572,7 +512,6 @@ void ExtendImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 
 void ExtendImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -583,13 +522,9 @@ void ExtendImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "Constraint";
 			}
-			std::shared_ptr<uml::Constraint> condition = std::dynamic_pointer_cast<uml::Constraint>(modelFactory->create(typeName));
-			if (condition != nullptr)
-			{
-				this->setCondition(condition);
-				loadHandler->handleChild(condition);
-			}
-			return;
+			loadHandler->handleChild(this->getCondition()); 
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -605,7 +540,7 @@ void ExtendImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ExtendImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ExtendImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -638,11 +573,11 @@ void ExtendImpl::resolveReferences(const int featureID, std::list<std::shared_pt
 			std::shared_ptr<Bag<uml::ExtensionPoint>> _extensionLocation = getExtensionLocation();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::ExtensionPoint> _r = std::dynamic_pointer_cast<uml::ExtensionPoint>(ref);
+				std::shared_ptr<uml::ExtensionPoint>  _r = std::dynamic_pointer_cast<uml::ExtensionPoint>(ref);
 				if (_r != nullptr)
 				{
 					_extensionLocation->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -676,23 +611,15 @@ void ExtendImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'condition'
-		std::shared_ptr<uml::Constraint > condition = this->getCondition();
+		std::shared_ptr<uml::Constraint> condition = this->getCondition();
 		if (condition != nullptr)
 		{
 			saveHandler->addReference(condition, "condition", condition->eClass() != package->getConstraint_Class());
 		}
-	
-
-		// Add references
-		saveHandler->addReference("extendedCase", this->getExtendedCase());
-		std::shared_ptr<Bag<uml::ExtensionPoint>> extensionLocation_list = this->getExtensionLocation();
-		for (std::shared_ptr<uml::ExtensionPoint > object : *extensionLocation_list)
-		{ 
-			saveHandler->addReferences("extensionLocation", object);
-		}
-
+	// Add references
+		saveHandler->addReference(this->getExtendedCase(), "extendedCase", getExtendedCase()->eClass() != uml::umlPackage::eInstance()->getUseCase_Class()); 
+		saveHandler->addReferences<uml::ExtensionPoint>("extensionLocation", this->getExtensionLocation());
 	}
 	catch (std::exception& e)
 	{

@@ -44,9 +44,7 @@ DocumentImpl::DocumentImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Document is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ DocumentImpl::DocumentImpl(const DocumentImpl & obj):DocumentImpl()
 
 std::shared_ptr<ecore::EObject>  DocumentImpl::copy() const
 {
-	std::shared_ptr<DocumentImpl> element(new DocumentImpl(*this));
+	std::shared_ptr<DocumentImpl> element(new DocumentImpl());
+	*element=(*this);
 	element->setThisDocumentPtr(element);
 	return element;
 }
 
 DocumentImpl& DocumentImpl::operator=(const DocumentImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	FileImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Document "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

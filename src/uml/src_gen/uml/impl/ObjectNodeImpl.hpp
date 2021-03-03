@@ -23,8 +23,8 @@ namespace uml
 	{
 		public: 
 			ObjectNodeImpl(const ObjectNodeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ObjectNodeImpl& operator=(ObjectNodeImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ObjectNodeImpl& operator=(ObjectNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -33,22 +33,13 @@ namespace uml
 			virtual void setThisObjectNodePtr(std::weak_ptr<ObjectNode> thisObjectNodePtr);
 
 			//Additional constructors for the containments back reference
-			ObjectNodeImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ObjectNodeImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ObjectNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ObjectNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ObjectNodeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ObjectNodeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ObjectNodeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ObjectNodeImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -66,23 +57,17 @@ namespace uml
 					selection.inputParameters()->forAll(p | self.type.conformsTo(p.type))
 			*/
 			 
-			virtual bool input_output_parameter(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool input_output_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If isControlType=false, the ActivityEdges incoming to or outgoing from an ObjectNode must all be ObjectFlows.
 			(not isControlType) implies incoming->union(outgoing)->forAll(oclIsKindOf(ObjectFlow))
 			*/
 			 
-			virtual bool object_flow_edges(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool object_flow_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If an ObjectNode has a selection Behavior, then the ordering of the object node is ordered, and vice versa.
 			(selection<>null) = (ordering=ObjectNodeOrderingKind::ordered)
 			*/
 			 
-			virtual bool selection_behavior(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool selection_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -93,26 +78,24 @@ namespace uml
 			*/
 			 
 			virtual bool getIsControlType() const ;
-			
 			/*!
 			Indicates whether the type of the ObjectNode is to be treated as representing control values that may traverse ControlFlows.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsControlType (bool _isControlType); 
+			virtual void setIsControlType (bool _isControlType);
 			/*!
 			Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
 			virtual uml::ObjectNodeOrderingKind getOrdering() const ;
-			
 			/*!
 			Indicates how the tokens held by the ObjectNode are ordered for selection to traverse ActivityEdges outgoing from the ObjectNode.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setOrdering (uml::ObjectNodeOrderingKind _ordering); 
+			virtual void setOrdering (uml::ObjectNodeOrderingKind _ordering);
 			
 			
 			//*********************************
@@ -125,36 +108,31 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::State>> getInState() const ;
 			
-			
 			/*!
 			A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior > getSelection() const ;
-			
+			virtual std::shared_ptr<uml::Behavior> getSelection() const ;
 			/*!
 			A Behavior used to select tokens to be offered on outgoing ActivityEdges.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setSelection(std::shared_ptr<uml::Behavior> _selection) ;
-			
+			virtual void setSelection(std::shared_ptr<uml::Behavior>) ;
 			/*!
 			The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getUpperBound() const ;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getUpperBound() const ;
 			/*!
 			The maximum number of tokens that may be held by this ObjectNode. Tokens cannot flow into the ObjectNode if the upperBound is reached. If no upperBound is specified, then there is no limit on how many tokens the ObjectNode can hold.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setUpperBound(std::shared_ptr<uml::ValueSpecification> _upperBound) ;
+			virtual void setUpperBound(std::shared_ptr<uml::ValueSpecification>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -174,7 +152,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -194,7 +172,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

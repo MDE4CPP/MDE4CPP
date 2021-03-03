@@ -69,9 +69,8 @@
 using namespace UML;
 
 UsageObject::UsageObject(std::shared_ptr<uml::Usage> _element):
-
 	m_UsageValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Usage());
 }
 
@@ -92,13 +91,15 @@ UsageObject::~UsageObject()
 
 std::shared_ptr<ecore::EObject> UsageObject::copy()
 {
-	std::shared_ptr<UsageObject> element(new UsageObject(*this));
+	std::shared_ptr<UsageObject> element(new UsageObject());
+	*element=(*this);
 	element->setThisUsageObjectPtr(element);
 	return element;
 }
 
 UsageObject& UsageObject::operator=(const UsageObject & obj)
 {
+	UML::DependencyObject::operator=(obj);
 	return *this;
 }
 

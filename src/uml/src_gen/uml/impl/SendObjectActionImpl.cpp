@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,48 +36,28 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/InvocationAction.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/Port.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -102,7 +83,7 @@ SendObjectActionImpl::~SendObjectActionImpl()
 }
 
 //Additional constructor for the containments back reference
-SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Activity > par_activity)
+SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Activity> par_activity)
 :SendObjectActionImpl()
 {
 	m_activity = par_activity;
@@ -110,7 +91,7 @@ SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Activity > par_act
 }
 
 //Additional constructor for the containments back reference
-SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :SendObjectActionImpl()
 {
 	m_inStructuredNode = par_inStructuredNode;
@@ -118,7 +99,7 @@ SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::StructuredActivity
 }
 
 //Additional constructor for the containments back reference
-SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :SendObjectActionImpl()
 {
 	m_namespace = par_namespace;
@@ -126,163 +107,50 @@ SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Namespace > par_na
 }
 
 //Additional constructor for the containments back reference
-SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Element > par_owner)
+SendObjectActionImpl::SendObjectActionImpl(std::weak_ptr<uml::Element> par_owner)
 :SendObjectActionImpl()
 {
 	m_owner = par_owner;
 }
 
-
-SendObjectActionImpl::SendObjectActionImpl(const SendObjectActionImpl & obj):SendObjectActionImpl()
+SendObjectActionImpl::SendObjectActionImpl(const SendObjectActionImpl & obj): SendObjectActionImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  SendObjectActionImpl::copy() const
-{
-	std::shared_ptr<SendObjectActionImpl> element(new SendObjectActionImpl(*this));
-	element->setThisSendObjectActionPtr(element);
-	return element;
-}
-
 SendObjectActionImpl& SendObjectActionImpl::operator=(const SendObjectActionImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	InvocationActionImpl::operator=(obj);
+	SendObjectAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SendObjectAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_isLeaf = obj.getIsLeaf();
-	m_isLocallyReentrant = obj.getIsLocallyReentrant();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_activity  = obj.getActivity();
-
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_context  = obj.getContext();
-
-	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
-	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
-
-	m_inStructuredNode  = obj.getInStructuredNode();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
-	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_onPort  = obj.getOnPort();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::InputPin>> _argumentList = obj.getArgument();
-	for(std::shared_ptr<uml::InputPin> _argument : *_argumentList)
-	{
-		this->getArgument()->add(std::shared_ptr<uml::InputPin>(std::dynamic_pointer_cast<uml::InputPin>(_argument->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_argument" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
-	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
-	{
-		this->getHandler()->add(std::shared_ptr<uml::ExceptionHandler>(std::dynamic_pointer_cast<uml::ExceptionHandler>(_handler->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_handler" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
-	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
-	{
-		this->getInInterruptibleRegion()->add(std::shared_ptr<uml::InterruptibleActivityRegion>(std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_inInterruptibleRegion->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inInterruptibleRegion" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityPartition>> _inPartitionList = obj.getInPartition();
-	for(std::shared_ptr<uml::ActivityPartition> _inPartition : *_inPartitionList)
-	{
-		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(std::dynamic_pointer_cast<uml::ActivityPartition>(_inPartition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _localPostconditionList = obj.getLocalPostcondition();
-	for(std::shared_ptr<uml::Constraint> _localPostcondition : *_localPostconditionList)
-	{
-		this->getLocalPostcondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_localPostcondition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_localPostcondition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _localPreconditionList = obj.getLocalPrecondition();
-	for(std::shared_ptr<uml::Constraint> _localPrecondition : *_localPreconditionList)
-	{
-		this->getLocalPrecondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_localPrecondition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_localPrecondition" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNodeList = obj.getRedefinedNode();
-	for(std::shared_ptr<uml::ActivityNode> _redefinedNode : *_redefinedNodeList)
-	{
-		this->getRedefinedNode()->add(std::shared_ptr<uml::ActivityNode>(std::dynamic_pointer_cast<uml::ActivityNode>(_redefinedNode->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
-	#endif
 	if(obj.getRequest()!=nullptr)
 	{
 		m_request = std::dynamic_pointer_cast<uml::InputPin>(obj.getRequest()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_request" << std::endl;
-	#endif
 	if(obj.getTarget()!=nullptr)
 	{
 		m_target = std::dynamic_pointer_cast<uml::InputPin>(obj.getTarget()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_target" << std::endl;
-	#endif
-
 	
-
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> SendObjectActionImpl::copy() const
+{
+	std::shared_ptr<SendObjectActionImpl> element(new SendObjectActionImpl());
+	*element =(*this);
+	element->setThisSendObjectActionPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> SendObjectActionImpl::eStaticClass() const
@@ -297,7 +165,7 @@ std::shared_ptr<ecore::EClass> SendObjectActionImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool SendObjectActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool SendObjectActionImpl::type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -309,33 +177,29 @@ bool SendObjectActionImpl::type_target_pin(Any diagnostics,std::map <   Any, Any
 /*
 Getter & Setter for reference request
 */
-std::shared_ptr<uml::InputPin > SendObjectActionImpl::getRequest() const
+std::shared_ptr<uml::InputPin> SendObjectActionImpl::getRequest() const
 {
 //assert(m_request);
     return m_request;
 }
-
 void SendObjectActionImpl::setRequest(std::shared_ptr<uml::InputPin> _request)
 {
     m_request = _request;
 }
 
 
-
 /*
 Getter & Setter for reference target
 */
-std::shared_ptr<uml::InputPin > SendObjectActionImpl::getTarget() const
+std::shared_ptr<uml::InputPin> SendObjectActionImpl::getTarget() const
 {
 //assert(m_target);
     return m_target;
 }
-
 void SendObjectActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
 {
     m_target = _target;
 }
-
 
 
 //*********************************
@@ -391,7 +255,7 @@ std::shared_ptr<Union<uml::Element>> SendObjectActionImpl::getOwnedElement() con
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > SendObjectActionImpl::getOwner() const
+std::weak_ptr<uml::Element> SendObjectActionImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -455,9 +319,9 @@ Any SendObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_REQUEST:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRequest())); //21229
+			return eAny(getRequest()); //21229
 		case uml::umlPackage::SENDOBJECTACTION_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //21230
+			return eAny(getTarget()); //21230
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }
@@ -524,7 +388,6 @@ void SendObjectActionImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -535,13 +398,9 @@ void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<uml::InputPin> request = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
-			if (request != nullptr)
-			{
-				this->setRequest(request);
-				loadHandler->handleChild(request);
-			}
-			return;
+			loadHandler->handleChild(this->getRequest()); 
+
+			return; 
 		}
 
 		if ( nodeName.compare("target") == 0 )
@@ -551,13 +410,9 @@ void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<uml::InputPin> target = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
-			if (target != nullptr)
-			{
-				this->setTarget(target);
-				loadHandler->handleChild(target);
-			}
-			return;
+			loadHandler->handleChild(this->getTarget()); 
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -572,7 +427,7 @@ void SendObjectActionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	InvocationActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void SendObjectActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void SendObjectActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	InvocationActionImpl::resolveReferences(featureID, references);
 }
@@ -613,22 +468,19 @@ void SendObjectActionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'request'
-		std::shared_ptr<uml::InputPin > request = this->getRequest();
+		std::shared_ptr<uml::InputPin> request = this->getRequest();
 		if (request != nullptr)
 		{
 			saveHandler->addReference(request, "request", request->eClass() != package->getInputPin_Class());
 		}
 
 		// Save 'target'
-		std::shared_ptr<uml::InputPin > target = this->getTarget();
+		std::shared_ptr<uml::InputPin> target = this->getTarget();
 		if (target != nullptr)
 		{
 			saveHandler->addReference(target, "target", target->eClass() != package->getInputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

@@ -22,8 +22,8 @@ namespace ecore
 	{
 		public: 
 			EAnnotationImpl(const EAnnotationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EAnnotationImpl& operator=(EAnnotationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EAnnotationImpl& operator=(EAnnotationImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
@@ -32,14 +32,9 @@ namespace ecore
 			virtual void setThisEAnnotationPtr(std::weak_ptr<EAnnotation> thisEAnnotationPtr);
 
 			//Additional constructors for the containments back reference
-			EAnnotationImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EAnnotationImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EAnnotationImpl(std::weak_ptr<ecore::EModelElement > par_eModelElement);
-
-
-
+			EAnnotationImpl(std::weak_ptr<ecore::EModelElement> par_eModelElement);
 
 		public:
 			//destructor
@@ -54,10 +49,13 @@ namespace ecore
 			// Attributes Getter Setter
 			//*********************************
 			 
-			virtual std::string getSource() const ;
-			
+			virtual std::shared_ptr<std::map < std::string, std::string>> getDetails() const ;
 			 
-			virtual void setSource (std::string _source); 
+			virtual void setDetails (std::shared_ptr<std::map < std::string, std::string>> _details);
+			 
+			virtual std::string getSource() const ;
+			 
+			virtual void setSource (std::string _source);
 			
 			
 			//*********************************
@@ -67,21 +65,13 @@ namespace ecore
 			virtual std::shared_ptr<Subset<ecore::EObject, ecore::EObject>> getContents() const ;
 			
 			
+			virtual std::weak_ptr<ecore::EModelElement> getEModelElement() const ;
 			
-			virtual std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> getDetails() const ;
-			
-			
-			
-			virtual std::weak_ptr<ecore::EModelElement > getEModelElement() const ;
-			
-			
-			virtual void setEModelElement(std::shared_ptr<ecore::EModelElement> _eModelElement) ;
-			
+			virtual void setEModelElement(std::weak_ptr<ecore::EModelElement>) ;
 			
 			virtual std::shared_ptr<Bag<ecore::EObject>> getReferences() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -102,7 +92,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

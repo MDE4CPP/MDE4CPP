@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ProfileApplicationImpl(const ProfileApplicationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ProfileApplicationImpl& operator=(ProfileApplicationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ProfileApplicationImpl& operator=(ProfileApplicationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisProfileApplicationPtr(std::weak_ptr<ProfileApplication> thisProfileApplicationPtr);
 
 			//Additional constructors for the containments back reference
-			ProfileApplicationImpl(std::weak_ptr<uml::Package > par_applyingPackage);
-
-
+			ProfileApplicationImpl(std::weak_ptr<uml::Package> par_applyingPackage);
 			//Additional constructors for the containments back reference
-			ProfileApplicationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ProfileApplicationImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -52,15 +47,11 @@ namespace uml
 			Retrieves the definition (Ecore representation) of the profile associated with this profile application.
 			*/
 			 
-			virtual std::shared_ptr<ecore::EPackage> getAppliedDefinition() ;
-			
-			/*!
+			virtual std::shared_ptr<ecore::EPackage> getAppliedDefinition() ;/*!
 			Retrieves the definition (Ecore representation) of the specified named element in the profile associated with this profile application.
 			*/
 			 
-			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement) ;
-			
-			
+			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement> namedElement) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -71,13 +62,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsStrict() const ;
-			
 			/*!
 			Specifies that the Profile filtering rules for the metaclasses of the referenced metamodel shall be strictly applied.
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setIsStrict (bool _isStrict); 
+			virtual void setIsStrict (bool _isStrict);
 			
 			
 			//*********************************
@@ -88,30 +78,26 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Profile > getAppliedProfile() const ;
-			
+			virtual std::shared_ptr<uml::Profile> getAppliedProfile() const ;
 			/*!
 			References the Profiles that are applied to a Package through this ProfileApplication.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual void setAppliedProfile(std::shared_ptr<uml::Profile> _appliedProfile) ;
-			
+			virtual void setAppliedProfile(std::shared_ptr<uml::Profile>) ;
 			/*!
 			The package that owns the profile application.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Package > getApplyingPackage() const ;
-			
+			virtual std::weak_ptr<uml::Package> getApplyingPackage() const ;
 			/*!
 			The package that owns the profile application.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual void setApplyingPackage(std::shared_ptr<uml::Package> _applyingPackage) ;
+			virtual void setApplyingPackage(std::weak_ptr<uml::Package>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -126,7 +112,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -156,7 +142,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

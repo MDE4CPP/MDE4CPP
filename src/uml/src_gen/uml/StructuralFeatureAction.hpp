@@ -8,23 +8,19 @@
 #define UML_STRUCTURALFEATUREACTION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,104 +35,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuralFeature;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -147,6 +63,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -155,14 +72,13 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class StructuralFeatureAction:virtual public Action
+	class StructuralFeatureAction: virtual public Action
 	{
 		public:
  			StructuralFeatureAction(const StructuralFeatureAction &) {}
 
 		protected:
 			StructuralFeatureAction(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -178,31 +94,23 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The structuralFeature must not be static.
 			not structuralFeature.isStatic
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The structuralFeature must either be an owned or inherited feature of the type of the object InputPin, or it must be an owned end of a binary Association whose opposite end had as a type to which the type of the object InputPin conforms.
 			object.type.oclAsType(Classifier).allFeatures()->includes(structuralFeature) or
 				object.type.conformsTo(structuralFeature.oclAsType(Property).opposite.type)
 			*/
 			 
-			virtual bool object_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool object_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The structuralFeature must have exactly one featuringClassifier.
 			structuralFeature.featuringClassifier->size() = 1
 			*/
 			 
-			virtual bool one_featuring_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool one_featuring_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The visibility of the structuralFeature must allow access from the object performing the ReadStructuralFeatureAction.
 			structuralFeature.visibility = VisibilityKind::public or
 			_'context'.allFeatures()->includes(structuralFeature) or
@@ -210,9 +118,7 @@ namespace uml
 			_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier))
 			*/
 			 
-			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -225,29 +131,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getObject() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
 			/*!
 			The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object) = 0;
-			
+			virtual void setObject(std::shared_ptr<uml::InputPin>) = 0;
 			/*!
 			The StructuralFeature to be read or written.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::StructuralFeature > getStructuralFeature() const = 0;
-			
+			virtual std::shared_ptr<uml::StructuralFeature> getStructuralFeature() const = 0;
 			/*!
 			The StructuralFeature to be read or written.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setStructuralFeature(std::shared_ptr<uml::StructuralFeature> _structuralFeature) = 0;
-			
+			virtual void setStructuralFeature(std::shared_ptr<uml::StructuralFeature>) = 0;
 			
 
 		protected:
@@ -264,12 +166,12 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_object;/*!
+			std::shared_ptr<uml::InputPin> m_object;/*!
 			The StructuralFeature to be read or written.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::StructuralFeature > m_structuralFeature;
+			std::shared_ptr<uml::StructuralFeature> m_structuralFeature;
 
 		public:
 			//*********************************
@@ -295,7 +197,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -309,7 +211,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

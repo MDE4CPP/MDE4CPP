@@ -94,9 +94,8 @@
 using namespace UML;
 
 ReadIsClassifiedObjectActionObject::ReadIsClassifiedObjectActionObject(std::shared_ptr<uml::ReadIsClassifiedObjectAction> _element):
-
 	m_ReadIsClassifiedObjectActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReadIsClassifiedObjectAction());
 }
 
@@ -117,13 +116,15 @@ ReadIsClassifiedObjectActionObject::~ReadIsClassifiedObjectActionObject()
 
 std::shared_ptr<ecore::EObject> ReadIsClassifiedObjectActionObject::copy()
 {
-	std::shared_ptr<ReadIsClassifiedObjectActionObject> element(new ReadIsClassifiedObjectActionObject(*this));
+	std::shared_ptr<ReadIsClassifiedObjectActionObject> element(new ReadIsClassifiedObjectActionObject());
+	*element=(*this);
 	element->setThisReadIsClassifiedObjectActionObjectPtr(element);
 	return element;
 }
 
 ReadIsClassifiedObjectActionObject& ReadIsClassifiedObjectActionObject::operator=(const ReadIsClassifiedObjectActionObject & obj)
 {
+	UML::ActionObject::operator=(obj);
 	return *this;
 }
 

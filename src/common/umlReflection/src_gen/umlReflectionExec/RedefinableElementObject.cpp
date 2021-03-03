@@ -58,9 +58,8 @@
 using namespace UML;
 
 RedefinableElementObject::RedefinableElementObject(std::shared_ptr<uml::RedefinableElement> _element):
-
 	m_RedefinableElementValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_RedefinableElement());
 }
 
@@ -81,13 +80,15 @@ RedefinableElementObject::~RedefinableElementObject()
 
 std::shared_ptr<ecore::EObject> RedefinableElementObject::copy()
 {
-	std::shared_ptr<RedefinableElementObject> element(new RedefinableElementObject(*this));
+	std::shared_ptr<RedefinableElementObject> element(new RedefinableElementObject());
+	*element=(*this);
 	element->setThisRedefinableElementObjectPtr(element);
 	return element;
 }
 
 RedefinableElementObject& RedefinableElementObject::operator=(const RedefinableElementObject & obj)
 {
+	UML::NamedElementObject::operator=(obj);
 	return *this;
 }
 

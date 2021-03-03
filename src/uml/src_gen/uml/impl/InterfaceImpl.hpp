@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			InterfaceImpl(const InterfaceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			InterfaceImpl& operator=(InterfaceImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			InterfaceImpl& operator=(InterfaceImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,25 +32,14 @@ namespace uml
 			virtual void setThisInterfacePtr(std::weak_ptr<Interface> thisInterfacePtr);
 
 			//Additional constructors for the containments back reference
-			InterfaceImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			InterfaceImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			InterfaceImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			InterfaceImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			InterfaceImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			InterfaceImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			InterfaceImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			InterfaceImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -63,22 +52,16 @@ namespace uml
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this interface.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) ;/*!
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this interface.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType) ;/*!
 			The visibility of all Features owned by an Interface must be public.
 			feature->forAll(visibility = VisibilityKind::public)
 			*/
 			 
-			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -95,14 +78,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> getNestedClassifier() const ;
 			
-			
 			/*!
 			The attributes (i.e., the Properties) owned by the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> getOwnedAttribute() const ;
-			
 			
 			/*!
 			The Operations owned by the Interface.
@@ -111,7 +92,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> getOwnedOperation() const ;
 			
-			
 			/*!
 			Receptions that objects providing this Interface are willing to accept.
 			<p>From package UML::SimpleClassifiers.</p>
@@ -119,21 +99,18 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Reception, uml::Feature,uml::NamedElement>> getOwnedReception() const ;
 			
-			
 			/*!
 			References a ProtocolStateMachine specifying the legal sequences of the invocation of the BehavioralFeatures described in the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ProtocolStateMachine > getProtocol() const ;
-			
+			virtual std::shared_ptr<uml::ProtocolStateMachine> getProtocol() const ;
 			/*!
 			References a ProtocolStateMachine specifying the legal sequences of the invocation of the BehavioralFeatures described in the Interface.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol) ;
-			
+			virtual void setProtocol(std::shared_ptr<uml::ProtocolStateMachine>) ;
 			/*!
 			References all the Interfaces redefined by this Interface.
 			<p>From package UML::SimpleClassifiers.</p>
@@ -142,7 +119,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Interface, uml::Classifier /*Subset does not reference a union*/>> getRedefinedInterface() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -167,7 +143,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -182,7 +158,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -202,7 +178,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			AcceptCallActionImpl(const AcceptCallActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			AcceptCallActionImpl& operator=(AcceptCallActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			AcceptCallActionImpl& operator=(AcceptCallActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisAcceptCallActionPtr(std::weak_ptr<AcceptCallAction> thisAcceptCallActionPtr);
 
 			//Additional constructors for the containments back reference
-			AcceptCallActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			AcceptCallActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			AcceptCallActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			AcceptCallActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			AcceptCallActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			AcceptCallActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			AcceptCallActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			AcceptCallActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -66,24 +57,18 @@ namespace uml
 				parameter->at(i).compatibleWith(result->at(i)))
 			*/
 			 
-			virtual bool result_pins(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool result_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The action must have exactly one trigger, which must be for a CallEvent.
 			trigger->size()=1 and
 			trigger->asSequence()->first().event.oclIsKindOf(CallEvent)
 			*/
 			 
-			virtual bool trigger_call_event(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool trigger_call_event(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			isUnmrashall must be true for an AcceptCallAction.
 			isUnmarshall = true
 			*/
 			 
-			virtual bool unmarshall(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool unmarshall(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -98,16 +83,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getReturnInformation() const ;
-			
+			virtual std::shared_ptr<uml::OutputPin> getReturnInformation() const ;
 			/*!
 			An OutputPin where a value is placed containing sufficient information to perform a subsequent ReplyAction and return control to the caller. The contents of this value are opaque. It can be passed and copied but it cannot be manipulated by the model.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setReturnInformation(std::shared_ptr<uml::OutputPin> _returnInformation) ;
+			virtual void setReturnInformation(std::shared_ptr<uml::OutputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -132,7 +115,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -152,7 +135,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -96,9 +96,8 @@
 using namespace UML;
 
 ValuePinObject::ValuePinObject(std::shared_ptr<uml::ValuePin> _element):
-
 	m_ValuePinValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ValuePin());
 }
 
@@ -119,13 +118,15 @@ ValuePinObject::~ValuePinObject()
 
 std::shared_ptr<ecore::EObject> ValuePinObject::copy()
 {
-	std::shared_ptr<ValuePinObject> element(new ValuePinObject(*this));
+	std::shared_ptr<ValuePinObject> element(new ValuePinObject());
+	*element=(*this);
 	element->setThisValuePinObjectPtr(element);
 	return element;
 }
 
 ValuePinObject& ValuePinObject::operator=(const ValuePinObject & obj)
 {
+	UML::InputPinObject::operator=(obj);
 	return *this;
 }
 

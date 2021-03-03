@@ -23,15 +23,14 @@ namespace fUML::Semantics::Loci
 	{
 		public: 
 			ChoiceStrategyImpl(const ChoiceStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ChoiceStrategyImpl& operator=(ChoiceStrategyImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ChoiceStrategyImpl& operator=(ChoiceStrategyImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;
 			ChoiceStrategyImpl();
 			virtual std::shared_ptr<ChoiceStrategy> getThisChoiceStrategyPtr() const;
 			virtual void setThisChoiceStrategyPtr(std::weak_ptr<ChoiceStrategy> thisChoiceStrategyPtr);
-
 
 
 		public:
@@ -42,12 +41,8 @@ namespace fUML::Semantics::Loci
 			// Operations
 			//*********************************
 			 
-			virtual int choose(int size) ;
-			
-			 
+			virtual int choose(int size) ; 
 			virtual std::string getName() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -57,7 +52,7 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -77,7 +72,7 @@ namespace fUML::Semantics::Loci
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

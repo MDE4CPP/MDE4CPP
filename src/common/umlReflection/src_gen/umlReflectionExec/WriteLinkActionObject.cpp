@@ -91,9 +91,8 @@
 using namespace UML;
 
 WriteLinkActionObject::WriteLinkActionObject(std::shared_ptr<uml::WriteLinkAction> _element):
-
 	m_WriteLinkActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_WriteLinkAction());
 }
 
@@ -114,13 +113,15 @@ WriteLinkActionObject::~WriteLinkActionObject()
 
 std::shared_ptr<ecore::EObject> WriteLinkActionObject::copy()
 {
-	std::shared_ptr<WriteLinkActionObject> element(new WriteLinkActionObject(*this));
+	std::shared_ptr<WriteLinkActionObject> element(new WriteLinkActionObject());
+	*element=(*this);
 	element->setThisWriteLinkActionObjectPtr(element);
 	return element;
 }
 
 WriteLinkActionObject& WriteLinkActionObject::operator=(const WriteLinkActionObject & obj)
 {
+	UML::LinkActionObject::operator=(obj);
 	return *this;
 }
 

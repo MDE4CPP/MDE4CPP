@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -33,19 +34,16 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
-
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
-
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -70,34 +68,34 @@ CS_RequestPropagationStrategyImpl::~CS_RequestPropagationStrategyImpl()
 }
 
 
-
-CS_RequestPropagationStrategyImpl::CS_RequestPropagationStrategyImpl(const CS_RequestPropagationStrategyImpl & obj):CS_RequestPropagationStrategyImpl()
+CS_RequestPropagationStrategyImpl::CS_RequestPropagationStrategyImpl(const CS_RequestPropagationStrategyImpl & obj): CS_RequestPropagationStrategyImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  CS_RequestPropagationStrategyImpl::copy() const
-{
-	std::shared_ptr<CS_RequestPropagationStrategyImpl> element(new CS_RequestPropagationStrategyImpl(*this));
-	element->setThisCS_RequestPropagationStrategyPtr(element);
-	return element;
-}
-
 CS_RequestPropagationStrategyImpl& CS_RequestPropagationStrategyImpl::operator=(const CS_RequestPropagationStrategyImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::SemanticStrategyImpl::operator=(obj);
+	CS_RequestPropagationStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_RequestPropagationStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> CS_RequestPropagationStrategyImpl::copy() const
+{
+	std::shared_ptr<CS_RequestPropagationStrategyImpl> element(new CS_RequestPropagationStrategyImpl());
+	*element =(*this);
+	element->setThisCS_RequestPropagationStrategyPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CS_RequestPropagationStrategyImpl::eStaticClass() const
@@ -121,7 +119,7 @@ std::string CS_RequestPropagationStrategyImpl::getName()
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_RequestPropagationStrategyImpl::select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> >  potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor>  context)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_RequestPropagationStrategyImpl::select(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> potentialTargets,std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -204,13 +202,12 @@ void CS_RequestPropagationStrategyImpl::loadAttributes(std::shared_ptr<persisten
 
 void CS_RequestPropagationStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Loci::SemanticStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_RequestPropagationStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_RequestPropagationStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::Loci::SemanticStrategyImpl::resolveReferences(featureID, references);
 }
@@ -230,9 +227,6 @@ void CS_RequestPropagationStrategyImpl::saveContent(std::shared_ptr<persistence:
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

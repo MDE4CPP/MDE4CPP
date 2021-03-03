@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -33,31 +34,24 @@
 #include <exception> // used in Persistence
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
-
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Port.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
-
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -82,38 +76,35 @@ CS_ReferenceImpl::~CS_ReferenceImpl()
 }
 
 
-
-CS_ReferenceImpl::CS_ReferenceImpl(const CS_ReferenceImpl & obj):CS_ReferenceImpl()
+CS_ReferenceImpl::CS_ReferenceImpl(const CS_ReferenceImpl & obj): CS_ReferenceImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  CS_ReferenceImpl::copy() const
-{
-	std::shared_ptr<CS_ReferenceImpl> element(new CS_ReferenceImpl(*this));
-	element->setThisCS_ReferencePtr(element);
-	return element;
-}
-
 CS_ReferenceImpl& CS_ReferenceImpl::operator=(const CS_ReferenceImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::StructuredClassifiers::ReferenceImpl::operator=(obj);
+	CS_Reference::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_Reference "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_compositeReferent  = obj.getCompositeReferent();
-
-	m_referent  = obj.getReferent();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> CS_ReferenceImpl::copy() const
+{
+	std::shared_ptr<CS_ReferenceImpl> element(new CS_ReferenceImpl());
+	*element =(*this);
+	element->setThisCS_ReferencePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CS_ReferenceImpl::eStaticClass() const
@@ -145,7 +136,7 @@ return newValue;
 
 
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchIn(std::shared_ptr<uml::Operation> operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -154,7 +145,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::di
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchIn(std::shared_ptr<uml::Operation> operation,std::shared_ptr<uml::Port> onPort)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -163,7 +154,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::di
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchOut(std::shared_ptr<uml::Operation> operation,std::shared_ptr<uml::Port> onPort)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -172,7 +163,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::di
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::dispatchOut(std::shared_ptr<uml::Operation> operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -182,7 +173,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ReferenceImpl::di
 	//end of body
 }
 
-void CS_ReferenceImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+void CS_ReferenceImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -191,7 +182,7 @@ void CS_ReferenceImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::E
 	//end of body
 }
 
-void CS_ReferenceImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort)
+void CS_ReferenceImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<uml::Port> onPort)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -200,7 +191,7 @@ void CS_ReferenceImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::E
 	//end of body
 }
 
-void CS_ReferenceImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort)
+void CS_ReferenceImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<uml::Port> onPort)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -209,7 +200,7 @@ void CS_ReferenceImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::
 	//end of body
 }
 
-void CS_ReferenceImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+void CS_ReferenceImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -225,17 +216,15 @@ void CS_ReferenceImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::
 /*
 Getter & Setter for reference compositeReferent
 */
-std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object > CS_ReferenceImpl::getCompositeReferent() const
+std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> CS_ReferenceImpl::getCompositeReferent() const
 {
 //assert(m_compositeReferent);
     return m_compositeReferent;
 }
-
 void CS_ReferenceImpl::setCompositeReferent(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> _compositeReferent)
 {
     m_compositeReferent = _compositeReferent;
 }
-
 
 
 //*********************************
@@ -266,7 +255,7 @@ Any CS_ReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_REFERENCE_ATTRIBUTE_COMPOSITEREFERENT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getCompositeReferent())); //261
+			return eAny(getCompositeReferent()); //261
 	}
 	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::eGet(featureID, resolve, coreType);
 }
@@ -342,13 +331,12 @@ void CS_ReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void CS_ReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::StructuredClassifiers::ReferenceImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_ReferenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_ReferenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -391,12 +379,8 @@ void CS_ReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("compositeReferent", this->getCompositeReferent());
-
+	// Add references
+		saveHandler->addReference(this->getCompositeReferent(), "compositeReferent", getCompositeReferent()->eClass() != PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_Object_Class()); 
 	}
 	catch (std::exception& e)
 	{

@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_STRUCTUREDCLASSIFIERS_EXTENSIONALVALUELIST_HPP
 #define FUML_SEMANTICS_STRUCTUREDCLASSIFIERS_EXTENSIONALVALUELIST_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,25 +31,14 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class ExtensionalValue;
-}
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
-namespace fUML::Semantics::Values 
+namespace fUML::Semantics::SimpleClassifiers 
 {
-	class Value;
+	class FeatureValue;
 }
 
 // base class includes
@@ -62,18 +47,18 @@ namespace fUML::Semantics::Values
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	
-	class ExtensionalValueList:virtual public ExtensionalValue
+	class ExtensionalValueList: virtual public ExtensionalValue
 	{
 		public:
  			ExtensionalValueList(const ExtensionalValueList &) {}
 
 		protected:
 			ExtensionalValueList(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -85,21 +70,11 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual bool addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value) = 0;
-			
-			 
-			virtual void addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i) = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> getValue() = 0;
-			
-			 
-			virtual std::string removeValue(int i) = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  value,int i) = 0;
-			
-			
+			virtual bool addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value) = 0; 
+			virtual void addValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i) = 0; 
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> getValue() = 0; 
+			virtual std::string removeValue(int i) = 0; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> setValue(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> value,int i) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -133,7 +108,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

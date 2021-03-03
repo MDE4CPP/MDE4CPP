@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ProtocolConformanceImpl(const ProtocolConformanceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ProtocolConformanceImpl& operator=(ProtocolConformanceImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ProtocolConformanceImpl& operator=(ProtocolConformanceImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisProtocolConformancePtr(std::weak_ptr<ProtocolConformance> thisProtocolConformancePtr);
 
 			//Additional constructors for the containments back reference
-			ProtocolConformanceImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ProtocolConformanceImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ProtocolConformanceImpl(std::weak_ptr<uml::ProtocolStateMachine > par_specificMachine);
-
-
-
+			ProtocolConformanceImpl(std::weak_ptr<uml::ProtocolStateMachine> par_specificMachine);
 
 		public:
 			//destructor
@@ -63,30 +58,26 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ProtocolStateMachine > getGeneralMachine() const ;
-			
+			virtual std::shared_ptr<uml::ProtocolStateMachine> getGeneralMachine() const ;
 			/*!
 			Specifies the ProtocolStateMachine to which the specific ProtocolStateMachine conforms.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine> _generalMachine) ;
-			
+			virtual void setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine>) ;
 			/*!
 			Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::ProtocolStateMachine > getSpecificMachine() const ;
-			
+			virtual std::weak_ptr<uml::ProtocolStateMachine> getSpecificMachine() const ;
 			/*!
 			Specifies the ProtocolStateMachine which conforms to the general ProtocolStateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setSpecificMachine(std::shared_ptr<uml::ProtocolStateMachine> _specificMachine) ;
+			virtual void setSpecificMachine(std::weak_ptr<uml::ProtocolStateMachine>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -101,7 +92,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -131,7 +122,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

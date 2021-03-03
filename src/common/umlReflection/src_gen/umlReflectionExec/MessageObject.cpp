@@ -69,9 +69,8 @@
 using namespace UML;
 
 MessageObject::MessageObject(std::shared_ptr<uml::Message> _element):
-
 	m_MessageValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Message());
 }
 
@@ -92,13 +91,15 @@ MessageObject::~MessageObject()
 
 std::shared_ptr<ecore::EObject> MessageObject::copy()
 {
-	std::shared_ptr<MessageObject> element(new MessageObject(*this));
+	std::shared_ptr<MessageObject> element(new MessageObject());
+	*element=(*this);
 	element->setThisMessageObjectPtr(element);
 	return element;
 }
 
 MessageObject& MessageObject::operator=(const MessageObject & obj)
 {
+	UML::NamedElementObject::operator=(obj);
 	return *this;
 }
 

@@ -25,15 +25,14 @@ virtual public ClassifierBehaviorExecutionActivity
 	{
 		public: 
 			ClassifierBehaviorExecutionActivityImpl(const ClassifierBehaviorExecutionActivityImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ClassifierBehaviorExecutionActivityImpl& operator=(ClassifierBehaviorExecutionActivityImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ClassifierBehaviorExecutionActivityImpl& operator=(ClassifierBehaviorExecutionActivityImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ClassifierBehaviorExecutionActivityImpl();
 			virtual std::shared_ptr<ClassifierBehaviorExecutionActivity> getThisClassifierBehaviorExecutionActivityPtr() const;
 			virtual void setThisClassifierBehaviorExecutionActivityPtr(std::weak_ptr<ClassifierBehaviorExecutionActivity> thisClassifierBehaviorExecutionActivityPtr);
-
 
 
 		public:
@@ -53,7 +52,7 @@ virtual public ClassifierBehaviorExecutionActivity
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -73,7 +72,7 @@ virtual public ClassifierBehaviorExecutionActivity
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			BehaviorExecutionSpecificationImpl(const BehaviorExecutionSpecificationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			BehaviorExecutionSpecificationImpl& operator=(BehaviorExecutionSpecificationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			BehaviorExecutionSpecificationImpl& operator=(BehaviorExecutionSpecificationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisBehaviorExecutionSpecificationPtr(std::weak_ptr<BehaviorExecutionSpecification> thisBehaviorExecutionSpecificationPtr);
 
 			//Additional constructors for the containments back reference
-			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
-
-
+			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
 			//Additional constructors for the containments back reference
-			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
-
-
+			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand);
 			//Additional constructors for the containments back reference
-			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			BehaviorExecutionSpecificationImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -71,16 +62,14 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior > getBehavior() const ;
-			
+			virtual std::shared_ptr<uml::Behavior> getBehavior() const ;
 			/*!
 			Behavior whose execution is occurring.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) ;
+			virtual void setBehavior(std::shared_ptr<uml::Behavior>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -90,7 +79,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -100,7 +89,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -115,7 +104,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

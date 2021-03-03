@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_ACTIONS_LINKACTIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_LINKACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,65 +32,29 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ActionActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-namespace uml 
-{
-	class Association;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-
+namespace fUML::Semantics::Activities 
+{
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
+	class Token;
+}
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	class Link;
 }
-
 namespace uml 
 {
+	class Action;
+	class ActivityNode;
+	class Association;
 	class LinkEndData;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class PinActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
 }
 
 // base class includes
@@ -103,18 +63,18 @@ namespace fUML::Semantics::Activities
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class LinkActionActivation:virtual public ActionActivation
+	class LinkActionActivation: virtual public ActionActivation
 	{
 		public:
  			LinkActionActivation(const LinkActionActivation &) {}
 
 		protected:
 			LinkActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -126,15 +86,9 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual bool endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<uml::LinkEndData>  endData) = 0;
-			
-			 
-			virtual std::shared_ptr<uml::Association> getAssociation() = 0;
-			
-			 
-			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link>  link,std::shared_ptr<Bag<uml::LinkEndData> >  endDataList) = 0;
-			
-			
+			virtual bool endMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<uml::LinkEndData> endData) = 0; 
+			virtual std::shared_ptr<uml::Association> getAssociation() = 0; 
+			virtual bool linkMatchesEndData(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> link,std::shared_ptr<Bag<uml::LinkEndData>> endDataList) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -169,7 +123,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIONS_READSTRUCTURALFEATUREACTIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_READSTRUCTURALFEATUREACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,55 +31,24 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
 	class PinActivation;
 }
-
-namespace uml 
-{
-	class ReadStructuralFeatureAction;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class StructuralFeatureActionActivation;
-}
-
 namespace fUML::Semantics::Activities 
 {
+	class ActivityEdgeInstance;
+	class ActivityNodeActivationGroup;
 	class Token;
+}
+namespace uml 
+{
+	class Action;
+	class ActivityNode;
+	class ReadStructuralFeatureAction;
 }
 
 // base class includes
@@ -92,18 +57,18 @@ namespace fUML::Semantics::Activities
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class ReadStructuralFeatureActionActivation:virtual public StructuralFeatureActionActivation
+	class ReadStructuralFeatureActionActivation: virtual public StructuralFeatureActionActivation
 	{
 		public:
  			ReadStructuralFeatureActionActivation(const ReadStructuralFeatureActionActivation &) {}
 
 		protected:
 			ReadStructuralFeatureActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -116,8 +81,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			 
 			virtual void doAction() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -126,20 +89,14 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::ReadStructuralFeatureAction > getReadStructuralFeatureAction() const = 0;
+			virtual std::shared_ptr<uml::ReadStructuralFeatureAction> getReadStructuralFeatureAction() const = 0;
 			
-			
-			virtual void setReadStructuralFeatureAction(std::shared_ptr<uml::ReadStructuralFeatureAction> _readStructuralFeatureAction) = 0;
-			
+			virtual void setReadStructuralFeatureAction(std::shared_ptr<uml::ReadStructuralFeatureAction>) = 0;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'readStructuralFeatureAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
+			virtual void setAction(std::shared_ptr<uml::Action>) = 0;/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'readStructuralFeatureAction'*/
 			
-			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'readStructuralFeatureAction'*/
-			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
-			
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
 
 		protected:
 			//*********************************
@@ -151,7 +108,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::ReadStructuralFeatureAction > m_readStructuralFeatureAction;
+			std::shared_ptr<uml::ReadStructuralFeatureAction> m_readStructuralFeatureAction;
 
 		public:
 			//*********************************
@@ -167,7 +124,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

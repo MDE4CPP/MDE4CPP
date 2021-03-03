@@ -22,8 +22,8 @@ namespace ecore
 	{
 		public: 
 			EModelElementImpl(const EModelElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EModelElementImpl& operator=(EModelElementImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EModelElementImpl& operator=(EModelElementImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
@@ -32,10 +32,7 @@ namespace ecore
 			virtual void setThisEModelElementPtr(std::weak_ptr<EModelElement> thisEModelElementPtr);
 
 			//Additional constructors for the containments back reference
-			EModelElementImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
-
+			EModelElementImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 
 		public:
 			//destructor
@@ -46,8 +43,6 @@ namespace ecore
 			//*********************************
 			 
 			virtual std::shared_ptr<ecore::EAnnotation> getEAnnotation(std::string source) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -61,7 +56,6 @@ namespace ecore
 			virtual std::shared_ptr<Subset<ecore::EAnnotation, ecore::EObject>> getEAnnotations() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -82,7 +76,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

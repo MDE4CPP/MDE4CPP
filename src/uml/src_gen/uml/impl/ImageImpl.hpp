@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ImageImpl(const ImageImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ImageImpl& operator=(ImageImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ImageImpl& operator=(ImageImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,10 +32,7 @@ namespace uml
 			virtual void setThisImagePtr(std::weak_ptr<Image> thisImagePtr);
 
 			//Additional constructors for the containments back reference
-			ImageImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ImageImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -55,45 +52,42 @@ namespace uml
 			*/
 			 
 			virtual std::string getContent() const ;
-			
 			/*!
 			This contains the serialization of the image according to the format. The value could represent a bitmap, image such as a GIF file, or drawing 'instructions' using a standard such as Scalable Vector Graphic (SVG) (which is XML based).
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setContent (std::string _content); 
+			virtual void setContent (std::string _content);
 			/*!
 			This indicates the format of the content, which is how the string content should be interpreted. The following values are reserved: SVG, GIF, PNG, JPG, WMF, EMF, BMP. In addition the prefix 'MIME: ' is also reserved. This option can be used as an alternative to express the reserved values above, for example "SVG" could instead be expressed as "MIME: image/svg+xml".
 			<p>From package UML::Packages.</p>
 			*/
 			 
 			virtual std::string getFormat() const ;
-			
 			/*!
 			This indicates the format of the content, which is how the string content should be interpreted. The following values are reserved: SVG, GIF, PNG, JPG, WMF, EMF, BMP. In addition the prefix 'MIME: ' is also reserved. This option can be used as an alternative to express the reserved values above, for example "SVG" could instead be expressed as "MIME: image/svg+xml".
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setFormat (std::string _format); 
+			virtual void setFormat (std::string _format);
 			/*!
 			This contains a location that can be used by a tool to locate the image as an alternative to embedding it in the stereotype.
 			<p>From package UML::Packages.</p>
 			*/
 			 
 			virtual std::string getLocation() const ;
-			
 			/*!
 			This contains a location that can be used by a tool to locate the image as an alternative to embedding it in the stereotype.
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setLocation (std::string _location); 
+			virtual void setLocation (std::string _location);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -118,7 +112,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

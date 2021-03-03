@@ -65,9 +65,8 @@
 using namespace UML;
 
 TimeExpressionObject::TimeExpressionObject(std::shared_ptr<uml::TimeExpression> _element):
-
 	m_TimeExpressionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TimeExpression());
 }
 
@@ -88,13 +87,15 @@ TimeExpressionObject::~TimeExpressionObject()
 
 std::shared_ptr<ecore::EObject> TimeExpressionObject::copy()
 {
-	std::shared_ptr<TimeExpressionObject> element(new TimeExpressionObject(*this));
+	std::shared_ptr<TimeExpressionObject> element(new TimeExpressionObject());
+	*element=(*this);
 	element->setThisTimeExpressionObjectPtr(element);
 	return element;
 }
 
 TimeExpressionObject& TimeExpressionObject::operator=(const TimeExpressionObject & obj)
 {
+	UML::ValueSpecificationObject::operator=(obj);
 	return *this;
 }
 

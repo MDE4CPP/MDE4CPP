@@ -7,21 +7,17 @@
 #ifndef UML_ENUMERATIONLITERAL_HPP
 #define UML_ENUMERATIONLITERAL_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,74 +32,19 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
 	class Deployment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Enumeration;
-}
-
-namespace uml 
-{
-	class InstanceSpecification;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Slot;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -114,6 +55,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -122,34 +64,27 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class EnumerationLiteral:virtual public InstanceSpecification
+	class EnumerationLiteral: virtual public InstanceSpecification
 	{
 		public:
  			EnumerationLiteral(const EnumerationLiteral &) {}
 
 		protected:
 			EnumerationLiteral(){}
-
+			//Additional constructors for the containments back reference
+			EnumerationLiteral(std::weak_ptr<uml::Enumeration> par_enumeration);
 
 			//Additional constructors for the containments back reference
-
-			EnumerationLiteral(std::weak_ptr<uml::Enumeration > par_enumeration);
-
-			//Additional constructors for the containments back reference
-
-			EnumerationLiteral(std::weak_ptr<uml::Namespace > par_namespace);
+			EnumerationLiteral(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-
-			EnumerationLiteral(std::weak_ptr<uml::Element > par_owner);
-
-			//Additional constructors for the containments back reference
-
-			EnumerationLiteral(std::weak_ptr<uml::Package > par_owningPackage);
+			EnumerationLiteral(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
+			EnumerationLiteral(std::weak_ptr<uml::Package> par_owningPackage);
 
-			EnumerationLiteral(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+			//Additional constructors for the containments back reference
+			EnumerationLiteral(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -160,12 +95,8 @@ namespace uml
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 			 
 			virtual std::shared_ptr<Bag<uml::Classifier> > getClassifiers() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -178,15 +109,13 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Enumeration > getEnumeration() const = 0;
-			
+			virtual std::weak_ptr<uml::Enumeration> getEnumeration() const = 0;
 			/*!
 			The Enumeration that this EnumerationLiteral is a member of.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setEnumeration(std::shared_ptr<uml::Enumeration> _enumeration) = 0;
-			
+			virtual void setEnumeration(std::weak_ptr<uml::Enumeration>) = 0;
 			
 
 		protected:
@@ -203,7 +132,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			std::weak_ptr<uml::Enumeration > m_enumeration;
+			std::weak_ptr<uml::Enumeration> m_enumeration;
 
 		public:
 			//*********************************
@@ -214,7 +143,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -224,7 +153,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -233,7 +162,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

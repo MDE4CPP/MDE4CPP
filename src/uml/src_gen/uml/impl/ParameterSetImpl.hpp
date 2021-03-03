@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ParameterSetImpl(const ParameterSetImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ParameterSetImpl& operator=(ParameterSetImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ParameterSetImpl& operator=(ParameterSetImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisParameterSetPtr(std::weak_ptr<ParameterSet> thisParameterSetPtr);
 
 			//Additional constructors for the containments back reference
-			ParameterSetImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ParameterSetImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ParameterSetImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ParameterSetImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -57,23 +52,17 @@ namespace uml
 			    behavioralFeature.ownedParameter->select(p | p.direction = ParameterDirectionKind::out and p.parameterSet->isEmpty())->forAll(isStream))
 			*/
 			 
-			virtual bool input(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool input(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The Parameters in a ParameterSet must all be inputs or all be outputs of the same parameterized entity, and the ParameterSet is owned by that entity.
 			parameter->forAll(p1, p2 | self.owner = p1.owner and self.owner = p2.owner and p1.direction = p2.direction)
 			*/
 			 
-			virtual bool same_parameterized_entity(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool same_parameterized_entity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Two ParameterSets cannot have exactly the same set of Parameters.
 			parameter->forAll(parameterSet->forAll(s1, s2 | s1->size() = s2->size() implies s1.parameter->exists(p | not s2.parameter->includes(p))))
 			*/
 			 
-			virtual bool two_parameter_sets(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool two_parameter_sets(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -90,7 +79,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Constraint, uml::Element>> getCondition() const ;
 			
-			
 			/*!
 			Parameters in the ParameterSet.
 			<p>From package UML::Classification.</p>
@@ -99,7 +87,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Parameter>> getParameter() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -114,7 +101,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -129,7 +116,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

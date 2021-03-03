@@ -23,8 +23,8 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			PinActivationImpl(const PinActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			PinActivationImpl& operator=(PinActivationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			PinActivationImpl& operator=(PinActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
@@ -33,10 +33,7 @@ namespace fUML::Semantics::Actions
 			virtual void setThisPinActivationPtr(std::weak_ptr<PinActivation> thisPinActivationPtr);
 
 			//Additional constructors for the containments back reference
-			PinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			PinActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -46,12 +43,8 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) ;
-			
-			 
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) ; 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -62,22 +55,16 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<fUML::Semantics::Actions::ActionActivation > getActionActivation() const ;
+			virtual std::weak_ptr<fUML::Semantics::Actions::ActionActivation> getActionActivation() const ;
 			
+			virtual void setActionActivation(std::weak_ptr<fUML::Semantics::Actions::ActionActivation>) ;
 			
-			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation) ;
+			virtual std::shared_ptr<uml::Pin> getPin() const ;
 			
-			
-			virtual std::shared_ptr<uml::Pin > getPin() const ;
-			
-			
-			virtual void setPin(std::shared_ptr<uml::Pin> _pin) ;
-			
+			virtual void setPin(std::shared_ptr<uml::Pin>) ;
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'pin'*/
 			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) ;
-			
-							
+			virtual void setNode(std::shared_ptr<uml::ActivityNode>) ;
 			
 			//*********************************
 			// Union Getter
@@ -97,7 +84,7 @@ namespace fUML::Semantics::Actions
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

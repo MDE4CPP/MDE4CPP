@@ -25,15 +25,14 @@ virtual public ParameterValue
 	{
 		public: 
 			ParameterValueImpl(const ParameterValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ParameterValueImpl& operator=(ParameterValueImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ParameterValueImpl& operator=(ParameterValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			ParameterValueImpl();
 			virtual std::shared_ptr<ParameterValue> getThisParameterValuePtr() const;
 			virtual void setThisParameterValuePtr(std::weak_ptr<ParameterValue> thisParameterValuePtr);
-
 
 
 		public:
@@ -46,8 +45,6 @@ virtual public ParameterValue
 			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> _copy() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -57,16 +54,13 @@ virtual public ParameterValue
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Parameter > getParameter() const ;
+			virtual std::shared_ptr<uml::Parameter> getParameter() const ;
 			
-			
-			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter) ;
-			
+			virtual void setParameter(std::shared_ptr<uml::Parameter>) ;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -86,7 +80,7 @@ virtual public ParameterValue
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

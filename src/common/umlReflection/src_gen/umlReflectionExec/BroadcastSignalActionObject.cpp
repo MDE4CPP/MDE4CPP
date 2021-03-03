@@ -93,9 +93,8 @@
 using namespace UML;
 
 BroadcastSignalActionObject::BroadcastSignalActionObject(std::shared_ptr<uml::BroadcastSignalAction> _element):
-
 	m_BroadcastSignalActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_BroadcastSignalAction());
 }
 
@@ -116,13 +115,15 @@ BroadcastSignalActionObject::~BroadcastSignalActionObject()
 
 std::shared_ptr<ecore::EObject> BroadcastSignalActionObject::copy()
 {
-	std::shared_ptr<BroadcastSignalActionObject> element(new BroadcastSignalActionObject(*this));
+	std::shared_ptr<BroadcastSignalActionObject> element(new BroadcastSignalActionObject());
+	*element=(*this);
 	element->setThisBroadcastSignalActionObjectPtr(element);
 	return element;
 }
 
 BroadcastSignalActionObject& BroadcastSignalActionObject::operator=(const BroadcastSignalActionObject & obj)
 {
+	UML::InvocationActionObject::operator=(obj);
 	return *this;
 }
 

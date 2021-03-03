@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ActivityImpl(const ActivityImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ActivityImpl& operator=(ActivityImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ActivityImpl& operator=(ActivityImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,29 +32,16 @@ namespace uml
 			virtual void setThisActivityPtr(std::weak_ptr<Activity> thisActivityPtr);
 
 			//Additional constructors for the containments back reference
-			ActivityImpl(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier);
-
-
+			ActivityImpl(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier);
 			//Additional constructors for the containments back reference
-			ActivityImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ActivityImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ActivityImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ActivityImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ActivityImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			ActivityImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			ActivityImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			ActivityImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -70,9 +57,7 @@ namespace uml
 			       oclIsKindOf(ActivityParameterNode) and oclAsType(ActivityParameterNode).parameter = p)->size()= 1)
 			*/
 			 
-			virtual bool maximum_one_parameter_node(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool maximum_one_parameter_node(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A Parameter with direction inout must have exactly two ActivityParameterNodes in an Activity, at most one with incoming ActivityEdges and at most one with outgoing ActivityEdges.
 			ownedParameter->forAll(p | 
 			p.direction = ParameterDirectionKind::inout implies
@@ -84,9 +69,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool maximum_two_parameter_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -97,26 +80,24 @@ namespace uml
 			*/
 			 
 			virtual bool getIsReadOnly() const ;
-			
 			/*!
 			If true, this Activity must not make any changes to objects. The default is false (an Activity may make nonlocal changes). (This is an assertion, not an executable property. It may be used by an execution engine to optimize model execution. If the assertion is violated by the Activity, then the model is ill-formed.)
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsReadOnly (bool _isReadOnly); 
+			virtual void setIsReadOnly (bool _isReadOnly);
 			/*!
 			If true, all invocations of the Activity are handled by the same execution.
 			<p>From package UML::Activities.</p>
 			*/
 			 
 			virtual bool getIsSingleExecution() const ;
-			
 			/*!
 			If true, all invocations of the Activity are handled by the same execution.
 			<p>From package UML::Activities.</p>
 			*/
 			 
-			virtual void setIsSingleExecution (bool _isSingleExecution); 
+			virtual void setIsSingleExecution (bool _isSingleExecution);
 			
 			
 			//*********************************
@@ -131,7 +112,6 @@ namespace uml
 			
 			
 			
-			
 			/*!
 			ActivityNodes coordinated by the Activity.
 			<p>From package UML::Activities.</p>
@@ -140,13 +120,10 @@ namespace uml
 			virtual std::shared_ptr<SubsetUnion<uml::ActivityNode, uml::Element>> getNode() const ;
 			
 			
-			
 			virtual std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::ActivityGroup>> getOwnedGroup() const ;
 			
 			
-			
 			virtual std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode /*Subset does not reference a union*/>> getOwnedNode() const ;
-			
 			
 			/*!
 			Top-level ActivityPartitions in the Activity.
@@ -155,14 +132,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup,uml::ActivityGroup /*Subset does not reference a union*/>> getPartition() const ;
 			
-			
 			/*!
 			Top-level StructuredActivityNodes in the Activity.
 			<p>From package UML::Activities.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::StructuredActivityNode, uml::ActivityGroup,uml::ActivityNode /*Subset does not reference a union*/>> getStructuredNode() const ;
-			
 			
 			/*!
 			Top-level Variables defined by the Activity.
@@ -172,7 +147,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> getVariable() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -202,7 +176,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -217,7 +191,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -247,7 +221,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

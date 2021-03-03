@@ -44,9 +44,7 @@ RealizationImpl::RealizationImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Realization is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ RealizationImpl::RealizationImpl(const RealizationImpl & obj):RealizationImpl()
 
 std::shared_ptr<ecore::EObject>  RealizationImpl::copy() const
 {
-	std::shared_ptr<RealizationImpl> element(new RealizationImpl(*this));
+	std::shared_ptr<RealizationImpl> element(new RealizationImpl());
+	*element=(*this);
 	element->setThisRealizationPtr(element);
 	return element;
 }
 
 RealizationImpl& RealizationImpl::operator=(const RealizationImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Realization "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

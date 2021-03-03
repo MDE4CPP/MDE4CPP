@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIONS_ACCEPTEVENTACTIONEVENTACCEPTER_HPP
 #define FUML_SEMANTICS_ACTIONS_ACCEPTEVENTACTIONEVENTACCEPTER_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,15 +31,10 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class AcceptEventActionActivation;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class EventAccepter;
 }
 
 // base class includes
@@ -52,18 +43,18 @@ namespace fUML::Semantics::CommonBehavior
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class AcceptEventActionEventAccepter:virtual public fUML::Semantics::CommonBehavior::EventAccepter
+	class AcceptEventActionEventAccepter: virtual public fUML::Semantics::CommonBehavior::EventAccepter
 	{
 		public:
  			AcceptEventActionEventAccepter(const AcceptEventActionEventAccepter &) {}
 
 		protected:
 			AcceptEventActionEventAccepter(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -83,11 +74,9 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation > getActionActivation() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> getActionActivation() const = 0;
 			
-			
-			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> _actionActivation) = 0;
-			
+			virtual void setActionActivation(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation>) = 0;
 			
 
 		protected:
@@ -100,7 +89,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation > m_actionActivation;
+			std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> m_actionActivation;
 
 		public:
 			//*********************************
@@ -115,7 +104,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

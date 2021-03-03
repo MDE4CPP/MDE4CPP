@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -38,23 +39,18 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
-
 #include "uml/DataType.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -79,44 +75,35 @@ DataValueImpl::~DataValueImpl()
 }
 
 
-
-DataValueImpl::DataValueImpl(const DataValueImpl & obj):DataValueImpl()
+DataValueImpl::DataValueImpl(const DataValueImpl & obj): DataValueImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  DataValueImpl::copy() const
-{
-	std::shared_ptr<DataValueImpl> element(new DataValueImpl(*this));
-	element->setThisDataValuePtr(element);
-	return element;
-}
-
 DataValueImpl& DataValueImpl::operator=(const DataValueImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	CompoundValueImpl::operator=(obj);
+	DataValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DataValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_type  = obj.getType();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> _featureValuesList = obj.getFeatureValues();
-	for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _featureValues : *_featureValuesList)
-	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(_featureValues->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> DataValueImpl::copy() const
+{
+	std::shared_ptr<DataValueImpl> element(new DataValueImpl());
+	*element =(*this);
+	element->setThisDataValuePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DataValueImpl::eStaticClass() const
@@ -167,17 +154,15 @@ std::shared_ptr<fUML::Semantics::Values::Value> DataValueImpl::new_()
 /*
 Getter & Setter for reference type
 */
-std::shared_ptr<uml::DataType > DataValueImpl::getType() const
+std::shared_ptr<uml::DataType> DataValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
-
 void DataValueImpl::setType(std::shared_ptr<uml::DataType> _type)
 {
     m_type = _type;
 }
-
 
 
 //*********************************
@@ -208,7 +193,7 @@ Any DataValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::DATAVALUE_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //361
+			return eAny(getType()); //361
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -284,13 +269,12 @@ void DataValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 
 void DataValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	CompoundValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void DataValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DataValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -333,12 +317,8 @@ void DataValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("type", this->getType());
-
+	// Add references
+		saveHandler->addReference(this->getType(), "type", getType()->eClass() != uml::umlPackage::eInstance()->getDataType_Class()); 
 	}
 	catch (std::exception& e)
 	{

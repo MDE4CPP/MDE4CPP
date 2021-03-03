@@ -23,15 +23,14 @@ namespace fUML::Semantics::Activities
 	{
 		public: 
 			ObjectTokenImpl(const ObjectTokenImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ObjectTokenImpl& operator=(ObjectTokenImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ObjectTokenImpl& operator=(ObjectTokenImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ObjectTokenImpl();
 			virtual std::shared_ptr<ObjectToken> getThisObjectTokenPtr() const;
 			virtual void setThisObjectTokenPtr(std::weak_ptr<ObjectToken> thisObjectTokenPtr);
-
 
 
 		public:
@@ -42,15 +41,9 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other) ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> other) ; 
 			virtual bool isControl() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -61,12 +54,10 @@ namespace fUML::Semantics::Activities
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Values::Value > getValue() const ;
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ;
 			
+			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value>) ;
 			
-			virtual void setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -86,7 +77,7 @@ namespace fUML::Semantics::Activities
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

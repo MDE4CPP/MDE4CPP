@@ -25,8 +25,8 @@ virtual public ActivityEdgeInstance
 	{
 		public: 
 			ActivityEdgeInstanceImpl(const ActivityEdgeInstanceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ActivityEdgeInstanceImpl& operator=(ActivityEdgeInstanceImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ActivityEdgeInstanceImpl& operator=(ActivityEdgeInstanceImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
@@ -35,10 +35,7 @@ virtual public ActivityEdgeInstance
 			virtual void setThisActivityEdgeInstancePtr(std::weak_ptr<ActivityEdgeInstance> thisActivityEdgeInstancePtr);
 
 			//Additional constructors for the containments back reference
-			ActivityEdgeInstanceImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			ActivityEdgeInstanceImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -48,24 +45,12 @@ virtual public ActivityEdgeInstance
 			// Operations
 			//*********************************
 			 
-			virtual int countOfferedValue() ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getOfferedTokens() ;
-			
-			 
-			virtual bool hasOffer() ;
-			
-			 
-			virtual void sendOffer(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  tokens) ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
-			
-			 
+			virtual int countOfferedValue() ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > getOfferedTokens() ; 
+			virtual bool hasOffer() ; 
+			virtual void sendOffer(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> tokens) ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ; 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens(int maxCount) ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -76,34 +61,25 @@ virtual public ActivityEdgeInstance
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::ActivityEdge > getEdge() const ;
+			virtual std::shared_ptr<uml::ActivityEdge> getEdge() const ;
 			
+			virtual void setEdge(std::shared_ptr<uml::ActivityEdge>) ;
 			
-			virtual void setEdge(std::shared_ptr<uml::ActivityEdge> _edge) ;
+			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> getGroup() const ;
 			
-			
-			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > getGroup() const ;
-			
-			
-			virtual void setGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group) ;
-			
+			virtual void setGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>) ;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Offer>> getOffers() const ;
 			
 			
+			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getSource() const ;
 			
-			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > getSource() const ;
+			virtual void setSource(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation>) ;
 			
+			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getTarget() const ;
 			
-			virtual void setSource(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _source) ;
+			virtual void setTarget(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation>) ;
 			
-			
-			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > getTarget() const ;
-			
-			
-			virtual void setTarget(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _target) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -123,7 +99,7 @@ virtual public ActivityEdgeInstance
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

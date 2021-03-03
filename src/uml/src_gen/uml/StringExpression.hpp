@@ -8,23 +8,19 @@
 #define UML_STRINGEXPRESSION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,89 +35,28 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class Expression;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class Slot;
-}
-
-namespace uml 
-{
-	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
-	class TemplateableElement;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
-	class ValueSpecification;
-}
-
-namespace uml 
-{
 	class ValueSpecificationAction;
 }
 
 // base class includes
 #include "uml/Expression.hpp"
-
 #include "uml/TemplateableElement.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
+
 
 
 //*********************************
@@ -132,42 +67,33 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class StringExpression:virtual public Expression,virtual public TemplateableElement
+	class StringExpression: virtual public Expression, virtual public TemplateableElement
 	{
 		public:
  			StringExpression(const StringExpression &) {}
 
 		protected:
 			StringExpression(){}
-
+			//Additional constructors for the containments back reference
+			StringExpression(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-
-			StringExpression(std::weak_ptr<uml::Namespace > par_namespace);
-
-			//Additional constructors for the containments back reference
-
-			StringExpression(std::weak_ptr<uml::Element > par_owner);
+			StringExpression(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-
-			StringExpression(std::weak_ptr<uml::StringExpression > par_owningExpression);
-
-			//Additional constructors for the containments back reference
-
-			StringExpression(std::weak_ptr<uml::Package > par_owningPackage);
+			StringExpression(std::weak_ptr<uml::StringExpression> par_owningExpression);
 
 			//Additional constructors for the containments back reference
-
-			StringExpression(std::weak_ptr<uml::Slot > par_owningSlot);
-
-			//Additional constructors for the containments back reference
-
-			StringExpression(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+			StringExpression(std::weak_ptr<uml::Package> par_owningPackage);
 
 			//Additional constructors for the containments back reference
+			StringExpression(std::weak_ptr<uml::Slot> par_owningSlot);
 
-			StringExpression(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
+			//Additional constructors for the containments back reference
+			StringExpression(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
+
+			//Additional constructors for the containments back reference
+			StringExpression(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -183,16 +109,12 @@ namespace uml
 			operand->forAll (oclIsKindOf (LiteralString))
 			*/
 			 
-			virtual bool operands(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool operands(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			If a StringExpression has sub-expressions, it cannot have operands and vice versa (this avoids the problem of having to define a collating sequence between operands and subexpressions).
 			if subExpression->notEmpty() then operand->isEmpty() else operand->notEmpty() endif
 			*/
 			 
-			virtual bool subexpressions(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool subexpressions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -205,22 +127,19 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::StringExpression > getOwningExpression() const = 0;
-			
+			virtual std::weak_ptr<uml::StringExpression> getOwningExpression() const = 0;
 			/*!
 			The StringExpression of which this StringExpression is a subExpression.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setOwningExpression(std::shared_ptr<uml::StringExpression> _owningExpression) = 0;
-			
+			virtual void setOwningExpression(std::weak_ptr<uml::StringExpression>) = 0;
 			/*!
 			The StringExpressions that constitute this StringExpression.
 			<p>From package UML::Values.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::StringExpression, uml::Element>> getSubExpression() const = 0;
-			
 			
 			
 
@@ -238,7 +157,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			std::weak_ptr<uml::StringExpression > m_owningExpression;/*!
+			std::weak_ptr<uml::StringExpression> m_owningExpression;/*!
 			The StringExpressions that constitute this StringExpression.
 			<p>From package UML::Values.</p>
 			*/
@@ -254,7 +173,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -264,7 +183,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -273,7 +192,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

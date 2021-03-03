@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -32,21 +33,17 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "uml/Signal.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -71,44 +68,35 @@ SignalInstanceImpl::~SignalInstanceImpl()
 }
 
 
-
-SignalInstanceImpl::SignalInstanceImpl(const SignalInstanceImpl & obj):SignalInstanceImpl()
+SignalInstanceImpl::SignalInstanceImpl(const SignalInstanceImpl & obj): SignalInstanceImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  SignalInstanceImpl::copy() const
-{
-	std::shared_ptr<SignalInstanceImpl> element(new SignalInstanceImpl(*this));
-	element->setThisSignalInstancePtr(element);
-	return element;
-}
-
 SignalInstanceImpl& SignalInstanceImpl::operator=(const SignalInstanceImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	CompoundValueImpl::operator=(obj);
+	SignalInstance::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SignalInstance "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_type  = obj.getType();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> _featureValuesList = obj.getFeatureValues();
-	for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _featureValues : *_featureValuesList)
-	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(_featureValues->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> SignalInstanceImpl::copy() const
+{
+	std::shared_ptr<SignalInstanceImpl> element(new SignalInstanceImpl());
+	*element =(*this);
+	element->setThisSignalInstancePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> SignalInstanceImpl::eStaticClass() const
@@ -141,17 +129,15 @@ return newValue;
 /*
 Getter & Setter for reference type
 */
-std::shared_ptr<uml::Signal > SignalInstanceImpl::getType() const
+std::shared_ptr<uml::Signal> SignalInstanceImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
-
 void SignalInstanceImpl::setType(std::shared_ptr<uml::Signal> _type)
 {
     m_type = _type;
 }
-
 
 
 //*********************************
@@ -182,7 +168,7 @@ Any SignalInstanceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::SIGNALINSTANCE_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //1071
+			return eAny(getType()); //1071
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -258,13 +244,12 @@ void SignalInstanceImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void SignalInstanceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	CompoundValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void SignalInstanceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void SignalInstanceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -307,12 +292,8 @@ void SignalInstanceImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("type", this->getType());
-
+	// Add references
+		saveHandler->addReference(this->getType(), "type", getType()->eClass() != uml::umlPackage::eInstance()->getSignal_Class()); 
 	}
 	catch (std::exception& e)
 	{

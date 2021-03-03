@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			TemplateBindingImpl(const TemplateBindingImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			TemplateBindingImpl& operator=(TemplateBindingImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			TemplateBindingImpl& operator=(TemplateBindingImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisTemplateBindingPtr(std::weak_ptr<TemplateBinding> thisTemplateBindingPtr);
 
 			//Additional constructors for the containments back reference
-			TemplateBindingImpl(std::weak_ptr<uml::TemplateableElement > par_boundElement);
-
-
+			TemplateBindingImpl(std::weak_ptr<uml::TemplateableElement> par_boundElement);
 			//Additional constructors for the containments back reference
-			TemplateBindingImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			TemplateBindingImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -53,16 +48,12 @@ namespace uml
 			signature.parameter->forAll(p | parameterSubstitution->select(b | b.formal = p)->size() <= 1)
 			*/
 			 
-			virtual bool one_parameter_substitution(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool one_parameter_substitution(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Each parameterSubstitution must refer to a formal TemplateParameter of the target TemplateSignature.
 			parameterSubstitution->forAll(b | signature.parameter->includes(b.formal))
 			*/
 			 
-			virtual bool parameter_substitution_formal(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool parameter_substitution_formal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -77,15 +68,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::TemplateableElement > getBoundElement() const ;
-			
+			virtual std::weak_ptr<uml::TemplateableElement> getBoundElement() const ;
 			/*!
 			The TemplateableElement that is bound by this TemplateBinding.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setBoundElement(std::shared_ptr<uml::TemplateableElement> _boundElement) ;
-			
+			virtual void setBoundElement(std::weak_ptr<uml::TemplateableElement>) ;
 			/*!
 			The TemplateParameterSubstitutions owned by this TemplateBinding.
 			<p>From package UML::CommonStructure.</p>
@@ -93,22 +82,19 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::TemplateParameterSubstitution, uml::Element>> getParameterSubstitution() const ;
 			
-			
 			/*!
 			The TemplateSignature for the template that is the target of this TemplateBinding.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TemplateSignature > getSignature() const ;
-			
+			virtual std::shared_ptr<uml::TemplateSignature> getSignature() const ;
 			/*!
 			The TemplateSignature for the template that is the target of this TemplateBinding.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setSignature(std::shared_ptr<uml::TemplateSignature> _signature) ;
+			virtual void setSignature(std::shared_ptr<uml::TemplateSignature>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -123,7 +109,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -153,7 +139,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

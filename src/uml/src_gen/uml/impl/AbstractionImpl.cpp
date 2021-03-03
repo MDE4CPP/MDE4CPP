@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,26 +35,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OpaqueExpression.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -79,7 +71,7 @@ AbstractionImpl::~AbstractionImpl()
 }
 
 //Additional constructor for the containments back reference
-AbstractionImpl::AbstractionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+AbstractionImpl::AbstractionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :AbstractionImpl()
 {
 	m_namespace = par_namespace;
@@ -87,14 +79,14 @@ AbstractionImpl::AbstractionImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-AbstractionImpl::AbstractionImpl(std::weak_ptr<uml::Element > par_owner)
+AbstractionImpl::AbstractionImpl(std::weak_ptr<uml::Element> par_owner)
 :AbstractionImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-AbstractionImpl::AbstractionImpl(std::weak_ptr<uml::Package > par_owningPackage)
+AbstractionImpl::AbstractionImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :AbstractionImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -102,99 +94,46 @@ AbstractionImpl::AbstractionImpl(std::weak_ptr<uml::Package > par_owningPackage)
 }
 
 //Additional constructor for the containments back reference
-AbstractionImpl::AbstractionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+AbstractionImpl::AbstractionImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :AbstractionImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-AbstractionImpl::AbstractionImpl(const AbstractionImpl & obj):AbstractionImpl()
+AbstractionImpl::AbstractionImpl(const AbstractionImpl & obj): AbstractionImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  AbstractionImpl::copy() const
-{
-	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl(*this));
-	element->setThisAbstractionPtr(element);
-	return element;
-}
-
 AbstractionImpl& AbstractionImpl::operator=(const AbstractionImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	DependencyImpl::operator=(obj);
+	Abstraction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Abstraction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::NamedElement>> _clientList = obj.getClient();
-	for(std::shared_ptr<uml::NamedElement> _client : *_clientList)
-	{
-		this->getClient()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_client->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_client" << std::endl;
-	#endif
 	if(obj.getMapping()!=nullptr)
 	{
 		m_mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(obj.getMapping()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_mapping" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::NamedElement>> _supplierList = obj.getSupplier();
-	for(std::shared_ptr<uml::NamedElement> _supplier : *_supplierList)
-	{
-		this->getSupplier()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_supplier->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_supplier" << std::endl;
-	#endif
-
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> AbstractionImpl::copy() const
+{
+	std::shared_ptr<AbstractionImpl> element(new AbstractionImpl());
+	*element =(*this);
+	element->setThisAbstractionPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> AbstractionImpl::eStaticClass() const
@@ -216,23 +155,21 @@ std::shared_ptr<ecore::EClass> AbstractionImpl::eStaticClass() const
 /*
 Getter & Setter for reference mapping
 */
-std::shared_ptr<uml::OpaqueExpression > AbstractionImpl::getMapping() const
+std::shared_ptr<uml::OpaqueExpression> AbstractionImpl::getMapping() const
 {
 
     return m_mapping;
 }
-
 void AbstractionImpl::setMapping(std::shared_ptr<uml::OpaqueExpression> _mapping)
 {
     m_mapping = _mapping;
 }
 
 
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > AbstractionImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> AbstractionImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -252,7 +189,7 @@ std::shared_ptr<Union<uml::Element>> AbstractionImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > AbstractionImpl::getOwner() const
+std::weak_ptr<uml::Element> AbstractionImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -356,7 +293,7 @@ Any AbstractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ABSTRACTION_ATTRIBUTE_MAPPING:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMapping())); //117
+			return eAny(getMapping()); //117
 	}
 	return DependencyImpl::eGet(featureID, resolve, coreType);
 }
@@ -413,7 +350,6 @@ void AbstractionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 
 void AbstractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -424,13 +360,9 @@ void AbstractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 			{
 				typeName = "OpaqueExpression";
 			}
-			std::shared_ptr<uml::OpaqueExpression> mapping = std::dynamic_pointer_cast<uml::OpaqueExpression>(modelFactory->create(typeName));
-			if (mapping != nullptr)
-			{
-				this->setMapping(mapping);
-				loadHandler->handleChild(mapping);
-			}
-			return;
+			loadHandler->handleChild(this->getMapping()); 
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -445,7 +377,7 @@ void AbstractionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence
 	DependencyImpl::loadNode(nodeName, loadHandler);
 }
 
-void AbstractionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void AbstractionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	DependencyImpl::resolveReferences(featureID, references);
 }
@@ -480,15 +412,12 @@ void AbstractionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'mapping'
-		std::shared_ptr<uml::OpaqueExpression > mapping = this->getMapping();
+		std::shared_ptr<uml::OpaqueExpression> mapping = this->getMapping();
 		if (mapping != nullptr)
 		{
 			saveHandler->addReference(mapping, "mapping", mapping->eClass() != package->getOpaqueExpression_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

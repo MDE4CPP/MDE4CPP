@@ -63,9 +63,8 @@
 using namespace UML;
 
 ConnectableElementObject::ConnectableElementObject(std::shared_ptr<uml::ConnectableElement> _element):
-
 	m_ConnectableElementValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ConnectableElement());
 }
 
@@ -86,13 +85,16 @@ ConnectableElementObject::~ConnectableElementObject()
 
 std::shared_ptr<ecore::EObject> ConnectableElementObject::copy()
 {
-	std::shared_ptr<ConnectableElementObject> element(new ConnectableElementObject(*this));
+	std::shared_ptr<ConnectableElementObject> element(new ConnectableElementObject());
+	*element=(*this);
 	element->setThisConnectableElementObjectPtr(element);
 	return element;
 }
 
 ConnectableElementObject& ConnectableElementObject::operator=(const ConnectableElementObject & obj)
 {
+	UML::ParameterableElementObject::operator=(obj);
+	UML::TypedElementObject::operator=(obj);
 	return *this;
 }
 

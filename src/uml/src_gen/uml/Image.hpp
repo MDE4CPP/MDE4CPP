@@ -7,20 +7,16 @@
 #ifndef UML_IMAGE_HPP
 #define UML_IMAGE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,21 +31,17 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
 }
 
 // base class includes
 #include "uml/Element.hpp"
 
 // enum includes
+
 
 
 //*********************************
@@ -60,14 +52,13 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class Image:virtual public Element
+	class Image: virtual public Element
 	{
 		public:
  			Image(const Image &) {}
 
 		protected:
 			Image(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -88,39 +79,36 @@ namespace uml
 			*/
 			 
 			virtual std::string getContent() const = 0;
-			
 			/*!
 			This contains the serialization of the image according to the format. The value could represent a bitmap, image such as a GIF file, or drawing 'instructions' using a standard such as Scalable Vector Graphic (SVG) (which is XML based).
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setContent (std::string _content)= 0; 
+			virtual void setContent (std::string _content)= 0;
 			/*!
 			This indicates the format of the content, which is how the string content should be interpreted. The following values are reserved: SVG, GIF, PNG, JPG, WMF, EMF, BMP. In addition the prefix 'MIME: ' is also reserved. This option can be used as an alternative to express the reserved values above, for example "SVG" could instead be expressed as "MIME: image/svg+xml".
 			<p>From package UML::Packages.</p>
 			*/
 			 
 			virtual std::string getFormat() const = 0;
-			
 			/*!
 			This indicates the format of the content, which is how the string content should be interpreted. The following values are reserved: SVG, GIF, PNG, JPG, WMF, EMF, BMP. In addition the prefix 'MIME: ' is also reserved. This option can be used as an alternative to express the reserved values above, for example "SVG" could instead be expressed as "MIME: image/svg+xml".
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setFormat (std::string _format)= 0; 
+			virtual void setFormat (std::string _format)= 0;
 			/*!
 			This contains a location that can be used by a tool to locate the image as an alternative to embedding it in the stereotype.
 			<p>From package UML::Packages.</p>
 			*/
 			 
 			virtual std::string getLocation() const = 0;
-			
 			/*!
 			This contains a location that can be used by a tool to locate the image as an alternative to embedding it in the stereotype.
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setLocation (std::string _location)= 0; 
+			virtual void setLocation (std::string _location)= 0;
 			
 			//*********************************
 			// Reference
@@ -174,7 +162,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

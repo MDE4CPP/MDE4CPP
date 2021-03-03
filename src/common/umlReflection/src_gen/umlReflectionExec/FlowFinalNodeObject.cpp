@@ -74,9 +74,8 @@
 using namespace UML;
 
 FlowFinalNodeObject::FlowFinalNodeObject(std::shared_ptr<uml::FlowFinalNode> _element):
-
 	m_FlowFinalNodeValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_FlowFinalNode());
 }
 
@@ -97,13 +96,15 @@ FlowFinalNodeObject::~FlowFinalNodeObject()
 
 std::shared_ptr<ecore::EObject> FlowFinalNodeObject::copy()
 {
-	std::shared_ptr<FlowFinalNodeObject> element(new FlowFinalNodeObject(*this));
+	std::shared_ptr<FlowFinalNodeObject> element(new FlowFinalNodeObject());
+	*element=(*this);
 	element->setThisFlowFinalNodeObjectPtr(element);
 	return element;
 }
 
 FlowFinalNodeObject& FlowFinalNodeObject::operator=(const FlowFinalNodeObject & obj)
 {
+	UML::FinalNodeObject::operator=(obj);
 	return *this;
 }
 

@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_STRUCTUREDCLASSIFIERS_CS_LINK_HPP
 #define PSCS_SEMANTICS_STRUCTUREDCLASSIFIERS_CS_LINK_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,35 +31,19 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Association;
-}
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Link;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
+namespace fUML::Semantics::SimpleClassifiers 
+{
+	class FeatureValue;
+}
 namespace uml 
 {
+	class Association;
 	class StructuralFeature;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 
 // base class includes
@@ -72,18 +52,18 @@ namespace fUML::Semantics::Values
 // enum includes
 
 
+
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	
-	class CS_Link:virtual public fUML::Semantics::StructuredClassifiers::Link
+	class CS_Link: virtual public fUML::Semantics::StructuredClassifiers::Link
 	{
 		public:
  			CS_Link(const CS_Link &) {}
 
 		protected:
 			CS_Link(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -95,12 +75,8 @@ namespace PSCS::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<uml::StructuralFeature> getFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value) = 0;
-			
-			 
-			virtual bool hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value) = 0;
-			
-			
+			virtual std::shared_ptr<uml::StructuralFeature> getFeature(std::shared_ptr<fUML::Semantics::Values::Value> value) = 0; 
+			virtual bool hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value> value) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -134,7 +110,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

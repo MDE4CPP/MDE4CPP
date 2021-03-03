@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -46,47 +47,34 @@
 #include <exception> // used in Persistence
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
-
 #include "PSCS/Semantics/StructuredClassifiers/CS_Link.hpp"
-
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
-
 #include "uml/Class.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
-
 #include "uml/Interface.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Port.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-
 #include "uml/StructuralFeature.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
-
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -111,54 +99,34 @@ CS_ObjectImpl::~CS_ObjectImpl()
 }
 
 
-
-CS_ObjectImpl::CS_ObjectImpl(const CS_ObjectImpl & obj):CS_ObjectImpl()
+CS_ObjectImpl::CS_ObjectImpl(const CS_ObjectImpl & obj): CS_ObjectImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  CS_ObjectImpl::copy() const
-{
-	std::shared_ptr<CS_ObjectImpl> element(new CS_ObjectImpl(*this));
-	element->setThisCS_ObjectPtr(element);
-	return element;
-}
-
 CS_ObjectImpl& CS_ObjectImpl::operator=(const CS_ObjectImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::StructuredClassifiers::ObjectImpl::operator=(obj);
+	CS_Object::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_Object "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_locus  = obj.getLocus();
-
-	std::shared_ptr<Bag<uml::Classifier>> _types = obj.getTypes();
-	m_types.reset(new Bag<uml::Classifier>(*(obj.getTypes().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> _featureValuesList = obj.getFeatureValues();
-	for(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _featureValues : *_featureValuesList)
-	{
-		this->getFeatureValues()->add(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>(std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(_featureValues->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_featureValues" << std::endl;
-	#endif
-	if(obj.getObjectActivation()!=nullptr)
-	{
-		m_objectActivation = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(obj.getObjectActivation()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_objectActivation" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> CS_ObjectImpl::copy() const
+{
+	std::shared_ptr<CS_ObjectImpl> element(new CS_ObjectImpl());
+	*element =(*this);
+	element->setThisCS_ObjectPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CS_ObjectImpl::eStaticClass() const
@@ -173,7 +141,7 @@ std::shared_ptr<ecore::EClass> CS_ObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool CS_ObjectImpl::checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)
+bool CS_ObjectImpl::checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -204,7 +172,7 @@ bool CS_ObjectImpl::checkAllParents(std::shared_ptr<uml::Classifier>  type,std::
 	//end of body
 }
 
-bool CS_ObjectImpl::contains(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object)
+bool CS_ObjectImpl::contains(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -232,7 +200,7 @@ bool CS_ObjectImpl::contains(std::shared_ptr<fUML::Semantics::StructuredClassifi
 	//end of body
 }
 
-bool CS_ObjectImpl::directlyContains(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object)
+bool CS_ObjectImpl::directlyContains(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -257,7 +225,7 @@ bool CS_ObjectImpl::directlyContains(std::shared_ptr<fUML::Semantics::Structured
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispatchIn(std::shared_ptr<uml::Operation> operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -304,7 +272,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispa
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispatchIn(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispatchIn(std::shared_ptr<uml::Operation> operation,std::shared_ptr<uml::Port> onPort)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -321,7 +289,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispa
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispatchOut(std::shared_ptr<uml::Operation> operation,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -384,7 +352,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispa
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispatchOut(std::shared_ptr<uml::Operation>  operation,std::shared_ptr<uml::Port>  onPort)
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> CS_ObjectImpl::dispatchOut(std::shared_ptr<uml::Operation> operation,std::shared_ptr<uml::Port> onPort)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -431,7 +399,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Object> > CS_Obje
 	//end of body
 }
 
-std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CS_ObjectImpl::getFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature)
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CS_ObjectImpl::getFeatureValue(std::shared_ptr<uml::StructuralFeature> feature)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -449,7 +417,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> CS_ObjectImpl:
 	//end of body
 }
 
-PSCS::Semantics::StructuredClassifiers::CS_LinkKind CS_ObjectImpl::getLinkKind(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link>  link,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+PSCS::Semantics::StructuredClassifiers::CS_LinkKind CS_ObjectImpl::getLinkKind(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -496,7 +464,7 @@ PSCS::Semantics::StructuredClassifiers::CS_LinkKind CS_ObjectImpl::getLinkKind(s
 	//end of body
 }
 
-std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_ObjectImpl::getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_ObjectImpl::getLinks(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -520,7 +488,7 @@ std::shared_ptr<Bag<PSCS::Semantics::StructuredClassifiers::CS_Link> > CS_Object
 	//end of body
 }
 
-bool CS_ObjectImpl::hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value>  value)
+bool CS_ObjectImpl::hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -545,7 +513,7 @@ bool CS_ObjectImpl::hasValueForAFeature(std::shared_ptr<fUML::Semantics::Values:
 	//end of body
 }
 
-bool CS_ObjectImpl::isDescendant(std::shared_ptr<uml::Interface>  contract,std::shared_ptr<uml::Interface>  interface_)
+bool CS_ObjectImpl::isDescendant(std::shared_ptr<uml::Interface> contract,std::shared_ptr<uml::Interface> interface_)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -570,7 +538,7 @@ bool CS_ObjectImpl::isDescendant(std::shared_ptr<uml::Interface>  contract,std::
 	//end of body
 }
 
-bool CS_ObjectImpl::isOperationProvided(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  reference,std::shared_ptr<uml::Operation>  operation)
+bool CS_ObjectImpl::isOperationProvided(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference,std::shared_ptr<uml::Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -636,7 +604,7 @@ bool CS_ObjectImpl::isOperationProvided(std::shared_ptr<fUML::Semantics::Structu
 	//end of body
 }
 
-bool CS_ObjectImpl::isOperationRequired(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  reference,std::shared_ptr<uml::Operation>  operation)
+bool CS_ObjectImpl::isOperationRequired(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> reference,std::shared_ptr<uml::Operation> operation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -668,7 +636,7 @@ bool CS_ObjectImpl::isOperationRequired(std::shared_ptr<fUML::Semantics::Structu
 	//end of body
 }
 
-bool CS_ObjectImpl::realizesInterface(std::shared_ptr<uml::Class>  type,std::shared_ptr<uml::Interface>  interface_)
+bool CS_ObjectImpl::realizesInterface(std::shared_ptr<uml::Class> type,std::shared_ptr<uml::Interface> interface_)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -693,7 +661,7 @@ bool CS_ObjectImpl::realizesInterface(std::shared_ptr<uml::Class>  type,std::sha
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_ObjectImpl::selectTargetsForDispatching(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link>  link,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint,uml::ConnectorKind connectorKind,std::shared_ptr<uml::Operation>  operation,bool toInternal)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_ObjectImpl::selectTargetsForDispatching(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint,uml::ConnectorKind connectorKind,std::shared_ptr<uml::Operation> operation,bool toInternal)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -790,7 +758,7 @@ std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_Obje
 	//end of body
 }
 
-std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_ObjectImpl::selectTargetsForSending(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link>  link,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint,uml::ConnectorKind connectorKind,bool toInternal)
+std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_ObjectImpl::selectTargetsForSending(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> link,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint,uml::ConnectorKind connectorKind,bool toInternal)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -882,7 +850,7 @@ std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference> > CS_Obje
 	//end of body
 }
 
-void CS_ObjectImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+void CS_ObjectImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -917,7 +885,7 @@ void CS_ObjectImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::Even
 	//end of body
 }
 
-void CS_ObjectImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort)
+void CS_ObjectImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<uml::Port> onPort)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -939,7 +907,7 @@ void CS_ObjectImpl::sendIn(std::shared_ptr<fUML::Semantics::CommonBehavior::Even
 	//end of body
 }
 
-void CS_ObjectImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>  interactionPoint)
+void CS_ObjectImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> interactionPoint)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1002,7 +970,7 @@ void CS_ObjectImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::Eve
 	//end of body
 }
 
-void CS_ObjectImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence,std::shared_ptr<uml::Port>  onPort)
+void CS_ObjectImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence,std::shared_ptr<uml::Port> onPort)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1024,7 +992,7 @@ void CS_ObjectImpl::sendOut(std::shared_ptr<fUML::Semantics::CommonBehavior::Eve
 	//end of body
 }
 
-void CS_ObjectImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position)
+void CS_ObjectImpl::setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -1119,13 +1087,12 @@ void CS_ObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoa
 
 void CS_ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::StructuredClassifiers::ObjectImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_ObjectImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_ObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::StructuredClassifiers::ObjectImpl::resolveReferences(featureID, references);
 }
@@ -1160,9 +1127,6 @@ void CS_ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHa
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

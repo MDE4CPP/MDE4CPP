@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,24 +35,16 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EAttribute.hpp"
-
 #include "ecore/EClass.hpp"
-
 #include "ecore/EClassifier.hpp"
-
 #include "ecore/EGenericType.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EReference.hpp"
-
 #include "ecore/EStructuralFeature.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -77,94 +70,54 @@ EReferenceImpl::~EReferenceImpl()
 }
 
 //Additional constructor for the containments back reference
-EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EReferenceImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
 //Additional constructor for the containments back reference
-EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+EReferenceImpl::EReferenceImpl(std::weak_ptr<ecore::EClass> par_eContainingClass)
 :EReferenceImpl()
 {
 	m_eContainingClass = par_eContainingClass;
 }
 
-
-EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj):EReferenceImpl()
+EReferenceImpl::EReferenceImpl(const EReferenceImpl & obj): EReferenceImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  EReferenceImpl::copy() const
-{
-	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl(*this));
-	element->setThisEReferencePtr(element);
-	return element;
-}
-
 EReferenceImpl& EReferenceImpl::operator=(const EReferenceImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	EStructuralFeatureImpl::operator=(obj);
+	EReference::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EReference "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_changeable = obj.isChangeable();
+	//Clone Attributes with (deep copy)
 	m_container = obj.isContainer();
 	m_containment = obj.isContainment();
-	m_defaultValue = obj.getDefaultValue();
-	m_defaultValueLiteral = obj.getDefaultValueLiteral();
-	m_derived = obj.isDerived();
-	m_featureID = obj.getFeatureID();
-	m_lowerBound = obj.getLowerBound();
-	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
-	m_ordered = obj.isOrdered();
-	m_required = obj.isRequired();
 	m_resolveProxies = obj.isResolveProxies();
-	m_transient = obj.isTransient();
-	m_unique = obj.isUnique();
-	m_unsettable = obj.isUnsettable();
-	m_upperBound = obj.getUpperBound();
-	m_volatile = obj.isVolatile();
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
-	m_eContainingClass  = obj.getEContainingClass();
-
 	std::shared_ptr<Bag<ecore::EAttribute>> _eKeys = obj.getEKeys();
 	m_eKeys.reset(new Bag<ecore::EAttribute>(*(obj.getEKeys().get())));
-
 	m_eOpposite  = obj.getEOpposite();
-
 	m_eReferenceType  = obj.getEReferenceType();
-
-	m_eType  = obj.getEType();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	if(obj.getEGenericType()!=nullptr)
-	{
-		m_eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEGenericType()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> EReferenceImpl::copy() const
+{
+	std::shared_ptr<EReferenceImpl> element(new EReferenceImpl());
+	*element =(*this);
+	element->setThisEReferencePtr(element);
+	return element;
 }
 
 std::shared_ptr<EClass> EReferenceImpl::eStaticClass() const
@@ -185,8 +138,6 @@ bool EReferenceImpl::isContainer() const
 
 
 
-
-
 /*
 Getter & Setter for attribute containment
 */
@@ -194,12 +145,10 @@ bool EReferenceImpl::isContainment() const
 {
 	return m_containment;
 }
-
 void EReferenceImpl::setContainment(bool _containment)
 {
 	m_containment = _containment;
 } 
-
 
 
 /*
@@ -209,12 +158,10 @@ bool EReferenceImpl::isResolveProxies() const
 {
 	return m_resolveProxies;
 }
-
 void EReferenceImpl::setResolveProxies(bool _resolveProxies)
 {
 	m_resolveProxies = _resolveProxies;
 } 
-
 
 
 //*********************************
@@ -241,38 +188,32 @@ std::shared_ptr<Bag<ecore::EAttribute>> EReferenceImpl::getEKeys() const
 
 
 
-
-
 /*
 Getter & Setter for reference eOpposite
 */
-std::shared_ptr<ecore::EReference > EReferenceImpl::getEOpposite() const
+std::shared_ptr<ecore::EReference> EReferenceImpl::getEOpposite() const
 {
 
     return m_eOpposite;
 }
-
 void EReferenceImpl::setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite)
 {
     m_eOpposite = _eOpposite;
 }
 
 
-
 /*
 Getter & Setter for reference eReferenceType
 */
-std::shared_ptr<ecore::EClass > EReferenceImpl::getEReferenceType() const
+std::shared_ptr<ecore::EClass> EReferenceImpl::getEReferenceType() const
 {
 //assert(m_eReferenceType);
     return m_eReferenceType;
 }
-
 void EReferenceImpl::setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType)
 {
     m_eReferenceType = _eReferenceType;
 }
-
 
 
 //*********************************
@@ -332,20 +273,12 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(isContainment()); //4322
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EAttribute>::iterator iter = m_eKeys->begin();
-			Bag<ecore::EAttribute>::iterator end = m_eKeys->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4327
+			return eAny(getEKeys()); //4327			
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEOpposite())); //4325
+			return eAny(getEOpposite()); //4325
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEReferenceType())); //4326
+			return eAny(getEReferenceType()); //4326
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 			return eAny(isResolveProxies()); //4324
 	}
@@ -404,7 +337,7 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 				}
 				iterEKeys++;
 			}
-
+ 
 			iterEKeys = eKeysList->begin();
 			endEKeys = eKeysList->end();
 			while (iterEKeys != endEKeys)
@@ -523,13 +456,12 @@ void EReferenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void EReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	EStructuralFeatureImpl::loadNode(nodeName, loadHandler);
 }
 
-void EReferenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EReferenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	switch(featureID)
 	{
@@ -538,11 +470,11 @@ void EReferenceImpl::resolveReferences(const int featureID, std::list<std::share
 			std::shared_ptr<Bag<ecore::EAttribute>> _eKeys = getEKeys();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<ecore::EAttribute> _r = std::dynamic_pointer_cast<ecore::EAttribute>(ref);
+				std::shared_ptr<ecore::EAttribute>  _r = std::dynamic_pointer_cast<ecore::EAttribute>(ref);
 				if (_r != nullptr)
 				{
 					_eKeys->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -601,8 +533,6 @@ void EReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEReference_Attribute_containment()) )
 		{
@@ -613,16 +543,10 @@ void EReferenceImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		{
 			saveHandler->addAttribute("resolveProxies", this->isResolveProxies());
 		}
-
-		// Add references
-		std::shared_ptr<Bag<ecore::EAttribute>> eKeys_list = this->getEKeys();
-		for (std::shared_ptr<ecore::EAttribute > object : *eKeys_list)
-		{ 
-			saveHandler->addReferences("eKeys", object);
-		}
-		saveHandler->addReference("eOpposite", this->getEOpposite());
-		saveHandler->addReference("eReferenceType", this->getEReferenceType());
-
+	// Add references
+		saveHandler->addReferences<ecore::EAttribute>("eKeys", this->getEKeys());
+		saveHandler->addReference(this->getEOpposite(),"eOpposite", getEOpposite()->eClass() != ecore::ecorePackage::eInstance()->getEReference_Class());
+		saveHandler->addReference(this->getEReferenceType(),"eReferenceType", getEReferenceType()->eClass() != ecore::ecorePackage::eInstance()->getEClass_Class());
 	}
 	catch (std::exception& e)
 	{

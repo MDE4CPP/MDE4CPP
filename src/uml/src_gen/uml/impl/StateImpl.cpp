@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,50 +36,29 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ConnectionPointReference.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/Pseudostate.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/Region.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StateMachine.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Transition.hpp"
-
 #include "uml/Trigger.hpp"
-
 #include "uml/Vertex.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -104,7 +84,7 @@ StateImpl::~StateImpl()
 }
 
 //Additional constructor for the containments back reference
-StateImpl::StateImpl(std::weak_ptr<uml::Region > par_container)
+StateImpl::StateImpl(std::weak_ptr<uml::Region> par_container)
 :StateImpl()
 {
 	m_container = par_container;
@@ -112,7 +92,7 @@ StateImpl::StateImpl(std::weak_ptr<uml::Region > par_container)
 }
 
 //Additional constructor for the containments back reference
-StateImpl::StateImpl(std::weak_ptr<uml::Namespace > par_namespace)
+StateImpl::StateImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :StateImpl()
 {
 	m_namespace = par_namespace;
@@ -120,221 +100,178 @@ StateImpl::StateImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-StateImpl::StateImpl(std::weak_ptr<uml::Element > par_owner)
+StateImpl::StateImpl(std::weak_ptr<uml::Element> par_owner)
 :StateImpl()
 {
 	m_owner = par_owner;
 }
 
-
-StateImpl::StateImpl(const StateImpl & obj):StateImpl()
+StateImpl::StateImpl(const StateImpl & obj): StateImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  StateImpl::copy() const
-{
-	std::shared_ptr<StateImpl> element(new StateImpl(*this));
-	element->setThisStatePtr(element);
-	return element;
-}
-
 StateImpl& StateImpl::operator=(const StateImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	NamespaceImpl::operator=(obj);
+	RedefinableElementImpl::operator=(obj);
+	VertexImpl::operator=(obj);
+	State::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy State "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_isComposite = obj.getIsComposite();
-	m_isLeaf = obj.getIsLeaf();
 	m_isOrthogonal = obj.getIsOrthogonal();
 	m_isSimple = obj.getIsSimple();
 	m_isSubmachineState = obj.getIsSubmachineState();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_container  = obj.getContainer();
-
-	std::shared_ptr<Bag<uml::Transition>> _incoming = obj.getIncoming();
-	m_incoming.reset(new Bag<uml::Transition>(*(obj.getIncoming().get())));
-
-	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
-	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	std::shared_ptr<Bag<uml::Transition>> _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new Bag<uml::Transition>(*(obj.getOutgoing().get())));
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
 	m_submachine  = obj.getSubmachine();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::ConnectionPointReference>> _connectionList = obj.getConnection();
-	for(std::shared_ptr<uml::ConnectionPointReference> _connection : *_connectionList)
+	std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> connectionContainer = getConnection();
+	if(nullptr != connectionContainer )
 	{
-		this->getConnection()->add(std::shared_ptr<uml::ConnectionPointReference>(std::dynamic_pointer_cast<uml::ConnectionPointReference>(_connection->copy())));
+		int size = connectionContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _connection=(*connectionContainer)[i];
+			if(nullptr != _connection)
+			{
+				connectionContainer->push_back(std::dynamic_pointer_cast<uml::ConnectionPointReference>(_connection->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container connection."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_connection" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Pseudostate>> _connectionPointList = obj.getConnectionPoint();
-	for(std::shared_ptr<uml::Pseudostate> _connectionPoint : *_connectionPointList)
+	else
 	{
-		this->getConnectionPoint()->add(std::shared_ptr<uml::Pseudostate>(std::dynamic_pointer_cast<uml::Pseudostate>(_connectionPoint->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr connection."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_connectionPoint" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Trigger>> _deferrableTriggerList = obj.getDeferrableTrigger();
-	for(std::shared_ptr<uml::Trigger> _deferrableTrigger : *_deferrableTriggerList)
+	std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> connectionPointContainer = getConnectionPoint();
+	if(nullptr != connectionPointContainer )
 	{
-		this->getDeferrableTrigger()->add(std::shared_ptr<uml::Trigger>(std::dynamic_pointer_cast<uml::Trigger>(_deferrableTrigger->copy())));
+		int size = connectionPointContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _connectionPoint=(*connectionPointContainer)[i];
+			if(nullptr != _connectionPoint)
+			{
+				connectionPointContainer->push_back(std::dynamic_pointer_cast<uml::Pseudostate>(_connectionPoint->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container connectionPoint."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_deferrableTrigger" << std::endl;
-	#endif
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr connectionPoint."<< std::endl;)
+	}
+	std::shared_ptr<Subset<uml::Trigger, uml::Element>> deferrableTriggerContainer = getDeferrableTrigger();
+	if(nullptr != deferrableTriggerContainer )
+	{
+		int size = deferrableTriggerContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _deferrableTrigger=(*deferrableTriggerContainer)[i];
+			if(nullptr != _deferrableTrigger)
+			{
+				deferrableTriggerContainer->push_back(std::dynamic_pointer_cast<uml::Trigger>(_deferrableTrigger->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container deferrableTrigger."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr deferrableTrigger."<< std::endl;)
+	}
 	if(obj.getDoActivity()!=nullptr)
 	{
 		m_doActivity = std::dynamic_pointer_cast<uml::Behavior>(obj.getDoActivity()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_doActivity" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
-	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
-	{
-		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
-	#endif
 	if(obj.getEntry()!=nullptr)
 	{
 		m_entry = std::dynamic_pointer_cast<uml::Behavior>(obj.getEntry()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_entry" << std::endl;
-	#endif
 	if(obj.getExit()!=nullptr)
 	{
 		m_exit = std::dynamic_pointer_cast<uml::Behavior>(obj.getExit()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_exit" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageableElement>> _importedMemberList = obj.getImportedMember();
-	for(std::shared_ptr<uml::PackageableElement> _importedMember : *_importedMemberList)
-	{
-		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_importedMember" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
-	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
-	{
-		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedRule" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
-	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
-	{
-		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
-	#endif
 	if(obj.getRedefinedState()!=nullptr)
 	{
 		m_redefinedState = std::dynamic_pointer_cast<uml::State>(obj.getRedefinedState()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedState" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Region>> _regionList = obj.getRegion();
-	for(std::shared_ptr<uml::Region> _region : *_regionList)
+	std::shared_ptr<Subset<uml::Region, uml::NamedElement>> regionContainer = getRegion();
+	if(nullptr != regionContainer )
 	{
-		this->getRegion()->add(std::shared_ptr<uml::Region>(std::dynamic_pointer_cast<uml::Region>(_region->copy())));
+		int size = regionContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _region=(*regionContainer)[i];
+			if(nullptr != _region)
+			{
+				regionContainer->push_back(std::dynamic_pointer_cast<uml::Region>(_region->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container region."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_region" << std::endl;
-	#endif
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr region."<< std::endl;)
+	}
 	if(obj.getStateInvariant()!=nullptr)
 	{
 		m_stateInvariant = std::dynamic_pointer_cast<uml::Constraint>(obj.getStateInvariant()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_stateInvariant" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_connection->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_connection - Subset<uml::ConnectionPointReference, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-
 	/*Subset*/
 	m_connectionPoint->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_connectionPoint - Subset<uml::Pseudostate, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-
 	/*Subset*/
 	m_deferrableTrigger->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_deferrableTrigger - Subset<uml::Trigger, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-
 	
-
 	
-
 	
-
 	/*Subset*/
 	m_region->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_region - Subset<uml::Region, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> StateImpl::copy() const
+{
+	std::shared_ptr<StateImpl> element(new StateImpl());
+	*element =(*this);
+	element->setThisStatePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> StateImpl::eStaticClass() const
@@ -355,8 +292,6 @@ bool StateImpl::getIsComposite() const
 
 
 
-
-
 /*
 Getter & Setter for attribute isOrthogonal
 */
@@ -364,8 +299,6 @@ bool StateImpl::getIsOrthogonal() const
 {
 	return m_isOrthogonal;
 }
-
-
 
 
 
@@ -379,8 +312,6 @@ bool StateImpl::getIsSimple() const
 
 
 
-
-
 /*
 Getter & Setter for attribute isSubmachineState
 */
@@ -391,24 +322,22 @@ bool StateImpl::getIsSubmachineState() const
 
 
 
-
-
 //*********************************
 // Operations
 //*********************************
-bool StateImpl::composite_states(Any diagnostics,std::map <   Any, Any >  context)
+bool StateImpl::composite_states(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::destinations_or_sources_of_transitions(Any diagnostics,std::map <   Any, Any >  context)
+bool StateImpl::destinations_or_sources_of_transitions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::entry_or_exit(Any diagnostics,std::map <   Any, Any >  context)
+bool StateImpl::entry_or_exit(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -444,13 +373,13 @@ std::shared_ptr<uml::Classifier> StateImpl::redefinitionContext()
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::submachine_or_regions(Any diagnostics,std::map <   Any, Any >  context)
+bool StateImpl::submachine_or_regions(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool StateImpl::submachine_states(Any diagnostics,std::map <   Any, Any >  context)
+bool StateImpl::submachine_states(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -485,8 +414,6 @@ std::shared_ptr<Subset<uml::ConnectionPointReference, uml::NamedElement>> StateI
 
 
 
-
-
 /*
 Getter & Setter for reference connectionPoint
 */
@@ -510,8 +437,6 @@ std::shared_ptr<Subset<uml::Pseudostate, uml::NamedElement>> StateImpl::getConne
 
     return m_connectionPoint;
 }
-
-
 
 
 
@@ -541,70 +466,60 @@ std::shared_ptr<Subset<uml::Trigger, uml::Element>> StateImpl::getDeferrableTrig
 
 
 
-
-
 /*
 Getter & Setter for reference doActivity
 */
-std::shared_ptr<uml::Behavior > StateImpl::getDoActivity() const
+std::shared_ptr<uml::Behavior> StateImpl::getDoActivity() const
 {
 
     return m_doActivity;
 }
-
 void StateImpl::setDoActivity(std::shared_ptr<uml::Behavior> _doActivity)
 {
     m_doActivity = _doActivity;
 }
 
 
-
 /*
 Getter & Setter for reference entry
 */
-std::shared_ptr<uml::Behavior > StateImpl::getEntry() const
+std::shared_ptr<uml::Behavior> StateImpl::getEntry() const
 {
 
     return m_entry;
 }
-
 void StateImpl::setEntry(std::shared_ptr<uml::Behavior> _entry)
 {
     m_entry = _entry;
 }
 
 
-
 /*
 Getter & Setter for reference exit
 */
-std::shared_ptr<uml::Behavior > StateImpl::getExit() const
+std::shared_ptr<uml::Behavior> StateImpl::getExit() const
 {
 
     return m_exit;
 }
-
 void StateImpl::setExit(std::shared_ptr<uml::Behavior> _exit)
 {
     m_exit = _exit;
 }
 
 
-
 /*
 Getter & Setter for reference redefinedState
 */
-std::shared_ptr<uml::State > StateImpl::getRedefinedState() const
+std::shared_ptr<uml::State> StateImpl::getRedefinedState() const
 {
 
     return m_redefinedState;
 }
-
 void StateImpl::setRedefinedState(std::shared_ptr<uml::State> _redefinedState)
 {
     m_redefinedState = _redefinedState;
 }
-
 
 
 /*
@@ -633,38 +548,32 @@ std::shared_ptr<Subset<uml::Region, uml::NamedElement>> StateImpl::getRegion() c
 
 
 
-
-
 /*
 Getter & Setter for reference stateInvariant
 */
-std::shared_ptr<uml::Constraint > StateImpl::getStateInvariant() const
+std::shared_ptr<uml::Constraint> StateImpl::getStateInvariant() const
 {
 
     return m_stateInvariant;
 }
-
 void StateImpl::setStateInvariant(std::shared_ptr<uml::Constraint> _stateInvariant)
 {
     m_stateInvariant = _stateInvariant;
 }
 
 
-
 /*
 Getter & Setter for reference submachine
 */
-std::shared_ptr<uml::StateMachine > StateImpl::getSubmachine() const
+std::shared_ptr<uml::StateMachine> StateImpl::getSubmachine() const
 {
 
     return m_submachine;
 }
-
 void StateImpl::setSubmachine(std::shared_ptr<uml::StateMachine> _submachine)
 {
     m_submachine = _submachine;
 }
-
 
 
 //*********************************
@@ -685,7 +594,7 @@ std::shared_ptr<Union<uml::NamedElement>> StateImpl::getMember() const
 	return m_member;
 }
 
-std::weak_ptr<uml::Namespace > StateImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> StateImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -725,7 +634,7 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> 
 	return m_ownedMember;
 }
 
-std::weak_ptr<uml::Element > StateImpl::getOwner() const
+std::weak_ptr<uml::Element> StateImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -787,46 +696,22 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectionPointReference>::iterator iter = m_connection->begin();
-			Bag<uml::ConnectionPointReference>::iterator end = m_connection->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22021
+			return eAny(getConnection()); //22021			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = m_connectionPoint->begin();
-			Bag<uml::Pseudostate>::iterator end = m_connectionPoint->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22022
+			return eAny(getConnectionPoint()); //22022			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Trigger>::iterator iter = m_deferrableTrigger->begin();
-			Bag<uml::Trigger>::iterator end = m_deferrableTrigger->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22023
+			return eAny(getDeferrableTrigger()); //22023			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DOACTIVITY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDoActivity())); //22024
+			return eAny(getDoActivity()); //22024
 		case uml::umlPackage::STATE_ATTRIBUTE_ENTRY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEntry())); //22025
+			return eAny(getEntry()); //22025
 		case uml::umlPackage::STATE_ATTRIBUTE_EXIT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExit())); //22026
+			return eAny(getExit()); //22026
 		case uml::umlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
 			return eAny(getIsComposite()); //22027
 		case uml::umlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
@@ -836,23 +721,15 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
 			return eAny(getIsSubmachineState()); //22030
 		case uml::umlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getRedefinedState())); //22031
+			return eAny(getRedefinedState()); //22031
 		case uml::umlPackage::STATE_ATTRIBUTE_REGION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Region>::iterator iter = m_region->begin();
-			Bag<uml::Region>::iterator end = m_region->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //22034
+			return eAny(getRegion()); //22034			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateInvariant())); //22032
+			return eAny(getStateInvariant()); //22032
 		case uml::umlPackage::STATE_ATTRIBUTE_SUBMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSubmachine())); //22033
+			return eAny(getSubmachine()); //22033
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
@@ -942,7 +819,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 				}
 				iterConnection++;
 			}
-
+ 
 			iterConnection = connectionList->begin();
 			endConnection = connectionList->end();
 			while (iterConnection != endConnection)
@@ -978,7 +855,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 				}
 				iterConnectionPoint++;
 			}
-
+ 
 			iterConnectionPoint = connectionPointList->begin();
 			endConnectionPoint = connectionPointList->end();
 			while (iterConnectionPoint != endConnectionPoint)
@@ -1014,7 +891,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 				}
 				iterDeferrableTrigger++;
 			}
-
+ 
 			iterDeferrableTrigger = deferrableTriggerList->begin();
 			endDeferrableTrigger = deferrableTriggerList->end();
 			while (iterDeferrableTrigger != endDeferrableTrigger)
@@ -1082,7 +959,7 @@ bool StateImpl::eSet(int featureID, Any newValue)
 				}
 				iterRegion++;
 			}
-
+ 
 			iterRegion = regionList->begin();
 			endRegion = regionList->end();
 			while (iterRegion != endRegion)
@@ -1190,7 +1067,6 @@ void StateImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 
 void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -1201,12 +1077,9 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "ConnectionPointReference";
 			}
-			std::shared_ptr<ecore::EObject> connection = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE);
-			if (connection != nullptr)
-			{
-				loadHandler->handleChild(connection);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::ConnectionPointReference>(this->getConnection());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("connectionPoint") == 0 )
@@ -1216,12 +1089,9 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Pseudostate";
 			}
-			std::shared_ptr<ecore::EObject> connectionPoint = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATE);
-			if (connectionPoint != nullptr)
-			{
-				loadHandler->handleChild(connectionPoint);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Pseudostate>(this->getConnectionPoint());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("deferrableTrigger") == 0 )
@@ -1231,14 +1101,9 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Trigger";
 			}
-			std::shared_ptr<uml::Trigger> deferrableTrigger = std::dynamic_pointer_cast<uml::Trigger>(modelFactory->create(typeName));
-			if (deferrableTrigger != nullptr)
-			{
-				std::shared_ptr<Subset<uml::Trigger, uml::Element>> list_deferrableTrigger = this->getDeferrableTrigger();
-				list_deferrableTrigger->push_back(deferrableTrigger);
-				loadHandler->handleChild(deferrableTrigger);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Trigger>(this->getDeferrableTrigger());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("doActivity") == 0 )
@@ -1249,13 +1114,9 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<uml::Behavior> doActivity = std::dynamic_pointer_cast<uml::Behavior>(modelFactory->create(typeName));
-			if (doActivity != nullptr)
-			{
-				this->setDoActivity(doActivity);
-				loadHandler->handleChild(doActivity);
-			}
-			return;
+			loadHandler->handleChild(this->getDoActivity()); 
+
+			return; 
 		}
 
 		if ( nodeName.compare("entry") == 0 )
@@ -1266,13 +1127,9 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<uml::Behavior> entry = std::dynamic_pointer_cast<uml::Behavior>(modelFactory->create(typeName));
-			if (entry != nullptr)
-			{
-				this->setEntry(entry);
-				loadHandler->handleChild(entry);
-			}
-			return;
+			loadHandler->handleChild(this->getEntry()); 
+
+			return; 
 		}
 
 		if ( nodeName.compare("exit") == 0 )
@@ -1283,13 +1140,9 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<uml::Behavior> exit = std::dynamic_pointer_cast<uml::Behavior>(modelFactory->create(typeName));
-			if (exit != nullptr)
-			{
-				this->setExit(exit);
-				loadHandler->handleChild(exit);
-			}
-			return;
+			loadHandler->handleChild(this->getExit()); 
+
+			return; 
 		}
 
 		if ( nodeName.compare("region") == 0 )
@@ -1299,12 +1152,9 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 			{
 				typeName = "Region";
 			}
-			std::shared_ptr<ecore::EObject> region = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::REGION_ATTRIBUTE_STATE);
-			if (region != nullptr)
-			{
-				loadHandler->handleChild(region);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Region>(this->getRegion());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -1321,7 +1171,7 @@ void StateImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::inte
 	VertexImpl::loadNode(nodeName, loadHandler);
 }
 
-void StateImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void StateImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -1392,7 +1242,6 @@ void StateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'connection'
 		for (std::shared_ptr<uml::ConnectionPointReference> connection : *this->getConnection()) 
 		{
@@ -1412,21 +1261,21 @@ void StateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		}
 
 		// Save 'doActivity'
-		std::shared_ptr<uml::Behavior > doActivity = this->getDoActivity();
+		std::shared_ptr<uml::Behavior> doActivity = this->getDoActivity();
 		if (doActivity != nullptr)
 		{
 			saveHandler->addReference(doActivity, "doActivity", doActivity->eClass() != package->getBehavior_Class());
 		}
 
 		// Save 'entry'
-		std::shared_ptr<uml::Behavior > entry = this->getEntry();
+		std::shared_ptr<uml::Behavior> entry = this->getEntry();
 		if (entry != nullptr)
 		{
 			saveHandler->addReference(entry, "entry", entry->eClass() != package->getBehavior_Class());
 		}
 
 		// Save 'exit'
-		std::shared_ptr<uml::Behavior > exit = this->getExit();
+		std::shared_ptr<uml::Behavior> exit = this->getExit();
 		if (exit != nullptr)
 		{
 			saveHandler->addReference(exit, "exit", exit->eClass() != package->getBehavior_Class());
@@ -1437,13 +1286,10 @@ void StateImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 		{
 			saveHandler->addReference(region, "region", region->eClass() != package->getRegion_Class());
 		}
-	
-
-		// Add references
-		saveHandler->addReference("redefinedState", this->getRedefinedState());
-		saveHandler->addReference("stateInvariant", this->getStateInvariant());
-		saveHandler->addReference("submachine", this->getSubmachine());
-
+	// Add references
+		saveHandler->addReference(this->getRedefinedState(), "redefinedState", getRedefinedState()->eClass() != uml::umlPackage::eInstance()->getState_Class()); 
+		saveHandler->addReference(this->getStateInvariant(), "stateInvariant", getStateInvariant()->eClass() != uml::umlPackage::eInstance()->getConstraint_Class()); 
+		saveHandler->addReference(this->getSubmachine(), "submachine", getSubmachine()->eClass() != uml::umlPackage::eInstance()->getStateMachine_Class()); 
 	}
 	catch (std::exception& e)
 	{

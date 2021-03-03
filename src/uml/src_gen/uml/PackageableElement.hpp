@@ -8,23 +8,19 @@
 #define UML_PACKAGEABLEELEMENT_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,59 +35,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
-	class ParameterableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
 }
 
 // base class includes
 #include "uml/NamedElement.hpp"
-
 #include "uml/ParameterableElement.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
+
 
 
 //*********************************
@@ -102,30 +63,24 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class PackageableElement:virtual public NamedElement,virtual public ParameterableElement
+	class PackageableElement: virtual public NamedElement, virtual public ParameterableElement
 	{
 		public:
  			PackageableElement(const PackageableElement &) {}
 
 		protected:
 			PackageableElement(){}
-
+			//Additional constructors for the containments back reference
+			PackageableElement(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-
-			PackageableElement(std::weak_ptr<uml::Namespace > par_namespace);
-
-			//Additional constructors for the containments back reference
-
-			PackageableElement(std::weak_ptr<uml::Element > par_owner);
+			PackageableElement(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-
-			PackageableElement(std::weak_ptr<uml::Package > par_owningPackage);
+			PackageableElement(std::weak_ptr<uml::Package> par_owningPackage);
 
 			//Additional constructors for the containments back reference
-
-			PackageableElement(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+			PackageableElement(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -141,9 +96,7 @@ namespace uml
 			visibility = null implies namespace = null
 			*/
 			 
-			virtual bool namespace_needs_visibility(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool namespace_needs_visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -152,11 +105,9 @@ namespace uml
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<uml::Package > getOwningPackage() const = 0;
+			virtual std::weak_ptr<uml::Package> getOwningPackage() const = 0;
 			
-			
-			virtual void setOwningPackage(std::shared_ptr<uml::Package> _owningPackage) = 0;
-			
+			virtual void setOwningPackage(std::weak_ptr<uml::Package>) = 0;
 			
 
 		protected:
@@ -169,7 +120,7 @@ namespace uml
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<uml::Package > m_owningPackage;
+			std::weak_ptr<uml::Package> m_owningPackage;
 
 		public:
 			//*********************************
@@ -180,7 +131,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -190,7 +141,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -199,7 +150,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

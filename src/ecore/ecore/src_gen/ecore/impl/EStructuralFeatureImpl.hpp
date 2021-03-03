@@ -22,8 +22,8 @@ namespace ecore
 	{
 		public: 
 			EStructuralFeatureImpl(const EStructuralFeatureImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EStructuralFeatureImpl& operator=(EStructuralFeatureImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EStructuralFeatureImpl& operator=(EStructuralFeatureImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
@@ -32,14 +32,9 @@ namespace ecore
 			virtual void setThisEStructuralFeaturePtr(std::weak_ptr<EStructuralFeature> thisEStructuralFeaturePtr);
 
 			//Additional constructors for the containments back reference
-			EStructuralFeatureImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EStructuralFeatureImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EStructuralFeatureImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
-
-
-
+			EStructuralFeatureImpl(std::weak_ptr<ecore::EClass> par_eContainingClass);
 
 		public:
 			//destructor
@@ -51,63 +46,50 @@ namespace ecore
 			 
 			virtual void * getContainerClass() ;
 			
-			
-			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
 			virtual bool isChangeable() const ;
-			
 			 
-			virtual void setChangeable (bool _changeable); 
+			virtual void setChangeable (bool _changeable);
 			 
 			virtual Any getDefaultValue() const ;
-			
 			 
-			virtual void setDefaultValue (Any _defaultValue); 
+			virtual void setDefaultValue (Any _defaultValue);
 			 
 			virtual std::string getDefaultValueLiteral() const ;
-			
 			 
-			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral); 
+			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral);
 			 
 			virtual bool isDerived() const ;
-			
 			 
-			virtual void setDerived (bool _derived); 
+			virtual void setDerived (bool _derived);
 			 
 			virtual int getFeatureID() const ;
-			
 			 
-			virtual void setFeatureID (int _featureID); 
+			virtual void setFeatureID (int _featureID);
 			 
 			virtual bool isTransient() const ;
-			
 			 
-			virtual void setTransient (bool _transient); 
+			virtual void setTransient (bool _transient);
 			 
 			virtual bool isUnsettable() const ;
-			
 			 
-			virtual void setUnsettable (bool _unsettable); 
+			virtual void setUnsettable (bool _unsettable);
 			 
 			virtual bool isVolatile() const ;
-			
 			 
-			virtual void setVolatile (bool _volatile); 
+			virtual void setVolatile (bool _volatile);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const ;
+			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -128,7 +110,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

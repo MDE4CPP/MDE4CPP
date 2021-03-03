@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -34,20 +35,14 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EClass.hpp"
-
 #include "ecore/EDataType.hpp"
-
 #include "ecore/EModelElement.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EPackage.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -73,53 +68,41 @@ EFactoryImpl::~EFactoryImpl()
 }
 
 //Additional constructor for the containments back reference
-EFactoryImpl::EFactoryImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EFactoryImpl::EFactoryImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EFactoryImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
-
-EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj):EFactoryImpl()
+EFactoryImpl::EFactoryImpl(const EFactoryImpl & obj): EFactoryImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  EFactoryImpl::copy() const
-{
-	std::shared_ptr<EFactoryImpl> element(new EFactoryImpl(*this));
-	element->setThisEFactoryPtr(element);
-	return element;
-}
-
 EFactoryImpl& EFactoryImpl::operator=(const EFactoryImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	EModelElementImpl::operator=(obj);
+	EFactory::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EFactory "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_metaElementID = obj.getMetaElementID();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
 	m_ePackage  = obj.getEPackage();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> EFactoryImpl::copy() const
+{
+	std::shared_ptr<EFactoryImpl> element(new EFactoryImpl());
+	*element =(*this);
+	element->setThisEFactoryPtr(element);
+	return element;
 }
 
 std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const
@@ -134,19 +117,19 @@ std::shared_ptr<EClass> EFactoryImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType>  eDataType,Any instanceValue) const
+std::string EFactoryImpl::convertToString(std::shared_ptr<ecore::EDataType> eDataType,Any instanceValue) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass>  eClass) const
+std::shared_ptr<ecore::EObject> EFactoryImpl::create(std::shared_ptr<ecore::EClass> eClass) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-Any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue) const
+Any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType> eDataType,std::string literalValue) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -158,17 +141,15 @@ Any EFactoryImpl::createFromString(std::shared_ptr<ecore::EDataType>  eDataType,
 /*
 Getter & Setter for reference ePackage
 */
-std::shared_ptr<ecore::EPackage > EFactoryImpl::getEPackage() const
+std::shared_ptr<ecore::EPackage> EFactoryImpl::getEPackage() const
 {
 //assert(m_ePackage);
     return m_ePackage;
 }
-
 void EFactoryImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
 {
     m_ePackage = _ePackage;
 }
-
 
 
 //*********************************
@@ -218,7 +199,7 @@ Any EFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EFACTORY_ATTRIBUTE_EPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEPackage())); //234
+			return eAny(getEPackage()); //234
 	}
 	return EModelElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -294,13 +275,12 @@ void EFactoryImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoad
 
 void EFactoryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	EModelElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EFactoryImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EFactoryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	switch(featureID)
 	{
@@ -337,12 +317,8 @@ void EFactoryImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHan
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("ePackage", this->getEPackage());
-
+	// Add references
+		saveHandler->addReference(this->getEPackage(),"ePackage", getEPackage()->eClass() != ecore::ecorePackage::eInstance()->getEPackage_Class());
 	}
 	catch (std::exception& e)
 	{

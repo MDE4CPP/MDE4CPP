@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ConnectableElementTemplateParameterImpl(const ConnectableElementTemplateParameterImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ConnectableElementTemplateParameterImpl& operator=(ConnectableElementTemplateParameterImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ConnectableElementTemplateParameterImpl& operator=(ConnectableElementTemplateParameterImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisConnectableElementTemplateParameterPtr(std::weak_ptr<ConnectableElementTemplateParameter> thisConnectableElementTemplateParameterPtr);
 
 			//Additional constructors for the containments back reference
-			ConnectableElementTemplateParameterImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ConnectableElementTemplateParameterImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ConnectableElementTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature > par_signature);
-
-
-
+			ConnectableElementTemplateParameterImpl(std::weak_ptr<uml::TemplateSignature> par_signature);
 
 		public:
 			//destructor
@@ -58,7 +53,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -73,7 +68,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -88,7 +83,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

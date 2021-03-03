@@ -44,9 +44,7 @@ SpecificationImpl::SpecificationImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Specification is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ SpecificationImpl::SpecificationImpl(const SpecificationImpl & obj):Specificatio
 
 std::shared_ptr<ecore::EObject>  SpecificationImpl::copy() const
 {
-	std::shared_ptr<SpecificationImpl> element(new SpecificationImpl(*this));
+	std::shared_ptr<SpecificationImpl> element(new SpecificationImpl());
+	*element=(*this);
 	element->setThisSpecificationPtr(element);
 	return element;
 }
 
 SpecificationImpl& SpecificationImpl::operator=(const SpecificationImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Specification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

@@ -44,9 +44,7 @@ UtilityImpl::UtilityImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Utility is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ UtilityImpl::UtilityImpl(const UtilityImpl & obj):UtilityImpl()
 
 std::shared_ptr<ecore::EObject>  UtilityImpl::copy() const
 {
-	std::shared_ptr<UtilityImpl> element(new UtilityImpl(*this));
+	std::shared_ptr<UtilityImpl> element(new UtilityImpl());
+	*element=(*this);
 	element->setThisUtilityPtr(element);
 	return element;
 }
 
 UtilityImpl& UtilityImpl::operator=(const UtilityImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Utility "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

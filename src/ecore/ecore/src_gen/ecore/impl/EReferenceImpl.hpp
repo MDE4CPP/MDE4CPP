@@ -22,8 +22,8 @@ namespace ecore
 	{
 		public: 
 			EReferenceImpl(const EReferenceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EReferenceImpl& operator=(EReferenceImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EReferenceImpl& operator=(EReferenceImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
@@ -32,14 +32,9 @@ namespace ecore
 			virtual void setThisEReferencePtr(std::weak_ptr<EReference> thisEReferencePtr);
 
 			//Additional constructors for the containments back reference
-			EReferenceImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EReferenceImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EReferenceImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
-
-
-
+			EReferenceImpl(std::weak_ptr<ecore::EClass> par_eContainingClass);
 
 		public:
 			//destructor
@@ -56,17 +51,14 @@ namespace ecore
 			 
 			virtual bool isContainer() const ;
 			
-			
 			 
 			virtual bool isContainment() const ;
-			
 			 
-			virtual void setContainment (bool _containment); 
+			virtual void setContainment (bool _containment);
 			 
 			virtual bool isResolveProxies() const ;
-			
 			 
-			virtual void setResolveProxies (bool _resolveProxies); 
+			virtual void setResolveProxies (bool _resolveProxies);
 			
 			
 			//*********************************
@@ -76,19 +68,14 @@ namespace ecore
 			virtual std::shared_ptr<Bag<ecore::EAttribute>> getEKeys() const ;
 			
 			
+			virtual std::shared_ptr<ecore::EReference> getEOpposite() const ;
 			
-			virtual std::shared_ptr<ecore::EReference > getEOpposite() const ;
+			virtual void setEOpposite(std::shared_ptr<ecore::EReference>) ;
 			
+			virtual std::shared_ptr<ecore::EClass> getEReferenceType() const ;
 			
-			virtual void setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite) ;
+			virtual void setEReferenceType(std::shared_ptr<ecore::EClass>) ;
 			
-			
-			virtual std::shared_ptr<ecore::EClass > getEReferenceType() const ;
-			
-			
-			virtual void setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -109,7 +96,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

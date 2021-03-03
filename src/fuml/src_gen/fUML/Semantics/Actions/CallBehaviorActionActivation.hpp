@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIONS_CALLBEHAVIORACTIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_CALLBEHAVIORACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,65 +31,29 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
+//Forward Declaration for used types 
+namespace fUML::Semantics::Actions 
 {
-	class Action;
+	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
 	class ActivityNodeActivationGroup;
+	class Token;
 }
-
-namespace uml 
-{
-	class CallAction;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class CallActionActivation;
-}
-
-namespace uml 
-{
-	class CallBehaviorAction;
-}
-
 namespace fUML::Semantics::CommonBehavior 
 {
 	class Execution;
 }
-
-namespace fUML::Semantics::Actions 
+namespace uml 
 {
-	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class PinActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
+	class Action;
+	class ActivityNode;
+	class CallAction;
+	class CallBehaviorAction;
 }
 
 // base class includes
@@ -102,18 +62,18 @@ namespace fUML::Semantics::Activities
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class CallBehaviorActionActivation:virtual public CallActionActivation
+	class CallBehaviorActionActivation: virtual public CallActionActivation
 	{
 		public:
  			CallBehaviorActionActivation(const CallBehaviorActionActivation &) {}
 
 		protected:
 			CallBehaviorActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -126,8 +86,6 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			 
 			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCallExecution() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -136,24 +94,16 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::CallBehaviorAction > getCallBehaviorAction() const = 0;
+			virtual std::shared_ptr<uml::CallBehaviorAction> getCallBehaviorAction() const = 0;
 			
-			
-			virtual void setCallBehaviorAction(std::shared_ptr<uml::CallBehaviorAction> _callBehaviorAction) = 0;
-			
+			virtual void setCallBehaviorAction(std::shared_ptr<uml::CallBehaviorAction>) = 0;
 			/*Additional Setter for 'CallActionActivation::callAction' redefined by reference 'callBehaviorAction'*/
 			
-			virtual void setCallAction(std::shared_ptr<uml::CallAction> _callAction) = 0;
+			virtual void setCallAction(std::shared_ptr<uml::CallAction>) = 0;/*Additional Setter for 'ActionActivation::action' redefined by reference 'callBehaviorAction'*/
 			
-			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callBehaviorAction'*/
+			virtual void setAction(std::shared_ptr<uml::Action>) = 0;/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callBehaviorAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action> _action) = 0;
-			
-			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callBehaviorAction'*/
-			
-			virtual void setNode(std::shared_ptr<uml::ActivityNode> _node) = 0;
-			
-			
+			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
 
 		protected:
 			//*********************************
@@ -165,7 +115,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::CallBehaviorAction > m_callBehaviorAction;
+			std::shared_ptr<uml::CallBehaviorAction> m_callBehaviorAction;
 
 		public:
 			//*********************************
@@ -181,7 +131,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

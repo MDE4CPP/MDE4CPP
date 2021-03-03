@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,13 +35,10 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
-#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -65,37 +63,36 @@ OfferImpl::~OfferImpl()
 }
 
 
-
-OfferImpl::OfferImpl(const OfferImpl & obj):OfferImpl()
+OfferImpl::OfferImpl(const OfferImpl & obj): OfferImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  OfferImpl::copy() const
-{
-	std::shared_ptr<OfferImpl> element(new OfferImpl(*this));
-	element->setThisOfferPtr(element);
-	return element;
-}
-
 OfferImpl& OfferImpl::operator=(const OfferImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	Offer::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Offer "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _offeredTokens = obj.getOfferedTokens();
 	m_offeredTokens.reset(new Bag<fUML::Semantics::Activities::Token>(*(obj.getOfferedTokens().get())));
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> OfferImpl::copy() const
+{
+	std::shared_ptr<OfferImpl> element(new OfferImpl());
+	*element =(*this);
+	element->setThisOfferPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> OfferImpl::eStaticClass() const
@@ -223,8 +220,6 @@ std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> OfferImpl::getOfferedTo
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
@@ -253,15 +248,7 @@ Any OfferImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::Token>::iterator iter = m_offeredTokens->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator end = m_offeredTokens->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //840
+			return eAny(getOfferedTokens()); //840			
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -302,7 +289,7 @@ bool OfferImpl::eSet(int featureID, Any newValue)
 				}
 				iterOfferedTokens++;
 			}
-
+ 
 			iterOfferedTokens = offeredTokensList->begin();
 			endOfferedTokens = offeredTokensList->end();
 			while (iterOfferedTokens != endOfferedTokens)
@@ -366,12 +353,11 @@ void OfferImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 
 void OfferImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
 	//load BasePackage Nodes
 }
 
-void OfferImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void OfferImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -380,11 +366,11 @@ void OfferImpl::resolveReferences(const int featureID, std::list<std::shared_ptr
 			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> _offeredTokens = getOfferedTokens();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<fUML::Semantics::Activities::Token> _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(ref);
+				std::shared_ptr<fUML::Semantics::Activities::Token>  _r = std::dynamic_pointer_cast<fUML::Semantics::Activities::Token>(ref);
 				if (_r != nullptr)
 				{
 					_offeredTokens->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -406,16 +392,8 @@ void OfferImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
-
-		// Add references
-		std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> offeredTokens_list = this->getOfferedTokens();
-		for (std::shared_ptr<fUML::Semantics::Activities::Token > object : *offeredTokens_list)
-		{ 
-			saveHandler->addReferences("offeredTokens", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<fUML::Semantics::Activities::Token>("offeredTokens", this->getOfferedTokens());
 	}
 	catch (std::exception& e)
 	{

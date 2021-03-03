@@ -65,9 +65,8 @@
 using namespace UML;
 
 StateInvariantObject::StateInvariantObject(std::shared_ptr<uml::StateInvariant> _element):
-
 	m_StateInvariantValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_StateInvariant());
 }
 
@@ -88,13 +87,15 @@ StateInvariantObject::~StateInvariantObject()
 
 std::shared_ptr<ecore::EObject> StateInvariantObject::copy()
 {
-	std::shared_ptr<StateInvariantObject> element(new StateInvariantObject(*this));
+	std::shared_ptr<StateInvariantObject> element(new StateInvariantObject());
+	*element=(*this);
 	element->setThisStateInvariantObjectPtr(element);
 	return element;
 }
 
 StateInvariantObject& StateInvariantObject::operator=(const StateInvariantObject & obj)
 {
+	UML::InteractionFragmentObject::operator=(obj);
 	return *this;
 }
 

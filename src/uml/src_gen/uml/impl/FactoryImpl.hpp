@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			FactoryImpl(const FactoryImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			FactoryImpl& operator=(FactoryImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			FactoryImpl& operator=(FactoryImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,10 +32,7 @@ namespace uml
 			virtual void setThisFactoryPtr(std::weak_ptr<Factory> thisFactoryPtr);
 
 			//Additional constructors for the containments back reference
-			FactoryImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			FactoryImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -51,9 +48,7 @@ namespace uml
 			every property.
 			*/
 			 
-			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class>  metaClass) ;
-			
-			
+			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class> metaClass) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -63,7 +58,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -88,7 +83,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

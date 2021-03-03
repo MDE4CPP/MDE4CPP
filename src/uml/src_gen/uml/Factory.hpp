@@ -7,20 +7,16 @@
 #ifndef UML_FACTORY_HPP
 #define UML_FACTORY_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,26 +31,18 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Class;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
 }
 
 // base class includes
 #include "uml/Element.hpp"
 
 // enum includes
+
 
 
 //*********************************
@@ -67,14 +55,13 @@ namespace uml
 	<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span>
 	*/
 	
-	class Factory:virtual public Element
+	class Factory: virtual public Element
 	{
 		public:
  			Factory(const Factory &) {}
 
 		protected:
 			Factory(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -92,9 +79,7 @@ namespace uml
 			every property.
 			*/
 			 
-			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class>  metaClass) = 0;
-			
-			
+			virtual std::shared_ptr<uml::Element> create(std::shared_ptr<uml::Class> metaClass) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -133,7 +118,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

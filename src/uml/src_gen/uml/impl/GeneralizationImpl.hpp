@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			GeneralizationImpl(const GeneralizationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			GeneralizationImpl& operator=(GeneralizationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			GeneralizationImpl& operator=(GeneralizationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisGeneralizationPtr(std::weak_ptr<Generalization> thisGeneralizationPtr);
 
 			//Additional constructors for the containments back reference
-			GeneralizationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			GeneralizationImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			GeneralizationImpl(std::weak_ptr<uml::Classifier > par_specific);
-
-
-
+			GeneralizationImpl(std::weak_ptr<uml::Classifier> par_specific);
 
 		public:
 			//destructor
@@ -59,13 +54,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsSubstitutable() const ;
-			
 			/*!
 			Indicates whether the specific Classifier can be used wherever the general Classifier can be used. If true, the execution traces of the specific Classifier shall be a superset of the execution traces of the general Classifier. If false, there is no such constraint on execution traces. If unset, the modeler has not stated whether there is such a constraint or not.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsSubstitutable (bool _isSubstitutable); 
+			virtual void setIsSubstitutable (bool _isSubstitutable);
 			
 			
 			//*********************************
@@ -76,15 +70,13 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier > getGeneral() const ;
-			
+			virtual std::shared_ptr<uml::Classifier> getGeneral() const ;
 			/*!
 			The general classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setGeneral(std::shared_ptr<uml::Classifier> _general) ;
-			
+			virtual void setGeneral(std::shared_ptr<uml::Classifier>) ;
 			/*!
 			Represents a set of instances of Generalization.  A Generalization may appear in many GeneralizationSets.
 			<p>From package UML::Classification.</p>
@@ -92,22 +84,19 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::GeneralizationSet>> getGeneralizationSet() const ;
 			
-			
 			/*!
 			The specializing Classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Classifier > getSpecific() const ;
-			
+			virtual std::weak_ptr<uml::Classifier> getSpecific() const ;
 			/*!
 			The specializing Classifier in the Generalization relationship.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setSpecific(std::shared_ptr<uml::Classifier> _specific) ;
+			virtual void setSpecific(std::weak_ptr<uml::Classifier>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -122,7 +111,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -152,7 +141,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

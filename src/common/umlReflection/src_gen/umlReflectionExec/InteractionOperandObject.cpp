@@ -77,9 +77,8 @@
 using namespace UML;
 
 InteractionOperandObject::InteractionOperandObject(std::shared_ptr<uml::InteractionOperand> _element):
-
 	m_InteractionOperandValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InteractionOperand());
 }
 
@@ -100,13 +99,16 @@ InteractionOperandObject::~InteractionOperandObject()
 
 std::shared_ptr<ecore::EObject> InteractionOperandObject::copy()
 {
-	std::shared_ptr<InteractionOperandObject> element(new InteractionOperandObject(*this));
+	std::shared_ptr<InteractionOperandObject> element(new InteractionOperandObject());
+	*element=(*this);
 	element->setThisInteractionOperandObjectPtr(element);
 	return element;
 }
 
 InteractionOperandObject& InteractionOperandObject::operator=(const InteractionOperandObject & obj)
 {
+	UML::InteractionFragmentObject::operator=(obj);
+	UML::NamespaceObject::operator=(obj);
 	return *this;
 }
 

@@ -57,9 +57,8 @@
 using namespace UML;
 
 GeneralOrderingObject::GeneralOrderingObject(std::shared_ptr<uml::GeneralOrdering> _element):
-
 	m_GeneralOrderingValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_GeneralOrdering());
 }
 
@@ -80,13 +79,15 @@ GeneralOrderingObject::~GeneralOrderingObject()
 
 std::shared_ptr<ecore::EObject> GeneralOrderingObject::copy()
 {
-	std::shared_ptr<GeneralOrderingObject> element(new GeneralOrderingObject(*this));
+	std::shared_ptr<GeneralOrderingObject> element(new GeneralOrderingObject());
+	*element=(*this);
 	element->setThisGeneralOrderingObjectPtr(element);
 	return element;
 }
 
 GeneralOrderingObject& GeneralOrderingObject::operator=(const GeneralOrderingObject & obj)
 {
+	UML::NamedElementObject::operator=(obj);
 	return *this;
 }
 

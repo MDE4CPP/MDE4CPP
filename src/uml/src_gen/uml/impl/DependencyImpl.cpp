@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,28 +35,18 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/DirectedRelationship.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -81,7 +72,7 @@ DependencyImpl::~DependencyImpl()
 }
 
 //Additional constructor for the containments back reference
-DependencyImpl::DependencyImpl(std::weak_ptr<uml::Namespace > par_namespace)
+DependencyImpl::DependencyImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :DependencyImpl()
 {
 	m_namespace = par_namespace;
@@ -89,14 +80,14 @@ DependencyImpl::DependencyImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-DependencyImpl::DependencyImpl(std::weak_ptr<uml::Element > par_owner)
+DependencyImpl::DependencyImpl(std::weak_ptr<uml::Element> par_owner)
 :DependencyImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-DependencyImpl::DependencyImpl(std::weak_ptr<uml::Package > par_owningPackage)
+DependencyImpl::DependencyImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :DependencyImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -104,91 +95,84 @@ DependencyImpl::DependencyImpl(std::weak_ptr<uml::Package > par_owningPackage)
 }
 
 //Additional constructor for the containments back reference
-DependencyImpl::DependencyImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+DependencyImpl::DependencyImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :DependencyImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-DependencyImpl::DependencyImpl(const DependencyImpl & obj):DependencyImpl()
+DependencyImpl::DependencyImpl(const DependencyImpl & obj): DependencyImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  DependencyImpl::copy() const
-{
-	std::shared_ptr<DependencyImpl> element(new DependencyImpl(*this));
-	element->setThisDependencyPtr(element);
-	return element;
-}
-
 DependencyImpl& DependencyImpl::operator=(const DependencyImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	PackageableElementImpl::operator=(obj);
+	DirectedRelationshipImpl::operator=(obj);
+	Dependency::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Dependency "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::NamedElement>> _clientList = obj.getClient();
-	for(std::shared_ptr<uml::NamedElement> _client : *_clientList)
+	std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> clientContainer = getClient();
+	if(nullptr != clientContainer )
 	{
-		this->getClient()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_client->copy())));
+		int size = clientContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _client=(*clientContainer)[i];
+			if(nullptr != _client)
+			{
+				clientContainer->push_back(std::dynamic_pointer_cast<uml::NamedElement>(_client->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container client."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_client" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
+	else
 	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr client."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
+	std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> supplierContainer = getSupplier();
+	if(nullptr != supplierContainer )
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
+		int size = supplierContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _supplier=(*supplierContainer)[i];
+			if(nullptr != _supplier)
+			{
+				supplierContainer->push_back(std::dynamic_pointer_cast<uml::NamedElement>(_supplier->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container supplier."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::NamedElement>> _supplierList = obj.getSupplier();
-	for(std::shared_ptr<uml::NamedElement> _supplier : *_supplierList)
+	else
 	{
-		this->getSupplier()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_supplier->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr supplier."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_supplier" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> DependencyImpl::copy() const
+{
+	std::shared_ptr<DependencyImpl> element(new DependencyImpl());
+	*element =(*this);
+	element->setThisDependencyPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DependencyImpl::eStaticClass() const
@@ -233,8 +217,6 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::ge
 
 
 
-
-
 /*
 Getter & Setter for reference supplier
 */
@@ -261,12 +243,10 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> DependencyImpl::ge
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > DependencyImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> DependencyImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -286,7 +266,7 @@ std::shared_ptr<Union<uml::Element>> DependencyImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > DependencyImpl::getOwner() const
+std::weak_ptr<uml::Element> DependencyImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -392,27 +372,11 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_client->begin();
-			Bag<uml::NamedElement>::iterator end = m_client->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6715
+			return eAny(getClient()); //6715			
 		}
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_supplier->begin();
-			Bag<uml::NamedElement>::iterator end = m_supplier->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6716
+			return eAny(getSupplier()); //6716			
 		}
 	}
 	Any result;
@@ -469,7 +433,7 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 				}
 				iterClient++;
 			}
-
+ 
 			iterClient = clientList->begin();
 			endClient = clientList->end();
 			while (iterClient != endClient)
@@ -505,7 +469,7 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 				}
 				iterSupplier++;
 			}
-
+ 
 			iterSupplier = supplierList->begin();
 			endSupplier = supplierList->end();
 			while (iterSupplier != endSupplier)
@@ -584,41 +548,40 @@ void DependencyImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void DependencyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 	PackageableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void DependencyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DependencyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
-			std::shared_ptr<Bag<uml::NamedElement>> _client = getClient();
+			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> _client = getClient();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::NamedElement> _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
+				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
 				if (_r != nullptr)
 				{
 					_client->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
 
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
-			std::shared_ptr<Bag<uml::NamedElement>> _supplier = getSupplier();
+			std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> _supplier = getSupplier();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::NamedElement> _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
+				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
 				if (_r != nullptr)
 				{
 					_supplier->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -654,21 +617,9 @@ void DependencyImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::NamedElement>> client_list = this->getClient();
-		for (std::shared_ptr<uml::NamedElement > object : *client_list)
-		{ 
-			saveHandler->addReferences("client", object);
-		}
-		std::shared_ptr<Bag<uml::NamedElement>> supplier_list = this->getSupplier();
-		for (std::shared_ptr<uml::NamedElement > object : *supplier_list)
-		{ 
-			saveHandler->addReferences("supplier", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::NamedElement>("client", this->getClient());
+		saveHandler->addReferences<uml::NamedElement>("supplier", this->getSupplier());
 	}
 	catch (std::exception& e)
 	{

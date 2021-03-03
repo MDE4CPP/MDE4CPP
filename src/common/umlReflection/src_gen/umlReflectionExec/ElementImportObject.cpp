@@ -56,9 +56,8 @@
 using namespace UML;
 
 ElementImportObject::ElementImportObject(std::shared_ptr<uml::ElementImport> _element):
-
 	m_ElementImportValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ElementImport());
 }
 
@@ -79,13 +78,15 @@ ElementImportObject::~ElementImportObject()
 
 std::shared_ptr<ecore::EObject> ElementImportObject::copy()
 {
-	std::shared_ptr<ElementImportObject> element(new ElementImportObject(*this));
+	std::shared_ptr<ElementImportObject> element(new ElementImportObject());
+	*element=(*this);
 	element->setThisElementImportObjectPtr(element);
 	return element;
 }
 
 ElementImportObject& ElementImportObject::operator=(const ElementImportObject & obj)
 {
+	UML::DirectedRelationshipObject::operator=(obj);
 	return *this;
 }
 

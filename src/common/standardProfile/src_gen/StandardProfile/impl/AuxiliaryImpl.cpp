@@ -44,9 +44,7 @@ AuxiliaryImpl::AuxiliaryImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Auxiliary is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ AuxiliaryImpl::AuxiliaryImpl(const AuxiliaryImpl & obj):AuxiliaryImpl()
 
 std::shared_ptr<ecore::EObject>  AuxiliaryImpl::copy() const
 {
-	std::shared_ptr<AuxiliaryImpl> element(new AuxiliaryImpl(*this));
+	std::shared_ptr<AuxiliaryImpl> element(new AuxiliaryImpl());
+	*element=(*this);
 	element->setThisAuxiliaryPtr(element);
 	return element;
 }
 
 AuxiliaryImpl& AuxiliaryImpl::operator=(const AuxiliaryImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Auxiliary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,22 +36,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OccurrenceSpecification.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -76,7 +70,7 @@ GeneralOrderingImpl::~GeneralOrderingImpl()
 }
 
 //Additional constructor for the containments back reference
-GeneralOrderingImpl::GeneralOrderingImpl(std::weak_ptr<uml::Namespace > par_namespace)
+GeneralOrderingImpl::GeneralOrderingImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :GeneralOrderingImpl()
 {
 	m_namespace = par_namespace;
@@ -84,69 +78,42 @@ GeneralOrderingImpl::GeneralOrderingImpl(std::weak_ptr<uml::Namespace > par_name
 }
 
 //Additional constructor for the containments back reference
-GeneralOrderingImpl::GeneralOrderingImpl(std::weak_ptr<uml::Element > par_owner)
+GeneralOrderingImpl::GeneralOrderingImpl(std::weak_ptr<uml::Element> par_owner)
 :GeneralOrderingImpl()
 {
 	m_owner = par_owner;
 }
 
-
-GeneralOrderingImpl::GeneralOrderingImpl(const GeneralOrderingImpl & obj):GeneralOrderingImpl()
+GeneralOrderingImpl::GeneralOrderingImpl(const GeneralOrderingImpl & obj): GeneralOrderingImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  GeneralOrderingImpl::copy() const
-{
-	std::shared_ptr<GeneralOrderingImpl> element(new GeneralOrderingImpl(*this));
-	element->setThisGeneralOrderingPtr(element);
-	return element;
-}
-
 GeneralOrderingImpl& GeneralOrderingImpl::operator=(const GeneralOrderingImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	GeneralOrdering::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy GeneralOrdering "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_after  = obj.getAfter();
-
 	m_before  = obj.getBefore();
-
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> GeneralOrderingImpl::copy() const
+{
+	std::shared_ptr<GeneralOrderingImpl> element(new GeneralOrderingImpl());
+	*element =(*this);
+	element->setThisGeneralOrderingPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
@@ -161,7 +128,7 @@ std::shared_ptr<ecore::EClass> GeneralOrderingImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool GeneralOrderingImpl::irreflexive_transitive_closure(Any diagnostics,std::map <   Any, Any >  context)
+bool GeneralOrderingImpl::irreflexive_transitive_closure(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -173,33 +140,29 @@ bool GeneralOrderingImpl::irreflexive_transitive_closure(Any diagnostics,std::ma
 /*
 Getter & Setter for reference after
 */
-std::shared_ptr<uml::OccurrenceSpecification > GeneralOrderingImpl::getAfter() const
+std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getAfter() const
 {
 //assert(m_after);
     return m_after;
 }
-
 void GeneralOrderingImpl::setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after)
 {
     m_after = _after;
 }
 
 
-
 /*
 Getter & Setter for reference before
 */
-std::shared_ptr<uml::OccurrenceSpecification > GeneralOrderingImpl::getBefore() const
+std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getBefore() const
 {
 //assert(m_before);
     return m_before;
 }
-
 void GeneralOrderingImpl::setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before)
 {
     m_before = _before;
 }
-
 
 
 //*********************************
@@ -220,7 +183,7 @@ std::shared_ptr<Union<uml::Element>> GeneralOrderingImpl::getOwnedElement() cons
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > GeneralOrderingImpl::getOwner() const
+std::weak_ptr<uml::Element> GeneralOrderingImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -259,9 +222,9 @@ Any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getAfter())); //1089
+			return eAny(getAfter()); //1089
 		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBefore())); //10810
+			return eAny(getBefore()); //10810
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -354,13 +317,12 @@ void GeneralOrderingImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 
 void GeneralOrderingImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void GeneralOrderingImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void GeneralOrderingImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -412,13 +374,9 @@ void GeneralOrderingImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("after", this->getAfter());
-		saveHandler->addReference("before", this->getBefore());
-
+	// Add references
+		saveHandler->addReference(this->getAfter(), "after", getAfter()->eClass() != uml::umlPackage::eInstance()->getOccurrenceSpecification_Class()); 
+		saveHandler->addReference(this->getBefore(), "before", getBefore()->eClass() != uml::umlPackage::eInstance()->getOccurrenceSpecification_Class()); 
 	}
 	catch (std::exception& e)
 	{

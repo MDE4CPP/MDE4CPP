@@ -23,15 +23,14 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public: 
 			ExecutionImpl(const ExecutionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ExecutionImpl& operator=(ExecutionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ExecutionImpl& operator=(ExecutionImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			ExecutionImpl();
 			virtual std::shared_ptr<Execution> getThisExecutionPtr() const;
 			virtual void setThisExecutionPtr(std::weak_ptr<Execution> thisExecutionPtr);
-
 
 
 		public:
@@ -42,29 +41,13 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual void execute() ;
-			
-			
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getOutputParameterValues() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter>  parameter) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
-			
-			 
-			virtual void setParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue>  parameterValue) ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual void execute() ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > getOutputParameterValues() ; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> getParameterValue(std::shared_ptr<uml::Parameter> parameter) ; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ; 
+			virtual void setParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> parameterValue) ; 
 			virtual void terminate() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -75,22 +58,17 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Behavior > getBehavior() const ;
+			virtual std::shared_ptr<uml::Behavior> getBehavior() const ;
 			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior>) ;
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getContext() const ;
 			
-			
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object > getContext() const ;
-			
-			
-			virtual void setContext(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _context) ;
-			
+			virtual void setContext(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>) ;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> getParameterValues() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -110,7 +88,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

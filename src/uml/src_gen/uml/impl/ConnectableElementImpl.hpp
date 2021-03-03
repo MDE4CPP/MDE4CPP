@@ -23,8 +23,8 @@ namespace uml
 	{
 		public: 
 			ConnectableElementImpl(const ConnectableElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ConnectableElementImpl& operator=(ConnectableElementImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ConnectableElementImpl& operator=(ConnectableElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -33,18 +33,11 @@ namespace uml
 			virtual void setThisConnectableElementPtr(std::weak_ptr<ConnectableElement> thisConnectableElementPtr);
 
 			//Additional constructors for the containments back reference
-			ConnectableElementImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ConnectableElementImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ConnectableElementImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ConnectableElementImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ConnectableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			ConnectableElementImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -60,8 +53,6 @@ namespace uml
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::ConnectorEnd> > getEnds() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -79,7 +70,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::ConnectorEnd>> getEnd() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -94,7 +84,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -109,7 +99,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

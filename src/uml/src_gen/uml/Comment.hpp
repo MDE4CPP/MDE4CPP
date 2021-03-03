@@ -7,21 +7,17 @@
 #ifndef UML_COMMENT_HPP
 #define UML_COMMENT_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,21 +32,13 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
+//Forward Declaration for used types 
 
 // base class includes
 #include "uml/Element.hpp"
 
 // enum includes
+
 
 
 //*********************************
@@ -61,14 +49,13 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class Comment:virtual public Element
+	class Comment: virtual public Element
 	{
 		public:
  			Comment(const Comment &) {}
 
 		protected:
 			Comment(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -89,13 +76,12 @@ namespace uml
 			*/
 			 
 			virtual std::string getBody() const = 0;
-			
 			/*!
 			Specifies a string that is the comment.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setBody (std::string _body)= 0; 
+			virtual void setBody (std::string _body)= 0;
 			
 			//*********************************
 			// Reference
@@ -106,7 +92,6 @@ namespace uml
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Element>> getAnnotatedElement() const = 0;
-			
 			
 			
 
@@ -150,7 +135,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

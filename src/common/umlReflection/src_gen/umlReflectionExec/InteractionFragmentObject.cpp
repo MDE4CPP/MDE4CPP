@@ -61,9 +61,8 @@
 using namespace UML;
 
 InteractionFragmentObject::InteractionFragmentObject(std::shared_ptr<uml::InteractionFragment> _element):
-
 	m_InteractionFragmentValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InteractionFragment());
 }
 
@@ -84,13 +83,15 @@ InteractionFragmentObject::~InteractionFragmentObject()
 
 std::shared_ptr<ecore::EObject> InteractionFragmentObject::copy()
 {
-	std::shared_ptr<InteractionFragmentObject> element(new InteractionFragmentObject(*this));
+	std::shared_ptr<InteractionFragmentObject> element(new InteractionFragmentObject());
+	*element=(*this);
 	element->setThisInteractionFragmentObjectPtr(element);
 	return element;
 }
 
 InteractionFragmentObject& InteractionFragmentObject::operator=(const InteractionFragmentObject & obj)
 {
+	UML::NamedElementObject::operator=(obj);
 	return *this;
 }
 

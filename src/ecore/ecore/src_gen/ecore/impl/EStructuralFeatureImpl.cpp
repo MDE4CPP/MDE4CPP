@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,20 +35,14 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EClass.hpp"
-
 #include "ecore/EClassifier.hpp"
-
 #include "ecore/EGenericType.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/ETypedElement.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -73,84 +68,56 @@ EStructuralFeatureImpl::~EStructuralFeatureImpl()
 }
 
 //Additional constructor for the containments back reference
-EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EStructuralFeatureImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
 //Additional constructor for the containments back reference
-EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+EStructuralFeatureImpl::EStructuralFeatureImpl(std::weak_ptr<ecore::EClass> par_eContainingClass)
 :EStructuralFeatureImpl()
 {
 	m_eContainingClass = par_eContainingClass;
 }
 
-
-EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & obj):EStructuralFeatureImpl()
+EStructuralFeatureImpl::EStructuralFeatureImpl(const EStructuralFeatureImpl & obj): EStructuralFeatureImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  EStructuralFeatureImpl::copy() const
-{
-	std::shared_ptr<EStructuralFeatureImpl> element(new EStructuralFeatureImpl(*this));
-	element->setThisEStructuralFeaturePtr(element);
-	return element;
-}
-
 EStructuralFeatureImpl& EStructuralFeatureImpl::operator=(const EStructuralFeatureImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ETypedElementImpl::operator=(obj);
+	EStructuralFeature::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EStructuralFeature "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_changeable = obj.isChangeable();
 	m_defaultValue = obj.getDefaultValue();
 	m_defaultValueLiteral = obj.getDefaultValueLiteral();
 	m_derived = obj.isDerived();
 	m_featureID = obj.getFeatureID();
-	m_lowerBound = obj.getLowerBound();
-	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
-	m_ordered = obj.isOrdered();
-	m_required = obj.isRequired();
 	m_transient = obj.isTransient();
-	m_unique = obj.isUnique();
 	m_unsettable = obj.isUnsettable();
-	m_upperBound = obj.getUpperBound();
 	m_volatile = obj.isVolatile();
 
 	//copy references with no containment (soft copy)
-	
-	m_eContainer  = obj.getEContainer();
-
 	m_eContainingClass  = obj.getEContainingClass();
-
-	m_eType  = obj.getEType();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	if(obj.getEGenericType()!=nullptr)
-	{
-		m_eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEGenericType()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> EStructuralFeatureImpl::copy() const
+{
+	std::shared_ptr<EStructuralFeatureImpl> element(new EStructuralFeatureImpl());
+	*element =(*this);
+	element->setThisEStructuralFeaturePtr(element);
+	return element;
 }
 
 std::shared_ptr<EClass> EStructuralFeatureImpl::eStaticClass() const
@@ -168,12 +135,10 @@ bool EStructuralFeatureImpl::isChangeable() const
 {
 	return m_changeable;
 }
-
 void EStructuralFeatureImpl::setChangeable(bool _changeable)
 {
 	m_changeable = _changeable;
 } 
-
 
 
 /*
@@ -183,12 +148,10 @@ Any EStructuralFeatureImpl::getDefaultValue() const
 {
 	return m_defaultValue;
 }
-
 void EStructuralFeatureImpl::setDefaultValue(Any _defaultValue)
 {
 	m_defaultValue = _defaultValue;
 } 
-
 
 
 /*
@@ -198,12 +161,10 @@ std::string EStructuralFeatureImpl::getDefaultValueLiteral() const
 {
 	return m_defaultValueLiteral;
 }
-
 void EStructuralFeatureImpl::setDefaultValueLiteral(std::string _defaultValueLiteral)
 {
 	m_defaultValueLiteral = _defaultValueLiteral;
 } 
-
 
 
 /*
@@ -213,12 +174,10 @@ bool EStructuralFeatureImpl::isDerived() const
 {
 	return m_derived;
 }
-
 void EStructuralFeatureImpl::setDerived(bool _derived)
 {
 	m_derived = _derived;
 } 
-
 
 
 /*
@@ -228,12 +187,10 @@ int EStructuralFeatureImpl::getFeatureID() const
 {
 	return m_featureID;
 }
-
 void EStructuralFeatureImpl::setFeatureID(int _featureID)
 {
 	m_featureID = _featureID;
 } 
-
 
 
 /*
@@ -243,12 +200,10 @@ bool EStructuralFeatureImpl::isTransient() const
 {
 	return m_transient;
 }
-
 void EStructuralFeatureImpl::setTransient(bool _transient)
 {
 	m_transient = _transient;
 } 
-
 
 
 /*
@@ -258,12 +213,10 @@ bool EStructuralFeatureImpl::isUnsettable() const
 {
 	return m_unsettable;
 }
-
 void EStructuralFeatureImpl::setUnsettable(bool _unsettable)
 {
 	m_unsettable = _unsettable;
 } 
-
 
 
 /*
@@ -273,12 +226,10 @@ bool EStructuralFeatureImpl::isVolatile() const
 {
 	return m_volatile;
 }
-
 void EStructuralFeatureImpl::setVolatile(bool _volatile)
 {
 	m_volatile = _volatile;
 } 
-
 
 
 //*********************************
@@ -298,13 +249,11 @@ void * EStructuralFeatureImpl::getContainerClass()
 /*
 Getter & Setter for reference eContainingClass
 */
-std::weak_ptr<ecore::EClass > EStructuralFeatureImpl::getEContainingClass() const
+std::weak_ptr<ecore::EClass> EStructuralFeatureImpl::getEContainingClass() const
 {
 
     return m_eContainingClass;
 }
-
-
 
 
 
@@ -368,7 +317,7 @@ Any EStructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
 			return eAny(isDerived()); //5019
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEContainingClass().lock())); //5021
+			return eAny(getEContainingClass().lock()); //5021
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
 			return eAny(getFeatureID()); //5020
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:
@@ -565,13 +514,12 @@ void EStructuralFeatureImpl::loadAttributes(std::shared_ptr<persistence::interfa
 
 void EStructuralFeatureImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	ETypedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void EStructuralFeatureImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EStructuralFeatureImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	ETypedElementImpl::resolveReferences(featureID, references);
 }
@@ -600,8 +548,6 @@ void EStructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEStructuralFeature_Attribute_changeable()) )
 		{
@@ -637,7 +583,6 @@ void EStructuralFeatureImpl::saveContent(std::shared_ptr<persistence::interfaces
 		{
 			saveHandler->addAttribute("volatile", this->isVolatile());
 		}
-
 	}
 	catch (std::exception& e)
 	{

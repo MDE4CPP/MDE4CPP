@@ -23,15 +23,14 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public: 
 			ReferenceImpl(const ReferenceImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ReferenceImpl& operator=(ReferenceImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ReferenceImpl& operator=(ReferenceImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			ReferenceImpl();
 			virtual std::shared_ptr<Reference> getThisReferencePtr() const;
 			virtual void setThisReferencePtr(std::weak_ptr<Reference> thisReferencePtr);
-
 
 
 		public:
@@ -42,54 +41,22 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position) ;
-			
-			 
-			virtual void destroy() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<uml::Operation>  operation) ;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
-			
-			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValues(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> >  featureValues) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
-			
-			 
-			virtual void removeValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<fUML::Semantics::Values::Value>  value) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > retrieveFeatureValues() ;
-			
-			 
-			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) ;
-			
-			 
-			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) ;
-			
-			 
-			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position) ;
-			
-			 
-			virtual void startBehavior(std::shared_ptr<uml::Class>  classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position) ; 
+			virtual void destroy() ; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> dispatch(std::shared_ptr<uml::Operation> operation) ; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ; 
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > getValues(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> featureValues) ; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ; 
+			virtual void removeValue(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<fUML::Semantics::Values::Value> value) ; 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature> feature) ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > retrieveFeatureValues() ; 
+			virtual void send(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) ; 
+			virtual void send(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ; 
+			virtual void setFeatureValue(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position) ; 
+			virtual void startBehavior(std::shared_ptr<uml::Class> classifier,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) ; 
 			virtual std::string toString() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -100,12 +67,10 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object > getReferent() const ;
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> getReferent() const ;
 			
+			virtual void setReferent(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>) ;
 			
-			virtual void setReferent(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _referent) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -125,7 +90,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

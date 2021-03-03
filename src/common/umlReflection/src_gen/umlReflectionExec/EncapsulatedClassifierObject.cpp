@@ -122,9 +122,8 @@
 using namespace UML;
 
 EncapsulatedClassifierObject::EncapsulatedClassifierObject(std::shared_ptr<uml::EncapsulatedClassifier> _element):
-
 	m_EncapsulatedClassifierValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_EncapsulatedClassifier());
 }
 
@@ -145,13 +144,15 @@ EncapsulatedClassifierObject::~EncapsulatedClassifierObject()
 
 std::shared_ptr<ecore::EObject> EncapsulatedClassifierObject::copy()
 {
-	std::shared_ptr<EncapsulatedClassifierObject> element(new EncapsulatedClassifierObject(*this));
+	std::shared_ptr<EncapsulatedClassifierObject> element(new EncapsulatedClassifierObject());
+	*element=(*this);
 	element->setThisEncapsulatedClassifierObjectPtr(element);
 	return element;
 }
 
 EncapsulatedClassifierObject& EncapsulatedClassifierObject::operator=(const EncapsulatedClassifierObject & obj)
 {
+	UML::StructuredClassifierObject::operator=(obj);
 	return *this;
 }
 

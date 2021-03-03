@@ -23,15 +23,14 @@ namespace fUML::Semantics::Values
 	{
 		public: 
 			EvaluationImpl(const EvaluationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EvaluationImpl& operator=(EvaluationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EvaluationImpl& operator=(EvaluationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Values::ValuesFactoryImpl;
 			EvaluationImpl();
 			virtual std::shared_ptr<Evaluation> getThisEvaluationPtr() const;
 			virtual void setThisEvaluationPtr(std::weak_ptr<Evaluation> thisEvaluationPtr);
-
 
 
 		public:
@@ -44,8 +43,6 @@ namespace fUML::Semantics::Values
 			 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -55,18 +52,14 @@ namespace fUML::Semantics::Values
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Loci::Locus > getLocus() const ;
+			virtual std::shared_ptr<fUML::Semantics::Loci::Locus> getLocus() const ;
 			
+			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus>) ;
 			
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) ;
+			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const ;
 			
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification>) ;
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const ;
-			
-			
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -86,7 +79,7 @@ namespace fUML::Semantics::Values
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

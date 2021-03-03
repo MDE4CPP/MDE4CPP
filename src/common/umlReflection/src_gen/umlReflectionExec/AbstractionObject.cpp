@@ -71,9 +71,8 @@
 using namespace UML;
 
 AbstractionObject::AbstractionObject(std::shared_ptr<uml::Abstraction> _element):
-
 	m_AbstractionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Abstraction());
 }
 
@@ -94,13 +93,15 @@ AbstractionObject::~AbstractionObject()
 
 std::shared_ptr<ecore::EObject> AbstractionObject::copy()
 {
-	std::shared_ptr<AbstractionObject> element(new AbstractionObject(*this));
+	std::shared_ptr<AbstractionObject> element(new AbstractionObject());
+	*element=(*this);
 	element->setThisAbstractionObjectPtr(element);
 	return element;
 }
 
 AbstractionObject& AbstractionObject::operator=(const AbstractionObject & obj)
 {
+	UML::DependencyObject::operator=(obj);
 	return *this;
 }
 

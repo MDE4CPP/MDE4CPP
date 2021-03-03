@@ -91,9 +91,8 @@
 using namespace UML;
 
 DestroyObjectActionObject::DestroyObjectActionObject(std::shared_ptr<uml::DestroyObjectAction> _element):
-
 	m_DestroyObjectActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DestroyObjectAction());
 }
 
@@ -114,13 +113,15 @@ DestroyObjectActionObject::~DestroyObjectActionObject()
 
 std::shared_ptr<ecore::EObject> DestroyObjectActionObject::copy()
 {
-	std::shared_ptr<DestroyObjectActionObject> element(new DestroyObjectActionObject(*this));
+	std::shared_ptr<DestroyObjectActionObject> element(new DestroyObjectActionObject());
+	*element=(*this);
 	element->setThisDestroyObjectActionObjectPtr(element);
 	return element;
 }
 
 DestroyObjectActionObject& DestroyObjectActionObject::operator=(const DestroyObjectActionObject & obj)
 {
+	UML::ActionObject::operator=(obj);
 	return *this;
 }
 

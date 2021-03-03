@@ -61,9 +61,8 @@
 using namespace UML;
 
 ChangeEventObject::ChangeEventObject(std::shared_ptr<uml::ChangeEvent> _element):
-
 	m_ChangeEventValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ChangeEvent());
 }
 
@@ -84,13 +83,15 @@ ChangeEventObject::~ChangeEventObject()
 
 std::shared_ptr<ecore::EObject> ChangeEventObject::copy()
 {
-	std::shared_ptr<ChangeEventObject> element(new ChangeEventObject(*this));
+	std::shared_ptr<ChangeEventObject> element(new ChangeEventObject());
+	*element=(*this);
 	element->setThisChangeEventObjectPtr(element);
 	return element;
 }
 
 ChangeEventObject& ChangeEventObject::operator=(const ChangeEventObject & obj)
 {
+	UML::EventObject::operator=(obj);
 	return *this;
 }
 

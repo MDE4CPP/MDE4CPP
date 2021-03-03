@@ -69,9 +69,8 @@
 using namespace UML;
 
 DependencyObject::DependencyObject(std::shared_ptr<uml::Dependency> _element):
-
 	m_DependencyValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Dependency());
 }
 
@@ -92,13 +91,16 @@ DependencyObject::~DependencyObject()
 
 std::shared_ptr<ecore::EObject> DependencyObject::copy()
 {
-	std::shared_ptr<DependencyObject> element(new DependencyObject(*this));
+	std::shared_ptr<DependencyObject> element(new DependencyObject());
+	*element=(*this);
 	element->setThisDependencyObjectPtr(element);
 	return element;
 }
 
 DependencyObject& DependencyObject::operator=(const DependencyObject & obj)
 {
+	UML::DirectedRelationshipObject::operator=(obj);
+	UML::PackageableElementObject::operator=(obj);
 	return *this;
 }
 

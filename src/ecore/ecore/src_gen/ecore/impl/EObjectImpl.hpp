@@ -23,8 +23,8 @@ virtual public EObject
 	{
 		public: 
 			EObjectImpl(const EObjectImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EObjectImpl& operator=(EObjectImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EObjectImpl& operator=(EObjectImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
@@ -33,10 +33,7 @@ virtual public EObject
 			virtual void setThisEObjectPtr(std::weak_ptr<EObject> thisEObjectPtr);
 
 			//Additional constructors for the containments back reference
-			EObjectImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
-
+			EObjectImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 
 		public:
 			//destructor
@@ -46,73 +43,40 @@ virtual public EObject
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<Bag <   ecore::EObject > > eAllContents() const ;
-			
-			 
-			virtual std::shared_ptr<ecore::EClass> eClass() const ;
-			
-			
-			
-			 
-			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const ;
-			
-			 
-			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const ;
-			
-			 
-			virtual std::shared_ptr<Bag <   ecore::EObject > > eContents() const ;
-			
-			 
-			virtual std::shared_ptr<Bag <   ecore::EObject > > eCrossReferences() const ;
-			
-			 
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature) const ;
-			
-			 
-			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature>  feature,bool resolve) const ;
-			
-			 
-			virtual Any eInvoke(std::shared_ptr<ecore::EOperation>  operation,Bag <   Any >  arguments) const ;
-			
-			 
-			virtual bool eIsProxy() const ;
-			
-			 
-			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature>  feature) const ;
-			
-			 
-			virtual int eResource() const ;
-			
-			 
-			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature>  feature,Any newValue) ;
-			
-			 
-			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature>  feature) const ;
-			
-			
+			virtual std::shared_ptr<Bag < ecore::EObject>> eAllContents() const ; 
+			virtual std::shared_ptr<ecore::EClass> eClass() const ; 
+			virtual std::shared_ptr<ecore::EStructuralFeature> eContainingFeature() const ; 
+			virtual std::shared_ptr<ecore::EReference> eContainmentFeature() const ; 
+			virtual std::shared_ptr<std::list < ecore::EObject>> eContents() const ; 
+			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const ; 
+			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const ; 
+			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const ; 
+			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) const ; 
+			virtual bool eIsProxy() const ; 
+			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const ; 
+			virtual int eResource() const ; 
+			virtual void eSet(std::shared_ptr<ecore::EStructuralFeature> feature,Any newValue) ; 
+			virtual void eUnset(std::shared_ptr<ecore::EStructuralFeature> feature) const ;
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
 			virtual int getMetaElementID() const ;
-			
 			 
-			virtual void setMetaElementID (int _metaElementID); 
+			virtual void setMetaElementID (int _metaElementID);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EObject > getEContainer() const ;
+			virtual std::weak_ptr<ecore::EObject> getEContainer() const ;
+			
+			virtual void setEContainer(std::weak_ptr<ecore::EObject>) ;
 			
 			
-			virtual void setEContainer(std::shared_ptr<ecore::EObject> _eContainer) ;
 			
-			
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -133,7 +97,7 @@ virtual public EObject
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

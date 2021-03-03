@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,8 +33,7 @@
 
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -59,36 +59,36 @@ EStringToStringMapEntryImpl::~EStringToStringMapEntryImpl()
 }
 
 
-
-EStringToStringMapEntryImpl::EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj):EStringToStringMapEntryImpl()
+EStringToStringMapEntryImpl::EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj): EStringToStringMapEntryImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  EStringToStringMapEntryImpl::copy() const
-{
-	std::shared_ptr<EStringToStringMapEntryImpl> element(new EStringToStringMapEntryImpl(*this));
-	element->setThisEStringToStringMapEntryPtr(element);
-	return element;
-}
-
 EStringToStringMapEntryImpl& EStringToStringMapEntryImpl::operator=(const EStringToStringMapEntryImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	EStringToStringMapEntry::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EStringToStringMapEntry "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_key = obj.getKey();
 	m_value = obj.getValue();
 
 	//copy references with no containment (soft copy)
-	
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> EStringToStringMapEntryImpl::copy() const
+{
+	std::shared_ptr<EStringToStringMapEntryImpl> element(new EStringToStringMapEntryImpl());
+	*element =(*this);
+	element->setThisEStringToStringMapEntryPtr(element);
+	return element;
 }
 
 std::shared_ptr<EClass> EStringToStringMapEntryImpl::eStaticClass() const
@@ -106,12 +106,10 @@ std::string EStringToStringMapEntryImpl::getKey() const
 {
 	return m_key;
 }
-
 void EStringToStringMapEntryImpl::setKey(std::string _key)
 {
 	m_key = _key;
 } 
-
 
 
 /*
@@ -121,12 +119,10 @@ std::string EStringToStringMapEntryImpl::getValue() const
 {
 	return m_value;
 }
-
 void EStringToStringMapEntryImpl::setValue(std::string _value)
 {
 	m_value = _value;
 } 
-
 
 
 //*********************************
@@ -261,12 +257,11 @@ void EStringToStringMapEntryImpl::loadAttributes(std::shared_ptr<persistence::in
 
 void EStringToStringMapEntryImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 }
 
-void EStringToStringMapEntryImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EStringToStringMapEntryImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }
@@ -285,8 +280,6 @@ void EStringToStringMapEntryImpl::saveContent(std::shared_ptr<persistence::inter
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEStringToStringMapEntry_Attribute_key()) )
 		{
@@ -297,7 +290,6 @@ void EStringToStringMapEntryImpl::saveContent(std::shared_ptr<persistence::inter
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

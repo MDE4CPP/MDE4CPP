@@ -75,9 +75,8 @@
 using namespace UML;
 
 VariableObject::VariableObject(std::shared_ptr<uml::Variable> _element):
-
 	m_VariableValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Variable());
 }
 
@@ -98,13 +97,16 @@ VariableObject::~VariableObject()
 
 std::shared_ptr<ecore::EObject> VariableObject::copy()
 {
-	std::shared_ptr<VariableObject> element(new VariableObject(*this));
+	std::shared_ptr<VariableObject> element(new VariableObject());
+	*element=(*this);
 	element->setThisVariableObjectPtr(element);
 	return element;
 }
 
 VariableObject& VariableObject::operator=(const VariableObject & obj)
 {
+	UML::ConnectableElementObject::operator=(obj);
+	UML::MultiplicityElementObject::operator=(obj);
 	return *this;
 }
 

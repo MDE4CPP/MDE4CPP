@@ -22,8 +22,8 @@ namespace ecore
 	{
 		public: 
 			EEnumLiteralImpl(const EEnumLiteralImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EEnumLiteralImpl& operator=(EEnumLiteralImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EEnumLiteralImpl& operator=(EEnumLiteralImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
@@ -32,14 +32,9 @@ namespace ecore
 			virtual void setThisEEnumLiteralPtr(std::weak_ptr<EEnumLiteral> thisEEnumLiteralPtr);
 
 			//Additional constructors for the containments back reference
-			EEnumLiteralImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EEnumLiteralImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EEnumLiteralImpl(std::weak_ptr<ecore::EEnum > par_eEnum);
-
-
-
+			EEnumLiteralImpl(std::weak_ptr<ecore::EEnum> par_eEnum);
 
 		public:
 			//destructor
@@ -55,29 +50,25 @@ namespace ecore
 			//*********************************
 			 
 			virtual Any getInstance() const ;
-			
 			 
-			virtual void setInstance (Any _instance); 
+			virtual void setInstance (Any _instance);
 			 
 			virtual std::string getLiteral() const ;
-			
 			 
-			virtual void setLiteral (std::string _literal); 
+			virtual void setLiteral (std::string _literal);
 			 
 			virtual int getValue() const ;
-			
 			 
-			virtual void setValue (int _value); 
+			virtual void setValue (int _value);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EEnum > getEEnum() const ;
+			virtual std::weak_ptr<ecore::EEnum> getEEnum() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -98,7 +89,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

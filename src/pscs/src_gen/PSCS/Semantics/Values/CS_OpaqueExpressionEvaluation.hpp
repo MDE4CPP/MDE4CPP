@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_VALUES_CS_OPAQUEEXPRESSIONEVALUATION_HPP
 #define PSCS_SEMANTICS_VALUES_CS_OPAQUEEXPRESSIONEVALUATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,22 +31,15 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::Values 
-{
-	class Evaluation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
 }
-
 namespace uml 
 {
 	class ValueSpecification;
@@ -62,18 +51,18 @@ namespace uml
 // enum includes
 
 
+
 //*********************************
 namespace PSCS::Semantics::Values 
 {
 	
-	class CS_OpaqueExpressionEvaluation:virtual public fUML::Semantics::Values::Evaluation
+	class CS_OpaqueExpressionEvaluation: virtual public fUML::Semantics::Values::Evaluation
 	{
 		public:
  			CS_OpaqueExpressionEvaluation(const CS_OpaqueExpressionEvaluation &) {}
 
 		protected:
 			CS_OpaqueExpressionEvaluation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -85,12 +74,8 @@ namespace PSCS::Semantics::Values
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() = 0; 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > executeExpressionBehavior() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -124,7 +109,7 @@ namespace PSCS::Semantics::Values
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

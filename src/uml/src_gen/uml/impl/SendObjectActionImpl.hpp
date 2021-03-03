@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			SendObjectActionImpl(const SendObjectActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			SendObjectActionImpl& operator=(SendObjectActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			SendObjectActionImpl& operator=(SendObjectActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisSendObjectActionPtr(std::weak_ptr<SendObjectAction> thisSendObjectActionPtr);
 
 			//Additional constructors for the containments back reference
-			SendObjectActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			SendObjectActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			SendObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			SendObjectActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			SendObjectActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			SendObjectActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			SendObjectActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			SendObjectActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,9 +52,7 @@ namespace uml
 			onPort<>null implies target.type.oclAsType(Classifier).allFeatures()->includes(onPort)
 			*/
 			 
-			virtual bool type_target_pin(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool type_target_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -78,30 +67,26 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getRequest() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getRequest() const ;
 			/*!
 			The request object, which is transmitted to the target object. The object may be copied in transmission, so identity might not be preserved.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setRequest(std::shared_ptr<uml::InputPin> _request) ;
-			
+			virtual void setRequest(std::shared_ptr<uml::InputPin>) ;
 			/*!
 			The target object to which the object is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getTarget() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getTarget() const ;
 			/*!
 			The target object to which the object is sent.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setTarget(std::shared_ptr<uml::InputPin> _target) ;
+			virtual void setTarget(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -126,7 +111,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -146,7 +131,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

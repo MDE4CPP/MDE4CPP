@@ -165,9 +165,8 @@
 using namespace UML;
 
 StateMachineObject::StateMachineObject(std::shared_ptr<uml::StateMachine> _element):
-
 	m_StateMachineValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_StateMachine());
 }
 
@@ -188,13 +187,15 @@ StateMachineObject::~StateMachineObject()
 
 std::shared_ptr<ecore::EObject> StateMachineObject::copy()
 {
-	std::shared_ptr<StateMachineObject> element(new StateMachineObject(*this));
+	std::shared_ptr<StateMachineObject> element(new StateMachineObject());
+	*element=(*this);
 	element->setThisStateMachineObjectPtr(element);
 	return element;
 }
 
 StateMachineObject& StateMachineObject::operator=(const StateMachineObject & obj)
 {
+	UML::BehaviorObject::operator=(obj);
 	return *this;
 }
 

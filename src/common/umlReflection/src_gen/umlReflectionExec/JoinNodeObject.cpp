@@ -77,9 +77,8 @@
 using namespace UML;
 
 JoinNodeObject::JoinNodeObject(std::shared_ptr<uml::JoinNode> _element):
-
 	m_JoinNodeValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_JoinNode());
 }
 
@@ -100,13 +99,15 @@ JoinNodeObject::~JoinNodeObject()
 
 std::shared_ptr<ecore::EObject> JoinNodeObject::copy()
 {
-	std::shared_ptr<JoinNodeObject> element(new JoinNodeObject(*this));
+	std::shared_ptr<JoinNodeObject> element(new JoinNodeObject());
+	*element=(*this);
 	element->setThisJoinNodeObjectPtr(element);
 	return element;
 }
 
 JoinNodeObject& JoinNodeObject::operator=(const JoinNodeObject & obj)
 {
+	UML::ControlNodeObject::operator=(obj);
 	return *this;
 }
 

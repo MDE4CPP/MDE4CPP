@@ -8,22 +8,18 @@
 #define UML_RECEPTION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -38,94 +34,21 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
-	class BehavioralFeature;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Parameter;
-}
-
-namespace uml 
-{
 	class ParameterSet;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class Signal;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Type;
 }
 
@@ -138,6 +61,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -146,14 +70,13 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class Reception:virtual public BehavioralFeature
+	class Reception: virtual public BehavioralFeature
 	{
 		public:
  			Reception(const Reception &) {}
 
 		protected:
 			Reception(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -169,9 +92,7 @@ namespace uml
 			name = signal.name
 			*/
 			 
-			virtual bool same_name_as_signal(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool same_name_as_signal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A Reception's parameters match the ownedAttributes of its signal by name, type, and multiplicity
 			signal.ownedAttribute->size() = ownedParameter->size() and
 			Sequence{1..signal.ownedAttribute->size()}->forAll( i | 
@@ -183,9 +104,7 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool same_structure_as_signal(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool same_structure_as_signal(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -198,15 +117,13 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Signal > getSignal() const = 0;
-			
+			virtual std::shared_ptr<uml::Signal> getSignal() const = 0;
 			/*!
 			The Signal that this Reception handles.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setSignal(std::shared_ptr<uml::Signal> _signal) = 0;
-			
+			virtual void setSignal(std::shared_ptr<uml::Signal>) = 0;
 			
 
 		protected:
@@ -223,7 +140,7 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			std::shared_ptr<uml::Signal > m_signal;
+			std::shared_ptr<uml::Signal> m_signal;
 
 		public:
 			//*********************************
@@ -249,7 +166,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -258,7 +175,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

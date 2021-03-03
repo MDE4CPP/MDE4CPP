@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,42 +36,25 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Behavior.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/ControlNode.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/ObjectFlow.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -96,7 +80,7 @@ DecisionNodeImpl::~DecisionNodeImpl()
 }
 
 //Additional constructor for the containments back reference
-DecisionNodeImpl::DecisionNodeImpl(std::weak_ptr<uml::Activity > par_activity)
+DecisionNodeImpl::DecisionNodeImpl(std::weak_ptr<uml::Activity> par_activity)
 :DecisionNodeImpl()
 {
 	m_activity = par_activity;
@@ -104,7 +88,7 @@ DecisionNodeImpl::DecisionNodeImpl(std::weak_ptr<uml::Activity > par_activity)
 }
 
 //Additional constructor for the containments back reference
-DecisionNodeImpl::DecisionNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+DecisionNodeImpl::DecisionNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :DecisionNodeImpl()
 {
 	m_inStructuredNode = par_inStructuredNode;
@@ -112,7 +96,7 @@ DecisionNodeImpl::DecisionNodeImpl(std::weak_ptr<uml::StructuredActivityNode > p
 }
 
 //Additional constructor for the containments back reference
-DecisionNodeImpl::DecisionNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+DecisionNodeImpl::DecisionNodeImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :DecisionNodeImpl()
 {
 	m_namespace = par_namespace;
@@ -120,113 +104,42 @@ DecisionNodeImpl::DecisionNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-DecisionNodeImpl::DecisionNodeImpl(std::weak_ptr<uml::Element > par_owner)
+DecisionNodeImpl::DecisionNodeImpl(std::weak_ptr<uml::Element> par_owner)
 :DecisionNodeImpl()
 {
 	m_owner = par_owner;
 }
 
-
-DecisionNodeImpl::DecisionNodeImpl(const DecisionNodeImpl & obj):DecisionNodeImpl()
+DecisionNodeImpl::DecisionNodeImpl(const DecisionNodeImpl & obj): DecisionNodeImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  DecisionNodeImpl::copy() const
-{
-	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl(*this));
-	element->setThisDecisionNodePtr(element);
-	return element;
-}
-
 DecisionNodeImpl& DecisionNodeImpl::operator=(const DecisionNodeImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ControlNodeImpl::operator=(obj);
+	DecisionNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DecisionNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_isLeaf = obj.getIsLeaf();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_activity  = obj.getActivity();
-
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	m_decisionInput  = obj.getDecisionInput();
-
 	m_decisionInputFlow  = obj.getDecisionInputFlow();
-
-	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
-	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
-
-	m_inStructuredNode  = obj.getInStructuredNode();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
-	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
-	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
-	{
-		this->getInInterruptibleRegion()->add(std::shared_ptr<uml::InterruptibleActivityRegion>(std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_inInterruptibleRegion->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inInterruptibleRegion" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityPartition>> _inPartitionList = obj.getInPartition();
-	for(std::shared_ptr<uml::ActivityPartition> _inPartition : *_inPartitionList)
-	{
-		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(std::dynamic_pointer_cast<uml::ActivityPartition>(_inPartition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNodeList = obj.getRedefinedNode();
-	for(std::shared_ptr<uml::ActivityNode> _redefinedNode : *_redefinedNodeList)
-	{
-		this->getRedefinedNode()->add(std::shared_ptr<uml::ActivityNode>(std::dynamic_pointer_cast<uml::ActivityNode>(_redefinedNode->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> DecisionNodeImpl::copy() const
+{
+	std::shared_ptr<DecisionNodeImpl> element(new DecisionNodeImpl());
+	*element =(*this);
+	element->setThisDecisionNodePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> DecisionNodeImpl::eStaticClass() const
@@ -241,49 +154,49 @@ std::shared_ptr<ecore::EClass> DecisionNodeImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool DecisionNodeImpl::decision_input_flow_incoming(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::decision_input_flow_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::edges(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::incoming_control_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::incoming_control_one_input_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::incoming_object_one_input_parameter(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::incoming_object_one_input_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::incoming_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::incoming_outgoing_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::parameters(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::two_input_parameters(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::two_input_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool DecisionNodeImpl::zero_input_parameters(Any diagnostics,std::map <   Any, Any >  context)
+bool DecisionNodeImpl::zero_input_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -295,33 +208,29 @@ bool DecisionNodeImpl::zero_input_parameters(Any diagnostics,std::map <   Any, A
 /*
 Getter & Setter for reference decisionInput
 */
-std::shared_ptr<uml::Behavior > DecisionNodeImpl::getDecisionInput() const
+std::shared_ptr<uml::Behavior> DecisionNodeImpl::getDecisionInput() const
 {
 
     return m_decisionInput;
 }
-
 void DecisionNodeImpl::setDecisionInput(std::shared_ptr<uml::Behavior> _decisionInput)
 {
     m_decisionInput = _decisionInput;
 }
 
 
-
 /*
 Getter & Setter for reference decisionInputFlow
 */
-std::shared_ptr<uml::ObjectFlow > DecisionNodeImpl::getDecisionInputFlow() const
+std::shared_ptr<uml::ObjectFlow> DecisionNodeImpl::getDecisionInputFlow() const
 {
 
     return m_decisionInputFlow;
 }
-
 void DecisionNodeImpl::setDecisionInputFlow(std::shared_ptr<uml::ObjectFlow> _decisionInputFlow)
 {
     m_decisionInputFlow = _decisionInputFlow;
 }
-
 
 
 //*********************************
@@ -357,7 +266,7 @@ std::shared_ptr<Union<uml::Element>> DecisionNodeImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > DecisionNodeImpl::getOwner() const
+std::weak_ptr<uml::Element> DecisionNodeImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -421,9 +330,9 @@ Any DecisionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInput())); //6620
+			return eAny(getDecisionInput()); //6620
 		case uml::umlPackage::DECISIONNODE_ATTRIBUTE_DECISIONINPUTFLOW:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDecisionInputFlow())); //6621
+			return eAny(getDecisionInputFlow()); //6621
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }
@@ -516,13 +425,12 @@ void DecisionNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void DecisionNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ControlNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void DecisionNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void DecisionNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -583,13 +491,9 @@ void DecisionNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("decisionInput", this->getDecisionInput());
-		saveHandler->addReference("decisionInputFlow", this->getDecisionInputFlow());
-
+	// Add references
+		saveHandler->addReference(this->getDecisionInput(), "decisionInput", getDecisionInput()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
+		saveHandler->addReference(this->getDecisionInputFlow(), "decisionInputFlow", getDecisionInputFlow()->eClass() != uml::umlPackage::eInstance()->getObjectFlow_Class()); 
 	}
 	catch (std::exception& e)
 	{

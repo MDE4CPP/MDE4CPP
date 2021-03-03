@@ -7,20 +7,16 @@
 #ifndef UML_ARGUMENT_HPP
 #define UML_ARGUMENT_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,7 +31,7 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Object;
@@ -47,6 +43,7 @@ namespace uml
 
 #include "ecore/EModelElement.hpp"
 
+
 //*********************************
 namespace uml 
 {
@@ -57,14 +54,12 @@ namespace uml
 	*/
 	
 	class Argument : virtual public ecore::EModelElement
-
 	{
 		public:
  			Argument(const Argument &) {}
 
 		protected:
 			Argument(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -81,19 +76,16 @@ namespace uml
 			//*********************************
 			 
 			virtual std::string getName() const = 0;
-			
 			 
-			virtual void setName (std::string _name)= 0; 
+			virtual void setName (std::string _name)= 0;
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Object > getValue() const = 0;
+			virtual std::shared_ptr<uml::Object> getValue() const = 0;
 			
-			
-			virtual void setValue(std::shared_ptr<uml::Object> _value) = 0;
-			
+			virtual void setValue(std::shared_ptr<uml::Object>) = 0;
 			
 
 		protected:
@@ -108,7 +100,7 @@ namespace uml
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Object > m_value;
+			std::shared_ptr<uml::Object> m_value;
 
 		public:
 			//*********************************
@@ -123,7 +115,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

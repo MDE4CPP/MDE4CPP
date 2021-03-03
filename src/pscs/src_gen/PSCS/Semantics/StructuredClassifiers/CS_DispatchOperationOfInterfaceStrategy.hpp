@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_STRUCTUREDCLASSIFIERS_CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_HPP
 #define PSCS_SEMANTICS_STRUCTUREDCLASSIFIERS_CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,15 +31,10 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Operation;
-}
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class RedefinitionBasedDispatchStrategy;
 }
 
 // base class includes
@@ -52,18 +43,18 @@ namespace fUML::Semantics::StructuredClassifiers
 // enum includes
 
 
+
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	
-	class CS_DispatchOperationOfInterfaceStrategy:virtual public fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy
+	class CS_DispatchOperationOfInterfaceStrategy: virtual public fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy
 	{
 		public:
  			CS_DispatchOperationOfInterfaceStrategy(const CS_DispatchOperationOfInterfaceStrategy &) {}
 
 		protected:
 			CS_DispatchOperationOfInterfaceStrategy(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -75,9 +66,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) = 0;
-			
-			
+			virtual bool operationsMatch(std::shared_ptr<uml::Operation> ownedOperation,std::shared_ptr<uml::Operation> baseOperation) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -111,7 +100,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

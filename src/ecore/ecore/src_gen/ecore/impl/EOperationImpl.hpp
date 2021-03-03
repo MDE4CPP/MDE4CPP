@@ -22,8 +22,8 @@ namespace ecore
 	{
 		public: 
 			EOperationImpl(const EOperationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EOperationImpl& operator=(EOperationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EOperationImpl& operator=(EOperationImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
@@ -32,14 +32,9 @@ namespace ecore
 			virtual void setThisEOperationPtr(std::weak_ptr<EOperation> thisEOperationPtr);
 
 			//Additional constructors for the containments back reference
-			EOperationImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EOperationImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EOperationImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
-
-
-
+			EOperationImpl(std::weak_ptr<ecore::EClass> par_eContainingClass);
 
 		public:
 			//destructor
@@ -48,47 +43,37 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 			 
-			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation) const ;
-			
-			
+			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const ;
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
 			virtual int getOperationID() const ;
-			
 			 
-			virtual void setOperationID (int _operationID); 
+			virtual void setOperationID (int _operationID);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const ;
-			
+			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const ;
 			
 			
 			virtual std::shared_ptr<Bag<ecore::EClassifier>> getEExceptions() const ;
 			
 			
-			
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEGenericExceptions() const ;
-			
 			
 			
 			virtual std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> getEParameters() const ;
 			
 			
-			
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -109,7 +94,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

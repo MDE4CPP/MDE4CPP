@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			LifelineImpl(const LifelineImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			LifelineImpl& operator=(LifelineImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			LifelineImpl& operator=(LifelineImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,18 +32,11 @@ namespace uml
 			virtual void setThisLifelinePtr(std::weak_ptr<Lifeline> thisLifelinePtr);
 
 			//Additional constructors for the containments back reference
-			LifelineImpl(std::weak_ptr<uml::Interaction > par_interaction);
-
-
+			LifelineImpl(std::weak_ptr<uml::Interaction> par_interaction);
 			//Additional constructors for the containments back reference
-			LifelineImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			LifelineImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			LifelineImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			LifelineImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -94,32 +87,24 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool interaction_uses_share_lifeline(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool interaction_uses_share_lifeline(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The classifier containing the referenced ConnectableElement must be the same classifier, or an ancestor, of the classifier that contains the interaction enclosing this lifeline.
 			represents.namespace->closure(namespace)->includes(interaction._'context')
 			*/
 			 
-			virtual bool same_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool same_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The selector value, if present, must be a LiteralString or a LiteralInteger
 			self.selector->notEmpty() implies 
 			self.selector.oclIsKindOf(LiteralInteger) or 
 			self.selector.oclIsKindOf(LiteralString)
 			*/
 			 
-			virtual bool selector_int_or_string(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool selector_int_or_string(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The selector for a Lifeline must only be specified if the referenced Part is multivalued.
 			 self.selector->notEmpty() = (self.represents.oclIsKindOf(MultiplicityElement) and self.represents.oclAsType(MultiplicityElement).isMultivalued())
 			*/
 			 
-			virtual bool selector_specified(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool selector_specified(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -136,64 +121,55 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::InteractionFragment>> getCoveredBy() const ;
 			
-			
 			/*!
 			References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::PartDecomposition > getDecomposedAs() const ;
-			
+			virtual std::shared_ptr<uml::PartDecomposition> getDecomposedAs() const ;
 			/*!
 			References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setDecomposedAs(std::shared_ptr<uml::PartDecomposition> _decomposedAs) ;
-			
+			virtual void setDecomposedAs(std::shared_ptr<uml::PartDecomposition>) ;
 			/*!
 			References the Interaction enclosing this Lifeline.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Interaction > getInteraction() const ;
-			
+			virtual std::weak_ptr<uml::Interaction> getInteraction() const ;
 			/*!
 			References the Interaction enclosing this Lifeline.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setInteraction(std::shared_ptr<uml::Interaction> _interaction) ;
-			
+			virtual void setInteraction(std::weak_ptr<uml::Interaction>) ;
 			/*!
 			References the ConnectableElement within the classifier that contains the enclosing interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ConnectableElement > getRepresents() const ;
-			
+			virtual std::shared_ptr<uml::ConnectableElement> getRepresents() const ;
 			/*!
 			References the ConnectableElement within the classifier that contains the enclosing interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setRepresents(std::shared_ptr<uml::ConnectableElement> _represents) ;
-			
+			virtual void setRepresents(std::shared_ptr<uml::ConnectableElement>) ;
 			/*!
 			If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getSelector() const ;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getSelector() const ;
 			/*!
 			If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setSelector(std::shared_ptr<uml::ValueSpecification> _selector) ;
+			virtual void setSelector(std::shared_ptr<uml::ValueSpecification>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -203,7 +179,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -213,7 +189,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -228,7 +204,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

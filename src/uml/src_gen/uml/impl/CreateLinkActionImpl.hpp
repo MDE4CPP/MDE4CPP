@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			CreateLinkActionImpl(const CreateLinkActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			CreateLinkActionImpl& operator=(CreateLinkActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			CreateLinkActionImpl& operator=(CreateLinkActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisCreateLinkActionPtr(std::weak_ptr<CreateLinkAction> thisCreateLinkActionPtr);
 
 			//Additional constructors for the containments back reference
-			CreateLinkActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			CreateLinkActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			CreateLinkActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			CreateLinkActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			CreateLinkActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			CreateLinkActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			CreateLinkActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			CreateLinkActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,9 +52,7 @@ namespace uml
 			not self.association().isAbstract
 			*/
 			 
-			virtual bool association_not_abstract(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool association_not_abstract(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -73,7 +62,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -98,7 +87,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -118,7 +107,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

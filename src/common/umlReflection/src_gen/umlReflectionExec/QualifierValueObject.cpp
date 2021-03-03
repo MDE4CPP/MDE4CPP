@@ -46,9 +46,8 @@
 using namespace UML;
 
 QualifierValueObject::QualifierValueObject(std::shared_ptr<uml::QualifierValue> _element):
-
 	m_QualifierValueValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_QualifierValue());
 }
 
@@ -69,13 +68,15 @@ QualifierValueObject::~QualifierValueObject()
 
 std::shared_ptr<ecore::EObject> QualifierValueObject::copy()
 {
-	std::shared_ptr<QualifierValueObject> element(new QualifierValueObject(*this));
+	std::shared_ptr<QualifierValueObject> element(new QualifierValueObject());
+	*element=(*this);
 	element->setThisQualifierValueObjectPtr(element);
 	return element;
 }
 
 QualifierValueObject& QualifierValueObject::operator=(const QualifierValueObject & obj)
 {
+	UML::ElementObject::operator=(obj);
 	return *this;
 }
 

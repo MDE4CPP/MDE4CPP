@@ -7,20 +7,16 @@
 #ifndef UML_BEHAVIOREXECUTIONSPECIFICATION_HPP
 #define UML_BEHAVIOREXECUTIONSPECIFICATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,64 +31,18 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class ExecutionSpecification;
-}
-
-namespace uml 
-{
 	class GeneralOrdering;
-}
-
-namespace uml 
-{
 	class Interaction;
-}
-
-namespace uml 
-{
 	class InteractionOperand;
-}
-
-namespace uml 
-{
 	class Lifeline;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OccurrenceSpecification;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -103,6 +53,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -111,14 +62,13 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class BehaviorExecutionSpecification:virtual public ExecutionSpecification
+	class BehaviorExecutionSpecification: virtual public ExecutionSpecification
 	{
 		public:
  			BehaviorExecutionSpecification(const BehaviorExecutionSpecification &) {}
 
 		protected:
 			BehaviorExecutionSpecification(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -142,15 +92,13 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Behavior > getBehavior() const = 0;
-			
+			virtual std::shared_ptr<uml::Behavior> getBehavior() const = 0;
 			/*!
 			Behavior whose execution is occurring.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) = 0;
-			
+			virtual void setBehavior(std::shared_ptr<uml::Behavior>) = 0;
 			
 
 		protected:
@@ -167,7 +115,7 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::Behavior > m_behavior;
+			std::shared_ptr<uml::Behavior> m_behavior;
 
 		public:
 			//*********************************
@@ -178,7 +126,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -188,7 +136,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -197,7 +145,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

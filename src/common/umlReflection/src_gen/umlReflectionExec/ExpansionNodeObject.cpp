@@ -89,9 +89,8 @@
 using namespace UML;
 
 ExpansionNodeObject::ExpansionNodeObject(std::shared_ptr<uml::ExpansionNode> _element):
-
 	m_ExpansionNodeValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExpansionNode());
 }
 
@@ -112,13 +111,15 @@ ExpansionNodeObject::~ExpansionNodeObject()
 
 std::shared_ptr<ecore::EObject> ExpansionNodeObject::copy()
 {
-	std::shared_ptr<ExpansionNodeObject> element(new ExpansionNodeObject(*this));
+	std::shared_ptr<ExpansionNodeObject> element(new ExpansionNodeObject());
+	*element=(*this);
 	element->setThisExpansionNodeObjectPtr(element);
 	return element;
 }
 
 ExpansionNodeObject& ExpansionNodeObject::operator=(const ExpansionNodeObject & obj)
 {
+	UML::ObjectNodeObject::operator=(obj);
 	return *this;
 }
 

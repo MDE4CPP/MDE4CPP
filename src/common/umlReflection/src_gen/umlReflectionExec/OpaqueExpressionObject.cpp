@@ -67,9 +67,8 @@
 using namespace UML;
 
 OpaqueExpressionObject::OpaqueExpressionObject(std::shared_ptr<uml::OpaqueExpression> _element):
-
 	m_OpaqueExpressionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_OpaqueExpression());
 }
 
@@ -90,13 +89,15 @@ OpaqueExpressionObject::~OpaqueExpressionObject()
 
 std::shared_ptr<ecore::EObject> OpaqueExpressionObject::copy()
 {
-	std::shared_ptr<OpaqueExpressionObject> element(new OpaqueExpressionObject(*this));
+	std::shared_ptr<OpaqueExpressionObject> element(new OpaqueExpressionObject());
+	*element=(*this);
 	element->setThisOpaqueExpressionObjectPtr(element);
 	return element;
 }
 
 OpaqueExpressionObject& OpaqueExpressionObject::operator=(const OpaqueExpressionObject & obj)
 {
+	UML::ValueSpecificationObject::operator=(obj);
 	return *this;
 }
 

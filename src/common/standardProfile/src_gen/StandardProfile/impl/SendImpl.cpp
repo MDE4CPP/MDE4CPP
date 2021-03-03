@@ -44,9 +44,7 @@ SendImpl::SendImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Send is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ SendImpl::SendImpl(const SendImpl & obj):SendImpl()
 
 std::shared_ptr<ecore::EObject>  SendImpl::copy() const
 {
-	std::shared_ptr<SendImpl> element(new SendImpl(*this));
+	std::shared_ptr<SendImpl> element(new SendImpl());
+	*element=(*this);
 	element->setThisSendPtr(element);
 	return element;
 }
 
 SendImpl& SendImpl::operator=(const SendImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Send "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

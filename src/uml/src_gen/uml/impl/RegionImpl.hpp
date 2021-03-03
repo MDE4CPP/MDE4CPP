@@ -23,8 +23,8 @@ namespace uml
 	{
 		public: 
 			RegionImpl(const RegionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			RegionImpl& operator=(RegionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			RegionImpl& operator=(RegionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -33,22 +33,13 @@ namespace uml
 			virtual void setThisRegionPtr(std::weak_ptr<Region> thisRegionPtr);
 
 			//Additional constructors for the containments back reference
-			RegionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			RegionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			RegionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			RegionImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			RegionImpl(std::weak_ptr<uml::State > par_state);
-
-
+			RegionImpl(std::weak_ptr<uml::State> par_state);
 			//Additional constructors for the containments back reference
-			RegionImpl(std::weak_ptr<uml::StateMachine > par_stateMachine);
-
-
-
+			RegionImpl(std::weak_ptr<uml::StateMachine> par_stateMachine);
 
 		public:
 			//destructor
@@ -68,9 +59,7 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual bool belongsToPSM() ;
-			
-			/*!
+			virtual bool belongsToPSM() ;/*!
 			The operation containingStateMachine() returns the StateMachine in which this Region is defined.
 			result = (if stateMachine = null 
 			then
@@ -81,32 +70,24 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() ;
-			
-			/*!
+			virtual std::shared_ptr<uml::StateMachine> containingStateMachine() ;/*!
 			A Region can have at most one deep history Vertex.
 			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
 			   select(kind = PseudostateKind::deepHistory)->size() <= 1
 			*/
 			 
-			virtual bool deep_history_vertex(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool deep_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A Region can have at most one initial Vertex.
 			self.subvertex->select (oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
 			  select(kind = PseudostateKind::initial)->size() <= 1
 			*/
 			 
-			virtual bool initial_vertex(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool initial_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If a Region is owned by a StateMachine, then it cannot also be owned by a State and vice versa.
 			(stateMachine <> null implies state = null) and (state <> null implies stateMachine = null)
 			*/
 			 
-			virtual bool owned(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool owned(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The redefinition context of a Region is the nearest containing StateMachine.
 			result = (let sm : StateMachine = containingStateMachine() in
 			if sm._'context' = null or sm.general->notEmpty() then
@@ -117,17 +98,13 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Classifier> redefinitionContext() ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Classifier> redefinitionContext() ;/*!
 			A Region can have at most one shallow history Vertex.
 			subvertex->select(oclIsKindOf(Pseudostate))->collect(oclAsType(Pseudostate))->
 			  select(kind = PseudostateKind::shallowHistory)->size() <= 1
 			*/
 			 
-			virtual bool shallow_history_vertex(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool shallow_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -142,50 +119,43 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Region > getExtendedRegion() const ;
-			
+			virtual std::shared_ptr<uml::Region> getExtendedRegion() const ;
 			/*!
 			The region of which this region is an extension.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setExtendedRegion(std::shared_ptr<uml::Region> _extendedRegion) ;
-			
+			virtual void setExtendedRegion(std::shared_ptr<uml::Region>) ;
 			/*!
 			The State that owns the Region. If a Region is owned by a State, then it cannot also be owned by a StateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::State > getState() const ;
-			
+			virtual std::weak_ptr<uml::State> getState() const ;
 			/*!
 			The State that owns the Region. If a Region is owned by a State, then it cannot also be owned by a StateMachine.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setState(std::shared_ptr<uml::State> _state) ;
-			
+			virtual void setState(std::weak_ptr<uml::State>) ;
 			/*!
 			The StateMachine that owns the Region. If a Region is owned by a StateMachine, then it cannot also be owned by a State.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::StateMachine > getStateMachine() const ;
-			
+			virtual std::weak_ptr<uml::StateMachine> getStateMachine() const ;
 			/*!
 			The StateMachine that owns the Region. If a Region is owned by a StateMachine, then it cannot also be owned by a State.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setStateMachine(std::shared_ptr<uml::StateMachine> _stateMachine) ;
-			
+			virtual void setStateMachine(std::weak_ptr<uml::StateMachine>) ;
 			/*!
 			The set of Vertices that are owned by this Region.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> getSubvertex() const ;
-			
 			
 			/*!
 			The set of Transitions owned by the Region.
@@ -195,7 +165,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> getTransition() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -210,7 +179,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -225,7 +194,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -245,7 +214,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -63,9 +63,8 @@
 using namespace UML;
 
 ActivityGroupObject::ActivityGroupObject(std::shared_ptr<uml::ActivityGroup> _element):
-
 	m_ActivityGroupValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ActivityGroup());
 }
 
@@ -86,13 +85,15 @@ ActivityGroupObject::~ActivityGroupObject()
 
 std::shared_ptr<ecore::EObject> ActivityGroupObject::copy()
 {
-	std::shared_ptr<ActivityGroupObject> element(new ActivityGroupObject(*this));
+	std::shared_ptr<ActivityGroupObject> element(new ActivityGroupObject());
+	*element=(*this);
 	element->setThisActivityGroupObjectPtr(element);
 	return element;
 }
 
 ActivityGroupObject& ActivityGroupObject::operator=(const ActivityGroupObject & obj)
 {
+	UML::NamedElementObject::operator=(obj);
 	return *this;
 }
 

@@ -22,8 +22,8 @@ namespace ecore
 	{
 		public: 
 			EFactoryImpl(const EFactoryImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EFactoryImpl& operator=(EFactoryImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EFactoryImpl& operator=(EFactoryImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
@@ -32,10 +32,7 @@ namespace ecore
 			virtual void setThisEFactoryPtr(std::weak_ptr<EFactory> thisEFactoryPtr);
 
 			//Additional constructors for the containments back reference
-			EFactoryImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
-
+			EFactoryImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 
 		public:
 			//destructor
@@ -45,15 +42,9 @@ namespace ecore
 			// Operations
 			//*********************************
 			 
-			virtual std::string convertToString(std::shared_ptr<ecore::EDataType>  eDataType,Any instanceValue) const ;
-			
-			 
-			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass>  eClass) const ;
-			
-			 
-			virtual Any createFromString(std::shared_ptr<ecore::EDataType>  eDataType,std::string literalValue) const ;
-			
-			
+			virtual std::string convertToString(std::shared_ptr<ecore::EDataType> eDataType,Any instanceValue) const ; 
+			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> eClass) const ; 
+			virtual Any createFromString(std::shared_ptr<ecore::EDataType> eDataType,std::string literalValue) const ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -64,12 +55,10 @@ namespace ecore
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<ecore::EPackage > getEPackage() const ;
+			virtual std::shared_ptr<ecore::EPackage> getEPackage() const ;
 			
+			virtual void setEPackage(std::shared_ptr<ecore::EPackage>) ;
 			
-			virtual void setEPackage(std::shared_ptr<ecore::EPackage> _ePackage) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -90,7 +79,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

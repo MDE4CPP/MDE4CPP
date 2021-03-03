@@ -8,22 +8,18 @@
 #define UML_ACTIVITYPARAMETERNODE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -38,104 +34,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Behavior;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class ObjectNode;
-}
-
-namespace uml 
-{
 	class Parameter;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class State;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -148,6 +64,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -156,14 +73,13 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class ActivityParameterNode:virtual public ObjectNode
+	class ActivityParameterNode: virtual public ObjectNode
 	{
 		public:
  			ActivityParameterNode(const ActivityParameterNode &) {}
 
 		protected:
 			ActivityParameterNode(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -179,25 +95,19 @@ namespace uml
 			activity.ownedParameter->includes(parameter)
 			*/
 			 
-			virtual bool has_parameters(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool has_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			An ActivityParameterNode may have all incoming ActivityEdges or all outgoing ActivityEdges, but it must not have both incoming and outgoing ActivityEdges.
 			incoming->isEmpty() or outgoing->isEmpty()
 			*/
 			 
-			virtual bool no_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool no_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			An ActivityParameterNode with no incoming ActivityEdges and one or more outgoing ActivityEdges must have a parameter with direction in or inout.
 			(outgoing->notEmpty() and incoming->isEmpty()) implies 
 				(parameter.direction = ParameterDirectionKind::_'in' or 
 				 parameter.direction = ParameterDirectionKind::inout)
 			*/
 			 
-			virtual bool no_incoming_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool no_incoming_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			An ActivityParameterNode with no outgoing ActivityEdges and one or more incoming ActivityEdges must have a parameter with direction out, inout, or return.
 			(incoming->notEmpty() and outgoing->isEmpty()) implies 
 				(parameter.direction = ParameterDirectionKind::out or 
@@ -205,16 +115,12 @@ namespace uml
 				 parameter.direction = ParameterDirectionKind::return)
 			*/
 			 
-			virtual bool no_outgoing_edges(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool no_outgoing_edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The type of an ActivityParameterNode is the same as the type of its parameter.
 			type = parameter.type
 			*/
 			 
-			virtual bool same_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool same_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -227,15 +133,13 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Parameter > getParameter() const = 0;
-			
+			virtual std::shared_ptr<uml::Parameter> getParameter() const = 0;
 			/*!
 			The Parameter for which the ActivityParameterNode will be accepting or providing values.
 			<p>From package UML::Activities.</p>
 			*/
 			
-			virtual void setParameter(std::shared_ptr<uml::Parameter> _parameter) = 0;
-			
+			virtual void setParameter(std::shared_ptr<uml::Parameter>) = 0;
 			
 
 		protected:
@@ -252,7 +156,7 @@ namespace uml
 			<p>From package UML::Activities.</p>
 			*/
 			
-			std::shared_ptr<uml::Parameter > m_parameter;
+			std::shared_ptr<uml::Parameter> m_parameter;
 
 		public:
 			//*********************************
@@ -273,7 +177,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -287,7 +191,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

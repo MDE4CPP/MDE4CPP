@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ExecutionSpecificationImpl(const ExecutionSpecificationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ExecutionSpecificationImpl& operator=(ExecutionSpecificationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ExecutionSpecificationImpl& operator=(ExecutionSpecificationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisExecutionSpecificationPtr(std::weak_ptr<ExecutionSpecification> thisExecutionSpecificationPtr);
 
 			//Additional constructors for the containments back reference
-			ExecutionSpecificationImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
-
-
+			ExecutionSpecificationImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
 			//Additional constructors for the containments back reference
-			ExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
-
-
+			ExecutionSpecificationImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand);
 			//Additional constructors for the containments back reference
-			ExecutionSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ExecutionSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ExecutionSpecificationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ExecutionSpecificationImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,9 +52,7 @@ namespace uml
 			start.covered = finish.covered
 			*/
 			 
-			virtual bool same_lifeline(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool same_lifeline(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -78,30 +67,26 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification > getFinish() const ;
-			
+			virtual std::shared_ptr<uml::OccurrenceSpecification> getFinish() const ;
 			/*!
 			References the OccurrenceSpecification that designates the finish of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish) ;
-			
+			virtual void setFinish(std::shared_ptr<uml::OccurrenceSpecification>) ;
 			/*!
 			References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OccurrenceSpecification > getStart() const ;
-			
+			virtual std::shared_ptr<uml::OccurrenceSpecification> getStart() const ;
 			/*!
 			References the OccurrenceSpecification that designates the start of the Action or Behavior.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setStart(std::shared_ptr<uml::OccurrenceSpecification> _start) ;
+			virtual void setStart(std::shared_ptr<uml::OccurrenceSpecification>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -111,7 +96,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -121,7 +106,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -136,7 +121,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

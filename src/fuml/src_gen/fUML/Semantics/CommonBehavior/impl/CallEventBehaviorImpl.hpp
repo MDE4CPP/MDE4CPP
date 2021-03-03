@@ -25,15 +25,14 @@ virtual public CallEventBehavior
 	{
 		public: 
 			CallEventBehaviorImpl(const CallEventBehaviorImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			CallEventBehaviorImpl& operator=(CallEventBehaviorImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			CallEventBehaviorImpl& operator=(CallEventBehaviorImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			CallEventBehaviorImpl();
 			virtual std::shared_ptr<CallEventBehavior> getThisCallEventBehaviorPtr() const;
 			virtual void setThisCallEventBehaviorPtr(std::weak_ptr<CallEventBehavior> thisCallEventBehaviorPtr);
-
 
 
 		public:
@@ -45,8 +44,6 @@ virtual public CallEventBehavior
 			//*********************************
 			
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -56,12 +53,10 @@ virtual public CallEventBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Operation > getOperation() const ;
+			virtual std::shared_ptr<uml::Operation> getOperation() const ;
 			
+			virtual void setOperation(std::shared_ptr<uml::Operation>) ;
 			
-			virtual void setOperation(std::shared_ptr<uml::Operation> _operation) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -81,7 +76,7 @@ virtual public CallEventBehavior
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

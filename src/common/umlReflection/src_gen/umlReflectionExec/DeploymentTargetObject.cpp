@@ -57,9 +57,8 @@
 using namespace UML;
 
 DeploymentTargetObject::DeploymentTargetObject(std::shared_ptr<uml::DeploymentTarget> _element):
-
 	m_DeploymentTargetValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DeploymentTarget());
 }
 
@@ -80,13 +79,15 @@ DeploymentTargetObject::~DeploymentTargetObject()
 
 std::shared_ptr<ecore::EObject> DeploymentTargetObject::copy()
 {
-	std::shared_ptr<DeploymentTargetObject> element(new DeploymentTargetObject(*this));
+	std::shared_ptr<DeploymentTargetObject> element(new DeploymentTargetObject());
+	*element=(*this);
 	element->setThisDeploymentTargetObjectPtr(element);
 	return element;
 }
 
 DeploymentTargetObject& DeploymentTargetObject::operator=(const DeploymentTargetObject & obj)
 {
+	UML::NamedElementObject::operator=(obj);
 	return *this;
 }
 

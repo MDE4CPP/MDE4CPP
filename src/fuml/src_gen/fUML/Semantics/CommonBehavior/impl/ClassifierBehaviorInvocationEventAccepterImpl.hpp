@@ -23,15 +23,14 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public: 
 			ClassifierBehaviorInvocationEventAccepterImpl(const ClassifierBehaviorInvocationEventAccepterImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ClassifierBehaviorInvocationEventAccepterImpl& operator=(ClassifierBehaviorInvocationEventAccepterImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ClassifierBehaviorInvocationEventAccepterImpl& operator=(ClassifierBehaviorInvocationEventAccepterImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			ClassifierBehaviorInvocationEventAccepterImpl();
 			virtual std::shared_ptr<ClassifierBehaviorInvocationEventAccepter> getThisClassifierBehaviorInvocationEventAccepterPtr() const;
 			virtual void setThisClassifierBehaviorInvocationEventAccepterPtr(std::weak_ptr<ClassifierBehaviorInvocationEventAccepter> thisClassifierBehaviorInvocationEventAccepterPtr);
-
 
 
 		public:
@@ -42,17 +41,9 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) ;
-			
-			
-			
-			 
-			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) ;
-			
-			 
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ; 
+			virtual bool match(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) ; 
 			virtual void terminate() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -63,24 +54,18 @@ namespace fUML::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Class > getClassifier() const ;
+			virtual std::shared_ptr<uml::Class> getClassifier() const ;
 			
+			virtual void setClassifier(std::shared_ptr<uml::Class>) ;
 			
-			virtual void setClassifier(std::shared_ptr<uml::Class> _classifier) ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getExecution() const ;
 			
+			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>) ;
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getExecution() const ;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> getObjectActivation() const ;
 			
+			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>) ;
 			
-			virtual void setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution) ;
-			
-			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation > getObjectActivation() const ;
-			
-			
-			virtual void setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -100,7 +85,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

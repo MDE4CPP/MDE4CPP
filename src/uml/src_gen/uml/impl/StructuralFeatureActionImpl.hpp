@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			StructuralFeatureActionImpl(const StructuralFeatureActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			StructuralFeatureActionImpl& operator=(StructuralFeatureActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			StructuralFeatureActionImpl& operator=(StructuralFeatureActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisStructuralFeatureActionPtr(std::weak_ptr<StructuralFeatureAction> thisStructuralFeatureActionPtr);
 
 			//Additional constructors for the containments back reference
-			StructuralFeatureActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			StructuralFeatureActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			StructuralFeatureActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			StructuralFeatureActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			StructuralFeatureActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			StructuralFeatureActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			StructuralFeatureActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			StructuralFeatureActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,31 +52,23 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The structuralFeature must not be static.
 			not structuralFeature.isStatic
 			*/
 			 
-			virtual bool not_static(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The structuralFeature must either be an owned or inherited feature of the type of the object InputPin, or it must be an owned end of a binary Association whose opposite end had as a type to which the type of the object InputPin conforms.
 			object.type.oclAsType(Classifier).allFeatures()->includes(structuralFeature) or
 				object.type.conformsTo(structuralFeature.oclAsType(Property).opposite.type)
 			*/
 			 
-			virtual bool object_type(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool object_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The structuralFeature must have exactly one featuringClassifier.
 			structuralFeature.featuringClassifier->size() = 1
 			*/
 			 
-			virtual bool one_featuring_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool one_featuring_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The visibility of the structuralFeature must allow access from the object performing the ReadStructuralFeatureAction.
 			structuralFeature.visibility = VisibilityKind::public or
 			_'context'.allFeatures()->includes(structuralFeature) or
@@ -93,9 +76,7 @@ namespace uml
 			_'context'.conformsTo(structuralFeature.oclAsType(Property).opposite.type.oclAsType(Classifier))
 			*/
 			 
-			virtual bool visibility(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool visibility(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -110,30 +91,26 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getObject() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getObject() const ;
 			/*!
 			The InputPin from which the object whose StructuralFeature is to be read or written is obtained.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object) ;
-			
+			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
 			/*!
 			The StructuralFeature to be read or written.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::StructuralFeature > getStructuralFeature() const ;
-			
+			virtual std::shared_ptr<uml::StructuralFeature> getStructuralFeature() const ;
 			/*!
 			The StructuralFeature to be read or written.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setStructuralFeature(std::shared_ptr<uml::StructuralFeature> _structuralFeature) ;
+			virtual void setStructuralFeature(std::shared_ptr<uml::StructuralFeature>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -158,7 +135,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -178,7 +155,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

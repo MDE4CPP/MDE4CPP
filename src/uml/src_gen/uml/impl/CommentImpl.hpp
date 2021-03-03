@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			CommentImpl(const CommentImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			CommentImpl& operator=(CommentImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			CommentImpl& operator=(CommentImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,10 +32,7 @@ namespace uml
 			virtual void setThisCommentPtr(std::weak_ptr<Comment> thisCommentPtr);
 
 			//Additional constructors for the containments back reference
-			CommentImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			CommentImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -55,13 +52,12 @@ namespace uml
 			*/
 			 
 			virtual std::string getBody() const ;
-			
 			/*!
 			Specifies a string that is the comment.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual void setBody (std::string _body); 
+			virtual void setBody (std::string _body);
 			
 			
 			//*********************************
@@ -75,7 +71,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Element>> getAnnotatedElement() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -100,7 +95,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

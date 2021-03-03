@@ -89,9 +89,8 @@
 using namespace UML;
 
 StartClassifierBehaviorActionObject::StartClassifierBehaviorActionObject(std::shared_ptr<uml::StartClassifierBehaviorAction> _element):
-
 	m_StartClassifierBehaviorActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_StartClassifierBehaviorAction());
 }
 
@@ -112,13 +111,15 @@ StartClassifierBehaviorActionObject::~StartClassifierBehaviorActionObject()
 
 std::shared_ptr<ecore::EObject> StartClassifierBehaviorActionObject::copy()
 {
-	std::shared_ptr<StartClassifierBehaviorActionObject> element(new StartClassifierBehaviorActionObject(*this));
+	std::shared_ptr<StartClassifierBehaviorActionObject> element(new StartClassifierBehaviorActionObject());
+	*element=(*this);
 	element->setThisStartClassifierBehaviorActionObjectPtr(element);
 	return element;
 }
 
 StartClassifierBehaviorActionObject& StartClassifierBehaviorActionObject::operator=(const StartClassifierBehaviorActionObject & obj)
 {
+	UML::ActionObject::operator=(obj);
 	return *this;
 }
 

@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_STRUCTUREDCLASSIFIERS_LINK_HPP
 #define FUML_SEMANTICS_STRUCTUREDCLASSIFIERS_LINK_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,40 +32,20 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Association;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class ExtensionalValue;
-}
-
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class FeatureValue;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
-
+namespace fUML::Semantics::SimpleClassifiers 
+{
+	class FeatureValue;
+}
 namespace uml 
 {
+	class Association;
+	class Classifier;
 	class Property;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
 }
 
 // base class includes
@@ -78,18 +54,18 @@ namespace fUML::Semantics::Values
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	
-	class Link:virtual public ExtensionalValue
+	class Link: virtual public ExtensionalValue
 	{
 		public:
  			Link(const Link &) {}
 
 		protected:
 			Link(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -101,21 +77,11 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
-			
-			 
-			virtual void addTo(std::shared_ptr<fUML::Semantics::Loci::Locus>  locus) = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >  extent,std::shared_ptr<uml::Property>  end) = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const = 0;
-			
-			 
-			virtual bool isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue>  link,std::shared_ptr<uml::Property>  end) = 0;
-			
-			
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0; 
+			virtual void addTo(std::shared_ptr<fUML::Semantics::Loci::Locus> locus) = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > getOtherFeatureValues(std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>> extent,std::shared_ptr<uml::Property> end) = 0; 
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() const = 0; 
+			virtual bool isMatchingLink(std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> link,std::shared_ptr<uml::Property> end) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -124,11 +90,9 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Association > getType() const = 0;
+			virtual std::shared_ptr<uml::Association> getType() const = 0;
 			
-			
-			virtual void setType(std::shared_ptr<uml::Association> _type) = 0;
-			
+			virtual void setType(std::shared_ptr<uml::Association>) = 0;
 			
 
 		protected:
@@ -141,7 +105,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Association > m_type;
+			std::shared_ptr<uml::Association> m_type;
 
 		public:
 			//*********************************
@@ -156,7 +120,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

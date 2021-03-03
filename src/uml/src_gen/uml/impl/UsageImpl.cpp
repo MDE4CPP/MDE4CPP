@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,24 +35,16 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -77,7 +70,7 @@ UsageImpl::~UsageImpl()
 }
 
 //Additional constructor for the containments back reference
-UsageImpl::UsageImpl(std::weak_ptr<uml::Namespace > par_namespace)
+UsageImpl::UsageImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :UsageImpl()
 {
 	m_namespace = par_namespace;
@@ -85,14 +78,14 @@ UsageImpl::UsageImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-UsageImpl::UsageImpl(std::weak_ptr<uml::Element > par_owner)
+UsageImpl::UsageImpl(std::weak_ptr<uml::Element> par_owner)
 :UsageImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-UsageImpl::UsageImpl(std::weak_ptr<uml::Package > par_owningPackage)
+UsageImpl::UsageImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :UsageImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -100,91 +93,41 @@ UsageImpl::UsageImpl(std::weak_ptr<uml::Package > par_owningPackage)
 }
 
 //Additional constructor for the containments back reference
-UsageImpl::UsageImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+UsageImpl::UsageImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :UsageImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-UsageImpl::UsageImpl(const UsageImpl & obj):UsageImpl()
+UsageImpl::UsageImpl(const UsageImpl & obj): UsageImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  UsageImpl::copy() const
-{
-	std::shared_ptr<UsageImpl> element(new UsageImpl(*this));
-	element->setThisUsagePtr(element);
-	return element;
-}
-
 UsageImpl& UsageImpl::operator=(const UsageImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	DependencyImpl::operator=(obj);
+	Usage::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Usage "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::NamedElement>> _clientList = obj.getClient();
-	for(std::shared_ptr<uml::NamedElement> _client : *_clientList)
-	{
-		this->getClient()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_client->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_client" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::NamedElement>> _supplierList = obj.getSupplier();
-	for(std::shared_ptr<uml::NamedElement> _supplier : *_supplierList)
-	{
-		this->getSupplier()->add(std::shared_ptr<uml::NamedElement>(std::dynamic_pointer_cast<uml::NamedElement>(_supplier->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_supplier" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> UsageImpl::copy() const
+{
+	std::shared_ptr<UsageImpl> element(new UsageImpl());
+	*element =(*this);
+	element->setThisUsagePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> UsageImpl::eStaticClass() const
@@ -207,7 +150,7 @@ std::shared_ptr<ecore::EClass> UsageImpl::eStaticClass() const
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > UsageImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> UsageImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -227,7 +170,7 @@ std::shared_ptr<Union<uml::Element>> UsageImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > UsageImpl::getOwner() const
+std::weak_ptr<uml::Element> UsageImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -376,13 +319,12 @@ void UsageImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 
 void UsageImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DependencyImpl::loadNode(nodeName, loadHandler);
 }
 
-void UsageImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void UsageImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	DependencyImpl::resolveReferences(featureID, references);
 }
@@ -417,9 +359,6 @@ void UsageImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

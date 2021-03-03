@@ -25,15 +25,14 @@ virtual public SemanticVisitor
 	{
 		public: 
 			SemanticVisitorImpl(const SemanticVisitorImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			SemanticVisitorImpl& operator=(SemanticVisitorImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			SemanticVisitorImpl& operator=(SemanticVisitorImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;
 			SemanticVisitorImpl();
 			virtual std::shared_ptr<SemanticVisitor> getThisSemanticVisitorPtr() const;
 			virtual void setThisSemanticVisitorPtr(std::weak_ptr<SemanticVisitor> thisSemanticVisitorPtr);
-
 
 
 		public:
@@ -44,12 +43,8 @@ virtual public SemanticVisitor
 			// Operations
 			//*********************************
 			 
-			virtual void _beginIsolation() ;
-			
-			 
+			virtual void _beginIsolation() ; 
 			virtual void _endIsolation() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -59,7 +54,7 @@ virtual public SemanticVisitor
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -79,7 +74,7 @@ virtual public SemanticVisitor
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

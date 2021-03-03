@@ -89,9 +89,8 @@
 using namespace UML;
 
 RaiseExceptionActionObject::RaiseExceptionActionObject(std::shared_ptr<uml::RaiseExceptionAction> _element):
-
 	m_RaiseExceptionActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_RaiseExceptionAction());
 }
 
@@ -112,13 +111,15 @@ RaiseExceptionActionObject::~RaiseExceptionActionObject()
 
 std::shared_ptr<ecore::EObject> RaiseExceptionActionObject::copy()
 {
-	std::shared_ptr<RaiseExceptionActionObject> element(new RaiseExceptionActionObject(*this));
+	std::shared_ptr<RaiseExceptionActionObject> element(new RaiseExceptionActionObject());
+	*element=(*this);
 	element->setThisRaiseExceptionActionObjectPtr(element);
 	return element;
 }
 
 RaiseExceptionActionObject& RaiseExceptionActionObject::operator=(const RaiseExceptionActionObject & obj)
 {
+	UML::ActionObject::operator=(obj);
 	return *this;
 }
 

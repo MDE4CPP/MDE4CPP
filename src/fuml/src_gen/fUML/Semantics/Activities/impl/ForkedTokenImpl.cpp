@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -33,19 +34,15 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
-#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -70,41 +67,37 @@ ForkedTokenImpl::~ForkedTokenImpl()
 }
 
 
-
-ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj):ForkedTokenImpl()
+ForkedTokenImpl::ForkedTokenImpl(const ForkedTokenImpl & obj): ForkedTokenImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ForkedTokenImpl::copy() const
-{
-	std::shared_ptr<ForkedTokenImpl> element(new ForkedTokenImpl(*this));
-	element->setThisForkedTokenPtr(element);
-	return element;
-}
-
 ForkedTokenImpl& ForkedTokenImpl::operator=(const ForkedTokenImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	TokenImpl::operator=(obj);
+	ForkedToken::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ForkedToken "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_baseTokenIsWithdrawn = obj.isBaseTokenIsWithdrawn();
 	m_remainingOffersCount = obj.getRemainingOffersCount();
-	m_withdrawn = obj.isWithdrawn();
 
 	//copy references with no containment (soft copy)
-	
 	m_baseToken  = obj.getBaseToken();
-
-	m_holder  = obj.getHolder();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ForkedTokenImpl::copy() const
+{
+	std::shared_ptr<ForkedTokenImpl> element(new ForkedTokenImpl());
+	*element =(*this);
+	element->setThisForkedTokenPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ForkedTokenImpl::eStaticClass() const
@@ -122,12 +115,10 @@ bool ForkedTokenImpl::isBaseTokenIsWithdrawn() const
 {
 	return m_baseTokenIsWithdrawn;
 }
-
 void ForkedTokenImpl::setBaseTokenIsWithdrawn(bool _baseTokenIsWithdrawn)
 {
 	m_baseTokenIsWithdrawn = _baseTokenIsWithdrawn;
 } 
-
 
 
 /*
@@ -137,12 +128,10 @@ int ForkedTokenImpl::getRemainingOffersCount() const
 {
 	return m_remainingOffersCount;
 }
-
 void ForkedTokenImpl::setRemainingOffersCount(int _remainingOffersCount)
 {
 	m_remainingOffersCount = _remainingOffersCount;
 } 
-
 
 
 //*********************************
@@ -158,7 +147,7 @@ return this->getBaseToken()->_copy();
 	//end of body
 }
 
-bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  otherToken)
+bool ForkedTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -214,17 +203,15 @@ if (!this->isBaseTokenIsWithdrawn() & !this->getBaseToken()->isWithdrawn()) {
 /*
 Getter & Setter for reference baseToken
 */
-std::shared_ptr<fUML::Semantics::Activities::Token > ForkedTokenImpl::getBaseToken() const
+std::shared_ptr<fUML::Semantics::Activities::Token> ForkedTokenImpl::getBaseToken() const
 {
 
     return m_baseToken;
 }
-
 void ForkedTokenImpl::setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token> _baseToken)
 {
     m_baseToken = _baseToken;
 }
-
 
 
 //*********************************
@@ -255,7 +242,7 @@ Any ForkedTokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKEN:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBaseToken())); //592
+			return eAny(getBaseToken()); //592
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_BASETOKENISWITHDRAWN:
 			return eAny(isBaseTokenIsWithdrawn()); //594
 		case fUML::Semantics::Activities::ActivitiesPackage::FORKEDTOKEN_ATTRIBUTE_REMAININGOFFERSCOUNT:
@@ -371,13 +358,12 @@ void ForkedTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 
 void ForkedTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
 	//load BasePackage Nodes
 	TokenImpl::loadNode(nodeName, loadHandler);
 }
 
-void ForkedTokenImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ForkedTokenImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -411,8 +397,6 @@ void ForkedTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getForkedToken_Attribute_baseTokenIsWithdrawn()) )
 		{
@@ -423,10 +407,8 @@ void ForkedTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 		{
 			saveHandler->addAttribute("remainingOffersCount", this->getRemainingOffersCount());
 		}
-
-		// Add references
-		saveHandler->addReference("baseToken", this->getBaseToken());
-
+	// Add references
+		saveHandler->addReference(this->getBaseToken(), "baseToken", getBaseToken()->eClass() != fUML::Semantics::Activities::ActivitiesPackage::eInstance()->getToken_Class()); 
 	}
 	catch (std::exception& e)
 	{

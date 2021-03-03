@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ActionInputPinImpl(const ActionInputPinImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ActionInputPinImpl& operator=(ActionInputPinImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ActionInputPinImpl& operator=(ActionInputPinImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,54 +32,29 @@ namespace uml
 			virtual void setThisActionInputPinPtr(std::weak_ptr<ActionInputPin> thisActionInputPinPtr);
 
 			//Additional constructors for the containments back reference
-			ActionInputPinImpl(std::weak_ptr<uml::Action > par_action);
-
-
+			ActionInputPinImpl(std::weak_ptr<uml::Action> par_action);
 			//Additional constructors for the containments back reference
-			ActionInputPinImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ActionInputPinImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ActionInputPinImpl(std::weak_ptr<uml::AddStructuralFeatureValueAction > par_addStructuralFeatureValueAction);
-
-
+			ActionInputPinImpl(std::weak_ptr<uml::AddStructuralFeatureValueAction> par_addStructuralFeatureValueAction);
 			//Additional constructors for the containments back reference
-			ActionInputPinImpl(std::weak_ptr<uml::CallOperationAction > par_callOperationAction);
-
-
+			ActionInputPinImpl(std::weak_ptr<uml::CallOperationAction> par_callOperationAction);
 			//Additional constructors for the containments back reference
-			ActionInputPinImpl(std::weak_ptr<uml::DestroyObjectAction > par_destroyObjectAction);
-
-
+			ActionInputPinImpl(std::weak_ptr<uml::DestroyObjectAction> par_destroyObjectAction);
 			//Additional constructors for the containments back reference
-			ActionInputPinImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ActionInputPinImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ActionInputPinImpl(std::weak_ptr<uml::InvocationAction > par_invocationAction);
-
-
+			ActionInputPinImpl(std::weak_ptr<uml::InvocationAction> par_invocationAction);
 			//Additional constructors for the containments back reference
-			ActionInputPinImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ActionInputPinImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ActionInputPinImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ActionInputPinImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ActionInputPinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction > par_removeStructuralFeatureValueAction);
-
-
+			ActionInputPinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> par_removeStructuralFeatureValueAction);
 			//Additional constructors for the containments back reference
-			ActionInputPinImpl(std::weak_ptr<uml::StructuralFeatureAction > par_structuralFeatureAction);
-
-
+			ActionInputPinImpl(std::weak_ptr<uml::StructuralFeatureAction> par_structuralFeatureAction);
 			//Additional constructors for the containments back reference
-			ActionInputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction > par_writeStructuralFeatureAction);
-
-
-
+			ActionInputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction> par_writeStructuralFeatureAction);
 
 		public:
 			//destructor
@@ -93,25 +68,19 @@ namespace uml
 			fromAction.input->forAll(oclIsKindOf(ActionInputPin))
 			*/
 			 
-			virtual bool input_pin(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool input_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The fromAction of an ActionInputPin cannot have ActivityEdges coming into or out of it or its Pins.
 			fromAction.incoming->union(outgoing)->isEmpty() and
 			fromAction.input.incoming->isEmpty() and
 			fromAction.output.outgoing->isEmpty()
 			*/
 			 
-			virtual bool no_control_or_object_flow(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool no_control_or_object_flow(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The fromAction of an ActionInputPin must have exactly one OutputPin.
 			fromAction.output->size() = 1
 			*/
 			 
-			virtual bool one_output_pin(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool one_output_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -126,16 +95,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Action > getFromAction() const ;
-			
+			virtual std::shared_ptr<uml::Action> getFromAction() const ;
 			/*!
 			The Action used to provide the values of the ActionInputPin.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setFromAction(std::shared_ptr<uml::Action> _fromAction) ;
+			virtual void setFromAction(std::shared_ptr<uml::Action>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -155,7 +122,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -175,7 +142,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

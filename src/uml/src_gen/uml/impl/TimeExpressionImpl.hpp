@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			TimeExpressionImpl(const TimeExpressionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			TimeExpressionImpl& operator=(TimeExpressionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			TimeExpressionImpl& operator=(TimeExpressionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,30 +32,17 @@ namespace uml
 			virtual void setThisTimeExpressionPtr(std::weak_ptr<TimeExpression> thisTimeExpressionPtr);
 
 			//Additional constructors for the containments back reference
-			TimeExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			TimeExpressionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			TimeExpressionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			TimeExpressionImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			TimeExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			TimeExpressionImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			TimeExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot);
-
-
+			TimeExpressionImpl(std::weak_ptr<uml::Slot> par_owningSlot);
 			//Additional constructors for the containments back reference
-			TimeExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			TimeExpressionImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-			TimeExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
-
-
-
+			TimeExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction);
 
 		public:
 			//destructor
@@ -69,9 +56,7 @@ namespace uml
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(TimeObservation)))
 			*/
 			 
-			virtual bool no_expr_requires_observation(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool no_expr_requires_observation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -86,15 +71,13 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getExpr() const ;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getExpr() const ;
 			/*!
 			A ValueSpecification that evaluates to the value of the TimeExpression.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setExpr(std::shared_ptr<uml::ValueSpecification> _expr) ;
-			
+			virtual void setExpr(std::shared_ptr<uml::ValueSpecification>) ;
 			/*!
 			Refers to the Observations that are involved in the computation of the TimeExpression value.
 			<p>From package UML::Values.</p>
@@ -103,7 +86,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Observation>> getObservation() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -113,7 +95,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -123,7 +105,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -138,7 +120,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

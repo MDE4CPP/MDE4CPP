@@ -8,24 +8,20 @@
 #define UML_ASSOCIATION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -40,139 +36,35 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Classifier;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class CollaborationUse;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
-	class Relationship;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
-	class Type;
-}
-
-namespace uml 
-{
 	class UseCase;
 }
 
 // base class includes
 #include "uml/Classifier.hpp"
-
 #include "uml/Relationship.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
+
 
 
 //*********************************
@@ -183,14 +75,13 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class Association:virtual public Classifier,virtual public Relationship
+	class Association: virtual public Classifier, virtual public Relationship
 	{
 		public:
  			Association(const Association &) {}
 
 		protected:
 			Association(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -206,52 +97,38 @@ namespace uml
 			memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd)
 			*/
 			 
-			virtual bool association_ends(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool association_ends(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			Only binary Associations can be aggregations.
 			memberEnd->exists(aggregation <> AggregationKind::none) implies (memberEnd->size() = 2 and memberEnd->exists(aggregation = AggregationKind::none))
 			*/
 			 
-			virtual bool binary_associations(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool binary_associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			memberEnd->forAll(type->notEmpty())
 			*/
 			 
-			virtual bool ends_must_be_typed(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool ends_must_be_typed(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			endType is derived from the types of the member ends.
 			result = (memberEnd->collect(type)->asSet())
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Type> > getEndTypes() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Type> > getEndTypes() = 0;/*!
 			Determines whether this association is a binary association, i.e. whether it has exactly two member ends.
 			*/
 			 
-			virtual bool isBinary() = 0;
-			
-			/*!
+			virtual bool isBinary() = 0;/*!
 			An Association specializing another Association has the same number of ends as the other Association.
 			parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p | p.memberEnd->size() = self.memberEnd->size())
 			*/
 			 
-			virtual bool specialized_end_number(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool specialized_end_number(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			When an Association specializes another Association, every end of the specific Association corresponds to an end of the general Association, and the specific end reaches the same type or a subtype of the corresponding general end.
 			Sequence{1..memberEnd->size()}->
 				forAll(i | general->select(oclIsKindOf(Association)).oclAsType(Association)->
 					forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type)))
 			*/
 			 
-			virtual bool specialized_end_types(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool specialized_end_types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -261,13 +138,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsDerived() const = 0;
-			
 			/*!
 			Specifies whether the Association is derived from other model elements such as other Associations.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual void setIsDerived (bool _isDerived)= 0; 
+			virtual void setIsDerived (bool _isDerived)= 0;
 			
 			//*********************************
 			// Reference
@@ -279,14 +155,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Type, uml::Element>> getEndType() const = 0;
 			
-			
 			/*!
 			Each end represents participation of instances of the Classifier connected to the end in links of the Association.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> getMemberEnd() const = 0;
-			
 			
 			/*!
 			The navigable ends that are owned by the Association itself.
@@ -295,14 +169,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> getNavigableOwnedEnd() const = 0;
 			
-			
 			/*!
 			The ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement>> getOwnedEnd() const = 0;
-			
 			
 			
 
@@ -362,7 +234,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -377,7 +249,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -396,7 +268,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

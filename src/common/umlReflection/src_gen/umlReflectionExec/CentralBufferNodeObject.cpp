@@ -85,9 +85,8 @@
 using namespace UML;
 
 CentralBufferNodeObject::CentralBufferNodeObject(std::shared_ptr<uml::CentralBufferNode> _element):
-
 	m_CentralBufferNodeValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CentralBufferNode());
 }
 
@@ -108,13 +107,15 @@ CentralBufferNodeObject::~CentralBufferNodeObject()
 
 std::shared_ptr<ecore::EObject> CentralBufferNodeObject::copy()
 {
-	std::shared_ptr<CentralBufferNodeObject> element(new CentralBufferNodeObject(*this));
+	std::shared_ptr<CentralBufferNodeObject> element(new CentralBufferNodeObject());
+	*element=(*this);
 	element->setThisCentralBufferNodeObjectPtr(element);
 	return element;
 }
 
 CentralBufferNodeObject& CentralBufferNodeObject::operator=(const CentralBufferNodeObject & obj)
 {
+	UML::ObjectNodeObject::operator=(obj);
 	return *this;
 }
 

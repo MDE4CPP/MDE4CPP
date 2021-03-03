@@ -8,23 +8,19 @@
 #define UML_REPLYACTION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,104 +35,24 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
-}
-
-namespace uml 
-{
 	class Trigger;
 }
 
@@ -147,6 +63,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -155,14 +72,13 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class ReplyAction:virtual public Action
+	class ReplyAction: virtual public Action
 	{
 		public:
  			ReplyAction(const ReplyAction &) {}
 
 		protected:
 			ReplyAction(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -178,9 +94,7 @@ namespace uml
 			replyToCall.event.oclIsKindOf(CallEvent)
 			*/
 			 
-			virtual bool event_on_reply_to_call_trigger(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool event_on_reply_to_call_trigger(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The replyValue InputPins must match the output (return, out, and inout) parameters of the operation of the event of the replyToCall Trigger in number, type, ordering, and multiplicity.
 			let parameter:OrderedSet(Parameter) = replyToCall.event.oclAsType(CallEvent).operation.outputParameters() in
 			replyValue->size()=parameter->size() and
@@ -190,9 +104,7 @@ namespace uml
 				replyValue->at(i).compatibleWith(parameter->at(i)))
 			*/
 			 
-			virtual bool pins_match_parameter(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool pins_match_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -205,15 +117,13 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Trigger > getReplyToCall() const = 0;
-			
+			virtual std::shared_ptr<uml::Trigger> getReplyToCall() const = 0;
 			/*!
 			The Trigger specifying the Operation whose call is being replied to.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setReplyToCall(std::shared_ptr<uml::Trigger> _replyToCall) = 0;
-			
+			virtual void setReplyToCall(std::shared_ptr<uml::Trigger>) = 0;
 			/*!
 			A list of InputPins providing the values for the output (inout, out, and return) Parameters of the Operation. These values are returned to the caller.
 			<p>From package UML::Actions.</p>
@@ -221,21 +131,18 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> getReplyValue() const = 0;
 			
-			
 			/*!
 			An InputPin that holds the return information value produced by an earlier AcceptCallAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getReturnInformation() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getReturnInformation() const = 0;
 			/*!
 			An InputPin that holds the return information value produced by an earlier AcceptCallAction.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setReturnInformation(std::shared_ptr<uml::InputPin> _returnInformation) = 0;
-			
+			virtual void setReturnInformation(std::shared_ptr<uml::InputPin>) = 0;
 			
 
 		protected:
@@ -252,7 +159,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::Trigger > m_replyToCall;/*!
+			std::shared_ptr<uml::Trigger> m_replyToCall;/*!
 			A list of InputPins providing the values for the output (inout, out, and return) Parameters of the Operation. These values are returned to the caller.
 			<p>From package UML::Actions.</p>
 			*/
@@ -262,7 +169,7 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_returnInformation;
+			std::shared_ptr<uml::InputPin> m_returnInformation;
 
 		public:
 			//*********************************
@@ -288,7 +195,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -302,7 +209,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

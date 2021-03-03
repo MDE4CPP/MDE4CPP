@@ -7,21 +7,17 @@
 #ifndef UML_INTERFACEREALIZATION_HPP
 #define UML_INTERFACEREALIZATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,64 +32,16 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class BehavioredClassifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
-	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Interface;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OpaqueExpression;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
-	class Realization;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
 }
 
@@ -104,6 +52,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -112,34 +61,27 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class InterfaceRealization:virtual public Realization
+	class InterfaceRealization: virtual public Realization
 	{
 		public:
  			InterfaceRealization(const InterfaceRealization &) {}
 
 		protected:
 			InterfaceRealization(){}
-
+			//Additional constructors for the containments back reference
+			InterfaceRealization(std::weak_ptr<uml::BehavioredClassifier> par_implementingClassifier);
 
 			//Additional constructors for the containments back reference
-
-			InterfaceRealization(std::weak_ptr<uml::BehavioredClassifier > par_implementingClassifier);
-
-			//Additional constructors for the containments back reference
-
-			InterfaceRealization(std::weak_ptr<uml::Namespace > par_namespace);
+			InterfaceRealization(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-
-			InterfaceRealization(std::weak_ptr<uml::Element > par_owner);
-
-			//Additional constructors for the containments back reference
-
-			InterfaceRealization(std::weak_ptr<uml::Package > par_owningPackage);
+			InterfaceRealization(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
+			InterfaceRealization(std::weak_ptr<uml::Package> par_owningPackage);
 
-			InterfaceRealization(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+			//Additional constructors for the containments back reference
+			InterfaceRealization(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -163,29 +105,25 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Interface > getContract() const = 0;
-			
+			virtual std::shared_ptr<uml::Interface> getContract() const = 0;
 			/*!
 			References the Interface specifying the conformance contract.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setContract(std::shared_ptr<uml::Interface> _contract) = 0;
-			
+			virtual void setContract(std::shared_ptr<uml::Interface>) = 0;
 			/*!
 			References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::BehavioredClassifier > getImplementingClassifier() const = 0;
-			
+			virtual std::weak_ptr<uml::BehavioredClassifier> getImplementingClassifier() const = 0;
 			/*!
 			References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			virtual void setImplementingClassifier(std::shared_ptr<uml::BehavioredClassifier> _implementingClassifier) = 0;
-			
+			virtual void setImplementingClassifier(std::weak_ptr<uml::BehavioredClassifier>) = 0;
 			
 
 		protected:
@@ -202,12 +140,12 @@ namespace uml
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			std::shared_ptr<uml::Interface > m_contract;/*!
+			std::shared_ptr<uml::Interface> m_contract;/*!
 			References the BehavioredClassifier that owns this InterfaceRealization, i.e., the BehavioredClassifier that realizes the Interface to which it refers.
 			<p>From package UML::SimpleClassifiers.</p>
 			*/
 			
-			std::weak_ptr<uml::BehavioredClassifier > m_implementingClassifier;
+			std::weak_ptr<uml::BehavioredClassifier> m_implementingClassifier;
 
 		public:
 			//*********************************
@@ -218,7 +156,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -228,7 +166,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -252,7 +190,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

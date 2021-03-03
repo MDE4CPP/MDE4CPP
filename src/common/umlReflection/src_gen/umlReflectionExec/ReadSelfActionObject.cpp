@@ -89,9 +89,8 @@
 using namespace UML;
 
 ReadSelfActionObject::ReadSelfActionObject(std::shared_ptr<uml::ReadSelfAction> _element):
-
 	m_ReadSelfActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReadSelfAction());
 }
 
@@ -112,13 +111,15 @@ ReadSelfActionObject::~ReadSelfActionObject()
 
 std::shared_ptr<ecore::EObject> ReadSelfActionObject::copy()
 {
-	std::shared_ptr<ReadSelfActionObject> element(new ReadSelfActionObject(*this));
+	std::shared_ptr<ReadSelfActionObject> element(new ReadSelfActionObject());
+	*element=(*this);
 	element->setThisReadSelfActionObjectPtr(element);
 	return element;
 }
 
 ReadSelfActionObject& ReadSelfActionObject::operator=(const ReadSelfActionObject & obj)
 {
+	UML::ActionObject::operator=(obj);
 	return *this;
 }
 

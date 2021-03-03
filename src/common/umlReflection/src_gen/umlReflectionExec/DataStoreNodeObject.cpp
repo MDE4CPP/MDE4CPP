@@ -85,9 +85,8 @@
 using namespace UML;
 
 DataStoreNodeObject::DataStoreNodeObject(std::shared_ptr<uml::DataStoreNode> _element):
-
 	m_DataStoreNodeValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DataStoreNode());
 }
 
@@ -108,13 +107,15 @@ DataStoreNodeObject::~DataStoreNodeObject()
 
 std::shared_ptr<ecore::EObject> DataStoreNodeObject::copy()
 {
-	std::shared_ptr<DataStoreNodeObject> element(new DataStoreNodeObject(*this));
+	std::shared_ptr<DataStoreNodeObject> element(new DataStoreNodeObject());
+	*element=(*this);
 	element->setThisDataStoreNodeObjectPtr(element);
 	return element;
 }
 
 DataStoreNodeObject& DataStoreNodeObject::operator=(const DataStoreNodeObject & obj)
 {
+	UML::CentralBufferNodeObject::operator=(obj);
 	return *this;
 }
 

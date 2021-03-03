@@ -46,9 +46,8 @@
 using namespace UML;
 
 CommentObject::CommentObject(std::shared_ptr<uml::Comment> _element):
-
 	m_CommentValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Comment());
 }
 
@@ -69,13 +68,15 @@ CommentObject::~CommentObject()
 
 std::shared_ptr<ecore::EObject> CommentObject::copy()
 {
-	std::shared_ptr<CommentObject> element(new CommentObject(*this));
+	std::shared_ptr<CommentObject> element(new CommentObject());
+	*element=(*this);
 	element->setThisCommentObjectPtr(element);
 	return element;
 }
 
 CommentObject& CommentObject::operator=(const CommentObject & obj)
 {
+	UML::ElementObject::operator=(obj);
 	return *this;
 }
 

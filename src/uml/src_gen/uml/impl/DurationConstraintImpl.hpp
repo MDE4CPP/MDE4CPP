@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			DurationConstraintImpl(const DurationConstraintImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			DurationConstraintImpl& operator=(DurationConstraintImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			DurationConstraintImpl& operator=(DurationConstraintImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,25 +32,14 @@ namespace uml
 			virtual void setThisDurationConstraintPtr(std::weak_ptr<DurationConstraint> thisDurationConstraintPtr);
 
 			//Additional constructors for the containments back reference
-			DurationConstraintImpl(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id);
-
-
+			DurationConstraintImpl(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id);
 			//Additional constructors for the containments back reference
-
-
 			//Additional constructors for the containments back reference
-			DurationConstraintImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			DurationConstraintImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			DurationConstraintImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			DurationConstraintImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			DurationConstraintImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			DurationConstraintImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -66,16 +55,12 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool first_event_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool first_event_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A DurationConstraint has either one or two constrainedElements.
 			constrainedElement->size() = 1 or constrainedElement->size()=2
 			*/
 			 
-			virtual bool has_one_or_two_constrainedElements(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool has_one_or_two_constrainedElements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -85,15 +70,14 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<bool> > isFirstEvent() const ;
-			
+			virtual std::shared_ptr<Bag<bool>> isFirstEvent() const ;
 			
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -103,7 +87,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -113,7 +97,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -128,7 +112,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

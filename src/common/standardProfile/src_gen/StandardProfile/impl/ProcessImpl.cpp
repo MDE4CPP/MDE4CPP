@@ -44,9 +44,7 @@ ProcessImpl::ProcessImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Process is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ ProcessImpl::ProcessImpl(const ProcessImpl & obj):ProcessImpl()
 
 std::shared_ptr<ecore::EObject>  ProcessImpl::copy() const
 {
-	std::shared_ptr<ProcessImpl> element(new ProcessImpl(*this));
+	std::shared_ptr<ProcessImpl> element(new ProcessImpl());
+	*element=(*this);
 	element->setThisProcessPtr(element);
 	return element;
 }
 
 ProcessImpl& ProcessImpl::operator=(const ProcessImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Process "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

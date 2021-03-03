@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			LiteralIntegerImpl(const LiteralIntegerImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			LiteralIntegerImpl& operator=(LiteralIntegerImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			LiteralIntegerImpl& operator=(LiteralIntegerImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,30 +32,17 @@ namespace uml
 			virtual void setThisLiteralIntegerPtr(std::weak_ptr<LiteralInteger> thisLiteralIntegerPtr);
 
 			//Additional constructors for the containments back reference
-			LiteralIntegerImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			LiteralIntegerImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			LiteralIntegerImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			LiteralIntegerImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			LiteralIntegerImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			LiteralIntegerImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			LiteralIntegerImpl(std::weak_ptr<uml::Slot > par_owningSlot);
-
-
+			LiteralIntegerImpl(std::weak_ptr<uml::Slot> par_owningSlot);
 			//Additional constructors for the containments back reference
-			LiteralIntegerImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			LiteralIntegerImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-			LiteralIntegerImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
-
-
-
+			LiteralIntegerImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction);
 
 		public:
 			//destructor
@@ -70,17 +57,13 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual int integerValue() ;
-			
-			/*!
+			virtual int integerValue() ;/*!
 			The query isComputable() is redefined to be true.
 			result = (true)
 			<p>From package UML::Values.</p>
 			*/
 			 
 			virtual bool isComputable() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -91,19 +74,18 @@ namespace uml
 			*/
 			 
 			virtual int getValue() const ;
-			
 			/*!
 			The specified Integer value.
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual void setValue (int _value); 
+			virtual void setValue (int _value);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -113,7 +95,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -123,7 +105,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -138,7 +120,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

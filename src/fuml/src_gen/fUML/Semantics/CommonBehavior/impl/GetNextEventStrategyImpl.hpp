@@ -23,15 +23,14 @@ namespace fUML::Semantics::CommonBehavior
 	{
 		public: 
 			GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			GetNextEventStrategyImpl& operator=(GetNextEventStrategyImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			GetNextEventStrategyImpl& operator=(GetNextEventStrategyImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			GetNextEventStrategyImpl();
 			virtual std::shared_ptr<GetNextEventStrategy> getThisGetNextEventStrategyPtr() const;
 			virtual void setThisGetNextEventStrategyPtr(std::weak_ptr<GetNextEventStrategy> thisGetNextEventStrategyPtr);
-
 
 
 		public:
@@ -42,12 +41,8 @@ namespace fUML::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::string getName() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation>  objectActivation) ;
-			
-			
+			virtual std::string getName() ; 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> retrieveNextEvent(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> objectActivation) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -57,7 +52,7 @@ namespace fUML::Semantics::CommonBehavior
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -77,7 +72,7 @@ namespace fUML::Semantics::CommonBehavior
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -33,13 +34,11 @@
 #include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -64,34 +63,34 @@ EventAccepterImpl::~EventAccepterImpl()
 }
 
 
-
-EventAccepterImpl::EventAccepterImpl(const EventAccepterImpl & obj):EventAccepterImpl()
+EventAccepterImpl::EventAccepterImpl(const EventAccepterImpl & obj): EventAccepterImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  EventAccepterImpl::copy() const
-{
-	std::shared_ptr<EventAccepterImpl> element(new EventAccepterImpl(*this));
-	element->setThisEventAccepterPtr(element);
-	return element;
-}
-
 EventAccepterImpl& EventAccepterImpl::operator=(const EventAccepterImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	EventAccepter::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EventAccepter "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> EventAccepterImpl::copy() const
+{
+	std::shared_ptr<EventAccepterImpl> element(new EventAccepterImpl());
+	*element =(*this);
+	element->setThisEventAccepterPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> EventAccepterImpl::eStaticClass() const
@@ -106,13 +105,13 @@ std::shared_ptr<ecore::EClass> EventAccepterImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-void EventAccepterImpl::accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance)
+void EventAccepterImpl::accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EventAccepterImpl::match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance)
+bool EventAccepterImpl::match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -194,12 +193,11 @@ void EventAccepterImpl::loadAttributes(std::shared_ptr<persistence::interfaces::
 
 void EventAccepterImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
 	//load BasePackage Nodes
 }
 
-void EventAccepterImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void EventAccepterImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }
@@ -218,9 +216,6 @@ void EventAccepterImpl::saveContent(std::shared_ptr<persistence::interfaces::XSa
 	try
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

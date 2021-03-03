@@ -44,9 +44,7 @@ TraceImpl::TraceImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Trace is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ TraceImpl::TraceImpl(const TraceImpl & obj):TraceImpl()
 
 std::shared_ptr<ecore::EObject>  TraceImpl::copy() const
 {
-	std::shared_ptr<TraceImpl> element(new TraceImpl(*this));
+	std::shared_ptr<TraceImpl> element(new TraceImpl());
+	*element=(*this);
 	element->setThisTracePtr(element);
 	return element;
 }
 
 TraceImpl& TraceImpl::operator=(const TraceImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Trace "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

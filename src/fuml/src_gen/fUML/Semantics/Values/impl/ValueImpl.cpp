@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -33,21 +34,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Values/impl/ValuesFactoryImpl.hpp"
-#include "fUML/Semantics/Values/impl/ValuesPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -72,34 +69,34 @@ ValueImpl::~ValueImpl()
 }
 
 
-
-ValueImpl::ValueImpl(const ValueImpl & obj):ValueImpl()
+ValueImpl::ValueImpl(const ValueImpl & obj): ValueImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ValueImpl::copy() const
-{
-	std::shared_ptr<ValueImpl> element(new ValueImpl(*this));
-	element->setThisValuePtr(element);
-	return element;
-}
-
 ValueImpl& ValueImpl::operator=(const ValueImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Loci::SemanticVisitorImpl::operator=(obj);
+	Value::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Value "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ValueImpl::copy() const
+{
+	std::shared_ptr<ValueImpl> element(new ValueImpl());
+	*element =(*this);
+	element->setThisValuePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ValueImpl::eStaticClass() const
@@ -127,13 +124,13 @@ return newValue;
 	//end of body
 }
 
-bool ValueImpl::checkAllParents(std::shared_ptr<uml::Classifier>  type,std::shared_ptr<uml::Classifier>  classifier)
+bool ValueImpl::checkAllParents(std::shared_ptr<uml::Classifier> type,std::shared_ptr<uml::Classifier> classifier)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
+bool ValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -175,7 +172,7 @@ std::shared_ptr<Bag<uml::Classifier> > ValueImpl::getTypes() const
 	throw "UnsupportedOperationException";
 }
 
-bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier>  type)
+bool ValueImpl::hasTypes(std::shared_ptr<uml::Classifier> type)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -291,13 +288,12 @@ void ValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHan
 
 void ValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Values::ValuesFactory> modelFactory=fUML::Semantics::Values::ValuesFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Loci::SemanticVisitorImpl::loadNode(nodeName, loadHandler);
 }
 
-void ValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::Loci::SemanticVisitorImpl::resolveReferences(featureID, references);
 }
@@ -317,9 +313,6 @@ void ValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandle
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

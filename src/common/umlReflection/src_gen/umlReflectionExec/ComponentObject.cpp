@@ -151,9 +151,8 @@
 using namespace UML;
 
 ComponentObject::ComponentObject(std::shared_ptr<uml::Component> _element):
-
 	m_ComponentValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Component());
 }
 
@@ -174,13 +173,15 @@ ComponentObject::~ComponentObject()
 
 std::shared_ptr<ecore::EObject> ComponentObject::copy()
 {
-	std::shared_ptr<ComponentObject> element(new ComponentObject(*this));
+	std::shared_ptr<ComponentObject> element(new ComponentObject());
+	*element=(*this);
 	element->setThisComponentObjectPtr(element);
 	return element;
 }
 
 ComponentObject& ComponentObject::operator=(const ComponentObject & obj)
 {
+	UML::ClassObject::operator=(obj);
 	return *this;
 }
 

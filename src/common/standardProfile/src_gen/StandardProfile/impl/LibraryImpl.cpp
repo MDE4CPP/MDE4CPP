@@ -44,9 +44,7 @@ LibraryImpl::LibraryImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Library is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ LibraryImpl::LibraryImpl(const LibraryImpl & obj):LibraryImpl()
 
 std::shared_ptr<ecore::EObject>  LibraryImpl::copy() const
 {
-	std::shared_ptr<LibraryImpl> element(new LibraryImpl(*this));
+	std::shared_ptr<LibraryImpl> element(new LibraryImpl());
+	*element=(*this);
 	element->setThisLibraryPtr(element);
 	return element;
 }
 
 LibraryImpl& LibraryImpl::operator=(const LibraryImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	FileImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Library "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

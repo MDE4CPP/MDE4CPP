@@ -8,23 +8,19 @@
 #define UML_READISCLASSIFIEDOBJECTACTION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,99 +35,23 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Activity;
-}
-
-namespace uml 
-{
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class ActivityGroup;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace uml 
-{
 	class ActivityPartition;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ExceptionHandler;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class InterruptibleActivityRegion;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OutputPin;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class StructuredActivityNode;
 }
 
@@ -142,6 +62,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -150,14 +71,13 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class ReadIsClassifiedObjectAction:virtual public Action
+	class ReadIsClassifiedObjectAction: virtual public Action
 	{
 		public:
  			ReadIsClassifiedObjectAction(const ReadIsClassifiedObjectAction &) {}
 
 		protected:
 			ReadIsClassifiedObjectAction(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -173,30 +93,22 @@ namespace uml
 			result.type = Boolean
 			*/
 			 
-			virtual bool boolean_result(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool boolean_result(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The multiplicity of the object InputPin is 1..1.
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_input(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool multiplicity_of_input(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The multiplicity of the result OutputPin is 1..1.
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_output(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool multiplicity_of_output(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The object InputPin has no type.
 			object.type = null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -206,13 +118,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsDirect() const = 0;
-			
 			/*!
 			Indicates whether the input object must be directly classified by the given Classifier or whether it may also be an instance of a specialization of the given Classifier.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsDirect (bool _isDirect)= 0; 
+			virtual void setIsDirect (bool _isDirect)= 0;
 			
 			//*********************************
 			// Reference
@@ -222,43 +133,37 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Classifier > getClassifier() const = 0;
-			
+			virtual std::shared_ptr<uml::Classifier> getClassifier() const = 0;
 			/*!
 			The Classifier against which the classification of the input object is tested.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setClassifier(std::shared_ptr<uml::Classifier> _classifier) = 0;
-			
+			virtual void setClassifier(std::shared_ptr<uml::Classifier>) = 0;
 			/*!
 			The InputPin that holds the object whose classification is to be tested.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getObject() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getObject() const = 0;
 			/*!
 			The InputPin that holds the object whose classification is to be tested.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object) = 0;
-			
+			virtual void setObject(std::shared_ptr<uml::InputPin>) = 0;
 			/*!
 			The OutputPin that holds the Boolean result of the test.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const = 0;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const = 0;
 			/*!
 			The OutputPin that holds the Boolean result of the test.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) = 0;
-			
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) = 0;
 			
 
 		protected:
@@ -281,17 +186,17 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::Classifier > m_classifier;/*!
+			std::shared_ptr<uml::Classifier> m_classifier;/*!
 			The InputPin that holds the object whose classification is to be tested.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_object;/*!
+			std::shared_ptr<uml::InputPin> m_object;/*!
 			The OutputPin that holds the Boolean result of the test.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::OutputPin > m_result;
+			std::shared_ptr<uml::OutputPin> m_result;
 
 		public:
 			//*********************************
@@ -322,7 +227,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -336,7 +241,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

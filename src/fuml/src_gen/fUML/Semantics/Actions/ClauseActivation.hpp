@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIONS_CLAUSEACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_CLAUSEACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,25 +31,18 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
+namespace fUML::Semantics::Actions 
+{
+	class ConditionalNodeActivation;
+}
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	class BooleanValue;
 }
-
 namespace uml 
 {
 	class Clause;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ClauseActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class ConditionalNodeActivation;
 }
 
 // base class includes
@@ -62,19 +51,18 @@ namespace fUML::Semantics::Actions
 
 #include "ecore/EModelElement.hpp"
 
+
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
 	class ClauseActivation : virtual public ecore::EModelElement
-
 	{
 		public:
  			ClauseActivation(const ClauseActivation &) {}
 
 		protected:
 			ClauseActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -86,27 +74,13 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> getDecision() = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > getPredecessors() = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > getSuccessors() = 0;
-			
-			 
-			virtual bool isReady() = 0;
-			
-			 
-			virtual void recieveControl() = 0;
-			
-			 
-			virtual void runTest() = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> getDecision() = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > getPredecessors() = 0; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation> > getSuccessors() = 0; 
+			virtual bool isReady() = 0; 
+			virtual void recieveControl() = 0; 
+			virtual void runTest() = 0; 
 			virtual void selectBody() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -115,17 +89,13 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::Clause > getClause() const = 0;
+			virtual std::shared_ptr<uml::Clause> getClause() const = 0;
 			
+			virtual void setClause(std::shared_ptr<uml::Clause>) = 0;
 			
-			virtual void setClause(std::shared_ptr<uml::Clause> _clause) = 0;
+			virtual std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> getConditionalNodeActivation() const = 0;
 			
-			
-			virtual std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation > getConditionalNodeActivation() const = 0;
-			
-			
-			virtual void setConditionalNodeActivation(std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> _conditionalNodeActivation) = 0;
-			
+			virtual void setConditionalNodeActivation(std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation>) = 0;
 			
 
 		protected:
@@ -138,8 +108,8 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<uml::Clause > m_clause;
-			std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation > m_conditionalNodeActivation;
+			std::shared_ptr<uml::Clause> m_clause;
+			std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> m_conditionalNodeActivation;
 
 		public:
 			//*********************************
@@ -154,7 +124,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

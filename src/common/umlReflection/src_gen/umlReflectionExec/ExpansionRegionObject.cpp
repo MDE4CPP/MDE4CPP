@@ -128,9 +128,8 @@
 using namespace UML;
 
 ExpansionRegionObject::ExpansionRegionObject(std::shared_ptr<uml::ExpansionRegion> _element):
-
 	m_ExpansionRegionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExpansionRegion());
 }
 
@@ -151,13 +150,15 @@ ExpansionRegionObject::~ExpansionRegionObject()
 
 std::shared_ptr<ecore::EObject> ExpansionRegionObject::copy()
 {
-	std::shared_ptr<ExpansionRegionObject> element(new ExpansionRegionObject(*this));
+	std::shared_ptr<ExpansionRegionObject> element(new ExpansionRegionObject());
+	*element=(*this);
 	element->setThisExpansionRegionObjectPtr(element);
 	return element;
 }
 
 ExpansionRegionObject& ExpansionRegionObject::operator=(const ExpansionRegionObject & obj)
 {
+	UML::StructuredActivityNodeObject::operator=(obj);
 	return *this;
 }
 

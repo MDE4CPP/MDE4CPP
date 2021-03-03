@@ -113,9 +113,8 @@
 using namespace UML;
 
 PropertyObject::PropertyObject(std::shared_ptr<uml::Property> _element):
-
 	m_PropertyValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Property());
 }
 
@@ -136,13 +135,17 @@ PropertyObject::~PropertyObject()
 
 std::shared_ptr<ecore::EObject> PropertyObject::copy()
 {
-	std::shared_ptr<PropertyObject> element(new PropertyObject(*this));
+	std::shared_ptr<PropertyObject> element(new PropertyObject());
+	*element=(*this);
 	element->setThisPropertyObjectPtr(element);
 	return element;
 }
 
 PropertyObject& PropertyObject::operator=(const PropertyObject & obj)
 {
+	UML::ConnectableElementObject::operator=(obj);
+	UML::DeploymentTargetObject::operator=(obj);
+	UML::StructuralFeatureObject::operator=(obj);
 	return *this;
 }
 

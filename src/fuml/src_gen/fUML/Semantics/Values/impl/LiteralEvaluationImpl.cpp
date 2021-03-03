@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -35,21 +36,17 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "uml/PrimitiveType.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Values/impl/ValuesFactoryImpl.hpp"
-#include "fUML/Semantics/Values/impl/ValuesPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -74,38 +71,34 @@ LiteralEvaluationImpl::~LiteralEvaluationImpl()
 }
 
 
-
-LiteralEvaluationImpl::LiteralEvaluationImpl(const LiteralEvaluationImpl & obj):LiteralEvaluationImpl()
+LiteralEvaluationImpl::LiteralEvaluationImpl(const LiteralEvaluationImpl & obj): LiteralEvaluationImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  LiteralEvaluationImpl::copy() const
-{
-	std::shared_ptr<LiteralEvaluationImpl> element(new LiteralEvaluationImpl(*this));
-	element->setThisLiteralEvaluationPtr(element);
-	return element;
-}
-
 LiteralEvaluationImpl& LiteralEvaluationImpl::operator=(const LiteralEvaluationImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	EvaluationImpl::operator=(obj);
+	LiteralEvaluation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LiteralEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_locus  = obj.getLocus();
-
-	m_specification  = obj.getSpecification();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> LiteralEvaluationImpl::copy() const
+{
+	std::shared_ptr<LiteralEvaluationImpl> element(new LiteralEvaluationImpl());
+	*element =(*this);
+	element->setThisLiteralEvaluationPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LiteralEvaluationImpl::eStaticClass() const
@@ -212,13 +205,12 @@ void LiteralEvaluationImpl::loadAttributes(std::shared_ptr<persistence::interfac
 
 void LiteralEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Values::ValuesFactory> modelFactory=fUML::Semantics::Values::ValuesFactory::eInstance();
 
 	//load BasePackage Nodes
 	EvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
-void LiteralEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LiteralEvaluationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	EvaluationImpl::resolveReferences(featureID, references);
 }
@@ -241,9 +233,6 @@ void LiteralEvaluationImpl::saveContent(std::shared_ptr<persistence::interfaces:
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Values::ValuesPackage> package = fUML::Semantics::Values::ValuesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

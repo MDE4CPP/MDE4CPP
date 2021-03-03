@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			InteractionUseImpl(const InteractionUseImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			InteractionUseImpl& operator=(InteractionUseImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			InteractionUseImpl& operator=(InteractionUseImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisInteractionUsePtr(std::weak_ptr<InteractionUse> thisInteractionUsePtr);
 
 			//Additional constructors for the containments back reference
-			InteractionUseImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
-
-
+			InteractionUseImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
 			//Additional constructors for the containments back reference
-			InteractionUseImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
-
-
+			InteractionUseImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand);
 			//Additional constructors for the containments back reference
-			InteractionUseImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			InteractionUseImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			InteractionUseImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			InteractionUseImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -75,30 +66,22 @@ namespace uml
 			 implies self.covered->asSet()->includes(intLifeline)))
 			*/
 			 
-			virtual bool all_lifelines(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool all_lifelines(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The arguments must only be constants, parameters of the enclosing Interaction or attributes of the classifier owning the enclosing Interaction.
 			*/
 			 
-			virtual bool arguments_are_constants(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool arguments_are_constants(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The arguments of the InteractionUse must correspond to parameters of the referred Interaction.
 			*/
 			 
-			virtual bool arguments_correspond_to_parameters(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool arguments_correspond_to_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Actual Gates of the InteractionUse must match Formal Gates of the referred Interaction. Gates match when their names are equal and their messages correspond.
 			actualGate->notEmpty() implies 
 			refersTo.formalGate->forAll( fg : Gate | self.actualGate->select(matches(fg))->size()=1) and
 			self.actualGate->forAll(ag : Gate | refersTo.formalGate->select(matches(ag))->size()=1)
 			*/
 			 
-			virtual bool gates_match(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool gates_match(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The returnValueRecipient must be a Property of a ConnectableElement that is represented by a Lifeline covered by this InteractionUse.
 			returnValueRecipient->asSet()->notEmpty() implies
 			let covCE : Set(ConnectableElement) = covered.represents->asSet() in 
@@ -107,16 +90,12 @@ namespace uml
 			allProps->includes(returnValueRecipient)
 			*/
 			 
-			virtual bool returnValueRecipient_coverage(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool returnValueRecipient_coverage(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type of the returnValue must correspond to the type of the returnValueRecipient.
 			returnValue.type->asSequence()->notEmpty() implies returnValue.type->asSequence()->first() = returnValueRecipient.type->asSequence()->first()
 			*/
 			 
-			virtual bool returnValue_type_recipient_correspondence(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool returnValue_type_recipient_correspondence(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -133,7 +112,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Gate, uml::Element>> getActualGate() const ;
 			
-			
 			/*!
 			The actual arguments of the Interaction.
 			<p>From package UML::Interactions.</p>
@@ -141,50 +119,43 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getArgument() const ;
 			
-			
 			/*!
 			Refers to the Interaction that defines its meaning.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Interaction > getRefersTo() const ;
-			
+			virtual std::shared_ptr<uml::Interaction> getRefersTo() const ;
 			/*!
 			Refers to the Interaction that defines its meaning.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setRefersTo(std::shared_ptr<uml::Interaction> _refersTo) ;
-			
+			virtual void setRefersTo(std::shared_ptr<uml::Interaction>) ;
 			/*!
 			The value of the executed Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getReturnValue() const ;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getReturnValue() const ;
 			/*!
 			The value of the executed Interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setReturnValue(std::shared_ptr<uml::ValueSpecification> _returnValue) ;
-			
+			virtual void setReturnValue(std::shared_ptr<uml::ValueSpecification>) ;
 			/*!
 			The recipient of the return value.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property > getReturnValueRecipient() const ;
-			
+			virtual std::shared_ptr<uml::Property> getReturnValueRecipient() const ;
 			/*!
 			The recipient of the return value.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setReturnValueRecipient(std::shared_ptr<uml::Property> _returnValueRecipient) ;
+			virtual void setReturnValueRecipient(std::shared_ptr<uml::Property>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -194,7 +165,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -204,7 +175,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -219,7 +190,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

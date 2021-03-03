@@ -23,8 +23,8 @@ namespace uml
 	{
 		public: 
 			AssociationImpl(const AssociationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			AssociationImpl& operator=(AssociationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			AssociationImpl& operator=(AssociationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -33,25 +33,14 @@ namespace uml
 			virtual void setThisAssociationPtr(std::weak_ptr<Association> thisAssociationPtr);
 
 			//Additional constructors for the containments back reference
-			AssociationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			AssociationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			AssociationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			AssociationImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			AssociationImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			AssociationImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			AssociationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			AssociationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -65,52 +54,38 @@ namespace uml
 			memberEnd->size() > 2 implies ownedEnd->includesAll(memberEnd)
 			*/
 			 
-			virtual bool association_ends(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool association_ends(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Only binary Associations can be aggregations.
 			memberEnd->exists(aggregation <> AggregationKind::none) implies (memberEnd->size() = 2 and memberEnd->exists(aggregation = AggregationKind::none))
 			*/
 			 
-			virtual bool binary_associations(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool binary_associations(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			memberEnd->forAll(type->notEmpty())
 			*/
 			 
-			virtual bool ends_must_be_typed(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool ends_must_be_typed(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			endType is derived from the types of the member ends.
 			result = (memberEnd->collect(type)->asSet())
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Type> > getEndTypes() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Type> > getEndTypes() ;/*!
 			Determines whether this association is a binary association, i.e. whether it has exactly two member ends.
 			*/
 			 
-			virtual bool isBinary() ;
-			
-			/*!
+			virtual bool isBinary() ;/*!
 			An Association specializing another Association has the same number of ends as the other Association.
 			parents()->select(oclIsKindOf(Association)).oclAsType(Association)->forAll(p | p.memberEnd->size() = self.memberEnd->size())
 			*/
 			 
-			virtual bool specialized_end_number(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool specialized_end_number(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			When an Association specializes another Association, every end of the specific Association corresponds to an end of the general Association, and the specific end reaches the same type or a subtype of the corresponding general end.
 			Sequence{1..memberEnd->size()}->
 				forAll(i | general->select(oclIsKindOf(Association)).oclAsType(Association)->
 					forAll(ga | self.memberEnd->at(i).type.conformsTo(ga.memberEnd->at(i).type)))
 			*/
 			 
-			virtual bool specialized_end_types(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool specialized_end_types(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -121,13 +96,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsDerived() const ;
-			
 			/*!
 			Specifies whether the Association is derived from other model elements such as other Associations.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			 
-			virtual void setIsDerived (bool _isDerived); 
+			virtual void setIsDerived (bool _isDerived);
 			
 			
 			//*********************************
@@ -140,7 +114,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Type, uml::Element>> getEndType() const ;
 			
-			
 			/*!
 			Each end represents participation of instances of the Classifier connected to the end in links of the Association.
 			<p>From package UML::StructuredClassifiers.</p>
@@ -148,14 +121,12 @@ namespace uml
 			
 			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> getMemberEnd() const ;
 			
-			
 			/*!
 			The navigable ends that are owned by the Association itself.
 			<p>From package UML::StructuredClassifiers.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> getNavigableOwnedEnd() const ;
-			
 			
 			/*!
 			The ends that are owned by the Association itself.
@@ -165,7 +136,6 @@ namespace uml
 			virtual std::shared_ptr<SubsetUnion<uml::Property, uml::Property /*Subset does not reference a union*/,uml::Feature,uml::NamedElement>> getOwnedEnd() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -185,7 +155,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -200,7 +170,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -225,7 +195,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

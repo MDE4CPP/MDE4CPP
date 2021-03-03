@@ -42,9 +42,8 @@
 using namespace UML;
 
 ElementObject::ElementObject(std::shared_ptr<uml::Element> _element):
-
 	m_ElementValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Element());
 }
 
@@ -65,13 +64,15 @@ ElementObject::~ElementObject()
 
 std::shared_ptr<ecore::EObject> ElementObject::copy()
 {
-	std::shared_ptr<ElementObject> element(new ElementObject(*this));
+	std::shared_ptr<ElementObject> element(new ElementObject());
+	*element=(*this);
 	element->setThisElementObjectPtr(element);
 	return element;
 }
 
 ElementObject& ElementObject::operator=(const ElementObject & obj)
 {
+	PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl::operator=(obj);
 	return *this;
 }
 

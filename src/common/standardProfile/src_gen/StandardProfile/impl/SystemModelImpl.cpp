@@ -44,9 +44,7 @@ SystemModelImpl::SystemModelImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"SystemModel is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ SystemModelImpl::SystemModelImpl(const SystemModelImpl & obj):SystemModelImpl()
 
 std::shared_ptr<ecore::EObject>  SystemModelImpl::copy() const
 {
-	std::shared_ptr<SystemModelImpl> element(new SystemModelImpl(*this));
+	std::shared_ptr<SystemModelImpl> element(new SystemModelImpl());
+	*element=(*this);
 	element->setThisSystemModelPtr(element);
 	return element;
 }
 
 SystemModelImpl& SystemModelImpl::operator=(const SystemModelImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SystemModel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

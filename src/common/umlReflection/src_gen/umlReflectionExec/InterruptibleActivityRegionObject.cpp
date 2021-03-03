@@ -67,9 +67,8 @@
 using namespace UML;
 
 InterruptibleActivityRegionObject::InterruptibleActivityRegionObject(std::shared_ptr<uml::InterruptibleActivityRegion> _element):
-
 	m_InterruptibleActivityRegionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InterruptibleActivityRegion());
 }
 
@@ -90,13 +89,15 @@ InterruptibleActivityRegionObject::~InterruptibleActivityRegionObject()
 
 std::shared_ptr<ecore::EObject> InterruptibleActivityRegionObject::copy()
 {
-	std::shared_ptr<InterruptibleActivityRegionObject> element(new InterruptibleActivityRegionObject(*this));
+	std::shared_ptr<InterruptibleActivityRegionObject> element(new InterruptibleActivityRegionObject());
+	*element=(*this);
 	element->setThisInterruptibleActivityRegionObjectPtr(element);
 	return element;
 }
 
 InterruptibleActivityRegionObject& InterruptibleActivityRegionObject::operator=(const InterruptibleActivityRegionObject & obj)
 {
+	UML::ActivityGroupObject::operator=(obj);
 	return *this;
 }
 

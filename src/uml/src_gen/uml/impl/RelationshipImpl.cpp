@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -33,12 +34,10 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -64,53 +63,42 @@ RelationshipImpl::~RelationshipImpl()
 }
 
 //Additional constructor for the containments back reference
-RelationshipImpl::RelationshipImpl(std::weak_ptr<uml::Element > par_owner)
+RelationshipImpl::RelationshipImpl(std::weak_ptr<uml::Element> par_owner)
 :RelationshipImpl()
 {
 	m_owner = par_owner;
 }
 
-
-RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj):RelationshipImpl()
+RelationshipImpl::RelationshipImpl(const RelationshipImpl & obj): RelationshipImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  RelationshipImpl::copy() const
-{
-	std::shared_ptr<RelationshipImpl> element(new RelationshipImpl(*this));
-	element->setThisRelationshipPtr(element);
-	return element;
-}
-
 RelationshipImpl& RelationshipImpl::operator=(const RelationshipImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	Relationship::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Relationship "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_owner  = obj.getOwner();
-
 	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
 	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> RelationshipImpl::copy() const
+{
+	std::shared_ptr<RelationshipImpl> element(new RelationshipImpl());
+	*element =(*this);
+	element->setThisRelationshipPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
@@ -132,8 +120,6 @@ std::shared_ptr<ecore::EClass> RelationshipImpl::eStaticClass() const
 /*
 Getter & Setter for reference relatedElement
 */
-
-
 
 
 
@@ -201,15 +187,7 @@ Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = m_relatedElement->begin();
-			Bag<uml::Element>::iterator end = m_relatedElement->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2083
+			return eAny(getRelatedElement()); //2083			
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
@@ -259,13 +237,12 @@ void RelationshipImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void RelationshipImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void RelationshipImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void RelationshipImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ElementImpl::resolveReferences(featureID, references);
 }
@@ -288,9 +265,6 @@ void RelationshipImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

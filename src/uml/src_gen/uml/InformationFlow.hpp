@@ -8,24 +8,20 @@
 #define UML_INFORMATIONFLOW_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -40,89 +36,28 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class ActivityEdge;
-}
-
-namespace uml 
-{
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Connector;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class DirectedRelationship;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Message;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
-	class Relationship;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
 }
 
 // base class includes
 #include "uml/DirectedRelationship.hpp"
-
 #include "uml/PackageableElement.hpp"
 
 // enum includes
 #include "uml/VisibilityKind.hpp"
+
 
 
 //*********************************
@@ -133,14 +68,13 @@ namespace uml
 	<p>From package UML::InformationFlows.</p>
 	*/
 	
-	class InformationFlow:virtual public DirectedRelationship,virtual public PackageableElement
+	class InformationFlow: virtual public DirectedRelationship, virtual public PackageableElement
 	{
 		public:
  			InformationFlow(const InformationFlow &) {}
 
 		protected:
 			InformationFlow(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -157,15 +91,11 @@ namespace uml
 			  or oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component))
 			*/
 			 
-			virtual bool convey_classifiers(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool convey_classifiers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The sources and targets of the information flow must conform to the sources and targets or conversely the targets and sources of the realization relationships.
 			*/
 			 
-			virtual bool must_conform(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool must_conform(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The sources and targets of the information flow can only be one of the following kind: Actor, Node, UseCase, Artifact, Class, Component, Port, Property, Interface, Package, ActivityNode, ActivityPartition,
 			Behavior and InstanceSpecification except when its classifier is a relationship (i.e. it represents a link).
 			(self.informationSource->forAll( sis |
@@ -183,9 +113,7 @@ namespace uml
 			(oclIsKindOf(InstanceSpecification) and not sit.oclAsType(InstanceSpecification).classifier->exists(oclIsKindOf(Relationship)))))
 			*/
 			 
-			virtual bool sources_and_targets_kind(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool sources_and_targets_kind(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -200,14 +128,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Classifier>> getConveyed() const = 0;
 			
-			
 			/*!
 			Defines from which source the conveyed InformationItems are initiated.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationSource() const = 0;
-			
 			
 			/*!
 			Defines to which target the conveyed InformationItems are directed.
@@ -216,14 +142,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::NamedElement, uml::Element>> getInformationTarget() const = 0;
 			
-			
 			/*!
 			Determines which Relationship will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Relationship>> getRealization() const = 0;
-			
 			
 			/*!
 			Determines which ActivityEdges will realize the specified flow.
@@ -232,7 +156,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ActivityEdge>> getRealizingActivityEdge() const = 0;
 			
-			
 			/*!
 			Determines which Connectors will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
@@ -240,14 +163,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Connector>> getRealizingConnector() const = 0;
 			
-			
 			/*!
 			Determines which Messages will realize the specified flow.
 			<p>From package UML::InformationFlows.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Message>> getRealizingMessage() const = 0;
-			
 			
 			
 
@@ -306,7 +227,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -316,7 +237,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -340,7 +261,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

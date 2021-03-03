@@ -8,24 +8,20 @@
 #define UML_LIFELINE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -40,59 +36,17 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Interaction;
-}
-
-namespace uml 
-{
 	class InteractionFragment;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class PartDecomposition;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -103,6 +57,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -111,26 +66,21 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class Lifeline:virtual public NamedElement
+	class Lifeline: virtual public NamedElement
 	{
 		public:
  			Lifeline(const Lifeline &) {}
 
 		protected:
 			Lifeline(){}
-
+			//Additional constructors for the containments back reference
+			Lifeline(std::weak_ptr<uml::Interaction> par_interaction);
 
 			//Additional constructors for the containments back reference
-
-			Lifeline(std::weak_ptr<uml::Interaction > par_interaction);
-
-			//Additional constructors for the containments back reference
-
-			Lifeline(std::weak_ptr<uml::Namespace > par_namespace);
+			Lifeline(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-
-			Lifeline(std::weak_ptr<uml::Element > par_owner);
+			Lifeline(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -183,32 +133,24 @@ namespace uml
 			)
 			*/
 			 
-			virtual bool interaction_uses_share_lifeline(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool interaction_uses_share_lifeline(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The classifier containing the referenced ConnectableElement must be the same classifier, or an ancestor, of the classifier that contains the interaction enclosing this lifeline.
 			represents.namespace->closure(namespace)->includes(interaction._'context')
 			*/
 			 
-			virtual bool same_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool same_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The selector value, if present, must be a LiteralString or a LiteralInteger
 			self.selector->notEmpty() implies 
 			self.selector.oclIsKindOf(LiteralInteger) or 
 			self.selector.oclIsKindOf(LiteralString)
 			*/
 			 
-			virtual bool selector_int_or_string(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool selector_int_or_string(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The selector for a Lifeline must only be specified if the referenced Part is multivalued.
 			 self.selector->notEmpty() = (self.represents.oclIsKindOf(MultiplicityElement) and self.represents.oclAsType(MultiplicityElement).isMultivalued())
 			*/
 			 
-			virtual bool selector_specified(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool selector_specified(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -223,63 +165,54 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::InteractionFragment>> getCoveredBy() const = 0;
 			
-			
 			/*!
 			References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::PartDecomposition > getDecomposedAs() const = 0;
-			
+			virtual std::shared_ptr<uml::PartDecomposition> getDecomposedAs() const = 0;
 			/*!
 			References the Interaction that represents the decomposition.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setDecomposedAs(std::shared_ptr<uml::PartDecomposition> _decomposedAs) = 0;
-			
+			virtual void setDecomposedAs(std::shared_ptr<uml::PartDecomposition>) = 0;
 			/*!
 			References the Interaction enclosing this Lifeline.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Interaction > getInteraction() const = 0;
-			
+			virtual std::weak_ptr<uml::Interaction> getInteraction() const = 0;
 			/*!
 			References the Interaction enclosing this Lifeline.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setInteraction(std::shared_ptr<uml::Interaction> _interaction) = 0;
-			
+			virtual void setInteraction(std::weak_ptr<uml::Interaction>) = 0;
 			/*!
 			References the ConnectableElement within the classifier that contains the enclosing interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ConnectableElement > getRepresents() const = 0;
-			
+			virtual std::shared_ptr<uml::ConnectableElement> getRepresents() const = 0;
 			/*!
 			References the ConnectableElement within the classifier that contains the enclosing interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setRepresents(std::shared_ptr<uml::ConnectableElement> _represents) = 0;
-			
+			virtual void setRepresents(std::shared_ptr<uml::ConnectableElement>) = 0;
 			/*!
 			If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getSelector() const = 0;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getSelector() const = 0;
 			/*!
 			If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setSelector(std::shared_ptr<uml::ValueSpecification> _selector) = 0;
-			
+			virtual void setSelector(std::shared_ptr<uml::ValueSpecification>) = 0;
 			
 
 		protected:
@@ -301,22 +234,22 @@ namespace uml
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::PartDecomposition > m_decomposedAs;/*!
+			std::shared_ptr<uml::PartDecomposition> m_decomposedAs;/*!
 			References the Interaction enclosing this Lifeline.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::weak_ptr<uml::Interaction > m_interaction;/*!
+			std::weak_ptr<uml::Interaction> m_interaction;/*!
 			References the ConnectableElement within the classifier that contains the enclosing interaction.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::ConnectableElement > m_represents;/*!
+			std::shared_ptr<uml::ConnectableElement> m_represents;/*!
 			If the referenced ConnectableElement is multivalued, then this specifies the specific individual part within that set.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			std::shared_ptr<uml::ValueSpecification > m_selector;
+			std::shared_ptr<uml::ValueSpecification> m_selector;
 
 		public:
 			//*********************************
@@ -327,7 +260,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -337,7 +270,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -346,7 +279,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

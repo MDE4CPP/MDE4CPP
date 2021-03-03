@@ -62,9 +62,8 @@
 using namespace UML;
 
 TimeObservationObject::TimeObservationObject(std::shared_ptr<uml::TimeObservation> _element):
-
 	m_TimeObservationValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TimeObservation());
 }
 
@@ -85,13 +84,15 @@ TimeObservationObject::~TimeObservationObject()
 
 std::shared_ptr<ecore::EObject> TimeObservationObject::copy()
 {
-	std::shared_ptr<TimeObservationObject> element(new TimeObservationObject(*this));
+	std::shared_ptr<TimeObservationObject> element(new TimeObservationObject());
+	*element=(*this);
 	element->setThisTimeObservationObjectPtr(element);
 	return element;
 }
 
 TimeObservationObject& TimeObservationObject::operator=(const TimeObservationObject & obj)
 {
+	UML::ObservationObject::operator=(obj);
 	return *this;
 }
 

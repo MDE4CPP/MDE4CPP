@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -37,21 +38,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/PrimitiveType.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/PrimitiveValue.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -76,37 +73,35 @@ BooleanValueImpl::~BooleanValueImpl()
 }
 
 
-
-BooleanValueImpl::BooleanValueImpl(const BooleanValueImpl & obj):BooleanValueImpl()
+BooleanValueImpl::BooleanValueImpl(const BooleanValueImpl & obj): BooleanValueImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  BooleanValueImpl::copy() const
-{
-	std::shared_ptr<BooleanValueImpl> element(new BooleanValueImpl(*this));
-	element->setThisBooleanValuePtr(element);
-	return element;
-}
-
 BooleanValueImpl& BooleanValueImpl::operator=(const BooleanValueImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	PrimitiveValueImpl::operator=(obj);
+	BooleanValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy BooleanValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_value = obj.isValue();
 
 	//copy references with no containment (soft copy)
-	
-	m_type  = obj.getType();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> BooleanValueImpl::copy() const
+{
+	std::shared_ptr<BooleanValueImpl> element(new BooleanValueImpl());
+	*element =(*this);
+	element->setThisBooleanValuePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> BooleanValueImpl::eStaticClass() const
@@ -124,12 +119,10 @@ bool BooleanValueImpl::isValue() const
 {
 	return m_value;
 }
-
 void BooleanValueImpl::setValue(bool _value)
 {
 	m_value = _value;
 } 
-
 
 
 //*********************************
@@ -148,7 +141,7 @@ return newValue;
 	//end of body
 }
 
-bool BooleanValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
+bool BooleanValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -299,13 +292,12 @@ void BooleanValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void BooleanValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	PrimitiveValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void BooleanValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void BooleanValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	PrimitiveValueImpl::resolveReferences(featureID, references);
 }
@@ -331,14 +323,11 @@ void BooleanValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getBooleanValue_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->isValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/Any.hpp"
@@ -33,16 +34,12 @@
 #include <exception> // used in Persistence
 
 #include "uml/Argument.hpp"
-
 #include "uml/Object.hpp"
-
 #include "uml/Operation.hpp"
-
 #include "uml/Property.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -68,34 +65,34 @@ ObjectImpl::~ObjectImpl()
 }
 
 
-
-ObjectImpl::ObjectImpl(const ObjectImpl & obj):ObjectImpl()
+ObjectImpl::ObjectImpl(const ObjectImpl & obj): ObjectImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ObjectImpl::copy() const
-{
-	std::shared_ptr<ObjectImpl> element(new ObjectImpl(*this));
-	element->setThisObjectPtr(element);
-	return element;
-}
-
 ObjectImpl& ObjectImpl::operator=(const ObjectImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	Object::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Object "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ObjectImpl::copy() const
+{
+	std::shared_ptr<ObjectImpl> element(new ObjectImpl());
+	*element =(*this);
+	element->setThisObjectPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
@@ -110,25 +107,25 @@ std::shared_ptr<ecore::EClass> ObjectImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-Any ObjectImpl::get(std::shared_ptr<uml::Property>  property) const
+Any ObjectImpl::get(std::shared_ptr<uml::Property> property) const
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-std::shared_ptr<Bag<uml::Object> > ObjectImpl::invoke(std::shared_ptr<uml::Operation>  op,std::shared_ptr<Bag<uml::Argument> >  arguments)
+std::shared_ptr<Bag<uml::Object> > ObjectImpl::invoke(std::shared_ptr<uml::Operation> op,std::shared_ptr<Bag<uml::Argument>> arguments)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ObjectImpl::set(std::shared_ptr<uml::Property>  property,Any value)
+void ObjectImpl::set(std::shared_ptr<uml::Property> property,Any value)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void ObjectImpl::unset(std::shared_ptr<uml::Property>  property)
+void ObjectImpl::unset(std::shared_ptr<uml::Property> property)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -210,12 +207,11 @@ void ObjectImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 
 void ObjectImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 }
 
-void ObjectImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ObjectImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ecore::EObjectImpl::resolveReferences(featureID, references);
 }
@@ -234,9 +230,6 @@ void ObjectImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

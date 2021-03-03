@@ -44,9 +44,7 @@ FileImpl::FileImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"File is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ FileImpl::FileImpl(const FileImpl & obj):FileImpl()
 
 std::shared_ptr<ecore::EObject>  FileImpl::copy() const
 {
-	std::shared_ptr<FileImpl> element(new FileImpl(*this));
+	std::shared_ptr<FileImpl> element(new FileImpl());
+	*element=(*this);
 	element->setThisFilePtr(element);
 	return element;
 }
 
 FileImpl& FileImpl::operator=(const FileImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy File "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

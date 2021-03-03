@@ -71,9 +71,8 @@
 using namespace UML;
 
 ConnectorObject::ConnectorObject(std::shared_ptr<uml::Connector> _element):
-
 	m_ConnectorValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Connector());
 }
 
@@ -94,13 +93,15 @@ ConnectorObject::~ConnectorObject()
 
 std::shared_ptr<ecore::EObject> ConnectorObject::copy()
 {
-	std::shared_ptr<ConnectorObject> element(new ConnectorObject(*this));
+	std::shared_ptr<ConnectorObject> element(new ConnectorObject());
+	*element=(*this);
 	element->setThisConnectorObjectPtr(element);
 	return element;
 }
 
 ConnectorObject& ConnectorObject::operator=(const ConnectorObject & obj)
 {
+	UML::FeatureObject::operator=(obj);
 	return *this;
 }
 

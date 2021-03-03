@@ -94,9 +94,8 @@
 using namespace UML;
 
 ReduceActionObject::ReduceActionObject(std::shared_ptr<uml::ReduceAction> _element):
-
 	m_ReduceActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReduceAction());
 }
 
@@ -117,13 +116,15 @@ ReduceActionObject::~ReduceActionObject()
 
 std::shared_ptr<ecore::EObject> ReduceActionObject::copy()
 {
-	std::shared_ptr<ReduceActionObject> element(new ReduceActionObject(*this));
+	std::shared_ptr<ReduceActionObject> element(new ReduceActionObject());
+	*element=(*this);
 	element->setThisReduceActionObjectPtr(element);
 	return element;
 }
 
 ReduceActionObject& ReduceActionObject::operator=(const ReduceActionObject & obj)
 {
+	UML::ActionObject::operator=(obj);
 	return *this;
 }
 

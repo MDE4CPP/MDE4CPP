@@ -7,21 +7,17 @@
 #ifndef UML_MANIFESTATION_HPP
 #define UML_MANIFESTATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,59 +32,14 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Abstraction;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class OpaqueExpression;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
 }
 
@@ -99,6 +50,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -107,14 +59,13 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class Manifestation:virtual public Abstraction
+	class Manifestation: virtual public Abstraction
 	{
 		public:
  			Manifestation(const Manifestation &) {}
 
 		protected:
 			Manifestation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -138,15 +89,13 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::PackageableElement > getUtilizedElement() const = 0;
-			
+			virtual std::shared_ptr<uml::PackageableElement> getUtilizedElement() const = 0;
 			/*!
 			The model element that is utilized in the manifestation in an Artifact.
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			virtual void setUtilizedElement(std::shared_ptr<uml::PackageableElement> _utilizedElement) = 0;
-			
+			virtual void setUtilizedElement(std::shared_ptr<uml::PackageableElement>) = 0;
 			
 
 		protected:
@@ -163,7 +112,7 @@ namespace uml
 			<p>From package UML::Deployments.</p>
 			*/
 			
-			std::shared_ptr<uml::PackageableElement > m_utilizedElement;
+			std::shared_ptr<uml::PackageableElement> m_utilizedElement;
 
 		public:
 			//*********************************
@@ -174,7 +123,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -184,7 +133,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -208,7 +157,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

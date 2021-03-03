@@ -7,21 +7,17 @@
 #ifndef UML_SLOT_HPP
 #define UML_SLOT_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,29 +32,12 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InstanceSpecification;
-}
-
-namespace uml 
-{
 	class StructuralFeature;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -66,6 +45,7 @@ namespace uml
 #include "uml/Element.hpp"
 
 // enum includes
+
 
 
 //*********************************
@@ -76,22 +56,18 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class Slot:virtual public Element
+	class Slot: virtual public Element
 	{
 		public:
  			Slot(const Slot &) {}
 
 		protected:
 			Slot(){}
-
+			//Additional constructors for the containments back reference
+			Slot(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-
-			Slot(std::weak_ptr<uml::Element > par_owner);
-
-			//Additional constructors for the containments back reference
-
-			Slot(std::weak_ptr<uml::InstanceSpecification > par_owningInstance);
+			Slot(std::weak_ptr<uml::InstanceSpecification> par_owningInstance);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -115,36 +91,31 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::StructuralFeature > getDefiningFeature() const = 0;
-			
+			virtual std::shared_ptr<uml::StructuralFeature> getDefiningFeature() const = 0;
 			/*!
 			The StructuralFeature that specifies the values that may be held by the Slot.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature) = 0;
-			
+			virtual void setDefiningFeature(std::shared_ptr<uml::StructuralFeature>) = 0;
 			/*!
 			The InstanceSpecification that owns this Slot.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::InstanceSpecification > getOwningInstance() const = 0;
-			
+			virtual std::weak_ptr<uml::InstanceSpecification> getOwningInstance() const = 0;
 			/*!
 			The InstanceSpecification that owns this Slot.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setOwningInstance(std::shared_ptr<uml::InstanceSpecification> _owningInstance) = 0;
-			
+			virtual void setOwningInstance(std::weak_ptr<uml::InstanceSpecification>) = 0;
 			/*!
 			The value or values held by the Slot.
 			<p>From package UML::Classification.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getValue() const = 0;
-			
 			
 			
 
@@ -162,12 +133,12 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			std::shared_ptr<uml::StructuralFeature > m_definingFeature;/*!
+			std::shared_ptr<uml::StructuralFeature> m_definingFeature;/*!
 			The InstanceSpecification that owns this Slot.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			std::weak_ptr<uml::InstanceSpecification > m_owningInstance;/*!
+			std::weak_ptr<uml::InstanceSpecification> m_owningInstance;/*!
 			The value or values held by the Slot.
 			<p>From package UML::Classification.</p>
 			*/
@@ -188,7 +159,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -197,7 +168,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

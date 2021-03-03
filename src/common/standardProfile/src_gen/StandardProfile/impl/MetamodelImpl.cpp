@@ -44,9 +44,7 @@ MetamodelImpl::MetamodelImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Metamodel is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ MetamodelImpl::MetamodelImpl(const MetamodelImpl & obj):MetamodelImpl()
 
 std::shared_ptr<ecore::EObject>  MetamodelImpl::copy() const
 {
-	std::shared_ptr<MetamodelImpl> element(new MetamodelImpl(*this));
+	std::shared_ptr<MetamodelImpl> element(new MetamodelImpl());
+	*element=(*this);
 	element->setThisMetamodelPtr(element);
 	return element;
 }
 
 MetamodelImpl& MetamodelImpl::operator=(const MetamodelImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Metamodel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

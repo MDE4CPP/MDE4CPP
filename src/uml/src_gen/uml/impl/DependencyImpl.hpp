@@ -23,8 +23,8 @@ namespace uml
 	{
 		public: 
 			DependencyImpl(const DependencyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			DependencyImpl& operator=(DependencyImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			DependencyImpl& operator=(DependencyImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -33,22 +33,13 @@ namespace uml
 			virtual void setThisDependencyPtr(std::weak_ptr<Dependency> thisDependencyPtr);
 
 			//Additional constructors for the containments back reference
-			DependencyImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			DependencyImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			DependencyImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			DependencyImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			DependencyImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			DependencyImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			DependencyImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			DependencyImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -74,7 +65,6 @@ namespace uml
 			
 			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> getClient() const ;
 			
-			
 			/*!
 			The Element(s) on which the client Element(s) depend in some respect. The modeler may stipulate a sense of Dependency direction suitable for their domain.
 			<p>From package UML::CommonStructure.</p>
@@ -83,7 +73,6 @@ namespace uml
 			virtual std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> getSupplier() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -93,7 +82,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -103,7 +92,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -133,7 +122,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

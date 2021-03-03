@@ -8,25 +8,21 @@
 #define UML_NAMESPACE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 template<class T, class ... U> class SubsetUnion;
 template<class T> class Union;
-
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -41,59 +37,16 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
 	class PackageableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -104,6 +57,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -112,14 +66,13 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class Namespace:virtual public NamedElement
+	class Namespace: virtual public NamedElement
 	{
 		public:
  			Namespace(const Namespace &) {}
 
 		protected:
 			Namespace(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -135,56 +88,40 @@ namespace uml
 			elementImport.importedElement.oclAsType(Element)->excludesAll(ownedMember)
 			*/
 			 
-			virtual bool cannot_import_ownedMembers(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool cannot_import_ownedMembers(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A Namespace cannot have a PackageImport to itself.
 			packageImport.importedPackage.oclAsType(Namespace)->excludes(self)
 			*/
 			 
-			virtual bool cannot_import_self(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool cannot_import_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			Creates an import of the specified element into this namespace with the specified visibility.
 			*/
 			 
-			virtual std::shared_ptr<uml::ElementImport> createElementImport(std::shared_ptr<uml::PackageableElement>  element,uml::VisibilityKind visibility) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::ElementImport> createElementImport(std::shared_ptr<uml::PackageableElement> element,uml::VisibilityKind visibility) = 0;/*!
 			Creates an import of the specified package into this namespace with the specified visibility.
 			*/
 			 
-			virtual std::shared_ptr<uml::PackageImport> createPackageImport(std::shared_ptr<uml::Package>  package_,uml::VisibilityKind visibility) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::PackageImport> createPackageImport(std::shared_ptr<uml::Package> package_,uml::VisibilityKind visibility) = 0;/*!
 			The query excludeCollisions() excludes from a set of PackageableElements any that would not be distinguishable from each other in this Namespace.
 			result = (imps->reject(imp1  | imps->exists(imp2 | not imp1.isDistinguishableFrom(imp2, self))))
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement> >  imps) = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::PackageableElement> > excludeCollisions(std::shared_ptr<Bag<uml::PackageableElement>> imps) = 0;/*!
 			Retrieves the elements imported by this namespace.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > getImportedElements() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::PackageableElement> > getImportedElements() = 0;/*!
 			The importedMember property is derived as the PackageableElements that are members of this Namespace as a result of either PackageImports or ElementImports.
 			result = (self.importMembers(elementImport.importedElement->asSet()->union(packageImport.importedPackage->collect(p | p.visibleMembers()))->asSet()))
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > getImportedMembers() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::PackageableElement> > getImportedMembers() = 0;/*!
 			Retrieves the packages imported by this namespace.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Package> > getImportedPackages() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Package> > getImportedPackages() = 0;/*!
 			The query getNamesOfMember() gives a set of all of the names that a member would have in a Namespace, taking importing into account. In general a member can have multiple names in a Namespace if it is imported more than once with different aliases.
 			result = (if self.ownedMember ->includes(element)
 			then Set{element.name}
@@ -199,20 +136,14 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<std::string> > getNamesOfMember(std::shared_ptr<uml::NamedElement>  element) = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<uml::NamedElement> > getOwnedMembers() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<std::string> > getNamesOfMember(std::shared_ptr<uml::NamedElement> element) = 0; 
+			virtual std::shared_ptr<Bag<uml::NamedElement> > getOwnedMembers() = 0;/*!
 			The query importMembers() defines which of a set of PackageableElements are actually imported into the Namespace. This excludes hidden ones, i.e., those which have names that conflict with names of ownedMembers, and it also excludes PackageableElements that would have the indistinguishable names when imported.
 			result = (self.excludeCollisions(imps)->select(imp | self.ownedMember->forAll(mem | imp.isDistinguishableFrom(mem, self))))
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::PackageableElement> > importMembers(std::shared_ptr<Bag<uml::PackageableElement> >  imps) = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::PackageableElement> > importMembers(std::shared_ptr<Bag<uml::PackageableElement>> imps) = 0;/*!
 			The Boolean query membersAreDistinguishable() determines whether all of the Namespace's members are distinguishable within it.
 			result = (member->forAll( memb |
 			   member->excluding(memb)->forAll(other |
@@ -220,16 +151,12 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool membersAreDistinguishable() = 0;
-			
-			/*!
+			virtual bool membersAreDistinguishable() = 0;/*!
 			All the members of a Namespace are distinguishable within it.
 			membersAreDistinguishable()
 			*/
 			 
-			virtual bool members_distinguishable(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool members_distinguishable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -244,14 +171,12 @@ namespace uml
 			
 			virtual std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> getElementImport() const = 0;
 			
-			
 			/*!
 			References the PackageableElements that are members of this Namespace as a result of either PackageImports or ElementImports.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> getImportedMember() const = 0;
-			
 			
 			
 			
@@ -264,14 +189,12 @@ namespace uml
 			
 			virtual std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> getOwnedRule() const = 0;
 			
-			
 			/*!
 			References the PackageImports owned by the Namespace.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
 			virtual std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> getPackageImport() const = 0;
-			
 			
 			
 
@@ -340,7 +263,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -349,7 +272,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

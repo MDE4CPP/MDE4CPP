@@ -23,15 +23,14 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public: 
 			CompoundValueImpl(const CompoundValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			CompoundValueImpl& operator=(CompoundValueImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			CompoundValueImpl& operator=(CompoundValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			CompoundValueImpl();
 			virtual std::shared_ptr<CompoundValue> getThisCompoundValuePtr() const;
 			virtual void setThisCompoundValuePtr(std::weak_ptr<CompoundValue> thisCompoundValuePtr);
-
 
 
 		public:
@@ -42,27 +41,13 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value> >  values,int position) ;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) ;
-			
-			 
-			virtual void removeFeatureValues(std::shared_ptr<uml::Classifier>  classifier) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature>  feature) ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > retrieveFeatureValues() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual void assignFeatureValue(std::shared_ptr<uml::StructuralFeature> feature,std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values,int position) ; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) ; 
+			virtual void removeFeatureValues(std::shared_ptr<uml::Classifier> classifier) ; 
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> retrieveFeatureValue(std::shared_ptr<uml::StructuralFeature> feature) ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue> > retrieveFeatureValues() ; 
 			virtual std::string toString() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -76,7 +61,6 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> getFeatureValues() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -96,7 +80,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -44,9 +44,7 @@ SubsystemImpl::SubsystemImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Subsystem is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ SubsystemImpl::SubsystemImpl(const SubsystemImpl & obj):SubsystemImpl()
 
 std::shared_ptr<ecore::EObject>  SubsystemImpl::copy() const
 {
-	std::shared_ptr<SubsystemImpl> element(new SubsystemImpl(*this));
+	std::shared_ptr<SubsystemImpl> element(new SubsystemImpl());
+	*element=(*this);
 	element->setThisSubsystemPtr(element);
 	return element;
 }
 
 SubsystemImpl& SubsystemImpl::operator=(const SubsystemImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Subsystem "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

@@ -25,8 +25,8 @@ virtual public ExecutionFactory
 	{
 		public: 
 			ExecutionFactoryImpl(const ExecutionFactoryImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ExecutionFactoryImpl& operator=(ExecutionFactoryImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ExecutionFactoryImpl& operator=(ExecutionFactoryImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;
@@ -35,10 +35,7 @@ virtual public ExecutionFactory
 			virtual void setThisExecutionFactoryPtr(std::weak_ptr<ExecutionFactory> thisExecutionFactoryPtr);
 
 			//Additional constructors for the containments back reference
-			ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus);
-
-
-
+			ExecutionFactoryImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus);
 
 		public:
 			//destructor
@@ -48,38 +45,16 @@ virtual public ExecutionFactory
 			// Operations
 			//*********************************
 			 
-			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType>  type) ;
-			
-			 
-			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>  execution) ;
-			
-			 
-			virtual void assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy>  strategy) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Evaluation> createEvaluation(std::shared_ptr<uml::ValueSpecification>  specification) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  context) ;
-			
-			 
-			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> getStrategy(std::string name) ;
-			
-			 
-			virtual int getStrategyIndex(std::string name) ;
-			
-			
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior>  behavior) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element>  element) ;
-			
-			
+			virtual void addBuiltInType(std::shared_ptr<uml::PrimitiveType> type) ; 
+			virtual void addPrimitiveBehaviorPrototype(std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> execution) ; 
+			virtual void assignStrategy(std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> strategy) ; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Evaluation> createEvaluation(std::shared_ptr<uml::ValueSpecification> specification) ; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> createExecution(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context) ; 
+			virtual std::shared_ptr<uml::PrimitiveType> getBuiltInType(std::string name) ; 
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticStrategy> getStrategy(std::string name) ; 
+			virtual int getStrategyIndex(std::string name) ; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution> instantiateOpaqueBehaviorExecution(std::shared_ptr<uml::Behavior> behavior) ; 
+			virtual std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> instantiateVisitor(std::shared_ptr<uml::Element> element) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -93,21 +68,16 @@ virtual public ExecutionFactory
 			virtual std::shared_ptr<Bag<uml::PrimitiveType>> getBuiltInTypes() const ;
 			
 			
+			virtual std::weak_ptr<fUML::Semantics::Loci::Locus> getLocus() const ;
 			
-			virtual std::weak_ptr<fUML::Semantics::Loci::Locus > getLocus() const ;
-			
-			
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) ;
-			
+			virtual void setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus>) ;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>> getPrimitiveBehaviorPrototypes() const ;
-			
 			
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Loci::SemanticStrategy>> getStrategies() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -127,7 +97,7 @@ virtual public ExecutionFactory
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -44,9 +44,7 @@ RefineImpl::RefineImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Refine is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ RefineImpl::RefineImpl(const RefineImpl & obj):RefineImpl()
 
 std::shared_ptr<ecore::EObject>  RefineImpl::copy() const
 {
-	std::shared_ptr<RefineImpl> element(new RefineImpl(*this));
+	std::shared_ptr<RefineImpl> element(new RefineImpl());
+	*element=(*this);
 	element->setThisRefinePtr(element);
 	return element;
 }
 
 RefineImpl& RefineImpl::operator=(const RefineImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Refine "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

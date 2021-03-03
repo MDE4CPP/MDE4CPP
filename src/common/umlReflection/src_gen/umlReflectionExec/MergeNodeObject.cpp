@@ -74,9 +74,8 @@
 using namespace UML;
 
 MergeNodeObject::MergeNodeObject(std::shared_ptr<uml::MergeNode> _element):
-
 	m_MergeNodeValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_MergeNode());
 }
 
@@ -97,13 +96,15 @@ MergeNodeObject::~MergeNodeObject()
 
 std::shared_ptr<ecore::EObject> MergeNodeObject::copy()
 {
-	std::shared_ptr<MergeNodeObject> element(new MergeNodeObject(*this));
+	std::shared_ptr<MergeNodeObject> element(new MergeNodeObject());
+	*element=(*this);
 	element->setThisMergeNodeObjectPtr(element);
 	return element;
 }
 
 MergeNodeObject& MergeNodeObject::operator=(const MergeNodeObject & obj)
 {
+	UML::ControlNodeObject::operator=(obj);
 	return *this;
 }
 

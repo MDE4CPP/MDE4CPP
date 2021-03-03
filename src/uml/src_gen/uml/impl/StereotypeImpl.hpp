@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			StereotypeImpl(const StereotypeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			StereotypeImpl& operator=(StereotypeImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			StereotypeImpl& operator=(StereotypeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,25 +32,14 @@ namespace uml
 			virtual void setThisStereotypePtr(std::weak_ptr<Stereotype> thisStereotypePtr);
 
 			//Additional constructors for the containments back reference
-			StereotypeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			StereotypeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			StereotypeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			StereotypeImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			StereotypeImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			StereotypeImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			StereotypeImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			StereotypeImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -66,106 +55,72 @@ namespace uml
 			->forAll(opposite.owner = association)
 			*/
 			 
-			virtual bool associationEndOwnership(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool associationEndOwnership(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If a Stereotype extends more than one metaclass, the multiplicity of the corresponding base-properties shall be [0..1]. At any point in time, only one of these base-properties can contain a metaclass instance during runtime.
 			*/
 			 
-			virtual bool base_property_multiplicity_multiple_extension(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool base_property_multiplicity_multiple_extension(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If a Stereotype extends only one metaclass, the multiplicity of the corresponding base-property shall be 1..1.
 			*/
 			 
-			virtual bool base_property_multiplicity_single_extension(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool base_property_multiplicity_single_extension(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The upper bound of base-properties is exactly 1.
 			*/
 			 
-			virtual bool base_property_upper_bound(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool base_property_upper_bound(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Stereotypes may only participate in binary associations.
 			ownedAttribute.association->forAll(memberEnd->size()=2)
 			*/
 			 
-			virtual bool binaryAssociationsOnly(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool binaryAssociationsOnly(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The query containingProfile returns the closest profile directly or indirectly containing this stereotype.
 			result = (self.namespace.oclAsType(Package).containingProfile())
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::Profile> containingProfile() ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Profile> containingProfile() ;/*!
 			Creates a(n) (required) extension of the specified metaclass with this stereotype.
 			*/
 			 
-			virtual std::shared_ptr<uml::Extension> createExtension(std::shared_ptr<uml::Class>  metaclass,bool isRequired) ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Extension> createExtension(std::shared_ptr<uml::Class> metaclass,bool isRequired) ;/*!
 			Creates an icon with the specified location for this stereotype.
 			*/
 			 
-			virtual std::shared_ptr<uml::Image> createIcon(std::string location) ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Image> createIcon(std::string location) ;/*!
 			Creates an icon with the specified format and content for this stereotype.
 			*/
 			 
-			virtual std::shared_ptr<uml::Image> createIcon(std::string format,std::string content) ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Image> createIcon(std::string format,std::string content) ;/*!
 			A Stereotype may only generalize or specialize another Stereotype.
 			allParents()->forAll(oclIsKindOf(Stereotype)) 
 			and Classifier.allInstances()->forAll(c | c.allParents()->exists(oclIsKindOf(Stereotype)) implies c.oclIsKindOf(Stereotype))
 			*/
 			 
-			virtual bool generalize(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool generalize(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			Retrieves all the metaclasses extended by this stereotype, including the metaclasses extended by its superstereotypes.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Class> > getAllExtendedMetaclasses() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Class> > getAllExtendedMetaclasses() ;/*!
 			Retrieves the current definition (Ecore representation) of this stereotype.
 			*/
 			 
-			virtual std::shared_ptr<ecore::EClass> getDefinition() ;
-			
-			/*!
+			virtual std::shared_ptr<ecore::EClass> getDefinition() ;/*!
 			Retrieves the metaclasses extended by this stereotype.
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Class> > getExtendedMetaclasses() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Class> > getExtendedMetaclasses() ;/*!
 			Retrieves the localized keyword for this stereotype.
 			*/
 			 
-			virtual std::string getKeyword() ;
-			
-			/*!
+			virtual std::string getKeyword() ;/*!
 			Retrieves the keyword for this stereotype, localized if indicated.
 			*/
 			 
-			virtual std::string getKeyword(bool localize) ;
-			
-			
-			
-			/*!
+			virtual std::string getKeyword(bool localize) ;/*!
 			Stereotype names should not clash with keyword names for the extended model element.
 			*/
 			 
-			virtual bool name_not_clash(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool name_not_clash(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -182,16 +137,14 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Image, uml::Element>> getIcon() const ;
 			
-			
 			/*!
 			The profile that directly or indirectly contains this stereotype.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Profile > getProfile() const ;
+			virtual std::shared_ptr<uml::Profile> getProfile() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -216,7 +169,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -231,7 +184,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -256,7 +209,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

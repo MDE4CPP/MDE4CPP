@@ -69,9 +69,8 @@
 using namespace UML;
 
 InstanceSpecificationObject::InstanceSpecificationObject(std::shared_ptr<uml::InstanceSpecification> _element):
-
 	m_InstanceSpecificationValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InstanceSpecification());
 }
 
@@ -92,13 +91,17 @@ InstanceSpecificationObject::~InstanceSpecificationObject()
 
 std::shared_ptr<ecore::EObject> InstanceSpecificationObject::copy()
 {
-	std::shared_ptr<InstanceSpecificationObject> element(new InstanceSpecificationObject(*this));
+	std::shared_ptr<InstanceSpecificationObject> element(new InstanceSpecificationObject());
+	*element=(*this);
 	element->setThisInstanceSpecificationObjectPtr(element);
 	return element;
 }
 
 InstanceSpecificationObject& InstanceSpecificationObject::operator=(const InstanceSpecificationObject & obj)
 {
+	UML::DeployedArtifactObject::operator=(obj);
+	UML::DeploymentTargetObject::operator=(obj);
+	UML::PackageableElementObject::operator=(obj);
 	return *this;
 }
 

@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			TriggerImpl(const TriggerImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			TriggerImpl& operator=(TriggerImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			TriggerImpl& operator=(TriggerImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisTriggerPtr(std::weak_ptr<Trigger> thisTriggerPtr);
 
 			//Additional constructors for the containments back reference
-			TriggerImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			TriggerImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			TriggerImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			TriggerImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -53,9 +48,7 @@ namespace uml
 			port->notEmpty() implies event.oclIsKindOf(MessageEvent)
 			*/
 			 
-			virtual bool trigger_with_ports(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool trigger_with_ports(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -70,15 +63,13 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Event > getEvent() const ;
-			
+			virtual std::shared_ptr<uml::Event> getEvent() const ;
 			/*!
 			The Event that detected by the Trigger.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setEvent(std::shared_ptr<uml::Event> _event) ;
-			
+			virtual void setEvent(std::shared_ptr<uml::Event>) ;
 			/*!
 			A optional Port of through which the given effect is detected.
 			<p>From package UML::CommonBehavior.</p>
@@ -87,7 +78,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Port>> getPort() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -102,7 +92,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -117,7 +107,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

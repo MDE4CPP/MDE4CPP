@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ChangeEventImpl(const ChangeEventImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ChangeEventImpl& operator=(ChangeEventImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ChangeEventImpl& operator=(ChangeEventImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisChangeEventPtr(std::weak_ptr<ChangeEvent> thisChangeEventPtr);
 
 			//Additional constructors for the containments back reference
-			ChangeEventImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ChangeEventImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ChangeEventImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ChangeEventImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ChangeEventImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			ChangeEventImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			ChangeEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			ChangeEventImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -71,16 +62,14 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getChangeExpression() const ;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getChangeExpression() const ;
 			/*!
 			A Boolean-valued ValueSpecification that will result in a ChangeEvent whenever its value changes from false to true.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setChangeExpression(std::shared_ptr<uml::ValueSpecification> _changeExpression) ;
+			virtual void setChangeExpression(std::shared_ptr<uml::ValueSpecification>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -90,7 +79,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -100,7 +89,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -115,7 +104,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

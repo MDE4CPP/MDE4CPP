@@ -59,9 +59,8 @@
 using namespace UML;
 
 AnyReceiveEventObject::AnyReceiveEventObject(std::shared_ptr<uml::AnyReceiveEvent> _element):
-
 	m_AnyReceiveEventValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_AnyReceiveEvent());
 }
 
@@ -82,13 +81,15 @@ AnyReceiveEventObject::~AnyReceiveEventObject()
 
 std::shared_ptr<ecore::EObject> AnyReceiveEventObject::copy()
 {
-	std::shared_ptr<AnyReceiveEventObject> element(new AnyReceiveEventObject(*this));
+	std::shared_ptr<AnyReceiveEventObject> element(new AnyReceiveEventObject());
+	*element=(*this);
 	element->setThisAnyReceiveEventObjectPtr(element);
 	return element;
 }
 
 AnyReceiveEventObject& AnyReceiveEventObject::operator=(const AnyReceiveEventObject & obj)
 {
+	UML::MessageEventObject::operator=(obj);
 	return *this;
 }
 

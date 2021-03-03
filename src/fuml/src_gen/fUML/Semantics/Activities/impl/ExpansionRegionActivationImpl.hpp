@@ -23,8 +23,8 @@ namespace fUML::Semantics::Activities
 	{
 		public: 
 			ExpansionRegionActivationImpl(const ExpansionRegionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ExpansionRegionActivationImpl& operator=(ExpansionRegionActivationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ExpansionRegionActivationImpl& operator=(ExpansionRegionActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
@@ -33,10 +33,7 @@ namespace fUML::Semantics::Activities
 			virtual void setThisExpansionRegionActivationPtr(std::weak_ptr<ExpansionRegionActivation> thisExpansionRegionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			ExpansionRegionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			ExpansionRegionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -46,57 +43,28 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual void doAction() ;
-			
-			 
-			virtual void doOutput() ;
-			
-			 
-			virtual void doStructuredActivity() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode>  node) ;
-			
-			 
-			virtual bool isSuspended() ;
-			
-			 
-			virtual int numberOfValues() ;
-			
-			 
-			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) ;
-			
-			 
-			virtual void runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) ;
-			
-			 
-			virtual void runIterative() ;
-			
-			 
-			virtual void runParallel() ;
-			
-			 
-			virtual void sendOffers() ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ;
-			
-			 
-			virtual void terminate() ;
-			
-			 
-			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup>  activationGroup) ;
-			
-			
+			virtual void doAction() ; 
+			virtual void doOutput() ; 
+			virtual void doStructuredActivity() ; 
+			virtual std::shared_ptr<fUML::Semantics::Activities::ExpansionNodeActivation> getExpansionNodeActivation(std::shared_ptr<uml::ExpansionNode> node) ; 
+			virtual bool isSuspended() ; 
+			virtual int numberOfValues() ; 
+			virtual void resume(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) ; 
+			virtual void runGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) ; 
+			virtual void runIterative() ; 
+			virtual void runParallel() ; 
+			virtual void sendOffers() ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::Token> > takeOfferedTokens() ; 
+			virtual void terminate() ; 
+			virtual void terminateGroup(std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> activationGroup) ;
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
 			virtual int getNext() const ;
-			
 			 
-			virtual void setNext (int _next); 
+			virtual void setNext (int _next);
 			
 			
 			//*********************************
@@ -106,15 +74,12 @@ namespace fUML::Semantics::Activities
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::ExpansionActivationGroup>> getActivationGroups() const ;
 			
 			
-			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputExpansionTokens() const ;
-			
 			
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Activities::TokenSet>> getInputTokens() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -135,7 +100,7 @@ namespace fUML::Semantics::Activities
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

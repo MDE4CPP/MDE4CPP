@@ -25,15 +25,14 @@ virtual public EventAccepter
 	{
 		public: 
 			EventAccepterImpl(const EventAccepterImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EventAccepterImpl& operator=(EventAccepterImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EventAccepterImpl& operator=(EventAccepterImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			EventAccepterImpl();
 			virtual std::shared_ptr<EventAccepter> getThisEventAccepterPtr() const;
 			virtual void setThisEventAccepterPtr(std::weak_ptr<EventAccepter> thisEventAccepterPtr);
-
 
 
 		public:
@@ -44,12 +43,8 @@ virtual public EventAccepter
 			// Operations
 			//*********************************
 			 
-			virtual void accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) ;
-			
-			 
-			virtual bool match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance>  signalInstance) ;
-			
-			
+			virtual void accept(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) ; 
+			virtual bool match(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> signalInstance) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -59,7 +54,7 @@ virtual public EventAccepter
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -79,7 +74,7 @@ virtual public EventAccepter
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

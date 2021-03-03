@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			InformationItemImpl(const InformationItemImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			InformationItemImpl& operator=(InformationItemImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			InformationItemImpl& operator=(InformationItemImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,25 +32,14 @@ namespace uml
 			virtual void setThisInformationItemPtr(std::weak_ptr<InformationItem> thisInformationItemPtr);
 
 			//Additional constructors for the containments back reference
-			InformationItemImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			InformationItemImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			InformationItemImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			InformationItemImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			InformationItemImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			InformationItemImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			InformationItemImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			InformationItemImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -64,16 +53,12 @@ namespace uml
 			self.generalization->isEmpty() and self.feature->isEmpty()
 			*/
 			 
-			virtual bool has_no(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool has_no(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			It is not instantiable.
 			isAbstract
 			*/
 			 
-			virtual bool not_instantiable(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool not_instantiable(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The sources and targets of an information item (its related information flows) must designate subsets of the sources and targets of the representation information item, if any. The Classifiers that can realize an information item can only be of the following kind: Class, Interface, InformationItem, Signal, Component.
 			(self.represented->select(oclIsKindOf(InformationItem))->forAll(p |
 			  p.conveyingFlow.source->forAll(q | self.conveyingFlow.source->includes(q)) and
@@ -82,9 +67,7 @@ namespace uml
 			        oclIsKindOf(InformationItem) or oclIsKindOf(Signal) or oclIsKindOf(Component)))
 			*/
 			 
-			virtual bool sources_and_targets(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool sources_and_targets(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -102,7 +85,6 @@ namespace uml
 			virtual std::shared_ptr<Bag<uml::Classifier>> getRepresented() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -122,7 +104,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -137,7 +119,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -157,7 +139,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ValueSpecificationActionImpl(const ValueSpecificationActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ValueSpecificationActionImpl& operator=(ValueSpecificationActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ValueSpecificationActionImpl& operator=(ValueSpecificationActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisValueSpecificationActionPtr(std::weak_ptr<ValueSpecificationAction> thisValueSpecificationActionPtr);
 
 			//Additional constructors for the containments back reference
-			ValueSpecificationActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ValueSpecificationActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ValueSpecificationActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ValueSpecificationActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ValueSpecificationActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ValueSpecificationActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ValueSpecificationActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ValueSpecificationActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,16 +52,12 @@ namespace uml
 			value.type.conformsTo(result.type)
 			*/
 			 
-			virtual bool compatible_type(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool compatible_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The multiplicity of the result OutputPin is 1..1
 			result.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -85,30 +72,26 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
 			/*!
 			The OutputPin on which the result value is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
-			
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
 			/*!
 			The ValueSpecification to be evaluated.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getValue() const ;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getValue() const ;
 			/*!
 			The ValueSpecification to be evaluated.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::ValueSpecification> _value) ;
+			virtual void setValue(std::shared_ptr<uml::ValueSpecification>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -133,7 +116,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -153,7 +136,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

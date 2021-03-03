@@ -23,8 +23,8 @@ namespace uml
 	{
 		public: 
 			ValueSpecificationImpl(const ValueSpecificationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ValueSpecificationImpl& operator=(ValueSpecificationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ValueSpecificationImpl& operator=(ValueSpecificationImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -33,30 +33,17 @@ namespace uml
 			virtual void setThisValueSpecificationPtr(std::weak_ptr<ValueSpecification> thisValueSpecificationPtr);
 
 			//Additional constructors for the containments back reference
-			ValueSpecificationImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ValueSpecificationImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ValueSpecificationImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ValueSpecificationImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ValueSpecificationImpl(std::weak_ptr<uml::Package > par_owningPackage);
-
-
+			ValueSpecificationImpl(std::weak_ptr<uml::Package> par_owningPackage);
 			//Additional constructors for the containments back reference
-			ValueSpecificationImpl(std::weak_ptr<uml::Slot > par_owningSlot);
-
-
+			ValueSpecificationImpl(std::weak_ptr<uml::Slot> par_owningSlot);
 			//Additional constructors for the containments back reference
-			ValueSpecificationImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			ValueSpecificationImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-			ValueSpecificationImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction);
-
-
-
+			ValueSpecificationImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction);
 
 		public:
 			//destructor
@@ -71,57 +58,43 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool booleanValue() ;
-			
-			/*!
+			virtual bool booleanValue() ;/*!
 			The query integerValue() gives a single Integer value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual int integerValue() ;
-			
-			/*!
+			virtual int integerValue() ;/*!
 			The query isComputable() determines whether a value specification can be computed in a model. This operation cannot be fully defined in OCL. A conforming implementation is expected to deliver true for this operation for all ValueSpecifications that it can compute, and to compute all of those for which the operation is true. A conforming implementation is expected to be able to compute at least the value of all LiteralSpecifications.
 			result = (false)
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool isComputable() ;
-			
-			/*!
+			virtual bool isComputable() ;/*!
 			The query isNull() returns true when it can be computed that the value is null.
 			result = (false)
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual bool isNull() ;
-			
-			/*!
+			virtual bool isNull() ;/*!
 			The query realValue() gives a single Real value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual double realValue() ;
-			
-			/*!
+			virtual double realValue() ;/*!
 			The query stringValue() gives a single String value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p>
 			*/
 			 
-			virtual std::string stringValue() ;
-			
-			/*!
+			virtual std::string stringValue() ;/*!
 			The query unlimitedValue() gives a single UnlimitedNatural value when one can be computed.
 			result = (null)
 			<p>From package UML::Values.</p>
 			*/
 			 
 			virtual int unlimitedValue() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -132,18 +105,14 @@ namespace uml
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<uml::Slot > getOwningSlot() const ;
+			virtual std::weak_ptr<uml::Slot> getOwningSlot() const ;
 			
+			virtual void setOwningSlot(std::weak_ptr<uml::Slot>) ;
 			
-			virtual void setOwningSlot(std::shared_ptr<uml::Slot> _owningSlot) ;
+			virtual std::weak_ptr<uml::ValueSpecificationAction> getValueSpecificationAction() const ;
 			
+			virtual void setValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction>) ;
 			
-			virtual std::weak_ptr<uml::ValueSpecificationAction > getValueSpecificationAction() const ;
-			
-			
-			virtual void setValueSpecificationAction(std::shared_ptr<uml::ValueSpecificationAction> _valueSpecificationAction) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -153,7 +122,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -163,7 +132,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -178,7 +147,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

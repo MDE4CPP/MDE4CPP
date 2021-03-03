@@ -45,9 +45,7 @@ CreateImpl::CreateImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Create is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -75,14 +73,17 @@ CreateImpl::CreateImpl(const CreateImpl & obj):CreateImpl()
 
 std::shared_ptr<ecore::EObject>  CreateImpl::copy() const
 {
-	std::shared_ptr<CreateImpl> element(new CreateImpl(*this));
+	std::shared_ptr<CreateImpl> element(new CreateImpl());
+	*element=(*this);
 	element->setThisCreatePtr(element);
 	return element;
 }
 
 CreateImpl& CreateImpl::operator=(const CreateImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Create "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

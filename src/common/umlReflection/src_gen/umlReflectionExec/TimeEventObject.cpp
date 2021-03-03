@@ -62,9 +62,8 @@
 using namespace UML;
 
 TimeEventObject::TimeEventObject(std::shared_ptr<uml::TimeEvent> _element):
-
 	m_TimeEventValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TimeEvent());
 }
 
@@ -85,13 +84,15 @@ TimeEventObject::~TimeEventObject()
 
 std::shared_ptr<ecore::EObject> TimeEventObject::copy()
 {
-	std::shared_ptr<TimeEventObject> element(new TimeEventObject(*this));
+	std::shared_ptr<TimeEventObject> element(new TimeEventObject());
+	*element=(*this);
 	element->setThisTimeEventObjectPtr(element);
 	return element;
 }
 
 TimeEventObject& TimeEventObject::operator=(const TimeEventObject & obj)
 {
+	UML::EventObject::operator=(obj);
 	return *this;
 }
 

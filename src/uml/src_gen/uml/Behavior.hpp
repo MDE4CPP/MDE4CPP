@@ -8,23 +8,19 @@
 #define UML_BEHAVIOR_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,184 +35,35 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Behavior;
-}
-
+//Forward Declaration for used types 
 namespace uml 
 {
 	class BehavioralFeature;
-}
-
-namespace uml 
-{
-	class BehavioredClassifier;
-}
-
-namespace uml 
-{
-	class Class;
-}
-
-namespace uml 
-{
-	class Classifier;
-}
-
-namespace uml 
-{
 	class CollaborationUse;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class ConnectableElement;
-}
-
-namespace uml 
-{
 	class Connector;
-}
-
-namespace uml 
-{
 	class Constraint;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class ElementImport;
-}
-
-namespace uml 
-{
 	class Extension;
-}
-
-namespace uml 
-{
 	class Feature;
-}
-
-namespace uml 
-{
 	class Generalization;
-}
-
-namespace uml 
-{
 	class GeneralizationSet;
-}
-
-namespace uml 
-{
 	class InterfaceRealization;
-}
-
-namespace uml 
-{
-	class NamedElement;
-}
-
-namespace uml 
-{
-	class Namespace;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class PackageImport;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class Parameter;
-}
-
-namespace uml 
-{
 	class ParameterSet;
-}
-
-namespace uml 
-{
 	class Port;
-}
-
-namespace uml 
-{
 	class Property;
-}
-
-namespace uml 
-{
 	class Reception;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class Substitution;
-}
-
-namespace uml 
-{
 	class TemplateBinding;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateSignature;
-}
-
-namespace uml 
-{
 	class UseCase;
 }
 
@@ -227,6 +74,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -235,37 +83,29 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class Behavior:virtual public Class
+	class Behavior: virtual public Class
 	{
 		public:
  			Behavior(const Behavior &) {}
 
 		protected:
 			Behavior(){}
-
+			//Additional constructors for the containments back reference
+			Behavior(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier);
 
 			//Additional constructors for the containments back reference
-
-			Behavior(std::weak_ptr<uml::BehavioredClassifier > par_behavioredClassifier);
-
-			//Additional constructors for the containments back reference
-
-			Behavior(std::weak_ptr<uml::Namespace > par_namespace);
+			Behavior(std::weak_ptr<uml::Namespace> par_namespace);
 
 			//Additional constructors for the containments back reference
-
-			Behavior(std::weak_ptr<uml::Element > par_owner);
-
-			//Additional constructors for the containments back reference
-
-			Behavior(std::weak_ptr<uml::Package > par_Package, const int reference_id);
+			Behavior(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-
-			Behavior(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+			Behavior(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 
 			//Additional constructors for the containments back reference
+			Behavior(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
+			//Additional constructors for the containments back reference
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -289,48 +129,34 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<uml::BehavioredClassifier> behavioredClassifier(std::shared_ptr<uml::Element>  from) = 0;
-			
-			/*!
+			virtual std::shared_ptr<uml::BehavioredClassifier> behavioredClassifier(std::shared_ptr<uml::Element> from) = 0;/*!
 			The specification BehavioralFeature must be a feature (possibly inherited) of the context BehavioredClassifier of the Behavior.
 			_'context'.feature->includes(specification)
 			*/
 			 
-			virtual bool feature_of_context_classifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
-			
-			/*!
+			virtual bool feature_of_context_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The in and inout ownedParameters of the Behavior.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::_'in' or direction=ParameterDirectionKind::inout))
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Parameter> > inputParameters() = 0;/*!
 			There may be at most one Behavior for a given pairing of BehavioredClassifier (as owner of the Behavior) and BehavioralFeature (as specification of the Behavior).
 			specification <> null implies _'context'.ownedBehavior->select(specification=self.specification)->size() = 1
 			*/
 			 
-			virtual bool most_one_behavior(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool most_one_behavior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The out, inout and return ownedParameters.
 			result = (ownedParameter->select(direction=ParameterDirectionKind::out or direction=ParameterDirectionKind::inout or direction=ParameterDirectionKind::return))
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() = 0;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::Parameter> > outputParameters() = 0;/*!
 			If a Behavior has a specification BehavioralFeature, then it must have the same number of ownedParameters as its specification. The Behavior Parameters must also "match" the BehavioralParameter Parameters, but the exact requirements for this matching are not formalized.
 			specification <> null implies ownedParameter->size() = specification.ownedParameter->size()
 			*/
 			 
-			virtual bool parameters_match(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool parameters_match(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -340,44 +166,38 @@ namespace uml
 			*/
 			 
 			virtual bool getIsReentrant() const = 0;
-			
 			/*!
 			Tells whether the Behavior can be invoked while it is still executing from a previous invocation.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			 
-			virtual void setIsReentrant (bool _isReentrant)= 0; 
+			virtual void setIsReentrant (bool _isReentrant)= 0;
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<uml::BehavioredClassifier > getBehavioredClassifier() const = 0;
+			virtual std::weak_ptr<uml::BehavioredClassifier> getBehavioredClassifier() const = 0;
 			
-			
-			virtual void setBehavioredClassifier(std::shared_ptr<uml::BehavioredClassifier> _behavioredClassifier) = 0;
-			
+			virtual void setBehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier>) = 0;
 			/*!
 			The BehavioredClassifier that is the context for the execution of the Behavior. A Behavior that is directly owned as a nestedClassifier does not have a context. Otherwise, to determine the context of a Behavior, find the first BehavioredClassifier reached by following the chain of owner relationships from the Behavior, if any. If there is such a BehavioredClassifier, then it is the context, unless it is itself a Behavior with a non-empty context, in which case that is also the context for the original Behavior. For example, following this algorithm, the context of an entry Behavior in a StateMachine is the BehavioredClassifier that owns the StateMachine. The features of the context BehavioredClassifier as well as the Elements visible to the context Classifier are visible to the Behavior.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::BehavioredClassifier > getContext() const = 0;
-			
+			virtual std::shared_ptr<uml::BehavioredClassifier> getContext() const = 0;
 			/*!
 			The BehavioredClassifier that is the context for the execution of the Behavior. A Behavior that is directly owned as a nestedClassifier does not have a context. Otherwise, to determine the context of a Behavior, find the first BehavioredClassifier reached by following the chain of owner relationships from the Behavior, if any. If there is such a BehavioredClassifier, then it is the context, unless it is itself a Behavior with a non-empty context, in which case that is also the context for the original Behavior. For example, following this algorithm, the context of an entry Behavior in a StateMachine is the BehavioredClassifier that owns the StateMachine. The features of the context BehavioredClassifier as well as the Elements visible to the context Classifier are visible to the Behavior.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setContext(std::shared_ptr<uml::BehavioredClassifier> _context) = 0;
-			
+			virtual void setContext(std::shared_ptr<uml::BehavioredClassifier>) = 0;
 			/*!
 			References a list of Parameters to the Behavior which describes the order and type of arguments that can be given when the Behavior is invoked and of the values which will be returned when the Behavior completes its execution.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> getOwnedParameter() const = 0;
-			
 			
 			/*!
 			The ParameterSets owned by this Behavior.
@@ -386,14 +206,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> getOwnedParameterSet() const = 0;
 			
-			
 			/*!
 			An optional set of Constraints specifying what is fulfilled after the execution of the Behavior is completed, if its precondition was fulfilled before its invocation.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> getPostcondition() const = 0;
-			
 			
 			/*!
 			An optional set of Constraints specifying what must be fulfilled before the Behavior is invoked.
@@ -402,7 +220,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> getPrecondition() const = 0;
 			
-			
 			/*!
 			References the Behavior that this Behavior redefines. A subtype of Behavior may redefine any other subtype of Behavior. If the Behavior implements a BehavioralFeature, it replaces the redefined Behavior. If the Behavior is a classifierBehavior, it extends the redefined Behavior.
 			<p>From package UML::CommonBehavior.</p>
@@ -410,21 +227,18 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>> getRedefinedBehavior() const = 0;
 			
-			
 			/*!
 			Designates a BehavioralFeature that the Behavior implements. The BehavioralFeature must be owned by the BehavioredClassifier that owns the Behavior or be inherited by it. The Parameters of the BehavioralFeature and the implementing Behavior must match. A Behavior does not need to have a specification, in which case it either is the classifierBehavior of a BehavioredClassifier or it can only be invoked by another Behavior of the Classifier.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::BehavioralFeature > getSpecification() const = 0;
-			
+			virtual std::shared_ptr<uml::BehavioralFeature> getSpecification() const = 0;
 			/*!
 			Designates a BehavioralFeature that the Behavior implements. The BehavioralFeature must be owned by the BehavioredClassifier that owns the Behavior or be inherited by it. The Parameters of the BehavioralFeature and the implementing Behavior must match. A Behavior does not need to have a specification, in which case it either is the classifierBehavior of a BehavioredClassifier or it can only be invoked by another Behavior of the Classifier.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			virtual void setSpecification(std::shared_ptr<uml::BehavioralFeature> _specification) = 0;
-			
+			virtual void setSpecification(std::shared_ptr<uml::BehavioralFeature>) = 0;
 			
 
 		protected:
@@ -443,12 +257,12 @@ namespace uml
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<uml::BehavioredClassifier > m_behavioredClassifier;/*!
+			std::weak_ptr<uml::BehavioredClassifier> m_behavioredClassifier;/*!
 			The BehavioredClassifier that is the context for the execution of the Behavior. A Behavior that is directly owned as a nestedClassifier does not have a context. Otherwise, to determine the context of a Behavior, find the first BehavioredClassifier reached by following the chain of owner relationships from the Behavior, if any. If there is such a BehavioredClassifier, then it is the context, unless it is itself a Behavior with a non-empty context, in which case that is also the context for the original Behavior. For example, following this algorithm, the context of an entry Behavior in a StateMachine is the BehavioredClassifier that owns the StateMachine. The features of the context BehavioredClassifier as well as the Elements visible to the context Classifier are visible to the Behavior.
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			std::shared_ptr<uml::BehavioredClassifier > m_context;/*!
+			std::shared_ptr<uml::BehavioredClassifier> m_context;/*!
 			References a list of Parameters to the Behavior which describes the order and type of arguments that can be given when the Behavior is invoked and of the values which will be returned when the Behavior completes its execution.
 			<p>From package UML::CommonBehavior.</p>
 			*/
@@ -478,7 +292,7 @@ namespace uml
 			<p>From package UML::CommonBehavior.</p>
 			*/
 			
-			std::shared_ptr<uml::BehavioralFeature > m_specification;
+			std::shared_ptr<uml::BehavioralFeature> m_specification;
 
 		public:
 			//*********************************
@@ -504,7 +318,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -519,7 +333,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -543,7 +357,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

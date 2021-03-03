@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			StartClassifierBehaviorActionImpl(const StartClassifierBehaviorActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			StartClassifierBehaviorActionImpl& operator=(StartClassifierBehaviorActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			StartClassifierBehaviorActionImpl& operator=(StartClassifierBehaviorActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisStartClassifierBehaviorActionPtr(std::weak_ptr<StartClassifierBehaviorAction> thisStartClassifierBehaviorActionPtr);
 
 			//Additional constructors for the containments back reference
-			StartClassifierBehaviorActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			StartClassifierBehaviorActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			StartClassifierBehaviorActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			StartClassifierBehaviorActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			StartClassifierBehaviorActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			StartClassifierBehaviorActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			StartClassifierBehaviorActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			StartClassifierBehaviorActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,17 +52,13 @@ namespace uml
 			object.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			If the InputPin has a type, then the type or one of its ancestors must have a classifierBehavior.
 			object.type->notEmpty() implies 
 			   (object.type.oclIsKindOf(BehavioredClassifier) and object.type.oclAsType(BehavioredClassifier).classifierBehavior<>null)
 			*/
 			 
-			virtual bool type_has_classifier(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool type_has_classifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -86,16 +73,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getObject() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getObject() const ;
 			/*!
 			The InputPin that holds the object whose classifierBehavior is to be started.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setObject(std::shared_ptr<uml::InputPin> _object) ;
+			virtual void setObject(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -120,7 +105,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -140,7 +125,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

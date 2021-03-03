@@ -52,9 +52,8 @@
 using namespace UML;
 
 LinkEndCreationDataObject::LinkEndCreationDataObject(std::shared_ptr<uml::LinkEndCreationData> _element):
-
 	m_LinkEndCreationDataValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LinkEndCreationData());
 }
 
@@ -75,13 +74,15 @@ LinkEndCreationDataObject::~LinkEndCreationDataObject()
 
 std::shared_ptr<ecore::EObject> LinkEndCreationDataObject::copy()
 {
-	std::shared_ptr<LinkEndCreationDataObject> element(new LinkEndCreationDataObject(*this));
+	std::shared_ptr<LinkEndCreationDataObject> element(new LinkEndCreationDataObject());
+	*element=(*this);
 	element->setThisLinkEndCreationDataObjectPtr(element);
 	return element;
 }
 
 LinkEndCreationDataObject& LinkEndCreationDataObject::operator=(const LinkEndCreationDataObject & obj)
 {
+	UML::LinkEndDataObject::operator=(obj);
 	return *this;
 }
 

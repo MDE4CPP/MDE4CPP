@@ -91,9 +91,8 @@
 using namespace UML;
 
 ModelObject::ModelObject(std::shared_ptr<uml::Model> _element):
-
 	m_ModelValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Model());
 }
 
@@ -114,13 +113,15 @@ ModelObject::~ModelObject()
 
 std::shared_ptr<ecore::EObject> ModelObject::copy()
 {
-	std::shared_ptr<ModelObject> element(new ModelObject(*this));
+	std::shared_ptr<ModelObject> element(new ModelObject());
+	*element=(*this);
 	element->setThisModelObjectPtr(element);
 	return element;
 }
 
 ModelObject& ModelObject::operator=(const ModelObject & obj)
 {
+	UML::PackageObject::operator=(obj);
 	return *this;
 }
 

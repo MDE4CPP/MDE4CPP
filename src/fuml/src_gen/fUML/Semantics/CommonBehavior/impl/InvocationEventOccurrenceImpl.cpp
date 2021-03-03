@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -32,23 +33,18 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
-
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
-
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-
 #include "uml/Trigger.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -73,38 +69,35 @@ InvocationEventOccurrenceImpl::~InvocationEventOccurrenceImpl()
 }
 
 
-
-InvocationEventOccurrenceImpl::InvocationEventOccurrenceImpl(const InvocationEventOccurrenceImpl & obj):InvocationEventOccurrenceImpl()
+InvocationEventOccurrenceImpl::InvocationEventOccurrenceImpl(const InvocationEventOccurrenceImpl & obj): InvocationEventOccurrenceImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  InvocationEventOccurrenceImpl::copy() const
-{
-	std::shared_ptr<InvocationEventOccurrenceImpl> element(new InvocationEventOccurrenceImpl(*this));
-	element->setThisInvocationEventOccurrencePtr(element);
-	return element;
-}
-
 InvocationEventOccurrenceImpl& InvocationEventOccurrenceImpl::operator=(const InvocationEventOccurrenceImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	EventOccurrenceImpl::operator=(obj);
+	InvocationEventOccurrence::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InvocationEventOccurrence "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_execution  = obj.getExecution();
-
-	m_target  = obj.getTarget();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> InvocationEventOccurrenceImpl::copy() const
+{
+	std::shared_ptr<InvocationEventOccurrenceImpl> element(new InvocationEventOccurrenceImpl());
+	*element =(*this);
+	element->setThisInvocationEventOccurrencePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> InvocationEventOccurrenceImpl::eStaticClass() const
@@ -131,7 +124,7 @@ return parameterValueList;
 	//end of body
 }
 
-bool InvocationEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger>  trigger)
+bool InvocationEventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -147,17 +140,15 @@ return false;
 /*
 Getter & Setter for reference execution
 */
-std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > InvocationEventOccurrenceImpl::getExecution() const
+std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> InvocationEventOccurrenceImpl::getExecution() const
 {
 //assert(m_execution);
     return m_execution;
 }
-
 void InvocationEventOccurrenceImpl::setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution)
 {
     m_execution = _execution;
 }
-
 
 
 //*********************************
@@ -188,7 +179,7 @@ Any InvocationEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::INVOCATIONEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExecution())); //661
+			return eAny(getExecution()); //661
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }
@@ -264,13 +255,12 @@ void InvocationEventOccurrenceImpl::loadAttributes(std::shared_ptr<persistence::
 
 void InvocationEventOccurrenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
 	//load BasePackage Nodes
 	EventOccurrenceImpl::loadNode(nodeName, loadHandler);
 }
 
-void InvocationEventOccurrenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void InvocationEventOccurrenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -304,12 +294,8 @@ void InvocationEventOccurrenceImpl::saveContent(std::shared_ptr<persistence::int
 	try
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("execution", this->getExecution());
-
+	// Add references
+		saveHandler->addReference(this->getExecution(), "execution", getExecution()->eClass() != fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getExecution_Class()); 
 	}
 	catch (std::exception& e)
 	{

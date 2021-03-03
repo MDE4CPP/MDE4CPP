@@ -25,8 +25,8 @@ virtual public Executor
 	{
 		public: 
 			ExecutorImpl(const ExecutorImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ExecutorImpl& operator=(ExecutorImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ExecutorImpl& operator=(ExecutorImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Loci::LociFactoryImpl;
@@ -35,10 +35,7 @@ virtual public Executor
 			virtual void setThisExecutorPtr(std::weak_ptr<Executor> thisExecutorPtr);
 
 			//Additional constructors for the containments back reference
-			ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus > par_locus);
-
-
-
+			ExecutorImpl(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus);
 
 		public:
 			//destructor
@@ -48,15 +45,9 @@ virtual public Executor
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate(std::shared_ptr<uml::ValueSpecification>  specification) ;
-			
-			 
-			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > execute(std::shared_ptr<uml::Behavior>  behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<uml::Class>  type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  inputs) ;
-			
-			
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate(std::shared_ptr<uml::ValueSpecification> specification) ; 
+			virtual std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > execute(std::shared_ptr<uml::Behavior> behavior,std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> context,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) ; 
+			virtual std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> start(std::shared_ptr<uml::Class> type,std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> inputs) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -67,12 +58,10 @@ virtual public Executor
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<fUML::Semantics::Loci::Locus > getLocus() const ;
+			virtual std::weak_ptr<fUML::Semantics::Loci::Locus> getLocus() const ;
 			
+			virtual void setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus>) ;
 			
-			virtual void setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -92,7 +81,7 @@ virtual public Executor
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

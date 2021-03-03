@@ -93,9 +93,8 @@
 using namespace UML;
 
 ReadLinkObjectEndQualifierActionObject::ReadLinkObjectEndQualifierActionObject(std::shared_ptr<uml::ReadLinkObjectEndQualifierAction> _element):
-
 	m_ReadLinkObjectEndQualifierActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReadLinkObjectEndQualifierAction());
 }
 
@@ -116,13 +115,15 @@ ReadLinkObjectEndQualifierActionObject::~ReadLinkObjectEndQualifierActionObject(
 
 std::shared_ptr<ecore::EObject> ReadLinkObjectEndQualifierActionObject::copy()
 {
-	std::shared_ptr<ReadLinkObjectEndQualifierActionObject> element(new ReadLinkObjectEndQualifierActionObject(*this));
+	std::shared_ptr<ReadLinkObjectEndQualifierActionObject> element(new ReadLinkObjectEndQualifierActionObject());
+	*element=(*this);
 	element->setThisReadLinkObjectEndQualifierActionObjectPtr(element);
 	return element;
 }
 
 ReadLinkObjectEndQualifierActionObject& ReadLinkObjectEndQualifierActionObject::operator=(const ReadLinkObjectEndQualifierActionObject & obj)
 {
+	UML::ActionObject::operator=(obj);
 	return *this;
 }
 

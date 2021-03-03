@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,16 +35,12 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/DirectedRelationship.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Package.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -69,70 +66,53 @@ PackageMergeImpl::~PackageMergeImpl()
 }
 
 //Additional constructor for the containments back reference
-PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Element > par_owner)
+PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Element> par_owner)
 :PackageMergeImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Package > par_receivingPackage)
+PackageMergeImpl::PackageMergeImpl(std::weak_ptr<uml::Package> par_receivingPackage)
 :PackageMergeImpl()
 {
 	m_receivingPackage = par_receivingPackage;
 	m_owner = par_receivingPackage;
 }
 
-
-PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj):PackageMergeImpl()
+PackageMergeImpl::PackageMergeImpl(const PackageMergeImpl & obj): PackageMergeImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  PackageMergeImpl::copy() const
-{
-	std::shared_ptr<PackageMergeImpl> element(new PackageMergeImpl(*this));
-	element->setThisPackageMergePtr(element);
-	return element;
-}
-
 PackageMergeImpl& PackageMergeImpl::operator=(const PackageMergeImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	DirectedRelationshipImpl::operator=(obj);
+	PackageMerge::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PackageMerge "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_owner  = obj.getOwner();
-
 	m_receivingPackage  = obj.getReceivingPackage();
-
-	std::shared_ptr<Union<uml::Element>> _relatedElement = obj.getRelatedElement();
-	m_relatedElement.reset(new Union<uml::Element>(*(obj.getRelatedElement().get())));
-
-
 	//Clone references with containment (deep copy)
-
 	if(obj.getMergedPackage()!=nullptr)
 	{
 		m_mergedPackage = std::dynamic_pointer_cast<uml::Package>(obj.getMergedPackage()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_mergedPackage" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> PackageMergeImpl::copy() const
+{
+	std::shared_ptr<PackageMergeImpl> element(new PackageMergeImpl());
+	*element =(*this);
+	element->setThisPackageMergePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
@@ -154,33 +134,29 @@ std::shared_ptr<ecore::EClass> PackageMergeImpl::eStaticClass() const
 /*
 Getter & Setter for reference mergedPackage
 */
-std::shared_ptr<uml::Package > PackageMergeImpl::getMergedPackage() const
+std::shared_ptr<uml::Package> PackageMergeImpl::getMergedPackage() const
 {
 //assert(m_mergedPackage);
     return m_mergedPackage;
 }
-
 void PackageMergeImpl::setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage)
 {
     m_mergedPackage = _mergedPackage;
 }
 
 
-
 /*
 Getter & Setter for reference receivingPackage
 */
-std::weak_ptr<uml::Package > PackageMergeImpl::getReceivingPackage() const
+std::weak_ptr<uml::Package> PackageMergeImpl::getReceivingPackage() const
 {
 //assert(m_receivingPackage);
     return m_receivingPackage;
 }
-
-void PackageMergeImpl::setReceivingPackage(std::shared_ptr<uml::Package> _receivingPackage)
+void PackageMergeImpl::setReceivingPackage(std::weak_ptr<uml::Package> _receivingPackage)
 {
     m_receivingPackage = _receivingPackage;
 }
-
 
 
 //*********************************
@@ -201,7 +177,7 @@ std::shared_ptr<Union<uml::Element>> PackageMergeImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > PackageMergeImpl::getOwner() const
+std::weak_ptr<uml::Element> PackageMergeImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -295,9 +271,9 @@ Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMergedPackage())); //1726
+			return eAny(getMergedPackage()); //1726
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getReceivingPackage().lock())); //1727
+			return eAny(getReceivingPackage().lock()); //1727
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }
@@ -383,13 +359,12 @@ void PackageMergeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void PackageMergeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	DirectedRelationshipImpl::loadNode(nodeName, loadHandler);
 }
 
-void PackageMergeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void PackageMergeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -444,12 +419,8 @@ void PackageMergeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("mergedPackage", this->getMergedPackage());
-
+	// Add references
+		saveHandler->addReference(this->getMergedPackage(), "mergedPackage", getMergedPackage()->eClass() != uml::umlPackage::eInstance()->getPackage_Class()); 
 	}
 	catch (std::exception& e)
 	{

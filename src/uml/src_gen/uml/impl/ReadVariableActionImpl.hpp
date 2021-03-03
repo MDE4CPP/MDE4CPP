@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ReadVariableActionImpl(const ReadVariableActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ReadVariableActionImpl& operator=(ReadVariableActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ReadVariableActionImpl& operator=(ReadVariableActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisReadVariableActionPtr(std::weak_ptr<ReadVariableAction> thisReadVariableActionPtr);
 
 			//Additional constructors for the containments back reference
-			ReadVariableActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			ReadVariableActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			ReadVariableActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			ReadVariableActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			ReadVariableActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ReadVariableActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ReadVariableActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			ReadVariableActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,17 +52,13 @@ namespace uml
 			variable.compatibleWith(result)
 			*/
 			 
-			virtual bool compatible_multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool compatible_multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type and ordering of the result OutputPin are the same as the type and ordering of the variable.
 			result.type =variable.type and 
 			result.isOrdered = variable.isOrdered
 			*/
 			 
-			virtual bool type_and_ordering(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool type_and_ordering(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -86,16 +73,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
 			/*!
 			The OutputPin on which the result values are placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -120,7 +105,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -140,7 +125,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

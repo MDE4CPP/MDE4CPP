@@ -8,24 +8,20 @@
 #define UML_CONSTRAINT_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -40,49 +36,15 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
-	class PackageableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -93,6 +55,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -101,33 +64,26 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class Constraint:virtual public PackageableElement
+	class Constraint: virtual public PackageableElement
 	{
 		public:
  			Constraint(const Constraint &) {}
 
 		protected:
 			Constraint(){}
-
+			//Additional constructors for the containments back reference
+			Constraint(std::weak_ptr<uml::Namespace> par_Namespace, const int reference_id);
 
 			//Additional constructors for the containments back reference
 
-			Constraint(std::weak_ptr<uml::Namespace > par_Namespace, const int reference_id);
+			//Additional constructors for the containments back reference
+			Constraint(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-
-
-			//Additional constructors for the containments back reference
-
-			Constraint(std::weak_ptr<uml::Element > par_owner);
+			Constraint(std::weak_ptr<uml::Package> par_owningPackage);
 
 			//Additional constructors for the containments back reference
-
-			Constraint(std::weak_ptr<uml::Package > par_owningPackage);
-
-			//Additional constructors for the containments back reference
-
-			Constraint(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
+			Constraint(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -142,22 +98,16 @@ namespace uml
 			The ValueSpecification for a Constraint must evaluate to a Boolean value.
 			*/
 			 
-			virtual bool boolean_value(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool boolean_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			Evaluating the ValueSpecification for a Constraint must not have side effects.
 			*/
 			 
-			virtual bool no_side_effects(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool no_side_effects(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			A Constraint cannot be applied to itself.
 			not constrainedElement->includes(self)
 			*/
 			 
-			virtual bool not_apply_to_self(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool not_apply_to_self(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -172,35 +122,30 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Element>> getConstrainedElement() const = 0;
 			
-			
 			/*!
 			Specifies the Namespace that owns the Constraint.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getContext() const = 0;
-			
+			virtual std::weak_ptr<uml::Namespace> getContext() const = 0;
 			/*!
 			Specifies the Namespace that owns the Constraint.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setContext(std::shared_ptr<uml::Namespace> _context) = 0;
-			
+			virtual void setContext(std::weak_ptr<uml::Namespace>) = 0;
 			/*!
 			A condition that must be true when evaluated in order for the Constraint to be satisfied.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getSpecification() const = 0;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getSpecification() const = 0;
 			/*!
 			A condition that must be true when evaluated in order for the Constraint to be satisfied.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification> _specification) = 0;
-			
+			virtual void setSpecification(std::shared_ptr<uml::ValueSpecification>) = 0;
 			
 
 		protected:
@@ -222,12 +167,12 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			std::weak_ptr<uml::Namespace > m_context;/*!
+			std::weak_ptr<uml::Namespace> m_context;/*!
 			A condition that must be true when evaluated in order for the Constraint to be satisfied.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			std::shared_ptr<uml::ValueSpecification > m_specification;
+			std::shared_ptr<uml::ValueSpecification> m_specification;
 
 		public:
 			//*********************************
@@ -238,7 +183,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -248,7 +193,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -257,7 +202,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

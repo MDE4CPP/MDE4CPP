@@ -23,15 +23,14 @@ namespace fUML::Semantics::SimpleClassifiers
 	{
 		public: 
 			DataValueImpl(const DataValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			DataValueImpl& operator=(DataValueImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			DataValueImpl& operator=(DataValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			DataValueImpl();
 			virtual std::shared_ptr<DataValue> getThisDataValuePtr() const;
 			virtual void setThisDataValuePtr(std::weak_ptr<DataValue> thisDataValuePtr);
-
 
 
 		public:
@@ -42,15 +41,9 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() ; 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -61,12 +54,10 @@ namespace fUML::Semantics::SimpleClassifiers
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::DataType > getType() const ;
+			virtual std::shared_ptr<uml::DataType> getType() const ;
 			
+			virtual void setType(std::shared_ptr<uml::DataType>) ;
 			
-			virtual void setType(std::shared_ptr<uml::DataType> _type) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -86,7 +77,7 @@ namespace fUML::Semantics::SimpleClassifiers
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

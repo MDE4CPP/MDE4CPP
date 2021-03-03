@@ -23,15 +23,14 @@ namespace fUML::Semantics::Activities
 	{
 		public: 
 			ActivityExecutionImpl(const ActivityExecutionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ActivityExecutionImpl& operator=(ActivityExecutionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ActivityExecutionImpl& operator=(ActivityExecutionImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			ActivityExecutionImpl();
 			virtual std::shared_ptr<ActivityExecution> getThisActivityExecutionPtr() const;
 			virtual void setThisActivityExecutionPtr(std::weak_ptr<ActivityExecution> thisActivityExecutionPtr);
-
 
 
 		public:
@@ -42,18 +41,10 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual void execute() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual void execute() ; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ; 
 			virtual void terminate() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -64,22 +55,16 @@ namespace fUML::Semantics::Activities
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > getActivationGroup() const ;
+			virtual std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> getActivationGroup() const ;
 			
+			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup>) ;
 			
-			virtual void setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup) ;
+			virtual std::shared_ptr<uml::Activity> getActivity() const ;
 			
-			
-			virtual std::shared_ptr<uml::Activity > getActivity() const ;
-			
-			
-			virtual void setActivity(std::shared_ptr<uml::Activity> _activity) ;
-			
+			virtual void setActivity(std::shared_ptr<uml::Activity>) ;
 			/*Additional Setter for 'Execution::behavior' redefined by reference 'activity'*/
 			
-			virtual void setBehavior(std::shared_ptr<uml::Behavior> _behavior) ;
-			
-							
+			virtual void setBehavior(std::shared_ptr<uml::Behavior>) ;
 			
 			//*********************************
 			// Union Getter
@@ -99,7 +84,7 @@ namespace fUML::Semantics::Activities
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

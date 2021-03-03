@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,28 +36,18 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Pseudostate.hpp"
-
 #include "uml/Region.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Transition.hpp"
-
 #include "uml/Vertex.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -82,7 +73,7 @@ ConnectionPointReferenceImpl::~ConnectionPointReferenceImpl()
 }
 
 //Additional constructor for the containments back reference
-ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Region > par_container)
+ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Region> par_container)
 :ConnectionPointReferenceImpl()
 {
 	m_container = par_container;
@@ -90,7 +81,7 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Re
 }
 
 //Additional constructor for the containments back reference
-ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Namespace > par_namespace)
+ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ConnectionPointReferenceImpl()
 {
 	m_namespace = par_namespace;
@@ -98,89 +89,53 @@ ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Na
 }
 
 //Additional constructor for the containments back reference
-ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Element > par_owner)
+ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::Element> par_owner)
 :ConnectionPointReferenceImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::State > par_state)
+ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(std::weak_ptr<uml::State> par_state)
 :ConnectionPointReferenceImpl()
 {
 	m_state = par_state;
 	m_namespace = par_state;
 }
 
-
-ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPointReferenceImpl & obj):ConnectionPointReferenceImpl()
+ConnectionPointReferenceImpl::ConnectionPointReferenceImpl(const ConnectionPointReferenceImpl & obj): ConnectionPointReferenceImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ConnectionPointReferenceImpl::copy() const
-{
-	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl(*this));
-	element->setThisConnectionPointReferencePtr(element);
-	return element;
-}
-
 ConnectionPointReferenceImpl& ConnectionPointReferenceImpl::operator=(const ConnectionPointReferenceImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	VertexImpl::operator=(obj);
+	ConnectionPointReference::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ConnectionPointReference "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_container  = obj.getContainer();
-
 	std::shared_ptr<Bag<uml::Pseudostate>> _entry = obj.getEntry();
 	m_entry.reset(new Bag<uml::Pseudostate>(*(obj.getEntry().get())));
-
 	std::shared_ptr<Bag<uml::Pseudostate>> _exit = obj.getExit();
 	m_exit.reset(new Bag<uml::Pseudostate>(*(obj.getExit().get())));
-
-	std::shared_ptr<Bag<uml::Transition>> _incoming = obj.getIncoming();
-	m_incoming.reset(new Bag<uml::Transition>(*(obj.getIncoming().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	std::shared_ptr<Bag<uml::Transition>> _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new Bag<uml::Transition>(*(obj.getOutgoing().get())));
-
-	m_owner  = obj.getOwner();
-
 	m_state  = obj.getState();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ConnectionPointReferenceImpl::copy() const
+{
+	std::shared_ptr<ConnectionPointReferenceImpl> element(new ConnectionPointReferenceImpl());
+	*element =(*this);
+	element->setThisConnectionPointReferencePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() const
@@ -195,13 +150,13 @@ std::shared_ptr<ecore::EClass> ConnectionPointReferenceImpl::eStaticClass() cons
 //*********************************
 // Operations
 //*********************************
-bool ConnectionPointReferenceImpl::entry_pseudostates(Any diagnostics,std::map <   Any, Any >  context)
+bool ConnectionPointReferenceImpl::entry_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConnectionPointReferenceImpl::exit_pseudostates(Any diagnostics,std::map <   Any, Any >  context)
+bool ConnectionPointReferenceImpl::exit_pseudostates(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -227,8 +182,6 @@ std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getEntry() 
 
 
 
-
-
 /*
 Getter & Setter for reference exit
 */
@@ -246,28 +199,24 @@ std::shared_ptr<Bag<uml::Pseudostate>> ConnectionPointReferenceImpl::getExit() c
 
 
 
-
-
 /*
 Getter & Setter for reference state
 */
-std::weak_ptr<uml::State > ConnectionPointReferenceImpl::getState() const
+std::weak_ptr<uml::State> ConnectionPointReferenceImpl::getState() const
 {
 
     return m_state;
 }
-
-void ConnectionPointReferenceImpl::setState(std::shared_ptr<uml::State> _state)
+void ConnectionPointReferenceImpl::setState(std::weak_ptr<uml::State> _state)
 {
     m_state = _state;
 }
 
 
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > ConnectionPointReferenceImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> ConnectionPointReferenceImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -287,7 +236,7 @@ std::shared_ptr<Union<uml::Element>> ConnectionPointReferenceImpl::getOwnedEleme
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > ConnectionPointReferenceImpl::getOwner() const
+std::weak_ptr<uml::Element> ConnectionPointReferenceImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -337,30 +286,14 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 	{
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = m_entry->begin();
-			Bag<uml::Pseudostate>::iterator end = m_entry->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5212
+			return eAny(getEntry()); //5212			
 		}
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = m_exit->begin();
-			Bag<uml::Pseudostate>::iterator end = m_exit->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5213
+			return eAny(getExit()); //5213			
 		}
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_STATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //5214
+			return eAny(getState().lock()); //5214
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }
@@ -404,7 +337,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 				}
 				iterEntry++;
 			}
-
+ 
 			iterEntry = entryList->begin();
 			endEntry = entryList->end();
 			while (iterEntry != endEntry)
@@ -440,7 +373,7 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 				}
 				iterExit++;
 			}
-
+ 
 			iterExit = exitList->begin();
 			endExit = exitList->end();
 			while (iterExit != endExit)
@@ -519,13 +452,12 @@ void ConnectionPointReferenceImpl::loadAttributes(std::shared_ptr<persistence::i
 
 void ConnectionPointReferenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	VertexImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -534,11 +466,11 @@ void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::l
 			std::shared_ptr<Bag<uml::Pseudostate>> _entry = getEntry();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Pseudostate> _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
+				std::shared_ptr<uml::Pseudostate>  _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
 				if (_r != nullptr)
 				{
 					_entry->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -548,11 +480,11 @@ void ConnectionPointReferenceImpl::resolveReferences(const int featureID, std::l
 			std::shared_ptr<Bag<uml::Pseudostate>> _exit = getExit();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::Pseudostate> _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
+				std::shared_ptr<uml::Pseudostate>  _r = std::dynamic_pointer_cast<uml::Pseudostate>(ref);
 				if (_r != nullptr)
 				{
 					_exit->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -596,21 +528,9 @@ void ConnectionPointReferenceImpl::saveContent(std::shared_ptr<persistence::inte
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::Pseudostate>> entry_list = this->getEntry();
-		for (std::shared_ptr<uml::Pseudostate > object : *entry_list)
-		{ 
-			saveHandler->addReferences("entry", object);
-		}
-		std::shared_ptr<Bag<uml::Pseudostate>> exit_list = this->getExit();
-		for (std::shared_ptr<uml::Pseudostate > object : *exit_list)
-		{ 
-			saveHandler->addReferences("exit", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::Pseudostate>("entry", this->getEntry());
+		saveHandler->addReferences<uml::Pseudostate>("exit", this->getExit());
 	}
 	catch (std::exception& e)
 	{

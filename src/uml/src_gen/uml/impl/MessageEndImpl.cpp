@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,26 +35,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InteractionFragment.hpp"
-
 #include "uml/Message.hpp"
-
 #include "uml/MessageEnd.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -79,7 +71,7 @@ MessageEndImpl::~MessageEndImpl()
 }
 
 //Additional constructor for the containments back reference
-MessageEndImpl::MessageEndImpl(std::weak_ptr<uml::Namespace > par_namespace)
+MessageEndImpl::MessageEndImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :MessageEndImpl()
 {
 	m_namespace = par_namespace;
@@ -87,67 +79,41 @@ MessageEndImpl::MessageEndImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-MessageEndImpl::MessageEndImpl(std::weak_ptr<uml::Element > par_owner)
+MessageEndImpl::MessageEndImpl(std::weak_ptr<uml::Element> par_owner)
 :MessageEndImpl()
 {
 	m_owner = par_owner;
 }
 
-
-MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj):MessageEndImpl()
+MessageEndImpl::MessageEndImpl(const MessageEndImpl & obj): MessageEndImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  MessageEndImpl::copy() const
-{
-	std::shared_ptr<MessageEndImpl> element(new MessageEndImpl(*this));
-	element->setThisMessageEndPtr(element);
-	return element;
-}
-
 MessageEndImpl& MessageEndImpl::operator=(const MessageEndImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	NamedElementImpl::operator=(obj);
+	MessageEnd::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy MessageEnd "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	m_message  = obj.getMessage();
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> MessageEndImpl::copy() const
+{
+	std::shared_ptr<MessageEndImpl> element(new MessageEndImpl());
+	*element =(*this);
+	element->setThisMessageEndPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> MessageEndImpl::eStaticClass() const
@@ -192,17 +158,15 @@ std::shared_ptr<Bag<uml::MessageEnd> > MessageEndImpl::oppositeEnd()
 /*
 Getter & Setter for reference message
 */
-std::shared_ptr<uml::Message > MessageEndImpl::getMessage() const
+std::shared_ptr<uml::Message> MessageEndImpl::getMessage() const
 {
 
     return m_message;
 }
-
 void MessageEndImpl::setMessage(std::shared_ptr<uml::Message> _message)
 {
     m_message = _message;
 }
-
 
 
 //*********************************
@@ -223,7 +187,7 @@ std::shared_ptr<Union<uml::Element>> MessageEndImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > MessageEndImpl::getOwner() const
+std::weak_ptr<uml::Element> MessageEndImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -262,7 +226,7 @@ Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getMessage())); //1489
+			return eAny(getMessage()); //1489
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -338,13 +302,12 @@ void MessageEndImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void MessageEndImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	NamedElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void MessageEndImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void MessageEndImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -384,12 +347,8 @@ void MessageEndImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("message", this->getMessage());
-
+	// Add references
+		saveHandler->addReference(this->getMessage(), "message", getMessage()->eClass() != uml::umlPackage::eInstance()->getMessage_Class()); 
 	}
 	catch (std::exception& e)
 	{

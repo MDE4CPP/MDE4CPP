@@ -23,8 +23,8 @@ namespace fUML::Semantics::Actions
 	{
 		public: 
 			ConditionalNodeActivationImpl(const ConditionalNodeActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ConditionalNodeActivationImpl& operator=(ConditionalNodeActivationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ConditionalNodeActivationImpl& operator=(ConditionalNodeActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Actions::ActionsFactoryImpl;
@@ -33,10 +33,7 @@ namespace fUML::Semantics::Actions
 			virtual void setThisConditionalNodeActivationPtr(std::weak_ptr<ConditionalNodeActivation> thisConditionalNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
-			ConditionalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			ConditionalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -46,15 +43,9 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause>  clause) ;
-			
-			 
-			virtual void runTest(std::shared_ptr<uml::Clause>  clause) ;
-			
-			 
-			virtual void selectBody(std::shared_ptr<uml::Clause>  clause) ;
-			
-			
+			virtual std::shared_ptr<fUML::Semantics::Actions::ClauseActivation> getClauseActivation(std::shared_ptr<uml::Clause> clause) ; 
+			virtual void runTest(std::shared_ptr<uml::Clause> clause) ; 
+			virtual void selectBody(std::shared_ptr<uml::Clause> clause) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -68,11 +59,9 @@ namespace fUML::Semantics::Actions
 			virtual std::shared_ptr<Bag<fUML::Semantics::Actions::ClauseActivation>> getClauseActivations() const ;
 			
 			
-			
 			virtual std::shared_ptr<Bag<uml::Clause>> getSelectedClauses() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -93,7 +82,7 @@ namespace fUML::Semantics::Actions
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

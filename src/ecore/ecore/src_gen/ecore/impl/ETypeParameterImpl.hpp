@@ -22,8 +22,8 @@ namespace ecore
 	{
 		public: 
 			ETypeParameterImpl(const ETypeParameterImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ETypeParameterImpl& operator=(ETypeParameterImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ETypeParameterImpl& operator=(ETypeParameterImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
@@ -32,10 +32,7 @@ namespace ecore
 			virtual void setThisETypeParameterPtr(std::weak_ptr<ETypeParameter> thisETypeParameterPtr);
 
 			//Additional constructors for the containments back reference
-			ETypeParameterImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
-
+			ETypeParameterImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 
 		public:
 			//destructor
@@ -58,7 +55,6 @@ namespace ecore
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEBounds() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -79,7 +75,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

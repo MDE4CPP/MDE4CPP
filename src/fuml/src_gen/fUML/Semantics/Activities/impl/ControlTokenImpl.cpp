@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,17 +33,13 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
-
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
-#include "fUML/Semantics/Activities/impl/ActivitiesPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -67,37 +64,34 @@ ControlTokenImpl::~ControlTokenImpl()
 }
 
 
-
-ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj):ControlTokenImpl()
+ControlTokenImpl::ControlTokenImpl(const ControlTokenImpl & obj): ControlTokenImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ControlTokenImpl::copy() const
-{
-	std::shared_ptr<ControlTokenImpl> element(new ControlTokenImpl(*this));
-	element->setThisControlTokenPtr(element);
-	return element;
-}
-
 ControlTokenImpl& ControlTokenImpl::operator=(const ControlTokenImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	TokenImpl::operator=(obj);
+	ControlToken::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ControlToken "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_withdrawn = obj.isWithdrawn();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_holder  = obj.getHolder();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ControlTokenImpl::copy() const
+{
+	std::shared_ptr<ControlTokenImpl> element(new ControlTokenImpl());
+	*element =(*this);
+	element->setThisControlTokenPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ControlTokenImpl::eStaticClass() const
@@ -122,7 +116,7 @@ return fUML::Semantics::Activities::ActivitiesFactory::eInstance()->createContro
 	//end of body
 }
 
-bool ControlTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other)
+bool ControlTokenImpl::equals(std::shared_ptr<fUML::Semantics::Activities::Token> other)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -215,13 +209,12 @@ void ControlTokenImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void ControlTokenImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Activities::ActivitiesFactory> modelFactory=fUML::Semantics::Activities::ActivitiesFactory::eInstance();
 
 	//load BasePackage Nodes
 	TokenImpl::loadNode(nodeName, loadHandler);
 }
 
-void ControlTokenImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ControlTokenImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	TokenImpl::resolveReferences(featureID, references);
 }
@@ -241,9 +234,6 @@ void ControlTokenImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Activities::ActivitiesPackage> package = fUML::Semantics::Activities::ActivitiesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

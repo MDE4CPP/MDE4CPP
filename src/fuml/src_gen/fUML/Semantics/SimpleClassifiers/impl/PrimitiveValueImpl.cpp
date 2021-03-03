@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -35,19 +36,16 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/PrimitiveType.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -72,36 +70,35 @@ PrimitiveValueImpl::~PrimitiveValueImpl()
 }
 
 
-
-PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj):PrimitiveValueImpl()
+PrimitiveValueImpl::PrimitiveValueImpl(const PrimitiveValueImpl & obj): PrimitiveValueImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  PrimitiveValueImpl::copy() const
-{
-	std::shared_ptr<PrimitiveValueImpl> element(new PrimitiveValueImpl(*this));
-	element->setThisPrimitiveValuePtr(element);
-	return element;
-}
-
 PrimitiveValueImpl& PrimitiveValueImpl::operator=(const PrimitiveValueImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Values::ValueImpl::operator=(obj);
+	PrimitiveValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy PrimitiveValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_type  = obj.getType();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> PrimitiveValueImpl::copy() const
+{
+	std::shared_ptr<PrimitiveValueImpl> element(new PrimitiveValueImpl());
+	*element =(*this);
+	element->setThisPrimitiveValuePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> PrimitiveValueImpl::eStaticClass() const
@@ -148,17 +145,15 @@ std::shared_ptr<Bag<uml::Classifier> > PrimitiveValueImpl::getTypes()
 /*
 Getter & Setter for reference type
 */
-std::shared_ptr<uml::PrimitiveType > PrimitiveValueImpl::getType() const
+std::shared_ptr<uml::PrimitiveType> PrimitiveValueImpl::getType() const
 {
 //assert(m_type);
     return m_type;
 }
-
 void PrimitiveValueImpl::setType(std::shared_ptr<uml::PrimitiveType> _type)
 {
     m_type = _type;
 }
-
 
 
 //*********************************
@@ -189,7 +184,7 @@ Any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getType())); //890
+			return eAny(getType()); //890
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }
@@ -265,13 +260,12 @@ void PrimitiveValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void PrimitiveValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Values::ValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void PrimitiveValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void PrimitiveValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -308,12 +302,8 @@ void PrimitiveValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("type", this->getType());
-
+	// Add references
+		saveHandler->addReference(this->getType(), "type", getType()->eClass() != uml::umlPackage::eInstance()->getPrimitiveType_Class()); 
 	}
 	catch (std::exception& e)
 	{

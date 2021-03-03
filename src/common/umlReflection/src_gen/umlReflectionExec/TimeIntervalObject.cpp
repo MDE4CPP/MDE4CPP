@@ -69,9 +69,8 @@
 using namespace UML;
 
 TimeIntervalObject::TimeIntervalObject(std::shared_ptr<uml::TimeInterval> _element):
-
 	m_TimeIntervalValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_TimeInterval());
 }
 
@@ -92,13 +91,15 @@ TimeIntervalObject::~TimeIntervalObject()
 
 std::shared_ptr<ecore::EObject> TimeIntervalObject::copy()
 {
-	std::shared_ptr<TimeIntervalObject> element(new TimeIntervalObject(*this));
+	std::shared_ptr<TimeIntervalObject> element(new TimeIntervalObject());
+	*element=(*this);
 	element->setThisTimeIntervalObjectPtr(element);
 	return element;
 }
 
 TimeIntervalObject& TimeIntervalObject::operator=(const TimeIntervalObject & obj)
 {
+	UML::IntervalObject::operator=(obj);
 	return *this;
 }
 

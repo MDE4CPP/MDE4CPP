@@ -23,15 +23,14 @@ namespace PSCS::Semantics::CommonBehavior
 	{
 		public: 
 			CS_CallEventExecutionImpl(const CS_CallEventExecutionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			CS_CallEventExecutionImpl& operator=(CS_CallEventExecutionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			CS_CallEventExecutionImpl& operator=(CS_CallEventExecutionImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::CommonBehavior::CommonBehaviorFactoryImpl;
 			CS_CallEventExecutionImpl();
 			virtual std::shared_ptr<CS_CallEventExecution> getThisCS_CallEventExecutionPtr() const;
 			virtual void setThisCS_CallEventExecutionPtr(std::weak_ptr<CS_CallEventExecution> thisCS_CallEventExecutionPtr);
-
 
 
 		public:
@@ -42,15 +41,9 @@ namespace PSCS::Semantics::CommonBehavior
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() ; 
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> createEventOccurrence() ; 
 			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -61,12 +54,10 @@ namespace PSCS::Semantics::CommonBehavior
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint > getInteractionPoint() const ;
+			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> getInteractionPoint() const ;
 			
+			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint>) ;
 			
-			virtual void setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -86,7 +77,7 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

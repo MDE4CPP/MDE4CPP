@@ -24,15 +24,14 @@ virtual public EStringToStringMapEntry
 	{
 		public: 
 			EStringToStringMapEntryImpl(const EStringToStringMapEntryImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EStringToStringMapEntryImpl& operator=(EStringToStringMapEntryImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EStringToStringMapEntryImpl& operator=(EStringToStringMapEntryImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
 			EStringToStringMapEntryImpl();
 			virtual std::shared_ptr<EStringToStringMapEntry> getThisEStringToStringMapEntryPtr() const;
 			virtual void setThisEStringToStringMapEntryPtr(std::weak_ptr<EStringToStringMapEntry> thisEStringToStringMapEntryPtr);
-
 
 
 		public:
@@ -49,20 +48,18 @@ virtual public EStringToStringMapEntry
 			//*********************************
 			 
 			virtual std::string getKey() const ;
-			
 			 
-			virtual void setKey (std::string _key); 
+			virtual void setKey (std::string _key);
 			 
 			virtual std::string getValue() const ;
-			
 			 
-			virtual void setValue (std::string _value); 
+			virtual void setValue (std::string _value);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -82,7 +79,7 @@ virtual public EStringToStringMapEntry
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

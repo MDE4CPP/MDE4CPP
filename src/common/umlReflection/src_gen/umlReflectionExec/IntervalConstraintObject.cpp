@@ -67,9 +67,8 @@
 using namespace UML;
 
 IntervalConstraintObject::IntervalConstraintObject(std::shared_ptr<uml::IntervalConstraint> _element):
-
 	m_IntervalConstraintValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_IntervalConstraint());
 }
 
@@ -90,13 +89,15 @@ IntervalConstraintObject::~IntervalConstraintObject()
 
 std::shared_ptr<ecore::EObject> IntervalConstraintObject::copy()
 {
-	std::shared_ptr<IntervalConstraintObject> element(new IntervalConstraintObject(*this));
+	std::shared_ptr<IntervalConstraintObject> element(new IntervalConstraintObject());
+	*element=(*this);
 	element->setThisIntervalConstraintObjectPtr(element);
 	return element;
 }
 
 IntervalConstraintObject& IntervalConstraintObject::operator=(const IntervalConstraintObject & obj)
 {
+	UML::ConstraintObject::operator=(obj);
 	return *this;
 }
 

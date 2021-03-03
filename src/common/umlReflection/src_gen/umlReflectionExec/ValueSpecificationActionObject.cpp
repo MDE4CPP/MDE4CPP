@@ -91,9 +91,8 @@
 using namespace UML;
 
 ValueSpecificationActionObject::ValueSpecificationActionObject(std::shared_ptr<uml::ValueSpecificationAction> _element):
-
 	m_ValueSpecificationActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ValueSpecificationAction());
 }
 
@@ -114,13 +113,15 @@ ValueSpecificationActionObject::~ValueSpecificationActionObject()
 
 std::shared_ptr<ecore::EObject> ValueSpecificationActionObject::copy()
 {
-	std::shared_ptr<ValueSpecificationActionObject> element(new ValueSpecificationActionObject(*this));
+	std::shared_ptr<ValueSpecificationActionObject> element(new ValueSpecificationActionObject());
+	*element=(*this);
 	element->setThisValueSpecificationActionObjectPtr(element);
 	return element;
 }
 
 ValueSpecificationActionObject& ValueSpecificationActionObject::operator=(const ValueSpecificationActionObject & obj)
 {
+	UML::ActionObject::operator=(obj);
 	return *this;
 }
 

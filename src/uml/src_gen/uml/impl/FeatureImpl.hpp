@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			FeatureImpl(const FeatureImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			FeatureImpl& operator=(FeatureImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			FeatureImpl& operator=(FeatureImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisFeaturePtr(std::weak_ptr<Feature> thisFeaturePtr);
 
 			//Additional constructors for the containments back reference
-			FeatureImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			FeatureImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			FeatureImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			FeatureImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -59,13 +54,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsStatic() const ;
-			
 			/*!
 			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsStatic (bool _isStatic); 
+			virtual void setIsStatic (bool _isStatic);
 			
 			
 			//*********************************
@@ -73,7 +67,7 @@ namespace uml
 			//*********************************
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -93,7 +87,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -108,7 +102,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -52,9 +52,8 @@
 using namespace UML;
 
 LinkEndDestructionDataObject::LinkEndDestructionDataObject(std::shared_ptr<uml::LinkEndDestructionData> _element):
-
 	m_LinkEndDestructionDataValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LinkEndDestructionData());
 }
 
@@ -75,13 +74,15 @@ LinkEndDestructionDataObject::~LinkEndDestructionDataObject()
 
 std::shared_ptr<ecore::EObject> LinkEndDestructionDataObject::copy()
 {
-	std::shared_ptr<LinkEndDestructionDataObject> element(new LinkEndDestructionDataObject(*this));
+	std::shared_ptr<LinkEndDestructionDataObject> element(new LinkEndDestructionDataObject());
+	*element=(*this);
 	element->setThisLinkEndDestructionDataObjectPtr(element);
 	return element;
 }
 
 LinkEndDestructionDataObject& LinkEndDestructionDataObject::operator=(const LinkEndDestructionDataObject & obj)
 {
+	UML::LinkEndDataObject::operator=(obj);
 	return *this;
 }
 

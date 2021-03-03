@@ -23,15 +23,14 @@ namespace PSCS::Semantics::Values
 	{
 		public: 
 			CS_OpaqueExpressionEvaluationImpl(const CS_OpaqueExpressionEvaluationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			CS_OpaqueExpressionEvaluationImpl& operator=(CS_OpaqueExpressionEvaluationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			CS_OpaqueExpressionEvaluationImpl& operator=(CS_OpaqueExpressionEvaluationImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::Values::ValuesFactoryImpl;
 			CS_OpaqueExpressionEvaluationImpl();
 			virtual std::shared_ptr<CS_OpaqueExpressionEvaluation> getThisCS_OpaqueExpressionEvaluationPtr() const;
 			virtual void setThisCS_OpaqueExpressionEvaluationPtr(std::weak_ptr<CS_OpaqueExpressionEvaluation> thisCS_OpaqueExpressionEvaluationPtr);
-
 
 
 		public:
@@ -42,12 +41,8 @@ namespace PSCS::Semantics::Values
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> evaluate() ; 
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value> > executeExpressionBehavior() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -57,7 +52,7 @@ namespace PSCS::Semantics::Values
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -77,7 +72,7 @@ namespace PSCS::Semantics::Values
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

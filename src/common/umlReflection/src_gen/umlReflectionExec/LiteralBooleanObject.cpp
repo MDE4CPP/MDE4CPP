@@ -62,9 +62,8 @@
 using namespace UML;
 
 LiteralBooleanObject::LiteralBooleanObject(std::shared_ptr<uml::LiteralBoolean> _element):
-
 	m_LiteralBooleanValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_LiteralBoolean());
 }
 
@@ -85,13 +84,15 @@ LiteralBooleanObject::~LiteralBooleanObject()
 
 std::shared_ptr<ecore::EObject> LiteralBooleanObject::copy()
 {
-	std::shared_ptr<LiteralBooleanObject> element(new LiteralBooleanObject(*this));
+	std::shared_ptr<LiteralBooleanObject> element(new LiteralBooleanObject());
+	*element=(*this);
 	element->setThisLiteralBooleanObjectPtr(element);
 	return element;
 }
 
 LiteralBooleanObject& LiteralBooleanObject::operator=(const LiteralBooleanObject & obj)
 {
+	UML::LiteralSpecificationObject::operator=(obj);
 	return *this;
 }
 

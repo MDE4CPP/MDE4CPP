@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ExtensionPointImpl(const ExtensionPointImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ExtensionPointImpl& operator=(ExtensionPointImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ExtensionPointImpl& operator=(ExtensionPointImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,18 +32,11 @@ namespace uml
 			virtual void setThisExtensionPointPtr(std::weak_ptr<ExtensionPoint> thisExtensionPointPtr);
 
 			//Additional constructors for the containments back reference
-			ExtensionPointImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ExtensionPointImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ExtensionPointImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ExtensionPointImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ExtensionPointImpl(std::weak_ptr<uml::UseCase > par_useCase);
-
-
-
+			ExtensionPointImpl(std::weak_ptr<uml::UseCase> par_useCase);
 
 		public:
 			//destructor
@@ -57,9 +50,7 @@ namespace uml
 			name->notEmpty ()
 			*/
 			 
-			virtual bool must_have_name(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool must_have_name(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -74,16 +65,14 @@ namespace uml
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::UseCase > getUseCase() const ;
-			
+			virtual std::weak_ptr<uml::UseCase> getUseCase() const ;
 			/*!
 			The UseCase that owns this ExtensionPoint.
 			<p>From package UML::UseCases.</p>
 			*/
 			
-			virtual void setUseCase(std::shared_ptr<uml::UseCase> _useCase) ;
+			virtual void setUseCase(std::weak_ptr<uml::UseCase>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -93,7 +82,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -103,7 +92,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -118,7 +107,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

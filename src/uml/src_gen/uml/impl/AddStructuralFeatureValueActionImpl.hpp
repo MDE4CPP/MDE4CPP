@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			AddStructuralFeatureValueActionImpl(const AddStructuralFeatureValueActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			AddStructuralFeatureValueActionImpl& operator=(AddStructuralFeatureValueActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			AddStructuralFeatureValueActionImpl& operator=(AddStructuralFeatureValueActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisAddStructuralFeatureValueActionPtr(std::weak_ptr<AddStructuralFeatureValueAction> thisAddStructuralFeatureValueActionPtr);
 
 			//Additional constructors for the containments back reference
-			AddStructuralFeatureValueActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			AddStructuralFeatureValueActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			AddStructuralFeatureValueActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			AddStructuralFeatureValueActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			AddStructuralFeatureValueActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			AddStructuralFeatureValueActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			AddStructuralFeatureValueActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			AddStructuralFeatureValueActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -66,16 +57,12 @@ namespace uml
 			endif
 			*/
 			 
-			virtual bool insertAt_pin(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool insertAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A value InputPin is required.
 			value<>null
 			*/
 			 
-			virtual bool required_value(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool required_value(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -86,13 +73,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsReplaceAll() const ;
-			
 			/*!
 			Specifies whether existing values of the StructuralFeature should be removed before adding the new value.
 			<p>From package UML::Actions.</p>
 			*/
 			 
-			virtual void setIsReplaceAll (bool _isReplaceAll); 
+			virtual void setIsReplaceAll (bool _isReplaceAll);
 			
 			
 			//*********************************
@@ -103,16 +89,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getInsertAt() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getInsertAt() const ;
 			/*!
 			The InputPin that gives the position at which to insert the value in an ordered StructuralFeature. The type of the insertAt InputPin is UnlimitedNatural, but the value cannot be zero. It is omitted for unordered StructuralFeatures.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setInsertAt(std::shared_ptr<uml::InputPin> _insertAt) ;
+			virtual void setInsertAt(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -142,7 +126,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -162,7 +146,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

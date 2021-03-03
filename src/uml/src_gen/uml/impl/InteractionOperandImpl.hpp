@@ -23,8 +23,8 @@ namespace uml
 	{
 		public: 
 			InteractionOperandImpl(const InteractionOperandImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			InteractionOperandImpl& operator=(InteractionOperandImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			InteractionOperandImpl& operator=(InteractionOperandImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -33,22 +33,13 @@ namespace uml
 			virtual void setThisInteractionOperandPtr(std::weak_ptr<InteractionOperand> thisInteractionOperandPtr);
 
 			//Additional constructors for the containments back reference
-			InteractionOperandImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction);
-
-
+			InteractionOperandImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction);
 			//Additional constructors for the containments back reference
-			InteractionOperandImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand);
-
-
+			InteractionOperandImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand);
 			//Additional constructors for the containments back reference
-			InteractionOperandImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			InteractionOperandImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			InteractionOperandImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			InteractionOperandImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,15 +52,11 @@ namespace uml
 			The guard must contain only references to values local to the Lifeline on which it resides, or values global to the whole Interaction.
 			*/
 			 
-			virtual bool guard_contain_references(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool guard_contain_references(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The guard must be placed directly prior to (above) the OccurrenceSpecification that will become the first OccurrenceSpecification within this InteractionOperand.
 			*/
 			 
-			virtual bool guard_directly_prior(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool guard_directly_prior(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -86,22 +73,19 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> getFragment() const ;
 			
-			
 			/*!
 			Constraint of the operand.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InteractionConstraint > getGuard() const ;
-			
+			virtual std::shared_ptr<uml::InteractionConstraint> getGuard() const ;
 			/*!
 			Constraint of the operand.
 			<p>From package UML::Interactions.</p>
 			*/
 			
-			virtual void setGuard(std::shared_ptr<uml::InteractionConstraint> _guard) ;
+			virtual void setGuard(std::shared_ptr<uml::InteractionConstraint>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -116,7 +100,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -131,7 +115,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -146,7 +130,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

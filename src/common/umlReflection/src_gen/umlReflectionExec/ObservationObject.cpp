@@ -59,9 +59,8 @@
 using namespace UML;
 
 ObservationObject::ObservationObject(std::shared_ptr<uml::Observation> _element):
-
 	m_ObservationValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Observation());
 }
 
@@ -82,13 +81,15 @@ ObservationObject::~ObservationObject()
 
 std::shared_ptr<ecore::EObject> ObservationObject::copy()
 {
-	std::shared_ptr<ObservationObject> element(new ObservationObject(*this));
+	std::shared_ptr<ObservationObject> element(new ObservationObject());
+	*element=(*this);
 	element->setThisObservationObjectPtr(element);
 	return element;
 }
 
 ObservationObject& ObservationObject::operator=(const ObservationObject & obj)
 {
+	UML::PackageableElementObject::operator=(obj);
 	return *this;
 }
 

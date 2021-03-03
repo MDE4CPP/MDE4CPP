@@ -91,9 +91,8 @@
 using namespace UML;
 
 ReadVariableActionObject::ReadVariableActionObject(std::shared_ptr<uml::ReadVariableAction> _element):
-
 	m_ReadVariableActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ReadVariableAction());
 }
 
@@ -114,13 +113,15 @@ ReadVariableActionObject::~ReadVariableActionObject()
 
 std::shared_ptr<ecore::EObject> ReadVariableActionObject::copy()
 {
-	std::shared_ptr<ReadVariableActionObject> element(new ReadVariableActionObject(*this));
+	std::shared_ptr<ReadVariableActionObject> element(new ReadVariableActionObject());
+	*element=(*this);
 	element->setThisReadVariableActionObjectPtr(element);
 	return element;
 }
 
 ReadVariableActionObject& ReadVariableActionObject::operator=(const ReadVariableActionObject & obj)
 {
+	UML::VariableActionObject::operator=(obj);
 	return *this;
 }
 

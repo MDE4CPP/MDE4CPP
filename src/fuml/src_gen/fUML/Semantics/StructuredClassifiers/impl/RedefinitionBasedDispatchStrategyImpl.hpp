@@ -23,15 +23,14 @@ namespace fUML::Semantics::StructuredClassifiers
 	{
 		public: 
 			RedefinitionBasedDispatchStrategyImpl(const RedefinitionBasedDispatchStrategyImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			RedefinitionBasedDispatchStrategyImpl& operator=(RedefinitionBasedDispatchStrategyImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			RedefinitionBasedDispatchStrategyImpl& operator=(RedefinitionBasedDispatchStrategyImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::StructuredClassifiers::StructuredClassifiersFactoryImpl;
 			RedefinitionBasedDispatchStrategyImpl();
 			virtual std::shared_ptr<RedefinitionBasedDispatchStrategy> getThisRedefinitionBasedDispatchStrategyPtr() const;
 			virtual void setThisRedefinitionBasedDispatchStrategyPtr(std::weak_ptr<RedefinitionBasedDispatchStrategy> thisRedefinitionBasedDispatchStrategyPtr);
-
 
 
 		public:
@@ -42,12 +41,8 @@ namespace fUML::Semantics::StructuredClassifiers
 			// Operations
 			//*********************************
 			 
-			virtual bool operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation) ;
-			
-			 
-			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object>  object,std::shared_ptr<uml::Operation>  operation) ;
-			
-			
+			virtual bool operationsMatch(std::shared_ptr<uml::Operation> ownedOperation,std::shared_ptr<uml::Operation> baseOperation) ; 
+			virtual std::shared_ptr<uml::Behavior> retrieveMethod(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> object,std::shared_ptr<uml::Operation> operation) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -57,7 +52,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -77,7 +72,7 @@ namespace fUML::Semantics::StructuredClassifiers
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

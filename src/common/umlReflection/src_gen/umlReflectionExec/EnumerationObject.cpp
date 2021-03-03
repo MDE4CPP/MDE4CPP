@@ -118,9 +118,8 @@
 using namespace UML;
 
 EnumerationObject::EnumerationObject(std::shared_ptr<uml::Enumeration> _element):
-
 	m_EnumerationValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Enumeration());
 }
 
@@ -141,13 +140,15 @@ EnumerationObject::~EnumerationObject()
 
 std::shared_ptr<ecore::EObject> EnumerationObject::copy()
 {
-	std::shared_ptr<EnumerationObject> element(new EnumerationObject(*this));
+	std::shared_ptr<EnumerationObject> element(new EnumerationObject());
+	*element=(*this);
 	element->setThisEnumerationObjectPtr(element);
 	return element;
 }
 
 EnumerationObject& EnumerationObject::operator=(const EnumerationObject & obj)
 {
+	UML::DataTypeObject::operator=(obj);
 	return *this;
 }
 

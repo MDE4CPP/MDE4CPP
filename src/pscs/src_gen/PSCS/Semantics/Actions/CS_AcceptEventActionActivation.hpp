@@ -7,20 +7,16 @@
 #ifndef PSCS_SEMANTICS_ACTIONS_CS_ACCEPTEVENTACTIONACTIVATION_HPP
 #define PSCS_SEMANTICS_ACTIONS_CS_ACCEPTEVENTACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,60 +31,28 @@ namespace PSCS
 	class PSCSFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::Actions 
-{
-	class AcceptEventActionActivation;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
 	class AcceptEventActionEventAccepter;
+	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-
-namespace uml 
-{
-	class Action;
-}
-
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
 	class ActivityNodeActivationGroup;
+	class Token;
 }
-
 namespace fUML::Semantics::CommonBehavior 
 {
 	class EventOccurrence;
 }
-
-namespace fUML::Semantics::Actions 
+namespace uml 
 {
-	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class PinActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
+	class Action;
+	class ActivityNode;
 }
 
 // base class includes
@@ -97,18 +61,18 @@ namespace fUML::Semantics::Activities
 // enum includes
 
 
+
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_AcceptEventActionActivation:virtual public fUML::Semantics::Actions::AcceptEventActionActivation
+	class CS_AcceptEventActionActivation: virtual public fUML::Semantics::Actions::AcceptEventActionActivation
 	{
 		public:
  			CS_AcceptEventActionActivation(const CS_AcceptEventActionActivation &) {}
 
 		protected:
 			CS_AcceptEventActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -120,9 +84,7 @@ namespace PSCS::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence>  eventOccurrence) = 0;
-			
-			
+			virtual void accept(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> eventOccurrence) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -157,7 +119,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

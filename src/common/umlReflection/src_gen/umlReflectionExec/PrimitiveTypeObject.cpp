@@ -116,9 +116,8 @@
 using namespace UML;
 
 PrimitiveTypeObject::PrimitiveTypeObject(std::shared_ptr<uml::PrimitiveType> _element):
-
 	m_PrimitiveTypeValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_PrimitiveType());
 }
 
@@ -139,13 +138,15 @@ PrimitiveTypeObject::~PrimitiveTypeObject()
 
 std::shared_ptr<ecore::EObject> PrimitiveTypeObject::copy()
 {
-	std::shared_ptr<PrimitiveTypeObject> element(new PrimitiveTypeObject(*this));
+	std::shared_ptr<PrimitiveTypeObject> element(new PrimitiveTypeObject());
+	*element=(*this);
 	element->setThisPrimitiveTypeObjectPtr(element);
 	return element;
 }
 
 PrimitiveTypeObject& PrimitiveTypeObject::operator=(const PrimitiveTypeObject & obj)
 {
+	UML::DataTypeObject::operator=(obj);
 	return *this;
 }
 

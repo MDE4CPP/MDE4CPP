@@ -44,9 +44,7 @@ CallImpl::CallImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Call is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ CallImpl::CallImpl(const CallImpl & obj):CallImpl()
 
 std::shared_ptr<ecore::EObject>  CallImpl::copy() const
 {
-	std::shared_ptr<CallImpl> element(new CallImpl(*this));
+	std::shared_ptr<CallImpl> element(new CallImpl());
+	*element=(*this);
 	element->setThisCallPtr(element);
 	return element;
 }
 
 CallImpl& CallImpl::operator=(const CallImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Call "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

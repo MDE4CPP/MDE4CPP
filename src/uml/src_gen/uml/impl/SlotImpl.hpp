@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			SlotImpl(const SlotImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			SlotImpl& operator=(SlotImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			SlotImpl& operator=(SlotImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisSlotPtr(std::weak_ptr<Slot> thisSlotPtr);
 
 			//Additional constructors for the containments back reference
-			SlotImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			SlotImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			SlotImpl(std::weak_ptr<uml::InstanceSpecification > par_owningInstance);
-
-
-
+			SlotImpl(std::weak_ptr<uml::InstanceSpecification> par_owningInstance);
 
 		public:
 			//destructor
@@ -63,29 +58,25 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::StructuralFeature > getDefiningFeature() const ;
-			
+			virtual std::shared_ptr<uml::StructuralFeature> getDefiningFeature() const ;
 			/*!
 			The StructuralFeature that specifies the values that may be held by the Slot.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature) ;
-			
+			virtual void setDefiningFeature(std::shared_ptr<uml::StructuralFeature>) ;
 			/*!
 			The InstanceSpecification that owns this Slot.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::InstanceSpecification > getOwningInstance() const ;
-			
+			virtual std::weak_ptr<uml::InstanceSpecification> getOwningInstance() const ;
 			/*!
 			The InstanceSpecification that owns this Slot.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setOwningInstance(std::shared_ptr<uml::InstanceSpecification> _owningInstance) ;
-			
+			virtual void setOwningInstance(std::weak_ptr<uml::InstanceSpecification>) ;
 			/*!
 			The value or values held by the Slot.
 			<p>From package UML::Classification.</p>
@@ -94,7 +85,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> getValue() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -109,7 +99,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -124,7 +114,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			TemplateableElementImpl(const TemplateableElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			TemplateableElementImpl& operator=(TemplateableElementImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			TemplateableElementImpl& operator=(TemplateableElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,10 +32,7 @@ namespace uml
 			virtual void setThisTemplateableElementPtr(std::weak_ptr<TemplateableElement> thisTemplateableElementPtr);
 
 			//Additional constructors for the containments back reference
-			TemplateableElementImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			TemplateableElementImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -50,17 +47,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool isTemplate() ;
-			
-			/*!
+			virtual bool isTemplate() ;/*!
 			The query parameterableElements() returns the set of ParameterableElements that may be used as the parameteredElements for a TemplateParameter of this TemplateableElement. By default, this set includes all the ownedElements. Subclasses may override this operation if they choose to restrict the set of ParameterableElements.
 			result = (self.allOwnedElements()->select(oclIsKindOf(ParameterableElement)).oclAsType(ParameterableElement)->asSet())
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
 			virtual std::shared_ptr<Bag<uml::ParameterableElement> > parameterableElements() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -75,15 +68,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TemplateSignature > getOwnedTemplateSignature() const ;
-			
+			virtual std::shared_ptr<uml::TemplateSignature> getOwnedTemplateSignature() const ;
 			/*!
 			The optional TemplateSignature specifying the formal TemplateParameters for this TemplateableElement. If a TemplateableElement has a TemplateSignature, then it is a template.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature) ;
-			
+			virtual void setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature>) ;
 			/*!
 			The optional TemplateBindings from this TemplateableElement to one or more templates.
 			<p>From package UML::CommonStructure.</p>
@@ -92,7 +83,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> getTemplateBinding() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -117,7 +107,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

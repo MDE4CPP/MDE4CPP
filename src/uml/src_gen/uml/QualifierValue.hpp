@@ -8,22 +8,18 @@
 #define UML_QUALIFIERVALUE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -38,24 +34,11 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class InputPin;
-}
-
-namespace uml 
-{
 	class Property;
 }
 
@@ -63,6 +46,7 @@ namespace uml
 #include "uml/Element.hpp"
 
 // enum includes
+
 
 
 //*********************************
@@ -73,14 +57,13 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class QualifierValue:virtual public Element
+	class QualifierValue: virtual public Element
 	{
 		public:
  			QualifierValue(const QualifierValue &) {}
 
 		protected:
 			QualifierValue(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -96,23 +79,17 @@ namespace uml
 			value.is(1,1)
 			*/
 			 
-			virtual bool multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool multiplicity_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The qualifier must be a qualifier of the Association end of the linkEndData that owns this QualifierValue.
 			linkEndData.end.qualifier->includes(qualifier)
 			*/
 			 
-			virtual bool qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool qualifier_attribute(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The type of the value InputPin conforms to the type of the qualifier Property.
 			value.type.conformsTo(qualifier.type)
 			*/
 			 
-			virtual bool type_of_qualifier(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool type_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -125,29 +102,25 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Property > getQualifier() const = 0;
-			
+			virtual std::shared_ptr<uml::Property> getQualifier() const = 0;
 			/*!
 			The qualifier Property for which the value is to be specified.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setQualifier(std::shared_ptr<uml::Property> _qualifier) = 0;
-			
+			virtual void setQualifier(std::shared_ptr<uml::Property>) = 0;
 			/*!
 			The InputPin from which the specified value for the qualifier is taken.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getValue() const = 0;
-			
+			virtual std::shared_ptr<uml::InputPin> getValue() const = 0;
 			/*!
 			The InputPin from which the specified value for the qualifier is taken.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setValue(std::shared_ptr<uml::InputPin> _value) = 0;
-			
+			virtual void setValue(std::shared_ptr<uml::InputPin>) = 0;
 			
 
 		protected:
@@ -164,12 +137,12 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::Property > m_qualifier;/*!
+			std::shared_ptr<uml::Property> m_qualifier;/*!
 			The InputPin from which the specified value for the qualifier is taken.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			std::shared_ptr<uml::InputPin > m_value;
+			std::shared_ptr<uml::InputPin> m_value;
 
 		public:
 			//*********************************
@@ -189,7 +162,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

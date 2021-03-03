@@ -23,8 +23,8 @@ namespace fUML::Semantics::Activities
 	{
 		public: 
 			ForkNodeActivationImpl(const ForkNodeActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ForkNodeActivationImpl& operator=(ForkNodeActivationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ForkNodeActivationImpl& operator=(ForkNodeActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
@@ -33,10 +33,7 @@ namespace fUML::Semantics::Activities
 			virtual void setThisForkNodeActivationPtr(std::weak_ptr<ForkNodeActivation> thisForkNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
-			ForkNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			ForkNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -46,12 +43,8 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token> >  incomingTokens) ;
-			
-			 
+			virtual void fire(std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incomingTokens) ; 
 			virtual void terminate() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -61,7 +54,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -81,7 +74,7 @@ namespace fUML::Semantics::Activities
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

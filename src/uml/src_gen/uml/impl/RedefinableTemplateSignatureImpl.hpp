@@ -23,8 +23,8 @@ namespace uml
 	{
 		public: 
 			RedefinableTemplateSignatureImpl(const RedefinableTemplateSignatureImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			RedefinableTemplateSignatureImpl& operator=(RedefinableTemplateSignatureImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			RedefinableTemplateSignatureImpl& operator=(RedefinableTemplateSignatureImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -33,18 +33,11 @@ namespace uml
 			virtual void setThisRedefinableTemplateSignaturePtr(std::weak_ptr<RedefinableTemplateSignature> thisRedefinableTemplateSignaturePtr);
 
 			//Additional constructors for the containments back reference
-			RedefinableTemplateSignatureImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			RedefinableTemplateSignatureImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			RedefinableTemplateSignatureImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			RedefinableTemplateSignatureImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			RedefinableTemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement > par_template);
-
-
-
+			RedefinableTemplateSignatureImpl(std::weak_ptr<uml::TemplateableElement> par_template);
 
 		public:
 			//destructor
@@ -59,16 +52,12 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters() ;
-			
-			/*!
+			virtual std::shared_ptr<Bag<uml::TemplateParameter> > getInheritedParameters() ;/*!
 			If any of the parent Classifiers are a template, then the extendedSignature must include the signature of that Classifier.
 			classifier.allParents()->forAll(c | c.ownedTemplateSignature->notEmpty() implies self->closure(extendedSignature)->includes(c.ownedTemplateSignature))
 			*/
 			 
-			virtual bool redefines_parents(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool redefines_parents(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -83,30 +72,25 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Classifier > getClassifier() const ;
-			
+			virtual std::weak_ptr<uml::Classifier> getClassifier() const ;
 			/*!
 			The Classifier that owns this RedefinableTemplateSignature.
 			<p>From package UML::Classification.</p>
 			*/
 			
-			virtual void setClassifier(std::shared_ptr<uml::Classifier> _classifier) ;
-			
+			virtual void setClassifier(std::weak_ptr<uml::Classifier>) ;
 			/*Additional Setter for 'TemplateSignature::template' redefined by reference 'classifier'*/
 			/*!
 			The TemplateableElement that owns this TemplateSignature.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setTemplate(std::shared_ptr<uml::TemplateableElement> _template) ;
-			
-			/*!
+			virtual void setTemplate(std::weak_ptr<uml::TemplateableElement>) ;/*!
 			The signatures extended by this RedefinableTemplateSignature.
 			<p>From package UML::Classification.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> getExtendedSignature() const ;
-			
 			
 			/*!
 			The formal template parameters of the extended signatures.
@@ -116,7 +100,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter>> getInheritedParameter() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -131,7 +114,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The ordered set of all formal TemplateParameters for this TemplateSignature.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -161,7 +144,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

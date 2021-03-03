@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -32,19 +33,16 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
-
 #include "uml/Trigger.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
-#include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -69,36 +67,35 @@ EventOccurrenceImpl::~EventOccurrenceImpl()
 }
 
 
-
-EventOccurrenceImpl::EventOccurrenceImpl(const EventOccurrenceImpl & obj):EventOccurrenceImpl()
+EventOccurrenceImpl::EventOccurrenceImpl(const EventOccurrenceImpl & obj): EventOccurrenceImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  EventOccurrenceImpl::copy() const
-{
-	std::shared_ptr<EventOccurrenceImpl> element(new EventOccurrenceImpl(*this));
-	element->setThisEventOccurrencePtr(element);
-	return element;
-}
-
 EventOccurrenceImpl& EventOccurrenceImpl::operator=(const EventOccurrenceImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ecore::EModelElementImpl::operator=(obj);
+	EventOccurrence::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EventOccurrence "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_target  = obj.getTarget();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> EventOccurrenceImpl::copy() const
+{
+	std::shared_ptr<EventOccurrenceImpl> element(new EventOccurrenceImpl());
+	*element =(*this);
+	element->setThisEventOccurrencePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> EventOccurrenceImpl::eStaticClass() const
@@ -125,19 +122,19 @@ std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> > EventOccu
 	throw "UnsupportedOperationException";
 }
 
-bool EventOccurrenceImpl::match(std::shared_ptr<uml::Trigger>  trigger)
+bool EventOccurrenceImpl::match(std::shared_ptr<uml::Trigger> trigger)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool EventOccurrenceImpl::matchAny(std::shared_ptr<Bag<uml::Trigger> >  triggers)
+bool EventOccurrenceImpl::matchAny(std::shared_ptr<Bag<uml::Trigger>> triggers)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-void EventOccurrenceImpl::sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference>  target)
+void EventOccurrenceImpl::sendTo(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> target)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -149,17 +146,15 @@ void EventOccurrenceImpl::sendTo(std::shared_ptr<fUML::Semantics::StructuredClas
 /*
 Getter & Setter for reference target
 */
-std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference > EventOccurrenceImpl::getTarget() const
+std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> EventOccurrenceImpl::getTarget() const
 {
 
     return m_target;
 }
-
 void EventOccurrenceImpl::setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target)
 {
     m_target = _target;
 }
-
 
 
 //*********************************
@@ -189,7 +184,7 @@ Any EventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EVENTOCCURRENCE_ATTRIBUTE_TARGET:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getTarget())); //450
+			return eAny(getTarget()); //450
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }
@@ -265,12 +260,11 @@ void EventOccurrenceImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 
 void EventOccurrenceImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorFactory> modelFactory=fUML::Semantics::CommonBehavior::CommonBehaviorFactory::eInstance();
 
 	//load BasePackage Nodes
 }
 
-void EventOccurrenceImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void EventOccurrenceImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -303,12 +297,8 @@ void EventOccurrenceImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	try
 	{
 		std::shared_ptr<fUML::Semantics::CommonBehavior::CommonBehaviorPackage> package = fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("target", this->getTarget());
-
+	// Add references
+		saveHandler->addReference(this->getTarget(), "target", getTarget()->eClass() != fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getReference_Class()); 
 	}
 	catch (std::exception& e)
 	{

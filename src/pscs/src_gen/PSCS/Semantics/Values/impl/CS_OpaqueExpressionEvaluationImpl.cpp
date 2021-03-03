@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -38,21 +39,18 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/Values/impl/ValuesFactoryImpl.hpp"
-#include "PSCS/Semantics/Values/impl/ValuesPackageImpl.hpp"
-
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -77,38 +75,34 @@ CS_OpaqueExpressionEvaluationImpl::~CS_OpaqueExpressionEvaluationImpl()
 }
 
 
-
-CS_OpaqueExpressionEvaluationImpl::CS_OpaqueExpressionEvaluationImpl(const CS_OpaqueExpressionEvaluationImpl & obj):CS_OpaqueExpressionEvaluationImpl()
+CS_OpaqueExpressionEvaluationImpl::CS_OpaqueExpressionEvaluationImpl(const CS_OpaqueExpressionEvaluationImpl & obj): CS_OpaqueExpressionEvaluationImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  CS_OpaqueExpressionEvaluationImpl::copy() const
-{
-	std::shared_ptr<CS_OpaqueExpressionEvaluationImpl> element(new CS_OpaqueExpressionEvaluationImpl(*this));
-	element->setThisCS_OpaqueExpressionEvaluationPtr(element);
-	return element;
-}
-
 CS_OpaqueExpressionEvaluationImpl& CS_OpaqueExpressionEvaluationImpl::operator=(const CS_OpaqueExpressionEvaluationImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Values::EvaluationImpl::operator=(obj);
+	CS_OpaqueExpressionEvaluation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_OpaqueExpressionEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_locus  = obj.getLocus();
-
-	m_specification  = obj.getSpecification();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> CS_OpaqueExpressionEvaluationImpl::copy() const
+{
+	std::shared_ptr<CS_OpaqueExpressionEvaluationImpl> element(new CS_OpaqueExpressionEvaluationImpl());
+	*element =(*this);
+	element->setThisCS_OpaqueExpressionEvaluationPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CS_OpaqueExpressionEvaluationImpl::eStaticClass() const
@@ -255,13 +249,12 @@ void CS_OpaqueExpressionEvaluationImpl::loadAttributes(std::shared_ptr<persisten
 
 void CS_OpaqueExpressionEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::Values::ValuesFactory> modelFactory=PSCS::Semantics::Values::ValuesFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Values::EvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_OpaqueExpressionEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_OpaqueExpressionEvaluationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::Values::EvaluationImpl::resolveReferences(featureID, references);
 }
@@ -284,9 +277,6 @@ void CS_OpaqueExpressionEvaluationImpl::saveContent(std::shared_ptr<persistence:
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::Values::ValuesPackage> package = PSCS::Semantics::Values::ValuesPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

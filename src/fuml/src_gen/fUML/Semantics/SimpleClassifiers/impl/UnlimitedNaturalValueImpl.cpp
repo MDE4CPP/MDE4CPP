@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -39,21 +40,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/PrimitiveType.hpp"
-
 #include "fUML/Semantics/SimpleClassifiers/PrimitiveValue.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
-#include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -78,37 +75,35 @@ UnlimitedNaturalValueImpl::~UnlimitedNaturalValueImpl()
 }
 
 
-
-UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl(const UnlimitedNaturalValueImpl & obj):UnlimitedNaturalValueImpl()
+UnlimitedNaturalValueImpl::UnlimitedNaturalValueImpl(const UnlimitedNaturalValueImpl & obj): UnlimitedNaturalValueImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  UnlimitedNaturalValueImpl::copy() const
-{
-	std::shared_ptr<UnlimitedNaturalValueImpl> element(new UnlimitedNaturalValueImpl(*this));
-	element->setThisUnlimitedNaturalValuePtr(element);
-	return element;
-}
-
 UnlimitedNaturalValueImpl& UnlimitedNaturalValueImpl::operator=(const UnlimitedNaturalValueImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	PrimitiveValueImpl::operator=(obj);
+	UnlimitedNaturalValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy UnlimitedNaturalValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_value = obj.getValue();
 
 	//copy references with no containment (soft copy)
-	
-	m_type  = obj.getType();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> UnlimitedNaturalValueImpl::copy() const
+{
+	std::shared_ptr<UnlimitedNaturalValueImpl> element(new UnlimitedNaturalValueImpl());
+	*element =(*this);
+	element->setThisUnlimitedNaturalValuePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> UnlimitedNaturalValueImpl::eStaticClass() const
@@ -126,12 +121,10 @@ int UnlimitedNaturalValueImpl::getValue() const
 {
 	return m_value;
 }
-
 void UnlimitedNaturalValueImpl::setValue(int _value)
 {
 	m_value = _value;
 } 
-
 
 
 //*********************************
@@ -150,7 +143,7 @@ return newValue;
 	//end of body
 }
 
-bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue)
+bool UnlimitedNaturalValueImpl::equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -304,13 +297,12 @@ void UnlimitedNaturalValueImpl::loadAttributes(std::shared_ptr<persistence::inte
 
 void UnlimitedNaturalValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory> modelFactory=fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	PrimitiveValueImpl::loadNode(nodeName, loadHandler);
 }
 
-void UnlimitedNaturalValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void UnlimitedNaturalValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	PrimitiveValueImpl::resolveReferences(featureID, references);
 }
@@ -336,14 +328,11 @@ void UnlimitedNaturalValueImpl::saveContent(std::shared_ptr<persistence::interfa
 	try
 	{
 		std::shared_ptr<fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage> package = fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getUnlimitedNaturalValue_Attribute_value()) )
 		{
 			saveHandler->addAttribute("value", this->getValue());
 		}
-
 	}
 	catch (std::exception& e)
 	{

@@ -123,9 +123,8 @@
 using namespace UML;
 
 CommunicationPathObject::CommunicationPathObject(std::shared_ptr<uml::CommunicationPath> _element):
-
 	m_CommunicationPathValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_CommunicationPath());
 }
 
@@ -146,13 +145,15 @@ CommunicationPathObject::~CommunicationPathObject()
 
 std::shared_ptr<ecore::EObject> CommunicationPathObject::copy()
 {
-	std::shared_ptr<CommunicationPathObject> element(new CommunicationPathObject(*this));
+	std::shared_ptr<CommunicationPathObject> element(new CommunicationPathObject());
+	*element=(*this);
 	element->setThisCommunicationPathObjectPtr(element);
 	return element;
 }
 
 CommunicationPathObject& CommunicationPathObject::operator=(const CommunicationPathObject & obj)
 {
+	UML::AssociationObject::operator=(obj);
 	return *this;
 }
 

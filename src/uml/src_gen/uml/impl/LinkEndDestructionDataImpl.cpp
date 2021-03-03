@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -34,20 +35,14 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/LinkEndData.hpp"
-
 #include "uml/Property.hpp"
-
 #include "uml/QualifierValue.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -73,65 +68,42 @@ LinkEndDestructionDataImpl::~LinkEndDestructionDataImpl()
 }
 
 //Additional constructor for the containments back reference
-LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(std::weak_ptr<uml::Element > par_owner)
+LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(std::weak_ptr<uml::Element> par_owner)
 :LinkEndDestructionDataImpl()
 {
 	m_owner = par_owner;
 }
 
-
-LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj):LinkEndDestructionDataImpl()
+LinkEndDestructionDataImpl::LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj): LinkEndDestructionDataImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  LinkEndDestructionDataImpl::copy() const
-{
-	std::shared_ptr<LinkEndDestructionDataImpl> element(new LinkEndDestructionDataImpl(*this));
-	element->setThisLinkEndDestructionDataPtr(element);
-	return element;
-}
-
 LinkEndDestructionDataImpl& LinkEndDestructionDataImpl::operator=(const LinkEndDestructionDataImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	LinkEndDataImpl::operator=(obj);
+	LinkEndDestructionData::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LinkEndDestructionData "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_isDestroyDuplicates = obj.getIsDestroyDuplicates();
 
 	//copy references with no containment (soft copy)
-	
 	m_destroyAt  = obj.getDestroyAt();
-
-	m_end  = obj.getEnd();
-
-	m_owner  = obj.getOwner();
-
-	m_value  = obj.getValue();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::QualifierValue>> _qualifierList = obj.getQualifier();
-	for(std::shared_ptr<uml::QualifierValue> _qualifier : *_qualifierList)
-	{
-		this->getQualifier()->add(std::shared_ptr<uml::QualifierValue>(std::dynamic_pointer_cast<uml::QualifierValue>(_qualifier->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_qualifier" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> LinkEndDestructionDataImpl::copy() const
+{
+	std::shared_ptr<LinkEndDestructionDataImpl> element(new LinkEndDestructionDataImpl());
+	*element =(*this);
+	element->setThisLinkEndDestructionDataPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LinkEndDestructionDataImpl::eStaticClass() const
@@ -149,18 +121,16 @@ bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const
 {
 	return m_isDestroyDuplicates;
 }
-
 void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicates)
 {
 	m_isDestroyDuplicates = _isDestroyDuplicates;
 } 
 
 
-
 //*********************************
 // Operations
 //*********************************
-bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -172,17 +142,15 @@ bool LinkEndDestructionDataImpl::destroyAt_pin(Any diagnostics,std::map <   Any,
 /*
 Getter & Setter for reference destroyAt
 */
-std::shared_ptr<uml::InputPin > LinkEndDestructionDataImpl::getDestroyAt() const
+std::shared_ptr<uml::InputPin> LinkEndDestructionDataImpl::getDestroyAt() const
 {
 
     return m_destroyAt;
 }
-
 void LinkEndDestructionDataImpl::setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt)
 {
     m_destroyAt = _destroyAt;
 }
-
 
 
 //*********************************
@@ -232,7 +200,7 @@ Any LinkEndDestructionDataImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_DESTROYAT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getDestroyAt())); //1366
+			return eAny(getDestroyAt()); //1366
 		case uml::umlPackage::LINKENDDESTRUCTIONDATA_ATTRIBUTE_ISDESTROYDUPLICATES:
 			return eAny(getIsDestroyDuplicates()); //1367
 	}
@@ -328,13 +296,12 @@ void LinkEndDestructionDataImpl::loadAttributes(std::shared_ptr<persistence::int
 
 void LinkEndDestructionDataImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	LinkEndDataImpl::loadNode(nodeName, loadHandler);
 }
 
-void LinkEndDestructionDataImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LinkEndDestructionDataImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -374,17 +341,13 @@ void LinkEndDestructionDataImpl::saveContent(std::shared_ptr<persistence::interf
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getLinkEndDestructionData_Attribute_isDestroyDuplicates()) )
 		{
 			saveHandler->addAttribute("isDestroyDuplicates", this->getIsDestroyDuplicates());
 		}
-
-		// Add references
-		saveHandler->addReference("destroyAt", this->getDestroyAt());
-
+	// Add references
+		saveHandler->addReference(this->getDestroyAt(), "destroyAt", getDestroyAt()->eClass() != uml::umlPackage::eInstance()->getInputPin_Class()); 
 	}
 	catch (std::exception& e)
 	{

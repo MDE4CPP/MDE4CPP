@@ -142,9 +142,8 @@
 using namespace UML;
 
 ClassObject::ClassObject(std::shared_ptr<uml::Class> _element):
-
 	m_ClassValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Class());
 }
 
@@ -165,13 +164,16 @@ ClassObject::~ClassObject()
 
 std::shared_ptr<ecore::EObject> ClassObject::copy()
 {
-	std::shared_ptr<ClassObject> element(new ClassObject(*this));
+	std::shared_ptr<ClassObject> element(new ClassObject());
+	*element=(*this);
 	element->setThisClassObjectPtr(element);
 	return element;
 }
 
 ClassObject& ClassObject::operator=(const ClassObject & obj)
 {
+	UML::BehavioredClassifierObject::operator=(obj);
+	UML::EncapsulatedClassifierObject::operator=(obj);
 	return *this;
 }
 

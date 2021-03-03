@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			RaiseExceptionActionImpl(const RaiseExceptionActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			RaiseExceptionActionImpl& operator=(RaiseExceptionActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			RaiseExceptionActionImpl& operator=(RaiseExceptionActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisRaiseExceptionActionPtr(std::weak_ptr<RaiseExceptionAction> thisRaiseExceptionActionPtr);
 
 			//Additional constructors for the containments back reference
-			RaiseExceptionActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			RaiseExceptionActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			RaiseExceptionActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			RaiseExceptionActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			RaiseExceptionActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			RaiseExceptionActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			RaiseExceptionActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			RaiseExceptionActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -71,16 +62,14 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getException() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getException() const ;
 			/*!
 			An InputPin whose value becomes the exception object.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setException(std::shared_ptr<uml::InputPin> _exception) ;
+			virtual void setException(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -105,7 +94,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -125,7 +114,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

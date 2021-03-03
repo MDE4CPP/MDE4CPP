@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			RedefinableElementImpl(const RedefinableElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			RedefinableElementImpl& operator=(RedefinableElementImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			RedefinableElementImpl& operator=(RedefinableElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisRedefinableElementPtr(std::weak_ptr<RedefinableElement> thisRedefinableElementPtr);
 
 			//Additional constructors for the containments back reference
-			RedefinableElementImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			RedefinableElementImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			RedefinableElementImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			RedefinableElementImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -55,38 +50,28 @@ namespace uml
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement>  redefiningElement) ;
-			
-			/*!
+			virtual bool isConsistentWith(std::shared_ptr<uml::RedefinableElement> redefiningElement) ;/*!
 			The query isRedefinitionContextValid() specifies whether the redefinition contexts of this RedefinableElement are properly related to the redefinition contexts of the specified RedefinableElement to allow this element to redefine the other. By default at least one of the redefinition contexts of this element must be a specialization of at least one of the redefinition contexts of the specified element.
 			result = (redefinitionContext->exists(c | c.allParents()->includesAll(redefinedElement.redefinitionContext)))
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement>  redefinedElement) ;
-			
-			/*!
+			virtual bool isRedefinitionContextValid(std::shared_ptr<uml::RedefinableElement> redefinedElement) ;/*!
 			A RedefinableElement can only redefine non-leaf RedefinableElements.
 			redefinedElement->forAll(re | not re.isLeaf)
 			*/
 			 
-			virtual bool non_leaf_redefinition(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool non_leaf_redefinition(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A redefining element must be consistent with each redefined element.
 			redefinedElement->forAll(re | re.isConsistentWith(self))
 			*/
 			 
-			virtual bool redefinition_consistent(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool redefinition_consistent(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			At least one of the redefinition contexts of the redefining element must be a specialization of at least one of the redefinition contexts for each redefined element.
 			redefinedElement->forAll(re | self.isRedefinitionContextValid(re))
 			*/
 			 
-			virtual bool redefinition_context_valid(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool redefinition_context_valid(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -97,13 +82,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsLeaf() const ;
-			
 			/*!
 			Indicates whether it is possible to further redefine a RedefinableElement. If the value is true, then it is not possible to further redefine the RedefinableElement.
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsLeaf (bool _isLeaf); 
+			virtual void setIsLeaf (bool _isLeaf);
 			
 			
 			//*********************************
@@ -113,7 +97,7 @@ namespace uml
 			
 			
 			
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -128,7 +112,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -153,7 +137,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

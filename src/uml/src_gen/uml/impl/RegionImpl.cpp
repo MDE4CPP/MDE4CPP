@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,42 +36,25 @@
 #include <exception> // used in Persistence
 
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/Region.hpp"
-
 #include "uml/State.hpp"
-
 #include "uml/StateMachine.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/Transition.hpp"
-
 #include "uml/Vertex.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -96,7 +80,7 @@ RegionImpl::~RegionImpl()
 }
 
 //Additional constructor for the containments back reference
-RegionImpl::RegionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+RegionImpl::RegionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :RegionImpl()
 {
 	m_namespace = par_namespace;
@@ -104,14 +88,14 @@ RegionImpl::RegionImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-RegionImpl::RegionImpl(std::weak_ptr<uml::Element > par_owner)
+RegionImpl::RegionImpl(std::weak_ptr<uml::Element> par_owner)
 :RegionImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-RegionImpl::RegionImpl(std::weak_ptr<uml::State > par_state)
+RegionImpl::RegionImpl(std::weak_ptr<uml::State> par_state)
 :RegionImpl()
 {
 	m_state = par_state;
@@ -119,148 +103,102 @@ RegionImpl::RegionImpl(std::weak_ptr<uml::State > par_state)
 }
 
 //Additional constructor for the containments back reference
-RegionImpl::RegionImpl(std::weak_ptr<uml::StateMachine > par_stateMachine)
+RegionImpl::RegionImpl(std::weak_ptr<uml::StateMachine> par_stateMachine)
 :RegionImpl()
 {
 	m_stateMachine = par_stateMachine;
 	m_namespace = par_stateMachine;
 }
 
-
-RegionImpl::RegionImpl(const RegionImpl & obj):RegionImpl()
+RegionImpl::RegionImpl(const RegionImpl & obj): RegionImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  RegionImpl::copy() const
-{
-	std::shared_ptr<RegionImpl> element(new RegionImpl(*this));
-	element->setThisRegionPtr(element);
-	return element;
-}
-
 RegionImpl& RegionImpl::operator=(const RegionImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	NamespaceImpl::operator=(obj);
+	RedefinableElementImpl::operator=(obj);
+	Region::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Region "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_isLeaf = obj.getIsLeaf();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
-	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
 	m_state  = obj.getState();
-
 	m_stateMachine  = obj.getStateMachine();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
-	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
-	{
-		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
-	#endif
 	if(obj.getExtendedRegion()!=nullptr)
 	{
 		m_extendedRegion = std::dynamic_pointer_cast<uml::Region>(obj.getExtendedRegion()->copy());
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_extendedRegion" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageableElement>> _importedMemberList = obj.getImportedMember();
-	for(std::shared_ptr<uml::PackageableElement> _importedMember : *_importedMemberList)
+	std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> subvertexContainer = getSubvertex();
+	if(nullptr != subvertexContainer )
 	{
-		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy())));
+		int size = subvertexContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _subvertex=(*subvertexContainer)[i];
+			if(nullptr != _subvertex)
+			{
+				subvertexContainer->push_back(std::dynamic_pointer_cast<uml::Vertex>(_subvertex->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container subvertex."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_importedMember" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
+	else
 	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr subvertex."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
+	std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> transitionContainer = getTransition();
+	if(nullptr != transitionContainer )
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
+		int size = transitionContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _transition=(*transitionContainer)[i];
+			if(nullptr != _transition)
+			{
+				transitionContainer->push_back(std::dynamic_pointer_cast<uml::Transition>(_transition->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container transition."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
-	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
+	else
 	{
-		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr transition."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedRule" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
-	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
-	{
-		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Vertex>> _subvertexList = obj.getSubvertex();
-	for(std::shared_ptr<uml::Vertex> _subvertex : *_subvertexList)
-	{
-		this->getSubvertex()->add(std::shared_ptr<uml::Vertex>(std::dynamic_pointer_cast<uml::Vertex>(_subvertex->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_subvertex" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Transition>> _transitionList = obj.getTransition();
-	for(std::shared_ptr<uml::Transition> _transition : *_transitionList)
-	{
-		this->getTransition()->add(std::shared_ptr<uml::Transition>(std::dynamic_pointer_cast<uml::Transition>(_transition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_transition" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_subvertex->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_subvertex - Subset<uml::Vertex, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-
 	/*Subset*/
 	m_transition->initSubset(getOwnedMember());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_transition - Subset<uml::Transition, uml::NamedElement >(getOwnedMember())" << std::endl;
 	#endif
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> RegionImpl::copy() const
+{
+	std::shared_ptr<RegionImpl> element(new RegionImpl());
+	*element =(*this);
+	element->setThisRegionPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> RegionImpl::eStaticClass() const
@@ -287,19 +225,19 @@ std::shared_ptr<uml::StateMachine> RegionImpl::containingStateMachine()
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::deep_history_vertex(Any diagnostics,std::map <   Any, Any >  context)
+bool RegionImpl::deep_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::initial_vertex(Any diagnostics,std::map <   Any, Any >  context)
+bool RegionImpl::initial_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::owned(Any diagnostics,std::map <   Any, Any >  context)
+bool RegionImpl::owned(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -311,7 +249,7 @@ std::shared_ptr<uml::Classifier> RegionImpl::redefinitionContext()
 	throw "UnsupportedOperationException";
 }
 
-bool RegionImpl::shallow_history_vertex(Any diagnostics,std::map <   Any, Any >  context)
+bool RegionImpl::shallow_history_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -323,49 +261,43 @@ bool RegionImpl::shallow_history_vertex(Any diagnostics,std::map <   Any, Any > 
 /*
 Getter & Setter for reference extendedRegion
 */
-std::shared_ptr<uml::Region > RegionImpl::getExtendedRegion() const
+std::shared_ptr<uml::Region> RegionImpl::getExtendedRegion() const
 {
 
     return m_extendedRegion;
 }
-
 void RegionImpl::setExtendedRegion(std::shared_ptr<uml::Region> _extendedRegion)
 {
     m_extendedRegion = _extendedRegion;
 }
 
 
-
 /*
 Getter & Setter for reference state
 */
-std::weak_ptr<uml::State > RegionImpl::getState() const
+std::weak_ptr<uml::State> RegionImpl::getState() const
 {
 
     return m_state;
 }
-
-void RegionImpl::setState(std::shared_ptr<uml::State> _state)
+void RegionImpl::setState(std::weak_ptr<uml::State> _state)
 {
     m_state = _state;
 }
 
 
-
 /*
 Getter & Setter for reference stateMachine
 */
-std::weak_ptr<uml::StateMachine > RegionImpl::getStateMachine() const
+std::weak_ptr<uml::StateMachine> RegionImpl::getStateMachine() const
 {
 
     return m_stateMachine;
 }
-
-void RegionImpl::setStateMachine(std::shared_ptr<uml::StateMachine> _stateMachine)
+void RegionImpl::setStateMachine(std::weak_ptr<uml::StateMachine> _stateMachine)
 {
     m_stateMachine = _stateMachine;
 }
-
 
 
 /*
@@ -391,8 +323,6 @@ std::shared_ptr<Subset<uml::Vertex, uml::NamedElement>> RegionImpl::getSubvertex
 
     return m_subvertex;
 }
-
-
 
 
 
@@ -422,8 +352,6 @@ std::shared_ptr<Subset<uml::Transition, uml::NamedElement>> RegionImpl::getTrans
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
@@ -442,7 +370,7 @@ std::shared_ptr<Union<uml::NamedElement>> RegionImpl::getMember() const
 	return m_member;
 }
 
-std::weak_ptr<uml::Namespace > RegionImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> RegionImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -482,7 +410,7 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> 
 	return m_ownedMember;
 }
 
-std::weak_ptr<uml::Element > RegionImpl::getOwner() const
+std::weak_ptr<uml::Element> RegionImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -547,34 +475,18 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getExtendedRegion())); //20718
+			return eAny(getExtendedRegion()); //20718
 		case uml::umlPackage::REGION_ATTRIBUTE_STATE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getState().lock())); //20719
+			return eAny(getState().lock()); //20719
 		case uml::umlPackage::REGION_ATTRIBUTE_STATEMACHINE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getStateMachine().lock())); //20720
+			return eAny(getStateMachine().lock()); //20720
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Vertex>::iterator iter = m_subvertex->begin();
-			Bag<uml::Vertex>::iterator end = m_subvertex->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20722
+			return eAny(getSubvertex()); //20722			
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_TRANSITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Transition>::iterator iter = m_transition->begin();
-			Bag<uml::Transition>::iterator end = m_transition->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //20721
+			return eAny(getTransition()); //20721			
 		}
 	}
 	Any result;
@@ -661,7 +573,7 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 				}
 				iterSubvertex++;
 			}
-
+ 
 			iterSubvertex = subvertexList->begin();
 			endSubvertex = subvertexList->end();
 			while (iterSubvertex != endSubvertex)
@@ -697,7 +609,7 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 				}
 				iterTransition++;
 			}
-
+ 
 			iterTransition = transitionList->begin();
 			endTransition = transitionList->end();
 			while (iterTransition != endTransition)
@@ -769,7 +681,6 @@ void RegionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHa
 
 void RegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -781,12 +692,9 @@ void RegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 				std::cout << "| WARNING    | type if an eClassifiers node it empty" << std::endl;
 				return; // no type name given and reference type is abstract
 			}
-			std::shared_ptr<ecore::EObject> subvertex = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::VERTEX_ATTRIBUTE_CONTAINER);
-			if (subvertex != nullptr)
-			{
-				loadHandler->handleChild(subvertex);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Vertex>(this->getSubvertex());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("transition") == 0 )
@@ -796,12 +704,9 @@ void RegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 			{
 				typeName = "Transition";
 			}
-			std::shared_ptr<ecore::EObject> transition = modelFactory->create(typeName, loadHandler->getCurrentObject(), uml::umlPackage::TRANSITION_ATTRIBUTE_CONTAINER);
-			if (transition != nullptr)
-			{
-				loadHandler->handleChild(transition);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Transition>(this->getTransition());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -817,7 +722,7 @@ void RegionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::int
 	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void RegionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void RegionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -886,7 +791,6 @@ void RegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'subvertex'
 		for (std::shared_ptr<uml::Vertex> subvertex : *this->getSubvertex()) 
 		{
@@ -898,11 +802,8 @@ void RegionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveHandl
 		{
 			saveHandler->addReference(transition, "transition", transition->eClass() != package->getTransition_Class());
 		}
-	
-
-		// Add references
-		saveHandler->addReference("extendedRegion", this->getExtendedRegion());
-
+	// Add references
+		saveHandler->addReference(this->getExtendedRegion(), "extendedRegion", getExtendedRegion()->eClass() != uml::umlPackage::eInstance()->getRegion_Class()); 
 	}
 	catch (std::exception& e)
 	{

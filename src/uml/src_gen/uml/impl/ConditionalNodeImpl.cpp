@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,56 +36,32 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Clause.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ElementImport.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/PackageImport.hpp"
-
 #include "uml/PackageableElement.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
-
 #include "uml/Variable.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -110,7 +87,7 @@ ConditionalNodeImpl::~ConditionalNodeImpl()
 }
 
 //Additional constructor for the containments back reference
-ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Activity > par_Activity, const int reference_id)
+ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Activity> par_Activity, const int reference_id)
 :ConditionalNodeImpl()
 {
 	switch(reference_id)
@@ -131,7 +108,7 @@ ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Activity > par_Activ
 
 
 //Additional constructor for the containments back reference
-ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :ConditionalNodeImpl()
 {
 	m_inStructuredNode = par_inStructuredNode;
@@ -139,7 +116,7 @@ ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::StructuredActivityNo
 }
 
 //Additional constructor for the containments back reference
-ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ConditionalNodeImpl()
 {
 	m_namespace = par_namespace;
@@ -147,256 +124,99 @@ ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Namespace > par_name
 }
 
 //Additional constructor for the containments back reference
-ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Element > par_owner)
+ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::Element> par_owner)
 :ConditionalNodeImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::ActivityGroup > par_superGroup)
+ConditionalNodeImpl::ConditionalNodeImpl(std::weak_ptr<uml::ActivityGroup> par_superGroup)
 :ConditionalNodeImpl()
 {
 	m_superGroup = par_superGroup;
 	m_owner = par_superGroup;
 }
 
-
-ConditionalNodeImpl::ConditionalNodeImpl(const ConditionalNodeImpl & obj):ConditionalNodeImpl()
+ConditionalNodeImpl::ConditionalNodeImpl(const ConditionalNodeImpl & obj): ConditionalNodeImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ConditionalNodeImpl::copy() const
-{
-	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl(*this));
-	element->setThisConditionalNodePtr(element);
-	return element;
-}
-
 ConditionalNodeImpl& ConditionalNodeImpl::operator=(const ConditionalNodeImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	StructuredActivityNodeImpl::operator=(obj);
+	ConditionalNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ConditionalNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 	m_isAssured = obj.getIsAssured();
 	m_isDeterminate = obj.getIsDeterminate();
-	m_isLeaf = obj.getIsLeaf();
-	m_isLocallyReentrant = obj.getIsLocallyReentrant();
-	m_mustIsolate = obj.getMustIsolate();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
 
 	//copy references with no containment (soft copy)
-	
-	m_activity  = obj.getActivity();
-
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	std::shared_ptr<Union<uml::ActivityEdge>> _containedEdge = obj.getContainedEdge();
-	m_containedEdge.reset(new Union<uml::ActivityEdge>(*(obj.getContainedEdge().get())));
-
-	std::shared_ptr<Union<uml::ActivityNode>> _containedNode = obj.getContainedNode();
-	m_containedNode.reset(new Union<uml::ActivityNode>(*(obj.getContainedNode().get())));
-
-	m_context  = obj.getContext();
-
-	m_inActivity  = obj.getInActivity();
-
-	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
-	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
-
-	m_inStructuredNode  = obj.getInStructuredNode();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
-	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
-
-	std::shared_ptr<Union<uml::NamedElement>> _member = obj.getMember();
-	m_member.reset(new Union<uml::NamedElement>(*(obj.getMember().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
-	m_superGroup  = obj.getSuperGroup();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Clause>> _clauseList = obj.getClause();
-	for(std::shared_ptr<uml::Clause> _clause : *_clauseList)
+	std::shared_ptr<Subset<uml::Clause, uml::Element>> clauseContainer = getClause();
+	if(nullptr != clauseContainer )
 	{
-		this->getClause()->add(std::shared_ptr<uml::Clause>(std::dynamic_pointer_cast<uml::Clause>(_clause->copy())));
+		int size = clauseContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _clause=(*clauseContainer)[i];
+			if(nullptr != _clause)
+			{
+				clauseContainer->push_back(std::dynamic_pointer_cast<uml::Clause>(_clause->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container clause."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_clause" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityEdge>> _edgeList = obj.getEdge();
-	for(std::shared_ptr<uml::ActivityEdge> _edge : *_edgeList)
+	else
 	{
-		this->getEdge()->add(std::shared_ptr<uml::ActivityEdge>(std::dynamic_pointer_cast<uml::ActivityEdge>(_edge->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr clause."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_edge" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ElementImport>> _elementImportList = obj.getElementImport();
-	for(std::shared_ptr<uml::ElementImport> _elementImport : *_elementImportList)
+	std::shared_ptr<Bag<uml::OutputPin>> resultContainer = getResult();
+	if(nullptr != resultContainer )
 	{
-		this->getElementImport()->add(std::shared_ptr<uml::ElementImport>(std::dynamic_pointer_cast<uml::ElementImport>(_elementImport->copy())));
+		int size = resultContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _result=(*resultContainer)[i];
+			if(nullptr != _result)
+			{
+				resultContainer->push_back(std::dynamic_pointer_cast<uml::OutputPin>(_result->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container result."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_elementImport" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
-	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
+	else
 	{
-		this->getHandler()->add(std::shared_ptr<uml::ExceptionHandler>(std::dynamic_pointer_cast<uml::ExceptionHandler>(_handler->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr result."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_handler" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageableElement>> _importedMemberList = obj.getImportedMember();
-	for(std::shared_ptr<uml::PackageableElement> _importedMember : *_importedMemberList)
-	{
-		this->getImportedMember()->add(std::shared_ptr<uml::PackageableElement>(std::dynamic_pointer_cast<uml::PackageableElement>(_importedMember->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_importedMember" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
-	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
-	{
-		this->getInInterruptibleRegion()->add(std::shared_ptr<uml::InterruptibleActivityRegion>(std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_inInterruptibleRegion->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inInterruptibleRegion" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityPartition>> _inPartitionList = obj.getInPartition();
-	for(std::shared_ptr<uml::ActivityPartition> _inPartition : *_inPartitionList)
-	{
-		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(std::dynamic_pointer_cast<uml::ActivityPartition>(_inPartition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _localPostconditionList = obj.getLocalPostcondition();
-	for(std::shared_ptr<uml::Constraint> _localPostcondition : *_localPostconditionList)
-	{
-		this->getLocalPostcondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_localPostcondition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_localPostcondition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _localPreconditionList = obj.getLocalPrecondition();
-	for(std::shared_ptr<uml::Constraint> _localPrecondition : *_localPreconditionList)
-	{
-		this->getLocalPrecondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_localPrecondition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_localPrecondition" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityNode>> _nodeList = obj.getNode();
-	for(std::shared_ptr<uml::ActivityNode> _node : *_nodeList)
-	{
-		this->getNode()->add(std::shared_ptr<uml::ActivityNode>(std::dynamic_pointer_cast<uml::ActivityNode>(_node->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_node" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _ownedRuleList = obj.getOwnedRule();
-	for(std::shared_ptr<uml::Constraint> _ownedRule : *_ownedRuleList)
-	{
-		this->getOwnedRule()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_ownedRule->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedRule" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::PackageImport>> _packageImportList = obj.getPackageImport();
-	for(std::shared_ptr<uml::PackageImport> _packageImport : *_packageImportList)
-	{
-		this->getPackageImport()->add(std::shared_ptr<uml::PackageImport>(std::dynamic_pointer_cast<uml::PackageImport>(_packageImport->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_packageImport" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNodeList = obj.getRedefinedNode();
-	for(std::shared_ptr<uml::ActivityNode> _redefinedNode : *_redefinedNodeList)
-	{
-		this->getRedefinedNode()->add(std::shared_ptr<uml::ActivityNode>(std::dynamic_pointer_cast<uml::ActivityNode>(_redefinedNode->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::OutputPin>> _resultList = obj.getResult();
-	for(std::shared_ptr<uml::OutputPin> _result : *_resultList)
-	{
-		this->getResult()->add(std::shared_ptr<uml::OutputPin>(std::dynamic_pointer_cast<uml::OutputPin>(_result->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_result" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::InputPin>> _structuredNodeInputList = obj.getStructuredNodeInput();
-	for(std::shared_ptr<uml::InputPin> _structuredNodeInput : *_structuredNodeInputList)
-	{
-		this->getStructuredNodeInput()->add(std::shared_ptr<uml::InputPin>(std::dynamic_pointer_cast<uml::InputPin>(_structuredNodeInput->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_structuredNodeInput" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::OutputPin>> _structuredNodeOutputList = obj.getStructuredNodeOutput();
-	for(std::shared_ptr<uml::OutputPin> _structuredNodeOutput : *_structuredNodeOutputList)
-	{
-		this->getStructuredNodeOutput()->add(std::shared_ptr<uml::OutputPin>(std::dynamic_pointer_cast<uml::OutputPin>(_structuredNodeOutput->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_structuredNodeOutput" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Variable>> _variableList = obj.getVariable();
-	for(std::shared_ptr<uml::Variable> _variable : *_variableList)
-	{
-		this->getVariable()->add(std::shared_ptr<uml::Variable>(std::dynamic_pointer_cast<uml::Variable>(_variable->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_variable" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_clause->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_clause - Subset<uml::Clause, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ConditionalNodeImpl::copy() const
+{
+	std::shared_ptr<ConditionalNodeImpl> element(new ConditionalNodeImpl());
+	*element =(*this);
+	element->setThisConditionalNodePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ConditionalNodeImpl::eStaticClass() const
@@ -414,12 +234,10 @@ bool ConditionalNodeImpl::getIsAssured() const
 {
 	return m_isAssured;
 }
-
 void ConditionalNodeImpl::setIsAssured(bool _isAssured)
 {
 	m_isAssured = _isAssured;
 } 
-
 
 
 /*
@@ -429,48 +247,46 @@ bool ConditionalNodeImpl::getIsDeterminate() const
 {
 	return m_isDeterminate;
 }
-
 void ConditionalNodeImpl::setIsDeterminate(bool _isDeterminate)
 {
 	m_isDeterminate = _isDeterminate;
 } 
 
 
-
 //*********************************
 // Operations
 //*********************************
-bool ConditionalNodeImpl::clause_no_predecessor(Any diagnostics,std::map <   Any, Any >  context)
+bool ConditionalNodeImpl::clause_no_predecessor(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::executable_nodes(Any diagnostics,std::map <   Any, Any >  context)
+bool ConditionalNodeImpl::executable_nodes(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::matching_output_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool ConditionalNodeImpl::matching_output_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::no_input_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool ConditionalNodeImpl::no_input_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::one_clause_with_executable_node(Any diagnostics,std::map <   Any, Any >  context)
+bool ConditionalNodeImpl::one_clause_with_executable_node(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConditionalNodeImpl::result_no_incoming(Any diagnostics,std::map <   Any, Any >  context)
+bool ConditionalNodeImpl::result_no_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -505,8 +321,6 @@ std::shared_ptr<Subset<uml::Clause, uml::Element>> ConditionalNodeImpl::getClaus
 
 
 
-
-
 /*
 Getter & Setter for reference result
 */
@@ -521,8 +335,6 @@ std::shared_ptr<Bag<uml::OutputPin>> ConditionalNodeImpl::getResult() const
 
     return m_result;
 }
-
-
 
 /*Additional Setter for redefined reference 'StructuredActivityNode::structuredNodeOutput'*/
 
@@ -666,7 +478,7 @@ std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element,uml::NamedElement>> 
 	return m_ownedMember;
 }
 
-std::weak_ptr<uml::Element > ConditionalNodeImpl::getOwner() const
+std::weak_ptr<uml::Element> ConditionalNodeImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -741,15 +553,7 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Clause>::iterator iter = m_clause->begin();
-			Bag<uml::Clause>::iterator end = m_clause->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4944
+			return eAny(getClause()); //4944			
 		}
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
 			return eAny(getIsAssured()); //4945
@@ -757,15 +561,7 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getIsDeterminate()); //4946
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_result->begin();
-			Bag<uml::OutputPin>::iterator end = m_result->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4947
+			return eAny(getResult()); //4947			
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);
@@ -812,7 +608,7 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterClause++;
 			}
-
+ 
 			iterClause = clauseList->begin();
 			endClause = clauseList->end();
 			while (iterClause != endClause)
@@ -862,7 +658,7 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterResult++;
 			}
-
+ 
 			iterResult = resultList->begin();
 			endResult = resultList->end();
 			while (iterResult != endResult)
@@ -937,7 +733,6 @@ void ConditionalNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces
 
 void ConditionalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -948,14 +743,9 @@ void ConditionalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 			{
 				typeName = "Clause";
 			}
-			std::shared_ptr<uml::Clause> clause = std::dynamic_pointer_cast<uml::Clause>(modelFactory->create(typeName));
-			if (clause != nullptr)
-			{
-				std::shared_ptr<Subset<uml::Clause, uml::Element>> list_clause = this->getClause();
-				list_clause->push_back(clause);
-				loadHandler->handleChild(clause);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::Clause>(this->getClause());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("result") == 0 )
@@ -965,14 +755,9 @@ void ConditionalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 			{
 				typeName = "OutputPin";
 			}
-			std::shared_ptr<uml::OutputPin> result = std::dynamic_pointer_cast<uml::OutputPin>(modelFactory->create(typeName));
-			if (result != nullptr)
-			{
-				std::shared_ptr<Bag<uml::OutputPin>> list_result = this->getResult();
-				list_result->push_back(result);
-				loadHandler->handleChild(result);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::OutputPin>(this->getResult());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -987,7 +772,7 @@ void ConditionalNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persist
 	StructuredActivityNodeImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConditionalNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ConditionalNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	StructuredActivityNodeImpl::resolveReferences(featureID, references);
 }
@@ -1030,13 +815,11 @@ void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'clause'
 		for (std::shared_ptr<uml::Clause> clause : *this->getClause()) 
 		{
 			saveHandler->addReference(clause, "clause", clause->eClass() != package->getClause_Class());
 		}
-	
 		// Add attributes
 		if ( this->eIsSet(package->getConditionalNode_Attribute_isAssured()) )
 		{
@@ -1047,18 +830,13 @@ void ConditionalNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::X
 		{
 			saveHandler->addAttribute("isDeterminate", this->getIsDeterminate());
 		}
-
-
 		//
 		// Add new tags (from references)
 		//
 		std::shared_ptr<ecore::EClass> metaClass = this->eClass();
 		// Save 'result'
-		std::shared_ptr<Bag<uml::OutputPin>> list_result = this->getResult();
-		for (std::shared_ptr<uml::OutputPin> result : *list_result) 
-		{
-			saveHandler->addReference(result, "result", result->eClass() !=uml::umlPackage::eInstance()->getOutputPin_Class());
-		}
+
+		saveHandler->addReferences<uml::OutputPin>("result", this->getResult());
 	}
 	catch (std::exception& e)
 	{

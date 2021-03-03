@@ -23,8 +23,8 @@ namespace uml
 	{
 		public: 
 			ArtifactImpl(const ArtifactImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ArtifactImpl& operator=(ArtifactImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ArtifactImpl& operator=(ArtifactImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -33,25 +33,14 @@ namespace uml
 			virtual void setThisArtifactPtr(std::weak_ptr<Artifact> thisArtifactPtr);
 
 			//Additional constructors for the containments back reference
-			ArtifactImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			ArtifactImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			ArtifactImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ArtifactImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ArtifactImpl(std::weak_ptr<uml::Package > par_Package, const int reference_id);
-
-
+			ArtifactImpl(std::weak_ptr<uml::Package> par_Package, const int reference_id);
 			//Additional constructors for the containments back reference
-			ArtifactImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
+			ArtifactImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 			//Additional constructors for the containments back reference
-
-
-
 
 		public:
 			//destructor
@@ -64,15 +53,11 @@ namespace uml
 			Creates a property with the specified name, type, lower bound, and upper bound as an owned attribute of this artifact.
 			*/
 			 
-			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type>  type,int lower,int upper) ;
-			
-			/*!
+			virtual std::shared_ptr<uml::Property> createOwnedAttribute(std::string name,std::shared_ptr<uml::Type> type,int lower,int upper) ;/*!
 			Creates an operation with the specified name, parameter names, parameter types, and return type (or null) as an owned operation of this artifact.
 			*/
 			 
-			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string> >  parameterNames,std::shared_ptr<Bag<uml::Type> >  parameterTypes,std::shared_ptr<uml::Type>  returnType) ;
-			
-			
+			virtual std::shared_ptr<uml::Operation> createOwnedOperation(std::string name,std::shared_ptr<Bag<std::string>> parameterNames,std::shared_ptr<Bag<uml::Type>> parameterTypes,std::shared_ptr<uml::Type> returnType) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -83,13 +68,12 @@ namespace uml
 			*/
 			 
 			virtual std::string getFileName() const ;
-			
 			/*!
 			A concrete name that is used to refer to the Artifact in a physical context. Example: file system name, universal resource locator.
 			<p>From package UML::Deployments.</p>
 			*/
 			 
-			virtual void setFileName (std::string _fileName); 
+			virtual void setFileName (std::string _fileName);
 			
 			
 			//*********************************
@@ -102,7 +86,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Manifestation, uml::Element>> getManifestation() const ;
 			
-			
 			/*!
 			The Artifacts that are defined (nested) within the Artifact. The association is a specialization of the ownedMember association from Namespace to NamedElement.
 			<p>From package UML::Deployments.</p>
@@ -110,14 +93,12 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Artifact, uml::NamedElement>> getNestedArtifact() const ;
 			
-			
 			/*!
 			The attributes or association ends defined for the Artifact. The association is a specialization of the ownedMember association.
 			<p>From package UML::Deployments.</p>
 			*/
 			
 			virtual std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement>> getOwnedAttribute() const ;
-			
 			
 			/*!
 			The Operations defined for the Artifact. The association is a specialization of the ownedMember association.
@@ -127,7 +108,6 @@ namespace uml
 			virtual std::shared_ptr<Subset<uml::Operation, uml::Feature,uml::NamedElement>> getOwnedOperation() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -152,7 +132,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -167,7 +147,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -187,7 +167,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

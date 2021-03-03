@@ -70,9 +70,8 @@
 using namespace UML;
 
 DurationConstraintObject::DurationConstraintObject(std::shared_ptr<uml::DurationConstraint> _element):
-
 	m_DurationConstraintValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_DurationConstraint());
 }
 
@@ -93,13 +92,15 @@ DurationConstraintObject::~DurationConstraintObject()
 
 std::shared_ptr<ecore::EObject> DurationConstraintObject::copy()
 {
-	std::shared_ptr<DurationConstraintObject> element(new DurationConstraintObject(*this));
+	std::shared_ptr<DurationConstraintObject> element(new DurationConstraintObject());
+	*element=(*this);
 	element->setThisDurationConstraintObjectPtr(element);
 	return element;
 }
 
 DurationConstraintObject& DurationConstraintObject::operator=(const DurationConstraintObject & obj)
 {
+	UML::IntervalConstraintObject::operator=(obj);
 	return *this;
 }
 

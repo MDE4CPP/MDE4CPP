@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			PseudostateImpl(const PseudostateImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			PseudostateImpl& operator=(PseudostateImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			PseudostateImpl& operator=(PseudostateImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,26 +32,15 @@ namespace uml
 			virtual void setThisPseudostatePtr(std::weak_ptr<Pseudostate> thisPseudostatePtr);
 
 			//Additional constructors for the containments back reference
-			PseudostateImpl(std::weak_ptr<uml::Region > par_container);
-
-
+			PseudostateImpl(std::weak_ptr<uml::Region> par_container);
 			//Additional constructors for the containments back reference
-			PseudostateImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			PseudostateImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			PseudostateImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			PseudostateImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			PseudostateImpl(std::weak_ptr<uml::State > par_state);
-
-
+			PseudostateImpl(std::weak_ptr<uml::State> par_state);
 			//Additional constructors for the containments back reference
-			PseudostateImpl(std::weak_ptr<uml::StateMachine > par_stateMachine);
-
-
-
+			PseudostateImpl(std::weak_ptr<uml::StateMachine> par_stateMachine);
 
 		public:
 			//destructor
@@ -65,51 +54,37 @@ namespace uml
 			(kind = PseudostateKind::choice) implies (incoming->size() >= 1 and outgoing->size() >= 1)
 			*/
 			 
-			virtual bool choice_vertex(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool choice_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			In a complete StateMachine, a fork Vertex must have at least two outgoing Transitions and exactly one incoming Transition.
 			(kind = PseudostateKind::fork) implies (incoming->size() = 1 and outgoing->size() >= 2)
 			*/
 			 
-			virtual bool fork_vertex(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool fork_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			History Vertices can have at most one outgoing Transition.
 			((kind = PseudostateKind::deepHistory) or (kind = PseudostateKind::shallowHistory)) implies (outgoing->size() <= 1)
 			*/
 			 
-			virtual bool history_vertices(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool history_vertices(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			An initial Vertex can have at most one outgoing Transition.
 			(kind = PseudostateKind::initial) implies (outgoing->size() <= 1)
 			*/
 			 
-			virtual bool initial_vertex(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool initial_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			In a complete StateMachine, a join Vertex must have at least two incoming Transitions and exactly one outgoing Transition.
 			(kind = PseudostateKind::join) implies (outgoing->size() = 1 and incoming->size() >= 2)
 			*/
 			 
-			virtual bool join_vertex(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool join_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			In a complete StateMachine, a junction Vertex must have at least one incoming and one outgoing Transition.
 			(kind = PseudostateKind::junction) implies (incoming->size() >= 1 and outgoing->size() >= 1)
 			*/
 			 
-			virtual bool junction_vertex(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool junction_vertex(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The outgoing Transition from an initial vertex may have a behavior, but not a trigger or a guard.
 			(kind = PseudostateKind::initial) implies (outgoing.guard = null and outgoing.trigger->isEmpty())
 			*/
 			 
-			virtual bool outgoing_from_initial(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool outgoing_from_initial(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			All Transitions incoming a join Vertex must originate in different Regions of an orthogonal State.
 			(kind = PseudostateKind::join) implies
 			
@@ -121,9 +96,7 @@ namespace uml
 					->exists(r1:Region, r2: Region | (r1 <> r2) and t1.source.isContainedInRegion(r1) and t2.source.isContainedInRegion(r2)))))
 			*/
 			 
-			virtual bool transitions_incoming(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool transitions_incoming(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			All transitions outgoing a fork vertex must target states in different regions of an orthogonal state.
 			(kind = PseudostateKind::fork) implies
 			
@@ -135,9 +108,7 @@ namespace uml
 					->exists(r1:Region, r2: Region | (r1 <> r2) and t1.target.isContainedInRegion(r1) and t2.target.isContainedInRegion(r2)))))
 			*/
 			 
-			virtual bool transitions_outgoing(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool transitions_outgoing(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -148,13 +119,12 @@ namespace uml
 			*/
 			 
 			virtual uml::PseudostateKind getKind() const ;
-			
 			/*!
 			Determines the precise type of the Pseudostate and can be one of: entryPoint, exitPoint, initial, deepHistory, shallowHistory, join, fork, junction, terminate or choice.
 			<p>From package UML::StateMachines.</p>
 			*/
 			 
-			virtual void setKind (uml::PseudostateKind _kind); 
+			virtual void setKind (uml::PseudostateKind _kind);
 			
 			
 			//*********************************
@@ -165,30 +135,26 @@ namespace uml
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::State > getState() const ;
-			
+			virtual std::weak_ptr<uml::State> getState() const ;
 			/*!
 			The State that owns this Pseudostate and in which it appears.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setState(std::shared_ptr<uml::State> _state) ;
-			
+			virtual void setState(std::weak_ptr<uml::State>) ;
 			/*!
 			The StateMachine in which this Pseudostate is defined. This only applies to Pseudostates of the kind entryPoint or exitPoint.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::StateMachine > getStateMachine() const ;
-			
+			virtual std::weak_ptr<uml::StateMachine> getStateMachine() const ;
 			/*!
 			The StateMachine in which this Pseudostate is defined. This only applies to Pseudostates of the kind entryPoint or exitPoint.
 			<p>From package UML::StateMachines.</p>
 			*/
 			
-			virtual void setStateMachine(std::shared_ptr<uml::StateMachine> _stateMachine) ;
+			virtual void setStateMachine(std::weak_ptr<uml::StateMachine>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -198,7 +164,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const ;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const ;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -208,7 +174,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -223,7 +189,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

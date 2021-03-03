@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,26 +35,17 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/MessageEvent.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/Signal.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -79,7 +71,7 @@ SignalEventImpl::~SignalEventImpl()
 }
 
 //Additional constructor for the containments back reference
-SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
+SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :SignalEventImpl()
 {
 	m_namespace = par_namespace;
@@ -87,14 +79,14 @@ SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Element > par_owner)
+SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Element> par_owner)
 :SignalEventImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
+SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :SignalEventImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -102,74 +94,42 @@ SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::Package > par_owningPackage)
 }
 
 //Additional constructor for the containments back reference
-SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+SignalEventImpl::SignalEventImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :SignalEventImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
 	m_owner = par_owningTemplateParameter;
 }
 
-
-SignalEventImpl::SignalEventImpl(const SignalEventImpl & obj):SignalEventImpl()
+SignalEventImpl::SignalEventImpl(const SignalEventImpl & obj): SignalEventImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  SignalEventImpl::copy() const
-{
-	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl(*this));
-	element->setThisSignalEventPtr(element);
-	return element;
-}
-
 SignalEventImpl& SignalEventImpl::operator=(const SignalEventImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	MessageEventImpl::operator=(obj);
+	SignalEvent::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SignalEvent "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
 	m_signal  = obj.getSignal();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> SignalEventImpl::copy() const
+{
+	std::shared_ptr<SignalEventImpl> element(new SignalEventImpl());
+	*element =(*this);
+	element->setThisSignalEventPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const
@@ -191,23 +151,21 @@ std::shared_ptr<ecore::EClass> SignalEventImpl::eStaticClass() const
 /*
 Getter & Setter for reference signal
 */
-std::shared_ptr<uml::Signal > SignalEventImpl::getSignal() const
+std::shared_ptr<uml::Signal> SignalEventImpl::getSignal() const
 {
 //assert(m_signal);
     return m_signal;
 }
-
 void SignalEventImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 {
     m_signal = _signal;
 }
 
 
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > SignalEventImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> SignalEventImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -227,7 +185,7 @@ std::shared_ptr<Union<uml::Element>> SignalEventImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > SignalEventImpl::getOwner() const
+std::weak_ptr<uml::Element> SignalEventImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -276,7 +234,7 @@ Any SignalEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SIGNALEVENT_ATTRIBUTE_SIGNAL:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getSignal())); //21612
+			return eAny(getSignal()); //21612
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
 }
@@ -352,13 +310,12 @@ void SignalEventImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XL
 
 void SignalEventImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	MessageEventImpl::loadNode(nodeName, loadHandler);
 }
 
-void SignalEventImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void SignalEventImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -408,12 +365,8 @@ void SignalEventImpl::saveContent(std::shared_ptr<persistence::interfaces::XSave
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("signal", this->getSignal());
-
+	// Add references
+		saveHandler->addReference(this->getSignal(), "signal", getSignal()->eClass() != uml::umlPackage::eInstance()->getSignal_Class()); 
 	}
 	catch (std::exception& e)
 	{

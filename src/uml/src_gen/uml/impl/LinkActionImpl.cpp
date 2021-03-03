@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,50 +36,29 @@
 #include <exception> // used in Persistence
 
 #include "uml/Action.hpp"
-
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Association.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Constraint.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/ExceptionHandler.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/LinkEndData.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/OutputPin.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -104,7 +84,7 @@ LinkActionImpl::~LinkActionImpl()
 }
 
 //Additional constructor for the containments back reference
-LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::Activity > par_activity)
+LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::Activity> par_activity)
 :LinkActionImpl()
 {
 	m_activity = par_activity;
@@ -112,7 +92,7 @@ LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::Activity > par_activity)
 }
 
 //Additional constructor for the containments back reference
-LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :LinkActionImpl()
 {
 	m_inStructuredNode = par_inStructuredNode;
@@ -120,7 +100,7 @@ LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_i
 }
 
 //Additional constructor for the containments back reference
-LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :LinkActionImpl()
 {
 	m_namespace = par_namespace;
@@ -128,165 +108,94 @@ LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::Element > par_owner)
+LinkActionImpl::LinkActionImpl(std::weak_ptr<uml::Element> par_owner)
 :LinkActionImpl()
 {
 	m_owner = par_owner;
 }
 
-
-LinkActionImpl::LinkActionImpl(const LinkActionImpl & obj):LinkActionImpl()
+LinkActionImpl::LinkActionImpl(const LinkActionImpl & obj): LinkActionImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  LinkActionImpl::copy() const
-{
-	std::shared_ptr<LinkActionImpl> element(new LinkActionImpl(*this));
-	element->setThisLinkActionPtr(element);
-	return element;
-}
-
 LinkActionImpl& LinkActionImpl::operator=(const LinkActionImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ActionImpl::operator=(obj);
+	LinkAction::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy LinkAction "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_isLeaf = obj.getIsLeaf();
-	m_isLocallyReentrant = obj.getIsLocallyReentrant();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_activity  = obj.getActivity();
-
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_context  = obj.getContext();
-
-	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
-	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
-
-	m_inStructuredNode  = obj.getInStructuredNode();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
-	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
-	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::LinkEndData>> _endDataList = obj.getEndData();
-	for(std::shared_ptr<uml::LinkEndData> _endData : *_endDataList)
+	std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> endDataContainer = getEndData();
+	if(nullptr != endDataContainer )
 	{
-		this->getEndData()->add(std::shared_ptr<uml::LinkEndData>(std::dynamic_pointer_cast<uml::LinkEndData>(_endData->copy())));
+		int size = endDataContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _endData=(*endDataContainer)[i];
+			if(nullptr != _endData)
+			{
+				endDataContainer->push_back(std::dynamic_pointer_cast<uml::LinkEndData>(_endData->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container endData."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_endData" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ExceptionHandler>> _handlerList = obj.getHandler();
-	for(std::shared_ptr<uml::ExceptionHandler> _handler : *_handlerList)
+	else
 	{
-		this->getHandler()->add(std::shared_ptr<uml::ExceptionHandler>(std::dynamic_pointer_cast<uml::ExceptionHandler>(_handler->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr endData."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_handler" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
-	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
+	std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> inputValueContainer = getInputValue();
+	if(nullptr != inputValueContainer )
 	{
-		this->getInInterruptibleRegion()->add(std::shared_ptr<uml::InterruptibleActivityRegion>(std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_inInterruptibleRegion->copy())));
+		int size = inputValueContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _inputValue=(*inputValueContainer)[i];
+			if(nullptr != _inputValue)
+			{
+				inputValueContainer->push_back(std::dynamic_pointer_cast<uml::InputPin>(_inputValue->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container inputValue."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inInterruptibleRegion" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityPartition>> _inPartitionList = obj.getInPartition();
-	for(std::shared_ptr<uml::ActivityPartition> _inPartition : *_inPartitionList)
+	else
 	{
-		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(std::dynamic_pointer_cast<uml::ActivityPartition>(_inPartition->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inputValue."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::InputPin>> _inputValueList = obj.getInputValue();
-	for(std::shared_ptr<uml::InputPin> _inputValue : *_inputValueList)
-	{
-		this->getInputValue()->add(std::shared_ptr<uml::InputPin>(std::dynamic_pointer_cast<uml::InputPin>(_inputValue->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inputValue" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _localPostconditionList = obj.getLocalPostcondition();
-	for(std::shared_ptr<uml::Constraint> _localPostcondition : *_localPostconditionList)
-	{
-		this->getLocalPostcondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_localPostcondition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_localPostcondition" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Constraint>> _localPreconditionList = obj.getLocalPrecondition();
-	for(std::shared_ptr<uml::Constraint> _localPrecondition : *_localPreconditionList)
-	{
-		this->getLocalPrecondition()->add(std::shared_ptr<uml::Constraint>(std::dynamic_pointer_cast<uml::Constraint>(_localPrecondition->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_localPrecondition" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNodeList = obj.getRedefinedNode();
-	for(std::shared_ptr<uml::ActivityNode> _redefinedNode : *_redefinedNodeList)
-	{
-		this->getRedefinedNode()->add(std::shared_ptr<uml::ActivityNode>(std::dynamic_pointer_cast<uml::ActivityNode>(_redefinedNode->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
-	#endif
-
 	/*Subset*/
 	m_endData->initSubset(getOwnedElement());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_endData - Subset<uml::LinkEndData, uml::Element >(getOwnedElement())" << std::endl;
 	#endif
 	
-
 	/*Subset*/
 	m_inputValue->initSubset(getInput());
 	#ifdef SHOW_SUBSET_UNION
 		std::cout << "Initialising value Subset: " << "m_inputValue - Subset<uml::InputPin, uml::InputPin >(getInput())" << std::endl;
 	#endif
 	
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> LinkActionImpl::copy() const
+{
+	std::shared_ptr<LinkActionImpl> element(new LinkActionImpl());
+	*element =(*this);
+	element->setThisLinkActionPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> LinkActionImpl::eStaticClass() const
@@ -307,19 +216,19 @@ std::shared_ptr<uml::Association> LinkActionImpl::association()
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionImpl::not_static(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkActionImpl::not_static(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionImpl::same_association(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkActionImpl::same_association(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool LinkActionImpl::same_pins(Any diagnostics,std::map <   Any, Any >  context)
+bool LinkActionImpl::same_pins(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -354,8 +263,6 @@ std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> LinkActionImpl::getEndDa
 
 
 
-
-
 /*
 Getter & Setter for reference inputValue
 */
@@ -379,8 +286,6 @@ std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> LinkActionImpl::getInputVa
 //assert(m_inputValue);
     return m_inputValue;
 }
-
-
 
 
 
@@ -437,7 +342,7 @@ std::shared_ptr<Union<uml::Element>> LinkActionImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > LinkActionImpl::getOwner() const
+std::weak_ptr<uml::Element> LinkActionImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -502,27 +407,11 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::LinkEndData>::iterator iter = m_endData->begin();
-			Bag<uml::LinkEndData>::iterator end = m_endData->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //13327
+			return eAny(getEndData()); //13327			
 		}
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
-			Bag<uml::InputPin>::iterator end = m_inputValue->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //13328
+			return eAny(getInputValue()); //13328			
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
@@ -565,7 +454,7 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterEndData++;
 			}
-
+ 
 			iterEndData = endDataList->begin();
 			endEndData = endDataList->end();
 			while (iterEndData != endEndData)
@@ -601,7 +490,7 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 				}
 				iterInputValue++;
 			}
-
+ 
 			iterInputValue = inputValueList->begin();
 			endInputValue = inputValueList->end();
 			while (iterInputValue != endInputValue)
@@ -646,7 +535,6 @@ void LinkActionImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void LinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	try
 	{
@@ -657,14 +545,9 @@ void LinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "LinkEndData";
 			}
-			std::shared_ptr<uml::LinkEndData> endData = std::dynamic_pointer_cast<uml::LinkEndData>(modelFactory->create(typeName));
-			if (endData != nullptr)
-			{
-				std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> list_endData = this->getEndData();
-				list_endData->push_back(endData);
-				loadHandler->handleChild(endData);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::LinkEndData>(this->getEndData());  
+
+			return; 
 		}
 
 		if ( nodeName.compare("inputValue") == 0 )
@@ -674,14 +557,9 @@ void LinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 			{
 				typeName = "InputPin";
 			}
-			std::shared_ptr<uml::InputPin> inputValue = std::dynamic_pointer_cast<uml::InputPin>(modelFactory->create(typeName));
-			if (inputValue != nullptr)
-			{
-				std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> list_inputValue = this->getInputValue();
-				list_inputValue->push_back(inputValue);
-				loadHandler->handleChild(inputValue);
-			}
-			return;
+			loadHandler->handleChildContainer<uml::InputPin>(this->getInputValue());  
+
+			return; 
 		}
 	}
 	catch (std::exception& e)
@@ -696,7 +574,7 @@ void LinkActionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence:
 	ActionImpl::loadNode(nodeName, loadHandler);
 }
 
-void LinkActionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void LinkActionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ActionImpl::resolveReferences(featureID, references);
 }
@@ -734,7 +612,6 @@ void LinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
 		// Save 'endData'
 		for (std::shared_ptr<uml::LinkEndData> endData : *this->getEndData()) 
 		{
@@ -746,8 +623,6 @@ void LinkActionImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 		{
 			saveHandler->addReference(inputValue, "inputValue", inputValue->eClass() != package->getInputPin_Class());
 		}
-	
-
 	}
 	catch (std::exception& e)
 	{

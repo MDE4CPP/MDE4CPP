@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIVITIES_FORKEDTOKEN_HPP
 #define FUML_SEMANTICS_ACTIVITIES_FORKEDTOKEN_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,17 +31,11 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::Activities 
 {
 	class ActivityNodeActivation;
 }
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
-}
-
 namespace fUML::Semantics::Values 
 {
 	class Value;
@@ -57,18 +47,18 @@ namespace fUML::Semantics::Values
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::Activities 
 {
 	
-	class ForkedToken:virtual public Token
+	class ForkedToken: virtual public Token
 	{
 		public:
  			ForkedToken(const ForkedToken &) {}
 
 		protected:
 			ForkedToken(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -80,44 +70,30 @@ namespace fUML::Semantics::Activities
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  otherToken) = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0;
-			
-			 
-			virtual bool isControl() = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() = 0; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> otherToken) = 0; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const = 0; 
+			virtual bool isControl() = 0; 
 			virtual void withdraw() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
 			virtual bool isBaseTokenIsWithdrawn() const = 0;
-			
 			 
-			virtual void setBaseTokenIsWithdrawn (bool _baseTokenIsWithdrawn)= 0; 
+			virtual void setBaseTokenIsWithdrawn (bool _baseTokenIsWithdrawn)= 0;
 			 
 			virtual int getRemainingOffersCount() const = 0;
-			
 			 
-			virtual void setRemainingOffersCount (int _remainingOffersCount)= 0; 
+			virtual void setRemainingOffersCount (int _remainingOffersCount)= 0;
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token > getBaseToken() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> getBaseToken() const = 0;
 			
-			
-			virtual void setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token> _baseToken) = 0;
-			
+			virtual void setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token>) = 0;
 			
 
 		protected:
@@ -134,7 +110,7 @@ namespace fUML::Semantics::Activities
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::Activities::Token > m_baseToken;
+			std::shared_ptr<fUML::Semantics::Activities::Token> m_baseToken;
 
 		public:
 			//*********************************
@@ -149,7 +125,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

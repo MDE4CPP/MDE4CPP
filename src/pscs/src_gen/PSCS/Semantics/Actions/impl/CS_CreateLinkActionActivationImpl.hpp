@@ -23,8 +23,8 @@ namespace PSCS::Semantics::Actions
 	{
 		public: 
 			CS_CreateLinkActionActivationImpl(const CS_CreateLinkActionActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			CS_CreateLinkActionActivationImpl& operator=(CS_CreateLinkActionActivationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			CS_CreateLinkActionActivationImpl& operator=(CS_CreateLinkActionActivationImpl const&); 
 
 		protected:
 			friend class PSCS::Semantics::Actions::ActionsFactoryImpl;
@@ -33,10 +33,7 @@ namespace PSCS::Semantics::Actions
 			virtual void setThisCS_CreateLinkActionActivationPtr(std::weak_ptr<CS_CreateLinkActionActivation> thisCS_CreateLinkActionActivationPtr);
 
 			//Additional constructors for the containments back reference
-			CS_CreateLinkActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			CS_CreateLinkActionActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -48,8 +45,6 @@ namespace PSCS::Semantics::Actions
 			 
 			virtual void doAction() ;
 			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -58,7 +53,7 @@ namespace PSCS::Semantics::Actions
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -79,7 +74,7 @@ namespace PSCS::Semantics::Actions
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

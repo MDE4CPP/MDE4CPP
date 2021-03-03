@@ -22,8 +22,8 @@ namespace ecore
 	{
 		public: 
 			EAttributeImpl(const EAttributeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			EAttributeImpl& operator=(EAttributeImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			EAttributeImpl& operator=(EAttributeImpl const&); 
 
 		protected:
 			friend class ecoreFactoryImpl;
@@ -32,14 +32,9 @@ namespace ecore
 			virtual void setThisEAttributePtr(std::weak_ptr<EAttribute> thisEAttributePtr);
 
 			//Additional constructors for the containments back reference
-			EAttributeImpl(std::weak_ptr<ecore::EObject > par_eContainer);
-
-
+			EAttributeImpl(std::weak_ptr<ecore::EObject> par_eContainer);
 			//Additional constructors for the containments back reference
-			EAttributeImpl(std::weak_ptr<ecore::EClass > par_eContainingClass);
-
-
-
+			EAttributeImpl(std::weak_ptr<ecore::EClass> par_eContainingClass);
 
 		public:
 			//destructor
@@ -55,19 +50,17 @@ namespace ecore
 			//*********************************
 			 
 			virtual bool isID() const ;
-			
 			 
-			virtual void setID (bool _iD); 
+			virtual void setID (bool _iD);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<ecore::EDataType > getEAttributeType() const ;
+			virtual std::shared_ptr<ecore::EDataType> getEAttributeType() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -88,7 +81,7 @@ namespace ecore
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

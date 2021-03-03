@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,36 +35,22 @@
 #include <exception> // used in Persistence
 
 #include "uml/Activity.hpp"
-
 #include "uml/ActivityEdge.hpp"
-
 #include "uml/ActivityGroup.hpp"
-
 #include "uml/ActivityNode.hpp"
-
 #include "uml/ActivityPartition.hpp"
-
 #include "uml/Classifier.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InterruptibleActivityRegion.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/RedefinableElement.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/StructuredActivityNode.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -89,7 +76,7 @@ ActivityNodeImpl::~ActivityNodeImpl()
 }
 
 //Additional constructor for the containments back reference
-ActivityNodeImpl::ActivityNodeImpl(std::weak_ptr<uml::Activity > par_activity)
+ActivityNodeImpl::ActivityNodeImpl(std::weak_ptr<uml::Activity> par_activity)
 :ActivityNodeImpl()
 {
 	m_activity = par_activity;
@@ -97,7 +84,7 @@ ActivityNodeImpl::ActivityNodeImpl(std::weak_ptr<uml::Activity > par_activity)
 }
 
 //Additional constructor for the containments back reference
-ActivityNodeImpl::ActivityNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode)
+ActivityNodeImpl::ActivityNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode)
 :ActivityNodeImpl()
 {
 	m_inStructuredNode = par_inStructuredNode;
@@ -105,7 +92,7 @@ ActivityNodeImpl::ActivityNodeImpl(std::weak_ptr<uml::StructuredActivityNode > p
 }
 
 //Additional constructor for the containments back reference
-ActivityNodeImpl::ActivityNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
+ActivityNodeImpl::ActivityNodeImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ActivityNodeImpl()
 {
 	m_namespace = par_namespace;
@@ -113,109 +100,111 @@ ActivityNodeImpl::ActivityNodeImpl(std::weak_ptr<uml::Namespace > par_namespace)
 }
 
 //Additional constructor for the containments back reference
-ActivityNodeImpl::ActivityNodeImpl(std::weak_ptr<uml::Element > par_owner)
+ActivityNodeImpl::ActivityNodeImpl(std::weak_ptr<uml::Element> par_owner)
 :ActivityNodeImpl()
 {
 	m_owner = par_owner;
 }
 
-
-ActivityNodeImpl::ActivityNodeImpl(const ActivityNodeImpl & obj):ActivityNodeImpl()
+ActivityNodeImpl::ActivityNodeImpl(const ActivityNodeImpl & obj): ActivityNodeImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ActivityNodeImpl::copy() const
-{
-	std::shared_ptr<ActivityNodeImpl> element(new ActivityNodeImpl(*this));
-	element->setThisActivityNodePtr(element);
-	return element;
-}
-
 ActivityNodeImpl& ActivityNodeImpl::operator=(const ActivityNodeImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	RedefinableElementImpl::operator=(obj);
+	ActivityNode::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ActivityNode "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_isLeaf = obj.getIsLeaf();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
 	m_activity  = obj.getActivity();
-
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
 	std::shared_ptr<Union<uml::ActivityGroup>> _inGroup = obj.getInGroup();
 	m_inGroup.reset(new Union<uml::ActivityGroup>(*(obj.getInGroup().get())));
-
 	m_inStructuredNode  = obj.getInStructuredNode();
-
 	std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = obj.getIncoming();
 	m_incoming.reset(new Bag<uml::ActivityEdge>(*(obj.getIncoming().get())));
-
-	m_namespace  = obj.getNamespace();
-
 	std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = obj.getOutgoing();
 	m_outgoing.reset(new Bag<uml::ActivityEdge>(*(obj.getOutgoing().get())));
-
-	m_owner  = obj.getOwner();
-
-	std::shared_ptr<Union<uml::RedefinableElement>> _redefinedElement = obj.getRedefinedElement();
-	m_redefinedElement.reset(new Union<uml::RedefinableElement>(*(obj.getRedefinedElement().get())));
-
-	std::shared_ptr<Union<uml::Classifier>> _redefinitionContext = obj.getRedefinitionContext();
-	m_redefinitionContext.reset(new Union<uml::Classifier>(*(obj.getRedefinitionContext().get())));
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegionList = obj.getInInterruptibleRegion();
-	for(std::shared_ptr<uml::InterruptibleActivityRegion> _inInterruptibleRegion : *_inInterruptibleRegionList)
+	std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> inInterruptibleRegionContainer = getInInterruptibleRegion();
+	if(nullptr != inInterruptibleRegionContainer )
 	{
-		this->getInInterruptibleRegion()->add(std::shared_ptr<uml::InterruptibleActivityRegion>(std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_inInterruptibleRegion->copy())));
+		int size = inInterruptibleRegionContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _inInterruptibleRegion=(*inInterruptibleRegionContainer)[i];
+			if(nullptr != _inInterruptibleRegion)
+			{
+				inInterruptibleRegionContainer->push_back(std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(_inInterruptibleRegion->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container inInterruptibleRegion."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inInterruptibleRegion" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityPartition>> _inPartitionList = obj.getInPartition();
-	for(std::shared_ptr<uml::ActivityPartition> _inPartition : *_inPartitionList)
+	else
 	{
-		this->getInPartition()->add(std::shared_ptr<uml::ActivityPartition>(std::dynamic_pointer_cast<uml::ActivityPartition>(_inPartition->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inInterruptibleRegion."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_inPartition" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
+	std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> inPartitionContainer = getInPartition();
+	if(nullptr != inPartitionContainer )
 	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
+		int size = inPartitionContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _inPartition=(*inPartitionContainer)[i];
+			if(nullptr != _inPartition)
+			{
+				inPartitionContainer->push_back(std::dynamic_pointer_cast<uml::ActivityPartition>(_inPartition->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container inPartition."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
+	else
 	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr inPartition."<< std::endl;)
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNodeList = obj.getRedefinedNode();
-	for(std::shared_ptr<uml::ActivityNode> _redefinedNode : *_redefinedNodeList)
+	std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> redefinedNodeContainer = getRedefinedNode();
+	if(nullptr != redefinedNodeContainer )
 	{
-		this->getRedefinedNode()->add(std::shared_ptr<uml::ActivityNode>(std::dynamic_pointer_cast<uml::ActivityNode>(_redefinedNode->copy())));
+		int size = redefinedNodeContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _redefinedNode=(*redefinedNodeContainer)[i];
+			if(nullptr != _redefinedNode)
+			{
+				redefinedNodeContainer->push_back(std::dynamic_pointer_cast<uml::ActivityNode>(_redefinedNode->copy()));
+			}
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container redefinedNode."<< std::endl;)
+			}
+		}
 	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_redefinedNode" << std::endl;
-	#endif
-
-
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr redefinedNode."<< std::endl;)
+	}
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ActivityNodeImpl::copy() const
+{
+	std::shared_ptr<ActivityNodeImpl> element(new ActivityNodeImpl());
+	*element =(*this);
+	element->setThisActivityNodePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ActivityNodeImpl::eStaticClass() const
@@ -242,24 +231,20 @@ std::shared_ptr<uml::Activity> ActivityNodeImpl::containingActivity()
 /*
 Getter & Setter for reference activity
 */
-std::weak_ptr<uml::Activity > ActivityNodeImpl::getActivity() const
+std::weak_ptr<uml::Activity> ActivityNodeImpl::getActivity() const
 {
 
     return m_activity;
 }
-
-void ActivityNodeImpl::setActivity(std::shared_ptr<uml::Activity> _activity)
+void ActivityNodeImpl::setActivity(std::weak_ptr<uml::Activity> _activity)
 {
     m_activity = _activity;
 }
 
 
-
 /*
 Getter & Setter for reference inGroup
 */
-
-
 
 
 
@@ -290,8 +275,6 @@ std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> Ac
 
 
 
-
-
 /*
 Getter & Setter for reference inPartition
 */
@@ -318,22 +301,18 @@ std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> ActivityNode
 
 
 
-
-
 /*
 Getter & Setter for reference inStructuredNode
 */
-std::weak_ptr<uml::StructuredActivityNode > ActivityNodeImpl::getInStructuredNode() const
+std::weak_ptr<uml::StructuredActivityNode> ActivityNodeImpl::getInStructuredNode() const
 {
 
     return m_inStructuredNode;
 }
-
-void ActivityNodeImpl::setInStructuredNode(std::shared_ptr<uml::StructuredActivityNode> _inStructuredNode)
+void ActivityNodeImpl::setInStructuredNode(std::weak_ptr<uml::StructuredActivityNode> _inStructuredNode)
 {
     m_inStructuredNode = _inStructuredNode;
 }
-
 
 
 /*
@@ -353,8 +332,6 @@ std::shared_ptr<Bag<uml::ActivityEdge>> ActivityNodeImpl::getIncoming() const
 
 
 
-
-
 /*
 Getter & Setter for reference outgoing
 */
@@ -369,8 +346,6 @@ std::shared_ptr<Bag<uml::ActivityEdge>> ActivityNodeImpl::getOutgoing() const
 
     return m_outgoing;
 }
-
-
 
 
 
@@ -397,8 +372,6 @@ std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> ActivityNode
 
     return m_redefinedNode;
 }
-
-
 
 
 
@@ -435,7 +408,7 @@ std::shared_ptr<Union<uml::Element>> ActivityNodeImpl::getOwnedElement() const
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > ActivityNodeImpl::getOwner() const
+std::weak_ptr<uml::Element> ActivityNodeImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -499,80 +472,32 @@ Any ActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getActivity().lock())); //1112
+			return eAny(getActivity().lock()); //1112
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INGROUP:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityGroup>::iterator iter = m_inGroup->begin();
-			Bag<uml::ActivityGroup>::iterator end = m_inGroup->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1113
+			return eAny(getInGroup()); //1113			
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InterruptibleActivityRegion>::iterator iter = m_inInterruptibleRegion->begin();
-			Bag<uml::InterruptibleActivityRegion>::iterator end = m_inInterruptibleRegion->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1114
+			return eAny(getInInterruptibleRegion()); //1114			
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INPARTITION:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityPartition>::iterator iter = m_inPartition->begin();
-			Bag<uml::ActivityPartition>::iterator end = m_inPartition->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1119
+			return eAny(getInPartition()); //1119			
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INSTRUCTUREDNODE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getInStructuredNode().lock())); //1115
+			return eAny(getInStructuredNode().lock()); //1115
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INCOMING:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_incoming->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_incoming->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1116
+			return eAny(getIncoming()); //1116			
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_OUTGOING:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_outgoing->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_outgoing->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1117
+			return eAny(getOutgoing()); //1117			
 		}
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = m_redefinedNode->begin();
-			Bag<uml::ActivityNode>::iterator end = m_redefinedNode->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //1118
+			return eAny(getRedefinedNode()); //1118			
 		}
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
@@ -635,7 +560,7 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterInInterruptibleRegion++;
 			}
-
+ 
 			iterInInterruptibleRegion = inInterruptibleRegionList->begin();
 			endInInterruptibleRegion = inInterruptibleRegionList->end();
 			while (iterInInterruptibleRegion != endInInterruptibleRegion)
@@ -671,7 +596,7 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterInPartition++;
 			}
-
+ 
 			iterInPartition = inPartitionList->begin();
 			endInPartition = inPartitionList->end();
 			while (iterInPartition != endInPartition)
@@ -715,7 +640,7 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterIncoming++;
 			}
-
+ 
 			iterIncoming = incomingList->begin();
 			endIncoming = incomingList->end();
 			while (iterIncoming != endIncoming)
@@ -751,7 +676,7 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterOutgoing++;
 			}
-
+ 
 			iterOutgoing = outgoingList->begin();
 			endOutgoing = outgoingList->end();
 			while (iterOutgoing != endOutgoing)
@@ -787,7 +712,7 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 				}
 				iterRedefinedNode++;
 			}
-
+ 
 			iterRedefinedNode = redefinedNodeList->begin();
 			endRedefinedNode = redefinedNodeList->end();
 			while (iterRedefinedNode != endRedefinedNode)
@@ -879,13 +804,12 @@ void ActivityNodeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::X
 
 void ActivityNodeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	RedefinableElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void ActivityNodeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ActivityNodeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -903,28 +827,28 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ININTERRUPTIBLEREGION:
 		{
-			std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> _inInterruptibleRegion = getInInterruptibleRegion();
+			std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> _inInterruptibleRegion = getInInterruptibleRegion();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::InterruptibleActivityRegion> _r = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(ref);
+				std::shared_ptr<uml::InterruptibleActivityRegion>  _r = std::dynamic_pointer_cast<uml::InterruptibleActivityRegion>(ref);
 				if (_r != nullptr)
 				{
 					_inInterruptibleRegion->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
 
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_INPARTITION:
 		{
-			std::shared_ptr<Bag<uml::ActivityPartition>> _inPartition = getInPartition();
+			std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> _inPartition = getInPartition();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::ActivityPartition> _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);
+				std::shared_ptr<uml::ActivityPartition>  _r = std::dynamic_pointer_cast<uml::ActivityPartition>(ref);
 				if (_r != nullptr)
 				{
 					_inPartition->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -946,11 +870,11 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 			std::shared_ptr<Bag<uml::ActivityEdge>> _incoming = getIncoming();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::ActivityEdge> _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
+				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
 				if (_r != nullptr)
 				{
 					_incoming->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -960,25 +884,25 @@ void ActivityNodeImpl::resolveReferences(const int featureID, std::list<std::sha
 			std::shared_ptr<Bag<uml::ActivityEdge>> _outgoing = getOutgoing();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::ActivityEdge> _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
+				std::shared_ptr<uml::ActivityEdge>  _r = std::dynamic_pointer_cast<uml::ActivityEdge>(ref);
 				if (_r != nullptr)
 				{
 					_outgoing->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
 
 		case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_REDEFINEDNODE:
 		{
-			std::shared_ptr<Bag<uml::ActivityNode>> _redefinedNode = getRedefinedNode();
+			std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> _redefinedNode = getRedefinedNode();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::ActivityNode> _r = std::dynamic_pointer_cast<uml::ActivityNode>(ref);
+				std::shared_ptr<uml::ActivityNode>  _r = std::dynamic_pointer_cast<uml::ActivityNode>(ref);
 				if (_r != nullptr)
 				{
 					_redefinedNode->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -1010,36 +934,12 @@ void ActivityNodeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSav
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> inInterruptibleRegion_list = this->getInInterruptibleRegion();
-		for (std::shared_ptr<uml::InterruptibleActivityRegion > object : *inInterruptibleRegion_list)
-		{ 
-			saveHandler->addReferences("inInterruptibleRegion", object);
-		}
-		std::shared_ptr<Bag<uml::ActivityPartition>> inPartition_list = this->getInPartition();
-		for (std::shared_ptr<uml::ActivityPartition > object : *inPartition_list)
-		{ 
-			saveHandler->addReferences("inPartition", object);
-		}
-		std::shared_ptr<Bag<uml::ActivityEdge>> incoming_list = this->getIncoming();
-		for (std::shared_ptr<uml::ActivityEdge > object : *incoming_list)
-		{ 
-			saveHandler->addReferences("incoming", object);
-		}
-		std::shared_ptr<Bag<uml::ActivityEdge>> outgoing_list = this->getOutgoing();
-		for (std::shared_ptr<uml::ActivityEdge > object : *outgoing_list)
-		{ 
-			saveHandler->addReferences("outgoing", object);
-		}
-		std::shared_ptr<Bag<uml::ActivityNode>> redefinedNode_list = this->getRedefinedNode();
-		for (std::shared_ptr<uml::ActivityNode > object : *redefinedNode_list)
-		{ 
-			saveHandler->addReferences("redefinedNode", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::InterruptibleActivityRegion>("inInterruptibleRegion", this->getInInterruptibleRegion());
+		saveHandler->addReferences<uml::ActivityPartition>("inPartition", this->getInPartition());
+		saveHandler->addReferences<uml::ActivityEdge>("incoming", this->getIncoming());
+		saveHandler->addReferences<uml::ActivityEdge>("outgoing", this->getOutgoing());
+		saveHandler->addReferences<uml::ActivityNode>("redefinedNode", this->getRedefinedNode());
 	}
 	catch (std::exception& e)
 	{

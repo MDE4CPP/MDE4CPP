@@ -7,21 +7,17 @@
 #ifndef UML_PROFILEAPPLICATION_HPP
 #define UML_PROFILEAPPLICATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,44 +32,17 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Comment;
-}
-
-namespace uml 
-{
-	class DirectedRelationship;
-}
-
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class ENamedElement;
-}
-
-namespace ecore 
-{
 	class EPackage;
 }
-
 namespace uml 
 {
-	class Element;
-}
-
-namespace uml 
-{
+	class Comment;
 	class NamedElement;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class Profile;
 }
 
@@ -81,6 +50,7 @@ namespace uml
 #include "uml/DirectedRelationship.hpp"
 
 // enum includes
+
 
 
 //*********************************
@@ -91,22 +61,18 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class ProfileApplication:virtual public DirectedRelationship
+	class ProfileApplication: virtual public DirectedRelationship
 	{
 		public:
  			ProfileApplication(const ProfileApplication &) {}
 
 		protected:
 			ProfileApplication(){}
-
+			//Additional constructors for the containments back reference
+			ProfileApplication(std::weak_ptr<uml::Package> par_applyingPackage);
 
 			//Additional constructors for the containments back reference
-
-			ProfileApplication(std::weak_ptr<uml::Package > par_applyingPackage);
-
-			//Additional constructors for the containments back reference
-
-			ProfileApplication(std::weak_ptr<uml::Element > par_owner);
+			ProfileApplication(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -121,15 +87,11 @@ namespace uml
 			Retrieves the definition (Ecore representation) of the profile associated with this profile application.
 			*/
 			 
-			virtual std::shared_ptr<ecore::EPackage> getAppliedDefinition() = 0;
-			
-			/*!
+			virtual std::shared_ptr<ecore::EPackage> getAppliedDefinition() = 0;/*!
 			Retrieves the definition (Ecore representation) of the specified named element in the profile associated with this profile application.
 			*/
 			 
-			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement>  namedElement) = 0;
-			
-			
+			virtual std::shared_ptr<ecore::ENamedElement> getAppliedDefinition(std::shared_ptr<uml::NamedElement> namedElement) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -139,13 +101,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsStrict() const = 0;
-			
 			/*!
 			Specifies that the Profile filtering rules for the metaclasses of the referenced metamodel shall be strictly applied.
 			<p>From package UML::Packages.</p>
 			*/
 			 
-			virtual void setIsStrict (bool _isStrict)= 0; 
+			virtual void setIsStrict (bool _isStrict)= 0;
 			
 			//*********************************
 			// Reference
@@ -155,29 +116,25 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Profile > getAppliedProfile() const = 0;
-			
+			virtual std::shared_ptr<uml::Profile> getAppliedProfile() const = 0;
 			/*!
 			References the Profiles that are applied to a Package through this ProfileApplication.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual void setAppliedProfile(std::shared_ptr<uml::Profile> _appliedProfile) = 0;
-			
+			virtual void setAppliedProfile(std::shared_ptr<uml::Profile>) = 0;
 			/*!
 			The package that owns the profile application.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Package > getApplyingPackage() const = 0;
-			
+			virtual std::weak_ptr<uml::Package> getApplyingPackage() const = 0;
 			/*!
 			The package that owns the profile application.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual void setApplyingPackage(std::shared_ptr<uml::Package> _applyingPackage) = 0;
-			
+			virtual void setApplyingPackage(std::weak_ptr<uml::Package>) = 0;
 			
 
 		protected:
@@ -200,12 +157,12 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			std::shared_ptr<uml::Profile > m_appliedProfile;/*!
+			std::shared_ptr<uml::Profile> m_appliedProfile;/*!
 			The package that owns the profile application.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			std::weak_ptr<uml::Package > m_applyingPackage;
+			std::weak_ptr<uml::Package> m_applyingPackage;
 
 		public:
 			//*********************************
@@ -221,7 +178,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -245,7 +202,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

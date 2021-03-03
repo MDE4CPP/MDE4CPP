@@ -7,22 +7,18 @@
 #ifndef ECORE_EOPERATION_HPP
 #define ECORE_EOPERATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -37,50 +33,15 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
 	class EClass;
-}
-
-namespace ecore 
-{
 	class EClassifier;
-}
-
-namespace ecore 
-{
 	class EGenericType;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
-	class EOperation;
-}
-
-namespace ecore 
-{
 	class EParameter;
-}
-
-namespace ecore 
-{
 	class ETypeParameter;
-}
-
-namespace ecore 
-{
-	class ETypedElement;
 }
 
 // base class includes
@@ -89,26 +50,23 @@ namespace ecore
 // enum includes
 
 
+
 //*********************************
 namespace ecore 
 {
 	
-	class EOperation:virtual public ETypedElement
+	class EOperation: virtual public ETypedElement
 	{
 		public:
  			EOperation(const EOperation &) {}
 
 		protected:
 			EOperation(){}
-
+			//Additional constructors for the containments back reference
+			EOperation(std::weak_ptr<ecore::EObject> par_eContainer);
 
 			//Additional constructors for the containments back reference
-
-			EOperation(std::weak_ptr<ecore::EObject > par_eContainer);
-
-			//Additional constructors for the containments back reference
-
-			EOperation(std::weak_ptr<ecore::EClass > par_eContainingClass);
+			EOperation(std::weak_ptr<ecore::EClass> par_eContainingClass);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -119,12 +77,8 @@ namespace ecore
 			//*********************************
 			// Operations
 			//*********************************
-			
-			
 			 
-			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation>  someOperation) const = 0;
-			
-			
+			virtual bool isOverrideOf(std::shared_ptr<ecore::EOperation> someOperation) const = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -132,29 +86,23 @@ namespace ecore
 			virtual int getOperationID() const = 0;
 			
 			
-			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const = 0;
-			
+			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const = 0;
 			
 			
 			virtual std::shared_ptr<Bag<ecore::EClassifier>> getEExceptions() const = 0;
 			
 			
-			
 			virtual std::shared_ptr<Bag<ecore::EGenericType>> getEGenericExceptions() const = 0;
-			
 			
 			
 			virtual std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> getEParameters() const = 0;
 			
 			
-			
 			virtual std::shared_ptr<Bag<ecore::ETypeParameter>> getETypeParameters() const = 0;
-			
 			
 			
 
@@ -170,7 +118,7 @@ namespace ecore
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<ecore::EClass > m_eContainingClass;
+			std::weak_ptr<ecore::EClass> m_eContainingClass;
 			mutable std::shared_ptr<Bag<ecore::EClassifier>> m_eExceptions;
 			mutable std::shared_ptr<Bag<ecore::EGenericType>> m_eGenericExceptions;
 			mutable std::shared_ptr<Subset<ecore::EParameter, ecore::EObject>> m_eParameters;
@@ -190,7 +138,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

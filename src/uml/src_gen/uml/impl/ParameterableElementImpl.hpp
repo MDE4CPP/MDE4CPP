@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			ParameterableElementImpl(const ParameterableElementImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			ParameterableElementImpl& operator=(ParameterableElementImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			ParameterableElementImpl& operator=(ParameterableElementImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisParameterableElementPtr(std::weak_ptr<ParameterableElement> thisParameterableElementPtr);
 
 			//Additional constructors for the containments back reference
-			ParameterableElementImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			ParameterableElementImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			ParameterableElementImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter);
-
-
-
+			ParameterableElementImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter);
 
 		public:
 			//destructor
@@ -54,17 +49,13 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
-			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement>  p) ;
-			
-			/*!
+			virtual bool isCompatibleWith(std::shared_ptr<uml::ParameterableElement> p) ;/*!
 			The query isTemplateParameter() determines if this ParameterableElement is exposed as a formal TemplateParameter.
 			result = (templateParameter->notEmpty())
 			<p>From package UML::CommonStructure.</p>
 			*/
 			 
 			virtual bool isTemplateParameter() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -79,30 +70,26 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::TemplateParameter > getOwningTemplateParameter() const ;
-			
+			virtual std::weak_ptr<uml::TemplateParameter> getOwningTemplateParameter() const ;
 			/*!
 			The formal TemplateParameter that owns this ParameterableElement.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setOwningTemplateParameter(std::shared_ptr<uml::TemplateParameter> _owningTemplateParameter) ;
-			
+			virtual void setOwningTemplateParameter(std::weak_ptr<uml::TemplateParameter>) ;
 			/*!
 			The TemplateParameter that exposes this ParameterableElement as a formal parameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::TemplateParameter > getTemplateParameter() const ;
-			
+			virtual std::shared_ptr<uml::TemplateParameter> getTemplateParameter() const ;
 			/*!
 			The TemplateParameter that exposes this ParameterableElement as a formal parameter.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setTemplateParameter(std::shared_ptr<uml::TemplateParameter> _templateParameter) ;
+			virtual void setTemplateParameter(std::shared_ptr<uml::TemplateParameter>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -117,7 +104,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ; 
+			virtual std::weak_ptr<uml::Element> getOwner() const ; 
 			 
 			//*********************************
 			// Structural Feature Getter/Setter
@@ -132,7 +119,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

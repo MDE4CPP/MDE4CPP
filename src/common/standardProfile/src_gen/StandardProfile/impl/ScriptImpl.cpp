@@ -44,9 +44,7 @@ ScriptImpl::ScriptImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Script is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ ScriptImpl::ScriptImpl(const ScriptImpl & obj):ScriptImpl()
 
 std::shared_ptr<ecore::EObject>  ScriptImpl::copy() const
 {
-	std::shared_ptr<ScriptImpl> element(new ScriptImpl(*this));
+	std::shared_ptr<ScriptImpl> element(new ScriptImpl());
+	*element=(*this);
 	element->setThisScriptPtr(element);
 	return element;
 }
 
 ScriptImpl& ScriptImpl::operator=(const ScriptImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	FileImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Script "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_ACTIONS_REDUCEACTIONACTIVATION_HPP
 #define FUML_SEMANTICS_ACTIONS_REDUCEACTIONACTIVATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,55 +31,27 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace uml 
-{
-	class Action;
-}
-
+//Forward Declaration for used types 
 namespace fUML::Semantics::Actions 
 {
-	class ActionActivation;
+	class InputPinActivation;
+	class OutputPinActivation;
+	class PinActivation;
 }
-
 namespace fUML::Semantics::Activities 
 {
 	class ActivityEdgeInstance;
-}
-
-namespace uml 
-{
-	class ActivityNode;
-}
-
-namespace fUML::Semantics::Activities 
-{
 	class ActivityNodeActivationGroup;
+	class Token;
 }
-
 namespace fUML::Semantics::CommonBehavior 
 {
 	class Execution;
 }
-
-namespace fUML::Semantics::Actions 
+namespace uml 
 {
-	class InputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class OutputPinActivation;
-}
-
-namespace fUML::Semantics::Actions 
-{
-	class PinActivation;
-}
-
-namespace fUML::Semantics::Activities 
-{
-	class Token;
+	class Action;
+	class ActivityNode;
 }
 
 // base class includes
@@ -92,18 +60,18 @@ namespace fUML::Semantics::Activities
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class ReduceActionActivation:virtual public ActionActivation
+	class ReduceActionActivation: virtual public ActionActivation
 	{
 		public:
  			ReduceActionActivation(const ReduceActionActivation &) {}
 
 		protected:
 			ReduceActionActivation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -123,11 +91,9 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > getCurrentExecution() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> getCurrentExecution() const = 0;
 			
-			
-			virtual void setCurrentExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _currentExecution) = 0;
-			
+			virtual void setCurrentExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution>) = 0;
 			
 
 		protected:
@@ -140,7 +106,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution > m_currentExecution;
+			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> m_currentExecution;
 
 		public:
 			//*********************************
@@ -156,7 +122,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

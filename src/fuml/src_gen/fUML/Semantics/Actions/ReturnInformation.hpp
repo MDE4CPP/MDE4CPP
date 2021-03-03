@@ -7,21 +7,17 @@
 #ifndef FUML_SEMANTICS_ACTIONS_RETURNINFORMATION_HPP
 #define FUML_SEMANTICS_ACTIONS_RETURNINFORMATION_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,34 +32,16 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace fUML::Semantics::CommonBehavior 
 {
 	class CallEventOccurrence;
+	class ParameterValue;
 }
-
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Operation;
-}
-
-namespace fUML::Semantics::CommonBehavior 
-{
-	class ParameterValue;
-}
-
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
-
-namespace uml 
-{
 	class ValueSpecification;
 }
 
@@ -73,18 +51,18 @@ namespace uml
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::Actions 
 {
 	
-	class ReturnInformation:virtual public fUML::Semantics::Values::Value
+	class ReturnInformation: virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			ReturnInformation(const ReturnInformation &) {}
 
 		protected:
 			ReturnInformation(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -96,30 +74,14 @@ namespace fUML::Semantics::Actions
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value>  otherValue) = 0;
-			
-			 
-			virtual std::shared_ptr<uml::Operation> getOperation() = 0;
-			
-			 
-			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0;
-			
-			 
-			virtual void reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue> >  outputParameterValues) = 0;
-			
-			 
-			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> _copy() = 0; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Values::Value> otherValue) = 0; 
+			virtual std::shared_ptr<uml::Operation> getOperation() = 0; 
+			virtual std::shared_ptr<Bag<uml::Classifier> > getTypes() = 0; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> new_() = 0; 
+			virtual void reply(std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> outputParameterValues) = 0; 
+			virtual std::shared_ptr<uml::ValueSpecification> specify() = 0; 
 			virtual std::string toString() = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -128,11 +90,9 @@ namespace fUML::Semantics::Actions
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence > getCallEventOccurrence() const = 0;
+			virtual std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> getCallEventOccurrence() const = 0;
 			
-			
-			virtual void setCallEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> _callEventOccurrence) = 0;
-			
+			virtual void setCallEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence>) = 0;
 			
 
 		protected:
@@ -145,7 +105,7 @@ namespace fUML::Semantics::Actions
 			// Reference Members
 			//*********************************
 			
-			std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence > m_callEventOccurrence;
+			std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> m_callEventOccurrence;
 
 		public:
 			//*********************************
@@ -160,7 +120,7 @@ namespace fUML::Semantics::Actions
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

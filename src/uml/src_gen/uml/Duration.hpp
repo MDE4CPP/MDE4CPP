@@ -8,24 +8,20 @@
 #define UML_DURATION_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Bag; 
 template<class T, class ... U> class Subset;
-
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -40,64 +36,18 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
 	class Observation;
-}
-
-namespace uml 
-{
 	class Package;
-}
-
-namespace uml 
-{
 	class Slot;
-}
-
-namespace uml 
-{
 	class StringExpression;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class Type;
-}
-
-namespace uml 
-{
-	class ValueSpecification;
-}
-
-namespace uml 
-{
 	class ValueSpecificationAction;
 }
 
@@ -108,6 +58,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -116,14 +67,13 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class Duration:virtual public ValueSpecification
+	class Duration: virtual public ValueSpecification
 	{
 		public:
  			Duration(const Duration &) {}
 
 		protected:
 			Duration(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -139,9 +89,7 @@ namespace uml
 			expr = null implies (observation->size() = 1 and observation->forAll(oclIsKindOf(DurationObservation)))
 			*/
 			 
-			virtual bool no_expr_requires_observation(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool no_expr_requires_observation(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -154,22 +102,19 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::ValueSpecification > getExpr() const = 0;
-			
+			virtual std::shared_ptr<uml::ValueSpecification> getExpr() const = 0;
 			/*!
 			A ValueSpecification that evaluates to the value of the Duration.
 			<p>From package UML::Values.</p>
 			*/
 			
-			virtual void setExpr(std::shared_ptr<uml::ValueSpecification> _expr) = 0;
-			
+			virtual void setExpr(std::shared_ptr<uml::ValueSpecification>) = 0;
 			/*!
 			Refers to the Observations that are involved in the computation of the Duration value
 			<p>From package UML::Values.</p>
 			*/
 			
 			virtual std::shared_ptr<Bag<uml::Observation>> getObservation() const = 0;
-			
 			
 			
 
@@ -187,7 +132,7 @@ namespace uml
 			<p>From package UML::Values.</p>
 			*/
 			
-			std::shared_ptr<uml::ValueSpecification > m_expr;/*!
+			std::shared_ptr<uml::ValueSpecification> m_expr;/*!
 			Refers to the Observations that are involved in the computation of the Duration value
 			<p>From package UML::Values.</p>
 			*/
@@ -203,7 +148,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Namespace > getNamespace() const = 0;/*!
+			virtual std::weak_ptr<uml::Namespace> getNamespace() const = 0;/*!
 			The Elements owned by this Element.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -213,7 +158,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -222,7 +167,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

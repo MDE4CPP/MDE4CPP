@@ -44,9 +44,7 @@ FocusImpl::FocusImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Focus is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ FocusImpl::FocusImpl(const FocusImpl & obj):FocusImpl()
 
 std::shared_ptr<ecore::EObject>  FocusImpl::copy() const
 {
-	std::shared_ptr<FocusImpl> element(new FocusImpl(*this));
+	std::shared_ptr<FocusImpl> element(new FocusImpl());
+	*element=(*this);
 	element->setThisFocusPtr(element);
 	return element;
 }
 
 FocusImpl& FocusImpl::operator=(const FocusImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Focus "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

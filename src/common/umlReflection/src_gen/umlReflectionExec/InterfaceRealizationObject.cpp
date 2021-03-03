@@ -75,9 +75,8 @@
 using namespace UML;
 
 InterfaceRealizationObject::InterfaceRealizationObject(std::shared_ptr<uml::InterfaceRealization> _element):
-
 	m_InterfaceRealizationValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_InterfaceRealization());
 }
 
@@ -98,13 +97,15 @@ InterfaceRealizationObject::~InterfaceRealizationObject()
 
 std::shared_ptr<ecore::EObject> InterfaceRealizationObject::copy()
 {
-	std::shared_ptr<InterfaceRealizationObject> element(new InterfaceRealizationObject(*this));
+	std::shared_ptr<InterfaceRealizationObject> element(new InterfaceRealizationObject());
+	*element=(*this);
 	element->setThisInterfaceRealizationObjectPtr(element);
 	return element;
 }
 
 InterfaceRealizationObject& InterfaceRealizationObject::operator=(const InterfaceRealizationObject & obj)
 {
+	UML::RealizationObject::operator=(obj);
 	return *this;
 }
 

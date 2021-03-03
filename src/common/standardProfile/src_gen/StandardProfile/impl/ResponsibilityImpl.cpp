@@ -44,9 +44,7 @@ ResponsibilityImpl::ResponsibilityImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Responsibility is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ ResponsibilityImpl::ResponsibilityImpl(const ResponsibilityImpl & obj):Responsib
 
 std::shared_ptr<ecore::EObject>  ResponsibilityImpl::copy() const
 {
-	std::shared_ptr<ResponsibilityImpl> element(new ResponsibilityImpl(*this));
+	std::shared_ptr<ResponsibilityImpl> element(new ResponsibilityImpl());
+	*element=(*this);
 	element->setThisResponsibilityPtr(element);
 	return element;
 }
 
 ResponsibilityImpl& ResponsibilityImpl::operator=(const ResponsibilityImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Responsibility "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

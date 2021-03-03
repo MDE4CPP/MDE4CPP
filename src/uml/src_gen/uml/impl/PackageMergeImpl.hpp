@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			PackageMergeImpl(const PackageMergeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			PackageMergeImpl& operator=(PackageMergeImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			PackageMergeImpl& operator=(PackageMergeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,14 +32,9 @@ namespace uml
 			virtual void setThisPackageMergePtr(std::weak_ptr<PackageMerge> thisPackageMergePtr);
 
 			//Additional constructors for the containments back reference
-			PackageMergeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
+			PackageMergeImpl(std::weak_ptr<uml::Element> par_owner);
 			//Additional constructors for the containments back reference
-			PackageMergeImpl(std::weak_ptr<uml::Package > par_receivingPackage);
-
-
-
+			PackageMergeImpl(std::weak_ptr<uml::Package> par_receivingPackage);
 
 		public:
 			//destructor
@@ -63,30 +58,26 @@ namespace uml
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::Package > getMergedPackage() const ;
-			
+			virtual std::shared_ptr<uml::Package> getMergedPackage() const ;
 			/*!
 			References the Package that is to be merged with the receiving package of the PackageMerge.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual void setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage) ;
-			
+			virtual void setMergedPackage(std::shared_ptr<uml::Package>) ;
 			/*!
 			References the Package that is being extended with the contents of the merged package of the PackageMerge.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Package > getReceivingPackage() const ;
-			
+			virtual std::weak_ptr<uml::Package> getReceivingPackage() const ;
 			/*!
 			References the Package that is being extended with the contents of the merged package of the PackageMerge.
 			<p>From package UML::Packages.</p>
 			*/
 			
-			virtual void setReceivingPackage(std::shared_ptr<uml::Package> _receivingPackage) ;
+			virtual void setReceivingPackage(std::weak_ptr<uml::Package>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -101,7 +92,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			Specifies the elements related by the Relationship.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -131,7 +122,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

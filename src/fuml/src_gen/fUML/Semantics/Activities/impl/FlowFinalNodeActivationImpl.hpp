@@ -23,8 +23,8 @@ namespace fUML::Semantics::Activities
 	{
 		public: 
 			FlowFinalNodeActivationImpl(const FlowFinalNodeActivationImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			FlowFinalNodeActivationImpl& operator=(FlowFinalNodeActivationImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			FlowFinalNodeActivationImpl& operator=(FlowFinalNodeActivationImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
@@ -33,10 +33,7 @@ namespace fUML::Semantics::Activities
 			virtual void setThisFlowFinalNodeActivationPtr(std::weak_ptr<FlowFinalNodeActivation> thisFlowFinalNodeActivationPtr);
 
 			//Additional constructors for the containments back reference
-			FlowFinalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup > par_group);
-
-
-
+			FlowFinalNodeActivationImpl(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> par_group);
 
 		public:
 			//destructor
@@ -55,7 +52,7 @@ namespace fUML::Semantics::Activities
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -75,7 +72,7 @@ namespace fUML::Semantics::Activities
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

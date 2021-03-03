@@ -7,20 +7,16 @@
 #ifndef FUML_SEMANTICS_LOCI_FIRSTCHOICESTRATEGY_HPP
 #define FUML_SEMANTICS_LOCI_FIRSTCHOICESTRATEGY_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,11 +31,7 @@ namespace fUML
 	class fUMLFactory;
 }
 
-//Forward Declaration for used types
-namespace fUML::Semantics::Loci 
-{
-	class ChoiceStrategy;
-}
+//Forward Declaration for used types 
 
 // base class includes
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
@@ -47,18 +39,18 @@ namespace fUML::Semantics::Loci
 // enum includes
 
 
+
 //*********************************
 namespace fUML::Semantics::Loci 
 {
 	
-	class FirstChoiceStrategy:virtual public ChoiceStrategy
+	class FirstChoiceStrategy: virtual public ChoiceStrategy
 	{
 		public:
  			FirstChoiceStrategy(const FirstChoiceStrategy &) {}
 
 		protected:
 			FirstChoiceStrategy(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -71,8 +63,6 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			 
 			virtual int choose(int size) = 0;
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -106,7 +96,7 @@ namespace fUML::Semantics::Loci
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

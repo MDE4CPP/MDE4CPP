@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			TestIdentityActionImpl(const TestIdentityActionImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			TestIdentityActionImpl& operator=(TestIdentityActionImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			TestIdentityActionImpl& operator=(TestIdentityActionImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisTestIdentityActionPtr(std::weak_ptr<TestIdentityAction> thisTestIdentityActionPtr);
 
 			//Additional constructors for the containments back reference
-			TestIdentityActionImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			TestIdentityActionImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			TestIdentityActionImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			TestIdentityActionImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			TestIdentityActionImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			TestIdentityActionImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			TestIdentityActionImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			TestIdentityActionImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -61,23 +52,17 @@ namespace uml
 			first.is(1,1) and second.is(1,1)
 			*/
 			 
-			virtual bool multiplicity(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool multiplicity(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The InputPins have no type.
 			first.type= null and second.type = null
 			*/
 			 
-			virtual bool no_type(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool no_type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			The type of the result OutputPin is Boolean.
 			result.type=Boolean
 			*/
 			 
-			virtual bool result_is_boolean(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool result_is_boolean(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -92,44 +77,38 @@ namespace uml
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getFirst() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getFirst() const ;
 			/*!
 			The InputPin on which the first input object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setFirst(std::shared_ptr<uml::InputPin> _first) ;
-			
+			virtual void setFirst(std::shared_ptr<uml::InputPin>) ;
 			/*!
 			The OutputPin whose Boolean value indicates whether the two input objects are identical.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::OutputPin > getResult() const ;
-			
+			virtual std::shared_ptr<uml::OutputPin> getResult() const ;
 			/*!
 			The OutputPin whose Boolean value indicates whether the two input objects are identical.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setResult(std::shared_ptr<uml::OutputPin> _result) ;
-			
+			virtual void setResult(std::shared_ptr<uml::OutputPin>) ;
 			/*!
 			The OutputPin on which the second input object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual std::shared_ptr<uml::InputPin > getSecond() const ;
-			
+			virtual std::shared_ptr<uml::InputPin> getSecond() const ;
 			/*!
 			The OutputPin on which the second input object is placed.
 			<p>From package UML::Actions.</p>
 			*/
 			
-			virtual void setSecond(std::shared_ptr<uml::InputPin> _second) ;
+			virtual void setSecond(std::shared_ptr<uml::InputPin>) ;
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -159,7 +138,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -179,7 +158,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

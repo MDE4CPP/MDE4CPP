@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -34,22 +35,15 @@
 #include <exception> // used in Persistence
 
 #include "ecore/EAnnotation.hpp"
-
 #include "ecore/EClass.hpp"
-
 #include "ecore/EClassifier.hpp"
-
 #include "ecore/EDataType.hpp"
-
 #include "ecore/EGenericType.hpp"
-
 #include "ecore/EObject.hpp"
-
 #include "ecore/EStructuralFeature.hpp"
 
 //Factories an Package includes
-#include "ecore/impl/ecoreFactoryImpl.hpp"
-#include "ecore/impl/ecorePackageImpl.hpp"
+#include "ecore/ecorePackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -75,87 +69,49 @@ EAttributeImpl::~EAttributeImpl()
 }
 
 //Additional constructor for the containments back reference
-EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EObject > par_eContainer)
+EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EObject> par_eContainer)
 :EAttributeImpl()
 {
 	m_eContainer = par_eContainer;
 }
 
 //Additional constructor for the containments back reference
-EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EClass > par_eContainingClass)
+EAttributeImpl::EAttributeImpl(std::weak_ptr<ecore::EClass> par_eContainingClass)
 :EAttributeImpl()
 {
 	m_eContainingClass = par_eContainingClass;
 }
 
-
-EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj):EAttributeImpl()
+EAttributeImpl::EAttributeImpl(const EAttributeImpl & obj): EAttributeImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  EAttributeImpl::copy() const
-{
-	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl(*this));
-	element->setThisEAttributePtr(element);
-	return element;
-}
-
 EAttributeImpl& EAttributeImpl::operator=(const EAttributeImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	EStructuralFeatureImpl::operator=(obj);
+	EAttribute::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy EAttribute "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_changeable = obj.isChangeable();
-	m_defaultValue = obj.getDefaultValue();
-	m_defaultValueLiteral = obj.getDefaultValueLiteral();
-	m_derived = obj.isDerived();
-	m_featureID = obj.getFeatureID();
+	//Clone Attributes with (deep copy)
 	m_iD = obj.isID();
-	m_lowerBound = obj.getLowerBound();
-	m_many = obj.isMany();
-	m_metaElementID = obj.getMetaElementID();
-	m_name = obj.getName();
-	m_ordered = obj.isOrdered();
-	m_required = obj.isRequired();
-	m_transient = obj.isTransient();
-	m_unique = obj.isUnique();
-	m_unsettable = obj.isUnsettable();
-	m_upperBound = obj.getUpperBound();
-	m_volatile = obj.isVolatile();
 
 	//copy references with no containment (soft copy)
-	
 	m_eAttributeType  = obj.getEAttributeType();
-
-	m_eContainer  = obj.getEContainer();
-
-	m_eContainingClass  = obj.getEContainingClass();
-
-	m_eType  = obj.getEType();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<ecore::EAnnotation>> _eAnnotationsList = obj.getEAnnotations();
-	for(std::shared_ptr<ecore::EAnnotation> _eAnnotations : *_eAnnotationsList)
-	{
-		this->getEAnnotations()->add(std::shared_ptr<ecore::EAnnotation>(std::dynamic_pointer_cast<ecore::EAnnotation>(_eAnnotations->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eAnnotations" << std::endl;
-	#endif
-	if(obj.getEGenericType()!=nullptr)
-	{
-		m_eGenericType = std::dynamic_pointer_cast<ecore::EGenericType>(obj.getEGenericType()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_eGenericType" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> EAttributeImpl::copy() const
+{
+	std::shared_ptr<EAttributeImpl> element(new EAttributeImpl());
+	*element =(*this);
+	element->setThisEAttributePtr(element);
+	return element;
 }
 
 std::shared_ptr<EClass> EAttributeImpl::eStaticClass() const
@@ -173,12 +129,10 @@ bool EAttributeImpl::isID() const
 {
 	return m_iD;
 }
-
 void EAttributeImpl::setID(bool _iD)
 {
 	m_iD = _iD;
 } 
-
 
 
 //*********************************
@@ -191,13 +145,11 @@ void EAttributeImpl::setID(bool _iD)
 /*
 Getter & Setter for reference eAttributeType
 */
-std::shared_ptr<ecore::EDataType > EAttributeImpl::getEAttributeType() const
+std::shared_ptr<ecore::EDataType> EAttributeImpl::getEAttributeType() const
 {
 //assert(m_eAttributeType);
     return m_eAttributeType;
 }
-
-
 
 
 
@@ -253,7 +205,7 @@ Any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getEAttributeType())); //223
+			return eAny(getEAttributeType()); //223
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
 			return eAny(isID()); //222
 	}
@@ -334,13 +286,12 @@ void EAttributeImpl::loadAttributes(std::shared_ptr<persistence::interfaces::XLo
 
 void EAttributeImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<ecore::ecoreFactory> modelFactory=ecore::ecoreFactory::eInstance();
 
 	//load BasePackage Nodes
 	EStructuralFeatureImpl::loadNode(nodeName, loadHandler);
 }
 
-void EAttributeImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references)
+void EAttributeImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references)
 {
 	EStructuralFeatureImpl::resolveReferences(featureID, references);
 }
@@ -372,14 +323,11 @@ void EAttributeImpl::saveContent(std::shared_ptr<persistence::interfaces::XSaveH
 	try
 	{
 		std::shared_ptr<ecore::ecorePackage> package = ecore::ecorePackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getEAttribute_Attribute_iD()) )
 		{
 			saveHandler->addAttribute("iD", this->isID());
 		}
-
 	}
 	catch (std::exception& e)
 	{

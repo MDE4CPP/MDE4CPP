@@ -44,9 +44,7 @@ SourceImpl::SourceImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"Source is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ SourceImpl::SourceImpl(const SourceImpl & obj):SourceImpl()
 
 std::shared_ptr<ecore::EObject>  SourceImpl::copy() const
 {
-	std::shared_ptr<SourceImpl> element(new SourceImpl(*this));
+	std::shared_ptr<SourceImpl> element(new SourceImpl());
+	*element=(*this);
 	element->setThisSourcePtr(element);
 	return element;
 }
 
 SourceImpl& SourceImpl::operator=(const SourceImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	FileImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Source "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

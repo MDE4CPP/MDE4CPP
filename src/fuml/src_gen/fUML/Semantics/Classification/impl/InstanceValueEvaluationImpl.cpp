@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -54,21 +55,18 @@
 #include <exception> // used in Persistence
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
-
 #include "fUML/Semantics/Loci/Locus.hpp"
-
 #include "fUML/Semantics/Values/Value.hpp"
-
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Classification/impl/ClassificationFactoryImpl.hpp"
-#include "fUML/Semantics/Classification/impl/ClassificationPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Classification/ClassificationPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -93,38 +91,34 @@ InstanceValueEvaluationImpl::~InstanceValueEvaluationImpl()
 }
 
 
-
-InstanceValueEvaluationImpl::InstanceValueEvaluationImpl(const InstanceValueEvaluationImpl & obj):InstanceValueEvaluationImpl()
+InstanceValueEvaluationImpl::InstanceValueEvaluationImpl(const InstanceValueEvaluationImpl & obj): InstanceValueEvaluationImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  InstanceValueEvaluationImpl::copy() const
-{
-	std::shared_ptr<InstanceValueEvaluationImpl> element(new InstanceValueEvaluationImpl(*this));
-	element->setThisInstanceValueEvaluationPtr(element);
-	return element;
-}
-
 InstanceValueEvaluationImpl& InstanceValueEvaluationImpl::operator=(const InstanceValueEvaluationImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::Values::EvaluationImpl::operator=(obj);
+	InstanceValueEvaluation::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy InstanceValueEvaluation "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_locus  = obj.getLocus();
-
-	m_specification  = obj.getSpecification();
-
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> InstanceValueEvaluationImpl::copy() const
+{
+	std::shared_ptr<InstanceValueEvaluationImpl> element(new InstanceValueEvaluationImpl());
+	*element =(*this);
+	element->setThisInstanceValueEvaluationPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> InstanceValueEvaluationImpl::eStaticClass() const
@@ -297,13 +291,12 @@ void InstanceValueEvaluationImpl::loadAttributes(std::shared_ptr<persistence::in
 
 void InstanceValueEvaluationImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Classification::ClassificationFactory> modelFactory=fUML::Semantics::Classification::ClassificationFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::Values::EvaluationImpl::loadNode(nodeName, loadHandler);
 }
 
-void InstanceValueEvaluationImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void InstanceValueEvaluationImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::Values::EvaluationImpl::resolveReferences(featureID, references);
 }
@@ -326,9 +319,6 @@ void InstanceValueEvaluationImpl::saveContent(std::shared_ptr<persistence::inter
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Classification::ClassificationPackage> package = fUML::Semantics::Classification::ClassificationPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

@@ -25,15 +25,14 @@ virtual public Token
 	{
 		public: 
 			TokenImpl(const TokenImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			TokenImpl& operator=(TokenImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			TokenImpl& operator=(TokenImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::Activities::ActivitiesFactoryImpl;
 			TokenImpl();
 			virtual std::shared_ptr<Token> getThisTokenPtr() const;
 			virtual void setThisTokenPtr(std::weak_ptr<Token> thisTokenPtr);
-
 
 
 		public:
@@ -44,45 +43,30 @@ virtual public Token
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ;
-			
-			 
-			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token>  other) ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ;
-			
-			 
-			virtual bool isControl() ;
-			
-			 
-			virtual std::shared_ptr<fUML::Semantics::Activities::Token> transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation>  holder) ;
-			
-			 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> _copy() ; 
+			virtual bool equals(std::shared_ptr<fUML::Semantics::Activities::Token> other) ; 
+			virtual std::shared_ptr<fUML::Semantics::Values::Value> getValue() const ; 
+			virtual bool isControl() ; 
+			virtual std::shared_ptr<fUML::Semantics::Activities::Token> transfer(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> holder) ; 
 			virtual void withdraw() ;
-			
-			
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
 			virtual bool isWithdrawn() const ;
-			
 			 
-			virtual void setWithdrawn (bool _withdrawn); 
+			virtual void setWithdrawn (bool _withdrawn);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation > getHolder() const ;
+			virtual std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> getHolder() const ;
 			
+			virtual void setHolder(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation>) ;
 			
-			virtual void setHolder(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder) ;
-			
-							
 			
 			//*********************************
 			// Union Getter
@@ -102,7 +86,7 @@ virtual public Token
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

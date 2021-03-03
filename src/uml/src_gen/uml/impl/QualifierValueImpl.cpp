@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/Union.hpp"
@@ -34,16 +35,12 @@
 #include <exception> // used in Persistence
 
 #include "uml/Comment.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/InputPin.hpp"
-
 #include "uml/Property.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -69,54 +66,42 @@ QualifierValueImpl::~QualifierValueImpl()
 }
 
 //Additional constructor for the containments back reference
-QualifierValueImpl::QualifierValueImpl(std::weak_ptr<uml::Element > par_owner)
+QualifierValueImpl::QualifierValueImpl(std::weak_ptr<uml::Element> par_owner)
 :QualifierValueImpl()
 {
 	m_owner = par_owner;
 }
 
-
-QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj):QualifierValueImpl()
+QualifierValueImpl::QualifierValueImpl(const QualifierValueImpl & obj): QualifierValueImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  QualifierValueImpl::copy() const
-{
-	std::shared_ptr<QualifierValueImpl> element(new QualifierValueImpl(*this));
-	element->setThisQualifierValuePtr(element);
-	return element;
-}
-
 QualifierValueImpl& QualifierValueImpl::operator=(const QualifierValueImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ElementImpl::operator=(obj);
+	QualifierValue::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy QualifierValue "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	m_owner  = obj.getOwner();
-
 	m_qualifier  = obj.getQualifier();
-
 	m_value  = obj.getValue();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> QualifierValueImpl::copy() const
+{
+	std::shared_ptr<QualifierValueImpl> element(new QualifierValueImpl());
+	*element =(*this);
+	element->setThisQualifierValuePtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
@@ -131,19 +116,19 @@ std::shared_ptr<ecore::EClass> QualifierValueImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool QualifierValueImpl::multiplicity_of_qualifier(Any diagnostics,std::map <   Any, Any >  context)
+bool QualifierValueImpl::multiplicity_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool QualifierValueImpl::qualifier_attribute(Any diagnostics,std::map <   Any, Any >  context)
+bool QualifierValueImpl::qualifier_attribute(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool QualifierValueImpl::type_of_qualifier(Any diagnostics,std::map <   Any, Any >  context)
+bool QualifierValueImpl::type_of_qualifier(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -155,33 +140,29 @@ bool QualifierValueImpl::type_of_qualifier(Any diagnostics,std::map <   Any, Any
 /*
 Getter & Setter for reference qualifier
 */
-std::shared_ptr<uml::Property > QualifierValueImpl::getQualifier() const
+std::shared_ptr<uml::Property> QualifierValueImpl::getQualifier() const
 {
 //assert(m_qualifier);
     return m_qualifier;
 }
-
 void QualifierValueImpl::setQualifier(std::shared_ptr<uml::Property> _qualifier)
 {
     m_qualifier = _qualifier;
 }
 
 
-
 /*
 Getter & Setter for reference value
 */
-std::shared_ptr<uml::InputPin > QualifierValueImpl::getValue() const
+std::shared_ptr<uml::InputPin> QualifierValueImpl::getValue() const
 {
 //assert(m_value);
     return m_value;
 }
-
 void QualifierValueImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 {
     m_value = _value;
 }
-
 
 
 //*********************************
@@ -231,9 +212,9 @@ Any QualifierValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_QUALIFIER:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getQualifier())); //1913
+			return eAny(getQualifier()); //1913
 		case uml::umlPackage::QUALIFIERVALUE_ATTRIBUTE_VALUE:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getValue())); //1914
+			return eAny(getValue()); //1914
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }
@@ -326,13 +307,12 @@ void QualifierValueImpl::loadAttributes(std::shared_ptr<persistence::interfaces:
 
 void QualifierValueImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	ElementImpl::loadNode(nodeName, loadHandler);
 }
 
-void QualifierValueImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void QualifierValueImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -381,13 +361,9 @@ void QualifierValueImpl::saveContent(std::shared_ptr<persistence::interfaces::XS
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
-		// Add references
-		saveHandler->addReference("qualifier", this->getQualifier());
-		saveHandler->addReference("value", this->getValue());
-
+	// Add references
+		saveHandler->addReference(this->getQualifier(), "qualifier", getQualifier()->eClass() != uml::umlPackage::eInstance()->getProperty_Class()); 
+		saveHandler->addReference(this->getValue(), "value", getValue()->eClass() != uml::umlPackage::eInstance()->getInputPin_Class()); 
 	}
 	catch (std::exception& e)
 	{

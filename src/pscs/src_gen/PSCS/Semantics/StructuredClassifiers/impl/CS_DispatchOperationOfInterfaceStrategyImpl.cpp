@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -37,17 +38,15 @@
 #include <exception> // used in Persistence
 
 #include "uml/Operation.hpp"
-
 #include "fUML/Semantics/StructuredClassifiers/RedefinitionBasedDispatchStrategy.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
-#include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersPackageImpl.hpp"
-
-#include "PSCS/Semantics/SemanticsFactory.hpp"
-#include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/PSCSFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "uml/umlPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -72,34 +71,34 @@ CS_DispatchOperationOfInterfaceStrategyImpl::~CS_DispatchOperationOfInterfaceStr
 }
 
 
-
-CS_DispatchOperationOfInterfaceStrategyImpl::CS_DispatchOperationOfInterfaceStrategyImpl(const CS_DispatchOperationOfInterfaceStrategyImpl & obj):CS_DispatchOperationOfInterfaceStrategyImpl()
+CS_DispatchOperationOfInterfaceStrategyImpl::CS_DispatchOperationOfInterfaceStrategyImpl(const CS_DispatchOperationOfInterfaceStrategyImpl & obj): CS_DispatchOperationOfInterfaceStrategyImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  CS_DispatchOperationOfInterfaceStrategyImpl::copy() const
-{
-	std::shared_ptr<CS_DispatchOperationOfInterfaceStrategyImpl> element(new CS_DispatchOperationOfInterfaceStrategyImpl(*this));
-	element->setThisCS_DispatchOperationOfInterfaceStrategyPtr(element);
-	return element;
-}
-
 CS_DispatchOperationOfInterfaceStrategyImpl& CS_DispatchOperationOfInterfaceStrategyImpl::operator=(const CS_DispatchOperationOfInterfaceStrategyImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::operator=(obj);
+	CS_DispatchOperationOfInterfaceStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy CS_DispatchOperationOfInterfaceStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> CS_DispatchOperationOfInterfaceStrategyImpl::copy() const
+{
+	std::shared_ptr<CS_DispatchOperationOfInterfaceStrategyImpl> element(new CS_DispatchOperationOfInterfaceStrategyImpl());
+	*element =(*this);
+	element->setThisCS_DispatchOperationOfInterfaceStrategyPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> CS_DispatchOperationOfInterfaceStrategyImpl::eStaticClass() const
@@ -114,7 +113,7 @@ std::shared_ptr<ecore::EClass> CS_DispatchOperationOfInterfaceStrategyImpl::eSta
 //*********************************
 // Operations
 //*********************************
-bool CS_DispatchOperationOfInterfaceStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation>  ownedOperation,std::shared_ptr<uml::Operation>  baseOperation)
+bool CS_DispatchOperationOfInterfaceStrategyImpl::operationsMatch(std::shared_ptr<uml::Operation> ownedOperation,std::shared_ptr<uml::Operation> baseOperation)
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
@@ -222,13 +221,12 @@ void CS_DispatchOperationOfInterfaceStrategyImpl::loadAttributes(std::shared_ptr
 
 void CS_DispatchOperationOfInterfaceStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory> modelFactory=PSCS::Semantics::StructuredClassifiers::StructuredClassifiersFactory::eInstance();
 
 	//load BasePackage Nodes
 	fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
-void CS_DispatchOperationOfInterfaceStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void CS_DispatchOperationOfInterfaceStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::resolveReferences(featureID, references);
 }
@@ -254,9 +252,6 @@ void CS_DispatchOperationOfInterfaceStrategyImpl::saveContent(std::shared_ptr<pe
 	try
 	{
 		std::shared_ptr<PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage> package = PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

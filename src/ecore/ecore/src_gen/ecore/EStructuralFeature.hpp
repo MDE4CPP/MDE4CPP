@@ -7,21 +7,17 @@
 #ifndef ECORE_ESTRUCTURALFEATURE_HPP
 #define ECORE_ESTRUCTURALFEATURE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
 #include "abstractDataTypes/Any.hpp"
-
 // forward declarations
-
 
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -36,35 +32,13 @@ namespace ecore
 	class ecoreFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace ecore 
 {
 	class EAnnotation;
-}
-
-namespace ecore 
-{
 	class EClass;
-}
-
-namespace ecore 
-{
 	class EClassifier;
-}
-
-namespace ecore 
-{
 	class EGenericType;
-}
-
-namespace ecore 
-{
-	class EObject;
-}
-
-namespace ecore 
-{
-	class ETypedElement;
 }
 
 // base class includes
@@ -73,26 +47,23 @@ namespace ecore
 // enum includes
 
 
+
 //*********************************
 namespace ecore 
 {
 	
-	class EStructuralFeature:virtual public ETypedElement
+	class EStructuralFeature: virtual public ETypedElement
 	{
 		public:
  			EStructuralFeature(const EStructuralFeature &) {}
 
 		protected:
 			EStructuralFeature(){}
-
+			//Additional constructors for the containments back reference
+			EStructuralFeature(std::weak_ptr<ecore::EObject> par_eContainer);
 
 			//Additional constructors for the containments back reference
-
-			EStructuralFeature(std::weak_ptr<ecore::EObject > par_eContainer);
-
-			//Additional constructors for the containments back reference
-
-			EStructuralFeature(std::weak_ptr<ecore::EClass > par_eContainingClass);
+			EStructuralFeature(std::weak_ptr<ecore::EClass> par_eContainingClass);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -105,59 +76,46 @@ namespace ecore
 			//*********************************
 			 
 			virtual void * getContainerClass() = 0;
-			
-			
-			
-			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
 			virtual bool isChangeable() const = 0;
-			
 			 
-			virtual void setChangeable (bool _changeable)= 0; 
+			virtual void setChangeable (bool _changeable)= 0;
 			 
 			virtual Any getDefaultValue() const = 0;
-			
 			 
-			virtual void setDefaultValue (Any _defaultValue)= 0; 
+			virtual void setDefaultValue (Any _defaultValue)= 0;
 			 
 			virtual std::string getDefaultValueLiteral() const = 0;
-			
 			 
-			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral)= 0; 
+			virtual void setDefaultValueLiteral (std::string _defaultValueLiteral)= 0;
 			 
 			virtual bool isDerived() const = 0;
-			
 			 
-			virtual void setDerived (bool _derived)= 0; 
+			virtual void setDerived (bool _derived)= 0;
 			 
 			virtual int getFeatureID() const = 0;
 			
-			
 			 
 			virtual bool isTransient() const = 0;
-			
 			 
-			virtual void setTransient (bool _transient)= 0; 
+			virtual void setTransient (bool _transient)= 0;
 			 
 			virtual bool isUnsettable() const = 0;
-			
 			 
-			virtual void setUnsettable (bool _unsettable)= 0; 
+			virtual void setUnsettable (bool _unsettable)= 0;
 			 
 			virtual bool isVolatile() const = 0;
-			
 			 
-			virtual void setVolatile (bool _volatile)= 0; 
+			virtual void setVolatile (bool _volatile)= 0;
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::weak_ptr<ecore::EClass > getEContainingClass() const = 0;
-			
+			virtual std::weak_ptr<ecore::EClass> getEContainingClass() const = 0;
 			
 			
 
@@ -187,7 +145,7 @@ namespace ecore
 			// Reference Members
 			//*********************************
 			
-			std::weak_ptr<ecore::EClass > m_eContainingClass;
+			std::weak_ptr<ecore::EClass> m_eContainingClass;
 
 		public:
 			//*********************************
@@ -203,7 +161,7 @@ namespace ecore
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

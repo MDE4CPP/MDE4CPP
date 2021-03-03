@@ -76,9 +76,8 @@
 using namespace UML;
 
 ExecutableNodeObject::ExecutableNodeObject(std::shared_ptr<uml::ExecutableNode> _element):
-
 	m_ExecutableNodeValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_ExecutableNode());
 }
 
@@ -99,13 +98,15 @@ ExecutableNodeObject::~ExecutableNodeObject()
 
 std::shared_ptr<ecore::EObject> ExecutableNodeObject::copy()
 {
-	std::shared_ptr<ExecutableNodeObject> element(new ExecutableNodeObject(*this));
+	std::shared_ptr<ExecutableNodeObject> element(new ExecutableNodeObject());
+	*element=(*this);
 	element->setThisExecutableNodeObjectPtr(element);
 	return element;
 }
 
 ExecutableNodeObject& ExecutableNodeObject::operator=(const ExecutableNodeObject & obj)
 {
+	UML::ActivityNodeObject::operator=(obj);
 	return *this;
 }
 

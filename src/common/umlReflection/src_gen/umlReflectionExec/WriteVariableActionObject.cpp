@@ -91,9 +91,8 @@
 using namespace UML;
 
 WriteVariableActionObject::WriteVariableActionObject(std::shared_ptr<uml::WriteVariableAction> _element):
-
 	m_WriteVariableActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_WriteVariableAction());
 }
 
@@ -114,13 +113,15 @@ WriteVariableActionObject::~WriteVariableActionObject()
 
 std::shared_ptr<ecore::EObject> WriteVariableActionObject::copy()
 {
-	std::shared_ptr<WriteVariableActionObject> element(new WriteVariableActionObject(*this));
+	std::shared_ptr<WriteVariableActionObject> element(new WriteVariableActionObject());
+	*element=(*this);
 	element->setThisWriteVariableActionObjectPtr(element);
 	return element;
 }
 
 WriteVariableActionObject& WriteVariableActionObject::operator=(const WriteVariableActionObject & obj)
 {
+	UML::VariableActionObject::operator=(obj);
 	return *this;
 }
 

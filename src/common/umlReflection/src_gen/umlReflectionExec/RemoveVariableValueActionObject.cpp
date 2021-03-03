@@ -94,9 +94,8 @@
 using namespace UML;
 
 RemoveVariableValueActionObject::RemoveVariableValueActionObject(std::shared_ptr<uml::RemoveVariableValueAction> _element):
-
 	m_RemoveVariableValueActionValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_RemoveVariableValueAction());
 }
 
@@ -117,13 +116,15 @@ RemoveVariableValueActionObject::~RemoveVariableValueActionObject()
 
 std::shared_ptr<ecore::EObject> RemoveVariableValueActionObject::copy()
 {
-	std::shared_ptr<RemoveVariableValueActionObject> element(new RemoveVariableValueActionObject(*this));
+	std::shared_ptr<RemoveVariableValueActionObject> element(new RemoveVariableValueActionObject());
+	*element=(*this);
 	element->setThisRemoveVariableValueActionObjectPtr(element);
 	return element;
 }
 
 RemoveVariableValueActionObject& RemoveVariableValueActionObject::operator=(const RemoveVariableValueActionObject & obj)
 {
+	UML::WriteVariableActionObject::operator=(obj);
 	return *this;
 }
 

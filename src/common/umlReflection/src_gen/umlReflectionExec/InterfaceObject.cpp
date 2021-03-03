@@ -124,9 +124,8 @@
 using namespace UML;
 
 InterfaceObject::InterfaceObject(std::shared_ptr<uml::Interface> _element):
-
 	m_InterfaceValue(_element)
-{		
+{
 	this->getTypes()->insert(this->getTypes()->begin(), UML::UMLPackage::eInstance()->get_UML_Interface());
 }
 
@@ -147,13 +146,15 @@ InterfaceObject::~InterfaceObject()
 
 std::shared_ptr<ecore::EObject> InterfaceObject::copy()
 {
-	std::shared_ptr<InterfaceObject> element(new InterfaceObject(*this));
+	std::shared_ptr<InterfaceObject> element(new InterfaceObject());
+	*element=(*this);
 	element->setThisInterfaceObjectPtr(element);
 	return element;
 }
 
 InterfaceObject& InterfaceObject::operator=(const InterfaceObject & obj)
 {
+	UML::ClassifierObject::operator=(obj);
 	return *this;
 }
 

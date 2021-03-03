@@ -25,15 +25,14 @@ virtual public FeatureValue
 	{
 		public: 
 			FeatureValueImpl(const FeatureValueImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			FeatureValueImpl& operator=(FeatureValueImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			FeatureValueImpl& operator=(FeatureValueImpl const&); 
 
 		protected:
 			friend class fUML::Semantics::SimpleClassifiers::SimpleClassifiersFactoryImpl;
 			FeatureValueImpl();
 			virtual std::shared_ptr<FeatureValue> getThisFeatureValuePtr() const;
 			virtual void setThisFeatureValuePtr(std::weak_ptr<FeatureValue> thisFeatureValuePtr);
-
 
 
 		public:
@@ -44,37 +43,29 @@ virtual public FeatureValue
 			// Operations
 			//*********************************
 			 
-			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _copy() ;
-			
-			 
-			virtual bool hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>  other) ;
-			
-			
+			virtual std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> _copy() ; 
+			virtual bool hasEqualValues(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> other) ;
 			
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
 			 
 			virtual int getPosition() const ;
-			
 			 
-			virtual void setPosition (int _position); 
+			virtual void setPosition (int _position);
 			
 			
 			//*********************************
 			// Reference
 			//*********************************
 			
-			virtual std::shared_ptr<uml::StructuralFeature > getFeature() const ;
+			virtual std::shared_ptr<uml::StructuralFeature> getFeature() const ;
 			
-			
-			virtual void setFeature(std::shared_ptr<uml::StructuralFeature> _feature) ;
-			
+			virtual void setFeature(std::shared_ptr<uml::StructuralFeature>) ;
 			
 			virtual std::shared_ptr<Bag<fUML::Semantics::Values::Value>> getValues() const ;
 			
 			
-							
 			
 			//*********************************
 			// Union Getter
@@ -94,7 +85,7 @@ virtual public FeatureValue
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

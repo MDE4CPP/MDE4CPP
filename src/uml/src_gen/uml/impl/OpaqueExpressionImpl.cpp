@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,34 +36,21 @@
 #include <exception> // used in Persistence
 
 #include "uml/Behavior.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/Package.hpp"
-
 #include "uml/Parameter.hpp"
-
 #include "uml/Slot.hpp"
-
 #include "uml/StringExpression.hpp"
-
 #include "uml/TemplateParameter.hpp"
-
 #include "uml/Type.hpp"
-
 #include "uml/ValueSpecification.hpp"
-
 #include "uml/ValueSpecificationAction.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -88,7 +76,7 @@ OpaqueExpressionImpl::~OpaqueExpressionImpl()
 }
 
 //Additional constructor for the containments back reference
-OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Namespace > par_namespace)
+OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :OpaqueExpressionImpl()
 {
 	m_namespace = par_namespace;
@@ -96,14 +84,14 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Namespace > par_na
 }
 
 //Additional constructor for the containments back reference
-OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Element > par_owner)
+OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Element> par_owner)
 :OpaqueExpressionImpl()
 {
 	m_owner = par_owner;
 }
 
 //Additional constructor for the containments back reference
-OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Package > par_owningPackage)
+OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Package> par_owningPackage)
 :OpaqueExpressionImpl()
 {
 	m_owningPackage = par_owningPackage;
@@ -111,7 +99,7 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Package > par_owni
 }
 
 //Additional constructor for the containments back reference
-OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Slot > par_owningSlot)
+OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Slot> par_owningSlot)
 :OpaqueExpressionImpl()
 {
 	m_owningSlot = par_owningSlot;
@@ -119,7 +107,7 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::Slot > par_owningS
 }
 
 //Additional constructor for the containments back reference
-OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::TemplateParameter > par_owningTemplateParameter)
+OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter)
 :OpaqueExpressionImpl()
 {
 	m_owningTemplateParameter = par_owningTemplateParameter;
@@ -127,84 +115,85 @@ OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::TemplateParameter 
 }
 
 //Additional constructor for the containments back reference
-OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction > par_valueSpecificationAction)
+OpaqueExpressionImpl::OpaqueExpressionImpl(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction)
 :OpaqueExpressionImpl()
 {
 	m_valueSpecificationAction = par_valueSpecificationAction;
 	m_owner = par_valueSpecificationAction;
 }
 
-
-OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj):OpaqueExpressionImpl()
+OpaqueExpressionImpl::OpaqueExpressionImpl(const OpaqueExpressionImpl & obj): OpaqueExpressionImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  OpaqueExpressionImpl::copy() const
-{
-	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl(*this));
-	element->setThisOpaqueExpressionPtr(element);
-	return element;
-}
-
 OpaqueExpressionImpl& OpaqueExpressionImpl::operator=(const OpaqueExpressionImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ValueSpecificationImpl::operator=(obj);
+	OpaqueExpression::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy OpaqueExpression "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_body = obj.getBody();
-	m_language = obj.getLanguage();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
+	std::shared_ptr<Bag<std::string>> bodyContainer = getBody();
+	if(nullptr != bodyContainer )
+	{
+		int size = bodyContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _body=(*bodyContainer)[i];	
+			if(nullptr != _body)
+			{
+				bodyContainer->push_back(_body);
+			} 
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container body."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr body."<< std::endl;)
+	}
+	std::shared_ptr<Bag<std::string>> languageContainer = getLanguage();
+	if(nullptr != languageContainer )
+	{
+		int size = languageContainer->size();
+		for(int i=0; i<size ; i++)
+		{
+			auto _language=(*languageContainer)[i];	
+			if(nullptr != _language)
+			{
+				languageContainer->push_back(_language);
+			} 
+			else
+			{
+				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container language."<< std::endl;)
+			}
+		}
+	}
+	else
+	{
+		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr language."<< std::endl;)
+	}
 
 	//copy references with no containment (soft copy)
-	
 	m_behavior  = obj.getBehavior();
-
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-	m_owningPackage  = obj.getOwningPackage();
-
-	m_owningSlot  = obj.getOwningSlot();
-
-	m_owningTemplateParameter  = obj.getOwningTemplateParameter();
-
 	m_result  = obj.getResult();
-
-	m_templateParameter  = obj.getTemplateParameter();
-
-	m_type  = obj.getType();
-
-	m_valueSpecificationAction  = obj.getValueSpecificationAction();
-
-
 	//Clone references with containment (deep copy)
-
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> OpaqueExpressionImpl::copy() const
+{
+	std::shared_ptr<OpaqueExpressionImpl> element(new OpaqueExpressionImpl());
+	*element =(*this);
+	element->setThisOpaqueExpressionPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
@@ -218,7 +207,7 @@ std::shared_ptr<ecore::EClass> OpaqueExpressionImpl::eStaticClass() const
 /*
 Getter & Setter for attribute body
 */
-std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getBody() const 
+std::shared_ptr<Bag<std::string>> OpaqueExpressionImpl::getBody() const 
 {
 	if(m_body == nullptr)
 	{
@@ -229,12 +218,10 @@ std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getBody() const
 
 
 
-
-
 /*
 Getter & Setter for attribute language
 */
-std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getLanguage() const 
+std::shared_ptr<Bag<std::string>> OpaqueExpressionImpl::getLanguage() const 
 {
 	if(m_language == nullptr)
 	{
@@ -242,8 +229,6 @@ std::shared_ptr<Bag<std::string> > OpaqueExpressionImpl::getLanguage() const
 	}
 	return m_language;
 }
-
-
 
 
 
@@ -270,19 +255,19 @@ bool OpaqueExpressionImpl::isPositive()
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::language_body_size(Any diagnostics,std::map <   Any, Any >  context)
+bool OpaqueExpressionImpl::language_body_size(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::one_return_result_parameter(Any diagnostics,std::map <   Any, Any >  context)
+bool OpaqueExpressionImpl::one_return_result_parameter(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool OpaqueExpressionImpl::only_return_result_parameters(Any diagnostics,std::map <   Any, Any >  context)
+bool OpaqueExpressionImpl::only_return_result_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -300,23 +285,21 @@ int OpaqueExpressionImpl::value()
 /*
 Getter & Setter for reference behavior
 */
-std::shared_ptr<uml::Behavior > OpaqueExpressionImpl::getBehavior() const
+std::shared_ptr<uml::Behavior> OpaqueExpressionImpl::getBehavior() const
 {
 
     return m_behavior;
 }
-
 void OpaqueExpressionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
 }
 
 
-
 /*
 Getter & Setter for reference result
 */
-std::shared_ptr<uml::Parameter > OpaqueExpressionImpl::getResult() const
+std::shared_ptr<uml::Parameter> OpaqueExpressionImpl::getResult() const
 {
 
     return m_result;
@@ -324,12 +307,10 @@ std::shared_ptr<uml::Parameter > OpaqueExpressionImpl::getResult() const
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > OpaqueExpressionImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> OpaqueExpressionImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -349,7 +330,7 @@ std::shared_ptr<Union<uml::Element>> OpaqueExpressionImpl::getOwnedElement() con
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > OpaqueExpressionImpl::getOwner() const
+std::weak_ptr<uml::Element> OpaqueExpressionImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -408,13 +389,13 @@ Any OpaqueExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BEHAVIOR:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getBehavior())); //16615
+			return eAny(getBehavior()); //16615
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_BODY:
 			return eAny(getBody()); //16616
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage()); //16617
 		case uml::umlPackage::OPAQUEEXPRESSION_ATTRIBUTE_RESULT:
-			return eAny(std::dynamic_pointer_cast<ecore::EObject>(getResult())); //16618
+			return eAny(getResult()); //16618
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }
@@ -508,13 +489,12 @@ void OpaqueExpressionImpl::loadAttributes(std::shared_ptr<persistence::interface
 
 void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 	try
 	{
 		if (nodeName.compare("body") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			std::shared_ptr<Bag<std::string> > list_body = this->getBody();
+			std::shared_ptr<Bag<std::string>> list_body = this->getBody();
 			list_body->push_back(value);
 			return;
 		}
@@ -522,7 +502,7 @@ void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 		if (nodeName.compare("language") == 0)
 		{
 			std::shared_ptr<std::string> value = loadHandler->getChildText();
-			std::shared_ptr<Bag<std::string> > list_language = this->getLanguage();
+			std::shared_ptr<Bag<std::string>> list_language = this->getLanguage();
 			list_language->push_back(value);
 			return;
 		}
@@ -540,7 +520,7 @@ void OpaqueExpressionImpl::loadNode(std::string nodeName, std::shared_ptr<persis
 	ValueSpecificationImpl::loadNode(nodeName, loadHandler);
 }
 
-void OpaqueExpressionImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void OpaqueExpressionImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -588,8 +568,6 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
 		// Add attributes
 		if ( this->eIsSet(package->getOpaqueExpression_Attribute_body()) )
 		{
@@ -606,10 +584,8 @@ void OpaqueExpressionImpl::saveContent(std::shared_ptr<persistence::interfaces::
 				saveHandler->addAttributeAsNode("language", *value);
 			}
 		}
-
-		// Add references
-		saveHandler->addReference("behavior", this->getBehavior());
-
+	// Add references
+		saveHandler->addReference(this->getBehavior(), "behavior", getBehavior()->eClass() != uml::umlPackage::eInstance()->getBehavior_Class()); 
 	}
 	catch (std::exception& e)
 	{

@@ -17,6 +17,7 @@
 #include <cassert>
 #include <iostream>
 #include <sstream>
+
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
@@ -35,32 +36,20 @@
 #include <exception> // used in Persistence
 
 #include "uml/CombinedFragment.hpp"
-
 #include "uml/Comment.hpp"
-
 #include "uml/Dependency.hpp"
-
 #include "uml/Element.hpp"
-
 #include "uml/Gate.hpp"
-
 #include "uml/GeneralOrdering.hpp"
-
 #include "uml/Interaction.hpp"
-
 #include "uml/InteractionOperand.hpp"
-
 #include "uml/Lifeline.hpp"
-
 #include "uml/NamedElement.hpp"
-
 #include "uml/Namespace.hpp"
-
 #include "uml/StringExpression.hpp"
 
 //Factories an Package includes
-#include "uml/impl/umlFactoryImpl.hpp"
-#include "uml/impl/umlPackageImpl.hpp"
+#include "uml/umlPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -86,7 +75,7 @@ ConsiderIgnoreFragmentImpl::~ConsiderIgnoreFragmentImpl()
 }
 
 //Additional constructor for the containments back reference
-ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Interaction > par_enclosingInteraction)
+ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Interaction> par_enclosingInteraction)
 :ConsiderIgnoreFragmentImpl()
 {
 	m_enclosingInteraction = par_enclosingInteraction;
@@ -94,7 +83,7 @@ ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Intera
 }
 
 //Additional constructor for the containments back reference
-ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::InteractionOperand > par_enclosingOperand)
+ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand)
 :ConsiderIgnoreFragmentImpl()
 {
 	m_enclosingOperand = par_enclosingOperand;
@@ -102,7 +91,7 @@ ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Intera
 }
 
 //Additional constructor for the containments back reference
-ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Namespace > par_namespace)
+ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Namespace> par_namespace)
 :ConsiderIgnoreFragmentImpl()
 {
 	m_namespace = par_namespace;
@@ -110,100 +99,42 @@ ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Namesp
 }
 
 //Additional constructor for the containments back reference
-ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Element > par_owner)
+ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(std::weak_ptr<uml::Element> par_owner)
 :ConsiderIgnoreFragmentImpl()
 {
 	m_owner = par_owner;
 }
 
-
-ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragmentImpl & obj):ConsiderIgnoreFragmentImpl()
+ConsiderIgnoreFragmentImpl::ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragmentImpl & obj): ConsiderIgnoreFragmentImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  ConsiderIgnoreFragmentImpl::copy() const
-{
-	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl(*this));
-	element->setThisConsiderIgnoreFragmentPtr(element);
-	return element;
-}
-
 ConsiderIgnoreFragmentImpl& ConsiderIgnoreFragmentImpl::operator=(const ConsiderIgnoreFragmentImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	CombinedFragmentImpl::operator=(obj);
+	ConsiderIgnoreFragment::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ConsiderIgnoreFragment "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
-	m_interactionOperator = obj.getInteractionOperator();
-	m_name = obj.getName();
-	m_qualifiedName = obj.getQualifiedName();
-	m_visibility = obj.getVisibility();
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-	std::shared_ptr<Bag<uml::Dependency>> _clientDependency = obj.getClientDependency();
-	m_clientDependency.reset(new Bag<uml::Dependency>(*(obj.getClientDependency().get())));
-
-	std::shared_ptr<Bag<uml::Lifeline>> _covered = obj.getCovered();
-	m_covered.reset(new Bag<uml::Lifeline>(*(obj.getCovered().get())));
-
-	m_enclosingInteraction  = obj.getEnclosingInteraction();
-
-	m_enclosingOperand  = obj.getEnclosingOperand();
-
 	std::shared_ptr<Bag<uml::NamedElement>> _message = obj.getMessage();
 	m_message.reset(new Bag<uml::NamedElement>(*(obj.getMessage().get())));
-
-	m_namespace  = obj.getNamespace();
-
-	m_owner  = obj.getOwner();
-
-
 	//Clone references with containment (deep copy)
-
-	std::shared_ptr<Bag<uml::Gate>> _cfragmentGateList = obj.getCfragmentGate();
-	for(std::shared_ptr<uml::Gate> _cfragmentGate : *_cfragmentGateList)
-	{
-		this->getCfragmentGate()->add(std::shared_ptr<uml::Gate>(std::dynamic_pointer_cast<uml::Gate>(_cfragmentGate->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_cfragmentGate" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::GeneralOrdering>> _generalOrderingList = obj.getGeneralOrdering();
-	for(std::shared_ptr<uml::GeneralOrdering> _generalOrdering : *_generalOrderingList)
-	{
-		this->getGeneralOrdering()->add(std::shared_ptr<uml::GeneralOrdering>(std::dynamic_pointer_cast<uml::GeneralOrdering>(_generalOrdering->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_generalOrdering" << std::endl;
-	#endif
-	if(obj.getNameExpression()!=nullptr)
-	{
-		m_nameExpression = std::dynamic_pointer_cast<uml::StringExpression>(obj.getNameExpression()->copy());
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_nameExpression" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::InteractionOperand>> _operandList = obj.getOperand();
-	for(std::shared_ptr<uml::InteractionOperand> _operand : *_operandList)
-	{
-		this->getOperand()->add(std::shared_ptr<uml::InteractionOperand>(std::dynamic_pointer_cast<uml::InteractionOperand>(_operand->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_operand" << std::endl;
-	#endif
-	std::shared_ptr<Bag<uml::Comment>> _ownedCommentList = obj.getOwnedComment();
-	for(std::shared_ptr<uml::Comment> _ownedComment : *_ownedCommentList)
-	{
-		this->getOwnedComment()->add(std::shared_ptr<uml::Comment>(std::dynamic_pointer_cast<uml::Comment>(_ownedComment->copy())));
-	}
-	#ifdef SHOW_SUBSET_UNION
-		std::cout << "Copying the Subset: " << "m_ownedComment" << std::endl;
-	#endif
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> ConsiderIgnoreFragmentImpl::copy() const
+{
+	std::shared_ptr<ConsiderIgnoreFragmentImpl> element(new ConsiderIgnoreFragmentImpl());
+	*element =(*this);
+	element->setThisConsiderIgnoreFragmentPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const
@@ -218,13 +149,13 @@ std::shared_ptr<ecore::EClass> ConsiderIgnoreFragmentImpl::eStaticClass() const
 //*********************************
 // Operations
 //*********************************
-bool ConsiderIgnoreFragmentImpl::consider_or_ignore(Any diagnostics,std::map <   Any, Any >  context)
+bool ConsiderIgnoreFragmentImpl::consider_or_ignore(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
 }
 
-bool ConsiderIgnoreFragmentImpl::type(Any diagnostics,std::map <   Any, Any >  context)
+bool ConsiderIgnoreFragmentImpl::type(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context)
 {
 	std::cout << __PRETTY_FUNCTION__  << std::endl;
 	throw "UnsupportedOperationException";
@@ -250,12 +181,10 @@ std::shared_ptr<Bag<uml::NamedElement>> ConsiderIgnoreFragmentImpl::getMessage()
 
 
 
-
-
 //*********************************
 // Union Getter
 //*********************************
-std::weak_ptr<uml::Namespace > ConsiderIgnoreFragmentImpl::getNamespace() const
+std::weak_ptr<uml::Namespace> ConsiderIgnoreFragmentImpl::getNamespace() const
 {
 	return m_namespace;
 }
@@ -275,7 +204,7 @@ std::shared_ptr<Union<uml::Element>> ConsiderIgnoreFragmentImpl::getOwnedElement
 	return m_ownedElement;
 }
 
-std::weak_ptr<uml::Element > ConsiderIgnoreFragmentImpl::getOwner() const
+std::weak_ptr<uml::Element> ConsiderIgnoreFragmentImpl::getOwner() const
 {
 	return m_owner;
 }
@@ -325,15 +254,7 @@ Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType)
 	{
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_message->begin();
-			Bag<uml::NamedElement>::iterator end = m_message->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5616
+			return eAny(getMessage()); //5616			
 		}
 	}
 	return CombinedFragmentImpl::eGet(featureID, resolve, coreType);
@@ -374,7 +295,7 @@ bool ConsiderIgnoreFragmentImpl::eSet(int featureID, Any newValue)
 				}
 				iterMessage++;
 			}
-
+ 
 			iterMessage = messageList->begin();
 			endMessage = messageList->end();
 			while (iterMessage != endMessage)
@@ -438,13 +359,12 @@ void ConsiderIgnoreFragmentImpl::loadAttributes(std::shared_ptr<persistence::int
 
 void ConsiderIgnoreFragmentImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<uml::umlFactory> modelFactory=uml::umlFactory::eInstance();
 
 	//load BasePackage Nodes
 	CombinedFragmentImpl::loadNode(nodeName, loadHandler);
 }
 
-void ConsiderIgnoreFragmentImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void ConsiderIgnoreFragmentImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	switch(featureID)
 	{
@@ -453,11 +373,11 @@ void ConsiderIgnoreFragmentImpl::resolveReferences(const int featureID, std::lis
 			std::shared_ptr<Bag<uml::NamedElement>> _message = getMessage();
 			for(std::shared_ptr<ecore::EObject> ref : references)
 			{
-				std::shared_ptr<uml::NamedElement> _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
+				std::shared_ptr<uml::NamedElement>  _r = std::dynamic_pointer_cast<uml::NamedElement>(ref);
 				if (_r != nullptr)
 				{
 					_message->push_back(_r);
-				}				
+				}
 			}
 			return;
 		}
@@ -492,16 +412,8 @@ void ConsiderIgnoreFragmentImpl::saveContent(std::shared_ptr<persistence::interf
 	try
 	{
 		std::shared_ptr<uml::umlPackage> package = uml::umlPackage::eInstance();
-
-	
-
-		// Add references
-		std::shared_ptr<Bag<uml::NamedElement>> message_list = this->getMessage();
-		for (std::shared_ptr<uml::NamedElement > object : *message_list)
-		{ 
-			saveHandler->addReferences("message", object);
-		}
-
+	// Add references
+		saveHandler->addReferences<uml::NamedElement>("message", this->getMessage());
 	}
 	catch (std::exception& e)
 	{

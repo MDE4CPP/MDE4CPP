@@ -7,20 +7,16 @@
 #ifndef UML_FEATURE_HPP
 #define UML_FEATURE_HPP
 
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T> class Union;
 
-
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -35,39 +31,13 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Classifier;
-}
-
-namespace uml 
-{
 	class Comment;
-}
-
-namespace uml 
-{
 	class Dependency;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class Namespace;
-}
-
-namespace uml 
-{
-	class RedefinableElement;
-}
-
-namespace uml 
-{
 	class StringExpression;
 }
 
@@ -78,6 +48,7 @@ namespace uml
 #include "uml/VisibilityKind.hpp"
 
 
+
 //*********************************
 namespace uml 
 {
@@ -86,14 +57,13 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class Feature:virtual public RedefinableElement
+	class Feature: virtual public RedefinableElement
 	{
 		public:
  			Feature(const Feature &) {}
 
 		protected:
 			Feature(){}
-
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -114,13 +84,12 @@ namespace uml
 			*/
 			 
 			virtual bool getIsStatic() const = 0;
-			
 			/*!
 			Specifies whether this Feature characterizes individual instances classified by the Classifier (false) or the Classifier itself (true).
 			<p>From package UML::Classification.</p>
 			*/
 			 
-			virtual void setIsStatic (bool _isStatic)= 0; 
+			virtual void setIsStatic (bool _isStatic)= 0;
 			
 			//*********************************
 			// Reference
@@ -170,7 +139,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;
 
 			virtual std::shared_ptr<ecore::EObject> eContainer() const = 0; 
 			
@@ -179,7 +148,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

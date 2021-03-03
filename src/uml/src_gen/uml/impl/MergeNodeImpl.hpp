@@ -22,8 +22,8 @@ namespace uml
 	{
 		public: 
 			MergeNodeImpl(const MergeNodeImpl & obj);
-			virtual std::shared_ptr<ecore::EObject> copy() const;    
-			MergeNodeImpl& operator=(MergeNodeImpl const&);
+			virtual std::shared_ptr<ecore::EObject> copy() const;
+			MergeNodeImpl& operator=(MergeNodeImpl const&); 
 
 		protected:
 			friend class umlFactoryImpl;
@@ -32,22 +32,13 @@ namespace uml
 			virtual void setThisMergeNodePtr(std::weak_ptr<MergeNode> thisMergeNodePtr);
 
 			//Additional constructors for the containments back reference
-			MergeNodeImpl(std::weak_ptr<uml::Activity > par_activity);
-
-
+			MergeNodeImpl(std::weak_ptr<uml::Activity> par_activity);
 			//Additional constructors for the containments back reference
-			MergeNodeImpl(std::weak_ptr<uml::StructuredActivityNode > par_inStructuredNode);
-
-
+			MergeNodeImpl(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode);
 			//Additional constructors for the containments back reference
-			MergeNodeImpl(std::weak_ptr<uml::Namespace > par_namespace);
-
-
+			MergeNodeImpl(std::weak_ptr<uml::Namespace> par_namespace);
 			//Additional constructors for the containments back reference
-			MergeNodeImpl(std::weak_ptr<uml::Element > par_owner);
-
-
-
+			MergeNodeImpl(std::weak_ptr<uml::Element> par_owner);
 
 		public:
 			//destructor
@@ -62,16 +53,12 @@ namespace uml
 			allEdges->forAll(oclIsKindOf(ControlFlow)) or allEdges->forAll(oclIsKindOf(ObjectFlow))
 			*/
 			 
-			virtual bool edges(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			/*!
+			virtual bool edges(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;/*!
 			A MergeNode has one outgoing ActivityEdge.
 			outgoing->size()=1
 			*/
 			 
-			virtual bool one_outgoing_edge(Any diagnostics,std::map <   Any, Any >  context) ;
-			
-			
+			virtual bool one_outgoing_edge(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) ;
 			
 			//*********************************
 			// Attributes Getter Setter
@@ -81,7 +68,7 @@ namespace uml
 			//*********************************
 			// Reference
 			//*********************************
-							
+			
 			
 			//*********************************
 			// Union Getter
@@ -101,7 +88,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const ;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const ;/*!
 			The RedefinableElement that is being redefined by this element.
 			<p>From package UML::Classification.</p>
 			*/
@@ -121,7 +108,7 @@ namespace uml
 			virtual void loadAttributes(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler, std::map<std::string, std::string> attr_list);
 			virtual void loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler);
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) ;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) ;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const ;
 			virtual void saveContent(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const;
 			

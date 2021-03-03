@@ -8,23 +8,19 @@
 #define UML_TEMPLATESIGNATURE_HPP
 
 #include <map>
-#include <list>
+
 #include <memory>
 #include <string>
-
-
 // forward declarations
 template<class T, class ... U> class Subset;
 template<class T> class Union;
-
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;
 
 //*********************************
 // generated Includes
-
-#include <map>
-
+#include <map> // used for Persistence
+#include <vector> // used for Persistence
 namespace persistence
 {
 	namespace interfaces
@@ -39,24 +35,11 @@ namespace uml
 	class umlFactory;
 }
 
-//Forward Declaration for used types
+//Forward Declaration for used types 
 namespace uml 
 {
 	class Comment;
-}
-
-namespace uml 
-{
-	class Element;
-}
-
-namespace uml 
-{
 	class TemplateParameter;
-}
-
-namespace uml 
-{
 	class TemplateableElement;
 }
 
@@ -64,6 +47,7 @@ namespace uml
 #include "uml/Element.hpp"
 
 // enum includes
+
 
 
 //*********************************
@@ -74,22 +58,18 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class TemplateSignature:virtual public Element
+	class TemplateSignature: virtual public Element
 	{
 		public:
  			TemplateSignature(const TemplateSignature &) {}
 
 		protected:
 			TemplateSignature(){}
-
+			//Additional constructors for the containments back reference
+			TemplateSignature(std::weak_ptr<uml::Element> par_owner);
 
 			//Additional constructors for the containments back reference
-
-			TemplateSignature(std::weak_ptr<uml::Element > par_owner);
-
-			//Additional constructors for the containments back reference
-
-			TemplateSignature(std::weak_ptr<uml::TemplateableElement > par_template);
+			TemplateSignature(std::weak_ptr<uml::TemplateableElement> par_template);
 
 		public:
 			virtual std::shared_ptr<ecore::EObject> copy() const = 0;
@@ -105,17 +85,13 @@ namespace uml
 			template.ownedElement->includesAll(parameter.parameteredElement->asSet() - parameter.ownedParameteredElement->asSet())
 			*/
 			 
-			virtual bool own_elements(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			/*!
+			virtual bool own_elements(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;/*!
 			The names of the parameters of a TemplateSignature are unique.
 			parameter->forAll( p1, p2 | (p1 <> p2 and p1.parameteredElement.oclIsKindOf(NamedElement) and p2.parameteredElement.oclIsKindOf(NamedElement) ) implies
 			   p1.parameteredElement.oclAsType(NamedElement).name <> p2.parameteredElement.oclAsType(NamedElement).name)
 			*/
 			 
-			virtual bool unique_parameters(Any diagnostics,std::map <   Any, Any >  context) = 0;
-			
-			
+			virtual bool unique_parameters(Any diagnostics,std::shared_ptr<std::map < Any, Any>> context) = 0;
 			//*********************************
 			// Attributes Getter Setter
 			//*********************************
@@ -132,21 +108,18 @@ namespace uml
 			
 			
 			
-			
 			/*!
 			The TemplateableElement that owns this TemplateSignature.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::TemplateableElement > getTemplate() const = 0;
-			
+			virtual std::weak_ptr<uml::TemplateableElement> getTemplate() const = 0;
 			/*!
 			The TemplateableElement that owns this TemplateSignature.
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setTemplate(std::shared_ptr<uml::TemplateableElement> _template) = 0;
-			
+			virtual void setTemplate(std::weak_ptr<uml::TemplateableElement>) = 0;
 			
 
 		protected:
@@ -173,7 +146,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			std::weak_ptr<uml::TemplateableElement > m_template;
+			std::weak_ptr<uml::TemplateableElement> m_template;
 
 		public:
 			//*********************************
@@ -189,7 +162,7 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual std::weak_ptr<uml::Element > getOwner() const = 0;/*!
+			virtual std::weak_ptr<uml::Element> getOwner() const = 0;/*!
 			The ordered set of all formal TemplateParameters for this TemplateSignature.
 			<p>From package UML::CommonStructure.</p>
 			*/
@@ -203,7 +176,7 @@ namespace uml
 			//*********************************
 			virtual void load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler) = 0;
 			
-			virtual void resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references) = 0;
+			virtual void resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references) = 0;
 			virtual void save(std::shared_ptr<persistence::interfaces::XSaveHandler> saveHandler) const = 0;
 			
 	};

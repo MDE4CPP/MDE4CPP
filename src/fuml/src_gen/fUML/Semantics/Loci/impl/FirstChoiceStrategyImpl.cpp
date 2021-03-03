@@ -18,6 +18,7 @@
 #include <iostream>
 #include <sstream>
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -33,13 +34,10 @@
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
-#include "fUML/Semantics/Loci/impl/LociPackageImpl.hpp"
-
-#include "fUML/Semantics/SemanticsFactory.hpp"
-#include "fUML/Semantics/SemanticsPackage.hpp"
-#include "fUML/fUMLFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/Semantics/Loci/LociPackage.hpp"
+
 
 #include "ecore/EAttribute.hpp"
 #include "ecore/EStructuralFeature.hpp"
@@ -64,34 +62,34 @@ FirstChoiceStrategyImpl::~FirstChoiceStrategyImpl()
 }
 
 
-
-FirstChoiceStrategyImpl::FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl & obj):FirstChoiceStrategyImpl()
+FirstChoiceStrategyImpl::FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl & obj): FirstChoiceStrategyImpl()
 {
 	*this = obj;
 }
 
-std::shared_ptr<ecore::EObject>  FirstChoiceStrategyImpl::copy() const
-{
-	std::shared_ptr<FirstChoiceStrategyImpl> element(new FirstChoiceStrategyImpl(*this));
-	element->setThisFirstChoiceStrategyPtr(element);
-	return element;
-}
-
 FirstChoiceStrategyImpl& FirstChoiceStrategyImpl::operator=(const FirstChoiceStrategyImpl & obj)
 {
+	//call overloaded =Operator for each base class
+	ChoiceStrategyImpl::operator=(obj);
+	FirstChoiceStrategy::operator=(obj);
+
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy FirstChoiceStrategy "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
+	//Clone Attributes with (deep copy)
 
 	//copy references with no containment (soft copy)
-	
-
 	//Clone references with containment (deep copy)
-
-
-
 	return *this;
+}
+
+std::shared_ptr<ecore::EObject> FirstChoiceStrategyImpl::copy() const
+{
+	std::shared_ptr<FirstChoiceStrategyImpl> element(new FirstChoiceStrategyImpl());
+	*element =(*this);
+	element->setThisFirstChoiceStrategyPtr(element);
+	return element;
 }
 
 std::shared_ptr<ecore::EClass> FirstChoiceStrategyImpl::eStaticClass() const
@@ -191,13 +189,12 @@ void FirstChoiceStrategyImpl::loadAttributes(std::shared_ptr<persistence::interf
 
 void FirstChoiceStrategyImpl::loadNode(std::string nodeName, std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
 {
-	std::shared_ptr<fUML::Semantics::Loci::LociFactory> modelFactory=fUML::Semantics::Loci::LociFactory::eInstance();
 
 	//load BasePackage Nodes
 	ChoiceStrategyImpl::loadNode(nodeName, loadHandler);
 }
 
-void FirstChoiceStrategyImpl::resolveReferences(const int featureID, std::list<std::shared_ptr<ecore::EObject> > references)
+void FirstChoiceStrategyImpl::resolveReferences(const int featureID, std::vector<std::shared_ptr<ecore::EObject> > references)
 {
 	ChoiceStrategyImpl::resolveReferences(featureID, references);
 }
@@ -220,9 +217,6 @@ void FirstChoiceStrategyImpl::saveContent(std::shared_ptr<persistence::interface
 	try
 	{
 		std::shared_ptr<fUML::Semantics::Loci::LociPackage> package = fUML::Semantics::Loci::LociPackage::eInstance();
-
-	
-
 	}
 	catch (std::exception& e)
 	{

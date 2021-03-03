@@ -44,9 +44,7 @@ ModelLibraryImpl::ModelLibraryImpl()
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
 	DEBUG_MESSAGE(std::cout<<"ModelLibrary is created..."<<std::endl;)
-
 	//***********************************
 	// init Get Set
 	//getter init
@@ -71,14 +69,17 @@ ModelLibraryImpl::ModelLibraryImpl(const ModelLibraryImpl & obj):ModelLibraryImp
 
 std::shared_ptr<ecore::EObject>  ModelLibraryImpl::copy() const
 {
-	std::shared_ptr<ModelLibraryImpl> element(new ModelLibraryImpl(*this));
+	std::shared_ptr<ModelLibraryImpl> element(new ModelLibraryImpl());
+	*element=(*this);
 	element->setThisModelLibraryPtr(element);
 	return element;
 }
 
 ModelLibraryImpl& ModelLibraryImpl::operator=(const ModelLibraryImpl & obj)
 {
-		//create copy of all Attributes
+	//call overloaded =Operator for each base class
+	uml::StereotypeImpl::operator=(obj);
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ModelLibrary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
