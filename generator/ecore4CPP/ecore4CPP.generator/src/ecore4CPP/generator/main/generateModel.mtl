@@ -134,10 +134,7 @@ namespace [aClass.generateNamespaceDefinition()/]
 [/if][if(aClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[aClass.name.toUpperFirst()/]>[/if]	{
 		public:
  			[aClass.name.toUpperFirst()/](const [aClass.name.toUpperFirst()/] &) {}
-<<<<<<< HEAD
 
-=======
->>>>>>> remotes/origin/Feature_EcoreTemplate
 		protected:
 			[aClass.name.toUpperFirst()/](){}
 			[if(aClass.containsContainerAttribute())]

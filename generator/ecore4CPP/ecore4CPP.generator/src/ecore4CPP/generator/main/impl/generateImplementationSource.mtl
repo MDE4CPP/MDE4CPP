@@ -154,23 +154,6 @@ using namespace [aClass.generateNamespaceDefinition()/];
 
 [className/]& [className/]::operator=(const [className/] & obj)
 {
-<<<<<<< HEAD
-	*this = obj;
-}
-
-std::shared_ptr<ecore::EObject>  [className/]::copy() const
-{
-	std::shared_ptr<[className/]> element(new [className/](*this));
-	element->[generateGetThisPtrPropertySetterName()/](element);
-[if (generateObjectMonitoring())]
-	[aClass.getRootPackage().name/]Factory::eInstance()->add(element);
-[/if]
-	return element;
-}
-
-[className/]& [className/]::operator=(const [className/] & obj)
-{
-=======
 	[if (aClass.eSuperTypes->isEmpty() and not(aClass.name='EObject'))]
 	//call overloaded =Operator for each base class
 	ecore::EModelElementImpl::operator=(obj);
@@ -182,7 +165,6 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 	[/if]
 	[aClass.name.toUpperFirst()/]::operator=(obj);
 
->>>>>>> remotes/origin/Feature_EcoreTemplate
 	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
@@ -419,10 +401,6 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|eRef.containment = true and not eRef.isUnion())->asOrderedSet()->sortedBy(name))]
 	[aReference.InitReferences()/]
 	[/for]
-<<<<<<< HEAD
-
-	return *this;
-=======
 	return *this;
 }
 
@@ -435,7 +413,6 @@ std::shared_ptr<ecore::EObject> [className/]::copy() const
 	[aClass.getRootPackage().name/]Factory::eInstance()->add(element);
 [/if]
 	return element;
->>>>>>> remotes/origin/Feature_EcoreTemplate
 }
 
 std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStaticClass() const

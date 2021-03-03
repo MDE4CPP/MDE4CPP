@@ -129,13 +129,9 @@
 //*********************************
 [className/]::[className/]()
 {
-<<<<<<< HEAD
 	/*
 	NOTE: Due to virtual inheritance, base class constrcutors may not be called correctly
 	*/
-
-=======
->>>>>>> remotes/origin/Feature_EcoreTemplate
 	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is created..."<<std::endl;)
 	//***********************************
 	// init Get Set
@@ -177,21 +173,14 @@
 
 std::shared_ptr<ecore::EObject>  [className/]::copy() const
 {
-<<<<<<< HEAD
-	std::shared_ptr<[className/]> element(new [className/](*this));
-=======
 	std::shared_ptr<[className/]> element(new [className/]());
 	*element=(*this);
->>>>>>> remotes/origin/Feature_EcoreTemplate
 	element->[generateGetThisPtrPropertySetterName()/](element);
 	return element;
 }
 
 [className/]& [className/]::operator=(const [className/] & obj)
 {
-<<<<<<< HEAD
-		//create copy of all Attributes
-=======
 [if (aClass.superClass->isEmpty())]
 	//call overloaded =Operator for each base class
 	uml::[aClass.getGeneralSuperClassName()/]Impl::operator=(obj);
@@ -201,8 +190,7 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 	[sClass.getClassifierName(aClass, false, ignoreNamespace(sClass))/]Impl::operator=(obj);
 	[/for]
 [/if]
-//create copy of all Attributes
->>>>>>> remotes/origin/Feature_EcoreTemplate
+	//create copy of all Attributes
 	#ifdef SHOW_COPIES
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif

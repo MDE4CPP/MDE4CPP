@@ -106,21 +106,13 @@
 
 using namespace [aClassifier.getNearestPackage().generateNamespace(false)/];
 
-<<<<<<< HEAD
-[className/]::[className/](std::shared_ptr<[pointerName/]> _element)
-{		
-	[comment] [if(not aClassifier.oclIsTypeOf(Interface))] [/comment]
-	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
-	[comment] [/if] [/comment]
-	[aClassifier.UMLValueSetterName()/](_element);
-=======
 [className/]::[className/](std::shared_ptr<[pointerName/]> _element):
 	[aClassifier.UMLValueName()/](_element)
-{
-	[if(not aClassifier.oclIsTypeOf(Interface))]
+{		
+	[if(not aClassifier.oclIsTypeOf(Interface))] 
+	[comment  use copy constructor! or =operator/]  
 	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
 	[/if]
->>>>>>> remotes/origin/Feature_EcoreTemplate
 }
 
 [className/]::[className/]([className/] &obj):
@@ -131,7 +123,8 @@ using namespace [aClassifier.getNearestPackage().generateNamespace(false)/];
 
 [className/]::[className/]()
 {	
-	[if(not aClassifier.oclIsTypeOf(Interface))]
+	[if(not aClassifier.oclIsTypeOf(Interface))] 
+	[comment  use copy constructor! or =operator/] 
 	this->getTypes()->insert(this->getTypes()->begin(), [aClassifier.getModelPackage()/][aClassifier.generatePackageGetterCall(aClassifier)/]);
 	[/if]
 }
@@ -150,15 +143,12 @@ std::shared_ptr<ecore::EObject> [className/]::copy()
 
 [className/]& [className/]::operator=(const [className/] & obj)
 {
-<<<<<<< HEAD
-=======
- [if (aClassifier.collectInheritedTypes()->isEmpty())]
+[if (aClassifier.collectInheritedTypes()->isEmpty())]
 	PSCS::Semantics::StructuredClassifiers::CS_ObjectImpl::operator=( obj);
 [else]
 [for(inheritedType : Classifier | aClassifier.collectInheritedTypes()) ]
 	[inheritedType.getNearestPackage().generateNamespace(false)/]::[inheritedType.objectClassName()/]::operator=(obj);
 [/for][/if]
->>>>>>> remotes/origin/Feature_EcoreTemplate
 	return *this;
 }
 

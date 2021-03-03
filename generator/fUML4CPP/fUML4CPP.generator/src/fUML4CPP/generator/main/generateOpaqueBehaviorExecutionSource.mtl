@@ -68,10 +68,7 @@ std::shared_ptr<ecore::EObject> [behaviorName/]::copy() const
 
 [behaviorName/]& [behaviorName/]::operator=(const [behaviorName/] & obj)
 {
-<<<<<<< HEAD
-=======
 	fUML::Semantics::CommonBehavior::OpaqueBehaviorExecutionImpl::operator=(obj); 
->>>>>>> remotes/origin/Feature_EcoreTemplate
 	return *this;
 }
 
