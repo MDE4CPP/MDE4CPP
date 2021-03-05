@@ -56,10 +56,6 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 			virtual std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> create(std::shared_ptr<[needNamespace(anEPackage, 'EClass')/]> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1)[if (not generateObjectMonitoring())] const[/if] = 0;
 
 			[anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->sortedBy(name).generateClassCreate(false)/]
-[comment] Package in Factory notwendig???
-			//Package
-			virtual std::shared_ptr<[anEPackage.name.concat('Package')/]> get[anEPackage.name.concat('Package')/]() const = 0;
-[/comment]
 [if (generateObjectMonitoring())]
 			virtual void print() = 0;
 			virtual void add(std::shared_ptr<ecore::EObject> obj) = 0;
@@ -69,29 +65,31 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 [endGuard(anEPackage,'Factory')/]
 [/file]
 [/template]
-
 [template public generateForwardDeclarations(anEPackage : EPackage)]
-[if (not anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->isEmpty() or anEPackage.eSuperPackage.oclIsUndefined())]
+[if (anEPackage.eSuperPackage.oclIsUndefined())]
 namespace [anEPackage.generateNamespaceDefinition()/] 
 {
-[for (elements : EClassifier| OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name))]
-	class [elements.name/];
-[/for]
-[if (anEPackage.eSuperPackage.oclIsUndefined())]
 	class [anEPackage.name.concat('Package')/];
-[/if]
 }
 [/if]
 [for (subPackage : EPackage | anEPackage.eSubpackages->sortedBy(name))]
 [subPackage.generateForwardDeclarations()/]
 [/for]
-[let ref:OrderedSet(EReference) = OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass).getAllContainers()->asOrderedSet()->sortedBy(name)]
-[for(aReference:EReference | ref->select(not (ref.eType.getRootPackage() = anEPackage.getRootPackage())))]
-
-namespace [aReference.eType.ePackage.generateNamespaceDefinition()/] 
+[let includeClasses:OrderedSet(EClassifier) = OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass).getAllContainers().eType->asOrderedSet()->sortedBy(name)]
+	[if (includeClasses->size()>0)]
+		[let includeNameSpaces:OrderedSet(EPackage) = includeClasses.ePackage->asOrderedSet()->sortedBy(name)]
+			[if (includeNameSpaces->size()>0)]
+				[for (includeNamespace: EPackage | includeNameSpaces)]
+namespace [includeNamespace.generateNamespaceDefinition()/] 
 {
-	class [aReference.eType.name/];
+					[for (element : EClassifier| includeClasses->select(includeClass: EClassifier | includeClass.ePackage = includeNamespace)->asOrderedSet()->sortedBy(name))]
+	class [element.name/];
+					[/for]
 }
-[/for]
+				[/for]
+			[/if]
+		[/let]
+	[/if]
 [/let]
+
 [/template]

@@ -57,19 +57,7 @@
 [/for]
 
 //Factories an Package includes
-[comment] root factory notwendig? 
-[if (generateObjectMonitoring())]
-#include "[getRootPackage().name/]/[aClass.getRootPackage().name/]Factory.hpp"
-[/if]
-[/comment]
-[comment] root factory Impl's wirklich notwendig? 
-#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name/]FactoryImpl.hpp"
-#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getNamespacePathWithoutRoot()/]impl/[aClass.ePackage.name/]PackageImpl.hpp"
-[/comment]
 [for (anEPackage: EPackage| aClass.ePackage->closure(p|p.eSuperPackage)->asSet() )]
-[comment] Factories wirklich notwendig?
-//#include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Factory.hpp"
-[/comment]
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
 [/for]
 [comment] nur für saveContent bei saveHandler->addReference() mit Meta-Datentyp-Vergleich nötig siehe generatePersistence.mtl

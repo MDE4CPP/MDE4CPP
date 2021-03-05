@@ -69,7 +69,6 @@
 [query public getSuperTypeContainers(aClass:EClass) : OrderedSet(EReference) = if not(aClass.eSuperTypes->isEmpty()) then aClass.eSuperTypes.getAllContainers()->flatten()->asOrderedSet() else OrderedSet{} endif /]
 
 [query public getAllContainers(aClass : EClass) : OrderedSet(EReference) =  if getContainsContainerAttribute()->notEmpty() then if getSuperTypeContainers()->isEmpty() then getContainsContainerAttribute() else OrderedSet{getContainsContainerAttribute()}->append(getSuperTypeContainers()->flatten()->reject(oclIsUndefined())->asOrderedSet())->flatten()->asOrderedSet() endif else getSuperTypeContainers()->asOrderedSet() endif /]
-[comment][query public getFirstContainer(aClass : EClass) : EReference =  if getContainsContainerAttribute()->notEmpty() then getContainsContainerAttribute()->first() else if not(aClass.eSuperTypes->isEmpty()) then aClass.eSuperTypes.getFirstContainer()->flatten() else null endif endif /][/comment]
 
 [query public hasImplOnly(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey(keyImplOnly()) then aModelElement.valueKey(keyImplOnly())='true' else false endif /]
 [query public doNotGenerate(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey(keyDoNotGenerate()) then aModelElement.valueKey(keyDoNotGenerate())='true' else false endif /]
