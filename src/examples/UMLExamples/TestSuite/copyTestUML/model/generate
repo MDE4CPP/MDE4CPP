@@ -1,0 +1,13 @@
+modelFolder=$PWD
+modelFile=$modelFolder/copyTestUML.uml
+
+# Go to MDE4CPP home folder to call the gradle task 'generateModel'
+# Task 'generateModel' is defined in $MDE4CPP_HOME/src/common/universalGradleTasks/build.gradle
+cd $MDE4CPP_HOME
+
+# Call the task 'generateModel' with model path as parameter
+# generator will be detected automatically (UML4CPP is used because parameter SO (struktureOnly) is defined)
+gradlew generateModel --model=$modelFile -PSO
+
+# Go back to model folder
+cd $modelFolder
