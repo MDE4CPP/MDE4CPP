@@ -20,7 +20,7 @@
 [import ecore4CPP::generator::main::helpers::keywords /]
 
 [query public hasSetter(anEAttribute : EAttribute) : Boolean = anEAttribute.changeable and (anEAttribute.upperBound = 1)/]
-[query public hasGetter(anEAttribute : EAttribute) : EBoolean = not hasKey('getterbody') /]
+[query public hasGetter(anEAttribute : EAttribute) : EBoolean = not hasKey('getterBody') /]
 
 [***###########################################################################################
  * Section for model and class implementation of an Attribute
