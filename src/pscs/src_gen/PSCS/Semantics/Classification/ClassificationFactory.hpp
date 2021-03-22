@@ -13,10 +13,7 @@
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/Classification/ClassificationPackage.hpp"
 
-namespace PSCS::Semantics::Classification 
-{
-	class CS_InstanceValueEvaluation;
-}
+
 
 
 namespace PSCS::Semantics::Classification 

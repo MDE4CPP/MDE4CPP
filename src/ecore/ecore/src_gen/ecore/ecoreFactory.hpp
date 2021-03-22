@@ -15,68 +15,18 @@
 
 namespace ecore 
 {
-	class EAnnotation;
-	class EAttribute;
-	class EClass;
-	class EClassifier;
-	class EDataType;
-	class EEnum;
-	class EEnumLiteral;
-	class EFactory;
-	class EGenericType;
-	class EModelElement;
-	class ENamedElement;
-	class EObject;
-	class EOperation;
-	class EPackage;
-	class EParameter;
-	class EReference;
-	class EStringToStringMapEntry;
-	class EStructuralFeature;
-	class ETypeParameter;
-	class ETypedElement;
 	class ecorePackage;
 }
-
-namespace ecore 
-{
-	class EObject;
-}
-
 namespace ecore 
 {
 	class EClass;
-}
-
-namespace ecore 
-{
-	class EClass;
-}
-
-namespace ecore 
-{
 	class EEnum;
-}
-
-namespace ecore 
-{
 	class EModelElement;
-}
-
-namespace ecore 
-{
+	class EObject;
 	class EOperation;
-}
-
-namespace ecore 
-{
 	class EPackage;
 }
 
-namespace ecore 
-{
-	class EPackage;
-}
 
 
 namespace ecore 

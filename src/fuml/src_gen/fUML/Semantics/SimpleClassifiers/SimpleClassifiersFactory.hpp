@@ -13,21 +13,7 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 
-namespace fUML::Semantics::SimpleClassifiers 
-{
-	class BooleanValue;
-	class CompoundValue;
-	class DataValue;
-	class EnumerationValue;
-	class FeatureValue;
-	class IntegerValue;
-	class PrimitiveValue;
-	class RealValue;
-	class SignalInstance;
-	class StringValue;
-	class StructuredValue;
-	class UnlimitedNaturalValue;
-}
+
 
 
 namespace fUML::Semantics::SimpleClassifiers 

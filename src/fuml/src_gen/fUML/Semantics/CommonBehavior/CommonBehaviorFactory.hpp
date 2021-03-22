@@ -13,25 +13,7 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
-namespace fUML::Semantics::CommonBehavior 
-{
-	class CallEventBehavior;
-	class CallEventExecution;
-	class CallEventOccurrence;
-	class ClassifierBehaviorExecution;
-	class ClassifierBehaviorInvocationEventAccepter;
-	class EventAccepter;
-	class EventDispatchLoop;
-	class EventOccurrence;
-	class Execution;
-	class FIFOGetNextEventStrategy;
-	class GetNextEventStrategy;
-	class InvocationEventOccurrence;
-	class ObjectActivation;
-	class OpaqueBehaviorExecution;
-	class ParameterValue;
-	class SignalEventOccurrence;
-}
+
 
 
 namespace fUML::Semantics::CommonBehavior 

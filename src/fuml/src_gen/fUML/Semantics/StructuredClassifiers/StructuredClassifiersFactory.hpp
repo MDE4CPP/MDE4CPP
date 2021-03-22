@@ -13,16 +13,7 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class DispatchStrategy;
-	class ExtensionalValue;
-	class ExtensionalValueList;
-	class Link;
-	class Object;
-	class RedefinitionBasedDispatchStrategy;
-	class Reference;
-}
+
 
 
 namespace fUML::Semantics::StructuredClassifiers 

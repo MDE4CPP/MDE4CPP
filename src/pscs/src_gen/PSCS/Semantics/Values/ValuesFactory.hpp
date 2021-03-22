@@ -13,10 +13,7 @@
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/Values/ValuesPackage.hpp"
 
-namespace PSCS::Semantics::Values 
-{
-	class CS_OpaqueExpressionEvaluation;
-}
+
 
 
 namespace PSCS::Semantics::Values 
