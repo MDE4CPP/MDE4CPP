@@ -105,13 +105,19 @@ task startEclipseModeling(type:Exec){
 	dependsOn 'checkEnvironment'
 	workingDir System.getenv('MDE4CPP_ECLIPSE_HOME') //No need to check it here, if it does not exist checkEnvironment will fail with an exception
 
-	if (System.getProperty('os.name').toLowerCase(Locale.ROOT).contains('windows')) {
-		//on windows:
+	if(OperatingSystem.current().isWindows()){
+		// MS Windows
 		commandLine 'cmd', '/c', 'start eclipse.exe'
-		} else {
-			//on linux
-			commandLine './eclipse'
-		}
+	} else if(OperatingSystem.current().isLinux()){
+		// GNU/Linux
+		commandLine './eclipse'
+	} else if(OperatingSystem.current().isMacOsX()){
+		// Apple macOS
+		commandLine '../MacOS/eclipse'
+	} else {
+		// OS not supported yet
+		throw new GradleException('OS ' + System.getProperty('os.name') + ' is not supported yet')
+	}
 }
 
 task startCPPIDE(type:Exec){
