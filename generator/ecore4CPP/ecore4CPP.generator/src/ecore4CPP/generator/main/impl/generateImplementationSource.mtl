@@ -20,6 +20,7 @@
 [import ecore4CPP::generator::main::generatePersistence/]
 [import ecore4CPP::generator::main::generateReference/]
 [import ecore4CPP::generator::main::generateStructuralFeatureSetGet /]
+[import ecore4CPP::generator::main::generateBehavioralFeatureInvoke /]
 [import ecore4CPP::generator::main::generateType/]
 [import ecore4CPP::generator::main::generateUnion /]
 [import ecore4CPP::generator::main::generateModel /]
@@ -60,7 +61,7 @@
 [for (anEPackage: EPackage| aClass.ePackage->closure(p|p.eSuperPackage)->asSet() )]
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
 [/for]
-[comment] nur für saveContent bei saveHandler->addReference() mit Meta-Datentyp-Vergleich nötig siehe generatePersistence.mtl
+[comment] nur fï¿½r saveContent bei saveHandler->addReference() mit Meta-Datentyp-Vergleich nï¿½tig siehe generatePersistence.mtl
 [/comment]
 [for (aPackage : EPackage| aClass.includes()->selectByKind(EClass)->select(not doNotGenerate())->including(aClass).ePackage->asOrderedSet()->sortedBy(name))]
 #include "[aPackage.getRootPackage().name/]/[aPackage.getNamespacePathWithoutRoot()/][aPackage.name/]Package.hpp"
@@ -443,6 +444,11 @@ std::shared_ptr<[needNamespace(aClass.ePackage, 'EClass')/]> [className/]::eStat
 [aClass.generateeGetImpl()/]
 [aClass.generateeIsSetImpl()/]
 [aClass.generateeSetImpl()/]
+
+//*********************************
+// Behavioral Feature
+//*********************************
+[aClass.generateeInvokeByIDImpl()/]
 
 //*********************************
 // Persistence Functions
