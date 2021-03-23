@@ -15,24 +15,9 @@
 
 namespace fUML::Semantics::Loci 
 {
-	class ChoiceStrategy;
-	class ExecutionFactory;
-	class Executor;
-	class FirstChoiceStrategy;
-	class Locus;
-	class SemanticStrategy;
-	class SemanticVisitor;
-}
-
-namespace fUML::Semantics::Loci 
-{
 	class Locus;
 }
 
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
 
 
 namespace fUML::Semantics::Loci 

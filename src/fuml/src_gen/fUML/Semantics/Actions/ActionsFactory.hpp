@@ -13,57 +13,11 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 
-namespace fUML::Semantics::Actions 
-{
-	class AcceptCallActionActivation;
-	class AcceptCallActionActivations;
-	class AcceptEventActionActivation;
-	class AcceptEventActionEventAccepter;
-	class ActionActivation;
-	class AddStructuralFeatureValueActionActivation;
-	class CallActionActivation;
-	class CallBehaviorActionActivation;
-	class CallOperationActionActivation;
-	class ClauseActivation;
-	class ClearAssociationActionActivation;
-	class ClearStructuralFeatureActionActivation;
-	class ConditionalNodeActivation;
-	class CreateLinkActionActivation;
-	class CreateObjectActionActivation;
-	class DestroyLinkActionActivation;
-	class DestroyObjectActionActivation;
-	class InputPinActivation;
-	class InvocationActionActivation;
-	class LinkActionActivation;
-	class LoopNodeActivation;
-	class OutputPinActivation;
-	class PinActivation;
-	class ReadExtentActionActivation;
-	class ReadIsClassifiedObjectActionActivation;
-	class ReadLinkActionActivation;
-	class ReadSelfActionActivation;
-	class ReadStructuralFeatureActionActivation;
-	class ReclassifyObjectActionActivation;
-	class ReduceActionActivation;
-	class RemoveStructuralFeatureValueActivation;
-	class ReplyActionActivation;
-	class ReturnInformation;
-	class SendSignalActionActivation;
-	class StartClassifierBehaviorActionActivation;
-	class StartObjectBehaviorActionActivation;
-	class StructuralFeatureActionActivation;
-	class StructuredActivityNodeActivation;
-	class TestIdentityActionActivation;
-	class ValueSpecificationActionActivation;
-	class Values;
-	class WriteLinkActionActivation;
-	class WriteStructuralFeatureActionActivation;
-}
-
 namespace fUML::Semantics::Activities 
 {
 	class ActivityNodeActivationGroup;
 }
+
 
 
 namespace fUML::Semantics::Actions 

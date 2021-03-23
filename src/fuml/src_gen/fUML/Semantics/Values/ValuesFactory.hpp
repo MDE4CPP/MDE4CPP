@@ -13,18 +13,7 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
-namespace fUML::Semantics::Values 
-{
-	class Evaluation;
-	class LiteralBooleanEvaluation;
-	class LiteralEvaluation;
-	class LiteralIntegerEvaluation;
-	class LiteralNullEvaluation;
-	class LiteralRealEvaluation;
-	class LiteralStringEvaluation;
-	class LiteralUnlimitedNaturalEvaluation;
-	class Value;
-}
+
 
 
 namespace fUML::Semantics::Values 

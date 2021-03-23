@@ -266,7 +266,7 @@ Getter & Setter for reference activity
 */
 std::shared_ptr<uml::Activity> ActivityExecutionImpl::getActivity() const
 {
-	//generated from getterbody annotation
+	//generated from getterBody annotation
 if(!m_activity)
 {
 	m_activity = std::dynamic_pointer_cast<uml::Activity>(this->getBehavior());

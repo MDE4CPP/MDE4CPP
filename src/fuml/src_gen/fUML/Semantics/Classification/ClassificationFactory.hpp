@@ -13,10 +13,7 @@
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/Classification/ClassificationPackage.hpp"
 
-namespace fUML::Semantics::Classification 
-{
-	class InstanceValueEvaluation;
-}
+
 
 
 namespace fUML::Semantics::Classification 
