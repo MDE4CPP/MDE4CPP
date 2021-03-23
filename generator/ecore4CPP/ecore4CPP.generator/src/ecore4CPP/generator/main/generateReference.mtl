@@ -19,8 +19,8 @@
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
 
-[query public hasSetter(anEReference : EReference) : EBoolean = (anEReference.changeable and anEReference.upperBound=1) or hasKey(keySetterBody()) /]
-[query public hasGetter(anEReference : EReference) : EBoolean = not hasKey('noGetter') or hasKey(keyGetterBody()) /]
+[query public hasSetter(anEReference : EReference) : EBoolean = anEReference.changeable and anEReference.upperBound=1 and not hasKey(keyNoSetter()) /]
+[query public hasGetter(anEReference : EReference) : EBoolean = not hasKey(keyNoGetter()) /]
 
 [template public generateReferenceDecl(anEReference : EReference, impl : EBoolean) ]
 [anEReference.generateReferenceGetterDeclaretaion(impl)/]
@@ -132,11 +132,11 @@ Getter & Setter for reference [anEReference.name/]
 [template private generateReferenceSetterCpp(anEReference : EReference) ? (hasSetter())]
 void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.SetterName()/]([anEReference.generateReferenceType()/] _[anEReference.name/])
 {
-[if (hasKey(keySetterBody()))]
-//generated from [keySetterBody()/] annotation
-[valueKey(keySetterBody())/] 
-//end of body
-[else]
+	[if (hasKey(keySetterBody()))]
+	//generated from [keySetterBody()/] annotation
+	[valueKey(keySetterBody())/] 
+	//end of body
+	[else]
     m_[anEReference.name/] = _[anEReference.name/];
 	[for (redefinedElement : EObject | anEReference.getDirectlyRedefinedElements())]
 	[if (redefinedElement.oclIsKindOf(EReference))]
@@ -146,7 +146,7 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.Set
 	[/let]
 	[/if]
 	[/for]
-[/if]
+	[/if]
 }
 [/template]
 

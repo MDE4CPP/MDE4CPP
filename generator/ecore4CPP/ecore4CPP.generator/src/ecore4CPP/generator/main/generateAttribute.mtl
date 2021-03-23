@@ -19,8 +19,8 @@
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
 
-[query public hasSetter(anEAttribute : EAttribute) : Boolean = anEAttribute.changeable and (anEAttribute.upperBound = 1)/]
-[query public hasGetter(anEAttribute : EAttribute) : EBoolean = not hasKey(keyGetterBody()) /]
+[query public hasSetter(anEAttribute : EAttribute) : Boolean = anEAttribute.changeable and anEAttribute.upperBound = 1 and not hasKey(keyNoSetter())/]
+[query public hasGetter(anEAttribute : EAttribute) : EBoolean = not hasKey(keyNoGetter()) /]
 
 [***###########################################################################################
  * Section for model and class implementation of an Attribute
@@ -97,6 +97,11 @@ Getter & Setter for attribute [anEAttribute.name/]
 [template private generateAttributeGetterImplementationCpp(anEAttribute : EAttribute)? (hasGetter())]
 [anEAttribute.generateStructuralFeatureType(true)/] [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.GetterName()/]() const 
 {
+	[if (hasKey(keyGetterBody()))]
+	//generated from [keyGetterBody()/] annotation
+	[valueKey(keyGetterBody())/]
+	//end of body
+	[else]
 	[if (not (anEAttribute.upperBound = 1))]
 	if(m_[anEAttribute.name/] == nullptr)
 	{
@@ -104,12 +109,18 @@ Getter & Setter for attribute [anEAttribute.name/]
 	}
 	[/if]
 	return m_[anEAttribute.name/];
+	[/if]
 }
 [/template]
 
-[template private generateAttributeSetterImplementationCpp(anEAttribute : EAttribute) ? (( hasSetter() or(hasImplSetterOnly())) )]
+[template private generateAttributeSetterImplementationCpp(anEAttribute : EAttribute) ? ((hasSetter() or(hasImplSetterOnly())) )]
 void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.SetterName()/]([anEAttribute.generateStructuralFeatureType(true)/] _[anEAttribute.name/])
 {
+	[if (hasKey(keySetterBody()))]
+	//generated from [keySetterBody()/] annotation
+	[valueKey(keySetterBody())/] 
+	//end of body
+	[else]
 	m_[anEAttribute.name/] = _[anEAttribute.name/];
 	[for (redefinedElement : EObject | anEAttribute.getDirectlyRedefinedElements())]
 	[if (redefinedElement.oclIsKindOf(EAttribute))]
@@ -119,6 +130,7 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.Set
 	[/let]
 	[/if]
 	[/for]
+	[/if]
 } 
 [/template]
 
