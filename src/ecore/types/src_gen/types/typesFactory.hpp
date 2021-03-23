@@ -19,6 +19,7 @@ namespace types
 }
 
 
+
 namespace types 
 {
 	class typesFactory : virtual public ecore::EFactory 
