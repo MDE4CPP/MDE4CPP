@@ -403,7 +403,7 @@ Getter & Setter for reference eAllAttributes
 */
 std::shared_ptr<Bag<ecore::EAttribute>> EClassImpl::getEAllAttributes() const
 {
-	//generated from getterbody annotation
+	//generated from getterBody annotation
     std::shared_ptr<Bag<ecore::EAttribute> > eAllAttributes(new Bag<ecore::EAttribute>());
 
     std::shared_ptr<Bag<ecore::EAttribute> > attributeList = this->getEAttributes();
@@ -459,7 +459,7 @@ Getter & Setter for reference eAllOperations
 */
 std::shared_ptr<Bag<ecore::EOperation>> EClassImpl::getEAllOperations() const
 {
-	//generated from getterbody annotation
+	//generated from getterBody annotation
 std::shared_ptr< Bag<ecore::EOperation> > eAllOperations(new Bag<ecore::EOperation> () );
 
     std::shared_ptr<Bag<ecore::EOperation> > operationList = this->getEOperations();
@@ -481,7 +481,7 @@ Getter & Setter for reference eAllReferences
 */
 std::shared_ptr<Bag<ecore::EReference>> EClassImpl::getEAllReferences() const
 {
-	//generated from getterbody annotation
+	//generated from getterBody annotation
     std::shared_ptr<Bag<ecore::EReference> > eAllReferences(new Bag<ecore::EReference>());
 
     std::shared_ptr<Bag<ecore::EReference> > referenceList = this->getEReferences();
@@ -503,7 +503,7 @@ Getter & Setter for reference eAllStructuralFeatures
 */
 std::shared_ptr<Bag<ecore::EStructuralFeature>> EClassImpl::getEAllStructuralFeatures() const
 {
-	//generated from getterbody annotation
+	//generated from getterBody annotation
 std::shared_ptr< Bag<ecore::EStructuralFeature> > eAllStructuralFeatures( new Bag<ecore::EStructuralFeature> ());
 
     std::shared_ptr< Bag< EStructuralFeature> > featureList = this->getEStructuralFeatures();
@@ -525,7 +525,7 @@ Getter & Setter for reference eAllSuperTypes
 */
 std::shared_ptr<Bag<ecore::EClass>> EClassImpl::getEAllSuperTypes() const
 {
-	//generated from getterbody annotation
+	//generated from getterBody annotation
 std::shared_ptr< Bag<ecore::EClass> > eAllSuperTypes(new Bag<ecore::EClass>  ());
 
 	std::shared_ptr<Bag<EClass> > classList = this->getESuperTypes();
