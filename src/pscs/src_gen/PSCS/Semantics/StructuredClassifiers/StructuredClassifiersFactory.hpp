@@ -13,18 +13,7 @@
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_DefaultRequestPropagationStrategy;
-	class CS_DispatchOperationOfInterfaceStrategy;
-	class CS_InteractionPoint;
-	class CS_Link;
-	class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy;
-	class CS_Object;
-	class CS_Reference;
-	class CS_RequestPropagationStrategy;
-	class CS_StructuralFeatureOfInterfaceAccessStrategy;
-}
+
 
 
 namespace PSCS::Semantics::StructuredClassifiers 

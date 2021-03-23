@@ -17,73 +17,27 @@ namespace PSCS
 {
 	class PSCSPackage;
 }
-namespace PSCS::Semantics::Actions 
-{
-	class CS_AcceptCallActionActivation;
-	class CS_AcceptEventActionActivation;
-	class CS_AddStructuralFeatureValueActionActivation;
-	class CS_CallOperationActionActivation;
-	class CS_ClearStructuralFeatureActionActivation;
-	class CS_ConstructStrategy;
-	class CS_CreateLinkActionActivation;
-	class CS_CreateObjectActionActivation;
-	class CS_DefaultConstructStrategy;
-	class CS_ReadExtentActionActivation;
-	class CS_ReadSelfActionActivation;
-	class CS_RemoveStructuralFeatureValueActionActivation;
-	class CS_SendSignalActionActivation;
-}
-
 namespace fUML::Semantics::Activities 
 {
 	class ActivityNodeActivationGroup;
 }
 
-namespace PSCS::Semantics::Classification 
-{
-	class CS_InstanceValueEvaluation;
-}
 
-namespace PSCS::Semantics::CommonBehavior 
-{
-	class CS_CallEventExecution;
-	class CS_EventOccurrence;
-}
 
-namespace PSCS::Semantics::Loci 
-{
-	class CS_ExecutionFactory;
-	class CS_Executor;
-	class CS_Locus;
-}
+
+
 
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
 
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
 
-namespace PSCS::Semantics::StructuredClassifiers 
-{
-	class CS_DefaultRequestPropagationStrategy;
-	class CS_DispatchOperationOfInterfaceStrategy;
-	class CS_InteractionPoint;
-	class CS_Link;
-	class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy;
-	class CS_Object;
-	class CS_Reference;
-	class CS_RequestPropagationStrategy;
-	class CS_StructuralFeatureOfInterfaceAccessStrategy;
-}
 
-namespace PSCS::Semantics::Values 
-{
-	class CS_OpaqueExpressionEvaluation;
-}
+
+
+
+
 
 
 

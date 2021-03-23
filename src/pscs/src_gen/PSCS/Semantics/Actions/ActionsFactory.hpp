@@ -13,27 +13,11 @@
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 
-namespace PSCS::Semantics::Actions 
-{
-	class CS_AcceptCallActionActivation;
-	class CS_AcceptEventActionActivation;
-	class CS_AddStructuralFeatureValueActionActivation;
-	class CS_CallOperationActionActivation;
-	class CS_ClearStructuralFeatureActionActivation;
-	class CS_ConstructStrategy;
-	class CS_CreateLinkActionActivation;
-	class CS_CreateObjectActionActivation;
-	class CS_DefaultConstructStrategy;
-	class CS_ReadExtentActionActivation;
-	class CS_ReadSelfActionActivation;
-	class CS_RemoveStructuralFeatureValueActionActivation;
-	class CS_SendSignalActionActivation;
-}
-
 namespace fUML::Semantics::Activities 
 {
 	class ActivityNodeActivationGroup;
 }
+
 
 
 namespace PSCS::Semantics::Actions 

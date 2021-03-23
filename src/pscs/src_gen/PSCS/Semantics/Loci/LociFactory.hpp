@@ -13,22 +13,11 @@
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/Loci/LociPackage.hpp"
 
-namespace PSCS::Semantics::Loci 
-{
-	class CS_ExecutionFactory;
-	class CS_Executor;
-	class CS_Locus;
-}
-
 namespace fUML::Semantics::Loci 
 {
 	class Locus;
 }
 
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
 
 
 namespace PSCS::Semantics::Loci 
