@@ -444,7 +444,7 @@ m_locus->setFactory(nullptr);
 	aPackage.allOwnedElements()->filter(Operation).method->reject(oclIsUndefined())->reject(not oclIsKindOf(Activity))->asSet()/]
 
 [query private getActivitiesOwnedByPackage(aPackage : Package) : Set(Activity) = 
-	aPackage.ownedElement->filter(Activity)->asSet()/]
+	aPackage.allOwnedElements()->filter(Activity)->asSet()/]
 
 [query private getUsedActivities (aPackage : Package) : OrderedSet(Activity) = 
 	Set{aPackage.getActivitiesUsedByCallBehaviorAction(), aPackage.getActivitiesUsedByDecisionNode(), aPackage.getActivitiesUsedByOperation(), aPackage.getActivitiesOwnedByPackage(), aPackage.getMainActivity()->asSet()->reject(oclIsUndefined())}->flatten()->sortedBy(name)/]
