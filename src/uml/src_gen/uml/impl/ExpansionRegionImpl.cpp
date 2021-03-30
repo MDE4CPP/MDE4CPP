@@ -33,6 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/UmlFactory.hpp"
+
 
 #include "uml/Activity.hpp"
 #include "uml/ActivityEdge.hpp"
@@ -91,11 +93,11 @@ ExpansionRegionImpl::ExpansionRegionImpl(std::weak_ptr<uml::Activity> par_Activi
 {
 	switch(reference_id)
 	{	
-	case umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
+	case uml::umlPackage::ACTIVITYNODE_ATTRIBUTE_ACTIVITY:
 		m_activity = par_Activity;
 		m_owner = par_Activity;
 		 return;
-	case umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
+	case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_INACTIVITY:
 		m_inActivity = par_Activity;
 		m_owner = par_Activity;
 		 return;

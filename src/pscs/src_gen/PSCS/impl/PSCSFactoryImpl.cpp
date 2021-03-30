@@ -4,6 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "PSCS/PSCSPackage.hpp"
 
 
 

@@ -50,6 +50,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/UmlFactory.hpp"
+
 
 #include "fUML/Semantics/Classification/InstanceValueEvaluation.hpp"
 #include "fUML/Semantics/Loci/Locus.hpp"
@@ -59,8 +62,8 @@
 //Factories an Package includes
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "fUML/Semantics/Classification/ClassificationPackage.hpp"
 #include "PSCS/Semantics/Classification/ClassificationPackage.hpp"
+#include "fUML/Semantics/Classification/ClassificationPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"

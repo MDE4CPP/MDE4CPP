@@ -39,13 +39,13 @@ namespace fUML::Semantics::CommonBehavior
 	class Execution;
 	class ParameterValue;
 }
-namespace fUML::Semantics::StructuredClassifiers 
-{
-	class Object;
-}
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	class CS_Reference;
+}
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class Object;
 }
 namespace uml 
 {

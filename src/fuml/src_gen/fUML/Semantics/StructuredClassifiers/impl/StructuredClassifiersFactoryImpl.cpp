@@ -4,6 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/impl/DispatchStrategyImpl.hpp"
 #include "fUML/Semantics/StructuredClassifiers/impl/ExtensionalValueImpl.hpp"
 #include "fUML/Semantics/StructuredClassifiers/impl/ExtensionalValueListImpl.hpp"

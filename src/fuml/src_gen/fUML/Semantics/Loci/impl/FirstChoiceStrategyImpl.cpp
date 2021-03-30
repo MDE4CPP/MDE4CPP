@@ -31,6 +31,7 @@
 
 #include <exception> // used in Persistence
 
+
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 
 //Factories an Package includes

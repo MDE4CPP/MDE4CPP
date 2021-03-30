@@ -34,6 +34,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/UmlFactory.hpp"
+
 
 #include "uml/Comment.hpp"
 #include "uml/Constraint.hpp"
@@ -77,11 +79,11 @@ InteractionConstraintImpl::InteractionConstraintImpl(std::weak_ptr<uml::Namespac
 {
 	switch(reference_id)
 	{	
-	case umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
+	case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 		m_context = par_Namespace;
 		m_namespace = par_Namespace;
 		 return;
-	case umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
+	case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAMESPACE:
 		m_namespace = par_Namespace;
 		m_owner = par_Namespace;
 		 return;

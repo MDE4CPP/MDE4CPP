@@ -32,6 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/UmlFactory.hpp"
+
 
 #include "uml/Parameter.hpp"
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"

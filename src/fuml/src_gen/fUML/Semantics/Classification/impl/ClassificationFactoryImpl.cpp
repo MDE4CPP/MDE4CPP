@@ -4,6 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "fUML/Semantics/Classification/ClassificationPackage.hpp"
 #include "fUML/Semantics/Classification/impl/InstanceValueEvaluationImpl.hpp"
 
 

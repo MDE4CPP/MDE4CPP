@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<viewpoint:DAnalysis xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:viewpoint="http://www.eclipse.org/sirius/1.1.0" uid="_AWUTcCRaEeuGRKch_h_VTg" version="14.1.0.201810161215">
+  <semanticResources>pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml</semanticResources>
+  <semanticResources>pathmap://UML_PROFILES/Ecore.profile.uml</semanticResources>
+  <semanticResources>pathmap://UML_PROFILES/Standard.profile.uml</semanticResources>
+  <semanticResources>http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard</semanticResources>
+  <semanticResources>http://www.eclipse.org/uml2/5.0.0/UML</semanticResources>
+  <semanticResources>http://www.eclipse.org/emf/2002/Ecore</semanticResources>
+  <semanticResources>pathmap://UML_LIBRARIES/EcorePrimitiveTypes.library.uml</semanticResources>
+  <semanticResources>pathmap://UML_METAMODELS/UML.metamodel.uml</semanticResources>
+  <semanticResources>pathmap://UML_METAMODELS/Ecore.metamodel.uml</semanticResources>
+  <semanticResources>BookStore_uml.uml</semanticResources>
+  <semanticResources>http://www.eclipse.org/uml2/5.0.0/Types</semanticResources>
+</viewpoint:DAnalysis>

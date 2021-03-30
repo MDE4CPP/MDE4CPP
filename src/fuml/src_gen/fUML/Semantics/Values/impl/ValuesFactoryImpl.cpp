@@ -4,6 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/impl/EvaluationImpl.hpp"
 #include "fUML/Semantics/Values/impl/LiteralBooleanEvaluationImpl.hpp"
 #include "fUML/Semantics/Values/impl/LiteralEvaluationImpl.hpp"

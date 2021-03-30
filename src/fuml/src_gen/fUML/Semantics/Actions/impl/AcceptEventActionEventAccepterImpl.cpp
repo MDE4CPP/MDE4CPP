@@ -30,6 +30,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
+
 
 #include "fUML/Semantics/Actions/AcceptEventActionActivation.hpp"
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"

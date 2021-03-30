@@ -4,6 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_DefaultRequestPropagationStrategyImpl.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_DispatchOperationOfInterfaceStrategyImpl.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/impl/CS_InteractionPointImpl.hpp"

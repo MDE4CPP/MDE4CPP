@@ -34,6 +34,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/UmlFactory.hpp"
+
 
 #include "uml/CombinedFragment.hpp"
 #include "uml/Comment.hpp"

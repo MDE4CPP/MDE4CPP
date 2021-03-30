@@ -38,6 +38,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/UmlFactory.hpp"
+
 
 #include "uml/PrimitiveType.hpp"
 #include "fUML/Semantics/SimpleClassifiers/PrimitiveValue.hpp"

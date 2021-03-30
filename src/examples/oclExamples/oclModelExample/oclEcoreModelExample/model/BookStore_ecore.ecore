@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="BookStore_ecore" nsURI="http://www.example.org/BookStore_ecore"
+    nsPrefix="BookStore_ecore">
+  <eClassifiers xsi:type="ecore:EClass" name="Library">
+    <eAnnotations source="http://www.eclipse.org/OCL">
+      <details key="OCL" value="context Library inv: self.opened"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/OCL">
+      <details key="OCL" value="context Library inv: self.nbBooks > 0"/>
+    </eAnnotations>
+    <eOperations name="addMember">
+      <eParameters name="m" eType="#//Member"/>
+    </eOperations>
+    <eOperations name="addLoan">
+      <eParameters name="m" eType="#//Member"/>
+      <eParameters name="b" eType="#//Book"/>
+    </eOperations>
+    <eOperations name="addBook">
+      <eParameters name="b" eType="#//Book"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="books" upperBound="-1"
+        eType="#//Book" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
+        eType="#//Member" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="loans" upperBound="-1"
+        eType="#//Loan" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="opened" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"
+        defaultValueLiteral="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="nbBooks" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"
+        defaultValueLiteral="3"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Member">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Book">
+    <eAnnotations source="http://www.eclipse.org/OCL">
+      <details key="OCL" value="context Book inv: self.copies > 0"/>
+    </eAnnotations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="title" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="copies" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="category" eType="#//BookCategory"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="available" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Loan">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="date" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDate"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="book" eType="#//Book"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="member" eType="#//Member"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Writer">
+    <eOperations name="write">
+      <eAnnotations source="http://www.eclipse.org/OCL">
+        <details key="OCL" value="context Book inv: self.copies > 0"/>
+      </eAnnotations>
+      <eParameters name="b" eType="#//Book"/>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="books" lowerBound="1" upperBound="-1"
+        eType="#//Book" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EEnum" name="BookCategory">
+    <eLiterals name="MISTERY"/>
+    <eLiterals name="BIOGRAPHY" value="1"/>
+    <eLiterals name="HISTORY" value="2"/>
+  </eClassifiers>
+</ecore:EPackage>

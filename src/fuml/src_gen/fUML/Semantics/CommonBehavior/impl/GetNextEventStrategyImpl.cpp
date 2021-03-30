@@ -31,6 +31,7 @@
 
 #include <exception> // used in Persistence
 
+
 #include "fUML/Semantics/CommonBehavior/ObjectActivation.hpp"
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"

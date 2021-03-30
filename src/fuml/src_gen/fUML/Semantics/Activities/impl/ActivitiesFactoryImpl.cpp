@@ -4,6 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/Activities/impl/ActivityEdgeInstanceImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ActivityExecutionImpl.hpp"
 #include "fUML/Semantics/Activities/impl/ActivityFinalNodeActivationImpl.hpp"
@@ -130,13 +131,13 @@ std::shared_ptr<ecore::EObject> ActivitiesFactoryImpl::create(const int metaElem
 				switch(referenceID)
 				{
 					//ActivityNodeActivationGroup has activityExecution as a containment
-					case  ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION:
+					case  fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(container);
 						return this->createActivityNodeActivationGroup_in_ActivityExecution(castedContainer,metaElementID);
 					}
 					//ActivityNodeActivationGroup has containingNodeActivation as a containment
-					case  ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION:
+					case  fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::StructuredActivityNodeActivation>(container);
 						return this->createActivityNodeActivationGroup_in_ContainingNodeActivation(castedContainer,metaElementID);
@@ -224,13 +225,13 @@ std::shared_ptr<ecore::EObject> ActivitiesFactoryImpl::create(const int metaElem
 				switch(referenceID)
 				{
 					//ExpansionActivationGroup has activityExecution as a containment
-					case  ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION:
+					case  fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ActivityExecution>(container);
 						return this->createExpansionActivationGroup_in_ActivityExecution(castedContainer,metaElementID);
 					}
 					//ExpansionActivationGroup has containingNodeActivation as a containment
-					case  ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION:
+					case  fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Actions::StructuredActivityNodeActivation>(container);
 						return this->createExpansionActivationGroup_in_ContainingNodeActivation(castedContainer,metaElementID);

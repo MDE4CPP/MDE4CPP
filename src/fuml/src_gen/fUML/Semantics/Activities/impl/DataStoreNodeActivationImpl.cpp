@@ -32,6 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/UmlFactory.hpp"
+
 
 #include "fUML/Semantics/Activities/ActivityEdgeInstance.hpp"
 #include "uml/ActivityNode.hpp"

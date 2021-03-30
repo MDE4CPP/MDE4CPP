@@ -4,6 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "PSCS/Semantics/Classification/ClassificationPackage.hpp"
 #include "PSCS/Semantics/Classification/impl/CS_InstanceValueEvaluationImpl.hpp"
 
 

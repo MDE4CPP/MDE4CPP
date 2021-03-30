@@ -17,6 +17,7 @@
 [import fUML4CPP::generator::main::generateOpaqueBehaviorExecution /]
 [import fUML4CPP::generator::main::generateExecution /]
 [import fUML4CPP::generator::main::parameterHelper /]
+[import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
@@ -105,9 +106,13 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]
 
-[if (anOpaqueBehavior.hasGenerateContextVariable())]
+[if (anOpaqueBehavior.hasGenerateContextVariable() or anOpaqueBehavior.language->includes(keyOCL()))]
 #include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 #include "[aPackage.generateNamespacePath(false)/]Exec/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
+[if (anOpaqueBehavior.language->includes(keyOCL()))]
+//Include ocl parser header
+#include "oclParser/Utilities/Ocl.h"
+[/if]
 [/if]
 [/template]
 
@@ -140,6 +145,28 @@ DEBUG_MESSAGE(
 [let index : Integer = anOpaqueBehavior.language->indexOf(keyCPP())]
 [if (0 < index and index <= anOpaqueBehavior._body->size())]
 [anOpaqueBehavior._body->at(index)/]
+[/if][/let]
+[elseif (anOpaqueBehavior.language->includes(keyOCL()))]
+[let index : Integer = anOpaqueBehavior.language->indexOf(keyOCL())]
+[if (0 < index and index <= anOpaqueBehavior._body->size())]
+[let retPar : OrderedSet(Parameter) = anOpaqueBehavior.ownedParameter->select(p :Parameter | (p.direction = ParameterDirectionKind::return))]
+[if(not retPar->isEmpty())]
+[if (not retPar->first().oclIsInvalid())]
+
+Utilities::Ocl ocl;
+std::string query = "[anOpaqueBehavior._body->at(index)/]";
+[retPar.name/] = ocl.validate(query, context);
+DEBUG_MESSAGE(
+	if(ocl.getErrors().size() > 0) {
+		std::cout << ocl.getError() << std::endl;
+	} else {
+		std::cout << "return: " << ocl.getResult() << std::endl;
+	}
+)
+[/if]
+[else]
+['An OpaqueBehavior with OCL must return a boolean value '.registerError()/]
+[/if][/let]
 [/if][/let]
 [else]
 std::cout << __PRETTY_FUNCTION__ << std::endl;

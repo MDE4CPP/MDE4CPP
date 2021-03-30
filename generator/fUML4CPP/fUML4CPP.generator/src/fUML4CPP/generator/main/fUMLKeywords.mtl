@@ -10,3 +10,5 @@
  * should be generated for an Element.
  */]
 [query public sourceNoExecution (anOclAny : OclAny) : String = 'noExecution'/]
+
+[query public keyOCL(any : OclAny) : String = 'OCL'/]	[**	indicates an ocl constraint in attribute 'body' of element 'OpaqueBehavior' /] 

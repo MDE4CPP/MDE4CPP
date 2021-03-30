@@ -4,6 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/CallEventBehaviorImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/CallEventExecutionImpl.hpp"
 #include "fUML/Semantics/CommonBehavior/impl/CallEventOccurrenceImpl.hpp"

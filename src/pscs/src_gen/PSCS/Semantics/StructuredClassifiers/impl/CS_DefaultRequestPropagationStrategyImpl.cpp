@@ -33,6 +33,7 @@
 
 #include <exception> // used in Persistence
 
+
 #include "PSCS/Semantics/StructuredClassifiers/CS_RequestPropagationStrategy.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
@@ -41,8 +42,8 @@
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"

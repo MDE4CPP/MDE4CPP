@@ -11,5 +11,5 @@ task generateUmlReflection(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	modelFilePath = file('.' + File.separator + 'umlReflection.uml')
 	structureOnly = false
 
-	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'fUML', 'PSCS']
+	relatedModels = ['ecore', 'uml', 'ecoreReflection', 'primitivetypesReflection', 'fUML', 'PSCS', 'oclParser']
 }

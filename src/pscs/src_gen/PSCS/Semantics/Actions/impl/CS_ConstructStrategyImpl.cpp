@@ -32,6 +32,7 @@
 
 #include <exception> // used in Persistence
 
+
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "uml/Operation.hpp"
@@ -42,8 +43,8 @@
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 

@@ -33,6 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/UmlFactory.hpp"
+
 
 #include "uml/Comment.hpp"
 #include "uml/Constraint.hpp"
@@ -93,11 +95,11 @@ ModelImpl::ModelImpl(std::weak_ptr<uml::Package> par_Package, const int referenc
 {
 	switch(reference_id)
 	{	
-	case umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
+	case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
 		m_nestingPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;

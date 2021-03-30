@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_gT4cQCRaEeuGRKch_h_VTg" name="BookStore_uml">
+  <packagedElement xmi:type="uml:Class" xmi:id="_ks8HMCRaEeuGRKch_h_VTg" name="Library">
+    <ownedAttribute xmi:id="_A72-kCRcEeuGRKch_h_VTg" name="nbBooks">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_u4XHcCRcEeuGRKch_h_VTg"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_x5_FYCRcEeuGRKch_h_VTg" name="opened">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_6t-qkCRcEeuGRKch_h_VTg" name="loans" type="_4cv5sCRaEeuGRKch_h_VTg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_-mOugCRcEeuGRKch_h_VTg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_8f5UICRcEeuGRKch_h_VTg" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_EGB_ECRdEeuGRKch_h_VTg" name="members" type="_woRQwCRaEeuGRKch_h_VTg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_EGB_ESRdEeuGRKch_h_VTg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EGB_EiRdEeuGRKch_h_VTg" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_EV9RcCRdEeuGRKch_h_VTg" name="books" type="_yzEUYCRaEeuGRKch_h_VTg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_EV9RcSRdEeuGRKch_h_VTg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_EV9RciRdEeuGRKch_h_VTg" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_k9BqQCRdEeuGRKch_h_VTg" name="name">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedOperation xmi:id="_OfqsYCRdEeuGRKch_h_VTg" name="addMember">
+      <ownedParameter xmi:id="_Q2968CRdEeuGRKch_h_VTg" name="m" type="_woRQwCRaEeuGRKch_h_VTg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_YUHB8CRdEeuGRKch_h_VTg" name="addBook">
+      <ownedParameter xmi:id="_YUHB8SRdEeuGRKch_h_VTg" name="b" type="_yzEUYCRaEeuGRKch_h_VTg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_YqOb4CRdEeuGRKch_h_VTg" name="addLoan">
+      <ownedParameter xmi:id="_YqPC8CRdEeuGRKch_h_VTg" name="l" type="_4cv5sCRaEeuGRKch_h_VTg"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_woRQwCRaEeuGRKch_h_VTg" name="Member">
+    <ownedAttribute xmi:id="_qMbuYCRdEeuGRKch_h_VTg" name="name">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_yzEUYCRaEeuGRKch_h_VTg" name="Book">
+    <ownedAttribute xmi:id="_sLQLgCRdEeuGRKch_h_VTg" name="title">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_vITLcCRdEeuGRKch_h_VTg" name="copies">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_vITLcSRdEeuGRKch_h_VTg"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_zos0gCRdEeuGRKch_h_VTg" name="available">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_4cv5sCRaEeuGRKch_h_VTg" name="Loan">
+    <ownedAttribute xmi:id="_7LkwECRdEeuGRKch_h_VTg" name="book" type="_yzEUYCRaEeuGRKch_h_VTg"/>
+    <ownedAttribute xmi:id="_BLuUoCReEeuGRKch_h_VTg" name="member" type="_woRQwCRaEeuGRKch_h_VTg"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_67InsCRaEeuGRKch_h_VTg" name="Writer">
+    <ownedAttribute xmi:id="_XD0wsCRbEeuGRKch_h_VTg" name="name">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_lhkMoCRbEeuGRKch_h_VTg" name="books" type="_yzEUYCRaEeuGRKch_h_VTg">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_qINnoCRbEeuGRKch_h_VTg"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_1udSACRbEeuGRKch_h_VTg" value="*"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Enumeration" xmi:id="__595MCRaEeuGRKch_h_VTg" name="BookCategory">
+    <ownedLiteral xmi:id="_ExZiMCRbEeuGRKch_h_VTg" name="MISTERY"/>
+    <ownedLiteral xmi:id="_GL_Q4CRbEeuGRKch_h_VTg" name="BIOGRAPHY"/>
+    <ownedLiteral xmi:id="_Ha1poCRbEeuGRKch_h_VTg" name="HISTORY"/>
+  </packagedElement>
+</uml:Model>

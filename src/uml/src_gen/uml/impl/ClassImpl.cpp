@@ -34,6 +34,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/UmlFactory.hpp"
+
 
 #include "uml/Behavior.hpp"
 #include "uml/BehavioredClassifier.hpp"
@@ -118,11 +120,11 @@ ClassImpl::ClassImpl(std::weak_ptr<uml::Package> par_Package, const int referenc
 {
 	switch(reference_id)
 	{	
-	case umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
+	case uml::umlPackage::PACKAGEABLEELEMENT_ATTRIBUTE_OWNINGPACKAGE:
 		m_owningPackage = par_Package;
 		m_namespace = par_Package;
 		 return;
-	case umlPackage::TYPE_ATTRIBUTE_PACKAGE:
+	case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
 		m_package = par_Package;
 		m_namespace = par_Package;
 		 return;

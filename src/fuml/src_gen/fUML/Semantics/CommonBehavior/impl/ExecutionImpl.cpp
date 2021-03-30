@@ -41,6 +41,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/UmlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+
 
 #include "uml/Behavior.hpp"
 #include "uml/Classifier.hpp"

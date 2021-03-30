@@ -4,6 +4,7 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
+#include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSCS/Semantics/CommonBehavior/impl/CS_CallEventExecutionImpl.hpp"
 #include "PSCS/Semantics/CommonBehavior/impl/CS_EventOccurrenceImpl.hpp"
 

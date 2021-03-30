@@ -1,0 +1,109 @@
+plugins {
+	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.5"
+	id 'antlr'
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    antlr 'org.antlr:antlr4:4.9' // use ANTLR version 4
+}
+
+ext.ocl = [
+    grammarpackage: "OclCS",
+    grammarDir:    	"../grammar",
+    destinationDir: "OclCS",
+	utilitiesDir: 	"Utilities",
+    tmpSourceDir:	"src",
+    tmpGrammarDir:	"src/main/antlr",
+    tmpBuildDir:	"src/build",
+]
+
+task antlrInitTmpDir(type: Copy) {
+    from ocl.grammarDir
+	into ocl.tmpGrammarDir
+}
+
+generateGrammarSource {	
+	inputs.dir(ocl.grammarDir)
+	outputs.dir(ocl.destinationDir)
+	
+	dependsOn 'antlrInitTmpDir'
+	outputDirectory = file(ocl.tmpBuildDir) 
+	arguments = ["-Dlanguage=Cpp", "-long-messages", "-visitor", "-package", ocl.grammarpackage]
+	
+	doLast {
+		copy {
+			from ocl.tmpBuildDir
+			into ocl.destinationDir
+			filter { line -> line.replaceAll(': public antlr4::ParserRuleContext', ': public antlr4::ParserRuleContext, public CSTNode') }
+			filter { line -> line.replaceAll('delete _interpreter;', '//delete _interpreter;') } // weir bug in release mode
+		}
+	}
+	doLast {
+		def tmpSource = file(ocl.tmpSourceDir)
+		if(tmpSource.exists()) {
+    		delete tmpSource.absolutePath
+		}
+	}
+}
+
+task generateOclParser() {
+	group 'Source'
+	description 'generate ocl model and grammar sources'
+	
+	dependsOn getRootProject().getTasksByName('generateGrammarSource', true)
+	dependsOn getRootProject().getTasksByName('generateOcl', true)
+}
+
+task compileOclParser(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'Source'
+	description 'compile the Ocl parser'
+	
+	projectFolder = file('.')
+
+	inputs.files(fileTree('.') {
+        exclude '.cmake/**'
+    })
+	if(!file('.' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'oclParser.dll')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'oclParserd.dll')
+	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'oclParser')
+	
+	// dependency to 'ocl model'
+	def model = getRootProject().getTasksByName('compileOcl', true)
+	dependsOn model
+	inputs.files(model.outputs)
+	
+	// dependency to 'antlr4'
+	def antlr4 = getRootProject().getTasksByName('compileAntlr4', true)
+	dependsOn antlr4
+	inputs.files(antlr4.outputs)
+}
+
+task buildOclParser() {
+	group 'Source'
+	description 'generate ocl model and grammar sources and compile all together'
+	
+	dependsOn 'generateOclParser'
+	dependsOn 'compileOclParser'
+}
+
+task cleanOclParser {
+	doFirst {
+		def cmakeFolder = file('.' + File.separator + '.cmake' + File.separator)
+		if(cmakeFolder.exists()) {
+			delete cmakeFolder.absolutePath
+			println "deleting folder " + cmakeFolder.absolutePath
+		}
+		def tmpSource = file(ocl.tmpSourceDir)
+		if(tmpSource.exists()) {
+    		delete tmpSource.absolutePath
+		}
+	}
+}
+tasks.clean.dependsOn(tasks.cleanOclParser)
