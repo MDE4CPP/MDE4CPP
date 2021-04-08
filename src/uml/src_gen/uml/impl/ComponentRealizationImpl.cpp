@@ -357,7 +357,15 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 			return eAny(getAbstraction().lock()); //4819
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
-			return eAny(getRealizingClassifier()); //4818			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_realizingClassifier->begin();
+			Bag<uml::Classifier>::iterator end = m_realizingClassifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4818
 		}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);

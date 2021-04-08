@@ -540,7 +540,15 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_ICON:
 		{
-			return eAny(getIcon()); //22352			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Image>::iterator iter = m_icon->begin();
+			Bag<uml::Image>::iterator end = m_icon->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22352
 		}
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
 			return eAny(getProfile()); //22353

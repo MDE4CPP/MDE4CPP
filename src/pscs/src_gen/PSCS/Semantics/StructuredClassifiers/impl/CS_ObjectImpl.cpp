@@ -47,8 +47,8 @@
 #include <exception> // used in Persistence
 #include "uml/UmlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"

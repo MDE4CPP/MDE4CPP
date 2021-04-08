@@ -158,7 +158,15 @@ Any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
 		{
-			return eAny(getTokens()); //1160			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Activities::Token>::iterator iter = m_tokens->begin();
+			Bag<fUML::Semantics::Activities::Token>::iterator end = m_tokens->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1160
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

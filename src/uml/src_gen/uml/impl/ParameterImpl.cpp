@@ -476,12 +476,20 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getOperation().lock()); //17425
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
 		{
-			return eAny(getParameterSet()); //17426			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ParameterSet>::iterator iter = m_parameterSet->begin();
+			Bag<uml::ParameterSet>::iterator end = m_parameterSet->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //17426
 		}
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

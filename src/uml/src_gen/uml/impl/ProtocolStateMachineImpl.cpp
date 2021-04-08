@@ -481,7 +481,15 @@ Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) c
 	{
 		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
 		{
-			return eAny(getConformance()); //18765			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ProtocolConformance>::iterator iter = m_conformance->begin();
+			Bag<uml::ProtocolConformance>::iterator end = m_conformance->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18765
 		}
 	}
 	return StateMachineImpl::eGet(featureID, resolve, coreType);

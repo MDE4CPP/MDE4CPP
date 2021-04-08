@@ -407,11 +407,27 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
 		{
-			return eAny(getConfiguration()); //6917			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::DeploymentSpecification>::iterator iter = m_configuration->begin();
+			Bag<uml::DeploymentSpecification>::iterator end = m_configuration->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //6917
 		}
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
-			return eAny(getDeployedArtifact()); //6918			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::DeployedArtifact>::iterator iter = m_deployedArtifact->begin();
+			Bag<uml::DeployedArtifact>::iterator end = m_deployedArtifact->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //6918
 		}
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_LOCATION:
 			return eAny(getLocation().lock()); //6919

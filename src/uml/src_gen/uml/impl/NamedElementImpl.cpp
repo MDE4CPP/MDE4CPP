@@ -395,7 +395,15 @@ Any NamedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_CLIENTDEPENDENCY:
 		{
-			return eAny(getClientDependency()); //1553			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Dependency>::iterator iter = m_clientDependency->begin();
+			Bag<uml::Dependency>::iterator end = m_clientDependency->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1553
 		}
 		case uml::umlPackage::NAMEDELEMENT_ATTRIBUTE_NAME:
 			return eAny(getName()); //1554

@@ -31,12 +31,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/UmlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -192,7 +192,15 @@ Any NavigationCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) 
 			return eAny(getNavigationSource()); //547
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS:
 		{
-			return eAny(getQualifiers()); //548			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Evaluations::OclExpEval>::iterator iter = m_qualifiers->begin();
+			Bag<ocl::Evaluations::OclExpEval>::iterator end = m_qualifiers->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //548
 		}
 	}
 	return ModelPropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);

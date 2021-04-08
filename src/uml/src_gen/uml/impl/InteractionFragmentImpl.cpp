@@ -325,7 +325,15 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 		{
-			return eAny(getCovered()); //1219			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Lifeline>::iterator iter = m_covered->begin();
+			Bag<uml::Lifeline>::iterator end = m_covered->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1219
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
 			return eAny(getEnclosingInteraction().lock()); //12111
@@ -333,7 +341,15 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 			return eAny(getEnclosingOperand().lock()); //12110
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
 		{
-			return eAny(getGeneralOrdering()); //12112			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::GeneralOrdering>::iterator iter = m_generalOrdering->begin();
+			Bag<uml::GeneralOrdering>::iterator end = m_generalOrdering->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12112
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);

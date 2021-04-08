@@ -361,7 +361,15 @@ Any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
 		{
-			return eAny(getRepresented()); //11438			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_represented->begin();
+			Bag<uml::Classifier>::iterator end = m_represented->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //11438
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);

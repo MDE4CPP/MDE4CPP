@@ -350,12 +350,20 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getExtension().lock()); //9615
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 		{
-			return eAny(getExtensionLocation()); //9614			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExtensionPoint>::iterator iter = m_extensionLocation->begin();
+			Bag<uml::ExtensionPoint>::iterator end = m_extensionLocation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //9614
 		}
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

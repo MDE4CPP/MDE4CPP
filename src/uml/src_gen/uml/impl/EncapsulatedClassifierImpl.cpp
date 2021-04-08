@@ -420,7 +420,15 @@ Any EncapsulatedClassifierImpl::eGet(int featureID, bool resolve, bool coreType)
 	{
 		case uml::umlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
 		{
-			return eAny(getOwnedPort()); //8342			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Port>::iterator iter = m_ownedPort->begin();
+			Bag<uml::Port>::iterator end = m_ownedPort->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //8342
 		}
 	}
 	return StructuredClassifierImpl::eGet(featureID, resolve, coreType);

@@ -316,7 +316,15 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 		{
-			return eAny(getOperand()); //9515			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ValueSpecification>::iterator iter = m_operand->begin();
+			Bag<uml::ValueSpecification>::iterator end = m_operand->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //9515
 		}
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_SYMBOL:
 			return eAny(getSymbol()); //9516

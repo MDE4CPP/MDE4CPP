@@ -450,12 +450,20 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 		{
-			return eAny(getNestedNode()); //15754			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Node>::iterator iter = m_nestedNode->begin();
+			Bag<uml::Node>::iterator end = m_nestedNode->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //15754
 		}
 	}
 	Any result;
 	result = ClassImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

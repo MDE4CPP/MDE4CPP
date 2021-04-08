@@ -282,7 +282,7 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	Any result;
 	result = ConnectableElementImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

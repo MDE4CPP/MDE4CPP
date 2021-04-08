@@ -770,15 +770,39 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getLower()); //16737
 		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
 		{
-			return eAny(getPostcondition()); //16738			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = m_postcondition->begin();
+			Bag<uml::Constraint>::iterator end = m_postcondition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16738
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
 		{
-			return eAny(getPrecondition()); //16739			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = m_precondition->begin();
+			Bag<uml::Constraint>::iterator end = m_precondition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16739
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
 		{
-			return eAny(getRedefinedOperation()); //16740			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Operation>::iterator iter = m_redefinedOperation->begin();
+			Bag<uml::Operation>::iterator end = m_redefinedOperation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16740
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_TYPE:
 			return eAny(getType()); //16741
@@ -787,12 +811,12 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	Any result;
 	result = BehavioralFeatureImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}
 	result = ParameterableElementImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

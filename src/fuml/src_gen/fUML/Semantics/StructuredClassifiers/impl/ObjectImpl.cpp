@@ -315,7 +315,15 @@ Any ObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getObjectActivation()); //803
 		case fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::OBJECT_ATTRIBUTE_TYPES:
 		{
-			return eAny(getTypes()); //802			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_types->begin();
+			Bag<uml::Classifier>::iterator end = m_types->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //802
 		}
 	}
 	return ExtensionalValueImpl::eGet(featureID, resolve, coreType);

@@ -361,13 +361,29 @@ Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
 		{
-			return eAny(getCfragmentGate()); //4413			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Gate>::iterator iter = m_cfragmentGate->begin();
+			Bag<uml::Gate>::iterator end = m_cfragmentGate->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4413
 		}
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_INTERACTIONOPERATOR:
 			return eAny(getInteractionOperator()); //4414
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
 		{
-			return eAny(getOperand()); //4415			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InteractionOperand>::iterator iter = m_operand->begin();
+			Bag<uml::InteractionOperand>::iterator end = m_operand->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4415
 		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);

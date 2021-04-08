@@ -727,15 +727,39 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 			return eAny(getContainingNodeActivation().lock()); //103
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES:
 		{
-			return eAny(getEdgeInstances()); //100			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iter = m_edgeInstances->begin();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator end = m_edgeInstances->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //100
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS:
 		{
-			return eAny(getNodeActivations()); //101			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iter = m_nodeActivations->begin();
+			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator end = m_nodeActivations->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //101
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS:
 		{
-			return eAny(getSuspendedActivations()); //104			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iter = m_suspendedActivations->begin();
+			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator end = m_suspendedActivations->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //104
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

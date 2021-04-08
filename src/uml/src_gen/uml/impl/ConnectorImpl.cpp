@@ -435,17 +435,41 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
 		{
-			return eAny(getContract()); //5314			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Behavior>::iterator iter = m_contract->begin();
+			Bag<uml::Behavior>::iterator end = m_contract->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5314
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
 		{
-			return eAny(getEnd()); //5315			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ConnectorEnd>::iterator iter = m_end->begin();
+			Bag<uml::ConnectorEnd>::iterator end = m_end->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5315
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_KIND:
 			return eAny(getKind()); //5316
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 		{
-			return eAny(getRedefinedConnector()); //5317			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Connector>::iterator iter = m_redefinedConnector->begin();
+			Bag<uml::Connector>::iterator end = m_redefinedConnector->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5317
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
 			return eAny(getStructuredClassifier().lock()); //5319

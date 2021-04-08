@@ -592,26 +592,58 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
 		{
-			return eAny(getEndType()); //2139			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Type>::iterator iter = m_endType->begin();
+			Bag<uml::Type>::iterator end = m_endType->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2139
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ISDERIVED:
 			return eAny(getIsDerived()); //2140
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
-			return eAny(getMemberEnd()); //2141			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_memberEnd->begin();
+			Bag<uml::Property>::iterator end = m_memberEnd->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2141
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
-			return eAny(getNavigableOwnedEnd()); //2143			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_navigableOwnedEnd->begin();
+			Bag<uml::Property>::iterator end = m_navigableOwnedEnd->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2143
 		}
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
 		{
-			return eAny(getOwnedEnd()); //2142			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_ownedEnd->begin();
+			Bag<uml::Property>::iterator end = m_ownedEnd->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2142
 		}
 	}
 	Any result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

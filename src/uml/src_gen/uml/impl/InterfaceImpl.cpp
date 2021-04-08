@@ -645,25 +645,65 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
-			return eAny(getNestedClassifier()); //12538			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_nestedClassifier->begin();
+			Bag<uml::Classifier>::iterator end = m_nestedClassifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12538
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			return eAny(getOwnedAttribute()); //12539			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
+			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12539
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
 		{
-			return eAny(getOwnedOperation()); //12543			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
+			Bag<uml::Operation>::iterator end = m_ownedOperation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12543
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
 		{
-			return eAny(getOwnedReception()); //12540			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Reception>::iterator iter = m_ownedReception->begin();
+			Bag<uml::Reception>::iterator end = m_ownedReception->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12540
 		}
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_PROTOCOL:
 			return eAny(getProtocol()); //12541
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
-			return eAny(getRedefinedInterface()); //12542			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Interface>::iterator iter = m_redefinedInterface->begin();
+			Bag<uml::Interface>::iterator end = m_redefinedInterface->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12542
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);

@@ -598,19 +598,51 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
 		{
-			return eAny(getConnectionPoint()); //22261			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Pseudostate>::iterator iter = m_connectionPoint->begin();
+			Bag<uml::Pseudostate>::iterator end = m_connectionPoint->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22261
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 		{
-			return eAny(getExtendedStateMachine()); //22264			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::StateMachine>::iterator iter = m_extendedStateMachine->begin();
+			Bag<uml::StateMachine>::iterator end = m_extendedStateMachine->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22264
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
 		{
-			return eAny(getRegion()); //22263			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Region>::iterator iter = m_region->begin();
+			Bag<uml::Region>::iterator end = m_region->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22263
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 		{
-			return eAny(getSubmachineState()); //22262			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::State>::iterator iter = m_submachineState->begin();
+			Bag<uml::State>::iterator end = m_submachineState->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22262
 		}
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);

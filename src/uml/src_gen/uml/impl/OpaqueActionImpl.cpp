@@ -480,13 +480,29 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getBody()); //16427
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
-			return eAny(getInputValue()); //16428			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
+			Bag<uml::InputPin>::iterator end = m_inputValue->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16428
 		}
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_LANGUAGE:
 			return eAny(getLanguage()); //16429
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
-			return eAny(getOutputValue()); //16430			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_outputValue->begin();
+			Bag<uml::OutputPin>::iterator end = m_outputValue->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16430
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);

@@ -270,7 +270,15 @@ Any OclMessageValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS:
 		{
-			return eAny(getArguments()); //637			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Values::NameValueBinding>::iterator iter = m_arguments->begin();
+			Bag<ocl::Values::NameValueBinding>::iterator end = m_arguments->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //637
 		}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION:
 			return eAny(getIsAsyncOperation()); //632

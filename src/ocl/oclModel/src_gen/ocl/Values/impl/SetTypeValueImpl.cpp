@@ -119,8 +119,8 @@ bool SetTypeValueImpl::addValue(std::shared_ptr<fUML::Semantics::Values::Value> 
 	if(!this->find(value)) {
     std::shared_ptr<ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();
     elem->setValue(value);
-    elem->setIndexNr(m_elements->size());
-    m_elements->add(elem);
+    elem->setIndexNr(this->getElements()->size());
+    this->getElements()->add(elem);
 
     return true;
 }

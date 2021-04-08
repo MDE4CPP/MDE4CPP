@@ -864,15 +864,39 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(isFiring()); //57
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 		{
-			return eAny(getInputPinActivation()); //58			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator iter = m_inputPinActivation->begin();
+			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator end = m_inputPinActivation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //58
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 		{
-			return eAny(getOutputPinActivation()); //59			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iter = m_outputPinActivation->begin();
+			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator end = m_outputPinActivation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //59
 		}
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 		{
-			return eAny(getPinActivation()); //56			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Actions::PinActivation>::iterator iter = m_pinActivation->begin();
+			Bag<fUML::Semantics::Actions::PinActivation>::iterator end = m_pinActivation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //56
 		}
 	}
 	return fUML::Semantics::Activities::ActivityNodeActivationImpl::eGet(featureID, resolve, coreType);

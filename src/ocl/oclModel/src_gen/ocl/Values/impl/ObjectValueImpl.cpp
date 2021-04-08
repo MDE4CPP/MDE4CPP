@@ -297,7 +297,15 @@ Any ObjectValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
 		{
-			return eAny(getHistory()); //580			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Values::LocalSnapshot>::iterator iter = m_history->begin();
+			Bag<ocl::Values::LocalSnapshot>::iterator end = m_history->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //580
 		}
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //581

@@ -223,7 +223,15 @@ Any ParameterValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getParameter()); //870
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:
 		{
-			return eAny(getValues()); //871			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Values::Value>::iterator iter = m_values->begin();
+			Bag<fUML::Semantics::Values::Value>::iterator end = m_values->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //871
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

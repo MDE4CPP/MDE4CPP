@@ -722,7 +722,15 @@ Any CS_DefaultConstructStrategyImpl::eGet(int featureID, bool resolve, bool core
 			return eAny(getDefaultAssociation()); //101
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
 		{
-			return eAny(getGeneratedRealizingClasses()); //102			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Class>::iterator iter = m_generatedRealizingClasses->begin();
+			Bag<uml::Class>::iterator end = m_generatedRealizingClasses->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //102
 		}
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
 			return eAny(getLocus()); //100

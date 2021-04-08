@@ -479,11 +479,27 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getGuard()); //813
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INGROUP:
 		{
-			return eAny(getInGroup()); //821			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityGroup>::iterator iter = m_inGroup->begin();
+			Bag<uml::ActivityGroup>::iterator end = m_inGroup->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //821
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
 		{
-			return eAny(getInPartition()); //814			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityPartition>::iterator iter = m_inPartition->begin();
+			Bag<uml::ActivityPartition>::iterator end = m_inPartition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //814
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
 			return eAny(getInStructuredNode().lock()); //816
@@ -491,7 +507,15 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getInterrupts()); //815
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
 		{
-			return eAny(getRedefinedEdge()); //819			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ActivityEdge>::iterator iter = m_redefinedEdge->begin();
+			Bag<uml::ActivityEdge>::iterator end = m_redefinedEdge->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //819
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
 			return eAny(getSource()); //818

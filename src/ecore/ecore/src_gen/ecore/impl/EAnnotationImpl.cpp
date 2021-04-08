@@ -296,7 +296,15 @@ Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:
 		{
-			return eAny(getContents()); //16			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EObject>::iterator iter = m_contents->begin();
+			Bag<ecore::EObject>::iterator end = m_contents->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
 			return eAny(getDetails()); //18
@@ -304,7 +312,15 @@ Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getEModelElement().lock()); //15
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
 		{
-			return eAny(getReferences()); //17			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EObject>::iterator iter = m_references->begin();
+			Bag<ecore::EObject>::iterator end = m_references->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //17
 		}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_SOURCE:
 			return eAny(getSource()); //14

@@ -373,7 +373,15 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 			return eAny(getGroup().lock()); //64
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
-			return eAny(getOffers()); //63			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Activities::Offer>::iterator iter = m_offers->begin();
+			Bag<fUML::Semantics::Activities::Offer>::iterator end = m_offers->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //63
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
 			return eAny(getSource().lock()); //61

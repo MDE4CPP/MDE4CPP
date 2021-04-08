@@ -471,11 +471,27 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 			return eAny(getClassifierBehavior()); //2638
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
 		{
-			return eAny(getInterfaceRealization()); //2639			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InterfaceRealization>::iterator iter = m_interfaceRealization->begin();
+			Bag<uml::InterfaceRealization>::iterator end = m_interfaceRealization->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2639
 		}
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
 		{
-			return eAny(getOwnedBehavior()); //2640			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Behavior>::iterator iter = m_ownedBehavior->begin();
+			Bag<uml::Behavior>::iterator end = m_ownedBehavior->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2640
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);

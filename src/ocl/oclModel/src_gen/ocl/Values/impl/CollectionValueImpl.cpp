@@ -153,7 +153,7 @@ bool CollectionValueImpl::find(std::shared_ptr<fUML::Semantics::Values::Value> v
 {
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
-	for (Bag<ocl::Values::Element>::const_iterator it_elem = m_elements->begin(); it_elem != m_elements->end(); ++it_elem)
+	for (Bag<ocl::Values::Element>::const_iterator it_elem = this->getElements()->begin(); it_elem != this->getElements()->end(); ++it_elem)
     {
         if ((*it_elem)->getValue()->equals(value)) {
             return true;
@@ -245,7 +245,15 @@ Any CollectionValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
 		{
-			return eAny(getElements()); //210			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Values::Element>::iterator iter = m_elements->begin();
+			Bag<ocl::Values::Element>::iterator end = m_elements->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //210
 		}
 		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_MODEL:
 			return eAny(getModel()); //211

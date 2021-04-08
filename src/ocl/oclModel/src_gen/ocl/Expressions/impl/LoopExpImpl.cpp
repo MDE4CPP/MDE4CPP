@@ -352,7 +352,15 @@ Any LoopExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getBody()); //4623
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
 		{
-			return eAny(getIterator()); //4624			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Expressions::Variable>::iterator iter = m_iterator->begin();
+			Bag<ocl::Expressions::Variable>::iterator end = m_iterator->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4624
 		}
 	}
 	return CallExpImpl::eGet(featureID, resolve, coreType);

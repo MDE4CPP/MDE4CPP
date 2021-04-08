@@ -736,7 +736,7 @@
     </eAnnotations>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="EStringToStringMapEntry" instanceClassName="java.util.Map$Entry">
-    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="../../../../unorderedMap_src_gen/model/std.ecore#//%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
+    <eAnnotations source="http://sse.tu-ilmenau.de/codegen" references="../../../common/cppLibs/std/model/std.ecore#//%http:%2F%2Fsse.tu-ilmenau.de%2Fcodegen%">
       <details key="doNotGenerate" value="false"/>
     </eAnnotations>
     <eAnnotations source="comment">

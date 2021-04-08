@@ -472,7 +472,15 @@ Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 			return eAny(getCallAction()); //1412
 		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
 		{
-			return eAny(getCallExecutions()); //1411			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator iter = m_callExecutions->begin();
+			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator end = m_callExecutions->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1411
 		}
 	}
 	return InvocationActionActivationImpl::eGet(featureID, resolve, coreType);

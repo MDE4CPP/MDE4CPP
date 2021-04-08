@@ -229,7 +229,7 @@ Any MessageOccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool c
 	}
 	Any result;
 	result = MessageEndImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

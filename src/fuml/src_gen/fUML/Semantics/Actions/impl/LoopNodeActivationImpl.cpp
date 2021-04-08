@@ -241,7 +241,15 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	{
 		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
 		{
-			return eAny(getBodyOutputLists()); //7812			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Actions::Values>::iterator iter = m_bodyOutputLists->begin();
+			Bag<fUML::Semantics::Actions::Values>::iterator end = m_bodyOutputLists->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //7812
 		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);

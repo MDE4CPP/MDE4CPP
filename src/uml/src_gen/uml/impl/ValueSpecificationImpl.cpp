@@ -329,7 +329,7 @@ Any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	}
 	Any result;
 	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

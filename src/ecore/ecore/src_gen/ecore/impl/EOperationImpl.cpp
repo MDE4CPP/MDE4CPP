@@ -402,19 +402,51 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getEContainingClass().lock()); //4014
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
 		{
-			return eAny(getEExceptions()); //4017			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EClassifier>::iterator iter = m_eExceptions->begin();
+			Bag<ecore::EClassifier>::iterator end = m_eExceptions->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4017
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
 		{
-			return eAny(getEGenericExceptions()); //4018			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EGenericType>::iterator iter = m_eGenericExceptions->begin();
+			Bag<ecore::EGenericType>::iterator end = m_eGenericExceptions->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4018
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
 		{
-			return eAny(getEParameters()); //4016			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EParameter>::iterator iter = m_eParameters->begin();
+			Bag<ecore::EParameter>::iterator end = m_eParameters->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4016
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
 		{
-			return eAny(getETypeParameters()); //4015			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::ETypeParameter>::iterator iter = m_eTypeParameters->begin();
+			Bag<ecore::ETypeParameter>::iterator end = m_eTypeParameters->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4015
 		}
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_OPERATIONID:
 			return eAny(getOperationID()); //4013

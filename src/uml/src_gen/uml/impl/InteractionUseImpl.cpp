@@ -417,11 +417,27 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 		{
-			return eAny(getActualGate()); //12413			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Gate>::iterator iter = m_actualGate->begin();
+			Bag<uml::Gate>::iterator end = m_actualGate->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12413
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
-			return eAny(getArgument()); //12414			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ValueSpecification>::iterator iter = m_argument->begin();
+			Bag<uml::ValueSpecification>::iterator end = m_argument->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //12414
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
 			return eAny(getRefersTo()); //12415

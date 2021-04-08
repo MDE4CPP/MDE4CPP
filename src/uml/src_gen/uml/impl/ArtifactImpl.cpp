@@ -589,24 +589,56 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getFileName()); //2038
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
 		{
-			return eAny(getManifestation()); //2039			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Manifestation>::iterator iter = m_manifestation->begin();
+			Bag<uml::Manifestation>::iterator end = m_manifestation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2039
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
 		{
-			return eAny(getNestedArtifact()); //2040			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Artifact>::iterator iter = m_nestedArtifact->begin();
+			Bag<uml::Artifact>::iterator end = m_nestedArtifact->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2040
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			return eAny(getOwnedAttribute()); //2041			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
+			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2041
 		}
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
 		{
-			return eAny(getOwnedOperation()); //2042			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
+			Bag<uml::Operation>::iterator end = m_ownedOperation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2042
 		}
 	}
 	Any result;
 	result = ClassifierImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

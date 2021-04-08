@@ -397,7 +397,15 @@ Any CallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getIsSynchronous()); //2829
 		case uml::umlPackage::CALLACTION_ATTRIBUTE_RESULT:
 		{
-			return eAny(getResult()); //2830			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_result->begin();
+			Bag<uml::OutputPin>::iterator end = m_result->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2830
 		}
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);

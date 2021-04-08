@@ -280,11 +280,27 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
 		{
-			return eAny(getCondition()); //1779			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = m_condition->begin();
+			Bag<uml::Constraint>::iterator end = m_condition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1779
 		}
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 		{
-			return eAny(getParameter()); //17710			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Parameter>::iterator iter = m_parameter->begin();
+			Bag<uml::Parameter>::iterator end = m_parameter->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //17710
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);

@@ -298,7 +298,15 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getPosition()); //551
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
 		{
-			return eAny(getValues()); //550			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Values::Value>::iterator iter = m_values->begin();
+			Bag<fUML::Semantics::Values::Value>::iterator end = m_values->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //550
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

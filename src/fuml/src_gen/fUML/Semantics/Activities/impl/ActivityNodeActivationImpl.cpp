@@ -714,17 +714,41 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 			return eAny(getGroup().lock()); //93
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS:
 		{
-			return eAny(getHeldTokens()); //92			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Activities::Token>::iterator iter = m_heldTokens->begin();
+			Bag<fUML::Semantics::Activities::Token>::iterator end = m_heldTokens->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //92
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
 		{
-			return eAny(getIncomingEdges()); //91			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iter = m_incomingEdges->begin();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator end = m_incomingEdges->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //91
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
 			return eAny(getNode()); //94
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
 		{
-			return eAny(getOutgoingEdges()); //90			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iter = m_outgoingEdges->begin();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator end = m_outgoingEdges->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //90
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_RUNNING:
 			return eAny(isRunning()); //95

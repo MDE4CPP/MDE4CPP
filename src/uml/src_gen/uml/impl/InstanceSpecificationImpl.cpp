@@ -346,23 +346,39 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 	{
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
-			return eAny(getClassifier()); //11714			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_classifier->begin();
+			Bag<uml::Classifier>::iterator end = m_classifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //11714
 		}
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 		{
-			return eAny(getSlot()); //11715			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Slot>::iterator iter = m_slot->begin();
+			Bag<uml::Slot>::iterator end = m_slot->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //11715
 		}
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SPECIFICATION:
 			return eAny(getSpecification()); //11716
 	}
 	Any result;
 	result = DeployedArtifactImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}
 	result = DeploymentTargetImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

@@ -189,7 +189,15 @@ Any RelationshipImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::RELATIONSHIP_ATTRIBUTE_RELATEDELEMENT:
 		{
-			return eAny(getRelatedElement()); //2083			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = m_relatedElement->begin();
+			Bag<uml::Element>::iterator end = m_relatedElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2083
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);

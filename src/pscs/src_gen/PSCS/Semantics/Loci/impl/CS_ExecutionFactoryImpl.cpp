@@ -342,7 +342,15 @@ Any CS_ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
-			return eAny(getAppliedProfiles()); //144			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Package>::iterator iter = m_appliedProfiles->begin();
+			Bag<uml::Package>::iterator end = m_appliedProfiles->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //144
 		}
 	}
 	return fUML::Semantics::Loci::ExecutionFactoryImpl::eGet(featureID, resolve, coreType);

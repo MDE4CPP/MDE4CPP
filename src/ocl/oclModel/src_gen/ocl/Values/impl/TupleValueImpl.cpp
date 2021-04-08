@@ -223,7 +223,15 @@ Any TupleValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
 		{
-			return eAny(getElements()); //890			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Values::NameValueBinding>::iterator iter = m_elements->begin();
+			Bag<ocl::Values::NameValueBinding>::iterator end = m_elements->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //890
 		}
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
 			return eAny(getModel()); //891

@@ -342,7 +342,15 @@ Any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
 		{
-			return eAny(getFeatureValues()); //290			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>::iterator iter = m_featureValues->begin();
+			Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>::iterator end = m_featureValues->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //290
 		}
 	}
 	return StructuredValueImpl::eGet(featureID, resolve, coreType);

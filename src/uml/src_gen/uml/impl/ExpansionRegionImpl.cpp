@@ -449,13 +449,29 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
-			return eAny(getInputElement()); //9446			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExpansionNode>::iterator iter = m_inputElement->begin();
+			Bag<uml::ExpansionNode>::iterator end = m_inputElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //9446
 		}
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_MODE:
 			return eAny(getMode()); //9444
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
-			return eAny(getOutputElement()); //9445			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExpansionNode>::iterator iter = m_outputElement->begin();
+			Bag<uml::ExpansionNode>::iterator end = m_outputElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //9445
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);

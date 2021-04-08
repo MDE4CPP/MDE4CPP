@@ -318,7 +318,15 @@ Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
 		{
-			return eAny(getCoveredBy()); //13213			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InteractionFragment>::iterator iter = m_coveredBy->begin();
+			Bag<uml::InteractionFragment>::iterator end = m_coveredBy->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //13213
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
 			return eAny(getDecomposedAs()); //1329

@@ -215,12 +215,12 @@ Any StructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	}
 	Any result;
 	result = FeatureImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}
 	result = MultiplicityElementImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

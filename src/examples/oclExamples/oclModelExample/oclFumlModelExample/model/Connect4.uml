@@ -27,9 +27,15 @@
   <packagedElement xmi:type="uml:Class" xmi:id="_EMKYsDUmEeuqy8jdqyFfUQ" name="Move" visibility="public">
     <ownedAttribute xmi:id="_vKYj0DUsEeuqy8jdqyFfUQ" name="posX" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_N7N2oJg8Eeu6K8yG0QzIuA"/>
     </ownedAttribute>
     <ownedAttribute xmi:id="_1ntzoDUsEeuqy8jdqyFfUQ" name="posY" visibility="private">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_Olj0IJg8Eeu6K8yG0QzIuA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_XSvq4Jg1Eeu6K8yG0QzIuA" name="count" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_PJDiwJg8Eeu6K8yG0QzIuA"/>
     </ownedAttribute>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_F0-woDUmEeuqy8jdqyFfUQ" name="GameBoard" visibility="public">
@@ -42,6 +48,10 @@
     <ownedAttribute xmi:id="_O0xudDUsEeuqy8jdqyFfUQ" name="items" visibility="protected" type="_J1bHQDUmEeuqy8jdqyFfUQ" aggregation="shared" association="_O0xucDUsEeuqy8jdqyFfUQ">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_O0xudTUsEeuqy8jdqyFfUQ"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_O0xudjUsEeuqy8jdqyFfUQ" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_NwWZgJgzEeu6K8yG0QzIuA" name="lastMove" visibility="protected" type="_J1bHQDUmEeuqy8jdqyFfUQ" aggregation="shared">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NwWZgZgzEeu6K8yG0QzIuA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NwWZgpgzEeu6K8yG0QzIuA" value="1"/>
     </ownedAttribute>
     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_6kPi8DV3Eeuqy8jdqyFfUQ" name="obResetBoard" specification="_rOXlIDV3Eeuqy8jdqyFfUQ">
       <eAnnotations xmi:id="_tmNkYJDLEeusyN9MX8Es3g" source="noExecution"/>
@@ -100,7 +110,7 @@
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Z1ftFTUwEeuqy8jdqyFfUQ"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Z1ftFjUwEeuqy8jdqyFfUQ" value="1"/>
     </ownedAttribute>
-    <ownedAttribute xmi:id="_KmrZgDUwEeuqy8jdqyFfUQ" name="history" visibility="protected" type="_EMKYsDUmEeuqy8jdqyFfUQ" aggregation="shared" association="_KmlS4DUwEeuqy8jdqyFfUQ">
+    <ownedAttribute xmi:id="_KmrZgDUwEeuqy8jdqyFfUQ" name="history" visibility="protected" type="_J1bHQDUmEeuqy8jdqyFfUQ" aggregation="shared" association="_KmlS4DUwEeuqy8jdqyFfUQ">
       <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_KmrZgTUwEeuqy8jdqyFfUQ"/>
       <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_KmrZgjUwEeuqy8jdqyFfUQ" value="*"/>
     </ownedAttribute>
@@ -120,7 +130,8 @@
 
     m_lastMove->setId(m_id);&#xD;
 
-    m_history->add(move);</body>
+    m_board->setLastMove(m_lastMove);&#xD;
+    m_history->add(m_lastMove);</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0xenIDZIEeut8fHQvk0ibQ" name="obInitPlayer" specification="_jzlioDZIEeut8fHQvk0ibQ">
       <eAnnotations xmi:id="_34CZgJDLEeusyN9MX8Es3g" source="noExecution"/>
@@ -135,7 +146,7 @@
       <body>   m_id = id;&#xD;
    m_name = name;&#xD;
    m_board = board;&#xD;
-   m_history = std::make_shared&lt;Bag&lt;Connect4::Move>>();</body>
+   m_history = std::make_shared&lt;Bag&lt;Connect4::GameItem>>();</body>
     </ownedBehavior>
     <ownedOperation xmi:id="_4Q3RQDVaEeuqy8jdqyFfUQ" name="play" isAbstract="true">
       <ownedParameter xmi:id="_7pvRkDVaEeuqy8jdqyFfUQ" name="move" type="_EMKYsDUmEeuqy8jdqyFfUQ" direction="return"/>
@@ -340,6 +351,9 @@
       <node xmi:type="uml:MergeNode" xmi:id="_iJOP8DazEeu1Q9BtzyAF7A" name="mnStoping" incoming="_I0UAsDa0Eeu1Q9BtzyAF7A _Ir7EQDa1Eeu1Q9BtzyAF7A" outgoing="_PhOkoDa0Eeu1Q9BtzyAF7A"/>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_5Ht5YDVdEeuqy8jdqyFfUQ" name="fbIsValid" specification="_utq8YDVdEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_sSwogJQ5EeuzcfCDtdNG0w" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_sSwogZQ5EeuzcfCDtdNG0w" key="generateContextVariable" value="true"/>
+      </eAnnotations>
       <ownedParameter xmi:id="_11NxYDVeEeuqy8jdqyFfUQ" name="valid" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
@@ -347,6 +361,9 @@
       <body>context Connect4Engine inv:(self.lastCmd > -1) and (self.lastCmd &lt; 8)</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_8f_x4DVfEeuqy8jdqyFfUQ" name="fbIsMoving" specification="_xjSzwDVfEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_r7y6AJQ5EeuzcfCDtdNG0w" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_r7y6AZQ5EeuzcfCDtdNG0w" key="generateContextVariable" value="true"/>
+      </eAnnotations>
       <ownedParameter xmi:id="__KC9UDVfEeuqy8jdqyFfUQ" name="moving" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
@@ -354,6 +371,9 @@
       <body>context Connect4Engine inv:self.lastCmd > 0</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_fZyVEDV9Eeuqy8jdqyFfUQ" name="fbIsStarting" specification="_Wxx9cDV9Eeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_rYLPkJQ5EeuzcfCDtdNG0w" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_rYLPkZQ5EeuzcfCDtdNG0w" key="generateContextVariable" value="true"/>
+      </eAnnotations>
       <ownedParameter xmi:id="_kwod8DV9Eeuqy8jdqyFfUQ" name="start" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
@@ -361,6 +381,9 @@
       <body>context Connect4Engine inv:self.lastCmd > 0</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_-WtJ8DVhEeuqy8jdqyFfUQ" name="fbIsOver" specification="_2xAj4DVhEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_q5vAEJQ5EeuzcfCDtdNG0w" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_q5vAEZQ5EeuzcfCDtdNG0w" key="generateContextVariable" value="true"/>
+      </eAnnotations>
       <ownedParameter xmi:id="_PryWsDVzEeuqy8jdqyFfUQ" name="over" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
@@ -368,6 +391,9 @@
       <body>context Connect4Engine inv:self.state = false</body>
     </ownedBehavior>
     <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_coHMwDV_Eeuqy8jdqyFfUQ" name="fbIsPlaying" specification="_WGq5ADV_Eeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_CGkvkJQ5EeuzcfCDtdNG0w" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_lAJ9kJQ5EeuzcfCDtdNG0w" key="generateContextVariable" value="true"/>
+      </eAnnotations>
       <ownedParameter xmi:id="_fw3GYDV_Eeuqy8jdqyFfUQ" name="playing" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
@@ -429,11 +455,11 @@
         std::cout &lt;&lt; &quot; ___________________________________________&quot; &lt;&lt; std::endl;&#xD;
         std::cout &lt;&lt; &quot;| History &quot; + m_players->at(0)->getName() &lt;&lt; &quot; (&quot; &lt;&lt; m_players->at(0)->getId() &lt;&lt; &quot;) : &quot;;&#xD;
         for(size_t i = 0; i &lt; m_players->at(0)->getHistory()->size(); i++) 
-			std::cout &lt;&lt; &quot; &quot; &lt;&lt; m_players->at(0)->getHistory()->at(i)->getPosX();&#xD;
+			std::cout &lt;&lt; &quot; &quot; &lt;&lt; (m_players->at(0)->getHistory()->at(i)->getPosX() + 1);&#xD;
         std::cout &lt;&lt; std::endl;&#xD;
         std::cout &lt;&lt; &quot;| History &quot; + m_players->at(1)->getName() &lt;&lt; &quot; (&quot; &lt;&lt; m_players->at(1)->getId() &lt;&lt; &quot;) : &quot;;&#xD;
         for(size_t i = 0; i &lt; m_players->at(1)->getHistory()->size(); i++) 
-			std::cout &lt;&lt; &quot; &quot; &lt;&lt; m_players->at(1)->getHistory()->at(i)->getPosX();&#xD;
+			std::cout &lt;&lt; &quot; &quot; &lt;&lt; (m_players->at(1)->getHistory()->at(i)->getPosX() +1);&#xD;
         std::cout &lt;&lt; std::endl;&#xD;
         std::cout &lt;&lt; &quot; ------------------------------------------- &quot; &lt;&lt; std::endl;&#xD;
         m_board->print();&#xD;
@@ -484,7 +510,7 @@
         p1->initPlayer(&quot;@&quot;, &quot;Player&quot;, m_board);&#xD;
         p2 = Connect4Factory::eInstance()->createConnect4AIPlayer();
 		&#xD;
-        p2->initPlayer(&quot;0&quot;, &quot;AI&quot;, m_board);&#xD;
+        p2->initPlayer(&quot;1&quot;, &quot;AI&quot;, m_board);&#xD;
     }&#xD;
     else {&#xD;
         p1 = Connect4Factory::eInstance()->createConnect4Player();
@@ -492,7 +518,7 @@
         p1->initPlayer(&quot;@&quot;, &quot;Player 1&quot;, m_board);&#xD;
         p2 = Connect4Factory::eInstance()->createConnect4Player();
 		&#xD;
-        p2->initPlayer(&quot;0&quot;, &quot;Player 2&quot;, m_board);&#xD;
+        p2->initPlayer(&quot;1&quot;, &quot;Player 2&quot;, m_board);&#xD;
     }&#xD;
     m_players->add(p1);&#xD;
     m_players->add(p2);&#xD;
@@ -632,65 +658,78 @@
       </ownedParameter>
       <language>CPP</language>
       <body>    if(lastMove != nullptr) {&#xD;
-        int count = 0;&#xD;
-        // check vertical&#xD;
-        for(int i = lastMove->getPosY(); i >= 0; i--) {&#xD;
-            std::shared_ptr&lt;GameItem> item = m_items->at((i * m_width) + lastMove->getPosX());&#xD;
-            if(item != nullptr &amp;&amp; item->getId() == lastMove->getId()) {&#xD;
-                count++;&#xD;
-                if(count >= 4)&#xD;
-                    return true;&#xD;
-            }&#xD;
-            else&#xD;
+       if(maxScore(lastMove)->getCount() >= 4) return true;&#xD;
+    }</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_qws4YJg1Eeu6K8yG0QzIuA" name="obMaxCount" specification="_tbs7gJg0Eeu6K8yG0QzIuA">
+      <eAnnotations xmi:id="_qws4YZg1Eeu6K8yG0QzIuA" source="noExecution"/>
+      <ownedParameter xmi:id="_qws4Ypg1Eeu6K8yG0QzIuA" name="item" type="_J1bHQDUmEeuqy8jdqyFfUQ"/>
+      <ownedParameter xmi:id="_0HJqYJg1Eeu6K8yG0QzIuA" name="ver">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_0HKRcJg1Eeu6K8yG0QzIuA" name="hor">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_0HKRcZg1Eeu6K8yG0QzIuA" name="count" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>    if(abs(ver) > 1) ver = 0;&#xD;
+    if(abs(hor) > 1) hor = 0;&#xD;
+&#xD;
+   count = 1;&#xD;
+   for(int i = item->getPosY() + ver, j = item->getPosX() + hor; i >= 0 &amp;&amp; i &lt; m_height &amp;&amp; j >= 0 &amp;&amp; j &lt; m_width; i+=ver, j+=hor) {&#xD;
+        std::shared_ptr&lt;GameItem> it = m_items->at((i * m_width) + j);&#xD;
+        if(it != nullptr &amp;&amp; it->getId() == item->getId()) {&#xD;
+            count++;&#xD;
+            if(count >= 4)&#xD;
                 break;&#xD;
         }&#xD;
-        count = 0;&#xD;
-        // check horizontal&#xD;
-        for(int j = lastMove->getPosX(); j >= 0; j--) {&#xD;
-            std::shared_ptr&lt;GameItem> item = m_items->at((lastMove->getPosY() * m_width) + j);&#xD;
-            if(item != nullptr &amp;&amp; item->getId() == lastMove->getId()) {&#xD;
-                count++;&#xD;
-                if(count >= 4)&#xD;
-                    return true;&#xD;
-            }&#xD;
-            else&#xD;
+        else&#xD;
+            break;&#xD;
+    }&#xD;
+    for(int i = item->getPosY() - ver, j = item->getPosX() - hor; i >= 0 &amp;&amp; i &lt; m_height &amp;&amp; j >= 0 &amp;&amp; j &lt; m_width; i-=ver, j-=hor) {&#xD;
+        std::shared_ptr&lt;GameItem> it = m_items->at((i * m_width) + j);&#xD;
+        if(it != nullptr &amp;&amp; it->getId() == item->getId()) {&#xD;
+            count++;&#xD;
+            if(count >= 4)&#xD;
                 break;&#xD;
         }&#xD;
-        count = 0;&#xD;
-        // check horizontal&#xD;
-        for(int j = lastMove->getPosX(); j &lt; m_width; j++) {&#xD;
-            std::shared_ptr&lt;GameItem> item = m_items->at((lastMove->getPosY() * m_width) + j);&#xD;
-            if(item != nullptr &amp;&amp; item->getId() == lastMove->getId()) {&#xD;
-                count++;&#xD;
-                if(count >= 4)&#xD;
-                    return true;&#xD;
+        else&#xD;
+            break;&#xD;
+    }</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_UhhD8Jg2Eeu6K8yG0QzIuA" name="obMaxScore" specification="_J8BhYJg1Eeu6K8yG0QzIuA">
+      <eAnnotations xmi:id="_UhhD8Zg2Eeu6K8yG0QzIuA" source="noExecution"/>
+      <ownedParameter xmi:id="_UhhD8pg2Eeu6K8yG0QzIuA" name="item" type="_J1bHQDUmEeuqy8jdqyFfUQ"/>
+      <ownedParameter xmi:id="_Zy9IYJg2Eeu6K8yG0QzIuA" name="result" type="_EMKYsDUmEeuqy8jdqyFfUQ" direction="return"/>
+      <language>CPP</language>
+      <body>      result = Connect4Factory::eInstance()->createMove();&#xD;
+    std::vector&lt;std::shared_ptr&lt;Move>> moves;&#xD;
+	std::shared_ptr&lt;Move> m1 = Connect4Factory::eInstance()->createMove();&#xD;
+	std::shared_ptr&lt;Move> m2 = Connect4Factory::eInstance()->createMove();&#xD;
+	std::shared_ptr&lt;Move> m3 = Connect4Factory::eInstance()->createMove();&#xD;
+	std::shared_ptr&lt;Move> m4 = Connect4Factory::eInstance()->createMove();&#xD;
+	&#xD;
+	m1->setPosX(0); m1->setPosY(-1); moves.push_back(m1); // vertical&#xD;
+	m2->setPosX(-1); m2->setPosY(0); moves.push_back(m2); // horizontal&#xD;
+	m3->setPosX(-1); m3->setPosY(-1); moves.push_back(m3); // first diagonal&#xD;
+	m4->setPosX(-1); m4->setPosY(1); moves.push_back(m4); // second diagonal&#xD;
+	&#xD;
+    for(std::shared_ptr&lt;Move> move : moves) {&#xD;
+        move->setCount(maxCount(item, move->getPosY(), move->getPosX()));&#xD;
+        if(move->getCount() >= 4) return move;&#xD;
+        if(result->getCount() &lt; move->getCount()) {&#xD;
+            if((move->getPosY() == -1 &amp;&amp; move->getPosX() == 0 &amp;&amp; getLastY(item->getPosX()) > (int)item->getPosY() + 1)&#xD;
+                    || (move->getPosX() == -1 &amp;&amp; getLastY(item->getPosX() + 1) == (int)item->getPosY() + 1)&#xD;
+                    || (move->getPosX() == 1 &amp;&amp; getLastY(item->getPosX() - 1) == (int)item->getPosY() + 1)) {&#xD;
+                move->setCount(0);&#xD;
             }&#xD;
-            else&#xD;
-                break;&#xD;
-        }&#xD;
-        count = 0;&#xD;
-        // check diagonal&#xD;
-        for(int i = lastMove->getPosY(), j = lastMove->getPosX(); i >= 0 &amp;&amp; j >= 0; i--, j--) {&#xD;
-            std::shared_ptr&lt;GameItem> item = m_items->at((i * m_width) + j);&#xD;
-            if(item != nullptr &amp;&amp; item->getId() == lastMove->getId()) {&#xD;
-                count++;&#xD;
-                if(count >= 4)&#xD;
-                    return true;&#xD;
+            else {&#xD;
+                result->setPosX(move->getPosX());&#xD;
+                result->setPosY(move->getPosY());&#xD;
+                result->setCount(move->getCount());&#xD;
             }&#xD;
-            else&#xD;
-                break;&#xD;
-        }&#xD;
-        count = 0;&#xD;
-        // check diagonal&#xD;
-        for(int i = lastMove->getPosY(), j = lastMove->getPosX(); i >= 0 &amp;&amp; j &lt; m_width; i--, j++) {&#xD;
-            std::shared_ptr&lt;GameItem> item = m_items->at((i * m_width) + j);&#xD;
-            if(item != nullptr &amp;&amp; item->getId() == lastMove->getId()) {&#xD;
-                count++;&#xD;
-                if(count >= 4)&#xD;
-                    return true;&#xD;
-            }&#xD;
-            else&#xD;
-                break;&#xD;
         }&#xD;
     }</body>
     </ownedBehavior>
@@ -708,6 +747,22 @@
       <ownedParameter xmi:id="_CZ7-wDV2Eeuqy8jdqyFfUQ" name="won" direction="return">
         <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
       </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_tbs7gJg0Eeu6K8yG0QzIuA" name="maxCount" method="_qws4YJg1Eeu6K8yG0QzIuA">
+      <ownedParameter xmi:id="_3sz-8Jg0Eeu6K8yG0QzIuA" name="item" type="_J1bHQDUmEeuqy8jdqyFfUQ"/>
+      <ownedParameter xmi:id="__3374Jg0Eeu6K8yG0QzIuA" name="ver">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_B3H20Jg1Eeu6K8yG0QzIuA" name="hor">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_FE9r0Jg1Eeu6K8yG0QzIuA" name="count" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_J8BhYJg1Eeu6K8yG0QzIuA" name="maxScore" method="_UhhD8Jg2Eeu6K8yG0QzIuA">
+      <ownedParameter xmi:id="_J8BhYZg1Eeu6K8yG0QzIuA" name="item" type="_J1bHQDUmEeuqy8jdqyFfUQ"/>
+      <ownedParameter xmi:id="_J8BhZJg1Eeu6K8yG0QzIuA" name="result" type="_EMKYsDUmEeuqy8jdqyFfUQ" direction="return"/>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_6AhYMDUyEeuqy8jdqyFfUQ" name="Connect4Player" visibility="public">
@@ -750,10 +805,63 @@
 #include &quot;Connect4/Connect4Factory.hpp&quot;&#xD;
 #include &quot;Connect4/Connect4Board.hpp&quot;&#xD;
 </body>
-      <body>    int x = 1;&#xD;
-    int y = std::dynamic_pointer_cast&lt;Connect4Board>(m_board)->getLastY(x - 1);&#xD;
+      <body>    int x = 0;&#xD;
+    int y = 1;&#xD;
+    std::shared_ptr&lt;Connect4Board> board = std::dynamic_pointer_cast&lt;Connect4Board>(m_board);&#xD;
+    std::shared_ptr&lt;GameItem> playerMove = board->getLastMove();&#xD;
+&#xD;
+   if(playerMove != nullptr &amp;&amp; m_history->size() > 0) {&#xD;
+        std::shared_ptr&lt;Move> playerMax = board->maxScore(playerMove);&#xD;
+		std::shared_ptr&lt;Move> aiMax = Connect4Factory::eInstance()->createMove();&#xD;
+        std::shared_ptr&lt;GameItem> bestMove = m_lastMove;&#xD;
+        for(size_t i = 0; i &lt; m_history->size(); i++) {&#xD;
+			std::shared_ptr&lt;GameItem> item = m_history->at(i);&#xD;
+            std::shared_ptr&lt;Move> move = board->maxScore(item);&#xD;
+            if(move->getCount() > aiMax->getCount()) {&#xD;
+                aiMax->setPosX(move->getPosX());&#xD;
+                if(move->getPosX() != 0)&#xD;
+                    aiMax->setPosY(move->getPosY());&#xD;
+                else&#xD;
+                    aiMax->setPosY(0);&#xD;
+                aiMax->setCount(move->getCount());&#xD;
+                bestMove = item;&#xD;
+            }&#xD;
+        }&#xD;
+&#xD;
+        if(aiMax->getCount() > 2 || playerMax->getCount() &lt; 3) { // if the ai is one move to win or the player is not close to win&#xD;
+            if(aiMax->getPosY() == -1) // if ai max count is vertical&#xD;
+                x = bestMove->getPosX() + 1;&#xD;
+            else if(aiMax->getPosX() == -1) // if ai max count is horizontal on left&#xD;
+                x = bestMove->getPosX() + 2;&#xD;
+            else if(aiMax->getPosX() == 1) // if ai max count is horizontal on right&#xD;
+                x = bestMove->getPosX();&#xD;
+            else&#xD;
+                x = 4;&#xD;
+            if(x &lt; 1 || x > 7) x = 0;&#xD;
+        }&#xD;
+        if(x == 0 &amp;&amp; playerMax->getCount() > 2) {&#xD;
+            if(playerMax->getPosY() == -1) // if player max count is vertical&#xD;
+                x = playerMove->getPosX() + 1;&#xD;
+            else if(playerMax->getPosX() == -1) // if player max count is horizontal on left&#xD;
+                x = playerMove->getPosX() + 2;&#xD;
+            else if(playerMax->getPosX() == 1) // if player max count is horizontal on right&#xD;
+                x = playerMove->getPosX();&#xD;
+            if(x &lt; 1 || x > 7) x = 0;&#xD;
+        }&#xD;
+    }&#xD;
+    if(x == 0) x = 4;&#xD;
+    y = board->getLastY(x - 1);&#xD;
+    if(y &lt; 0) {&#xD;
+        x = 0;&#xD;
+        while(y &lt; 0) {&#xD;
+            x++;&#xD;
+            y = board->getLastY(x - 1);&#xD;
+        }&#xD;
+    }&#xD;
+&#xD;
     std::cout &lt;&lt; x;&#xD;
-    std::this_thread::sleep_for (std::chrono::seconds(2));&#xD;
+    std::this_thread::sleep_for (std::chrono::seconds(1));&#xD;
+&#xD;
     move = Connect4Factory::eInstance()->createMove();&#xD;
     move->setPosX(x);&#xD;
     move->setPosY(y);</body>

@@ -159,7 +159,15 @@ Any ValuesImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case fUML::Semantics::Actions::ActionsPackage::VALUES_ATTRIBUTE_VALUES:
 		{
-			return eAny(getValues()); //1200			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Values::Value>::iterator iter = m_values->begin();
+			Bag<fUML::Semantics::Values::Value>::iterator end = m_values->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1200
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

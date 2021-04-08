@@ -349,7 +349,15 @@ Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getContext()); //464
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
 		{
-			return eAny(getParameterValues()); //465			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator iter = m_parameterValues->begin();
+			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator end = m_parameterValues->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //465
 		}
 	}
 	return fUML::Semantics::StructuredClassifiers::ObjectImpl::eGet(featureID, resolve, coreType);

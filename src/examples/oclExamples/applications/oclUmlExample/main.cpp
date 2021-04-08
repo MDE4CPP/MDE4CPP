@@ -38,9 +38,9 @@ void pause();
 
 int main()
 {
-   //query1();
-   //query2();
-   //query3();
+   query1();
+   query2();
+   query3();
    query4();
    query5();
    query6();
@@ -136,14 +136,12 @@ void validate4() {
     std::cout << "END Validate_4 -------------------------------------------\n" << std::endl;
 }
 void validate5() {
-    std::string qry = "\npackage library \n"
-                      "context Library \n"
+    std::string qry = "context Library \n"
                       "def: rest1: Real = nbBooks - 2 * nbBooks \n"
                       "context Library \n"
                       "def: rest2: Real = rest1 * 2 \n"
                       "context Library \n"
-                      "inv: 15 <> let result : Integer = 0 in nbBooks - rest2 \n"
-                      "endpackage \n";
+                      "inv: 15 <> let result : Integer = 0 in nbBooks - rest2 \n";
     std::shared_ptr<BookStore_uml::Library> context = BookStore_uml::BookStore_umlFactory::eInstance()->createLibrary();
     context->setNbBooks(5);
     std::cout << "START Validate_5(nbBooks = 5) : " << qry << std::endl;
@@ -151,10 +149,8 @@ void validate5() {
     std::cout << "END Validate_5 -------------------------------------------\n" << std::endl;
 }
 void validate6() {
-    std::string qry = "\npackage library \n"
-                      "context Library::getBooks() : Integer \n"
-                      "body: self.nbBooks \n"
-                      "endpackage \n";
+    std::string qry = "context Library::getBooks() : Integer \n"
+                      "body: self.nbBooks \n";
     std::shared_ptr<BookStore_uml::Library> context = BookStore_uml::BookStore_umlFactory::eInstance()->createLibrary();
     context->setNbBooks(5);
     std::cout << "START Validate_6(nbBooks = 5) : " << qry << std::endl;
@@ -171,7 +167,7 @@ void validate(std::shared_ptr<ecore::EObject> context,const std::string& query) 
         } else {
             std::cout << ocl.getResult() << std::endl;
         }
-    } catch (std::exception e) {
+    } catch (std::exception &e) {
         std::cout << "exception : " << e.what() << std::endl;
     }
 }
@@ -184,7 +180,7 @@ void query( std::shared_ptr<ecore::EObject> context, const std::string& query) {
         } else {
             std::cout << ocl.getError() << std::endl;
         }
-    } catch (std::exception e) {
+    } catch (std::exception &e) {
         std::cout << "exception : " << e.what() << std::endl;
     }
 }

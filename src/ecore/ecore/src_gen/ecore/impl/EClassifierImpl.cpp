@@ -300,7 +300,15 @@ Any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getEPackage().lock()); //139
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
 		{
-			return eAny(getETypeParameters()); //1310			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::ETypeParameter>::iterator iter = m_eTypeParameters->begin();
+			Bag<ecore::ETypeParameter>::iterator end = m_eTypeParameters->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1310
 		}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_INSTANCECLASS:
 			return eAny(getInstanceClass()); //136

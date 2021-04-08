@@ -253,7 +253,15 @@ Any TemplateableElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 			return eAny(getOwnedTemplateSignature()); //2344
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
 		{
-			return eAny(getTemplateBinding()); //2343			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::TemplateBinding>::iterator iter = m_templateBinding->begin();
+			Bag<uml::TemplateBinding>::iterator end = m_templateBinding->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2343
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);

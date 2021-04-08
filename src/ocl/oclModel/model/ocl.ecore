@@ -242,7 +242,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="BagTypeValue" eSuperTypes="#//Values/CollectionValue">
       <eOperations name="addValue" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-          <details key="body" value="std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;elem->setValue(value);&#xA;elem->setIndexNr(m_elements->size());&#xA;m_elements->add(elem);&#xA;&#xA;return true;"/>
+          <details key="body" value="std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;elem->setValue(value);&#xA;elem->setIndexNr(this->getElements()->size());&#xA;this->getElements()->add(elem);&#xA;&#xA;return true;"/>
         </eAnnotations>
         <eParameters name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
       </eOperations>
@@ -259,7 +259,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="SequenceTypeValue" eSuperTypes="#//Values/CollectionValue">
       <eOperations name="addValue" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-          <details key="body" value="std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;elem->setValue(value);&#xA;elem->setIndexNr(m_elements->size());&#xA;m_elements->add(elem);&#xA;&#xA;return true;"/>
+          <details key="body" value="std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;elem->setValue(value);&#xA;elem->setIndexNr(this->getElements()->size());&#xA;this->getElements()->add(elem);&#xA;&#xA;return true;"/>
         </eAnnotations>
         <eParameters name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
       </eOperations>
@@ -295,7 +295,7 @@
       </eOperations>
       <eOperations name="find" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-          <details key="body" value="for (Bag&lt;ocl::Values::Element>::const_iterator it_elem = m_elements->begin(); it_elem != m_elements->end(); ++it_elem)&#xA;    {&#xA;        if ((*it_elem)->getValue()->equals(value)) {&#xA;            return true;&#xA;        }&#xA;    }&#xA;    return false;"/>
+          <details key="body" value="for (Bag&lt;ocl::Values::Element>::const_iterator it_elem = this->getElements()->begin(); it_elem != this->getElements()->end(); ++it_elem)&#xA;    {&#xA;        if ((*it_elem)->getValue()->equals(value)) {&#xA;            return true;&#xA;        }&#xA;    }&#xA;    return false;"/>
         </eAnnotations>
         <eParameters name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
       </eOperations>
@@ -313,7 +313,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="SetTypeValue" eSuperTypes="#//Values/CollectionValue">
       <eOperations name="addValue" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-          <details key="body" value="if(!this->find(value)) {&#xA;    std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;    elem->setValue(value);&#xA;    elem->setIndexNr(m_elements->size());&#xA;    m_elements->add(elem);&#xA;&#xA;    return true;&#xA;}&#xA;return false;"/>
+          <details key="body" value="if(!this->find(value)) {&#xA;    std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;    elem->setValue(value);&#xA;    elem->setIndexNr(this->getElements()->size());&#xA;    this->getElements()->add(elem);&#xA;&#xA;    return true;&#xA;}&#xA;return false;"/>
         </eAnnotations>
         <eParameters name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
       </eOperations>
@@ -408,7 +408,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="OrderedSetTypeValue" eSuperTypes="#//Values/CollectionValue">
       <eOperations name="addValue" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
         <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-          <details key="body" value="if(!this->find(value)) {&#xA;    std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;    elem->setValue(value);&#xA;    elem->setIndexNr(m_elements->size());&#xA;    m_elements->add(elem);&#xA;&#xA;    return true;&#xA;}&#xA;return false;"/>
+          <details key="body" value="if(!this->find(value)) {&#xA;    std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;    elem->setValue(value);&#xA;    elem->setIndexNr(this->getElements()->size());&#xA;    this->getElements()->add(elem);&#xA;&#xA;    return true;&#xA;}&#xA;return false;"/>
         </eAnnotations>
         <eParameters name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
       </eOperations>

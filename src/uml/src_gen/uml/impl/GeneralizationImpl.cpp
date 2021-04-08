@@ -309,7 +309,15 @@ Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getGeneral()); //1096
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
 		{
-			return eAny(getGeneralizationSet()); //1097			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::GeneralizationSet>::iterator iter = m_generalizationSet->begin();
+			Bag<uml::GeneralizationSet>::iterator end = m_generalizationSet->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1097
 		}
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
 			return eAny(getIsSubstitutable()); //1098

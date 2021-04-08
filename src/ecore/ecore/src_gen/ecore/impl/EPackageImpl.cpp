@@ -342,13 +342,29 @@ Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
 		{
-			return eAny(getEClassifiers()); //418			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EClassifier>::iterator iter = m_eClassifiers->begin();
+			Bag<ecore::EClassifier>::iterator end = m_eClassifiers->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //418
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
 			return eAny(getEFactoryInstance()); //417
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
 		{
-			return eAny(getESubpackages()); //419			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EPackage>::iterator iter = m_eSubpackages->begin();
+			Bag<ecore::EPackage>::iterator end = m_eSubpackages->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //419
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
 			return eAny(getESuperPackage().lock()); //4110

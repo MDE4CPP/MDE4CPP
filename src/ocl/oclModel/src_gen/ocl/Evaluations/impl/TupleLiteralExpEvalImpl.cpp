@@ -31,11 +31,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/UmlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -172,7 +172,15 @@ Any TupleLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case ocl::Evaluations::EvaluationsPackage::TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART:
 		{
-			return eAny(getTuplePart()); //856			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Evaluations::VariableDeclEval>::iterator iter = m_tuplePart->begin();
+			Bag<ocl::Evaluations::VariableDeclEval>::iterator end = m_tuplePart->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //856
 		}
 	}
 	return LiteralExpEvalImpl::eGet(featureID, resolve, coreType);

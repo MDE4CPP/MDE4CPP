@@ -351,12 +351,20 @@ Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getOwningExpression().lock()); //22419
 		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
 		{
-			return eAny(getSubExpression()); //22420			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::StringExpression>::iterator iter = m_subExpression->begin();
+			Bag<uml::StringExpression>::iterator end = m_subExpression->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22420
 		}
 	}
 	Any result;
 	result = ExpressionImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

@@ -206,7 +206,15 @@ Any ETypeParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::ETYPEPARAMETER_ATTRIBUTE_EBOUNDS:
 		{
-			return eAny(getEBounds()); //525			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EGenericType>::iterator iter = m_eBounds->begin();
+			Bag<ecore::EGenericType>::iterator end = m_eBounds->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //525
 		}
 	}
 	return ENamedElementImpl::eGet(featureID, resolve, coreType);

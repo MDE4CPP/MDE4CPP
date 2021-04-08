@@ -268,11 +268,27 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 	{
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
-			return eAny(getToAfter()); //16313			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::GeneralOrdering>::iterator iter = m_toAfter->begin();
+			Bag<uml::GeneralOrdering>::iterator end = m_toAfter->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16313
 		}
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
-			return eAny(getToBefore()); //16314			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::GeneralOrdering>::iterator iter = m_toBefore->begin();
+			Bag<uml::GeneralOrdering>::iterator end = m_toBefore->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16314
 		}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);

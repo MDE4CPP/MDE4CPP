@@ -406,7 +406,15 @@ Any EnumerationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::ENUMERATION_ATTRIBUTE_OWNEDLITERAL:
 		{
-			return eAny(getOwnedLiteral()); //8440			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::EnumerationLiteral>::iterator iter = m_ownedLiteral->begin();
+			Bag<uml::EnumerationLiteral>::iterator end = m_ownedLiteral->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //8440
 		}
 	}
 	return DataTypeImpl::eGet(featureID, resolve, coreType);

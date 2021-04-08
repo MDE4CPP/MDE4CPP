@@ -32,10 +32,10 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/UmlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -200,7 +200,15 @@ Any OclMessageExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS:
 		{
-			return eAny(getArguments()); //627			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Evaluations::OclMessageArgEval>::iterator iter = m_arguments->begin();
+			Bag<ocl::Evaluations::OclMessageArgEval>::iterator end = m_arguments->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //627
 		}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME:
 			return eAny(getName()); //628

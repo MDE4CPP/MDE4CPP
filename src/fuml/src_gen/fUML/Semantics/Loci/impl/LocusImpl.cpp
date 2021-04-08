@@ -348,7 +348,15 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getExecutor()); //770
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 		{
-			return eAny(getExtensionalValues()); //772			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator iter = m_extensionalValues->begin();
+			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator end = m_extensionalValues->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //772
 		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
 			return eAny(getFactory()); //771

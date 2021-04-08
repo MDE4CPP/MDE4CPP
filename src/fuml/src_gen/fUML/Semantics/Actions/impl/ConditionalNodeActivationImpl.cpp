@@ -255,11 +255,27 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
 		{
-			return eAny(getClauseActivations()); //3012			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator iter = m_clauseActivations->begin();
+			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator end = m_clauseActivations->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //3012
 		}
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 		{
-			return eAny(getSelectedClauses()); //3013			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Clause>::iterator iter = m_selectedClauses->begin();
+			Bag<uml::Clause>::iterator end = m_selectedClauses->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //3013
 		}
 	}
 	return StructuredActivityNodeActivationImpl::eGet(featureID, resolve, coreType);

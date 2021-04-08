@@ -788,39 +788,87 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getURI()); //17020
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
 		{
-			return eAny(getNestedPackage()); //17021			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Package>::iterator iter = m_nestedPackage->begin();
+			Bag<uml::Package>::iterator end = m_nestedPackage->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //17021
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTINGPACKAGE:
 			return eAny(getNestingPackage().lock()); //17022
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE:
 		{
-			return eAny(getOwnedStereotype()); //17023			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Stereotype>::iterator iter = m_ownedStereotype->begin();
+			Bag<uml::Stereotype>::iterator end = m_ownedStereotype->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //17023
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
 		{
-			return eAny(getOwnedType()); //17024			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Type>::iterator iter = m_ownedType->begin();
+			Bag<uml::Type>::iterator end = m_ownedType->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //17024
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
 		{
-			return eAny(getPackageMerge()); //17025			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PackageMerge>::iterator iter = m_packageMerge->begin();
+			Bag<uml::PackageMerge>::iterator end = m_packageMerge->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //17025
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
 		{
-			return eAny(getPackagedElement()); //17026			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PackageableElement>::iterator iter = m_packagedElement->begin();
+			Bag<uml::PackageableElement>::iterator end = m_packagedElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //17026
 		}
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
 		{
-			return eAny(getProfileApplication()); //17027			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ProfileApplication>::iterator iter = m_profileApplication->begin();
+			Bag<uml::ProfileApplication>::iterator end = m_profileApplication->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //17027
 		}
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}
 	result = PackageableElementImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

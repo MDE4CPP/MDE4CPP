@@ -394,16 +394,32 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 			return eAny(getClassifier().lock()); //20517
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
-			return eAny(getExtendedSignature()); //20515			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::RedefinableTemplateSignature>::iterator iter = m_extendedSignature->begin();
+			Bag<uml::RedefinableTemplateSignature>::iterator end = m_extendedSignature->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //20515
 		}
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
 		{
-			return eAny(getInheritedParameter()); //20516			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::TemplateParameter>::iterator iter = m_inheritedParameter->begin();
+			Bag<uml::TemplateParameter>::iterator end = m_inheritedParameter->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //20516
 		}
 	}
 	Any result;
 	result = RedefinableElementImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

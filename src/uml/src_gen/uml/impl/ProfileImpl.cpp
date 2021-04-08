@@ -452,11 +452,27 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 		{
-			return eAny(getMetaclassReference()); //18328			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ElementImport>::iterator iter = m_metaclassReference->begin();
+			Bag<uml::ElementImport>::iterator end = m_metaclassReference->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18328
 		}
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
-			return eAny(getMetamodelReference()); //18329			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PackageImport>::iterator iter = m_metamodelReference->begin();
+			Bag<uml::PackageImport>::iterator end = m_metamodelReference->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18329
 		}
 	}
 	return PackageImpl::eGet(featureID, resolve, coreType);

@@ -367,13 +367,29 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 			return eAny(getIsReplaceAll()); //20327
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 		{
-			return eAny(getNewClassifier()); //20328			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_newClassifier->begin();
+			Bag<uml::Classifier>::iterator end = m_newClassifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //20328
 		}
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OBJECT:
 			return eAny(getObject()); //20329
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
-			return eAny(getOldClassifier()); //20330			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_oldClassifier->begin();
+			Bag<uml::Classifier>::iterator end = m_oldClassifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //20330
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
