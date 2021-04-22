@@ -42,9 +42,9 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 [comment] Helper [/comment]
 [template public generateIncomingParameter(aEParameter : EParameter, index : Integer)]
 	//parameter [index/]
-	[aEParameter.generateParameterType()/] [aEParameter.name/];
-	std::list<std::shared_ptr<Any>>::const_iterator [aEParameter.name/]_arguments_citer = std::next(arguments->begin(), [index/]);
-	[aEParameter.name/] = (*[aEParameter.name/]_arguments_citer)->get()->get<[aEParameter.generateParameterType()/]>();
+	[aEParameter.generateParameterType()/] incoming_param_[aEParameter.name/];
+	std::list<std::shared_ptr<Any>>::const_iterator incoming_param_[aEParameter.name/]_arguments_citer = std::next(arguments->begin(), [index/]);
+	incoming_param_[aEParameter.name/] = (*incoming_param_[aEParameter.name/]_arguments_citer)->get()->get<[aEParameter.generateParameterType()/] >();
 [/template]
 
 
@@ -65,7 +65,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 
   	switch(operationID)
 	{
-[for (aOperation : EOperation | aClass.eOperations->asOrderedSet()->sortedBy(name))]
+[for (aOperation : EOperation | aClass.eOperations->asOrderedSet()->select(not doNotGenerate())->sortedBy(name))]
 		
 		[comment @see ecore4CPP::generator::main::generateOperation for ID calculation /]
 		// [aOperation.eContainingClass.getMyClassifierID() * 100 + aOperation.eContainingClass.getFeatureCount() + aOperation.getOperationID()/]
@@ -79,10 +79,10 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 [/let]
 			[comment Operation w/o return value /]
 			[if (aOperation.eType.oclIsUndefined())]
-			[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')][inPar.name/][/for]);
+			this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
  			[else]
 			[comment Operation w/ return value /]
-			result = eAny([aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')][inPar.name/][/for]));
+			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]));
 			[/if]
 			break;
 		}
@@ -98,7 +98,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 [else]
 [let superTypeList : OrderedSet(EClass) = aClass.eSuperTypes]
 [for (i : EClass | superTypeList->reverse())]
-			result = [i.ePackage.name/]::[i.name/]Impl::eInvoke(operationID, arguments);
+			result = [ClassWithNamespace(aClass, i)/]Impl::eInvoke(operationID, arguments);
 			if (!result->isEmpty())
 				break;
 [/for]
