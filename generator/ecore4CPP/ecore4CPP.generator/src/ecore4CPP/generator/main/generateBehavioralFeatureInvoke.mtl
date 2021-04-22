@@ -24,7 +24,29 @@
 
 [module generateBehavioralFeatureInvoke('http://www.eclipse.org/emf/2002/Ecore')]
 
+[import ecore4CPP::generator::main::generateOperation /]
+[import ecore4CPP::generator::main::generateType /]
 [import ecore4CPP::generator::main::helper /]
+
+[comment]
+[template public generateInputParameter(par:EParameter, index:Integer)]
+[par.name.generateInputParameter(par.eType, index)/]
+[/template]
+
+
+[template private generateInputParameter(name : String, type : EClassifier, index:Integer) ? (not (name.oclIsUndefined() or type.name.oclIsUndefined()))]
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputParameters->at([index/])->getValues();
+[/template]
+[/comment]
+
+[comment] Helper [/comment]
+[template public generateIncomingParameter(aEParameter : EParameter, index : Integer)]
+	//parameter [index/]
+	[aEParameter.generateParameterType()/] [aEParameter.name/];
+	std::list<std::shared_ptr<Any>>::const_iterator [aEParameter.name/]_arguments_citer = std::next(arguments->begin(), [index/]);
+	[aEParameter.name/] = (*[aEParameter.name/]_arguments_citer)->get()->get<[aEParameter.generateParameterType()/]>();
+[/template]
+
 
 [**/
  *  Declaration of internal eInvoke helper method
@@ -37,10 +59,59 @@ virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr
  *  Implementation of internal eInvoke helper method
  */]
 [template public generateeInvokeByIDImpl(aClass : EClass)]
-Any 
-[aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
 {
-  Any result;
-  return result;
+	Any result;
+
+  	switch(operationID)
+	{
+[for (aOperation : EOperation | aClass.eOperations->asOrderedSet()->sortedBy(name))]
+		
+		[comment @see ecore4CPP::generator::main::generateOperation for ID calculation /]
+		// [aOperation.eContainingClass.getMyClassifierID() * 100 + aOperation.eContainingClass.getFeatureCount() + aOperation.getOperationID()/]
+		case [aClass.ePackage.name/]Package::[aOperation.getStaticAttributeIDName()/]:
+		{
+[let parameterList : OrderedSet(EParameter) = aOperation.eParameters]
+[for (inPar : EParameter | parameterList)]
+			//Retrieve input parameter '[inPar.name/]'
+		[inPar.generateIncomingParameter(parameterList->indexOf(inPar)-1)/]
+[/for]
+[/let]
+			[comment Operation w/o return value /]
+			[if (aOperation.eType.oclIsUndefined())]
+			[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')][inPar.name/][/for]);
+ 			[else]
+			[comment Operation w/ return value /]
+			result = eAny([aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')][inPar.name/][/for]));
+			[/if]
+			break;
+		}
+[/for]
+
+		default:
+		{
+			// call superTypes
+[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+[else]
+[let superTypeList : OrderedSet(EClass) = aClass.eSuperTypes]
+[for (i : EClass | superTypeList->reverse())]
+			result = [i.ePackage.name/]::[i.name/]Impl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+[/for]
+[/let]
+[/if]
+			break;
+		}
+  	}
+
+	return result;
 }
 [/template]
+
+
+
+
