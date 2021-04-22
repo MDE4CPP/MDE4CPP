@@ -340,6 +340,80 @@ bool BroadcastSignalActionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any BroadcastSignalActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2798
+		case umlPackage::BROADCASTSIGNALACTION_OPERATION_NO_ONPORT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_onport(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 2796
+		case umlPackage::BROADCASTSIGNALACTION_OPERATION_NUMBER_OF_ARGUMENTS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->number_of_arguments(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 2797
+		case umlPackage::BROADCASTSIGNALACTION_OPERATION_TYPE_ORDERING_MULTIPLICITY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type_ordering_multiplicity(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = InvocationActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void BroadcastSignalActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

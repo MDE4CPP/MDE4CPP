@@ -385,6 +385,41 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any EGenericTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2806
+		case ecorePackage::EGENERICTYPE_OPERATION_ISINSTANCE_EJAVAOBJECT:
+		{
+			//Retrieve input parameter 'object'
+			//parameter 0
+			Any incoming_param_object;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_object = (*incoming_param_object_arguments_citer)->get()->get<Any >();
+			result = eAny(this->isInstance(incoming_param_object));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void EGenericTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

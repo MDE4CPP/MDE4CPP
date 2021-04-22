@@ -393,6 +393,80 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ConstraintImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 5774
+		case umlPackage::CONSTRAINT_OPERATION_BOOLEAN_VALUE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->boolean_value(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 5775
+		case umlPackage::CONSTRAINT_OPERATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_side_effects(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 5776
+		case umlPackage::CONSTRAINT_OPERATION_NOT_APPLY_TO_SELF_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->not_apply_to_self(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PackageableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ConstraintImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

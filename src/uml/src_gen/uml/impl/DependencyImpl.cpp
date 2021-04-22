@@ -495,6 +495,32 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any DependencyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = PackageableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void DependencyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

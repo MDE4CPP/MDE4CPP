@@ -337,6 +337,65 @@ bool EEnumImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any EEnumImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2031
+		case ecorePackage::EENUM_OPERATION_GETEENUMLITERAL_ESTRING:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getEEnumLiteral(incoming_param_name));
+			break;
+		}
+		
+		// 2032
+		case ecorePackage::EENUM_OPERATION_GETEENUMLITERAL_EINT:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			int incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<int >();
+			result = eAny(this->getEEnumLiteral(incoming_param_value));
+			break;
+		}
+		
+		// 2033
+		case ecorePackage::EENUM_OPERATION_GETEENUMLITERALBYLITERAL_ESTRING:
+		{
+			//Retrieve input parameter 'literal'
+			//parameter 0
+			std::string incoming_param_literal;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_literal_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_literal = (*incoming_param_literal_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getEEnumLiteralByLiteral(incoming_param_literal));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = EDataTypeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void EEnumImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

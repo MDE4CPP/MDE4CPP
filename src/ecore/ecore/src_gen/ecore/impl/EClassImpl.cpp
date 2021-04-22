@@ -268,7 +268,19 @@ std::shared_ptr<ecore::EOperation> EClassImpl::getEOperation(int operationID) co
 	//ADD_COUNT(__PRETTY_FUNCTION__)
 	//generated from body annotation
 	std::shared_ptr< Bag<ecore::EOperation> > eAllOps = getEAllOperations();
-    return operationID >=0 && operationID < (int) eAllOps->size() ? eAllOps->at(operationID): nullptr;
+
+    std::shared_ptr<ecore::EOperation> operation;
+    Bag<ecore::EOperation >::iterator iter = eAllOps->begin();
+    
+    while (iter != eAllOps->end())
+    {
+        operation = *iter;
+        if (operation->getOperationID() == operationID)
+            return operation;
+        iter++;
+    }
+    
+    return nullptr;
 	//end of body
 }
 
@@ -1090,6 +1102,139 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 	}
 
 	return EClassifierImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any EClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1251
+		case ecorePackage::ECLASS_OPERATION_GETEOPERATION_EINT:
+		{
+			//Retrieve input parameter 'operationID'
+			//parameter 0
+			int incoming_param_operationID;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operationID_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operationID = (*incoming_param_operationID_arguments_citer)->get()->get<int >();
+			result = eAny(this->getEOperation(incoming_param_operationID));
+			break;
+		}
+		
+		// 1247
+		case ecorePackage::ECLASS_OPERATION_GETESTRUCTURALFEATURE_EINT:
+		{
+			//Retrieve input parameter 'featureID'
+			//parameter 0
+			int incoming_param_featureID;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_featureID_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_featureID = (*incoming_param_featureID_arguments_citer)->get()->get<int >();
+			result = eAny(this->getEStructuralFeature(incoming_param_featureID));
+			break;
+		}
+		
+		// 1249
+		case ecorePackage::ECLASS_OPERATION_GETESTRUCTURALFEATURE_ESTRING:
+		{
+			//Retrieve input parameter 'featureName'
+			//parameter 0
+			std::string incoming_param_featureName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_featureName_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_featureName = (*incoming_param_featureName_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getEStructuralFeature(incoming_param_featureName));
+			break;
+		}
+		
+		// 1246
+		case ecorePackage::ECLASS_OPERATION_GETFEATURECOUNT:
+		{
+			result = eAny(this->getFeatureCount());
+			break;
+		}
+		
+		// 1248
+		case ecorePackage::ECLASS_OPERATION_GETFEATUREID_ESTRUCTURALFEATURE:
+		{
+			//Retrieve input parameter 'feature'
+			//parameter 0
+			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<ecore::EStructuralFeature> >();
+			result = eAny(this->getFeatureID(incoming_param_feature));
+			break;
+		}
+		
+		// 1254
+		case ecorePackage::ECLASS_OPERATION_GETFEATURETYPE_ESTRUCTURALFEATURE:
+		{
+			//Retrieve input parameter 'feature'
+			//parameter 0
+			std::shared_ptr<ecore::EStructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<ecore::EStructuralFeature> >();
+			result = eAny(this->getFeatureType(incoming_param_feature));
+			break;
+		}
+		
+		// 1250
+		case ecorePackage::ECLASS_OPERATION_GETOPERATIONCOUNT:
+		{
+			result = eAny(this->getOperationCount());
+			break;
+		}
+		
+		// 1252
+		case ecorePackage::ECLASS_OPERATION_GETOPERATIONID_EOPERATION:
+		{
+			//Retrieve input parameter 'operation'
+			//parameter 0
+			std::shared_ptr<ecore::EOperation> incoming_param_operation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<ecore::EOperation> >();
+			result = eAny(this->getOperationID(incoming_param_operation));
+			break;
+		}
+		
+		// 1253
+		case ecorePackage::ECLASS_OPERATION_GETOVERRIDE_EOPERATION:
+		{
+			//Retrieve input parameter 'operation'
+			//parameter 0
+			std::shared_ptr<ecore::EOperation> incoming_param_operation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<ecore::EOperation> >();
+			result = eAny(this->getOverride(incoming_param_operation));
+			break;
+		}
+		
+		// 1245
+		case ecorePackage::ECLASS_OPERATION_ISSUPERTYPEOF_ECLASS:
+		{
+			//Retrieve input parameter 'someClass'
+			//parameter 0
+			std::shared_ptr<ecore::EClass> incoming_param_someClass;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_someClass_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_someClass = (*incoming_param_someClass_arguments_citer)->get()->get<std::shared_ptr<ecore::EClass> >();
+			result = eAny(this->isSuperTypeOf(incoming_param_someClass));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = EClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

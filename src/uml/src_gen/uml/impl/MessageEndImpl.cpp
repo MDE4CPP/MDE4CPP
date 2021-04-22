@@ -257,6 +257,57 @@ bool MessageEndImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any MessageEndImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 14869
+		case umlPackage::MESSAGEEND_OPERATION_ENCLOSINGFRAGMENT:
+		{
+			result = eAny(this->enclosingFragment());
+			break;
+		}
+		
+		// 14868
+		case umlPackage::MESSAGEEND_OPERATION_ISRECEIVE:
+		{
+			result = eAny(this->isReceive());
+			break;
+		}
+		
+		// 14867
+		case umlPackage::MESSAGEEND_OPERATION_ISSEND:
+		{
+			result = eAny(this->isSend());
+			break;
+		}
+		
+		// 14866
+		case umlPackage::MESSAGEEND_OPERATION_OPPOSITEEND:
+		{
+			result = eAny(this->oppositeEnd());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = NamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void MessageEndImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

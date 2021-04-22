@@ -374,6 +374,48 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any FeatureValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 5504
+		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 5503
+		case SimpleClassifiersPackage::FEATUREVALUE_OPERATION_HASEQUALVALUES_FEATUREVALUE:
+		{
+			//Retrieve input parameter 'other'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> incoming_param_other;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> >();
+			result = eAny(this->hasEqualValues(incoming_param_other));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void FeatureValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

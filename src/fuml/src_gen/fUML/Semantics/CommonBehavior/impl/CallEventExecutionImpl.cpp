@@ -360,6 +360,118 @@ bool CallEventExecutionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1752
+		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 1753
+		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE:
+		{
+			result = eAny(this->createEventOccurrence());
+			break;
+		}
+		
+		// 1754
+		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_EXECUTE:
+		{
+			this->execute();
+			break;
+		}
+		
+		// 1755
+		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_GETINPUTPARAMETERVALUES:
+		{
+			result = eAny(this->getInputParameterValues());
+			break;
+		}
+		
+		// 1756
+		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_GETOPERATION:
+		{
+			result = eAny(this->getOperation());
+			break;
+		}
+		
+		// 1757
+		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_ISCALLERSUSPENDED:
+		{
+			result = eAny(this->isCallerSuspended());
+			break;
+		}
+		
+		// 1758
+		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_MAKECALL:
+		{
+			this->makeCall();
+			break;
+		}
+		
+		// 1759
+		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
+		// 1760
+		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_RELEASECALLER:
+		{
+			this->releaseCaller();
+			break;
+		}
+		
+		// 1761
+		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_SETOUTPUTPARAMETERVALUES_PARAMETERVALUE:
+		{
+			//Retrieve input parameter 'parameterValues'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_parameterValues;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterValues_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_parameterValues = (*incoming_param_parameterValues_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			this->setOutputParameterValues(incoming_param_parameterValues);
+			break;
+		}
+		
+		// 1762
+		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_SUSPENDCALLER:
+		{
+			this->suspendCaller();
+			break;
+		}
+		
+		// 1763
+		case CommonBehaviorPackage::CALLEVENTEXECUTION_OPERATION_WAIT_:
+		{
+			this->wait_();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ExecutionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CallEventExecutionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

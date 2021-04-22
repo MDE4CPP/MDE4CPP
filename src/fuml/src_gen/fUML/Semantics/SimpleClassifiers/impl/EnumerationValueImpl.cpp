@@ -289,6 +289,76 @@ bool EnumerationValueImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any EnumerationValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 4117
+		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 4113
+		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue));
+			break;
+		}
+		
+		// 4116
+		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_GETTYPES:
+		{
+			result = eAny(this->getTypes());
+			break;
+		}
+		
+		// 4114
+		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
+		// 4112
+		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_SPECIFY:
+		{
+			result = eAny(this->specify());
+			break;
+		}
+		
+		// 4115
+		case SimpleClassifiersPackage::ENUMERATIONVALUE_OPERATION_TOSTRING:
+		{
+			result = eAny(this->toString());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void EnumerationValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

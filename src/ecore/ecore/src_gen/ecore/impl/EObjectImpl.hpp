@@ -51,7 +51,7 @@ virtual public EObject
 			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const ; 
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const ; 
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const ; 
-			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) const ; 
+			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ; 
 			virtual bool eIsProxy() const ; 
 			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const ; 
 			virtual int eResource() const ; 
@@ -107,6 +107,7 @@ virtual public EObject
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<EObject> m_thisEObjectPtr;

@@ -198,6 +198,36 @@ bool SendSignalActionActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any SendSignalActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 10558
+		case ActionsPackage::SENDSIGNALACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = InvocationActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void SendSignalActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

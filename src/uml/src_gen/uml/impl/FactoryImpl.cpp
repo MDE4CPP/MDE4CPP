@@ -188,6 +188,41 @@ bool FactoryImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any FactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 10045
+		case umlPackage::FACTORY_OPERATION_CREATE_CLASS:
+		{
+			//Retrieve input parameter 'metaClass'
+			//parameter 0
+			std::shared_ptr<uml::Class> incoming_param_metaClass;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_metaClass_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_metaClass = (*incoming_param_metaClass_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			result = eAny(this->create(incoming_param_metaClass));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void FactoryImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

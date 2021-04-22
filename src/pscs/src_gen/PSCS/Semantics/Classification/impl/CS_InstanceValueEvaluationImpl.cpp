@@ -286,6 +286,36 @@ bool CS_InstanceValueEvaluationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CS_InstanceValueEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1606
+		case ClassificationPackage::CS_INSTANCEVALUEEVALUATION_OPERATION_EVALUATE:
+		{
+			result = eAny(this->evaluate());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Classification::InstanceValueEvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CS_InstanceValueEvaluationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

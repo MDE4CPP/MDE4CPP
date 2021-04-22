@@ -400,6 +400,97 @@ bool WriteStructuralFeatureActionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any WriteStructuralFeatureActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 25802
+		case umlPackage::WRITESTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 25804
+		case umlPackage::WRITESTRUCTURALFEATUREACTION_OPERATION_MULTIPLICITY_OF_VALUE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity_of_value(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 25805
+		case umlPackage::WRITESTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type_of_result(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 25803
+		case umlPackage::WRITESTRUCTURALFEATUREACTION_OPERATION_TYPE_OF_VALUE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type_of_value(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StructuralFeatureActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void WriteStructuralFeatureActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

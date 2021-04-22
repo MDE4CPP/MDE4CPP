@@ -168,6 +168,36 @@ bool LiteralNullEvaluationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any LiteralNullEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 7306
+		case ValuesPackage::LITERALNULLEVALUATION_OPERATION_EVALUATE:
+		{
+			result = eAny(this->evaluate());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = LiteralEvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void LiteralNullEvaluationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

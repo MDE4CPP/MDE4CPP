@@ -442,6 +442,66 @@ bool AssociationClassImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any AssociationClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2388
+		case umlPackage::ASSOCIATIONCLASS_OPERATION_CANNOT_BE_DEFINED_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->cannot_be_defined(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 2389
+		case umlPackage::ASSOCIATIONCLASS_OPERATION_DISJOINT_ATTRIBUTES_ENDS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->disjoint_attributes_ends(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = AssociationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = ClassImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void AssociationClassImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

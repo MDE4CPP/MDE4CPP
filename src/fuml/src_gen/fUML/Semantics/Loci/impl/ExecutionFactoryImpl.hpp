@@ -107,6 +107,7 @@ virtual public ExecutionFactory
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<ExecutionFactory> m_thisExecutionFactoryPtr;

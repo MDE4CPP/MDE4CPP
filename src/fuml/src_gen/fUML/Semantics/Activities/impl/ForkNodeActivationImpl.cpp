@@ -230,6 +230,48 @@ bool ForkNodeActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ForkNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 5834
+		case ActivitiesPackage::FORKNODEACTIVATION_OPERATION_FIRE_TOKEN:
+		{
+			//Retrieve input parameter 'incomingTokens'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			this->fire(incoming_param_incomingTokens);
+			break;
+		}
+		
+		// 5835
+		case ActivitiesPackage::FORKNODEACTIVATION_OPERATION_TERMINATE:
+		{
+			this->terminate();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ControlNodeActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ForkNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

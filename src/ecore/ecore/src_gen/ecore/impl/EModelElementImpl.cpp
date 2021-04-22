@@ -290,6 +290,41 @@ bool EModelElementImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any EModelElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 3719
+		case ecorePackage::EMODELELEMENT_OPERATION_GETEANNOTATION_ESTRING:
+		{
+			//Retrieve input parameter 'source'
+			//parameter 0
+			std::string incoming_param_source;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_source = (*incoming_param_source_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getEAnnotation(incoming_param_source));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = EObjectImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void EModelElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

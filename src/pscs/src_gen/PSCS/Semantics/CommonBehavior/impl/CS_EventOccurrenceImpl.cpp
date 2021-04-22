@@ -42,10 +42,10 @@
 #include "uml/Trigger.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
+#include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -353,6 +353,89 @@ bool CS_EventOccurrenceImpl::eSet(int featureID, Any newValue)
 	}
 
 	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any CS_EventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1312
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_DOSEND:
+		{
+			this->doSend();
+			break;
+		}
+		
+		// 1310
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
+		{
+			result = eAny(this->getParameterValues());
+			break;
+		}
+		
+		// 1311
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
+		{
+			//Retrieve input parameter 'trigger'
+			//parameter 0
+			std::shared_ptr<uml::Trigger> incoming_param_trigger;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_trigger_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_trigger = (*incoming_param_trigger_arguments_citer)->get()->get<std::shared_ptr<uml::Trigger> >();
+			result = eAny(this->match(incoming_param_trigger));
+			break;
+		}
+		
+		// 1313
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_SENDINTO_CS_REFERENCE_PORT:
+		{
+			//Retrieve input parameter 'target'
+			//parameter 0
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_target;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_target_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_target = (*incoming_param_target_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			//Retrieve input parameter 'port'
+			//parameter 1
+			std::shared_ptr<uml::Port> incoming_param_port;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_port = (*incoming_param_port_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
+			this->sendInTo(incoming_param_target,incoming_param_port);
+			break;
+		}
+		
+		// 1314
+		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_OPERATION_SENDOUTTO_CS_REFERENCE_PORT:
+		{
+			//Retrieve input parameter 'target'
+			//parameter 0
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_target;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_target_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_target = (*incoming_param_target_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			//Retrieve input parameter 'port'
+			//parameter 1
+			std::shared_ptr<uml::Port> incoming_param_port;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_port = (*incoming_param_port_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
+			this->sendOutTo(incoming_param_target,incoming_param_port);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

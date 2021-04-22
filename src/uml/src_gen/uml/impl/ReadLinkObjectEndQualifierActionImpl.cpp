@@ -451,6 +451,165 @@ bool ReadLinkObjectEndQualifierActionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ReadLinkObjectEndQualifierActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 19802
+		case umlPackage::READLINKOBJECTENDQUALIFIERACTION_OPERATION_ASSOCIATION_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->association_of_association(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 19799
+		case umlPackage::READLINKOBJECTENDQUALIFIERACTION_OPERATION_ENDS_OF_ASSOCIATION_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->ends_of_association(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 19796
+		case umlPackage::READLINKOBJECTENDQUALIFIERACTION_OPERATION_MULTIPLICITY_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity_of_object(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 19798
+		case umlPackage::READLINKOBJECTENDQUALIFIERACTION_OPERATION_MULTIPLICITY_OF_QUALIFIER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity_of_qualifier(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 19800
+		case umlPackage::READLINKOBJECTENDQUALIFIERACTION_OPERATION_MULTIPLICITY_OF_RESULT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity_of_result(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 19803
+		case umlPackage::READLINKOBJECTENDQUALIFIERACTION_OPERATION_QUALIFIER_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->qualifier_attribute(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 19801
+		case umlPackage::READLINKOBJECTENDQUALIFIERACTION_OPERATION_SAME_TYPE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->same_type(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 19797
+		case umlPackage::READLINKOBJECTENDQUALIFIERACTION_OPERATION_TYPE_OF_OBJECT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type_of_object(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ReadLinkObjectEndQualifierActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

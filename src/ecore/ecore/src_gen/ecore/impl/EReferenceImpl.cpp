@@ -379,6 +379,29 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any EReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = EStructuralFeatureImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void EReferenceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

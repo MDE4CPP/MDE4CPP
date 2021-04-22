@@ -537,6 +537,62 @@ bool CallActionActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CallActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1462
+		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+		
+		// 1460
+		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
+		{
+			result = eAny(this->getCallExecution());
+			break;
+		}
+		
+		// 1461
+		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_REMOVECALLEXECUTION_EXECUTION:
+		{
+			//Retrieve input parameter 'execution'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> incoming_param_execution;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_execution_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_execution = (*incoming_param_execution_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> >();
+			this->removeCallExecution(incoming_param_execution);
+			break;
+		}
+		
+		// 1463
+		case ActionsPackage::CALLACTIONACTIVATION_OPERATION_TERMINATE:
+		{
+			this->terminate();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = InvocationActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CallActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

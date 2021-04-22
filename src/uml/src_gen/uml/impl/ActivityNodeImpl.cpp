@@ -731,6 +731,36 @@ bool ActivityNodeImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ActivityNodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1181
+		case umlPackage::ACTIVITYNODE_OPERATION_CONTAININGACTIVITY:
+		{
+			result = eAny(this->containingActivity());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = RedefinableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ActivityNodeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

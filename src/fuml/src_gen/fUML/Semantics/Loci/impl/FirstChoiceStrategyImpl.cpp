@@ -163,6 +163,41 @@ bool FirstChoiceStrategyImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any FirstChoiceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 5603
+		case LociPackage::FIRSTCHOICESTRATEGY_OPERATION_CHOOSE_EINT:
+		{
+			//Retrieve input parameter 'size'
+			//parameter 0
+			int incoming_param_size;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_size_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_size = (*incoming_param_size_arguments_citer)->get()->get<int >();
+			result = eAny(this->choose(incoming_param_size));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ChoiceStrategyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void FirstChoiceStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

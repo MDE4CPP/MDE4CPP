@@ -442,6 +442,75 @@ bool FunctionBehaviorImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any FunctionBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 10795
+		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_HASALLDATATYPEATTRIBUTES_DATATYPE:
+		{
+			//Retrieve input parameter 'd'
+			//parameter 0
+			std::shared_ptr<uml::DataType> incoming_param_d;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_d_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_d = (*incoming_param_d_arguments_citer)->get()->get<std::shared_ptr<uml::DataType> >();
+			result = eAny(this->hasAllDataTypeAttributes(incoming_param_d));
+			break;
+		}
+		
+		// 10793
+		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_ONE_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->one_output_parameter(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 10794
+		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_TYPES_OF_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->types_of_parameters(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = OpaqueBehaviorImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void FunctionBehaviorImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

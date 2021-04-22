@@ -306,6 +306,43 @@ bool LiteralRealImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any LiteralRealImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 14082
+		case umlPackage::LITERALREAL_OPERATION_ISCOMPUTABLE:
+		{
+			result = eAny(this->isComputable());
+			break;
+		}
+		
+		// 14083
+		case umlPackage::LITERALREAL_OPERATION_REALVALUE:
+		{
+			result = eAny(this->realValue());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = LiteralSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void LiteralRealImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

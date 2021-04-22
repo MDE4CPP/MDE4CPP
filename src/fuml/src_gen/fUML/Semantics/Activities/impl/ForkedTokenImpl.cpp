@@ -295,6 +295,69 @@ bool ForkedTokenImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ForkedTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 5915
+		case ActivitiesPackage::FORKEDTOKEN_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 5911
+		case ActivitiesPackage::FORKEDTOKEN_OPERATION_EQUALS_TOKEN:
+		{
+			//Retrieve input parameter 'otherToken'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_otherToken;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherToken_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherToken = (*incoming_param_otherToken_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+			result = eAny(this->equals(incoming_param_otherToken));
+			break;
+		}
+		
+		// 5914
+		case ActivitiesPackage::FORKEDTOKEN_OPERATION_GETVALUE:
+		{
+			result = eAny(this->getValue());
+			break;
+		}
+		
+		// 5913
+		case ActivitiesPackage::FORKEDTOKEN_OPERATION_ISCONTROL:
+		{
+			result = eAny(this->isControl());
+			break;
+		}
+		
+		// 5912
+		case ActivitiesPackage::FORKEDTOKEN_OPERATION_WITHDRAW:
+		{
+			this->withdraw();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = TokenImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ForkedTokenImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -300,6 +300,36 @@ bool CallBehaviorActionActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CallBehaviorActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1565
+		case ActionsPackage::CALLBEHAVIORACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
+		{
+			result = eAny(this->getCallExecution());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = CallActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CallBehaviorActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

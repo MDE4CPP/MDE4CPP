@@ -348,6 +348,121 @@ bool ObjectNodeActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ObjectNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 8242
+		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_ADDTOKEN_TOKEN:
+		{
+			//Retrieve input parameter 'token'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_token = (*incoming_param_token_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+			this->addToken(incoming_param_token);
+			break;
+		}
+		
+		// 8244
+		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_CLEARTOKENS:
+		{
+			this->clearTokens();
+			break;
+		}
+		
+		// 8234
+		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_COUNTOFFEREDVALUES:
+		{
+			result = eAny(this->countOfferedValues());
+			break;
+		}
+		
+		// 8236
+		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_COUNTUNOFFEREDTOKENS:
+		{
+			result = eAny(this->countUnofferedTokens());
+			break;
+		}
+		
+		// 8237
+		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_GETUNOFFEREDTOKENS:
+		{
+			result = eAny(this->getUnofferedTokens());
+			break;
+		}
+		
+		// 8243
+		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_REMOVETOKEN_TOKEN:
+		{
+			//Retrieve input parameter 'token'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_token;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_token_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_token = (*incoming_param_token_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+			result = eAny(this->removeToken(incoming_param_token));
+			break;
+		}
+		
+		// 8239
+		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_RUN:
+		{
+			this->run();
+			break;
+		}
+		
+		// 8240
+		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_SENDOFFERS_TOKEN:
+		{
+			//Retrieve input parameter 'tokens'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_tokens;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_tokens_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_tokens = (*incoming_param_tokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			this->sendOffers(incoming_param_tokens);
+			break;
+		}
+		
+		// 8235
+		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_SENDUNOFFEREDTOKENS:
+		{
+			this->sendUnofferedTokens();
+			break;
+		}
+		
+		// 8238
+		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_TAKEUNOFFEREDTOKENS:
+		{
+			result = eAny(this->takeUnofferedTokens());
+			break;
+		}
+		
+		// 8241
+		case ActivitiesPackage::OBJECTNODEACTIVATION_OPERATION_TERMINATE:
+		{
+			this->terminate();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActivityNodeActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ObjectNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

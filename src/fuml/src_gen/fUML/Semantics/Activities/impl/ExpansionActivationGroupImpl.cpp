@@ -495,6 +495,72 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ExpansionActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 4927
+		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_GETACTIVITYEXECUTION:
+		{
+			result = eAny(this->getActivityExecution());
+			break;
+		}
+		
+		// 4928
+		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE:
+		{
+			//Retrieve input parameter 'node'
+			//parameter 0
+			std::shared_ptr<uml::ActivityNode> incoming_param_node;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_node = (*incoming_param_node_arguments_citer)->get()->get<std::shared_ptr<uml::ActivityNode> >();
+			result = eAny(this->getNodeActivation(incoming_param_node));
+			break;
+		}
+		
+		// 4929
+		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_RESUME_ACTIVITYNODEACTIVATION:
+		{
+			//Retrieve input parameter 'activation'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_activation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
+			this->resume(incoming_param_activation);
+			break;
+		}
+		
+		// 4930
+		case ActivitiesPackage::EXPANSIONACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION:
+		{
+			//Retrieve input parameter 'activation'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_activation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
+			this->suspend(incoming_param_activation);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActivityNodeActivationGroupImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ExpansionActivationGroupImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

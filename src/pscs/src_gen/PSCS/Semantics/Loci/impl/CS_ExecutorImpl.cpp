@@ -45,11 +45,11 @@
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
-#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -209,6 +209,46 @@ bool CS_ExecutorImpl::eSet(int featureID, Any newValue)
 	}
 
 	return fUML::Semantics::Loci::ExecutorImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any CS_ExecutorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1504
+		case LociPackage::CS_EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE:
+		{
+			//Retrieve input parameter 'type'
+			//parameter 0
+			std::shared_ptr<uml::Class> incoming_param_type;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			//Retrieve input parameter 'inputs'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			result = eAny(this->start(incoming_param_type,incoming_param_inputs));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Loci::ExecutorImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

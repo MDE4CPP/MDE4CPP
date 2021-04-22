@@ -400,6 +400,108 @@ bool CompoundValueImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CompoundValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2925
+		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 2923
+		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT:
+		{
+			//Retrieve input parameter 'feature'
+			//parameter 0
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			//Retrieve input parameter 'values'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> incoming_param_values;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_values = (*incoming_param_values_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
+			//Retrieve input parameter 'position'
+			//parameter 2
+			int incoming_param_position;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_position = (*incoming_param_position_arguments_citer)->get()->get<int >();
+			this->assignFeatureValue(incoming_param_feature,incoming_param_values,incoming_param_position);
+			break;
+		}
+		
+		// 2920
+		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue));
+			break;
+		}
+		
+		// 2919
+		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_REMOVEFEATUREVALUES_CLASSIFIER:
+		{
+			//Retrieve input parameter 'classifier'
+			//parameter 0
+			std::shared_ptr<uml::Classifier> incoming_param_classifier;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
+			this->removeFeatureValues(incoming_param_classifier);
+			break;
+		}
+		
+		// 2922
+		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE:
+		{
+			//Retrieve input parameter 'feature'
+			//parameter 0
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			result = eAny(this->retrieveFeatureValue(incoming_param_feature));
+			break;
+		}
+		
+		// 2924
+		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUES:
+		{
+			result = eAny(this->retrieveFeatureValues());
+			break;
+		}
+		
+		// 2921
+		case SimpleClassifiersPackage::COMPOUNDVALUE_OPERATION_TOSTRING:
+		{
+			result = eAny(this->toString());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StructuredValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CompoundValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

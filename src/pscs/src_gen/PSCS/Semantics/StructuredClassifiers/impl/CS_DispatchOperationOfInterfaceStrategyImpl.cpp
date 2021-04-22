@@ -41,8 +41,8 @@
 #include "fUML/Semantics/StructuredClassifiers/RedefinitionBasedDispatchStrategy.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -192,6 +192,46 @@ bool CS_DispatchOperationOfInterfaceStrategyImpl::eSet(int featureID, Any newVal
 	}
 
 	return fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any CS_DispatchOperationOfInterfaceStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1206
+		case StructuredClassifiersPackage::CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION:
+		{
+			//Retrieve input parameter 'ownedOperation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_ownedOperation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_ownedOperation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_ownedOperation = (*incoming_param_ownedOperation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			//Retrieve input parameter 'baseOperation'
+			//parameter 1
+			std::shared_ptr<uml::Operation> incoming_param_baseOperation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_baseOperation_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_baseOperation = (*incoming_param_baseOperation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->operationsMatch(incoming_param_ownedOperation,incoming_param_baseOperation));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

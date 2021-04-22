@@ -330,6 +330,36 @@ bool ModelImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ModelImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 15427
+		case umlPackage::MODEL_OPERATION_ISMETAMODEL:
+		{
+			result = eAny(this->isMetamodel());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PackageImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ModelImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -1,0 +1,14 @@
+description 'Build task for project: eInvokeTest'
+
+task buildEInvokeTest() {
+	group 'eInvokeTest'
+	description 'build eInvokeTest'
+
+	dependsOn 'model:generateEInvokeTest'
+	dependsOn 'src_gen:compileEInvokeTest'
+	dependsOn 'application:compileApplicationForEInvokeTest'
+
+	dependsOn getRootProject().getTasksByName('buildEcore', true)
+}
+
+tasks.getByPath('src_gen:compileEInvokeTest').mustRunAfter tasks.getByPath('model:generateEInvokeTest')

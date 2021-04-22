@@ -552,6 +552,156 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ProfileImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 18430
+		case umlPackage::PROFILE_OPERATION_CREATE_CLASSIFIER:
+		{
+			//Retrieve input parameter 'classifier'
+			//parameter 0
+			std::shared_ptr<uml::Classifier> incoming_param_classifier;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
+			result = eAny(this->create(incoming_param_classifier));
+			break;
+		}
+		
+		// 18431
+		case umlPackage::PROFILE_OPERATION_DEFINE:
+		{
+			result = eAny(this->define());
+			break;
+		}
+		
+		// 18432
+		case umlPackage::PROFILE_OPERATION_DEFINE_EMAP_EMAP:
+		{
+			//Retrieve input parameter 'options'
+			//parameter 0
+			std::shared_ptr<std::unordered_map < std::string, std::string>> incoming_param_options;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_options_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_options = (*incoming_param_options_arguments_citer)->get()->get<std::shared_ptr<std::unordered_map < std::string, std::string>> >();
+			//Retrieve input parameter 'diagnostics'
+			//parameter 1
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 2
+			std::shared_ptr<std::unordered_map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::unordered_map < Any, Any>> >();
+			result = eAny(this->define(incoming_param_options,incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 18433
+		case umlPackage::PROFILE_OPERATION_GETDEFINITION:
+		{
+			result = eAny(this->getDefinition());
+			break;
+		}
+		
+		// 18434
+		case umlPackage::PROFILE_OPERATION_GETDEFINITION_NAMEDELEMENT:
+		{
+			//Retrieve input parameter 'namedElement'
+			//parameter 0
+			std::shared_ptr<uml::NamedElement> incoming_param_namedElement;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_namedElement = (*incoming_param_namedElement_arguments_citer)->get()->get<std::shared_ptr<uml::NamedElement> >();
+			result = eAny(this->getDefinition(incoming_param_namedElement));
+			break;
+		}
+		
+		// 18435
+		case umlPackage::PROFILE_OPERATION_GETOWNEDEXTENSIONS_BOOLEAN:
+		{
+			//Retrieve input parameter 'requiredOnly'
+			//parameter 0
+			bool incoming_param_requiredOnly;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_requiredOnly_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_requiredOnly = (*incoming_param_requiredOnly_arguments_citer)->get()->get<bool >();
+			result = eAny(this->getOwnedExtensions(incoming_param_requiredOnly));
+			break;
+		}
+		
+		// 18436
+		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETACLASSES:
+		{
+			result = eAny(this->getReferencedMetaclasses());
+			break;
+		}
+		
+		// 18437
+		case umlPackage::PROFILE_OPERATION_GETREFERENCEDMETAMODELS:
+		{
+			result = eAny(this->getReferencedMetamodels());
+			break;
+		}
+		
+		// 18438
+		case umlPackage::PROFILE_OPERATION_ISDEFINED:
+		{
+			result = eAny(this->isDefined());
+			break;
+		}
+		
+		// 18428
+		case umlPackage::PROFILE_OPERATION_METACLASS_REFERENCE_NOT_SPECIALIZED_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->metaclass_reference_not_specialized(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 18429
+		case umlPackage::PROFILE_OPERATION_REFERENCES_SAME_METAMODEL_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->references_same_metamodel(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PackageImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ProfileImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

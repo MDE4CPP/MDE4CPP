@@ -293,6 +293,29 @@ bool UsageImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any UsageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = DependencyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void UsageImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

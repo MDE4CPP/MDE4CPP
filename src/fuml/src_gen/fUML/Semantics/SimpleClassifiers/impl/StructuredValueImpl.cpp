@@ -280,6 +280,140 @@ bool StructuredValueImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any StructuredValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 11311
+		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT:
+		{
+			//Retrieve input parameter 'feature'
+			//parameter 0
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			//Retrieve input parameter 'values'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> incoming_param_values;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_values = (*incoming_param_values_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
+			//Retrieve input parameter 'position'
+			//parameter 2
+			int incoming_param_position;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_position = (*incoming_param_position_arguments_citer)->get()->get<int >();
+			this->assignFeatureValue(incoming_param_feature,incoming_param_values,incoming_param_position);
+			break;
+		}
+		
+		// 11313
+		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_CREATEFEATUREVALUES:
+		{
+			this->createFeatureValues();
+			break;
+		}
+		
+		// 11316
+		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE:
+		{
+			//Retrieve input parameter 'feature'
+			//parameter 0
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			//Retrieve input parameter 'featureValues'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> incoming_param_featureValues;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_featureValues_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_featureValues = (*incoming_param_featureValues_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> >();
+			result = eAny(this->getValues(incoming_param_feature,incoming_param_featureValues));
+			break;
+		}
+		
+		// 11317
+		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE:
+		{
+			//Retrieve input parameter 'feature'
+			//parameter 0
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			//Retrieve input parameter 'value'
+			//parameter 1
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			this->removeValue(incoming_param_feature,incoming_param_value);
+			break;
+		}
+		
+		// 11310
+		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE:
+		{
+			//Retrieve input parameter 'feature'
+			//parameter 0
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			result = eAny(this->retrieveFeatureValue(incoming_param_feature));
+			break;
+		}
+		
+		// 11312
+		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUES:
+		{
+			result = eAny(this->retrieveFeatureValues());
+			break;
+		}
+		
+		// 11315
+		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT:
+		{
+			//Retrieve input parameter 'feature'
+			//parameter 0
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			//Retrieve input parameter 'values'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> incoming_param_values;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_values = (*incoming_param_values_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
+			//Retrieve input parameter 'position'
+			//parameter 2
+			int incoming_param_position;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_position = (*incoming_param_position_arguments_citer)->get()->get<int >();
+			this->setFeatureValue(incoming_param_feature,incoming_param_values,incoming_param_position);
+			break;
+		}
+		
+		// 11314
+		case SimpleClassifiersPackage::STRUCTUREDVALUE_OPERATION_SPECIFY:
+		{
+			result = eAny(this->specify());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void StructuredValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

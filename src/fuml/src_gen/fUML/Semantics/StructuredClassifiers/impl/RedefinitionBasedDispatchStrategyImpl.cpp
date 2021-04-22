@@ -226,6 +226,63 @@ bool RedefinitionBasedDispatchStrategyImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any RedefinitionBasedDispatchStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 9704
+		case StructuredClassifiersPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_OPERATIONSMATCH_OPERATION_OPERATION:
+		{
+			//Retrieve input parameter 'ownedOperation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_ownedOperation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_ownedOperation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_ownedOperation = (*incoming_param_ownedOperation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			//Retrieve input parameter 'baseOperation'
+			//parameter 1
+			std::shared_ptr<uml::Operation> incoming_param_baseOperation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_baseOperation_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_baseOperation = (*incoming_param_baseOperation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->operationsMatch(incoming_param_ownedOperation,incoming_param_baseOperation));
+			break;
+		}
+		
+		// 9705
+		case StructuredClassifiersPackage::REDEFINITIONBASEDDISPATCHSTRATEGY_OPERATION_RETRIEVEMETHOD_OBJECT_OPERATION:
+		{
+			//Retrieve input parameter 'object'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> incoming_param_object;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_object_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_object = (*incoming_param_object_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> >();
+			//Retrieve input parameter 'operation'
+			//parameter 1
+			std::shared_ptr<uml::Operation> incoming_param_operation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->retrieveMethod(incoming_param_object,incoming_param_operation));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = DispatchStrategyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void RedefinitionBasedDispatchStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

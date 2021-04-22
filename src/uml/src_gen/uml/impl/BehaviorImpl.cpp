@@ -1024,6 +1024,113 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any BehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2488
+		case umlPackage::BEHAVIOR_OPERATION_BEHAVIOREDCLASSIFIER_ELEMENT:
+		{
+			//Retrieve input parameter 'from'
+			//parameter 0
+			std::shared_ptr<uml::Element> incoming_param_from;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_from_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_from = (*incoming_param_from_arguments_citer)->get()->get<std::shared_ptr<uml::Element> >();
+			result = eAny(this->behavioredClassifier(incoming_param_from));
+			break;
+		}
+		
+		// 2486
+		case umlPackage::BEHAVIOR_OPERATION_FEATURE_OF_CONTEXT_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->feature_of_context_classifier(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 2487
+		case umlPackage::BEHAVIOR_OPERATION_GETCONTEXT:
+		{
+			result = eAny(this->getContext());
+			break;
+		}
+		
+		// 2489
+		case umlPackage::BEHAVIOR_OPERATION_INPUTPARAMETERS:
+		{
+			result = eAny(this->inputParameters());
+			break;
+		}
+		
+		// 2484
+		case umlPackage::BEHAVIOR_OPERATION_MOST_ONE_BEHAVIOR_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->most_one_behavior(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 2490
+		case umlPackage::BEHAVIOR_OPERATION_OUTPUTPARAMETERS:
+		{
+			result = eAny(this->outputParameters());
+			break;
+		}
+		
+		// 2485
+		case umlPackage::BEHAVIOR_OPERATION_PARAMETERS_MATCH_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->parameters_match(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ClassImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void BehaviorImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -159,6 +159,36 @@ bool SemanticStrategyImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any SemanticStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 10300
+		case LociPackage::SEMANTICSTRATEGY_OPERATION_GETNAME:
+		{
+			result = eAny(this->getName());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void SemanticStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

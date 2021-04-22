@@ -224,6 +224,50 @@ bool DataValueImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any DataValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 3629
+		case SimpleClassifiersPackage::DATAVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 3628
+		case SimpleClassifiersPackage::DATAVALUE_OPERATION_GETTYPES:
+		{
+			result = eAny(this->getTypes());
+			break;
+		}
+		
+		// 3627
+		case SimpleClassifiersPackage::DATAVALUE_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = CompoundValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void DataValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -68,10 +68,10 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -472,6 +472,75 @@ bool CS_RemoveStructuralFeatureValueActionActivationImpl::eSet(int featureID, An
 	}
 
 	return fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any CS_RemoveStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2765
+		case ActionsPackage::CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+		
+		// 2766
+		case ActionsPackage::CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_STRUCTUREDVALUE_VALUE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> >();
+			//Retrieve input parameter 'feature'
+			//parameter 1
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			//Retrieve input parameter 'removedValue'
+			//parameter 2
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_removedValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_removedValue_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_removedValue = (*incoming_param_removedValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->getLinksToDestroy(incoming_param_value,incoming_param_feature,incoming_param_removedValue));
+			break;
+		}
+		
+		// 2767
+		case ActionsPackage::CS_REMOVESTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_GETPOTENTIALLINKENDS_CS_REFERENCE_STRUCTURALFEATURE:
+		{
+			//Retrieve input parameter 'context'
+			//parameter 0
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			//Retrieve input parameter 'feature'
+			//parameter 1
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			result = eAny(this->getPotentialLinkEnds(incoming_param_context,incoming_param_feature));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Actions::RemoveStructuralFeatureValueActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

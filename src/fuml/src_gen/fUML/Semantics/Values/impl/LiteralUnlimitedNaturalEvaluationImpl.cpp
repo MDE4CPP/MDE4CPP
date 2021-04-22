@@ -175,6 +175,36 @@ bool LiteralUnlimitedNaturalEvaluationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any LiteralUnlimitedNaturalEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 7606
+		case ValuesPackage::LITERALUNLIMITEDNATURALEVALUATION_OPERATION_EVALUATE:
+		{
+			result = eAny(this->evaluate());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = LiteralEvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void LiteralUnlimitedNaturalEvaluationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -338,6 +338,44 @@ bool VariableImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any VariableImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 25292
+		case umlPackage::VARIABLE_OPERATION_ISACCESSIBLEBY_ACTION:
+		{
+			//Retrieve input parameter 'a'
+			//parameter 0
+			std::shared_ptr<uml::Action> incoming_param_a;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_a_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_a = (*incoming_param_a_arguments_citer)->get()->get<std::shared_ptr<uml::Action> >();
+			result = eAny(this->isAccessibleBy(incoming_param_a));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = MultiplicityElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = ConnectableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void VariableImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

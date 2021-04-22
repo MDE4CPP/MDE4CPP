@@ -1011,6 +1011,190 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any OperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 16825
+		case umlPackage::OPERATION_OPERATION_AT_MOST_ONE_RETURN_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->at_most_one_return(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 16835
+		case umlPackage::OPERATION_OPERATION_GETLOWER:
+		{
+			result = eAny(this->getLower());
+			break;
+		}
+		
+		// 16827
+		case umlPackage::OPERATION_OPERATION_GETRETURNRESULT:
+		{
+			result = eAny(this->getReturnResult());
+			break;
+		}
+		
+		// 16837
+		case umlPackage::OPERATION_OPERATION_GETTYPE:
+		{
+			result = eAny(this->getType());
+			break;
+		}
+		
+		// 16838
+		case umlPackage::OPERATION_OPERATION_GETUPPER:
+		{
+			result = eAny(this->getUpper());
+			break;
+		}
+		
+		// 16833
+		case umlPackage::OPERATION_OPERATION_ISORDERED:
+		{
+			result = eAny(this->isOrdered());
+			break;
+		}
+		
+		// 16834
+		case umlPackage::OPERATION_OPERATION_ISUNIQUE:
+		{
+			result = eAny(this->isUnique());
+			break;
+		}
+		
+		// 16839
+		case umlPackage::OPERATION_OPERATION_MATCHES_OPERATION:
+		{
+			//Retrieve input parameter 'comparedOperation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_comparedOperation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_comparedOperation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_comparedOperation = (*incoming_param_comparedOperation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->matches(incoming_param_comparedOperation));
+			break;
+		}
+		
+		// 16826
+		case umlPackage::OPERATION_OPERATION_ONLY_BODY_FOR_QUERY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->only_body_for_query(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 16836
+		case umlPackage::OPERATION_OPERATION_RETURNRESULT:
+		{
+			result = eAny(this->returnResult());
+			break;
+		}
+		
+		// 16828
+		case umlPackage::OPERATION_OPERATION_SETISORDERED_BOOLEAN:
+		{
+			//Retrieve input parameter 'newIsOrdered'
+			//parameter 0
+			bool incoming_param_newIsOrdered;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newIsOrdered_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_newIsOrdered = (*incoming_param_newIsOrdered_arguments_citer)->get()->get<bool >();
+			this->setIsOrdered(incoming_param_newIsOrdered);
+			break;
+		}
+		
+		// 16829
+		case umlPackage::OPERATION_OPERATION_SETISUNIQUE_BOOLEAN:
+		{
+			//Retrieve input parameter 'newIsUnique'
+			//parameter 0
+			bool incoming_param_newIsUnique;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newIsUnique_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_newIsUnique = (*incoming_param_newIsUnique_arguments_citer)->get()->get<bool >();
+			this->setIsUnique(incoming_param_newIsUnique);
+			break;
+		}
+		
+		// 16830
+		case umlPackage::OPERATION_OPERATION_SETLOWER_INTEGER:
+		{
+			//Retrieve input parameter 'newLower'
+			//parameter 0
+			int incoming_param_newLower;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newLower_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_newLower = (*incoming_param_newLower_arguments_citer)->get()->get<int >();
+			this->setLower(incoming_param_newLower);
+			break;
+		}
+		
+		// 16831
+		case umlPackage::OPERATION_OPERATION_SETTYPE_TYPE:
+		{
+			//Retrieve input parameter 'newType'
+			//parameter 0
+			std::shared_ptr<uml::Type> incoming_param_newType;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newType_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_newType = (*incoming_param_newType_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
+			this->setType(incoming_param_newType);
+			break;
+		}
+		
+		// 16832
+		case umlPackage::OPERATION_OPERATION_SETUPPER_UNLIMITEDNATURAL:
+		{
+			//Retrieve input parameter 'newUpper'
+			//parameter 0
+			int incoming_param_newUpper;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newUpper_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_newUpper = (*incoming_param_newUpper_arguments_citer)->get()->get<int >();
+			this->setUpper(incoming_param_newUpper);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = TemplateableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = ParameterableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = BehavioralFeatureImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void OperationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

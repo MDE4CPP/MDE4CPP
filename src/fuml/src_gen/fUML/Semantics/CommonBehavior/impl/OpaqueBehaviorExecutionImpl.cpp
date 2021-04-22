@@ -230,6 +230,53 @@ bool OpaqueBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any OpaqueBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 8551
+		case CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_OPERATION_DOBODY_PARAMETERVALUE_PARAMETERVALUE:
+		{
+			//Retrieve input parameter 'inputParameters'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputParameters;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputParameters_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_inputParameters = (*incoming_param_inputParameters_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			//Retrieve input parameter 'outputParameters'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_outputParameters;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_outputParameters_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_outputParameters = (*incoming_param_outputParameters_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			this->doBody(incoming_param_inputParameters,incoming_param_outputParameters);
+			break;
+		}
+		
+		// 8552
+		case CommonBehaviorPackage::OPAQUEBEHAVIOREXECUTION_OPERATION_EXECUTE:
+		{
+			this->execute();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ExecutionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void OpaqueBehaviorExecutionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -308,6 +308,69 @@ bool OfferImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any OfferImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 8401
+		case ActivitiesPackage::OFFER_OPERATION_COUNTOFFEREDVALES:
+		{
+			result = eAny(this->countOfferedVales());
+			break;
+		}
+		
+		// 8405
+		case ActivitiesPackage::OFFER_OPERATION_HASTOKENS:
+		{
+			result = eAny(this->hasTokens());
+			break;
+		}
+		
+		// 8403
+		case ActivitiesPackage::OFFER_OPERATION_REMOVEOFFEREDVALUES_EINT:
+		{
+			//Retrieve input parameter 'count'
+			//parameter 0
+			int incoming_param_count;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_count_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_count = (*incoming_param_count_arguments_citer)->get()->get<int >();
+			this->removeOfferedValues(incoming_param_count);
+			break;
+		}
+		
+		// 8404
+		case ActivitiesPackage::OFFER_OPERATION_REMOVEWITHDRAWNTOKENS:
+		{
+			this->removeWithdrawnTokens();
+			break;
+		}
+		
+		// 8402
+		case ActivitiesPackage::OFFER_OPERATION_RETRIEVEOFFEREDTOKENS:
+		{
+			result = eAny(this->retrieveOfferedTokens());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void OfferImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

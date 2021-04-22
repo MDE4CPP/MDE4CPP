@@ -413,6 +413,36 @@ bool EStructuralFeatureImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any EStructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 5039
+		case ecorePackage::ESTRUCTURALFEATURE_OPERATION_GETCONTAINERCLASS:
+		{
+			result = eAny(this->getContainerClass());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ETypedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void EStructuralFeatureImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -199,6 +199,36 @@ bool SignalInstanceImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any SignalInstanceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 10727
+		case SimpleClassifiersPackage::SIGNALINSTANCE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = CompoundValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void SignalInstanceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

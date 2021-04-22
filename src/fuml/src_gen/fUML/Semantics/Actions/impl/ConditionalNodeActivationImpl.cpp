@@ -353,6 +353,65 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ConditionalNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 3075
+		case ActionsPackage::CONDITIONALNODEACTIVATION_OPERATION_GETCLAUSEACTIVATION_CLAUSE:
+		{
+			//Retrieve input parameter 'clause'
+			//parameter 0
+			std::shared_ptr<uml::Clause> incoming_param_clause;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get()->get<std::shared_ptr<uml::Clause> >();
+			result = eAny(this->getClauseActivation(incoming_param_clause));
+			break;
+		}
+		
+		// 3076
+		case ActionsPackage::CONDITIONALNODEACTIVATION_OPERATION_RUNTEST_CLAUSE:
+		{
+			//Retrieve input parameter 'clause'
+			//parameter 0
+			std::shared_ptr<uml::Clause> incoming_param_clause;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get()->get<std::shared_ptr<uml::Clause> >();
+			this->runTest(incoming_param_clause);
+			break;
+		}
+		
+		// 3077
+		case ActionsPackage::CONDITIONALNODEACTIVATION_OPERATION_SELECTBODY_CLAUSE:
+		{
+			//Retrieve input parameter 'clause'
+			//parameter 0
+			std::shared_ptr<uml::Clause> incoming_param_clause;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_clause_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_clause = (*incoming_param_clause_arguments_citer)->get()->get<std::shared_ptr<uml::Clause> >();
+			this->selectBody(incoming_param_clause);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StructuredActivityNodeActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ConditionalNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

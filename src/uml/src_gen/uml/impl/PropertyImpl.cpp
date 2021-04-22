@@ -1156,6 +1156,357 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any PropertyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 18626
+		case umlPackage::PROPERTY_OPERATION_BINDING_TO_ATTRIBUTE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->binding_to_attribute(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 18628
+		case umlPackage::PROPERTY_OPERATION_DEPLOYMENT_TARGET_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->deployment_target(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 18627
+		case umlPackage::PROPERTY_OPERATION_DERIVED_UNION_IS_DERIVED_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->derived_union_is_derived(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 18622
+		case umlPackage::PROPERTY_OPERATION_DERIVED_UNION_IS_READ_ONLY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->derived_union_is_read_only(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 18645
+		case umlPackage::PROPERTY_OPERATION_GETOPPOSITE:
+		{
+			result = eAny(this->getOpposite());
+			break;
+		}
+		
+		// 18632
+		case umlPackage::PROPERTY_OPERATION_GETOTHEREND:
+		{
+			result = eAny(this->getOtherEnd());
+			break;
+		}
+		
+		// 18642
+		case umlPackage::PROPERTY_OPERATION_ISATTRIBUTE:
+		{
+			result = eAny(this->isAttribute());
+			break;
+		}
+		
+		// 18643
+		case umlPackage::PROPERTY_OPERATION_ISCOMPOSITE:
+		{
+			result = eAny(this->isComposite());
+			break;
+		}
+		
+		// 18644
+		case umlPackage::PROPERTY_OPERATION_ISNAVIGABLE:
+		{
+			result = eAny(this->isNavigable());
+			break;
+		}
+		
+		// 18633
+		case umlPackage::PROPERTY_OPERATION_ISSETDEFAULT:
+		{
+			result = eAny(this->isSetDefault());
+			break;
+		}
+		
+		// 18623
+		case umlPackage::PROPERTY_OPERATION_MULTIPLICITY_OF_COMPOSITE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->multiplicity_of_composite(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 18631
+		case umlPackage::PROPERTY_OPERATION_QUALIFIED_IS_ASSOCIATION_END_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->qualified_is_association_end(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 18624
+		case umlPackage::PROPERTY_OPERATION_REDEFINED_PROPERTY_INHERITED_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->redefined_property_inherited(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 18634
+		case umlPackage::PROPERTY_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			bool incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<bool >();
+			this->setBooleanDefaultValue(incoming_param_value);
+			break;
+		}
+		
+		// 18635
+		case umlPackage::PROPERTY_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			int incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<int >();
+			this->setIntegerDefaultValue(incoming_param_value);
+			break;
+		}
+		
+		// 18636
+		case umlPackage::PROPERTY_OPERATION_SETISNAVIGABLE_BOOLEAN:
+		{
+			//Retrieve input parameter 'isNavigable'
+			//parameter 0
+			bool incoming_param_isNavigable;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_isNavigable_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_isNavigable = (*incoming_param_isNavigable_arguments_citer)->get()->get<bool >();
+			this->setIsNavigable(incoming_param_isNavigable);
+			break;
+		}
+		
+		// 18637
+		case umlPackage::PROPERTY_OPERATION_SETNULLDEFAULTVALUE:
+		{
+			this->setNullDefaultValue();
+			break;
+		}
+		
+		// 18638
+		case umlPackage::PROPERTY_OPERATION_SETREALDEFAULTVALUE_REAL:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			double incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<double >();
+			this->setRealDefaultValue(incoming_param_value);
+			break;
+		}
+		
+		// 18639
+		case umlPackage::PROPERTY_OPERATION_SETSTRINGDEFAULTVALUE_STRING:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::string incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::string >();
+			this->setStringDefaultValue(incoming_param_value);
+			break;
+		}
+		
+		// 18640
+		case umlPackage::PROPERTY_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			int incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<int >();
+			this->setUnlimitedNaturalDefaultValue(incoming_param_value);
+			break;
+		}
+		
+		// 18629
+		case umlPackage::PROPERTY_OPERATION_SUBSETTED_PROPERTY_NAMES_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->subsetted_property_names(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 18646
+		case umlPackage::PROPERTY_OPERATION_SUBSETTINGCONTEXT:
+		{
+			result = eAny(this->subsettingContext());
+			break;
+		}
+		
+		// 18621
+		case umlPackage::PROPERTY_OPERATION_SUBSETTING_CONTEXT_CONFORMS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->subsetting_context_conforms(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 18625
+		case umlPackage::PROPERTY_OPERATION_SUBSETTING_RULES_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->subsetting_rules(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 18630
+		case umlPackage::PROPERTY_OPERATION_TYPE_OF_OPPOSITE_END_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->type_of_opposite_end(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 18641
+		case umlPackage::PROPERTY_OPERATION_UNSETDEFAULT:
+		{
+			this->unsetDefault();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = DeploymentTargetImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = ConnectableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = StructuralFeatureImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void PropertyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

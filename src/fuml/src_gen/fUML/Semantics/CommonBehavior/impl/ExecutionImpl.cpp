@@ -423,6 +423,88 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 4650
+		case CommonBehaviorPackage::EXECUTION_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 4643
+		case CommonBehaviorPackage::EXECUTION_OPERATION_EXECUTE:
+		{
+			this->execute();
+			break;
+		}
+		
+		// 4647
+		case CommonBehaviorPackage::EXECUTION_OPERATION_GETOUTPUTPARAMETERVALUES:
+		{
+			result = eAny(this->getOutputParameterValues());
+			break;
+		}
+		
+		// 4646
+		case CommonBehaviorPackage::EXECUTION_OPERATION_GETPARAMETERVALUE_PARAMETER:
+		{
+			//Retrieve input parameter 'parameter'
+			//parameter 0
+			std::shared_ptr<uml::Parameter> incoming_param_parameter;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameter_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_parameter = (*incoming_param_parameter_arguments_citer)->get()->get<std::shared_ptr<uml::Parameter> >();
+			result = eAny(this->getParameterValue(incoming_param_parameter));
+			break;
+		}
+		
+		// 4649
+		case CommonBehaviorPackage::EXECUTION_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
+		// 4645
+		case CommonBehaviorPackage::EXECUTION_OPERATION_SETPARAMETERVALUE_PARAMETERVALUE:
+		{
+			//Retrieve input parameter 'parameterValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> incoming_param_parameterValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_parameterValue = (*incoming_param_parameterValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> >();
+			this->setParameterValue(incoming_param_parameterValue);
+			break;
+		}
+		
+		// 4644
+		case CommonBehaviorPackage::EXECUTION_OPERATION_TERMINATE:
+		{
+			this->terminate();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::StructuredClassifiers::ObjectImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ExecutionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

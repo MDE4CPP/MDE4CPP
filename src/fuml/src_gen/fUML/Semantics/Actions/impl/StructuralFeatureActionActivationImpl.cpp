@@ -296,6 +296,107 @@ bool StructuralFeatureActionActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any StructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 11158
+		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETASSOCIATION_STRUCTURALFEATURE:
+		{
+			//Retrieve input parameter 'feature'
+			//parameter 0
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			result = eAny(this->getAssociation(incoming_param_feature));
+			break;
+		}
+		
+		// 11159
+		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKS_ASSOCIATION_VALUE:
+		{
+			//Retrieve input parameter 'association'
+			//parameter 0
+			std::shared_ptr<uml::Association> incoming_param_association;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_association = (*incoming_param_association_arguments_citer)->get()->get<std::shared_ptr<uml::Association> >();
+			//Retrieve input parameter 'end'
+			//parameter 1
+			std::shared_ptr<uml::StructuralFeature> incoming_param_end;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			//Retrieve input parameter 'oppositeValue'
+			//parameter 2
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_oppositeValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->getMatchingLinks(incoming_param_association,incoming_param_end,incoming_param_oppositeValue));
+			break;
+		}
+		
+		// 11161
+		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETMATCHINGLINKSFORENDVALUE_ASSOCIATION_VALUE:
+		{
+			//Retrieve input parameter 'association'
+			//parameter 0
+			std::shared_ptr<uml::Association> incoming_param_association;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_association = (*incoming_param_association_arguments_citer)->get()->get<std::shared_ptr<uml::Association> >();
+			//Retrieve input parameter 'end'
+			//parameter 1
+			std::shared_ptr<uml::StructuralFeature> incoming_param_end;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			//Retrieve input parameter 'oppositeValue'
+			//parameter 2
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_oppositeValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_oppositeValue_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_oppositeValue = (*incoming_param_oppositeValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			//Retrieve input parameter 'endValue'
+			//parameter 3
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_endValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_endValue_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_endValue = (*incoming_param_endValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->getMatchingLinksForEndValue(incoming_param_association,incoming_param_end,incoming_param_oppositeValue,incoming_param_endValue));
+			break;
+		}
+		
+		// 11160
+		case ActionsPackage::STRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETOPPOSITEEND_ASSOCIATION_STRUCTURALFEATURE:
+		{
+			//Retrieve input parameter 'association'
+			//parameter 0
+			std::shared_ptr<uml::Association> incoming_param_association;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_association_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_association = (*incoming_param_association_arguments_citer)->get()->get<std::shared_ptr<uml::Association> >();
+			//Retrieve input parameter 'end'
+			//parameter 1
+			std::shared_ptr<uml::StructuralFeature> incoming_param_end;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			result = eAny(this->getOppositeEnd(incoming_param_association,incoming_param_end));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void StructuralFeatureActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

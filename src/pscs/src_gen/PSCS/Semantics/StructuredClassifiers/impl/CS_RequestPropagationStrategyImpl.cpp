@@ -38,8 +38,8 @@
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -173,6 +173,53 @@ bool CS_RequestPropagationStrategyImpl::eSet(int featureID, Any newValue)
 	}
 
 	return fUML::Semantics::Loci::SemanticStrategyImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any CS_RequestPropagationStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2801
+		case StructuredClassifiersPackage::CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_GETNAME:
+		{
+			result = eAny(this->getName());
+			break;
+		}
+		
+		// 2802
+		case StructuredClassifiersPackage::CS_REQUESTPROPAGATIONSTRATEGY_OPERATION_SELECT_REFERENCE_SEMANTICVISITOR:
+		{
+			//Retrieve input parameter 'potentialTargets'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> incoming_param_potentialTargets;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_potentialTargets_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_potentialTargets = (*incoming_param_potentialTargets_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::StructuredClassifiers::Reference>> >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Loci::SemanticVisitor> >();
+			result = eAny(this->select(incoming_param_potentialTargets,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Loci::SemanticStrategyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

@@ -210,6 +210,48 @@ bool InvocationEventOccurrenceImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any InvocationEventOccurrenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 6607
+		case CommonBehaviorPackage::INVOCATIONEVENTOCCURRENCE_OPERATION_GETPARAMETERVALUES:
+		{
+			result = eAny(this->getParameterValues());
+			break;
+		}
+		
+		// 6608
+		case CommonBehaviorPackage::INVOCATIONEVENTOCCURRENCE_OPERATION_MATCH_TRIGGER:
+		{
+			//Retrieve input parameter 'trigger'
+			//parameter 0
+			std::shared_ptr<uml::Trigger> incoming_param_trigger;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_trigger_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_trigger = (*incoming_param_trigger_arguments_citer)->get()->get<std::shared_ptr<uml::Trigger> >();
+			result = eAny(this->match(incoming_param_trigger));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = EventOccurrenceImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void InvocationEventOccurrenceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

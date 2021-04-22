@@ -254,6 +254,78 @@ bool ClauseActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ClauseActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2606
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETDECISION:
+		{
+			result = eAny(this->getDecision());
+			break;
+		}
+		
+		// 2607
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETPREDECESSORS:
+		{
+			result = eAny(this->getPredecessors());
+			break;
+		}
+		
+		// 2608
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_GETSUCCESSORS:
+		{
+			result = eAny(this->getSuccessors());
+			break;
+		}
+		
+		// 2603
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_ISREADY:
+		{
+			result = eAny(this->isReady());
+			break;
+		}
+		
+		// 2602
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_RECIEVECONTROL:
+		{
+			this->recieveControl();
+			break;
+		}
+		
+		// 2604
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_RUNTEST:
+		{
+			this->runTest();
+			break;
+		}
+		
+		// 2605
+		case ActionsPackage::CLAUSEACTIVATION_OPERATION_SELECTBODY:
+		{
+			this->selectBody();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ClauseActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

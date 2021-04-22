@@ -444,6 +444,115 @@ bool OpaqueExpressionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any OpaqueExpressionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 16691
+		case umlPackage::OPAQUEEXPRESSION_OPERATION_GETRESULT:
+		{
+			result = eAny(this->getResult());
+			break;
+		}
+		
+		// 16688
+		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISINTEGRAL:
+		{
+			result = eAny(this->isIntegral());
+			break;
+		}
+		
+		// 16689
+		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISNONNEGATIVE:
+		{
+			result = eAny(this->isNonNegative());
+			break;
+		}
+		
+		// 16690
+		case umlPackage::OPAQUEEXPRESSION_OPERATION_ISPOSITIVE:
+		{
+			result = eAny(this->isPositive());
+			break;
+		}
+		
+		// 16685
+		case umlPackage::OPAQUEEXPRESSION_OPERATION_LANGUAGE_BODY_SIZE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->language_body_size(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 16686
+		case umlPackage::OPAQUEEXPRESSION_OPERATION_ONE_RETURN_RESULT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->one_return_result_parameter(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 16687
+		case umlPackage::OPAQUEEXPRESSION_OPERATION_ONLY_RETURN_RESULT_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->only_return_result_parameters(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 16692
+		case umlPackage::OPAQUEEXPRESSION_OPERATION_VALUE:
+		{
+			result = eAny(this->value());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ValueSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void OpaqueExpressionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

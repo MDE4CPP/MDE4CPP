@@ -320,6 +320,104 @@ bool RedefinableElementImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any RedefinableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 20471
+		case umlPackage::REDEFINABLEELEMENT_OPERATION_ISCONSISTENTWITH_REDEFINABLEELEMENT:
+		{
+			//Retrieve input parameter 'redefiningElement'
+			//parameter 0
+			std::shared_ptr<uml::RedefinableElement> incoming_param_redefiningElement;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_redefiningElement_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_redefiningElement = (*incoming_param_redefiningElement_arguments_citer)->get()->get<std::shared_ptr<uml::RedefinableElement> >();
+			result = eAny(this->isConsistentWith(incoming_param_redefiningElement));
+			break;
+		}
+		
+		// 20472
+		case umlPackage::REDEFINABLEELEMENT_OPERATION_ISREDEFINITIONCONTEXTVALID_REDEFINABLEELEMENT:
+		{
+			//Retrieve input parameter 'redefinedElement'
+			//parameter 0
+			std::shared_ptr<uml::RedefinableElement> incoming_param_redefinedElement;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_redefinedElement_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_redefinedElement = (*incoming_param_redefinedElement_arguments_citer)->get()->get<std::shared_ptr<uml::RedefinableElement> >();
+			result = eAny(this->isRedefinitionContextValid(incoming_param_redefinedElement));
+			break;
+		}
+		
+		// 20469
+		case umlPackage::REDEFINABLEELEMENT_OPERATION_NON_LEAF_REDEFINITION_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->non_leaf_redefinition(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 20468
+		case umlPackage::REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONSISTENT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->redefinition_consistent(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 20470
+		case umlPackage::REDEFINABLEELEMENT_OPERATION_REDEFINITION_CONTEXT_VALID_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->redefinition_context_valid(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = NamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void RedefinableElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

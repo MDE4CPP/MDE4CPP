@@ -293,6 +293,110 @@ bool AcceptEventActionActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any AcceptEventActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 360
+		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_ACCEPT_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			this->accept(incoming_param_eventOccurrence);
+			break;
+		}
+		
+		// 362
+		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+		
+		// 363
+		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_FIRE_TOKEN:
+		{
+			//Retrieve input parameter 'incomingTokens'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> incoming_param_incomingTokens;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_incomingTokens_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_incomingTokens = (*incoming_param_incomingTokens_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::Token>> >();
+			this->fire(incoming_param_incomingTokens);
+			break;
+		}
+		
+		// 364
+		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_INITIALIZE_ACTIVITYNODE_ACTIVITYNODEACTIVATIONGROUP:
+		{
+			//Retrieve input parameter 'node'
+			//parameter 0
+			std::shared_ptr<uml::ActivityNode> incoming_param_node;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_node = (*incoming_param_node_arguments_citer)->get()->get<std::shared_ptr<uml::ActivityNode> >();
+			//Retrieve input parameter 'group'
+			//parameter 1
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> incoming_param_group;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_group_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_group = (*incoming_param_group_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> >();
+			this->initialize(incoming_param_node,incoming_param_group);
+			break;
+		}
+		
+		// 365
+		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_ISREADY:
+		{
+			result = eAny(this->isReady());
+			break;
+		}
+		
+		// 361
+		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_MATCH_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			result = eAny(this->match(incoming_param_eventOccurrence));
+			break;
+		}
+		
+		// 366
+		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_RUN:
+		{
+			this->run();
+			break;
+		}
+		
+		// 367
+		case ActionsPackage::ACCEPTEVENTACTIONACTIVATION_OPERATION_TERMINATE:
+		{
+			this->terminate();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void AcceptEventActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

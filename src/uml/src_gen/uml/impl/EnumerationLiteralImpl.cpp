@@ -290,6 +290,43 @@ bool EnumerationLiteralImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any EnumerationLiteralImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 8583
+		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIER:
+		{
+			result = eAny(this->getClassifier());
+			break;
+		}
+		
+		// 8582
+		case umlPackage::ENUMERATIONLITERAL_OPERATION_GETCLASSIFIERS:
+		{
+			result = eAny(this->getClassifiers());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = InstanceSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void EnumerationLiteralImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

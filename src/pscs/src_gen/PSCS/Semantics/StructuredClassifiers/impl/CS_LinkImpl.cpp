@@ -41,8 +41,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
@@ -199,6 +199,53 @@ bool CS_LinkImpl::eSet(int featureID, Any newValue)
 	}
 
 	return fUML::Semantics::StructuredClassifiers::LinkImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any CS_LinkImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1836
+		case StructuredClassifiersPackage::CS_LINK_OPERATION_GETFEATURE_VALUE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->getFeature(incoming_param_value));
+			break;
+		}
+		
+		// 1835
+		case StructuredClassifiersPackage::CS_LINK_OPERATION_HASVALUEFORAFEATURE_VALUE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->hasValueForAFeature(incoming_param_value));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::StructuredClassifiers::LinkImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

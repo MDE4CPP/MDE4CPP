@@ -321,6 +321,43 @@ bool TemplateableElementImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any TemplateableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 23447
+		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_ISTEMPLATE:
+		{
+			result = eAny(this->isTemplate());
+			break;
+		}
+		
+		// 23448
+		case umlPackage::TEMPLATEABLEELEMENT_OPERATION_PARAMETERABLEELEMENTS:
+		{
+			result = eAny(this->parameterableElements());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void TemplateableElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

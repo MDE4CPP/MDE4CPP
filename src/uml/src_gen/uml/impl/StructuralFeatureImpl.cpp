@@ -275,6 +275,35 @@ bool StructuralFeatureImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any StructuralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = MultiplicityElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = TypedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = FeatureImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void StructuralFeatureImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

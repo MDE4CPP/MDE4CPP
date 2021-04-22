@@ -705,6 +705,130 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 4882
+		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'isAbstract'
+			//parameter 1
+			bool incoming_param_isAbstract;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_isAbstract_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get()->get<bool >();
+			result = eAny(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract));
+			break;
+		}
+		
+		// 4883
+		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDENUMERATION_STRING:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->createOwnedEnumeration(incoming_param_name));
+			break;
+		}
+		
+		// 4884
+		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDINTERFACE_STRING:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->createOwnedInterface(incoming_param_name));
+			break;
+		}
+		
+		// 4885
+		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->createOwnedPrimitiveType(incoming_param_name));
+			break;
+		}
+		
+		// 4886
+		case umlPackage::COMPONENT_OPERATION_GETPROVIDEDS:
+		{
+			result = eAny(this->getProvideds());
+			break;
+		}
+		
+		// 4887
+		case umlPackage::COMPONENT_OPERATION_GETREQUIREDS:
+		{
+			result = eAny(this->getRequireds());
+			break;
+		}
+		
+		// 4880
+		case umlPackage::COMPONENT_OPERATION_NO_NESTED_CLASSIFIERS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_nested_classifiers(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 4881
+		case umlPackage::COMPONENT_OPERATION_NO_PACKAGED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_packaged_elements(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ClassImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ComponentImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

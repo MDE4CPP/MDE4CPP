@@ -331,6 +331,36 @@ bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any DeploymentTargetImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 7167
+		case umlPackage::DEPLOYMENTTARGET_OPERATION_GETDEPLOYEDELEMENTS:
+		{
+			result = eAny(this->getDeployedElements());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = NamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void DeploymentTargetImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

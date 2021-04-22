@@ -44,11 +44,11 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "PSCS/Semantics/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
 
@@ -220,6 +220,43 @@ bool CS_OpaqueExpressionEvaluationImpl::eSet(int featureID, Any newValue)
 	}
 
 	return fUML::Semantics::Values::EvaluationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any CS_OpaqueExpressionEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2305
+		case ValuesPackage::CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EVALUATE:
+		{
+			result = eAny(this->evaluate());
+			break;
+		}
+		
+		// 2306
+		case ValuesPackage::CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EXECUTEEXPRESSIONBEHAVIOR:
+		{
+			result = eAny(this->executeExpressionBehavior());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::EvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

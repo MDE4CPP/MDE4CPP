@@ -266,6 +266,48 @@ bool ParameterableElementImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ParameterableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 17847
+		case umlPackage::PARAMETERABLEELEMENT_OPERATION_ISCOMPATIBLEWITH_PARAMETERABLEELEMENT:
+		{
+			//Retrieve input parameter 'p'
+			//parameter 0
+			std::shared_ptr<uml::ParameterableElement> incoming_param_p;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_p_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_p = (*incoming_param_p_arguments_citer)->get()->get<std::shared_ptr<uml::ParameterableElement> >();
+			result = eAny(this->isCompatibleWith(incoming_param_p));
+			break;
+		}
+		
+		// 17848
+		case umlPackage::PARAMETERABLEELEMENT_OPERATION_ISTEMPLATEPARAMETER:
+		{
+			result = eAny(this->isTemplateParameter());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ParameterableElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

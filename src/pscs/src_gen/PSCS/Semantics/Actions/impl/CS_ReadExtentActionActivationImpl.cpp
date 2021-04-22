@@ -55,10 +55,10 @@
 #include "fUML/Semantics/Activities/Token.hpp"
 
 //Factories an Package includes
-#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "PSCS/PSCSPackage.hpp"
-#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
+#include "PSCS/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/Activities/ActivitiesPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -233,6 +233,36 @@ bool CS_ReadExtentActionActivationImpl::eSet(int featureID, Any newValue)
 	}
 
 	return fUML::Semantics::Actions::ReadExtentActionActivationImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any CS_ReadExtentActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2458
+		case ActionsPackage::CS_READEXTENTACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Actions::ReadExtentActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

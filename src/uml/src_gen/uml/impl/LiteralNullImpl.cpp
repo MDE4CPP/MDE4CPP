@@ -282,6 +282,43 @@ bool LiteralNullImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any LiteralNullImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 13981
+		case umlPackage::LITERALNULL_OPERATION_ISCOMPUTABLE:
+		{
+			result = eAny(this->isComputable());
+			break;
+		}
+		
+		// 13982
+		case umlPackage::LITERALNULL_OPERATION_ISNULL:
+		{
+			result = eAny(this->isNull());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = LiteralSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void LiteralNullImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

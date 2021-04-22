@@ -380,6 +380,127 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 8039
+		case StructuredClassifiersPackage::OBJECT_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 8034
+		case StructuredClassifiersPackage::OBJECT_OPERATION__REGISTER_EVENTACCEPTER:
+		{
+			//Retrieve input parameter 'accepter'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> incoming_param_accepter;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_accepter_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_accepter = (*incoming_param_accepter_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> >();
+			this->_register(incoming_param_accepter);
+			break;
+		}
+		
+		// 8037
+		case StructuredClassifiersPackage::OBJECT_OPERATION_DESTROY:
+		{
+			this->destroy();
+			break;
+		}
+		
+		// 8032
+		case StructuredClassifiersPackage::OBJECT_OPERATION_DISPATCH_OPERATION:
+		{
+			//Retrieve input parameter 'operation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_operation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->dispatch(incoming_param_operation));
+			break;
+		}
+		
+		// 8036
+		case StructuredClassifiersPackage::OBJECT_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
+		// 8033
+		case StructuredClassifiersPackage::OBJECT_OPERATION_SEND_SIGNALINSTANCE:
+		{
+			//Retrieve input parameter 'signalInstance'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> incoming_param_signalInstance;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
+			this->send(incoming_param_signalInstance);
+			break;
+		}
+		
+		// 8038
+		case StructuredClassifiersPackage::OBJECT_OPERATION_SEND_EVENTOCCURRENCE:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			this->send(incoming_param_eventOccurrence);
+			break;
+		}
+		
+		// 8031
+		case StructuredClassifiersPackage::OBJECT_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
+		{
+			//Retrieve input parameter 'classifier'
+			//parameter 0
+			std::shared_ptr<uml::Class> incoming_param_classifier;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			//Retrieve input parameter 'inputs'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			this->startBehavior(incoming_param_classifier,incoming_param_inputs);
+			break;
+		}
+		
+		// 8035
+		case StructuredClassifiersPackage::OBJECT_OPERATION_UNREGISTER_EVENTACCEPTER:
+		{
+			//Retrieve input parameter 'accepter'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> incoming_param_accepter;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_accepter_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_accepter = (*incoming_param_accepter_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> >();
+			this->unregister(incoming_param_accepter);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ExtensionalValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

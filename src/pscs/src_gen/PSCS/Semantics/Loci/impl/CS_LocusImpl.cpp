@@ -45,8 +45,8 @@
 //Factories an Package includes
 #include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
+#include "PSCS/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -185,6 +185,41 @@ bool CS_LocusImpl::eSet(int featureID, Any newValue)
 	}
 
 	return fUML::Semantics::Loci::LocusImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any CS_LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2010
+		case LociPackage::CS_LOCUS_OPERATION_INSTANTIATE_CLASS:
+		{
+			//Retrieve input parameter 'type'
+			//parameter 0
+			std::shared_ptr<uml::Class> incoming_param_type;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			result = eAny(this->instantiate(incoming_param_type));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Loci::LocusImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

@@ -257,6 +257,60 @@ bool ClassifierBehaviorExecutionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ClassifierBehaviorExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2205
+		case CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_OPERATION__STARTOBJECTBEHAVIOR:
+		{
+			this->_startObjectBehavior();
+			break;
+		}
+		
+		// 2203
+		case CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_OPERATION_EXECUTE_CLASS_PARAMETERVALUE:
+		{
+			//Retrieve input parameter 'classifier'
+			//parameter 0
+			std::shared_ptr<Bag<uml::Class>> incoming_param_classifier;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::Class>> >();
+			//Retrieve input parameter 'inputs'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			this->execute(incoming_param_classifier,incoming_param_inputs);
+			break;
+		}
+		
+		// 2204
+		case CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_OPERATION_TERMINATE:
+		{
+			this->terminate();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ClassifierBehaviorExecutionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -219,6 +219,55 @@ bool ObjectTokenImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ObjectTokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 8311
+		case ActivitiesPackage::OBJECTTOKEN_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 8309
+		case ActivitiesPackage::OBJECTTOKEN_OPERATION_EQUALS_TOKEN:
+		{
+			//Retrieve input parameter 'other'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+			result = eAny(this->equals(incoming_param_other));
+			break;
+		}
+		
+		// 8310
+		case ActivitiesPackage::OBJECTTOKEN_OPERATION_ISCONTROL:
+		{
+			result = eAny(this->isControl());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = TokenImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ObjectTokenImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
