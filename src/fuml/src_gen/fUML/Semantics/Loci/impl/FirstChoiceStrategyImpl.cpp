@@ -34,8 +34,8 @@
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 
 
