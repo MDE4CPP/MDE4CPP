@@ -75,17 +75,11 @@ task compileAntlr4(dependsOn: downloadAndUnzipAntlr4) {
 }
 
 task clean {
-	doFirst {
-		def cmakeFolder = file('.' + File.separator + '.cmake' + File.separator)
-		if(cmakeFolder.exists()) {
-			delete cmakeFolder.absolutePath
-			println "deleting folder " + cmakeFolder.absolutePath
-		}
-
-		cmakeFolder = file(".${File.separator}antlr4${File.separator}antlr4-cpp-runtime-${antlr4Version}-source${File.separator}.cmake${File.separator}")
-		if(cmakeFolder.exists()) {
-			delete cmakeFolder.absolutePath
-			println "deleting folder " + cmakeFolder.absolutePath
+	doLast {
+		def antlrFolder = file('.' + File.separator + 'antlr4')
+		if(antlrFolder.exists()) {
+			delete antlrFolder.absolutePath
+			println "deleting folder " + antlrFolder.absolutePath
 		}
 	}
 }
