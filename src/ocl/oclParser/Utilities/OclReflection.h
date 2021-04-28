@@ -154,6 +154,12 @@ public:
      */
     static std::string getStringValue(std::shared_ptr<OclExpression> source);
     /**
+     * @brief Retrieve the value of the given oclExpression as Any.
+     * @param source : OclExpression
+     * @return the Any value
+     */
+    static Any getAnyValue(std::shared_ptr<OclExpression> source);
+    /**
      * @brief Retrieve the boolean value of the given oclExpression. One must first check if the given expression has a boolean value.
      * @param source : OclExpression
      * @return the boolean value

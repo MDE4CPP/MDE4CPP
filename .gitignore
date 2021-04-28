@@ -11,6 +11,7 @@ setenv*
 /application/
 /gradle.properties
 xerces
+/antlr4
 /.metadata/
 /src/examples/ecoreExamples/TestSuite/templateTest/.cproject
 /src/examples/UMLExamples/TestSuite/copyTestUML/.cproject

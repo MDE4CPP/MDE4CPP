@@ -359,6 +359,11 @@ std::string OclReflection::getStringValue(std::shared_ptr<OclExpression> source)
     return source->getInstance()->getResultValue()->toString();
 }
 
+Any OclReflection::getAnyValue(std::shared_ptr<OclExpression> source)
+{
+    return retrieveRawValue(source->getInstance()->getResultValue());
+}
+
 bool OclReflection::getResult(std::shared_ptr<OclExpression> source)
 {
     std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> value =

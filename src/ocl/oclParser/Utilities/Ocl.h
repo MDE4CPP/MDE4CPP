@@ -91,6 +91,11 @@ public:
      * \return query result
      */
     std::string getResult();
+    /*!
+     * \brief Gets the query result as Any.
+     * \return query result
+     */
+    Any getResultValue();
 
 private:
     /*!

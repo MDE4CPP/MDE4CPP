@@ -141,6 +141,15 @@ std::string Ocl::getResult()
         return "";
 }
 
+Any Ocl::getResultValue()
+{
+    if(m_root != nullptr && m_root->getAST() != nullptr && m_errors.empty()) {
+        return OclReflection::getAnyValue(m_root->getAST());
+    }
+    else
+        return nullptr;
+}
+
 std::string Ocl::getError()
 {
     std::string error = "";
