@@ -105,6 +105,9 @@ namespace [includeNamespace.generateNamespaceDefinition()/]
 [/if]
 [/let]
 
+// namespace macro header include
+#include "[aClass.ePackage.getRootPackage().name.toLower()/]/[aClass.ePackage.getRootPackage().name.toLower()/].hpp"
+
 // base class includes
 [for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
 #include "[elements.generateNamespacePath()/]/[elements.name.toUpperFirst().concat('.hpp')/]"
@@ -128,7 +131,7 @@ namespace [includeNamespace.generateNamespaceDefinition()/]
 namespace [aClass.generateNamespaceDefinition()/] 
 {
 	[aClass.generateDocumentation()/]
-	class [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EModelElement
+	class [aClass.ePackage.getRootPackage().name.toUpper()/]_API [aClass.name.toUpperFirst()/] [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))] : virtual public ecore::EModelElement
 [else]
 [for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) before (':') separator (',')] virtual public [ClassWithNamespace(aClass,sClass)/][/for]
 [/if][if(aClass.hasKey('shared_from_this'))], public std::enable_shared_from_this<[aClass.name.toUpperFirst()/]>[/if]	{

@@ -21,6 +21,9 @@
 [file (anEPackage.generateNamespacePath().concat('/impl/').concat(anEPackage.name).concat('FactoryImpl.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'FactoryImpl')/]
 
+// namespace macro header include
+#include "[anEPackage.getRootPackage().name.toLower()/]/[anEPackage.getRootPackage().name.toLower()/].hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 [comment  Generate Includes for the Factory/]
@@ -42,7 +45,7 @@ namespace [anEPackage.name/]
 [comment namespace /]
 namespace [anEPackage.generateNamespaceDefinition()/] 
 {
-	class [anEPackage.name.concat('FactoryImpl')/] : virtual public [needNamespace(anEPackage, 'EFactoryImpl')/] , virtual public [anEPackage.name.concat('Factory')/] 
+	class [anEPackage.getRootPackage().name.toUpper()/]_API [anEPackage.name.concat('FactoryImpl')/] : virtual public [needNamespace(anEPackage, 'EFactoryImpl')/] , virtual public [anEPackage.name.concat('Factory')/] 
 	{
 		private:    
 			[anEPackage.name.concat('FactoryImpl')/]([anEPackage.name.concat('FactoryImpl')/] const&) = delete;

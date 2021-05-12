@@ -27,6 +27,9 @@
 [file (anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'Package')/]
 
+// namespace macro header include
+#include "[anEPackage.getRootPackage().name.toLower()/]/[anEPackage.getRootPackage().name.toLower()/].hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace [anEPackage.eClass().ePackage.name/] 
@@ -57,7 +60,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 	which were described in an ecore file.
 	*/
 	[anEPackage.generateDocumentation()/]
-	class [packageName/] : virtual public [needNamespace(anEPackage, 'EPackage')/] 
+	class [anEPackage.getRootPackage().name.toUpper()/]_API [packageName/] : virtual public [needNamespace(anEPackage, 'EPackage')/] 
 	{
 		private:    
 			[packageName/]([packageName/] const&) = delete;

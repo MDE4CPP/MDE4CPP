@@ -31,7 +31,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "[aClass.ePackage.getRootPackage().name.toLower()/]/[aClass.ePackage.getRootPackage().name.toLower()/].hpp" 
+
+// model includes
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
 
 [if (not (aClass.ePackage = aClass.getRootPackage()))]
@@ -48,7 +51,7 @@
 [comment namespace /]
 namespace [aClass.generateNamespaceDefinition()/] 
 {
-	class [className/] : [for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator (', ') after (', ')]
+	class [aClass.ePackage.getRootPackage().name.toUpper()/]_API [className/] : [for (sClass : EClass | aClass.eSuperTypes->asOrderedSet()->sortedBy(name)) separator (', ') after (', ')]
 virtual public [ClassWithNamespace(aClass, sClass)/]Impl[/for][if (aClass.eSuperTypes->isEmpty())]
 [if (not(aClass.name='EObject'))]virtual public ecore::EModelElementImpl,[/if]
 [/if]virtual public [aClass.name.toUpperFirst()/] 

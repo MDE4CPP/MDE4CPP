@@ -26,6 +26,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "[anEPackage.getRootPackage().name.toLower()/]/[anEPackage.getRootPackage().name.toLower()/].hpp"
+
 #include "ecore/EFactory.hpp"
 [if (not (anEPackage = anEPackage.getRootPackage()))]
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
@@ -39,7 +42,7 @@
 [comment namespace /]
 namespace [anEPackage.generateNamespaceDefinition()/] 
 {
-	class [packageName/] : virtual public [needNamespace(anEPackage, 'EFactory')/] 
+	class [anEPackage.getRootPackage().name.toUpper()/]_API [packageName/] : virtual public [needNamespace(anEPackage, 'EFactory')/] 
 	{
 		private:    
 			[packageName/]([packageName/] const&) = delete;

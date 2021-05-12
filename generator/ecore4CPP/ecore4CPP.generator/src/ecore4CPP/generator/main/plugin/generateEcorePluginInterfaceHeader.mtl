@@ -20,11 +20,14 @@
 [file (aPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(aPackage,'Plugin')/]
 
+// namespace macro header include
+#include "[aPackage.getRootPackage().name.toLower()/]/[aPackage.getRootPackage().name.toLower()/].hpp"
+
 #include "pluginFramework/EcoreModelPlugin.hpp"
 
 namespace [aPackage.name/]
 {
-	class [packageName/] : virtual public EcoreModelPlugin
+	class [aPackage.getRootPackage().name.toUpper()/]_API [packageName/] : virtual public EcoreModelPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

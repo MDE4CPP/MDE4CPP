@@ -26,6 +26,9 @@
 [file (anEPackage.generateNamespacePath().concat('/impl/').concat(anEPackage.name).concat('PackageImpl.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'PackageImpl')/]
 
+// namespace macro header include
+#include "[anEPackage.getRootPackage().name.toLower()/]/[anEPackage.getRootPackage().name.toLower()/].hpp"
+
 [comment  Generate Includes for the Factory/]
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
@@ -54,7 +57,7 @@ namespace ecore
 
 namespace [anEPackage.generateNamespaceDefinition()/]
 {
-	class [anEPackage.name.concat('PackageImpl')/] : public [anEPackage.needNamespace('EPackageImpl')/] ,virtual public [anEPackage.name.concat('Package')/]
+	class [anEPackage.getRootPackage().name.toUpper()/]_API [anEPackage.name.concat('PackageImpl')/] : public [anEPackage.needNamespace('EPackageImpl')/] ,virtual public [anEPackage.name.concat('Package')/]
 	{
 		private:    
 			[anEPackage.name.concat('PackageImpl')/]([anEPackage.name.concat('PackageImpl')/] const&) = delete;

@@ -91,6 +91,7 @@ public class Ecore4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"generateEnum",
 								"generateModel",
 								"generateOperation",
+								"generatePackageHeaderFile",
 								"generatePersistence",
 								"generateProjectFiles",
 								"generateReference",
