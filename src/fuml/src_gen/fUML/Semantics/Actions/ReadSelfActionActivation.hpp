@@ -51,6 +51,9 @@ namespace uml
 	class ReadSelfAction;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
@@ -62,7 +65,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class ReadSelfActionActivation: virtual public ActionActivation
+	class FUML_API ReadSelfActionActivation: virtual public ActionActivation
 	{
 		public:
  			ReadSelfActionActivation(const ReadSelfActionActivation &) {}

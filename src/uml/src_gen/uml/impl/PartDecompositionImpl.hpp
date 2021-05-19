@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../PartDecomposition.hpp"
 
 #include "uml/impl/InteractionUseImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class PartDecompositionImpl : virtual public InteractionUseImpl, virtual public PartDecomposition 
+	class UML_API PartDecompositionImpl : virtual public InteractionUseImpl, virtual public PartDecomposition 
 	{
 		public: 
 			PartDecompositionImpl(const PartDecompositionImpl & obj);

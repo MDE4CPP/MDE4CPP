@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ExecutionEnvironment.hpp"
 
 #include "uml/impl/NodeImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ExecutionEnvironmentImpl : virtual public NodeImpl, virtual public ExecutionEnvironment 
+	class UML_API ExecutionEnvironmentImpl : virtual public NodeImpl, virtual public ExecutionEnvironment 
 	{
 		public: 
 			ExecutionEnvironmentImpl(const ExecutionEnvironmentImpl & obj);

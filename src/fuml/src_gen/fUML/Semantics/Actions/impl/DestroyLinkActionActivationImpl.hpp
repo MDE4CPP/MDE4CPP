@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../DestroyLinkActionActivation.hpp"
 
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class DestroyLinkActionActivationImpl : virtual public WriteLinkActionActivationImpl, virtual public DestroyLinkActionActivation 
+	class FUML_API DestroyLinkActionActivationImpl : virtual public WriteLinkActionActivationImpl, virtual public DestroyLinkActionActivation 
 	{
 		public: 
 			DestroyLinkActionActivationImpl(const DestroyLinkActionActivationImpl & obj);

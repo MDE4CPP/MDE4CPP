@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "pscs/pscs.hpp" 
+
+// model includes
 #include "../CS_Locus.hpp"
 
 #include "PSCS/Semantics/Loci/impl/LociFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace PSCS::Semantics::Loci 
 {
-	class CS_LocusImpl : virtual public fUML::Semantics::Loci::LocusImpl, virtual public CS_Locus 
+	class PSCS_API CS_LocusImpl : virtual public fUML::Semantics::Loci::LocusImpl, virtual public CS_Locus 
 	{
 		public: 
 			CS_LocusImpl(const CS_LocusImpl & obj);

@@ -48,6 +48,9 @@ namespace uml
 	class StringExpression;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/NamedElement.hpp"
 
@@ -64,7 +67,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class ActivityGroup: virtual public NamedElement
+	class UML_API ActivityGroup: virtual public NamedElement
 	{
 		public:
  			ActivityGroup(const ActivityGroup &) {}

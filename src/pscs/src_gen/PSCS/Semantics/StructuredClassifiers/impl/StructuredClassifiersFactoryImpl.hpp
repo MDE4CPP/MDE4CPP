@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICS_STRUCTUREDCLASSIFIERSFACTORYIMPL_HPP
 #define PSCS_SEMANTICS_STRUCTUREDCLASSIFIERSFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
@@ -25,7 +28,7 @@ namespace StructuredClassifiers
 
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class StructuredClassifiersFactoryImpl : virtual public ecore::EFactoryImpl , virtual public StructuredClassifiersFactory 
+	class PSCS_API StructuredClassifiersFactoryImpl : virtual public ecore::EFactoryImpl , virtual public StructuredClassifiersFactory 
 	{
 		private:    
 			StructuredClassifiersFactoryImpl(StructuredClassifiersFactoryImpl const&) = delete;

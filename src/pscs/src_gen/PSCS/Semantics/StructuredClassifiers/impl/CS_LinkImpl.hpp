@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "pscs/pscs.hpp" 
+
+// model includes
 #include "../CS_Link.hpp"
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_LinkImpl : virtual public fUML::Semantics::StructuredClassifiers::LinkImpl, virtual public CS_Link 
+	class PSCS_API CS_LinkImpl : virtual public fUML::Semantics::StructuredClassifiers::LinkImpl, virtual public CS_Link 
 	{
 		public: 
 			CS_LinkImpl(const CS_LinkImpl & obj);

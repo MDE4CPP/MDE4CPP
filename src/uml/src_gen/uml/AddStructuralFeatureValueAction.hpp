@@ -56,6 +56,9 @@ namespace uml
 	class StructuredActivityNode;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/WriteStructuralFeatureAction.hpp"
 
@@ -72,7 +75,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class AddStructuralFeatureValueAction: virtual public WriteStructuralFeatureAction
+	class UML_API AddStructuralFeatureValueAction: virtual public WriteStructuralFeatureAction
 	{
 		public:
  			AddStructuralFeatureValueAction(const AddStructuralFeatureValueAction &) {}

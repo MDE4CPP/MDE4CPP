@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../TemplateParameterSubstitution.hpp"
 
 #include "uml/impl/ElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class TemplateParameterSubstitutionImpl : virtual public ElementImpl, virtual public TemplateParameterSubstitution 
+	class UML_API TemplateParameterSubstitutionImpl : virtual public ElementImpl, virtual public TemplateParameterSubstitution 
 	{
 		public: 
 			TemplateParameterSubstitutionImpl(const TemplateParameterSubstitutionImpl & obj);

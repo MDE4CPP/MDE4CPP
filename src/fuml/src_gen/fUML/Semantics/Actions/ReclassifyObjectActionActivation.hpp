@@ -50,6 +50,9 @@ namespace uml
 	class ActivityNode;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class ReclassifyObjectActionActivation: virtual public ActionActivation
+	class FUML_API ReclassifyObjectActionActivation: virtual public ActionActivation
 	{
 		public:
  			ReclassifyObjectActionActivation(const ReclassifyObjectActionActivation &) {}

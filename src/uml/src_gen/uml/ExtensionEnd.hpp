@@ -54,6 +54,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Property.hpp"
 
@@ -73,7 +76,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class ExtensionEnd: virtual public Property
+	class UML_API ExtensionEnd: virtual public Property
 	{
 		public:
  			ExtensionEnd(const ExtensionEnd &) {}

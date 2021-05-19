@@ -47,6 +47,9 @@ namespace uml
 	class StringExpression;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/InteractionFragment.hpp"
 
@@ -63,7 +66,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class Continuation: virtual public InteractionFragment
+	class UML_API Continuation: virtual public InteractionFragment
 	{
 		public:
  			Continuation(const Continuation &) {}

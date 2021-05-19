@@ -55,6 +55,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/ObjectNode.hpp"
 
@@ -73,7 +76,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class ExpansionNode: virtual public ObjectNode
+	class UML_API ExpansionNode: virtual public ObjectNode
 	{
 		public:
  			ExpansionNode(const ExpansionNode &) {}

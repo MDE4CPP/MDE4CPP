@@ -50,6 +50,9 @@ namespace uml
 	class ValueSpecificationAction;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Expression.hpp"
 #include "uml/TemplateableElement.hpp"
@@ -67,7 +70,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class StringExpression: virtual public Expression, virtual public TemplateableElement
+	class UML_API StringExpression: virtual public Expression, virtual public TemplateableElement
 	{
 		public:
  			StringExpression(const StringExpression &) {}

@@ -62,6 +62,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Namespace.hpp"
 #include "uml/RedefinableElement.hpp"
@@ -81,7 +84,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class Classifier: virtual public Namespace, virtual public RedefinableElement, virtual public TemplateableElement, virtual public Type
+	class UML_API Classifier: virtual public Namespace, virtual public RedefinableElement, virtual public TemplateableElement, virtual public Type
 	{
 		public:
  			Classifier(const Classifier &) {}

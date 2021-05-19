@@ -45,6 +45,9 @@ namespace uml
 	class StringExpression;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/MessageEnd.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class Gate: virtual public MessageEnd
+	class UML_API Gate: virtual public MessageEnd
 	{
 		public:
  			Gate(const Gate &) {}

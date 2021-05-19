@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/Classification/ClassificationPackage.hpp"
 
@@ -18,7 +21,7 @@
 
 namespace PSCS::Semantics::Classification 
 {
-	class ClassificationFactory : virtual public ecore::EFactory 
+	class PSCS_API ClassificationFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			ClassificationFactory(ClassificationFactory const&) = delete;

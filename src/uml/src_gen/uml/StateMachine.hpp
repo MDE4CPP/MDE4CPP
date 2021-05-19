@@ -72,6 +72,9 @@ namespace uml
 	class Vertex;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Behavior.hpp"
 
@@ -88,7 +91,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class StateMachine: virtual public Behavior
+	class UML_API StateMachine: virtual public Behavior
 	{
 		public:
  			StateMachine(const StateMachine &) {}

@@ -54,6 +54,9 @@ namespace uml
 	class Operation;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 
@@ -65,7 +68,7 @@ namespace uml
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class CallEventExecution: virtual public Execution
+	class FUML_API CallEventExecution: virtual public Execution
 	{
 		public:
  			CallEventExecution(const CallEventExecution &) {}

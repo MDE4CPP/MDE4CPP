@@ -45,6 +45,9 @@ namespace uml
 	class StringExpression;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/NamedElement.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class CollaborationUse: virtual public NamedElement
+	class UML_API CollaborationUse: virtual public NamedElement
 	{
 		public:
  			CollaborationUse(const CollaborationUse &) {}

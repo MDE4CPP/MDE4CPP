@@ -51,6 +51,9 @@ namespace uml
 	class AddStructuralFeatureValueAction;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/AddStructuralFeatureValueActionActivation.hpp"
 
@@ -62,7 +65,7 @@ namespace uml
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_AddStructuralFeatureValueActionActivation: virtual public fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation
+	class PSCS_API CS_AddStructuralFeatureValueActionActivation: virtual public fUML::Semantics::Actions::AddStructuralFeatureValueActionActivation
 	{
 		public:
  			CS_AddStructuralFeatureValueActionActivation(const CS_AddStructuralFeatureValueActionActivation &) {}

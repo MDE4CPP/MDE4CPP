@@ -45,6 +45,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Classification/InstanceValueEvaluation.hpp"
 
@@ -56,7 +59,7 @@ namespace uml
 namespace PSCS::Semantics::Classification 
 {
 	
-	class CS_InstanceValueEvaluation: virtual public fUML::Semantics::Classification::InstanceValueEvaluation
+	class PSCS_API CS_InstanceValueEvaluation: virtual public fUML::Semantics::Classification::InstanceValueEvaluation
 	{
 		public:
  			CS_InstanceValueEvaluation(const CS_InstanceValueEvaluation &) {}

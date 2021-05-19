@@ -43,6 +43,9 @@ namespace uml
 	class TemplateParameter;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Abstraction.hpp"
 
@@ -59,7 +62,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class Manifestation: virtual public Abstraction
+	class UML_API Manifestation: virtual public Abstraction
 	{
 		public:
  			Manifestation(const Manifestation &) {}

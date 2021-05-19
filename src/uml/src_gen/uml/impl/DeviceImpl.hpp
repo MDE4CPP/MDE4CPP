@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Device.hpp"
 
 #include "uml/impl/NodeImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class DeviceImpl : virtual public NodeImpl, virtual public Device 
+	class UML_API DeviceImpl : virtual public NodeImpl, virtual public Device 
 	{
 		public: 
 			DeviceImpl(const DeviceImpl & obj);

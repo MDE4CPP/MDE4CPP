@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ParameterableElement.hpp"
 
 #include "uml/impl/ElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ParameterableElementImpl : virtual public ElementImpl, virtual public ParameterableElement 
+	class UML_API ParameterableElementImpl : virtual public ElementImpl, virtual public ParameterableElement 
 	{
 		public: 
 			ParameterableElementImpl(const ParameterableElementImpl & obj);

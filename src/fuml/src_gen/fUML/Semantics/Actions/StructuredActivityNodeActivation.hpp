@@ -57,6 +57,9 @@ namespace uml
 	class OutputPin;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
@@ -68,7 +71,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class StructuredActivityNodeActivation: virtual public ActionActivation
+	class FUML_API StructuredActivityNodeActivation: virtual public ActionActivation
 	{
 		public:
  			StructuredActivityNodeActivation(const StructuredActivityNodeActivation &) {}

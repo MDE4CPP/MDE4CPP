@@ -56,6 +56,9 @@ namespace uml
 	class Classifier;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/CommonBehavior/CallEventExecution.hpp"
 
@@ -67,7 +70,7 @@ namespace uml
 namespace PSCS::Semantics::CommonBehavior 
 {
 	
-	class CS_CallEventExecution: virtual public fUML::Semantics::CommonBehavior::CallEventExecution
+	class PSCS_API CS_CallEventExecution: virtual public fUML::Semantics::CommonBehavior::CallEventExecution
 	{
 		public:
  			CS_CallEventExecution(const CS_CallEventExecution &) {}

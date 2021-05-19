@@ -49,6 +49,9 @@ namespace uml
 	class StringExpression;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/ExecutionSpecification.hpp"
 
@@ -65,7 +68,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class ActionExecutionSpecification: virtual public ExecutionSpecification
+	class UML_API ActionExecutionSpecification: virtual public ExecutionSpecification
 	{
 		public:
  			ActionExecutionSpecification(const ActionExecutionSpecification &) {}

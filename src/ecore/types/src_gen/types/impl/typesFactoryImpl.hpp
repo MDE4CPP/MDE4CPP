@@ -7,6 +7,9 @@
 #ifndef TYPESFACTORYIMPL_HPP
 #define TYPESFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "types/types.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "types/typesFactory.hpp"
@@ -17,7 +20,7 @@ namespace types
 
 namespace types 
 {
-	class typesFactoryImpl : virtual public ecore::EFactoryImpl , virtual public typesFactory 
+	class TYPES_API typesFactoryImpl : virtual public ecore::EFactoryImpl , virtual public typesFactory 
 	{
 		private:    
 			typesFactoryImpl(typesFactoryImpl const&) = delete;

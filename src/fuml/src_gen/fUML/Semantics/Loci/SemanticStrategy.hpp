@@ -33,6 +33,9 @@ namespace fUML
 
 //Forward Declaration for used types 
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -44,7 +47,7 @@ namespace fUML
 namespace fUML::Semantics::Loci 
 {
 	
-	class SemanticStrategy : virtual public ecore::EModelElement
+	class FUML_API SemanticStrategy : virtual public ecore::EModelElement
 	{
 		public:
  			SemanticStrategy(const SemanticStrategy &) {}

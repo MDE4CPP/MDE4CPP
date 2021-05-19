@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../Evaluation.hpp"
 
 #include "fUML/Semantics/Values/impl/ValuesFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::Values 
 {
-	class EvaluationImpl : virtual public fUML::Semantics::Loci::SemanticVisitorImpl, virtual public Evaluation 
+	class FUML_API EvaluationImpl : virtual public fUML::Semantics::Loci::SemanticVisitorImpl, virtual public Evaluation 
 	{
 		public: 
 			EvaluationImpl(const EvaluationImpl & obj);

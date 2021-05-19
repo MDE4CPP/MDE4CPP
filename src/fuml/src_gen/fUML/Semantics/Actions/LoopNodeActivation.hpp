@@ -52,6 +52,9 @@ namespace uml
 	class ActivityNode;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 
@@ -63,7 +66,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class LoopNodeActivation: virtual public StructuredActivityNodeActivation
+	class FUML_API LoopNodeActivation: virtual public StructuredActivityNodeActivation
 	{
 		public:
  			LoopNodeActivation(const LoopNodeActivation &) {}

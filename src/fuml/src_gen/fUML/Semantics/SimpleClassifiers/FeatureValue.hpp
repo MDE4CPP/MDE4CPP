@@ -42,6 +42,9 @@ namespace uml
 	class StructuralFeature;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -53,7 +56,7 @@ namespace uml
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	
-	class FeatureValue : virtual public ecore::EModelElement
+	class FUML_API FeatureValue : virtual public ecore::EModelElement
 	{
 		public:
  			FeatureValue(const FeatureValue &) {}

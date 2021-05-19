@@ -52,6 +52,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/ConnectableElement.hpp"
 #include "uml/MultiplicityElement.hpp"
@@ -73,7 +76,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class Parameter: virtual public ConnectableElement, virtual public MultiplicityElement
+	class UML_API Parameter: virtual public ConnectableElement, virtual public MultiplicityElement
 	{
 		public:
  			Parameter(const Parameter &) {}

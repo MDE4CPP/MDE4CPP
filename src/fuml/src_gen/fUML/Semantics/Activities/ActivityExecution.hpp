@@ -56,6 +56,9 @@ namespace uml
 	class Classifier;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"
 
@@ -67,7 +70,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class ActivityExecution: virtual public fUML::Semantics::CommonBehavior::Execution
+	class FUML_API ActivityExecution: virtual public fUML::Semantics::CommonBehavior::Execution
 	{
 		public:
  			ActivityExecution(const ActivityExecution &) {}

@@ -56,6 +56,9 @@ namespace uml
 	class Variable;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Action.hpp"
 #include "uml/ActivityGroup.hpp"
@@ -74,7 +77,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class StructuredActivityNode: virtual public Action, virtual public ActivityGroup, virtual public Namespace
+	class UML_API StructuredActivityNode: virtual public Action, virtual public ActivityGroup, virtual public Namespace
 	{
 		public:
  			StructuredActivityNode(const StructuredActivityNode &) {}

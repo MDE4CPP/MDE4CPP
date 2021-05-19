@@ -43,6 +43,9 @@ namespace uml
 	class TemplateParameter;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Dependency.hpp"
 
@@ -59,7 +62,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class Abstraction: virtual public Dependency
+	class UML_API Abstraction: virtual public Dependency
 	{
 		public:
  			Abstraction(const Abstraction &) {}

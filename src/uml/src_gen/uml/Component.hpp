@@ -70,6 +70,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Class.hpp"
 
@@ -86,7 +89,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class Component: virtual public Class
+	class UML_API Component: virtual public Class
 	{
 		public:
  			Component(const Component &) {}

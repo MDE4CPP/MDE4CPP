@@ -43,6 +43,9 @@ namespace uml
 	class OutputPin;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Element.hpp"
 
@@ -58,7 +61,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class Clause: virtual public Element
+	class UML_API Clause: virtual public Element
 	{
 		public:
  			Clause(const Clause &) {}

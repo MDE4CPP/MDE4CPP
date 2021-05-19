@@ -56,6 +56,9 @@ namespace uml
 	class PrimitiveType;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Loci/ExecutionFactory.hpp"
 
@@ -67,7 +70,7 @@ namespace uml
 namespace PSCS::Semantics::Loci 
 {
 	
-	class CS_ExecutionFactory: virtual public fUML::Semantics::Loci::ExecutionFactory
+	class PSCS_API CS_ExecutionFactory: virtual public fUML::Semantics::Loci::ExecutionFactory
 	{
 		public:
  			CS_ExecutionFactory(const CS_ExecutionFactory &) {}

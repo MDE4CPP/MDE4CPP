@@ -45,6 +45,9 @@ namespace uml
 	class ObjectNode;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Element.hpp"
 
@@ -60,7 +63,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class ExceptionHandler: virtual public Element
+	class UML_API ExceptionHandler: virtual public Element
 	{
 		public:
  			ExceptionHandler(const ExceptionHandler &) {}

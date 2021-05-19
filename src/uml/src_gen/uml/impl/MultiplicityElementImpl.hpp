@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../MultiplicityElement.hpp"
 
 #include "uml/impl/ElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class MultiplicityElementImpl : virtual public ElementImpl, virtual public MultiplicityElement 
+	class UML_API MultiplicityElementImpl : virtual public ElementImpl, virtual public MultiplicityElement 
 	{
 		public: 
 			MultiplicityElementImpl(const MultiplicityElementImpl & obj);

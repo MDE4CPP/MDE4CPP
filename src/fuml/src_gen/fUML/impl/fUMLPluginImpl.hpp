@@ -7,11 +7,14 @@
 #ifndef FUMLPLUGINIMPL_HPP
 #define FUMLPLUGINIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "fUML/fUMLPlugin.hpp"
 
 namespace fUML 
 {
-	class fUMLPluginImpl : virtual public fUMLPlugin 
+	class FUML_API fUMLPluginImpl : virtual public fUMLPlugin 
 	{
 		public:
 			fUMLPluginImpl();

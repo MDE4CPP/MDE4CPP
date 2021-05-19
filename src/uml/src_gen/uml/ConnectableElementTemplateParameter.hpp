@@ -39,6 +39,9 @@ namespace uml
 	class TemplateSignature;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/TemplateParameter.hpp"
 
@@ -54,7 +57,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class ConnectableElementTemplateParameter: virtual public TemplateParameter
+	class UML_API ConnectableElementTemplateParameter: virtual public TemplateParameter
 	{
 		public:
  			ConnectableElementTemplateParameter(const ConnectableElementTemplateParameter &) {}

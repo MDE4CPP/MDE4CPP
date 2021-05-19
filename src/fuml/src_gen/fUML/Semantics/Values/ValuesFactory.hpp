@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 
@@ -18,7 +21,7 @@
 
 namespace fUML::Semantics::Values 
 {
-	class ValuesFactory : virtual public ecore::EFactory 
+	class FUML_API ValuesFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			ValuesFactory(ValuesFactory const&) = delete;

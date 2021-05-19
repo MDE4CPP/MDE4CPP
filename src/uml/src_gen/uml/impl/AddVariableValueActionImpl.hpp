@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../AddVariableValueAction.hpp"
 
 #include "uml/impl/WriteVariableActionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class AddVariableValueActionImpl : virtual public WriteVariableActionImpl, virtual public AddVariableValueAction 
+	class UML_API AddVariableValueActionImpl : virtual public WriteVariableActionImpl, virtual public AddVariableValueAction 
 	{
 		public: 
 			AddVariableValueActionImpl(const AddVariableValueActionImpl & obj);

@@ -7,11 +7,14 @@
 #ifndef FUMLPLUGIN_HPP
 #define FUMLPLUGIN_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "pluginFramework/EcoreModelPlugin.hpp"
 
 namespace fUML
 {
-	class fUMLPlugin : virtual public EcoreModelPlugin
+	class FUML_API fUMLPlugin : virtual public EcoreModelPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

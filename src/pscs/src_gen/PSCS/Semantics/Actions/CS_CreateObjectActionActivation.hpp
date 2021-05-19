@@ -51,6 +51,9 @@ namespace uml
 	class CreateObjectAction;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/CreateObjectActionActivation.hpp"
 
@@ -62,7 +65,7 @@ namespace uml
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_CreateObjectActionActivation: virtual public fUML::Semantics::Actions::CreateObjectActionActivation
+	class PSCS_API CS_CreateObjectActionActivation: virtual public fUML::Semantics::Actions::CreateObjectActionActivation
 	{
 		public:
  			CS_CreateObjectActionActivation(const CS_CreateObjectActionActivation &) {}

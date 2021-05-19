@@ -7,11 +7,14 @@
 #ifndef UMLPLUGINIMPL_HPP
 #define UMLPLUGINIMPL_HPP
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 #include "uml/umlPlugin.hpp"
 
 namespace uml 
 {
-	class umlPluginImpl : virtual public umlPlugin 
+	class UML_API umlPluginImpl : virtual public umlPlugin 
 	{
 		public:
 			umlPluginImpl();

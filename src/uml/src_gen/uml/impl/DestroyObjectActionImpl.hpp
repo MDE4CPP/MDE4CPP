@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../DestroyObjectAction.hpp"
 
 #include "uml/impl/ActionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class DestroyObjectActionImpl : virtual public ActionImpl, virtual public DestroyObjectAction 
+	class UML_API DestroyObjectActionImpl : virtual public ActionImpl, virtual public DestroyObjectAction 
 	{
 		public: 
 			DestroyObjectActionImpl(const DestroyObjectActionImpl & obj);

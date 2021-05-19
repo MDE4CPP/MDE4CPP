@@ -46,6 +46,9 @@ namespace uml
 	class TemplateParameter;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Observation.hpp"
 
@@ -62,7 +65,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class DurationObservation: virtual public Observation
+	class UML_API DurationObservation: virtual public Observation
 	{
 		public:
  			DurationObservation(const DurationObservation &) {}

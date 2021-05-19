@@ -50,6 +50,9 @@ namespace uml
 	class ActivityNode;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/StructuralFeatureActionActivation.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class ClearStructuralFeatureActionActivation: virtual public StructuralFeatureActionActivation
+	class FUML_API ClearStructuralFeatureActionActivation: virtual public StructuralFeatureActionActivation
 	{
 		public:
  			ClearStructuralFeatureActionActivation(const ClearStructuralFeatureActionActivation &) {}

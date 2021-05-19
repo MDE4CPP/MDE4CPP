@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICS_VALUESPACKAGE_HPP
 #define PSCS_SEMANTICS_VALUESPACKAGE_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -30,7 +33,7 @@ namespace PSCS::Semantics::Values
 	which were described in an ecore file.
 	*/
 	
-	class ValuesPackage : virtual public ecore::EPackage 
+	class PSCS_API ValuesPackage : virtual public ecore::EPackage 
 	{
 		private:    
 			ValuesPackage(ValuesPackage const&) = delete;

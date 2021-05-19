@@ -42,6 +42,9 @@ namespace ecore
 	class EGenericType;
 }
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 // base class includes
 #include "ecore/EStructuralFeature.hpp"
 
@@ -53,7 +56,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class EReference: virtual public EStructuralFeature
+	class ECORE_API EReference: virtual public EStructuralFeature
 	{
 		public:
  			EReference(const EReference &) {}

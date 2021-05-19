@@ -7,6 +7,9 @@
 #ifndef FUMLFACTORYIMPL_HPP
 #define FUMLFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "fUML/fUMLFactory.hpp"
@@ -17,7 +20,7 @@ namespace fUML
 
 namespace fUML 
 {
-	class fUMLFactoryImpl : virtual public ecore::EFactoryImpl , virtual public fUMLFactory 
+	class FUML_API fUMLFactoryImpl : virtual public ecore::EFactoryImpl , virtual public fUMLFactory 
 	{
 		private:    
 			fUMLFactoryImpl(fUMLFactoryImpl const&) = delete;

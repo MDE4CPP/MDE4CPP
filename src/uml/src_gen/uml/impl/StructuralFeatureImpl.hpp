@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../StructuralFeature.hpp"
 
 #include "uml/impl/FeatureImpl.hpp"
@@ -20,7 +23,7 @@
 //*********************************
 namespace uml 
 {
-	class StructuralFeatureImpl : virtual public FeatureImpl, virtual public MultiplicityElementImpl, virtual public TypedElementImpl, virtual public StructuralFeature 
+	class UML_API StructuralFeatureImpl : virtual public FeatureImpl, virtual public MultiplicityElementImpl, virtual public TypedElementImpl, virtual public StructuralFeature 
 	{
 		public: 
 			StructuralFeatureImpl(const StructuralFeatureImpl & obj);

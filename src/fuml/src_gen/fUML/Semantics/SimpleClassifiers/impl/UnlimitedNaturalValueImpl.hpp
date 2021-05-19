@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../UnlimitedNaturalValue.hpp"
 
 #include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class UnlimitedNaturalValueImpl : virtual public PrimitiveValueImpl, virtual public UnlimitedNaturalValue 
+	class FUML_API UnlimitedNaturalValueImpl : virtual public PrimitiveValueImpl, virtual public UnlimitedNaturalValue 
 	{
 		public: 
 			UnlimitedNaturalValueImpl(const UnlimitedNaturalValueImpl & obj);

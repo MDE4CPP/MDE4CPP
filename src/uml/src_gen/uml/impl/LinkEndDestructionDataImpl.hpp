@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../LinkEndDestructionData.hpp"
 
 #include "uml/impl/LinkEndDataImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class LinkEndDestructionDataImpl : virtual public LinkEndDataImpl, virtual public LinkEndDestructionData 
+	class UML_API LinkEndDestructionDataImpl : virtual public LinkEndDataImpl, virtual public LinkEndDestructionData 
 	{
 		public: 
 			LinkEndDestructionDataImpl(const LinkEndDestructionDataImpl & obj);

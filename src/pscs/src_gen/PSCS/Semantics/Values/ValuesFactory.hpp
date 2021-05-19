@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/Values/ValuesPackage.hpp"
 
@@ -18,7 +21,7 @@
 
 namespace PSCS::Semantics::Values 
 {
-	class ValuesFactory : virtual public ecore::EFactory 
+	class PSCS_API ValuesFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			ValuesFactory(ValuesFactory const&) = delete;

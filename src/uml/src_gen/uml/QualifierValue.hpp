@@ -42,6 +42,9 @@ namespace uml
 	class Property;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Element.hpp"
 
@@ -57,7 +60,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class QualifierValue: virtual public Element
+	class UML_API QualifierValue: virtual public Element
 	{
 		public:
  			QualifierValue(const QualifierValue &) {}

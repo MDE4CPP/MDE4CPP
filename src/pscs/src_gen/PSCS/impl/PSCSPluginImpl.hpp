@@ -7,11 +7,14 @@
 #ifndef PSCSPLUGINIMPL_HPP
 #define PSCSPLUGINIMPL_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "PSCS/PSCSPlugin.hpp"
 
 namespace PSCS 
 {
-	class PSCSPluginImpl : virtual public PSCSPlugin 
+	class PSCS_API PSCSPluginImpl : virtual public PSCSPlugin 
 	{
 		public:
 			PSCSPluginImpl();

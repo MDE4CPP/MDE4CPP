@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ControlFlow.hpp"
 
 #include "uml/impl/ActivityEdgeImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ControlFlowImpl : virtual public ActivityEdgeImpl, virtual public ControlFlow 
+	class UML_API ControlFlowImpl : virtual public ActivityEdgeImpl, virtual public ControlFlow 
 	{
 		public: 
 			ControlFlowImpl(const ControlFlowImpl & obj);

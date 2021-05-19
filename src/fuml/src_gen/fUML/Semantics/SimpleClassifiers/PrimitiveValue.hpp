@@ -38,6 +38,9 @@ namespace uml
 	class PrimitiveType;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Values/Value.hpp"
 
@@ -49,7 +52,7 @@ namespace uml
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	
-	class PrimitiveValue: virtual public fUML::Semantics::Values::Value
+	class FUML_API PrimitiveValue: virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			PrimitiveValue(const PrimitiveValue &) {}

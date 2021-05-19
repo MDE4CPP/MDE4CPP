@@ -44,6 +44,9 @@ namespace uml
 	class ActivityNode;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Activities/ActivityNodeActivation.hpp"
 
@@ -55,7 +58,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class ObjectNodeActivation: virtual public ActivityNodeActivation
+	class FUML_API ObjectNodeActivation: virtual public ActivityNodeActivation
 	{
 		public:
  			ObjectNodeActivation(const ObjectNodeActivation &) {}

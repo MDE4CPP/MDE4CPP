@@ -45,6 +45,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Values/Value.hpp"
 
@@ -56,7 +59,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class ReturnInformation: virtual public fUML::Semantics::Values::Value
+	class FUML_API ReturnInformation: virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			ReturnInformation(const ReturnInformation &) {}

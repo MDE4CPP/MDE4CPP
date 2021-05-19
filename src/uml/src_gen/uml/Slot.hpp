@@ -41,6 +41,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Element.hpp"
 
@@ -56,7 +59,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class Slot: virtual public Element
+	class UML_API Slot: virtual public Element
 	{
 		public:
  			Slot(const Slot &) {}

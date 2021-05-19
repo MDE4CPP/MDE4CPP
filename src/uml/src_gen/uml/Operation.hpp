@@ -58,6 +58,9 @@ namespace uml
 	class Type;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/BehavioralFeature.hpp"
 #include "uml/ParameterableElement.hpp"
@@ -78,7 +81,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class Operation: virtual public BehavioralFeature, virtual public ParameterableElement, virtual public TemplateableElement
+	class UML_API Operation: virtual public BehavioralFeature, virtual public ParameterableElement, virtual public TemplateableElement
 	{
 		public:
  			Operation(const Operation &) {}

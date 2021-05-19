@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../SendObjectAction.hpp"
 
 #include "uml/impl/InvocationActionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class SendObjectActionImpl : virtual public InvocationActionImpl, virtual public SendObjectAction 
+	class UML_API SendObjectActionImpl : virtual public InvocationActionImpl, virtual public SendObjectAction 
 	{
 		public: 
 			SendObjectActionImpl(const SendObjectActionImpl & obj);

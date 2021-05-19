@@ -45,6 +45,9 @@ namespace uml
 	class Clause;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -56,7 +59,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class ClauseActivation : virtual public ecore::EModelElement
+	class FUML_API ClauseActivation : virtual public ecore::EModelElement
 	{
 		public:
  			ClauseActivation(const ClauseActivation &) {}

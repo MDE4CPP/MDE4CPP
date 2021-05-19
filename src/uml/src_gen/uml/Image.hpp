@@ -37,6 +37,9 @@ namespace uml
 	class Comment;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Element.hpp"
 
@@ -52,7 +55,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class Image: virtual public Element
+	class UML_API Image: virtual public Element
 	{
 		public:
  			Image(const Image &) {}

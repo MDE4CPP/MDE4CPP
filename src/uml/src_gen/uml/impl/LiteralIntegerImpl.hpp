@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../LiteralInteger.hpp"
 
 #include "uml/impl/LiteralSpecificationImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class LiteralIntegerImpl : virtual public LiteralSpecificationImpl, virtual public LiteralInteger 
+	class UML_API LiteralIntegerImpl : virtual public LiteralSpecificationImpl, virtual public LiteralInteger 
 	{
 		public: 
 			LiteralIntegerImpl(const LiteralIntegerImpl & obj);

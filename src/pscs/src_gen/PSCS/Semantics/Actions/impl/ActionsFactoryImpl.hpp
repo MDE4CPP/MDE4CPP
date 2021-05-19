@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICS_ACTIONSFACTORYIMPL_HPP
 #define PSCS_SEMANTICS_ACTIONSFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "PSCS/Semantics/Actions/ActionsFactory.hpp"
@@ -29,7 +32,7 @@ namespace Actions
 
 namespace PSCS::Semantics::Actions 
 {
-	class ActionsFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ActionsFactory 
+	class PSCS_API ActionsFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ActionsFactory 
 	{
 		private:    
 			ActionsFactoryImpl(ActionsFactoryImpl const&) = delete;

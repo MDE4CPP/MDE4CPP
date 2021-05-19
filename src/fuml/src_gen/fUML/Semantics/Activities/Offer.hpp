@@ -38,6 +38,9 @@ namespace fUML::Semantics::Activities
 	class Token;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -49,7 +52,7 @@ namespace fUML::Semantics::Activities
 namespace fUML::Semantics::Activities 
 {
 	
-	class Offer : virtual public ecore::EModelElement
+	class FUML_API Offer : virtual public ecore::EModelElement
 	{
 		public:
  			Offer(const Offer &) {}

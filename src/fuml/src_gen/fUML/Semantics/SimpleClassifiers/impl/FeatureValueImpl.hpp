@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../FeatureValue.hpp"
 
 #include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
@@ -20,7 +23,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class FeatureValueImpl : virtual public ecore::EModelElementImpl,
+	class FUML_API FeatureValueImpl : virtual public ecore::EModelElementImpl,
 virtual public FeatureValue 
 	{
 		public: 

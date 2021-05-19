@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../MergeNode.hpp"
 
 #include "uml/impl/ControlNodeImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class MergeNodeImpl : virtual public ControlNodeImpl, virtual public MergeNode 
+	class UML_API MergeNodeImpl : virtual public ControlNodeImpl, virtual public MergeNode 
 	{
 		public: 
 			MergeNodeImpl(const MergeNodeImpl & obj);

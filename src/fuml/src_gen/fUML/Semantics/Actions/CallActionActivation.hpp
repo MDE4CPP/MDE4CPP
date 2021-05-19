@@ -56,6 +56,9 @@ namespace uml
 	class CallAction;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/InvocationActionActivation.hpp"
 
@@ -67,7 +70,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class CallActionActivation: virtual public InvocationActionActivation
+	class FUML_API CallActionActivation: virtual public InvocationActionActivation
 	{
 		public:
  			CallActionActivation(const CallActionActivation &) {}

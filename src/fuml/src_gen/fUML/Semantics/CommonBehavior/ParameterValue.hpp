@@ -42,6 +42,9 @@ namespace uml
 	class Parameter;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -53,7 +56,7 @@ namespace uml
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class ParameterValue : virtual public ecore::EModelElement
+	class FUML_API ParameterValue : virtual public ecore::EModelElement
 	{
 		public:
  			ParameterValue(const ParameterValue &) {}

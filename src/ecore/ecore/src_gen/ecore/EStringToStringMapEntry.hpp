@@ -33,6 +33,9 @@ namespace ecore
 
 //Forward Declaration for used types 
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 // base class includes
 
 // enum includes
@@ -44,7 +47,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class EStringToStringMapEntry : virtual public ecore::EModelElement
+	class ECORE_API EStringToStringMapEntry : virtual public ecore::EModelElement
 	{
 		public:
  			EStringToStringMapEntry(const EStringToStringMapEntry &) {}

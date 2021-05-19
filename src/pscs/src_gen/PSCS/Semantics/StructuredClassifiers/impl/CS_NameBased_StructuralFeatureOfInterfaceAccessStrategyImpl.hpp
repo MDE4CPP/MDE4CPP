@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "pscs/pscs.hpp" 
+
+// model includes
 #include "../CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy.hpp"
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl : virtual public CS_StructuralFeatureOfInterfaceAccessStrategyImpl, virtual public CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy 
+	class PSCS_API CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl : virtual public CS_StructuralFeatureOfInterfaceAccessStrategyImpl, virtual public CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy 
 	{
 		public: 
 			CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl(const CS_NameBased_StructuralFeatureOfInterfaceAccessStrategyImpl & obj);

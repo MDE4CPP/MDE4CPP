@@ -51,6 +51,9 @@ namespace uml
 	class TemplateParameter;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/DirectedRelationship.hpp"
 #include "uml/PackageableElement.hpp"
@@ -68,7 +71,7 @@ namespace uml
 	<p>From package UML::InformationFlows.</p>
 	*/
 	
-	class InformationFlow: virtual public DirectedRelationship, virtual public PackageableElement
+	class UML_API InformationFlow: virtual public DirectedRelationship, virtual public PackageableElement
 	{
 		public:
  			InformationFlow(const InformationFlow &) {}

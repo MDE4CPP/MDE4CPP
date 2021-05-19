@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../AcceptCallActionActivations.hpp"
 
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
@@ -20,7 +23,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class AcceptCallActionActivationsImpl : virtual public ecore::EModelElementImpl,
+	class FUML_API AcceptCallActionActivationsImpl : virtual public ecore::EModelElementImpl,
 virtual public AcceptCallActionActivations 
 	{
 		public: 

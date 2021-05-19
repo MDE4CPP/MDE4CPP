@@ -44,6 +44,9 @@ namespace uml
 	class TemplateableElement;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/DirectedRelationship.hpp"
 
@@ -59,7 +62,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class TemplateBinding: virtual public DirectedRelationship
+	class UML_API TemplateBinding: virtual public DirectedRelationship
 	{
 		public:
  			TemplateBinding(const TemplateBinding &) {}

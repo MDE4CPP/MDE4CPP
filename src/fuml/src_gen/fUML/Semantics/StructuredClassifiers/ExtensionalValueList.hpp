@@ -41,6 +41,9 @@ namespace fUML::Semantics::SimpleClassifiers
 	class FeatureValue;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 
@@ -52,7 +55,7 @@ namespace fUML::Semantics::SimpleClassifiers
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	
-	class ExtensionalValueList: virtual public ExtensionalValue
+	class FUML_API ExtensionalValueList: virtual public ExtensionalValue
 	{
 		public:
  			ExtensionalValueList(const ExtensionalValueList &) {}

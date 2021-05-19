@@ -46,6 +46,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/RedefinableElement.hpp"
 
@@ -62,7 +65,7 @@ namespace uml
 	<p>From package UML::UseCases.</p>
 	*/
 	
-	class ExtensionPoint: virtual public RedefinableElement
+	class UML_API ExtensionPoint: virtual public RedefinableElement
 	{
 		public:
  			ExtensionPoint(const ExtensionPoint &) {}

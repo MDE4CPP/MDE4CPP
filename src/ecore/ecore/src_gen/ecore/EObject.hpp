@@ -44,6 +44,9 @@ namespace ecore
 	class EStructuralFeature;
 }
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 // base class includes
 
 // enum includes
@@ -54,7 +57,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class EObject
+	class ECORE_API EObject
 	{
 		public:
  			EObject(const EObject &) {}

@@ -57,6 +57,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/StructuredClassifier.hpp"
 
@@ -73,7 +76,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class EncapsulatedClassifier: virtual public StructuredClassifier
+	class UML_API EncapsulatedClassifier: virtual public StructuredClassifier
 	{
 		public:
  			EncapsulatedClassifier(const EncapsulatedClassifier &) {}

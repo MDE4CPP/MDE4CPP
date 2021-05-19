@@ -50,6 +50,9 @@ namespace uml
 	class StructuredClassifier;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Feature.hpp"
 
@@ -68,7 +71,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class Connector: virtual public Feature
+	class UML_API Connector: virtual public Feature
 	{
 		public:
  			Connector(const Connector &) {}

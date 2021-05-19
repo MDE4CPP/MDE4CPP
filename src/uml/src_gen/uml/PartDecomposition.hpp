@@ -50,6 +50,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/InteractionUse.hpp"
 
@@ -66,7 +69,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class PartDecomposition: virtual public InteractionUse
+	class UML_API PartDecomposition: virtual public InteractionUse
 	{
 		public:
  			PartDecomposition(const PartDecomposition &) {}

@@ -60,6 +60,9 @@ namespace uml
 	class DestroyObjectAction;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
@@ -71,7 +74,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class DestroyObjectActionActivation: virtual public ActionActivation
+	class FUML_API DestroyObjectActionActivation: virtual public ActionActivation
 	{
 		public:
  			DestroyObjectActionActivation(const DestroyObjectActionActivation &) {}

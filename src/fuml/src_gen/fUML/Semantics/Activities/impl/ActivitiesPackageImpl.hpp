@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICS_ACTIVITIESPACKAGEIMPL_HPP
 #define FUML_SEMANTICS_ACTIVITIESPACKAGEIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -50,7 +53,7 @@ namespace ecore
 
 namespace fUML::Semantics::Activities
 {
-	class ActivitiesPackageImpl : public ecore::EPackageImpl ,virtual public ActivitiesPackage
+	class FUML_API ActivitiesPackageImpl : public ecore::EPackageImpl ,virtual public ActivitiesPackage
 	{
 		private:    
 			ActivitiesPackageImpl(ActivitiesPackageImpl const&) = delete;

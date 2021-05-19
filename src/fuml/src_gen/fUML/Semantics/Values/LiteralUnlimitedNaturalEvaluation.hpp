@@ -45,6 +45,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Values/LiteralEvaluation.hpp"
 
@@ -56,7 +59,7 @@ namespace uml
 namespace fUML::Semantics::Values 
 {
 	
-	class LiteralUnlimitedNaturalEvaluation: virtual public LiteralEvaluation
+	class FUML_API LiteralUnlimitedNaturalEvaluation: virtual public LiteralEvaluation
 	{
 		public:
  			LiteralUnlimitedNaturalEvaluation(const LiteralUnlimitedNaturalEvaluation &) {}

@@ -7,6 +7,9 @@
 #ifndef FUMLPACKAGEIMPL_HPP
 #define FUMLPACKAGEIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -28,7 +31,7 @@ namespace ecore
 
 namespace fUML
 {
-	class fUMLPackageImpl : public ecore::EPackageImpl ,virtual public fUMLPackage
+	class FUML_API fUMLPackageImpl : public ecore::EPackageImpl ,virtual public fUMLPackage
 	{
 		private:    
 			fUMLPackageImpl(fUMLPackageImpl const&) = delete;

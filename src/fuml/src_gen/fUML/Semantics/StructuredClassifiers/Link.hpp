@@ -48,6 +48,9 @@ namespace uml
 	class Property;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 
@@ -59,7 +62,7 @@ namespace uml
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	
-	class Link: virtual public ExtensionalValue
+	class FUML_API Link: virtual public ExtensionalValue
 	{
 		public:
  			Link(const Link &) {}

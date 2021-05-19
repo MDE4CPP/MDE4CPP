@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICSPACKAGE_HPP
 #define FUML_SEMANTICSPACKAGE_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -74,7 +77,7 @@ namespace fUML::Semantics
 	which were described in an ecore file.
 	*/
 	
-	class SemanticsPackage : virtual public ecore::EPackage 
+	class FUML_API SemanticsPackage : virtual public ecore::EPackage 
 	{
 		private:    
 			SemanticsPackage(SemanticsPackage const&) = delete;

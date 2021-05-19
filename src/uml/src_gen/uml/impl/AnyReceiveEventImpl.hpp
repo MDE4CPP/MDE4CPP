@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../AnyReceiveEvent.hpp"
 
 #include "uml/impl/MessageEventImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class AnyReceiveEventImpl : virtual public MessageEventImpl, virtual public AnyReceiveEvent 
+	class UML_API AnyReceiveEventImpl : virtual public MessageEventImpl, virtual public AnyReceiveEvent 
 	{
 		public: 
 			AnyReceiveEventImpl(const AnyReceiveEventImpl & obj);

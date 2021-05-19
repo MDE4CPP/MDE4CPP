@@ -50,6 +50,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/NamedElement.hpp"
 
@@ -66,7 +69,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class Lifeline: virtual public NamedElement
+	class UML_API Lifeline: virtual public NamedElement
 	{
 		public:
  			Lifeline(const Lifeline &) {}

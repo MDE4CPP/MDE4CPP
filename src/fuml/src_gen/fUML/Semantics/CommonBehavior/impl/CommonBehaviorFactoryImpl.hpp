@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICS_COMMONBEHAVIORFACTORYIMPL_HPP
 #define FUML_SEMANTICS_COMMONBEHAVIORFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -32,7 +35,7 @@ namespace CommonBehavior
 
 namespace fUML::Semantics::CommonBehavior 
 {
-	class CommonBehaviorFactoryImpl : virtual public ecore::EFactoryImpl , virtual public CommonBehaviorFactory 
+	class FUML_API CommonBehaviorFactoryImpl : virtual public ecore::EFactoryImpl , virtual public CommonBehaviorFactory 
 	{
 		private:    
 			CommonBehaviorFactoryImpl(CommonBehaviorFactoryImpl const&) = delete;

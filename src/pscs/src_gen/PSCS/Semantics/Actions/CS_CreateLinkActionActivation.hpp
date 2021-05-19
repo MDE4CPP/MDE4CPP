@@ -50,6 +50,9 @@ namespace uml
 	class ActivityNode;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/CreateLinkActionActivation.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_CreateLinkActionActivation: virtual public fUML::Semantics::Actions::CreateLinkActionActivation
+	class PSCS_API CS_CreateLinkActionActivation: virtual public fUML::Semantics::Actions::CreateLinkActionActivation
 	{
 		public:
  			CS_CreateLinkActionActivation(const CS_CreateLinkActionActivation &) {}

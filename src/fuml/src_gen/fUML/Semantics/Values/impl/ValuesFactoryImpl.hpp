@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICS_VALUESFACTORYIMPL_HPP
 #define FUML_SEMANTICS_VALUESFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
@@ -25,7 +28,7 @@ namespace Values
 
 namespace fUML::Semantics::Values 
 {
-	class ValuesFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ValuesFactory 
+	class FUML_API ValuesFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ValuesFactory 
 	{
 		private:    
 			ValuesFactoryImpl(ValuesFactoryImpl const&) = delete;

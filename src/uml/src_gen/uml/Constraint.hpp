@@ -48,6 +48,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/PackageableElement.hpp"
 
@@ -64,7 +67,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class Constraint: virtual public PackageableElement
+	class UML_API Constraint: virtual public PackageableElement
 	{
 		public:
  			Constraint(const Constraint &) {}

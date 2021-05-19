@@ -7,6 +7,9 @@
 #ifndef UMLFACTORYIMPL_HPP
 #define UMLFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "uml/umlFactory.hpp"
@@ -261,7 +264,7 @@ namespace uml
 
 namespace uml 
 {
-	class umlFactoryImpl : virtual public ecore::EFactoryImpl , virtual public umlFactory 
+	class UML_API umlFactoryImpl : virtual public ecore::EFactoryImpl , virtual public umlFactory 
 	{
 		private:    
 			umlFactoryImpl(umlFactoryImpl const&) = delete;

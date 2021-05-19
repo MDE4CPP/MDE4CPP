@@ -37,6 +37,9 @@ namespace ecore
 	class EAnnotation;
 }
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 // base class includes
 #include "ecore/EModelElement.hpp"
 
@@ -48,7 +51,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class ENamedElement: virtual public EModelElement
+	class ECORE_API ENamedElement: virtual public EModelElement
 	{
 		public:
  			ENamedElement(const ENamedElement &) {}

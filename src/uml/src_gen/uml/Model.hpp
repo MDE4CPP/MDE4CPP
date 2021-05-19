@@ -49,6 +49,9 @@ namespace uml
 	class Type;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Package.hpp"
 
@@ -65,7 +68,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class Model: virtual public Package
+	class UML_API Model: virtual public Package
 	{
 		public:
  			Model(const Model &) {}

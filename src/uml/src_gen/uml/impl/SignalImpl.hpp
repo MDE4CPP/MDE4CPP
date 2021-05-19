@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Signal.hpp"
 
 #include "uml/impl/ClassifierImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class SignalImpl : virtual public ClassifierImpl, virtual public Signal 
+	class UML_API SignalImpl : virtual public ClassifierImpl, virtual public Signal 
 	{
 		public: 
 			SignalImpl(const SignalImpl & obj);

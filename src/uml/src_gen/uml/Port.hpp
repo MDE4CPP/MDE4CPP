@@ -57,6 +57,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Property.hpp"
 
@@ -75,7 +78,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class Port: virtual public Property
+	class UML_API Port: virtual public Property
 	{
 		public:
  			Port(const Port &) {}

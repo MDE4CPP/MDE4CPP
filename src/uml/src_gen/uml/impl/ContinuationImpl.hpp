@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Continuation.hpp"
 
 #include "uml/impl/InteractionFragmentImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ContinuationImpl : virtual public InteractionFragmentImpl, virtual public Continuation 
+	class UML_API ContinuationImpl : virtual public InteractionFragmentImpl, virtual public Continuation 
 	{
 		public: 
 			ContinuationImpl(const ContinuationImpl & obj);

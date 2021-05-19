@@ -52,6 +52,9 @@ namespace uml
 	class StructuredActivityNode;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Action.hpp"
 
@@ -68,7 +71,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class RaiseExceptionAction: virtual public Action
+	class UML_API RaiseExceptionAction: virtual public Action
 	{
 		public:
  			RaiseExceptionAction(const RaiseExceptionAction &) {}

@@ -44,6 +44,9 @@ namespace uml
 	class Type;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/ParameterableElement.hpp"
 #include "uml/TypedElement.hpp"
@@ -61,7 +64,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class ConnectableElement: virtual public ParameterableElement, virtual public TypedElement
+	class UML_API ConnectableElement: virtual public ParameterableElement, virtual public TypedElement
 	{
 		public:
  			ConnectableElement(const ConnectableElement &) {}

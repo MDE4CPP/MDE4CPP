@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "types/types.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "types/typesPackage.hpp"
 
@@ -22,7 +25,7 @@ namespace types
 
 namespace types 
 {
-	class typesFactory : virtual public ecore::EFactory 
+	class TYPES_API typesFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			typesFactory(typesFactory const&) = delete;

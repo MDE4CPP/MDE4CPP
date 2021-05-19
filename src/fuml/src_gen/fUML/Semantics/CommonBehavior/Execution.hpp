@@ -53,6 +53,9 @@ namespace uml
 	class Parameter;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 
@@ -64,7 +67,7 @@ namespace uml
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class Execution: virtual public fUML::Semantics::StructuredClassifiers::Object
+	class FUML_API Execution: virtual public fUML::Semantics::StructuredClassifiers::Object
 	{
 		public:
  			Execution(const Execution &) {}

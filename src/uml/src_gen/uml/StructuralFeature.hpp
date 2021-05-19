@@ -43,6 +43,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Feature.hpp"
 #include "uml/MultiplicityElement.hpp"
@@ -61,7 +64,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class StructuralFeature: virtual public Feature, virtual public MultiplicityElement, virtual public TypedElement
+	class UML_API StructuralFeature: virtual public Feature, virtual public MultiplicityElement, virtual public TypedElement
 	{
 		public:
  			StructuralFeature(const StructuralFeature &) {}

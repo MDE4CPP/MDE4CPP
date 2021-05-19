@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../WriteStructuralFeatureAction.hpp"
 
 #include "uml/impl/StructuralFeatureActionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class WriteStructuralFeatureActionImpl : virtual public StructuralFeatureActionImpl, virtual public WriteStructuralFeatureAction 
+	class UML_API WriteStructuralFeatureActionImpl : virtual public StructuralFeatureActionImpl, virtual public WriteStructuralFeatureAction 
 	{
 		public: 
 			WriteStructuralFeatureActionImpl(const WriteStructuralFeatureActionImpl & obj);

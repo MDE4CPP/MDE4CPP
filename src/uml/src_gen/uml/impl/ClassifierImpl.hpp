@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Classifier.hpp"
 
 #include "uml/impl/NamespaceImpl.hpp"
@@ -21,7 +24,7 @@
 //*********************************
 namespace uml 
 {
-	class ClassifierImpl : virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public TemplateableElementImpl, virtual public TypeImpl, virtual public Classifier 
+	class UML_API ClassifierImpl : virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public TemplateableElementImpl, virtual public TypeImpl, virtual public Classifier 
 	{
 		public: 
 			ClassifierImpl(const ClassifierImpl & obj);

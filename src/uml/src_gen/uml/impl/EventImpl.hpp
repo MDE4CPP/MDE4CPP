@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Event.hpp"
 
 #include "uml/impl/PackageableElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class EventImpl : virtual public PackageableElementImpl, virtual public Event 
+	class UML_API EventImpl : virtual public PackageableElementImpl, virtual public Event 
 	{
 		public: 
 			EventImpl(const EventImpl & obj);

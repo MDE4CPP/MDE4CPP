@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICS_CLASSIFICATIONPACKAGE_HPP
 #define PSCS_SEMANTICS_CLASSIFICATIONPACKAGE_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -30,7 +33,7 @@ namespace PSCS::Semantics::Classification
 	which were described in an ecore file.
 	*/
 	
-	class ClassificationPackage : virtual public ecore::EPackage 
+	class PSCS_API ClassificationPackage : virtual public ecore::EPackage 
 	{
 		private:    
 			ClassificationPackage(ClassificationPackage const&) = delete;

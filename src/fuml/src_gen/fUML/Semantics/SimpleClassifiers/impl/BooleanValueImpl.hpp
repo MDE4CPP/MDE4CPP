@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../BooleanValue.hpp"
 
 #include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class BooleanValueImpl : virtual public PrimitiveValueImpl, virtual public BooleanValue 
+	class FUML_API BooleanValueImpl : virtual public PrimitiveValueImpl, virtual public BooleanValue 
 	{
 		public: 
 			BooleanValueImpl(const BooleanValueImpl & obj);

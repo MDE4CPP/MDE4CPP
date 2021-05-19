@@ -45,6 +45,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
@@ -56,7 +59,7 @@ namespace uml
 namespace fUML::Semantics::Values 
 {
 	
-	class Evaluation: virtual public fUML::Semantics::Loci::SemanticVisitor
+	class FUML_API Evaluation: virtual public fUML::Semantics::Loci::SemanticVisitor
 	{
 		public:
  			Evaluation(const Evaluation &) {}

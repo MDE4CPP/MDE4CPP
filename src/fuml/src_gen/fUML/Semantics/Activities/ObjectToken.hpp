@@ -41,6 +41,9 @@ namespace fUML::Semantics::Values
 	class Value;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Activities/Token.hpp"
 
@@ -52,7 +55,7 @@ namespace fUML::Semantics::Values
 namespace fUML::Semantics::Activities 
 {
 	
-	class ObjectToken: virtual public Token
+	class FUML_API ObjectToken: virtual public Token
 	{
 		public:
  			ObjectToken(const ObjectToken &) {}

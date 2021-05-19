@@ -44,6 +44,9 @@ namespace ecore
 	class ETypeParameter;
 }
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 // base class includes
 #include "ecore/ETypedElement.hpp"
 
@@ -55,7 +58,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class EOperation: virtual public ETypedElement
+	class ECORE_API EOperation: virtual public ETypedElement
 	{
 		public:
  			EOperation(const EOperation &) {}

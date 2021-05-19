@@ -62,6 +62,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Node.hpp"
 
@@ -78,7 +81,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class ExecutionEnvironment: virtual public Node
+	class UML_API ExecutionEnvironment: virtual public Node
 	{
 		public:
  			ExecutionEnvironment(const ExecutionEnvironment &) {}

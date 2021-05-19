@@ -37,6 +37,9 @@ namespace fUML::Semantics::Actions
 	class AcceptEventActionActivation;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 
@@ -48,7 +51,7 @@ namespace fUML::Semantics::Actions
 namespace fUML::Semantics::Actions 
 {
 	
-	class AcceptEventActionEventAccepter: virtual public fUML::Semantics::CommonBehavior::EventAccepter
+	class FUML_API AcceptEventActionEventAccepter: virtual public fUML::Semantics::CommonBehavior::EventAccepter
 	{
 		public:
  			AcceptEventActionEventAccepter(const AcceptEventActionEventAccepter &) {}

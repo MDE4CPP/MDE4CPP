@@ -38,6 +38,9 @@ namespace uml
 	class Comment;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Relationship.hpp"
 
@@ -53,7 +56,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class DirectedRelationship: virtual public Relationship
+	class UML_API DirectedRelationship: virtual public Relationship
 	{
 		public:
  			DirectedRelationship(const DirectedRelationship &) {}

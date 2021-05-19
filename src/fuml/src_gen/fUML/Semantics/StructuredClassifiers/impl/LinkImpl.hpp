@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../Link.hpp"
 
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	class LinkImpl : virtual public ExtensionalValueImpl, virtual public Link 
+	class FUML_API LinkImpl : virtual public ExtensionalValueImpl, virtual public Link 
 	{
 		public: 
 			LinkImpl(const LinkImpl & obj);

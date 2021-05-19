@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../ForkedToken.hpp"
 
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ForkedTokenImpl : virtual public TokenImpl, virtual public ForkedToken 
+	class FUML_API ForkedTokenImpl : virtual public TokenImpl, virtual public ForkedToken 
 	{
 		public: 
 			ForkedTokenImpl(const ForkedTokenImpl & obj);

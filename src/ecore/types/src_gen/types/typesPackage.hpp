@@ -7,6 +7,9 @@
 #ifndef TYPESPACKAGE_HPP
 #define TYPESPACKAGE_HPP
 
+// namespace macro header include
+#include "types/types.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -28,7 +31,7 @@ namespace types
 	which were described in an ecore file.
 	*/
 	
-	class typesPackage : virtual public ecore::EPackage 
+	class TYPES_API typesPackage : virtual public ecore::EPackage 
 	{
 		private:    
 			typesPackage(typesPackage const&) = delete;

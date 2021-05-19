@@ -42,6 +42,9 @@ namespace uml
 	class Operation;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp"
 
@@ -53,7 +56,7 @@ namespace uml
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	
-	class RedefinitionBasedDispatchStrategy: virtual public DispatchStrategy
+	class FUML_API RedefinitionBasedDispatchStrategy: virtual public DispatchStrategy
 	{
 		public:
  			RedefinitionBasedDispatchStrategy(const RedefinitionBasedDispatchStrategy &) {}

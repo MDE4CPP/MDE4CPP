@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Pseudostate.hpp"
 
 #include "uml/impl/VertexImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class PseudostateImpl : virtual public VertexImpl, virtual public Pseudostate 
+	class UML_API PseudostateImpl : virtual public VertexImpl, virtual public Pseudostate 
 	{
 		public: 
 			PseudostateImpl(const PseudostateImpl & obj);

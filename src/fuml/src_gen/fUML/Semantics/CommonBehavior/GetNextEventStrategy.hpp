@@ -41,6 +41,9 @@ namespace fUML::Semantics::SimpleClassifiers
 	class SignalInstance;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
@@ -52,7 +55,7 @@ namespace fUML::Semantics::SimpleClassifiers
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class GetNextEventStrategy: virtual public fUML::Semantics::Loci::SemanticStrategy
+	class FUML_API GetNextEventStrategy: virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
  			GetNextEventStrategy(const GetNextEventStrategy &) {}

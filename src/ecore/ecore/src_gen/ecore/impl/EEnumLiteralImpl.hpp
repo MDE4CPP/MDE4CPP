@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ecore/ecore.hpp" 
+
+// model includes
 #include "../EEnumLiteral.hpp"
 
 #include "ecore/impl/ENamedElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace ecore 
 {
-	class EEnumLiteralImpl : virtual public ENamedElementImpl, virtual public EEnumLiteral 
+	class ECORE_API EEnumLiteralImpl : virtual public ENamedElementImpl, virtual public EEnumLiteral 
 	{
 		public: 
 			EEnumLiteralImpl(const EEnumLiteralImpl & obj);

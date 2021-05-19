@@ -47,6 +47,9 @@ namespace uml
 	class TemplateableElement;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/RedefinableElement.hpp"
 #include "uml/TemplateSignature.hpp"
@@ -64,7 +67,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class RedefinableTemplateSignature: virtual public RedefinableElement, virtual public TemplateSignature
+	class UML_API RedefinableTemplateSignature: virtual public RedefinableElement, virtual public TemplateSignature
 	{
 		public:
  			RedefinableTemplateSignature(const RedefinableTemplateSignature &) {}

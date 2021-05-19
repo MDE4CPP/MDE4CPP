@@ -33,6 +33,9 @@ namespace fUML
 
 //Forward Declaration for used types 
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
@@ -44,7 +47,7 @@ namespace fUML
 namespace fUML::Semantics::Loci 
 {
 	
-	class ChoiceStrategy: virtual public SemanticStrategy
+	class FUML_API ChoiceStrategy: virtual public SemanticStrategy
 	{
 		public:
  			ChoiceStrategy(const ChoiceStrategy &) {}

@@ -33,6 +33,9 @@ namespace fUML
 
 //Forward Declaration for used types 
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/CommonBehavior/GetNextEventStrategy.hpp"
 
@@ -44,7 +47,7 @@ namespace fUML
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class FIFOGetNextEventStrategy: virtual public GetNextEventStrategy
+	class FUML_API FIFOGetNextEventStrategy: virtual public GetNextEventStrategy
 	{
 		public:
  			FIFOGetNextEventStrategy(const FIFOGetNextEventStrategy &) {}

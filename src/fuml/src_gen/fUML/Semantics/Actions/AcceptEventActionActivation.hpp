@@ -56,6 +56,9 @@ namespace uml
 	class ActivityNode;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
@@ -67,7 +70,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class AcceptEventActionActivation: virtual public ActionActivation
+	class FUML_API AcceptEventActionActivation: virtual public ActionActivation
 	{
 		public:
  			AcceptEventActionActivation(const AcceptEventActionActivation &) {}

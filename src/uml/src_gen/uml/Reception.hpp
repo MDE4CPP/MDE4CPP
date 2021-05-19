@@ -52,6 +52,9 @@ namespace uml
 	class Type;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/BehavioralFeature.hpp"
 
@@ -70,7 +73,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class Reception: virtual public BehavioralFeature
+	class UML_API Reception: virtual public BehavioralFeature
 	{
 		public:
  			Reception(const Reception &) {}

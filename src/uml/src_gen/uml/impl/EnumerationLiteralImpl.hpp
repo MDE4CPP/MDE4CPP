@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../EnumerationLiteral.hpp"
 
 #include "uml/impl/InstanceSpecificationImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class EnumerationLiteralImpl : virtual public InstanceSpecificationImpl, virtual public EnumerationLiteral 
+	class UML_API EnumerationLiteralImpl : virtual public InstanceSpecificationImpl, virtual public EnumerationLiteral 
 	{
 		public: 
 			EnumerationLiteralImpl(const EnumerationLiteralImpl & obj);

@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../StructuredClassifier.hpp"
 
 #include "uml/impl/ClassifierImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class StructuredClassifierImpl : virtual public ClassifierImpl, virtual public StructuredClassifier 
+	class UML_API StructuredClassifierImpl : virtual public ClassifierImpl, virtual public StructuredClassifier 
 	{
 		public: 
 			StructuredClassifierImpl(const StructuredClassifierImpl & obj);

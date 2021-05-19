@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
@@ -18,7 +21,7 @@
 
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class StructuredClassifiersFactory : virtual public ecore::EFactory 
+	class PSCS_API StructuredClassifiersFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			StructuredClassifiersFactory(StructuredClassifiersFactory const&) = delete;

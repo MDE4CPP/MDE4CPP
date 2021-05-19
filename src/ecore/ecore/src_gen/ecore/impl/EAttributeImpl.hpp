@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ecore/ecore.hpp" 
+
+// model includes
 #include "../EAttribute.hpp"
 
 #include "ecore/impl/EStructuralFeatureImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace ecore 
 {
-	class EAttributeImpl : virtual public EStructuralFeatureImpl, virtual public EAttribute 
+	class ECORE_API EAttributeImpl : virtual public EStructuralFeatureImpl, virtual public EAttribute 
 	{
 		public: 
 			EAttributeImpl(const EAttributeImpl & obj);

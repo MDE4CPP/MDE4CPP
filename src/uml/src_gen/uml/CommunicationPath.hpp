@@ -53,6 +53,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Association.hpp"
 
@@ -69,7 +72,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class CommunicationPath: virtual public Association
+	class UML_API CommunicationPath: virtual public Association
 	{
 		public:
  			CommunicationPath(const CommunicationPath &) {}

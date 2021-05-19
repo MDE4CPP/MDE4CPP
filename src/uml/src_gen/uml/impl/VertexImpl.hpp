@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Vertex.hpp"
 
 #include "uml/impl/NamedElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class VertexImpl : virtual public NamedElementImpl, virtual public Vertex 
+	class UML_API VertexImpl : virtual public NamedElementImpl, virtual public Vertex 
 	{
 		public: 
 			VertexImpl(const VertexImpl & obj);

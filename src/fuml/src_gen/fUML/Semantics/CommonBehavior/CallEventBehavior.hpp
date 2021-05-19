@@ -37,6 +37,9 @@ namespace uml
 	class Operation;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -48,7 +51,7 @@ namespace uml
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class CallEventBehavior : virtual public ecore::EModelElement
+	class FUML_API CallEventBehavior : virtual public ecore::EModelElement
 	{
 		public:
  			CallEventBehavior(const CallEventBehavior &) {}

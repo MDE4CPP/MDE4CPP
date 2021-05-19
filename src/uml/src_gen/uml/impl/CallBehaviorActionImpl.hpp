@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../CallBehaviorAction.hpp"
 
 #include "uml/impl/CallActionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class CallBehaviorActionImpl : virtual public CallActionImpl, virtual public CallBehaviorAction 
+	class UML_API CallBehaviorActionImpl : virtual public CallActionImpl, virtual public CallBehaviorAction 
 	{
 		public: 
 			CallBehaviorActionImpl(const CallBehaviorActionImpl & obj);

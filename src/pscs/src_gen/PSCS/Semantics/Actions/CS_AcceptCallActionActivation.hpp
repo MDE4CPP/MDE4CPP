@@ -55,6 +55,9 @@ namespace uml
 	class ActivityNode;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/AcceptCallActionActivation.hpp"
 
@@ -66,7 +69,7 @@ namespace uml
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_AcceptCallActionActivation: virtual public fUML::Semantics::Actions::AcceptCallActionActivation
+	class PSCS_API CS_AcceptCallActionActivation: virtual public fUML::Semantics::Actions::AcceptCallActionActivation
 	{
 		public:
  			CS_AcceptCallActionActivation(const CS_AcceptCallActionActivation &) {}

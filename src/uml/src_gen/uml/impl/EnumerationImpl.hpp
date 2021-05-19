@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Enumeration.hpp"
 
 #include "uml/impl/DataTypeImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class EnumerationImpl : virtual public DataTypeImpl, virtual public Enumeration 
+	class UML_API EnumerationImpl : virtual public DataTypeImpl, virtual public Enumeration 
 	{
 		public: 
 			EnumerationImpl(const EnumerationImpl & obj);

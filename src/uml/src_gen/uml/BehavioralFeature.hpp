@@ -53,6 +53,9 @@ namespace uml
 	class Type;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Feature.hpp"
 #include "uml/Namespace.hpp"
@@ -72,7 +75,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class BehavioralFeature: virtual public Feature, virtual public Namespace
+	class UML_API BehavioralFeature: virtual public Feature, virtual public Namespace
 	{
 		public:
  			BehavioralFeature(const BehavioralFeature &) {}

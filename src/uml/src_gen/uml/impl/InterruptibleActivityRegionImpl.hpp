@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../InterruptibleActivityRegion.hpp"
 
 #include "uml/impl/ActivityGroupImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class InterruptibleActivityRegionImpl : virtual public ActivityGroupImpl, virtual public InterruptibleActivityRegion 
+	class UML_API InterruptibleActivityRegionImpl : virtual public ActivityGroupImpl, virtual public InterruptibleActivityRegion 
 	{
 		public: 
 			InterruptibleActivityRegionImpl(const InterruptibleActivityRegionImpl & obj);

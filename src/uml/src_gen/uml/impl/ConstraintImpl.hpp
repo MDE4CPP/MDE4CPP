@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Constraint.hpp"
 
 #include "uml/impl/PackageableElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ConstraintImpl : virtual public PackageableElementImpl, virtual public Constraint 
+	class UML_API ConstraintImpl : virtual public PackageableElementImpl, virtual public Constraint 
 	{
 		public: 
 			ConstraintImpl(const ConstraintImpl & obj);

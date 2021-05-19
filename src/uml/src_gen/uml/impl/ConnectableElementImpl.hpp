@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ConnectableElement.hpp"
 
 #include "uml/impl/ParameterableElementImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace uml 
 {
-	class ConnectableElementImpl : virtual public ParameterableElementImpl, virtual public TypedElementImpl, virtual public ConnectableElement 
+	class UML_API ConnectableElementImpl : virtual public ParameterableElementImpl, virtual public TypedElementImpl, virtual public ConnectableElement 
 	{
 		public: 
 			ConnectableElementImpl(const ConnectableElementImpl & obj);

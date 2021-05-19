@@ -43,6 +43,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Constraint.hpp"
 
@@ -59,7 +62,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class IntervalConstraint: virtual public Constraint
+	class UML_API IntervalConstraint: virtual public Constraint
 	{
 		public:
  			IntervalConstraint(const IntervalConstraint &) {}

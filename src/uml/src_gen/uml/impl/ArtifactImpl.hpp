@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Artifact.hpp"
 
 #include "uml/impl/ClassifierImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace uml 
 {
-	class ArtifactImpl : virtual public ClassifierImpl, virtual public DeployedArtifactImpl, virtual public Artifact 
+	class UML_API ArtifactImpl : virtual public ClassifierImpl, virtual public DeployedArtifactImpl, virtual public Artifact 
 	{
 		public: 
 			ArtifactImpl(const ArtifactImpl & obj);

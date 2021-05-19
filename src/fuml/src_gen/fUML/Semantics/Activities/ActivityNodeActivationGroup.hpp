@@ -50,6 +50,9 @@ namespace uml
 	class ActivityNode;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -61,7 +64,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class ActivityNodeActivationGroup : virtual public ecore::EModelElement
+	class FUML_API ActivityNodeActivationGroup : virtual public ecore::EModelElement
 	{
 		public:
  			ActivityNodeActivationGroup(const ActivityNodeActivationGroup &) {}

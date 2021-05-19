@@ -47,6 +47,9 @@ namespace uml
 	class TimeExpression;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Event.hpp"
 
@@ -63,7 +66,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class TimeEvent: virtual public Event
+	class UML_API TimeEvent: virtual public Event
 	{
 		public:
  			TimeEvent(const TimeEvent &) {}

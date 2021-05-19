@@ -54,6 +54,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/MultiplicityElement.hpp"
 #include "uml/ObjectNode.hpp"
@@ -73,7 +76,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class Pin: virtual public MultiplicityElement, virtual public ObjectNode
+	class UML_API Pin: virtual public MultiplicityElement, virtual public ObjectNode
 	{
 		public:
  			Pin(const Pin &) {}

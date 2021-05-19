@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../FirstChoiceStrategy.hpp"
 
 #include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	class FirstChoiceStrategyImpl : virtual public ChoiceStrategyImpl, virtual public FirstChoiceStrategy 
+	class FUML_API FirstChoiceStrategyImpl : virtual public ChoiceStrategyImpl, virtual public FirstChoiceStrategy 
 	{
 		public: 
 			FirstChoiceStrategyImpl(const FirstChoiceStrategyImpl & obj);

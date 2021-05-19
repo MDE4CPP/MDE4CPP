@@ -71,6 +71,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Class.hpp"
 
@@ -87,7 +90,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class Stereotype: virtual public Class
+	class UML_API Stereotype: virtual public Class
 	{
 		public:
  			Stereotype(const Stereotype &) {}

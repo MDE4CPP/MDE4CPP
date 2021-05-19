@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../GetNextEventStrategy.hpp"
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class GetNextEventStrategyImpl : virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public GetNextEventStrategy 
+	class FUML_API GetNextEventStrategyImpl : virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public GetNextEventStrategy 
 	{
 		public: 
 			GetNextEventStrategyImpl(const GetNextEventStrategyImpl & obj);

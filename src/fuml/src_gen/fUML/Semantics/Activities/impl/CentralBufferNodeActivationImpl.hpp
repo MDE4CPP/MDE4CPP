@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../CentralBufferNodeActivation.hpp"
 
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class CentralBufferNodeActivationImpl : virtual public ObjectNodeActivationImpl, virtual public CentralBufferNodeActivation 
+	class FUML_API CentralBufferNodeActivationImpl : virtual public ObjectNodeActivationImpl, virtual public CentralBufferNodeActivation 
 	{
 		public: 
 			CentralBufferNodeActivationImpl(const CentralBufferNodeActivationImpl & obj);

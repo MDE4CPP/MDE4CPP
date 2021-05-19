@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ReclassifyObjectAction.hpp"
 
 #include "uml/impl/ActionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ReclassifyObjectActionImpl : virtual public ActionImpl, virtual public ReclassifyObjectAction 
+	class UML_API ReclassifyObjectActionImpl : virtual public ActionImpl, virtual public ReclassifyObjectAction 
 	{
 		public: 
 			ReclassifyObjectActionImpl(const ReclassifyObjectActionImpl & obj);

@@ -54,6 +54,9 @@ namespace uml
 	class Variable;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/StructuredActivityNode.hpp"
 
@@ -72,7 +75,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class ExpansionRegion: virtual public StructuredActivityNode
+	class UML_API ExpansionRegion: virtual public StructuredActivityNode
 	{
 		public:
  			ExpansionRegion(const ExpansionRegion &) {}

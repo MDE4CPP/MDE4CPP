@@ -42,6 +42,9 @@ namespace uml
 	class TemplateParameter;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/PackageableElement.hpp"
 
@@ -58,7 +61,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class Observation: virtual public PackageableElement
+	class UML_API Observation: virtual public PackageableElement
 	{
 		public:
  			Observation(const Observation &) {}

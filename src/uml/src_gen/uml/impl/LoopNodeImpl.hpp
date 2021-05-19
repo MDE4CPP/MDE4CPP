@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../LoopNode.hpp"
 
 #include "uml/impl/StructuredActivityNodeImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class LoopNodeImpl : virtual public StructuredActivityNodeImpl, virtual public LoopNode 
+	class UML_API LoopNodeImpl : virtual public StructuredActivityNodeImpl, virtual public LoopNode 
 	{
 		public: 
 			LoopNodeImpl(const LoopNodeImpl & obj);

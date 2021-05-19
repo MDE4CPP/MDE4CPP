@@ -50,6 +50,9 @@ namespace uml
 	class ActivityNode;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/ReadExtentActionActivation.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_ReadExtentActionActivation: virtual public fUML::Semantics::Actions::ReadExtentActionActivation
+	class PSCS_API CS_ReadExtentActionActivation: virtual public fUML::Semantics::Actions::ReadExtentActionActivation
 	{
 		public:
  			CS_ReadExtentActionActivation(const CS_ReadExtentActionActivation &) {}

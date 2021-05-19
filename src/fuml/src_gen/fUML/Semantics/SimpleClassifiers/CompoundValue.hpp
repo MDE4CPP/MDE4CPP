@@ -43,6 +43,9 @@ namespace uml
 	class StructuralFeature;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/SimpleClassifiers/StructuredValue.hpp"
 
@@ -54,7 +57,7 @@ namespace uml
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	
-	class CompoundValue: virtual public StructuredValue
+	class FUML_API CompoundValue: virtual public StructuredValue
 	{
 		public:
  			CompoundValue(const CompoundValue &) {}

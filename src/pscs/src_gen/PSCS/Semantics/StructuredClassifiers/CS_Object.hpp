@@ -66,6 +66,9 @@ namespace uml
 	class StructuralFeature;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 
@@ -80,7 +83,7 @@ namespace uml
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	
-	class CS_Object: virtual public fUML::Semantics::StructuredClassifiers::Object
+	class PSCS_API CS_Object: virtual public fUML::Semantics::StructuredClassifiers::Object
 	{
 		public:
  			CS_Object(const CS_Object &) {}

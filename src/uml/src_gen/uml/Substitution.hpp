@@ -44,6 +44,9 @@ namespace uml
 	class TemplateParameter;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Realization.hpp"
 
@@ -60,7 +63,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class Substitution: virtual public Realization
+	class UML_API Substitution: virtual public Realization
 	{
 		public:
  			Substitution(const Substitution &) {}

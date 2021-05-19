@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../LiteralBoolean.hpp"
 
 #include "uml/impl/LiteralSpecificationImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class LiteralBooleanImpl : virtual public LiteralSpecificationImpl, virtual public LiteralBoolean 
+	class UML_API LiteralBooleanImpl : virtual public LiteralSpecificationImpl, virtual public LiteralBoolean 
 	{
 		public: 
 			LiteralBooleanImpl(const LiteralBooleanImpl & obj);

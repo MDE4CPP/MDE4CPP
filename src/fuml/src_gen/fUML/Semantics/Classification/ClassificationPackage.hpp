@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICS_CLASSIFICATIONPACKAGE_HPP
 #define FUML_SEMANTICS_CLASSIFICATIONPACKAGE_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -30,7 +33,7 @@ namespace fUML::Semantics::Classification
 	which were described in an ecore file.
 	*/
 	
-	class ClassificationPackage : virtual public ecore::EPackage 
+	class FUML_API ClassificationPackage : virtual public ecore::EPackage 
 	{
 		private:    
 			ClassificationPackage(ClassificationPackage const&) = delete;

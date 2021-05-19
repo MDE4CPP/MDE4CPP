@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../ClearAssociationActionActivation.hpp"
 
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class ClearAssociationActionActivationImpl : virtual public ActionActivationImpl, virtual public ClearAssociationActionActivation 
+	class FUML_API ClearAssociationActionActivationImpl : virtual public ActionActivationImpl, virtual public ClearAssociationActionActivation 
 	{
 		public: 
 			ClearAssociationActionActivationImpl(const ClearAssociationActionActivationImpl & obj);

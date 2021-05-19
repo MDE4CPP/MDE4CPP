@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Connector.hpp"
 
 #include "uml/impl/FeatureImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ConnectorImpl : virtual public FeatureImpl, virtual public Connector 
+	class UML_API ConnectorImpl : virtual public FeatureImpl, virtual public Connector 
 	{
 		public: 
 			ConnectorImpl(const ConnectorImpl & obj);

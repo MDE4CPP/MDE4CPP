@@ -7,11 +7,14 @@
 #ifndef TYPESPLUGINIMPL_HPP
 #define TYPESPLUGINIMPL_HPP
 
+// namespace macro header include
+#include "types/types.hpp"
+
 #include "types/typesPlugin.hpp"
 
 namespace types 
 {
-	class typesPluginImpl : virtual public typesPlugin 
+	class TYPES_API typesPluginImpl : virtual public typesPlugin 
 	{
 		public:
 			typesPluginImpl();

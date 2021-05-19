@@ -58,6 +58,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/BehavioredClassifier.hpp"
 
@@ -74,7 +77,7 @@ namespace uml
 	<p>From package UML::UseCases.</p>
 	*/
 	
-	class Actor: virtual public BehavioredClassifier
+	class UML_API Actor: virtual public BehavioredClassifier
 	{
 		public:
  			Actor(const Actor &) {}

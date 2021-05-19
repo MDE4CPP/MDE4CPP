@@ -56,6 +56,9 @@ namespace uml
 	class Trigger;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/AcceptEventAction.hpp"
 
@@ -72,7 +75,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class AcceptCallAction: virtual public AcceptEventAction
+	class UML_API AcceptCallAction: virtual public AcceptEventAction
 	{
 		public:
  			AcceptCallAction(const AcceptCallAction &) {}

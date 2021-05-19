@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../AcceptEventActionEventAccepter.hpp"
 
 #include "fUML/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::Actions 
 {
-	class AcceptEventActionEventAccepterImpl : virtual public fUML::Semantics::CommonBehavior::EventAccepterImpl, virtual public AcceptEventActionEventAccepter 
+	class FUML_API AcceptEventActionEventAccepterImpl : virtual public fUML::Semantics::CommonBehavior::EventAccepterImpl, virtual public AcceptEventActionEventAccepter 
 	{
 		public: 
 			AcceptEventActionEventAccepterImpl(const AcceptEventActionEventAccepterImpl & obj);

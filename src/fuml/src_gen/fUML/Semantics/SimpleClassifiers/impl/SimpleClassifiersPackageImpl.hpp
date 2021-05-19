@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICS_SIMPLECLASSIFIERSPACKAGEIMPL_HPP
 #define FUML_SEMANTICS_SIMPLECLASSIFIERSPACKAGEIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -35,7 +38,7 @@ namespace ecore
 
 namespace fUML::Semantics::SimpleClassifiers
 {
-	class SimpleClassifiersPackageImpl : public ecore::EPackageImpl ,virtual public SimpleClassifiersPackage
+	class FUML_API SimpleClassifiersPackageImpl : public ecore::EPackageImpl ,virtual public SimpleClassifiersPackage
 	{
 		private:    
 			SimpleClassifiersPackageImpl(SimpleClassifiersPackageImpl const&) = delete;

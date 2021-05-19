@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Package.hpp"
 
 #include "uml/impl/NamespaceImpl.hpp"
@@ -20,7 +23,7 @@
 //*********************************
 namespace uml 
 {
-	class PackageImpl : virtual public NamespaceImpl, virtual public PackageableElementImpl, virtual public TemplateableElementImpl, virtual public Package 
+	class UML_API PackageImpl : virtual public NamespaceImpl, virtual public PackageableElementImpl, virtual public TemplateableElementImpl, virtual public Package 
 	{
 		public: 
 			PackageImpl(const PackageImpl & obj);

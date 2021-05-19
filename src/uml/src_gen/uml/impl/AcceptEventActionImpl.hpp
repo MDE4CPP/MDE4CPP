@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../AcceptEventAction.hpp"
 
 #include "uml/impl/ActionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class AcceptEventActionImpl : virtual public ActionImpl, virtual public AcceptEventAction 
+	class UML_API AcceptEventActionImpl : virtual public ActionImpl, virtual public AcceptEventAction 
 	{
 		public: 
 			AcceptEventActionImpl(const AcceptEventActionImpl & obj);

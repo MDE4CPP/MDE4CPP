@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../StateInvariant.hpp"
 
 #include "uml/impl/InteractionFragmentImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class StateInvariantImpl : virtual public InteractionFragmentImpl, virtual public StateInvariant 
+	class UML_API StateInvariantImpl : virtual public InteractionFragmentImpl, virtual public StateInvariant 
 	{
 		public: 
 			StateInvariantImpl(const StateInvariantImpl & obj);

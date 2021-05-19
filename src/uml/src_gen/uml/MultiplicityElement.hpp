@@ -42,6 +42,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Element.hpp"
 
@@ -57,7 +60,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class MultiplicityElement: virtual public Element
+	class UML_API MultiplicityElement: virtual public Element
 	{
 		public:
  			MultiplicityElement(const MultiplicityElement &) {}

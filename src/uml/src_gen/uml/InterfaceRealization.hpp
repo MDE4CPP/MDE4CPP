@@ -45,6 +45,9 @@ namespace uml
 	class TemplateParameter;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Realization.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class InterfaceRealization: virtual public Realization
+	class UML_API InterfaceRealization: virtual public Realization
 	{
 		public:
  			InterfaceRealization(const InterfaceRealization &) {}

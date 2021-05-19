@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../RemoveVariableValueAction.hpp"
 
 #include "uml/impl/WriteVariableActionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class RemoveVariableValueActionImpl : virtual public WriteVariableActionImpl, virtual public RemoveVariableValueAction 
+	class UML_API RemoveVariableValueActionImpl : virtual public WriteVariableActionImpl, virtual public RemoveVariableValueAction 
 	{
 		public: 
 			RemoveVariableValueActionImpl(const RemoveVariableValueActionImpl & obj);

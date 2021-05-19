@@ -7,11 +7,14 @@
 #ifndef ECOREPLUGIN_HPP
 #define ECOREPLUGIN_HPP
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 #include "pluginFramework/EcoreModelPlugin.hpp"
 
 namespace ecore
 {
-	class ecorePlugin : virtual public EcoreModelPlugin
+	class ECORE_API ecorePlugin : virtual public EcoreModelPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

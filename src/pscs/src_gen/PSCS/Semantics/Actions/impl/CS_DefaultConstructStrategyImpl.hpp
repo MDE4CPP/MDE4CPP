@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "pscs/pscs.hpp" 
+
+// model includes
 #include "../CS_DefaultConstructStrategy.hpp"
 
 #include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_DefaultConstructStrategyImpl : virtual public CS_ConstructStrategyImpl, virtual public CS_DefaultConstructStrategy 
+	class PSCS_API CS_DefaultConstructStrategyImpl : virtual public CS_ConstructStrategyImpl, virtual public CS_DefaultConstructStrategy 
 	{
 		public: 
 			CS_DefaultConstructStrategyImpl(const CS_DefaultConstructStrategyImpl & obj);

@@ -56,6 +56,9 @@ namespace uml
 	class StructuredActivityNode;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Action.hpp"
 
@@ -72,7 +75,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class ClearAssociationAction: virtual public Action
+	class UML_API ClearAssociationAction: virtual public Action
 	{
 		public:
  			ClearAssociationAction(const ClearAssociationAction &) {}

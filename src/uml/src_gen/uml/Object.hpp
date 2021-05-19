@@ -42,6 +42,9 @@ namespace uml
 	class Property;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 
 // enum includes
@@ -59,7 +62,7 @@ namespace uml
 	<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span>
 	*/
 	
-	class Object : virtual public ecore::EModelElement
+	class UML_API Object : virtual public ecore::EModelElement
 	{
 		public:
  			Object(const Object &) {}

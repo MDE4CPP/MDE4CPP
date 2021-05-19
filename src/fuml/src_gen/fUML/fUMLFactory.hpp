@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
 
@@ -57,7 +60,7 @@ namespace fUML::Semantics::Loci
 
 namespace fUML 
 {
-	class fUMLFactory : virtual public ecore::EFactory 
+	class FUML_API fUMLFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			fUMLFactory(fUMLFactory const&) = delete;

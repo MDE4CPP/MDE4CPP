@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Image.hpp"
 
 #include "uml/impl/ElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ImageImpl : virtual public ElementImpl, virtual public Image 
+	class UML_API ImageImpl : virtual public ElementImpl, virtual public Image 
 	{
 		public: 
 			ImageImpl(const ImageImpl & obj);

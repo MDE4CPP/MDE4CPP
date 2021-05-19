@@ -44,6 +44,9 @@ namespace uml
 	class QualifierValue;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Element.hpp"
 
@@ -59,7 +62,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class LinkEndData: virtual public Element
+	class UML_API LinkEndData: virtual public Element
 	{
 		public:
  			LinkEndData(const LinkEndData &) {}

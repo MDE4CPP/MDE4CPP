@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICS_STRUCTUREDCLASSIFIERSFACTORYIMPL_HPP
 #define FUML_SEMANTICS_STRUCTUREDCLASSIFIERSFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
@@ -23,7 +26,7 @@ namespace StructuredClassifiers
 
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	class StructuredClassifiersFactoryImpl : virtual public ecore::EFactoryImpl , virtual public StructuredClassifiersFactory 
+	class FUML_API StructuredClassifiersFactoryImpl : virtual public ecore::EFactoryImpl , virtual public StructuredClassifiersFactory 
 	{
 		private:    
 			StructuredClassifiersFactoryImpl(StructuredClassifiersFactoryImpl const&) = delete;

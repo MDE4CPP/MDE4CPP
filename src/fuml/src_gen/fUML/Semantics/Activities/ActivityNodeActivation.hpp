@@ -53,6 +53,9 @@ namespace uml
 	class ActivityNode;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 
@@ -64,7 +67,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class ActivityNodeActivation: virtual public fUML::Semantics::Loci::SemanticVisitor
+	class FUML_API ActivityNodeActivation: virtual public fUML::Semantics::Loci::SemanticVisitor
 	{
 		public:
  			ActivityNodeActivation(const ActivityNodeActivation &) {}

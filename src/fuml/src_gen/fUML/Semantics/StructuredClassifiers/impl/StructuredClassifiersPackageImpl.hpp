@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICS_STRUCTUREDCLASSIFIERSPACKAGEIMPL_HPP
 #define FUML_SEMANTICS_STRUCTUREDCLASSIFIERSPACKAGEIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -30,7 +33,7 @@ namespace ecore
 
 namespace fUML::Semantics::StructuredClassifiers
 {
-	class StructuredClassifiersPackageImpl : public ecore::EPackageImpl ,virtual public StructuredClassifiersPackage
+	class FUML_API StructuredClassifiersPackageImpl : public ecore::EPackageImpl ,virtual public StructuredClassifiersPackage
 	{
 		private:    
 			StructuredClassifiersPackageImpl(StructuredClassifiersPackageImpl const&) = delete;

@@ -54,6 +54,9 @@ namespace uml
 	class Class;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -65,7 +68,7 @@ namespace uml
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class ObjectActivation : virtual public ecore::EModelElement
+	class FUML_API ObjectActivation : virtual public ecore::EModelElement
 	{
 		public:
  			ObjectActivation(const ObjectActivation &) {}

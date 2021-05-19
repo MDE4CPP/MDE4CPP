@@ -46,6 +46,9 @@ namespace uml
 	class StructuralFeature;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/StructuredClassifiers/Link.hpp"
 
@@ -57,7 +60,7 @@ namespace uml
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	
-	class CS_Link: virtual public fUML::Semantics::StructuredClassifiers::Link
+	class PSCS_API CS_Link: virtual public fUML::Semantics::StructuredClassifiers::Link
 	{
 		public:
  			CS_Link(const CS_Link &) {}

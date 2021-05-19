@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Lifeline.hpp"
 
 #include "uml/impl/NamedElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class LifelineImpl : virtual public NamedElementImpl, virtual public Lifeline 
+	class UML_API LifelineImpl : virtual public NamedElementImpl, virtual public Lifeline 
 	{
 		public: 
 			LifelineImpl(const LifelineImpl & obj);

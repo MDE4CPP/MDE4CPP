@@ -51,6 +51,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/ActivityEdge.hpp"
 
@@ -67,7 +70,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class ControlFlow: virtual public ActivityEdge
+	class UML_API ControlFlow: virtual public ActivityEdge
 	{
 		public:
  			ControlFlow(const ControlFlow &) {}

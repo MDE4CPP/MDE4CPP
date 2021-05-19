@@ -41,6 +41,9 @@ namespace ecore
 	class ETypeParameter;
 }
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 // base class includes
 #include "ecore/ENamedElement.hpp"
 
@@ -52,7 +55,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class EClassifier: virtual public ENamedElement
+	class ECORE_API EClassifier: virtual public ENamedElement
 	{
 		public:
  			EClassifier(const EClassifier &) {}

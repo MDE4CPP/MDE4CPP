@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICS_SIMPLECLASSIFIERSFACTORYIMPL_HPP
 #define FUML_SEMANTICS_SIMPLECLASSIFIERSFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
@@ -28,7 +31,7 @@ namespace SimpleClassifiers
 
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class SimpleClassifiersFactoryImpl : virtual public ecore::EFactoryImpl , virtual public SimpleClassifiersFactory 
+	class FUML_API SimpleClassifiersFactoryImpl : virtual public ecore::EFactoryImpl , virtual public SimpleClassifiersFactory 
 	{
 		private:    
 			SimpleClassifiersFactoryImpl(SimpleClassifiersFactoryImpl const&) = delete;

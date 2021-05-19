@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ReadLinkObjectEndAction.hpp"
 
 #include "uml/impl/ActionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ReadLinkObjectEndActionImpl : virtual public ActionImpl, virtual public ReadLinkObjectEndAction 
+	class UML_API ReadLinkObjectEndActionImpl : virtual public ActionImpl, virtual public ReadLinkObjectEndAction 
 	{
 		public: 
 			ReadLinkObjectEndActionImpl(const ReadLinkObjectEndActionImpl & obj);

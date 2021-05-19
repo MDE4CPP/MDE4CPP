@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../DispatchStrategy.hpp"
 
 #include "fUML/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	class DispatchStrategyImpl : virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public DispatchStrategy 
+	class FUML_API DispatchStrategyImpl : virtual public fUML::Semantics::Loci::SemanticStrategyImpl, virtual public DispatchStrategy 
 	{
 		public: 
 			DispatchStrategyImpl(const DispatchStrategyImpl & obj);

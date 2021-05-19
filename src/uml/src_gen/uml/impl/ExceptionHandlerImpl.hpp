@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ExceptionHandler.hpp"
 
 #include "uml/impl/ElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ExceptionHandlerImpl : virtual public ElementImpl, virtual public ExceptionHandler 
+	class UML_API ExceptionHandlerImpl : virtual public ElementImpl, virtual public ExceptionHandler 
 	{
 		public: 
 			ExceptionHandlerImpl(const ExceptionHandlerImpl & obj);

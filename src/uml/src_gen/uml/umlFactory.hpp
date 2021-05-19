@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -76,7 +79,7 @@ namespace uml
 
 namespace uml 
 {
-	class umlFactory : virtual public ecore::EFactory 
+	class UML_API umlFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			umlFactory(umlFactory const&) = delete;

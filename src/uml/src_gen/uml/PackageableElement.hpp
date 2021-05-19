@@ -46,6 +46,9 @@ namespace uml
 	class TemplateParameter;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/NamedElement.hpp"
 #include "uml/ParameterableElement.hpp"
@@ -63,7 +66,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class PackageableElement: virtual public NamedElement, virtual public ParameterableElement
+	class UML_API PackageableElement: virtual public NamedElement, virtual public ParameterableElement
 	{
 		public:
  			PackageableElement(const PackageableElement &) {}

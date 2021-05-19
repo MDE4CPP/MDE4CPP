@@ -63,6 +63,9 @@ namespace uml
 	class WriteStructuralFeatureAction;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Pin.hpp"
 
@@ -81,7 +84,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class InputPin: virtual public Pin
+	class UML_API InputPin: virtual public Pin
 	{
 		public:
  			InputPin(const InputPin &) {}

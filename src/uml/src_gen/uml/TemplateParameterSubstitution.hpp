@@ -44,6 +44,9 @@ namespace uml
 	class TemplateParameter;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Element.hpp"
 
@@ -59,7 +62,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class TemplateParameterSubstitution: virtual public Element
+	class UML_API TemplateParameterSubstitution: virtual public Element
 	{
 		public:
  			TemplateParameterSubstitution(const TemplateParameterSubstitution &) {}

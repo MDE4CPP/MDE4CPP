@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Extension.hpp"
 
 #include "uml/impl/AssociationImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ExtensionImpl : virtual public AssociationImpl, virtual public Extension 
+	class UML_API ExtensionImpl : virtual public AssociationImpl, virtual public Extension 
 	{
 		public: 
 			ExtensionImpl(const ExtensionImpl & obj);

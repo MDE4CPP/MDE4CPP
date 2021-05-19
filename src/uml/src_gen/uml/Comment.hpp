@@ -34,6 +34,9 @@ namespace uml
 
 //Forward Declaration for used types 
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Element.hpp"
 
@@ -49,7 +52,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class Comment: virtual public Element
+	class UML_API Comment: virtual public Element
 	{
 		public:
  			Comment(const Comment &) {}

@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ConnectionPointReference.hpp"
 
 #include "uml/impl/VertexImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ConnectionPointReferenceImpl : virtual public VertexImpl, virtual public ConnectionPointReference 
+	class UML_API ConnectionPointReferenceImpl : virtual public VertexImpl, virtual public ConnectionPointReference 
 	{
 		public: 
 			ConnectionPointReferenceImpl(const ConnectionPointReferenceImpl & obj);

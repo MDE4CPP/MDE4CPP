@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../TemplateableElement.hpp"
 
 #include "uml/impl/ElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class TemplateableElementImpl : virtual public ElementImpl, virtual public TemplateableElement 
+	class UML_API TemplateableElementImpl : virtual public ElementImpl, virtual public TemplateableElement 
 	{
 		public: 
 			TemplateableElementImpl(const TemplateableElementImpl & obj);

@@ -46,6 +46,9 @@ namespace uml
 	class Profile;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/DirectedRelationship.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class ProfileApplication: virtual public DirectedRelationship
+	class UML_API ProfileApplication: virtual public DirectedRelationship
 	{
 		public:
  			ProfileApplication(const ProfileApplication &) {}

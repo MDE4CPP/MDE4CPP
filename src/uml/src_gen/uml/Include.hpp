@@ -42,6 +42,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/DirectedRelationship.hpp"
 #include "uml/NamedElement.hpp"
@@ -59,7 +62,7 @@ namespace uml
 	<p>From package UML::UseCases.</p>
 	*/
 	
-	class Include: virtual public DirectedRelationship, virtual public NamedElement
+	class UML_API Include: virtual public DirectedRelationship, virtual public NamedElement
 	{
 		public:
  			Include(const Include &) {}

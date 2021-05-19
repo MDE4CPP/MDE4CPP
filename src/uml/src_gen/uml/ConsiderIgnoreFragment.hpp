@@ -49,6 +49,9 @@ namespace uml
 	class StringExpression;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/CombinedFragment.hpp"
 
@@ -67,7 +70,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class ConsiderIgnoreFragment: virtual public CombinedFragment
+	class UML_API ConsiderIgnoreFragment: virtual public CombinedFragment
 	{
 		public:
  			ConsiderIgnoreFragment(const ConsiderIgnoreFragment &) {}

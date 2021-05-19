@@ -55,6 +55,9 @@ namespace uml
 	class Variable;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Action.hpp"
 
@@ -71,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class VariableAction: virtual public Action
+	class UML_API VariableAction: virtual public Action
 	{
 		public:
  			VariableAction(const VariableAction &) {}

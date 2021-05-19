@@ -45,6 +45,9 @@ namespace uml
 	class StringExpression;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/OccurrenceSpecification.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class ExecutionOccurrenceSpecification: virtual public OccurrenceSpecification
+	class UML_API ExecutionOccurrenceSpecification: virtual public OccurrenceSpecification
 	{
 		public:
  			ExecutionOccurrenceSpecification(const ExecutionOccurrenceSpecification &) {}

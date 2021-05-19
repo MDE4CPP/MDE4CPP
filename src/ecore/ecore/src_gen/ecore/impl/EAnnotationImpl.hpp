@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ecore/ecore.hpp" 
+
+// model includes
 #include "../EAnnotation.hpp"
 
 #include "ecore/impl/EModelElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace ecore 
 {
-	class EAnnotationImpl : virtual public EModelElementImpl, virtual public EAnnotation 
+	class ECORE_API EAnnotationImpl : virtual public EModelElementImpl, virtual public EAnnotation 
 	{
 		public: 
 			EAnnotationImpl(const EAnnotationImpl & obj);

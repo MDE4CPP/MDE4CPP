@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../OpaqueBehavior.hpp"
 
 #include "uml/impl/BehaviorImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class OpaqueBehaviorImpl : virtual public BehaviorImpl, virtual public OpaqueBehavior 
+	class UML_API OpaqueBehaviorImpl : virtual public BehaviorImpl, virtual public OpaqueBehavior 
 	{
 		public: 
 			OpaqueBehaviorImpl(const OpaqueBehaviorImpl & obj);

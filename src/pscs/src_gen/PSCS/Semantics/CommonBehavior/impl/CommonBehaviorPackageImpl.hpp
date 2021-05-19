@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICS_COMMONBEHAVIORPACKAGEIMPL_HPP
 #define PSCS_SEMANTICS_COMMONBEHAVIORPACKAGEIMPL_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -25,7 +28,7 @@ namespace ecore
 
 namespace PSCS::Semantics::CommonBehavior
 {
-	class CommonBehaviorPackageImpl : public ecore::EPackageImpl ,virtual public CommonBehaviorPackage
+	class PSCS_API CommonBehaviorPackageImpl : public ecore::EPackageImpl ,virtual public CommonBehaviorPackage
 	{
 		private:    
 			CommonBehaviorPackageImpl(CommonBehaviorPackageImpl const&) = delete;

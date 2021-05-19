@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../Token.hpp"
 
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
@@ -20,7 +23,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class TokenImpl : virtual public ecore::EModelElementImpl,
+	class FUML_API TokenImpl : virtual public ecore::EModelElementImpl,
 virtual public Token 
 	{
 		public: 

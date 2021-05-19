@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICSFACTORYIMPL_HPP
 #define PSCS_SEMANTICSFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "PSCS/Semantics/SemanticsFactory.hpp"
@@ -17,7 +20,7 @@ namespace Semantics
 
 namespace PSCS::Semantics 
 {
-	class SemanticsFactoryImpl : virtual public ecore::EFactoryImpl , virtual public SemanticsFactory 
+	class PSCS_API SemanticsFactoryImpl : virtual public ecore::EFactoryImpl , virtual public SemanticsFactory 
 	{
 		private:    
 			SemanticsFactoryImpl(SemanticsFactoryImpl const&) = delete;

@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../StartClassifierBehaviorAction.hpp"
 
 #include "uml/impl/ActionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class StartClassifierBehaviorActionImpl : virtual public ActionImpl, virtual public StartClassifierBehaviorAction 
+	class UML_API StartClassifierBehaviorActionImpl : virtual public ActionImpl, virtual public StartClassifierBehaviorAction 
 	{
 		public: 
 			StartClassifierBehaviorActionImpl(const StartClassifierBehaviorActionImpl & obj);

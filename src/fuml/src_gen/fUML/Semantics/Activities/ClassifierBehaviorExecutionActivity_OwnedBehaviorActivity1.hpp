@@ -33,6 +33,9 @@ namespace fUML
 
 //Forward Declaration for used types 
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -44,7 +47,7 @@ namespace fUML
 namespace fUML::Semantics::Activities 
 {
 	
-	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 : virtual public ecore::EModelElement
+	class FUML_API ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 : virtual public ecore::EModelElement
 	{
 		public:
  			ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1(const ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 &) {}

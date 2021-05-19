@@ -54,6 +54,9 @@ namespace uml
 	class Trigger;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/State.hpp"
 
@@ -70,7 +73,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class FinalState: virtual public State
+	class UML_API FinalState: virtual public State
 	{
 		public:
  			FinalState(const FinalState &) {}

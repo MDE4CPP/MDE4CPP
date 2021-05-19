@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICS_LOCIFACTORYIMPL_HPP
 #define FUML_SEMANTICS_LOCIFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "fUML/Semantics/Loci/LociFactory.hpp"
@@ -23,7 +26,7 @@ namespace Loci
 
 namespace fUML::Semantics::Loci 
 {
-	class LociFactoryImpl : virtual public ecore::EFactoryImpl , virtual public LociFactory 
+	class FUML_API LociFactoryImpl : virtual public ecore::EFactoryImpl , virtual public LociFactory 
 	{
 		private:    
 			LociFactoryImpl(LociFactoryImpl const&) = delete;

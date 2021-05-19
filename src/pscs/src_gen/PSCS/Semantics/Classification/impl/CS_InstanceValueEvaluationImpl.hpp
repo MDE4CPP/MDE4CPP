@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "pscs/pscs.hpp" 
+
+// model includes
 #include "../CS_InstanceValueEvaluation.hpp"
 
 #include "PSCS/Semantics/Classification/impl/ClassificationFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace PSCS::Semantics::Classification 
 {
-	class CS_InstanceValueEvaluationImpl : virtual public fUML::Semantics::Classification::InstanceValueEvaluationImpl, virtual public CS_InstanceValueEvaluation 
+	class PSCS_API CS_InstanceValueEvaluationImpl : virtual public fUML::Semantics::Classification::InstanceValueEvaluationImpl, virtual public CS_InstanceValueEvaluation 
 	{
 		public: 
 			CS_InstanceValueEvaluationImpl(const CS_InstanceValueEvaluationImpl & obj);

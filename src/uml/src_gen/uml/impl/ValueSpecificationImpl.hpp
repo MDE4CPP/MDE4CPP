@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ValueSpecification.hpp"
 
 #include "uml/impl/PackageableElementImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace uml 
 {
-	class ValueSpecificationImpl : virtual public PackageableElementImpl, virtual public TypedElementImpl, virtual public ValueSpecification 
+	class UML_API ValueSpecificationImpl : virtual public PackageableElementImpl, virtual public TypedElementImpl, virtual public ValueSpecification 
 	{
 		public: 
 			ValueSpecificationImpl(const ValueSpecificationImpl & obj);

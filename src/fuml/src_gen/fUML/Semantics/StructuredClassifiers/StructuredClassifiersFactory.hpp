@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
@@ -18,7 +21,7 @@
 
 namespace fUML::Semantics::StructuredClassifiers 
 {
-	class StructuredClassifiersFactory : virtual public ecore::EFactory 
+	class FUML_API StructuredClassifiersFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			StructuredClassifiersFactory(StructuredClassifiersFactory const&) = delete;

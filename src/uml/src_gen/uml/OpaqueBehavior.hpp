@@ -63,6 +63,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Behavior.hpp"
 
@@ -79,7 +82,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class OpaqueBehavior: virtual public Behavior
+	class UML_API OpaqueBehavior: virtual public Behavior
 	{
 		public:
  			OpaqueBehavior(const OpaqueBehavior &) {}

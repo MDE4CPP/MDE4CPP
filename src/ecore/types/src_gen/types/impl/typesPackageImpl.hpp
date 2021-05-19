@@ -7,6 +7,9 @@
 #ifndef TYPESPACKAGEIMPL_HPP
 #define TYPESPACKAGEIMPL_HPP
 
+// namespace macro header include
+#include "types/types.hpp"
+
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -24,7 +27,7 @@ namespace ecore
 
 namespace types
 {
-	class typesPackageImpl : public ecore::EPackageImpl ,virtual public typesPackage
+	class TYPES_API typesPackageImpl : public ecore::EPackageImpl ,virtual public typesPackage
 	{
 		private:    
 			typesPackageImpl(typesPackageImpl const&) = delete;

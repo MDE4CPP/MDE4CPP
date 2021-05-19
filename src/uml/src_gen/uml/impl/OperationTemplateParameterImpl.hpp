@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../OperationTemplateParameter.hpp"
 
 #include "uml/impl/TemplateParameterImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class OperationTemplateParameterImpl : virtual public TemplateParameterImpl, virtual public OperationTemplateParameter 
+	class UML_API OperationTemplateParameterImpl : virtual public TemplateParameterImpl, virtual public OperationTemplateParameter 
 	{
 		public: 
 			OperationTemplateParameterImpl(const OperationTemplateParameterImpl & obj);

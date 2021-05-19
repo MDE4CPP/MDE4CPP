@@ -42,6 +42,9 @@ namespace uml
 	class DataType;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 
@@ -53,7 +56,7 @@ namespace uml
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	
-	class DataValue: virtual public CompoundValue
+	class FUML_API DataValue: virtual public CompoundValue
 	{
 		public:
  			DataValue(const DataValue &) {}

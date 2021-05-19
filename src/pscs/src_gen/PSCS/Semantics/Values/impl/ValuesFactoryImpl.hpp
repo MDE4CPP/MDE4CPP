@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICS_VALUESFACTORYIMPL_HPP
 #define PSCS_SEMANTICS_VALUESFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "PSCS/Semantics/Values/ValuesFactory.hpp"
@@ -17,7 +20,7 @@ namespace Values
 
 namespace PSCS::Semantics::Values 
 {
-	class ValuesFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ValuesFactory 
+	class PSCS_API ValuesFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ValuesFactory 
 	{
 		private:    
 			ValuesFactoryImpl(ValuesFactoryImpl const&) = delete;

@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../MessageOccurrenceSpecification.hpp"
 
 #include "uml/impl/MessageEndImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace uml 
 {
-	class MessageOccurrenceSpecificationImpl : virtual public MessageEndImpl, virtual public OccurrenceSpecificationImpl, virtual public MessageOccurrenceSpecification 
+	class UML_API MessageOccurrenceSpecificationImpl : virtual public MessageEndImpl, virtual public OccurrenceSpecificationImpl, virtual public MessageOccurrenceSpecification 
 	{
 		public: 
 			MessageOccurrenceSpecificationImpl(const MessageOccurrenceSpecificationImpl & obj);

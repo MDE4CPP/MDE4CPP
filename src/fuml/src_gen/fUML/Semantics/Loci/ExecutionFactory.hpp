@@ -61,6 +61,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -72,7 +75,7 @@ namespace uml
 namespace fUML::Semantics::Loci 
 {
 	
-	class ExecutionFactory : virtual public ecore::EModelElement
+	class FUML_API ExecutionFactory : virtual public ecore::EModelElement
 	{
 		public:
  			ExecutionFactory(const ExecutionFactory &) {}

@@ -61,6 +61,9 @@ namespace uml
 	class StructuralFeature;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
@@ -72,7 +75,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class StructuralFeatureActionActivation: virtual public ActionActivation
+	class FUML_API StructuralFeatureActionActivation: virtual public ActionActivation
 	{
 		public:
  			StructuralFeatureActionActivation(const StructuralFeatureActionActivation &) {}

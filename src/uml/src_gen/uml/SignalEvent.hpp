@@ -43,6 +43,9 @@ namespace uml
 	class TemplateParameter;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/MessageEvent.hpp"
 
@@ -59,7 +62,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class SignalEvent: virtual public MessageEvent
+	class UML_API SignalEvent: virtual public MessageEvent
 	{
 		public:
  			SignalEvent(const SignalEvent &) {}

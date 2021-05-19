@@ -49,6 +49,9 @@ namespace uml
 	class Classifier;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -60,7 +63,7 @@ namespace uml
 namespace fUML::Semantics::Loci 
 {
 	
-	class Locus : virtual public ecore::EModelElement
+	class FUML_API Locus : virtual public ecore::EModelElement
 	{
 		public:
  			Locus(const Locus &) {}

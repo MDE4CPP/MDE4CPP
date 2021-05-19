@@ -47,6 +47,9 @@ namespace uml
 	class StructuredActivityNode;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/FinalNode.hpp"
 
@@ -63,7 +66,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class ActivityFinalNode: virtual public FinalNode
+	class UML_API ActivityFinalNode: virtual public FinalNode
 	{
 		public:
  			ActivityFinalNode(const ActivityFinalNode &) {}

@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../DataType.hpp"
 
 #include "uml/impl/ClassifierImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class DataTypeImpl : virtual public ClassifierImpl, virtual public DataType 
+	class UML_API DataTypeImpl : virtual public ClassifierImpl, virtual public DataType 
 	{
 		public: 
 			DataTypeImpl(const DataTypeImpl & obj);

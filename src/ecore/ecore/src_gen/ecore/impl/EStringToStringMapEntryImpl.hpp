@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ecore/ecore.hpp" 
+
+// model includes
 #include "../EStringToStringMapEntry.hpp"
 
 
@@ -19,7 +22,7 @@
 //*********************************
 namespace ecore 
 {
-	class EStringToStringMapEntryImpl : virtual public ecore::EModelElementImpl,
+	class ECORE_API EStringToStringMapEntryImpl : virtual public ecore::EModelElementImpl,
 virtual public EStringToStringMapEntry 
 	{
 		public: 

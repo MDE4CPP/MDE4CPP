@@ -33,6 +33,9 @@ namespace fUML
 
 //Forward Declaration for used types 
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -44,7 +47,7 @@ namespace fUML
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class EventDispatchLoop : virtual public ecore::EModelElement
+	class FUML_API EventDispatchLoop : virtual public ecore::EModelElement
 	{
 		public:
  			EventDispatchLoop(const EventDispatchLoop &) {}

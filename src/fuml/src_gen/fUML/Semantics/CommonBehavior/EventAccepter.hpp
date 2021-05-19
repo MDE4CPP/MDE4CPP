@@ -37,6 +37,9 @@ namespace fUML::Semantics::SimpleClassifiers
 	class SignalInstance;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -48,7 +51,7 @@ namespace fUML::Semantics::SimpleClassifiers
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class EventAccepter : virtual public ecore::EModelElement
+	class FUML_API EventAccepter : virtual public ecore::EModelElement
 	{
 		public:
  			EventAccepter(const EventAccepter &) {}

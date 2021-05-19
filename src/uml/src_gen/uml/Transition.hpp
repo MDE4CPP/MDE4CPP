@@ -54,6 +54,9 @@ namespace uml
 	class Vertex;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Namespace.hpp"
 #include "uml/RedefinableElement.hpp"
@@ -73,7 +76,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class Transition: virtual public Namespace, virtual public RedefinableElement
+	class UML_API Transition: virtual public Namespace, virtual public RedefinableElement
 	{
 		public:
  			Transition(const Transition &) {}

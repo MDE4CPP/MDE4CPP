@@ -50,6 +50,9 @@ namespace uml
 	class ActivityNode;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/SendSignalActionActivation.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_SendSignalActionActivation: virtual public fUML::Semantics::Actions::SendSignalActionActivation
+	class PSCS_API CS_SendSignalActionActivation: virtual public fUML::Semantics::Actions::SendSignalActionActivation
 	{
 		public:
  			CS_SendSignalActionActivation(const CS_SendSignalActionActivation &) {}

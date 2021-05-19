@@ -54,6 +54,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/DataType.hpp"
 
@@ -70,7 +73,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class PrimitiveType: virtual public DataType
+	class UML_API PrimitiveType: virtual public DataType
 	{
 		public:
  			PrimitiveType(const PrimitiveType &) {}

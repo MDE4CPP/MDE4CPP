@@ -48,6 +48,9 @@ namespace uml
 	class TemplateParameter;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/PackageableElement.hpp"
 
@@ -64,7 +67,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class GeneralizationSet: virtual public PackageableElement
+	class UML_API GeneralizationSet: virtual public PackageableElement
 	{
 		public:
  			GeneralizationSet(const GeneralizationSet &) {}

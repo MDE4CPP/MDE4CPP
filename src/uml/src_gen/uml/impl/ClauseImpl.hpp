@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Clause.hpp"
 
 #include "uml/impl/ElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ClauseImpl : virtual public ElementImpl, virtual public Clause 
+	class UML_API ClauseImpl : virtual public ElementImpl, virtual public Clause 
 	{
 		public: 
 			ClauseImpl(const ClauseImpl & obj);

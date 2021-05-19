@@ -54,6 +54,9 @@ namespace uml
 	class Vertex;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Transition.hpp"
 
@@ -72,7 +75,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class ProtocolTransition: virtual public Transition
+	class UML_API ProtocolTransition: virtual public Transition
 	{
 		public:
  			ProtocolTransition(const ProtocolTransition &) {}

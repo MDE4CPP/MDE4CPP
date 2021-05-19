@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../MergeNodeActivation.hpp"
 
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class MergeNodeActivationImpl : virtual public ControlNodeActivationImpl, virtual public MergeNodeActivation 
+	class FUML_API MergeNodeActivationImpl : virtual public ControlNodeActivationImpl, virtual public MergeNodeActivation 
 	{
 		public: 
 			MergeNodeActivationImpl(const MergeNodeActivationImpl & obj);

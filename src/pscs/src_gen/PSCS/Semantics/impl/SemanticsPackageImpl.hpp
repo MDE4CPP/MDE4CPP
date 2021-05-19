@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICSPACKAGEIMPL_HPP
 #define PSCS_SEMANTICSPACKAGEIMPL_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -53,7 +56,7 @@ namespace ecore
 
 namespace PSCS::Semantics
 {
-	class SemanticsPackageImpl : public ecore::EPackageImpl ,virtual public SemanticsPackage
+	class PSCS_API SemanticsPackageImpl : public ecore::EPackageImpl ,virtual public SemanticsPackage
 	{
 		private:    
 			SemanticsPackageImpl(SemanticsPackageImpl const&) = delete;

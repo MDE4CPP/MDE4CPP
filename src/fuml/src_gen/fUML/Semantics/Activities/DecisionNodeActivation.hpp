@@ -54,6 +54,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Activities/ControlNodeActivation.hpp"
 
@@ -65,7 +68,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class DecisionNodeActivation: virtual public ControlNodeActivation
+	class FUML_API DecisionNodeActivation: virtual public ControlNodeActivation
 	{
 		public:
  			DecisionNodeActivation(const DecisionNodeActivation &) {}

@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/Classification/ClassificationPackage.hpp"
 
@@ -18,7 +21,7 @@
 
 namespace fUML::Semantics::Classification 
 {
-	class ClassificationFactory : virtual public ecore::EFactory 
+	class FUML_API ClassificationFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			ClassificationFactory(ClassificationFactory const&) = delete;

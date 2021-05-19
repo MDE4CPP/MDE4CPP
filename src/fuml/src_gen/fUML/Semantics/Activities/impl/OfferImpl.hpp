@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../Offer.hpp"
 
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
@@ -20,7 +23,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class OfferImpl : virtual public ecore::EModelElementImpl,
+	class FUML_API OfferImpl : virtual public ecore::EModelElementImpl,
 virtual public Offer 
 	{
 		public: 

@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../OutputPin.hpp"
 
 #include "uml/impl/PinImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class OutputPinImpl : virtual public PinImpl, virtual public OutputPin 
+	class UML_API OutputPinImpl : virtual public PinImpl, virtual public OutputPin 
 	{
 		public: 
 			OutputPinImpl(const OutputPinImpl & obj);

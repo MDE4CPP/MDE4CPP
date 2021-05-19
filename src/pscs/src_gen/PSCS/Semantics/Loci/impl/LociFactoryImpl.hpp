@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICS_LOCIFACTORYIMPL_HPP
 #define PSCS_SEMANTICS_LOCIFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "PSCS/Semantics/Loci/LociFactory.hpp"
@@ -19,7 +22,7 @@ namespace Loci
 
 namespace PSCS::Semantics::Loci 
 {
-	class LociFactoryImpl : virtual public ecore::EFactoryImpl , virtual public LociFactory 
+	class PSCS_API LociFactoryImpl : virtual public ecore::EFactoryImpl , virtual public LociFactory 
 	{
 		private:    
 			LociFactoryImpl(LociFactoryImpl const&) = delete;

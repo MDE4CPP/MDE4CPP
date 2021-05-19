@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../TimeExpression.hpp"
 
 #include "uml/impl/ValueSpecificationImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class TimeExpressionImpl : virtual public ValueSpecificationImpl, virtual public TimeExpression 
+	class UML_API TimeExpressionImpl : virtual public ValueSpecificationImpl, virtual public TimeExpression 
 	{
 		public: 
 			TimeExpressionImpl(const TimeExpressionImpl & obj);

@@ -40,6 +40,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Values/Value.hpp"
 
@@ -51,7 +54,7 @@ namespace uml
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	
-	class EnumerationValue: virtual public fUML::Semantics::Values::Value
+	class FUML_API EnumerationValue: virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			EnumerationValue(const EnumerationValue &) {}

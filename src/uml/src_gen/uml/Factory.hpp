@@ -38,6 +38,9 @@ namespace uml
 	class Comment;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Element.hpp"
 
@@ -55,7 +58,7 @@ namespace uml
 	<span style="background-color:#FF8000">This Element was merged from mof::Reflection package.</span>
 	*/
 	
-	class Factory: virtual public Element
+	class UML_API Factory: virtual public Element
 	{
 		public:
  			Factory(const Factory &) {}

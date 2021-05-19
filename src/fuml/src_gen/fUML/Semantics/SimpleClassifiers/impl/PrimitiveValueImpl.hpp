@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../PrimitiveValue.hpp"
 
 #include "fUML/Semantics/SimpleClassifiers/impl/SimpleClassifiersFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::SimpleClassifiers 
 {
-	class PrimitiveValueImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public PrimitiveValue 
+	class FUML_API PrimitiveValueImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public PrimitiveValue 
 	{
 		public: 
 			PrimitiveValueImpl(const PrimitiveValueImpl & obj);

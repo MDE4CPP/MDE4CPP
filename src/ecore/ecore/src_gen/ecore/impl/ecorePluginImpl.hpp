@@ -7,11 +7,14 @@
 #ifndef ECOREPLUGINIMPL_HPP
 #define ECOREPLUGINIMPL_HPP
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 #include "ecore/ecorePlugin.hpp"
 
 namespace ecore 
 {
-	class ecorePluginImpl : virtual public ecorePlugin 
+	class ECORE_API ecorePluginImpl : virtual public ecorePlugin 
 	{
 		public:
 			ecorePluginImpl();

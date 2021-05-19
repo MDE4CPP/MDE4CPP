@@ -51,6 +51,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/DeployedArtifact.hpp"
 #include "uml/DeploymentTarget.hpp"
@@ -69,7 +72,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class InstanceSpecification: virtual public DeployedArtifact, virtual public DeploymentTarget, virtual public PackageableElement
+	class UML_API InstanceSpecification: virtual public DeployedArtifact, virtual public DeploymentTarget, virtual public PackageableElement
 	{
 		public:
  			InstanceSpecification(const InstanceSpecification &) {}

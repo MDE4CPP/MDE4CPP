@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ClearAssociationAction.hpp"
 
 #include "uml/impl/ActionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ClearAssociationActionImpl : virtual public ActionImpl, virtual public ClearAssociationAction 
+	class UML_API ClearAssociationActionImpl : virtual public ActionImpl, virtual public ClearAssociationAction 
 	{
 		public: 
 			ClearAssociationActionImpl(const ClearAssociationActionImpl & obj);

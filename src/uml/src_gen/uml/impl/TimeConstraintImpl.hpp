@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../TimeConstraint.hpp"
 
 #include "uml/impl/IntervalConstraintImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class TimeConstraintImpl : virtual public IntervalConstraintImpl, virtual public TimeConstraint 
+	class UML_API TimeConstraintImpl : virtual public IntervalConstraintImpl, virtual public TimeConstraint 
 	{
 		public: 
 			TimeConstraintImpl(const TimeConstraintImpl & obj);

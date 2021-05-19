@@ -7,6 +7,9 @@
 #ifndef UMLPACKAGEIMPL_HPP
 #define UMLPACKAGEIMPL_HPP
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -268,7 +271,7 @@ namespace ecore
 
 namespace uml
 {
-	class umlPackageImpl : public ecore::EPackageImpl ,virtual public umlPackage
+	class UML_API umlPackageImpl : public ecore::EPackageImpl ,virtual public umlPackage
 	{
 		private:    
 			umlPackageImpl(umlPackageImpl const&) = delete;

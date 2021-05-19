@@ -57,6 +57,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Classifier.hpp"
 
@@ -73,7 +76,7 @@ namespace uml
 	<p>From package UML::InformationFlows.</p>
 	*/
 	
-	class InformationItem: virtual public Classifier
+	class UML_API InformationItem: virtual public Classifier
 	{
 		public:
  			InformationItem(const InformationItem &) {}

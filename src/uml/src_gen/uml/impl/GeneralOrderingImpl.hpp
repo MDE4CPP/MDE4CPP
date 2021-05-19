@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../GeneralOrdering.hpp"
 
 #include "uml/impl/NamedElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class GeneralOrderingImpl : virtual public NamedElementImpl, virtual public GeneralOrdering 
+	class UML_API GeneralOrderingImpl : virtual public NamedElementImpl, virtual public GeneralOrdering 
 	{
 		public: 
 			GeneralOrderingImpl(const GeneralOrderingImpl & obj);

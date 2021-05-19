@@ -45,6 +45,9 @@ namespace uml
 	class ValueSpecificationAction;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Interval.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class TimeInterval: virtual public Interval
+	class UML_API TimeInterval: virtual public Interval
 	{
 		public:
  			TimeInterval(const TimeInterval &) {}

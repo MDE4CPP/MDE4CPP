@@ -53,6 +53,9 @@ namespace uml
 	class Stereotype;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Object.hpp"
 
@@ -68,7 +71,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class Element: virtual public Object
+	class UML_API Element: virtual public Object
 	{
 		public:
  			Element(const Element &) {}

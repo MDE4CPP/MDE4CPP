@@ -73,6 +73,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Behavior.hpp"
 #include "uml/InteractionFragment.hpp"
@@ -90,7 +93,7 @@ namespace uml
 	<p>From package UML::Interactions.</p>
 	*/
 	
-	class Interaction: virtual public Behavior, virtual public InteractionFragment
+	class UML_API Interaction: virtual public Behavior, virtual public InteractionFragment
 	{
 		public:
  			Interaction(const Interaction &) {}

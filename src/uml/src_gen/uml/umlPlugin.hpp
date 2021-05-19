@@ -7,11 +7,14 @@
 #ifndef UMLPLUGIN_HPP
 #define UMLPLUGIN_HPP
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 #include "pluginFramework/EcoreModelPlugin.hpp"
 
 namespace uml
 {
-	class umlPlugin : virtual public EcoreModelPlugin
+	class UML_API umlPlugin : virtual public EcoreModelPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

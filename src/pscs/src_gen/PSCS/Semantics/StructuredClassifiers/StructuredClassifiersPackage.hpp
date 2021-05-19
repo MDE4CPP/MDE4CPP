@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICS_STRUCTUREDCLASSIFIERSPACKAGE_HPP
 #define PSCS_SEMANTICS_STRUCTUREDCLASSIFIERSPACKAGE_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -43,7 +46,7 @@ namespace PSCS::Semantics::StructuredClassifiers
 	which were described in an ecore file.
 	*/
 	
-	class StructuredClassifiersPackage : virtual public ecore::EPackage 
+	class PSCS_API StructuredClassifiersPackage : virtual public ecore::EPackage 
 	{
 		private:    
 			StructuredClassifiersPackage(StructuredClassifiersPackage const&) = delete;

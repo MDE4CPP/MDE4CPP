@@ -52,6 +52,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/RedefinableElement.hpp"
 
@@ -68,7 +71,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class ActivityEdge: virtual public RedefinableElement
+	class UML_API ActivityEdge: virtual public RedefinableElement
 	{
 		public:
  			ActivityEdge(const ActivityEdge &) {}

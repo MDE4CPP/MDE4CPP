@@ -39,6 +39,9 @@ namespace ecore
 	class EEnum;
 }
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 // base class includes
 #include "ecore/ENamedElement.hpp"
 
@@ -50,7 +53,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class EEnumLiteral: virtual public ENamedElement
+	class ECORE_API EEnumLiteral: virtual public ENamedElement
 	{
 		public:
  			EEnumLiteral(const EEnumLiteral &) {}

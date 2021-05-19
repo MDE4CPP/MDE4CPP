@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../EventDispatchLoop.hpp"
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
@@ -20,7 +23,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class EventDispatchLoopImpl : virtual public ecore::EModelElementImpl,
+	class FUML_API EventDispatchLoopImpl : virtual public ecore::EModelElementImpl,
 virtual public EventDispatchLoop 
 	{
 		public: 

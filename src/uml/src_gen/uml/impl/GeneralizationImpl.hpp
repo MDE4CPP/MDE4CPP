@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Generalization.hpp"
 
 #include "uml/impl/DirectedRelationshipImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class GeneralizationImpl : virtual public DirectedRelationshipImpl, virtual public Generalization 
+	class UML_API GeneralizationImpl : virtual public DirectedRelationshipImpl, virtual public Generalization 
 	{
 		public: 
 			GeneralizationImpl(const GeneralizationImpl & obj);

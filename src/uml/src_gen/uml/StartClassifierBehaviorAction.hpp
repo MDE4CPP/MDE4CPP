@@ -55,6 +55,9 @@ namespace uml
 	class StructuredActivityNode;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Action.hpp"
 
@@ -71,7 +74,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class StartClassifierBehaviorAction: virtual public Action
+	class UML_API StartClassifierBehaviorAction: virtual public Action
 	{
 		public:
  			StartClassifierBehaviorAction(const StartClassifierBehaviorAction &) {}

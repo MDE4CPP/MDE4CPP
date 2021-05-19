@@ -38,6 +38,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/SimpleClassifiers/PrimitiveValue.hpp"
 
@@ -49,7 +52,7 @@ namespace uml
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	
-	class BooleanValue: virtual public PrimitiveValue
+	class FUML_API BooleanValue: virtual public PrimitiveValue
 	{
 		public:
  			BooleanValue(const BooleanValue &) {}

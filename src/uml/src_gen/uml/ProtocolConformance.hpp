@@ -39,6 +39,9 @@ namespace uml
 	class ProtocolStateMachine;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/DirectedRelationship.hpp"
 
@@ -54,7 +57,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class ProtocolConformance: virtual public DirectedRelationship
+	class UML_API ProtocolConformance: virtual public DirectedRelationship
 	{
 		public:
  			ProtocolConformance(const ProtocolConformance &) {}

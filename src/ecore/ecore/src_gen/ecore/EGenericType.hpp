@@ -41,6 +41,9 @@ namespace ecore
 	class ETypeParameter;
 }
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 // base class includes
 
 // enum includes
@@ -52,7 +55,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class EGenericType : virtual public ecore::EModelElement
+	class ECORE_API EGenericType : virtual public ecore::EModelElement
 	{
 		public:
  			EGenericType(const EGenericType &) {}

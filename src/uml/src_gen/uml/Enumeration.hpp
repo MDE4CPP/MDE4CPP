@@ -59,6 +59,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/DataType.hpp"
 
@@ -75,7 +78,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class Enumeration: virtual public DataType
+	class UML_API Enumeration: virtual public DataType
 	{
 		public:
  			Enumeration(const Enumeration &) {}

@@ -53,6 +53,9 @@ namespace uml
 	class Clause;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/StructuredActivityNodeActivation.hpp"
 
@@ -64,7 +67,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class ConditionalNodeActivation: virtual public StructuredActivityNodeActivation
+	class FUML_API ConditionalNodeActivation: virtual public StructuredActivityNodeActivation
 	{
 		public:
  			ConditionalNodeActivation(const ConditionalNodeActivation &) {}

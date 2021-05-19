@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Port.hpp"
 
 #include "uml/impl/PropertyImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class PortImpl : virtual public PropertyImpl, virtual public Port 
+	class UML_API PortImpl : virtual public PropertyImpl, virtual public Port 
 	{
 		public: 
 			PortImpl(const PortImpl & obj);

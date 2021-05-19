@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../RedefinableTemplateSignature.hpp"
 
 #include "uml/impl/RedefinableElementImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace uml 
 {
-	class RedefinableTemplateSignatureImpl : virtual public RedefinableElementImpl, virtual public TemplateSignatureImpl, virtual public RedefinableTemplateSignature 
+	class UML_API RedefinableTemplateSignatureImpl : virtual public RedefinableElementImpl, virtual public TemplateSignatureImpl, virtual public RedefinableTemplateSignature 
 	{
 		public: 
 			RedefinableTemplateSignatureImpl(const RedefinableTemplateSignatureImpl & obj);

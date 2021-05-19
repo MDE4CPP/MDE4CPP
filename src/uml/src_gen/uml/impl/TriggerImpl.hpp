@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Trigger.hpp"
 
 #include "uml/impl/NamedElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class TriggerImpl : virtual public NamedElementImpl, virtual public Trigger 
+	class UML_API TriggerImpl : virtual public NamedElementImpl, virtual public Trigger 
 	{
 		public: 
 			TriggerImpl(const TriggerImpl & obj);

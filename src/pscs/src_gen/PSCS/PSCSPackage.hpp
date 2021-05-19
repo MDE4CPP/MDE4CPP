@@ -7,6 +7,9 @@
 #ifndef PSCSPACKAGE_HPP
 #define PSCSPACKAGE_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -41,7 +44,7 @@ namespace PSCS
 	which were described in an ecore file.
 	*/
 	
-	class PSCSPackage : virtual public ecore::EPackage 
+	class PSCS_API PSCSPackage : virtual public ecore::EPackage 
 	{
 		private:    
 			PSCSPackage(PSCSPackage const&) = delete;

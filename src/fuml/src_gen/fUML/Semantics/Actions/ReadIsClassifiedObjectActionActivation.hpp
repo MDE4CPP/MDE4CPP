@@ -51,6 +51,9 @@ namespace uml
 	class Classifier;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
@@ -62,7 +65,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class ReadIsClassifiedObjectActionActivation: virtual public ActionActivation
+	class FUML_API ReadIsClassifiedObjectActionActivation: virtual public ActionActivation
 	{
 		public:
  			ReadIsClassifiedObjectActionActivation(const ReadIsClassifiedObjectActionActivation &) {}

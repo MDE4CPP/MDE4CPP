@@ -49,6 +49,9 @@ namespace uml
 	class Pin;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Activities/ObjectNodeActivation.hpp"
 
@@ -60,7 +63,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class PinActivation: virtual public fUML::Semantics::Activities::ObjectNodeActivation
+	class FUML_API PinActivation: virtual public fUML::Semantics::Activities::ObjectNodeActivation
 	{
 		public:
  			PinActivation(const PinActivation &) {}

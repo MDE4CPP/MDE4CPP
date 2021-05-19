@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "pscs/pscs.hpp" 
+
+// model includes
 #include "../CS_DispatchOperationOfInterfaceStrategy.hpp"
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_DispatchOperationOfInterfaceStrategyImpl : virtual public fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl, virtual public CS_DispatchOperationOfInterfaceStrategy 
+	class PSCS_API CS_DispatchOperationOfInterfaceStrategyImpl : virtual public fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategyImpl, virtual public CS_DispatchOperationOfInterfaceStrategy 
 	{
 		public: 
 			CS_DispatchOperationOfInterfaceStrategyImpl(const CS_DispatchOperationOfInterfaceStrategyImpl & obj);

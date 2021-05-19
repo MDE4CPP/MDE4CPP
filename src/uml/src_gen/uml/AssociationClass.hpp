@@ -64,6 +64,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Association.hpp"
 #include "uml/Class.hpp"
@@ -81,7 +84,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class AssociationClass: virtual public Association, virtual public Class
+	class UML_API AssociationClass: virtual public Association, virtual public Class
 	{
 		public:
  			AssociationClass(const AssociationClass &) {}

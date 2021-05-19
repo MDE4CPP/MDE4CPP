@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICS_CLASSIFICATIONFACTORYIMPL_HPP
 #define FUML_SEMANTICS_CLASSIFICATIONFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "fUML/Semantics/Classification/ClassificationFactory.hpp"
@@ -17,7 +20,7 @@ namespace Classification
 
 namespace fUML::Semantics::Classification 
 {
-	class ClassificationFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ClassificationFactory 
+	class FUML_API ClassificationFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ClassificationFactory 
 	{
 		private:    
 			ClassificationFactoryImpl(ClassificationFactoryImpl const&) = delete;

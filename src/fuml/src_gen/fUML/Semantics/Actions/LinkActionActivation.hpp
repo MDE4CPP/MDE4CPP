@@ -57,6 +57,9 @@ namespace uml
 	class LinkEndData;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
@@ -68,7 +71,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class LinkActionActivation: virtual public ActionActivation
+	class FUML_API LinkActionActivation: virtual public ActionActivation
 	{
 		public:
  			LinkActionActivation(const LinkActionActivation &) {}

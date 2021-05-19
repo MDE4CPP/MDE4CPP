@@ -41,6 +41,9 @@ namespace uml
 	class GeneralizationSet;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/DirectedRelationship.hpp"
 
@@ -56,7 +59,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class Generalization: virtual public DirectedRelationship
+	class UML_API Generalization: virtual public DirectedRelationship
 	{
 		public:
  			Generalization(const Generalization &) {}

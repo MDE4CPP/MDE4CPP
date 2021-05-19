@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Collaboration.hpp"
 
 #include "uml/impl/BehavioredClassifierImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace uml 
 {
-	class CollaborationImpl : virtual public BehavioredClassifierImpl, virtual public StructuredClassifierImpl, virtual public Collaboration 
+	class UML_API CollaborationImpl : virtual public BehavioredClassifierImpl, virtual public StructuredClassifierImpl, virtual public Collaboration 
 	{
 		public: 
 			CollaborationImpl(const CollaborationImpl & obj);

@@ -46,6 +46,9 @@ namespace uml
 	class StringExpression;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/NamedElement.hpp"
 
@@ -62,7 +65,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class Trigger: virtual public NamedElement
+	class UML_API Trigger: virtual public NamedElement
 	{
 		public:
  			Trigger(const Trigger &) {}

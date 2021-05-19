@@ -41,6 +41,9 @@ namespace uml
 	class Signal;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 
@@ -52,7 +55,7 @@ namespace uml
 namespace fUML::Semantics::SimpleClassifiers 
 {
 	
-	class SignalInstance: virtual public CompoundValue
+	class FUML_API SignalInstance: virtual public CompoundValue
 	{
 		public:
  			SignalInstance(const SignalInstance &) {}

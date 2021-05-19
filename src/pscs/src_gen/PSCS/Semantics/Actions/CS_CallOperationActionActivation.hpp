@@ -58,6 +58,9 @@ namespace uml
 	class Port;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/CallOperationActionActivation.hpp"
 
@@ -69,7 +72,7 @@ namespace uml
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_CallOperationActionActivation: virtual public fUML::Semantics::Actions::CallOperationActionActivation
+	class PSCS_API CS_CallOperationActionActivation: virtual public fUML::Semantics::Actions::CallOperationActionActivation
 	{
 		public:
  			CS_CallOperationActionActivation(const CS_CallOperationActionActivation &) {}

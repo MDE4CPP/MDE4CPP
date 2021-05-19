@@ -52,6 +52,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/ControlNode.hpp"
 
@@ -68,7 +71,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class JoinNode: virtual public ControlNode
+	class UML_API JoinNode: virtual public ControlNode
 	{
 		public:
  			JoinNode(const JoinNode &) {}

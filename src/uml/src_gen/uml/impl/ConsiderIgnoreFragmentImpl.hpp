@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ConsiderIgnoreFragment.hpp"
 
 #include "uml/impl/CombinedFragmentImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ConsiderIgnoreFragmentImpl : virtual public CombinedFragmentImpl, virtual public ConsiderIgnoreFragment 
+	class UML_API ConsiderIgnoreFragmentImpl : virtual public CombinedFragmentImpl, virtual public ConsiderIgnoreFragment 
 	{
 		public: 
 			ConsiderIgnoreFragmentImpl(const ConsiderIgnoreFragmentImpl & obj);

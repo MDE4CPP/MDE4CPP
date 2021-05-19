@@ -48,6 +48,9 @@ namespace uml
 	class Trigger;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 
@@ -59,7 +62,7 @@ namespace uml
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class CallEventOccurrence: virtual public EventOccurrence
+	class FUML_API CallEventOccurrence: virtual public EventOccurrence
 	{
 		public:
  			CallEventOccurrence(const CallEventOccurrence &) {}

@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ActivityNode.hpp"
 
 #include "uml/impl/RedefinableElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ActivityNodeImpl : virtual public RedefinableElementImpl, virtual public ActivityNode 
+	class UML_API ActivityNodeImpl : virtual public RedefinableElementImpl, virtual public ActivityNode 
 	{
 		public: 
 			ActivityNodeImpl(const ActivityNodeImpl & obj);

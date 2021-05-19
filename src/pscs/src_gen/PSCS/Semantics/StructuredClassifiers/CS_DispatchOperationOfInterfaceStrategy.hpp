@@ -37,6 +37,9 @@ namespace uml
 	class Operation;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/StructuredClassifiers/RedefinitionBasedDispatchStrategy.hpp"
 
@@ -48,7 +51,7 @@ namespace uml
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	
-	class CS_DispatchOperationOfInterfaceStrategy: virtual public fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy
+	class PSCS_API CS_DispatchOperationOfInterfaceStrategy: virtual public fUML::Semantics::StructuredClassifiers::RedefinitionBasedDispatchStrategy
 	{
 		public:
  			CS_DispatchOperationOfInterfaceStrategy(const CS_DispatchOperationOfInterfaceStrategy &) {}

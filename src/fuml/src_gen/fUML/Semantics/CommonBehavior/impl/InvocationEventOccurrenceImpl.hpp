@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../InvocationEventOccurrence.hpp"
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class InvocationEventOccurrenceImpl : virtual public EventOccurrenceImpl, virtual public InvocationEventOccurrence 
+	class FUML_API InvocationEventOccurrenceImpl : virtual public EventOccurrenceImpl, virtual public InvocationEventOccurrence 
 	{
 		public: 
 			InvocationEventOccurrenceImpl(const InvocationEventOccurrenceImpl & obj);

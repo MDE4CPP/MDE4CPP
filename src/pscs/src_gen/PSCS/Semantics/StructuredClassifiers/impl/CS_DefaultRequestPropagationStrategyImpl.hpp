@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "pscs/pscs.hpp" 
+
+// model includes
 #include "../CS_DefaultRequestPropagationStrategy.hpp"
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_DefaultRequestPropagationStrategyImpl : virtual public CS_RequestPropagationStrategyImpl, virtual public CS_DefaultRequestPropagationStrategy 
+	class PSCS_API CS_DefaultRequestPropagationStrategyImpl : virtual public CS_RequestPropagationStrategyImpl, virtual public CS_DefaultRequestPropagationStrategy 
 	{
 		public: 
 			CS_DefaultRequestPropagationStrategyImpl(const CS_DefaultRequestPropagationStrategyImpl & obj);

@@ -61,6 +61,9 @@ namespace uml
 	class Property;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "PSCS/Semantics/Actions/CS_ConstructStrategy.hpp"
 
@@ -72,7 +75,7 @@ namespace uml
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_DefaultConstructStrategy: virtual public CS_ConstructStrategy
+	class PSCS_API CS_DefaultConstructStrategy: virtual public CS_ConstructStrategy
 	{
 		public:
  			CS_DefaultConstructStrategy(const CS_DefaultConstructStrategy &) {}

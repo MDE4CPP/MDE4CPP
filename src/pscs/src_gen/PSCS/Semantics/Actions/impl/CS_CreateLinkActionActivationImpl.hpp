@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "pscs/pscs.hpp" 
+
+// model includes
 #include "../CS_CreateLinkActionActivation.hpp"
 
 #include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_CreateLinkActionActivationImpl : virtual public fUML::Semantics::Actions::CreateLinkActionActivationImpl, virtual public CS_CreateLinkActionActivation 
+	class PSCS_API CS_CreateLinkActionActivationImpl : virtual public fUML::Semantics::Actions::CreateLinkActionActivationImpl, virtual public CS_CreateLinkActionActivation 
 	{
 		public: 
 			CS_CreateLinkActionActivationImpl(const CS_CreateLinkActionActivationImpl & obj);

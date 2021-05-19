@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "pscs/pscs.hpp" 
+
+// model includes
 #include "../CS_ReadSelfActionActivation.hpp"
 
 #include "PSCS/Semantics/Actions/impl/ActionsFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace PSCS::Semantics::Actions 
 {
-	class CS_ReadSelfActionActivationImpl : virtual public fUML::Semantics::Actions::ReadSelfActionActivationImpl, virtual public CS_ReadSelfActionActivation 
+	class PSCS_API CS_ReadSelfActionActivationImpl : virtual public fUML::Semantics::Actions::ReadSelfActionActivationImpl, virtual public CS_ReadSelfActionActivation 
 	{
 		public: 
 			CS_ReadSelfActionActivationImpl(const CS_ReadSelfActionActivationImpl & obj);

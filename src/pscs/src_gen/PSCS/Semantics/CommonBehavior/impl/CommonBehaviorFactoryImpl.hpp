@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICS_COMMONBEHAVIORFACTORYIMPL_HPP
 #define PSCS_SEMANTICS_COMMONBEHAVIORFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "PSCS/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
@@ -18,7 +21,7 @@ namespace CommonBehavior
 
 namespace PSCS::Semantics::CommonBehavior 
 {
-	class CommonBehaviorFactoryImpl : virtual public ecore::EFactoryImpl , virtual public CommonBehaviorFactory 
+	class PSCS_API CommonBehaviorFactoryImpl : virtual public ecore::EFactoryImpl , virtual public CommonBehaviorFactory 
 	{
 		private:    
 			CommonBehaviorFactoryImpl(CommonBehaviorFactoryImpl const&) = delete;

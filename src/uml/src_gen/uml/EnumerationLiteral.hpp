@@ -48,6 +48,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/InstanceSpecification.hpp"
 
@@ -64,7 +67,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class EnumerationLiteral: virtual public InstanceSpecification
+	class UML_API EnumerationLiteral: virtual public InstanceSpecification
 	{
 		public:
  			EnumerationLiteral(const EnumerationLiteral &) {}

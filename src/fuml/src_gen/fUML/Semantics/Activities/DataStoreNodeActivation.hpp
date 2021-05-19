@@ -43,6 +43,9 @@ namespace uml
 	class ActivityNode;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Activities/CentralBufferNodeActivation.hpp"
 
@@ -54,7 +57,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class DataStoreNodeActivation: virtual public CentralBufferNodeActivation
+	class FUML_API DataStoreNodeActivation: virtual public CentralBufferNodeActivation
 	{
 		public:
  			DataStoreNodeActivation(const DataStoreNodeActivation &) {}

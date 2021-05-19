@@ -37,6 +37,9 @@ namespace fUML::Semantics::Activities
 	class ActivityNodeActivation;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Activities/Token.hpp"
 
@@ -48,7 +51,7 @@ namespace fUML::Semantics::Activities
 namespace fUML::Semantics::Activities 
 {
 	
-	class ControlToken: virtual public Token
+	class FUML_API ControlToken: virtual public Token
 	{
 		public:
  			ControlToken(const ControlToken &) {}

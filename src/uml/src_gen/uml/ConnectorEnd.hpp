@@ -44,6 +44,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/MultiplicityElement.hpp"
 
@@ -59,7 +62,7 @@ namespace uml
 	<p>From package UML::StructuredClassifiers.</p>
 	*/
 	
-	class ConnectorEnd: virtual public MultiplicityElement
+	class UML_API ConnectorEnd: virtual public MultiplicityElement
 	{
 		public:
  			ConnectorEnd(const ConnectorEnd &) {}

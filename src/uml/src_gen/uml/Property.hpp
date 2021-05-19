@@ -57,6 +57,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/ConnectableElement.hpp"
 #include "uml/DeploymentTarget.hpp"
@@ -77,7 +80,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class Property: virtual public ConnectableElement, virtual public DeploymentTarget, virtual public StructuralFeature
+	class UML_API Property: virtual public ConnectableElement, virtual public DeploymentTarget, virtual public StructuralFeature
 	{
 		public:
  			Property(const Property &) {}

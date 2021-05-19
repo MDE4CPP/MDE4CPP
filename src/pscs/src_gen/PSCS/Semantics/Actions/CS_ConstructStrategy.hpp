@@ -45,6 +45,9 @@ namespace uml
 	class Operation;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
@@ -56,7 +59,7 @@ namespace uml
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_ConstructStrategy: virtual public fUML::Semantics::Loci::SemanticStrategy
+	class PSCS_API CS_ConstructStrategy: virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
  			CS_ConstructStrategy(const CS_ConstructStrategy &) {}

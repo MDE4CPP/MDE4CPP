@@ -7,6 +7,9 @@
 #ifndef PSCSPACKAGEIMPL_HPP
 #define PSCSPACKAGEIMPL_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -28,7 +31,7 @@ namespace ecore
 
 namespace PSCS
 {
-	class PSCSPackageImpl : public ecore::EPackageImpl ,virtual public PSCSPackage
+	class PSCS_API PSCSPackageImpl : public ecore::EPackageImpl ,virtual public PSCSPackage
 	{
 		private:    
 			PSCSPackageImpl(PSCSPackageImpl const&) = delete;

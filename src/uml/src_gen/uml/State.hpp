@@ -55,6 +55,9 @@ namespace uml
 	class Trigger;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Namespace.hpp"
 #include "uml/RedefinableElement.hpp"
@@ -73,7 +76,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class State: virtual public Namespace, virtual public RedefinableElement, virtual public Vertex
+	class UML_API State: virtual public Namespace, virtual public RedefinableElement, virtual public Vertex
 	{
 		public:
  			State(const State &) {}

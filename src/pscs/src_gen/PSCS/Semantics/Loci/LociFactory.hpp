@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/Loci/LociPackage.hpp"
 
@@ -22,7 +25,7 @@ namespace fUML::Semantics::Loci
 
 namespace PSCS::Semantics::Loci 
 {
-	class LociFactory : virtual public ecore::EFactory 
+	class PSCS_API LociFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			LociFactory(LociFactory const&) = delete;

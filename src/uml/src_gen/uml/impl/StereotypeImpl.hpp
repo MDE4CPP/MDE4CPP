@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Stereotype.hpp"
 
 #include "uml/impl/ClassImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class StereotypeImpl : virtual public ClassImpl, virtual public Stereotype 
+	class UML_API StereotypeImpl : virtual public ClassImpl, virtual public Stereotype 
 	{
 		public: 
 			StereotypeImpl(const StereotypeImpl & obj);

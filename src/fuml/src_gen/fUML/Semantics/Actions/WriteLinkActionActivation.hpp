@@ -50,6 +50,9 @@ namespace uml
 	class ActivityNode;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/LinkActionActivation.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 namespace fUML::Semantics::Actions 
 {
 	
-	class WriteLinkActionActivation: virtual public LinkActionActivation
+	class FUML_API WriteLinkActionActivation: virtual public LinkActionActivation
 	{
 		public:
  			WriteLinkActionActivation(const WriteLinkActionActivation &) {}

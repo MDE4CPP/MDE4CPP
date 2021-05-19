@@ -71,6 +71,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/StateMachine.hpp"
 
@@ -87,7 +90,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class ProtocolStateMachine: virtual public StateMachine
+	class UML_API ProtocolStateMachine: virtual public StateMachine
 	{
 		public:
  			ProtocolStateMachine(const ProtocolStateMachine &) {}

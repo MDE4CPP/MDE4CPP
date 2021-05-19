@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Argument.hpp"
 
 
@@ -19,7 +22,7 @@
 //*********************************
 namespace uml 
 {
-	class ArgumentImpl : virtual public ecore::EModelElementImpl,
+	class UML_API ArgumentImpl : virtual public ecore::EModelElementImpl,
 virtual public Argument 
 	{
 		public: 

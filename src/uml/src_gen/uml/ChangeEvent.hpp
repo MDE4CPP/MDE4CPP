@@ -44,6 +44,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Event.hpp"
 
@@ -60,7 +63,7 @@ namespace uml
 	<p>From package UML::CommonBehavior.</p>
 	*/
 	
-	class ChangeEvent: virtual public Event
+	class UML_API ChangeEvent: virtual public Event
 	{
 		public:
  			ChangeEvent(const ChangeEvent &) {}

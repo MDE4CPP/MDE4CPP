@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Profile.hpp"
 
 #include "uml/impl/PackageImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ProfileImpl : virtual public PackageImpl, virtual public Profile 
+	class UML_API ProfileImpl : virtual public PackageImpl, virtual public Profile 
 	{
 		public: 
 			ProfileImpl(const ProfileImpl & obj);

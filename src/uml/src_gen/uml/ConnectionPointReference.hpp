@@ -49,6 +49,9 @@ namespace uml
 	class Transition;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Vertex.hpp"
 
@@ -65,7 +68,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class ConnectionPointReference: virtual public Vertex
+	class UML_API ConnectionPointReference: virtual public Vertex
 	{
 		public:
  			ConnectionPointReference(const ConnectionPointReference &) {}

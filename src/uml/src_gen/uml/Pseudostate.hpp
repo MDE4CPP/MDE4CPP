@@ -48,6 +48,9 @@ namespace uml
 	class Transition;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Vertex.hpp"
 
@@ -66,7 +69,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class Pseudostate: virtual public Vertex
+	class UML_API Pseudostate: virtual public Vertex
 	{
 		public:
  			Pseudostate(const Pseudostate &) {}

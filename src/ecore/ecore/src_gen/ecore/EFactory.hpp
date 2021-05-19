@@ -42,6 +42,9 @@ namespace ecore
 	class EPackage;
 }
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 // base class includes
 #include "ecore/EModelElement.hpp"
 
@@ -53,7 +56,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class EFactory: virtual public EModelElement
+	class ECORE_API EFactory: virtual public EModelElement
 	{
 		public:
  			EFactory(const EFactory &) {}

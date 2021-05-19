@@ -52,6 +52,9 @@ namespace uml
 	class Vertex;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Namespace.hpp"
 #include "uml/RedefinableElement.hpp"
@@ -69,7 +72,7 @@ namespace uml
 	<p>From package UML::StateMachines.</p>
 	*/
 	
-	class Region: virtual public Namespace, virtual public RedefinableElement
+	class UML_API Region: virtual public Namespace, virtual public RedefinableElement
 	{
 		public:
  			Region(const Region &) {}

@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
 
@@ -44,7 +47,7 @@ namespace fUML::Semantics::Loci
 
 namespace PSCS 
 {
-	class PSCSFactory : virtual public ecore::EFactory 
+	class PSCS_API PSCSFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			PSCSFactory(PSCSFactory const&) = delete;

@@ -7,11 +7,14 @@
 #ifndef PSCSPLUGIN_HPP
 #define PSCSPLUGIN_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "pluginFramework/EcoreModelPlugin.hpp"
 
 namespace PSCS
 {
-	class PSCSPlugin : virtual public EcoreModelPlugin
+	class PSCS_API PSCSPlugin : virtual public EcoreModelPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

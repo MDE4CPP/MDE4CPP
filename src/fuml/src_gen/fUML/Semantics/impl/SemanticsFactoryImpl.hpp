@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICSFACTORYIMPL_HPP
 #define FUML_SEMANTICSFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "fUML/Semantics/SemanticsFactory.hpp"
@@ -17,7 +20,7 @@ namespace Semantics
 
 namespace fUML::Semantics 
 {
-	class SemanticsFactoryImpl : virtual public ecore::EFactoryImpl , virtual public SemanticsFactory 
+	class FUML_API SemanticsFactoryImpl : virtual public ecore::EFactoryImpl , virtual public SemanticsFactory 
 	{
 		private:    
 			SemanticsFactoryImpl(SemanticsFactoryImpl const&) = delete;

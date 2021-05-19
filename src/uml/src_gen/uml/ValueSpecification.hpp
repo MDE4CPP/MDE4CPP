@@ -46,6 +46,9 @@ namespace uml
 	class ValueSpecificationAction;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/PackageableElement.hpp"
 #include "uml/TypedElement.hpp"
@@ -63,7 +66,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class ValueSpecification: virtual public PackageableElement, virtual public TypedElement
+	class UML_API ValueSpecification: virtual public PackageableElement, virtual public TypedElement
 	{
 		public:
  			ValueSpecification(const ValueSpecification &) {}

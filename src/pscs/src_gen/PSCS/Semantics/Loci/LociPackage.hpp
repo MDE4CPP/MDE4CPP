@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICS_LOCIPACKAGE_HPP
 #define PSCS_SEMANTICS_LOCIPACKAGE_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -35,7 +38,7 @@ namespace PSCS::Semantics::Loci
 	which were described in an ecore file.
 	*/
 	
-	class LociPackage : virtual public ecore::EPackage 
+	class PSCS_API LociPackage : virtual public ecore::EPackage 
 	{
 		private:    
 			LociPackage(LociPackage const&) = delete;

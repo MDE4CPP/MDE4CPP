@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ExpansionRegion.hpp"
 
 #include "uml/impl/StructuredActivityNodeImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ExpansionRegionImpl : virtual public StructuredActivityNodeImpl, virtual public ExpansionRegion 
+	class UML_API ExpansionRegionImpl : virtual public StructuredActivityNodeImpl, virtual public ExpansionRegion 
 	{
 		public: 
 			ExpansionRegionImpl(const ExpansionRegionImpl & obj);

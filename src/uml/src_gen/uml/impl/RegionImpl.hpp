@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Region.hpp"
 
 #include "uml/impl/NamespaceImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace uml 
 {
-	class RegionImpl : virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public Region 
+	class UML_API RegionImpl : virtual public NamespaceImpl, virtual public RedefinableElementImpl, virtual public Region 
 	{
 		public: 
 			RegionImpl(const RegionImpl & obj);

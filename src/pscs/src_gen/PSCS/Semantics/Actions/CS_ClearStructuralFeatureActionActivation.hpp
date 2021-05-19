@@ -64,6 +64,9 @@ namespace uml
 	class StructuralFeature;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/ClearStructuralFeatureActionActivation.hpp"
 
@@ -75,7 +78,7 @@ namespace uml
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_ClearStructuralFeatureActionActivation: virtual public fUML::Semantics::Actions::ClearStructuralFeatureActionActivation
+	class PSCS_API CS_ClearStructuralFeatureActionActivation: virtual public fUML::Semantics::Actions::ClearStructuralFeatureActionActivation
 	{
 		public:
  			CS_ClearStructuralFeatureActionActivation(const CS_ClearStructuralFeatureActionActivation &) {}

@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Slot.hpp"
 
 #include "uml/impl/ElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class SlotImpl : virtual public ElementImpl, virtual public Slot 
+	class UML_API SlotImpl : virtual public ElementImpl, virtual public Slot 
 	{
 		public: 
 			SlotImpl(const SlotImpl & obj);

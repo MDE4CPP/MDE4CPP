@@ -42,6 +42,9 @@ namespace uml
 	class TemplateSignature;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/TemplateParameter.hpp"
 
@@ -57,7 +60,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class OperationTemplateParameter: virtual public TemplateParameter
+	class UML_API OperationTemplateParameter: virtual public TemplateParameter
 	{
 		public:
  			OperationTemplateParameter(const OperationTemplateParameter &) {}

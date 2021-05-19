@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICS_ACTIONSPACKAGEIMPL_HPP
 #define PSCS_SEMANTICS_ACTIONSPACKAGEIMPL_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -36,7 +39,7 @@ namespace ecore
 
 namespace PSCS::Semantics::Actions
 {
-	class ActionsPackageImpl : public ecore::EPackageImpl ,virtual public ActionsPackage
+	class PSCS_API ActionsPackageImpl : public ecore::EPackageImpl ,virtual public ActionsPackage
 	{
 		private:    
 			ActionsPackageImpl(ActionsPackageImpl const&) = delete;

@@ -45,6 +45,9 @@ namespace uml
 	class Class;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"
 
@@ -56,7 +59,7 @@ namespace uml
 namespace fUML::Semantics::CommonBehavior 
 {
 	
-	class ClassifierBehaviorInvocationEventAccepter: virtual public EventAccepter
+	class FUML_API ClassifierBehaviorInvocationEventAccepter: virtual public EventAccepter
 	{
 		public:
  			ClassifierBehaviorInvocationEventAccepter(const ClassifierBehaviorInvocationEventAccepter &) {}

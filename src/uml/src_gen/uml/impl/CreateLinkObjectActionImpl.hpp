@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../CreateLinkObjectAction.hpp"
 
 #include "uml/impl/CreateLinkActionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class CreateLinkObjectActionImpl : virtual public CreateLinkActionImpl, virtual public CreateLinkObjectAction 
+	class UML_API CreateLinkObjectActionImpl : virtual public CreateLinkActionImpl, virtual public CreateLinkObjectAction 
 	{
 		public: 
 			CreateLinkObjectActionImpl(const CreateLinkObjectActionImpl & obj);

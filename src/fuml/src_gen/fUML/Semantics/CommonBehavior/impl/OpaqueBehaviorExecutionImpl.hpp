@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../OpaqueBehaviorExecution.hpp"
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class OpaqueBehaviorExecutionImpl : virtual public ExecutionImpl, virtual public OpaqueBehaviorExecution 
+	class FUML_API OpaqueBehaviorExecutionImpl : virtual public ExecutionImpl, virtual public OpaqueBehaviorExecution 
 	{
 		public: 
 			OpaqueBehaviorExecutionImpl(const OpaqueBehaviorExecutionImpl & obj);

@@ -47,6 +47,9 @@ namespace uml
 	class Class;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Loci/Locus.hpp"
 
@@ -58,7 +61,7 @@ namespace uml
 namespace PSCS::Semantics::Loci 
 {
 	
-	class CS_Locus: virtual public fUML::Semantics::Loci::Locus
+	class PSCS_API CS_Locus: virtual public fUML::Semantics::Loci::Locus
 	{
 		public:
  			CS_Locus(const CS_Locus &) {}

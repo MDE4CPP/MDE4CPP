@@ -7,11 +7,14 @@
 #ifndef TYPESPLUGIN_HPP
 #define TYPESPLUGIN_HPP
 
+// namespace macro header include
+#include "types/types.hpp"
+
 #include "pluginFramework/EcoreModelPlugin.hpp"
 
 namespace types
 {
-	class typesPlugin : virtual public EcoreModelPlugin
+	class TYPES_API typesPlugin : virtual public EcoreModelPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

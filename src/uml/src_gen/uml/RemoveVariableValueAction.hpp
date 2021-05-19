@@ -56,6 +56,9 @@ namespace uml
 	class Variable;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/WriteVariableAction.hpp"
 
@@ -72,7 +75,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class RemoveVariableValueAction: virtual public WriteVariableAction
+	class UML_API RemoveVariableValueAction: virtual public WriteVariableAction
 	{
 		public:
  			RemoveVariableValueAction(const RemoveVariableValueAction &) {}

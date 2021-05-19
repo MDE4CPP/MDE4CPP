@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICS_ACTIONSFACTORYIMPL_HPP
 #define FUML_SEMANTICS_ACTIONSFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
@@ -59,7 +62,7 @@ namespace Actions
 
 namespace fUML::Semantics::Actions 
 {
-	class ActionsFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ActionsFactory 
+	class FUML_API ActionsFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ActionsFactory 
 	{
 		private:    
 			ActionsFactoryImpl(ActionsFactoryImpl const&) = delete;

@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Manifestation.hpp"
 
 #include "uml/impl/AbstractionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ManifestationImpl : virtual public AbstractionImpl, virtual public Manifestation 
+	class UML_API ManifestationImpl : virtual public AbstractionImpl, virtual public Manifestation 
 	{
 		public: 
 			ManifestationImpl(const ManifestationImpl & obj);

@@ -57,6 +57,9 @@ namespace uml
 	class Operation;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/StructuredClassifiers/ExtensionalValue.hpp"
 
@@ -68,7 +71,7 @@ namespace uml
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	
-	class Object: virtual public ExtensionalValue
+	class FUML_API Object: virtual public ExtensionalValue
 	{
 		public:
  			Object(const Object &) {}

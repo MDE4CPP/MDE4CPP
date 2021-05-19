@@ -54,6 +54,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Classifier.hpp"
 
@@ -70,7 +73,7 @@ namespace uml
 	<p>From package UML::SimpleClassifiers.</p>
 	*/
 	
-	class Signal: virtual public Classifier
+	class UML_API Signal: virtual public Classifier
 	{
 		public:
  			Signal(const Signal &) {}

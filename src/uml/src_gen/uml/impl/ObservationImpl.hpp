@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../Observation.hpp"
 
 #include "uml/impl/PackageableElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ObservationImpl : virtual public PackageableElementImpl, virtual public Observation 
+	class UML_API ObservationImpl : virtual public PackageableElementImpl, virtual public Observation 
 	{
 		public: 
 			ObservationImpl(const ObservationImpl & obj);

@@ -52,6 +52,9 @@ namespace uml
 	class Port;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 
@@ -63,7 +66,7 @@ namespace uml
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	
-	class CS_Reference: virtual public fUML::Semantics::StructuredClassifiers::Reference
+	class PSCS_API CS_Reference: virtual public fUML::Semantics::StructuredClassifiers::Reference
 	{
 		public:
  			CS_Reference(const CS_Reference &) {}

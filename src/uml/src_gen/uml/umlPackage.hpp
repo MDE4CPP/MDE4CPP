@@ -7,6 +7,9 @@
 #ifndef UMLPACKAGE_HPP
 #define UMLPACKAGE_HPP
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -280,7 +283,7 @@ namespace uml
 	which were described in an ecore file.
 	*/
 	
-	class umlPackage : virtual public ecore::EPackage 
+	class UML_API umlPackage : virtual public ecore::EPackage 
 	{
 		private:    
 			umlPackage(umlPackage const&) = delete;

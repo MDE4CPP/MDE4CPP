@@ -55,6 +55,9 @@ namespace uml
 	class ExpansionNode;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/ActionActivation.hpp"
 
@@ -66,7 +69,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class ExpansionRegionActivation: virtual public fUML::Semantics::Actions::ActionActivation
+	class FUML_API ExpansionRegionActivation: virtual public fUML::Semantics::Actions::ActionActivation
 	{
 		public:
  			ExpansionRegionActivation(const ExpansionRegionActivation &) {}

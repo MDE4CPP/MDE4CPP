@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ProtocolStateMachine.hpp"
 
 #include "uml/impl/StateMachineImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ProtocolStateMachineImpl : virtual public StateMachineImpl, virtual public ProtocolStateMachine 
+	class UML_API ProtocolStateMachineImpl : virtual public StateMachineImpl, virtual public ProtocolStateMachine 
 	{
 		public: 
 			ProtocolStateMachineImpl(const ProtocolStateMachineImpl & obj);

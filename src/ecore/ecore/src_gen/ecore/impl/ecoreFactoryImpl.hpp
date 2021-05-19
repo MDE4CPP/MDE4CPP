@@ -7,6 +7,9 @@
 #ifndef ECOREFACTORYIMPL_HPP
 #define ECOREFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "ecore/ecoreFactory.hpp"
@@ -36,7 +39,7 @@ namespace ecore
 
 namespace ecore 
 {
-	class ecoreFactoryImpl : virtual public EFactoryImpl , virtual public ecoreFactory 
+	class ECORE_API ecoreFactoryImpl : virtual public EFactoryImpl , virtual public ecoreFactory 
 	{
 		private:    
 			ecoreFactoryImpl(ecoreFactoryImpl const&) = delete;

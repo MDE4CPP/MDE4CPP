@@ -74,6 +74,9 @@ namespace uml
 	class Variable;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Behavior.hpp"
 
@@ -90,7 +93,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class Activity: virtual public Behavior
+	class UML_API Activity: virtual public Behavior
 	{
 		public:
  			Activity(const Activity &) {}

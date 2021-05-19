@@ -51,6 +51,9 @@ namespace uml
 	class ValueSpecificationAction;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/ValueSpecification.hpp"
 
@@ -67,7 +70,7 @@ namespace uml
 	<p>From package UML::Values.</p>
 	*/
 	
-	class Duration: virtual public ValueSpecification
+	class UML_API Duration: virtual public ValueSpecification
 	{
 		public:
  			Duration(const Duration &) {}

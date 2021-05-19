@@ -50,6 +50,9 @@ namespace uml
 	class Class;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Loci/Executor.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 namespace PSCS::Semantics::Loci 
 {
 	
-	class CS_Executor: virtual public fUML::Semantics::Loci::Executor
+	class PSCS_API CS_Executor: virtual public fUML::Semantics::Loci::Executor
 	{
 		public:
  			CS_Executor(const CS_Executor &) {}

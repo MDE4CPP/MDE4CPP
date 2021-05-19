@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
@@ -18,7 +21,7 @@
 
 namespace fUML::Semantics::CommonBehavior 
 {
-	class CommonBehaviorFactory : virtual public ecore::EFactory 
+	class FUML_API CommonBehaviorFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			CommonBehaviorFactory(CommonBehaviorFactory const&) = delete;

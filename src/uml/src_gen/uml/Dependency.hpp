@@ -42,6 +42,9 @@ namespace uml
 	class TemplateParameter;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/DirectedRelationship.hpp"
 #include "uml/PackageableElement.hpp"
@@ -59,7 +62,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class Dependency: virtual public DirectedRelationship, virtual public PackageableElement
+	class UML_API Dependency: virtual public DirectedRelationship, virtual public PackageableElement
 	{
 		public:
  			Dependency(const Dependency &) {}

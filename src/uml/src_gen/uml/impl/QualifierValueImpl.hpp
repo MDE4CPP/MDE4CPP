@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../QualifierValue.hpp"
 
 #include "uml/impl/ElementImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class QualifierValueImpl : virtual public ElementImpl, virtual public QualifierValue 
+	class UML_API QualifierValueImpl : virtual public ElementImpl, virtual public QualifierValue 
 	{
 		public: 
 			QualifierValueImpl(const QualifierValueImpl & obj);

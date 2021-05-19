@@ -45,6 +45,9 @@ namespace uml
 	class ActivityEdge;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 
 // enum includes
@@ -56,7 +59,7 @@ namespace uml
 namespace fUML::Semantics::Activities 
 {
 	
-	class ActivityEdgeInstance : virtual public ecore::EModelElement
+	class FUML_API ActivityEdgeInstance : virtual public ecore::EModelElement
 	{
 		public:
  			ActivityEdgeInstance(const ActivityEdgeInstance &) {}

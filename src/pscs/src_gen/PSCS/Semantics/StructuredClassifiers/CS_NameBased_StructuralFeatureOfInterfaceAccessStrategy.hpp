@@ -50,6 +50,9 @@ namespace uml
 	class StructuralFeature;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "PSCS/Semantics/StructuredClassifiers/CS_StructuralFeatureOfInterfaceAccessStrategy.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	
-	class CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy: virtual public CS_StructuralFeatureOfInterfaceAccessStrategy
+	class PSCS_API CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy: virtual public CS_StructuralFeatureOfInterfaceAccessStrategy
 	{
 		public:
  			CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy(const CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy &) {}

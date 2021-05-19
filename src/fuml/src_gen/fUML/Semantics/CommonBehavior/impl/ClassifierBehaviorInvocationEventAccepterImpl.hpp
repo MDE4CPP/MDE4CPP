@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../ClassifierBehaviorInvocationEventAccepter.hpp"
 
 #include "fUML/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace fUML::Semantics::CommonBehavior 
 {
-	class ClassifierBehaviorInvocationEventAccepterImpl : virtual public EventAccepterImpl, virtual public ClassifierBehaviorInvocationEventAccepter 
+	class FUML_API ClassifierBehaviorInvocationEventAccepterImpl : virtual public EventAccepterImpl, virtual public ClassifierBehaviorInvocationEventAccepter 
 	{
 		public: 
 			ClassifierBehaviorInvocationEventAccepterImpl(const ClassifierBehaviorInvocationEventAccepterImpl & obj);

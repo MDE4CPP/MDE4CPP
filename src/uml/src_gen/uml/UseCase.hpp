@@ -62,6 +62,9 @@ namespace uml
 	class TemplateSignature;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/BehavioredClassifier.hpp"
 
@@ -78,7 +81,7 @@ namespace uml
 	<p>From package UML::UseCases.</p>
 	*/
 	
-	class UseCase: virtual public BehavioredClassifier
+	class UML_API UseCase: virtual public BehavioredClassifier
 	{
 		public:
  			UseCase(const UseCase &) {}

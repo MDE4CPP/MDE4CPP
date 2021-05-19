@@ -46,6 +46,9 @@ namespace uml
 	class Operation;
 }
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 // base class includes
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
@@ -57,7 +60,7 @@ namespace uml
 namespace fUML::Semantics::StructuredClassifiers 
 {
 	
-	class DispatchStrategy: virtual public fUML::Semantics::Loci::SemanticStrategy
+	class FUML_API DispatchStrategy: virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
  			DispatchStrategy(const DispatchStrategy &) {}

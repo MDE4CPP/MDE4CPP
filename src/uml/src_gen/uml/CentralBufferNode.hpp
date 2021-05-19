@@ -51,6 +51,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/ObjectNode.hpp"
 
@@ -69,7 +72,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class CentralBufferNode: virtual public ObjectNode
+	class UML_API CentralBufferNode: virtual public ObjectNode
 	{
 		public:
  			CentralBufferNode(const CentralBufferNode &) {}

@@ -7,6 +7,9 @@
 #ifndef PSCSFACTORYIMPL_HPP
 #define PSCSFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "PSCS/PSCSFactory.hpp"
@@ -17,7 +20,7 @@ namespace PSCS
 
 namespace PSCS 
 {
-	class PSCSFactoryImpl : virtual public ecore::EFactoryImpl , virtual public PSCSFactory 
+	class PSCS_API PSCSFactoryImpl : virtual public ecore::EFactoryImpl , virtual public PSCSFactory 
 	{
 		private:    
 			PSCSFactoryImpl(PSCSFactoryImpl const&) = delete;

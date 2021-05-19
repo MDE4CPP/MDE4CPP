@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../CommunicationPath.hpp"
 
 #include "uml/impl/AssociationImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class CommunicationPathImpl : virtual public AssociationImpl, virtual public CommunicationPath 
+	class UML_API CommunicationPathImpl : virtual public AssociationImpl, virtual public CommunicationPath 
 	{
 		public: 
 			CommunicationPathImpl(const CommunicationPathImpl & obj);

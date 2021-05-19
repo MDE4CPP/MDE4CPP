@@ -7,6 +7,9 @@
 #ifndef FUML_SEMANTICS_COMMONBEHAVIORPACKAGE_HPP
 #define FUML_SEMANTICS_COMMONBEHAVIORPACKAGE_HPP
 
+// namespace macro header include
+#include "fuml/fuml.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -49,7 +52,7 @@ namespace fUML::Semantics::CommonBehavior
 	which were described in an ecore file.
 	*/
 	
-	class CommonBehaviorPackage : virtual public ecore::EPackage 
+	class FUML_API CommonBehaviorPackage : virtual public ecore::EPackage 
 	{
 		private:    
 			CommonBehaviorPackage(CommonBehaviorPackage const&) = delete;

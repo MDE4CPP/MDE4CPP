@@ -42,6 +42,9 @@ namespace fUML::Semantics::StructuredClassifiers
 	class Reference;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "PSCS/Semantics/StructuredClassifiers/CS_RequestPropagationStrategy.hpp"
 
@@ -53,7 +56,7 @@ namespace fUML::Semantics::StructuredClassifiers
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	
-	class CS_DefaultRequestPropagationStrategy: virtual public CS_RequestPropagationStrategy
+	class PSCS_API CS_DefaultRequestPropagationStrategy: virtual public CS_RequestPropagationStrategy
 	{
 		public:
  			CS_DefaultRequestPropagationStrategy(const CS_DefaultRequestPropagationStrategy &) {}

@@ -45,6 +45,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Values/Evaluation.hpp"
 
@@ -56,7 +59,7 @@ namespace uml
 namespace PSCS::Semantics::Values 
 {
 	
-	class CS_OpaqueExpressionEvaluation: virtual public fUML::Semantics::Values::Evaluation
+	class PSCS_API CS_OpaqueExpressionEvaluation: virtual public fUML::Semantics::Values::Evaluation
 	{
 		public:
  			CS_OpaqueExpressionEvaluation(const CS_OpaqueExpressionEvaluation &) {}

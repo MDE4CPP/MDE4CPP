@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../Locus.hpp"
 
 #include "fUML/Semantics/Loci/impl/LociFactoryImpl.hpp"
@@ -20,7 +23,7 @@
 //*********************************
 namespace fUML::Semantics::Loci 
 {
-	class LocusImpl : virtual public ecore::EModelElementImpl,
+	class FUML_API LocusImpl : virtual public ecore::EModelElementImpl,
 virtual public Locus 
 	{
 		public: 

@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "ecore/ecorePackage.hpp"
 
@@ -31,7 +34,7 @@ namespace ecore
 
 namespace ecore 
 {
-	class ecoreFactory : virtual public EFactory 
+	class ECORE_API ecoreFactory : virtual public EFactory 
 	{
 		private:    
 			ecoreFactory(ecoreFactory const&) = delete;

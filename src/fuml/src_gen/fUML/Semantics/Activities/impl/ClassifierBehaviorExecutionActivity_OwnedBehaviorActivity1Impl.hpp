@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "fuml/fuml.hpp" 
+
+// model includes
 #include "../ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1.hpp"
 
 #include "fUML/Semantics/Activities/impl/ActivitiesFactoryImpl.hpp"
@@ -20,7 +23,7 @@
 //*********************************
 namespace fUML::Semantics::Activities 
 {
-	class ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl : virtual public ecore::EModelElementImpl,
+	class FUML_API ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1Impl : virtual public ecore::EModelElementImpl,
 virtual public ClassifierBehaviorExecutionActivity_OwnedBehaviorActivity1 
 	{
 		public: 

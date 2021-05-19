@@ -41,6 +41,9 @@ namespace uml
 	class Type;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/NamedElement.hpp"
 
@@ -57,7 +60,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class TypedElement: virtual public NamedElement
+	class UML_API TypedElement: virtual public NamedElement
 	{
 		public:
  			TypedElement(const TypedElement &) {}

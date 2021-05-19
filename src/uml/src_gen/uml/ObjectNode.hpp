@@ -56,6 +56,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/ActivityNode.hpp"
 #include "uml/TypedElement.hpp"
@@ -75,7 +78,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class ObjectNode: virtual public ActivityNode, virtual public TypedElement
+	class UML_API ObjectNode: virtual public ActivityNode, virtual public TypedElement
 	{
 		public:
  			ObjectNode(const ObjectNode &) {}

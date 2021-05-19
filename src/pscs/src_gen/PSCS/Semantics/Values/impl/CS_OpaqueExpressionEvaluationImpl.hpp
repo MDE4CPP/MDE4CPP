@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "pscs/pscs.hpp" 
+
+// model includes
 #include "../CS_OpaqueExpressionEvaluation.hpp"
 
 #include "PSCS/Semantics/Values/impl/ValuesFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace PSCS::Semantics::Values 
 {
-	class CS_OpaqueExpressionEvaluationImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public CS_OpaqueExpressionEvaluation 
+	class PSCS_API CS_OpaqueExpressionEvaluationImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public CS_OpaqueExpressionEvaluation 
 	{
 		public: 
 			CS_OpaqueExpressionEvaluationImpl(const CS_OpaqueExpressionEvaluationImpl & obj);

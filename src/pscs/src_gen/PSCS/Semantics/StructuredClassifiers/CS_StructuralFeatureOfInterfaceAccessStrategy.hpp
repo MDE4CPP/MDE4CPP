@@ -50,6 +50,9 @@ namespace uml
 	class StructuralFeature;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"
 
@@ -61,7 +64,7 @@ namespace uml
 namespace PSCS::Semantics::StructuredClassifiers 
 {
 	
-	class CS_StructuralFeatureOfInterfaceAccessStrategy: virtual public fUML::Semantics::Loci::SemanticStrategy
+	class PSCS_API CS_StructuralFeatureOfInterfaceAccessStrategy: virtual public fUML::Semantics::Loci::SemanticStrategy
 	{
 		public:
  			CS_StructuralFeatureOfInterfaceAccessStrategy(const CS_StructuralFeatureOfInterfaceAccessStrategy &) {}

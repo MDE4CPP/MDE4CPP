@@ -37,6 +37,9 @@ namespace uml
 	class Object;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 
 // enum includes
@@ -53,7 +56,7 @@ namespace uml
 	This Element was merged from mof::Reflection package. 
 	*/
 	
-	class Argument : virtual public ecore::EModelElement
+	class UML_API Argument : virtual public ecore::EModelElement
 	{
 		public:
  			Argument(const Argument &) {}

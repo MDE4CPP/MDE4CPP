@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../InstanceSpecification.hpp"
 
 #include "uml/impl/DeployedArtifactImpl.hpp"
@@ -20,7 +23,7 @@
 //*********************************
 namespace uml 
 {
-	class InstanceSpecificationImpl : virtual public DeployedArtifactImpl, virtual public DeploymentTargetImpl, virtual public PackageableElementImpl, virtual public InstanceSpecification 
+	class UML_API InstanceSpecificationImpl : virtual public DeployedArtifactImpl, virtual public DeploymentTargetImpl, virtual public PackageableElementImpl, virtual public InstanceSpecification 
 	{
 		public: 
 			InstanceSpecificationImpl(const InstanceSpecificationImpl & obj);

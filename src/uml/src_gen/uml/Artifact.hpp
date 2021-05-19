@@ -57,6 +57,9 @@ namespace uml
 	class UseCase;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Classifier.hpp"
 #include "uml/DeployedArtifact.hpp"
@@ -75,7 +78,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class Artifact: virtual public Classifier, virtual public DeployedArtifact
+	class UML_API Artifact: virtual public Classifier, virtual public DeployedArtifact
 	{
 		public:
  			Artifact(const Artifact &) {}

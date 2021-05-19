@@ -51,6 +51,9 @@ namespace uml
 	class ReadSelfAction;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/Actions/ReadSelfActionActivation.hpp"
 
@@ -62,7 +65,7 @@ namespace uml
 namespace PSCS::Semantics::Actions 
 {
 	
-	class CS_ReadSelfActionActivation: virtual public fUML::Semantics::Actions::ReadSelfActionActivation
+	class PSCS_API CS_ReadSelfActionActivation: virtual public fUML::Semantics::Actions::ReadSelfActionActivation
 	{
 		public:
  			CS_ReadSelfActionActivation(const CS_ReadSelfActionActivation &) {}

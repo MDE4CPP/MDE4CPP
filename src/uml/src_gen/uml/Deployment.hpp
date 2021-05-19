@@ -45,6 +45,9 @@ namespace uml
 	class TemplateParameter;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Dependency.hpp"
 
@@ -62,7 +65,7 @@ namespace uml
 	<p>From package UML::Deployments.</p>
 	*/
 	
-	class Deployment: virtual public Dependency
+	class UML_API Deployment: virtual public Dependency
 	{
 		public:
  			Deployment(const Deployment &) {}

@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "pscs/pscs.hpp" 
+
+// model includes
 #include "../CS_EventOccurrence.hpp"
 
 #include "PSCS/Semantics/CommonBehavior/impl/CommonBehaviorFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace PSCS::Semantics::CommonBehavior 
 {
-	class CS_EventOccurrenceImpl : virtual public fUML::Semantics::CommonBehavior::EventOccurrenceImpl, virtual public CS_EventOccurrence 
+	class PSCS_API CS_EventOccurrenceImpl : virtual public fUML::Semantics::CommonBehavior::EventOccurrenceImpl, virtual public CS_EventOccurrence 
 	{
 		public: 
 			CS_EventOccurrenceImpl(const CS_EventOccurrenceImpl & obj);

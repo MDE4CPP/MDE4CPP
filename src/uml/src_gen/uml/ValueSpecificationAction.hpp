@@ -56,6 +56,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Action.hpp"
 
@@ -72,7 +75,7 @@ namespace uml
 	<p>From package UML::Actions.</p>
 	*/
 	
-	class ValueSpecificationAction: virtual public Action
+	class UML_API ValueSpecificationAction: virtual public Action
 	{
 		public:
  			ValueSpecificationAction(const ValueSpecificationAction &) {}

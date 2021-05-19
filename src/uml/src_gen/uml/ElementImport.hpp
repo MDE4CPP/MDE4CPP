@@ -43,6 +43,9 @@ namespace uml
 	class PackageableElement;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/DirectedRelationship.hpp"
 
@@ -59,7 +62,7 @@ namespace uml
 	<p>From package UML::CommonStructure.</p>
 	*/
 	
-	class ElementImport: virtual public DirectedRelationship
+	class UML_API ElementImport: virtual public DirectedRelationship
 	{
 		public:
  			ElementImport(const ElementImport &) {}

@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../ProtocolTransition.hpp"
 
 #include "uml/impl/TransitionImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class ProtocolTransitionImpl : virtual public TransitionImpl, virtual public ProtocolTransition 
+	class UML_API ProtocolTransitionImpl : virtual public TransitionImpl, virtual public ProtocolTransition 
 	{
 		public: 
 			ProtocolTransitionImpl(const ProtocolTransitionImpl & obj);

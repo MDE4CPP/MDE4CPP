@@ -51,6 +51,9 @@ namespace uml
 	class Trigger;
 }
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 // base class includes
 #include "fUML/Semantics/CommonBehavior/EventOccurrence.hpp"
 
@@ -62,7 +65,7 @@ namespace uml
 namespace PSCS::Semantics::CommonBehavior 
 {
 	
-	class CS_EventOccurrence: virtual public fUML::Semantics::CommonBehavior::EventOccurrence
+	class PSCS_API CS_EventOccurrence: virtual public fUML::Semantics::CommonBehavior::EventOccurrence
 	{
 		public:
  			CS_EventOccurrence(const CS_EventOccurrence &) {}

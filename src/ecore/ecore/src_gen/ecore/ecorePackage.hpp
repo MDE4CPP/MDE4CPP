@@ -7,6 +7,9 @@
 #ifndef ECOREPACKAGE_HPP
 #define ECOREPACKAGE_HPP
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -54,7 +57,7 @@ namespace ecore
 	which were described in an ecore file.
 	*/
 	
-	class ecorePackage : virtual public EPackage 
+	class ECORE_API ecorePackage : virtual public EPackage 
 	{
 		private:    
 			ecorePackage(ecorePackage const&) = delete;

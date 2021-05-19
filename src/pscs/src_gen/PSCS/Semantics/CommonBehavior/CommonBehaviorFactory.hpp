@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
@@ -18,7 +21,7 @@
 
 namespace PSCS::Semantics::CommonBehavior 
 {
-	class CommonBehaviorFactory : virtual public ecore::EFactory 
+	class PSCS_API CommonBehaviorFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			CommonBehaviorFactory(CommonBehaviorFactory const&) = delete;

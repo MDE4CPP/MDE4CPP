@@ -36,6 +36,9 @@ namespace ecore
 
 //Forward Declaration for used types 
 
+// namespace macro header include
+#include "ecore/ecore.hpp"
+
 // base class includes
 #include "ecore/EModelElement.hpp"
 
@@ -47,7 +50,7 @@ namespace ecore
 namespace ecore 
 {
 	
-	class EAnnotation: virtual public EModelElement
+	class ECORE_API EAnnotation: virtual public EModelElement
 	{
 		public:
  			EAnnotation(const EAnnotation &) {}

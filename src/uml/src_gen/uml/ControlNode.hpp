@@ -47,6 +47,9 @@ namespace uml
 	class StructuredActivityNode;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/ActivityNode.hpp"
 
@@ -63,7 +66,7 @@ namespace uml
 	<p>From package UML::Activities.</p>
 	*/
 	
-	class ControlNode: virtual public ActivityNode
+	class UML_API ControlNode: virtual public ActivityNode
 	{
 		public:
  			ControlNode(const ControlNode &) {}

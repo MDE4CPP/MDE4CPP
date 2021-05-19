@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../InstanceValue.hpp"
 
 #include "uml/impl/ValueSpecificationImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class InstanceValueImpl : virtual public ValueSpecificationImpl, virtual public InstanceValue 
+	class UML_API InstanceValueImpl : virtual public ValueSpecificationImpl, virtual public InstanceValue 
 	{
 		public: 
 			InstanceValueImpl(const InstanceValueImpl & obj);

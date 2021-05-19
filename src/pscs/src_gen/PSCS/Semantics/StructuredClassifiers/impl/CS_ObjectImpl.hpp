@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "pscs/pscs.hpp" 
+
+// model includes
 #include "../CS_Object.hpp"
 
 #include "PSCS/Semantics/StructuredClassifiers/impl/StructuredClassifiersFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace PSCS::Semantics::StructuredClassifiers 
 {
-	class CS_ObjectImpl : virtual public fUML::Semantics::StructuredClassifiers::ObjectImpl, virtual public CS_Object 
+	class PSCS_API CS_ObjectImpl : virtual public fUML::Semantics::StructuredClassifiers::ObjectImpl, virtual public CS_Object 
 	{
 		public: 
 			CS_ObjectImpl(const CS_ObjectImpl & obj);

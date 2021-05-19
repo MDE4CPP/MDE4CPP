@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../FinalState.hpp"
 
 #include "uml/impl/StateImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class FinalStateImpl : virtual public StateImpl, virtual public FinalState 
+	class UML_API FinalStateImpl : virtual public StateImpl, virtual public FinalState 
 	{
 		public: 
 			FinalStateImpl(const FinalStateImpl & obj);

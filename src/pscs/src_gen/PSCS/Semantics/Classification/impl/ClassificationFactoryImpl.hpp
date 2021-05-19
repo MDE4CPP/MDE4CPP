@@ -7,6 +7,9 @@
 #ifndef PSCS_SEMANTICS_CLASSIFICATIONFACTORYIMPL_HPP
 #define PSCS_SEMANTICS_CLASSIFICATIONFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "pscs/pscs.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "PSCS/Semantics/Classification/ClassificationFactory.hpp"
@@ -17,7 +20,7 @@ namespace Classification
 
 namespace PSCS::Semantics::Classification 
 {
-	class ClassificationFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ClassificationFactory 
+	class PSCS_API ClassificationFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ClassificationFactory 
 	{
 		private:    
 			ClassificationFactoryImpl(ClassificationFactoryImpl const&) = delete;

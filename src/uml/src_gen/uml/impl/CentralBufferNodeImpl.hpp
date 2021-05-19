@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "uml/uml.hpp" 
+
+// model includes
 #include "../CentralBufferNode.hpp"
 
 #include "uml/impl/ObjectNodeImpl.hpp"
@@ -18,7 +21,7 @@
 //*********************************
 namespace uml 
 {
-	class CentralBufferNodeImpl : virtual public ObjectNodeImpl, virtual public CentralBufferNode 
+	class UML_API CentralBufferNodeImpl : virtual public ObjectNodeImpl, virtual public CentralBufferNode 
 	{
 		public: 
 			CentralBufferNodeImpl(const CentralBufferNodeImpl & obj);

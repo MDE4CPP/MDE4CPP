@@ -41,6 +41,9 @@ namespace uml
 	class StringExpression;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/RedefinableElement.hpp"
 
@@ -57,7 +60,7 @@ namespace uml
 	<p>From package UML::Classification.</p>
 	*/
 	
-	class Feature: virtual public RedefinableElement
+	class UML_API Feature: virtual public RedefinableElement
 	{
 		public:
  			Feature(const Feature &) {}

@@ -63,6 +63,9 @@ namespace uml
 	class Type;
 }
 
+// namespace macro header include
+#include "uml/uml.hpp"
+
 // base class includes
 #include "uml/Namespace.hpp"
 #include "uml/PackageableElement.hpp"
@@ -83,7 +86,7 @@ namespace uml
 	<p>From package UML::Packages.</p>
 	*/
 	
-	class Package: virtual public Namespace, virtual public PackageableElement, virtual public TemplateableElement
+	class UML_API Package: virtual public Namespace, virtual public PackageableElement, virtual public TemplateableElement
 	{
 		public:
  			Package(const Package &) {}
