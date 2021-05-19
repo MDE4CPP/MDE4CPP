@@ -9,6 +9,7 @@
 #define PLUGINFRAMEWORK_PLUGINFRAMEWORK_HPP
 
 #include <memory>
+#include <string>
 
 template<class T> class Bag;
 class MDE4CPPPlugin;
