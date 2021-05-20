@@ -590,6 +590,57 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ActionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 490
+		case umlPackage::ACTION_OPERATION_ALLACTIONS:
+		{
+			result = eAny(this->allActions());
+			break;
+		}
+		
+		// 491
+		case umlPackage::ACTION_OPERATION_ALLOWNEDNODES:
+		{
+			result = eAny(this->allOwnedNodes());
+			break;
+		}
+		
+		// 492
+		case umlPackage::ACTION_OPERATION_CONTAININGBEHAVIOR:
+		{
+			result = eAny(this->containingBehavior());
+			break;
+		}
+		
+		// 489
+		case umlPackage::ACTION_OPERATION_GETCONTEXT:
+		{
+			result = eAny(this->getContext());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ExecutableNodeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ActionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

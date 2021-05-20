@@ -688,6 +688,185 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any NamespaceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 15673
+		case umlPackage::NAMESPACE_OPERATION_CANNOT_IMPORT_OWNEDMEMBERS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->cannot_import_ownedMembers(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 15672
+		case umlPackage::NAMESPACE_OPERATION_CANNOT_IMPORT_SELF_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->cannot_import_self(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 15674
+		case umlPackage::NAMESPACE_OPERATION_CREATEELEMENTIMPORT_PACKAGEABLEELEMENT_VISIBILITYKIND:
+		{
+			//Retrieve input parameter 'element'
+			//parameter 0
+			std::shared_ptr<uml::PackageableElement> incoming_param_element;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_element = (*incoming_param_element_arguments_citer)->get()->get<std::shared_ptr<uml::PackageableElement> >();
+			//Retrieve input parameter 'visibility'
+			//parameter 1
+			uml::VisibilityKind incoming_param_visibility;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_visibility_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_visibility = (*incoming_param_visibility_arguments_citer)->get()->get<uml::VisibilityKind >();
+			result = eAny(this->createElementImport(incoming_param_element,incoming_param_visibility));
+			break;
+		}
+		
+		// 15675
+		case umlPackage::NAMESPACE_OPERATION_CREATEPACKAGEIMPORT_PACKAGE_VISIBILITYKIND:
+		{
+			//Retrieve input parameter 'package_'
+			//parameter 0
+			std::shared_ptr<uml::Package> incoming_param_package_;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_package__arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_package_ = (*incoming_param_package__arguments_citer)->get()->get<std::shared_ptr<uml::Package> >();
+			//Retrieve input parameter 'visibility'
+			//parameter 1
+			uml::VisibilityKind incoming_param_visibility;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_visibility_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_visibility = (*incoming_param_visibility_arguments_citer)->get()->get<uml::VisibilityKind >();
+			result = eAny(this->createPackageImport(incoming_param_package_,incoming_param_visibility));
+			break;
+		}
+		
+		// 15679
+		case umlPackage::NAMESPACE_OPERATION_EXCLUDECOLLISIONS_PACKAGEABLEELEMENT:
+		{
+			//Retrieve input parameter 'imps'
+			//parameter 0
+			std::shared_ptr<Bag<uml::PackageableElement>> incoming_param_imps;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_imps_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_imps = (*incoming_param_imps_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::PackageableElement>> >();
+			result = eAny(this->excludeCollisions(incoming_param_imps));
+			break;
+		}
+		
+		// 15676
+		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDELEMENTS:
+		{
+			result = eAny(this->getImportedElements());
+			break;
+		}
+		
+		// 15682
+		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDMEMBERS:
+		{
+			result = eAny(this->getImportedMembers());
+			break;
+		}
+		
+		// 15677
+		case umlPackage::NAMESPACE_OPERATION_GETIMPORTEDPACKAGES:
+		{
+			result = eAny(this->getImportedPackages());
+			break;
+		}
+		
+		// 15680
+		case umlPackage::NAMESPACE_OPERATION_GETNAMESOFMEMBER_NAMEDELEMENT:
+		{
+			//Retrieve input parameter 'element'
+			//parameter 0
+			std::shared_ptr<uml::NamedElement> incoming_param_element;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_element = (*incoming_param_element_arguments_citer)->get()->get<std::shared_ptr<uml::NamedElement> >();
+			result = eAny(this->getNamesOfMember(incoming_param_element));
+			break;
+		}
+		
+		// 15678
+		case umlPackage::NAMESPACE_OPERATION_GETOWNEDMEMBERS:
+		{
+			result = eAny(this->getOwnedMembers());
+			break;
+		}
+		
+		// 15681
+		case umlPackage::NAMESPACE_OPERATION_IMPORTMEMBERS_PACKAGEABLEELEMENT:
+		{
+			//Retrieve input parameter 'imps'
+			//parameter 0
+			std::shared_ptr<Bag<uml::PackageableElement>> incoming_param_imps;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_imps_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_imps = (*incoming_param_imps_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::PackageableElement>> >();
+			result = eAny(this->importMembers(incoming_param_imps));
+			break;
+		}
+		
+		// 15683
+		case umlPackage::NAMESPACE_OPERATION_MEMBERSAREDISTINGUISHABLE:
+		{
+			result = eAny(this->membersAreDistinguishable());
+			break;
+		}
+		
+		// 15671
+		case umlPackage::NAMESPACE_OPERATION_MEMBERS_DISTINGUISHABLE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->members_distinguishable(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = NamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void NamespaceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

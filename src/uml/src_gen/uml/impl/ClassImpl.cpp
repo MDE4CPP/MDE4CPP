@@ -876,6 +876,104 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ClassImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 3670
+		case umlPackage::CLASS_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'parameterNames'
+			//parameter 1
+			std::shared_ptr<Bag<std::string>> incoming_param_parameterNames;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get()->get<std::shared_ptr<Bag<std::string>> >();
+			//Retrieve input parameter 'parameterTypes'
+			//parameter 2
+			std::shared_ptr<Bag<uml::Type>> incoming_param_parameterTypes;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::Type>> >();
+			//Retrieve input parameter 'returnType'
+			//parameter 3
+			std::shared_ptr<uml::Type> incoming_param_returnType;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
+			result = eAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType));
+			break;
+		}
+		
+		// 3674
+		case umlPackage::CLASS_OPERATION_GETALLOPERATIONS:
+		{
+			result = eAny(this->getAllOperations());
+			break;
+		}
+		
+		// 3672
+		case umlPackage::CLASS_OPERATION_GETEXTENSIONS:
+		{
+			result = eAny(this->getExtensions());
+			break;
+		}
+		
+		// 3673
+		case umlPackage::CLASS_OPERATION_GETSUPERCLASSES:
+		{
+			result = eAny(this->getSuperClasses());
+			break;
+		}
+		
+		// 3671
+		case umlPackage::CLASS_OPERATION_ISMETACLASS:
+		{
+			result = eAny(this->isMetaclass());
+			break;
+		}
+		
+		// 3669
+		case umlPackage::CLASS_OPERATION_PASSIVE_CLASS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->passive_class(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = BehavioredClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = EncapsulatedClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ClassImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

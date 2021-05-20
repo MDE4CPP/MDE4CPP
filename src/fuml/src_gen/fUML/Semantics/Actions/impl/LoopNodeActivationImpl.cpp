@@ -297,6 +297,57 @@ bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any LoopNodeActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 7877
+		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_MAKELOOPVARIABLELIST:
+		{
+			result = eAny(this->makeLoopVariableList());
+			break;
+		}
+		
+		// 7875
+		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNBODY:
+		{
+			this->runBody();
+			break;
+		}
+		
+		// 7876
+		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNLOOPVARIABLES:
+		{
+			this->runLoopVariables();
+			break;
+		}
+		
+		// 7874
+		case ActionsPackage::LOOPNODEACTIVATION_OPERATION_RUNTEST:
+		{
+			result = eAny(this->runTest());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StructuredActivityNodeActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void LoopNodeActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -398,6 +398,75 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CS_ExecutionFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1418
+		case LociPackage::CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT:
+		{
+			//Retrieve input parameter 'stereotype'
+			//parameter 0
+			std::shared_ptr<uml::Class> incoming_param_stereotype;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			//Retrieve input parameter 'element'
+			//parameter 1
+			std::shared_ptr<uml::Element> incoming_param_element;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_element = (*incoming_param_element_arguments_citer)->get()->get<std::shared_ptr<uml::Element> >();
+			result = eAny(this->getStereotypeApplication(incoming_param_stereotype,incoming_param_element));
+			break;
+		}
+		
+		// 1417
+		case LociPackage::CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING:
+		{
+			//Retrieve input parameter 'profileName'
+			//parameter 0
+			std::string incoming_param_profileName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_profileName_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_profileName = (*incoming_param_profileName_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'stereotypeName'
+			//parameter 1
+			std::string incoming_param_stereotypeName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotypeName_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_stereotypeName = (*incoming_param_stereotypeName_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getStereotypeClass(incoming_param_profileName,incoming_param_stereotypeName));
+			break;
+		}
+		
+		// 1416
+		case LociPackage::CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT:
+		{
+			//Retrieve input parameter 'element'
+			//parameter 0
+			std::shared_ptr<uml::Element> incoming_param_element;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_element_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_element = (*incoming_param_element_arguments_citer)->get()->get<std::shared_ptr<uml::Element> >();
+			result = eAny(this->instantiateVisitor(incoming_param_element));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Loci::ExecutionFactoryImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CS_ExecutionFactoryImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

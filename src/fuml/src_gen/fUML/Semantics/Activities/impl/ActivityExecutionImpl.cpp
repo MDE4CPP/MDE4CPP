@@ -370,6 +370,57 @@ bool ActivityExecutionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ActivityExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 756
+		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 753
+		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_EXECUTE:
+		{
+			this->execute();
+			break;
+		}
+		
+		// 755
+		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+		
+		// 754
+		case ActivitiesPackage::ACTIVITYEXECUTION_OPERATION_TERMINATE:
+		{
+			this->terminate();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::CommonBehavior::ExecutionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ActivityExecutionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -217,6 +217,43 @@ bool ExtensionalValueImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ExtensionalValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 5228
+		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 5227
+		case StructuredClassifiersPackage::EXTENSIONALVALUE_OPERATION_DESTROY:
+		{
+			this->destroy();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::SimpleClassifiers::CompoundValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ExtensionalValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

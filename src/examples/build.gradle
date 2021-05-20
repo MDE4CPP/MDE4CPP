@@ -17,7 +17,8 @@ task generateAllExamples() {
 			prefix = ''
 		}
 	
-		[  	'./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion/model/', 
+		[  	'./ecoreExamples/TestSuite/eInvokeTest/model/', 
+			'./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion/model/', 
 			'./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnionDepth/model/', 
 			'./ecoreExamples/TestSuite/templateTest/model/', 		
 			'./ecoreExamples/ecoreModelExample/model/',

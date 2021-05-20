@@ -85,7 +85,7 @@ namespace ecore
 			virtual std::shared_ptr<std::list < ecore::EObject>> eCrossReferences() const = 0; 
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0; 
 			virtual Any eGet(std::shared_ptr<ecore::EStructuralFeature> feature,bool resolve) const = 0; 
-			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) const = 0; 
+			virtual Any eInvoke(std::shared_ptr<ecore::EOperation> operation,std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) = 0; 
 			virtual bool eIsProxy() const = 0; 
 			virtual bool eIsSet(std::shared_ptr<ecore::EStructuralFeature> feature) const = 0; 
 			virtual int eResource() const = 0; 

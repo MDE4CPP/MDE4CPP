@@ -394,6 +394,70 @@ bool CS_ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newV
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CS_ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 663
+		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+		
+		// 664
+		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETLINKSTODESTROY_STRUCTUREDVALUE_STRUCTURALFEATURE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::StructuredValue> >();
+			//Retrieve input parameter 'feature'
+			//parameter 1
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			result = eAny(this->getLinksToDestroy(incoming_param_value,incoming_param_feature));
+			break;
+		}
+		
+		// 665
+		case ActionsPackage::CS_CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_GETPOTENTIALLINKENDS_CS_REFERENCE_STRUCTURALFEATURE:
+		{
+			//Retrieve input parameter 'context'
+			//parameter 0
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			//Retrieve input parameter 'feature'
+			//parameter 1
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			result = eAny(this->getPotentialLinkEnds(incoming_param_context,incoming_param_feature));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Actions::ClearStructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CS_ClearStructuralFeatureActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

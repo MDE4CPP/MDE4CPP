@@ -179,6 +179,41 @@ bool LiteralEvaluationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any LiteralEvaluationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 7105
+		case ValuesPackage::LITERALEVALUATION_OPERATION_GETTYPE_ESTRING:
+		{
+			//Retrieve input parameter 'builtInTypeName'
+			//parameter 0
+			std::string incoming_param_builtInTypeName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_builtInTypeName_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_builtInTypeName = (*incoming_param_builtInTypeName_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getType(incoming_param_builtInTypeName));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = EvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void LiteralEvaluationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

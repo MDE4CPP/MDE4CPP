@@ -480,6 +480,41 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any EPackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 4127
+		case ecorePackage::EPACKAGE_OPERATION_GETECLASSIFIER_ESTRING:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getEClassifier(incoming_param_name));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ENamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void EPackageImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

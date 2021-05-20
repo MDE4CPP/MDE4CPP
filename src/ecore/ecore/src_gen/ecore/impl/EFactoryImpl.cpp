@@ -230,6 +230,75 @@ bool EFactoryImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any EFactoryImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2323
+		case ecorePackage::EFACTORY_OPERATION_CONVERTTOSTRING_EDATATYPE_EJAVAOBJECT:
+		{
+			//Retrieve input parameter 'eDataType'
+			//parameter 0
+			std::shared_ptr<ecore::EDataType> incoming_param_eDataType;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eDataType_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eDataType = (*incoming_param_eDataType_arguments_citer)->get()->get<std::shared_ptr<ecore::EDataType> >();
+			//Retrieve input parameter 'instanceValue'
+			//parameter 1
+			Any incoming_param_instanceValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_instanceValue_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_instanceValue = (*incoming_param_instanceValue_arguments_citer)->get()->get<Any >();
+			result = eAny(this->convertToString(incoming_param_eDataType,incoming_param_instanceValue));
+			break;
+		}
+		
+		// 2321
+		case ecorePackage::EFACTORY_OPERATION_CREATE_ECLASS:
+		{
+			//Retrieve input parameter 'eClass'
+			//parameter 0
+			std::shared_ptr<ecore::EClass> incoming_param_eClass;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get()->get<std::shared_ptr<ecore::EClass> >();
+			result = eAny(this->create(incoming_param_eClass));
+			break;
+		}
+		
+		// 2322
+		case ecorePackage::EFACTORY_OPERATION_CREATEFROMSTRING_EDATATYPE_ESTRING:
+		{
+			//Retrieve input parameter 'eDataType'
+			//parameter 0
+			std::shared_ptr<ecore::EDataType> incoming_param_eDataType;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eDataType_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eDataType = (*incoming_param_eDataType_arguments_citer)->get()->get<std::shared_ptr<ecore::EDataType> >();
+			//Retrieve input parameter 'literalValue'
+			//parameter 1
+			std::string incoming_param_literalValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_literalValue_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_literalValue = (*incoming_param_literalValue_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->createFromString(incoming_param_eDataType,incoming_param_literalValue));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void EFactoryImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

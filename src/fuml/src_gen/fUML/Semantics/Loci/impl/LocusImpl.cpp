@@ -427,6 +427,118 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any LocusImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 7707
+		case LociPackage::LOCUS_OPERATION_ADD_EXTENSIONALVALUE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
+			this->add(incoming_param_value);
+			break;
+		}
+		
+		// 7704
+		case LociPackage::LOCUS_OPERATION_ASSIGNEXECUTOR_EXECUTOR:
+		{
+			//Retrieve input parameter 'executor'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Loci::Executor> incoming_param_executor;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_executor_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_executor = (*incoming_param_executor_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Loci::Executor> >();
+			this->assignExecutor(incoming_param_executor);
+			break;
+		}
+		
+		// 7705
+		case LociPackage::LOCUS_OPERATION_ASSIGNFACTORY_EXECUTIONFACTORY:
+		{
+			//Retrieve input parameter 'factory'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> incoming_param_factory;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_factory_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_factory = (*incoming_param_factory_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> >();
+			this->assignFactory(incoming_param_factory);
+			break;
+		}
+		
+		// 7703
+		case LociPackage::LOCUS_OPERATION_CONFORMS_CLASSIFIER_CLASSIFIER:
+		{
+			//Retrieve input parameter 'type'
+			//parameter 0
+			std::shared_ptr<uml::Classifier> incoming_param_type;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
+			//Retrieve input parameter 'classifier'
+			//parameter 1
+			std::shared_ptr<uml::Classifier> incoming_param_classifier;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
+			result = eAny(this->conforms(incoming_param_type,incoming_param_classifier));
+			break;
+		}
+		
+		// 7709
+		case LociPackage::LOCUS_OPERATION_INSTANTIATE_CLASS:
+		{
+			//Retrieve input parameter 'type'
+			//parameter 0
+			std::shared_ptr<uml::Class> incoming_param_type;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			result = eAny(this->instantiate(incoming_param_type));
+			break;
+		}
+		
+		// 7708
+		case LociPackage::LOCUS_OPERATION_REMOVE_EXTENSIONALVALUE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
+			this->remove(incoming_param_value);
+			break;
+		}
+		
+		// 7706
+		case LociPackage::LOCUS_OPERATION_RETRIEVEEXTENT_CLASSIFIER:
+		{
+			//Retrieve input parameter 'classifier'
+			//parameter 0
+			std::shared_ptr<uml::Classifier> incoming_param_classifier;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
+			result = eAny(this->retrieveExtent(incoming_param_classifier));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void LocusImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

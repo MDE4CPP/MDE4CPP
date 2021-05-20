@@ -217,6 +217,51 @@ bool WriteStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValu
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any WriteStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 12262
+		case ActionsPackage::WRITESTRUCTURALFEATUREACTIONACTIVATION_OPERATION_POSITION_VALUE_EINT:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			//Retrieve input parameter 'list'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> incoming_param_list;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_list_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_list = (*incoming_param_list_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
+			//Retrieve input parameter 'startAt'
+			//parameter 2
+			int incoming_param_startAt;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_startAt_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_startAt = (*incoming_param_startAt_arguments_citer)->get()->get<int >();
+			result = eAny(this->position(incoming_param_value,incoming_param_list,incoming_param_startAt));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void WriteStructuralFeatureActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

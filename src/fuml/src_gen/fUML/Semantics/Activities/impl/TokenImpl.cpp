@@ -280,6 +280,81 @@ bool TokenImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any TokenImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 11506
+		case ActivitiesPackage::TOKEN_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 11504
+		case ActivitiesPackage::TOKEN_OPERATION_EQUALS_TOKEN:
+		{
+			//Retrieve input parameter 'other'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::Token> incoming_param_other;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::Token> >();
+			result = eAny(this->equals(incoming_param_other));
+			break;
+		}
+		
+		// 11507
+		case ActivitiesPackage::TOKEN_OPERATION_GETVALUE:
+		{
+			result = eAny(this->getValue());
+			break;
+		}
+		
+		// 11505
+		case ActivitiesPackage::TOKEN_OPERATION_ISCONTROL:
+		{
+			result = eAny(this->isControl());
+			break;
+		}
+		
+		// 11502
+		case ActivitiesPackage::TOKEN_OPERATION_TRANSFER_ACTIVITYNODEACTIVATION:
+		{
+			//Retrieve input parameter 'holder'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_holder;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_holder_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_holder = (*incoming_param_holder_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
+			result = eAny(this->transfer(incoming_param_holder));
+			break;
+		}
+		
+		// 11503
+		case ActivitiesPackage::TOKEN_OPERATION_WITHDRAW:
+		{
+			this->withdraw();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void TokenImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

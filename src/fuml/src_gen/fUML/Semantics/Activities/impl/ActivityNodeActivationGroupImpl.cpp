@@ -888,6 +888,223 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ActivityNodeActivationGroupImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1007
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ACTIVATE_ACTIVITYNODE_ACTIVITYEDGE:
+		{
+			//Retrieve input parameter 'nodes'
+			//parameter 0
+			std::shared_ptr<Bag<uml::ActivityNode>> incoming_param_nodes;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_nodes_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_nodes = (*incoming_param_nodes_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::ActivityNode>> >();
+			//Retrieve input parameter 'edges'
+			//parameter 1
+			std::shared_ptr<Bag<uml::ActivityEdge>> incoming_param_edges;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_edges_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_edges = (*incoming_param_edges_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::ActivityEdge>> >();
+			this->activate(incoming_param_nodes,incoming_param_edges);
+			break;
+		}
+		
+		// 1015
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDEDGEINSTANCE_ACTIVITYEDGEINSTANCE:
+		{
+			//Retrieve input parameter 'instance'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incoming_param_instance;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_instance_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_instance = (*incoming_param_instance_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
+			this->addEdgeInstance(incoming_param_instance);
+			break;
+		}
+		
+		// 1012
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ADDNODEACTIVATION_ACTIVITYNODEACTIVATION:
+		{
+			//Retrieve input parameter 'activation'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_activation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
+			this->addNodeActivation(incoming_param_activation);
+			break;
+		}
+		
+		// 1006
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CHECKINCOMINGEDGES_ACTIVITYEDGEINSTANCE_ACTIVITYNODEACTIVATION:
+		{
+			//Retrieve input parameter 'incomingEdges'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> incoming_param_incomingEdges;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_incomingEdges_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_incomingEdges = (*incoming_param_incomingEdges_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityEdgeInstance>> >();
+			//Retrieve input parameter 'activations'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> incoming_param_activations;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_activations_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_activations = (*incoming_param_activations_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> >();
+			result = eAny(this->checkIncomingEdges(incoming_param_incomingEdges,incoming_param_activations));
+			break;
+		}
+		
+		// 1014
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATEEDGEINSTANCE_ACTIVITYEDGE:
+		{
+			//Retrieve input parameter 'edges'
+			//parameter 0
+			std::shared_ptr<Bag<uml::ActivityEdge>> incoming_param_edges;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_edges_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_edges = (*incoming_param_edges_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::ActivityEdge>> >();
+			this->createEdgeInstance(incoming_param_edges);
+			break;
+		}
+		
+		// 1011
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATENODEACTIVATION_ACTIVITYNODE:
+		{
+			//Retrieve input parameter 'node'
+			//parameter 0
+			std::shared_ptr<uml::ActivityNode> incoming_param_node;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_node = (*incoming_param_node_arguments_citer)->get()->get<std::shared_ptr<uml::ActivityNode> >();
+			result = eAny(this->createNodeActivation(incoming_param_node));
+			break;
+		}
+		
+		// 1010
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_CREATENODEACTIVATIONS_ACTIVITYNODE:
+		{
+			//Retrieve input parameter 'nodes'
+			//parameter 0
+			std::shared_ptr<Bag<uml::ActivityNode>> incoming_param_nodes;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_nodes_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_nodes = (*incoming_param_nodes_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::ActivityNode>> >();
+			this->createNodeActivations(incoming_param_nodes);
+			break;
+		}
+		
+		// 1013
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETNODEACTIVATION_ACTIVITYNODE:
+		{
+			//Retrieve input parameter 'node'
+			//parameter 0
+			std::shared_ptr<uml::ActivityNode> incoming_param_node;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_node = (*incoming_param_node_arguments_citer)->get()->get<std::shared_ptr<uml::ActivityNode> >();
+			result = eAny(this->getNodeActivation(incoming_param_node));
+			break;
+		}
+		
+		// 1017
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_GETOUTPUTPARAMETERNODEACTIVATIONS:
+		{
+			result = eAny(this->getOutputParameterNodeActivations());
+			break;
+		}
+		
+		// 1021
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_HASSOURCEFOR_ACTIVITYEDGEINSTANCE:
+		{
+			//Retrieve input parameter 'edgeInstance'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> incoming_param_edgeInstance;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_edgeInstance_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_edgeInstance = (*incoming_param_edgeInstance_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityEdgeInstance> >();
+			result = eAny(this->hasSourceFor(incoming_param_edgeInstance));
+			break;
+		}
+		
+		// 1020
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_ISSUSPENDED:
+		{
+			result = eAny(this->isSuspended());
+			break;
+		}
+		
+		// 1018
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RESUME_ACTIVITYNODEACTIVATION:
+		{
+			//Retrieve input parameter 'activation'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_activation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
+			this->resume(incoming_param_activation);
+			break;
+		}
+		
+		// 1016
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RETRIEVEACTIVITYEXECUTION:
+		{
+			result = eAny(this->retrieveActivityExecution());
+			break;
+		}
+		
+		// 1005
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RUN_ACTIVITYNODEACTIVATION:
+		{
+			//Retrieve input parameter 'activations'
+			//parameter 0
+			std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> incoming_param_activations;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_activations_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_activations = (*incoming_param_activations_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Activities::ActivityNodeActivation>> >();
+			this->run(incoming_param_activations);
+			break;
+		}
+		
+		// 1008
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_RUNNODES_ACTIVITYNODE:
+		{
+			//Retrieve input parameter 'nodes'
+			//parameter 0
+			std::shared_ptr<Bag<uml::ActivityNode>> incoming_param_nodes;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_nodes_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_nodes = (*incoming_param_nodes_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::ActivityNode>> >();
+			this->runNodes(incoming_param_nodes);
+			break;
+		}
+		
+		// 1019
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_SUSPEND_ACTIVITYNODEACTIVATION:
+		{
+			//Retrieve input parameter 'activation'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> incoming_param_activation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_activation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_activation = (*incoming_param_activation_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivation> >();
+			this->suspend(incoming_param_activation);
+			break;
+		}
+		
+		// 1009
+		case ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_OPERATION_TERMINATEALL:
+		{
+			this->terminateAll();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ActivityNodeActivationGroupImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

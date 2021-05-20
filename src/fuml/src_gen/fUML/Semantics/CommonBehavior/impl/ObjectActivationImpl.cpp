@@ -545,6 +545,122 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ObjectActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 8106
+		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION__REGISTER_EVENTACCEPTER:
+		{
+			//Retrieve input parameter 'accepter'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> incoming_param_accepter;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_accepter_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_accepter = (*incoming_param_accepter_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> >();
+			this->_register(incoming_param_accepter);
+			break;
+		}
+		
+		// 8112
+		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION__SEND_EJAVAOBJECT:
+		{
+			//Retrieve input parameter 'signal'
+			//parameter 0
+			Any incoming_param_signal;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_signal_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_signal = (*incoming_param_signal_arguments_citer)->get()->get<Any >();
+			this->_send(incoming_param_signal);
+			break;
+		}
+		
+		// 8111
+		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION__STARTOBJECTBEHAVIOR:
+		{
+			this->_startObjectBehavior();
+			break;
+		}
+		
+		// 8109
+		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_DISPATCHNEXTEVENT:
+		{
+			this->dispatchNextEvent();
+			break;
+		}
+		
+		// 8110
+		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_RETRIEVENEXTEVENT:
+		{
+			result = eAny(this->retrieveNextEvent());
+			break;
+		}
+		
+		// 8108
+		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_SEND_SIGNALINSTANCE:
+		{
+			//Retrieve input parameter 'signalInstance'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> incoming_param_signalInstance;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
+			this->send(incoming_param_signalInstance);
+			break;
+		}
+		
+		// 8104
+		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_STARTBEHAVIOR_CLASS_PARAMETERVALUE:
+		{
+			//Retrieve input parameter 'classifier'
+			//parameter 0
+			std::shared_ptr<uml::Class> incoming_param_classifier;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			//Retrieve input parameter 'inputs'
+			//parameter 1
+			std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> incoming_param_inputs;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inputs_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_inputs = (*incoming_param_inputs_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::CommonBehavior::ParameterValue>> >();
+			this->startBehavior(incoming_param_classifier,incoming_param_inputs);
+			break;
+		}
+		
+		// 8105
+		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_STOP:
+		{
+			this->stop();
+			break;
+		}
+		
+		// 8107
+		case CommonBehaviorPackage::OBJECTACTIVATION_OPERATION_UNREGISTER_EVENTACCEPTER:
+		{
+			//Retrieve input parameter 'accepter'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> incoming_param_accepter;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_accepter_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_accepter = (*incoming_param_accepter_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventAccepter> >();
+			this->unregister(incoming_param_accepter);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ObjectActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

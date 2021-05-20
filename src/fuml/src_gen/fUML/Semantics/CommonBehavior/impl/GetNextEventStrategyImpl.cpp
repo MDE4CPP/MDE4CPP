@@ -174,6 +174,48 @@ bool GetNextEventStrategyImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any GetNextEventStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 6002
+		case CommonBehaviorPackage::GETNEXTEVENTSTRATEGY_OPERATION_GETNAME:
+		{
+			result = eAny(this->getName());
+			break;
+		}
+		
+		// 6001
+		case CommonBehaviorPackage::GETNEXTEVENTSTRATEGY_OPERATION_RETRIEVENEXTEVENT_OBJECTACTIVATION:
+		{
+			//Retrieve input parameter 'objectActivation'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> incoming_param_objectActivation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_objectActivation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_objectActivation = (*incoming_param_objectActivation_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> >();
+			result = eAny(this->retrieveNextEvent(incoming_param_objectActivation));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Loci::SemanticStrategyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void GetNextEventStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -658,6 +658,80 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any BehavioralFeatureImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2600
+		case umlPackage::BEHAVIORALFEATURE_OPERATION_ABSTRACT_NO_METHOD_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->abstract_no_method(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 2601
+		case umlPackage::BEHAVIORALFEATURE_OPERATION_CREATERETURNRESULT_STRING_TYPE:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'type'
+			//parameter 1
+			std::shared_ptr<uml::Type> incoming_param_type;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
+			result = eAny(this->createReturnResult(incoming_param_name,incoming_param_type));
+			break;
+		}
+		
+		// 2602
+		case umlPackage::BEHAVIORALFEATURE_OPERATION_INPUTPARAMETERS:
+		{
+			result = eAny(this->inputParameters());
+			break;
+		}
+		
+		// 2603
+		case umlPackage::BEHAVIORALFEATURE_OPERATION_OUTPUTPARAMETERS:
+		{
+			result = eAny(this->outputParameters());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = FeatureImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = NamespaceImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void BehavioralFeatureImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

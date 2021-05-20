@@ -181,6 +181,87 @@ bool ObjectImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ObjectImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 15800
+		case umlPackage::OBJECT_OPERATION_GET_PROPERTY:
+		{
+			//Retrieve input parameter 'property'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param_property;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_property_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_property = (*incoming_param_property_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
+			result = eAny(this->get(incoming_param_property));
+			break;
+		}
+		
+		// 15803
+		case umlPackage::OBJECT_OPERATION_INVOKE_OPERATION_ARGUMENT:
+		{
+			//Retrieve input parameter 'op'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_op;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_op_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_op = (*incoming_param_op_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			//Retrieve input parameter 'arguments'
+			//parameter 1
+			std::shared_ptr<Bag<uml::Argument>> incoming_param_arguments;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_arguments_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_arguments = (*incoming_param_arguments_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::Argument>> >();
+			result = eAny(this->invoke(incoming_param_op,incoming_param_arguments));
+			break;
+		}
+		
+		// 15801
+		case umlPackage::OBJECT_OPERATION_SET_PROPERTY_EJAVAOBJECT:
+		{
+			//Retrieve input parameter 'property'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param_property;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_property_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_property = (*incoming_param_property_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
+			//Retrieve input parameter 'value'
+			//parameter 1
+			Any incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<Any >();
+			this->set(incoming_param_property,incoming_param_value);
+			break;
+		}
+		
+		// 15802
+		case umlPackage::OBJECT_OPERATION_UNSET_PROPERTY:
+		{
+			//Retrieve input parameter 'property'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param_property;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_property_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_property = (*incoming_param_property_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
+			this->unset(incoming_param_property);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ObjectImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

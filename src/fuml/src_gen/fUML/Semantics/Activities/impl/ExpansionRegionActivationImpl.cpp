@@ -824,6 +824,147 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ExpansionRegionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 5162
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+		
+		// 5163
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_DOOUTPUT:
+		{
+			this->doOutput();
+			break;
+		}
+		
+		// 5164
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_DOSTRUCTUREDACTIVITY:
+		{
+			this->doStructuredActivity();
+			break;
+		}
+		
+		// 5165
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_GETEXPANSIONNODEACTIVATION_EXPANSIONNODE:
+		{
+			//Retrieve input parameter 'node'
+			//parameter 0
+			std::shared_ptr<uml::ExpansionNode> incoming_param_node;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_node_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_node = (*incoming_param_node_arguments_citer)->get()->get<std::shared_ptr<uml::ExpansionNode> >();
+			result = eAny(this->getExpansionNodeActivation(incoming_param_node));
+			break;
+		}
+		
+		// 5166
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_ISSUSPENDED:
+		{
+			result = eAny(this->isSuspended());
+			break;
+		}
+		
+		// 5167
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_NUMBEROFVALUES:
+		{
+			result = eAny(this->numberOfValues());
+			break;
+		}
+		
+		// 5168
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RESUME_EXPANSIONACTIVATIONGROUP:
+		{
+			//Retrieve input parameter 'activationGroup'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> incoming_param_activationGroup;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_activationGroup_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_activationGroup = (*incoming_param_activationGroup_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> >();
+			this->resume(incoming_param_activationGroup);
+			break;
+		}
+		
+		// 5169
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RUNGROUP_EXPANSIONACTIVATIONGROUP:
+		{
+			//Retrieve input parameter 'activationGroup'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> incoming_param_activationGroup;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_activationGroup_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_activationGroup = (*incoming_param_activationGroup_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> >();
+			this->runGroup(incoming_param_activationGroup);
+			break;
+		}
+		
+		// 5170
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RUNITERATIVE:
+		{
+			this->runIterative();
+			break;
+		}
+		
+		// 5171
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_RUNPARALLEL:
+		{
+			this->runParallel();
+			break;
+		}
+		
+		// 5172
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_SENDOFFERS:
+		{
+			this->sendOffers();
+			break;
+		}
+		
+		// 5173
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TAKEOFFEREDTOKENS:
+		{
+			result = eAny(this->takeOfferedTokens());
+			break;
+		}
+		
+		// 5174
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TERMINATE:
+		{
+			this->terminate();
+			break;
+		}
+		
+		// 5175
+		case ActivitiesPackage::EXPANSIONREGIONACTIVATION_OPERATION_TERMINATEGROUP_EXPANSIONACTIVATIONGROUP:
+		{
+			//Retrieve input parameter 'activationGroup'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> incoming_param_activationGroup;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_activationGroup_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_activationGroup = (*incoming_param_activationGroup_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Activities::ExpansionActivationGroup> >();
+			this->terminateGroup(incoming_param_activationGroup);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Actions::ActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ExpansionRegionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

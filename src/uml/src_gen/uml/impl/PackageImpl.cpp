@@ -1077,6 +1077,298 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any PackageImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 17119
+		case umlPackage::PACKAGE_OPERATION_ALLAPPLICABLESTEREOTYPES:
+		{
+			result = eAny(this->allApplicableStereotypes());
+			break;
+		}
+		
+		// 17103
+		case umlPackage::PACKAGE_OPERATION_APPLYPROFILE_PROFILE:
+		{
+			//Retrieve input parameter 'profile'
+			//parameter 0
+			std::shared_ptr<uml::Profile> incoming_param_profile;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get()->get<std::shared_ptr<uml::Profile> >();
+			result = eAny(this->applyProfile(incoming_param_profile));
+			break;
+		}
+		
+		// 17120
+		case umlPackage::PACKAGE_OPERATION_CONTAININGPROFILE:
+		{
+			result = eAny(this->containingProfile());
+			break;
+		}
+		
+		// 17104
+		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'isAbstract'
+			//parameter 1
+			bool incoming_param_isAbstract;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_isAbstract_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get()->get<bool >();
+			result = eAny(this->createOwnedClass(incoming_param_name,incoming_param_isAbstract));
+			break;
+		}
+		
+		// 17105
+		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDENUMERATION_STRING:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->createOwnedEnumeration(incoming_param_name));
+			break;
+		}
+		
+		// 17106
+		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDINTERFACE_STRING:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->createOwnedInterface(incoming_param_name));
+			break;
+		}
+		
+		// 17107
+		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->createOwnedPrimitiveType(incoming_param_name));
+			break;
+		}
+		
+		// 17108
+		case umlPackage::PACKAGE_OPERATION_CREATEOWNEDSTEREOTYPE_STRING_BOOLEAN:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'isAbstract'
+			//parameter 1
+			bool incoming_param_isAbstract;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_isAbstract_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_isAbstract = (*incoming_param_isAbstract_arguments_citer)->get()->get<bool >();
+			result = eAny(this->createOwnedStereotype(incoming_param_name,incoming_param_isAbstract));
+			break;
+		}
+		
+		// 17102
+		case umlPackage::PACKAGE_OPERATION_ELEMENTS_PUBLIC_OR_PRIVATE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->elements_public_or_private(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 17109
+		case umlPackage::PACKAGE_OPERATION_GETALLAPPLIEDPROFILES:
+		{
+			result = eAny(this->getAllAppliedProfiles());
+			break;
+		}
+		
+		// 17110
+		case umlPackage::PACKAGE_OPERATION_GETALLPROFILEAPPLICATIONS:
+		{
+			result = eAny(this->getAllProfileApplications());
+			break;
+		}
+		
+		// 17111
+		case umlPackage::PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING:
+		{
+			//Retrieve input parameter 'qualifiedName'
+			//parameter 0
+			std::string incoming_param_qualifiedName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getAppliedProfile(incoming_param_qualifiedName));
+			break;
+		}
+		
+		// 17112
+		case umlPackage::PACKAGE_OPERATION_GETAPPLIEDPROFILE_STRING_BOOLEAN:
+		{
+			//Retrieve input parameter 'qualifiedName'
+			//parameter 0
+			std::string incoming_param_qualifiedName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'recurse'
+			//parameter 1
+			bool incoming_param_recurse;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_recurse_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_recurse = (*incoming_param_recurse_arguments_citer)->get()->get<bool >();
+			result = eAny(this->getAppliedProfile(incoming_param_qualifiedName,incoming_param_recurse));
+			break;
+		}
+		
+		// 17113
+		case umlPackage::PACKAGE_OPERATION_GETAPPLIEDPROFILES:
+		{
+			result = eAny(this->getAppliedProfiles());
+			break;
+		}
+		
+		// 17122
+		case umlPackage::PACKAGE_OPERATION_GETNESTEDPACKAGES:
+		{
+			result = eAny(this->getNestedPackages());
+			break;
+		}
+		
+		// 17123
+		case umlPackage::PACKAGE_OPERATION_GETOWNEDSTEREOTYPES:
+		{
+			result = eAny(this->getOwnedStereotypes());
+			break;
+		}
+		
+		// 17124
+		case umlPackage::PACKAGE_OPERATION_GETOWNEDTYPES:
+		{
+			result = eAny(this->getOwnedTypes());
+			break;
+		}
+		
+		// 17114
+		case umlPackage::PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE:
+		{
+			//Retrieve input parameter 'profile'
+			//parameter 0
+			std::shared_ptr<uml::Profile> incoming_param_profile;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get()->get<std::shared_ptr<uml::Profile> >();
+			result = eAny(this->getProfileApplication(incoming_param_profile));
+			break;
+		}
+		
+		// 17115
+		case umlPackage::PACKAGE_OPERATION_GETPROFILEAPPLICATION_PROFILE_BOOLEAN:
+		{
+			//Retrieve input parameter 'profile'
+			//parameter 0
+			std::shared_ptr<uml::Profile> incoming_param_profile;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get()->get<std::shared_ptr<uml::Profile> >();
+			//Retrieve input parameter 'recurse'
+			//parameter 1
+			bool incoming_param_recurse;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_recurse_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_recurse = (*incoming_param_recurse_arguments_citer)->get()->get<bool >();
+			result = eAny(this->getProfileApplication(incoming_param_profile,incoming_param_recurse));
+			break;
+		}
+		
+		// 17116
+		case umlPackage::PACKAGE_OPERATION_ISMODELLIBRARY:
+		{
+			result = eAny(this->isModelLibrary());
+			break;
+		}
+		
+		// 17117
+		case umlPackage::PACKAGE_OPERATION_ISPROFILEAPPLIED_PROFILE:
+		{
+			//Retrieve input parameter 'profile'
+			//parameter 0
+			std::shared_ptr<uml::Profile> incoming_param_profile;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get()->get<std::shared_ptr<uml::Profile> >();
+			result = eAny(this->isProfileApplied(incoming_param_profile));
+			break;
+		}
+		
+		// 17121
+		case umlPackage::PACKAGE_OPERATION_MAKESVISIBLE_NAMEDELEMENT:
+		{
+			//Retrieve input parameter 'el'
+			//parameter 0
+			std::shared_ptr<uml::NamedElement> incoming_param_el;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_el_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_el = (*incoming_param_el_arguments_citer)->get()->get<std::shared_ptr<uml::NamedElement> >();
+			result = eAny(this->makesVisible(incoming_param_el));
+			break;
+		}
+		
+		// 17118
+		case umlPackage::PACKAGE_OPERATION_UNAPPLYPROFILE_PROFILE:
+		{
+			//Retrieve input parameter 'profile'
+			//parameter 0
+			std::shared_ptr<uml::Profile> incoming_param_profile;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_profile_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_profile = (*incoming_param_profile_arguments_citer)->get()->get<std::shared_ptr<uml::Profile> >();
+			result = eAny(this->unapplyProfile(incoming_param_profile));
+			break;
+		}
+		
+		// 17125
+		case umlPackage::PACKAGE_OPERATION_VISIBLEMEMBERS:
+		{
+			result = eAny(this->visibleMembers());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = TemplateableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = PackageableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = NamespaceImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void PackageImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

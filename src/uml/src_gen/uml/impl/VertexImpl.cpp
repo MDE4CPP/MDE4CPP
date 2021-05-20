@@ -332,6 +332,74 @@ bool VertexImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any VertexImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 25468
+		case umlPackage::VERTEX_OPERATION_CONTAININGSTATEMACHINE:
+		{
+			result = eAny(this->containingStateMachine());
+			break;
+		}
+		
+		// 25469
+		case umlPackage::VERTEX_OPERATION_GETINCOMINGS:
+		{
+			result = eAny(this->getIncomings());
+			break;
+		}
+		
+		// 25470
+		case umlPackage::VERTEX_OPERATION_GETOUTGOINGS:
+		{
+			result = eAny(this->getOutgoings());
+			break;
+		}
+		
+		// 25472
+		case umlPackage::VERTEX_OPERATION_ISCONTAINEDINREGION_REGION:
+		{
+			//Retrieve input parameter 'r'
+			//parameter 0
+			std::shared_ptr<uml::Region> incoming_param_r;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_r_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_r = (*incoming_param_r_arguments_citer)->get()->get<std::shared_ptr<uml::Region> >();
+			result = eAny(this->isContainedInRegion(incoming_param_r));
+			break;
+		}
+		
+		// 25471
+		case umlPackage::VERTEX_OPERATION_ISCONTAINEDINSTATE_STATE:
+		{
+			//Retrieve input parameter 's'
+			//parameter 0
+			std::shared_ptr<uml::State> incoming_param_s;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_s_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_s = (*incoming_param_s_arguments_citer)->get()->get<std::shared_ptr<uml::State> >();
+			result = eAny(this->isContainedInState(incoming_param_s));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = NamedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void VertexImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

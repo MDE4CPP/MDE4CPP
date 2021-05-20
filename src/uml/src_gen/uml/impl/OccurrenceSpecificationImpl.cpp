@@ -368,6 +368,48 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any OccurrenceSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 16371
+		case umlPackage::OCCURRENCESPECIFICATION_OPERATION_GETCOVERED:
+		{
+			result = eAny(this->getCovered());
+			break;
+		}
+		
+		// 16372
+		case umlPackage::OCCURRENCESPECIFICATION_OPERATION_SETCOVERED_LIFELINE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<uml::Lifeline> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<uml::Lifeline> >();
+			this->setCovered(incoming_param_value);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = InteractionFragmentImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void OccurrenceSpecificationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

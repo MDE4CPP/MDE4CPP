@@ -306,6 +306,43 @@ bool LiteralBooleanImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any LiteralBooleanImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 13782
+		case umlPackage::LITERALBOOLEAN_OPERATION_BOOLEANVALUE:
+		{
+			result = eAny(this->booleanValue());
+			break;
+		}
+		
+		// 13783
+		case umlPackage::LITERALBOOLEAN_OPERATION_ISCOMPUTABLE:
+		{
+			result = eAny(this->isComputable());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = LiteralSpecificationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void LiteralBooleanImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

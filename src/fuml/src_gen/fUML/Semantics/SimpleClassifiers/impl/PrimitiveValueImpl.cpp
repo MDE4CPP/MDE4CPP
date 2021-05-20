@@ -215,6 +215,43 @@ bool PrimitiveValueImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any PrimitiveValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 8912
+		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 8911
+		case SimpleClassifiersPackage::PRIMITIVEVALUE_OPERATION_GETTYPES:
+		{
+			result = eAny(this->getTypes());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void PrimitiveValueImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

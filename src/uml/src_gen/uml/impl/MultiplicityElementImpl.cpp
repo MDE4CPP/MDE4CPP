@@ -416,6 +416,193 @@ bool MultiplicityElementImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any MultiplicityElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 15457
+		case umlPackage::MULTIPLICITYELEMENT_OPERATION_COMPATIBLEWITH_MULTIPLICITYELEMENT:
+		{
+			//Retrieve input parameter 'other'
+			//parameter 0
+			std::shared_ptr<uml::MultiplicityElement> incoming_param_other;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_other_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_other = (*incoming_param_other_arguments_citer)->get()->get<std::shared_ptr<uml::MultiplicityElement> >();
+			result = eAny(this->compatibleWith(incoming_param_other));
+			break;
+		}
+		
+		// 15458
+		case umlPackage::MULTIPLICITYELEMENT_OPERATION_INCLUDESMULTIPLICITY_MULTIPLICITYELEMENT:
+		{
+			//Retrieve input parameter 'M'
+			//parameter 0
+			std::shared_ptr<uml::MultiplicityElement> incoming_param_M;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_M_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_M = (*incoming_param_M_arguments_citer)->get()->get<std::shared_ptr<uml::MultiplicityElement> >();
+			result = eAny(this->includesMultiplicity(incoming_param_M));
+			break;
+		}
+		
+		// 15459
+		case umlPackage::MULTIPLICITYELEMENT_OPERATION_IS_INTEGER_UNLIMITEDNATURAL:
+		{
+			//Retrieve input parameter 'lowerbound'
+			//parameter 0
+			int incoming_param_lowerbound;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_lowerbound_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_lowerbound = (*incoming_param_lowerbound_arguments_citer)->get()->get<int >();
+			//Retrieve input parameter 'upperbound'
+			//parameter 1
+			int incoming_param_upperbound;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_upperbound_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_upperbound = (*incoming_param_upperbound_arguments_citer)->get()->get<int >();
+			result = eAny(this->is(incoming_param_lowerbound,incoming_param_upperbound));
+			break;
+		}
+		
+		// 15460
+		case umlPackage::MULTIPLICITYELEMENT_OPERATION_ISMULTIVALUED:
+		{
+			result = eAny(this->isMultivalued());
+			break;
+		}
+		
+		// 15461
+		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWERBOUND:
+		{
+			result = eAny(this->lowerBound());
+			break;
+		}
+		
+		// 15452
+		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWER_GE_0_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->lower_ge_0(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 15455
+		case umlPackage::MULTIPLICITYELEMENT_OPERATION_LOWER_IS_INTEGER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->lower_is_integer(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 15462
+		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPERBOUND:
+		{
+			result = eAny(this->upperBound());
+			break;
+		}
+		
+		// 15451
+		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPER_GE_LOWER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->upper_ge_lower(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 15456
+		case umlPackage::MULTIPLICITYELEMENT_OPERATION_UPPER_IS_UNLIMITEDNATURAL_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->upper_is_unlimitedNatural(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 15454
+		case umlPackage::MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_CONSTANT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->value_specification_constant(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 15453
+		case umlPackage::MULTIPLICITYELEMENT_OPERATION_VALUE_SPECIFICATION_NO_SIDE_EFFECTS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->value_specification_no_side_effects(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void MultiplicityElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

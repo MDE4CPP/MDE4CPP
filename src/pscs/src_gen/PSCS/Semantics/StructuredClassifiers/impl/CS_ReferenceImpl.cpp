@@ -286,6 +286,172 @@ bool CS_ReferenceImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CS_ReferenceImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2645
+		case StructuredClassifiersPackage::CS_REFERENCE_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 2637
+		case StructuredClassifiersPackage::CS_REFERENCE_OPERATION_DISPATCHIN_OPERATION_CS_INTERACTIONPOINT:
+		{
+			//Retrieve input parameter 'operation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_operation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			//Retrieve input parameter 'interactionPoint'
+			//parameter 1
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> incoming_param_interactionPoint;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_interactionPoint_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_interactionPoint = (*incoming_param_interactionPoint_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> >();
+			result = eAny(this->dispatchIn(incoming_param_operation,incoming_param_interactionPoint));
+			break;
+		}
+		
+		// 2641
+		case StructuredClassifiersPackage::CS_REFERENCE_OPERATION_DISPATCHIN_OPERATION_PORT:
+		{
+			//Retrieve input parameter 'operation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_operation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			//Retrieve input parameter 'onPort'
+			//parameter 1
+			std::shared_ptr<uml::Port> incoming_param_onPort;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_onPort_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_onPort = (*incoming_param_onPort_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
+			result = eAny(this->dispatchIn(incoming_param_operation,incoming_param_onPort));
+			break;
+		}
+		
+		// 2640
+		case StructuredClassifiersPackage::CS_REFERENCE_OPERATION_DISPATCHOUT_OPERATION_PORT:
+		{
+			//Retrieve input parameter 'operation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_operation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			//Retrieve input parameter 'onPort'
+			//parameter 1
+			std::shared_ptr<uml::Port> incoming_param_onPort;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_onPort_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_onPort = (*incoming_param_onPort_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
+			result = eAny(this->dispatchOut(incoming_param_operation,incoming_param_onPort));
+			break;
+		}
+		
+		// 2643
+		case StructuredClassifiersPackage::CS_REFERENCE_OPERATION_DISPATCHOUT_OPERATION_CS_INTERACTIONPOINT:
+		{
+			//Retrieve input parameter 'operation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_operation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			//Retrieve input parameter 'interactionPoint'
+			//parameter 1
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> incoming_param_interactionPoint;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_interactionPoint_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_interactionPoint = (*incoming_param_interactionPoint_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> >();
+			result = eAny(this->dispatchOut(incoming_param_operation,incoming_param_interactionPoint));
+			break;
+		}
+		
+		// 2638
+		case StructuredClassifiersPackage::CS_REFERENCE_OPERATION_SENDIN_EVENTOCCURRENCE_CS_INTERACTIONPOINT:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			//Retrieve input parameter 'interactionPoint'
+			//parameter 1
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> incoming_param_interactionPoint;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_interactionPoint_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_interactionPoint = (*incoming_param_interactionPoint_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> >();
+			this->sendIn(incoming_param_eventOccurrence,incoming_param_interactionPoint);
+			break;
+		}
+		
+		// 2642
+		case StructuredClassifiersPackage::CS_REFERENCE_OPERATION_SENDIN_EVENTOCCURRENCE_PORT:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			//Retrieve input parameter 'onPort'
+			//parameter 1
+			std::shared_ptr<uml::Port> incoming_param_onPort;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_onPort_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_onPort = (*incoming_param_onPort_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
+			this->sendIn(incoming_param_eventOccurrence,incoming_param_onPort);
+			break;
+		}
+		
+		// 2639
+		case StructuredClassifiersPackage::CS_REFERENCE_OPERATION_SENDOUT_EVENTOCCURRENCE_PORT:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			//Retrieve input parameter 'onPort'
+			//parameter 1
+			std::shared_ptr<uml::Port> incoming_param_onPort;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_onPort_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_onPort = (*incoming_param_onPort_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
+			this->sendOut(incoming_param_eventOccurrence,incoming_param_onPort);
+			break;
+		}
+		
+		// 2644
+		case StructuredClassifiersPackage::CS_REFERENCE_OPERATION_SENDOUT_EVENTOCCURRENCE_CS_INTERACTIONPOINT:
+		{
+			//Retrieve input parameter 'eventOccurrence'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> incoming_param_eventOccurrence;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eventOccurrence_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eventOccurrence = (*incoming_param_eventOccurrence_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> >();
+			//Retrieve input parameter 'interactionPoint'
+			//parameter 1
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> incoming_param_interactionPoint;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_interactionPoint_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_interactionPoint = (*incoming_param_interactionPoint_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> >();
+			this->sendOut(incoming_param_eventOccurrence,incoming_param_interactionPoint);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::StructuredClassifiers::ReferenceImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CS_ReferenceImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

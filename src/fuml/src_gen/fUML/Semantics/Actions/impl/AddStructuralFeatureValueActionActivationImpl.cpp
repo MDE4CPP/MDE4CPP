@@ -410,6 +410,36 @@ bool AddStructuralFeatureValueActionActivationImpl::eSet(int featureID, Any newV
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any AddStructuralFeatureValueActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1264
+		case ActionsPackage::ADDSTRUCTURALFEATUREVALUEACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = WriteStructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void AddStructuralFeatureValueActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

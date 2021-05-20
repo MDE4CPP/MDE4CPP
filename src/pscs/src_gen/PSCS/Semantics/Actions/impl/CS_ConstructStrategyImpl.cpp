@@ -178,6 +178,53 @@ bool CS_ConstructStrategyImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CS_ConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 702
+		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_CS_OBJECT:
+		{
+			//Retrieve input parameter 'constructor'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_constructor;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_constructor_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_constructor = (*incoming_param_constructor_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
+			result = eAny(this->construct(incoming_param_constructor,incoming_param_context));
+			break;
+		}
+		
+		// 701
+		case ActionsPackage::CS_CONSTRUCTSTRATEGY_OPERATION_GETNAME:
+		{
+			result = eAny(this->getName());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Loci::SemanticStrategyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CS_ConstructStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -592,6 +592,41 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any EOperationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 4036
+		case ecorePackage::EOPERATION_OPERATION_ISOVERRIDEOF_EOPERATION:
+		{
+			//Retrieve input parameter 'someOperation'
+			//parameter 0
+			std::shared_ptr<ecore::EOperation> incoming_param_someOperation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_someOperation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_someOperation = (*incoming_param_someOperation_arguments_citer)->get()->get<std::shared_ptr<ecore::EOperation> >();
+			result = eAny(this->isOverrideOf(incoming_param_someOperation));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ETypedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void EOperationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

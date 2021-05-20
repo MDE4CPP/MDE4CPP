@@ -354,6 +354,48 @@ bool ProfileApplicationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ProfileApplicationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 18451
+		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION:
+		{
+			result = eAny(this->getAppliedDefinition());
+			break;
+		}
+		
+		// 18452
+		case umlPackage::PROFILEAPPLICATION_OPERATION_GETAPPLIEDDEFINITION_NAMEDELEMENT:
+		{
+			//Retrieve input parameter 'namedElement'
+			//parameter 0
+			std::shared_ptr<uml::NamedElement> incoming_param_namedElement;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_namedElement_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_namedElement = (*incoming_param_namedElement_arguments_citer)->get()->get<std::shared_ptr<uml::NamedElement> >();
+			result = eAny(this->getAppliedDefinition(incoming_param_namedElement));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = DirectedRelationshipImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ProfileApplicationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -274,6 +274,39 @@ bool ConnectableElementImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ConnectableElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 5071
+		case umlPackage::CONNECTABLEELEMENT_OPERATION_GETENDS:
+		{
+			result = eAny(this->getEnds());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ParameterableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = TypedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ConnectableElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

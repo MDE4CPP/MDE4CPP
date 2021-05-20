@@ -169,6 +169,43 @@ bool SemanticVisitorImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any SemanticVisitorImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 10401
+		case LociPackage::SEMANTICVISITOR_OPERATION__BEGINISOLATION:
+		{
+			this->_beginIsolation();
+			break;
+		}
+		
+		// 10400
+		case LociPackage::SEMANTICVISITOR_OPERATION__ENDISOLATION:
+		{
+			this->_endIsolation();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void SemanticVisitorImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -1533,6 +1533,339 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 3745
+		case umlPackage::CLASSIFIER_OPERATION_ALLATTRIBUTES:
+		{
+			result = eAny(this->allAttributes());
+			break;
+		}
+		
+		// 3731
+		case umlPackage::CLASSIFIER_OPERATION_ALLFEATURES:
+		{
+			result = eAny(this->allFeatures());
+			break;
+		}
+		
+		// 3732
+		case umlPackage::CLASSIFIER_OPERATION_ALLPARENTS:
+		{
+			result = eAny(this->allParents());
+			break;
+		}
+		
+		// 3742
+		case umlPackage::CLASSIFIER_OPERATION_ALLREALIZEDINTERFACES:
+		{
+			result = eAny(this->allRealizedInterfaces());
+			break;
+		}
+		
+		// 3746
+		case umlPackage::CLASSIFIER_OPERATION_ALLSLOTTABLEFEATURES:
+		{
+			result = eAny(this->allSlottableFeatures());
+			break;
+		}
+		
+		// 3743
+		case umlPackage::CLASSIFIER_OPERATION_ALLUSEDINTERFACES:
+		{
+			result = eAny(this->allUsedInterfaces());
+			break;
+		}
+		
+		// 3740
+		case umlPackage::CLASSIFIER_OPERATION_DIRECTLYREALIZEDINTERFACES:
+		{
+			result = eAny(this->directlyRealizedInterfaces());
+			break;
+		}
+		
+		// 3741
+		case umlPackage::CLASSIFIER_OPERATION_DIRECTLYUSEDINTERFACES:
+		{
+			result = eAny(this->directlyUsedInterfaces());
+			break;
+		}
+		
+		// 3724
+		case umlPackage::CLASSIFIER_OPERATION_GETALLATTRIBUTES:
+		{
+			result = eAny(this->getAllAttributes());
+			break;
+		}
+		
+		// 3725
+		case umlPackage::CLASSIFIER_OPERATION_GETALLOPERATIONS:
+		{
+			result = eAny(this->getAllOperations());
+			break;
+		}
+		
+		// 3726
+		case umlPackage::CLASSIFIER_OPERATION_GETALLUSEDINTERFACES:
+		{
+			result = eAny(this->getAllUsedInterfaces());
+			break;
+		}
+		
+		// 3733
+		case umlPackage::CLASSIFIER_OPERATION_GETGENERALS:
+		{
+			result = eAny(this->getGenerals());
+			break;
+		}
+		
+		// 3737
+		case umlPackage::CLASSIFIER_OPERATION_GETINHERITEDMEMBERS:
+		{
+			result = eAny(this->getInheritedMembers());
+			break;
+		}
+		
+		// 3727
+		case umlPackage::CLASSIFIER_OPERATION_GETOPERATION_STRING_TYPE:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'parameterNames'
+			//parameter 1
+			std::shared_ptr<Bag<std::string>> incoming_param_parameterNames;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get()->get<std::shared_ptr<Bag<std::string>> >();
+			//Retrieve input parameter 'parameterTypes'
+			//parameter 2
+			std::shared_ptr<Bag<uml::Type>> incoming_param_parameterTypes;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::Type>> >();
+			result = eAny(this->getOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes));
+			break;
+		}
+		
+		// 3728
+		case umlPackage::CLASSIFIER_OPERATION_GETOPERATION_STRING_BOOLEAN:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'parameterNames'
+			//parameter 1
+			std::shared_ptr<Bag<std::string>> incoming_param_parameterNames;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get()->get<std::shared_ptr<Bag<std::string>> >();
+			//Retrieve input parameter 'parameterTypes'
+			//parameter 2
+			std::shared_ptr<Bag<uml::Type>> incoming_param_parameterTypes;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::Type>> >();
+			//Retrieve input parameter 'ignoreCase'
+			//parameter 3
+			bool incoming_param_ignoreCase;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_ignoreCase_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_ignoreCase = (*incoming_param_ignoreCase_arguments_citer)->get()->get<bool >();
+			result = eAny(this->getOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_ignoreCase));
+			break;
+		}
+		
+		// 3729
+		case umlPackage::CLASSIFIER_OPERATION_GETOPERATIONS:
+		{
+			result = eAny(this->getOperations());
+			break;
+		}
+		
+		// 3747
+		case umlPackage::CLASSIFIER_OPERATION_GETPROPERTYVALUE_STRING:
+		{
+			//Retrieve input parameter 'propertyName'
+			//parameter 0
+			std::string incoming_param_propertyName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getPropertyValue(incoming_param_propertyName));
+			break;
+		}
+		
+		// 3730
+		case umlPackage::CLASSIFIER_OPERATION_GETUSEDINTERFACES:
+		{
+			result = eAny(this->getUsedInterfaces());
+			break;
+		}
+		
+		// 3734
+		case umlPackage::CLASSIFIER_OPERATION_HASVISIBILITYOF_NAMEDELEMENT:
+		{
+			//Retrieve input parameter 'n'
+			//parameter 0
+			std::shared_ptr<uml::NamedElement> incoming_param_n;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_n = (*incoming_param_n_arguments_citer)->get()->get<std::shared_ptr<uml::NamedElement> >();
+			result = eAny(this->hasVisibilityOf(incoming_param_n));
+			break;
+		}
+		
+		// 3735
+		case umlPackage::CLASSIFIER_OPERATION_INHERIT_NAMEDELEMENT:
+		{
+			//Retrieve input parameter 'inhs'
+			//parameter 0
+			std::shared_ptr<Bag<uml::NamedElement>> incoming_param_inhs;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_inhs_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_inhs = (*incoming_param_inhs_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::NamedElement>> >();
+			result = eAny(this->inherit(incoming_param_inhs));
+			break;
+		}
+		
+		// 3736
+		case umlPackage::CLASSIFIER_OPERATION_INHERITABLEMEMBERS_CLASSIFIER:
+		{
+			//Retrieve input parameter 'c'
+			//parameter 0
+			std::shared_ptr<uml::Classifier> incoming_param_c;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_c = (*incoming_param_c_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
+			result = eAny(this->inheritableMembers(incoming_param_c));
+			break;
+		}
+		
+		// 3744
+		case umlPackage::CLASSIFIER_OPERATION_ISSUBSTITUTABLEFOR_CLASSIFIER:
+		{
+			//Retrieve input parameter 'contract'
+			//parameter 0
+			std::shared_ptr<uml::Classifier> incoming_param_contract;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_contract_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_contract = (*incoming_param_contract_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
+			result = eAny(this->isSubstitutableFor(incoming_param_contract));
+			break;
+		}
+		
+		// 3721
+		case umlPackage::CLASSIFIER_OPERATION_MAPS_TO_GENERALIZATION_SET_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->maps_to_generalization_set(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 3738
+		case umlPackage::CLASSIFIER_OPERATION_MAYSPECIALIZETYPE_CLASSIFIER:
+		{
+			//Retrieve input parameter 'c'
+			//parameter 0
+			std::shared_ptr<uml::Classifier> incoming_param_c;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_c = (*incoming_param_c_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
+			result = eAny(this->maySpecializeType(incoming_param_c));
+			break;
+		}
+		
+		// 3723
+		case umlPackage::CLASSIFIER_OPERATION_NO_CYCLES_IN_GENERALIZATION_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->no_cycles_in_generalization(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 3722
+		case umlPackage::CLASSIFIER_OPERATION_NON_FINAL_PARENTS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->non_final_parents(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 3739
+		case umlPackage::CLASSIFIER_OPERATION_PARENTS:
+		{
+			result = eAny(this->parents());
+			break;
+		}
+		
+		// 3720
+		case umlPackage::CLASSIFIER_OPERATION_SPECIALIZE_TYPE_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->specialize_type(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = TemplateableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = TypeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = RedefinableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = NamespaceImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ClassifierImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

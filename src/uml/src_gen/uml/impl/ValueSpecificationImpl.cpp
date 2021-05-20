@@ -385,6 +385,81 @@ bool ValueSpecificationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ValueSpecificationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 25074
+		case umlPackage::VALUESPECIFICATION_OPERATION_BOOLEANVALUE:
+		{
+			result = eAny(this->booleanValue());
+			break;
+		}
+		
+		// 25075
+		case umlPackage::VALUESPECIFICATION_OPERATION_INTEGERVALUE:
+		{
+			result = eAny(this->integerValue());
+			break;
+		}
+		
+		// 25076
+		case umlPackage::VALUESPECIFICATION_OPERATION_ISCOMPUTABLE:
+		{
+			result = eAny(this->isComputable());
+			break;
+		}
+		
+		// 25077
+		case umlPackage::VALUESPECIFICATION_OPERATION_ISNULL:
+		{
+			result = eAny(this->isNull());
+			break;
+		}
+		
+		// 25078
+		case umlPackage::VALUESPECIFICATION_OPERATION_REALVALUE:
+		{
+			result = eAny(this->realValue());
+			break;
+		}
+		
+		// 25079
+		case umlPackage::VALUESPECIFICATION_OPERATION_STRINGVALUE:
+		{
+			result = eAny(this->stringValue());
+			break;
+		}
+		
+		// 25080
+		case umlPackage::VALUESPECIFICATION_OPERATION_UNLIMITEDVALUE:
+		{
+			result = eAny(this->unlimitedValue());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = TypedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = PackageableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ValueSpecificationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

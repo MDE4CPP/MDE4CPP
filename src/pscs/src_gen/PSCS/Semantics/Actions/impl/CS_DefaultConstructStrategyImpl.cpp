@@ -801,6 +801,237 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CS_DefaultConstructStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 1006
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ADDSTRUCTURALFEATUREVALUE_CS_REFERENCE_VALUE:
+		{
+			//Retrieve input parameter 'context'
+			//parameter 0
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			//Retrieve input parameter 'feature'
+			//parameter 1
+			std::shared_ptr<uml::Property> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
+			//Retrieve input parameter 'value'
+			//parameter 2
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			this->addStructuralFeatureValue(incoming_param_context,incoming_param_feature,incoming_param_value);
+			break;
+		}
+		
+		// 1007
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CANINSTANTIATE_PROPERTY:
+		{
+			//Retrieve input parameter 'p'
+			//parameter 0
+			std::shared_ptr<uml::Property> incoming_param_p;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_p_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_p = (*incoming_param_p_arguments_citer)->get()->get<std::shared_ptr<uml::Property> >();
+			result = eAny(this->canInstantiate(incoming_param_p));
+			break;
+		}
+		
+		// 1019
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CONSTRUCT_OPERATION_CS_OBJECT:
+		{
+			//Retrieve input parameter 'constructor'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_constructor;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_constructor_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_constructor = (*incoming_param_constructor_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
+			result = eAny(this->construct(incoming_param_constructor,incoming_param_context));
+			break;
+		}
+		
+		// 1008
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_CONSTRUCTOBJECT_CS_OBJECT_CLASS:
+		{
+			//Retrieve input parameter 'context'
+			//parameter 0
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
+			//Retrieve input parameter 'type'
+			//parameter 1
+			std::shared_ptr<uml::Class> incoming_param_type;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Class> >();
+			result = eAny(this->constructObject(incoming_param_context,incoming_param_type));
+			break;
+		}
+		
+		// 1009
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATEARRAYPATTERN_CS_REFERENCE_CONNECTOR:
+		{
+			//Retrieve input parameter 'context'
+			//parameter 0
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			//Retrieve input parameter 'connector'
+			//parameter 1
+			std::shared_ptr<uml::Connector> incoming_param_connector;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_connector_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_connector = (*incoming_param_connector_arguments_citer)->get()->get<std::shared_ptr<uml::Connector> >();
+			this->generateArrayPattern(incoming_param_context,incoming_param_connector);
+			break;
+		}
+		
+		// 1018
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATEREALIZINGCLASS_INTERFACE_ESTRING:
+		{
+			//Retrieve input parameter 'interface_'
+			//parameter 0
+			std::shared_ptr<uml::Interface> incoming_param_interface_;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_interface__arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_interface_ = (*incoming_param_interface__arguments_citer)->get()->get<std::shared_ptr<uml::Interface> >();
+			//Retrieve input parameter 'className'
+			//parameter 1
+			std::string incoming_param_className;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_className_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_className = (*incoming_param_className_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->generateRealizingClass(incoming_param_interface_,incoming_param_className));
+			break;
+		}
+		
+		// 1010
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GENERATESTARPATTERN_CS_REFERENCE_CONNECTOR:
+		{
+			//Retrieve input parameter 'context'
+			//parameter 0
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			//Retrieve input parameter 'connector'
+			//parameter 1
+			std::shared_ptr<uml::Connector> incoming_param_connector;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_connector_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_connector = (*incoming_param_connector_arguments_citer)->get()->get<std::shared_ptr<uml::Connector> >();
+			this->generateStarPattern(incoming_param_context,incoming_param_connector);
+			break;
+		}
+		
+		// 1011
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETCARDINALITY_CONNECTOREND:
+		{
+			//Retrieve input parameter 'end'
+			//parameter 0
+			std::shared_ptr<uml::ConnectorEnd> incoming_param_end;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::ConnectorEnd> >();
+			result = eAny(this->getCardinality(incoming_param_end));
+			break;
+		}
+		
+		// 1015
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETDEFAULTASSOCIATION:
+		{
+			result = eAny(this->getDefaultAssociation());
+			break;
+		}
+		
+		// 1017
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETREALIZINGCLASS_INTERFACE:
+		{
+			//Retrieve input parameter 'interface_'
+			//parameter 0
+			std::shared_ptr<uml::Interface> incoming_param_interface_;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_interface__arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_interface_ = (*incoming_param_interface__arguments_citer)->get()->get<std::shared_ptr<uml::Interface> >();
+			result = eAny(this->getRealizingClass(incoming_param_interface_));
+			break;
+		}
+		
+		// 1012
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_GETVALUESFROMCONNECTOREND_CS_REFERENCE_CONNECTOREND:
+		{
+			//Retrieve input parameter 'context'
+			//parameter 0
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> >();
+			//Retrieve input parameter 'end'
+			//parameter 1
+			std::shared_ptr<uml::ConnectorEnd> incoming_param_end;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_end_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_end = (*incoming_param_end_arguments_citer)->get()->get<std::shared_ptr<uml::ConnectorEnd> >();
+			result = eAny(this->getValuesFromConnectorEnd(incoming_param_context,incoming_param_end));
+			break;
+		}
+		
+		// 1016
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_INSTANTIATEINTERFACE_INTERFACE_LOCUS:
+		{
+			//Retrieve input parameter 'interface'
+			//parameter 0
+			std::shared_ptr<uml::Interface> incoming_param_interface;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_interface_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_interface = (*incoming_param_interface_arguments_citer)->get()->get<std::shared_ptr<uml::Interface> >();
+			//Retrieve input parameter 'locus'
+			//parameter 1
+			std::shared_ptr<fUML::Semantics::Loci::Locus> incoming_param_locus;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_locus_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_locus = (*incoming_param_locus_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Loci::Locus> >();
+			result = eAny(this->instantiateInterface(incoming_param_interface,incoming_param_locus));
+			break;
+		}
+		
+		// 1013
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ISARRAYPATTERN_CONNECTOR:
+		{
+			//Retrieve input parameter 'c'
+			//parameter 0
+			std::shared_ptr<uml::Connector> incoming_param_c;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_c = (*incoming_param_c_arguments_citer)->get()->get<std::shared_ptr<uml::Connector> >();
+			result = eAny(this->isArrayPattern(incoming_param_c));
+			break;
+		}
+		
+		// 1014
+		case ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_OPERATION_ISSTARPATTERN_CONNECTOR:
+		{
+			//Retrieve input parameter 'c'
+			//parameter 0
+			std::shared_ptr<uml::Connector> incoming_param_c;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_c_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_c = (*incoming_param_c_arguments_citer)->get()->get<std::shared_ptr<uml::Connector> >();
+			result = eAny(this->isStarPattern(incoming_param_c));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = CS_ConstructStrategyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CS_DefaultConstructStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -186,6 +186,80 @@ bool CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eSet(int featureID, Any 
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CS_StructuralFeatureOfInterfaceAccessStrategyImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 3001
+		case StructuredClassifiersPackage::CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_GETNAME:
+		{
+			result = eAny(this->getName());
+			break;
+		}
+		
+		// 3002
+		case StructuredClassifiersPackage::CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_READ_CS_OBJECT_STRUCTURALFEATURE:
+		{
+			//Retrieve input parameter 'cs_Object'
+			//parameter 0
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> incoming_param_cs_Object;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_cs_Object_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_cs_Object = (*incoming_param_cs_Object_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
+			//Retrieve input parameter 'feature'
+			//parameter 1
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			result = eAny(this->read(incoming_param_cs_Object,incoming_param_feature));
+			break;
+		}
+		
+		// 3003
+		case StructuredClassifiersPackage::CS_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_OPERATION_WRITE_CS_OBJECT_INTEGER:
+		{
+			//Retrieve input parameter 'cs_Object'
+			//parameter 0
+			std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> incoming_param_cs_Object;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_cs_Object_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_cs_Object = (*incoming_param_cs_Object_arguments_citer)->get()->get<std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> >();
+			//Retrieve input parameter 'feature'
+			//parameter 1
+			std::shared_ptr<uml::StructuralFeature> incoming_param_feature;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_feature_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_feature = (*incoming_param_feature_arguments_citer)->get()->get<std::shared_ptr<uml::StructuralFeature> >();
+			//Retrieve input parameter 'values'
+			//parameter 2
+			std::shared_ptr<Bag<fUML::Semantics::Values::Value>> incoming_param_values;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_values_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_values = (*incoming_param_values_arguments_citer)->get()->get<std::shared_ptr<Bag<fUML::Semantics::Values::Value>> >();
+			//Retrieve input parameter 'position'
+			//parameter 3
+			int incoming_param_position;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_position_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_position = (*incoming_param_position_arguments_citer)->get()->get<int >();
+			this->write(incoming_param_cs_Object,incoming_param_feature,incoming_param_values,incoming_param_position);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Loci::SemanticStrategyImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CS_StructuralFeatureOfInterfaceAccessStrategyImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

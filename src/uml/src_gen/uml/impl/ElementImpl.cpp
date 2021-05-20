@@ -587,6 +587,445 @@ bool ElementImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ElementImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 8109
+		case umlPackage::ELEMENT_OPERATION_ADDKEYWORD_STRING:
+		{
+			//Retrieve input parameter 'keyword'
+			//parameter 0
+			std::string incoming_param_keyword;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_keyword_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_keyword = (*incoming_param_keyword_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->addKeyword(incoming_param_keyword));
+			break;
+		}
+		
+		// 8141
+		case umlPackage::ELEMENT_OPERATION_ALLOWNEDELEMENTS:
+		{
+			result = eAny(this->allOwnedElements());
+			break;
+		}
+		
+		// 8110
+		case umlPackage::ELEMENT_OPERATION_APPLYSTEREOTYPE_STEREOTYPE:
+		{
+			//Retrieve input parameter 'stereotype'
+			//parameter 0
+			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get()->get<std::shared_ptr<uml::Stereotype> >();
+			result = eAny(this->applyStereotype(incoming_param_stereotype));
+			break;
+		}
+		
+		// 8144
+		case umlPackage::ELEMENT_OPERATION_CONTAINER:
+		{
+			result = eAny(this->container());
+			break;
+		}
+		
+		// 8111
+		case umlPackage::ELEMENT_OPERATION_CREATEEANNOTATION_STRING:
+		{
+			//Retrieve input parameter 'source'
+			//parameter 0
+			std::string incoming_param_source;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_source_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_source = (*incoming_param_source_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->createEAnnotation(incoming_param_source));
+			break;
+		}
+		
+		// 8112
+		case umlPackage::ELEMENT_OPERATION_DESTROY:
+		{
+			this->destroy();
+			break;
+		}
+		
+		// 8114
+		case umlPackage::ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPE_STRING:
+		{
+			//Retrieve input parameter 'qualifiedName'
+			//parameter 0
+			std::string incoming_param_qualifiedName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getApplicableStereotype(incoming_param_qualifiedName));
+			break;
+		}
+		
+		// 8115
+		case umlPackage::ELEMENT_OPERATION_GETAPPLICABLESTEREOTYPES:
+		{
+			result = eAny(this->getApplicableStereotypes());
+			break;
+		}
+		
+		// 8116
+		case umlPackage::ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPE_STRING:
+		{
+			//Retrieve input parameter 'qualifiedName'
+			//parameter 0
+			std::string incoming_param_qualifiedName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getAppliedStereotype(incoming_param_qualifiedName));
+			break;
+		}
+		
+		// 8117
+		case umlPackage::ELEMENT_OPERATION_GETAPPLIEDSTEREOTYPES:
+		{
+			result = eAny(this->getAppliedStereotypes());
+			break;
+		}
+		
+		// 8118
+		case umlPackage::ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPE_STEREOTYPE_STRING:
+		{
+			//Retrieve input parameter 'stereotype'
+			//parameter 0
+			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get()->get<std::shared_ptr<uml::Stereotype> >();
+			//Retrieve input parameter 'qualifiedName'
+			//parameter 1
+			std::string incoming_param_qualifiedName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getAppliedSubstereotype(incoming_param_stereotype,incoming_param_qualifiedName));
+			break;
+		}
+		
+		// 8119
+		case umlPackage::ELEMENT_OPERATION_GETAPPLIEDSUBSTEREOTYPES_STEREOTYPE:
+		{
+			//Retrieve input parameter 'stereotype'
+			//parameter 0
+			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get()->get<std::shared_ptr<uml::Stereotype> >();
+			result = eAny(this->getAppliedSubstereotypes(incoming_param_stereotype));
+			break;
+		}
+		
+		// 8113
+		case umlPackage::ELEMENT_OPERATION_GETKEYWORDS:
+		{
+			result = eAny(this->getKeywords());
+			break;
+		}
+		
+		// 8143
+		case umlPackage::ELEMENT_OPERATION_GETMETACLASS:
+		{
+			result = eAny(this->getMetaClass());
+			break;
+		}
+		
+		// 8120
+		case umlPackage::ELEMENT_OPERATION_GETMODEL:
+		{
+			result = eAny(this->getModel());
+			break;
+		}
+		
+		// 8121
+		case umlPackage::ELEMENT_OPERATION_GETNEARESTPACKAGE:
+		{
+			result = eAny(this->getNearestPackage());
+			break;
+		}
+		
+		// 8122
+		case umlPackage::ELEMENT_OPERATION_GETRELATIONSHIPS:
+		{
+			result = eAny(this->getRelationships());
+			break;
+		}
+		
+		// 8123
+		case umlPackage::ELEMENT_OPERATION_GETRELATIONSHIPS_ECLASS:
+		{
+			//Retrieve input parameter 'eClass'
+			//parameter 0
+			std::shared_ptr<ecore::EClass> incoming_param_eClass;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get()->get<std::shared_ptr<ecore::EClass> >();
+			result = eAny(this->getRelationships(incoming_param_eClass));
+			break;
+		}
+		
+		// 8124
+		case umlPackage::ELEMENT_OPERATION_GETREQUIREDSTEREOTYPE_STRING:
+		{
+			//Retrieve input parameter 'qualifiedName'
+			//parameter 0
+			std::string incoming_param_qualifiedName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_qualifiedName_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_qualifiedName = (*incoming_param_qualifiedName_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getRequiredStereotype(incoming_param_qualifiedName));
+			break;
+		}
+		
+		// 8125
+		case umlPackage::ELEMENT_OPERATION_GETREQUIREDSTEREOTYPES:
+		{
+			result = eAny(this->getRequiredStereotypes());
+			break;
+		}
+		
+		// 8126
+		case umlPackage::ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS:
+		{
+			result = eAny(this->getSourceDirectedRelationships());
+			break;
+		}
+		
+		// 8127
+		case umlPackage::ELEMENT_OPERATION_GETSOURCEDIRECTEDRELATIONSHIPS_ECLASS:
+		{
+			//Retrieve input parameter 'eClass'
+			//parameter 0
+			std::shared_ptr<ecore::EClass> incoming_param_eClass;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get()->get<std::shared_ptr<ecore::EClass> >();
+			result = eAny(this->getSourceDirectedRelationships(incoming_param_eClass));
+			break;
+		}
+		
+		// 8128
+		case umlPackage::ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATION_STEREOTYPE:
+		{
+			//Retrieve input parameter 'stereotype'
+			//parameter 0
+			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get()->get<std::shared_ptr<uml::Stereotype> >();
+			result = eAny(this->getStereotypeApplication(incoming_param_stereotype));
+			break;
+		}
+		
+		// 8129
+		case umlPackage::ELEMENT_OPERATION_GETSTEREOTYPEAPPLICATIONS:
+		{
+			result = eAny(this->getStereotypeApplications());
+			break;
+		}
+		
+		// 8130
+		case umlPackage::ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS:
+		{
+			result = eAny(this->getTargetDirectedRelationships());
+			break;
+		}
+		
+		// 8131
+		case umlPackage::ELEMENT_OPERATION_GETTARGETDIRECTEDRELATIONSHIPS_ECLASS:
+		{
+			//Retrieve input parameter 'eClass'
+			//parameter 0
+			std::shared_ptr<ecore::EClass> incoming_param_eClass;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_eClass_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_eClass = (*incoming_param_eClass_arguments_citer)->get()->get<std::shared_ptr<ecore::EClass> >();
+			result = eAny(this->getTargetDirectedRelationships(incoming_param_eClass));
+			break;
+		}
+		
+		// 8132
+		case umlPackage::ELEMENT_OPERATION_GETVALUE_STEREOTYPE_STRING:
+		{
+			//Retrieve input parameter 'stereotype'
+			//parameter 0
+			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get()->get<std::shared_ptr<uml::Stereotype> >();
+			//Retrieve input parameter 'propertyName'
+			//parameter 1
+			std::string incoming_param_propertyName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getValue(incoming_param_stereotype,incoming_param_propertyName));
+			break;
+		}
+		
+		// 8133
+		case umlPackage::ELEMENT_OPERATION_HASKEYWORD_STRING:
+		{
+			//Retrieve input parameter 'keyword'
+			//parameter 0
+			std::string incoming_param_keyword;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_keyword_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_keyword = (*incoming_param_keyword_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->hasKeyword(incoming_param_keyword));
+			break;
+		}
+		
+		// 8134
+		case umlPackage::ELEMENT_OPERATION_HASVALUE_STEREOTYPE_STRING:
+		{
+			//Retrieve input parameter 'stereotype'
+			//parameter 0
+			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get()->get<std::shared_ptr<uml::Stereotype> >();
+			//Retrieve input parameter 'propertyName'
+			//parameter 1
+			std::string incoming_param_propertyName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->hasValue(incoming_param_stereotype,incoming_param_propertyName));
+			break;
+		}
+		
+		// 8107
+		case umlPackage::ELEMENT_OPERATION_HAS_OWNER_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->has_owner(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 8135
+		case umlPackage::ELEMENT_OPERATION_ISSTEREOTYPEAPPLICABLE_STEREOTYPE:
+		{
+			//Retrieve input parameter 'stereotype'
+			//parameter 0
+			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get()->get<std::shared_ptr<uml::Stereotype> >();
+			result = eAny(this->isStereotypeApplicable(incoming_param_stereotype));
+			break;
+		}
+		
+		// 8136
+		case umlPackage::ELEMENT_OPERATION_ISSTEREOTYPEAPPLIED_STEREOTYPE:
+		{
+			//Retrieve input parameter 'stereotype'
+			//parameter 0
+			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get()->get<std::shared_ptr<uml::Stereotype> >();
+			result = eAny(this->isStereotypeApplied(incoming_param_stereotype));
+			break;
+		}
+		
+		// 8137
+		case umlPackage::ELEMENT_OPERATION_ISSTEREOTYPEREQUIRED_STEREOTYPE:
+		{
+			//Retrieve input parameter 'stereotype'
+			//parameter 0
+			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get()->get<std::shared_ptr<uml::Stereotype> >();
+			result = eAny(this->isStereotypeRequired(incoming_param_stereotype));
+			break;
+		}
+		
+		// 8142
+		case umlPackage::ELEMENT_OPERATION_MUSTBEOWNED:
+		{
+			result = eAny(this->mustBeOwned());
+			break;
+		}
+		
+		// 8108
+		case umlPackage::ELEMENT_OPERATION_NOT_OWN_SELF_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->not_own_self(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 8138
+		case umlPackage::ELEMENT_OPERATION_REMOVEKEYWORD_STRING:
+		{
+			//Retrieve input parameter 'keyword'
+			//parameter 0
+			std::string incoming_param_keyword;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_keyword_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_keyword = (*incoming_param_keyword_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->removeKeyword(incoming_param_keyword));
+			break;
+		}
+		
+		// 8139
+		case umlPackage::ELEMENT_OPERATION_SETVALUE_STEREOTYPE_EJAVAOBJECT:
+		{
+			//Retrieve input parameter 'stereotype'
+			//parameter 0
+			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get()->get<std::shared_ptr<uml::Stereotype> >();
+			//Retrieve input parameter 'propertyName'
+			//parameter 1
+			std::string incoming_param_propertyName;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_propertyName_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_propertyName = (*incoming_param_propertyName_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'newValue'
+			//parameter 2
+			Any incoming_param_newValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_newValue_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_newValue = (*incoming_param_newValue_arguments_citer)->get()->get<Any >();
+			this->setValue(incoming_param_stereotype,incoming_param_propertyName,incoming_param_newValue);
+			break;
+		}
+		
+		// 8140
+		case umlPackage::ELEMENT_OPERATION_UNAPPLYSTEREOTYPE_STEREOTYPE:
+		{
+			//Retrieve input parameter 'stereotype'
+			//parameter 0
+			std::shared_ptr<uml::Stereotype> incoming_param_stereotype;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_stereotype_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_stereotype = (*incoming_param_stereotype_arguments_citer)->get()->get<std::shared_ptr<uml::Stereotype> >();
+			result = eAny(this->unapplyStereotype(incoming_param_stereotype));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ObjectImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ElementImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -167,6 +167,53 @@ bool EventAccepterImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any EventAccepterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 4300
+		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_ACCEPT_SIGNALINSTANCE:
+		{
+			//Retrieve input parameter 'signalInstance'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> incoming_param_signalInstance;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
+			this->accept(incoming_param_signalInstance);
+			break;
+		}
+		
+		// 4301
+		case CommonBehaviorPackage::EVENTACCEPTER_OPERATION_MATCH_SIGNALINSTANCE:
+		{
+			//Retrieve input parameter 'signalInstance'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> incoming_param_signalInstance;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_signalInstance_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_signalInstance = (*incoming_param_signalInstance_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> >();
+			result = eAny(this->match(incoming_param_signalInstance));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void EventAccepterImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -237,6 +237,50 @@ bool CS_CallEventExecutionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CS_CallEventExecutionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 467
+		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION__COPY:
+		{
+			result = eAny(this->_copy());
+			break;
+		}
+		
+		// 465
+		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION_CREATEEVENTOCCURRENCE:
+		{
+			result = eAny(this->createEventOccurrence());
+			break;
+		}
+		
+		// 466
+		case CommonBehaviorPackage::CS_CALLEVENTEXECUTION_OPERATION_NEW_:
+		{
+			result = eAny(this->new_());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::CommonBehavior::CallEventExecutionImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CS_CallEventExecutionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

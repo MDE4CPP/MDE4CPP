@@ -199,6 +199,46 @@ bool ReadIsClassifiedObjectActionActivationImpl::eSet(int featureID, Any newValu
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ReadIsClassifiedObjectActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 9158
+		case ActionsPackage::READISCLASSIFIEDOBJECTACTIONACTIVATION_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER:
+		{
+			//Retrieve input parameter 'type'
+			//parameter 0
+			std::shared_ptr<uml::Classifier> incoming_param_type;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
+			//Retrieve input parameter 'classifier'
+			//parameter 1
+			std::shared_ptr<uml::Classifier> incoming_param_classifier;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_classifier_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_classifier = (*incoming_param_classifier_arguments_citer)->get()->get<std::shared_ptr<uml::Classifier> >();
+			result = eAny(this->checkAllParents(incoming_param_type,incoming_param_classifier));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ReadIsClassifiedObjectActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

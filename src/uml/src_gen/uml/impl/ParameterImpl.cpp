@@ -622,6 +622,215 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ParameterImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 17501
+		case umlPackage::PARAMETER_OPERATION_CONNECTOR_END_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->connector_end(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 17499
+		case umlPackage::PARAMETER_OPERATION_IN_AND_OUT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->in_and_out(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 17505
+		case umlPackage::PARAMETER_OPERATION_ISSETDEFAULT:
+		{
+			result = eAny(this->isSetDefault());
+			break;
+		}
+		
+		// 17500
+		case umlPackage::PARAMETER_OPERATION_NOT_EXCEPTION_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->not_exception(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 17504
+		case umlPackage::PARAMETER_OPERATION_OBJECT_EFFECT_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->object_effect(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 17502
+		case umlPackage::PARAMETER_OPERATION_REENTRANT_BEHAVIORS_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->reentrant_behaviors(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 17506
+		case umlPackage::PARAMETER_OPERATION_SETBOOLEANDEFAULTVALUE_BOOLEAN:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			bool incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<bool >();
+			this->setBooleanDefaultValue(incoming_param_value);
+			break;
+		}
+		
+		// 17507
+		case umlPackage::PARAMETER_OPERATION_SETINTEGERDEFAULTVALUE_INTEGER:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			int incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<int >();
+			this->setIntegerDefaultValue(incoming_param_value);
+			break;
+		}
+		
+		// 17508
+		case umlPackage::PARAMETER_OPERATION_SETNULLDEFAULTVALUE:
+		{
+			this->setNullDefaultValue();
+			break;
+		}
+		
+		// 17509
+		case umlPackage::PARAMETER_OPERATION_SETREALDEFAULTVALUE_REAL:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			double incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<double >();
+			this->setRealDefaultValue(incoming_param_value);
+			break;
+		}
+		
+		// 17510
+		case umlPackage::PARAMETER_OPERATION_SETSTRINGDEFAULTVALUE_STRING:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::string incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::string >();
+			this->setStringDefaultValue(incoming_param_value);
+			break;
+		}
+		
+		// 17511
+		case umlPackage::PARAMETER_OPERATION_SETUNLIMITEDNATURALDEFAULTVALUE_UNLIMITEDNATURAL:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			int incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<int >();
+			this->setUnlimitedNaturalDefaultValue(incoming_param_value);
+			break;
+		}
+		
+		// 17503
+		case umlPackage::PARAMETER_OPERATION_STREAM_AND_EXCEPTION_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->stream_and_exception(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 17512
+		case umlPackage::PARAMETER_OPERATION_UNSETDEFAULT:
+		{
+			this->unsetDefault();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = MultiplicityElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = ConnectableElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ParameterImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

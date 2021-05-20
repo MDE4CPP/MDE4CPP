@@ -214,6 +214,70 @@ bool LinkActionActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any LinkActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 6959
+		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_ENDMATCHESENDDATA_LINK_LINKENDDATA:
+		{
+			//Retrieve input parameter 'link'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> incoming_param_link;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_link = (*incoming_param_link_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
+			//Retrieve input parameter 'endData'
+			//parameter 1
+			std::shared_ptr<uml::LinkEndData> incoming_param_endData;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_endData_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_endData = (*incoming_param_endData_arguments_citer)->get()->get<std::shared_ptr<uml::LinkEndData> >();
+			result = eAny(this->endMatchesEndData(incoming_param_link,incoming_param_endData));
+			break;
+		}
+		
+		// 6960
+		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_GETASSOCIATION:
+		{
+			result = eAny(this->getAssociation());
+			break;
+		}
+		
+		// 6958
+		case ActionsPackage::LINKACTIONACTIVATION_OPERATION_LINKMATCHESENDDATA_LINK_LINKENDDATA:
+		{
+			//Retrieve input parameter 'link'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> incoming_param_link;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_link_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_link = (*incoming_param_link_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::Link> >();
+			//Retrieve input parameter 'endDataList'
+			//parameter 1
+			std::shared_ptr<Bag<uml::LinkEndData>> incoming_param_endDataList;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_endDataList_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_endDataList = (*incoming_param_endDataList_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::LinkEndData>> >();
+			result = eAny(this->linkMatchesEndData(incoming_param_link,incoming_param_endDataList));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void LinkActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

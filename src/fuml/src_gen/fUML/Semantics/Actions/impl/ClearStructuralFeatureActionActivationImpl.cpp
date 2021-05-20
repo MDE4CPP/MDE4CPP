@@ -238,6 +238,36 @@ bool ClearStructuralFeatureActionActivationImpl::eSet(int featureID, Any newValu
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ClearStructuralFeatureActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2862
+		case ActionsPackage::CLEARSTRUCTURALFEATUREACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StructuralFeatureActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ClearStructuralFeatureActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

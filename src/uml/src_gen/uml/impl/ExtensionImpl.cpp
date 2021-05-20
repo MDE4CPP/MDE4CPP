@@ -427,6 +427,98 @@ bool ExtensionImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ExtensionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 9868
+		case umlPackage::EXTENSION_OPERATION_GETMETACLASS:
+		{
+			result = eAny(this->getMetaclass());
+			break;
+		}
+		
+		// 9865
+		case umlPackage::EXTENSION_OPERATION_GETSTEREOTYPE:
+		{
+			result = eAny(this->getStereotype());
+			break;
+		}
+		
+		// 9866
+		case umlPackage::EXTENSION_OPERATION_GETSTEREOTYPEEND:
+		{
+			result = eAny(this->getStereotypeEnd());
+			break;
+		}
+		
+		// 9867
+		case umlPackage::EXTENSION_OPERATION_ISREQUIRED:
+		{
+			result = eAny(this->isRequired());
+			break;
+		}
+		
+		// 9864
+		case umlPackage::EXTENSION_OPERATION_IS_BINARY_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->is_binary(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+		
+		// 9869
+		case umlPackage::EXTENSION_OPERATION_METACLASSEND:
+		{
+			result = eAny(this->metaclassEnd());
+			break;
+		}
+		
+		// 9863
+		case umlPackage::EXTENSION_OPERATION_NON_OWNED_END_EDIAGNOSTICCHAIN_EMAP:
+		{
+			//Retrieve input parameter 'diagnostics'
+			//parameter 0
+			Any incoming_param_diagnostics;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_diagnostics_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_diagnostics = (*incoming_param_diagnostics_arguments_citer)->get()->get<Any >();
+			//Retrieve input parameter 'context'
+			//parameter 1
+			std::shared_ptr<std::map < Any, Any>> incoming_param_context;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_context_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_context = (*incoming_param_context_arguments_citer)->get()->get<std::shared_ptr<std::map < Any, Any>> >();
+			result = eAny(this->non_owned_end(incoming_param_diagnostics,incoming_param_context));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = AssociationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ExtensionImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

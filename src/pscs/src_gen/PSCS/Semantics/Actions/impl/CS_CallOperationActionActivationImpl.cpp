@@ -429,6 +429,101 @@ bool CS_CallOperationActionActivationImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CS_CallOperationActionActivationImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 571
+		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION__ISCREATE_OPERATION:
+		{
+			//Retrieve input parameter 'operation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_operation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->_isCreate(incoming_param_operation));
+			break;
+		}
+		
+		// 567
+		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_DOACTION:
+		{
+			this->doAction();
+			break;
+		}
+		
+		// 566
+		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_GETCALLEXECUTION:
+		{
+			result = eAny(this->getCallExecution());
+			break;
+		}
+		
+		// 570
+		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISCREATE_OPERATION:
+		{
+			//Retrieve input parameter 'operation'
+			//parameter 0
+			std::shared_ptr<uml::Operation> incoming_param_operation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->isCreate(incoming_param_operation));
+			break;
+		}
+		
+		// 568
+		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONPROVIDED_PORT_OPERATION:
+		{
+			//Retrieve input parameter 'port'
+			//parameter 0
+			std::shared_ptr<uml::Port> incoming_param_port;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_port = (*incoming_param_port_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
+			//Retrieve input parameter 'operation'
+			//parameter 1
+			std::shared_ptr<uml::Operation> incoming_param_operation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->isOperationProvided(incoming_param_port,incoming_param_operation));
+			break;
+		}
+		
+		// 569
+		case ActionsPackage::CS_CALLOPERATIONACTIONACTIVATION_OPERATION_ISOPERATIONREQUIRED_PORT_OPERATION:
+		{
+			//Retrieve input parameter 'port'
+			//parameter 0
+			std::shared_ptr<uml::Port> incoming_param_port;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_port_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_port = (*incoming_param_port_arguments_citer)->get()->get<std::shared_ptr<uml::Port> >();
+			//Retrieve input parameter 'operation'
+			//parameter 1
+			std::shared_ptr<uml::Operation> incoming_param_operation;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_operation_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_operation = (*incoming_param_operation_arguments_citer)->get()->get<std::shared_ptr<uml::Operation> >();
+			result = eAny(this->isOperationRequired(incoming_param_port,incoming_param_operation));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Actions::CallOperationActionActivationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CS_CallOperationActionActivationImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

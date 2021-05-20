@@ -192,6 +192,94 @@ bool ExtensionalValueListImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ExtensionalValueListImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 5330
+		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
+			result = eAny(this->addValue(incoming_param_value));
+			break;
+		}
+		
+		// 5331
+		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_ADDVALUE_EXTENSIONALVALUE_EINT:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
+			//Retrieve input parameter 'i'
+			//parameter 1
+			int incoming_param_i;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_i_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_i = (*incoming_param_i_arguments_citer)->get()->get<int >();
+			this->addValue(incoming_param_value,incoming_param_i);
+			break;
+		}
+		
+		// 5329
+		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_GETVALUE:
+		{
+			result = eAny(this->getValue());
+			break;
+		}
+		
+		// 5333
+		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_REMOVEVALUE_EINT:
+		{
+			//Retrieve input parameter 'i'
+			//parameter 0
+			int incoming_param_i;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_i_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_i = (*incoming_param_i_arguments_citer)->get()->get<int >();
+			result = eAny(this->removeValue(incoming_param_i));
+			break;
+		}
+		
+		// 5332
+		case StructuredClassifiersPackage::EXTENSIONALVALUELIST_OPERATION_SETVALUE_EXTENSIONALVALUE_EINT:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::StructuredClassifiers::ExtensionalValue> >();
+			//Retrieve input parameter 'i'
+			//parameter 1
+			int incoming_param_i;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_i_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_i = (*incoming_param_i_arguments_citer)->get()->get<int >();
+			result = eAny(this->setValue(incoming_param_value,incoming_param_i));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ExtensionalValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ExtensionalValueListImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

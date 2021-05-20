@@ -803,6 +803,86 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any ArtifactImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2153
+		case umlPackage::ARTIFACT_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'type'
+			//parameter 1
+			std::shared_ptr<uml::Type> incoming_param_type;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
+			//Retrieve input parameter 'lower'
+			//parameter 2
+			int incoming_param_lower;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_lower = (*incoming_param_lower_arguments_citer)->get()->get<int >();
+			//Retrieve input parameter 'upper'
+			//parameter 3
+			int incoming_param_upper;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get()->get<int >();
+			result = eAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper));
+			break;
+		}
+		
+		// 2154
+		case umlPackage::ARTIFACT_OPERATION_CREATEOWNEDOPERATION_STRING_TYPE:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'parameterNames'
+			//parameter 1
+			std::shared_ptr<Bag<std::string>> incoming_param_parameterNames;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterNames_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_parameterNames = (*incoming_param_parameterNames_arguments_citer)->get()->get<std::shared_ptr<Bag<std::string>> >();
+			//Retrieve input parameter 'parameterTypes'
+			//parameter 2
+			std::shared_ptr<Bag<uml::Type>> incoming_param_parameterTypes;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_parameterTypes_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_parameterTypes = (*incoming_param_parameterTypes_arguments_citer)->get()->get<std::shared_ptr<Bag<uml::Type>> >();
+			//Retrieve input parameter 'returnType'
+			//parameter 3
+			std::shared_ptr<uml::Type> incoming_param_returnType;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_returnType_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_returnType = (*incoming_param_returnType_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
+			result = eAny(this->createOwnedOperation(incoming_param_name,incoming_param_parameterNames,incoming_param_parameterTypes,incoming_param_returnType));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = DeployedArtifactImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = ClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void ArtifactImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

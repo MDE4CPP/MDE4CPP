@@ -628,6 +628,70 @@ bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any StructuredClassifierImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 22954
+		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_ALLROLES:
+		{
+			result = eAny(this->allRoles());
+			break;
+		}
+		
+		// 22952
+		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_CREATEOWNEDATTRIBUTE_STRING_UNLIMITEDNATURAL:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			//Retrieve input parameter 'type'
+			//parameter 1
+			std::shared_ptr<uml::Type> incoming_param_type;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_type_arguments_citer = std::next(arguments->begin(), 1);
+			incoming_param_type = (*incoming_param_type_arguments_citer)->get()->get<std::shared_ptr<uml::Type> >();
+			//Retrieve input parameter 'lower'
+			//parameter 2
+			int incoming_param_lower;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_lower_arguments_citer = std::next(arguments->begin(), 2);
+			incoming_param_lower = (*incoming_param_lower_arguments_citer)->get()->get<int >();
+			//Retrieve input parameter 'upper'
+			//parameter 3
+			int incoming_param_upper;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_upper_arguments_citer = std::next(arguments->begin(), 3);
+			incoming_param_upper = (*incoming_param_upper_arguments_citer)->get()->get<int >();
+			result = eAny(this->createOwnedAttribute(incoming_param_name,incoming_param_type,incoming_param_lower,incoming_param_upper));
+			break;
+		}
+		
+		// 22953
+		case umlPackage::STRUCTUREDCLASSIFIER_OPERATION_GETPARTS:
+		{
+			result = eAny(this->getParts());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ClassifierImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void StructuredClassifierImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)
