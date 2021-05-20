@@ -1,0 +1,117 @@
+[comment encoding = UTF-8 /]
+[**
+ * Copyright (c) 2021 TU Ilmenau, Systems and Software Engineering Group
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy
+ * of this software and associated documentation files (the "Software"), to 
+ * deal in the Software without restriction, including without limitation the 
+ * rights to use, copy, modify, merge, publish, distribute, sublicense, 
+ * and/or sell copies of the Software, and to permit persons to whom the 
+ * Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included 
+ * in all copies or substantial portions of the Software.
+ * 
+ * THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+ * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+ * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+ * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER 
+ * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING 
+ * FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS
+ * IN THE SOF
+ * TWARE.
+ */]
+
+[module generateBehavioralFeatureInvoke('http://www.eclipse.org/emf/2002/Ecore')]
+
+[import ecore4CPP::generator::main::generateOperation /]
+[import ecore4CPP::generator::main::generateType /]
+[import ecore4CPP::generator::main::helper /]
+
+[comment]
+[template public generateInputParameter(par:EParameter, index:Integer)]
+[par.name.generateInputParameter(par.eType, index)/]
+[/template]
+
+
+[template private generateInputParameter(name : String, type : EClassifier, index:Integer) ? (not (name.oclIsUndefined() or type.name.oclIsUndefined()))]
+std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputParameters->at([index/])->getValues();
+[/template]
+[/comment]
+
+[comment] Helper [/comment]
+[template public generateIncomingParameter(aEParameter : EParameter, index : Integer)]
+	//parameter [index/]
+	[aEParameter.generateParameterType()/] incoming_param_[aEParameter.name/];
+	std::list<std::shared_ptr<Any>>::const_iterator incoming_param_[aEParameter.name/]_arguments_citer = std::next(arguments->begin(), [index/]);
+	incoming_param_[aEParameter.name/] = (*incoming_param_[aEParameter.name/]_arguments_citer)->get()->get<[aEParameter.generateParameterType()/] >();
+[/template]
+
+
+[**/
+ *  Declaration of internal eInvoke helper method
+ */]
+[template public generateeInvokeByIDDecl(aClass : EClass, impl : Boolean)]
+virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) [abstractSufix(impl)/];
+[/template]
+
+[**/
+ *  Implementation of internal eInvoke helper method
+ */]
+[template public generateeInvokeByIDImpl(aClass : EClass)]
+Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+[for (aOperation : EOperation | aClass.eOperations->asOrderedSet()->select(not doNotGenerate())->sortedBy(name))]
+		
+		[comment @see ecore4CPP::generator::main::generateOperation for ID calculation /]
+		// [aOperation.eContainingClass.getMyClassifierID() * 100 + aOperation.eContainingClass.getFeatureCount() + aOperation.getOperationID()/]
+		case [aClass.ePackage.name/]Package::[aOperation.getStaticAttributeIDName()/]:
+		{
+[let parameterList : OrderedSet(EParameter) = aOperation.eParameters]
+[for (inPar : EParameter | parameterList)]
+			//Retrieve input parameter '[inPar.name/]'
+		[inPar.generateIncomingParameter(parameterList->indexOf(inPar)-1)/]
+[/for]
+[/let]
+			[comment Operation w/o return value /]
+			[if (aOperation.eType.oclIsUndefined())]
+			this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
+ 			[else]
+			[comment Operation w/ return value /]
+			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]));
+			[/if]
+			break;
+		}
+[/for]
+
+		default:
+		{
+			// call superTypes
+[if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+[else]
+[let superTypeList : OrderedSet(EClass) = aClass.eSuperTypes]
+[for (i : EClass | superTypeList->reverse())]
+			result = [ClassWithNamespace(aClass, i)/]Impl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+[/for]
+[/let]
+[/if]
+			break;
+		}
+  	}
+
+	return result;
+}
+[/template]
+
+
+
+

@@ -39,7 +39,7 @@ IF(NOT CMAKE_BUILD_TYPE)
 ENDIF(NOT CMAKE_BUILD_TYPE)
 SET(CMAKE_DEBUG_POSTFIX d)
 
-SET(CMAKE_CXX_STANDARD 14)
+SET(CMAKE_CXX_STANDARD 17)
 
 IF(("$ENV{DEBUG_MESSAGE_[packageName.toUpper()/]}" EQUAL "1") AND (CMAKE_BUILD_TYPE MATCHES Debug))
 	SET(ENABLED_DEBUG_MESSAGE " ")
@@ -52,6 +52,9 @@ ENDIF()
 
 [comment IF("${CMAKE_CXX_COMPILER_ID}" STREQUAL "AppleClang") -> not necessary after removing openmp/]
 SET(CMAKE_CXX_FLAGS "-Wall -Wno-overloaded-virtual -Wdeprecated-declarations -fmax-errors=5")
+IF(APPLE)
+  string(APPEND CMAKE_CXX_FLAGS " -Qunused-arguments")
+ENDIF(APPLE)
 SET(CMAKE_CXX_FLAGS_DEBUG " -Og -ggdb ${ENABLED_DEBUG_MESSAGE}")
 SET(CMAKE_CXX_FLAGS_RELEASE " -O3  ${ENABLED_DEBUG_MESSAGE}")
 
