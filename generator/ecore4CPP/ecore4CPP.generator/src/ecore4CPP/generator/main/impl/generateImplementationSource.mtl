@@ -102,7 +102,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	switch(reference_id)
 	{	
 	[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
-	case [aClass.getRootPackage().name/]Package::[multipleRef.getStaticAttributeIDName()/]:
+	case [aReference.eContainingClass.ePackage.generateNamespaceDefinition()/]::[aReference.eContainingClass.ePackage.name/]Package::[multipleRef.getStaticAttributeIDName()/]:
 		m_[multipleRef.name/] = par_[aReference.eType.name/];
 		[if (multipleRef.hasSubset() and multipleRef.upperBound = 1)]
 		[for (m : EReference | multipleRef.oclAsType(EReference).Subset()->selectByKind(EReference).oclAsType(EReference)->select(isBackReference())->asOrderedSet())]
