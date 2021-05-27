@@ -1,17 +1,29 @@
-.cmake/
-.gradle/
-.idea/
-.settings/
-.ssh/
-bin/
-build/
-userProjects/
-*.bat
-setenv*
-/application/
-/gradle.properties
-xerces
+# Directories/Files (top-level) -----------------------------------------------
+/.gradle/
+/.idea/
 /.metadata/
+/.settings/
+/.ssh/
+
+/application/
+/userProjects/
+
+/gradle.properties
+/setenv*
+
+# Directories/Files (all-levels) ----------------------------------------------
+**/.cmake/
+**/bin/
+**/build/
+
+# 3rd-Party Libraries ---------------------------------------------------------
+/src/common/parser/antlr4/
+/src/common/persistence/xerces/
+
+# OCL -------------------------------------------------------------------------
+/src/ocl/oclParser/src/
+
+# Examples --------------------------------------------------------------------
 /src/examples/ecoreExamples/TestSuite/templateTest/.cproject
 /src/examples/UMLExamples/TestSuite/copyTestUML/.cproject
 /src/examples/UMLExamples/TestSuite/copyTestUML/.project
