@@ -294,6 +294,7 @@ IF(UNIX AND NOT APPLE)
 		FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_DEBUG umld.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PSCS_DEBUG PSCSd.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(OCLPARSER_DEBUG oclParserd.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_DEBUG ecored.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond.so ${MDE4CPP_HOME}/application/bin)
@@ -303,6 +304,7 @@ IF(UNIX AND NOT APPLE)
 		FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_RELEASE uml.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PSCS_RELEASE PSCS.so ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(OCLPARSER_RELEASE oclParser.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_RELEASE ecore.so ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection.so ${MDE4CPP_HOME}/application/bin)
@@ -314,6 +316,7 @@ ELSEIF(APPLE)
 		FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_DEBUG umld.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PSCS_DEBUG PSCSd.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(OCLPARSER_DEBUG oclParserd.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_DEBUG ecored.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond.dylib ${MDE4CPP_HOME}/application/bin)
@@ -323,6 +326,7 @@ ELSEIF(APPLE)
 		FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UML_RELEASE uml.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PSCS_RELEASE PSCS.dylib ${MDE4CPP_HOME}/application/bin)
+		FIND_LIBRARY(OCLPARSER_RELEASE oclParser.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(ECORE_RELEASE ecore.dylib ${MDE4CPP_HOME}/application/bin)
 		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection.dylib ${MDE4CPP_HOME}/application/bin)
@@ -334,6 +338,7 @@ ELSE()
 		FIND_LIBRARY(ECOREREFLECTION_DEBUG ecoreReflectiond ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UML_DEBUG umld ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(PSCS_DEBUG PSCSd ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(OCLPARSER_DEBUG oclParserd ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_DEBUG primitivetypesReflectiond ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(ECORE_DEBUG ecored ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UMLREFLECTION_DEBUG umlReflectiond ${MDE4CPP_HOME}/application/lib)
@@ -343,6 +348,7 @@ ELSE()
 		FIND_LIBRARY(ECOREREFLECTION_RELEASE ecoreReflection ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UML_RELEASE uml ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(PSCS_RELEASE PSCS ${MDE4CPP_HOME}/application/lib)
+		FIND_LIBRARY(OCLPARSER_RELEASE oclParser ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(PRIMITIVETYPESREFLECTION_RELEASE primitivetypesReflection ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(ECORE_RELEASE ecore ${MDE4CPP_HOME}/application/lib)
 		FIND_LIBRARY(UMLREFLECTION_RELEASE umlReflection ${MDE4CPP_HOME}/application/lib)
@@ -360,6 +366,7 @@ IF (CMAKE_BUILD_TYPE STREQUAL "Debug")
 		debug ${ECOREREFLECTION_DEBUG}
 		debug ${UML_DEBUG}
 		debug ${PSCS_DEBUG}
+		debug ${OCLPARSER_DEBUG}
 		debug ${PRIMITIVETYPESREFLECTION_DEBUG}
 		debug ${ECORE_DEBUG}
 		debug ${UMLREFLECTION_DEBUG}
@@ -370,6 +377,7 @@ ELSE()
 		optimized ${ECOREREFLECTION_RELEASE}
 		optimized ${UML_RELEASE}
 		optimized ${PSCS_RELEASE}
+		optimized ${OCLPARSER_RELEASE}
 		optimized ${PRIMITIVETYPESREFLECTION_RELEASE}
 		optimized ${ECORE_RELEASE}
 		optimized ${UMLREFLECTION_RELEASE}
