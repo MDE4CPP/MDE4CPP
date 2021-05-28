@@ -33,6 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "ecore/EcoreFactory.hpp"
+
 
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
