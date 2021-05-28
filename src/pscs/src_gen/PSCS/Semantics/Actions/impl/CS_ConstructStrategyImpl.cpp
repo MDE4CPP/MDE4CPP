@@ -32,6 +32,7 @@
 
 #include <exception> // used in Persistence
 
+
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
 #include "uml/Operation.hpp"

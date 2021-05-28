@@ -37,6 +37,7 @@
 
 #include <exception> // used in Persistence
 
+
 #include "uml/Operation.hpp"
 #include "fUML/Semantics/StructuredClassifiers/RedefinitionBasedDispatchStrategy.hpp"
 
