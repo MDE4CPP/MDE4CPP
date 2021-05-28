@@ -23,6 +23,8 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 
+#include <algorithm>
+
 using namespace testmodel;
 
 TestModel::TestModel()
@@ -339,7 +341,16 @@ std::shared_ptr<ecore::EObject> TestModel::createEcoreTestMetaModel()
 
 				annotation->setSource("http://sse.tu-ilmenau.de/codegen");
 
-				std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> list_EStringToStringMapEntry = annotation->getDetails();
+				std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> list_EStringToStringMapEntry;
+				std::shared_ptr<std::map < std::string, std::string >> map_annotation_details = annotation->getDetails();
+				std::for_each(map_annotation_details->begin(), map_annotation_details->end(),
+					[factory, list_EStringToStringMapEntry](std::pair<std::string, std::string> e){
+						std::shared_ptr<ecore::EStringToStringMapEntry> list_entry(factory->createEStringToStringMapEntry());
+						list_entry->setKey(e.first);
+						list_entry->setValue(e.second);
+						list_EStringToStringMapEntry->push_back(list_entry);
+				});
+				
 				{
 					std::shared_ptr<ecore::EStringToStringMapEntry> stringToStringMapEntry(factory->createEStringToStringMapEntry());
 
@@ -355,7 +366,16 @@ std::shared_ptr<ecore::EObject> TestModel::createEcoreTestMetaModel()
 
 				annotation->setSource("http://sse.tu-ilmenau.de/HansPeter");
 
-				std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> list_EStringToStringMapEntry = annotation->getDetails();
+				std::shared_ptr<Bag<ecore::EStringToStringMapEntry>> list_EStringToStringMapEntry;
+				std::shared_ptr<std::map < std::string, std::string >> map_annotation_details = annotation->getDetails();
+				std::for_each(map_annotation_details->begin(), map_annotation_details->end(),
+					[factory, list_EStringToStringMapEntry](std::pair<std::string, std::string> e){
+						std::shared_ptr<ecore::EStringToStringMapEntry> list_entry(factory->createEStringToStringMapEntry());
+						list_entry->setKey(e.first);
+						list_entry->setValue(e.second);
+						list_EStringToStringMapEntry->push_back(list_entry);
+				});
+				
 				{
 					std::shared_ptr<ecore::EStringToStringMapEntry> stringToStringMapEntry(factory->createEStringToStringMapEntry());
 
