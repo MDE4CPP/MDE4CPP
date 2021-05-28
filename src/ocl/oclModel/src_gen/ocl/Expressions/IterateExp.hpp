@@ -52,6 +52,9 @@ namespace ecore
 	class EGenericType;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Expressions/LoopExp.hpp"
 
@@ -63,7 +66,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class IterateExp: virtual public LoopExp
+	class OCL_API IterateExp: virtual public LoopExp
 	{
 		public:
  			IterateExp(const IterateExp &) {}

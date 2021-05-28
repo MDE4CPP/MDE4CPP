@@ -58,6 +58,9 @@ namespace uml
 	class State;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Expressions/OclExpression.hpp"
 
@@ -69,7 +72,7 @@ namespace uml
 namespace ocl::Expressions 
 {
 	
-	class StateExp: virtual public OclExpression
+	class OCL_API StateExp: virtual public OclExpression
 	{
 		public:
  			StateExp(const StateExp &) {}

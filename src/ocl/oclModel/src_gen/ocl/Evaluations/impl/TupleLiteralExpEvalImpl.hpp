@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../TupleLiteralExpEval.hpp"
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class TupleLiteralExpEvalImpl : virtual public LiteralExpEvalImpl, virtual public TupleLiteralExpEval 
+	class OCL_API TupleLiteralExpEvalImpl : virtual public LiteralExpEvalImpl, virtual public TupleLiteralExpEval 
 	{
 		public: 
 			TupleLiteralExpEvalImpl(const TupleLiteralExpEvalImpl & obj);
@@ -83,6 +86,7 @@ namespace ocl::Evaluations
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<TupleLiteralExpEval> m_thisTupleLiteralExpEvalPtr;

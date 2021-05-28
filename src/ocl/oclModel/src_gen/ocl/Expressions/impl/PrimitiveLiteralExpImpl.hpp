@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../PrimitiveLiteralExp.hpp"
 
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class PrimitiveLiteralExpImpl : virtual public LiteralExpImpl, virtual public PrimitiveLiteralExp 
+	class OCL_API PrimitiveLiteralExpImpl : virtual public LiteralExpImpl, virtual public PrimitiveLiteralExp 
 	{
 		public: 
 			PrimitiveLiteralExpImpl(const PrimitiveLiteralExpImpl & obj);
@@ -103,6 +106,7 @@ namespace ocl::Expressions
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<PrimitiveLiteralExp> m_thisPrimitiveLiteralExpPtr;

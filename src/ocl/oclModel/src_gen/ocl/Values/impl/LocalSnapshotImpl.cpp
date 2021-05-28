@@ -254,27 +254,11 @@ Any LocalSnapshotImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_BINDINGS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::NameValueBinding>::iterator iter = m_bindings->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator end = m_bindings->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //452
+			return eAny(getBindings()); //452			
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_INPUTQ:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::OclMessageValue>::iterator iter = m_inputQ->begin();
-			Bag<ocl::Values::OclMessageValue>::iterator end = m_inputQ->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //455
+			return eAny(getInputQ()); //455			
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_ISPOST:
 			return eAny(getIsPost()); //453
@@ -282,15 +266,7 @@ Any LocalSnapshotImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getIsPre()); //454
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::OclMessageValue>::iterator iter = m_outputQ->begin();
-			Bag<ocl::Values::OclMessageValue>::iterator end = m_outputQ->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //456
+			return eAny(getOutputQ()); //456			
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_PRED:
 			return eAny(getPred()); //451
@@ -465,6 +441,29 @@ bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
 	}
 
 	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any LocalSnapshotImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

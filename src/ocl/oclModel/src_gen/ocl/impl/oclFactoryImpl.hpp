@@ -7,6 +7,9 @@
 #ifndef OCLFACTORYIMPL_HPP
 #define OCLFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "ocl/oclFactory.hpp"
@@ -17,7 +20,7 @@ namespace ocl
 
 namespace ocl 
 {
-	class oclFactoryImpl : virtual public ecore::EFactoryImpl , virtual public oclFactory 
+	class OCL_API oclFactoryImpl : virtual public ecore::EFactoryImpl , virtual public oclFactory 
 	{
 		private:    
 			oclFactoryImpl(oclFactoryImpl const&) = delete;

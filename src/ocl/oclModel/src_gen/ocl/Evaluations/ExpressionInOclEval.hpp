@@ -38,6 +38,9 @@ namespace ocl::Evaluations
 	class OclExpEval;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 
 // enum includes
@@ -49,7 +52,7 @@ namespace ocl::Evaluations
 namespace ocl::Evaluations 
 {
 	
-	class ExpressionInOclEval : virtual public ecore::EModelElement
+	class OCL_API ExpressionInOclEval : virtual public ecore::EModelElement
 	{
 		public:
  			ExpressionInOclEval(const ExpressionInOclEval &) {}

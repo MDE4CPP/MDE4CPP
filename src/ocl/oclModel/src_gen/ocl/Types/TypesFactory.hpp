@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "ocl/Types/TypesPackage.hpp"
 
@@ -22,7 +25,7 @@ namespace ecore
 
 namespace ocl::Types 
 {
-	class TypesFactory : virtual public ecore::EFactory 
+	class OCL_API TypesFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			TypesFactory(TypesFactory const&) = delete;

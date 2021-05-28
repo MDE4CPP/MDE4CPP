@@ -43,6 +43,9 @@ namespace ecore
 	class EGenericType;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Expressions/CollectionLiteralPart.hpp"
 
@@ -54,7 +57,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class CollectionRange: virtual public CollectionLiteralPart
+	class OCL_API CollectionRange: virtual public CollectionLiteralPart
 	{
 		public:
  			CollectionRange(const CollectionRange &) {}

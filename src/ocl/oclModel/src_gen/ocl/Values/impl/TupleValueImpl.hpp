@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../TupleValue.hpp"
 
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace ocl::Values 
 {
-	class TupleValueImpl : virtual public StaticValueImpl, virtual public TupleValue 
+	class OCL_API TupleValueImpl : virtual public StaticValueImpl, virtual public TupleValue 
 	{
 		public: 
 			TupleValueImpl(const TupleValueImpl & obj);
@@ -89,6 +92,7 @@ namespace ocl::Values
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<TupleValue> m_thisTupleValuePtr;

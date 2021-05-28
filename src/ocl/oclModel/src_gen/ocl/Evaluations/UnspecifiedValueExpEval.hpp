@@ -41,6 +41,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "fUML/Semantics/Values/Evaluation.hpp"
 
@@ -52,7 +55,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class UnspecifiedValueExpEval: virtual public fUML::Semantics::Values::Evaluation
+	class OCL_API UnspecifiedValueExpEval: virtual public fUML::Semantics::Values::Evaluation
 	{
 		public:
  			UnspecifiedValueExpEval(const UnspecifiedValueExpEval &) {}

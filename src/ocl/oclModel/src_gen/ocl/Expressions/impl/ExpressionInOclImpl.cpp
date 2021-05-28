@@ -246,15 +246,7 @@ Any ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getContextVariable()); //2711
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::Variable>::iterator iter = m_parameterVariable->begin();
-			Bag<ocl::Expressions::Variable>::iterator end = m_parameterVariable->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //2713
+			return eAny(getParameterVariable()); //2713			
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:
 			return eAny(getResultVariable()); //2712
@@ -343,6 +335,29 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 	}
 
 	return ecore::ETypedElementImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any ExpressionInOclImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = ecore::ETypedElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

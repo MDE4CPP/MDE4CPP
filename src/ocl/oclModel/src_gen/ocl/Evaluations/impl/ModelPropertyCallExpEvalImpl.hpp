@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../ModelPropertyCallExpEval.hpp"
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class ModelPropertyCallExpEvalImpl : virtual public PropertyCallExpEvalImpl, virtual public ModelPropertyCallExpEval 
+	class OCL_API ModelPropertyCallExpEvalImpl : virtual public PropertyCallExpEvalImpl, virtual public ModelPropertyCallExpEval 
 	{
 		public: 
 			ModelPropertyCallExpEvalImpl(const ModelPropertyCallExpEvalImpl & obj);
@@ -81,6 +84,7 @@ namespace ocl::Evaluations
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<ModelPropertyCallExpEval> m_thisModelPropertyCallExpEvalPtr;

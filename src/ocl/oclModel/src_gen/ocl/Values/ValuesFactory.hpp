@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
 
@@ -18,7 +21,7 @@
 
 namespace ocl::Values 
 {
-	class ValuesFactory : virtual public ecore::EFactory 
+	class OCL_API ValuesFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			ValuesFactory(ValuesFactory const&) = delete;

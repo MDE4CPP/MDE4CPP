@@ -32,9 +32,9 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "uml/UmlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -173,6 +173,36 @@ bool ModelPropertyCallExpEvalImpl::eSet(int featureID, Any newValue)
 	}
 
 	return PropertyCallExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any ModelPropertyCallExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 5010
+		case EvaluationsPackage::MODELPROPERTYCALLEXPEVAL_OPERATION_ATPRE:
+		{
+			result = eAny(this->atPre());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = PropertyCallExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

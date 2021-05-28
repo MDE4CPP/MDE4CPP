@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../LocalSnapshot.hpp"
 
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
@@ -20,7 +23,7 @@
 //*********************************
 namespace ocl::Values 
 {
-	class LocalSnapshotImpl : virtual public ecore::EModelElementImpl,
+	class OCL_API LocalSnapshotImpl : virtual public ecore::EModelElementImpl,
 virtual public LocalSnapshot 
 	{
 		public: 
@@ -107,6 +110,7 @@ virtual public LocalSnapshot
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<LocalSnapshot> m_thisLocalSnapshotPtr;

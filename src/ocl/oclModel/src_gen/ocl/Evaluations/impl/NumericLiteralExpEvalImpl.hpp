@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../NumericLiteralExpEval.hpp"
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class NumericLiteralExpEvalImpl : virtual public PrimitiveLiteralExpEvalImpl, virtual public NumericLiteralExpEval 
+	class OCL_API NumericLiteralExpEvalImpl : virtual public PrimitiveLiteralExpEvalImpl, virtual public NumericLiteralExpEval 
 	{
 		public: 
 			NumericLiteralExpEvalImpl(const NumericLiteralExpEvalImpl & obj);
@@ -80,6 +83,7 @@ namespace ocl::Evaluations
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<NumericLiteralExpEval> m_thisNumericLiteralExpEvalPtr;

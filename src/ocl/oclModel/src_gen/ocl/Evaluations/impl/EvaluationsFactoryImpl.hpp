@@ -7,6 +7,9 @@
 #ifndef OCL_EVALUATIONSFACTORYIMPL_HPP
 #define OCL_EVALUATIONSFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
@@ -52,7 +55,7 @@ namespace Evaluations
 
 namespace ocl::Evaluations 
 {
-	class EvaluationsFactoryImpl : virtual public ecore::EFactoryImpl , virtual public EvaluationsFactory 
+	class OCL_API EvaluationsFactoryImpl : virtual public ecore::EFactoryImpl , virtual public EvaluationsFactory 
 	{
 		private:    
 			EvaluationsFactoryImpl(EvaluationsFactoryImpl const&) = delete;

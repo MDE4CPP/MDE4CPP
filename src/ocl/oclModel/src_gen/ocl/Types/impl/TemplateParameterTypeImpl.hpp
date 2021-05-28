@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../TemplateParameterType.hpp"
 
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace ocl::Types 
 {
-	class TemplateParameterTypeImpl : virtual public ecore::EClassifierImpl, virtual public TemplateParameterType 
+	class OCL_API TemplateParameterTypeImpl : virtual public ecore::EClassifierImpl, virtual public TemplateParameterType 
 	{
 		public: 
 			TemplateParameterTypeImpl(const TemplateParameterTypeImpl & obj);
@@ -86,6 +89,7 @@ namespace ocl::Types
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<TemplateParameterType> m_thisTemplateParameterTypePtr;

@@ -57,6 +57,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Evaluations/NavigationCallExpEval.hpp"
 
@@ -68,7 +71,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class AssociationEndCallExpEval: virtual public NavigationCallExpEval
+	class OCL_API AssociationEndCallExpEval: virtual public NavigationCallExpEval
 	{
 		public:
  			AssociationEndCallExpEval(const AssociationEndCallExpEval &) {}

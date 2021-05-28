@@ -53,6 +53,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Evaluations/PropertyCallExpEval.hpp"
 
@@ -64,7 +67,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class ModelPropertyCallExpEval: virtual public PropertyCallExpEval
+	class OCL_API ModelPropertyCallExpEval: virtual public PropertyCallExpEval
 	{
 		public:
  			ModelPropertyCallExpEval(const ModelPropertyCallExpEval &) {}

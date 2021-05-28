@@ -41,6 +41,9 @@ namespace ocl::Values
 	class Element;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Values/CollectionValue.hpp"
 
@@ -52,7 +55,7 @@ namespace ocl::Values
 namespace ocl::Values 
 {
 	
-	class SequenceTypeValue: virtual public CollectionValue
+	class OCL_API SequenceTypeValue: virtual public CollectionValue
 	{
 		public:
  			SequenceTypeValue(const SequenceTypeValue &) {}

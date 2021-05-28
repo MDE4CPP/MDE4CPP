@@ -43,6 +43,9 @@ namespace ecore
 	class ETypeParameter;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Types/CollectionType.hpp"
 
@@ -54,7 +57,7 @@ namespace ecore
 namespace ocl::Types 
 {
 	
-	class SetType: virtual public CollectionType
+	class OCL_API SetType: virtual public CollectionType
 	{
 		public:
  			SetType(const SetType &) {}

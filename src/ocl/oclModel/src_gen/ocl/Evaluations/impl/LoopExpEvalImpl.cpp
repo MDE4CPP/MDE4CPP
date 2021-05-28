@@ -31,12 +31,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "uml/UmlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -194,27 +194,11 @@ Any LoopExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_BODYEVALS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::OclExpEval>::iterator iter = m_bodyEvals->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator end = m_bodyEvals->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //477
+			return eAny(getBodyEvals()); //477			
 		}
 		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_ITERATORS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator iter = m_iterators->begin();
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator end = m_iterators->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //478
+			return eAny(getIterators()); //478			
 		}
 	}
 	return PropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);
@@ -309,6 +293,29 @@ bool LoopExpEvalImpl::eSet(int featureID, Any newValue)
 	}
 
 	return PropertyCallExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any LoopExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = PropertyCallExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

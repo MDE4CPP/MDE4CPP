@@ -45,8 +45,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/EcoreFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ecore/EcoreFactory.hpp"
 
 
 #include "ecore/EObject.hpp"
@@ -55,8 +55,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 
 
@@ -297,15 +297,7 @@ Any ObjectValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::LocalSnapshot>::iterator iter = m_history->begin();
-			Bag<ocl::Values::LocalSnapshot>::iterator end = m_history->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //580
+			return eAny(getHistory()); //580			
 		}
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //581
@@ -374,6 +366,48 @@ bool ObjectValueImpl::eSet(int featureID, Any newValue)
 	}
 
 	return fUML::Semantics::Values::ValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any ObjectValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 5813
+		case ValuesPackage::OBJECTVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue));
+			break;
+		}
+		
+		// 5812
+		case ValuesPackage::OBJECTVALUE_OPERATION_TOSTRING:
+		{
+			result = eAny(this->toString());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::ValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

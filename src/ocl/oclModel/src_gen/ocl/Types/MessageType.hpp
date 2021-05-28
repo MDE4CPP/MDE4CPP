@@ -44,6 +44,9 @@ namespace uml
 	class Signal;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ecore/EClassifier.hpp"
 
@@ -55,7 +58,7 @@ namespace uml
 namespace ocl::Types 
 {
 	
-	class MessageType: virtual public ecore::EClassifier
+	class OCL_API MessageType: virtual public ecore::EClassifier
 	{
 		public:
  			MessageType(const MessageType &) {}

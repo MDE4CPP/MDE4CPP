@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../ExpressionInOclEval.hpp"
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
@@ -20,7 +23,7 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class ExpressionInOclEvalImpl : virtual public ecore::EModelElementImpl,
+	class OCL_API ExpressionInOclEvalImpl : virtual public ecore::EModelElementImpl,
 virtual public ExpressionInOclEval 
 	{
 		public: 
@@ -90,6 +93,7 @@ virtual public ExpressionInOclEval
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<ExpressionInOclEval> m_thisExpressionInOclEvalPtr;

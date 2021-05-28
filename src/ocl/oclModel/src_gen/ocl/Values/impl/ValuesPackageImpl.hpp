@@ -7,6 +7,9 @@
 #ifndef OCL_VALUESPACKAGEIMPL_HPP
 #define OCL_VALUESPACKAGEIMPL_HPP
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -37,7 +40,7 @@ namespace ecore
 
 namespace ocl::Values
 {
-	class ValuesPackageImpl : public ecore::EPackageImpl ,virtual public ValuesPackage
+	class OCL_API ValuesPackageImpl : public ecore::EPackageImpl ,virtual public ValuesPackage
 	{
 		private:    
 			ValuesPackageImpl(ValuesPackageImpl const&) = delete;

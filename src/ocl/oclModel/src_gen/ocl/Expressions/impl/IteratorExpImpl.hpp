@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../IteratorExp.hpp"
 
 #include "ocl/Expressions/impl/ExpressionsFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace ocl::Expressions 
 {
-	class IteratorExpImpl : virtual public LoopExpImpl, virtual public IteratorExp 
+	class OCL_API IteratorExpImpl : virtual public LoopExpImpl, virtual public IteratorExp 
 	{
 		public: 
 			IteratorExpImpl(const IteratorExpImpl & obj);
@@ -99,6 +102,7 @@ namespace ocl::Expressions
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<IteratorExp> m_thisIteratorExpPtr;

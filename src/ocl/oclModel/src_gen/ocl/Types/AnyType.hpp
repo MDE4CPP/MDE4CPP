@@ -39,6 +39,9 @@ namespace ecore
 	class ETypeParameter;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ecore/EClassifier.hpp"
 
@@ -50,7 +53,7 @@ namespace ecore
 namespace ocl::Types 
 {
 	
-	class AnyType: virtual public ecore::EClassifier
+	class OCL_API AnyType: virtual public ecore::EClassifier
 	{
 		public:
  			AnyType(const AnyType &) {}

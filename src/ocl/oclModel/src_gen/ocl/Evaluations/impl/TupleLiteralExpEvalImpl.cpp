@@ -33,9 +33,9 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "uml/UmlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -172,15 +172,7 @@ Any TupleLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 	{
 		case ocl::Evaluations::EvaluationsPackage::TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator iter = m_tuplePart->begin();
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator end = m_tuplePart->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //856
+			return eAny(getTuplePart()); //856			
 		}
 	}
 	return LiteralExpEvalImpl::eGet(featureID, resolve, coreType);
@@ -237,6 +229,29 @@ bool TupleLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 	}
 
 	return LiteralExpEvalImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any TupleLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = LiteralExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

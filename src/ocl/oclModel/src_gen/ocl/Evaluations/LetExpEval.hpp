@@ -57,6 +57,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Evaluations/OclExpEval.hpp"
 
@@ -68,7 +71,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class LetExpEval: virtual public OclExpEval
+	class OCL_API LetExpEval: virtual public OclExpEval
 	{
 		public:
  			LetExpEval(const LetExpEval &) {}

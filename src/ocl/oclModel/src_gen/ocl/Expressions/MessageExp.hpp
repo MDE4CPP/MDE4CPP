@@ -60,6 +60,9 @@ namespace uml
 	class SendSignalAction;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Expressions/OclExpression.hpp"
 
@@ -71,7 +74,7 @@ namespace uml
 namespace ocl::Expressions 
 {
 	
-	class MessageExp: virtual public OclExpression
+	class OCL_API MessageExp: virtual public OclExpression
 	{
 		public:
  			MessageExp(const MessageExp &) {}

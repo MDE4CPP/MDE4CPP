@@ -54,6 +54,9 @@ namespace ecore
 	class EReference;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Expressions/NavigationCallExp.hpp"
 
@@ -65,7 +68,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class AssociationClassCallExp: virtual public NavigationCallExp
+	class OCL_API AssociationClassCallExp: virtual public NavigationCallExp
 	{
 		public:
  			AssociationClassCallExp(const AssociationClassCallExp &) {}

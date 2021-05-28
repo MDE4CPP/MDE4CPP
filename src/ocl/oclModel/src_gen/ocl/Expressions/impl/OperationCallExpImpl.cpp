@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/EcoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/EcoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 
@@ -348,15 +348,7 @@ Any OperationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::OclExpression>::iterator iter = m_argument->begin();
-			Bag<ocl::Expressions::OclExpression>::iterator end = m_argument->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //6524
+			return eAny(getArgument()); //6524			
 		}
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION:
 			return eAny(getReferredOperation()); //6525
@@ -425,6 +417,29 @@ bool OperationCallExpImpl::eSet(int featureID, Any newValue)
 	}
 
 	return FeatureCallExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any OperationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = FeatureCallExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

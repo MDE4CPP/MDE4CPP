@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/EcoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/EcoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 
@@ -352,15 +352,7 @@ Any LoopExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getBody()); //4623
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::Variable>::iterator iter = m_iterator->begin();
-			Bag<ocl::Expressions::Variable>::iterator end = m_iterator->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //4624
+			return eAny(getIterator()); //4624			
 		}
 	}
 	return CallExpImpl::eGet(featureID, resolve, coreType);
@@ -427,6 +419,29 @@ bool LoopExpImpl::eSet(int featureID, Any newValue)
 	}
 
 	return CallExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any LoopExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = CallExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

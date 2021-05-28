@@ -248,6 +248,41 @@ bool CollectionTypeImpl::eSet(int featureID, Any newValue)
 }
 
 //*********************************
+// Behavioral Feature
+//*********************************
+Any CollectionTypeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2014
+		case TypesPackage::COLLECTIONTYPE_OPERATION_KINDOF_COLLECTIONTYPE:
+		{
+			//Retrieve input parameter 'coll'
+			//parameter 0
+			std::shared_ptr<ocl::Types::CollectionType> incoming_param_coll;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_coll_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_coll = (*incoming_param_coll_arguments_citer)->get()->get<std::shared_ptr<ocl::Types::CollectionType> >();
+			result = eAny(this->kindOf(incoming_param_coll));
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EDataTypeImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
+}
+
+//*********************************
 // Persistence Functions
 //*********************************
 void CollectionTypeImpl::load(std::shared_ptr<persistence::interfaces::XLoadHandler> loadHandler)

@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "ocl/oclPackage.hpp"
 
@@ -46,7 +49,7 @@ namespace ecore
 
 namespace ocl 
 {
-	class oclFactory : virtual public ecore::EFactory 
+	class OCL_API oclFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			oclFactory(oclFactory const&) = delete;

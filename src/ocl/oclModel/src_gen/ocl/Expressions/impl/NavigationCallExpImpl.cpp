@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/EcoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/EcoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 
@@ -350,15 +350,7 @@ Any NavigationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			return eAny(getNavigationSource()); //5325
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::OclExpression>::iterator iter = m_qualifier->begin();
-			Bag<ocl::Expressions::OclExpression>::iterator end = m_qualifier->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //5324
+			return eAny(getQualifier()); //5324			
 		}
 	}
 	return FeatureCallExpImpl::eGet(featureID, resolve, coreType);
@@ -425,6 +417,29 @@ bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
 	}
 
 	return FeatureCallExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any NavigationCallExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = FeatureCallExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

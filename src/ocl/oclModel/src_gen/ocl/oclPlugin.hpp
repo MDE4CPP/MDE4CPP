@@ -7,11 +7,14 @@
 #ifndef OCLPLUGIN_HPP
 #define OCLPLUGIN_HPP
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "pluginFramework/EcoreModelPlugin.hpp"
 
 namespace ocl
 {
-	class oclPlugin : virtual public EcoreModelPlugin
+	class OCL_API oclPlugin : virtual public EcoreModelPlugin
 	{
 		public:
 			static std::shared_ptr<MDE4CPPPlugin> eInstance();

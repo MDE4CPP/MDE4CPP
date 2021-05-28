@@ -54,6 +54,9 @@ namespace ecore
 	class EGenericType;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Expressions/PrimitiveLiteralExp.hpp"
 
@@ -65,7 +68,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class BooleanLiteralExp: virtual public PrimitiveLiteralExp
+	class OCL_API BooleanLiteralExp: virtual public PrimitiveLiteralExp
 	{
 		public:
  			BooleanLiteralExp(const BooleanLiteralExp &) {}

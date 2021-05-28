@@ -4,7 +4,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "ocl/Types/TypesPackage.hpp"
 #include "ocl/Types/impl/AnyTypeImpl.hpp"
 #include "ocl/Types/impl/BagTypeImpl.hpp"
 #include "ocl/Types/impl/CollectionTypeImpl.hpp"

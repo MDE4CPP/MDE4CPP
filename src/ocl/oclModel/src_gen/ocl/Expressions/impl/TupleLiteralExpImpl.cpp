@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/EcoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/EcoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 
@@ -332,15 +332,7 @@ Any TupleLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALEXP_ATTRIBUTE_PART:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::TupleLiteralPart>::iterator iter = m_part->begin();
-			Bag<ocl::Expressions::TupleLiteralPart>::iterator end = m_part->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //8422
+			return eAny(getPart()); //8422			
 		}
 	}
 	return LiteralExpImpl::eGet(featureID, resolve, coreType);
@@ -397,6 +389,29 @@ bool TupleLiteralExpImpl::eSet(int featureID, Any newValue)
 	}
 
 	return LiteralExpImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any TupleLiteralExpImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = LiteralExpImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

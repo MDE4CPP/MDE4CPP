@@ -7,11 +7,14 @@
 #ifndef OCLPLUGINIMPL_HPP
 #define OCLPLUGINIMPL_HPP
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ocl/oclPlugin.hpp"
 
 namespace ocl 
 {
-	class oclPluginImpl : virtual public oclPlugin 
+	class OCL_API oclPluginImpl : virtual public oclPlugin 
 	{
 		public:
 			oclPluginImpl();

@@ -53,6 +53,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Evaluations/PrimitiveLiteralExpEval.hpp"
 
@@ -64,7 +67,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class NumericLiteralExpEval: virtual public PrimitiveLiteralExpEval
+	class OCL_API NumericLiteralExpEval: virtual public PrimitiveLiteralExpEval
 	{
 		public:
  			NumericLiteralExpEval(const NumericLiteralExpEval &) {}

@@ -41,8 +41,8 @@
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -224,15 +224,7 @@ Any EvalEnvironmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_ATTRIBUTE_BINDINGS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::NameValueBinding>::iterator iter = m_bindings->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator end = m_bindings->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //250
+			return eAny(getBindings()); //250			
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
@@ -289,6 +281,89 @@ bool EvalEnvironmentImpl::eSet(int featureID, Any newValue)
 	}
 
 	return ecore::EObjectImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any EvalEnvironmentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2503
+		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_ADD_NAMEVALUEBINDING:
+		{
+			//Retrieve input parameter 'n'
+			//parameter 0
+			std::shared_ptr<ocl::Values::NameValueBinding> incoming_param_n;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_n = (*incoming_param_n_arguments_citer)->get()->get<std::shared_ptr<ocl::Values::NameValueBinding> >();
+			this->add(incoming_param_n);
+			break;
+		}
+		
+		// 2505
+		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_ADDALL_NAMEVALUEBINDING:
+		{
+			//Retrieve input parameter 'nvbs'
+			//parameter 0
+			std::shared_ptr<Bag<ocl::Values::NameValueBinding>> incoming_param_nvbs;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_nvbs_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_nvbs = (*incoming_param_nvbs_arguments_citer)->get()->get<std::shared_ptr<Bag<ocl::Values::NameValueBinding>> >();
+			this->addAll(incoming_param_nvbs);
+			break;
+		}
+		
+		// 2504
+		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_FIND_STRING:
+		{
+			//Retrieve input parameter 'name'
+			//parameter 0
+			std::string incoming_param_name;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_name_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_name = (*incoming_param_name_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->find(incoming_param_name));
+			break;
+		}
+		
+		// 2501
+		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_GETVALUEOF_ESTRING:
+		{
+			//Retrieve input parameter 'n'
+			//parameter 0
+			std::string incoming_param_n;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_n = (*incoming_param_n_arguments_citer)->get()->get<std::string >();
+			result = eAny(this->getValueOf(incoming_param_n));
+			break;
+		}
+		
+		// 2502
+		case EvaluationsPackage::EVALENVIRONMENT_OPERATION_REPLACE_NAMEVALUEBINDING:
+		{
+			//Retrieve input parameter 'n'
+			//parameter 0
+			std::shared_ptr<ocl::Values::NameValueBinding> incoming_param_n;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_n_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_n = (*incoming_param_n_arguments_citer)->get()->get<std::shared_ptr<ocl::Values::NameValueBinding> >();
+			this->replace(incoming_param_n);
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

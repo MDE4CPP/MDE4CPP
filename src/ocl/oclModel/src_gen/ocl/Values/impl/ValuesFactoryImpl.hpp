@@ -7,6 +7,9 @@
 #ifndef OCL_VALUESFACTORYIMPL_HPP
 #define OCL_VALUESFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "ocl/Values/ValuesFactory.hpp"
@@ -30,7 +33,7 @@ namespace Values
 
 namespace ocl::Values 
 {
-	class ValuesFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ValuesFactory 
+	class OCL_API ValuesFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ValuesFactory 
 	{
 		private:    
 			ValuesFactoryImpl(ValuesFactoryImpl const&) = delete;

@@ -58,6 +58,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Evaluations/LoopExpEval.hpp"
 
@@ -69,7 +72,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class IterateExpEval: virtual public LoopExpEval
+	class OCL_API IterateExpEval: virtual public LoopExpEval
 	{
 		public:
  			IterateExpEval(const IterateExpEval &) {}

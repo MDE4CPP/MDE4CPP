@@ -58,6 +58,9 @@ namespace uml
 	class EnumerationLiteral;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Expressions/LiteralExp.hpp"
 
@@ -69,7 +72,7 @@ namespace uml
 namespace ocl::Expressions 
 {
 	
-	class EnumLiteralExp: virtual public LiteralExp
+	class OCL_API EnumLiteralExp: virtual public LiteralExp
 	{
 		public:
  			EnumLiteralExp(const EnumLiteralExp &) {}

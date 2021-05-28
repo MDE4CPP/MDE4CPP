@@ -39,6 +39,9 @@ namespace ocl::Values
 	class OclMessageValue;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 
 // enum includes
@@ -50,7 +53,7 @@ namespace ocl::Values
 namespace ocl::Values 
 {
 	
-	class LocalSnapshot : virtual public ecore::EModelElement
+	class OCL_API LocalSnapshot : virtual public ecore::EModelElement
 	{
 		public:
  			LocalSnapshot(const LocalSnapshot &) {}

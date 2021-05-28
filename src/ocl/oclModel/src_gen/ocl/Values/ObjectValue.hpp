@@ -42,6 +42,9 @@ namespace ecore
 	class EObject;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "fUML/Semantics/Values/Value.hpp"
 
@@ -53,7 +56,7 @@ namespace ecore
 namespace ocl::Values 
 {
 	
-	class ObjectValue: virtual public fUML::Semantics::Values::Value
+	class OCL_API ObjectValue: virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			ObjectValue(const ObjectValue &) {}

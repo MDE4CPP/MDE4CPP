@@ -33,14 +33,17 @@ namespace ocl
 }
 
 //Forward Declaration for used types 
-namespace fUML::Semantics::Values 
-{
-	class Value;
-}
 namespace ocl::Values 
 {
 	class NameValueBinding;
 }
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
+// namespace macro header include
+#include "ocl/ocl.hpp"
 
 // base class includes
 
@@ -53,7 +56,7 @@ namespace ocl::Values
 namespace ocl::Evaluations 
 {
 	
-	class EvalEnvironment : virtual public ecore::EModelElement
+	class OCL_API EvalEnvironment : virtual public ecore::EModelElement
 	{
 		public:
  			EvalEnvironment(const EvalEnvironment &) {}

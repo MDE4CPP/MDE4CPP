@@ -49,6 +49,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
 
@@ -60,7 +63,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class CollectionRangeEval: virtual public CollectionLiteralPartEval
+	class OCL_API CollectionRangeEval: virtual public CollectionLiteralPartEval
 	{
 		public:
  			CollectionRangeEval(const CollectionRangeEval &) {}

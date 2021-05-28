@@ -42,6 +42,9 @@ namespace ocl::Values
 	class NameValueBinding;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Values/StaticValue.hpp"
 
@@ -53,7 +56,7 @@ namespace ocl::Values
 namespace ocl::Values 
 {
 	
-	class TupleValue: virtual public StaticValue
+	class OCL_API TupleValue: virtual public StaticValue
 	{
 		public:
  			TupleValue(const TupleValue &) {}

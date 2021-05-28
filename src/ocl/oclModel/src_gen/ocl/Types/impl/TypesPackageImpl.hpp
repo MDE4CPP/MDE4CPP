@@ -7,6 +7,9 @@
 #ifndef OCL_TYPESPACKAGEIMPL_HPP
 #define OCL_TYPESPACKAGEIMPL_HPP
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"
 
@@ -35,7 +38,7 @@ namespace ecore
 
 namespace ocl::Types
 {
-	class TypesPackageImpl : public ecore::EPackageImpl ,virtual public TypesPackage
+	class OCL_API TypesPackageImpl : public ecore::EPackageImpl ,virtual public TypesPackage
 	{
 		private:    
 			TypesPackageImpl(TypesPackageImpl const&) = delete;

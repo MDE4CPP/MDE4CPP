@@ -53,6 +53,9 @@ namespace ecore
 	class EGenericType;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Expressions/OclExpression.hpp"
 
@@ -64,7 +67,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class CallExp: virtual public OclExpression
+	class OCL_API CallExp: virtual public OclExpression
 	{
 		public:
  			CallExp(const CallExp &) {}

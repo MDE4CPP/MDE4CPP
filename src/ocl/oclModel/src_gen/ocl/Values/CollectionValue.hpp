@@ -42,6 +42,9 @@ namespace ocl::Values
 	class Element;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Values/StaticValue.hpp"
 
@@ -53,7 +56,7 @@ namespace ocl::Values
 namespace ocl::Values 
 {
 	
-	class CollectionValue: virtual public StaticValue
+	class OCL_API CollectionValue: virtual public StaticValue
 	{
 		public:
  			CollectionValue(const CollectionValue &) {}

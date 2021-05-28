@@ -33,9 +33,9 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
-#include "uml/UmlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -157,7 +157,7 @@ Any StringLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) c
 	}
 	Any result;
 	result = fUML::Semantics::Values::LiteralStringEvaluationImpl::eGet(featureID, resolve, coreType);
-	if (result != nullptr && !result->isEmpty())
+	if (!result->isEmpty())
 	{
 		return result;
 	}
@@ -191,6 +191,32 @@ bool StringLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 		return result;
 	}
 	result = PrimitiveLiteralExpEvalImpl::eSet(featureID, newValue);
+	return result;
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any StringLiteralExpEvalImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+
+		default:
+		{
+			// call superTypes
+			result = fUML::Semantics::Values::LiteralStringEvaluationImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			result = PrimitiveLiteralExpEvalImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
 	return result;
 }
 

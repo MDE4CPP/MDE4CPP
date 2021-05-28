@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../InvalidType.hpp"
 
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace ocl::Types 
 {
-	class InvalidTypeImpl : virtual public ecore::EClassifierImpl, virtual public InvalidType 
+	class OCL_API InvalidTypeImpl : virtual public ecore::EClassifierImpl, virtual public InvalidType 
 	{
 		public: 
 			InvalidTypeImpl(const InvalidTypeImpl & obj);
@@ -82,6 +85,7 @@ namespace ocl::Types
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<InvalidType> m_thisInvalidTypePtr;

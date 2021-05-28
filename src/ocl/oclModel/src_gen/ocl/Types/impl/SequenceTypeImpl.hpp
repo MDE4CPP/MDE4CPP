@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../SequenceType.hpp"
 
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace ocl::Types 
 {
-	class SequenceTypeImpl : virtual public CollectionTypeImpl, virtual public SequenceType 
+	class OCL_API SequenceTypeImpl : virtual public CollectionTypeImpl, virtual public SequenceType 
 	{
 		public: 
 			SequenceTypeImpl(const SequenceTypeImpl & obj);
@@ -82,6 +85,7 @@ namespace ocl::Types
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<SequenceType> m_thisSequenceTypePtr;

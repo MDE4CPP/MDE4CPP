@@ -7,6 +7,9 @@
 #ifndef OCLPACKAGE_HPP
 #define OCLPACKAGE_HPP
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -56,7 +59,7 @@ namespace ocl
 	which were described in an ecore file.
 	*/
 	
-	class oclPackage : virtual public ecore::EPackage 
+	class OCL_API oclPackage : virtual public ecore::EPackage 
 	{
 		private:    
 			oclPackage(oclPackage const&) = delete;

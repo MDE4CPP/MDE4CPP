@@ -7,6 +7,9 @@
 #ifndef OCL_EXPRESSIONSFACTORYIMPL_HPP
 #define OCL_EXPRESSIONSFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "ocl/Expressions/ExpressionsFactory.hpp"
@@ -53,7 +56,7 @@ namespace Expressions
 
 namespace ocl::Expressions 
 {
-	class ExpressionsFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ExpressionsFactory 
+	class OCL_API ExpressionsFactoryImpl : virtual public ecore::EFactoryImpl , virtual public ExpressionsFactory 
 	{
 		private:    
 			ExpressionsFactoryImpl(ExpressionsFactoryImpl const&) = delete;

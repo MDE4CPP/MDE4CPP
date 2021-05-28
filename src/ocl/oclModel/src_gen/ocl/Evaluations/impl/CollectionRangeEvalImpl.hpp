@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../CollectionRangeEval.hpp"
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class CollectionRangeEvalImpl : virtual public CollectionLiteralPartEvalImpl, virtual public CollectionRangeEval 
+	class OCL_API CollectionRangeEvalImpl : virtual public CollectionLiteralPartEvalImpl, virtual public CollectionRangeEval 
 	{
 		public: 
 			CollectionRangeEvalImpl(const CollectionRangeEvalImpl & obj);
@@ -88,6 +91,7 @@ namespace ocl::Evaluations
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<CollectionRangeEval> m_thisCollectionRangeEvalPtr;

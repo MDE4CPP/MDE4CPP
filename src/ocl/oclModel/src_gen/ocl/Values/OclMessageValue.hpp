@@ -39,6 +39,9 @@ namespace ocl::Values
 	class ObjectValue;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "fUML/Semantics/Values/Value.hpp"
 
@@ -50,7 +53,7 @@ namespace ocl::Values
 namespace ocl::Values 
 {
 	
-	class OclMessageValue: virtual public fUML::Semantics::Values::Value
+	class OCL_API OclMessageValue: virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			OclMessageValue(const OclMessageValue &) {}

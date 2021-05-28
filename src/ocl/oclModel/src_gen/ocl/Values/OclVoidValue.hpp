@@ -33,6 +33,9 @@ namespace ocl
 
 //Forward Declaration for used types 
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "fUML/Semantics/Values/Value.hpp"
 
@@ -44,7 +47,7 @@ namespace ocl
 namespace ocl::Values 
 {
 	
-	class OclVoidValue: virtual public fUML::Semantics::Values::Value
+	class OCL_API OclVoidValue: virtual public fUML::Semantics::Values::Value
 	{
 		public:
  			OclVoidValue(const OclVoidValue &) {}

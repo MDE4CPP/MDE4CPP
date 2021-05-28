@@ -37,6 +37,9 @@ namespace fUML::Semantics::Values
 	class Value;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 
 // enum includes
@@ -48,7 +51,7 @@ namespace fUML::Semantics::Values
 namespace ocl::Values 
 {
 	
-	class Element : virtual public ecore::EModelElement
+	class OCL_API Element : virtual public ecore::EModelElement
 	{
 		public:
  			Element(const Element &) {}

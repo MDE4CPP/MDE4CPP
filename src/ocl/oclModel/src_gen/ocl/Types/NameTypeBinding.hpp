@@ -37,6 +37,9 @@ namespace ecore
 	class EClassifier;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 
 // enum includes
@@ -48,7 +51,7 @@ namespace ecore
 namespace ocl::Types 
 {
 	
-	class NameTypeBinding : virtual public ecore::EModelElement
+	class OCL_API NameTypeBinding : virtual public ecore::EModelElement
 	{
 		public:
  			NameTypeBinding(const NameTypeBinding &) {}

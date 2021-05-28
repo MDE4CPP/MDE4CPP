@@ -4,7 +4,6 @@
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EClass.hpp"
-#include "ocl/Evaluations/EvaluationsPackage.hpp"
 #include "ocl/Evaluations/impl/AssociationClassCallExpEvalImpl.hpp"
 #include "ocl/Evaluations/impl/AssociationEndCallExpEvalImpl.hpp"
 #include "ocl/Evaluations/impl/AttributeCallExpEvalImpl.hpp"

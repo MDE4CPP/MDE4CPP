@@ -54,6 +54,9 @@ namespace ecore
 	class EOperation;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Expressions/FeatureCallExp.hpp"
 
@@ -65,7 +68,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class OperationCallExp: virtual public FeatureCallExp
+	class OCL_API OperationCallExp: virtual public FeatureCallExp
 	{
 		public:
  			OperationCallExp(const OperationCallExp &) {}

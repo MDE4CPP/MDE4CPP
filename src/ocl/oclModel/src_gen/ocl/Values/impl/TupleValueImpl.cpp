@@ -43,8 +43,8 @@
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Types/TypesPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -223,15 +223,7 @@ Any TupleValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_ELEMENTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::NameValueBinding>::iterator iter = m_elements->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator end = m_elements->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //890
+			return eAny(getElements()); //890			
 		}
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
 			return eAny(getModel()); //891
@@ -300,6 +292,48 @@ bool TupleValueImpl::eSet(int featureID, Any newValue)
 	}
 
 	return StaticValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any TupleValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 8913
+		case ValuesPackage::TUPLEVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue));
+			break;
+		}
+		
+		// 8912
+		case ValuesPackage::TUPLEVALUE_OPERATION_TOSTRING:
+		{
+			result = eAny(this->toString());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StaticValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

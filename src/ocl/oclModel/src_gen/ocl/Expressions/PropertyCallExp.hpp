@@ -53,6 +53,9 @@ namespace ecore
 	class EGenericType;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Expressions/NavigationCallExp.hpp"
 
@@ -64,7 +67,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class PropertyCallExp: virtual public NavigationCallExp
+	class OCL_API PropertyCallExp: virtual public NavigationCallExp
 	{
 		public:
  			PropertyCallExp(const PropertyCallExp &) {}

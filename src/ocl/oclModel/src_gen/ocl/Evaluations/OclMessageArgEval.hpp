@@ -46,6 +46,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "fUML/Semantics/Values/Evaluation.hpp"
 
@@ -57,7 +60,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class OclMessageArgEval: virtual public fUML::Semantics::Values::Evaluation
+	class OCL_API OclMessageArgEval: virtual public fUML::Semantics::Values::Evaluation
 	{
 		public:
  			OclMessageArgEval(const OclMessageArgEval &) {}

@@ -7,6 +7,9 @@
 #ifndef OCL_EXPRESSIONSPACKAGE_HPP
 #define OCL_EXPRESSIONSPACKAGE_HPP
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -68,7 +71,7 @@ namespace ocl::Expressions
 	which were described in an ecore file.
 	*/
 	
-	class ExpressionsPackage : virtual public ecore::EPackage 
+	class OCL_API ExpressionsPackage : virtual public ecore::EPackage 
 	{
 		private:    
 			ExpressionsPackage(ExpressionsPackage const&) = delete;

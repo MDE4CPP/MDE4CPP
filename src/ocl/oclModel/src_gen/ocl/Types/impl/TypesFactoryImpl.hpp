@@ -7,6 +7,9 @@
 #ifndef OCL_TYPESFACTORYIMPL_HPP
 #define OCL_TYPESFACTORYIMPL_HPP
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/impl/EFactoryImpl.hpp"
 
 #include "ocl/Types/TypesFactory.hpp"
@@ -28,7 +31,7 @@ namespace Types
 
 namespace ocl::Types 
 {
-	class TypesFactoryImpl : virtual public ecore::EFactoryImpl , virtual public TypesFactory 
+	class OCL_API TypesFactoryImpl : virtual public ecore::EFactoryImpl , virtual public TypesFactory 
 	{
 		private:    
 			TypesFactoryImpl(TypesFactoryImpl const&) = delete;

@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../UndefinedValue.hpp"
 
 #include "ocl/Values/impl/ValuesFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace ocl::Values 
 {
-	class UndefinedValueImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public UndefinedValue 
+	class OCL_API UndefinedValueImpl : virtual public fUML::Semantics::Values::ValueImpl, virtual public UndefinedValue 
 	{
 		public: 
 			UndefinedValueImpl(const UndefinedValueImpl & obj);
@@ -82,6 +85,7 @@ namespace ocl::Values
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<UndefinedValue> m_thisUndefinedValuePtr;

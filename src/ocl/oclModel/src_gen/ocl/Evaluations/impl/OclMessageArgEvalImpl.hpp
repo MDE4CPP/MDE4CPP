@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../OclMessageArgEval.hpp"
 
 #include "ocl/Evaluations/impl/EvaluationsFactoryImpl.hpp"
@@ -19,7 +22,7 @@
 //*********************************
 namespace ocl::Evaluations 
 {
-	class OclMessageArgEvalImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public OclMessageArgEval 
+	class OCL_API OclMessageArgEvalImpl : virtual public fUML::Semantics::Values::EvaluationImpl, virtual public OclMessageArgEval 
 	{
 		public: 
 			OclMessageArgEvalImpl(const OclMessageArgEvalImpl & obj);
@@ -92,6 +95,7 @@ namespace ocl::Evaluations
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<OclMessageArgEval> m_thisOclMessageArgEvalPtr;

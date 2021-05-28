@@ -41,6 +41,9 @@ namespace fUML::Semantics::SimpleClassifiers
 	class StringValue;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 
 // enum includes
@@ -52,7 +55,7 @@ namespace fUML::Semantics::SimpleClassifiers
 namespace ocl::Evaluations 
 {
 	
-	class VariableDeclEval : virtual public ecore::EModelElement
+	class OCL_API VariableDeclEval : virtual public ecore::EModelElement
 	{
 		public:
  			VariableDeclEval(const VariableDeclEval &) {}

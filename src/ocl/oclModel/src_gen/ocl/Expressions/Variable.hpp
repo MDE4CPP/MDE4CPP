@@ -52,6 +52,9 @@ namespace ecore
 	class EParameter;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ecore/ETypedElement.hpp"
 
@@ -63,7 +66,7 @@ namespace ecore
 namespace ocl::Expressions 
 {
 	
-	class Variable: virtual public ecore::ETypedElement
+	class OCL_API Variable: virtual public ecore::ETypedElement
 	{
 		public:
  			Variable(const Variable &) {}

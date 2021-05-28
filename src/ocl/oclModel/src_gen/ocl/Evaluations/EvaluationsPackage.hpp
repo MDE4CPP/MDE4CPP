@@ -7,6 +7,9 @@
 #ifndef OCL_EVALUATIONSPACKAGE_HPP
 #define OCL_EVALUATIONSPACKAGE_HPP
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/EPackage.hpp"
 
 namespace ecore 
@@ -69,7 +72,7 @@ namespace ocl::Evaluations
 	which were described in an ecore file.
 	*/
 	
-	class EvaluationsPackage : virtual public ecore::EPackage 
+	class OCL_API EvaluationsPackage : virtual public ecore::EPackage 
 	{
 		private:    
 			EvaluationsPackage(EvaluationsPackage const&) = delete;

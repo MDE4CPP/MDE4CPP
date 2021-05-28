@@ -10,6 +10,9 @@
 #include <map>
 #include <memory>
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 #include "ecore/EFactory.hpp"
 #include "ocl/Expressions/ExpressionsPackage.hpp"
 
@@ -30,7 +33,7 @@ namespace ocl::Expressions
 
 namespace ocl::Expressions 
 {
-	class ExpressionsFactory : virtual public ecore::EFactory 
+	class OCL_API ExpressionsFactory : virtual public ecore::EFactory 
 	{
 		private:    
 			ExpressionsFactory(ExpressionsFactory const&) = delete;

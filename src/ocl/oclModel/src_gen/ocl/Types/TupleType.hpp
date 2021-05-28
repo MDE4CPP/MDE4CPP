@@ -48,6 +48,9 @@ namespace ecore
 	class ETypeParameter;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ecore/EDataType.hpp"
 
@@ -59,7 +62,7 @@ namespace ecore
 namespace ocl::Types 
 {
 	
-	class TupleType: virtual public ecore::EDataType
+	class OCL_API TupleType: virtual public ecore::EDataType
 	{
 		public:
  			TupleType(const TupleType &) {}

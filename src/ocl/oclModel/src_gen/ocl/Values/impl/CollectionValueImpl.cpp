@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ocl/Types/TypesFactory.hpp"
 
 
 #include "ocl/Types/CollectionType.hpp"
@@ -43,8 +43,8 @@
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Types/TypesPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -245,15 +245,7 @@ Any CollectionValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
 		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::Element>::iterator iter = m_elements->begin();
-			Bag<ocl::Values::Element>::iterator end = m_elements->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //210
+			return eAny(getElements()); //210			
 		}
 		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_MODEL:
 			return eAny(getModel()); //211
@@ -322,6 +314,72 @@ bool CollectionValueImpl::eSet(int featureID, Any newValue)
 	}
 
 	return StaticValueImpl::eSet(featureID, newValue);
+}
+
+//*********************************
+// Behavioral Feature
+//*********************************
+Any CollectionValueImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+{
+	Any result;
+
+  	switch(operationID)
+	{
+		
+		// 2112
+		case ValuesPackage::COLLECTIONVALUE_OPERATION_ADDVALUE_VALUE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->addValue(incoming_param_value));
+			break;
+		}
+		
+		// 2115
+		case ValuesPackage::COLLECTIONVALUE_OPERATION_EQUALS_VALUE:
+		{
+			//Retrieve input parameter 'otherValue'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_otherValue;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_otherValue_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_otherValue = (*incoming_param_otherValue_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->equals(incoming_param_otherValue));
+			break;
+		}
+		
+		// 2114
+		case ValuesPackage::COLLECTIONVALUE_OPERATION_FIND_VALUE:
+		{
+			//Retrieve input parameter 'value'
+			//parameter 0
+			std::shared_ptr<fUML::Semantics::Values::Value> incoming_param_value;
+			std::list<std::shared_ptr<Any>>::const_iterator incoming_param_value_arguments_citer = std::next(arguments->begin(), 0);
+			incoming_param_value = (*incoming_param_value_arguments_citer)->get()->get<std::shared_ptr<fUML::Semantics::Values::Value> >();
+			result = eAny(this->find(incoming_param_value));
+			break;
+		}
+		
+		// 2113
+		case ValuesPackage::COLLECTIONVALUE_OPERATION_TOSTRING:
+		{
+			result = eAny(this->toString());
+			break;
+		}
+
+		default:
+		{
+			// call superTypes
+			result = StaticValueImpl::eInvoke(operationID, arguments);
+			if (!result->isEmpty())
+				break;
+			break;
+		}
+  	}
+
+	return result;
 }
 
 //*********************************

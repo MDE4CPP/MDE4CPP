@@ -41,6 +41,9 @@ namespace ocl::Values
 	class Element;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "ocl/Values/CollectionValue.hpp"
 
@@ -52,7 +55,7 @@ namespace ocl::Values
 namespace ocl::Values 
 {
 	
-	class BagTypeValue: virtual public CollectionValue
+	class OCL_API BagTypeValue: virtual public CollectionValue
 	{
 		public:
  			BagTypeValue(const BagTypeValue &) {}

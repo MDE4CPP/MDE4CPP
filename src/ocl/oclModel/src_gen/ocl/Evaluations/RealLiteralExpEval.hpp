@@ -53,6 +53,9 @@ namespace uml
 	class ValueSpecification;
 }
 
+// namespace macro header include
+#include "ocl/ocl.hpp"
+
 // base class includes
 #include "fUML/Semantics/Values/LiteralRealEvaluation.hpp"
 #include "ocl/Evaluations/NumericLiteralExpEval.hpp"
@@ -65,7 +68,7 @@ namespace uml
 namespace ocl::Evaluations 
 {
 	
-	class RealLiteralExpEval: virtual public fUML::Semantics::Values::LiteralRealEvaluation, virtual public NumericLiteralExpEval
+	class OCL_API RealLiteralExpEval: virtual public fUML::Semantics::Values::LiteralRealEvaluation, virtual public NumericLiteralExpEval
 	{
 		public:
  			RealLiteralExpEval(const RealLiteralExpEval &) {}

@@ -10,7 +10,10 @@
 //*********************************
 // generated Includes
 
-//Model includes
+// namespace macro header include
+#include "ocl/ocl.hpp" 
+
+// model includes
 #include "../NameTypeBinding.hpp"
 
 #include "ocl/Types/impl/TypesFactoryImpl.hpp"
@@ -20,7 +23,7 @@
 //*********************************
 namespace ocl::Types 
 {
-	class NameTypeBindingImpl : virtual public ecore::EModelElementImpl,
+	class OCL_API NameTypeBindingImpl : virtual public ecore::EModelElementImpl,
 virtual public NameTypeBinding 
 	{
 		public: 
@@ -90,6 +93,7 @@ virtual public NameTypeBinding
 			virtual Any eGet(int featureID, bool resolve, bool coreType) const ;
 			virtual bool internalEIsSet(int featureID) const ;
 			virtual bool eSet(int featureID, Any newValue) ;
+			virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) ;
 
 		private:
 			std::weak_ptr<NameTypeBinding> m_thisNameTypeBindingPtr;
