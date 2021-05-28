@@ -1,5 +1,7 @@
 description 'Example collection'
 
+import org.gradle.internal.os.OperatingSystem;
+
 task generateAllExamples() {
 	group 'Examples'
 	description 'generate all examples'	
@@ -91,7 +93,9 @@ task compileAllExamples() {
 	dependsOn getRootProject().getTasksByName('compileApplicationForLibraryModel_uml', true)
 	
 	// PSCS examples
-	dependsOn getRootProject().getTasksByName('compileApplicationForAmpelsteuerung_Example', true)
+	if(OperatingSystem.current().isWindows()){
+		dependsOn getRootProject().getTasksByName('compileApplicationForAmpelsteuerung_Example', true)
+	}
 }
 
 task buildAllExamples() {
