@@ -1,3 +1,5 @@
+import org.gradle.internal.os.OperatingSystem;
+
 plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.5"
 	id "de.undercouch.download" version "3.4.2"
@@ -67,11 +69,22 @@ task compileAntlr4(dependsOn: downloadAndUnzipAntlr4) {
 	inputs.files(fileTree(".${File.separator}antlr4${File.separator}antlr4-cpp-runtime-${antlr4Version}-source") {
         exclude '.cmake/**'
     })
-	if(!file('.' + File.separator + '.cmake' + File.separator).exists()) {
-		outputs.upToDateWhen { false }
-	}
-	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'libantlr4-runtime.dll')
+	
+	// Define the outputs
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'antlr4-runtime')
+	if(OperatingSystem.current().isWindows()){
+		outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'libantlr4-runtime.dll')
+	} else if (OperatingSystem.current().isLinux()) {
+		outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'libantlr4-runtime.so')
+	} else if (OperatingSystem.current().isMacOsX()){
+		outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'libantlr4-runtime.so')
+	} else {
+		// Unknown OS
+	}
+	
+	//if(!file('.' + File.separator + '.cmake' + File.separator).exists()) {
+	//	outputs.upToDateWhen { false }
+	//}
 }
 
 task clean {
