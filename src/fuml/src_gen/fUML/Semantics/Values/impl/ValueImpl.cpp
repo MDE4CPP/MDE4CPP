@@ -33,6 +33,7 @@
 
 #include <exception> // used in Persistence
 
+
 #include "uml/Classifier.hpp"
 #include "fUML/Semantics/Loci/SemanticVisitor.hpp"
 #include "fUML/Semantics/Values/Value.hpp"

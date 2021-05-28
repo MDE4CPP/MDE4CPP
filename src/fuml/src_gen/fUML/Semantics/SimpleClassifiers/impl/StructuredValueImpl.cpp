@@ -43,6 +43,7 @@
 
 #include <exception> // used in Persistence
 
+
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
 #include "uml/StructuralFeature.hpp"
 #include "fUML/Semantics/Values/Value.hpp"

@@ -31,6 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+
 
 #include "fUML/Semantics/CommonBehavior/ParameterValue.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"

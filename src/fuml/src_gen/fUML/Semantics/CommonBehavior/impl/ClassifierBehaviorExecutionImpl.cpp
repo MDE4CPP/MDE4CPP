@@ -31,6 +31,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/UmlFactory.hpp"
+
 
 #include "uml/Class.hpp"
 #include "fUML/Semantics/CommonBehavior/Execution.hpp"

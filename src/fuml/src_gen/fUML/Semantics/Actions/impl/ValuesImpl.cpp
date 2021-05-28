@@ -31,6 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
+
 
 #include "fUML/Semantics/Values/Value.hpp"
 

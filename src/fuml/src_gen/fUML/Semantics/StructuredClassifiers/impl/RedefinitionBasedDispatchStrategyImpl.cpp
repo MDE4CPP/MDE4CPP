@@ -36,6 +36,7 @@
 
 #include <exception> // used in Persistence
 
+
 #include "uml/Behavior.hpp"
 #include "fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Object.hpp"
