@@ -1,0 +1,128 @@
+plugins {
+  id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "0.5"
+}
+
+task compileOclExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'Examples'
+	description 'compile Ocl example'
+	
+	projectFolder = file('.' + File.separator + 'oclExample')
+	
+	inputs.files(fileTree('.') {
+        exclude 'src/oclExample/.cmake/**'
+    })
+	if(!file('.' + File.separator + 'oclExample' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'oclExample.exe')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'oclExampled.exe')
+	
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('buildEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+	
+	// dependency to model 'uml'
+	def uml = getRootProject().getTasksByName('buildUml', true)
+	dependsOn uml
+	inputs.files(uml.outputs)
+
+	// dependency to model 'types'
+	def types = getRootProject().getTasksByName('buildTypes', true)
+	dependsOn types
+	inputs.files(types.outputs)
+	
+	// dependency to model 'primitivetypesReflection'
+	def primitives = getRootProject().getTasksByName('buildPrimitivetypesReflection', true)
+	dependsOn primitives
+	inputs.files(primitives.outputs)
+	
+	// dependency to model 'oclParser'
+	def oclParser = getRootProject().getTasksByName('buildOclParser', true)
+	dependsOn oclParser
+	inputs.files(oclParser.outputs)
+}
+
+task compileOclEcoreExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'Examples'
+	description 'compile Ocl Ecore model example'
+	
+	projectFolder = file('.' + File.separator + 'oclEcoreExample')
+	
+	inputs.files(fileTree('.') {
+        exclude 'oclEcoreExample/.cmake/**'
+    })
+	if(!file('.' + File.separator + 'oclEcoreExample' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'oclEcoreExample.exe')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'oclEcoreExampled.exe')
+		
+	// dependency to model 'ecore'
+	def ecore = getRootProject().getTasksByName('buildEcore', true)
+	dependsOn ecore
+	inputs.files(ecore.outputs)
+	
+	// dependency to model 'oclParser'
+	def oclParser = getRootProject().getTasksByName('buildOclParser', true)
+	dependsOn oclParser
+	inputs.files(oclParser.outputs)
+	
+	// dependency to model 'BookStore_ecore'
+	def bookstore = getRootProject().getTasksByName('buildBookStore_ecore', true)
+	dependsOn bookstore
+	inputs.files(bookstore.outputs)
+}
+
+task compileOclUmlExample(type: tui.sse.mde4cpp.MDE4CPPCompile) {
+	group 'Examples'
+	description 'compile Ocl Uml model example'
+	
+	projectFolder = file('.' + File.separator + 'oclUmlExample')
+	
+	inputs.files(fileTree('.') {
+        exclude 'oclUmlExample/.cmake/**'
+    })
+	if(!file('.' + File.separator + 'oclUmlExample' + File.separator + '.cmake' + File.separator).exists()) {
+		outputs.upToDateWhen { false }
+	}
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'oclUmlExample.exe')
+	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'oclUmlExampled.exe')
+		
+	// dependency to model 'uml'
+	def uml = getRootProject().getTasksByName('compileUml', true)
+	dependsOn uml
+	inputs.files(uml.outputs)
+	
+	// dependency to model 'oclParser'
+	def oclParser = getRootProject().getTasksByName('buildOclParser', true)
+	dependsOn oclParser
+	inputs.files(oclParser.outputs)
+	
+	// dependency to model 'BookStore_uml'
+	def bookstore = getRootProject().getTasksByName('buildBookStore_uml', true)
+	dependsOn bookstore
+	inputs.files(bookstore.outputs)
+}
+
+task clean {
+	doLast {
+		def cmakeFolder = file('.' + File.separator + 'oclExample' + File.separator + '.cmake')
+		if(cmakeFolder.exists()) {
+			delete cmakeFolder.absolutePath
+			println "deleting folder " + cmakeFolder.absolutePath
+		}
+		
+		def cmakeEcoreFolder = file('.' + File.separator + 'oclEcoreExample' + File.separator + '.cmake')
+		if(cmakeEcoreFolder.exists()) {
+			delete cmakeEcoreFolder.absolutePath
+			println "deleting folder " + cmakeEcoreFolder.absolutePath
+		}
+		
+		def cmakeUmlFolder = file('.' + File.separator + 'oclUmlExample' + File.separator + '.cmake')
+		if(cmakeUmlFolder.exists()) {
+			delete cmakeUmlFolder.absolutePath
+			println "deleting folder " + cmakeUmlFolder.absolutePath
+		}
+	}
+}

@@ -1,0 +1,873 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_3EwvgDUjEeuqy8jdqyFfUQ" name="Connect4">
+  <eAnnotations xmi:id="_DJdn4JBzEeug7NAL31e9OA" source="prepareApplication">
+    <details xmi:id="_G-ZSEJBzEeug7NAL31e9OA" key="activityMain" value="true"/>
+  </eAnnotations>
+  <packagedElement xmi:type="uml:Class" xmi:id="_xBiMUDUkEeuqy8jdqyFfUQ" name="GameEngine" visibility="public">
+    <ownedAttribute xmi:id="_3qlj8DUkEeuqy8jdqyFfUQ" name="state" visibility="protected">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      <defaultValue xmi:type="uml:LiteralBoolean" xmi:id="_WejiQDU3Eeuqy8jdqyFfUQ"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_NpJHIDU_Eeuqy8jdqyFfUQ" name="lastCmd" visibility="protected">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_MaDUcjVYEeuqy8jdqyFfUQ" name="currentMove" visibility="protected" type="_EMKYsDUmEeuqy8jdqyFfUQ" aggregation="shared" association="_MaBfQDVYEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MaEikDVYEeuqy8jdqyFfUQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MaEikTVYEeuqy8jdqyFfUQ" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_H2MTFDUpEeuqy8jdqyFfUQ" name="players" visibility="protected" type="_P8ucsDUmEeuqy8jdqyFfUQ" aggregation="shared" association="_H2MTEDUpEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_H2MTFTUpEeuqy8jdqyFfUQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_H2MTFjUpEeuqy8jdqyFfUQ" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_YisiFDUoEeuqy8jdqyFfUQ" name="board" visibility="protected" type="_F0-woDUmEeuqy8jdqyFfUQ" aggregation="shared" association="_YisiEDUoEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YiyosDUoEeuqy8jdqyFfUQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YiyosTUoEeuqy8jdqyFfUQ" value="1"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_EMKYsDUmEeuqy8jdqyFfUQ" name="Move" visibility="public">
+    <ownedAttribute xmi:id="_vKYj0DUsEeuqy8jdqyFfUQ" name="posX" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_N7N2oJg8Eeu6K8yG0QzIuA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_1ntzoDUsEeuqy8jdqyFfUQ" name="posY" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_Olj0IJg8Eeu6K8yG0QzIuA"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_XSvq4Jg1Eeu6K8yG0QzIuA" name="count" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      <defaultValue xmi:type="uml:LiteralInteger" xmi:id="_PJDiwJg8Eeu6K8yG0QzIuA"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_F0-woDUmEeuqy8jdqyFfUQ" name="GameBoard" visibility="public">
+    <ownedAttribute xmi:id="_jikooDUrEeuqy8jdqyFfUQ" name="width" visibility="protected">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_5j-DQDUrEeuqy8jdqyFfUQ" name="height" visibility="protected">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_O0xudDUsEeuqy8jdqyFfUQ" name="items" visibility="protected" type="_J1bHQDUmEeuqy8jdqyFfUQ" aggregation="shared" association="_O0xucDUsEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_O0xudTUsEeuqy8jdqyFfUQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_O0xudjUsEeuqy8jdqyFfUQ" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_NwWZgJgzEeu6K8yG0QzIuA" name="lastMove" visibility="protected" type="_J1bHQDUmEeuqy8jdqyFfUQ" aggregation="shared">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_NwWZgZgzEeu6K8yG0QzIuA"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_NwWZgpgzEeu6K8yG0QzIuA" value="1"/>
+    </ownedAttribute>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_6kPi8DV3Eeuqy8jdqyFfUQ" name="obResetBoard" specification="_rOXlIDV3Eeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_tmNkYJDLEeusyN9MX8Es3g" source="noExecution"/>
+      <language>CPP</language>
+      <body>    m_items = std::make_shared&lt;Bag&lt;Connect4::GameItem>>(); &#xD;
+    for(int i = 0; i &lt; m_width * m_height; i++)&#xD;
+        m_items->push_back(nullptr);</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_WaOyYDV4Eeuqy8jdqyFfUQ" name="addMove" specification="_sI1CQDV3Eeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_un8HIJDLEeusyN9MX8Es3g" source="noExecution"/>
+      <ownedParameter xmi:id="_jxaO4DV4Eeuqy8jdqyFfUQ" name="item" type="_J1bHQDUmEeuqy8jdqyFfUQ"/>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &quot;Connect4/GameItem.hpp&quot;</body>
+      <body>    if(item != nullptr) {&#xD;
+        int pos = (item->getPosY() * m_width) + item->getPosX();&#xD;
+            if(pos >= 0 &amp;&amp; (size_t)pos &lt; m_items->size()) {
+			&#xD;
+                m_items->erase(m_items->begin() + pos);
+			&#xD;
+                m_items->insert(m_items->begin() + pos, item);&#xD;
+	    }&#xD;
+    }</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_rOXlIDV3Eeuqy8jdqyFfUQ" name="resetBoard" method="_6kPi8DV3Eeuqy8jdqyFfUQ"/>
+    <ownedOperation xmi:id="_sI1CQDV3Eeuqy8jdqyFfUQ" name="addMove" method="_WaOyYDV4Eeuqy8jdqyFfUQ">
+      <ownedParameter xmi:id="_weQKYDV3Eeuqy8jdqyFfUQ" name="item" type="_J1bHQDUmEeuqy8jdqyFfUQ"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_WCwn8DYEEeut8fHQvk0ibQ" name="hasWon" isAbstract="true">
+      <ownedParameter xmi:id="_WCwn8TYEEeut8fHQvk0ibQ" name="lastMove" type="_J1bHQDUmEeuqy8jdqyFfUQ"/>
+      <ownedParameter xmi:id="_WCwn8jYEEeut8fHQvk0ibQ" name="won" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_2yBZ0DYMEeut8fHQvk0ibQ" name="print" isAbstract="true"/>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_J1bHQDUmEeuqy8jdqyFfUQ" name="GameItem" visibility="public">
+    <ownedAttribute xmi:id="_8Sj-MDUwEeuqy8jdqyFfUQ" name="id" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_Fn1rgDUxEeuqy8jdqyFfUQ" name="posX" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_Isa20DUxEeuqy8jdqyFfUQ" name="posY" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+    </ownedAttribute>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_P8ucsDUmEeuqy8jdqyFfUQ" name="Player" visibility="public">
+    <ownedAttribute xmi:id="_wFyfUDUwEeuqy8jdqyFfUQ" name="id" visibility="protected">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_zy31EDUwEeuqy8jdqyFfUQ" name="name" visibility="protected">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_Z1ftFDUwEeuqy8jdqyFfUQ" name="lastMove" visibility="protected" type="_J1bHQDUmEeuqy8jdqyFfUQ" aggregation="shared" association="_Z1ftEDUwEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Z1ftFTUwEeuqy8jdqyFfUQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Z1ftFjUwEeuqy8jdqyFfUQ" value="1"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_KmrZgDUwEeuqy8jdqyFfUQ" name="history" visibility="protected" type="_J1bHQDUmEeuqy8jdqyFfUQ" aggregation="shared" association="_KmlS4DUwEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_KmrZgTUwEeuqy8jdqyFfUQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_KmrZgjUwEeuqy8jdqyFfUQ" value="*"/>
+    </ownedAttribute>
+    <ownedAttribute xmi:id="_h4jPdDUuEeuqy8jdqyFfUQ" name="board" visibility="protected" type="_F0-woDUmEeuqy8jdqyFfUQ" aggregation="shared" association="_h4jPcDUuEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_h4jPdTUuEeuqy8jdqyFfUQ"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_h4jPdjUuEeuqy8jdqyFfUQ" value="1"/>
+    </ownedAttribute>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_mP8qsDV0Eeuqy8jdqyFfUQ" name="obApplyMove" specification="_b7mtEDV0Eeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_3CGQAJDLEeusyN9MX8Es3g" source="noExecution"/>
+      <ownedParameter xmi:id="_4NE-oDV0Eeuqy8jdqyFfUQ" name="move" type="_EMKYsDUmEeuqy8jdqyFfUQ"/>
+      <language>CPP</language>
+      <body>    m_lastMove = Connect4Factory::eInstance()->createGameItem();&#xD;
+
+    m_lastMove->setPosX(move->getPosX());&#xD;
+
+    m_lastMove->setPosY(move->getPosY());&#xD;
+
+    m_lastMove->setId(m_id);&#xD;
+
+    m_board->setLastMove(m_lastMove);&#xD;
+    m_history->add(m_lastMove);</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_0xenIDZIEeut8fHQvk0ibQ" name="obInitPlayer" specification="_jzlioDZIEeut8fHQvk0ibQ">
+      <eAnnotations xmi:id="_34CZgJDLEeusyN9MX8Es3g" source="noExecution"/>
+      <ownedParameter xmi:id="_DZxtQDZJEeut8fHQvk0ibQ" name="id">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_GA-ZADZJEeut8fHQvk0ibQ" name="name">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_JF3tYDZJEeut8fHQvk0ibQ" name="board" type="_F0-woDUmEeuqy8jdqyFfUQ"/>
+      <language>CPP</language>
+      <body>   m_id = id;&#xD;
+   m_name = name;&#xD;
+   m_board = board;&#xD;
+   m_history = std::make_shared&lt;Bag&lt;Connect4::GameItem>>();</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_4Q3RQDVaEeuqy8jdqyFfUQ" name="play" isAbstract="true">
+      <ownedParameter xmi:id="_7pvRkDVaEeuqy8jdqyFfUQ" name="move" type="_EMKYsDUmEeuqy8jdqyFfUQ" direction="return"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_b7mtEDV0Eeuqy8jdqyFfUQ" name="applyMove" method="_mP8qsDV0Eeuqy8jdqyFfUQ">
+      <ownedParameter xmi:id="_gjh6cDV0Eeuqy8jdqyFfUQ" name="move" type="_EMKYsDUmEeuqy8jdqyFfUQ"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_jzlioDZIEeut8fHQvk0ibQ" name="initPlayer" method="_0xenIDZIEeut8fHQvk0ibQ">
+      <ownedParameter xmi:id="_me-x4DZIEeut8fHQvk0ibQ" name="id">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_qtGYIDZIEeut8fHQvk0ibQ" name="name">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_uPzC0DZIEeut8fHQvk0ibQ" name="board" type="_F0-woDUmEeuqy8jdqyFfUQ"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_YisiEDUoEeuqy8jdqyFfUQ" name="gemeEngine_gameBoard" memberEnd="_YisiETUoEeuqy8jdqyFfUQ _YisiFDUoEeuqy8jdqyFfUQ">
+    <ownedEnd xmi:id="_YisiETUoEeuqy8jdqyFfUQ" name="" type="_xBiMUDUkEeuqy8jdqyFfUQ" association="_YisiEDUoEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_YisiEjUoEeuqy8jdqyFfUQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_YisiEzUoEeuqy8jdqyFfUQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_H2MTEDUpEeuqy8jdqyFfUQ" name="engine_player" memberEnd="_H2MTETUpEeuqy8jdqyFfUQ _H2MTFDUpEeuqy8jdqyFfUQ">
+    <ownedEnd xmi:id="_H2MTETUpEeuqy8jdqyFfUQ" name="" type="_xBiMUDUkEeuqy8jdqyFfUQ" association="_H2MTEDUpEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_H2MTEjUpEeuqy8jdqyFfUQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_H2MTEzUpEeuqy8jdqyFfUQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_O0xucDUsEeuqy8jdqyFfUQ" name="gameBoard_items" memberEnd="_O0xucTUsEeuqy8jdqyFfUQ _O0xudDUsEeuqy8jdqyFfUQ">
+    <ownedEnd xmi:id="_O0xucTUsEeuqy8jdqyFfUQ" name="" type="_F0-woDUmEeuqy8jdqyFfUQ" association="_O0xucDUsEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_O0xucjUsEeuqy8jdqyFfUQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_O0xuczUsEeuqy8jdqyFfUQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_h4jPcDUuEeuqy8jdqyFfUQ" name="gameBoard_player" memberEnd="_h4jPcTUuEeuqy8jdqyFfUQ _h4jPdDUuEeuqy8jdqyFfUQ">
+    <ownedEnd xmi:id="_h4jPcTUuEeuqy8jdqyFfUQ" name="" type="_P8ucsDUmEeuqy8jdqyFfUQ" association="_h4jPcDUuEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_h4jPcjUuEeuqy8jdqyFfUQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_h4jPczUuEeuqy8jdqyFfUQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_KmlS4DUwEeuqy8jdqyFfUQ" name="player_history" memberEnd="_KmlS4TUwEeuqy8jdqyFfUQ _KmrZgDUwEeuqy8jdqyFfUQ">
+    <ownedEnd xmi:id="_KmlS4TUwEeuqy8jdqyFfUQ" name="" type="_P8ucsDUmEeuqy8jdqyFfUQ" association="_KmlS4DUwEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_KmlS4jUwEeuqy8jdqyFfUQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_KmlS4zUwEeuqy8jdqyFfUQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_MaBfQDVYEeuqy8jdqyFfUQ" name="gameEnginesToMoves" memberEnd="_MaCGUDVYEeuqy8jdqyFfUQ _MaDUcjVYEeuqy8jdqyFfUQ">
+    <ownedEnd xmi:id="_MaCGUDVYEeuqy8jdqyFfUQ" name="" type="_xBiMUDUkEeuqy8jdqyFfUQ" association="_MaBfQDVYEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_MaDUcDVYEeuqy8jdqyFfUQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_MaDUcTVYEeuqy8jdqyFfUQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Association" xmi:id="_Z1ftEDUwEeuqy8jdqyFfUQ" name="player_move" memberEnd="_Z1ftETUwEeuqy8jdqyFfUQ _Z1ftFDUwEeuqy8jdqyFfUQ">
+    <ownedEnd xmi:id="_Z1ftETUwEeuqy8jdqyFfUQ" name="" type="_P8ucsDUmEeuqy8jdqyFfUQ" association="_Z1ftEDUwEeuqy8jdqyFfUQ">
+      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_Z1ftEjUwEeuqy8jdqyFfUQ" value="1"/>
+      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_Z1ftEzUwEeuqy8jdqyFfUQ" value="1"/>
+    </ownedEnd>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_FdXEYDUyEeuqy8jdqyFfUQ" name="Connect4Engine" visibility="public">
+    <generalization xmi:id="_zZx4cDVYEeuqy8jdqyFfUQ" general="_xBiMUDUkEeuqy8jdqyFfUQ"/>
+    <ownedBehavior xmi:type="uml:Activity" xmi:id="_n8PfQDY2Eeut8fHQvk0ibQ" name="actConnect4" node="_5NoukDY2Eeut8fHQvk0ibQ _AyiDYDY3Eeut8fHQvk0ibQ _IKuY8DY3Eeut8fHQvk0ibQ _OM0eQDY3Eeut8fHQvk0ibQ _wnCIUDY6Eeut8fHQvk0ibQ __6z0YDY6Eeut8fHQvk0ibQ _LcqG8DY7Eeut8fHQvk0ibQ _hQDh0DY7Eeut8fHQvk0ibQ _t4N8MDY7Eeut8fHQvk0ibQ _ihzEQDZAEeut8fHQvk0ibQ _KkR6MDZLEeut8fHQvk0ibQ _RL8KsDZLEeut8fHQvk0ibQ _dcxqMDZLEeut8fHQvk0ibQ _iML_oDZLEeut8fHQvk0ibQ _igQCIDauEeu1Q9BtzyAF7A _00JQQDauEeu1Q9BtzyAF7A _G6z6sDavEeu1Q9BtzyAF7A _yo3HoDayEeu1Q9BtzyAF7A _iJOP8DazEeu1Q9BtzyAF7A _WSmx0Da0Eeu1Q9BtzyAF7A">
+      <eAnnotations xmi:id="_PmP4sJBzEeug7NAL31e9OA" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_T6D3QJBzEeug7NAL31e9OA" key="mainActivity" value="1"/>
+      </eAnnotations>
+      <ownedParameter xmi:id="_sVpvgDY2Eeut8fHQvk0ibQ" name="parentEngine" type="_FdXEYDUyEeuqy8jdqyFfUQ"/>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_EAAE8DY3Eeut8fHQvk0ibQ" target="_AyiDYDY3Eeut8fHQvk0ibQ" source="_5NoukDY2Eeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_EAAsADY3Eeut8fHQvk0ibQ" name="Initial1_To_initialize_call_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_EABTEDY3Eeut8fHQvk0ibQ" name="Initial1_To_initialize_call_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_QE_g0DY3Eeut8fHQvk0ibQ" target="_wnCIUDY6Eeut8fHQvk0ibQ" source="_IKuY8DY3Eeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_QFAH4DY3Eeut8fHQvk0ibQ" name="print_call_To_ActivityFinal1_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_QFAH4TY3Eeut8fHQvk0ibQ" name="print_call_To_ActivityFinal1_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_Qhq48DY7Eeut8fHQvk0ibQ" target="_LcqG8DY7Eeut8fHQvk0ibQ" source="_wnCIUDY6Eeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_QhsHEDY7Eeut8fHQvk0ibQ" name="dnIsPlaying_To_select_call_guard"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_QhsuIDY7Eeut8fHQvk0ibQ" name="dnIsPlaying_To_select_call_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_oacE4DY7Eeut8fHQvk0ibQ" target="_hQDh0DY7Eeut8fHQvk0ibQ" source="_LcqG8DY7Eeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_oacr8DY7Eeut8fHQvk0ibQ" name="select_call_To_dnIsStarting_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_oadTADY7Eeut8fHQvk0ibQ" name="select_call_To_dnIsStarting_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_pZ_dYDY7Eeut8fHQvk0ibQ" target="__6z0YDY6Eeut8fHQvk0ibQ" source="_hQDh0DY7Eeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_paAEcDY7Eeut8fHQvk0ibQ" name="dnIsStarting_To_quit_call_guard"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_paArgDY7Eeut8fHQvk0ibQ" name="dnIsStarting_To_quit_call_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_xRPtgDY7Eeut8fHQvk0ibQ" target="_t4N8MDY7Eeut8fHQvk0ibQ" source="_hQDh0DY7Eeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_xRPtgTY7Eeut8fHQvk0ibQ" name="dnIsStarting_To_start_call_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_xRQUkDY7Eeut8fHQvk0ibQ" name="dnIsStarting_To_start_call_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_1bCNYDY7Eeut8fHQvk0ibQ" target="_OM0eQDY3Eeut8fHQvk0ibQ" source="__6z0YDY6Eeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_1bC0cDY7Eeut8fHQvk0ibQ" name="quit_call_To_ActivityFinal1_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_1bDbgDY7Eeut8fHQvk0ibQ" name="quit_call_To_ActivityFinal1_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_lEx-YDZAEeut8fHQvk0ibQ" target="_ihzEQDZAEeut8fHQvk0ibQ" source="_t4N8MDY7Eeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_lEylcDZAEeut8fHQvk0ibQ" name="start_call_To_mnPrint_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_lEzMgDZAEeut8fHQvk0ibQ" name="start_call_To_mnPrint_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_nGjB0DZAEeut8fHQvk0ibQ" target="_IKuY8DY3Eeut8fHQvk0ibQ" source="_ihzEQDZAEeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_nGjo4DZAEeut8fHQvk0ibQ" name="mnPrint_To_print_call_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_nGkP8DZAEeut8fHQvk0ibQ" name="mnPrint_To_print_call_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_pPpcUDZAEeut8fHQvk0ibQ" target="_ihzEQDZAEeut8fHQvk0ibQ" source="_AyiDYDY3Eeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_pPqDYDZAEeut8fHQvk0ibQ" name="initialize_call_To_mnPrint_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_pPqDYTZAEeut8fHQvk0ibQ" name="initialize_call_To_mnPrint_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_T7bPwDZLEeut8fHQvk0ibQ" target="_RL8KsDZLEeut8fHQvk0ibQ" source="_wnCIUDY6Eeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_T7b20DZLEeut8fHQvk0ibQ" name="dnIsPlaying_To_mnPlay_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_T7cd4DZLEeut8fHQvk0ibQ" name="dnIsPlaying_To_mnPlay_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_U-2boDZLEeut8fHQvk0ibQ" target="_KkR6MDZLEeut8fHQvk0ibQ" source="_RL8KsDZLEeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_U-3CsDZLEeut8fHQvk0ibQ" name="mnPlay_To_play_call_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_U-3CsTZLEeut8fHQvk0ibQ" name="mnPlay_To_play_call_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_lvfuUDZLEeut8fHQvk0ibQ" target="_dcxqMDZLEeut8fHQvk0ibQ" source="_KkR6MDZLEeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_lvgVYDZLEeut8fHQvk0ibQ" name="play_call_To_dnIsValid_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_lvhjgDZLEeut8fHQvk0ibQ" name="play_call_To_dnIsValid_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_njh3wDZLEeut8fHQvk0ibQ" target="_iML_oDZLEeut8fHQvk0ibQ" source="_dcxqMDZLEeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_njie0DZLEeut8fHQvk0ibQ" name="dnIsValid_To_printInvalid_call_guard"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_njjF4DZLEeut8fHQvk0ibQ" name="dnIsValid_To_printInvalid_call_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_qcEyMDZLEeut8fHQvk0ibQ" target="_RL8KsDZLEeut8fHQvk0ibQ" source="_iML_oDZLEeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_qcFZQDZLEeut8fHQvk0ibQ" name="printInvalid_call_To_mnPlay_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_qcGAUDZLEeut8fHQvk0ibQ" name="printInvalid_call_To_mnPlay_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_8lRDMDauEeu1Q9BtzyAF7A" target="_igQCIDauEeu1Q9BtzyAF7A" source="_00JQQDauEeu1Q9BtzyAF7A">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_8lXJ0DauEeu1Q9BtzyAF7A" name="makeMove_call_To_dnIsOver_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_8lXJ0TauEeu1Q9BtzyAF7A" name="makeMove_call_To_dnIsOver_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_UYg18DavEeu1Q9BtzyAF7A" target="_ihzEQDZAEeut8fHQvk0ibQ" source="_igQCIDauEeu1Q9BtzyAF7A">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_UYg18TavEeu1Q9BtzyAF7A" name="dnIsOver_To_mnPrint_guard"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_UYg18javEeu1Q9BtzyAF7A" name="dnIsOver_To_mnPrint_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_jA4NgDavEeu1Q9BtzyAF7A" target="_ihzEQDZAEeut8fHQvk0ibQ" source="_G6z6sDavEeu1Q9BtzyAF7A">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_jA4NgTavEeu1Q9BtzyAF7A" name="stop_call_To_mnPrint_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_jA4NgjavEeu1Q9BtzyAF7A" name="stop_call_To_mnPrint_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_H3iE0DazEeu1Q9BtzyAF7A" target="_yo3HoDayEeu1Q9BtzyAF7A" source="_dcxqMDZLEeut8fHQvk0ibQ">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_H3iE0TazEeu1Q9BtzyAF7A" name="dnIsValid_To_dnIsMoving_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_H3iE0jazEeu1Q9BtzyAF7A" name="dnIsValid_To_dnIsMoving_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_GgrxMDa0Eeu1Q9BtzyAF7A" target="_00JQQDauEeu1Q9BtzyAF7A" source="_yo3HoDayEeu1Q9BtzyAF7A">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_GgrxMTa0Eeu1Q9BtzyAF7A" name="dnIsMoving_To_makeMove_call_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_GgrxMja0Eeu1Q9BtzyAF7A" name="dnIsMoving_To_makeMove_call_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_I0UAsDa0Eeu1Q9BtzyAF7A" target="_iJOP8DazEeu1Q9BtzyAF7A" source="_yo3HoDayEeu1Q9BtzyAF7A">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_I0UAsTa0Eeu1Q9BtzyAF7A" name="dnIsMoving_To_mnStoping_guard"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_I0aHUDa0Eeu1Q9BtzyAF7A" name="dnIsMoving_To_mnStoping_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_PhOkoDa0Eeu1Q9BtzyAF7A" target="_G6z6sDavEeu1Q9BtzyAF7A" source="_iJOP8DazEeu1Q9BtzyAF7A">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_PhUrQDa0Eeu1Q9BtzyAF7A" name="mnStoping_To_stop_call_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_PhUrQTa0Eeu1Q9BtzyAF7A" name="mnStoping_To_stop_call_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_Ir7EQDa1Eeu1Q9BtzyAF7A" target="_iJOP8DazEeu1Q9BtzyAF7A" source="_WSmx0Da0Eeu1Q9BtzyAF7A">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_Ir7EQTa1Eeu1Q9BtzyAF7A" name="printWinner_call_To_mnStoping_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_Ir7EQja1Eeu1Q9BtzyAF7A" name="printWinner_call_To_mnStoping_weight"/>
+      </edge>
+      <edge xmi:type="uml:ControlFlow" xmi:id="_LPSY4Da1Eeu1Q9BtzyAF7A" target="_WSmx0Da0Eeu1Q9BtzyAF7A" source="_igQCIDauEeu1Q9BtzyAF7A">
+        <guard xmi:type="uml:LiteralBoolean" xmi:id="_LPSY4Ta1Eeu1Q9BtzyAF7A" name="dnIsOver_To_printWinner_call_guard" value="true"/>
+        <weight xmi:type="uml:LiteralInteger" xmi:id="_LPSY4ja1Eeu1Q9BtzyAF7A" name="dnIsOver_To_printWinner_call_weight"/>
+      </edge>
+      <node xmi:type="uml:InitialNode" xmi:id="_5NoukDY2Eeut8fHQvk0ibQ" name="Initial1" outgoing="_EAAE8DY3Eeut8fHQvk0ibQ"/>
+      <node xmi:type="uml:ActivityFinalNode" xmi:id="_OM0eQDY3Eeut8fHQvk0ibQ" name="ActivityFinal1" incoming="_1bCNYDY7Eeut8fHQvk0ibQ"/>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_AyiDYDY3Eeut8fHQvk0ibQ" name="initialize_call" incoming="_EAAE8DY3Eeut8fHQvk0ibQ" outgoing="_pPpcUDZAEeut8fHQvk0ibQ" operation="_QO2z4DU5Eeuqy8jdqyFfUQ">
+        <target xmi:id="_AyjRgDY3Eeut8fHQvk0ibQ" name="self" type="_FdXEYDUyEeuqy8jdqyFfUQ"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_IKuY8DY3Eeut8fHQvk0ibQ" name="print_call" incoming="_nGjB0DZAEeut8fHQvk0ibQ" outgoing="_QE_g0DY3Eeut8fHQvk0ibQ" operation="_LDjP0DU9Eeuqy8jdqyFfUQ">
+        <target xmi:id="_IKvAADY3Eeut8fHQvk0ibQ" name="self" type="_FdXEYDUyEeuqy8jdqyFfUQ"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="__6z0YDY6Eeut8fHQvk0ibQ" name="quit_call" incoming="_pZ_dYDY7Eeut8fHQvk0ibQ" outgoing="_1bCNYDY7Eeut8fHQvk0ibQ" operation="_GmEMUDVHEeuqy8jdqyFfUQ">
+        <target xmi:id="__60bcDY6Eeut8fHQvk0ibQ" name="self" type="_FdXEYDUyEeuqy8jdqyFfUQ"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_LcqG8DY7Eeut8fHQvk0ibQ" name="select_call" incoming="_Qhq48DY7Eeut8fHQvk0ibQ" outgoing="_oacE4DY7Eeut8fHQvk0ibQ" operation="_LMcmwDU1Eeuqy8jdqyFfUQ">
+        <target xmi:id="_LcquADY7Eeut8fHQvk0ibQ" name="self" type="_FdXEYDUyEeuqy8jdqyFfUQ"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_t4N8MDY7Eeut8fHQvk0ibQ" name="start_call" incoming="_xRPtgDY7Eeut8fHQvk0ibQ" outgoing="_lEx-YDZAEeut8fHQvk0ibQ" operation="_DoEKIDVHEeuqy8jdqyFfUQ">
+        <target xmi:id="_t4OjQDY7Eeut8fHQvk0ibQ" name="self" type="_FdXEYDUyEeuqy8jdqyFfUQ"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_KkR6MDZLEeut8fHQvk0ibQ" name="play_call" incoming="_U-2boDZLEeut8fHQvk0ibQ" outgoing="_lvfuUDZLEeut8fHQvk0ibQ" operation="_NTvgEDVZEeuqy8jdqyFfUQ">
+        <target xmi:id="_KkR6MTZLEeut8fHQvk0ibQ" name="self" type="_FdXEYDUyEeuqy8jdqyFfUQ"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_iML_oDZLEeut8fHQvk0ibQ" name="printInvalid_call" incoming="_njh3wDZLEeut8fHQvk0ibQ" outgoing="_qcEyMDZLEeut8fHQvk0ibQ" operation="_B8XJYDVfEeuqy8jdqyFfUQ">
+        <target xmi:id="_iMMmsDZLEeut8fHQvk0ibQ" name="self" type="_FdXEYDUyEeuqy8jdqyFfUQ"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_00JQQDauEeu1Q9BtzyAF7A" name="makeMove_call" incoming="_GgrxMDa0Eeu1Q9BtzyAF7A" outgoing="_8lRDMDauEeu1Q9BtzyAF7A" operation="_YJp1gDVgEeuqy8jdqyFfUQ">
+        <target xmi:id="_00JQQTauEeu1Q9BtzyAF7A" name="self" type="_FdXEYDUyEeuqy8jdqyFfUQ"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_G6z6sDavEeu1Q9BtzyAF7A" name="stop_call" incoming="_PhOkoDa0Eeu1Q9BtzyAF7A" outgoing="_jA4NgDavEeu1Q9BtzyAF7A" operation="_zt_L4DVuEeuqy8jdqyFfUQ">
+        <target xmi:id="_G6z6sTavEeu1Q9BtzyAF7A" name="self" type="_FdXEYDUyEeuqy8jdqyFfUQ"/>
+      </node>
+      <node xmi:type="uml:CallOperationAction" xmi:id="_WSmx0Da0Eeu1Q9BtzyAF7A" name="printWinner_call" incoming="_LPSY4Da1Eeu1Q9BtzyAF7A" outgoing="_Ir7EQDa1Eeu1Q9BtzyAF7A" operation="_UGhFUDViEeuqy8jdqyFfUQ">
+        <target xmi:id="_WSmx0Ta0Eeu1Q9BtzyAF7A" name="self" type="_FdXEYDUyEeuqy8jdqyFfUQ"/>
+      </node>
+      <node xmi:type="uml:DecisionNode" xmi:id="_wnCIUDY6Eeut8fHQvk0ibQ" name="dnIsPlaying" incoming="_QE_g0DY3Eeut8fHQvk0ibQ" outgoing="_Qhq48DY7Eeut8fHQvk0ibQ _T7bPwDZLEeut8fHQvk0ibQ" decisionInput="_coHMwDV_Eeuqy8jdqyFfUQ"/>
+      <node xmi:type="uml:DecisionNode" xmi:id="_hQDh0DY7Eeut8fHQvk0ibQ" name="dnIsStarting" incoming="_oacE4DY7Eeut8fHQvk0ibQ" outgoing="_pZ_dYDY7Eeut8fHQvk0ibQ _xRPtgDY7Eeut8fHQvk0ibQ" decisionInput="_fZyVEDV9Eeuqy8jdqyFfUQ"/>
+      <node xmi:type="uml:DecisionNode" xmi:id="_dcxqMDZLEeut8fHQvk0ibQ" name="dnIsValid" incoming="_lvfuUDZLEeut8fHQvk0ibQ" outgoing="_njh3wDZLEeut8fHQvk0ibQ _H3iE0DazEeu1Q9BtzyAF7A" decisionInput="_5Ht5YDVdEeuqy8jdqyFfUQ"/>
+      <node xmi:type="uml:DecisionNode" xmi:id="_igQCIDauEeu1Q9BtzyAF7A" name="dnIsOver" incoming="_8lRDMDauEeu1Q9BtzyAF7A" outgoing="_UYg18DavEeu1Q9BtzyAF7A _LPSY4Da1Eeu1Q9BtzyAF7A" decisionInput="_-WtJ8DVhEeuqy8jdqyFfUQ"/>
+      <node xmi:type="uml:DecisionNode" xmi:id="_yo3HoDayEeu1Q9BtzyAF7A" name="dnIsMoving" incoming="_H3iE0DazEeu1Q9BtzyAF7A" outgoing="_GgrxMDa0Eeu1Q9BtzyAF7A _I0UAsDa0Eeu1Q9BtzyAF7A" decisionInput="_8f_x4DVfEeuqy8jdqyFfUQ"/>
+      <node xmi:type="uml:MergeNode" xmi:id="_ihzEQDZAEeut8fHQvk0ibQ" name="mnPrint" incoming="_lEx-YDZAEeut8fHQvk0ibQ _pPpcUDZAEeut8fHQvk0ibQ _UYg18DavEeu1Q9BtzyAF7A _jA4NgDavEeu1Q9BtzyAF7A" outgoing="_nGjB0DZAEeut8fHQvk0ibQ"/>
+      <node xmi:type="uml:MergeNode" xmi:id="_RL8KsDZLEeut8fHQvk0ibQ" name="mnPlay" incoming="_T7bPwDZLEeut8fHQvk0ibQ _qcEyMDZLEeut8fHQvk0ibQ" outgoing="_U-2boDZLEeut8fHQvk0ibQ"/>
+      <node xmi:type="uml:MergeNode" xmi:id="_iJOP8DazEeu1Q9BtzyAF7A" name="mnStoping" incoming="_I0UAsDa0Eeu1Q9BtzyAF7A _Ir7EQDa1Eeu1Q9BtzyAF7A" outgoing="_PhOkoDa0Eeu1Q9BtzyAF7A"/>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_5Ht5YDVdEeuqy8jdqyFfUQ" name="fbIsValid" specification="_utq8YDVdEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_sSwogJQ5EeuzcfCDtdNG0w" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_sSwogZQ5EeuzcfCDtdNG0w" key="generateContextVariable" value="true"/>
+      </eAnnotations>
+      <ownedParameter xmi:id="_11NxYDVeEeuqy8jdqyFfUQ" name="valid" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <language>OCL</language>
+      <body>context Connect4Engine inv:(self.lastCmd > -1) and (self.lastCmd &lt; 8)</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_8f_x4DVfEeuqy8jdqyFfUQ" name="fbIsMoving" specification="_xjSzwDVfEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_r7y6AJQ5EeuzcfCDtdNG0w" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_r7y6AZQ5EeuzcfCDtdNG0w" key="generateContextVariable" value="true"/>
+      </eAnnotations>
+      <ownedParameter xmi:id="__KC9UDVfEeuqy8jdqyFfUQ" name="moving" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <language>OCL</language>
+      <body>context Connect4Engine inv:self.lastCmd > 0</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_fZyVEDV9Eeuqy8jdqyFfUQ" name="fbIsStarting" specification="_Wxx9cDV9Eeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_rYLPkJQ5EeuzcfCDtdNG0w" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_rYLPkZQ5EeuzcfCDtdNG0w" key="generateContextVariable" value="true"/>
+      </eAnnotations>
+      <ownedParameter xmi:id="_kwod8DV9Eeuqy8jdqyFfUQ" name="start" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <language>OCL</language>
+      <body>context Connect4Engine inv:self.lastCmd > 0</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_-WtJ8DVhEeuqy8jdqyFfUQ" name="fbIsOver" specification="_2xAj4DVhEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_q5vAEJQ5EeuzcfCDtdNG0w" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_q5vAEZQ5EeuzcfCDtdNG0w" key="generateContextVariable" value="true"/>
+      </eAnnotations>
+      <ownedParameter xmi:id="_PryWsDVzEeuqy8jdqyFfUQ" name="over" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <language>OCL</language>
+      <body>context Connect4Engine inv:self.state = false</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_coHMwDV_Eeuqy8jdqyFfUQ" name="fbIsPlaying" specification="_WGq5ADV_Eeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_CGkvkJQ5EeuzcfCDtdNG0w" source="http://sse.tu-ilmenau.de/codegen">
+        <details xmi:id="_lAJ9kJQ5EeuzcfCDtdNG0w" key="generateContextVariable" value="true"/>
+      </eAnnotations>
+      <ownedParameter xmi:id="_fw3GYDV_Eeuqy8jdqyFfUQ" name="playing" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <language>OCL</language>
+      <body>context Connect4Engine inv:self.state = true</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_O8IgYDU8Eeuqy8jdqyFfUQ" name="obInitialize" specification="_QO2z4DU5Eeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_0VHp0JByEeug7NAL31e9OA" source="noExecution"/>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &quot;Connect4/Connect4Board.hpp&quot;&#xD;
+#include &quot;Connect4/Connect4Factory.hpp&quot;</body>
+      <body>    m_players = std::make_shared&lt;Bag&lt;Connect4::Player>>();&#xD;
+    m_board = Connect4Factory::eInstance()->createConnect4Board();&#xD;
+    m_board->setWidth(7);&#xD;
+    m_board->setHeight(6);</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_K8BzEDVfEeuqy8jdqyFfUQ" name="obPrintInvalid" specification="_B8XJYDVfEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_1mi1cJByEeug7NAL31e9OA" source="noExecution"/>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &lt;iostream></body>
+      <body>    print();&#xD;
+    std::cout &lt;&lt; &quot;Wrong input!&quot; &lt;&lt; std::endl;</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_SYfm0DVuEeuqy8jdqyFfUQ" name="obPrintWinner" specification="_UGhFUDViEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_18l98JByEeug7NAL31e9OA" source="noExecution"/>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &lt;iostream>&#xD;
+#include &lt;cstdlib></body>
+      <body>    std::cout &lt;&lt; std::endl;&#xD;
+    std::cout &lt;&lt; &quot; ___________________________________________&quot; &lt;&lt; std::endl;&#xD;
+    std::cout &lt;&lt; &quot;|            CONGRATULATION                 &quot; &lt;&lt; std::endl;&#xD;
+    std::cout &lt;&lt; &quot;|            &quot; &lt;&lt; m_players->at(2)->getName() &lt;&lt; &quot; (&quot; &lt;&lt; m_players->at(2)->getId() &lt;&lt; &quot;) Won! &quot; &lt;&lt; std::endl;&#xD;
+    std::cout &lt;&lt; &quot; ------------------------------------------- &quot; &lt;&lt; std::endl;&#xD;
+    system(&quot;pause&quot;);</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_2wJ8YDVuEeuqy8jdqyFfUQ" name="obStop" specification="_zt_L4DVuEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_2KtScJByEeug7NAL31e9OA" source="noExecution"/>
+      <language>CPP</language>
+      <body>m_state = false;</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_UNDfQDVvEeuqy8jdqyFfUQ" name="obPrint" specification="_LDjP0DU9Eeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_2VSx0JByEeug7NAL31e9OA" source="noExecution"/>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &lt;iostream></body>
+      <body>    system(&quot;CLS&quot;);&#xD;
+&#xD;
+    std::cout &lt;&lt; &quot; ___________________________________________&quot; &lt;&lt; std::endl;&#xD;
+    std::cout &lt;&lt; &quot;|              CONNECT4 GAME                |&quot; &lt;&lt; std::endl;&#xD;
+    std::cout &lt;&lt; &quot; ------------------------------------------- &quot; &lt;&lt; std::endl;&#xD;
+    if(m_state) {&#xD;
+        std::cout &lt;&lt; &quot; ___________________________________________&quot; &lt;&lt; std::endl;&#xD;
+        std::cout &lt;&lt; &quot;|   Hint 1 : enter 1 to 7 for the column    |&quot; &lt;&lt; std::endl;&#xD;
+        std::cout &lt;&lt; &quot;|   Hint 2 : enter 0 to quit the game       |&quot; &lt;&lt; std::endl;&#xD;
+        std::cout &lt;&lt; &quot; ------------------------------------------- &quot; &lt;&lt; std::endl;&#xD;
+        std::cout &lt;&lt; &quot; ___________________________________________&quot; &lt;&lt; std::endl;&#xD;
+        std::cout &lt;&lt; &quot;| History &quot; + m_players->at(0)->getName() &lt;&lt; &quot; (&quot; &lt;&lt; m_players->at(0)->getId() &lt;&lt; &quot;) : &quot;;&#xD;
+        for(size_t i = 0; i &lt; m_players->at(0)->getHistory()->size(); i++) 
+			std::cout &lt;&lt; &quot; &quot; &lt;&lt; (m_players->at(0)->getHistory()->at(i)->getPosX() + 1);&#xD;
+        std::cout &lt;&lt; std::endl;&#xD;
+        std::cout &lt;&lt; &quot;| History &quot; + m_players->at(1)->getName() &lt;&lt; &quot; (&quot; &lt;&lt; m_players->at(1)->getId() &lt;&lt; &quot;) : &quot;;&#xD;
+        for(size_t i = 0; i &lt; m_players->at(1)->getHistory()->size(); i++) 
+			std::cout &lt;&lt; &quot; &quot; &lt;&lt; (m_players->at(1)->getHistory()->at(i)->getPosX() +1);&#xD;
+        std::cout &lt;&lt; std::endl;&#xD;
+        std::cout &lt;&lt; &quot; ------------------------------------------- &quot; &lt;&lt; std::endl;&#xD;
+        m_board->print();&#xD;
+    }&#xD;
+    else {&#xD;
+        std::cout &lt;&lt; &quot; ___________________________________________&quot; &lt;&lt; std::endl;&#xD;
+        std::cout &lt;&lt; &quot;|   Hint 1 : enter 1 or 2 for one/two player|&quot; &lt;&lt; std::endl;&#xD;
+        std::cout &lt;&lt; &quot;|   Hint 2 : enter 0 to quit the game       |&quot; &lt;&lt; std::endl;&#xD;
+        std::cout &lt;&lt; &quot; ------------------------------------------- &quot; &lt;&lt; std::endl;&#xD;
+    }</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_VnpYgDVwEeuqy8jdqyFfUQ" name="obSelect" specification="_LMcmwDU1Eeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_2fsD8JByEeug7NAL31e9OA" source="noExecution"/>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &lt;iostream>&#xD;
+#include &lt;cstdlib>&#xD;
+#include &lt;string></body>
+      <body>    std::string str;&#xD;
+    std::cout &lt;&lt; &quot;Enter : &quot;;&#xD;
+    std::cin >> str;&#xD;
+    char ch = str.at(0);&#xD;
+    while(ch != '0' &amp;&amp; ch != '1' &amp;&amp; ch != '2') {&#xD;
+        print();&#xD;
+        std::cout &lt;&lt; &quot;Wrong input!&quot; &lt;&lt; std::endl;&#xD;
+        std::cout &lt;&lt; &quot;Enter : &quot;;&#xD;
+        std::cin >> str;&#xD;
+        ch = str.at(0);&#xD;
+    }&#xD;
+    m_lastCmd = ch - '0';</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_uVVaQDVwEeuqy8jdqyFfUQ" name="obStart" specification="_DoEKIDVHEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_2qp90JByEeug7NAL31e9OA" source="noExecution"/>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &quot;Connect4/Connect4Factory.hpp&quot;&#xD;
+#include &quot;Connect4/Connect4Player.hpp&quot;&#xD;
+#include &quot;Connect4/Connect4AIPlayer.hpp&quot;</body>
+      <body>    m_players->clear();&#xD;
+    m_board->resetBoard();&#xD;
+&#xD;
+    std::shared_ptr&lt;Player>p1;&#xD;
+    std::shared_ptr&lt;Player>p2;&#xD;
+    &#xD;
+    if(m_lastCmd == 1) {&#xD;
+        p1 = Connect4Factory::eInstance()->createConnect4Player();
+		&#xD;
+        p1->initPlayer(&quot;@&quot;, &quot;Player&quot;, m_board);&#xD;
+        p2 = Connect4Factory::eInstance()->createConnect4AIPlayer();
+		&#xD;
+        p2->initPlayer(&quot;1&quot;, &quot;AI&quot;, m_board);&#xD;
+    }&#xD;
+    else {&#xD;
+        p1 = Connect4Factory::eInstance()->createConnect4Player();
+		&#xD;
+        p1->initPlayer(&quot;@&quot;, &quot;Player 1&quot;, m_board);&#xD;
+        p2 = Connect4Factory::eInstance()->createConnect4Player();
+		&#xD;
+        p2->initPlayer(&quot;1&quot;, &quot;Player 2&quot;, m_board);&#xD;
+    }&#xD;
+    m_players->add(p1);&#xD;
+    m_players->add(p2);&#xD;
+    m_players->add(p1); // current player&#xD;
+    m_state = true;</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_2p3m0DVxEeuqy8jdqyFfUQ" name="obQuit" specification="_GmEMUDVHEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_25V6EJByEeug7NAL31e9OA" source="noExecution"/>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &lt;cstdlib>&#xD;
+#include &lt;iostream></body>
+      <body>    std::cout&lt;&lt; std::endl &lt;&lt; &quot;Thank you for playing!&quot; &lt;&lt; std::endl;&#xD;
+    exit(1);</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_T3xEYDVyEeuqy8jdqyFfUQ" name="obPlay" specification="_NTvgEDVZEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_3FEo8JByEeug7NAL31e9OA" source="noExecution"/>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &lt;iostream></body>
+      <body>    std::cout &lt;&lt; m_players->at(2)->getName() &lt;&lt; &quot; (&quot; &lt;&lt; m_players->at(2)->getId() &lt;&lt; &quot;) : &quot;;&#xD;
+    m_currentMove = m_players->at(2)->play();&#xD;
+    m_lastCmd = m_currentMove->getPosX();</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_50ONgDVyEeuqy8jdqyFfUQ" name="obMakeMove" specification="_YJp1gDVgEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_3RFrsJByEeug7NAL31e9OA" source="noExecution"/>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &quot;Connect4/GameItem.hpp&quot;</body>
+      <body>    std::shared_ptr&lt;Player> current = m_players->at(2);&#xD;
+    m_currentMove->setPosX(m_currentMove->getPosX() - 1);&#xD;
+&#xD;
+    current->applyMove(m_currentMove);&#xD;
+    std::shared_ptr&lt;GameItem> lastMove = current->getLastMove();&#xD;
+    m_board->addMove(lastMove);&#xD;
+
+    m_players->erase(m_players->end() - 1);&#xD;
+    if(m_board->hasWon(lastMove)) {&#xD;
+        m_state = false;&#xD;
+    }&#xD;
+    else if(current == m_players->at(0))&#xD;
+        current = m_players->at(1);&#xD;
+    else&#xD;
+        current = m_players->at(0);
+	&#xD;
+
+    &#xD;
+    m_players->add(current);</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_LMcmwDU1Eeuqy8jdqyFfUQ" name="select" method="_VnpYgDVwEeuqy8jdqyFfUQ"/>
+    <ownedOperation xmi:id="_QO2z4DU5Eeuqy8jdqyFfUQ" name="initialize" method="_O8IgYDU8Eeuqy8jdqyFfUQ"/>
+    <ownedOperation xmi:id="_LDjP0DU9Eeuqy8jdqyFfUQ" name="print" method="_UNDfQDVvEeuqy8jdqyFfUQ"/>
+    <ownedOperation xmi:id="_DoEKIDVHEeuqy8jdqyFfUQ" name="start" method="_uVVaQDVwEeuqy8jdqyFfUQ"/>
+    <ownedOperation xmi:id="_GmEMUDVHEeuqy8jdqyFfUQ" name="quit" method="_2p3m0DVxEeuqy8jdqyFfUQ"/>
+    <ownedOperation xmi:id="_NTvgEDVZEeuqy8jdqyFfUQ" name="play" method="_T3xEYDVyEeuqy8jdqyFfUQ"/>
+    <ownedOperation xmi:id="_utq8YDVdEeuqy8jdqyFfUQ" name="isValid" method="_5Ht5YDVdEeuqy8jdqyFfUQ">
+      <ownedParameter xmi:id="_0d4AcDVdEeuqy8jdqyFfUQ" name="valid" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_B8XJYDVfEeuqy8jdqyFfUQ" name="printInvalid" method="_K8BzEDVfEeuqy8jdqyFfUQ"/>
+    <ownedOperation xmi:id="_xjSzwDVfEeuqy8jdqyFfUQ" name="isMoving" method="_8f_x4DVfEeuqy8jdqyFfUQ">
+      <ownedParameter xmi:id="_3JiqkDVfEeuqy8jdqyFfUQ" name="moving" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_YJp1gDVgEeuqy8jdqyFfUQ" name="makeMove" method="_50ONgDVyEeuqy8jdqyFfUQ"/>
+    <ownedOperation xmi:id="_2xAj4DVhEeuqy8jdqyFfUQ" name="isOver" method="_-WtJ8DVhEeuqy8jdqyFfUQ">
+      <ownedParameter xmi:id="_5Ac28DVhEeuqy8jdqyFfUQ" name="over" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_UGhFUDViEeuqy8jdqyFfUQ" name="printWinner" method="_SYfm0DVuEeuqy8jdqyFfUQ"/>
+    <ownedOperation xmi:id="_zt_L4DVuEeuqy8jdqyFfUQ" name="stop" method="_2wJ8YDVuEeuqy8jdqyFfUQ"/>
+    <ownedOperation xmi:id="_Wxx9cDV9Eeuqy8jdqyFfUQ" name="isStarting" method="_fZyVEDV9Eeuqy8jdqyFfUQ">
+      <ownedParameter xmi:id="_ZfuxcDV9Eeuqy8jdqyFfUQ" name="start" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_WGq5ADV_Eeuqy8jdqyFfUQ" name="isPlaying" method="_coHMwDV_Eeuqy8jdqyFfUQ">
+      <ownedParameter xmi:id="_YfcuQDV_Eeuqy8jdqyFfUQ" name="playing" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_hoCKYDUyEeuqy8jdqyFfUQ" name="Connect4Board" visibility="public">
+    <generalization xmi:id="_rplH0DUyEeuqy8jdqyFfUQ" general="_F0-woDUmEeuqy8jdqyFfUQ"/>
+    <ownedAttribute xmi:id="_t3kL0DYCEeut8fHQvk0ibQ" name="emptyItem" visibility="private">
+      <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
+      <defaultValue xmi:type="uml:LiteralString" xmi:id="_5t3rcDYCEeut8fHQvk0ibQ" value="."/>
+    </ownedAttribute>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_NYmrwDV2Eeuqy8jdqyFfUQ" name="obGetLastY" specification="_erovQDV1Eeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_AjwzgJDMEeusyN9MX8Es3g" source="noExecution"/>
+      <ownedParameter xmi:id="_PApPQDY0Eeut8fHQvk0ibQ" name="col">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_PAp2UDY0Eeut8fHQvk0ibQ" name="lastY" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>    lastY = -1;
+   &#xD;
+     if(col >= 0 &amp;&amp; col &lt; m_width) {
+        for(int i = 0; i &lt; m_height; i++) {&#xD;
+            if(m_items->at((i * m_width) + col) == nullptr)&#xD;
+                return i;&#xD;
+        }
+    &#xD;
+    }</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_eYjlwDV2Eeuqy8jdqyFfUQ" name="obPrint" specification="_g1uBMDV1Eeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_Bb6jgJDMEeusyN9MX8Es3g" source="noExecution"/>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &lt;iostream></body>
+      <body>    std::cout &lt;&lt; &quot; ___________________________________________ &quot; &lt;&lt; std::endl;&#xD;
+    std::cout &lt;&lt; &quot;|              1 2 3 4 5 6 7                |&quot; &lt;&lt; std::endl;&#xD;
+    std::cout &lt;&lt; &quot; ------------------------------------------- &quot; &lt;&lt; std::endl;&#xD;
+    for(int i = m_height - 1; i >= 0; i--) {&#xD;
+        std::cout &lt;&lt; &quot;|              &quot;;&#xD;
+        for(int j = 0; j &lt; m_width; j++) {&#xD;
+            std::shared_ptr&lt;GameItem> item = m_items->at((i * m_width) + j);&#xD;
+            if(item != nullptr)&#xD;
+                std::cout &lt;&lt; item->getId() &lt;&lt; &quot; &quot;;&#xD;
+            else&#xD;
+                std::cout &lt;&lt; m_emptyItem &lt;&lt; &quot; &quot;;&#xD;
+        }&#xD;
+        std::cout &lt;&lt; &quot;               |&quot; &lt;&lt; std::endl;&#xD;
+    }&#xD;
+    std::cout &lt;&lt; &quot; ------------------------------------------- &quot; &lt;&lt; std::endl;</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_vBoQ0DV2Eeuqy8jdqyFfUQ" name="obHasWon" specification="_hykD8DV1Eeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_CusaAJDMEeusyN9MX8Es3g" source="noExecution"/>
+      <ownedParameter xmi:id="_yNoSwDV2Eeuqy8jdqyFfUQ" name="lastMove" type="_J1bHQDUmEeuqy8jdqyFfUQ"/>
+      <ownedParameter xmi:id="_3HGjIDV2Eeuqy8jdqyFfUQ" name="won" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>    if(lastMove != nullptr) {&#xD;
+       if(maxScore(lastMove)->getCount() >= 4) return true;&#xD;
+    }</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_qws4YJg1Eeu6K8yG0QzIuA" name="obMaxCount" specification="_tbs7gJg0Eeu6K8yG0QzIuA">
+      <eAnnotations xmi:id="_qws4YZg1Eeu6K8yG0QzIuA" source="noExecution"/>
+      <ownedParameter xmi:id="_qws4Ypg1Eeu6K8yG0QzIuA" name="item" type="_J1bHQDUmEeuqy8jdqyFfUQ"/>
+      <ownedParameter xmi:id="_0HJqYJg1Eeu6K8yG0QzIuA" name="ver">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_0HKRcJg1Eeu6K8yG0QzIuA" name="hor">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_0HKRcZg1Eeu6K8yG0QzIuA" name="count" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>    if(abs(ver) > 1) ver = 0;&#xD;
+    if(abs(hor) > 1) hor = 0;&#xD;
+&#xD;
+   count = 1;&#xD;
+   for(int i = item->getPosY() + ver, j = item->getPosX() + hor; i >= 0 &amp;&amp; i &lt; m_height &amp;&amp; j >= 0 &amp;&amp; j &lt; m_width; i+=ver, j+=hor) {&#xD;
+        std::shared_ptr&lt;GameItem> it = m_items->at((i * m_width) + j);&#xD;
+        if(it != nullptr &amp;&amp; it->getId() == item->getId()) {&#xD;
+            count++;&#xD;
+            if(count >= 4)&#xD;
+                break;&#xD;
+        }&#xD;
+        else&#xD;
+            break;&#xD;
+    }&#xD;
+    for(int i = item->getPosY() - ver, j = item->getPosX() - hor; i >= 0 &amp;&amp; i &lt; m_height &amp;&amp; j >= 0 &amp;&amp; j &lt; m_width; i-=ver, j-=hor) {&#xD;
+        std::shared_ptr&lt;GameItem> it = m_items->at((i * m_width) + j);&#xD;
+        if(it != nullptr &amp;&amp; it->getId() == item->getId()) {&#xD;
+            count++;&#xD;
+            if(count >= 4)&#xD;
+                break;&#xD;
+        }&#xD;
+        else&#xD;
+            break;&#xD;
+    }</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_UhhD8Jg2Eeu6K8yG0QzIuA" name="obMaxScore" specification="_J8BhYJg1Eeu6K8yG0QzIuA">
+      <eAnnotations xmi:id="_UhhD8Zg2Eeu6K8yG0QzIuA" source="noExecution"/>
+      <ownedParameter xmi:id="_UhhD8pg2Eeu6K8yG0QzIuA" name="item" type="_J1bHQDUmEeuqy8jdqyFfUQ"/>
+      <ownedParameter xmi:id="_Zy9IYJg2Eeu6K8yG0QzIuA" name="result" type="_EMKYsDUmEeuqy8jdqyFfUQ" direction="return"/>
+      <language>CPP</language>
+      <body>      result = Connect4Factory::eInstance()->createMove();&#xD;
+    std::vector&lt;std::shared_ptr&lt;Move>> moves;&#xD;
+	std::shared_ptr&lt;Move> m1 = Connect4Factory::eInstance()->createMove();&#xD;
+	std::shared_ptr&lt;Move> m2 = Connect4Factory::eInstance()->createMove();&#xD;
+	std::shared_ptr&lt;Move> m3 = Connect4Factory::eInstance()->createMove();&#xD;
+	std::shared_ptr&lt;Move> m4 = Connect4Factory::eInstance()->createMove();&#xD;
+	&#xD;
+	m1->setPosX(0); m1->setPosY(-1); moves.push_back(m1); // vertical&#xD;
+	m2->setPosX(-1); m2->setPosY(0); moves.push_back(m2); // horizontal&#xD;
+	m3->setPosX(-1); m3->setPosY(-1); moves.push_back(m3); // first diagonal&#xD;
+	m4->setPosX(-1); m4->setPosY(1); moves.push_back(m4); // second diagonal&#xD;
+	&#xD;
+    for(std::shared_ptr&lt;Move> move : moves) {&#xD;
+        move->setCount(maxCount(item, move->getPosY(), move->getPosX()));&#xD;
+        if(move->getCount() >= 4) return move;&#xD;
+        if(result->getCount() &lt; move->getCount()) {&#xD;
+            if((move->getPosY() == -1 &amp;&amp; move->getPosX() == 0 &amp;&amp; getLastY(item->getPosX()) > (int)item->getPosY() + 1)&#xD;
+                    || (move->getPosX() == -1 &amp;&amp; getLastY(item->getPosX() + 1) == (int)item->getPosY() + 1)&#xD;
+                    || (move->getPosX() == 1 &amp;&amp; getLastY(item->getPosX() - 1) == (int)item->getPosY() + 1)) {&#xD;
+                move->setCount(0);&#xD;
+            }&#xD;
+            else {&#xD;
+                result->setPosX(move->getPosX());&#xD;
+                result->setPosY(move->getPosY());&#xD;
+                result->setCount(move->getCount());&#xD;
+            }&#xD;
+        }&#xD;
+    }</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_erovQDV1Eeuqy8jdqyFfUQ" name="getLastY" method="_NYmrwDV2Eeuqy8jdqyFfUQ">
+      <ownedParameter xmi:id="_lqO5EDV1Eeuqy8jdqyFfUQ" name="col">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_p7GRUDV1Eeuqy8jdqyFfUQ" name="lastY" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_g1uBMDV1Eeuqy8jdqyFfUQ" name="print" method="_eYjlwDV2Eeuqy8jdqyFfUQ"/>
+    <ownedOperation xmi:id="_hykD8DV1Eeuqy8jdqyFfUQ" name="hasWon" method="_vBoQ0DV2Eeuqy8jdqyFfUQ">
+      <ownedParameter xmi:id="_88mMUDV1Eeuqy8jdqyFfUQ" name="lastMove" type="_J1bHQDUmEeuqy8jdqyFfUQ"/>
+      <ownedParameter xmi:id="_CZ7-wDV2Eeuqy8jdqyFfUQ" name="won" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_tbs7gJg0Eeu6K8yG0QzIuA" name="maxCount" method="_qws4YJg1Eeu6K8yG0QzIuA">
+      <ownedParameter xmi:id="_3sz-8Jg0Eeu6K8yG0QzIuA" name="item" type="_J1bHQDUmEeuqy8jdqyFfUQ"/>
+      <ownedParameter xmi:id="__3374Jg0Eeu6K8yG0QzIuA" name="ver">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_B3H20Jg1Eeu6K8yG0QzIuA" name="hor">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <ownedParameter xmi:id="_FE9r0Jg1Eeu6K8yG0QzIuA" name="count" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_J8BhYJg1Eeu6K8yG0QzIuA" name="maxScore" method="_UhhD8Jg2Eeu6K8yG0QzIuA">
+      <ownedParameter xmi:id="_J8BhYZg1Eeu6K8yG0QzIuA" name="item" type="_J1bHQDUmEeuqy8jdqyFfUQ"/>
+      <ownedParameter xmi:id="_J8BhZJg1Eeu6K8yG0QzIuA" name="result" type="_EMKYsDUmEeuqy8jdqyFfUQ" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_6AhYMDUyEeuqy8jdqyFfUQ" name="Connect4Player" visibility="public">
+    <generalization xmi:id="_iGvDIDUzEeuqy8jdqyFfUQ" general="_P8ucsDUmEeuqy8jdqyFfUQ"/>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_Zp4-kDVzEeuqy8jdqyFfUQ" name="obPlay" specification="_yOaxMDVbEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_JEbNAJDMEeusyN9MX8Es3g" source="noExecution"/>
+      <ownedParameter xmi:id="_qrSqEDVzEeuqy8jdqyFfUQ" name="move" type="_EMKYsDUmEeuqy8jdqyFfUQ" direction="return"/>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &lt;iostream>&#xD;
+#include &lt;limits>&#xD;
+#include &quot;Connect4/Connect4Board.hpp&quot;&#xD;
+#include &quot;Connect4/Connect4Factory.hpp&quot;</body>
+      <body>    int col;&#xD;
+    std::cin >> col;&#xD;
+    if (std::cin.fail()) {&#xD;
+        std::cin.clear();&#xD;
+        std::cin.ignore(std::numeric_limits&lt;std::streamsize>::max(), '\n');&#xD;
+        col = -1;&#xD;
+    }&#xD;
+    int y = std::dynamic_pointer_cast&lt;Connect4Board>(m_board)->getLastY(col - 1);&#xD;
+    move = Connect4Factory::eInstance()->createMove();&#xD;
+    move->setPosX(col);&#xD;
+    move->setPosY(y);</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_yOaxMDVbEeuqy8jdqyFfUQ" name="play" method="_Zp4-kDVzEeuqy8jdqyFfUQ">
+      <ownedParameter xmi:id="_0uikkDVbEeuqy8jdqyFfUQ" name="move" type="_EMKYsDUmEeuqy8jdqyFfUQ" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+  <packagedElement xmi:type="uml:Class" xmi:id="_8q9lMDUyEeuqy8jdqyFfUQ" name="Connect4AIPlayer" visibility="public">
+    <generalization xmi:id="_kpbpYDUzEeuqy8jdqyFfUQ" general="_P8ucsDUmEeuqy8jdqyFfUQ"/>
+    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_1amFYDVzEeuqy8jdqyFfUQ" name="obPlay" specification="_l-lh0DVcEeuqy8jdqyFfUQ">
+      <eAnnotations xmi:id="_K3jXgJDMEeusyN9MX8Es3g" source="noExecution"/>
+      <ownedParameter xmi:id="_1amFYTVzEeuqy8jdqyFfUQ" name="move" type="_EMKYsDUmEeuqy8jdqyFfUQ" direction="return"/>
+      <language>INCLUDE</language>
+      <language>CPP</language>
+      <body>#include &lt;iostream>&#xD;
+#include &lt;thread>&#xD;
+#include &lt;chrono>&#xD;
+#include &quot;Connect4/Connect4Factory.hpp&quot;&#xD;
+#include &quot;Connect4/Connect4Board.hpp&quot;&#xD;
+</body>
+      <body>    int x = 0;&#xD;
+    int y = 1;&#xD;
+    std::shared_ptr&lt;Connect4Board> board = std::dynamic_pointer_cast&lt;Connect4Board>(m_board);&#xD;
+    std::shared_ptr&lt;GameItem> playerMove = board->getLastMove();&#xD;
+&#xD;
+   if(playerMove != nullptr &amp;&amp; m_history->size() > 0) {&#xD;
+        std::shared_ptr&lt;Move> playerMax = board->maxScore(playerMove);&#xD;
+		std::shared_ptr&lt;Move> aiMax = Connect4Factory::eInstance()->createMove();&#xD;
+        std::shared_ptr&lt;GameItem> bestMove = m_lastMove;&#xD;
+        for(size_t i = 0; i &lt; m_history->size(); i++) {&#xD;
+			std::shared_ptr&lt;GameItem> item = m_history->at(i);&#xD;
+            std::shared_ptr&lt;Move> move = board->maxScore(item);&#xD;
+            if(move->getCount() > aiMax->getCount()) {&#xD;
+                aiMax->setPosX(move->getPosX());&#xD;
+                if(move->getPosX() != 0)&#xD;
+                    aiMax->setPosY(move->getPosY());&#xD;
+                else&#xD;
+                    aiMax->setPosY(0);&#xD;
+                aiMax->setCount(move->getCount());&#xD;
+                bestMove = item;&#xD;
+            }&#xD;
+        }&#xD;
+&#xD;
+        if(aiMax->getCount() > 2 || playerMax->getCount() &lt; 3) { // if the ai is one move to win or the player is not close to win&#xD;
+            if(aiMax->getPosY() == -1) // if ai max count is vertical&#xD;
+                x = bestMove->getPosX() + 1;&#xD;
+            else if(aiMax->getPosX() == -1) // if ai max count is horizontal on left&#xD;
+                x = bestMove->getPosX() + 2;&#xD;
+            else if(aiMax->getPosX() == 1) // if ai max count is horizontal on right&#xD;
+                x = bestMove->getPosX();&#xD;
+            else&#xD;
+                x = 4;&#xD;
+            if(x &lt; 1 || x > 7) x = 0;&#xD;
+        }&#xD;
+        if(x == 0 &amp;&amp; playerMax->getCount() > 2) {&#xD;
+            if(playerMax->getPosY() == -1) // if player max count is vertical&#xD;
+                x = playerMove->getPosX() + 1;&#xD;
+            else if(playerMax->getPosX() == -1) // if player max count is horizontal on left&#xD;
+                x = playerMove->getPosX() + 2;&#xD;
+            else if(playerMax->getPosX() == 1) // if player max count is horizontal on right&#xD;
+                x = playerMove->getPosX();&#xD;
+            if(x &lt; 1 || x > 7) x = 0;&#xD;
+        }&#xD;
+    }&#xD;
+    if(x == 0) x = 4;&#xD;
+    y = board->getLastY(x - 1);&#xD;
+    if(y &lt; 0) {&#xD;
+        x = 0;&#xD;
+        while(y &lt; 0) {&#xD;
+            x++;&#xD;
+            y = board->getLastY(x - 1);&#xD;
+        }&#xD;
+    }&#xD;
+&#xD;
+    std::cout &lt;&lt; x;&#xD;
+    std::this_thread::sleep_for (std::chrono::seconds(1));&#xD;
+&#xD;
+    move = Connect4Factory::eInstance()->createMove();&#xD;
+    move->setPosX(x);&#xD;
+    move->setPosY(y);</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_l-lh0DVcEeuqy8jdqyFfUQ" name="play" method="_1amFYDVzEeuqy8jdqyFfUQ">
+      <ownedParameter xmi:id="_l-lh0TVcEeuqy8jdqyFfUQ" name="move" type="_EMKYsDUmEeuqy8jdqyFfUQ" direction="return"/>
+    </ownedOperation>
+  </packagedElement>
+</uml:Model>
