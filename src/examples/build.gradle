@@ -17,15 +17,25 @@ task generateAllExamples() {
 			prefix = ''
 		}
 	
-		[  	'./ecoreExamples/TestSuite/eInvokeTest/model/', 
+		[  	
+			'./ecoreExamples/ecoreModelExample/model/',
+			'./ecoreExamples/TestSuite/copyTest/model/', 
+			'./ecoreExamples/TestSuite/eInvokeTest/model/', 
 			'./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion/model/', 
 			'./ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnionDepth/model/', 
-			'./ecoreExamples/TestSuite/templateTest/model/', 		
-			'./ecoreExamples/ecoreModelExample/model/',
-			'./UMLExamples/UMLModelExample/model/',		
+			'./ecoreExamples/TestSuite/templateTest/model/', 
+			
 			'./fUMLExamples/Calculator/model/', 
-			'./fUMLExamples/ThreePhilosophers/model/',
-			'./PSCSExamples/Ampelsteuerung_Example/model'
+			'./fUMLExamples/ThreePhilosophers/model/', 
+			
+			'./oclExamples/oclModelExample/oclEcoreModelExample/model',
+			'./oclExamples/oclModelExample/oclFumlModelExample/model',
+			'./oclExamples/oclModelExample/oclUmlModelExample/model',
+			
+			'./PSCSExamples/Ampelsteuerung_Example/model',
+			
+			'./UMLExamples/UMLModelExample/model/'
+
 		].each { path ->
 			exec
 			{
@@ -43,20 +53,42 @@ task compileAllExamples() {
 	// common examples
 	dependsOn getRootProject().getTasksByName('compileExamplePersistence', true)
 	dependsOn getRootProject().getTasksByName('compileExamplePluginFramework', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnion', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnionDepth', true)
 	
 	// ecore examples
+		//ecoreExamples/ecoreExample
 	dependsOn getRootProject().getTasksByName('compileEcoreExample', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForLibraryModel_ecore', true)
+		//ecoreExamples/ecoreModelExample/application
+	dependsOn getRootProject().getTasksByName('compileApplicationForLibraryModel_ecore', true) 
+		//ecoreExamples/TestSuite/copyTest
+	dependsOn getRootProject().getTasksByName('compileApplicationForCopyTest', true)
+		//ecoreExamples/TestSuite/eInvokeTest
+	dependsOn getRootProject().getTasksByName('compileApplicationForEInvokeTest', true)
+		//ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnion
+	dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnion', true)
+		//ecoreExamples/TestSuite/SubsetUnionExample/SubsetUnionDepth
+	dependsOn getRootProject().getTasksByName('compileApplicationForSubsetUnionDepth', true)
+		//ecoreExamples/TestSuite/templateTest
+	//dependsOn getRootProject().getTasksByName('compileApplicationForTemplateTest', true)
+
+	// fUML examples
+		//fUMLExamples/Calculator
+	dependsOn getRootProject().getTasksByName('compileApplicationForCalcModel', true)
+		//fUMLExamples/ThreePhilosophers
+	dependsOn getRootProject().getTasksByName('compileApplicationForPhilosophers', true)
+	
+	// OCL examples
+		//oclExamples/applications/oclEcoreExample
+	dependsOn getRootProject().getTasksByName('compileOclEcoreExample', true)
+		//oclExamples/applications/oclExample
+	dependsOn getRootProject().getTasksByName('compileOclExample', true)
+		//oclExamples/applications/oclUmlExample
+	dependsOn getRootProject().getTasksByName('compileOclUmlExample', true)
+		//oclExamples/oclModelExample/oclFumlModelExample
+	dependsOn getRootProject().getTasksByName('compileApplicationForConnect4', true)
 	
 	// uml examples
 	dependsOn getRootProject().getTasksByName('compileUMLExample', true)
 	dependsOn getRootProject().getTasksByName('compileApplicationForLibraryModel_uml', true)
-	
-	// fUML examples
-	dependsOn getRootProject().getTasksByName('compileApplicationForCalcModel', true)
-	dependsOn getRootProject().getTasksByName('compileApplicationForPhilosophers', true)
 	
 	// PSCS examples
 	dependsOn getRootProject().getTasksByName('compileApplicationForAmpelsteuerung_Example', true)
@@ -69,10 +101,10 @@ task buildAllExamples() {
 	// common examples
 	dependsOn getRootProject().getTasksByName('compileExamplePersistence', true)
 	dependsOn getRootProject().getTasksByName('compileExamplePluginFramework', true)
-	dependsOn getRootProject().getTasksByName('buildSubsetUnion', true)
-	dependsOn getRootProject().getTasksByName('buildSubsetUnionDepth', true)
 	
 	// ecore examples
+	dependsOn getRootProject().getTasksByName('buildSubsetUnion', true)
+	dependsOn getRootProject().getTasksByName('buildSubsetUnionDepth', true)
 	dependsOn getRootProject().getTasksByName('compileEcoreExample', true)
 	dependsOn getRootProject().getTasksByName('buildLibraryModel_ecore', true)
 	
