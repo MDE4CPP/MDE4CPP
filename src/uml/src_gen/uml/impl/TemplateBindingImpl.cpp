@@ -343,7 +343,15 @@ Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getBoundElement().lock()); //2308
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
 		{
-			return eAny(getParameterSubstitution()); //2306			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::TemplateParameterSubstitution>::iterator iter = m_parameterSubstitution->begin();
+			Bag<uml::TemplateParameterSubstitution>::iterator end = m_parameterSubstitution->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2306			
 		}
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_SIGNATURE:
 			return eAny(getSignature()); //2307

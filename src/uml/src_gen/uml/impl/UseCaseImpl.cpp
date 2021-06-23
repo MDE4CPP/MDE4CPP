@@ -538,19 +538,51 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTEND:
 		{
-			return eAny(getExtend()); //24841			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Extend>::iterator iter = m_extend->begin();
+			Bag<uml::Extend>::iterator end = m_extend->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //24841			
 		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
 		{
-			return eAny(getExtensionPoint()); //24842			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExtensionPoint>::iterator iter = m_extensionPoint->begin();
+			Bag<uml::ExtensionPoint>::iterator end = m_extensionPoint->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //24842			
 		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_INCLUDE:
 		{
-			return eAny(getInclude()); //24843			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Include>::iterator iter = m_include->begin();
+			Bag<uml::Include>::iterator end = m_include->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //24843			
 		}
 		case uml::umlPackage::USECASE_ATTRIBUTE_SUBJECT:
 		{
-			return eAny(getSubject()); //24844			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_subject->begin();
+			Bag<uml::Classifier>::iterator end = m_subject->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //24844			
 		}
 	}
 	return BehavioredClassifierImpl::eGet(featureID, resolve, coreType);

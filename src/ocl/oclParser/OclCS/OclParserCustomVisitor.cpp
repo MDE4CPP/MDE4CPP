@@ -408,6 +408,26 @@ bool OclParserCustomVisitor::visitPropertyCallExpCS(CSTNode* ctx, std::shared_pt
         srcValue = exp->getSource()->getInstance()->getResultValue();
     }
 
+    if(isPre) {
+        std::shared_ptr<ObjectValue> objValue = std::dynamic_pointer_cast<ObjectValue>(srcValue);
+        // retrieve the context at the previous state
+        if(objValue != nullptr && !objValue->getHistory()->empty()) {
+            std::shared_ptr<LocalSnapshot> lastSnapshot = objValue->getHistory()->at(objValue->getHistory()->size() - 1);
+            for(size_t i = 0; i < objValue->getHistory()->size(); i++) {
+                std::shared_ptr<LocalSnapshot> lastSnapshot = objValue->getHistory()->at(i);
+                if(lastSnapshot->getIsPre()) {
+                    if(!lastSnapshot->getBindings()->empty()) {
+                        std::shared_ptr<fUML::Semantics::Values::Value> prevObj = lastSnapshot->getBindings()->at(0)->getValue();
+                        if(prevObj != nullptr) {
+                            srcValue = prevObj;
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
+
     std::shared_ptr<ecore::EAttribute> eatt = OclReflection::lookupProperty(eClass, simpleName);
     if(eatt != nullptr) {
         std::shared_ptr<PropertyCallExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createPropertyCallExpEval();
@@ -1887,17 +1907,7 @@ antlrcpp::Any OclParserCustomVisitor::visitPackageDeclarationCS(OclParser::Packa
                 return true;
             }
             else {
-                std::shared_ptr<VariableExp> exp = ocl::Expressions::ExpressionsFactory::eInstance()->createVariableExp();
-                std::shared_ptr<VariableExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createVariableExpEval();
-
-                expEval->setModel(exp);
-                expEval->setResultValue(var->getValue());
-
-                exp->setName(var->getName());
-                exp->setInstance(expEval);
-                exp->setReferredVariable(var);
-                exp->setEType(var->getEType());
-                ctx->setAST(exp);
+                ctx->setAST(createVariableExp(var));
             }
         }
         else {
@@ -2054,27 +2064,7 @@ antlrcpp::Any OclParserCustomVisitor::visitInvOrDefCS(OclParser::InvOrDefCSConte
         oclExpCS->setEnv(ctx->getEnv());
         oclExpCS->setErrorListener(ctx->getErrorListener());
 
-        if(visitOclExpressionCS(oclExpCS)) {
-            std::shared_ptr<OclExpression> boolExp = oclExpCS->getAST();
-            std::shared_ptr<fUML::Semantics::Values::Value> boolValue = boolExp->getInstance()->getResultValue();
-
-            if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::BooleanValue>(boolValue)) {
-                if(ctx->simpleNameCS() != nullptr) {
-                    std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
-                    std::shared_ptr<Variable> var = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
-
-                    var->setName(simpleName);
-                    var->setValue(boolValue);
-                    var->setInitExpression(boolExp);
-                    ctx->getEnv()->addElement(var->getName(), var, false);
-                }
-                ctx->setAST(boolExp);
-                return true;
-            }
-            else {
-                ctx->getErrorListener()->syntaxError("The Result of an invariant must be a boolean");
-            }
-        }
+        return visitForBoolExp(ctx, oclExpCS, ctx->simpleNameCS());
     }
     else { // define
         if(ctx->defExpressionCS()->variableDeclarationCS() != nullptr) {
@@ -2152,6 +2142,7 @@ antlrcpp::Any OclParserCustomVisitor::visitOperationCS(OclParser::OperationCSCon
     if(var != nullptr) {
         std::shared_ptr<OperationCallExp> exp = ocl::Expressions::ExpressionsFactory::eInstance()->createOperationCallExp();
         std::shared_ptr<ecore::EClass> eClass = ctx->getEnv()->getMetaClass(var->getEType());
+        exp->setSource(createVariableExp(var));
 
         if(paramCS != nullptr) {
             paramCS->setEnv(ctx->getEnv());
@@ -2196,6 +2187,17 @@ antlrcpp::Any OclParserCustomVisitor::visitOperationCS(OclParser::OperationCSCon
 
             return true;
         }
+        else {
+            std::string error = "Unrecognized operation: " + simpleName + "(";
+            for(size_t i = 0; i < exp->getArgument()->size(); i++) {
+                if(i != 0) {
+                    error += ", ";
+                }
+                error += exp->getArgument()->at(i)->getInstance()->getResultValue()->toString();
+            }
+            error += ")";
+            ctx->getErrorListener()->syntaxError(error);
+        }
     }
     else {
         ctx->getErrorListener()->syntaxError("Unknown variable ("+ simpleName +")");
@@ -2212,25 +2214,17 @@ antlrcpp::Any OclParserCustomVisitor::visitOperationContextDeclCS(OclParser::Ope
     opeCS->setErrorListener(ctx->getErrorListener());
 
     if(visitOperationCS(opeCS)) {
-        std::shared_ptr<Environment> env = ctx->getEnv()->nestedEnvironment();
         std::shared_ptr<OperationCallExp> opeExp = std::dynamic_pointer_cast<OperationCallExp>(opeCS->getAST());
         std::shared_ptr<ecore::EOperation> ope = opeExp->getReferredOperation();
-        std::shared_ptr<Variable> self = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
-
-        self->setName(Environment::SELF_VARIABLE_NAME);
-        self->setEType(ope->eClass());
-        self->setValue(OclReflection::createValue(ope));
-        env->setSelfVariable(self);
-        env->addElement(self->getName(), self, true);
 
         for(size_t i = 0; i < opeExp->getArgument()->size(); i++) {
             std::shared_ptr<VariableExp> varExp = std::dynamic_pointer_cast<VariableExp>(opeExp->getArgument()->at(i));
             std::shared_ptr<Variable> var = varExp->getReferredVariable();
-            env->addElement(var->getName(), var, true);
+            ctx->getEnv()->addElement(var->getName(), var, true);
         }
 
         ppbCS->setAST(opeExp);
-        ppbCS->setEnv(env);
+        ppbCS->setEnv(ctx->getEnv());
         ppbCS->setErrorListener(ctx->getErrorListener());
 
         if(visitPrePostOrBodyDeclCS(ppbCS)) {
@@ -2249,30 +2243,24 @@ antlrcpp::Any OclParserCustomVisitor::visitPrePostOrBodyDeclCS(OclParser::PrePos
     oclExpCS->setErrorListener(ctx->getErrorListener());
 
     if(ctx->PRE() != nullptr) {
-        if(visitOclExpressionCS(oclExpCS)) {
-            std::shared_ptr<BooleanLiteralExp> boolExp = std::dynamic_pointer_cast<BooleanLiteralExp>(oclExpCS->getAST());
-
-            if(boolExp != nullptr) {
-                if(ctx->simpleNameCS() != nullptr) {
-                    std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
-                    std::shared_ptr<Variable> var = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
-
-                    var->setName(simpleName);
-                    var->setValue(boolExp->getInstance()->getResultValue());
-                    var->setInitExpression(boolExp);
-                    ctx->getEnv()->addElement(var->getName(), var, false);
-                }
-                ctx->setAST(boolExp);
-                return true;
-            }
-            else {
-                ctx->getErrorListener()->syntaxError("The Result of a precondition must be a boolean");
-            }
-        }
+        return visitForBoolExp(ctx, oclExpCS, ctx->simpleNameCS());
     }
     else if(ctx->POST() != nullptr) {
         std::shared_ptr<OperationCallExp> opeExp = std::dynamic_pointer_cast<OperationCallExp>(ctx->getAST());
         std::shared_ptr<fUML::Semantics::Values::Value> objValue = opeExp->getInstance()->getResultValue();
+        std::shared_ptr<ObjectValue> selfValue = std::dynamic_pointer_cast<ObjectValue>(opeExp->getSource()->getInstance()->getResultValue());
+        std::shared_ptr<Variable> self = ctx->getEnv()->getSelfVariable();
+
+        // update the environment with the post context object (object after executing the operation)
+        if(selfValue != nullptr && !selfValue->getHistory()->empty()) {
+            std::shared_ptr<LocalSnapshot> lastSnapshot = selfValue->getHistory()->at(selfValue->getHistory()->size() - 1);
+            if(!lastSnapshot->getBindings()->empty()) {
+                std::shared_ptr<fUML::Semantics::Values::Value> postObj = lastSnapshot->getBindings()->at(0)->getValue();
+                if(postObj != nullptr) {
+                    self->setValue(postObj);
+                }
+            }
+        }
 
         if(objValue != nullptr && std::dynamic_pointer_cast<UndefinedValue>(objValue) == nullptr) {
             std::shared_ptr<Variable> var = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
@@ -2281,30 +2269,24 @@ antlrcpp::Any OclParserCustomVisitor::visitPrePostOrBodyDeclCS(OclParser::PrePos
             var->setValue(objValue);
             ctx->getEnv()->addElement(var->getName(), var, false);
         }
-        if(visitOclExpressionCS(oclExpCS)) {
-            std::shared_ptr<BooleanLiteralExp> boolExp = std::dynamic_pointer_cast<BooleanLiteralExp>(oclExpCS->getAST());
-
-            if(boolExp != nullptr) {
-                if(ctx->simpleNameCS() != nullptr) {
-                    std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
-                    std::shared_ptr<Variable> var = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
-
-                    var->setName(simpleName);
-                    var->setValue(boolExp->getInstance()->getResultValue());
-                    var->setInitExpression(boolExp);
-                    ctx->getEnv()->addElement(var->getName(), var, false);
-                }
-                ctx->setAST(boolExp);
-                return true;
-            }
-            else {
-                ctx->getErrorListener()->syntaxError("The Result of a postcondition must be a boolean");
-            }
-        }
+        return visitForBoolExp(ctx, oclExpCS, ctx->simpleNameCS());
     }
     else {
         if(visitOclExpressionCS(oclExpCS)) {
             std::shared_ptr<OclExpression> oclExp = oclExpCS->getAST();
+            std::shared_ptr<OperationCallExp> opeExp = std::dynamic_pointer_cast<OperationCallExp>(ctx->getAST());
+
+            /*
+            std::shared_ptr<fUML::Semantics::Values::Value> operValue = opeExp->getInstance()->getResultValue();
+            std::shared_ptr<fUML::Semantics::Values::Value> exprValue = oclExp->getInstance()->getResultValue();
+            std::shared_ptr<BooleanLiteralExp> boolExp = createBooleanLiteralExp(operValue->equals(exprValue));
+            ctx->setAST(boolExp);
+            */
+
+            if(oclExp->getEType()->getClassifierID() != opeExp->getEType()->getClassifierID()) {
+                ctx->getErrorListener()->syntaxError("The body return type must be conform to the operation type");
+                return false;
+            }
 
             if(ctx->simpleNameCS() != nullptr) {
                 std::string simpleName = ctx->simpleNameCS()->ID()->getSymbol()->getText();
@@ -2501,6 +2483,21 @@ std::shared_ptr<BooleanLiteralExp> OclParserCustomVisitor::createBooleanLiteralE
     return boolExp;
 }
 
+std::shared_ptr<VariableExp> OclParserCustomVisitor::createVariableExp(std::shared_ptr<Variable> var)
+{
+    std::shared_ptr<VariableExp> exp = ocl::Expressions::ExpressionsFactory::eInstance()->createVariableExp();
+    std::shared_ptr<VariableExpEval> expEval = ocl::Evaluations::EvaluationsFactory::eInstance()->createVariableExpEval();
+
+    expEval->setModel(exp);
+    expEval->setResultValue(var->getValue());
+
+    exp->setName(var->getName());
+    exp->setInstance(expEval);
+    exp->setReferredVariable(var);
+    exp->setEType(var->getEType());
+    return exp;
+}
+
 int OclParserCustomVisitor::retrieveInt(std::shared_ptr<fUML::Semantics::Values::Value> value)
 {
     int intValue = 0;
@@ -2513,6 +2510,32 @@ int OclParserCustomVisitor::retrieveInt(std::shared_ptr<fUML::Semantics::Values:
         intValue = left->getValue();
     }
     return intValue;
+}
+
+bool OclParserCustomVisitor::visitForBoolExp(CSTNode *ctx, OclParser::OclExpressionCSContext *oclExpCS, OclParser::SimpleNameCSContext *simpleNameCS)
+{
+    if(visitOclExpressionCS(oclExpCS)) {
+        std::shared_ptr<OclExpression> boolExp = oclExpCS->getAST();
+        std::shared_ptr<fUML::Semantics::Values::Value> boolValue = boolExp->getInstance()->getResultValue();
+
+        if(OclReflection::instanceOf<fUML::Semantics::SimpleClassifiers::BooleanValue>(boolValue)) {
+            if(simpleNameCS != nullptr) {
+                std::string simpleName = simpleNameCS->ID()->getSymbol()->getText();
+                std::shared_ptr<Variable> var = ocl::Expressions::ExpressionsFactory::eInstance()->createVariable();
+
+                var->setName(simpleName);
+                var->setValue(boolValue);
+                var->setInitExpression(boolExp);
+                ctx->getEnv()->addElement(var->getName(), var, false);
+            }
+            ctx->setAST(boolExp);
+            return true;
+        }
+        else {
+            ctx->getErrorListener()->syntaxError("The Result of an invariant must be a boolean");
+        }
+    }
+    return false;
 }
 
 string OclParserCustomVisitor::getPath(std::vector<string> path)

@@ -288,7 +288,15 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getExceptionInput()); //873
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 		{
-			return eAny(getExceptionType()); //874			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_exceptionType->begin();
+			Bag<uml::Classifier>::iterator end = m_exceptionType->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //874			
 		}
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_HANDLERBODY:
 			return eAny(getHandlerBody()); //875

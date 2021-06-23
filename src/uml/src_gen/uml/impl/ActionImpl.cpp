@@ -465,21 +465,53 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getContext()); //421
 		case uml::umlPackage::ACTION_ATTRIBUTE_INPUT:
 		{
-			return eAny(getInput()); //422			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InputPin>::iterator iter = m_input->begin();
+			Bag<uml::InputPin>::iterator end = m_input->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //422			
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_ISLOCALLYREENTRANT:
 			return eAny(getIsLocallyReentrant()); //423
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
 		{
-			return eAny(getLocalPostcondition()); //424			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = m_localPostcondition->begin();
+			Bag<uml::Constraint>::iterator end = m_localPostcondition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //424			
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
 		{
-			return eAny(getLocalPrecondition()); //425			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = m_localPrecondition->begin();
+			Bag<uml::Constraint>::iterator end = m_localPrecondition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //425			
 		}
 		case uml::umlPackage::ACTION_ATTRIBUTE_OUTPUT:
 		{
-			return eAny(getOutput()); //426			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_output->begin();
+			Bag<uml::OutputPin>::iterator end = m_output->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //426			
 		}
 	}
 	return ExecutableNodeImpl::eGet(featureID, resolve, coreType);

@@ -289,7 +289,15 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getEnd()); //1353
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 		{
-			return eAny(getQualifier()); //1354			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::QualifierValue>::iterator iter = m_qualifier->begin();
+			Bag<uml::QualifierValue>::iterator end = m_qualifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1354			
 		}
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_VALUE:
 			return eAny(getValue()); //1355

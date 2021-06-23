@@ -47,7 +47,15 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 			return eAny([struct.GetterName()/]()[if (struct.oclAsType(EReference).isBackReference())].lock()[/if]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 [else]
 		{
-			return eAny([struct.GetterName()/]()[if (struct.oclAsType(EReference).isBackReference())].lock()[/if]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator iter = m_[struct.name/]->begin();
+			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator end = m_[struct.name/]->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]			
 		}
 [/if]
 	[/for]
@@ -62,7 +70,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 	[for (sClass : EClass | eClasses)]
 	result = [ClassWithNamespace(aClass,sClass)/]Impl::eGet(featureID, resolve, coreType);
 	[if (sClass <> eClasses->last())]
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

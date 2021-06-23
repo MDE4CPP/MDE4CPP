@@ -763,57 +763,161 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(isAbstract()); //1211
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLATTRIBUTES:
 		{
-			return eAny(getEAllAttributes()); //1215			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EAttribute>::iterator iter = m_eAllAttributes->begin();
+			Bag<ecore::EAttribute>::iterator end = m_eAllAttributes->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1215			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLCONTAINMENTS:
 		{
-			return eAny(getEAllContainments()); //1219			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EReference>::iterator iter = m_eAllContainments->begin();
+			Bag<ecore::EReference>::iterator end = m_eAllContainments->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1219			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLGENERICSUPERTYPES:
 		{
-			return eAny(getEAllGenericSuperTypes()); //1226			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EGenericType>::iterator iter = m_eAllGenericSuperTypes->begin();
+			Bag<ecore::EGenericType>::iterator end = m_eAllGenericSuperTypes->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1226			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLOPERATIONS:
 		{
-			return eAny(getEAllOperations()); //1220			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EOperation>::iterator iter = m_eAllOperations->begin();
+			Bag<ecore::EOperation>::iterator end = m_eAllOperations->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1220			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLREFERENCES:
 		{
-			return eAny(getEAllReferences()); //1216			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EReference>::iterator iter = m_eAllReferences->begin();
+			Bag<ecore::EReference>::iterator end = m_eAllReferences->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1216			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLSTRUCTURALFEATURES:
 		{
-			return eAny(getEAllStructuralFeatures()); //1221			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EStructuralFeature>::iterator iter = m_eAllStructuralFeatures->begin();
+			Bag<ecore::EStructuralFeature>::iterator end = m_eAllStructuralFeatures->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1221			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLSUPERTYPES:
 		{
-			return eAny(getEAllSuperTypes()); //1222			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EClass>::iterator iter = m_eAllSuperTypes->begin();
+			Bag<ecore::EClass>::iterator end = m_eAllSuperTypes->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1222			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EATTRIBUTES:
 		{
-			return eAny(getEAttributes()); //1218			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EAttribute>::iterator iter = m_eAttributes->begin();
+			Bag<ecore::EAttribute>::iterator end = m_eAttributes->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1218			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EGENERICSUPERTYPES:
 		{
-			return eAny(getEGenericSuperTypes()); //1225			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EGenericType>::iterator iter = m_eGenericSuperTypes->begin();
+			Bag<ecore::EGenericType>::iterator end = m_eGenericSuperTypes->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1225			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EIDATTRIBUTE:
 			return eAny(getEIDAttribute()); //1223
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EOPERATIONS:
 		{
-			return eAny(getEOperations()); //1214			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EOperation>::iterator iter = m_eOperations->begin();
+			Bag<ecore::EOperation>::iterator end = m_eOperations->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1214			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EREFERENCES:
 		{
-			return eAny(getEReferences()); //1217			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EReference>::iterator iter = m_eReferences->begin();
+			Bag<ecore::EReference>::iterator end = m_eReferences->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1217			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES:
 		{
-			return eAny(getEStructuralFeatures()); //1224			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EStructuralFeature>::iterator iter = m_eStructuralFeatures->begin();
+			Bag<ecore::EStructuralFeature>::iterator end = m_eStructuralFeatures->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1224			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ESUPERTYPES:
 		{
-			return eAny(getESuperTypes()); //1213			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EClass>::iterator iter = m_eSuperTypes->begin();
+			Bag<ecore::EClass>::iterator end = m_eSuperTypes->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1213			
 		}
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_INTERFACE:
 			return eAny(isInterface()); //1212

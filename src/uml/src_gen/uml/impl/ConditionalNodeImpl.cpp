@@ -555,7 +555,15 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
 		{
-			return eAny(getClause()); //4944			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Clause>::iterator iter = m_clause->begin();
+			Bag<uml::Clause>::iterator end = m_clause->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4944			
 		}
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_ISASSURED:
 			return eAny(getIsAssured()); //4945
@@ -563,7 +571,15 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getIsDeterminate()); //4946
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
 		{
-			return eAny(getResult()); //4947			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_result->begin();
+			Bag<uml::OutputPin>::iterator end = m_result->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4947			
 		}
 	}
 	return StructuredActivityNodeImpl::eGet(featureID, resolve, coreType);

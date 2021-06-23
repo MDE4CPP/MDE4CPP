@@ -256,7 +256,15 @@ Any ConsiderIgnoreFragmentImpl::eGet(int featureID, bool resolve, bool coreType)
 	{
 		case uml::umlPackage::CONSIDERIGNOREFRAGMENT_ATTRIBUTE_MESSAGE:
 		{
-			return eAny(getMessage()); //5616			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = m_message->begin();
+			Bag<uml::NamedElement>::iterator end = m_message->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5616			
 		}
 	}
 	return CombinedFragmentImpl::eGet(featureID, resolve, coreType);

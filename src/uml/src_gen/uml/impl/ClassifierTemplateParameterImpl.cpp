@@ -257,7 +257,15 @@ Any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool core
 			return eAny(getAllowSubstitutable()); //378
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
 		{
-			return eAny(getConstrainingClassifier()); //379			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Classifier>::iterator iter = m_constrainingClassifier->begin();
+			Bag<uml::Classifier>::iterator end = m_constrainingClassifier->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //379			
 		}
 	}
 	return TemplateParameterImpl::eGet(featureID, resolve, coreType);

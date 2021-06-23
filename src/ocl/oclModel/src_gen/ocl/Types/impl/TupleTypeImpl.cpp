@@ -32,8 +32,8 @@
 
 #include <exception> // used in Persistence
 #include "ecore/EcoreFactory.hpp"
-#include "ocl/Types/TypesFactory.hpp"
 #include "ocl/Values/ValuesFactory.hpp"
+#include "ocl/Types/TypesFactory.hpp"
 
 
 #include "ecore/EAnnotation.hpp"
@@ -194,7 +194,15 @@ Any TupleTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getInstance()); //889
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
 		{
-			return eAny(getParts()); //8810			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Types::NameTypeBinding>::iterator iter = m_parts->begin();
+			Bag<ocl::Types::NameTypeBinding>::iterator end = m_parts->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //8810			
 		}
 	}
 	return ecore::EDataTypeImpl::eGet(featureID, resolve, coreType);

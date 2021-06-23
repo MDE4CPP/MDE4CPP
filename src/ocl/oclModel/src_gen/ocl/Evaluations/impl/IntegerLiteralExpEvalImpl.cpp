@@ -33,9 +33,9 @@
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "uml/UmlFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "uml/UmlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -157,7 +157,7 @@ Any IntegerLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) 
 	}
 	Any result;
 	result = fUML::Semantics::Values::LiteralIntegerEvaluationImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

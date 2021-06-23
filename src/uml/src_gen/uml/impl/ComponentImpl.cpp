@@ -584,19 +584,51 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getIsIndirectlyInstantiated()); //4752
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
 		{
-			return eAny(getPackagedElement()); //4753			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PackageableElement>::iterator iter = m_packagedElement->begin();
+			Bag<uml::PackageableElement>::iterator end = m_packagedElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4753			
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PROVIDED:
 		{
-			return eAny(getProvided()); //4754			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Interface>::iterator iter = m_provided->begin();
+			Bag<uml::Interface>::iterator end = m_provided->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4754			
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
 		{
-			return eAny(getRealization()); //4755			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ComponentRealization>::iterator iter = m_realization->begin();
+			Bag<uml::ComponentRealization>::iterator end = m_realization->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4755			
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REQUIRED:
 		{
-			return eAny(getRequired()); //4756			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Interface>::iterator iter = m_required->begin();
+			Bag<uml::Interface>::iterator end = m_required->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4756			
 		}
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);

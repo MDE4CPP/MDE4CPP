@@ -305,7 +305,15 @@ Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getEContainer().lock()); //391
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
 		{
-			return eAny(getEContens()); //390			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EObject>::iterator iter = m_eContens->begin();
+			Bag<ecore::EObject>::iterator end = m_eContens->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //390			
 		}
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_METAELEMENTID:
 			return eAny(getMetaElementID()); //392

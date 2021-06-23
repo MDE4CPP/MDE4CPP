@@ -119,12 +119,12 @@ std::shared_ptr<ecore::EOperation> OclReflection::lookupOperation(std::shared_pt
     for (Bag<ecore::EOperation>::const_iterator it_operation = ecore_operations->begin();
          it_operation != endIt_operation; ++it_operation)
     {
-        if ((*it_operation)->getName() == name && (*it_operation)->getETypeParameters()->size() == arguments->size()) {
-            for(size_t i = 0; i < (*it_operation)->getETypeParameters()->size(); i++) {
-                std::shared_ptr<ecore::ETypeParameter> p = (*it_operation)->getETypeParameters()->at(i);
+        //std::cout << (*it_operation)->getName() << std::endl;
+        if ((*it_operation)->getName() == name && (*it_operation)->getEParameters()->size() == arguments->size()) {
+            for(size_t i = 0; i < (*it_operation)->getEParameters()->size(); i++) {
+                std::shared_ptr<ecore::EParameter> p = (*it_operation)->getEParameters()->at(i);
                 std::shared_ptr<OclExpression> e = arguments->at(i);
-
-                if(p->eClass()->getClassifierID() != e->getEType()->eClass()->getClassifierID()) {
+                if(p->getEType()->getClassifierID() != e->getEType()->getClassifierID()) {
                     return nullptr; // different parameter
                 }
             }
@@ -345,12 +345,44 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclReflection::createValue(std::
     else if(instanceOf<ObjectValue>(fromValue)) {
         std::shared_ptr<ObjectValue> objValue = std::dynamic_pointer_cast<ObjectValue>(fromValue);
         std::shared_ptr<ecore::EObject> obj = objValue->getValue();
-        Bag<Any> convertArgs;
+        std::shared_ptr<std::list<std::shared_ptr<Any>>> convertArgs = std::make_shared<std::list<std::shared_ptr<Any>>>();
+
+        // create the pre value snapshot
+        // copy object to avoid modifying the given context
+        std::shared_ptr<ecore::EObject> preObj = obj->copy();
+        std::shared_ptr<ObjectValue> preValue = std::dynamic_pointer_cast<ObjectValue>(createValue(preObj));
+        std::shared_ptr<NameValueBinding> nvbPre = ocl::Values::ValuesFactory::eInstance()->createNameValueBinding();
+        std::shared_ptr<LocalSnapshot> localSnapshotPre = ocl::Values::ValuesFactory::eInstance()->createLocalSnapshot();
+        nvbPre->setName("pre");
+        nvbPre->setValue(preValue);
+        localSnapshotPre->setIsPre(true);
+        localSnapshotPre->getBindings()->add(nvbPre);
+
+        // create the post value snapshot
+        std::shared_ptr<ecore::EObject> postObj = obj->copy();
+        std::shared_ptr<ObjectValue> postValue = std::dynamic_pointer_cast<ObjectValue>(createValue(postObj));
+        std::shared_ptr<NameValueBinding> nvbPost = ocl::Values::ValuesFactory::eInstance()->createNameValueBinding();
+        std::shared_ptr<LocalSnapshot> localSnapshotPost = ocl::Values::ValuesFactory::eInstance()->createLocalSnapshot();
+        nvbPost->setName("post");
+        nvbPost->setValue(postValue);
+        localSnapshotPost->setIsPost(true);
+        localSnapshotPost->getBindings()->add(nvbPost);
+
+        localSnapshotPre->setSucc(localSnapshotPost);
+        localSnapshotPost->setPred(localSnapshotPre);
+        objValue->getHistory()->add(localSnapshotPre);
+        objValue->getHistory()->add(localSnapshotPost);
+        postValue->getHistory()->add(localSnapshotPre);
+        postValue->getHistory()->add(localSnapshotPost);
+        preValue->getHistory()->add(localSnapshotPre);
+        preValue->getHistory()->add(localSnapshotPost);
 
         for(size_t i = 0; i < arguments->size(); i++) {
             Any item = retrieveRawValue(arguments->at(i)->getInstance()->getResultValue());
+            std::shared_ptr<Any> item_ptr = std::make_shared<Any>(item);
+            convertArgs->push_back(item_ptr);
         }
-        std::shared_ptr<AnyObject> value = nullptr; //obj->eInvoke(operation, convertArgs);
+        std::shared_ptr<AnyObject> value = postObj->eInvoke(operation, convertArgs);
 
         return OclReflection::createValue(operation, value);
     }
@@ -441,22 +473,26 @@ std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr
             for (Bag<uml::Operation>::const_iterator it_operation = uml_operations->begin();
                  it_operation != endIt_operation; ++it_operation)
             {
-                std::shared_ptr<ecore::EOperation> op = ecore::ecoreFactory::eInstance()->createEOperation_in_EContainingClass(eclass, (*it_operation)->getMetaElementID());
-                std::string name = (*it_operation)->getName();
-                std::shared_ptr<ecore::EClassifier> propType = createClassifier(epackage, (*it_operation)->getType());
+                std::shared_ptr<uml::Operation> currentOp = *it_operation;
+                std::shared_ptr<ecore::EOperation> op = ecore::ecoreFactory::eInstance()->createEOperation_in_EContainingClass(eclass, currentOp->getMetaElementID());
+                std::string name = currentOp->getName();
+                std::shared_ptr<ecore::EClassifier> propType = createClassifier(epackage, currentOp->getType());
                 op->setName(name);
                 if(propType != nullptr) {
                     op->setEType(propType);
                 }
                 //std::cout << name << std::endl;
-                for(size_t i = 0; i < (*it_operation)->getOwnedParameter()->size(); i++) {
-                    std::shared_ptr<uml::Parameter> p = (*it_operation)->getOwnedParameter()->at(i);
-                    std::shared_ptr<ecore::EParameter> param = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(op, p->getMetaElementID());
-                    std::shared_ptr<ecore::EClassifier> propType = createClassifier(epackage, p->getType());
-                    param->setEType(propType);
-                    param->setName(p->getName());
-                    param->setUpperBound(p->getUpper());
-                    param->setLowerBound(p->getLower());
+                std::shared_ptr<Bag<uml::Parameter>> currentParams = std::dynamic_pointer_cast<Bag<uml::Parameter>>(currentOp->getOwnedParameter());
+                for(size_t j = 0; j < currentParams->size(); j++) {
+                    std::shared_ptr<uml::Parameter> p = currentParams->at(j);
+                    if(p->getDirection() != uml::ParameterDirectionKind::RETURN) {
+                        std::shared_ptr<ecore::EParameter> param = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(op, p->getMetaElementID());
+                        std::shared_ptr<ecore::EClassifier> currentPropType = createClassifier(epackage, p->getType());
+                        param->setEType(currentPropType);
+                        param->setName(p->getName());
+                        param->setUpperBound(p->getUpper());
+                        param->setLowerBound(p->getLower());
+                    }
                 }
             }
         }

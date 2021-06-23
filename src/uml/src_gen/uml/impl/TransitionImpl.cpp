@@ -516,12 +516,20 @@ Any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getTarget()); //24123
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
 		{
-			return eAny(getTrigger()); //24124			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Trigger>::iterator iter = m_trigger->begin();
+			Bag<uml::Trigger>::iterator end = m_trigger->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //24124			
 		}
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

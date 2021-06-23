@@ -232,7 +232,15 @@ Any EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
 		{
-			return eAny(getEAnnotations()); //373			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EAnnotation>::iterator iter = m_eAnnotations->begin();
+			Bag<ecore::EAnnotation>::iterator end = m_eAnnotations->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //373			
 		}
 	}
 	return EObjectImpl::eGet(featureID, resolve, coreType);

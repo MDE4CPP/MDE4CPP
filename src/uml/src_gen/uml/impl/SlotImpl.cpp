@@ -273,7 +273,15 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getOwningInstance().lock()); //2175
 		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
 		{
-			return eAny(getValue()); //2174			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ValueSpecification>::iterator iter = m_value->begin();
+			Bag<uml::ValueSpecification>::iterator end = m_value->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2174			
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);

@@ -296,25 +296,65 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
 		{
-			return eAny(getBody()); //383			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExecutableNode>::iterator iter = m_body->begin();
+			Bag<uml::ExecutableNode>::iterator end = m_body->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //383			
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
 		{
-			return eAny(getBodyOutput()); //384			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_bodyOutput->begin();
+			Bag<uml::OutputPin>::iterator end = m_bodyOutput->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //384			
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_DECIDER:
 			return eAny(getDecider()); //385
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 		{
-			return eAny(getPredecessorClause()); //386			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Clause>::iterator iter = m_predecessorClause->begin();
+			Bag<uml::Clause>::iterator end = m_predecessorClause->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //386			
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
 		{
-			return eAny(getSuccessorClause()); //387			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Clause>::iterator iter = m_successorClause->begin();
+			Bag<uml::Clause>::iterator end = m_successorClause->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //387			
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
 		{
-			return eAny(getTest()); //388			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ExecutableNode>::iterator iter = m_test->begin();
+			Bag<uml::ExecutableNode>::iterator end = m_test->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //388			
 		}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);

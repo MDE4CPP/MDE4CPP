@@ -528,27 +528,75 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
 		{
-			return eAny(getElementImport()); //15610			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ElementImport>::iterator iter = m_elementImport->begin();
+			Bag<uml::ElementImport>::iterator end = m_elementImport->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //15610			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
 		{
-			return eAny(getImportedMember()); //15613			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PackageableElement>::iterator iter = m_importedMember->begin();
+			Bag<uml::PackageableElement>::iterator end = m_importedMember->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //15613			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
 		{
-			return eAny(getMember()); //15614			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = m_member->begin();
+			Bag<uml::NamedElement>::iterator end = m_member->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //15614			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
 		{
-			return eAny(getOwnedMember()); //15612			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::NamedElement>::iterator iter = m_ownedMember->begin();
+			Bag<uml::NamedElement>::iterator end = m_ownedMember->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //15612			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
 		{
-			return eAny(getOwnedRule()); //1569			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Constraint>::iterator iter = m_ownedRule->begin();
+			Bag<uml::Constraint>::iterator end = m_ownedRule->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1569			
 		}
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
 		{
-			return eAny(getPackageImport()); //15611			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PackageImport>::iterator iter = m_packageImport->begin();
+			Bag<uml::PackageImport>::iterator end = m_packageImport->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //15611			
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);

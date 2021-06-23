@@ -549,15 +549,39 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getProtocol()); //18147
 		case uml::umlPackage::PORT_ATTRIBUTE_PROVIDED:
 		{
-			return eAny(getProvided()); //18148			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Interface>::iterator iter = m_provided->begin();
+			Bag<uml::Interface>::iterator end = m_provided->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18148			
 		}
 		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
 		{
-			return eAny(getRedefinedPort()); //18149			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Port>::iterator iter = m_redefinedPort->begin();
+			Bag<uml::Port>::iterator end = m_redefinedPort->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18149			
 		}
 		case uml::umlPackage::PORT_ATTRIBUTE_REQUIRED:
 		{
-			return eAny(getRequired()); //18150			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Interface>::iterator iter = m_required->begin();
+			Bag<uml::Interface>::iterator end = m_required->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //18150			
 		}
 	}
 	return PropertyImpl::eGet(featureID, resolve, coreType);

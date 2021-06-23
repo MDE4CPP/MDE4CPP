@@ -416,7 +416,15 @@ Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
 		{
-			return eAny(getArgument()); //1479			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ValueSpecification>::iterator iter = m_argument->begin();
+			Bag<uml::ValueSpecification>::iterator end = m_argument->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //1479			
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
 			return eAny(getConnector()); //14710

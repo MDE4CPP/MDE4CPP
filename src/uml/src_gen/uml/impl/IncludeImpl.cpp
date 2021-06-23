@@ -303,7 +303,7 @@ Any IncludeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	Any result;
 	result = DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

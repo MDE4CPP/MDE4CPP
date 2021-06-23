@@ -409,11 +409,27 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 		{
-			return eAny(getEndData()); //13327			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::LinkEndData>::iterator iter = m_endData->begin();
+			Bag<uml::LinkEndData>::iterator end = m_endData->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //13327			
 		}
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 		{
-			return eAny(getInputValue()); //13328			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
+			Bag<uml::InputPin>::iterator end = m_inputValue->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //13328			
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);

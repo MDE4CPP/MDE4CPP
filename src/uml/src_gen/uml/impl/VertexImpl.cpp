@@ -294,11 +294,27 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getContainer().lock()); //2549
 		case uml::umlPackage::VERTEX_ATTRIBUTE_INCOMING:
 		{
-			return eAny(getIncoming()); //25410			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Transition>::iterator iter = m_incoming->begin();
+			Bag<uml::Transition>::iterator end = m_incoming->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //25410			
 		}
 		case uml::umlPackage::VERTEX_ATTRIBUTE_OUTGOING:
 		{
-			return eAny(getOutgoing()); //25411			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Transition>::iterator iter = m_outgoing->begin();
+			Bag<uml::Transition>::iterator end = m_outgoing->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //25411			
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);

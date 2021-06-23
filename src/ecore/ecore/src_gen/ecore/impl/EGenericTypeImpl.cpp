@@ -273,7 +273,15 @@ Any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getERawType()); //282
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
 		{
-			return eAny(getETypeArguments()); //281			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EGenericType>::iterator iter = m_eTypeArguments->begin();
+			Bag<ecore::EGenericType>::iterator end = m_eTypeArguments->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //281			
 		}
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEPARAMETER:
 			return eAny(getETypeParameter()); //284

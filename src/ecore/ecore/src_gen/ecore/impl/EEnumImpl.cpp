@@ -279,7 +279,15 @@ Any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ecore::ecorePackage::EENUM_ATTRIBUTE_ELITERALS:
 		{
-			return eAny(getELiterals()); //2012			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EEnumLiteral>::iterator iter = m_eLiterals->begin();
+			Bag<ecore::EEnumLiteral>::iterator end = m_eLiterals->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //2012			
 		}
 	}
 	return EDataTypeImpl::eGet(featureID, resolve, coreType);

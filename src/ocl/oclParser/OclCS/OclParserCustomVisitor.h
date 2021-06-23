@@ -118,7 +118,9 @@ private:
     std::shared_ptr<OclExpression> plusAndMinus(OclParser::OclExpressionCSContext* expr1, OclParser::OclExpressionCSContext* expr2, bool isPlus);
     std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> doOperation(OclParser::BinaryLiteralExpCSContext* binCS, double left, double right);
     std::shared_ptr<BooleanLiteralExp> createBooleanLiteralExp(bool value);
+    std::shared_ptr<VariableExp> createVariableExp(std::shared_ptr<Variable> var);
     int retrieveInt(std::shared_ptr<fUML::Semantics::Values::Value> value);
+    bool visitForBoolExp(CSTNode *ctx, OclParser::OclExpressionCSContext *oclExpCS, OclParser::SimpleNameCSContext *simpleNameCS);
     bool visitOperationCallExpCS(CSTNode* ctx, std::shared_ptr<OperationCallExp> exp, std::string simpleName, bool isImplicit);
     bool visitPropertyCallExpCS(CSTNode* ctx, std::shared_ptr<PropertyCallExp> exp, std::string simpleName, bool isPre, bool isImplicit);
     bool visitAssociationCallExpCS(CSTNode *ctx, OclParser::ArgumentsCSContext *argCS, std::shared_ptr<AssociationClassCallExp> exp,

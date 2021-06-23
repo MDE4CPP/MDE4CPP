@@ -232,7 +232,15 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getEvent()); //2439
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
-			return eAny(getPort()); //24310			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Port>::iterator iter = m_port->begin();
+			Bag<uml::Port>::iterator end = m_port->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //24310			
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);

@@ -33,8 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "uml/UmlFactory.hpp"
+#include "fUML/Semantics/Values/ValuesFactory.hpp"
 
 
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
@@ -42,8 +42,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/fUMLPackage.hpp"
+#include "fUML/Semantics/SemanticsPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"
@@ -298,7 +298,15 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getPosition()); //551
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
 		{
-			return eAny(getValues()); //550			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<fUML::Semantics::Values::Value>::iterator iter = m_values->begin();
+			Bag<fUML::Semantics::Values::Value>::iterator end = m_values->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //550			
 		}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);

@@ -267,11 +267,27 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
 		{
-			return eAny(getDeployedElement()); //719			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::PackageableElement>::iterator iter = m_deployedElement->begin();
+			Bag<uml::PackageableElement>::iterator end = m_deployedElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //719			
 		}
 		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
 		{
-			return eAny(getDeployment()); //7110			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Deployment>::iterator iter = m_deployment->begin();
+			Bag<uml::Deployment>::iterator end = m_deployment->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //7110			
 		}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);

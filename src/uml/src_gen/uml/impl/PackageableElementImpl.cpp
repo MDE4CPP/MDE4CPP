@@ -248,7 +248,7 @@ Any PackageableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 	}
 	Any result;
 	result = NamedElementImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

@@ -275,7 +275,15 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(isContainment()); //4322
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
-			return eAny(getEKeys()); //4327			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ecore::EAttribute>::iterator iter = m_eKeys->begin();
+			Bag<ecore::EAttribute>::iterator end = m_eKeys->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //4327			
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
 			return eAny(getEOpposite()); //4325

@@ -416,7 +416,15 @@ Any UnmarshallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getObject()); //24627
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_RESULT:
 		{
-			return eAny(getResult()); //24628			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_result->begin();
+			Bag<uml::OutputPin>::iterator end = m_result->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //24628			
 		}
 		case uml::umlPackage::UNMARSHALLACTION_ATTRIBUTE_UNMARSHALLTYPE:
 			return eAny(getUnmarshallType()); //24629

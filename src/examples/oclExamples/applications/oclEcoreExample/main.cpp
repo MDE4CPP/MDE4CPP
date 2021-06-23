@@ -20,6 +20,7 @@
 #include <BookStore_ecore/BookStore_ecoreFactory.hpp>
 #include <BookStore_ecore/BookStore_ecorePackage.hpp>
 #include <BookStore_ecore/Library.hpp>
+#include <BookStore_ecore/Book.hpp>
 
 void query1();
 void query2();
@@ -42,6 +43,11 @@ void validate3();
 void validate4();
 void validate5();
 void validate6();
+void validate7();
+void validate8();
+void validate9();
+void validate10();
+void validate11();
 
 void validate( std::shared_ptr<ecore::EObject> context, const std::string& query);
 void query(std::shared_ptr<ecore::EObject> context, const std::string& query);
@@ -80,6 +86,11 @@ int main()
    validate4();
    validate5();
    validate6();
+   validate7();
+   validate8();
+   validate9();
+   validate10();
+   validate11();
 
 	pause();
 
@@ -276,14 +287,69 @@ void validate5() {
 }
 void validate6() {
     std::string qry = "\npackage BookStore_ecore \n"
-                      "context Library::getBooks() : Integer \n"
-                      "body: self.nbBooks \n"
+                      "context Book::countCopies() : Integer \n"
+                      "body: self.copies \n"
                       "endpackage \n";
-    std::shared_ptr<BookStore_ecore::Library> context = BookStore_ecore::BookStore_ecoreFactory::eInstance()->createLibrary();
-    context->setNbBooks(5);
-    std::cout << "START Validate_6(nbBooks = 5) : " << qry << std::endl;
+    std::shared_ptr<BookStore_ecore::Book> context = BookStore_ecore::BookStore_ecoreFactory::eInstance()->createBook();
+    context->setCopies(5);
+    std::cout << "START Validate_6(copies = 5) : " << qry << std::endl;
     validate(context, qry);
     std::cout << "END Validate_6 -------------------------------------------\n" << std::endl;
+}
+
+void validate7() {
+    std::string qry = "\npackage BookStore_ecore \n"
+                      "context Book::addCopies(nbCopies:Integer=2): \n"
+                      "pre: nbCopies > 0 \n"
+                      "endpackage \n";
+    std::shared_ptr<BookStore_ecore::Book> context = BookStore_ecore::BookStore_ecoreFactory::eInstance()->createBook();
+    std::cout << "START Validate_7(addCopy(2)) : " << qry << std::endl;
+    validate(context, qry);
+    std::cout << "END Validate_7 -------------------------------------------\n" << std::endl;
+}
+
+void validate8() {
+    std::string qry = "\npackage BookStore_ecore \n"
+                      "context Book::addCopies(nbCopies:Integer=2): \n"
+                      "post: self.copies = 2 \n"
+                      "endpackage \n";
+    std::shared_ptr<BookStore_ecore::Book> context = BookStore_ecore::BookStore_ecoreFactory::eInstance()->createBook();
+    std::cout << "START Validate_8(addCopy(2)) : " << qry << std::endl;
+    validate(context, qry);
+    std::cout << "END Validate_8 -------------------------------------------\n" << std::endl;
+}
+
+void validate9() {
+    std::string qry = "\npackage BookStore_ecore \n"
+                      "context Library::open(): \n"
+                      "pre: self.opened = false \n"
+                      "endpackage \n";
+    std::shared_ptr<BookStore_ecore::Library> context = BookStore_ecore::BookStore_ecoreFactory::eInstance()->createLibrary();
+    context->setOpened(false);
+    std::cout << "START Validate_9(open()) : " << qry << std::endl;
+    validate(context, qry);
+    std::cout << "END Validate_9 -------------------------------------------\n" << std::endl;
+}
+
+void validate10() {
+    std::string qry = "context Library::open(): \n"
+                      "post: self.opened = true";
+    std::shared_ptr<BookStore_ecore::Library> context = BookStore_ecore::BookStore_ecoreFactory::eInstance()->createLibrary();
+    context->setOpened(false);
+    std::cout << "START Validate_10(open()) : " << qry << std::endl;
+    validate(context, qry);
+    std::cout << "END Validate_10 -------------------------------------------\n" << std::endl;
+}
+
+void validate11() {
+    std::string qry = "\npackage BookStore_ecore \n"
+                      "context Book::addCopies(nbCopies:Integer=2): \n"
+                      "post: copies = copies@pre + nbCopies \n"
+                      "endpackage \n";
+    std::shared_ptr<BookStore_ecore::Book> context = BookStore_ecore::BookStore_ecoreFactory::eInstance()->createBook();
+    std::cout << "START Validate_11(addCopies(2)) : " << qry << std::endl;
+    validate(context, qry);
+    std::cout << "END Validate_11 -------------------------------------------\n" << std::endl;
 }
 
 void validate(std::shared_ptr<ecore::EObject> context,const std::string& query) {
@@ -439,6 +505,8 @@ void printEOperation(std::shared_ptr<ecore::EOperation> eope) {
                 result += "[Not set in Model]";
         }
         result += ")";
+        if(eope->getEType() != nullptr && eope->getEType()->getName() != "invalid")
+            result += " : " + eope->getEType()->getName();
         std::cout << result << std::endl;
     }
 }

@@ -403,7 +403,15 @@ Any SignalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			return eAny(getOwnedAttribute()); //21538			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
+			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //21538			
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);

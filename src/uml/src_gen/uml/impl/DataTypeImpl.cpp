@@ -463,11 +463,27 @@ Any DataTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
-			return eAny(getOwnedAttribute()); //6538			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
+			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //6538			
 		}
 		case uml::umlPackage::DATATYPE_ATTRIBUTE_OWNEDOPERATION:
 		{
-			return eAny(getOwnedOperation()); //6539			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
+			Bag<uml::Operation>::iterator end = m_ownedOperation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //6539			
 		}
 	}
 	return ClassifierImpl::eGet(featureID, resolve, coreType);

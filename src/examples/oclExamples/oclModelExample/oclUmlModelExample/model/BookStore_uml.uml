@@ -23,6 +23,24 @@
     <ownedAttribute xmi:id="_k9BqQCRdEeuGRKch_h_VTg" name="name">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#String"/>
     </ownedAttribute>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_9gRy4M8dEeul1pIblBCjIA" name="fbOpen" specification="_hmGKMMkuEeuSte8oTwAAqA">
+      <eAnnotations xmi:id="_9gRy4c8dEeul1pIblBCjIA" source="noExecution"/>
+      <language>CPP</language>
+      <body>    this->setOpened(true);</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_aDvMUM8eEeul1pIblBCjIA" name="fbClose" specification="_qvk3MMkuEeuSte8oTwAAqA">
+      <eAnnotations xmi:id="_aDvMUc8eEeul1pIblBCjIA" source="noExecution"/>
+      <language>CPP</language>
+      <body>    this->setOpened(false);</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_cauR0M8eEeul1pIblBCjIA" name="fbClosed" specification="_y8yJMMkuEeuSte8oTwAAqA">
+      <eAnnotations xmi:id="_cauR0c8eEeul1pIblBCjIA" source="noExecution"/>
+      <ownedParameter xmi:id="_AtoqQM8fEeul1pIblBCjIA" name="opened" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>    opened = !this->isOpened();</body>
+    </ownedBehavior>
     <ownedOperation xmi:id="_OfqsYCRdEeuGRKch_h_VTg" name="addMember">
       <ownedParameter xmi:id="_Q2968CRdEeuGRKch_h_VTg" name="m" type="_woRQwCRaEeuGRKch_h_VTg"/>
     </ownedOperation>
@@ -31,6 +49,13 @@
     </ownedOperation>
     <ownedOperation xmi:id="_YqOb4CRdEeuGRKch_h_VTg" name="addLoan">
       <ownedParameter xmi:id="_YqPC8CRdEeuGRKch_h_VTg" name="l" type="_4cv5sCRaEeuGRKch_h_VTg"/>
+    </ownedOperation>
+    <ownedOperation xmi:id="_hmGKMMkuEeuSte8oTwAAqA" name="open" method="_9gRy4M8dEeul1pIblBCjIA"/>
+    <ownedOperation xmi:id="_qvk3MMkuEeuSte8oTwAAqA" name="close" method="_aDvMUM8eEeul1pIblBCjIA"/>
+    <ownedOperation xmi:id="_y8yJMMkuEeuSte8oTwAAqA" name="closed" method="_cauR0M8eEeul1pIblBCjIA">
+      <ownedParameter xmi:id="_5YtDwMkuEeuSte8oTwAAqA" name="opened" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+      </ownedParameter>
     </ownedOperation>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_woRQwCRaEeuGRKch_h_VTg" name="Member">
@@ -49,6 +74,38 @@
     <ownedAttribute xmi:id="_zos0gCRdEeuGRKch_h_VTg" name="available">
       <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
     </ownedAttribute>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_Meg3UM8fEeul1pIblBCjIA" name="fbIncrCopies" specification="_Myu-EMkwEeuSte8oTwAAqA">
+      <eAnnotations xmi:id="_Meg3Uc8fEeul1pIblBCjIA" source="noExecution"/>
+      <language>CPP</language>
+      <body>    this->setCopies(this->getCopies() + 1);</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_YxaMUM8fEeul1pIblBCjIA" name="fbCountCopies" specification="_EXLuEMkwEeuSte8oTwAAqA">
+      <eAnnotations xmi:id="_YxaMUc8fEeul1pIblBCjIA" source="noExecution"/>
+      <ownedParameter xmi:id="_dT78UM8fEeul1pIblBCjIA" name="copies" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>    copies = this->getCopies();</body>
+    </ownedBehavior>
+    <ownedBehavior xmi:type="uml:FunctionBehavior" xmi:id="_odayMM8fEeul1pIblBCjIA" name="fbAddCopies" specification="_t5NsMMkvEeuSte8oTwAAqA">
+      <eAnnotations xmi:id="_odayMc8fEeul1pIblBCjIA" source="noExecution"/>
+      <ownedParameter xmi:id="_1HgfMM8fEeul1pIblBCjIA" name="nbCopies">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+      <language>CPP</language>
+      <body>    this->setCopies(this->getCopies() + nbCopies);</body>
+    </ownedBehavior>
+    <ownedOperation xmi:id="_t5NsMMkvEeuSte8oTwAAqA" name="addCopies" method="_odayMM8fEeul1pIblBCjIA">
+      <ownedParameter xmi:id="_t5NsMckvEeuSte8oTwAAqA" name="nbCopies">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_EXLuEMkwEeuSte8oTwAAqA" name="countCopies" method="_YxaMUM8fEeul1pIblBCjIA">
+      <ownedParameter xmi:id="_EXLuE8kwEeuSte8oTwAAqA" name="copies" direction="return">
+        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+      </ownedParameter>
+    </ownedOperation>
+    <ownedOperation xmi:id="_Myu-EMkwEeuSte8oTwAAqA" name="incrCopies" method="_Meg3UM8fEeul1pIblBCjIA"/>
   </packagedElement>
   <packagedElement xmi:type="uml:Class" xmi:id="_4cv5sCRaEeuGRKch_h_VTg" name="Loan">
     <ownedAttribute xmi:id="_7LkwECRdEeuGRKch_h_VTg" name="book" type="_yzEUYCRaEeuGRKch_h_VTg"/>

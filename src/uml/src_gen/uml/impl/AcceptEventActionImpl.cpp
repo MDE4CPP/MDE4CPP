@@ -429,11 +429,27 @@ Any AcceptEventActionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			return eAny(getIsUnmarshall()); //327
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_RESULT:
 		{
-			return eAny(getResult()); //328			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::OutputPin>::iterator iter = m_result->begin();
+			Bag<uml::OutputPin>::iterator end = m_result->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //328			
 		}
 		case uml::umlPackage::ACCEPTEVENTACTION_ATTRIBUTE_TRIGGER:
 		{
-			return eAny(getTrigger()); //329			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Trigger>::iterator iter = m_trigger->begin();
+			Bag<uml::Trigger>::iterator end = m_trigger->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //329			
 		}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);

@@ -698,15 +698,39 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTION:
 		{
-			return eAny(getConnection()); //22021			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::ConnectionPointReference>::iterator iter = m_connection->begin();
+			Bag<uml::ConnectionPointReference>::iterator end = m_connection->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22021			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
 		{
-			return eAny(getConnectionPoint()); //22022			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Pseudostate>::iterator iter = m_connectionPoint->begin();
+			Bag<uml::Pseudostate>::iterator end = m_connectionPoint->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22022			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
 		{
-			return eAny(getDeferrableTrigger()); //22023			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Trigger>::iterator iter = m_deferrableTrigger->begin();
+			Bag<uml::Trigger>::iterator end = m_deferrableTrigger->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22023			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DOACTIVITY:
 			return eAny(getDoActivity()); //22024
@@ -726,7 +750,15 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getRedefinedState()); //22031
 		case uml::umlPackage::STATE_ATTRIBUTE_REGION:
 		{
-			return eAny(getRegion()); //22034			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Region>::iterator iter = m_region->begin();
+			Bag<uml::Region>::iterator end = m_region->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //22034			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
 			return eAny(getStateInvariant()); //22032
@@ -735,12 +767,12 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}
 	result = RedefinableElementImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

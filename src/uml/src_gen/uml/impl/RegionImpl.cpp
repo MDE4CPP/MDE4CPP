@@ -484,16 +484,32 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getStateMachine().lock()); //20720
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
 		{
-			return eAny(getSubvertex()); //20722			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Vertex>::iterator iter = m_subvertex->begin();
+			Bag<uml::Vertex>::iterator end = m_subvertex->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //20722			
 		}
 		case uml::umlPackage::REGION_ATTRIBUTE_TRANSITION:
 		{
-			return eAny(getTransition()); //20721			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Transition>::iterator iter = m_transition->begin();
+			Bag<uml::Transition>::iterator end = m_transition->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //20721			
 		}
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}

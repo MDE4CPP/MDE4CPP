@@ -254,11 +254,27 @@ Any LocalSnapshotImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_BINDINGS:
 		{
-			return eAny(getBindings()); //452			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Values::NameValueBinding>::iterator iter = m_bindings->begin();
+			Bag<ocl::Values::NameValueBinding>::iterator end = m_bindings->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //452			
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_INPUTQ:
 		{
-			return eAny(getInputQ()); //455			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Values::OclMessageValue>::iterator iter = m_inputQ->begin();
+			Bag<ocl::Values::OclMessageValue>::iterator end = m_inputQ->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //455			
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_ISPOST:
 			return eAny(getIsPost()); //453
@@ -266,7 +282,15 @@ Any LocalSnapshotImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getIsPre()); //454
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ:
 		{
-			return eAny(getOutputQ()); //456			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<ocl::Values::OclMessageValue>::iterator iter = m_outputQ->begin();
+			Bag<ocl::Values::OclMessageValue>::iterator end = m_outputQ->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //456			
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_PRED:
 			return eAny(getPred()); //451

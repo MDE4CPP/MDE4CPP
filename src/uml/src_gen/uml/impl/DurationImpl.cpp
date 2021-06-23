@@ -297,7 +297,15 @@ Any DurationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getExpr()); //7715
 		case uml::umlPackage::DURATION_ATTRIBUTE_OBSERVATION:
 		{
-			return eAny(getObservation()); //7716			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Observation>::iterator iter = m_observation->begin();
+			Bag<uml::Observation>::iterator end = m_observation->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //7716			
 		}
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);

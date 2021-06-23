@@ -311,7 +311,15 @@ Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
 		{
-			return eAny(getConstrainedElement()); //5712			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::Element>::iterator iter = m_constrainedElement->begin();
+			Bag<uml::Element>::iterator end = m_constrainedElement->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //5712			
 		}
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
 			return eAny(getContext().lock()); //5713

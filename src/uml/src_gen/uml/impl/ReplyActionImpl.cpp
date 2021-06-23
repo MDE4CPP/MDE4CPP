@@ -379,7 +379,15 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(getReplyToCall()); //21127
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 		{
-			return eAny(getReplyValue()); //21128			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::InputPin>::iterator iter = m_replyValue->begin();
+			Bag<uml::InputPin>::iterator end = m_replyValue->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //21128			
 		}
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
 			return eAny(getReturnInformation()); //21129

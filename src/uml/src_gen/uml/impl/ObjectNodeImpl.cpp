@@ -357,7 +357,15 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	{
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 		{
-			return eAny(getInState()); //16021			
+			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+			Bag<uml::State>::iterator iter = m_inState->begin();
+			Bag<uml::State>::iterator end = m_inState->end();
+			while (iter != end)
+			{
+				tempList->add(*iter);
+				iter++;
+			}
+			return eAny(tempList); //16021			
 		}
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_ISCONTROLTYPE:
 			return eAny(getIsControlType()); //16022
@@ -370,7 +378,7 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	}
 	Any result;
 	result = ActivityNodeImpl::eGet(featureID, resolve, coreType);
-	if (!result->isEmpty())
+	if (result != nullptr && !result->isEmpty())
 	{
 		return result;
 	}
