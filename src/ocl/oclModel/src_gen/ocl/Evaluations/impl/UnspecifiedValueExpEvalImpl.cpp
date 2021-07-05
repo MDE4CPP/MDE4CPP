@@ -32,7 +32,7 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "uml/UmlFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 
 #include "fUML/Semantics/Values/Evaluation.hpp"

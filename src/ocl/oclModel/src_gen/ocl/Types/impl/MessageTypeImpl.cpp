@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/EcoreFactory.hpp"
-#include "uml/UmlFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 
 
 #include "ecore/EAnnotation.hpp"
