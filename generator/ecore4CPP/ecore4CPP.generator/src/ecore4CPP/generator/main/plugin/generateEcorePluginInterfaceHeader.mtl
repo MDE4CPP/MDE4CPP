@@ -21,7 +21,7 @@
 [startGuard(aPackage,'Plugin')/]
 
 // namespace macro header include
-#include "[aPackage.getRootPackage().name.toLower()/]/[aPackage.getRootPackage().name.toLower()/].hpp"
+#include "[aPackage.getRootPackage().name/]/[aPackage.getRootPackage().name/].hpp"
 
 #include "pluginFramework/EcoreModelPlugin.hpp"
 

@@ -22,7 +22,7 @@
 [startGuard(anEPackage,'FactoryImpl')/]
 
 // namespace macro header include
-#include "[anEPackage.getRootPackage().name.toLower()/]/[anEPackage.getRootPackage().name.toLower()/].hpp"
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getRootPackage().name/].hpp"
 
 #include "ecore/impl/EFactoryImpl.hpp"
 

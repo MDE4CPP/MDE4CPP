@@ -33,7 +33,7 @@
 // generated Includes
 
 // namespace macro header include
-#include "[aClass.ePackage.getRootPackage().name.toLower()/]/[aClass.ePackage.getRootPackage().name.toLower()/].hpp" 
+#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getRootPackage().name/].hpp" 
 
 // model includes
 #include "../[aClass.name.toUpperFirst().concat('.hpp')/]"
