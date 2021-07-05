@@ -32,6 +32,11 @@ SET ORG_GRADLE_PROJECT_DEBUG=1
 REM debug messages of fUML library will be enabled with value '1', this property has no effect on release compiling
 SET ORG_GRADLE_PROJECT_DEBUG_MESSAGE_FUML=0
 
+REM # #############################################################################
+REM # # Configure JAVA CLASSPATH                                                  #
+REM # #############################################################################
+
+SET CLASSPATH=$MDE4CPP_ECLIPSE_HOME/plugins
 
 REM #####################################################
 REM # configure PATH variable with minimal set of paths #

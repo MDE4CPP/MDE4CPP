@@ -41,6 +41,11 @@ export PATH="$MDE4CPP_HOME/application/bin:$MDE4CPP_HOME/application/tools:$PATH
 
 export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:$PWD/application/bin
 
+# #############################################################################
+# # Configure JAVA CLASSPATH                                                  #
+# #############################################################################
+
+export CLASSPATH=$MDE4CPP_ECLIPSE_HOME/plugins
 
 # ##############################################################################
 # # configure compiler information for include path setting inside cpp eclipse #
