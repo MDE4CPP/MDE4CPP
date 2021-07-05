@@ -15,9 +15,10 @@
 
 #include "ecore/EClass.hpp"
 #include "ecore/EClassifier.hpp"
-#include "ecore/EcoreFactory.hpp"
 #include "ecore/EObject.hpp"
 #include "ecore/EPackage.hpp"
+
+#include "ecore/ecoreFactory.hpp"
 
 #include "persistence/base/LoadHandler.hpp"
 
