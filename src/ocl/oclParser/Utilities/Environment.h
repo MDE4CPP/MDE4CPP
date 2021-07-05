@@ -1,10 +1,26 @@
-/*!
- * \file Environment.h
- * \brief The Environment type used in the rules for the concrete syntax is defined according to the following invariants and
-    additional operations. Environments can be nested, denoted by the existence of a parent environment. Each environment keeps
-    a list of named elements, that have a name a reference to a ModelElement. (OCL 2.4 specification)
- * \author Ndongmo Silatsa F.
- * \date 21-01-2020
+/*
+ * MDE4CPP - Model Driven Engineering for C++
+ *
+ * Copyright (c) TU Ilmenau, Systems and Software Engineering Group
+ * All rights reserved.
+ *
+ * MIT License
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software
+ * without restriction, including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+ * to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+ * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
  */
 
 #ifndef ENVIRONMENT_H
@@ -30,6 +46,13 @@ enum class Level {
     M2  // model level
 };
 
+/*!
+ * \brief The Environment type used in the rules for the concrete syntax is
+ * defined according to the following invariants and additional operations.
+ * Environments can be nested, denoted by the existence of a parent environment.
+ * Each environment keeps a list of named elements, that have a name a reference
+ * to a ModelElement. (OCL 2.4 specification)
+ */
 class Environment
 {
 public:
