@@ -8,7 +8,7 @@
 #define PSCS_SEMANTICS_ACTIONSPACKAGEIMPL_HPP
 
 // namespace macro header include
-#include "pscs/pscs.hpp"
+#include "PSCS/PSCS.hpp"
 
 #include "ecore/ecorePackage.hpp"
 #include "ecore/impl/EPackageImpl.hpp"

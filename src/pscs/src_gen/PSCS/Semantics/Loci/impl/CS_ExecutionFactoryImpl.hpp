@@ -11,7 +11,7 @@
 // generated Includes
 
 // namespace macro header include
-#include "pscs/pscs.hpp" 
+#include "PSCS/PSCS.hpp" 
 
 // model includes
 #include "../CS_ExecutionFactory.hpp"

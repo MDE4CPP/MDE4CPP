@@ -8,7 +8,7 @@
 #define PSCS_SEMANTICS_ACTIONSFACTORYIMPL_HPP
 
 // namespace macro header include
-#include "pscs/pscs.hpp"
+#include "PSCS/PSCS.hpp"
 
 #include "ecore/impl/EFactoryImpl.hpp"
 

@@ -11,7 +11,7 @@
 #include <memory>
 
 // namespace macro header include
-#include "pscs/pscs.hpp"
+#include "PSCS/PSCS.hpp"
 
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/Loci/LociPackage.hpp"

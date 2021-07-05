@@ -27,7 +27,7 @@
 #include "PSCS/Semantics/StructuredClassifiers/CS_Object.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/EnumerationValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/DataValue.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
@@ -50,8 +50,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "uml/UmlFactory.hpp"
 
 
 #include "fUML/Semantics/Classification/InstanceValueEvaluation.hpp"
@@ -60,10 +60,10 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "PSCS/PSCSPackage.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
-#include "PSCS/Semantics/Classification/ClassificationPackage.hpp"
+#include "PSCS/PSCSPackage.hpp"
 #include "fUML/Semantics/Classification/ClassificationPackage.hpp"
+#include "PSCS/Semantics/Classification/ClassificationPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"

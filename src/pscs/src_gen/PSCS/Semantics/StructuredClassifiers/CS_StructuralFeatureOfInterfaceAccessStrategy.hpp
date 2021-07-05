@@ -51,7 +51,7 @@ namespace uml
 }
 
 // namespace macro header include
-#include "pscs/pscs.hpp"
+#include "PSCS/PSCS.hpp"
 
 // base class includes
 #include "fUML/Semantics/Loci/SemanticStrategy.hpp"

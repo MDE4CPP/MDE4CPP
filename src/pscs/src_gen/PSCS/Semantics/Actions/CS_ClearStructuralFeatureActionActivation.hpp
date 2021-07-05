@@ -65,7 +65,7 @@ namespace uml
 }
 
 // namespace macro header include
-#include "pscs/pscs.hpp"
+#include "PSCS/PSCS.hpp"
 
 // base class includes
 #include "fUML/Semantics/Actions/ClearStructuralFeatureActionActivation.hpp"

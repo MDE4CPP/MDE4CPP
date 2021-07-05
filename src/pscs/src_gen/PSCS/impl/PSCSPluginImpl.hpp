@@ -8,7 +8,7 @@
 #define PSCSPLUGINIMPL_HPP
 
 // namespace macro header include
-#include "pscs/pscs.hpp"
+#include "PSCS/PSCS.hpp"
 
 #include "PSCS/PSCSPlugin.hpp"
 
