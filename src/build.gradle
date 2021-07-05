@@ -1,3 +1,28 @@
+/*
+ * MDE4CPP - Model Driven Engineering for C++
+ *
+ * Copyright (c) TU Ilmenau, Systems and Software Engineering Group
+ * All rights reserved.
+ *
+ * MIT License
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software
+ * without restriction, including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+ * to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+ * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
 description 'Models and generated source code collection'
 
 task buildEcoreModels() {
@@ -9,6 +34,7 @@ task buildEcoreModels() {
 	dependsOn 'uml:buildUml'
 	dependsOn 'fuml:buildFUML'
 	dependsOn 'pscs:buildPSCS'
+	dependsOn 'ocl:oclModel:buildOcl'
 }
 
 task buildReflectionModels() {
@@ -37,6 +63,8 @@ task compileEcoreModels() {
 	dependsOn 'uml:src_gen:compileUml'
 	dependsOn 'fuml:src_gen:compileFUML'
 	dependsOn 'pscs:src_gen:compilePSCS'
+	dependsOn 'ocl:oclModel:src_gen:compileOcl'
+	
 }
 
 // Compile all without generating the models
@@ -47,6 +75,9 @@ task compileReflectionModels() {
 	dependsOn 'common:ecoreReflection:src_gen:compileEcoreReflection'
 	dependsOn 'common:primitivetypesReflection:src_gen:compilePrimitivetypesReflection'
 	dependsOn 'common:umlReflection:src_gen:compileUmlReflection'
+	
+	//@quickfix: Solves dependency of common:umlReflection:umlReflectionExec to oclParser library
+	dependsOn 'ocl:oclParser:compileOclParser'
 }
 
 task compileUMLProfiles() {
@@ -65,6 +96,7 @@ task generateEcoreModels() {
 	dependsOn 'uml:model:generateUml'
 	dependsOn 'fuml:model:generateFUML'
 	dependsOn 'pscs:model:generatePSCS'
+	dependsOn 'ocl:oclModel:model:generateOcl'
 }
 
 task generateReflectionModels() {
@@ -91,4 +123,22 @@ task deliverBasicInterfaces() {
 	dependsOn 'common:pluginFramework:deliverPluginFrameworkInterface'
 	dependsOn 'common:persistence:deliverPersistenceInterface'
 	dependsOn 'util:deliverUtil'
+}
+
+/**
+ * Convert line endings on GNU/Linux & macOS
+ */
+task dos2unix_srcgen {
+	doLast {
+		fileTree('.').matching{ 
+			include "**/src_gen/**/*.hpp"
+			include "**/src_gen/**/*.cpp"
+			exclude "**/.cmake"
+		}.each { 
+			aFile -> exec{
+			    commandLine 'dos2unix'
+			    args aFile.absolutePath
+			}
+		}
+	}
 }
