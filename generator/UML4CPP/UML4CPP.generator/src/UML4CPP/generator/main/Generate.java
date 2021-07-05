@@ -15,6 +15,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Map;
 
@@ -380,17 +381,29 @@ public class Generate extends AbstractAcceleoGenerator {
         	String path = null;
         	if (umlJarPath == null)
         	{
-        		URL[] includedJars = ((URLClassLoader) (Thread.currentThread().getContextClassLoader())).getURLs();
-    			for (URL url : includedJars) {
-    				if (url.getFile().startsWith("rsrc:org.eclipse.uml2.uml.resources_"))
-    				{
-    					path = url.toString();
-    	    			System.out.println(" *uml.resources_*.jar: internal jar used (" + url.getFile().replace("!/", ""));
-    				}
-    			}
+				try {
+					// getResource() requires full qualified name in java > 8 (?)
+					ClassLoader t_classloader = Thread.currentThread().getContextClassLoader();
+					Enumeration<URL> t_ressources = t_classloader.getResources("plugin.xml");
+				
+					for (Enumeration<URL> e = t_ressources; e.hasMoreElements();) {
+					    URL url = e.nextElement();
+						//System.out.println("URL: " + url.toString());
+						
+						if (url.getFile().startsWith("rsrc:org.eclipse.uml2.uml.resources_"))
+	    				{
+	    					path = url.toString().replace("plugin.xml", "");
+	    					System.out.println();
+	    	    			System.out.println("INFO: Using internal org.eclipse.uml2.uml.resources.*.jar (" + path.replace("!/", "") + ")");
+	    				}
+					}
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			
     			if (path == null)
     			{
-    				System.err.println("Could not find org.eclipse.uml2.uml.resources.*.jar inside the generator!");
+    				System.err.println("ERROR: Could not find org.eclipse.uml2.uml.resources.*.jar in JARs of generator!");
     				System.exit(1);
     			}
         	}
@@ -422,11 +435,12 @@ public class Generate extends AbstractAcceleoGenerator {
 	        uriMap.put(URI.createURI(UMLResource.METAMODELS_PATHMAP), uri.appendSegment("metamodels").appendSegment(""));
 	        uriMap.put(URI.createURI(UMLResource.PROFILES_PATHMAP), uri.appendSegment("profiles").appendSegment(""));
 	
+	        System.out.println();
+	        System.out.println("registered libraries/metamodels/profiles:");
 	        for (URI nsuri : uriMap.keySet()) {
-				System.out.println(nsuri.toString());
+				System.out.println("    " + nsuri.toString());
 			}
-	
-	
+
 	        /*
 	         * If you need additional package registrations, you can register them here. The following line
 	         * (in comment) is an example of the package registration for UML.
@@ -462,11 +476,11 @@ public class Generate extends AbstractAcceleoGenerator {
 	        resourceSet.getPackageRegistry().put("http://www.eclipse.org/uml2/5.0.0/Types", TypesPackage.eINSTANCE);
         }
         
+        System.out.println();
         System.out.println("registered packages:");
         for (String nsuri : resourceSet.getPackageRegistry().keySet()) {
-			System.out.println(nsuri);
+			System.out.println("    " + nsuri);
 		}
-        System.out.println();
     }
 
     /**

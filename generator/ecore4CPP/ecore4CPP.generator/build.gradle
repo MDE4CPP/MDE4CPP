@@ -1,5 +1,5 @@
 plugins {
-    id 'net.robyf.jarinjar' version '1.0.6'
+    id 'net.robyf.jarinjar' version '1.0.9'
 }
 
 apply plugin: 'java'
@@ -7,30 +7,54 @@ apply plugin: 'java'
 description 'UML4CPP generator project'
 
 dependencies {
-   runtime fileTree(dir: System.getenv('MDE4CPP_ECLIPSE_HOME') + '/plugins', include: [
+	runtime fileTree(dir: System.getenv('MDE4CPP_ECLIPSE_HOME') + '/plugins', include: [
+		
+		'org.eclipse.acceleo.common_*.jar',
+		'org.eclipse.acceleo.engine_*.jar',
+		'org.eclipse.acceleo.model_*.jar',
+		'org.eclipse.acceleo.parser_*.jar',
+		
+		'org.eclipse.emf.common_*.jar',
+		'org.eclipse.emf.ecore_*.jar',
+		'org.eclipse.emf.ecore.xmi_*.jar',
+		
+		'org.eclipse.uml2.common_*.jar',
+		'org.eclipse.uml2.types_*.jar',
+		'org.eclipse.uml2.uml_*.jar',
+		'org.eclipse.uml2.uml.resources_*.jar',
+
 		'com.google.guava_*.jar',
 		'javax.inject_*.jar',
 		'lpg.runtime.java_*.jar',
-		'org.eclipse.acceleo.common_*.jar',
+		
 		'org.eclipse.equinox.app_*.jar',
 		'org.eclipse.equinox.common_*.jar',
 		'org.eclipse.equinox.preferences_*.jar',
 		'org.eclipse.equinox.registry_*.jar',
+			
 		'org.eclipse.ocl.common_*.jar',
 		'org.eclipse.ocl.ecore_*.jar',
 		'org.eclipse.ocl_*.jar'
 	])
 	
-    compile fileTree(dir: System.getenv('MDE4CPP_ECLIPSE_HOME') + '/plugins', include: [
+    implementation fileTree(dir: System.getenv('MDE4CPP_ECLIPSE_HOME') + '/plugins', include: [
+		
+		'org.eclipse.acceleo.common_*.jar',
 		'org.eclipse.acceleo.engine_*.jar',
 		'org.eclipse.acceleo.model_*.jar',
-		'org.eclipse.core.runtime_*.jar',
+		'org.eclipse.acceleo.parser_*.jar',
+		
 		'org.eclipse.emf.common_*.jar',
-		'org.eclipse.emf.ecore.xmi_*.jar',
 		'org.eclipse.emf.ecore_*.jar',
+		'org.eclipse.emf.ecore.xmi_*.jar',
+		
+		'org.eclipse.core.runtime_*.jar',
+		
 		'org.eclipse.osgi_*.jar',
+		
 		'org.eclipse.uml2.uml_*.jar',
 		'org.eclipse.uml2.types_*.jar'
+		
 	])
 }
 
@@ -42,7 +66,7 @@ sourceSets {
 	}
 }
 
-jar.archiveName = 'ecore4CPP.jar'
+jar.archiveFileName = 'ecore4CPP.jar'
 
 executableJar {
    mainClass 'ecore4CPP.generator.main.Generate'

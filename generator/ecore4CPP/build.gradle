@@ -10,7 +10,7 @@ task createEcore4CPP(dependsOn: ['checkDependencies', 'ecore4CPP.generator:compi
 
 task executeCompiler(type: JavaExec, dependsOn: ['checkDependencies', 'ecore4CPP.generator.compiler:jar']) {
 	description 'generate emtl files for Ecore4CPP generator'	
-	main = "-jar"
+	mainClass = "-jar"
 	args "ecore4CPP.generator.compiler/build/libs/ecore4CPP.generator.compiler.jar", "ecore4CPP.generator/src", "ecore4CPP.generator/build/classes/java/main"
 
 	inputs.files file("ecore4CPP.generator.compiler/build/libs/ecore4CPP.generator.compiler.jar"), file("ecore4CPP.generator/src")
