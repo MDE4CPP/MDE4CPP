@@ -27,7 +27,7 @@
 //Includes from codegen annotation
 #include "fUML/Semantics/SimpleClassifiers/DataValue.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/CompoundValue.hpp"
 #include "uml/DataType.hpp"
 #include "uml/Classifier.hpp"
@@ -37,8 +37,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "uml/UmlFactory.hpp"
 
 
 #include "uml/Classifier.hpp"
@@ -48,8 +48,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"

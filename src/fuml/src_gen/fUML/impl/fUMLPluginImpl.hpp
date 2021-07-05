@@ -8,7 +8,7 @@
 #define FUMLPLUGINIMPL_HPP
 
 // namespace macro header include
-#include "fuml/fuml.hpp"
+#include "fUML/fUML.hpp"
 
 #include "fUML/fUMLPlugin.hpp"
 

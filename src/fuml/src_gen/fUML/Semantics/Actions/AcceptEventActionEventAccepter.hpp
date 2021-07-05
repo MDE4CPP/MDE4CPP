@@ -38,7 +38,7 @@ namespace fUML::Semantics::Actions
 }
 
 // namespace macro header include
-#include "fuml/fuml.hpp"
+#include "fUML/fUML.hpp"
 
 // base class includes
 #include "fUML/Semantics/CommonBehavior/EventAccepter.hpp"

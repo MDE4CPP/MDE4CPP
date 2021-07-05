@@ -8,7 +8,7 @@
 #define FUML_SEMANTICS_ACTIVITIESPACKAGE_HPP
 
 // namespace macro header include
-#include "fuml/fuml.hpp"
+#include "fUML/fUML.hpp"
 
 #include "ecore/EPackage.hpp"
 

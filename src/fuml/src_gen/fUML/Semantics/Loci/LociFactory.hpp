@@ -11,7 +11,7 @@
 #include <memory>
 
 // namespace macro header include
-#include "fuml/fuml.hpp"
+#include "fUML/fUML.hpp"
 
 #include "ecore/EFactory.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"

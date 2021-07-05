@@ -34,7 +34,7 @@ namespace fUML
 //Forward Declaration for used types 
 
 // namespace macro header include
-#include "fuml/fuml.hpp"
+#include "fUML/fUML.hpp"
 
 // base class includes
 #include "fUML/Semantics/Loci/ChoiceStrategy.hpp"

@@ -11,7 +11,7 @@
 // generated Includes
 
 // namespace macro header include
-#include "fuml/fuml.hpp" 
+#include "fUML/fUML.hpp" 
 
 // model includes
 #include "../EventAccepter.hpp"

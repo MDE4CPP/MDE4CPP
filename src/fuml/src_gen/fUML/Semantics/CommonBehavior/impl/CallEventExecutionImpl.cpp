@@ -27,7 +27,7 @@
 //Includes from codegen annotation
 #include "fUML/Semantics/CommonBehavior/CallEventOccurrence.hpp"
 #include "fUML/Semantics/CommonBehavior/CallEventBehavior.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/Reference.hpp"
 #include "uml/ParameterDirectionKind.hpp"
 #include "uml/Parameter.hpp"
@@ -38,11 +38,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/UmlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "uml/Behavior.hpp"
@@ -58,8 +58,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"

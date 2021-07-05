@@ -42,7 +42,7 @@ namespace fUML::Semantics::Values
 }
 
 // namespace macro header include
-#include "fuml/fuml.hpp"
+#include "fUML/fUML.hpp"
 
 // base class includes
 

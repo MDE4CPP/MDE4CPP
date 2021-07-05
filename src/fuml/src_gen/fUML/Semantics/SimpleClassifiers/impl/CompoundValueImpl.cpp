@@ -27,7 +27,7 @@
 //Includes from codegen annotation
 #include <algorithm>
 #include "uml/Classifier.hpp"
-#include <fUML/FUMLFactory.hpp>
+#include <fUML/fUMLFactory.hpp>
 #include <cstdio>
 
 #include "uml/StructuralFeature.hpp"
@@ -47,8 +47,8 @@
 #include "fUML/Semantics/Values/Value.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "uml/umlPackage.hpp"

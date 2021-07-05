@@ -25,8 +25,8 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
-#include "fUML/FUMLPackage.hpp"
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/fUMLPackage.hpp"
+#include "fUML/fUMLFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
@@ -146,8 +146,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "uml/UmlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 
 #include "uml/Behavior.hpp"
@@ -164,8 +164,8 @@
 #include "uml/ValueSpecification.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 #include "fUML/Semantics/Loci/LociPackage.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"

@@ -30,8 +30,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "uml/UmlFactory.hpp"
 
 
 #include "fUML/Semantics/SimpleClassifiers/BooleanValue.hpp"
@@ -40,8 +40,8 @@
 #include "fUML/Semantics/Actions/ConditionalNodeActivation.hpp"
 
 //Factories an Package includes
-#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/SemanticsPackage.hpp"
+#include "fUML/fUMLPackage.hpp"
 #include "fUML/Semantics/Actions/ActionsPackage.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersPackage.hpp"
 #include "uml/umlPackage.hpp"

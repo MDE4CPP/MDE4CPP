@@ -43,7 +43,7 @@ namespace uml
 }
 
 // namespace macro header include
-#include "fuml/fuml.hpp"
+#include "fUML/fUML.hpp"
 
 // base class includes
 #include "fUML/Semantics/StructuredClassifiers/DispatchStrategy.hpp"
