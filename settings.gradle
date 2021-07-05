@@ -1,9 +1,18 @@
+pluginManagement {
+	repositories {
+		mavenLocal()
+		mavenCentral()
+		gradlePluginPortal()
+	}
+}
+
 rootProject.name = 'MDE4CPP'
 
 //Search recursivly for all build.gradle file and add the imports
 fileTree('.') {
 	include '**/build.gradle'
-	exclude 'build.gradle' // Exclude the root build file.
+	exclude 'build.gradle' // Exclude root build file
+	//exclude '**/examples/' // Exclude examples directory
 }.collect { 
 	relativePath(it.parent).replace(File.separator, ':') 
 }.each {
