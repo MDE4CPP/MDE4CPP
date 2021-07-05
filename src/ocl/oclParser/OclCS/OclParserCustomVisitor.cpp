@@ -16,8 +16,8 @@
 #include <ecore/EStructuralFeature.hpp>
 #include <ecore/EEnumLiteral.hpp>
 #include <ecore/ecoreFactory.hpp>
-#include <types/TypesFactory.hpp>
-#include <types/TypesPackage.hpp>
+#include <types/typesFactory.hpp>
+#include <types/typesPackage.hpp>
 
 #include <ocl/Expressions/ExpressionsFactory.hpp>
 #include <ocl/Expressions/EnumLiteralExp.hpp>
