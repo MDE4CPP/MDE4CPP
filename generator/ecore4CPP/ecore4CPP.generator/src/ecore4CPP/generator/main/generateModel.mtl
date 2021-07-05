@@ -106,7 +106,7 @@ namespace [includeNamespace.generateNamespaceDefinition()/]
 [/let]
 
 // namespace macro header include
-#include "[aClass.ePackage.getRootPackage().name.toLower()/]/[aClass.ePackage.getRootPackage().name.toLower()/].hpp"
+#include "[aClass.ePackage.getRootPackage().name/]/[aClass.ePackage.getRootPackage().name/].hpp"
 
 // base class includes
 [for (elements : EClassifier| aClass.eSuperTypes->asOrderedSet()->sortedBy(name))]
