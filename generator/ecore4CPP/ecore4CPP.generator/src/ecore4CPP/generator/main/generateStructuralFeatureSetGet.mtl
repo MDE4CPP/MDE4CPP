@@ -48,8 +48,8 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 [else]
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator iter = m_[struct.name/]->begin();
-			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator end = m_[struct.name/]->end();
+			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator iter = [struct.GetterName()/]()->begin();
+			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator end = [struct.GetterName()/]()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -147,13 +147,13 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newVa
 				iter++;
 			}
 			
-			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator iter[struct.name.toUpperFirst()/] = m_[struct.name/]->begin();
-			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator end[struct.name.toUpperFirst()/] = m_[struct.name/]->end();
+			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator iter[struct.name.toUpperFirst()/] = [struct.GetterName()/]()->begin();
+			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator end[struct.name.toUpperFirst()/] = [struct.GetterName()/]()->end();
 			while (iter[struct.name.toUpperFirst()/] != end[struct.name.toUpperFirst()/])
 			{
 				if ([struct.name/]List->find(*iter[struct.name.toUpperFirst()/]) == -1)
 				{
-					m_[struct.name/]->erase(*iter[struct.name.toUpperFirst()/]);
+					[struct.GetterName()/]()->erase(*iter[struct.name.toUpperFirst()/]);
 				}
 				iter[struct.name.toUpperFirst()/]++;
 			}
@@ -162,9 +162,9 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newVa
 			end[struct.name.toUpperFirst()/] = [struct.name/]List->end();
 			while (iter[struct.name.toUpperFirst()/] != end[struct.name.toUpperFirst()/])
 			{
-				if (m_[struct.name/]->find(*iter[struct.name.toUpperFirst()/]) == -1)
+				if ([struct.GetterName()/]()->find(*iter[struct.name.toUpperFirst()/]) == -1)
 				{
-					m_[struct.name/]->add(*iter[struct.name.toUpperFirst()/]);
+					[struct.GetterName()/]()->add(*iter[struct.name.toUpperFirst()/]);
 				}
 				iter[struct.name.toUpperFirst()/]++;			
 			}
