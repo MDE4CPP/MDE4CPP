@@ -52,6 +52,8 @@
 																		aPackage.allOwnedElements().getAppliedStereotypes()._package,
 																		aPackage.getAppliedStereotypes()._package,
 																		aPackage.member->filter(Class).generalization.general->reject(oclIsUndefined()).getNearestPackage(),
+																		aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined()).getNearestPackage(),
+																		aPackage.allOwnedElements()->filter(CallOperationAction).operation->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.packageImport.importedPackage
 																	}->flatten()->reject(oclIsUndefined())->reject(pack : Package | (pack = aPackage) or pack.isReflectionModel()) /]
 
