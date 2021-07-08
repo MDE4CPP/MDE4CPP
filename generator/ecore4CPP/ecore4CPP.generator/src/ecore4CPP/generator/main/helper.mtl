@@ -27,11 +27,11 @@
  * check if application should be prepared
 */]
 [query public prepareApplication(ePackage : EPackage) : Boolean = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->notEmpty() /]
-[query public hasMainSourceCode(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyMainSourceCode())->notEmpty() else false endif /]
-[query public getMainSourceCode(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyMainSourceCode())->first().value /]
+[query public hasMainSourceCode(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyBody())->notEmpty() else false endif /]
+[query public getMainSourceCode(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyBody())->first().value /]
 
-[query public hasMainSourceIncludes(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyMainIncludes())->notEmpty() else false endif /]
-[query public getMainSourceIncludes(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyMainIncludes())->first().value /]
+[query public hasMainSourceIncludes(ePackage : EPackage) : Boolean = if (prepareApplication()) then eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyIncludes())->notEmpty() else false endif /]
+[query public getMainSourceIncludes(ePackage : EPackage) : String = eAllContents()->filter(ecore::EAnnotation)->select(source = sourceNamePrepareApplication())->first().details->select(key = keyIncludes())->first().value /]
 
 [**
  * namespace generation
@@ -70,9 +70,9 @@
 
 [query public getAllContainers(aClass : EClass) : OrderedSet(EReference) =  if getContainsContainerAttribute()->notEmpty() then if getSuperTypeContainers()->isEmpty() then getContainsContainerAttribute() else OrderedSet{getContainsContainerAttribute()}->append(getSuperTypeContainers()->flatten()->reject(oclIsUndefined())->asOrderedSet())->flatten()->asOrderedSet() endif else getSuperTypeContainers()->asOrderedSet() endif /]
 
-[query public hasImplOnly(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey(keyImplOnly()) then aModelElement.valueKey(keyImplOnly())='true' else false endif /]
-[query public doNotGenerate(aModelElement : EModelElement) : Boolean =  if aModelElement.hasKey(keyDoNotGenerate()) then aModelElement.valueKey(keyDoNotGenerate())='true' else false endif /]
-[query public hasImplSetterOnly(aModelElement : EModelElement) : Boolean = if aModelElement.hasKey(keyImplSetterOnly()) then aModelElement.valueKey(keyImplSetterOnly())='true' else false endif/]
+[query public hasImplOnly(aModelElement : EModelElement) : Boolean =  aModelElement.hasKey(keyImplOnly())/]
+[query public doNotGenerate(aModelElement : EModelElement) : Boolean =  aModelElement.hasKey(keyDoNotGenerate())/]
+[query public hasImplSetterOnly(aModelElement : EModelElement) : Boolean = aModelElement.hasKey(keyImplSetterOnly())/]
 
 [query public SetterName(feature : EStructuralFeature) : String = if hasKey(keySetterName()) then valueKey(keySetterName()) else 'set'.concat(feature.name.toUpperFirst()) endif/]
 [query public GetterName(feature : EStructuralFeature) : String = if hasKey(keyGetterName()) then valueKey(keyGetterName()) else getterPrefix().concat(name.toUpperFirst()) endif/]
