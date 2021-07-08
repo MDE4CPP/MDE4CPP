@@ -34,8 +34,11 @@
 [/if]
 	enum class [anEnum.name/] 
 	{
-[for (lit : EnumerationLiteral | anEnum.ownedLiteral->asOrderedSet()->sortedBy(myQualifiedName())) separator (',\n')]
-		[lit.name.toUpperCase()/] = [anEnum.ownedLiteral->indexOf(lit).toString()/][/for]
+	[for (lit : EnumerationLiteral | anEnum.ownedLiteral->asOrderedSet()->sortedBy(myQualifiedName())) separator (',\n') after('\n')]
+		[if (not lit.specification->filter(LiteralInteger)->isEmpty())]
+		[lit.name.toUpperCase()/] = [lit.specification->filter(LiteralInteger)->asOrderedSet()->first().value/][else]
+		[lit.name.toUpperCase()/][/if]
+	[/for]
 	};
 [if (not anEnum.getNearestPackage().ignoreNamespace())]}[/if]
 [anEnum.endGuard()/]

@@ -158,7 +158,7 @@ std::string
 [/template]
 
 [template public transformType(aType : Type) ? (oclIsKindOf(Enumeration))]
-[if (not aType.getNearestPackage().ignoreNamespace())][aType.namespace.oclAsType(Package).generateNamespace(true)/]::[/if][aType.name.toUpperFirst()/]
+[if (not aType.getNearestPackage().ignoreNamespace())][aType.namespace.oclAsType(Package).generateNamespace(true)/]::[/if][aType.name/]
 [/template]
 
 [template public transformType(aType : Type) ? (not oclIsKindOf(PrimitiveType) and not oclIsKindOf(Enumeration) )]
