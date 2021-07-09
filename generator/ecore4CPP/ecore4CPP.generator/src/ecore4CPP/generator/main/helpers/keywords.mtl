@@ -34,7 +34,7 @@
 [query public keyImplIncludes(any : OclAny) : String = 'implIncludes'/]	[**	indicates a header include specification for class implementations/]
 [query public keyHeaderIncludes(any : OclAny) : String = 'interfaceIncludes'/]	[**	indicates a header include specification for class interfaces /]
 [query public keyLibrary(any : OclAny) : String = 'library' /] [**	indicates a specification for a library to link /]
-[query public keyAggregationKind(any : OclAny) : String = 'aggregationKind'/]	[** indicates a AggregationKind specifiation, values: 'shared' -> indicates a back reference, otherwise -> no action/]
+[query public keySharedAggregation(any : OclAny) : String = 'sharedAggregation'/]	[** indicates a AggregationKind specifiation, values: 'shared' -> indicates a back reference, otherwise -> no action/]
 [query public keyNoBackReference(any : OclAny) : String = 'noBackReference'/] [** indicates that no back reference for a reference should exists/]
 [query public keyQualify(any : OclAny) : String = 'qualify' /] [**	indicates a type qualifier for an attribute /]
 [query public keyWeakptr(any : OclAny) : String = 'returnWeakPtr'/] [** indicates that an operation with upper=1 should return an weak pointer/]
