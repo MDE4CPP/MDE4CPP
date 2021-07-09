@@ -19,19 +19,6 @@
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
 
-[**
- * Helper for finding hidden functions (currently unused)
-*/]
-[query public getSuperClassOperations(aOperation : EOperation) : Set(EOperation) = aOperation.eContainingClass.eAllOperations->select(not (aOperation.eContainingClass = eContainingClass))->flatten() /]
-[query public hasOverrideInClass(aOperation : EOperation, aClass: EClass) : Boolean = aClass.eOperations->forAll(op | op.isOverrideOf(aOperation) ) /]
-
-[query public getHiddenFunctions(aOperation : EOperation) : Set(EOperation) = getSuperClassOperations()->select(op | not aOperation.isOverrideOf(op) and (aOperation.name = op.name) and (op.hasOverrideInClass(aOperation.eContainingClass) ))->flatten() /]
-[query public getClassWithHiddenFunctions(aOperation : EOperation) : Set(EClass) = aOperation.getHiddenFunctions().eContainingClass->asOrderedSet()->flatten()->sortedBy(name)/]
-
-[query public isOverride(aOperation : EOperation) : Boolean = not aOperation.getSuperClassOperations()->forAll(op | not aOperation.isOverrideOf(op) )/]
-[query public getOverideSuffix(aOperation : EOperation) : String = if aOperation.isOverride() then 'override' else '' endif  /]
-
-
 [***###########################################################################################
  * Section for creating the EAttribute elements in the model factory
 */]

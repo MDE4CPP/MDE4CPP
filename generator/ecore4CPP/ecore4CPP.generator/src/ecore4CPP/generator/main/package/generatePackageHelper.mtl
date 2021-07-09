@@ -26,10 +26,6 @@
 								anEPackage.eAllContents()->selectByKind(EClass).eReferences.eClass()
 						}->flatten()->selectByKind(EClass)->sortedBy(name)/]
 
-[template public generateDeletePrivatePackageMember(anENamedElement : ENamedElement)]
-[anENamedElement.getClassMemberName()/].reset();
-[/template]
-
 [template public generateModelElementGetter(anENamedElement : ENamedElement, anEPackage : EPackage, impl : Boolean) ? ( not hasImplOnly())]
 virtual std::shared_ptr<[metaModelTypeString(anENamedElement, anEPackage)/]> get[anENamedElement.getMemberNameUpperFirst()/]() const [abstractSufix(impl)/];
 
