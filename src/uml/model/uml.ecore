@@ -8285,7 +8285,7 @@
       <eAnnotations source="redefines" references="#//TemplateSignature/template"/>
       <eAnnotations source="subsets" references="#//RedefinableElement/redefinitionContext"/>
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="aggregationKind" value="shared"/>
+        <details key="sharedAggregation"/>
       </eAnnotations>
     </eStructuralFeatures>
   </eClassifiers>
