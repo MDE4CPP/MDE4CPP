@@ -27,7 +27,7 @@
 
 [/template]
 
-[template public generateUnionGetterCpp(aReference : EReference,aClass: EClass) ? (hasGetter() and aReference.isUnion() )]
+[template public generateUnionGetterCpp(aReference : EReference,aClass: EClass) ? (hasGetter() and aReference.isUnion() and (not aReference.doNotGenerate()))]
 [aReference.generateReferenceType()/] [aClass.name.toUpperFirst()/]Impl::[aReference.GetterName()/]() const
 {
 [if (not (aReference.upperBound = 1))]
@@ -52,7 +52,7 @@
 virtual [aReference.generateReferenceType()/] [aReference.GetterName()/]() const [abstractSufix(impl)/];
 [/template]
 
-[template public generateUnionGetterDeclaretaionBag(aReference : EReference, impl : EBoolean)? (hasGetter() and isUnion() )]
+[template public generateUnionGetterDeclaretaionBag(aReference : EReference, impl : EBoolean)? (hasGetter() and isUnion() and (not doNotGenerate()))]
 [aReference.generateDocumentation()/]
 virtual [aReference.generateReferenceType()/] [aReference.GetterName()/]() const [abstractSufix(impl)/];
 [/template]

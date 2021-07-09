@@ -139,7 +139,7 @@
 [/if]
 [/template]
 
-[query private isShared(aReference : EReference) : Boolean = if (aReference.hasKey(keyAggregationKind())) then aReference.valueKey(keyAggregationKind())='shared' else false endif/]
+[query private isShared(aReference : EReference) : Boolean = aReference.hasKey(keySharedAggregation())/]
 [query public isBackReference(aReference:EReference) : Boolean = aReference.container or isShared()/]
 [query public hasAbstractType(aReference : EReference) : Boolean = if (aReference.eType.oclIsKindOf(EClass)) then eType.oclAsType(EClass).abstract else false endif /]
 

@@ -39,7 +39,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 {
 	switch(featureID)
 	{
-	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->asOrderedSet()->sortedBy(name))]
+	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->reject(doNotGenerate())->asOrderedSet()->sortedBy(name))]
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
 [if (struct.eType.oclIsKindOf(EDataType))]
 			return eAny([struct.GetterName()/]()); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
@@ -87,7 +87,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::internalEIsSet(int featureID)
 {
 	switch(featureID)
 	{
-	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->asOrderedSet()->sortedBy(name))]
+	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->reject(doNotGenerate())->asOrderedSet()->sortedBy(name))]
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
 			return [struct.generateComparison()/]; //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 	[/for]
@@ -119,7 +119,7 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newVa
 {
 	switch(featureID)
 	{
-[for (struct : EStructuralFeature | aClass.eStructuralFeatures->select(changeable)->asOrderedSet()->sortedBy(name))]
+[for (struct : EStructuralFeature | aClass.eStructuralFeatures->select(changeable)->reject(doNotGenerate())->asOrderedSet()->sortedBy(name))]
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
 		{
 			// BOOST CAST
