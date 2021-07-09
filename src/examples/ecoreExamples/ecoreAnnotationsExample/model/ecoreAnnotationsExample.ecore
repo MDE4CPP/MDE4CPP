@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="ecoreAnnotationsExample" nsURI="http://www.example.org/ecoreAnnotationsExample"
+    nsPrefix="ecoreAnnotationsExample">
+  <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+    <details key="description" value="The &quot;GenModel&quot; annotation (source: http://www.eclipse.org/emf/2002/GenModel) is a standard&#xA;annotation of EMF which is reused in MDE4CPP. In MDE4CPP, only the DetailsEntry &quot;documentation&quot;&#xA;is taken into account. This can be used to add documentation to your model.&#xA;The documentation will be generated into the corresponding C++-files for model elements: EClass, EAttribute, EReference, EOpteration.&#xA;But of course, model documentation is useful beyond generation.&#xA;Examples can be found under corresponding instances in this model."/>
+    <details key="documentation" value="This model serves as an example model to explain the usage of pre-defined annotations for ecore models in MDE4CPP.&#xA;In ecore, annotations (metaclass EAnnotations) give the possibility to add additional information to a model, which could not be represented&#xA;using other ecore-concepts otherwise.&#xA;An EAnnotations hat two basic properties: &quot;source&quot; and &quot;references&quot;. The source serves as an ID (what kind of annotation is this?). &#xA;Using the &quot;references&quot; property, arbitrary model elements can be linked to the annotation (we will use this some times).&#xA;Furthermore, an EAnnotation can contain so-called DetailsEntries, which are used to concretize the information provided by the annotation.&#xA;A DetailsEntry is just a simple key-value-pair. The &quot;key&quot; property determines, which information it carries. &#xA;The &quot;value&quot; property contains the actual information.&#xA;&#xA;&#xA;In MDE4CPP, EAnnotations are used to provide additional information the the code generator which will result in certain behavior.&#xA;In this model, all pre-defined annotations that can be used with ecore models in MDE4CPP are explaned. You will find an example for each &#xA;possible annotation in the model.&#xA;Each annotation contains an additional &quot;description&quot; DetailsEntry, which is just used in this model to carry the description.&#xA;These are of course not required for real usage.&#xA;&#xA;NOTE: This model is not compilable, as all annotations shall be explained and some of them are inconsistent with one another."/>
+  </eAnnotations>
+  <eAnnotations source="http://tu-ilmenau.de/see/prepareApplication">
+    <details key="description" value="The &quot;prepareApplication&quot; EAnnotation (source: http://tu-ilmenau.de/see/prepareApplication) is used to specify &#xA;an application (i.e. main.cpp) that shall be generated for an ecore model. This main application can be executed once compiled.&#xA;&quot;prepareApplication&quot; can be placed under (child) the root package of an ecore model. Subpackages will not be taken into account&#xA;as there can only be one main application.&#xA;&#xA;Possible details entries: &#xA;&quot;body&quot;&#xA;&quot;includes&quot;"/>
+    <details key="body" value="This DetailsEntry can be used to define the body of the applications main function.&#xA;&#xA;Example:&#xA;&#xA;std::string hw = &quot;Hello World&quot;;&#xA;std::cout&lt;&lt;hw&lt;&lt;std::endl;"/>
+    <details key="includes" value="This DetailsEntry can be used to define additional include statements for labraries &#xA;to be included in the main application.&#xA;&#xA;NOTE: The include statements should be listed, a new line&#xA;for each statement (as the value of this DetailsEntry will be generated into the final code&#xA;as is).&#xA;&#xA;Example:&#xA;&#xA;#include &lt;cmath>&#xA;#include &lt;string>&#xA;"/>
+  </eAnnotations>
+  <eClassifiers xsi:type="ecore:EClass" name="Library">
+    <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+      <details key="description" value="The &quot;codegen&quot; annotation (source: http://tu-ilmenau.de/see/codegen) is one of the most powerful annotations in MDE4CPP.&#xA;As you might expect, it is used to specify additional &quot;stuff&quot; that should be generated for the parent element.&#xA;It can be used for several types of model elements.&#xA;This example shows the usage with model element EClass&#xA;&#xA;Possible DetailsEntries:&#xA;&quot;doNotGenerate&quot;&#xA;&quot;library&quot;&#xA;&quot;implIncludes&quot;&#xA;&quot;interfaceIncludes&quot;"/>
+      <details key="doNotGenerate" value="This DetailsEntry indicates, that the parent class should not be generated.&#xA;No additional information.&#xA;"/>
+      <details key="library" value="This DetailsEntry is used to define an additional library that should be linked when compiling the generated model code.&#xA;&#xA;NOTE: Only one library name for each &quot;library&quot; DetailsEntry.&#xA;&#xA;Example:&#xA;&#xA;libraryModel_ecore&#xA;"/>
+      <details key="implIncludes" value="This DetailsEntry can be used to add include statements for libraries, that shall be included in the implementation file of the generated C++ class.&#xA;&#xA;NOTE: The include statements should be listed, a new line&#xA;for each statement (as the value of this DetailsEntry will be generated into the final code&#xA;as is).&#xA;&#xA;Example:&#xA;&#xA;#include &quot;ecoreAnnotationsExample/Picture.hpp&quot;&#xA;#include &lt;vector>"/>
+      <details key="interfaceIncludes" value="This DetailsEntry can be used to add include statements for libraries, that shall be included in the interface file of the generated C++ class.&#xA;&#xA;NOTE: The include statements should be listed, a new line&#xA;for each statement (as the value of this DetailsEntry will be generated into the final code&#xA;as is).&#xA;&#xA;Example:&#xA;&#xA;#include &lt;iostream>&#xA;#include &lt;mutex>"/>
+    </eAnnotations>
+    <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+      <details key="documentation" value="This DetailsEntry is used to add documentation to a class.&#xA;&#xA;Example:&#xA;&#xA;Represents a library. It contains a set of books, as well as a set of authors who wrote these books."/>
+    </eAnnotations>
+    <eOperations name="printLibrary">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="description" value="The &quot;codegen&quot; annotation (source: http://tu-ilmenau.de/see/codegen) is one of the most powerful annotations in MDE4CPP.&#xA;As you might expect, it is used to specify additional &quot;stuff&quot; that should be generated for the parent element. &#xA;It can be used for several types of model elements.&#xA;This example shows the usage with model element EOperation&#xA;&#xA;Possible DetailsEntries:&#xA;&quot;body&quot;&#xA;&quot;const&quot;&#xA;&quot;doNoGenerate&quot;&#xA;&quot;returnWeakPtr&quot;&#xA;&quot;implOnly&quot;"/>
+        <details key="body" value="This DetailsEntry can be used to define the function body of the parent EOperation.&#xA;&#xA;Example:&#xA;&#xA;&#x9;std::shared_ptr&lt;Bag&lt;libraryModel_ecore::Book>> books = this->getBook();&#xA;&#x9;for(Bag&lt;libraryModel_ecore::Book>::const_iterator it=books->begin(); it!=books->end(); it++)&#xA;&#x9;{&#xA;&#x9;&#x9;std::cout &lt;&lt; &quot;The book &quot; &lt;&lt; (*it)->getName() &lt;&lt; std::endl;&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::cout &lt;&lt; &quot;\twas written by:&quot; &lt;&lt; std::endl;&#xA;&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt; Bag&lt;Author> > authors= (*it)->getAuthors();&#xA;&#x9;&#x9;&#x9;for(Bag&lt;Author>::const_iterator itA=authors->begin();itA!=authors->end();itA++)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;std::cout &lt;&lt; &quot;\t\t- &quot; &lt;&lt; (*itA)->getName() &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;std::cout &lt;&lt; &quot;\tIndex of Figures:&quot; &lt;&lt; std::endl;&#xA;&#xA;&#x9;&#x9;&#x9;std::shared_ptr&lt; Bag&lt;Picture> > pictures= (*it)->getPictures();&#xA;&#x9;&#x9;&#x9;for(Bag&lt;Picture>::const_iterator itP=pictures->begin();itP!=pictures->end();itP++)&#xA;&#x9;&#x9;&#x9;{&#xA;&#x9;&#x9;&#x9;&#x9;std::cout &lt;&lt; &quot;\t\t- &quot; &lt;&lt; (*itP)->getName() &lt;&lt; &quot; - Page number: &quot;&lt;&lt; (*itP)->getPageNumber() &lt;&lt; std::endl;&#xA;&#x9;&#x9;&#x9;}&#xA;&#x9;&#x9;}&#xA;&#x9;}"/>
+        <details key="const" value="This DetailsEntry is used to indicate, that the member function should be const.&#xA;No additional information."/>
+        <details key="doNotGenerate" value="This DetailsEntry indicates, that the parent operation should not be generated.&#xA;No additional information.&#xA;"/>
+        <details key="implOnly" value="The DetailsEntry determines, if the operation should only be generated for the implementation files of the resulting C++-class.&#xA;That means, that will not be accessible through the interface of the class.&#xA;&#xA;No additional information."/>
+        <details key="returnWeakPtr" value="This DetailsEntry determines, if the generated operation should return an std::weak_ptr instead of an std::shared_ptr (whcih is the default).&#xA;&#xA;No additional information."/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This DetailsEntry is used to add documentation to an operation.&#xA;&#xA;Example:&#xA;&#xA;Prints out the names of all books as well as their auhtors of the library object."/>
+      </eAnnotations>
+    </eOperations>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="book" upperBound="-1" eType="#//Book"
+        containment="true" eOpposite="#//Book/library">
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This DetailsEntry is used to add documentation to a reference.&#xA;&#xA;Example:&#xA;&#xA;Represents the books contained in the library."/>
+      </eAnnotations>
+      <eAnnotations source="union" references="#//Library/scienceBooks #//Library/philosophyBooks">
+        <details key="description" value="The &quot;union&quot; annotation (source: union) indicates, that this reference is a union of a number of subsetting references.&#xA;In this case for example, the set of all books in the library is a union of all science books and all philosophy books.&#xA;&#xA;No DetailsEntries. Subsets are references using the &quot;references&quot; property of EAnnotation."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="scienceBooks" upperBound="-1"
+        eType="#//Book">
+      <eAnnotations source="subsets" references="#//Library/book">
+        <details key="description" value="The &quot;subsets&quot; annotation (source: subsets) indicates, that this reference is a subset of other references.&#xA;In this case for example, science books is a subset of all books.&#xA;&#xA;No DetailsEntries. Unions is referenced using the &quot;references&quot; property of EAnnotation."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="philosophyBooks" upperBound="-1"
+        eType="#//Book">
+      <eAnnotations source="subsets" references="#//Library/book">
+        <details key="description" value="The &quot;subsets&quot; annotation (source: subsets) indicates, that this reference is a subset of other references.&#xA;In this case for example, philisopy books is a subset of all books.&#xA;&#xA;No DetailsEntries. Unions is referenced using the &quot;references&quot; property of EAnnotation."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="authors" upperBound="-1"
+        eType="#//Author" containment="true" eOpposite="#//Author/library"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="Name" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Book" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="authors" upperBound="-1"
+        eType="#//Author"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="library" eType="#//Library"
+        eOpposite="#//Library/book"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="pictures" upperBound="-1"
+        eType="#//Picture" containment="true" eOpposite="#//Picture/book"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Author" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="library" eType="#//Library"
+        eOpposite="#//Library/authors"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Picture" eSuperTypes="#//NamedElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="book" eType="#//Book" eOpposite="#//Book/pictures">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="description" value="The &quot;codegen&quot; annotation (source: http://tu-ilmenau.de/see/codegen) is one of the most powerful annotations in MDE4CPP.&#xA;As you might expect, it is used to specify additional &quot;stuff&quot; that should be generated for the parent element.&#xA;It can be used for several types of model elements.&#xA;This example shows the usage with model element EReference&#xA;&#xA;Possible DetailsEntries:&#xA;&quot;doNotGenerate&quot;&#xA;&quot;getterName&quot;&#xA;&quot;setterName&quot;&#xA;&quot;getterBody&quot;&#xA;&quot;setterBody&quot;&#xA;&quot;aggregationKind&quot;&#xA;&quot;noBackReference&quot;&#xA;&quot;qualify&quot;"/>
+        <details key="doNotGenerate" value="This DetailsEntry indicates, that the parent reference should not be generated.&#xA;No additional information.&#xA;"/>
+        <details key="getterBody" value="This DetailsEntry is used to specify the body of the getter function of this reference.&#xA;By default, the generated getter function will only return the corresponding attribute value.&#xA;This can be extended here.&#xA;&#xA;Example:&#xA;&#xA;&#x9;std::cout&lt;&lt;&quot;This is my adapted getter!&quot;&lt;&lt;std::endl;&#xA;&#x9;//do some stuff&#xA;&#x9;return m_book;"/>
+        <details key="getterName" value="This DetailsEntry is used to specify the name of the getter function of this reference.&#xA;&#xA;Example:&#xA;&#xA;mySpecialGetter"/>
+        <details key="noBackReference" value="This DetailsEntry is used to supress the generation of a back references between container and contained element of a modeled &quot;containment&quot; reference.&#xA;No additional information."/>
+        <details key="setterBody" value="This DetailsEntry is used to specify the body of the setter function of this reference.&#xA;By default, the generated getter function will only set the corresponding attribute value.&#xA;This can be extended here.&#xA;&#xA;NOTE: This is only applicable for references with multiplicity [0..1] or [1..1].&#xA;References with [*] multiplicity do not have setter functions.&#xA;&#xA;Example:&#xA;&#xA;&#x9;if(_book == nullptr)&#xA;&#x9;{&#xA;&#x9;&#x9;std::cout&lt;&lt;&quot;_book was null, could not set&quot;&lt;&lt;std::endl;&#xA;&#x9;&#x9;return;&#xA;&#x9;}&#xA;&#xA;&#x9;m_book = _book;"/>
+        <details key="setterName" value="This DetailsEntry is used to specify the name of the setter function of this reference.&#xA;&#xA;NOTE: This is only applicable for references with multiplicity [0..1] or [1..1].&#xA;References with [*] multiplicity do not have setter functions.&#xA;&#xA;Example:&#xA;&#xA;mySpecialSetter"/>
+        <details key="sharedAggregation" value="This DetailsEntry is only used to substitute the aggregation kind &quot;shared&quot; of UML in ecore.&#xA;No additional information."/>
+        <details key="qualify" value="This DetailsEntry is used to add qualifiers to the generated attribute of this reference.&#xA;&#xA;Examples:&#xA;&#xA;&quot;const&quot; ; &quot;volatile&quot; ; &quot;mutable&quot; ; &quot;const volatile&quot; ; ..."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pageNumber" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Integer">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="description" value="The &quot;codegen&quot; annotation (source: http://tu-ilmenau.de/see/codegen) is one of the most powerful annotations in MDE4CPP.&#xA;As you might expect, it is used to specify additional &quot;stuff&quot; that should be generated for the parent element.&#xA;It can be used for several types of model elements.&#xA;This example shows the usage with model element EAttribute.&#xA;&#xA;Possible DetailsEntries:&#xA;&quot;doNotGenerate&quot;&#xA;&quot;getterBody&quot;&#xA;&quot;getterName&quot;&#xA;&quot;implSetterOnly&quot;&#xA;&quot;setterBody&quot;&#xA;&quot;setterName&quot;&#xA;&quot;qualify&quot;"/>
+        <details key="doNotGenerate" value="This DetailsEntry indicates, that the parent attribute should not be generated.&#xA;No additional information.&#xA;"/>
+        <details key="getterBody" value="This DetailsEntry is used to specify the body of the getter function of this attribute.&#xA;By default, the generated getter function will only return the corresponding attribute value.&#xA;This can be extended here.&#xA;&#xA;Example:&#xA;&#xA;&#x9;std::cout&lt;&lt;&quot;This is my adapted getter!&quot;&lt;&lt;std::endl;&#xA;&#x9;//do some stuff&#xA;&#x9;return m_pageNumber;"/>
+        <details key="getterName" value="This DetailsEntry is used to specify the name of the getter function of this attribute.&#xA;&#xA;Example:&#xA;&#xA;mySpecialGetter"/>
+        <details key="implSetterOnly" value="This DetailsEntry is used to determine, that the setter of this attribute will only exists on the implementation level of the generated C++ class.&#xA;It will not be accessable via the interface of the class.&#xA;No additional Information."/>
+        <details key="setterBody" value="This DetailsEntry is used to specify the body of the setter function of this attribute.&#xA;By default, the generated getter function will only set the corresponding attribute value.&#xA;This can be extended here.&#xA;&#xA;NOTE: This is only applicable for attributes with multiplicity [0..1] or [1..1].&#xA;Attributes with [*] multiplicity do not have setter functions.&#xA;&#xA;Example:&#xA;&#xA;&#x9;if(_pageNumber &lt; 0)&#xA;&#x9;{&#xA;&#x9;&#x9;std::cout&lt;&lt;&quot;Error: negative page number&quot;&lt;&lt;std::endl;&#xA;&#x9;&#x9;return;&#xA;&#x9;}&#xA;&#xA;&#x9;_pageNumber = m_pageNumber;"/>
+        <details key="setterName" value="This DetailsEntry is used to specify the name of the setter function of this attribute.&#xA;&#xA;NOTE: This is only applicable for attributes with multiplicity [0..1] or [1..1].&#xA;Attributes with [*] multiplicity do not have setter functions.&#xA;&#xA;Example:&#xA;&#xA;mySpecialSetter"/>
+        <details key="qualify" value="This DetailsEntry is used to add qualifiers to the generated attribute of this attribute.&#xA;&#xA;Examples:&#xA;&#xA;&quot;const&quot; ; &quot;volatile&quot; ; &quot;mutable&quot; ; &quot;const volatile&quot; ; ..."/>
+      </eAnnotations>
+      <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
+        <details key="documentation" value="This DetailsEntry is used to add documentation to an attribute.&#xA;&#xA;Example:&#xA;&#xA;Represents the page number on which the picture is depicted in the book."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="pictureCaption" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString">
+      <eAnnotations source="redefines" references="#//NamedElement/Name">
+        <details key="description" value="The &quot;redefines&quot; annotation (source: redefines) indicates, that this attribute redefines an attribute of a (direct or indirect) superclass.&#xA;In this case for example, the caption of a picture redefines the name of NamedElement.&#xA;&#xA;NOTE: This annotation is also applicable for EReferences.&#xA;&#xA;No DetailsEntries. The redefined attribute is referenced using the &quot;references&quot; property of EAnnotation."/>
+      </eAnnotations>
+    </eStructuralFeatures>
+  </eClassifiers>
+</ecore:EPackage>
