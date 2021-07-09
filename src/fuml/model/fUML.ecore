@@ -1566,7 +1566,7 @@
         <eStructuralFeatures xsi:type="ecore:EReference" name="actionActivation" ordered="false"
             eType="#//Semantics/Actions/ActionActivation" eOpposite="#//Semantics/Actions/ActionActivation/pinActivation">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="aggregationKind" value="shared"/>
+            <details key="sharedAggregation"/>
           </eAnnotations>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="pin" lowerBound="1"
@@ -1913,14 +1913,14 @@
             lowerBound="1" eType="#//Semantics/Activities/ActivityNodeActivation"
             eOpposite="#//Semantics/Activities/ActivityNodeActivation/outgoingEdges">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="aggregationKind" value="shared"/>
+            <details key="sharedAggregation"/>
           </eAnnotations>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="target" ordered="false"
             lowerBound="1" eType="#//Semantics/Activities/ActivityNodeActivation"
             eOpposite="#//Semantics/Activities/ActivityNodeActivation/incomingEdges">
           <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-            <details key="aggregationKind" value="shared"/>
+            <details key="sharedAggregation"/>
           </eAnnotations>
         </eStructuralFeatures>
         <eStructuralFeatures xsi:type="ecore:EReference" name="offers" ordered="false"
