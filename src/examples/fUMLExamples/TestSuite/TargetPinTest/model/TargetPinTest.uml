@@ -1,146 +1,173 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_STXVsF0WEeq5aMbnrvR8VA" name="TargetPinTest">
-  <eAnnotations xmi:id="_kcDSAF0ZEeq5aMbnrvR8VA" source="prepareApplication">
-    <details xmi:id="_kcDSAV0ZEeq5aMbnrvR8VA" key="sourceCodeMain" value="&#x9;std::shared_ptr&lt;Controller> controller = factory->createController();&#xA;&#x9;std::shared_ptr&lt;Bag&lt;XModule>> modules = controller->getModules();&#xA;&#x9;modules->push_back(factory->createClassA());&#xA;&#x9;modules->push_back(factory->createClassB());&#xA;&#x9;modules->push_back(factory->createClassC());&#xA;&#xA;&#x9;std::cout &lt;&lt; &quot;DO MANUALLY&quot; &lt;&lt; std::endl;&#xA;&#xA;&#x9;int size = (int) modules->size();&#xA;&#x9;for (int i=0; i&lt;size; i++)&#xA;&#x9;{&#xA;&#x9;&#x9;std::shared_ptr&lt;XModule> m = modules->at(i);&#xA;&#x9;&#x9;m->print();&#xA;&#x9;}&#xA;&#xA;&#x9;std::cout &lt;&lt; &quot;DONE\r\n#######################################\r\nDO ACTIVITY&quot; &lt;&lt; std::endl;&#xA;&#xA;&#x9;controller->run();&#xA;&#xA;&#x9;std::cout &lt;&lt; &quot;DONE\r\n#######################################&quot; &lt;&lt; std::endl;"/>
-  </eAnnotations>
-  <packagedElement xmi:type="uml:Class" xmi:id="_b8fzIF0WEeq5aMbnrvR8VA" name="Controller" visibility="public">
-    <ownedAttribute xmi:id="_ql-lAl0WEeq5aMbnrvR8VA" name="modules" type="_eCnyIF0WEeq5aMbnrvR8VA" aggregation="composite" association="_ql00AF0WEeq5aMbnrvR8VA">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ql-lA10WEeq5aMbnrvR8VA"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ql-lBF0WEeq5aMbnrvR8VA" value="*"/>
-    </ownedAttribute>
-    <ownedBehavior xmi:type="uml:Activity" xmi:id="_GjIMYF0XEeq5aMbnrvR8VA" name="Run test" specification="_mlDwcF0aEeq5aMbnrvR8VA" node="_L-sdMF0XEeq5aMbnrvR8VA _Z214wF0XEeq5aMbnrvR8VA _z4W54F0XEeq5aMbnrvR8VA _Q7JToF0YEeq5aMbnrvR8VA _kSVx0F0YEeq5aMbnrvR8VA _vxv0YF0YEeq5aMbnrvR8VA _zel5kF0YEeq5aMbnrvR8VA _53II8F0YEeq5aMbnrvR8VA _KnmVIF0cEeq5aMbnrvR8VA">
-      <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_TQ1_sF0YEeq5aMbnrvR8VA" name="obIncrementIndex">
-        <ownedParameter xmi:id="_V-mmcF0YEeq5aMbnrvR8VA" name="index">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-        </ownedParameter>
-        <ownedParameter xmi:id="_WSaTQF0YEeq5aMbnrvR8VA" name="nextIndex" direction="return">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_bc8YIeLsEeur7cjoMTUC9A">
+  <uml:Model xmi:id="_STXVsF0WEeq5aMbnrvR8VA" name="TargetPinTest">
+    <packagedElement xmi:type="uml:Class" xmi:id="_b8fzIF0WEeq5aMbnrvR8VA" name="Controller" visibility="public">
+      <ownedAttribute xmi:id="_ql-lAl0WEeq5aMbnrvR8VA" name="modules" type="_eCnyIF0WEeq5aMbnrvR8VA" aggregation="composite" association="_ql00AF0WEeq5aMbnrvR8VA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ql-lA10WEeq5aMbnrvR8VA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ql-lBF0WEeq5aMbnrvR8VA" value="*"/>
+      </ownedAttribute>
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="_GjIMYF0XEeq5aMbnrvR8VA" name="Run test" specification="_mlDwcF0aEeq5aMbnrvR8VA" node="_L-sdMF0XEeq5aMbnrvR8VA _Z214wF0XEeq5aMbnrvR8VA _z4W54F0XEeq5aMbnrvR8VA _Q7JToF0YEeq5aMbnrvR8VA _kSVx0F0YEeq5aMbnrvR8VA _vxv0YF0YEeq5aMbnrvR8VA _zel5kF0YEeq5aMbnrvR8VA _53II8F0YEeq5aMbnrvR8VA _KnmVIF0cEeq5aMbnrvR8VA">
+        <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_TQ1_sF0YEeq5aMbnrvR8VA" name="obIncrementIndex">
+          <ownedParameter xmi:id="_V-mmcF0YEeq5aMbnrvR8VA" name="index">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedParameter>
+          <ownedParameter xmi:id="_WSaTQF0YEeq5aMbnrvR8VA" name="nextIndex" direction="return">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </ownedParameter>
+          <language>CPP</language>
+          <body>nextIndex = index+1;</body>
+          <body>//INCLUDE</body>
+          <body>//LIBRARY</body>
+        </ownedBehavior>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_Yp-dAF0XEeq5aMbnrvR8VA" target="_Z214wF0XEeq5aMbnrvR8VA" source="_L-sdMF0XEeq5aMbnrvR8VA">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_YqHm8F0XEeq5aMbnrvR8VA" name="Initial1_To_ReadSelfAction1_guard" value="true"/>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_YqHm8V0XEeq5aMbnrvR8VA" name="Initial1_To_ReadSelfAction1_weight"/>
+        </edge>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_t3SS0F0YEeq5aMbnrvR8VA" target="_Q7JToF0YEeq5aMbnrvR8VA" source="_kSVx0F0YEeq5aMbnrvR8VA">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_t3SS0V0YEeq5aMbnrvR8VA" name="print_To_increment index_guard" value="true"/>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_t3SS0l0YEeq5aMbnrvR8VA" name="print_To_increment index_weight"/>
+        </edge>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_w6MqMF0YEeq5aMbnrvR8VA" target="_vxv0YF0YEeq5aMbnrvR8VA" source="_nf0P4F0XEeq5aMbnrvR8VA"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_ygf5oF0YEeq5aMbnrvR8VA" target="_vxv0YF0YEeq5aMbnrvR8VA" source="_cRzC0F0YEeq5aMbnrvR8VA"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_3JBj8F0YEeq5aMbnrvR8VA" target="_zel5kF0YEeq5aMbnrvR8VA" source="_vxv0YF0YEeq5aMbnrvR8VA"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_7bh68F0YEeq5aMbnrvR8VA" target="_53II8F0YEeq5aMbnrvR8VA" source="_zel5kF0YEeq5aMbnrvR8VA">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_TDnmkF0ZEeq5aMbnrvR8VA"/>
+        </edge>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_T5CLoF0ZEeq5aMbnrvR8VA" target="_GbZXQV0YEeq5aMbnrvR8VA" source="_KnmVIF0cEeq5aMbnrvR8VA">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_WWlzMF0ZEeq5aMbnrvR8VA" value="true"/>
+        </edge>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_YHskcF0ZEeq5aMbnrvR8VA" target="_kSVx0V0YEeq5aMbnrvR8VA" source="_GbZXQF0YEeq5aMbnrvR8VA"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_MWQPUF0cEeq5aMbnrvR8VA" target="_KnmVIF0cEeq5aMbnrvR8VA" source="_zel5kF0YEeq5aMbnrvR8VA"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_Mz9fAF0cEeq5aMbnrvR8VA" target="_fkil8F0YEeq5aMbnrvR8VA" source="_KnmVIF0cEeq5aMbnrvR8VA"/>
+        <node xmi:type="uml:InitialNode" xmi:id="_L-sdMF0XEeq5aMbnrvR8VA" name="Initial1" outgoing="_Yp-dAF0XEeq5aMbnrvR8VA"/>
+        <node xmi:type="uml:CallBehaviorAction" xmi:id="_Z214wF0XEeq5aMbnrvR8VA" name="initializeIndex" incoming="_Yp-dAF0XEeq5aMbnrvR8VA" behavior="_dE6XQF0XEeq5aMbnrvR8VA">
+          <result xmi:id="_nf0P4F0XEeq5aMbnrvR8VA" name="index" outgoing="_w6MqMF0YEeq5aMbnrvR8VA">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </result>
+        </node>
+        <node xmi:type="uml:CallOperationAction" xmi:id="_z4W54F0XEeq5aMbnrvR8VA" name="getModulesAtIndex" operation="_1zr-IF0XEeq5aMbnrvR8VA">
+          <argument xmi:id="_GbZXQV0YEeq5aMbnrvR8VA" name="index" incoming="_T5CLoF0ZEeq5aMbnrvR8VA">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </argument>
+          <result xmi:id="_GbZXQF0YEeq5aMbnrvR8VA" name="module" outgoing="_YHskcF0ZEeq5aMbnrvR8VA" type="_eCnyIF0WEeq5aMbnrvR8VA"/>
+          <target xmi:id="_z4W54V0XEeq5aMbnrvR8VA" name="self" type="_b8fzIF0WEeq5aMbnrvR8VA"/>
+        </node>
+        <node xmi:type="uml:CallBehaviorAction" xmi:id="_Q7JToF0YEeq5aMbnrvR8VA" name="increment index" incoming="_t3SS0F0YEeq5aMbnrvR8VA" behavior="_TQ1_sF0YEeq5aMbnrvR8VA">
+          <argument xmi:id="_fkil8F0YEeq5aMbnrvR8VA" name="index" incoming="_Mz9fAF0cEeq5aMbnrvR8VA">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </argument>
+          <result xmi:id="_cRzC0F0YEeq5aMbnrvR8VA" name="nextIndex" outgoing="_ygf5oF0YEeq5aMbnrvR8VA">
+            <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+          </result>
+        </node>
+        <node xmi:type="uml:CallOperationAction" xmi:id="_kSVx0F0YEeq5aMbnrvR8VA" name="print" outgoing="_t3SS0F0YEeq5aMbnrvR8VA" operation="_g8fiQF0WEeq5aMbnrvR8VA">
+          <target xmi:id="_kSVx0V0YEeq5aMbnrvR8VA" name="target" incoming="_YHskcF0ZEeq5aMbnrvR8VA" type="_eCnyIF0WEeq5aMbnrvR8VA"/>
+        </node>
+        <node xmi:type="uml:MergeNode" xmi:id="_vxv0YF0YEeq5aMbnrvR8VA" name="Merge1" incoming="_w6MqMF0YEeq5aMbnrvR8VA _ygf5oF0YEeq5aMbnrvR8VA" outgoing="_3JBj8F0YEeq5aMbnrvR8VA"/>
+        <node xmi:type="uml:DecisionNode" xmi:id="_zel5kF0YEeq5aMbnrvR8VA" name="Decision1" incoming="_3JBj8F0YEeq5aMbnrvR8VA" outgoing="_7bh68F0YEeq5aMbnrvR8VA _MWQPUF0cEeq5aMbnrvR8VA" decisionInput="_-HgZAF0YEeq5aMbnrvR8VA"/>
+        <node xmi:type="uml:ActivityFinalNode" xmi:id="_53II8F0YEeq5aMbnrvR8VA" name="ActivityFinal1" incoming="_7bh68F0YEeq5aMbnrvR8VA"/>
+        <node xmi:type="uml:ForkNode" xmi:id="_KnmVIF0cEeq5aMbnrvR8VA" name="Fork1" incoming="_MWQPUF0cEeq5aMbnrvR8VA" outgoing="_T5CLoF0ZEeq5aMbnrvR8VA _Mz9fAF0cEeq5aMbnrvR8VA"/>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_dE6XQF0XEeq5aMbnrvR8VA" name="obInitializeIndex">
+        <ownedParameter xmi:id="_fYWZgF0XEeq5aMbnrvR8VA" name="index" direction="return">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
         </ownedParameter>
         <language>CPP</language>
-        <body>nextIndex = index+1;</body>
+        <body>index = 0;</body>
         <body>//INCLUDE</body>
         <body>//LIBRARY</body>
       </ownedBehavior>
-      <edge xmi:type="uml:ControlFlow" xmi:id="_Yp-dAF0XEeq5aMbnrvR8VA" target="_Z214wF0XEeq5aMbnrvR8VA" source="_L-sdMF0XEeq5aMbnrvR8VA">
-        <guard xmi:type="uml:LiteralBoolean" xmi:id="_YqHm8F0XEeq5aMbnrvR8VA" name="Initial1_To_ReadSelfAction1_guard" value="true"/>
-        <weight xmi:type="uml:LiteralInteger" xmi:id="_YqHm8V0XEeq5aMbnrvR8VA" name="Initial1_To_ReadSelfAction1_weight"/>
-      </edge>
-      <edge xmi:type="uml:ControlFlow" xmi:id="_t3SS0F0YEeq5aMbnrvR8VA" target="_Q7JToF0YEeq5aMbnrvR8VA" source="_kSVx0F0YEeq5aMbnrvR8VA">
-        <guard xmi:type="uml:LiteralBoolean" xmi:id="_t3SS0V0YEeq5aMbnrvR8VA" name="print_To_increment index_guard" value="true"/>
-        <weight xmi:type="uml:LiteralInteger" xmi:id="_t3SS0l0YEeq5aMbnrvR8VA" name="print_To_increment index_weight"/>
-      </edge>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_w6MqMF0YEeq5aMbnrvR8VA" target="_vxv0YF0YEeq5aMbnrvR8VA" source="_nf0P4F0XEeq5aMbnrvR8VA"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_ygf5oF0YEeq5aMbnrvR8VA" target="_vxv0YF0YEeq5aMbnrvR8VA" source="_cRzC0F0YEeq5aMbnrvR8VA"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_3JBj8F0YEeq5aMbnrvR8VA" target="_zel5kF0YEeq5aMbnrvR8VA" source="_vxv0YF0YEeq5aMbnrvR8VA"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_7bh68F0YEeq5aMbnrvR8VA" target="_53II8F0YEeq5aMbnrvR8VA" source="_zel5kF0YEeq5aMbnrvR8VA">
-        <guard xmi:type="uml:LiteralBoolean" xmi:id="_TDnmkF0ZEeq5aMbnrvR8VA"/>
-      </edge>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_T5CLoF0ZEeq5aMbnrvR8VA" target="_GbZXQV0YEeq5aMbnrvR8VA" source="_KnmVIF0cEeq5aMbnrvR8VA">
-        <guard xmi:type="uml:LiteralBoolean" xmi:id="_WWlzMF0ZEeq5aMbnrvR8VA" value="true"/>
-      </edge>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_YHskcF0ZEeq5aMbnrvR8VA" target="_kSVx0V0YEeq5aMbnrvR8VA" source="_GbZXQF0YEeq5aMbnrvR8VA"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_MWQPUF0cEeq5aMbnrvR8VA" target="_KnmVIF0cEeq5aMbnrvR8VA" source="_zel5kF0YEeq5aMbnrvR8VA"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_Mz9fAF0cEeq5aMbnrvR8VA" target="_fkil8F0YEeq5aMbnrvR8VA" source="_KnmVIF0cEeq5aMbnrvR8VA"/>
-      <node xmi:type="uml:InitialNode" xmi:id="_L-sdMF0XEeq5aMbnrvR8VA" name="Initial1" outgoing="_Yp-dAF0XEeq5aMbnrvR8VA"/>
-      <node xmi:type="uml:CallBehaviorAction" xmi:id="_Z214wF0XEeq5aMbnrvR8VA" name="initializeIndex" incoming="_Yp-dAF0XEeq5aMbnrvR8VA" behavior="_dE6XQF0XEeq5aMbnrvR8VA">
-        <result xmi:id="_nf0P4F0XEeq5aMbnrvR8VA" name="index" outgoing="_w6MqMF0YEeq5aMbnrvR8VA">
+      <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_-HgZAF0YEeq5aMbnrvR8VA" name="decide">
+        <ownedParameter xmi:id="_Fv2DYF0ZEeq5aMbnrvR8VA" name="index">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-        </result>
-      </node>
-      <node xmi:type="uml:CallOperationAction" xmi:id="_z4W54F0XEeq5aMbnrvR8VA" name="getModulesAtIndex" operation="_1zr-IF0XEeq5aMbnrvR8VA">
-        <argument xmi:id="_GbZXQV0YEeq5aMbnrvR8VA" name="index" incoming="_T5CLoF0ZEeq5aMbnrvR8VA">
+        </ownedParameter>
+        <ownedParameter xmi:id="_HyvIMF0ZEeq5aMbnrvR8VA" name="result" direction="return">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
+        </ownedParameter>
+        <language>CPP</language>
+        <body>result = (index &lt; (int) context->getModules()->size());</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_vySDEF0cEeq5aMbnrvR8VA" name="obGetModulesAtIndex" specification="_1zr-IF0XEeq5aMbnrvR8VA">
+        <ownedParameter xmi:id="_xUgq0F0cEeq5aMbnrvR8VA" name="index">
           <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-        </argument>
-        <result xmi:id="_GbZXQF0YEeq5aMbnrvR8VA" name="module" outgoing="_YHskcF0ZEeq5aMbnrvR8VA" type="_eCnyIF0WEeq5aMbnrvR8VA"/>
-        <target xmi:id="_z4W54V0XEeq5aMbnrvR8VA" name="self" type="_b8fzIF0WEeq5aMbnrvR8VA"/>
-      </node>
-      <node xmi:type="uml:CallBehaviorAction" xmi:id="_Q7JToF0YEeq5aMbnrvR8VA" name="increment index" incoming="_t3SS0F0YEeq5aMbnrvR8VA" behavior="_TQ1_sF0YEeq5aMbnrvR8VA">
-        <argument xmi:id="_fkil8F0YEeq5aMbnrvR8VA" name="index" incoming="_Mz9fAF0cEeq5aMbnrvR8VA">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-        </argument>
-        <result xmi:id="_cRzC0F0YEeq5aMbnrvR8VA" name="nextIndex" outgoing="_ygf5oF0YEeq5aMbnrvR8VA">
-          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-        </result>
-      </node>
-      <node xmi:type="uml:CallOperationAction" xmi:id="_kSVx0F0YEeq5aMbnrvR8VA" name="print" outgoing="_t3SS0F0YEeq5aMbnrvR8VA" operation="_g8fiQF0WEeq5aMbnrvR8VA">
-        <target xmi:id="_kSVx0V0YEeq5aMbnrvR8VA" name="target" incoming="_YHskcF0ZEeq5aMbnrvR8VA" type="_eCnyIF0WEeq5aMbnrvR8VA"/>
-      </node>
-      <node xmi:type="uml:MergeNode" xmi:id="_vxv0YF0YEeq5aMbnrvR8VA" name="Merge1" incoming="_w6MqMF0YEeq5aMbnrvR8VA _ygf5oF0YEeq5aMbnrvR8VA" outgoing="_3JBj8F0YEeq5aMbnrvR8VA"/>
-      <node xmi:type="uml:DecisionNode" xmi:id="_zel5kF0YEeq5aMbnrvR8VA" name="Decision1" incoming="_3JBj8F0YEeq5aMbnrvR8VA" outgoing="_7bh68F0YEeq5aMbnrvR8VA _MWQPUF0cEeq5aMbnrvR8VA" decisionInput="_-HgZAF0YEeq5aMbnrvR8VA"/>
-      <node xmi:type="uml:ActivityFinalNode" xmi:id="_53II8F0YEeq5aMbnrvR8VA" name="ActivityFinal1" incoming="_7bh68F0YEeq5aMbnrvR8VA"/>
-      <node xmi:type="uml:ForkNode" xmi:id="_KnmVIF0cEeq5aMbnrvR8VA" name="Fork1" incoming="_MWQPUF0cEeq5aMbnrvR8VA" outgoing="_T5CLoF0ZEeq5aMbnrvR8VA _Mz9fAF0cEeq5aMbnrvR8VA"/>
-    </ownedBehavior>
-    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_dE6XQF0XEeq5aMbnrvR8VA" name="obInitializeIndex">
-      <ownedParameter xmi:id="_fYWZgF0XEeq5aMbnrvR8VA" name="index" direction="return">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-      </ownedParameter>
-      <language>CPP</language>
-      <body>index = 0;</body>
-      <body>//INCLUDE</body>
-      <body>//LIBRARY</body>
-    </ownedBehavior>
-    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_-HgZAF0YEeq5aMbnrvR8VA" name="decide">
-      <eAnnotations xmi:id="_DwjFIF0ZEeq5aMbnrvR8VA" source="http://sse.tu-ilmenau.de/codegen">
-        <details xmi:id="_DwjFIV0ZEeq5aMbnrvR8VA" key="generateContextVariable" value="true"/>
-      </eAnnotations>
-      <ownedParameter xmi:id="_Fv2DYF0ZEeq5aMbnrvR8VA" name="index">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-      </ownedParameter>
-      <ownedParameter xmi:id="_HyvIMF0ZEeq5aMbnrvR8VA" name="result" direction="return">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Boolean"/>
-      </ownedParameter>
-      <language>CPP</language>
-      <body>result = (index &lt; (int) context->getModules()->size());</body>
-    </ownedBehavior>
-    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_vySDEF0cEeq5aMbnrvR8VA" name="obGetModulesAtIndex" specification="_1zr-IF0XEeq5aMbnrvR8VA">
-      <eAnnotations xmi:id="_-fHFkFAcEeukhN12il4vjA" source="noExecution"/>
-      <ownedParameter xmi:id="_xUgq0F0cEeq5aMbnrvR8VA" name="index">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-      </ownedParameter>
-      <ownedParameter xmi:id="_xUgq0V0cEeq5aMbnrvR8VA" name="module" type="_eCnyIF0WEeq5aMbnrvR8VA" direction="return"/>
-      <language>CPP</language>
-      <body>module = m_modules->at(index);&#xD;
+        </ownedParameter>
+        <ownedParameter xmi:id="_xUgq0V0cEeq5aMbnrvR8VA" name="module" type="_eCnyIF0WEeq5aMbnrvR8VA" direction="return"/>
+        <language>CPP</language>
+        <body>module = m_modules->at(index);&#xD;
 std::cout &lt;&lt; &quot;    (type of module at index &quot; &lt;&lt; index &lt;&lt; &quot;: &quot; &lt;&lt; module->getMetaClass()->getName() &lt;&lt; &quot;)&quot; &lt;&lt; std::endl;</body>
-    </ownedBehavior>
-    <ownedOperation xmi:id="_1zr-IF0XEeq5aMbnrvR8VA" name="getModulesAtIndex" method="_vySDEF0cEeq5aMbnrvR8VA">
-      <ownedParameter xmi:id="_3DeLAF0XEeq5aMbnrvR8VA" name="index">
-        <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
-      </ownedParameter>
-      <ownedParameter xmi:id="_3U4EEF0XEeq5aMbnrvR8VA" name="module" type="_eCnyIF0WEeq5aMbnrvR8VA" direction="return"/>
-    </ownedOperation>
-    <ownedOperation xmi:id="_mlDwcF0aEeq5aMbnrvR8VA" name="run" method="_GjIMYF0XEeq5aMbnrvR8VA"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Interface" xmi:id="_eCnyIF0WEeq5aMbnrvR8VA" name="XModule" visibility="public">
-    <ownedOperation xmi:id="_g8fiQF0WEeq5aMbnrvR8VA" name="print"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_iHmDcF0WEeq5aMbnrvR8VA" name="ClassA" visibility="public">
-    <interfaceRealization xmi:id="_mVoKIF0WEeq5aMbnrvR8VA" client="_iHmDcF0WEeq5aMbnrvR8VA" supplier="_eCnyIF0WEeq5aMbnrvR8VA" contract="_eCnyIF0WEeq5aMbnrvR8VA"/>
-    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_21tRQF0WEeq5aMbnrvR8VA" name="obPrintA" specification="_lsz2oF0WEeq5aMbnrvR8VA">
+      </ownedBehavior>
+      <ownedOperation xmi:id="_1zr-IF0XEeq5aMbnrvR8VA" name="getModulesAtIndex" method="_vySDEF0cEeq5aMbnrvR8VA">
+        <ownedParameter xmi:id="_3DeLAF0XEeq5aMbnrvR8VA" name="index">
+          <type xmi:type="uml:PrimitiveType" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#Integer"/>
+        </ownedParameter>
+        <ownedParameter xmi:id="_3U4EEF0XEeq5aMbnrvR8VA" name="module" type="_eCnyIF0WEeq5aMbnrvR8VA" direction="return"/>
+      </ownedOperation>
+      <ownedOperation xmi:id="_mlDwcF0aEeq5aMbnrvR8VA" name="run" method="_GjIMYF0XEeq5aMbnrvR8VA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_eCnyIF0WEeq5aMbnrvR8VA" name="XModule" visibility="public">
+      <ownedOperation xmi:id="_g8fiQF0WEeq5aMbnrvR8VA" name="print"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_iHmDcF0WEeq5aMbnrvR8VA" name="ClassA" visibility="public">
+      <interfaceRealization xmi:id="_mVoKIF0WEeq5aMbnrvR8VA" client="_iHmDcF0WEeq5aMbnrvR8VA" supplier="_eCnyIF0WEeq5aMbnrvR8VA" contract="_eCnyIF0WEeq5aMbnrvR8VA"/>
+      <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_21tRQF0WEeq5aMbnrvR8VA" name="obPrintA" specification="_lsz2oF0WEeq5aMbnrvR8VA">
+        <language>CPP</language>
+        <body>std::cout &lt;&lt; &quot;printing from ClassA&quot; &lt;&lt; std::endl;</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_lsz2oF0WEeq5aMbnrvR8VA" name="print" method="_21tRQF0WEeq5aMbnrvR8VA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_i7KOYF0WEeq5aMbnrvR8VA" name="ClassB" visibility="public">
+      <interfaceRealization xmi:id="_mxUnoF0WEeq5aMbnrvR8VA" client="_i7KOYF0WEeq5aMbnrvR8VA" supplier="_eCnyIF0WEeq5aMbnrvR8VA" contract="_eCnyIF0WEeq5aMbnrvR8VA"/>
+      <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_9LwNUF0WEeq5aMbnrvR8VA" name="obPrintB" specification="_lziwwF0WEeq5aMbnrvR8VA">
+        <language>CPP</language>
+        <body>std::cout &lt;&lt; &quot;printing from ClassB&quot; &lt;&lt; std::endl;</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_lziwwF0WEeq5aMbnrvR8VA" name="print" method="_9LwNUF0WEeq5aMbnrvR8VA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_j6oHUF0WEeq5aMbnrvR8VA" name="ClassC" visibility="public">
+      <interfaceRealization xmi:id="_nPACIF0WEeq5aMbnrvR8VA" client="_j6oHUF0WEeq5aMbnrvR8VA" supplier="_eCnyIF0WEeq5aMbnrvR8VA" contract="_eCnyIF0WEeq5aMbnrvR8VA"/>
+      <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_9XhYcF0WEeq5aMbnrvR8VA" name="obPrintC" specification="_l7BRwF0WEeq5aMbnrvR8VA">
+        <language>CPP</language>
+        <body>std::cout &lt;&lt; &quot;printing from ClassC&quot; &lt;&lt; std::endl;</body>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_l7BRwF0WEeq5aMbnrvR8VA" name="print" method="_9XhYcF0WEeq5aMbnrvR8VA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Association" xmi:id="_ql00AF0WEeq5aMbnrvR8VA" memberEnd="_ql00AV0WEeq5aMbnrvR8VA _ql-lAl0WEeq5aMbnrvR8VA">
+      <ownedEnd xmi:id="_ql00AV0WEeq5aMbnrvR8VA" name="controllers" type="_b8fzIF0WEeq5aMbnrvR8VA" association="_ql00AF0WEeq5aMbnrvR8VA">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ql-lAF0WEeq5aMbnrvR8VA"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ql-lAV0WEeq5aMbnrvR8VA" value="1"/>
+      </ownedEnd>
+    </packagedElement>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_ivq_EOMREeur7cjoMTUC9A" name="main">
       <language>CPP</language>
-      <body>std::cout &lt;&lt; &quot;printing from ClassA&quot; &lt;&lt; std::endl;</body>
-    </ownedBehavior>
-    <ownedOperation xmi:id="_lsz2oF0WEeq5aMbnrvR8VA" name="print" method="_21tRQF0WEeq5aMbnrvR8VA"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_i7KOYF0WEeq5aMbnrvR8VA" name="ClassB" visibility="public">
-    <interfaceRealization xmi:id="_mxUnoF0WEeq5aMbnrvR8VA" client="_i7KOYF0WEeq5aMbnrvR8VA" supplier="_eCnyIF0WEeq5aMbnrvR8VA" contract="_eCnyIF0WEeq5aMbnrvR8VA"/>
-    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_9LwNUF0WEeq5aMbnrvR8VA" name="obPrintB" specification="_lziwwF0WEeq5aMbnrvR8VA">
-      <language>CPP</language>
-      <body>std::cout &lt;&lt; &quot;printing from ClassB&quot; &lt;&lt; std::endl;</body>
-    </ownedBehavior>
-    <ownedOperation xmi:id="_lziwwF0WEeq5aMbnrvR8VA" name="print" method="_9LwNUF0WEeq5aMbnrvR8VA"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_j6oHUF0WEeq5aMbnrvR8VA" name="ClassC" visibility="public">
-    <interfaceRealization xmi:id="_nPACIF0WEeq5aMbnrvR8VA" client="_j6oHUF0WEeq5aMbnrvR8VA" supplier="_eCnyIF0WEeq5aMbnrvR8VA" contract="_eCnyIF0WEeq5aMbnrvR8VA"/>
-    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_9XhYcF0WEeq5aMbnrvR8VA" name="obPrintC" specification="_l7BRwF0WEeq5aMbnrvR8VA">
-      <language>CPP</language>
-      <body>std::cout &lt;&lt; &quot;printing from ClassC&quot; &lt;&lt; std::endl;</body>
-    </ownedBehavior>
-    <ownedOperation xmi:id="_l7BRwF0WEeq5aMbnrvR8VA" name="print" method="_9XhYcF0WEeq5aMbnrvR8VA"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Association" xmi:id="_ql00AF0WEeq5aMbnrvR8VA" memberEnd="_ql00AV0WEeq5aMbnrvR8VA _ql-lAl0WEeq5aMbnrvR8VA">
-    <ownedEnd xmi:id="_ql00AV0WEeq5aMbnrvR8VA" name="controllers" type="_b8fzIF0WEeq5aMbnrvR8VA" association="_ql00AF0WEeq5aMbnrvR8VA">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ql-lAF0WEeq5aMbnrvR8VA"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_ql-lAV0WEeq5aMbnrvR8VA" value="1"/>
-    </ownedEnd>
-  </packagedElement>
-</uml:Model>
+      <body>	std::shared_ptr&lt;Controller> controller = factory->createController();&#xD;
+	std::shared_ptr&lt;Bag&lt;XModule>> modules = controller->getModules();&#xD;
+	modules->push_back(factory->createClassA());&#xD;
+	modules->push_back(factory->createClassB());&#xD;
+	modules->push_back(factory->createClassC());&#xD;
+&#xD;
+	std::cout &lt;&lt; &quot;DO MANUALLY&quot; &lt;&lt; std::endl;&#xD;
+&#xD;
+	int size = (int) modules->size();&#xD;
+	for (int i=0; i&lt;size; i++)&#xD;
+	{&#xD;
+		std::shared_ptr&lt;XModule> m = modules->at(i);&#xD;
+		m->print();&#xD;
+	}&#xD;
+&#xD;
+	std::cout &lt;&lt; &quot;DONE\r\n#######################################\r\nDO ACTIVITY&quot; &lt;&lt; std::endl;&#xD;
+&#xD;
+	controller->run();&#xD;
+&#xD;
+	std::cout &lt;&lt; &quot;DONE\r\n#######################################&quot; &lt;&lt; std::endl;</body>
+    </packagedElement>
+    <profileApplication xmi:id="_231coOMQEeur7cjoMTUC9A">
+      <eAnnotations xmi:id="_231coeMQEeur7cjoMTUC9A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_bc8YIeLsEeur7cjoMTUC9A"/>
+      </eAnnotations>
+      <appliedProfile href="../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <UML4CPPProfile:MainBehavior xmi:id="_nqrggOMREeur7cjoMTUC9A" base_Behavior="_ivq_EOMREeur7cjoMTUC9A"/>
+  <UML4CPPProfile:NonExecutable xmi:id="_taKL0OMREeur7cjoMTUC9A" base_NamedElement="_vySDEF0cEeq5aMbnrvR8VA"/>
+  <UML4CPPProfile:NonExecutable xmi:id="_HbGlMOMSEeur7cjoMTUC9A" base_NamedElement="_ivq_EOMREeur7cjoMTUC9A"/>
+</xmi:XMI>
