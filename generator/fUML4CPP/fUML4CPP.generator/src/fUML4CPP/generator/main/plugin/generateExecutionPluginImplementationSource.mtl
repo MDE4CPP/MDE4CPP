@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::keywords /]
 
 [template public generateExecutionPluginImplSource(aPackage : Package) { packageName : String = aPackage.name.concat('ExecPluginImpl'); }]
 [file (aPackage.generateNamespacePath(false).concat('Exec/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
@@ -91,12 +92,12 @@ void [packageName/]::initialize()
 	[generateExecutionPluginInitialization()/]
 
 	[comment create opaque behavior executions for operations /]
-	[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(hasEAnnotation(sourceNoExecution())))]
+	[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
 	[anOperation.generateOpaqueBehaviorForOperationExecution()/]
 	[/for]
 
 	[comment create opaque behavior executions for opaque behaviors in the model that are executed either by a call behavior action or by a desicion node/]
-	[for (anOpaqueBehavior : OpaqueBehavior | aPackage.collectAllExecutedOpaqueBehaviors()->reject(hasEAnnotation(sourceNoExecution())))]
+	[for (anOpaqueBehavior : OpaqueBehavior | aPackage.collectAllExecutedOpaqueBehaviors()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
 	[anOpaqueBehavior.generateOpaqueBehaviorExecution()/]
 	[/for]
 	[/if]
@@ -190,9 +191,9 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 
 //Includes of OpaqueBehaviourExecutions
 [aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->filter(OpaqueBehavior)
-->addAll(aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->filter(OpaqueBehavior))->reject(hasEAnnotation(sourceNoExecution()))->asOrderedSet().generateInclude()/]
+->addAll(aPackage.allOwnedElements()->filter(DecisionNode).decisionInput->filter(OpaqueBehavior))->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->asOrderedSet().generateInclude()/]
 //Includes of OperationExecutions
-[aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(hasEAnnotation(sourceNoExecution())).generateInclude()/]
+[aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).generateInclude()/]
 
 //Includes from parameter types of executed Operations and Activities
 [for ( type : Type | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA()).ownedParameter.type->asSet()
@@ -425,9 +426,9 @@ m_locus->setFactory(nullptr);
 
 [query private findPackagesForOpaqueBehaviorExecutions(aPackage : Package) : OrderedSet(Package) = 
 	OrderedSet(Package){
-		aPackage.getCallBehaviorActionsWithOB().behavior->reject(hasEAnnotation(sourceNoExecution())).getNearestPackage(),
-		aPackage.getOperationExecutionsAll().method->filter(OpaqueBehavior)->reject(hasEAnnotation(sourceNoExecution())).getNearestPackage(),
-		aPackage.getDecisionNodesWithOB().decisionInput->reject(hasEAnnotation(sourceNoExecution())).getNearestPackage()
+		aPackage.getCallBehaviorActionsWithOB().behavior->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).getNearestPackage(),
+		aPackage.getOperationExecutionsAll().method->filter(OpaqueBehavior)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).getNearestPackage(),
+		aPackage.getDecisionNodesWithOB().decisionInput->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())).getNearestPackage()
 	}->flatten()->sortedBy(name) /]
 
 
@@ -447,7 +448,7 @@ m_locus->setFactory(nullptr);
 	aPackage.allOwnedElements()->filter(Activity)->asSet()/]
 
 [query private getUsedActivities (aPackage : Package) : OrderedSet(Activity) = 
-	Set{aPackage.getActivitiesUsedByCallBehaviorAction(), aPackage.getActivitiesUsedByDecisionNode(), aPackage.getActivitiesUsedByOperation(), aPackage.getActivitiesOwnedByPackage(), aPackage.getMainActivity()->asSet()->reject(oclIsUndefined())}->flatten()->sortedBy(name)/]
+	Set{aPackage.getActivitiesUsedByCallBehaviorAction(), aPackage.getActivitiesUsedByDecisionNode(), aPackage.getActivitiesUsedByOperation(), aPackage.getActivitiesOwnedByPackage(), aPackage.getMainBehavior().oclAsType(Activity)->asSet()->reject(oclIsUndefined())}->flatten()->sortedBy(name)/]
 
 [query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  
 	anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->indexOf(aParameter)-1 /]

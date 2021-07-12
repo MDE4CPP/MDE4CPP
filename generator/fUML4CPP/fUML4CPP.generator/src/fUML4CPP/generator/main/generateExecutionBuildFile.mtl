@@ -20,6 +20,7 @@
 [import fUML4CPP::generator::main::fUMLKeywords /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::keywords /]
 
 
 [template public generateExecutionBuildFiles(aPackage : Package, packageOnly : Boolean)]
@@ -127,7 +128,7 @@ task build[packageName.toUpperFirst()/]() {
 
 	dependsOn 'model:generate[packageName.toUpperFirst()/]'
 	dependsOn 'src_gen:compile[packageName.toUpperFirst()/]'
-[if(aPackage.prepareApplication())]
+[if(aPackage.hasMainBehavior())]
 	dependsOn 'application:compileApplicationFor[packageName.toUpperFirst()/]'
 [/if]
 [for (packName : String | aPackage.metaModelLibrariesNames()) ? (not(packName = aPackage.getPackageName()))]
@@ -222,17 +223,17 @@ task clean {
 
 [template private generatePackageSourceFilesToCompile(aPackage : Package, packOnly : Boolean, isRoot : Boolean)]
 #ClassifierObject classes for Package [aPackage.generateNamespace(false)/]
-[for (aClassifier : Classifier | getClassifiersForObjectClasses()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name))]
+[for (aClassifier : Classifier | getClassifiersForObjectClasses()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][aClassifier.name.toUpperFirst()/]Object.cpp
 [/for]
 [if (not packOnly)]
 #OpaqueBehaviorExecution classes for Package [aPackage.generateNamespace(false)/]
-[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name))]
+[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name))]
 [if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOpaqueBehavior.generateOpaqueBehaviorExecutionName()/].cpp
 [/for]
 #OperationExecution classes for Package [aPackage.generateNamespace(false)/]
 [for (anOperation : Operation | aPackage.getPackageOperations()->sortedBy(name))]
-[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOperation.generateOperationExecutionName()->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(name)/].cpp
+[if(not isRoot)]../[aPackage.generateNamespacePath(false)/]Exec/[/if][anOperation.generateOperationExecutionName()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(name)/].cpp
 [/for]
 [/if]
 [for (subPackage : Package | aPackage.ownedElement->filter(Package))]

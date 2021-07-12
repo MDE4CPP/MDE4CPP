@@ -106,7 +106,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [type.generateTypeInclude(type.getNearestPackage(), aPackage)/]
 [/for]
 
-[if (anOpaqueBehavior.hasGenerateContextVariable() or anOpaqueBehavior.language->includes(keyOCL()))]
+[if (anOpaqueBehavior.hasContext() or anOpaqueBehavior.language->includes(keyOCL()))]
 #include "[anOpaqueBehavior.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 #include "[aPackage.generateNamespacePath(false)/]Exec/[anOpaqueBehavior._context.oclAsType(Classifier).name.toUpperFirst()/]Object.hpp"
 [if (anOpaqueBehavior.language->includes(keyOCL()))]
@@ -117,7 +117,7 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 [/template]
 
 [template private generateBody(anOpaqueBehavior : OpaqueBehavior, aPackage : Package)]
-[if (anOpaqueBehavior.hasGenerateContextVariable())]
+[if (anOpaqueBehavior.hasContext())]
 std::shared_ptr<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace(false)/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace(false)/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]Object>(this->getContext())->[anOpaqueBehavior.getContext().UMLValueGetterName()/]();
 DEBUG_MESSAGE(
 	if (context == nullptr)
@@ -176,4 +176,4 @@ throw "UnsupportedBehaviorException";
 [anOpaqueBehavior.ownedParameter->generateOutgoingParameters()/]
 [/template]
 
-[query public hasGenerateContextVariable(aElement : Element) : Boolean = aElement.valueKey('generateContextVariable') = 'true'/]
+[query public hasContext(anOpaqueBehavior : OpaqueBehavior) : Boolean = anOpaqueBehavior.owner.oclIsTypeOf(Class) or anOpaqueBehavior.oclIsKindOf(Interface)/]

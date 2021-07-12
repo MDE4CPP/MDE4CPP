@@ -19,6 +19,7 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::keywords /]
 
 [query private getAllLocusClasses(aPackage : Package) : Set(Class) = aPackage.allOwnedElements()->filter(Class)->asSet()->flatten()->addAll(aPackage.getClassesOfCreateObjectAction())
 																	->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node)) /]
@@ -47,7 +48,7 @@ originalName : String = aPackage.generateNamespacePath(false);
 [if (classPackage.isReflectionModel())]
 #include "[classPackage.generateNamespacePath(false)/]/[classPackage.name/]Package.hpp"
 [/if]
-[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(myQualifiedName()))]
+[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(myQualifiedName()))]
 #include "[aClass.getNearestPackage().generateNamespacePath(true)/]/[aClass.name.toUpperFirst()/].hpp"
 #include "[aClass.getNearestPackage().generateNamespacePath(false)/]Exec/[aClass.name.toUpperFirst()/]Object.hpp"
 [/for]
@@ -80,7 +81,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> [packageName/]Lo
 	{		
 		switch(type->getMetaElementID())
 		{
-[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->reject(hasEAnnotation(sourceNoExecution()))->sortedBy(myQualifiedName())) separator('\n')]
+[for (aClass : Class | classPackage.ownedElement->filter(Class)->reject(c : Class | c.oclIsKindOf(Behavior) or c.isAbstract)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->sortedBy(myQualifiedName())) separator('\n')]
 [let className : String = aClass.name.toUpperFirst()]
 			case [packageNamespace/]::[classPackage.myNamespaceName()/]Package::[aClass.getMemberName().toUpperCase()/]:
 			{
