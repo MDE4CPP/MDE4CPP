@@ -28,45 +28,34 @@
 [query public abstractSuffix(impl : Boolean) : String = if impl then '' else ' = 0' endif/]
 
 [** 
- * queries to read out annotaion values, default source is the annotation 'codeGen' 
+ * queries wether a specific stereotype is applied to an Element by its qualified name 
 */]
-[query public hasEAnnotation(aElement : Element, aSource : String) : Boolean = eAnnotations->select(source = aSource)->notEmpty()/]
-[query public getEAnnotation(aElement : Element, aSource : String) : EAnnotation = eAnnotations->select(source = aSource)->first()/]
-[query private hasKey(aElement : Element, aSource : String, aKey:String) : Boolean = if aElement.hasEAnnotation(aSource) then aElement.getEAnnotation(aSource).details->select(key = aKey)->notEmpty() else false endif /]
-[query public valueKey(aElement : Element, aSource : String, aKey:String) : String = if (hasKey(aSource, aKey)) then aElement.getEAnnotation(aSource).details->select(key = aKey)->first().value else '' endif/]
-[query public valueKey(aElement : Element, aKey:String) : String = aElement.valueKey(sourceNameCodeGen(), aKey) /]
+[query public hasStereotypeApplied(anElement : Element, qualifiedName : String) : Boolean = anElement.getAppliedStereotype(qualifiedName).oclIsUndefined() /]
 
 [**
- * queries to check values of codeGen annotation keys
+ * queries for handling of the 'UML4CPPPackage' stereotype
 */]
-[query public ignoreNamespace(anElement : Element) : Boolean = anElement.getNearestPackage().valueKey(sourceNameCodeGen(), keyIgnoreNamespace()) = '1' /] [** check, if namespace should be igored./]
-[query public isSingleton(anElement : Element) : Boolean = anElement.valueKey(sourceNameCodeGen(), keySingleton()) = '1' /]	[** check, if a singleton construct should be generated /]
-[query public isMainActivity(anElement : Element) : Boolean = anElement.valueKey(sourceNameCodeGen(), keyMainActivity()) = '1' /]	[** check, if an operation with const construct should be generated /]
+[query public getEclipseURI(anElement : Element) : String = if(isUML4CPPPackage()) then getValue(anElement.getAppliedStereotype(QN_STEREOTYPE_UML4CPPPACKAGE()), keyEclipseURI()) else '' endif/] [** get the packages Eclipse URI if present./]
+[query public isIgnoreNamespace(anElement : Element) : Boolean = if(isUML4CPPPackage()) then getValue(anElement.getAppliedStereotype(QN_STEREOTYPE_UML4CPPPACKAGE()), keyIgnoreNamespace()) else false endif/] [** check, if namespace should be igored./]
+[query public isPackageOnly(anElement : Element) : Boolean = if(isUML4CPPPackage()) then getValue(anElement.getAppliedStereotype(QN_STEREOTYPE_UML4CPPPACKAGE()), keyPackagOnly()) else false endif/] [** check, if only the model package should be generated./]
+[query public isSingleton(anElement : Element) : Boolean = anElement.hasStereotypeApplied(QN_STEREOTYPE_SINGLETON()) /]	[** check, if a singleton construct should be generated /]
+[query private isUML4CPPPackage(anElement : Element) : Boolean = anElement.hasStereotypeApplied(QN_STEREOTYPE_UML4CPPPACKAGE())/] [** check, if additional generation information exist./]
+[**
+ * queries for handling of the 'ExternalLibrary' stereotype
+*/]
+[query public hasIncludePath(ePackage : Package) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_EXTERNALLIBRARY()) /]
+[query public getIncludePath(ePackage : Package) : String = getValue(ePackage.getAppliedStereotype(QN_STEREOTYPE_EXTERNALLIBRARY()), keyIncludePath()) /]
 
 [**
- * queries to check values of include path annotation keys
+ * queries for handling of the 'MainBehavior' stereotype
 */]
-[query public hasIncludePath(ePackage : Package) : Boolean = hasKey(sourceNameCodeGen(), keyIncludePath()) /]
-[query public getIncludePath(ePackage : Package) : String = valueKey(sourceNameCodeGen(), keyIncludePath()) /]
-
-[**
- * queries to check values of prepareApplication annotation keys
-*/]
-[query public prepareApplication(aPackage : Package) : Boolean = hasEAnnotation(sourceNamePrepareApplication()) /]
-[query public hasMainActivity(aPackage : Package) : Boolean = hasKey(sourceNamePrepareApplication(), keyIsMainActivity()) /]
-[query public getHasMainActivity(aPackage : Package) : String = valueKey(sourceNamePrepareApplication(), keyIsMainActivity()) /]
-[query public isActivityWithMainKeyExisting(aPackage : Package) : Boolean = aPackage.allOwnedElements()->filter(Activity)->select(act : Activity | act.isMainActivity())->size() > 0 /]
-[query private getFirstActivityWithMainKey(aPackage : Package) : Activity = aPackage.allOwnedElements()->filter(Activity)->select(act : Activity | act.isMainActivity())->asOrderedSet()->first() /]
-[query public getMainActivity(aPackage : Package) : Activity = if (aPackage.isActivityWithMainKeyExisting()) then aPackage.getFirstActivityWithMainKey() else null endif/]
-[query public hasMainSourceCode(ePackage : Package) : Boolean = hasKey(sourceNamePrepareApplication(), keyMainSourceCode()) /]
-[query public getMainSourceCode(ePackage : Package) : String = valueKey(sourceNamePrepareApplication(), keyMainSourceCode()) /]
-[query public hasMainIncludes(ePackage : Package) : Boolean = hasKey(sourceNamePrepareApplication(), keyMainIncludes()) /]
-[query public getMainIncludes(ePackage : Package) : String = valueKey(sourceNamePrepareApplication(), keyMainIncludes()) /]
-
-[**
- * query to check if an element has a certain stereotype applied
-*/]
-[query public hasStereotypeApplied(anElement : Element, stereotypeName : String) : Boolean = not anElement.getAppliedStereotype(stereotypeName).oclIsUndefined() /]
+[query public hasMainBehavior(aPackage : Package) : Boolean = aPackage.eAllContents(Behavior)->select(hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))->size() > 0 /]
+[query public getMainBehavior(aPackage : Package) : Behavior = aPackage.eAllContents(Behavior)->select(hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))->asOrderedSet()->first()/]
+[query public hasMainActivity_(aPackage : Package) : Boolean = if(aPackage.hasMainBehavior()) then if(aPackage.getMainBehavior().oclIsKindOf(Activity)) then true else false endif else false endif /]
+[query public hasMainSourceCode(ePackage : Package) : Boolean = true /]
+[query public getMainSourceCode(ePackage : Package) : String = '' /]
+[query public hasMainIncludes(ePackage : Package) : Boolean = true /]
+[query public getMainIncludes(ePackage : Package) : String = '' /]
 
 
 [**

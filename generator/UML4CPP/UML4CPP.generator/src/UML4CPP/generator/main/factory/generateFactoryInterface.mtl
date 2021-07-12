@@ -43,7 +43,7 @@ namespace [forwardDeclPackages.generateNamespace(false)/]
 }
 [/for]
 
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace(false)/] 
+[if (not aPackage.isIgnoreNamespace())]namespace [aPackage.generateNamespace(false)/] 
 {
 [/if]
 	class [aPackage.name.concat('Package')/];
@@ -67,7 +67,7 @@ namespace [forwardDeclPackages.generateNamespace(false)/]
 			//Package
 			virtual std::shared_ptr<[aPackage.name.concat('Package')/]> get[aPackage.name.concat('Package')/]() = 0;
 	};
-[if (not aPackage.ignoreNamespace())]}[/if]
+[if (not aPackage.isIgnoreNamespace())]}[/if]
 [endGuard(aPackage,'Factory')/]
 [/file]
 [/template]

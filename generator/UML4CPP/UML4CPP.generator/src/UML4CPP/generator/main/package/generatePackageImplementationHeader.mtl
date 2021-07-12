@@ -46,7 +46,7 @@ namespace [subPackage.generateNamespace(false)/]
 }
 [/for]
 
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace(false)/]
+[if (not aPackage.isIgnoreNamespace())]namespace [aPackage.generateNamespace(false)/]
 {
 [/if]
 	class [packageName/] : virtual public uml::[aPackage.eClass().name /]Impl, virtual public [aPackage.name.concat('Package')/]
@@ -115,7 +115,7 @@ namespace [subPackage.generateNamespace(false)/]
 			void initializePackageStereotypes();
 			void initializePackageValueSpecifications();
 	};
-[if (not aPackage.ignoreNamespace())]}[/if]
+[if (not aPackage.isIgnoreNamespace())]}[/if]
 [endGuard(aPackage,'MetaModelPackageImpl')/]
 [/file]
 [/template]

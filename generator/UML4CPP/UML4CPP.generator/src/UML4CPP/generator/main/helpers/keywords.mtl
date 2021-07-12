@@ -33,24 +33,30 @@
 [query public keyEcore(any : OclAny) : String = 'Ecore' /]	[**	original name of ecore model /]
 [query public keyPrimitiveTypes(any : OclAny) : String = 'PrimitiveTypes' /]	[**	original name of PrimitiveTypes model /]
 
-[** 
- * keywords for source name and keys of CodeGen annoation
+[**
+ * 	keyword for the name of the UML4CPPProfile 
 */]
-[query public sourceNameCodeGen(any : OclAny) : String = 'http://sse.tu-ilmenau.de/codegen' /]	[** source name of annotation, which will be evaluated in MDE4CPP project /]
-[query public keyIgnoreNamespace (any : OclAny) : String = 'ignoreNamespace' /]	[** indicate, whether a namespace for given element should be generated: value = '1' -> namespace ignored /]
-[query public keySingleton(any : OclAny) : String = 'singleton' /]	[** indicate, if a singleton mechanism should be generated for given element: value = '1' -> singleton generated /]
-[query public keyMainActivity(any : OclAny) : String = 'mainActivity' /] [** indicate, that this activity should be used inside main.cpp /]
-
-[** 
- * keywords for source name and keys of prepareApplication annoation
+[query private QN_PROFILE_UML4CPPPROFILE(any : OclAny) : String = 'UML4CPPProfile' /]
+[**
+ * 	keyword for the qualified names of the UML4CPPProfile stereotypes
 */]
-[query public sourceNamePrepareApplication(any : OclAny) : String = 'prepareApplication' /]	[** special source for generating class with main function /]
-[query public keyMainIncludes(any : OclAny) : String = 'sourceCodeMainIncludes'/]	[**	specifiy header to be included for main function /] 
-[query public keyMainSourceCode(any : OclAny) : String = 'sourceCodeMain'/]	[**	specifiy source code of main function /] 
-[query public keyIsMainActivity(any : OclAny) : String = 'activityMain' /] [** specifiy that an activity execution should be generated in main function instead of main source code /] 
-
+[query public QN_STEREOTYPE_DONOTGENERATE(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::DoNotGenerate' /]
+[query public QN_STEREOTYPE_EXTERNALLIBRARY(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::ExternalLibrary' /]
+[query public QN_STEREOTYPE_MAINBEHAVIOR(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::MainBehavior' /]
+[query public QN_STEREOTYPE_NONEXECUTABLE(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::NonExecutable' /]
+[query public QN_STEREOTYPE_SINGLETON(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::Singleton' /]
+[query public QN_STEREOTYPE_UML4CPPPACKAGE(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::UML4CPPPackage' /]
 
 [**
- * keywords for source name and keys of include annoation
+ * keywords for property names of the "ExternalLibrary" stereotype of the UML4CPPProfile
 */]
 [query public keyIncludePath(any : OclAny) : String = 'includePath'/] [** specifiy include path/]
+[query public keyLibraryName(any : OclAny) : String = 'libraryName'/] [** specifiy library name/]
+[query public keyLibraryPath(any : OclAny) : String = 'libraryPath'/] [** specifiy library path/]
+
+[**
+ * keywords for property names of the "UML4CPPPackage" stereotype of the UML4CPPProfile
+*/]
+[query public keyEclipseURI(any : OclAny) : String = 'eclipseURI'/] [** specifiy eclipse URI/]
+[query public keyIgnoreNamespace(any : OclAny) : String = 'ignoreNamespace'/] [** specifiy flag for ignoring namespace/]
+[query public keyPackagOnly(any : OclAny) : String = 'packageOnly'/] [** specifiy flag for generating model package only/]

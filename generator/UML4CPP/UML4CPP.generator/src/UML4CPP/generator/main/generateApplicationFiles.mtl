@@ -30,22 +30,28 @@
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::keywords /]
 
 [template public generateApplication(aPackage : Package)]
-[if(aPackage.hasMainSourceCode() or (aPackage.hasMainActivity() and (aPackage.getHasMainActivity() = 'true')))]
-	[if (aPackage.hasMainSourceCode())]
-		[aPackage.generateApplicationFromSourceCode()/]
-	[else]
+[let mainBehavior : Behavior = aPackage.getMainBehavior()]
+	[if (mainBehavior.oclIsKindOf(OpaqueBehavior))]
+		[aPackage.generateApplicationFromOpaqueBehavior()/]
+	[elseif (mainBehavior.oclIsKindOf(Activity))]
 		[aPackage.generateApplicationFromActivity()/]
+	[elseif (mainBehavior.oclIsKindOf(StateMachine))]
+		[comment To be implemented in the future /]
+	[elseif (mainBehavior.oclIsKindOf(Interaction))]
+		[comment To be implemented in the future /]
 	[/if]
 		[aPackage.generateApplicationCMakeLists()/]
 		[aPackage.generateApplicationGradleFile()/]
 		[aPackage.generateEclipseFiles(true)/]
-[/if]
+[/let]
 [/template]
 
-[template private generateApplicationFromSourceCode(aPackage : Package) { packageName : String = getPackageName(); }]
+[template private generateApplicationFromOpaqueBehavior(aPackage : Package) { packageName : String = getPackageName(); }]
 [file ('../application/src/main.cpp', false, 'UTF-8')]
+[let mainOpaqueBehavior : OpaqueBehavior = aPackage.getMainBehavior().oclAsType(OpaqueBehavior)]
 
 #include <iostream>
 
@@ -63,16 +69,21 @@
 #include "[anEnumeration.getNearestPackage().generateNamespacePath(false)/]/[anEnumeration.name/].hpp"
 [/for]
 
-[if (hasMainIncludes())]
-[getMainIncludes()/]
-
+[if(mainOpaqueBehavior.language->notEmpty())]
+[if (mainOpaqueBehavior.language->includes(keyInclude()))]
+//Includes from main behavior [mainOpaqueBehavior.name/]
+[let index : Integer = mainOpaqueBehavior.language->asOrderedSet()->indexOf(keyInclude()) ]
+[if (0 < index and index <= mainOpaqueBehavior._body->size())]
+[mainOpaqueBehavior._body->asOrderedSet()->at(index)/]
+[/if][/let][/if]
 [/if]
+
 // [protected ('includes')] 
 // You may manually edit additional includes, won't be overwritten upon generation.
 
 // [/protected]
 
-[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
+[if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
 
 // [protected ('functions')] 
 // You may manually edit additional functions, won't be overwritten upon generation.
@@ -85,8 +96,12 @@ int main ()
 	std::shared_ptr<[packageName/]Factory> factory = [packageName/]Factory::eInstance();
 	std::shared_ptr<[packageName/]Package> package = [packageName/]Package::eInstance();
 
-	[if (hasMainSourceCode())]
-	[getMainSourceCode()/]
+	[if(mainOpaqueBehavior.language->notEmpty())]
+	[if (mainOpaqueBehavior.language->includes(keyCPP()))]
+	[let index : Integer = mainOpaqueBehavior.language->asOrderedSet()->indexOf(keyCPP()) ]
+	[if (0 < index and index <= mainOpaqueBehavior._body->size())]
+	[mainOpaqueBehavior._body->asOrderedSet()->at(index)/]
+	[/if][/let][/if]
 	[/if]
 	// [protected ('main')]
 	// You may manually edit the following lines, won't be overwritten upon generation.
@@ -95,20 +110,20 @@ int main ()
 
     return 0;
 }
+[/let]
 [/file]
 [/template]
 
 [template private generateApplicationFromActivity(aPackage : Package) { packageName : String = getPackageName(); }]
 [file ('../application/src/main.cpp', false, 'UTF-8')]
+[let mainActivity : Activity = aPackage.getMainBehavior().oclAsType(Activity)]
 #include <iostream>
 #include <memory>
 #include <vector>
 
-[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
 #include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-[let mainActivity : Activity = aPackage.getMainActivity()]
 [if (mainActivity.owner.oclIsKindOf(Classifier))]
 #include "[mainActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/].hpp"
 #include "[mainActivity.owner.oclAsType(Classifier).getNearestPackage().generateNamespacePath(false)/]/[mainActivity.owner.oclAsType(Classifier).getNearestPackage().getPackageName()/]Package.hpp"
@@ -121,18 +136,12 @@ int main ()
 [/for]
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
-[/let]
-[else]
-//Info: No main activity found! Mark one activity as the main activity using the proper annotation in the model.
-[/if]
 
 using namespace [aPackage.getPackageName()/];
 
 int main()
 {	
-	[if (not aPackage.allOwnedElements()->filter(Activity)->isEmpty())]
     //executing main activity
-	[let mainActivity : Activity = aPackage.getMainActivity()]
 	[mainActivity.generateParameterInstances(aPackage)/]
 	std::shared_ptr<[if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).generateNamespaceName(false)/][else]uml::Element[/if]> element = [if (mainActivity.owner.oclIsKindOf(Classifier))][mainActivity.owner.oclAsType(Classifier).generateNamespace(false)/]::[mainActivity.owner.oclAsType(Classifier).getNearestPackage().getPackageName()/]Factory::eInstance()->create[mainActivity.owner.oclAsType(Classifier).name.toUpperFirst()/]()[else]nullptr[/if];
 
@@ -184,12 +193,9 @@ int main()
 	{ 
 		std::cout << "plugin" << pluginName << " not found" << std::endl;
 	}
-	[/let]
-	[else]
-	//Info: No main activity found! Mark one activity as the main activity using the proper annotation in the model.
-	[/if]
     return EXIT_SUCCESS;
 }
+[/let]
 [/file]
 [/template]
 
@@ -339,7 +345,7 @@ ENDIF()
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/for]
 FIND_LIBRARY([aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aPackage.getPackageName()/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
-[if (aPackage.isActivityWithMainKeyExisting())]
+[if (aPackage.hasMainActivity_())]
 FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/if]
 # ['['/]protected ('library_[system/]_[buildModeCMakeProperty(debugMode)/]')[']'/]
@@ -354,7 +360,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [/for]
 	[buildModeCMakeProperty(debugMode)/] ${[aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
-[if (aPackage.isActivityWithMainKeyExisting())]
+[if (aPackage.hasMainActivity_())]
 	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
 [/if]
 

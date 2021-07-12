@@ -46,7 +46,7 @@
 [/for]
 [/comment]
 
-[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
+[if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
 //*********************************
 // Constructor / Destructor
 //*********************************

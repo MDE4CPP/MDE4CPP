@@ -28,7 +28,7 @@
 #include "[aPackage.generateNamespacePath(false)/]/[packageName/].hpp"
 #include "[aPackage.generateNamespacePath(false)/]/impl/[packageName.concat('Impl')/].hpp"
 
-[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
+[if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
 
 //static initialisation
 const std::string [packageName/]::eNAME ="[aPackage.name/]";

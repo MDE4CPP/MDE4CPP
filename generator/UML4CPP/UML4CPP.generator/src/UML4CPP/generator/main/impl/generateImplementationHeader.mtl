@@ -61,11 +61,11 @@ namespace uml
 }
 
 //*********************************
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace(false)/]
+[if (not aPackage.isIgnoreNamespace())]namespace [aPackage.generateNamespace(false)/]
 {
 [/if]
 	class [className/] [for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())) before (':') separator (',')]
-virtual public [sClass.getClassifierName(aClass, false, ignoreNamespace(sClass))/]Impl[/for][if (aClass.superClass->isEmpty())]
+virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage().isIgnoreNamespace())/]Impl[/for][if (aClass.superClass->isEmpty())]
  : virtual public uml::[aClass.getGeneralSuperClassName()/]Impl[/if], virtual public [aClass.name.toUpperFirst()/]
 	{
 		public: 
@@ -135,7 +135,7 @@ virtual public [sClass.getClassifierName(aClass, false, ignoreNamespace(sClass))
 			std::weak_ptr<[aClass.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
 			[aClass.generateGetSetMemeberInit()/]
 	};
-[if (not aPackage.ignoreNamespace())]}[/if]
+[if (not aPackage.isIgnoreNamespace())]}[/if]
 [endGuard(className)/]
 [/file]
 [/template]
@@ -173,11 +173,11 @@ namespace uml
 }
 
 //*********************************
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace(false)/]
+[if (not aPackage.isIgnoreNamespace())]namespace [aPackage.generateNamespace(false)/]
 {
 [/if]
 	class [interfaceName/] [for (sClassifier : Classifier | aInterface.generalization.general->reject(oclIsUndefined() and name.oclIsUndefined())) before (':') separator (',')]
-virtual public [sClassifier.getClassifierName(aInterface, false, ignoreNamespace(sClassifier))/]Impl[/for][if (aInterface.generalization->isEmpty())]
+virtual public [sClassifier.getClassifierName(aInterface, false, sClassifier.getNearestPackage().isIgnoreNamespace())/]Impl[/for][if (aInterface.generalization->isEmpty())]
  : virtual public uml::[aInterface.getGeneralSuperClassName()/]Impl[/if], virtual public [aInterface.name.toUpperFirst()/]
 	{
 		private:    
@@ -238,7 +238,7 @@ virtual public [sClassifier.getClassifierName(aInterface, false, ignoreNamespace
 			std::weak_ptr<[aInterface.name.toUpperFirst()/]> m_[generateGetThisPtrPropertyName()/];
 			[aInterface.generateGetSetMemeberInit()/]
 	};
-[if (not aPackage.ignoreNamespace())]}[/if]
+[if (not aPackage.isIgnoreNamespace())]}[/if]
 [endGuard(interfaceName)/]
 [/file]
 [/template]

@@ -44,7 +44,7 @@
 [/template]
 
 [template public generateModel(aPackage : Package)]
-[if (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'PackageOnly')->notEmpty())]
+[if (aPackage.isPackageOnly())]
 	[comment Configuration files and Plugin files should only be generated for the root package/]
 	[if (aPackage.getSuperPackage().oclIsUndefined())]
 		[aPackage.generateConfigurationFiles(true)/]
@@ -64,7 +64,7 @@
 
 [aPackage.generatePackageFiles()/]
 
-[if (aPackage.prepareApplication())]
+[if (aPackage.hasMainBehavior())]
 	[aPackage.generateApplication()/]
 [/if]
 [/template]

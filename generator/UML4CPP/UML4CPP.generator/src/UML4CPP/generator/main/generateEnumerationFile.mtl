@@ -29,7 +29,7 @@
 [file (anEnum._package.generateNamespacePath(false).concat('/').concat(anEnum.name).concat('.hpp'), false, 'UTF-8')]
 [anEnum.startGuard()/]
 
-[if (not anEnum.getNearestPackage().ignoreNamespace())]namespace [anEnum._package.generateNamespace(false)/] 
+[if (not anEnum.getNearestPackage().isIgnoreNamespace())]namespace [anEnum._package.generateNamespace(false)/] 
 {
 [/if]
 	enum class [anEnum.name/] 
@@ -40,7 +40,7 @@
 		[lit.name.toUpperCase()/][/if]
 	[/for]
 	};
-[if (not anEnum.getNearestPackage().ignoreNamespace())]}[/if]
+[if (not anEnum.getNearestPackage().isIgnoreNamespace())]}[/if]
 [anEnum.endGuard()/]
 [/file]
 [/template]

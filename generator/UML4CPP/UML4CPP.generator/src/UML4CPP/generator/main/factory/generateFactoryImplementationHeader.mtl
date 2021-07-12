@@ -35,7 +35,7 @@
 #include "uml/impl/FactoryImpl.hpp"
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.name.concat('Factory')/].hpp"
 
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace(false)/] 
+[if (not aPackage.isIgnoreNamespace())]namespace [aPackage.generateNamespace(false)/] 
 {
 [/if]
 	class [aPackage.name.concat('FactoryImpl')/] : virtual public uml::FactoryImpl , virtual public [aPackage.name.concat('Factory')/] 
@@ -62,7 +62,7 @@
 			std::map<std::string,unsigned int> m_idMap;
 			virtual void init() {}
 	};
-[if (not aPackage.ignoreNamespace())]}[/if]
+[if (not aPackage.isIgnoreNamespace())]}[/if]
 [endGuard(aPackage,'FactoryImpl')/]
 [/file]
 [/template]

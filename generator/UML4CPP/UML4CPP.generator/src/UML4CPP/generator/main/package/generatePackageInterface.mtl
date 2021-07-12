@@ -48,7 +48,7 @@ namespace [subPackage.generateNamespace(false)/]
 [/for]
 
 [comment namespace /]
-[if (not aPackage.ignoreNamespace())]namespace [aPackage.generateNamespace(false)/] 
+[if (not aPackage.isIgnoreNamespace())]namespace [aPackage.generateNamespace(false)/] 
 {
 [/if]
 	/*!
@@ -84,7 +84,7 @@ namespace [subPackage.generateNamespace(false)/]
 			[generateStaticPackageID(aPackage)/]
 			[/if]
 	};
-[if (not aPackage.ignoreNamespace())]}[/if]
+[if (not aPackage.isIgnoreNamespace())]}[/if]
 [endGuard(aPackage,'MetaModelPackage')/]
 [/file]
 [/template]
