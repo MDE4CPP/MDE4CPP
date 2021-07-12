@@ -97,7 +97,7 @@
 #include "[aPackage.name.toLower()/]/[aPackage.name.toLower().concat('Package')/].hpp"
 [/if]
 
-[if (aPackage.isPackageOnly())]
+[if (not aPackage.isPackageOnly())]
 //metamodel factory
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.name.concat('Factory')/].hpp"
 [/if]

@@ -345,7 +345,7 @@ ENDIF()
 FIND_LIBRARY([packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [packName/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/for]
 FIND_LIBRARY([aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/] [aPackage.getPackageName()/][libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
-[if (aPackage.hasMainActivity_())]
+[if (aPackage.hasMainActivity())]
 FIND_LIBRARY(PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/] pluginFramework[libraryNameSuffix(debugMode)/][ending/] ${MDE4CPP_HOME}/application/[folderName/])
 [/if]
 # ['['/]protected ('library_[system/]_[buildModeCMakeProperty(debugMode)/]')[']'/]
@@ -360,7 +360,7 @@ TARGET_LINK_LIBRARIES(${PROJECT_NAME}
 	[buildModeCMakeProperty(debugMode)/] ${[packName.toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
 [/for]
 	[buildModeCMakeProperty(debugMode)/] ${[aPackage.getPackageName().toUpperCase()/]_[libraryVariableNameSuffix(debugMode)/]}
-[if (aPackage.hasMainActivity_())]
+[if (aPackage.hasMainActivity())]
 	[buildModeCMakeProperty(debugMode)/] ${PLUGINFRAMEWORK_[libraryVariableNameSuffix(debugMode)/]}
 [/if]
 

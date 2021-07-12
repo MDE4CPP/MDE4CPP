@@ -45,7 +45,7 @@ task build[packageName.toUpperFirst()/]() {
 
 	dependsOn 'model:generate[packageName.toUpperFirst()/]'
 	dependsOn 'src_gen:compile[packageName.toUpperFirst()/]'
-[if(aPackage.hasMainActivity_())]
+[if(aPackage.hasMainBehavior())]
 	dependsOn 'application:compileApplicationFor[packageName.toUpperFirst()/]'
 [/if]
 [for (packName : String | aPackage.collectIncludingModelNames()) ? (not(packName = aPackage.name))]

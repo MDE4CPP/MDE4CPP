@@ -30,7 +30,7 @@
 [** 
  * queries wether a specific stereotype is applied to an Element by its qualified name 
 */]
-[query public hasStereotypeApplied(anElement : Element, qualifiedName : String) : Boolean = anElement.getAppliedStereotype(qualifiedName).oclIsUndefined() /]
+[query public hasStereotypeApplied(anElement : Element, qualifiedName : String) : Boolean = not anElement.getAppliedStereotype(qualifiedName).oclIsUndefined() /]
 
 [**
  * queries for handling of the 'UML4CPPPackage' stereotype
@@ -50,8 +50,9 @@
  * queries for handling of the 'MainBehavior' stereotype
 */]
 [query public hasMainBehavior(aPackage : Package) : Boolean = aPackage.eAllContents(Behavior)->select(hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))->size() > 0 /]
-[query public getMainBehavior(aPackage : Package) : Behavior = aPackage.eAllContents(Behavior)->select(hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))->asOrderedSet()->first()/]
-[query public hasMainActivity_(aPackage : Package) : Boolean = if(aPackage.hasMainBehavior()) then if(aPackage.getMainBehavior().oclIsKindOf(Activity)) then true else false endif else false endif /]
+[query public getMainBehavior(aPackage : Package) : Behavior = if(hasMainBehavior()) then aPackage.eAllContents(Behavior)->select(hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))->asOrderedSet()->first() else null endif/]
+[query public hasMainActivity(aPackage : Package) : Boolean = if(hasMainBehavior() and getMainBehavior().oclIsKindOf(Activity)) then true else false endif /]
+[query public getMainActivity(aPackage : Package) : Activity = if(hasMainActivity()) then getMainBehavior().oclAsType(Activity) else null endif /]
 [query public hasMainSourceCode(ePackage : Package) : Boolean = true /]
 [query public getMainSourceCode(ePackage : Package) : String = '' /]
 [query public hasMainIncludes(ePackage : Package) : Boolean = true /]

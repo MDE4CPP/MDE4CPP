@@ -448,7 +448,7 @@ m_locus->setFactory(nullptr);
 	aPackage.allOwnedElements()->filter(Activity)->asSet()/]
 
 [query private getUsedActivities (aPackage : Package) : OrderedSet(Activity) = 
-	Set{aPackage.getActivitiesUsedByCallBehaviorAction(), aPackage.getActivitiesUsedByDecisionNode(), aPackage.getActivitiesUsedByOperation(), aPackage.getActivitiesOwnedByPackage(), aPackage.getMainBehavior().oclAsType(Activity)->asSet()->reject(oclIsUndefined())}->flatten()->sortedBy(name)/]
+	Set{aPackage.getActivitiesUsedByCallBehaviorAction(), aPackage.getActivitiesUsedByDecisionNode(), aPackage.getActivitiesUsedByOperation(), aPackage.getActivitiesOwnedByPackage(), Set{aPackage.getMainActivity()}}->reject(oclIsUndefined())->flatten()->sortedBy(name)/]
 
 [query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  
 	anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->indexOf(aParameter)-1 /]
