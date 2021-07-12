@@ -358,8 +358,8 @@ Any ComponentRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::COMPONENTREALIZATION_ATTRIBUTE_REALIZINGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_realizingClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_realizingClassifier->end();
+			Bag<uml::Classifier>::iterator iter = getRealizingClassifier()->begin();
+			Bag<uml::Classifier>::iterator end = getRealizingClassifier()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -406,13 +406,13 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Classifier>::iterator iterRealizingClassifier = m_realizingClassifier->begin();
-			Bag<uml::Classifier>::iterator endRealizingClassifier = m_realizingClassifier->end();
+			Bag<uml::Classifier>::iterator iterRealizingClassifier = getRealizingClassifier()->begin();
+			Bag<uml::Classifier>::iterator endRealizingClassifier = getRealizingClassifier()->end();
 			while (iterRealizingClassifier != endRealizingClassifier)
 			{
 				if (realizingClassifierList->find(*iterRealizingClassifier) == -1)
 				{
-					m_realizingClassifier->erase(*iterRealizingClassifier);
+					getRealizingClassifier()->erase(*iterRealizingClassifier);
 				}
 				iterRealizingClassifier++;
 			}
@@ -421,9 +421,9 @@ bool ComponentRealizationImpl::eSet(int featureID, Any newValue)
 			endRealizingClassifier = realizingClassifierList->end();
 			while (iterRealizingClassifier != endRealizingClassifier)
 			{
-				if (m_realizingClassifier->find(*iterRealizingClassifier) == -1)
+				if (getRealizingClassifier()->find(*iterRealizingClassifier) == -1)
 				{
-					m_realizingClassifier->add(*iterRealizingClassifier);
+					getRealizingClassifier()->add(*iterRealizingClassifier);
 				}
 				iterRealizingClassifier++;			
 			}

@@ -436,8 +436,8 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_METHOD:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Behavior>::iterator iter = m_method->begin();
-			Bag<uml::Behavior>::iterator end = m_method->end();
+			Bag<uml::Behavior>::iterator iter = getMethod()->begin();
+			Bag<uml::Behavior>::iterator end = getMethod()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -448,8 +448,8 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Parameter>::iterator iter = m_ownedParameter->begin();
-			Bag<uml::Parameter>::iterator end = m_ownedParameter->end();
+			Bag<uml::Parameter>::iterator iter = getOwnedParameter()->begin();
+			Bag<uml::Parameter>::iterator end = getOwnedParameter()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -460,8 +460,8 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_OWNEDPARAMETERSET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ParameterSet>::iterator iter = m_ownedParameterSet->begin();
-			Bag<uml::ParameterSet>::iterator end = m_ownedParameterSet->end();
+			Bag<uml::ParameterSet>::iterator iter = getOwnedParameterSet()->begin();
+			Bag<uml::ParameterSet>::iterator end = getOwnedParameterSet()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -472,8 +472,8 @@ Any BehavioralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::BEHAVIORALFEATURE_ATTRIBUTE_RAISEDEXCEPTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Type>::iterator iter = m_raisedException->begin();
-			Bag<uml::Type>::iterator end = m_raisedException->end();
+			Bag<uml::Type>::iterator iter = getRaisedException()->begin();
+			Bag<uml::Type>::iterator end = getRaisedException()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -548,13 +548,13 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Behavior>::iterator iterMethod = m_method->begin();
-			Bag<uml::Behavior>::iterator endMethod = m_method->end();
+			Bag<uml::Behavior>::iterator iterMethod = getMethod()->begin();
+			Bag<uml::Behavior>::iterator endMethod = getMethod()->end();
 			while (iterMethod != endMethod)
 			{
 				if (methodList->find(*iterMethod) == -1)
 				{
-					m_method->erase(*iterMethod);
+					getMethod()->erase(*iterMethod);
 				}
 				iterMethod++;
 			}
@@ -563,9 +563,9 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 			endMethod = methodList->end();
 			while (iterMethod != endMethod)
 			{
-				if (m_method->find(*iterMethod) == -1)
+				if (getMethod()->find(*iterMethod) == -1)
 				{
-					m_method->add(*iterMethod);
+					getMethod()->add(*iterMethod);
 				}
 				iterMethod++;			
 			}
@@ -584,13 +584,13 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Parameter>::iterator iterOwnedParameter = m_ownedParameter->begin();
-			Bag<uml::Parameter>::iterator endOwnedParameter = m_ownedParameter->end();
+			Bag<uml::Parameter>::iterator iterOwnedParameter = getOwnedParameter()->begin();
+			Bag<uml::Parameter>::iterator endOwnedParameter = getOwnedParameter()->end();
 			while (iterOwnedParameter != endOwnedParameter)
 			{
 				if (ownedParameterList->find(*iterOwnedParameter) == -1)
 				{
-					m_ownedParameter->erase(*iterOwnedParameter);
+					getOwnedParameter()->erase(*iterOwnedParameter);
 				}
 				iterOwnedParameter++;
 			}
@@ -599,9 +599,9 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 			endOwnedParameter = ownedParameterList->end();
 			while (iterOwnedParameter != endOwnedParameter)
 			{
-				if (m_ownedParameter->find(*iterOwnedParameter) == -1)
+				if (getOwnedParameter()->find(*iterOwnedParameter) == -1)
 				{
-					m_ownedParameter->add(*iterOwnedParameter);
+					getOwnedParameter()->add(*iterOwnedParameter);
 				}
 				iterOwnedParameter++;			
 			}
@@ -620,13 +620,13 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ParameterSet>::iterator iterOwnedParameterSet = m_ownedParameterSet->begin();
-			Bag<uml::ParameterSet>::iterator endOwnedParameterSet = m_ownedParameterSet->end();
+			Bag<uml::ParameterSet>::iterator iterOwnedParameterSet = getOwnedParameterSet()->begin();
+			Bag<uml::ParameterSet>::iterator endOwnedParameterSet = getOwnedParameterSet()->end();
 			while (iterOwnedParameterSet != endOwnedParameterSet)
 			{
 				if (ownedParameterSetList->find(*iterOwnedParameterSet) == -1)
 				{
-					m_ownedParameterSet->erase(*iterOwnedParameterSet);
+					getOwnedParameterSet()->erase(*iterOwnedParameterSet);
 				}
 				iterOwnedParameterSet++;
 			}
@@ -635,9 +635,9 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 			endOwnedParameterSet = ownedParameterSetList->end();
 			while (iterOwnedParameterSet != endOwnedParameterSet)
 			{
-				if (m_ownedParameterSet->find(*iterOwnedParameterSet) == -1)
+				if (getOwnedParameterSet()->find(*iterOwnedParameterSet) == -1)
 				{
-					m_ownedParameterSet->add(*iterOwnedParameterSet);
+					getOwnedParameterSet()->add(*iterOwnedParameterSet);
 				}
 				iterOwnedParameterSet++;			
 			}
@@ -656,13 +656,13 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Type>::iterator iterRaisedException = m_raisedException->begin();
-			Bag<uml::Type>::iterator endRaisedException = m_raisedException->end();
+			Bag<uml::Type>::iterator iterRaisedException = getRaisedException()->begin();
+			Bag<uml::Type>::iterator endRaisedException = getRaisedException()->end();
 			while (iterRaisedException != endRaisedException)
 			{
 				if (raisedExceptionList->find(*iterRaisedException) == -1)
 				{
-					m_raisedException->erase(*iterRaisedException);
+					getRaisedException()->erase(*iterRaisedException);
 				}
 				iterRaisedException++;
 			}
@@ -671,9 +671,9 @@ bool BehavioralFeatureImpl::eSet(int featureID, Any newValue)
 			endRaisedException = raisedExceptionList->end();
 			while (iterRaisedException != endRaisedException)
 			{
-				if (m_raisedException->find(*iterRaisedException) == -1)
+				if (getRaisedException()->find(*iterRaisedException) == -1)
 				{
-					m_raisedException->add(*iterRaisedException);
+					getRaisedException()->add(*iterRaisedException);
 				}
 				iterRaisedException++;			
 			}

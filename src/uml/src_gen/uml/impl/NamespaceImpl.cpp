@@ -529,8 +529,8 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_ELEMENTIMPORT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ElementImport>::iterator iter = m_elementImport->begin();
-			Bag<uml::ElementImport>::iterator end = m_elementImport->end();
+			Bag<uml::ElementImport>::iterator iter = getElementImport()->begin();
+			Bag<uml::ElementImport>::iterator end = getElementImport()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -541,8 +541,8 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_IMPORTEDMEMBER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageableElement>::iterator iter = m_importedMember->begin();
-			Bag<uml::PackageableElement>::iterator end = m_importedMember->end();
+			Bag<uml::PackageableElement>::iterator iter = getImportedMember()->begin();
+			Bag<uml::PackageableElement>::iterator end = getImportedMember()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -553,8 +553,8 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_MEMBER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_member->begin();
-			Bag<uml::NamedElement>::iterator end = m_member->end();
+			Bag<uml::NamedElement>::iterator iter = getMember()->begin();
+			Bag<uml::NamedElement>::iterator end = getMember()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -565,8 +565,8 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDMEMBER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_ownedMember->begin();
-			Bag<uml::NamedElement>::iterator end = m_ownedMember->end();
+			Bag<uml::NamedElement>::iterator iter = getOwnedMember()->begin();
+			Bag<uml::NamedElement>::iterator end = getOwnedMember()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -577,8 +577,8 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_OWNEDRULE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_ownedRule->begin();
-			Bag<uml::Constraint>::iterator end = m_ownedRule->end();
+			Bag<uml::Constraint>::iterator iter = getOwnedRule()->begin();
+			Bag<uml::Constraint>::iterator end = getOwnedRule()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -589,8 +589,8 @@ Any NamespaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::NAMESPACE_ATTRIBUTE_PACKAGEIMPORT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageImport>::iterator iter = m_packageImport->begin();
-			Bag<uml::PackageImport>::iterator end = m_packageImport->end();
+			Bag<uml::PackageImport>::iterator iter = getPackageImport()->begin();
+			Bag<uml::PackageImport>::iterator end = getPackageImport()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -637,13 +637,13 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ElementImport>::iterator iterElementImport = m_elementImport->begin();
-			Bag<uml::ElementImport>::iterator endElementImport = m_elementImport->end();
+			Bag<uml::ElementImport>::iterator iterElementImport = getElementImport()->begin();
+			Bag<uml::ElementImport>::iterator endElementImport = getElementImport()->end();
 			while (iterElementImport != endElementImport)
 			{
 				if (elementImportList->find(*iterElementImport) == -1)
 				{
-					m_elementImport->erase(*iterElementImport);
+					getElementImport()->erase(*iterElementImport);
 				}
 				iterElementImport++;
 			}
@@ -652,9 +652,9 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 			endElementImport = elementImportList->end();
 			while (iterElementImport != endElementImport)
 			{
-				if (m_elementImport->find(*iterElementImport) == -1)
+				if (getElementImport()->find(*iterElementImport) == -1)
 				{
-					m_elementImport->add(*iterElementImport);
+					getElementImport()->add(*iterElementImport);
 				}
 				iterElementImport++;			
 			}
@@ -673,13 +673,13 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Constraint>::iterator iterOwnedRule = m_ownedRule->begin();
-			Bag<uml::Constraint>::iterator endOwnedRule = m_ownedRule->end();
+			Bag<uml::Constraint>::iterator iterOwnedRule = getOwnedRule()->begin();
+			Bag<uml::Constraint>::iterator endOwnedRule = getOwnedRule()->end();
 			while (iterOwnedRule != endOwnedRule)
 			{
 				if (ownedRuleList->find(*iterOwnedRule) == -1)
 				{
-					m_ownedRule->erase(*iterOwnedRule);
+					getOwnedRule()->erase(*iterOwnedRule);
 				}
 				iterOwnedRule++;
 			}
@@ -688,9 +688,9 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 			endOwnedRule = ownedRuleList->end();
 			while (iterOwnedRule != endOwnedRule)
 			{
-				if (m_ownedRule->find(*iterOwnedRule) == -1)
+				if (getOwnedRule()->find(*iterOwnedRule) == -1)
 				{
-					m_ownedRule->add(*iterOwnedRule);
+					getOwnedRule()->add(*iterOwnedRule);
 				}
 				iterOwnedRule++;			
 			}
@@ -709,13 +709,13 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::PackageImport>::iterator iterPackageImport = m_packageImport->begin();
-			Bag<uml::PackageImport>::iterator endPackageImport = m_packageImport->end();
+			Bag<uml::PackageImport>::iterator iterPackageImport = getPackageImport()->begin();
+			Bag<uml::PackageImport>::iterator endPackageImport = getPackageImport()->end();
 			while (iterPackageImport != endPackageImport)
 			{
 				if (packageImportList->find(*iterPackageImport) == -1)
 				{
-					m_packageImport->erase(*iterPackageImport);
+					getPackageImport()->erase(*iterPackageImport);
 				}
 				iterPackageImport++;
 			}
@@ -724,9 +724,9 @@ bool NamespaceImpl::eSet(int featureID, Any newValue)
 			endPackageImport = packageImportList->end();
 			while (iterPackageImport != endPackageImport)
 			{
-				if (m_packageImport->find(*iterPackageImport) == -1)
+				if (getPackageImport()->find(*iterPackageImport) == -1)
 				{
-					m_packageImport->add(*iterPackageImport);
+					getPackageImport()->add(*iterPackageImport);
 				}
 				iterPackageImport++;			
 			}

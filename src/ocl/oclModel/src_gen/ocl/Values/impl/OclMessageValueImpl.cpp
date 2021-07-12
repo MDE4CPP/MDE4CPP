@@ -42,8 +42,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -271,8 +271,8 @@ Any OclMessageValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::NameValueBinding>::iterator iter = m_arguments->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator end = m_arguments->end();
+			Bag<ocl::Values::NameValueBinding>::iterator iter = getArguments()->begin();
+			Bag<ocl::Values::NameValueBinding>::iterator end = getArguments()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -337,13 +337,13 @@ bool OclMessageValueImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Values::NameValueBinding>::iterator iterArguments = m_arguments->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator endArguments = m_arguments->end();
+			Bag<ocl::Values::NameValueBinding>::iterator iterArguments = getArguments()->begin();
+			Bag<ocl::Values::NameValueBinding>::iterator endArguments = getArguments()->end();
 			while (iterArguments != endArguments)
 			{
 				if (argumentsList->find(*iterArguments) == -1)
 				{
-					m_arguments->erase(*iterArguments);
+					getArguments()->erase(*iterArguments);
 				}
 				iterArguments++;
 			}
@@ -352,9 +352,9 @@ bool OclMessageValueImpl::eSet(int featureID, Any newValue)
 			endArguments = argumentsList->end();
 			while (iterArguments != endArguments)
 			{
-				if (m_arguments->find(*iterArguments) == -1)
+				if (getArguments()->find(*iterArguments) == -1)
 				{
-					m_arguments->add(*iterArguments);
+					getArguments()->add(*iterArguments);
 				}
 				iterArguments++;			
 			}

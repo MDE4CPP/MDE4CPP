@@ -298,8 +298,8 @@ Any DurationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::DURATION_ATTRIBUTE_OBSERVATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Observation>::iterator iter = m_observation->begin();
-			Bag<uml::Observation>::iterator end = m_observation->end();
+			Bag<uml::Observation>::iterator iter = getObservation()->begin();
+			Bag<uml::Observation>::iterator end = getObservation()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -346,13 +346,13 @@ bool DurationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Observation>::iterator iterObservation = m_observation->begin();
-			Bag<uml::Observation>::iterator endObservation = m_observation->end();
+			Bag<uml::Observation>::iterator iterObservation = getObservation()->begin();
+			Bag<uml::Observation>::iterator endObservation = getObservation()->end();
 			while (iterObservation != endObservation)
 			{
 				if (observationList->find(*iterObservation) == -1)
 				{
-					m_observation->erase(*iterObservation);
+					getObservation()->erase(*iterObservation);
 				}
 				iterObservation++;
 			}
@@ -361,9 +361,9 @@ bool DurationImpl::eSet(int featureID, Any newValue)
 			endObservation = observationList->end();
 			while (iterObservation != endObservation)
 			{
-				if (m_observation->find(*iterObservation) == -1)
+				if (getObservation()->find(*iterObservation) == -1)
 				{
-					m_observation->add(*iterObservation);
+					getObservation()->add(*iterObservation);
 				}
 				iterObservation++;			
 			}

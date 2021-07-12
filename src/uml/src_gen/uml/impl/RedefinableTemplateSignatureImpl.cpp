@@ -395,8 +395,8 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_EXTENDEDSIGNATURE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::RedefinableTemplateSignature>::iterator iter = m_extendedSignature->begin();
-			Bag<uml::RedefinableTemplateSignature>::iterator end = m_extendedSignature->end();
+			Bag<uml::RedefinableTemplateSignature>::iterator iter = getExtendedSignature()->begin();
+			Bag<uml::RedefinableTemplateSignature>::iterator end = getExtendedSignature()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -407,8 +407,8 @@ Any RedefinableTemplateSignatureImpl::eGet(int featureID, bool resolve, bool cor
 		case uml::umlPackage::REDEFINABLETEMPLATESIGNATURE_ATTRIBUTE_INHERITEDPARAMETER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateParameter>::iterator iter = m_inheritedParameter->begin();
-			Bag<uml::TemplateParameter>::iterator end = m_inheritedParameter->end();
+			Bag<uml::TemplateParameter>::iterator iter = getInheritedParameter()->begin();
+			Bag<uml::TemplateParameter>::iterator end = getInheritedParameter()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -471,13 +471,13 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::RedefinableTemplateSignature>::iterator iterExtendedSignature = m_extendedSignature->begin();
-			Bag<uml::RedefinableTemplateSignature>::iterator endExtendedSignature = m_extendedSignature->end();
+			Bag<uml::RedefinableTemplateSignature>::iterator iterExtendedSignature = getExtendedSignature()->begin();
+			Bag<uml::RedefinableTemplateSignature>::iterator endExtendedSignature = getExtendedSignature()->end();
 			while (iterExtendedSignature != endExtendedSignature)
 			{
 				if (extendedSignatureList->find(*iterExtendedSignature) == -1)
 				{
-					m_extendedSignature->erase(*iterExtendedSignature);
+					getExtendedSignature()->erase(*iterExtendedSignature);
 				}
 				iterExtendedSignature++;
 			}
@@ -486,9 +486,9 @@ bool RedefinableTemplateSignatureImpl::eSet(int featureID, Any newValue)
 			endExtendedSignature = extendedSignatureList->end();
 			while (iterExtendedSignature != endExtendedSignature)
 			{
-				if (m_extendedSignature->find(*iterExtendedSignature) == -1)
+				if (getExtendedSignature()->find(*iterExtendedSignature) == -1)
 				{
-					m_extendedSignature->add(*iterExtendedSignature);
+					getExtendedSignature()->add(*iterExtendedSignature);
 				}
 				iterExtendedSignature++;			
 			}

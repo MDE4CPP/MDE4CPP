@@ -789,8 +789,8 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_NESTEDPACKAGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Package>::iterator iter = m_nestedPackage->begin();
-			Bag<uml::Package>::iterator end = m_nestedPackage->end();
+			Bag<uml::Package>::iterator iter = getNestedPackage()->begin();
+			Bag<uml::Package>::iterator end = getNestedPackage()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -803,8 +803,8 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDSTEREOTYPE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Stereotype>::iterator iter = m_ownedStereotype->begin();
-			Bag<uml::Stereotype>::iterator end = m_ownedStereotype->end();
+			Bag<uml::Stereotype>::iterator iter = getOwnedStereotype()->begin();
+			Bag<uml::Stereotype>::iterator end = getOwnedStereotype()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -815,8 +815,8 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_OWNEDTYPE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Type>::iterator iter = m_ownedType->begin();
-			Bag<uml::Type>::iterator end = m_ownedType->end();
+			Bag<uml::Type>::iterator iter = getOwnedType()->begin();
+			Bag<uml::Type>::iterator end = getOwnedType()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -827,8 +827,8 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEMERGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageMerge>::iterator iter = m_packageMerge->begin();
-			Bag<uml::PackageMerge>::iterator end = m_packageMerge->end();
+			Bag<uml::PackageMerge>::iterator iter = getPackageMerge()->begin();
+			Bag<uml::PackageMerge>::iterator end = getPackageMerge()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -839,8 +839,8 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PACKAGEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageableElement>::iterator iter = m_packagedElement->begin();
-			Bag<uml::PackageableElement>::iterator end = m_packagedElement->end();
+			Bag<uml::PackageableElement>::iterator iter = getPackagedElement()->begin();
+			Bag<uml::PackageableElement>::iterator end = getPackagedElement()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -851,8 +851,8 @@ Any PackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PACKAGE_ATTRIBUTE_PROFILEAPPLICATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ProfileApplication>::iterator iter = m_profileApplication->begin();
-			Bag<uml::ProfileApplication>::iterator end = m_profileApplication->end();
+			Bag<uml::ProfileApplication>::iterator iter = getProfileApplication()->begin();
+			Bag<uml::ProfileApplication>::iterator end = getProfileApplication()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -934,13 +934,13 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Package>::iterator iterNestedPackage = m_nestedPackage->begin();
-			Bag<uml::Package>::iterator endNestedPackage = m_nestedPackage->end();
+			Bag<uml::Package>::iterator iterNestedPackage = getNestedPackage()->begin();
+			Bag<uml::Package>::iterator endNestedPackage = getNestedPackage()->end();
 			while (iterNestedPackage != endNestedPackage)
 			{
 				if (nestedPackageList->find(*iterNestedPackage) == -1)
 				{
-					m_nestedPackage->erase(*iterNestedPackage);
+					getNestedPackage()->erase(*iterNestedPackage);
 				}
 				iterNestedPackage++;
 			}
@@ -949,9 +949,9 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 			endNestedPackage = nestedPackageList->end();
 			while (iterNestedPackage != endNestedPackage)
 			{
-				if (m_nestedPackage->find(*iterNestedPackage) == -1)
+				if (getNestedPackage()->find(*iterNestedPackage) == -1)
 				{
-					m_nestedPackage->add(*iterNestedPackage);
+					getNestedPackage()->add(*iterNestedPackage);
 				}
 				iterNestedPackage++;			
 			}
@@ -978,13 +978,13 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Type>::iterator iterOwnedType = m_ownedType->begin();
-			Bag<uml::Type>::iterator endOwnedType = m_ownedType->end();
+			Bag<uml::Type>::iterator iterOwnedType = getOwnedType()->begin();
+			Bag<uml::Type>::iterator endOwnedType = getOwnedType()->end();
 			while (iterOwnedType != endOwnedType)
 			{
 				if (ownedTypeList->find(*iterOwnedType) == -1)
 				{
-					m_ownedType->erase(*iterOwnedType);
+					getOwnedType()->erase(*iterOwnedType);
 				}
 				iterOwnedType++;
 			}
@@ -993,9 +993,9 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 			endOwnedType = ownedTypeList->end();
 			while (iterOwnedType != endOwnedType)
 			{
-				if (m_ownedType->find(*iterOwnedType) == -1)
+				if (getOwnedType()->find(*iterOwnedType) == -1)
 				{
-					m_ownedType->add(*iterOwnedType);
+					getOwnedType()->add(*iterOwnedType);
 				}
 				iterOwnedType++;			
 			}
@@ -1014,13 +1014,13 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::PackageMerge>::iterator iterPackageMerge = m_packageMerge->begin();
-			Bag<uml::PackageMerge>::iterator endPackageMerge = m_packageMerge->end();
+			Bag<uml::PackageMerge>::iterator iterPackageMerge = getPackageMerge()->begin();
+			Bag<uml::PackageMerge>::iterator endPackageMerge = getPackageMerge()->end();
 			while (iterPackageMerge != endPackageMerge)
 			{
 				if (packageMergeList->find(*iterPackageMerge) == -1)
 				{
-					m_packageMerge->erase(*iterPackageMerge);
+					getPackageMerge()->erase(*iterPackageMerge);
 				}
 				iterPackageMerge++;
 			}
@@ -1029,9 +1029,9 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 			endPackageMerge = packageMergeList->end();
 			while (iterPackageMerge != endPackageMerge)
 			{
-				if (m_packageMerge->find(*iterPackageMerge) == -1)
+				if (getPackageMerge()->find(*iterPackageMerge) == -1)
 				{
-					m_packageMerge->add(*iterPackageMerge);
+					getPackageMerge()->add(*iterPackageMerge);
 				}
 				iterPackageMerge++;			
 			}
@@ -1050,13 +1050,13 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::PackageableElement>::iterator iterPackagedElement = m_packagedElement->begin();
-			Bag<uml::PackageableElement>::iterator endPackagedElement = m_packagedElement->end();
+			Bag<uml::PackageableElement>::iterator iterPackagedElement = getPackagedElement()->begin();
+			Bag<uml::PackageableElement>::iterator endPackagedElement = getPackagedElement()->end();
 			while (iterPackagedElement != endPackagedElement)
 			{
 				if (packagedElementList->find(*iterPackagedElement) == -1)
 				{
-					m_packagedElement->erase(*iterPackagedElement);
+					getPackagedElement()->erase(*iterPackagedElement);
 				}
 				iterPackagedElement++;
 			}
@@ -1065,9 +1065,9 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 			endPackagedElement = packagedElementList->end();
 			while (iterPackagedElement != endPackagedElement)
 			{
-				if (m_packagedElement->find(*iterPackagedElement) == -1)
+				if (getPackagedElement()->find(*iterPackagedElement) == -1)
 				{
-					m_packagedElement->add(*iterPackagedElement);
+					getPackagedElement()->add(*iterPackagedElement);
 				}
 				iterPackagedElement++;			
 			}
@@ -1086,13 +1086,13 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ProfileApplication>::iterator iterProfileApplication = m_profileApplication->begin();
-			Bag<uml::ProfileApplication>::iterator endProfileApplication = m_profileApplication->end();
+			Bag<uml::ProfileApplication>::iterator iterProfileApplication = getProfileApplication()->begin();
+			Bag<uml::ProfileApplication>::iterator endProfileApplication = getProfileApplication()->end();
 			while (iterProfileApplication != endProfileApplication)
 			{
 				if (profileApplicationList->find(*iterProfileApplication) == -1)
 				{
-					m_profileApplication->erase(*iterProfileApplication);
+					getProfileApplication()->erase(*iterProfileApplication);
 				}
 				iterProfileApplication++;
 			}
@@ -1101,9 +1101,9 @@ bool PackageImpl::eSet(int featureID, Any newValue)
 			endProfileApplication = profileApplicationList->end();
 			while (iterProfileApplication != endProfileApplication)
 			{
-				if (m_profileApplication->find(*iterProfileApplication) == -1)
+				if (getProfileApplication()->find(*iterProfileApplication) == -1)
 				{
-					m_profileApplication->add(*iterProfileApplication);
+					getProfileApplication()->add(*iterProfileApplication);
 				}
 				iterProfileApplication++;			
 			}

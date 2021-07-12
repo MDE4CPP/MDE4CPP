@@ -539,8 +539,8 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTEND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Extend>::iterator iter = m_extend->begin();
-			Bag<uml::Extend>::iterator end = m_extend->end();
+			Bag<uml::Extend>::iterator iter = getExtend()->begin();
+			Bag<uml::Extend>::iterator end = getExtend()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -551,8 +551,8 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::USECASE_ATTRIBUTE_EXTENSIONPOINT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExtensionPoint>::iterator iter = m_extensionPoint->begin();
-			Bag<uml::ExtensionPoint>::iterator end = m_extensionPoint->end();
+			Bag<uml::ExtensionPoint>::iterator iter = getExtensionPoint()->begin();
+			Bag<uml::ExtensionPoint>::iterator end = getExtensionPoint()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -563,8 +563,8 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::USECASE_ATTRIBUTE_INCLUDE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Include>::iterator iter = m_include->begin();
-			Bag<uml::Include>::iterator end = m_include->end();
+			Bag<uml::Include>::iterator iter = getInclude()->begin();
+			Bag<uml::Include>::iterator end = getInclude()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -575,8 +575,8 @@ Any UseCaseImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::USECASE_ATTRIBUTE_SUBJECT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_subject->begin();
-			Bag<uml::Classifier>::iterator end = m_subject->end();
+			Bag<uml::Classifier>::iterator iter = getSubject()->begin();
+			Bag<uml::Classifier>::iterator end = getSubject()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -619,13 +619,13 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Extend>::iterator iterExtend = m_extend->begin();
-			Bag<uml::Extend>::iterator endExtend = m_extend->end();
+			Bag<uml::Extend>::iterator iterExtend = getExtend()->begin();
+			Bag<uml::Extend>::iterator endExtend = getExtend()->end();
 			while (iterExtend != endExtend)
 			{
 				if (extendList->find(*iterExtend) == -1)
 				{
-					m_extend->erase(*iterExtend);
+					getExtend()->erase(*iterExtend);
 				}
 				iterExtend++;
 			}
@@ -634,9 +634,9 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 			endExtend = extendList->end();
 			while (iterExtend != endExtend)
 			{
-				if (m_extend->find(*iterExtend) == -1)
+				if (getExtend()->find(*iterExtend) == -1)
 				{
-					m_extend->add(*iterExtend);
+					getExtend()->add(*iterExtend);
 				}
 				iterExtend++;			
 			}
@@ -655,13 +655,13 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ExtensionPoint>::iterator iterExtensionPoint = m_extensionPoint->begin();
-			Bag<uml::ExtensionPoint>::iterator endExtensionPoint = m_extensionPoint->end();
+			Bag<uml::ExtensionPoint>::iterator iterExtensionPoint = getExtensionPoint()->begin();
+			Bag<uml::ExtensionPoint>::iterator endExtensionPoint = getExtensionPoint()->end();
 			while (iterExtensionPoint != endExtensionPoint)
 			{
 				if (extensionPointList->find(*iterExtensionPoint) == -1)
 				{
-					m_extensionPoint->erase(*iterExtensionPoint);
+					getExtensionPoint()->erase(*iterExtensionPoint);
 				}
 				iterExtensionPoint++;
 			}
@@ -670,9 +670,9 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 			endExtensionPoint = extensionPointList->end();
 			while (iterExtensionPoint != endExtensionPoint)
 			{
-				if (m_extensionPoint->find(*iterExtensionPoint) == -1)
+				if (getExtensionPoint()->find(*iterExtensionPoint) == -1)
 				{
-					m_extensionPoint->add(*iterExtensionPoint);
+					getExtensionPoint()->add(*iterExtensionPoint);
 				}
 				iterExtensionPoint++;			
 			}
@@ -691,13 +691,13 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Include>::iterator iterInclude = m_include->begin();
-			Bag<uml::Include>::iterator endInclude = m_include->end();
+			Bag<uml::Include>::iterator iterInclude = getInclude()->begin();
+			Bag<uml::Include>::iterator endInclude = getInclude()->end();
 			while (iterInclude != endInclude)
 			{
 				if (includeList->find(*iterInclude) == -1)
 				{
-					m_include->erase(*iterInclude);
+					getInclude()->erase(*iterInclude);
 				}
 				iterInclude++;
 			}
@@ -706,9 +706,9 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 			endInclude = includeList->end();
 			while (iterInclude != endInclude)
 			{
-				if (m_include->find(*iterInclude) == -1)
+				if (getInclude()->find(*iterInclude) == -1)
 				{
-					m_include->add(*iterInclude);
+					getInclude()->add(*iterInclude);
 				}
 				iterInclude++;			
 			}
@@ -727,13 +727,13 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Classifier>::iterator iterSubject = m_subject->begin();
-			Bag<uml::Classifier>::iterator endSubject = m_subject->end();
+			Bag<uml::Classifier>::iterator iterSubject = getSubject()->begin();
+			Bag<uml::Classifier>::iterator endSubject = getSubject()->end();
 			while (iterSubject != endSubject)
 			{
 				if (subjectList->find(*iterSubject) == -1)
 				{
-					m_subject->erase(*iterSubject);
+					getSubject()->erase(*iterSubject);
 				}
 				iterSubject++;
 			}
@@ -742,9 +742,9 @@ bool UseCaseImpl::eSet(int featureID, Any newValue)
 			endSubject = subjectList->end();
 			while (iterSubject != endSubject)
 			{
-				if (m_subject->find(*iterSubject) == -1)
+				if (getSubject()->find(*iterSubject) == -1)
 				{
-					m_subject->add(*iterSubject);
+					getSubject()->add(*iterSubject);
 				}
 				iterSubject++;			
 			}

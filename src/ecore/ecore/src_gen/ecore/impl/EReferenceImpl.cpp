@@ -276,8 +276,8 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EKEYS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EAttribute>::iterator iter = m_eKeys->begin();
-			Bag<ecore::EAttribute>::iterator end = m_eKeys->end();
+			Bag<ecore::EAttribute>::iterator iter = getEKeys()->begin();
+			Bag<ecore::EAttribute>::iterator end = getEKeys()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -337,13 +337,13 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EAttribute>::iterator iterEKeys = m_eKeys->begin();
-			Bag<ecore::EAttribute>::iterator endEKeys = m_eKeys->end();
+			Bag<ecore::EAttribute>::iterator iterEKeys = getEKeys()->begin();
+			Bag<ecore::EAttribute>::iterator endEKeys = getEKeys()->end();
 			while (iterEKeys != endEKeys)
 			{
 				if (eKeysList->find(*iterEKeys) == -1)
 				{
-					m_eKeys->erase(*iterEKeys);
+					getEKeys()->erase(*iterEKeys);
 				}
 				iterEKeys++;
 			}
@@ -352,9 +352,9 @@ bool EReferenceImpl::eSet(int featureID, Any newValue)
 			endEKeys = eKeysList->end();
 			while (iterEKeys != endEKeys)
 			{
-				if (m_eKeys->find(*iterEKeys) == -1)
+				if (getEKeys()->find(*iterEKeys) == -1)
 				{
-					m_eKeys->add(*iterEKeys);
+					getEKeys()->add(*iterEKeys);
 				}
 				iterEKeys++;			
 			}

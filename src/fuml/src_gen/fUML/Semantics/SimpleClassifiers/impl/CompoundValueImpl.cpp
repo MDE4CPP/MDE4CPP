@@ -343,8 +343,8 @@ Any CompoundValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>::iterator iter = m_featureValues->begin();
-			Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>::iterator end = m_featureValues->end();
+			Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>::iterator iter = getFeatureValues()->begin();
+			Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>::iterator end = getFeatureValues()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -381,13 +381,13 @@ bool CompoundValueImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>::iterator iterFeatureValues = m_featureValues->begin();
-			Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>::iterator endFeatureValues = m_featureValues->end();
+			Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>::iterator iterFeatureValues = getFeatureValues()->begin();
+			Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>::iterator endFeatureValues = getFeatureValues()->end();
 			while (iterFeatureValues != endFeatureValues)
 			{
 				if (featureValuesList->find(*iterFeatureValues) == -1)
 				{
-					m_featureValues->erase(*iterFeatureValues);
+					getFeatureValues()->erase(*iterFeatureValues);
 				}
 				iterFeatureValues++;
 			}
@@ -396,9 +396,9 @@ bool CompoundValueImpl::eSet(int featureID, Any newValue)
 			endFeatureValues = featureValuesList->end();
 			while (iterFeatureValues != endFeatureValues)
 			{
-				if (m_featureValues->find(*iterFeatureValues) == -1)
+				if (getFeatureValues()->find(*iterFeatureValues) == -1)
 				{
-					m_featureValues->add(*iterFeatureValues);
+					getFeatureValues()->add(*iterFeatureValues);
 				}
 				iterFeatureValues++;			
 			}

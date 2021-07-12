@@ -699,8 +699,8 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectionPointReference>::iterator iter = m_connection->begin();
-			Bag<uml::ConnectionPointReference>::iterator end = m_connection->end();
+			Bag<uml::ConnectionPointReference>::iterator iter = getConnection()->begin();
+			Bag<uml::ConnectionPointReference>::iterator end = getConnection()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -711,8 +711,8 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STATE_ATTRIBUTE_CONNECTIONPOINT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = m_connectionPoint->begin();
-			Bag<uml::Pseudostate>::iterator end = m_connectionPoint->end();
+			Bag<uml::Pseudostate>::iterator iter = getConnectionPoint()->begin();
+			Bag<uml::Pseudostate>::iterator end = getConnectionPoint()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -723,8 +723,8 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STATE_ATTRIBUTE_DEFERRABLETRIGGER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Trigger>::iterator iter = m_deferrableTrigger->begin();
-			Bag<uml::Trigger>::iterator end = m_deferrableTrigger->end();
+			Bag<uml::Trigger>::iterator iter = getDeferrableTrigger()->begin();
+			Bag<uml::Trigger>::iterator end = getDeferrableTrigger()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -751,8 +751,8 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STATE_ATTRIBUTE_REGION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Region>::iterator iter = m_region->begin();
-			Bag<uml::Region>::iterator end = m_region->end();
+			Bag<uml::Region>::iterator iter = getRegion()->begin();
+			Bag<uml::Region>::iterator end = getRegion()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -843,13 +843,13 @@ bool StateImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ConnectionPointReference>::iterator iterConnection = m_connection->begin();
-			Bag<uml::ConnectionPointReference>::iterator endConnection = m_connection->end();
+			Bag<uml::ConnectionPointReference>::iterator iterConnection = getConnection()->begin();
+			Bag<uml::ConnectionPointReference>::iterator endConnection = getConnection()->end();
 			while (iterConnection != endConnection)
 			{
 				if (connectionList->find(*iterConnection) == -1)
 				{
-					m_connection->erase(*iterConnection);
+					getConnection()->erase(*iterConnection);
 				}
 				iterConnection++;
 			}
@@ -858,9 +858,9 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			endConnection = connectionList->end();
 			while (iterConnection != endConnection)
 			{
-				if (m_connection->find(*iterConnection) == -1)
+				if (getConnection()->find(*iterConnection) == -1)
 				{
-					m_connection->add(*iterConnection);
+					getConnection()->add(*iterConnection);
 				}
 				iterConnection++;			
 			}
@@ -879,13 +879,13 @@ bool StateImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Pseudostate>::iterator iterConnectionPoint = m_connectionPoint->begin();
-			Bag<uml::Pseudostate>::iterator endConnectionPoint = m_connectionPoint->end();
+			Bag<uml::Pseudostate>::iterator iterConnectionPoint = getConnectionPoint()->begin();
+			Bag<uml::Pseudostate>::iterator endConnectionPoint = getConnectionPoint()->end();
 			while (iterConnectionPoint != endConnectionPoint)
 			{
 				if (connectionPointList->find(*iterConnectionPoint) == -1)
 				{
-					m_connectionPoint->erase(*iterConnectionPoint);
+					getConnectionPoint()->erase(*iterConnectionPoint);
 				}
 				iterConnectionPoint++;
 			}
@@ -894,9 +894,9 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			endConnectionPoint = connectionPointList->end();
 			while (iterConnectionPoint != endConnectionPoint)
 			{
-				if (m_connectionPoint->find(*iterConnectionPoint) == -1)
+				if (getConnectionPoint()->find(*iterConnectionPoint) == -1)
 				{
-					m_connectionPoint->add(*iterConnectionPoint);
+					getConnectionPoint()->add(*iterConnectionPoint);
 				}
 				iterConnectionPoint++;			
 			}
@@ -915,13 +915,13 @@ bool StateImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Trigger>::iterator iterDeferrableTrigger = m_deferrableTrigger->begin();
-			Bag<uml::Trigger>::iterator endDeferrableTrigger = m_deferrableTrigger->end();
+			Bag<uml::Trigger>::iterator iterDeferrableTrigger = getDeferrableTrigger()->begin();
+			Bag<uml::Trigger>::iterator endDeferrableTrigger = getDeferrableTrigger()->end();
 			while (iterDeferrableTrigger != endDeferrableTrigger)
 			{
 				if (deferrableTriggerList->find(*iterDeferrableTrigger) == -1)
 				{
-					m_deferrableTrigger->erase(*iterDeferrableTrigger);
+					getDeferrableTrigger()->erase(*iterDeferrableTrigger);
 				}
 				iterDeferrableTrigger++;
 			}
@@ -930,9 +930,9 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			endDeferrableTrigger = deferrableTriggerList->end();
 			while (iterDeferrableTrigger != endDeferrableTrigger)
 			{
-				if (m_deferrableTrigger->find(*iterDeferrableTrigger) == -1)
+				if (getDeferrableTrigger()->find(*iterDeferrableTrigger) == -1)
 				{
-					m_deferrableTrigger->add(*iterDeferrableTrigger);
+					getDeferrableTrigger()->add(*iterDeferrableTrigger);
 				}
 				iterDeferrableTrigger++;			
 			}
@@ -983,13 +983,13 @@ bool StateImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Region>::iterator iterRegion = m_region->begin();
-			Bag<uml::Region>::iterator endRegion = m_region->end();
+			Bag<uml::Region>::iterator iterRegion = getRegion()->begin();
+			Bag<uml::Region>::iterator endRegion = getRegion()->end();
 			while (iterRegion != endRegion)
 			{
 				if (regionList->find(*iterRegion) == -1)
 				{
-					m_region->erase(*iterRegion);
+					getRegion()->erase(*iterRegion);
 				}
 				iterRegion++;
 			}
@@ -998,9 +998,9 @@ bool StateImpl::eSet(int featureID, Any newValue)
 			endRegion = regionList->end();
 			while (iterRegion != endRegion)
 			{
-				if (m_region->find(*iterRegion) == -1)
+				if (getRegion()->find(*iterRegion) == -1)
 				{
-					m_region->add(*iterRegion);
+					getRegion()->add(*iterRegion);
 				}
 				iterRegion++;			
 			}

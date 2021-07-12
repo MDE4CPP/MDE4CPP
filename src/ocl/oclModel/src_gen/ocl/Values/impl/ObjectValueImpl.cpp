@@ -55,8 +55,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 
 
@@ -298,8 +298,8 @@ Any ObjectValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Values::ValuesPackage::OBJECTVALUE_ATTRIBUTE_HISTORY:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::LocalSnapshot>::iterator iter = m_history->begin();
-			Bag<ocl::Values::LocalSnapshot>::iterator end = m_history->end();
+			Bag<ocl::Values::LocalSnapshot>::iterator iter = getHistory()->begin();
+			Bag<ocl::Values::LocalSnapshot>::iterator end = getHistory()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -340,13 +340,13 @@ bool ObjectValueImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Values::LocalSnapshot>::iterator iterHistory = m_history->begin();
-			Bag<ocl::Values::LocalSnapshot>::iterator endHistory = m_history->end();
+			Bag<ocl::Values::LocalSnapshot>::iterator iterHistory = getHistory()->begin();
+			Bag<ocl::Values::LocalSnapshot>::iterator endHistory = getHistory()->end();
 			while (iterHistory != endHistory)
 			{
 				if (historyList->find(*iterHistory) == -1)
 				{
-					m_history->erase(*iterHistory);
+					getHistory()->erase(*iterHistory);
 				}
 				iterHistory++;
 			}
@@ -355,9 +355,9 @@ bool ObjectValueImpl::eSet(int featureID, Any newValue)
 			endHistory = historyList->end();
 			while (iterHistory != endHistory)
 			{
-				if (m_history->find(*iterHistory) == -1)
+				if (getHistory()->find(*iterHistory) == -1)
 				{
-					m_history->add(*iterHistory);
+					getHistory()->add(*iterHistory);
 				}
 				iterHistory++;			
 			}

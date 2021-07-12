@@ -319,8 +319,8 @@ Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_COVEREDBY:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InteractionFragment>::iterator iter = m_coveredBy->begin();
-			Bag<uml::InteractionFragment>::iterator end = m_coveredBy->end();
+			Bag<uml::InteractionFragment>::iterator iter = getCoveredBy()->begin();
+			Bag<uml::InteractionFragment>::iterator end = getCoveredBy()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -373,13 +373,13 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::InteractionFragment>::iterator iterCoveredBy = m_coveredBy->begin();
-			Bag<uml::InteractionFragment>::iterator endCoveredBy = m_coveredBy->end();
+			Bag<uml::InteractionFragment>::iterator iterCoveredBy = getCoveredBy()->begin();
+			Bag<uml::InteractionFragment>::iterator endCoveredBy = getCoveredBy()->end();
 			while (iterCoveredBy != endCoveredBy)
 			{
 				if (coveredByList->find(*iterCoveredBy) == -1)
 				{
-					m_coveredBy->erase(*iterCoveredBy);
+					getCoveredBy()->erase(*iterCoveredBy);
 				}
 				iterCoveredBy++;
 			}
@@ -388,9 +388,9 @@ bool LifelineImpl::eSet(int featureID, Any newValue)
 			endCoveredBy = coveredByList->end();
 			while (iterCoveredBy != endCoveredBy)
 			{
-				if (m_coveredBy->find(*iterCoveredBy) == -1)
+				if (getCoveredBy()->find(*iterCoveredBy) == -1)
 				{
-					m_coveredBy->add(*iterCoveredBy);
+					getCoveredBy()->add(*iterCoveredBy);
 				}
 				iterCoveredBy++;			
 			}

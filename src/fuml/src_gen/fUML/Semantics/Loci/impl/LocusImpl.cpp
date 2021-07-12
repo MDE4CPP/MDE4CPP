@@ -349,8 +349,8 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator iter = m_extensionalValues->begin();
-			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator end = m_extensionalValues->end();
+			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator iter = getExtensionalValues()->begin();
+			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator end = getExtensionalValues()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -401,13 +401,13 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator iterExtensionalValues = m_extensionalValues->begin();
-			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator endExtensionalValues = m_extensionalValues->end();
+			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator iterExtensionalValues = getExtensionalValues()->begin();
+			Bag<fUML::Semantics::StructuredClassifiers::ExtensionalValue>::iterator endExtensionalValues = getExtensionalValues()->end();
 			while (iterExtensionalValues != endExtensionalValues)
 			{
 				if (extensionalValuesList->find(*iterExtensionalValues) == -1)
 				{
-					m_extensionalValues->erase(*iterExtensionalValues);
+					getExtensionalValues()->erase(*iterExtensionalValues);
 				}
 				iterExtensionalValues++;
 			}
@@ -416,9 +416,9 @@ bool LocusImpl::eSet(int featureID, Any newValue)
 			endExtensionalValues = extensionalValuesList->end();
 			while (iterExtensionalValues != endExtensionalValues)
 			{
-				if (m_extensionalValues->find(*iterExtensionalValues) == -1)
+				if (getExtensionalValues()->find(*iterExtensionalValues) == -1)
 				{
-					m_extensionalValues->add(*iterExtensionalValues);
+					getExtensionalValues()->add(*iterExtensionalValues);
 				}
 				iterExtensionalValues++;			
 			}

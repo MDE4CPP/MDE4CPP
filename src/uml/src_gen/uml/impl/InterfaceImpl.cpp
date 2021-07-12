@@ -646,8 +646,8 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_nestedClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_nestedClassifier->end();
+			Bag<uml::Classifier>::iterator iter = getNestedClassifier()->begin();
+			Bag<uml::Classifier>::iterator end = getNestedClassifier()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -658,8 +658,8 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
-			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
+			Bag<uml::Property>::iterator iter = getOwnedAttribute()->begin();
+			Bag<uml::Property>::iterator end = getOwnedAttribute()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -670,8 +670,8 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDOPERATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
-			Bag<uml::Operation>::iterator end = m_ownedOperation->end();
+			Bag<uml::Operation>::iterator iter = getOwnedOperation()->begin();
+			Bag<uml::Operation>::iterator end = getOwnedOperation()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -682,8 +682,8 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_OWNEDRECEPTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Reception>::iterator iter = m_ownedReception->begin();
-			Bag<uml::Reception>::iterator end = m_ownedReception->end();
+			Bag<uml::Reception>::iterator iter = getOwnedReception()->begin();
+			Bag<uml::Reception>::iterator end = getOwnedReception()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -696,8 +696,8 @@ Any InterfaceImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERFACE_ATTRIBUTE_REDEFINEDINTERFACE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Interface>::iterator iter = m_redefinedInterface->begin();
-			Bag<uml::Interface>::iterator end = m_redefinedInterface->end();
+			Bag<uml::Interface>::iterator iter = getRedefinedInterface()->begin();
+			Bag<uml::Interface>::iterator end = getRedefinedInterface()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -744,13 +744,13 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Classifier>::iterator iterNestedClassifier = m_nestedClassifier->begin();
-			Bag<uml::Classifier>::iterator endNestedClassifier = m_nestedClassifier->end();
+			Bag<uml::Classifier>::iterator iterNestedClassifier = getNestedClassifier()->begin();
+			Bag<uml::Classifier>::iterator endNestedClassifier = getNestedClassifier()->end();
 			while (iterNestedClassifier != endNestedClassifier)
 			{
 				if (nestedClassifierList->find(*iterNestedClassifier) == -1)
 				{
-					m_nestedClassifier->erase(*iterNestedClassifier);
+					getNestedClassifier()->erase(*iterNestedClassifier);
 				}
 				iterNestedClassifier++;
 			}
@@ -759,9 +759,9 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 			endNestedClassifier = nestedClassifierList->end();
 			while (iterNestedClassifier != endNestedClassifier)
 			{
-				if (m_nestedClassifier->find(*iterNestedClassifier) == -1)
+				if (getNestedClassifier()->find(*iterNestedClassifier) == -1)
 				{
-					m_nestedClassifier->add(*iterNestedClassifier);
+					getNestedClassifier()->add(*iterNestedClassifier);
 				}
 				iterNestedClassifier++;			
 			}
@@ -780,13 +780,13 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Property>::iterator iterOwnedAttribute = m_ownedAttribute->begin();
-			Bag<uml::Property>::iterator endOwnedAttribute = m_ownedAttribute->end();
+			Bag<uml::Property>::iterator iterOwnedAttribute = getOwnedAttribute()->begin();
+			Bag<uml::Property>::iterator endOwnedAttribute = getOwnedAttribute()->end();
 			while (iterOwnedAttribute != endOwnedAttribute)
 			{
 				if (ownedAttributeList->find(*iterOwnedAttribute) == -1)
 				{
-					m_ownedAttribute->erase(*iterOwnedAttribute);
+					getOwnedAttribute()->erase(*iterOwnedAttribute);
 				}
 				iterOwnedAttribute++;
 			}
@@ -795,9 +795,9 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 			endOwnedAttribute = ownedAttributeList->end();
 			while (iterOwnedAttribute != endOwnedAttribute)
 			{
-				if (m_ownedAttribute->find(*iterOwnedAttribute) == -1)
+				if (getOwnedAttribute()->find(*iterOwnedAttribute) == -1)
 				{
-					m_ownedAttribute->add(*iterOwnedAttribute);
+					getOwnedAttribute()->add(*iterOwnedAttribute);
 				}
 				iterOwnedAttribute++;			
 			}
@@ -816,13 +816,13 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Operation>::iterator iterOwnedOperation = m_ownedOperation->begin();
-			Bag<uml::Operation>::iterator endOwnedOperation = m_ownedOperation->end();
+			Bag<uml::Operation>::iterator iterOwnedOperation = getOwnedOperation()->begin();
+			Bag<uml::Operation>::iterator endOwnedOperation = getOwnedOperation()->end();
 			while (iterOwnedOperation != endOwnedOperation)
 			{
 				if (ownedOperationList->find(*iterOwnedOperation) == -1)
 				{
-					m_ownedOperation->erase(*iterOwnedOperation);
+					getOwnedOperation()->erase(*iterOwnedOperation);
 				}
 				iterOwnedOperation++;
 			}
@@ -831,9 +831,9 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 			endOwnedOperation = ownedOperationList->end();
 			while (iterOwnedOperation != endOwnedOperation)
 			{
-				if (m_ownedOperation->find(*iterOwnedOperation) == -1)
+				if (getOwnedOperation()->find(*iterOwnedOperation) == -1)
 				{
-					m_ownedOperation->add(*iterOwnedOperation);
+					getOwnedOperation()->add(*iterOwnedOperation);
 				}
 				iterOwnedOperation++;			
 			}
@@ -852,13 +852,13 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Reception>::iterator iterOwnedReception = m_ownedReception->begin();
-			Bag<uml::Reception>::iterator endOwnedReception = m_ownedReception->end();
+			Bag<uml::Reception>::iterator iterOwnedReception = getOwnedReception()->begin();
+			Bag<uml::Reception>::iterator endOwnedReception = getOwnedReception()->end();
 			while (iterOwnedReception != endOwnedReception)
 			{
 				if (ownedReceptionList->find(*iterOwnedReception) == -1)
 				{
-					m_ownedReception->erase(*iterOwnedReception);
+					getOwnedReception()->erase(*iterOwnedReception);
 				}
 				iterOwnedReception++;
 			}
@@ -867,9 +867,9 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 			endOwnedReception = ownedReceptionList->end();
 			while (iterOwnedReception != endOwnedReception)
 			{
-				if (m_ownedReception->find(*iterOwnedReception) == -1)
+				if (getOwnedReception()->find(*iterOwnedReception) == -1)
 				{
-					m_ownedReception->add(*iterOwnedReception);
+					getOwnedReception()->add(*iterOwnedReception);
 				}
 				iterOwnedReception++;			
 			}
@@ -896,13 +896,13 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Interface>::iterator iterRedefinedInterface = m_redefinedInterface->begin();
-			Bag<uml::Interface>::iterator endRedefinedInterface = m_redefinedInterface->end();
+			Bag<uml::Interface>::iterator iterRedefinedInterface = getRedefinedInterface()->begin();
+			Bag<uml::Interface>::iterator endRedefinedInterface = getRedefinedInterface()->end();
 			while (iterRedefinedInterface != endRedefinedInterface)
 			{
 				if (redefinedInterfaceList->find(*iterRedefinedInterface) == -1)
 				{
-					m_redefinedInterface->erase(*iterRedefinedInterface);
+					getRedefinedInterface()->erase(*iterRedefinedInterface);
 				}
 				iterRedefinedInterface++;
 			}
@@ -911,9 +911,9 @@ bool InterfaceImpl::eSet(int featureID, Any newValue)
 			endRedefinedInterface = redefinedInterfaceList->end();
 			while (iterRedefinedInterface != endRedefinedInterface)
 			{
-				if (m_redefinedInterface->find(*iterRedefinedInterface) == -1)
+				if (getRedefinedInterface()->find(*iterRedefinedInterface) == -1)
 				{
-					m_redefinedInterface->add(*iterRedefinedInterface);
+					getRedefinedInterface()->add(*iterRedefinedInterface);
 				}
 				iterRedefinedInterface++;			
 			}

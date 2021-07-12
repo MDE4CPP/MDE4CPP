@@ -599,8 +599,8 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = m_connectionPoint->begin();
-			Bag<uml::Pseudostate>::iterator end = m_connectionPoint->end();
+			Bag<uml::Pseudostate>::iterator iter = getConnectionPoint()->begin();
+			Bag<uml::Pseudostate>::iterator end = getConnectionPoint()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -611,8 +611,8 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::StateMachine>::iterator iter = m_extendedStateMachine->begin();
-			Bag<uml::StateMachine>::iterator end = m_extendedStateMachine->end();
+			Bag<uml::StateMachine>::iterator iter = getExtendedStateMachine()->begin();
+			Bag<uml::StateMachine>::iterator end = getExtendedStateMachine()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -623,8 +623,8 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Region>::iterator iter = m_region->begin();
-			Bag<uml::Region>::iterator end = m_region->end();
+			Bag<uml::Region>::iterator iter = getRegion()->begin();
+			Bag<uml::Region>::iterator end = getRegion()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -635,8 +635,8 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::State>::iterator iter = m_submachineState->begin();
-			Bag<uml::State>::iterator end = m_submachineState->end();
+			Bag<uml::State>::iterator iter = getSubmachineState()->begin();
+			Bag<uml::State>::iterator end = getSubmachineState()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -679,13 +679,13 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Pseudostate>::iterator iterConnectionPoint = m_connectionPoint->begin();
-			Bag<uml::Pseudostate>::iterator endConnectionPoint = m_connectionPoint->end();
+			Bag<uml::Pseudostate>::iterator iterConnectionPoint = getConnectionPoint()->begin();
+			Bag<uml::Pseudostate>::iterator endConnectionPoint = getConnectionPoint()->end();
 			while (iterConnectionPoint != endConnectionPoint)
 			{
 				if (connectionPointList->find(*iterConnectionPoint) == -1)
 				{
-					m_connectionPoint->erase(*iterConnectionPoint);
+					getConnectionPoint()->erase(*iterConnectionPoint);
 				}
 				iterConnectionPoint++;
 			}
@@ -694,9 +694,9 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 			endConnectionPoint = connectionPointList->end();
 			while (iterConnectionPoint != endConnectionPoint)
 			{
-				if (m_connectionPoint->find(*iterConnectionPoint) == -1)
+				if (getConnectionPoint()->find(*iterConnectionPoint) == -1)
 				{
-					m_connectionPoint->add(*iterConnectionPoint);
+					getConnectionPoint()->add(*iterConnectionPoint);
 				}
 				iterConnectionPoint++;			
 			}
@@ -715,13 +715,13 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::StateMachine>::iterator iterExtendedStateMachine = m_extendedStateMachine->begin();
-			Bag<uml::StateMachine>::iterator endExtendedStateMachine = m_extendedStateMachine->end();
+			Bag<uml::StateMachine>::iterator iterExtendedStateMachine = getExtendedStateMachine()->begin();
+			Bag<uml::StateMachine>::iterator endExtendedStateMachine = getExtendedStateMachine()->end();
 			while (iterExtendedStateMachine != endExtendedStateMachine)
 			{
 				if (extendedStateMachineList->find(*iterExtendedStateMachine) == -1)
 				{
-					m_extendedStateMachine->erase(*iterExtendedStateMachine);
+					getExtendedStateMachine()->erase(*iterExtendedStateMachine);
 				}
 				iterExtendedStateMachine++;
 			}
@@ -730,9 +730,9 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 			endExtendedStateMachine = extendedStateMachineList->end();
 			while (iterExtendedStateMachine != endExtendedStateMachine)
 			{
-				if (m_extendedStateMachine->find(*iterExtendedStateMachine) == -1)
+				if (getExtendedStateMachine()->find(*iterExtendedStateMachine) == -1)
 				{
-					m_extendedStateMachine->add(*iterExtendedStateMachine);
+					getExtendedStateMachine()->add(*iterExtendedStateMachine);
 				}
 				iterExtendedStateMachine++;			
 			}
@@ -751,13 +751,13 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Region>::iterator iterRegion = m_region->begin();
-			Bag<uml::Region>::iterator endRegion = m_region->end();
+			Bag<uml::Region>::iterator iterRegion = getRegion()->begin();
+			Bag<uml::Region>::iterator endRegion = getRegion()->end();
 			while (iterRegion != endRegion)
 			{
 				if (regionList->find(*iterRegion) == -1)
 				{
-					m_region->erase(*iterRegion);
+					getRegion()->erase(*iterRegion);
 				}
 				iterRegion++;
 			}
@@ -766,9 +766,9 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 			endRegion = regionList->end();
 			while (iterRegion != endRegion)
 			{
-				if (m_region->find(*iterRegion) == -1)
+				if (getRegion()->find(*iterRegion) == -1)
 				{
-					m_region->add(*iterRegion);
+					getRegion()->add(*iterRegion);
 				}
 				iterRegion++;			
 			}
@@ -787,13 +787,13 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::State>::iterator iterSubmachineState = m_submachineState->begin();
-			Bag<uml::State>::iterator endSubmachineState = m_submachineState->end();
+			Bag<uml::State>::iterator iterSubmachineState = getSubmachineState()->begin();
+			Bag<uml::State>::iterator endSubmachineState = getSubmachineState()->end();
 			while (iterSubmachineState != endSubmachineState)
 			{
 				if (submachineStateList->find(*iterSubmachineState) == -1)
 				{
-					m_submachineState->erase(*iterSubmachineState);
+					getSubmachineState()->erase(*iterSubmachineState);
 				}
 				iterSubmachineState++;
 			}
@@ -802,9 +802,9 @@ bool StateMachineImpl::eSet(int featureID, Any newValue)
 			endSubmachineState = submachineStateList->end();
 			while (iterSubmachineState != endSubmachineState)
 			{
-				if (m_submachineState->find(*iterSubmachineState) == -1)
+				if (getSubmachineState()->find(*iterSubmachineState) == -1)
 				{
-					m_submachineState->add(*iterSubmachineState);
+					getSubmachineState()->add(*iterSubmachineState);
 				}
 				iterSubmachineState++;			
 			}

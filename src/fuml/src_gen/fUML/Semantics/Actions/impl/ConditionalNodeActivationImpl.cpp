@@ -32,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 
 
 #include "uml/Action.hpp"
@@ -256,8 +256,8 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_CLAUSEACTIVATIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator iter = m_clauseActivations->begin();
-			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator end = m_clauseActivations->end();
+			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator iter = getClauseActivations()->begin();
+			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator end = getClauseActivations()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -268,8 +268,8 @@ Any ConditionalNodeActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 		case fUML::Semantics::Actions::ActionsPackage::CONDITIONALNODEACTIVATION_ATTRIBUTE_SELECTEDCLAUSES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Clause>::iterator iter = m_selectedClauses->begin();
-			Bag<uml::Clause>::iterator end = m_selectedClauses->end();
+			Bag<uml::Clause>::iterator iter = getSelectedClauses()->begin();
+			Bag<uml::Clause>::iterator end = getSelectedClauses()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -308,13 +308,13 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator iterClauseActivations = m_clauseActivations->begin();
-			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator endClauseActivations = m_clauseActivations->end();
+			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator iterClauseActivations = getClauseActivations()->begin();
+			Bag<fUML::Semantics::Actions::ClauseActivation>::iterator endClauseActivations = getClauseActivations()->end();
 			while (iterClauseActivations != endClauseActivations)
 			{
 				if (clauseActivationsList->find(*iterClauseActivations) == -1)
 				{
-					m_clauseActivations->erase(*iterClauseActivations);
+					getClauseActivations()->erase(*iterClauseActivations);
 				}
 				iterClauseActivations++;
 			}
@@ -323,9 +323,9 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 			endClauseActivations = clauseActivationsList->end();
 			while (iterClauseActivations != endClauseActivations)
 			{
-				if (m_clauseActivations->find(*iterClauseActivations) == -1)
+				if (getClauseActivations()->find(*iterClauseActivations) == -1)
 				{
-					m_clauseActivations->add(*iterClauseActivations);
+					getClauseActivations()->add(*iterClauseActivations);
 				}
 				iterClauseActivations++;			
 			}
@@ -344,13 +344,13 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Clause>::iterator iterSelectedClauses = m_selectedClauses->begin();
-			Bag<uml::Clause>::iterator endSelectedClauses = m_selectedClauses->end();
+			Bag<uml::Clause>::iterator iterSelectedClauses = getSelectedClauses()->begin();
+			Bag<uml::Clause>::iterator endSelectedClauses = getSelectedClauses()->end();
 			while (iterSelectedClauses != endSelectedClauses)
 			{
 				if (selectedClausesList->find(*iterSelectedClauses) == -1)
 				{
-					m_selectedClauses->erase(*iterSelectedClauses);
+					getSelectedClauses()->erase(*iterSelectedClauses);
 				}
 				iterSelectedClauses++;
 			}
@@ -359,9 +359,9 @@ bool ConditionalNodeActivationImpl::eSet(int featureID, Any newValue)
 			endSelectedClauses = selectedClausesList->end();
 			while (iterSelectedClauses != endSelectedClauses)
 			{
-				if (m_selectedClauses->find(*iterSelectedClauses) == -1)
+				if (getSelectedClauses()->find(*iterSelectedClauses) == -1)
 				{
-					m_selectedClauses->add(*iterSelectedClauses);
+					getSelectedClauses()->add(*iterSelectedClauses);
 				}
 				iterSelectedClauses++;			
 			}

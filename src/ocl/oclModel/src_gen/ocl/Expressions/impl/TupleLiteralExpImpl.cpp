@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 
@@ -333,8 +333,8 @@ Any TupleLiteralExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALEXP_ATTRIBUTE_PART:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::TupleLiteralPart>::iterator iter = m_part->begin();
-			Bag<ocl::Expressions::TupleLiteralPart>::iterator end = m_part->end();
+			Bag<ocl::Expressions::TupleLiteralPart>::iterator iter = getPart()->begin();
+			Bag<ocl::Expressions::TupleLiteralPart>::iterator end = getPart()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -371,13 +371,13 @@ bool TupleLiteralExpImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Expressions::TupleLiteralPart>::iterator iterPart = m_part->begin();
-			Bag<ocl::Expressions::TupleLiteralPart>::iterator endPart = m_part->end();
+			Bag<ocl::Expressions::TupleLiteralPart>::iterator iterPart = getPart()->begin();
+			Bag<ocl::Expressions::TupleLiteralPart>::iterator endPart = getPart()->end();
 			while (iterPart != endPart)
 			{
 				if (partList->find(*iterPart) == -1)
 				{
-					m_part->erase(*iterPart);
+					getPart()->erase(*iterPart);
 				}
 				iterPart++;
 			}
@@ -386,9 +386,9 @@ bool TupleLiteralExpImpl::eSet(int featureID, Any newValue)
 			endPart = partList->end();
 			while (iterPart != endPart)
 			{
-				if (m_part->find(*iterPart) == -1)
+				if (getPart()->find(*iterPart) == -1)
 				{
-					m_part->add(*iterPart);
+					getPart()->add(*iterPart);
 				}
 				iterPart++;			
 			}

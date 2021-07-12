@@ -227,8 +227,8 @@ Any FeatureImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::FEATURE_ATTRIBUTE_FEATURINGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_featuringClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_featuringClassifier->end();
+			Bag<uml::Classifier>::iterator iter = getFeaturingClassifier()->begin();
+			Bag<uml::Classifier>::iterator end = getFeaturingClassifier()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);

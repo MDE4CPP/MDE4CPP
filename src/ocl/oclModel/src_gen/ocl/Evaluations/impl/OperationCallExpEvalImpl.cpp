@@ -31,12 +31,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -191,8 +191,8 @@ Any OperationCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::OclExpEval>::iterator iter = m_arguments->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator end = m_arguments->end();
+			Bag<ocl::Evaluations::OclExpEval>::iterator iter = getArguments()->begin();
+			Bag<ocl::Evaluations::OclExpEval>::iterator end = getArguments()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -233,13 +233,13 @@ bool OperationCallExpEvalImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Evaluations::OclExpEval>::iterator iterArguments = m_arguments->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator endArguments = m_arguments->end();
+			Bag<ocl::Evaluations::OclExpEval>::iterator iterArguments = getArguments()->begin();
+			Bag<ocl::Evaluations::OclExpEval>::iterator endArguments = getArguments()->end();
 			while (iterArguments != endArguments)
 			{
 				if (argumentsList->find(*iterArguments) == -1)
 				{
-					m_arguments->erase(*iterArguments);
+					getArguments()->erase(*iterArguments);
 				}
 				iterArguments++;
 			}
@@ -248,9 +248,9 @@ bool OperationCallExpEvalImpl::eSet(int featureID, Any newValue)
 			endArguments = argumentsList->end();
 			while (iterArguments != endArguments)
 			{
-				if (m_arguments->find(*iterArguments) == -1)
+				if (getArguments()->find(*iterArguments) == -1)
 				{
-					m_arguments->add(*iterArguments);
+					getArguments()->add(*iterArguments);
 				}
 				iterArguments++;			
 			}

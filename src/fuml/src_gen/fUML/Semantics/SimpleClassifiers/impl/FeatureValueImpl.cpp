@@ -33,8 +33,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 
 #include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
@@ -299,8 +299,8 @@ Any FeatureValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Values::Value>::iterator iter = m_values->begin();
-			Bag<fUML::Semantics::Values::Value>::iterator end = m_values->end();
+			Bag<fUML::Semantics::Values::Value>::iterator iter = getValues()->begin();
+			Bag<fUML::Semantics::Values::Value>::iterator end = getValues()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -356,13 +356,13 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Values::Value>::iterator iterValues = m_values->begin();
-			Bag<fUML::Semantics::Values::Value>::iterator endValues = m_values->end();
+			Bag<fUML::Semantics::Values::Value>::iterator iterValues = getValues()->begin();
+			Bag<fUML::Semantics::Values::Value>::iterator endValues = getValues()->end();
 			while (iterValues != endValues)
 			{
 				if (valuesList->find(*iterValues) == -1)
 				{
-					m_values->erase(*iterValues);
+					getValues()->erase(*iterValues);
 				}
 				iterValues++;
 			}
@@ -371,9 +371,9 @@ bool FeatureValueImpl::eSet(int featureID, Any newValue)
 			endValues = valuesList->end();
 			while (iterValues != endValues)
 			{
-				if (m_values->find(*iterValues) == -1)
+				if (getValues()->find(*iterValues) == -1)
 				{
-					m_values->add(*iterValues);
+					getValues()->add(*iterValues);
 				}
 				iterValues++;			
 			}

@@ -307,8 +307,8 @@ Any ExecutableNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXECUTABLENODE_ATTRIBUTE_HANDLER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExceptionHandler>::iterator iter = m_handler->begin();
-			Bag<uml::ExceptionHandler>::iterator end = m_handler->end();
+			Bag<uml::ExceptionHandler>::iterator iter = getHandler()->begin();
+			Bag<uml::ExceptionHandler>::iterator end = getHandler()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -345,13 +345,13 @@ bool ExecutableNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ExceptionHandler>::iterator iterHandler = m_handler->begin();
-			Bag<uml::ExceptionHandler>::iterator endHandler = m_handler->end();
+			Bag<uml::ExceptionHandler>::iterator iterHandler = getHandler()->begin();
+			Bag<uml::ExceptionHandler>::iterator endHandler = getHandler()->end();
 			while (iterHandler != endHandler)
 			{
 				if (handlerList->find(*iterHandler) == -1)
 				{
-					m_handler->erase(*iterHandler);
+					getHandler()->erase(*iterHandler);
 				}
 				iterHandler++;
 			}
@@ -360,9 +360,9 @@ bool ExecutableNodeImpl::eSet(int featureID, Any newValue)
 			endHandler = handlerList->end();
 			while (iterHandler != endHandler)
 			{
-				if (m_handler->find(*iterHandler) == -1)
+				if (getHandler()->find(*iterHandler) == -1)
 				{
-					m_handler->add(*iterHandler);
+					getHandler()->add(*iterHandler);
 				}
 				iterHandler++;			
 			}

@@ -41,8 +41,8 @@
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -225,8 +225,8 @@ Any EvalEnvironmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Evaluations::EvaluationsPackage::EVALENVIRONMENT_ATTRIBUTE_BINDINGS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::NameValueBinding>::iterator iter = m_bindings->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator end = m_bindings->end();
+			Bag<ocl::Values::NameValueBinding>::iterator iter = getBindings()->begin();
+			Bag<ocl::Values::NameValueBinding>::iterator end = getBindings()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -263,13 +263,13 @@ bool EvalEnvironmentImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Values::NameValueBinding>::iterator iterBindings = m_bindings->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator endBindings = m_bindings->end();
+			Bag<ocl::Values::NameValueBinding>::iterator iterBindings = getBindings()->begin();
+			Bag<ocl::Values::NameValueBinding>::iterator endBindings = getBindings()->end();
 			while (iterBindings != endBindings)
 			{
 				if (bindingsList->find(*iterBindings) == -1)
 				{
-					m_bindings->erase(*iterBindings);
+					getBindings()->erase(*iterBindings);
 				}
 				iterBindings++;
 			}
@@ -278,9 +278,9 @@ bool EvalEnvironmentImpl::eSet(int featureID, Any newValue)
 			endBindings = bindingsList->end();
 			while (iterBindings != endBindings)
 			{
-				if (m_bindings->find(*iterBindings) == -1)
+				if (getBindings()->find(*iterBindings) == -1)
 				{
-					m_bindings->add(*iterBindings);
+					getBindings()->add(*iterBindings);
 				}
 				iterBindings++;			
 			}

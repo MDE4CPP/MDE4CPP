@@ -713,8 +713,8 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_ACTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Action>::iterator iter = m_action->begin();
-			Bag<uml::Action>::iterator end = m_action->end();
+			Bag<uml::Action>::iterator iter = getAction()->begin();
+			Bag<uml::Action>::iterator end = getAction()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -725,8 +725,8 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Gate>::iterator iter = m_formalGate->begin();
-			Bag<uml::Gate>::iterator end = m_formalGate->end();
+			Bag<uml::Gate>::iterator iter = getFormalGate()->begin();
+			Bag<uml::Gate>::iterator end = getFormalGate()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -737,8 +737,8 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InteractionFragment>::iterator iter = m_fragment->begin();
-			Bag<uml::InteractionFragment>::iterator end = m_fragment->end();
+			Bag<uml::InteractionFragment>::iterator iter = getFragment()->begin();
+			Bag<uml::InteractionFragment>::iterator end = getFragment()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -749,8 +749,8 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Lifeline>::iterator iter = m_lifeline->begin();
-			Bag<uml::Lifeline>::iterator end = m_lifeline->end();
+			Bag<uml::Lifeline>::iterator iter = getLifeline()->begin();
+			Bag<uml::Lifeline>::iterator end = getLifeline()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -761,8 +761,8 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Message>::iterator iter = m_message->begin();
-			Bag<uml::Message>::iterator end = m_message->end();
+			Bag<uml::Message>::iterator iter = getMessage()->begin();
+			Bag<uml::Message>::iterator end = getMessage()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -821,13 +821,13 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Action>::iterator iterAction = m_action->begin();
-			Bag<uml::Action>::iterator endAction = m_action->end();
+			Bag<uml::Action>::iterator iterAction = getAction()->begin();
+			Bag<uml::Action>::iterator endAction = getAction()->end();
 			while (iterAction != endAction)
 			{
 				if (actionList->find(*iterAction) == -1)
 				{
-					m_action->erase(*iterAction);
+					getAction()->erase(*iterAction);
 				}
 				iterAction++;
 			}
@@ -836,9 +836,9 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 			endAction = actionList->end();
 			while (iterAction != endAction)
 			{
-				if (m_action->find(*iterAction) == -1)
+				if (getAction()->find(*iterAction) == -1)
 				{
-					m_action->add(*iterAction);
+					getAction()->add(*iterAction);
 				}
 				iterAction++;			
 			}
@@ -857,13 +857,13 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Gate>::iterator iterFormalGate = m_formalGate->begin();
-			Bag<uml::Gate>::iterator endFormalGate = m_formalGate->end();
+			Bag<uml::Gate>::iterator iterFormalGate = getFormalGate()->begin();
+			Bag<uml::Gate>::iterator endFormalGate = getFormalGate()->end();
 			while (iterFormalGate != endFormalGate)
 			{
 				if (formalGateList->find(*iterFormalGate) == -1)
 				{
-					m_formalGate->erase(*iterFormalGate);
+					getFormalGate()->erase(*iterFormalGate);
 				}
 				iterFormalGate++;
 			}
@@ -872,9 +872,9 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 			endFormalGate = formalGateList->end();
 			while (iterFormalGate != endFormalGate)
 			{
-				if (m_formalGate->find(*iterFormalGate) == -1)
+				if (getFormalGate()->find(*iterFormalGate) == -1)
 				{
-					m_formalGate->add(*iterFormalGate);
+					getFormalGate()->add(*iterFormalGate);
 				}
 				iterFormalGate++;			
 			}
@@ -893,13 +893,13 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::InteractionFragment>::iterator iterFragment = m_fragment->begin();
-			Bag<uml::InteractionFragment>::iterator endFragment = m_fragment->end();
+			Bag<uml::InteractionFragment>::iterator iterFragment = getFragment()->begin();
+			Bag<uml::InteractionFragment>::iterator endFragment = getFragment()->end();
 			while (iterFragment != endFragment)
 			{
 				if (fragmentList->find(*iterFragment) == -1)
 				{
-					m_fragment->erase(*iterFragment);
+					getFragment()->erase(*iterFragment);
 				}
 				iterFragment++;
 			}
@@ -908,9 +908,9 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 			endFragment = fragmentList->end();
 			while (iterFragment != endFragment)
 			{
-				if (m_fragment->find(*iterFragment) == -1)
+				if (getFragment()->find(*iterFragment) == -1)
 				{
-					m_fragment->add(*iterFragment);
+					getFragment()->add(*iterFragment);
 				}
 				iterFragment++;			
 			}
@@ -929,13 +929,13 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Lifeline>::iterator iterLifeline = m_lifeline->begin();
-			Bag<uml::Lifeline>::iterator endLifeline = m_lifeline->end();
+			Bag<uml::Lifeline>::iterator iterLifeline = getLifeline()->begin();
+			Bag<uml::Lifeline>::iterator endLifeline = getLifeline()->end();
 			while (iterLifeline != endLifeline)
 			{
 				if (lifelineList->find(*iterLifeline) == -1)
 				{
-					m_lifeline->erase(*iterLifeline);
+					getLifeline()->erase(*iterLifeline);
 				}
 				iterLifeline++;
 			}
@@ -944,9 +944,9 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 			endLifeline = lifelineList->end();
 			while (iterLifeline != endLifeline)
 			{
-				if (m_lifeline->find(*iterLifeline) == -1)
+				if (getLifeline()->find(*iterLifeline) == -1)
 				{
-					m_lifeline->add(*iterLifeline);
+					getLifeline()->add(*iterLifeline);
 				}
 				iterLifeline++;			
 			}
@@ -965,13 +965,13 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Message>::iterator iterMessage = m_message->begin();
-			Bag<uml::Message>::iterator endMessage = m_message->end();
+			Bag<uml::Message>::iterator iterMessage = getMessage()->begin();
+			Bag<uml::Message>::iterator endMessage = getMessage()->end();
 			while (iterMessage != endMessage)
 			{
 				if (messageList->find(*iterMessage) == -1)
 				{
-					m_message->erase(*iterMessage);
+					getMessage()->erase(*iterMessage);
 				}
 				iterMessage++;
 			}
@@ -980,9 +980,9 @@ bool InteractionImpl::eSet(int featureID, Any newValue)
 			endMessage = messageList->end();
 			while (iterMessage != endMessage)
 			{
-				if (m_message->find(*iterMessage) == -1)
+				if (getMessage()->find(*iterMessage) == -1)
 				{
-					m_message->add(*iterMessage);
+					getMessage()->add(*iterMessage);
 				}
 				iterMessage++;			
 			}

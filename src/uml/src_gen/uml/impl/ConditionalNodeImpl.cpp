@@ -556,8 +556,8 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_CLAUSE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Clause>::iterator iter = m_clause->begin();
-			Bag<uml::Clause>::iterator end = m_clause->end();
+			Bag<uml::Clause>::iterator iter = getClause()->begin();
+			Bag<uml::Clause>::iterator end = getClause()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -572,8 +572,8 @@ Any ConditionalNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CONDITIONALNODE_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_result->begin();
-			Bag<uml::OutputPin>::iterator end = m_result->end();
+			Bag<uml::OutputPin>::iterator iter = getResult()->begin();
+			Bag<uml::OutputPin>::iterator end = getResult()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -616,13 +616,13 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Clause>::iterator iterClause = m_clause->begin();
-			Bag<uml::Clause>::iterator endClause = m_clause->end();
+			Bag<uml::Clause>::iterator iterClause = getClause()->begin();
+			Bag<uml::Clause>::iterator endClause = getClause()->end();
 			while (iterClause != endClause)
 			{
 				if (clauseList->find(*iterClause) == -1)
 				{
-					m_clause->erase(*iterClause);
+					getClause()->erase(*iterClause);
 				}
 				iterClause++;
 			}
@@ -631,9 +631,9 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 			endClause = clauseList->end();
 			while (iterClause != endClause)
 			{
-				if (m_clause->find(*iterClause) == -1)
+				if (getClause()->find(*iterClause) == -1)
 				{
-					m_clause->add(*iterClause);
+					getClause()->add(*iterClause);
 				}
 				iterClause++;			
 			}
@@ -666,13 +666,13 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::OutputPin>::iterator iterResult = m_result->begin();
-			Bag<uml::OutputPin>::iterator endResult = m_result->end();
+			Bag<uml::OutputPin>::iterator iterResult = getResult()->begin();
+			Bag<uml::OutputPin>::iterator endResult = getResult()->end();
 			while (iterResult != endResult)
 			{
 				if (resultList->find(*iterResult) == -1)
 				{
-					m_result->erase(*iterResult);
+					getResult()->erase(*iterResult);
 				}
 				iterResult++;
 			}
@@ -681,9 +681,9 @@ bool ConditionalNodeImpl::eSet(int featureID, Any newValue)
 			endResult = resultList->end();
 			while (iterResult != endResult)
 			{
-				if (m_result->find(*iterResult) == -1)
+				if (getResult()->find(*iterResult) == -1)
 				{
-					m_result->add(*iterResult);
+					getResult()->add(*iterResult);
 				}
 				iterResult++;			
 			}

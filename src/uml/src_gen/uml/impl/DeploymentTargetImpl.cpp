@@ -268,8 +268,8 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageableElement>::iterator iter = m_deployedElement->begin();
-			Bag<uml::PackageableElement>::iterator end = m_deployedElement->end();
+			Bag<uml::PackageableElement>::iterator iter = getDeployedElement()->begin();
+			Bag<uml::PackageableElement>::iterator end = getDeployedElement()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -280,8 +280,8 @@ Any DeploymentTargetImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::DEPLOYMENTTARGET_ATTRIBUTE_DEPLOYMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Deployment>::iterator iter = m_deployment->begin();
-			Bag<uml::Deployment>::iterator end = m_deployment->end();
+			Bag<uml::Deployment>::iterator iter = getDeployment()->begin();
+			Bag<uml::Deployment>::iterator end = getDeployment()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -320,13 +320,13 @@ bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Deployment>::iterator iterDeployment = m_deployment->begin();
-			Bag<uml::Deployment>::iterator endDeployment = m_deployment->end();
+			Bag<uml::Deployment>::iterator iterDeployment = getDeployment()->begin();
+			Bag<uml::Deployment>::iterator endDeployment = getDeployment()->end();
 			while (iterDeployment != endDeployment)
 			{
 				if (deploymentList->find(*iterDeployment) == -1)
 				{
-					m_deployment->erase(*iterDeployment);
+					getDeployment()->erase(*iterDeployment);
 				}
 				iterDeployment++;
 			}
@@ -335,9 +335,9 @@ bool DeploymentTargetImpl::eSet(int featureID, Any newValue)
 			endDeployment = deploymentList->end();
 			while (iterDeployment != endDeployment)
 			{
-				if (m_deployment->find(*iterDeployment) == -1)
+				if (getDeployment()->find(*iterDeployment) == -1)
 				{
-					m_deployment->add(*iterDeployment);
+					getDeployment()->add(*iterDeployment);
 				}
 				iterDeployment++;			
 			}

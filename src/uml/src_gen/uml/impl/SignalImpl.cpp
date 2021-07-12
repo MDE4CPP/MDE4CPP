@@ -404,8 +404,8 @@ Any SignalImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::SIGNAL_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
-			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
+			Bag<uml::Property>::iterator iter = getOwnedAttribute()->begin();
+			Bag<uml::Property>::iterator end = getOwnedAttribute()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -442,13 +442,13 @@ bool SignalImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Property>::iterator iterOwnedAttribute = m_ownedAttribute->begin();
-			Bag<uml::Property>::iterator endOwnedAttribute = m_ownedAttribute->end();
+			Bag<uml::Property>::iterator iterOwnedAttribute = getOwnedAttribute()->begin();
+			Bag<uml::Property>::iterator endOwnedAttribute = getOwnedAttribute()->end();
 			while (iterOwnedAttribute != endOwnedAttribute)
 			{
 				if (ownedAttributeList->find(*iterOwnedAttribute) == -1)
 				{
-					m_ownedAttribute->erase(*iterOwnedAttribute);
+					getOwnedAttribute()->erase(*iterOwnedAttribute);
 				}
 				iterOwnedAttribute++;
 			}
@@ -457,9 +457,9 @@ bool SignalImpl::eSet(int featureID, Any newValue)
 			endOwnedAttribute = ownedAttributeList->end();
 			while (iterOwnedAttribute != endOwnedAttribute)
 			{
-				if (m_ownedAttribute->find(*iterOwnedAttribute) == -1)
+				if (getOwnedAttribute()->find(*iterOwnedAttribute) == -1)
 				{
-					m_ownedAttribute->add(*iterOwnedAttribute);
+					getOwnedAttribute()->add(*iterOwnedAttribute);
 				}
 				iterOwnedAttribute++;			
 			}

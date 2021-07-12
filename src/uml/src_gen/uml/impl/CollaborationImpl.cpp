@@ -420,8 +420,8 @@ Any CollaborationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::COLLABORATION_ATTRIBUTE_COLLABORATIONROLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectableElement>::iterator iter = m_collaborationRole->begin();
-			Bag<uml::ConnectableElement>::iterator end = m_collaborationRole->end();
+			Bag<uml::ConnectableElement>::iterator iter = getCollaborationRole()->begin();
+			Bag<uml::ConnectableElement>::iterator end = getCollaborationRole()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -472,13 +472,13 @@ bool CollaborationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ConnectableElement>::iterator iterCollaborationRole = m_collaborationRole->begin();
-			Bag<uml::ConnectableElement>::iterator endCollaborationRole = m_collaborationRole->end();
+			Bag<uml::ConnectableElement>::iterator iterCollaborationRole = getCollaborationRole()->begin();
+			Bag<uml::ConnectableElement>::iterator endCollaborationRole = getCollaborationRole()->end();
 			while (iterCollaborationRole != endCollaborationRole)
 			{
 				if (collaborationRoleList->find(*iterCollaborationRole) == -1)
 				{
-					m_collaborationRole->erase(*iterCollaborationRole);
+					getCollaborationRole()->erase(*iterCollaborationRole);
 				}
 				iterCollaborationRole++;
 			}
@@ -487,9 +487,9 @@ bool CollaborationImpl::eSet(int featureID, Any newValue)
 			endCollaborationRole = collaborationRoleList->end();
 			while (iterCollaborationRole != endCollaborationRole)
 			{
-				if (m_collaborationRole->find(*iterCollaborationRole) == -1)
+				if (getCollaborationRole()->find(*iterCollaborationRole) == -1)
 				{
-					m_collaborationRole->add(*iterCollaborationRole);
+					getCollaborationRole()->add(*iterCollaborationRole);
 				}
 				iterCollaborationRole++;			
 			}

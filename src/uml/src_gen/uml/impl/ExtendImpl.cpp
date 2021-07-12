@@ -351,8 +351,8 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExtensionPoint>::iterator iter = m_extensionLocation->begin();
-			Bag<uml::ExtensionPoint>::iterator end = m_extensionLocation->end();
+			Bag<uml::ExtensionPoint>::iterator iter = getExtensionLocation()->begin();
+			Bag<uml::ExtensionPoint>::iterator end = getExtensionLocation()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -433,13 +433,13 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ExtensionPoint>::iterator iterExtensionLocation = m_extensionLocation->begin();
-			Bag<uml::ExtensionPoint>::iterator endExtensionLocation = m_extensionLocation->end();
+			Bag<uml::ExtensionPoint>::iterator iterExtensionLocation = getExtensionLocation()->begin();
+			Bag<uml::ExtensionPoint>::iterator endExtensionLocation = getExtensionLocation()->end();
 			while (iterExtensionLocation != endExtensionLocation)
 			{
 				if (extensionLocationList->find(*iterExtensionLocation) == -1)
 				{
-					m_extensionLocation->erase(*iterExtensionLocation);
+					getExtensionLocation()->erase(*iterExtensionLocation);
 				}
 				iterExtensionLocation++;
 			}
@@ -448,9 +448,9 @@ bool ExtendImpl::eSet(int featureID, Any newValue)
 			endExtensionLocation = extensionLocationList->end();
 			while (iterExtensionLocation != endExtensionLocation)
 			{
-				if (m_extensionLocation->find(*iterExtensionLocation) == -1)
+				if (getExtensionLocation()->find(*iterExtensionLocation) == -1)
 				{
-					m_extensionLocation->add(*iterExtensionLocation);
+					getExtensionLocation()->add(*iterExtensionLocation);
 				}
 				iterExtensionLocation++;			
 			}

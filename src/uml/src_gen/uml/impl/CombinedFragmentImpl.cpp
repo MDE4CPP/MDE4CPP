@@ -362,8 +362,8 @@ Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_CFRAGMENTGATE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Gate>::iterator iter = m_cfragmentGate->begin();
-			Bag<uml::Gate>::iterator end = m_cfragmentGate->end();
+			Bag<uml::Gate>::iterator iter = getCfragmentGate()->begin();
+			Bag<uml::Gate>::iterator end = getCfragmentGate()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -376,8 +376,8 @@ Any CombinedFragmentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::COMBINEDFRAGMENT_ATTRIBUTE_OPERAND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InteractionOperand>::iterator iter = m_operand->begin();
-			Bag<uml::InteractionOperand>::iterator end = m_operand->end();
+			Bag<uml::InteractionOperand>::iterator iter = getOperand()->begin();
+			Bag<uml::InteractionOperand>::iterator end = getOperand()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -418,13 +418,13 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Gate>::iterator iterCfragmentGate = m_cfragmentGate->begin();
-			Bag<uml::Gate>::iterator endCfragmentGate = m_cfragmentGate->end();
+			Bag<uml::Gate>::iterator iterCfragmentGate = getCfragmentGate()->begin();
+			Bag<uml::Gate>::iterator endCfragmentGate = getCfragmentGate()->end();
 			while (iterCfragmentGate != endCfragmentGate)
 			{
 				if (cfragmentGateList->find(*iterCfragmentGate) == -1)
 				{
-					m_cfragmentGate->erase(*iterCfragmentGate);
+					getCfragmentGate()->erase(*iterCfragmentGate);
 				}
 				iterCfragmentGate++;
 			}
@@ -433,9 +433,9 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 			endCfragmentGate = cfragmentGateList->end();
 			while (iterCfragmentGate != endCfragmentGate)
 			{
-				if (m_cfragmentGate->find(*iterCfragmentGate) == -1)
+				if (getCfragmentGate()->find(*iterCfragmentGate) == -1)
 				{
-					m_cfragmentGate->add(*iterCfragmentGate);
+					getCfragmentGate()->add(*iterCfragmentGate);
 				}
 				iterCfragmentGate++;			
 			}
@@ -461,13 +461,13 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::InteractionOperand>::iterator iterOperand = m_operand->begin();
-			Bag<uml::InteractionOperand>::iterator endOperand = m_operand->end();
+			Bag<uml::InteractionOperand>::iterator iterOperand = getOperand()->begin();
+			Bag<uml::InteractionOperand>::iterator endOperand = getOperand()->end();
 			while (iterOperand != endOperand)
 			{
 				if (operandList->find(*iterOperand) == -1)
 				{
-					m_operand->erase(*iterOperand);
+					getOperand()->erase(*iterOperand);
 				}
 				iterOperand++;
 			}
@@ -476,9 +476,9 @@ bool CombinedFragmentImpl::eSet(int featureID, Any newValue)
 			endOperand = operandList->end();
 			while (iterOperand != endOperand)
 			{
-				if (m_operand->find(*iterOperand) == -1)
+				if (getOperand()->find(*iterOperand) == -1)
 				{
-					m_operand->add(*iterOperand);
+					getOperand()->add(*iterOperand);
 				}
 				iterOperand++;			
 			}

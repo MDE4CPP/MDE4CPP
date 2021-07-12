@@ -289,8 +289,8 @@ Any ExceptionHandlerImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXCEPTIONHANDLER_ATTRIBUTE_EXCEPTIONTYPE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_exceptionType->begin();
-			Bag<uml::Classifier>::iterator end = m_exceptionType->end();
+			Bag<uml::Classifier>::iterator iter = getExceptionType()->begin();
+			Bag<uml::Classifier>::iterator end = getExceptionType()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -345,13 +345,13 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Classifier>::iterator iterExceptionType = m_exceptionType->begin();
-			Bag<uml::Classifier>::iterator endExceptionType = m_exceptionType->end();
+			Bag<uml::Classifier>::iterator iterExceptionType = getExceptionType()->begin();
+			Bag<uml::Classifier>::iterator endExceptionType = getExceptionType()->end();
 			while (iterExceptionType != endExceptionType)
 			{
 				if (exceptionTypeList->find(*iterExceptionType) == -1)
 				{
-					m_exceptionType->erase(*iterExceptionType);
+					getExceptionType()->erase(*iterExceptionType);
 				}
 				iterExceptionType++;
 			}
@@ -360,9 +360,9 @@ bool ExceptionHandlerImpl::eSet(int featureID, Any newValue)
 			endExceptionType = exceptionTypeList->end();
 			while (iterExceptionType != endExceptionType)
 			{
-				if (m_exceptionType->find(*iterExceptionType) == -1)
+				if (getExceptionType()->find(*iterExceptionType) == -1)
 				{
-					m_exceptionType->add(*iterExceptionType);
+					getExceptionType()->add(*iterExceptionType);
 				}
 				iterExceptionType++;			
 			}

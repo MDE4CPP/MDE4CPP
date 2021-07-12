@@ -440,8 +440,8 @@ Any SequenceNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::SEQUENCENODE_ATTRIBUTE_EXECUTABLENODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = m_executableNode->begin();
-			Bag<uml::ExecutableNode>::iterator end = m_executableNode->end();
+			Bag<uml::ExecutableNode>::iterator iter = getExecutableNode()->begin();
+			Bag<uml::ExecutableNode>::iterator end = getExecutableNode()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -478,13 +478,13 @@ bool SequenceNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ExecutableNode>::iterator iterExecutableNode = m_executableNode->begin();
-			Bag<uml::ExecutableNode>::iterator endExecutableNode = m_executableNode->end();
+			Bag<uml::ExecutableNode>::iterator iterExecutableNode = getExecutableNode()->begin();
+			Bag<uml::ExecutableNode>::iterator endExecutableNode = getExecutableNode()->end();
 			while (iterExecutableNode != endExecutableNode)
 			{
 				if (executableNodeList->find(*iterExecutableNode) == -1)
 				{
-					m_executableNode->erase(*iterExecutableNode);
+					getExecutableNode()->erase(*iterExecutableNode);
 				}
 				iterExecutableNode++;
 			}
@@ -493,9 +493,9 @@ bool SequenceNodeImpl::eSet(int featureID, Any newValue)
 			endExecutableNode = executableNodeList->end();
 			while (iterExecutableNode != endExecutableNode)
 			{
-				if (m_executableNode->find(*iterExecutableNode) == -1)
+				if (getExecutableNode()->find(*iterExecutableNode) == -1)
 				{
-					m_executableNode->add(*iterExecutableNode);
+					getExecutableNode()->add(*iterExecutableNode);
 				}
 				iterExecutableNode++;			
 			}

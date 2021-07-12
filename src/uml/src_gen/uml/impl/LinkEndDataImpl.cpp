@@ -290,8 +290,8 @@ Any LinkEndDataImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LINKENDDATA_ATTRIBUTE_QUALIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::QualifierValue>::iterator iter = m_qualifier->begin();
-			Bag<uml::QualifierValue>::iterator end = m_qualifier->end();
+			Bag<uml::QualifierValue>::iterator iter = getQualifier()->begin();
+			Bag<uml::QualifierValue>::iterator end = getQualifier()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -342,13 +342,13 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::QualifierValue>::iterator iterQualifier = m_qualifier->begin();
-			Bag<uml::QualifierValue>::iterator endQualifier = m_qualifier->end();
+			Bag<uml::QualifierValue>::iterator iterQualifier = getQualifier()->begin();
+			Bag<uml::QualifierValue>::iterator endQualifier = getQualifier()->end();
 			while (iterQualifier != endQualifier)
 			{
 				if (qualifierList->find(*iterQualifier) == -1)
 				{
-					m_qualifier->erase(*iterQualifier);
+					getQualifier()->erase(*iterQualifier);
 				}
 				iterQualifier++;
 			}
@@ -357,9 +357,9 @@ bool LinkEndDataImpl::eSet(int featureID, Any newValue)
 			endQualifier = qualifierList->end();
 			while (iterQualifier != endQualifier)
 			{
-				if (m_qualifier->find(*iterQualifier) == -1)
+				if (getQualifier()->find(*iterQualifier) == -1)
 				{
-					m_qualifier->add(*iterQualifier);
+					getQualifier()->add(*iterQualifier);
 				}
 				iterQualifier++;			
 			}

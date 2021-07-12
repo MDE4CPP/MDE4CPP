@@ -39,9 +39,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 
 
 #include "uml/Action.hpp"
@@ -674,8 +674,8 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_ACTIVATIONGROUPS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ExpansionActivationGroup>::iterator iter = m_activationGroups->begin();
-			Bag<fUML::Semantics::Activities::ExpansionActivationGroup>::iterator end = m_activationGroups->end();
+			Bag<fUML::Semantics::Activities::ExpansionActivationGroup>::iterator iter = getActivationGroups()->begin();
+			Bag<fUML::Semantics::Activities::ExpansionActivationGroup>::iterator end = getActivationGroups()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -686,8 +686,8 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTEXPANSIONTOKENS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::TokenSet>::iterator iter = m_inputExpansionTokens->begin();
-			Bag<fUML::Semantics::Activities::TokenSet>::iterator end = m_inputExpansionTokens->end();
+			Bag<fUML::Semantics::Activities::TokenSet>::iterator iter = getInputExpansionTokens()->begin();
+			Bag<fUML::Semantics::Activities::TokenSet>::iterator end = getInputExpansionTokens()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -698,8 +698,8 @@ Any ExpansionRegionActivationImpl::eGet(int featureID, bool resolve, bool coreTy
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONREGIONACTIVATION_ATTRIBUTE_INPUTTOKENS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::TokenSet>::iterator iter = m_inputTokens->begin();
-			Bag<fUML::Semantics::Activities::TokenSet>::iterator end = m_inputTokens->end();
+			Bag<fUML::Semantics::Activities::TokenSet>::iterator iter = getInputTokens()->begin();
+			Bag<fUML::Semantics::Activities::TokenSet>::iterator end = getInputTokens()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -744,13 +744,13 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::ExpansionActivationGroup>::iterator iterActivationGroups = m_activationGroups->begin();
-			Bag<fUML::Semantics::Activities::ExpansionActivationGroup>::iterator endActivationGroups = m_activationGroups->end();
+			Bag<fUML::Semantics::Activities::ExpansionActivationGroup>::iterator iterActivationGroups = getActivationGroups()->begin();
+			Bag<fUML::Semantics::Activities::ExpansionActivationGroup>::iterator endActivationGroups = getActivationGroups()->end();
 			while (iterActivationGroups != endActivationGroups)
 			{
 				if (activationGroupsList->find(*iterActivationGroups) == -1)
 				{
-					m_activationGroups->erase(*iterActivationGroups);
+					getActivationGroups()->erase(*iterActivationGroups);
 				}
 				iterActivationGroups++;
 			}
@@ -759,9 +759,9 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 			endActivationGroups = activationGroupsList->end();
 			while (iterActivationGroups != endActivationGroups)
 			{
-				if (m_activationGroups->find(*iterActivationGroups) == -1)
+				if (getActivationGroups()->find(*iterActivationGroups) == -1)
 				{
-					m_activationGroups->add(*iterActivationGroups);
+					getActivationGroups()->add(*iterActivationGroups);
 				}
 				iterActivationGroups++;			
 			}
@@ -780,13 +780,13 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::TokenSet>::iterator iterInputExpansionTokens = m_inputExpansionTokens->begin();
-			Bag<fUML::Semantics::Activities::TokenSet>::iterator endInputExpansionTokens = m_inputExpansionTokens->end();
+			Bag<fUML::Semantics::Activities::TokenSet>::iterator iterInputExpansionTokens = getInputExpansionTokens()->begin();
+			Bag<fUML::Semantics::Activities::TokenSet>::iterator endInputExpansionTokens = getInputExpansionTokens()->end();
 			while (iterInputExpansionTokens != endInputExpansionTokens)
 			{
 				if (inputExpansionTokensList->find(*iterInputExpansionTokens) == -1)
 				{
-					m_inputExpansionTokens->erase(*iterInputExpansionTokens);
+					getInputExpansionTokens()->erase(*iterInputExpansionTokens);
 				}
 				iterInputExpansionTokens++;
 			}
@@ -795,9 +795,9 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 			endInputExpansionTokens = inputExpansionTokensList->end();
 			while (iterInputExpansionTokens != endInputExpansionTokens)
 			{
-				if (m_inputExpansionTokens->find(*iterInputExpansionTokens) == -1)
+				if (getInputExpansionTokens()->find(*iterInputExpansionTokens) == -1)
 				{
-					m_inputExpansionTokens->add(*iterInputExpansionTokens);
+					getInputExpansionTokens()->add(*iterInputExpansionTokens);
 				}
 				iterInputExpansionTokens++;			
 			}
@@ -816,13 +816,13 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::TokenSet>::iterator iterInputTokens = m_inputTokens->begin();
-			Bag<fUML::Semantics::Activities::TokenSet>::iterator endInputTokens = m_inputTokens->end();
+			Bag<fUML::Semantics::Activities::TokenSet>::iterator iterInputTokens = getInputTokens()->begin();
+			Bag<fUML::Semantics::Activities::TokenSet>::iterator endInputTokens = getInputTokens()->end();
 			while (iterInputTokens != endInputTokens)
 			{
 				if (inputTokensList->find(*iterInputTokens) == -1)
 				{
-					m_inputTokens->erase(*iterInputTokens);
+					getInputTokens()->erase(*iterInputTokens);
 				}
 				iterInputTokens++;
 			}
@@ -831,9 +831,9 @@ bool ExpansionRegionActivationImpl::eSet(int featureID, Any newValue)
 			endInputTokens = inputTokensList->end();
 			while (iterInputTokens != endInputTokens)
 			{
-				if (m_inputTokens->find(*iterInputTokens) == -1)
+				if (getInputTokens()->find(*iterInputTokens) == -1)
 				{
-					m_inputTokens->add(*iterInputTokens);
+					getInputTokens()->add(*iterInputTokens);
 				}
 				iterInputTokens++;			
 			}

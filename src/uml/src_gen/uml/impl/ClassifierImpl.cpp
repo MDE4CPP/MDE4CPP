@@ -1079,8 +1079,8 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_ATTRIBUTE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_attribute->begin();
-			Bag<uml::Property>::iterator end = m_attribute->end();
+			Bag<uml::Property>::iterator iter = getAttribute()->begin();
+			Bag<uml::Property>::iterator end = getAttribute()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -1091,8 +1091,8 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_COLLABORATIONUSE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::CollaborationUse>::iterator iter = m_collaborationUse->begin();
-			Bag<uml::CollaborationUse>::iterator end = m_collaborationUse->end();
+			Bag<uml::CollaborationUse>::iterator iter = getCollaborationUse()->begin();
+			Bag<uml::CollaborationUse>::iterator end = getCollaborationUse()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -1103,8 +1103,8 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_FEATURE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Feature>::iterator iter = m_feature->begin();
-			Bag<uml::Feature>::iterator end = m_feature->end();
+			Bag<uml::Feature>::iterator iter = getFeature()->begin();
+			Bag<uml::Feature>::iterator end = getFeature()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -1115,8 +1115,8 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_GENERAL:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_general->begin();
-			Bag<uml::Classifier>::iterator end = m_general->end();
+			Bag<uml::Classifier>::iterator iter = getGeneral()->begin();
+			Bag<uml::Classifier>::iterator end = getGeneral()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -1127,8 +1127,8 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_GENERALIZATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Generalization>::iterator iter = m_generalization->begin();
-			Bag<uml::Generalization>::iterator end = m_generalization->end();
+			Bag<uml::Generalization>::iterator iter = getGeneralization()->begin();
+			Bag<uml::Generalization>::iterator end = getGeneralization()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -1139,8 +1139,8 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_INHERITEDMEMBER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_inheritedMember->begin();
-			Bag<uml::NamedElement>::iterator end = m_inheritedMember->end();
+			Bag<uml::NamedElement>::iterator iter = getInheritedMember()->begin();
+			Bag<uml::NamedElement>::iterator end = getInheritedMember()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -1155,8 +1155,8 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_OWNEDUSECASE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::UseCase>::iterator iter = m_ownedUseCase->begin();
-			Bag<uml::UseCase>::iterator end = m_ownedUseCase->end();
+			Bag<uml::UseCase>::iterator iter = getOwnedUseCase()->begin();
+			Bag<uml::UseCase>::iterator end = getOwnedUseCase()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -1167,8 +1167,8 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_POWERTYPEEXTENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::GeneralizationSet>::iterator iter = m_powertypeExtent->begin();
-			Bag<uml::GeneralizationSet>::iterator end = m_powertypeExtent->end();
+			Bag<uml::GeneralizationSet>::iterator iter = getPowertypeExtent()->begin();
+			Bag<uml::GeneralizationSet>::iterator end = getPowertypeExtent()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -1179,8 +1179,8 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_REDEFINEDCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_redefinedClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_redefinedClassifier->end();
+			Bag<uml::Classifier>::iterator iter = getRedefinedClassifier()->begin();
+			Bag<uml::Classifier>::iterator end = getRedefinedClassifier()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -1193,8 +1193,8 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_SUBSTITUTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Substitution>::iterator iter = m_substitution->begin();
-			Bag<uml::Substitution>::iterator end = m_substitution->end();
+			Bag<uml::Substitution>::iterator iter = getSubstitution()->begin();
+			Bag<uml::Substitution>::iterator end = getSubstitution()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -1205,8 +1205,8 @@ Any ClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASSIFIER_ATTRIBUTE_USECASE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::UseCase>::iterator iter = m_useCase->begin();
-			Bag<uml::UseCase>::iterator end = m_useCase->end();
+			Bag<uml::UseCase>::iterator iter = getUseCase()->begin();
+			Bag<uml::UseCase>::iterator end = getUseCase()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -1303,13 +1303,13 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::CollaborationUse>::iterator iterCollaborationUse = m_collaborationUse->begin();
-			Bag<uml::CollaborationUse>::iterator endCollaborationUse = m_collaborationUse->end();
+			Bag<uml::CollaborationUse>::iterator iterCollaborationUse = getCollaborationUse()->begin();
+			Bag<uml::CollaborationUse>::iterator endCollaborationUse = getCollaborationUse()->end();
 			while (iterCollaborationUse != endCollaborationUse)
 			{
 				if (collaborationUseList->find(*iterCollaborationUse) == -1)
 				{
-					m_collaborationUse->erase(*iterCollaborationUse);
+					getCollaborationUse()->erase(*iterCollaborationUse);
 				}
 				iterCollaborationUse++;
 			}
@@ -1318,9 +1318,9 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 			endCollaborationUse = collaborationUseList->end();
 			while (iterCollaborationUse != endCollaborationUse)
 			{
-				if (m_collaborationUse->find(*iterCollaborationUse) == -1)
+				if (getCollaborationUse()->find(*iterCollaborationUse) == -1)
 				{
-					m_collaborationUse->add(*iterCollaborationUse);
+					getCollaborationUse()->add(*iterCollaborationUse);
 				}
 				iterCollaborationUse++;			
 			}
@@ -1339,13 +1339,13 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Classifier>::iterator iterGeneral = m_general->begin();
-			Bag<uml::Classifier>::iterator endGeneral = m_general->end();
+			Bag<uml::Classifier>::iterator iterGeneral = getGeneral()->begin();
+			Bag<uml::Classifier>::iterator endGeneral = getGeneral()->end();
 			while (iterGeneral != endGeneral)
 			{
 				if (generalList->find(*iterGeneral) == -1)
 				{
-					m_general->erase(*iterGeneral);
+					getGeneral()->erase(*iterGeneral);
 				}
 				iterGeneral++;
 			}
@@ -1354,9 +1354,9 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 			endGeneral = generalList->end();
 			while (iterGeneral != endGeneral)
 			{
-				if (m_general->find(*iterGeneral) == -1)
+				if (getGeneral()->find(*iterGeneral) == -1)
 				{
-					m_general->add(*iterGeneral);
+					getGeneral()->add(*iterGeneral);
 				}
 				iterGeneral++;			
 			}
@@ -1375,13 +1375,13 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Generalization>::iterator iterGeneralization = m_generalization->begin();
-			Bag<uml::Generalization>::iterator endGeneralization = m_generalization->end();
+			Bag<uml::Generalization>::iterator iterGeneralization = getGeneralization()->begin();
+			Bag<uml::Generalization>::iterator endGeneralization = getGeneralization()->end();
 			while (iterGeneralization != endGeneralization)
 			{
 				if (generalizationList->find(*iterGeneralization) == -1)
 				{
-					m_generalization->erase(*iterGeneralization);
+					getGeneralization()->erase(*iterGeneralization);
 				}
 				iterGeneralization++;
 			}
@@ -1390,9 +1390,9 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 			endGeneralization = generalizationList->end();
 			while (iterGeneralization != endGeneralization)
 			{
-				if (m_generalization->find(*iterGeneralization) == -1)
+				if (getGeneralization()->find(*iterGeneralization) == -1)
 				{
-					m_generalization->add(*iterGeneralization);
+					getGeneralization()->add(*iterGeneralization);
 				}
 				iterGeneralization++;			
 			}
@@ -1425,13 +1425,13 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::UseCase>::iterator iterOwnedUseCase = m_ownedUseCase->begin();
-			Bag<uml::UseCase>::iterator endOwnedUseCase = m_ownedUseCase->end();
+			Bag<uml::UseCase>::iterator iterOwnedUseCase = getOwnedUseCase()->begin();
+			Bag<uml::UseCase>::iterator endOwnedUseCase = getOwnedUseCase()->end();
 			while (iterOwnedUseCase != endOwnedUseCase)
 			{
 				if (ownedUseCaseList->find(*iterOwnedUseCase) == -1)
 				{
-					m_ownedUseCase->erase(*iterOwnedUseCase);
+					getOwnedUseCase()->erase(*iterOwnedUseCase);
 				}
 				iterOwnedUseCase++;
 			}
@@ -1440,9 +1440,9 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 			endOwnedUseCase = ownedUseCaseList->end();
 			while (iterOwnedUseCase != endOwnedUseCase)
 			{
-				if (m_ownedUseCase->find(*iterOwnedUseCase) == -1)
+				if (getOwnedUseCase()->find(*iterOwnedUseCase) == -1)
 				{
-					m_ownedUseCase->add(*iterOwnedUseCase);
+					getOwnedUseCase()->add(*iterOwnedUseCase);
 				}
 				iterOwnedUseCase++;			
 			}
@@ -1461,13 +1461,13 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::GeneralizationSet>::iterator iterPowertypeExtent = m_powertypeExtent->begin();
-			Bag<uml::GeneralizationSet>::iterator endPowertypeExtent = m_powertypeExtent->end();
+			Bag<uml::GeneralizationSet>::iterator iterPowertypeExtent = getPowertypeExtent()->begin();
+			Bag<uml::GeneralizationSet>::iterator endPowertypeExtent = getPowertypeExtent()->end();
 			while (iterPowertypeExtent != endPowertypeExtent)
 			{
 				if (powertypeExtentList->find(*iterPowertypeExtent) == -1)
 				{
-					m_powertypeExtent->erase(*iterPowertypeExtent);
+					getPowertypeExtent()->erase(*iterPowertypeExtent);
 				}
 				iterPowertypeExtent++;
 			}
@@ -1476,9 +1476,9 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 			endPowertypeExtent = powertypeExtentList->end();
 			while (iterPowertypeExtent != endPowertypeExtent)
 			{
-				if (m_powertypeExtent->find(*iterPowertypeExtent) == -1)
+				if (getPowertypeExtent()->find(*iterPowertypeExtent) == -1)
 				{
-					m_powertypeExtent->add(*iterPowertypeExtent);
+					getPowertypeExtent()->add(*iterPowertypeExtent);
 				}
 				iterPowertypeExtent++;			
 			}
@@ -1497,13 +1497,13 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Classifier>::iterator iterRedefinedClassifier = m_redefinedClassifier->begin();
-			Bag<uml::Classifier>::iterator endRedefinedClassifier = m_redefinedClassifier->end();
+			Bag<uml::Classifier>::iterator iterRedefinedClassifier = getRedefinedClassifier()->begin();
+			Bag<uml::Classifier>::iterator endRedefinedClassifier = getRedefinedClassifier()->end();
 			while (iterRedefinedClassifier != endRedefinedClassifier)
 			{
 				if (redefinedClassifierList->find(*iterRedefinedClassifier) == -1)
 				{
-					m_redefinedClassifier->erase(*iterRedefinedClassifier);
+					getRedefinedClassifier()->erase(*iterRedefinedClassifier);
 				}
 				iterRedefinedClassifier++;
 			}
@@ -1512,9 +1512,9 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 			endRedefinedClassifier = redefinedClassifierList->end();
 			while (iterRedefinedClassifier != endRedefinedClassifier)
 			{
-				if (m_redefinedClassifier->find(*iterRedefinedClassifier) == -1)
+				if (getRedefinedClassifier()->find(*iterRedefinedClassifier) == -1)
 				{
-					m_redefinedClassifier->add(*iterRedefinedClassifier);
+					getRedefinedClassifier()->add(*iterRedefinedClassifier);
 				}
 				iterRedefinedClassifier++;			
 			}
@@ -1541,13 +1541,13 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Substitution>::iterator iterSubstitution = m_substitution->begin();
-			Bag<uml::Substitution>::iterator endSubstitution = m_substitution->end();
+			Bag<uml::Substitution>::iterator iterSubstitution = getSubstitution()->begin();
+			Bag<uml::Substitution>::iterator endSubstitution = getSubstitution()->end();
 			while (iterSubstitution != endSubstitution)
 			{
 				if (substitutionList->find(*iterSubstitution) == -1)
 				{
-					m_substitution->erase(*iterSubstitution);
+					getSubstitution()->erase(*iterSubstitution);
 				}
 				iterSubstitution++;
 			}
@@ -1556,9 +1556,9 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 			endSubstitution = substitutionList->end();
 			while (iterSubstitution != endSubstitution)
 			{
-				if (m_substitution->find(*iterSubstitution) == -1)
+				if (getSubstitution()->find(*iterSubstitution) == -1)
 				{
-					m_substitution->add(*iterSubstitution);
+					getSubstitution()->add(*iterSubstitution);
 				}
 				iterSubstitution++;			
 			}
@@ -1577,13 +1577,13 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::UseCase>::iterator iterUseCase = m_useCase->begin();
-			Bag<uml::UseCase>::iterator endUseCase = m_useCase->end();
+			Bag<uml::UseCase>::iterator iterUseCase = getUseCase()->begin();
+			Bag<uml::UseCase>::iterator endUseCase = getUseCase()->end();
 			while (iterUseCase != endUseCase)
 			{
 				if (useCaseList->find(*iterUseCase) == -1)
 				{
-					m_useCase->erase(*iterUseCase);
+					getUseCase()->erase(*iterUseCase);
 				}
 				iterUseCase++;
 			}
@@ -1592,9 +1592,9 @@ bool ClassifierImpl::eSet(int featureID, Any newValue)
 			endUseCase = useCaseList->end();
 			while (iterUseCase != endUseCase)
 			{
-				if (m_useCase->find(*iterUseCase) == -1)
+				if (getUseCase()->find(*iterUseCase) == -1)
 				{
-					m_useCase->add(*iterUseCase);
+					getUseCase()->add(*iterUseCase);
 				}
 				iterUseCase++;			
 			}

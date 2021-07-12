@@ -362,8 +362,8 @@ Any InformationItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INFORMATIONITEM_ATTRIBUTE_REPRESENTED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_represented->begin();
-			Bag<uml::Classifier>::iterator end = m_represented->end();
+			Bag<uml::Classifier>::iterator iter = getRepresented()->begin();
+			Bag<uml::Classifier>::iterator end = getRepresented()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -400,13 +400,13 @@ bool InformationItemImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Classifier>::iterator iterRepresented = m_represented->begin();
-			Bag<uml::Classifier>::iterator endRepresented = m_represented->end();
+			Bag<uml::Classifier>::iterator iterRepresented = getRepresented()->begin();
+			Bag<uml::Classifier>::iterator endRepresented = getRepresented()->end();
 			while (iterRepresented != endRepresented)
 			{
 				if (representedList->find(*iterRepresented) == -1)
 				{
-					m_represented->erase(*iterRepresented);
+					getRepresented()->erase(*iterRepresented);
 				}
 				iterRepresented++;
 			}
@@ -415,9 +415,9 @@ bool InformationItemImpl::eSet(int featureID, Any newValue)
 			endRepresented = representedList->end();
 			while (iterRepresented != endRepresented)
 			{
-				if (m_represented->find(*iterRepresented) == -1)
+				if (getRepresented()->find(*iterRepresented) == -1)
 				{
-					m_represented->add(*iterRepresented);
+					getRepresented()->add(*iterRepresented);
 				}
 				iterRepresented++;			
 			}

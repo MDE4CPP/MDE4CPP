@@ -715,8 +715,8 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::Token>::iterator iter = m_heldTokens->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator end = m_heldTokens->end();
+			Bag<fUML::Semantics::Activities::Token>::iterator iter = getHeldTokens()->begin();
+			Bag<fUML::Semantics::Activities::Token>::iterator end = getHeldTokens()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -727,8 +727,8 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_INCOMINGEDGES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iter = m_incomingEdges->begin();
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator end = m_incomingEdges->end();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iter = getIncomingEdges()->begin();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator end = getIncomingEdges()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -741,8 +741,8 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iter = m_outgoingEdges->begin();
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator end = m_outgoingEdges->end();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iter = getOutgoingEdges()->begin();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator end = getOutgoingEdges()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -799,13 +799,13 @@ bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::Token>::iterator iterHeldTokens = m_heldTokens->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator endHeldTokens = m_heldTokens->end();
+			Bag<fUML::Semantics::Activities::Token>::iterator iterHeldTokens = getHeldTokens()->begin();
+			Bag<fUML::Semantics::Activities::Token>::iterator endHeldTokens = getHeldTokens()->end();
 			while (iterHeldTokens != endHeldTokens)
 			{
 				if (heldTokensList->find(*iterHeldTokens) == -1)
 				{
-					m_heldTokens->erase(*iterHeldTokens);
+					getHeldTokens()->erase(*iterHeldTokens);
 				}
 				iterHeldTokens++;
 			}
@@ -814,9 +814,9 @@ bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 			endHeldTokens = heldTokensList->end();
 			while (iterHeldTokens != endHeldTokens)
 			{
-				if (m_heldTokens->find(*iterHeldTokens) == -1)
+				if (getHeldTokens()->find(*iterHeldTokens) == -1)
 				{
-					m_heldTokens->add(*iterHeldTokens);
+					getHeldTokens()->add(*iterHeldTokens);
 				}
 				iterHeldTokens++;			
 			}
@@ -835,13 +835,13 @@ bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iterIncomingEdges = m_incomingEdges->begin();
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator endIncomingEdges = m_incomingEdges->end();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iterIncomingEdges = getIncomingEdges()->begin();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator endIncomingEdges = getIncomingEdges()->end();
 			while (iterIncomingEdges != endIncomingEdges)
 			{
 				if (incomingEdgesList->find(*iterIncomingEdges) == -1)
 				{
-					m_incomingEdges->erase(*iterIncomingEdges);
+					getIncomingEdges()->erase(*iterIncomingEdges);
 				}
 				iterIncomingEdges++;
 			}
@@ -850,9 +850,9 @@ bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 			endIncomingEdges = incomingEdgesList->end();
 			while (iterIncomingEdges != endIncomingEdges)
 			{
-				if (m_incomingEdges->find(*iterIncomingEdges) == -1)
+				if (getIncomingEdges()->find(*iterIncomingEdges) == -1)
 				{
-					m_incomingEdges->add(*iterIncomingEdges);
+					getIncomingEdges()->add(*iterIncomingEdges);
 				}
 				iterIncomingEdges++;			
 			}
@@ -879,13 +879,13 @@ bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iterOutgoingEdges = m_outgoingEdges->begin();
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator endOutgoingEdges = m_outgoingEdges->end();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iterOutgoingEdges = getOutgoingEdges()->begin();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator endOutgoingEdges = getOutgoingEdges()->end();
 			while (iterOutgoingEdges != endOutgoingEdges)
 			{
 				if (outgoingEdgesList->find(*iterOutgoingEdges) == -1)
 				{
-					m_outgoingEdges->erase(*iterOutgoingEdges);
+					getOutgoingEdges()->erase(*iterOutgoingEdges);
 				}
 				iterOutgoingEdges++;
 			}
@@ -894,9 +894,9 @@ bool ActivityNodeActivationImpl::eSet(int featureID, Any newValue)
 			endOutgoingEdges = outgoingEdgesList->end();
 			while (iterOutgoingEdges != endOutgoingEdges)
 			{
-				if (m_outgoingEdges->find(*iterOutgoingEdges) == -1)
+				if (getOutgoingEdges()->find(*iterOutgoingEdges) == -1)
 				{
-					m_outgoingEdges->add(*iterOutgoingEdges);
+					getOutgoingEdges()->add(*iterOutgoingEdges);
 				}
 				iterOutgoingEdges++;			
 			}

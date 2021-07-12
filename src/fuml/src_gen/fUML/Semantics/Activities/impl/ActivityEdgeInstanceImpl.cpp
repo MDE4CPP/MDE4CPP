@@ -374,8 +374,8 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::Offer>::iterator iter = m_offers->begin();
-			Bag<fUML::Semantics::Activities::Offer>::iterator end = m_offers->end();
+			Bag<fUML::Semantics::Activities::Offer>::iterator iter = getOffers()->begin();
+			Bag<fUML::Semantics::Activities::Offer>::iterator end = getOffers()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -440,13 +440,13 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::Offer>::iterator iterOffers = m_offers->begin();
-			Bag<fUML::Semantics::Activities::Offer>::iterator endOffers = m_offers->end();
+			Bag<fUML::Semantics::Activities::Offer>::iterator iterOffers = getOffers()->begin();
+			Bag<fUML::Semantics::Activities::Offer>::iterator endOffers = getOffers()->end();
 			while (iterOffers != endOffers)
 			{
 				if (offersList->find(*iterOffers) == -1)
 				{
-					m_offers->erase(*iterOffers);
+					getOffers()->erase(*iterOffers);
 				}
 				iterOffers++;
 			}
@@ -455,9 +455,9 @@ bool ActivityEdgeInstanceImpl::eSet(int featureID, Any newValue)
 			endOffers = offersList->end();
 			while (iterOffers != endOffers)
 			{
-				if (m_offers->find(*iterOffers) == -1)
+				if (getOffers()->find(*iterOffers) == -1)
 				{
-					m_offers->add(*iterOffers);
+					getOffers()->add(*iterOffers);
 				}
 				iterOffers++;			
 			}

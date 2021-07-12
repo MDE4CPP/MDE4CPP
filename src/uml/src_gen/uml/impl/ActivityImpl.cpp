@@ -843,8 +843,8 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_EDGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_edge->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_edge->end();
+			Bag<uml::ActivityEdge>::iterator iter = getEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator end = getEdge()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -855,8 +855,8 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_GROUP:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityGroup>::iterator iter = m_group->begin();
-			Bag<uml::ActivityGroup>::iterator end = m_group->end();
+			Bag<uml::ActivityGroup>::iterator iter = getGroup()->begin();
+			Bag<uml::ActivityGroup>::iterator end = getGroup()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -871,8 +871,8 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = m_node->begin();
-			Bag<uml::ActivityNode>::iterator end = m_node->end();
+			Bag<uml::ActivityNode>::iterator iter = getNode()->begin();
+			Bag<uml::ActivityNode>::iterator end = getNode()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -883,8 +883,8 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_OWNEDGROUP:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityGroup>::iterator iter = m_ownedGroup->begin();
-			Bag<uml::ActivityGroup>::iterator end = m_ownedGroup->end();
+			Bag<uml::ActivityGroup>::iterator iter = getOwnedGroup()->begin();
+			Bag<uml::ActivityGroup>::iterator end = getOwnedGroup()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -895,8 +895,8 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_OWNEDNODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = m_ownedNode->begin();
-			Bag<uml::ActivityNode>::iterator end = m_ownedNode->end();
+			Bag<uml::ActivityNode>::iterator iter = getOwnedNode()->begin();
+			Bag<uml::ActivityNode>::iterator end = getOwnedNode()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -907,8 +907,8 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityPartition>::iterator iter = m_partition->begin();
-			Bag<uml::ActivityPartition>::iterator end = m_partition->end();
+			Bag<uml::ActivityPartition>::iterator iter = getPartition()->begin();
+			Bag<uml::ActivityPartition>::iterator end = getPartition()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -919,8 +919,8 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_STRUCTUREDNODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::StructuredActivityNode>::iterator iter = m_structuredNode->begin();
-			Bag<uml::StructuredActivityNode>::iterator end = m_structuredNode->end();
+			Bag<uml::StructuredActivityNode>::iterator iter = getStructuredNode()->begin();
+			Bag<uml::StructuredActivityNode>::iterator end = getStructuredNode()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -931,8 +931,8 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_VARIABLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Variable>::iterator iter = m_variable->begin();
-			Bag<uml::Variable>::iterator end = m_variable->end();
+			Bag<uml::Variable>::iterator iter = getVariable()->begin();
+			Bag<uml::Variable>::iterator end = getVariable()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -987,13 +987,13 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityEdge>::iterator iterEdge = m_edge->begin();
-			Bag<uml::ActivityEdge>::iterator endEdge = m_edge->end();
+			Bag<uml::ActivityEdge>::iterator iterEdge = getEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator endEdge = getEdge()->end();
 			while (iterEdge != endEdge)
 			{
 				if (edgeList->find(*iterEdge) == -1)
 				{
-					m_edge->erase(*iterEdge);
+					getEdge()->erase(*iterEdge);
 				}
 				iterEdge++;
 			}
@@ -1002,9 +1002,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 			endEdge = edgeList->end();
 			while (iterEdge != endEdge)
 			{
-				if (m_edge->find(*iterEdge) == -1)
+				if (getEdge()->find(*iterEdge) == -1)
 				{
-					m_edge->add(*iterEdge);
+					getEdge()->add(*iterEdge);
 				}
 				iterEdge++;			
 			}
@@ -1023,13 +1023,13 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityGroup>::iterator iterGroup = m_group->begin();
-			Bag<uml::ActivityGroup>::iterator endGroup = m_group->end();
+			Bag<uml::ActivityGroup>::iterator iterGroup = getGroup()->begin();
+			Bag<uml::ActivityGroup>::iterator endGroup = getGroup()->end();
 			while (iterGroup != endGroup)
 			{
 				if (groupList->find(*iterGroup) == -1)
 				{
-					m_group->erase(*iterGroup);
+					getGroup()->erase(*iterGroup);
 				}
 				iterGroup++;
 			}
@@ -1038,9 +1038,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 			endGroup = groupList->end();
 			while (iterGroup != endGroup)
 			{
-				if (m_group->find(*iterGroup) == -1)
+				if (getGroup()->find(*iterGroup) == -1)
 				{
-					m_group->add(*iterGroup);
+					getGroup()->add(*iterGroup);
 				}
 				iterGroup++;			
 			}
@@ -1073,13 +1073,13 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityNode>::iterator iterNode = m_node->begin();
-			Bag<uml::ActivityNode>::iterator endNode = m_node->end();
+			Bag<uml::ActivityNode>::iterator iterNode = getNode()->begin();
+			Bag<uml::ActivityNode>::iterator endNode = getNode()->end();
 			while (iterNode != endNode)
 			{
 				if (nodeList->find(*iterNode) == -1)
 				{
-					m_node->erase(*iterNode);
+					getNode()->erase(*iterNode);
 				}
 				iterNode++;
 			}
@@ -1088,9 +1088,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 			endNode = nodeList->end();
 			while (iterNode != endNode)
 			{
-				if (m_node->find(*iterNode) == -1)
+				if (getNode()->find(*iterNode) == -1)
 				{
-					m_node->add(*iterNode);
+					getNode()->add(*iterNode);
 				}
 				iterNode++;			
 			}
@@ -1109,13 +1109,13 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityGroup>::iterator iterOwnedGroup = m_ownedGroup->begin();
-			Bag<uml::ActivityGroup>::iterator endOwnedGroup = m_ownedGroup->end();
+			Bag<uml::ActivityGroup>::iterator iterOwnedGroup = getOwnedGroup()->begin();
+			Bag<uml::ActivityGroup>::iterator endOwnedGroup = getOwnedGroup()->end();
 			while (iterOwnedGroup != endOwnedGroup)
 			{
 				if (ownedGroupList->find(*iterOwnedGroup) == -1)
 				{
-					m_ownedGroup->erase(*iterOwnedGroup);
+					getOwnedGroup()->erase(*iterOwnedGroup);
 				}
 				iterOwnedGroup++;
 			}
@@ -1124,9 +1124,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 			endOwnedGroup = ownedGroupList->end();
 			while (iterOwnedGroup != endOwnedGroup)
 			{
-				if (m_ownedGroup->find(*iterOwnedGroup) == -1)
+				if (getOwnedGroup()->find(*iterOwnedGroup) == -1)
 				{
-					m_ownedGroup->add(*iterOwnedGroup);
+					getOwnedGroup()->add(*iterOwnedGroup);
 				}
 				iterOwnedGroup++;			
 			}
@@ -1145,13 +1145,13 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityNode>::iterator iterOwnedNode = m_ownedNode->begin();
-			Bag<uml::ActivityNode>::iterator endOwnedNode = m_ownedNode->end();
+			Bag<uml::ActivityNode>::iterator iterOwnedNode = getOwnedNode()->begin();
+			Bag<uml::ActivityNode>::iterator endOwnedNode = getOwnedNode()->end();
 			while (iterOwnedNode != endOwnedNode)
 			{
 				if (ownedNodeList->find(*iterOwnedNode) == -1)
 				{
-					m_ownedNode->erase(*iterOwnedNode);
+					getOwnedNode()->erase(*iterOwnedNode);
 				}
 				iterOwnedNode++;
 			}
@@ -1160,9 +1160,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 			endOwnedNode = ownedNodeList->end();
 			while (iterOwnedNode != endOwnedNode)
 			{
-				if (m_ownedNode->find(*iterOwnedNode) == -1)
+				if (getOwnedNode()->find(*iterOwnedNode) == -1)
 				{
-					m_ownedNode->add(*iterOwnedNode);
+					getOwnedNode()->add(*iterOwnedNode);
 				}
 				iterOwnedNode++;			
 			}
@@ -1181,13 +1181,13 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityPartition>::iterator iterPartition = m_partition->begin();
-			Bag<uml::ActivityPartition>::iterator endPartition = m_partition->end();
+			Bag<uml::ActivityPartition>::iterator iterPartition = getPartition()->begin();
+			Bag<uml::ActivityPartition>::iterator endPartition = getPartition()->end();
 			while (iterPartition != endPartition)
 			{
 				if (partitionList->find(*iterPartition) == -1)
 				{
-					m_partition->erase(*iterPartition);
+					getPartition()->erase(*iterPartition);
 				}
 				iterPartition++;
 			}
@@ -1196,9 +1196,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 			endPartition = partitionList->end();
 			while (iterPartition != endPartition)
 			{
-				if (m_partition->find(*iterPartition) == -1)
+				if (getPartition()->find(*iterPartition) == -1)
 				{
-					m_partition->add(*iterPartition);
+					getPartition()->add(*iterPartition);
 				}
 				iterPartition++;			
 			}
@@ -1217,13 +1217,13 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::StructuredActivityNode>::iterator iterStructuredNode = m_structuredNode->begin();
-			Bag<uml::StructuredActivityNode>::iterator endStructuredNode = m_structuredNode->end();
+			Bag<uml::StructuredActivityNode>::iterator iterStructuredNode = getStructuredNode()->begin();
+			Bag<uml::StructuredActivityNode>::iterator endStructuredNode = getStructuredNode()->end();
 			while (iterStructuredNode != endStructuredNode)
 			{
 				if (structuredNodeList->find(*iterStructuredNode) == -1)
 				{
-					m_structuredNode->erase(*iterStructuredNode);
+					getStructuredNode()->erase(*iterStructuredNode);
 				}
 				iterStructuredNode++;
 			}
@@ -1232,9 +1232,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 			endStructuredNode = structuredNodeList->end();
 			while (iterStructuredNode != endStructuredNode)
 			{
-				if (m_structuredNode->find(*iterStructuredNode) == -1)
+				if (getStructuredNode()->find(*iterStructuredNode) == -1)
 				{
-					m_structuredNode->add(*iterStructuredNode);
+					getStructuredNode()->add(*iterStructuredNode);
 				}
 				iterStructuredNode++;			
 			}
@@ -1253,13 +1253,13 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Variable>::iterator iterVariable = m_variable->begin();
-			Bag<uml::Variable>::iterator endVariable = m_variable->end();
+			Bag<uml::Variable>::iterator iterVariable = getVariable()->begin();
+			Bag<uml::Variable>::iterator endVariable = getVariable()->end();
 			while (iterVariable != endVariable)
 			{
 				if (variableList->find(*iterVariable) == -1)
 				{
-					m_variable->erase(*iterVariable);
+					getVariable()->erase(*iterVariable);
 				}
 				iterVariable++;
 			}
@@ -1268,9 +1268,9 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 			endVariable = variableList->end();
 			while (iterVariable != endVariable)
 			{
-				if (m_variable->find(*iterVariable) == -1)
+				if (getVariable()->find(*iterVariable) == -1)
 				{
-					m_variable->add(*iterVariable);
+					getVariable()->add(*iterVariable);
 				}
 				iterVariable++;			
 			}

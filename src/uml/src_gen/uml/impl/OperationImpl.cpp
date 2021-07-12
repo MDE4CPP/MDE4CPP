@@ -771,8 +771,8 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OPERATION_ATTRIBUTE_POSTCONDITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_postcondition->begin();
-			Bag<uml::Constraint>::iterator end = m_postcondition->end();
+			Bag<uml::Constraint>::iterator iter = getPostcondition()->begin();
+			Bag<uml::Constraint>::iterator end = getPostcondition()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -783,8 +783,8 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OPERATION_ATTRIBUTE_PRECONDITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_precondition->begin();
-			Bag<uml::Constraint>::iterator end = m_precondition->end();
+			Bag<uml::Constraint>::iterator iter = getPrecondition()->begin();
+			Bag<uml::Constraint>::iterator end = getPrecondition()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -795,8 +795,8 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OPERATION_ATTRIBUTE_REDEFINEDOPERATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = m_redefinedOperation->begin();
-			Bag<uml::Operation>::iterator end = m_redefinedOperation->end();
+			Bag<uml::Operation>::iterator iter = getRedefinedOperation()->begin();
+			Bag<uml::Operation>::iterator end = getRedefinedOperation()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -924,13 +924,13 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Constraint>::iterator iterPostcondition = m_postcondition->begin();
-			Bag<uml::Constraint>::iterator endPostcondition = m_postcondition->end();
+			Bag<uml::Constraint>::iterator iterPostcondition = getPostcondition()->begin();
+			Bag<uml::Constraint>::iterator endPostcondition = getPostcondition()->end();
 			while (iterPostcondition != endPostcondition)
 			{
 				if (postconditionList->find(*iterPostcondition) == -1)
 				{
-					m_postcondition->erase(*iterPostcondition);
+					getPostcondition()->erase(*iterPostcondition);
 				}
 				iterPostcondition++;
 			}
@@ -939,9 +939,9 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 			endPostcondition = postconditionList->end();
 			while (iterPostcondition != endPostcondition)
 			{
-				if (m_postcondition->find(*iterPostcondition) == -1)
+				if (getPostcondition()->find(*iterPostcondition) == -1)
 				{
-					m_postcondition->add(*iterPostcondition);
+					getPostcondition()->add(*iterPostcondition);
 				}
 				iterPostcondition++;			
 			}
@@ -960,13 +960,13 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Constraint>::iterator iterPrecondition = m_precondition->begin();
-			Bag<uml::Constraint>::iterator endPrecondition = m_precondition->end();
+			Bag<uml::Constraint>::iterator iterPrecondition = getPrecondition()->begin();
+			Bag<uml::Constraint>::iterator endPrecondition = getPrecondition()->end();
 			while (iterPrecondition != endPrecondition)
 			{
 				if (preconditionList->find(*iterPrecondition) == -1)
 				{
-					m_precondition->erase(*iterPrecondition);
+					getPrecondition()->erase(*iterPrecondition);
 				}
 				iterPrecondition++;
 			}
@@ -975,9 +975,9 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 			endPrecondition = preconditionList->end();
 			while (iterPrecondition != endPrecondition)
 			{
-				if (m_precondition->find(*iterPrecondition) == -1)
+				if (getPrecondition()->find(*iterPrecondition) == -1)
 				{
-					m_precondition->add(*iterPrecondition);
+					getPrecondition()->add(*iterPrecondition);
 				}
 				iterPrecondition++;			
 			}
@@ -996,13 +996,13 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Operation>::iterator iterRedefinedOperation = m_redefinedOperation->begin();
-			Bag<uml::Operation>::iterator endRedefinedOperation = m_redefinedOperation->end();
+			Bag<uml::Operation>::iterator iterRedefinedOperation = getRedefinedOperation()->begin();
+			Bag<uml::Operation>::iterator endRedefinedOperation = getRedefinedOperation()->end();
 			while (iterRedefinedOperation != endRedefinedOperation)
 			{
 				if (redefinedOperationList->find(*iterRedefinedOperation) == -1)
 				{
-					m_redefinedOperation->erase(*iterRedefinedOperation);
+					getRedefinedOperation()->erase(*iterRedefinedOperation);
 				}
 				iterRedefinedOperation++;
 			}
@@ -1011,9 +1011,9 @@ bool OperationImpl::eSet(int featureID, Any newValue)
 			endRedefinedOperation = redefinedOperationList->end();
 			while (iterRedefinedOperation != endRedefinedOperation)
 			{
-				if (m_redefinedOperation->find(*iterRedefinedOperation) == -1)
+				if (getRedefinedOperation()->find(*iterRedefinedOperation) == -1)
 				{
-					m_redefinedOperation->add(*iterRedefinedOperation);
+					getRedefinedOperation()->add(*iterRedefinedOperation);
 				}
 				iterRedefinedOperation++;			
 			}

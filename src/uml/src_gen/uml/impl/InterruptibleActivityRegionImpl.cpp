@@ -305,8 +305,8 @@ Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool core
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_INTERRUPTINGEDGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_interruptingEdge->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_interruptingEdge->end();
+			Bag<uml::ActivityEdge>::iterator iter = getInterruptingEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator end = getInterruptingEdge()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -317,8 +317,8 @@ Any InterruptibleActivityRegionImpl::eGet(int featureID, bool resolve, bool core
 		case uml::umlPackage::INTERRUPTIBLEACTIVITYREGION_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = m_node->begin();
-			Bag<uml::ActivityNode>::iterator end = m_node->end();
+			Bag<uml::ActivityNode>::iterator iter = getNode()->begin();
+			Bag<uml::ActivityNode>::iterator end = getNode()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -357,13 +357,13 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityEdge>::iterator iterInterruptingEdge = m_interruptingEdge->begin();
-			Bag<uml::ActivityEdge>::iterator endInterruptingEdge = m_interruptingEdge->end();
+			Bag<uml::ActivityEdge>::iterator iterInterruptingEdge = getInterruptingEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator endInterruptingEdge = getInterruptingEdge()->end();
 			while (iterInterruptingEdge != endInterruptingEdge)
 			{
 				if (interruptingEdgeList->find(*iterInterruptingEdge) == -1)
 				{
-					m_interruptingEdge->erase(*iterInterruptingEdge);
+					getInterruptingEdge()->erase(*iterInterruptingEdge);
 				}
 				iterInterruptingEdge++;
 			}
@@ -372,9 +372,9 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
 			endInterruptingEdge = interruptingEdgeList->end();
 			while (iterInterruptingEdge != endInterruptingEdge)
 			{
-				if (m_interruptingEdge->find(*iterInterruptingEdge) == -1)
+				if (getInterruptingEdge()->find(*iterInterruptingEdge) == -1)
 				{
-					m_interruptingEdge->add(*iterInterruptingEdge);
+					getInterruptingEdge()->add(*iterInterruptingEdge);
 				}
 				iterInterruptingEdge++;			
 			}
@@ -393,13 +393,13 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityNode>::iterator iterNode = m_node->begin();
-			Bag<uml::ActivityNode>::iterator endNode = m_node->end();
+			Bag<uml::ActivityNode>::iterator iterNode = getNode()->begin();
+			Bag<uml::ActivityNode>::iterator endNode = getNode()->end();
 			while (iterNode != endNode)
 			{
 				if (nodeList->find(*iterNode) == -1)
 				{
-					m_node->erase(*iterNode);
+					getNode()->erase(*iterNode);
 				}
 				iterNode++;
 			}
@@ -408,9 +408,9 @@ bool InterruptibleActivityRegionImpl::eSet(int featureID, Any newValue)
 			endNode = nodeList->end();
 			while (iterNode != endNode)
 			{
-				if (m_node->find(*iterNode) == -1)
+				if (getNode()->find(*iterNode) == -1)
 				{
-					m_node->add(*iterNode);
+					getNode()->add(*iterNode);
 				}
 				iterNode++;			
 			}

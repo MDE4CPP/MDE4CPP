@@ -728,8 +728,8 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iter = m_edgeInstances->begin();
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator end = m_edgeInstances->end();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iter = getEdgeInstances()->begin();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator end = getEdgeInstances()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -740,8 +740,8 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_NODEACTIVATIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iter = m_nodeActivations->begin();
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator end = m_nodeActivations->end();
+			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iter = getNodeActivations()->begin();
+			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator end = getNodeActivations()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -752,8 +752,8 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_SUSPENDEDACTIVATIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iter = m_suspendedActivations->begin();
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator end = m_suspendedActivations->end();
+			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iter = getSuspendedActivations()->begin();
+			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator end = getSuspendedActivations()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -814,13 +814,13 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iterEdgeInstances = m_edgeInstances->begin();
-			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator endEdgeInstances = m_edgeInstances->end();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator iterEdgeInstances = getEdgeInstances()->begin();
+			Bag<fUML::Semantics::Activities::ActivityEdgeInstance>::iterator endEdgeInstances = getEdgeInstances()->end();
 			while (iterEdgeInstances != endEdgeInstances)
 			{
 				if (edgeInstancesList->find(*iterEdgeInstances) == -1)
 				{
-					m_edgeInstances->erase(*iterEdgeInstances);
+					getEdgeInstances()->erase(*iterEdgeInstances);
 				}
 				iterEdgeInstances++;
 			}
@@ -829,9 +829,9 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 			endEdgeInstances = edgeInstancesList->end();
 			while (iterEdgeInstances != endEdgeInstances)
 			{
-				if (m_edgeInstances->find(*iterEdgeInstances) == -1)
+				if (getEdgeInstances()->find(*iterEdgeInstances) == -1)
 				{
-					m_edgeInstances->add(*iterEdgeInstances);
+					getEdgeInstances()->add(*iterEdgeInstances);
 				}
 				iterEdgeInstances++;			
 			}
@@ -850,13 +850,13 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iterNodeActivations = m_nodeActivations->begin();
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator endNodeActivations = m_nodeActivations->end();
+			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iterNodeActivations = getNodeActivations()->begin();
+			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator endNodeActivations = getNodeActivations()->end();
 			while (iterNodeActivations != endNodeActivations)
 			{
 				if (nodeActivationsList->find(*iterNodeActivations) == -1)
 				{
-					m_nodeActivations->erase(*iterNodeActivations);
+					getNodeActivations()->erase(*iterNodeActivations);
 				}
 				iterNodeActivations++;
 			}
@@ -865,9 +865,9 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 			endNodeActivations = nodeActivationsList->end();
 			while (iterNodeActivations != endNodeActivations)
 			{
-				if (m_nodeActivations->find(*iterNodeActivations) == -1)
+				if (getNodeActivations()->find(*iterNodeActivations) == -1)
 				{
-					m_nodeActivations->add(*iterNodeActivations);
+					getNodeActivations()->add(*iterNodeActivations);
 				}
 				iterNodeActivations++;			
 			}
@@ -886,13 +886,13 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iterSuspendedActivations = m_suspendedActivations->begin();
-			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator endSuspendedActivations = m_suspendedActivations->end();
+			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator iterSuspendedActivations = getSuspendedActivations()->begin();
+			Bag<fUML::Semantics::Activities::ActivityNodeActivation>::iterator endSuspendedActivations = getSuspendedActivations()->end();
 			while (iterSuspendedActivations != endSuspendedActivations)
 			{
 				if (suspendedActivationsList->find(*iterSuspendedActivations) == -1)
 				{
-					m_suspendedActivations->erase(*iterSuspendedActivations);
+					getSuspendedActivations()->erase(*iterSuspendedActivations);
 				}
 				iterSuspendedActivations++;
 			}
@@ -901,9 +901,9 @@ bool ActivityNodeActivationGroupImpl::eSet(int featureID, Any newValue)
 			endSuspendedActivations = suspendedActivationsList->end();
 			while (iterSuspendedActivations != endSuspendedActivations)
 			{
-				if (m_suspendedActivations->find(*iterSuspendedActivations) == -1)
+				if (getSuspendedActivations()->find(*iterSuspendedActivations) == -1)
 				{
-					m_suspendedActivations->add(*iterSuspendedActivations);
+					getSuspendedActivations()->add(*iterSuspendedActivations);
 				}
 				iterSuspendedActivations++;			
 			}

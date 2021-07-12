@@ -466,8 +466,8 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTION_ATTRIBUTE_INPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_input->begin();
-			Bag<uml::InputPin>::iterator end = m_input->end();
+			Bag<uml::InputPin>::iterator iter = getInput()->begin();
+			Bag<uml::InputPin>::iterator end = getInput()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -480,8 +480,8 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPOSTCONDITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_localPostcondition->begin();
-			Bag<uml::Constraint>::iterator end = m_localPostcondition->end();
+			Bag<uml::Constraint>::iterator iter = getLocalPostcondition()->begin();
+			Bag<uml::Constraint>::iterator end = getLocalPostcondition()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -492,8 +492,8 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTION_ATTRIBUTE_LOCALPRECONDITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_localPrecondition->begin();
-			Bag<uml::Constraint>::iterator end = m_localPrecondition->end();
+			Bag<uml::Constraint>::iterator iter = getLocalPrecondition()->begin();
+			Bag<uml::Constraint>::iterator end = getLocalPrecondition()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -504,8 +504,8 @@ Any ActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTION_ATTRIBUTE_OUTPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_output->begin();
-			Bag<uml::OutputPin>::iterator end = m_output->end();
+			Bag<uml::OutputPin>::iterator iter = getOutput()->begin();
+			Bag<uml::OutputPin>::iterator end = getOutput()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -559,13 +559,13 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Constraint>::iterator iterLocalPostcondition = m_localPostcondition->begin();
-			Bag<uml::Constraint>::iterator endLocalPostcondition = m_localPostcondition->end();
+			Bag<uml::Constraint>::iterator iterLocalPostcondition = getLocalPostcondition()->begin();
+			Bag<uml::Constraint>::iterator endLocalPostcondition = getLocalPostcondition()->end();
 			while (iterLocalPostcondition != endLocalPostcondition)
 			{
 				if (localPostconditionList->find(*iterLocalPostcondition) == -1)
 				{
-					m_localPostcondition->erase(*iterLocalPostcondition);
+					getLocalPostcondition()->erase(*iterLocalPostcondition);
 				}
 				iterLocalPostcondition++;
 			}
@@ -574,9 +574,9 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 			endLocalPostcondition = localPostconditionList->end();
 			while (iterLocalPostcondition != endLocalPostcondition)
 			{
-				if (m_localPostcondition->find(*iterLocalPostcondition) == -1)
+				if (getLocalPostcondition()->find(*iterLocalPostcondition) == -1)
 				{
-					m_localPostcondition->add(*iterLocalPostcondition);
+					getLocalPostcondition()->add(*iterLocalPostcondition);
 				}
 				iterLocalPostcondition++;			
 			}
@@ -595,13 +595,13 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Constraint>::iterator iterLocalPrecondition = m_localPrecondition->begin();
-			Bag<uml::Constraint>::iterator endLocalPrecondition = m_localPrecondition->end();
+			Bag<uml::Constraint>::iterator iterLocalPrecondition = getLocalPrecondition()->begin();
+			Bag<uml::Constraint>::iterator endLocalPrecondition = getLocalPrecondition()->end();
 			while (iterLocalPrecondition != endLocalPrecondition)
 			{
 				if (localPreconditionList->find(*iterLocalPrecondition) == -1)
 				{
-					m_localPrecondition->erase(*iterLocalPrecondition);
+					getLocalPrecondition()->erase(*iterLocalPrecondition);
 				}
 				iterLocalPrecondition++;
 			}
@@ -610,9 +610,9 @@ bool ActionImpl::eSet(int featureID, Any newValue)
 			endLocalPrecondition = localPreconditionList->end();
 			while (iterLocalPrecondition != endLocalPrecondition)
 			{
-				if (m_localPrecondition->find(*iterLocalPrecondition) == -1)
+				if (getLocalPrecondition()->find(*iterLocalPrecondition) == -1)
 				{
-					m_localPrecondition->add(*iterLocalPrecondition);
+					getLocalPrecondition()->add(*iterLocalPrecondition);
 				}
 				iterLocalPrecondition++;			
 			}

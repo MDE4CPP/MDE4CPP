@@ -758,8 +758,8 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Parameter>::iterator iter = m_ownedParameter->begin();
-			Bag<uml::Parameter>::iterator end = m_ownedParameter->end();
+			Bag<uml::Parameter>::iterator iter = getOwnedParameter()->begin();
+			Bag<uml::Parameter>::iterator end = getOwnedParameter()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -770,8 +770,8 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETERSET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ParameterSet>::iterator iter = m_ownedParameterSet->begin();
-			Bag<uml::ParameterSet>::iterator end = m_ownedParameterSet->end();
+			Bag<uml::ParameterSet>::iterator iter = getOwnedParameterSet()->begin();
+			Bag<uml::ParameterSet>::iterator end = getOwnedParameterSet()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -782,8 +782,8 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_POSTCONDITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_postcondition->begin();
-			Bag<uml::Constraint>::iterator end = m_postcondition->end();
+			Bag<uml::Constraint>::iterator iter = getPostcondition()->begin();
+			Bag<uml::Constraint>::iterator end = getPostcondition()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -794,8 +794,8 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_PRECONDITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_precondition->begin();
-			Bag<uml::Constraint>::iterator end = m_precondition->end();
+			Bag<uml::Constraint>::iterator iter = getPrecondition()->begin();
+			Bag<uml::Constraint>::iterator end = getPrecondition()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -806,8 +806,8 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_REDEFINEDBEHAVIOR:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Behavior>::iterator iter = m_redefinedBehavior->begin();
-			Bag<uml::Behavior>::iterator end = m_redefinedBehavior->end();
+			Bag<uml::Behavior>::iterator iter = getRedefinedBehavior()->begin();
+			Bag<uml::Behavior>::iterator end = getRedefinedBehavior()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -885,13 +885,13 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Parameter>::iterator iterOwnedParameter = m_ownedParameter->begin();
-			Bag<uml::Parameter>::iterator endOwnedParameter = m_ownedParameter->end();
+			Bag<uml::Parameter>::iterator iterOwnedParameter = getOwnedParameter()->begin();
+			Bag<uml::Parameter>::iterator endOwnedParameter = getOwnedParameter()->end();
 			while (iterOwnedParameter != endOwnedParameter)
 			{
 				if (ownedParameterList->find(*iterOwnedParameter) == -1)
 				{
-					m_ownedParameter->erase(*iterOwnedParameter);
+					getOwnedParameter()->erase(*iterOwnedParameter);
 				}
 				iterOwnedParameter++;
 			}
@@ -900,9 +900,9 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 			endOwnedParameter = ownedParameterList->end();
 			while (iterOwnedParameter != endOwnedParameter)
 			{
-				if (m_ownedParameter->find(*iterOwnedParameter) == -1)
+				if (getOwnedParameter()->find(*iterOwnedParameter) == -1)
 				{
-					m_ownedParameter->add(*iterOwnedParameter);
+					getOwnedParameter()->add(*iterOwnedParameter);
 				}
 				iterOwnedParameter++;			
 			}
@@ -921,13 +921,13 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ParameterSet>::iterator iterOwnedParameterSet = m_ownedParameterSet->begin();
-			Bag<uml::ParameterSet>::iterator endOwnedParameterSet = m_ownedParameterSet->end();
+			Bag<uml::ParameterSet>::iterator iterOwnedParameterSet = getOwnedParameterSet()->begin();
+			Bag<uml::ParameterSet>::iterator endOwnedParameterSet = getOwnedParameterSet()->end();
 			while (iterOwnedParameterSet != endOwnedParameterSet)
 			{
 				if (ownedParameterSetList->find(*iterOwnedParameterSet) == -1)
 				{
-					m_ownedParameterSet->erase(*iterOwnedParameterSet);
+					getOwnedParameterSet()->erase(*iterOwnedParameterSet);
 				}
 				iterOwnedParameterSet++;
 			}
@@ -936,9 +936,9 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 			endOwnedParameterSet = ownedParameterSetList->end();
 			while (iterOwnedParameterSet != endOwnedParameterSet)
 			{
-				if (m_ownedParameterSet->find(*iterOwnedParameterSet) == -1)
+				if (getOwnedParameterSet()->find(*iterOwnedParameterSet) == -1)
 				{
-					m_ownedParameterSet->add(*iterOwnedParameterSet);
+					getOwnedParameterSet()->add(*iterOwnedParameterSet);
 				}
 				iterOwnedParameterSet++;			
 			}
@@ -957,13 +957,13 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Constraint>::iterator iterPostcondition = m_postcondition->begin();
-			Bag<uml::Constraint>::iterator endPostcondition = m_postcondition->end();
+			Bag<uml::Constraint>::iterator iterPostcondition = getPostcondition()->begin();
+			Bag<uml::Constraint>::iterator endPostcondition = getPostcondition()->end();
 			while (iterPostcondition != endPostcondition)
 			{
 				if (postconditionList->find(*iterPostcondition) == -1)
 				{
-					m_postcondition->erase(*iterPostcondition);
+					getPostcondition()->erase(*iterPostcondition);
 				}
 				iterPostcondition++;
 			}
@@ -972,9 +972,9 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 			endPostcondition = postconditionList->end();
 			while (iterPostcondition != endPostcondition)
 			{
-				if (m_postcondition->find(*iterPostcondition) == -1)
+				if (getPostcondition()->find(*iterPostcondition) == -1)
 				{
-					m_postcondition->add(*iterPostcondition);
+					getPostcondition()->add(*iterPostcondition);
 				}
 				iterPostcondition++;			
 			}
@@ -993,13 +993,13 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Constraint>::iterator iterPrecondition = m_precondition->begin();
-			Bag<uml::Constraint>::iterator endPrecondition = m_precondition->end();
+			Bag<uml::Constraint>::iterator iterPrecondition = getPrecondition()->begin();
+			Bag<uml::Constraint>::iterator endPrecondition = getPrecondition()->end();
 			while (iterPrecondition != endPrecondition)
 			{
 				if (preconditionList->find(*iterPrecondition) == -1)
 				{
-					m_precondition->erase(*iterPrecondition);
+					getPrecondition()->erase(*iterPrecondition);
 				}
 				iterPrecondition++;
 			}
@@ -1008,9 +1008,9 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 			endPrecondition = preconditionList->end();
 			while (iterPrecondition != endPrecondition)
 			{
-				if (m_precondition->find(*iterPrecondition) == -1)
+				if (getPrecondition()->find(*iterPrecondition) == -1)
 				{
-					m_precondition->add(*iterPrecondition);
+					getPrecondition()->add(*iterPrecondition);
 				}
 				iterPrecondition++;			
 			}
@@ -1029,13 +1029,13 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Behavior>::iterator iterRedefinedBehavior = m_redefinedBehavior->begin();
-			Bag<uml::Behavior>::iterator endRedefinedBehavior = m_redefinedBehavior->end();
+			Bag<uml::Behavior>::iterator iterRedefinedBehavior = getRedefinedBehavior()->begin();
+			Bag<uml::Behavior>::iterator endRedefinedBehavior = getRedefinedBehavior()->end();
 			while (iterRedefinedBehavior != endRedefinedBehavior)
 			{
 				if (redefinedBehaviorList->find(*iterRedefinedBehavior) == -1)
 				{
-					m_redefinedBehavior->erase(*iterRedefinedBehavior);
+					getRedefinedBehavior()->erase(*iterRedefinedBehavior);
 				}
 				iterRedefinedBehavior++;
 			}
@@ -1044,9 +1044,9 @@ bool BehaviorImpl::eSet(int featureID, Any newValue)
 			endRedefinedBehavior = redefinedBehaviorList->end();
 			while (iterRedefinedBehavior != endRedefinedBehavior)
 			{
-				if (m_redefinedBehavior->find(*iterRedefinedBehavior) == -1)
+				if (getRedefinedBehavior()->find(*iterRedefinedBehavior) == -1)
 				{
-					m_redefinedBehavior->add(*iterRedefinedBehavior);
+					getRedefinedBehavior()->add(*iterRedefinedBehavior);
 				}
 				iterRedefinedBehavior++;			
 			}

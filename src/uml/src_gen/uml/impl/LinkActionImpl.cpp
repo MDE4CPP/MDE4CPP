@@ -410,8 +410,8 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_ENDDATA:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::LinkEndData>::iterator iter = m_endData->begin();
-			Bag<uml::LinkEndData>::iterator end = m_endData->end();
+			Bag<uml::LinkEndData>::iterator iter = getEndData()->begin();
+			Bag<uml::LinkEndData>::iterator end = getEndData()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -422,8 +422,8 @@ Any LinkActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LINKACTION_ATTRIBUTE_INPUTVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
-			Bag<uml::InputPin>::iterator end = m_inputValue->end();
+			Bag<uml::InputPin>::iterator iter = getInputValue()->begin();
+			Bag<uml::InputPin>::iterator end = getInputValue()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -462,13 +462,13 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::LinkEndData>::iterator iterEndData = m_endData->begin();
-			Bag<uml::LinkEndData>::iterator endEndData = m_endData->end();
+			Bag<uml::LinkEndData>::iterator iterEndData = getEndData()->begin();
+			Bag<uml::LinkEndData>::iterator endEndData = getEndData()->end();
 			while (iterEndData != endEndData)
 			{
 				if (endDataList->find(*iterEndData) == -1)
 				{
-					m_endData->erase(*iterEndData);
+					getEndData()->erase(*iterEndData);
 				}
 				iterEndData++;
 			}
@@ -477,9 +477,9 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 			endEndData = endDataList->end();
 			while (iterEndData != endEndData)
 			{
-				if (m_endData->find(*iterEndData) == -1)
+				if (getEndData()->find(*iterEndData) == -1)
 				{
-					m_endData->add(*iterEndData);
+					getEndData()->add(*iterEndData);
 				}
 				iterEndData++;			
 			}
@@ -498,13 +498,13 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::InputPin>::iterator iterInputValue = m_inputValue->begin();
-			Bag<uml::InputPin>::iterator endInputValue = m_inputValue->end();
+			Bag<uml::InputPin>::iterator iterInputValue = getInputValue()->begin();
+			Bag<uml::InputPin>::iterator endInputValue = getInputValue()->end();
 			while (iterInputValue != endInputValue)
 			{
 				if (inputValueList->find(*iterInputValue) == -1)
 				{
-					m_inputValue->erase(*iterInputValue);
+					getInputValue()->erase(*iterInputValue);
 				}
 				iterInputValue++;
 			}
@@ -513,9 +513,9 @@ bool LinkActionImpl::eSet(int featureID, Any newValue)
 			endInputValue = inputValueList->end();
 			while (iterInputValue != endInputValue)
 			{
-				if (m_inputValue->find(*iterInputValue) == -1)
+				if (getInputValue()->find(*iterInputValue) == -1)
 				{
-					m_inputValue->add(*iterInputValue);
+					getInputValue()->add(*iterInputValue);
 				}
 				iterInputValue++;			
 			}

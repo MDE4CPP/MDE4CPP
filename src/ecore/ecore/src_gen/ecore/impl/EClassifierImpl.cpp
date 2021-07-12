@@ -301,8 +301,8 @@ Any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::ETypeParameter>::iterator iter = m_eTypeParameters->begin();
-			Bag<ecore::ETypeParameter>::iterator end = m_eTypeParameters->end();
+			Bag<ecore::ETypeParameter>::iterator iter = getETypeParameters()->begin();
+			Bag<ecore::ETypeParameter>::iterator end = getETypeParameters()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -362,13 +362,13 @@ bool EClassifierImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::ETypeParameter>::iterator iterETypeParameters = m_eTypeParameters->begin();
-			Bag<ecore::ETypeParameter>::iterator endETypeParameters = m_eTypeParameters->end();
+			Bag<ecore::ETypeParameter>::iterator iterETypeParameters = getETypeParameters()->begin();
+			Bag<ecore::ETypeParameter>::iterator endETypeParameters = getETypeParameters()->end();
 			while (iterETypeParameters != endETypeParameters)
 			{
 				if (eTypeParametersList->find(*iterETypeParameters) == -1)
 				{
-					m_eTypeParameters->erase(*iterETypeParameters);
+					getETypeParameters()->erase(*iterETypeParameters);
 				}
 				iterETypeParameters++;
 			}
@@ -377,9 +377,9 @@ bool EClassifierImpl::eSet(int featureID, Any newValue)
 			endETypeParameters = eTypeParametersList->end();
 			while (iterETypeParameters != endETypeParameters)
 			{
-				if (m_eTypeParameters->find(*iterETypeParameters) == -1)
+				if (getETypeParameters()->find(*iterETypeParameters) == -1)
 				{
-					m_eTypeParameters->add(*iterETypeParameters);
+					getETypeParameters()->add(*iterETypeParameters);
 				}
 				iterETypeParameters++;			
 			}

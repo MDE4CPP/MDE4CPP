@@ -541,8 +541,8 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_ICON:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Image>::iterator iter = m_icon->begin();
-			Bag<uml::Image>::iterator end = m_icon->end();
+			Bag<uml::Image>::iterator iter = getIcon()->begin();
+			Bag<uml::Image>::iterator end = getIcon()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -583,13 +583,13 @@ bool StereotypeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Image>::iterator iterIcon = m_icon->begin();
-			Bag<uml::Image>::iterator endIcon = m_icon->end();
+			Bag<uml::Image>::iterator iterIcon = getIcon()->begin();
+			Bag<uml::Image>::iterator endIcon = getIcon()->end();
 			while (iterIcon != endIcon)
 			{
 				if (iconList->find(*iterIcon) == -1)
 				{
-					m_icon->erase(*iterIcon);
+					getIcon()->erase(*iterIcon);
 				}
 				iterIcon++;
 			}
@@ -598,9 +598,9 @@ bool StereotypeImpl::eSet(int featureID, Any newValue)
 			endIcon = iconList->end();
 			while (iterIcon != endIcon)
 			{
-				if (m_icon->find(*iterIcon) == -1)
+				if (getIcon()->find(*iterIcon) == -1)
 				{
-					m_icon->add(*iterIcon);
+					getIcon()->add(*iterIcon);
 				}
 				iterIcon++;			
 			}

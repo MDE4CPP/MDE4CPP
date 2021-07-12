@@ -332,8 +332,8 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPINPUTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator iter = m_groupInputs->begin();
-			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator end = m_groupInputs->end();
+			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator iter = getGroupInputs()->begin();
+			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator end = getGroupInputs()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -344,8 +344,8 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_GROUPOUTPUTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator iter = m_groupOutputs->begin();
-			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator end = m_groupOutputs->end();
+			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator iter = getGroupOutputs()->begin();
+			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator end = getGroupOutputs()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -360,8 +360,8 @@ Any ExpansionActivationGroupImpl::eGet(int featureID, bool resolve, bool coreTyp
 		case fUML::Semantics::Activities::ActivitiesPackage::EXPANSIONACTIVATIONGROUP_ATTRIBUTE_REGIONINPUTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iter = m_regionInputs->begin();
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator end = m_regionInputs->end();
+			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iter = getRegionInputs()->begin();
+			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator end = getRegionInputs()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -406,13 +406,13 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator iterGroupInputs = m_groupInputs->begin();
-			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator endGroupInputs = m_groupInputs->end();
+			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator iterGroupInputs = getGroupInputs()->begin();
+			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator endGroupInputs = getGroupInputs()->end();
 			while (iterGroupInputs != endGroupInputs)
 			{
 				if (groupInputsList->find(*iterGroupInputs) == -1)
 				{
-					m_groupInputs->erase(*iterGroupInputs);
+					getGroupInputs()->erase(*iterGroupInputs);
 				}
 				iterGroupInputs++;
 			}
@@ -421,9 +421,9 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 			endGroupInputs = groupInputsList->end();
 			while (iterGroupInputs != endGroupInputs)
 			{
-				if (m_groupInputs->find(*iterGroupInputs) == -1)
+				if (getGroupInputs()->find(*iterGroupInputs) == -1)
 				{
-					m_groupInputs->add(*iterGroupInputs);
+					getGroupInputs()->add(*iterGroupInputs);
 				}
 				iterGroupInputs++;			
 			}
@@ -442,13 +442,13 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator iterGroupOutputs = m_groupOutputs->begin();
-			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator endGroupOutputs = m_groupOutputs->end();
+			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator iterGroupOutputs = getGroupOutputs()->begin();
+			Bag<fUML::Semantics::Activities::ExpansionNodeActivation>::iterator endGroupOutputs = getGroupOutputs()->end();
 			while (iterGroupOutputs != endGroupOutputs)
 			{
 				if (groupOutputsList->find(*iterGroupOutputs) == -1)
 				{
-					m_groupOutputs->erase(*iterGroupOutputs);
+					getGroupOutputs()->erase(*iterGroupOutputs);
 				}
 				iterGroupOutputs++;
 			}
@@ -457,9 +457,9 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 			endGroupOutputs = groupOutputsList->end();
 			while (iterGroupOutputs != endGroupOutputs)
 			{
-				if (m_groupOutputs->find(*iterGroupOutputs) == -1)
+				if (getGroupOutputs()->find(*iterGroupOutputs) == -1)
 				{
-					m_groupOutputs->add(*iterGroupOutputs);
+					getGroupOutputs()->add(*iterGroupOutputs);
 				}
 				iterGroupOutputs++;			
 			}
@@ -493,13 +493,13 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iterRegionInputs = m_regionInputs->begin();
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator endRegionInputs = m_regionInputs->end();
+			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iterRegionInputs = getRegionInputs()->begin();
+			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator endRegionInputs = getRegionInputs()->end();
 			while (iterRegionInputs != endRegionInputs)
 			{
 				if (regionInputsList->find(*iterRegionInputs) == -1)
 				{
-					m_regionInputs->erase(*iterRegionInputs);
+					getRegionInputs()->erase(*iterRegionInputs);
 				}
 				iterRegionInputs++;
 			}
@@ -508,9 +508,9 @@ bool ExpansionActivationGroupImpl::eSet(int featureID, Any newValue)
 			endRegionInputs = regionInputsList->end();
 			while (iterRegionInputs != endRegionInputs)
 			{
-				if (m_regionInputs->find(*iterRegionInputs) == -1)
+				if (getRegionInputs()->find(*iterRegionInputs) == -1)
 				{
-					m_regionInputs->add(*iterRegionInputs);
+					getRegionInputs()->add(*iterRegionInputs);
 				}
 				iterRegionInputs++;			
 			}

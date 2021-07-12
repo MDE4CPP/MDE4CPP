@@ -436,8 +436,8 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_CONTRACT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Behavior>::iterator iter = m_contract->begin();
-			Bag<uml::Behavior>::iterator end = m_contract->end();
+			Bag<uml::Behavior>::iterator iter = getContract()->begin();
+			Bag<uml::Behavior>::iterator end = getContract()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -448,8 +448,8 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_END:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectorEnd>::iterator iter = m_end->begin();
-			Bag<uml::ConnectorEnd>::iterator end = m_end->end();
+			Bag<uml::ConnectorEnd>::iterator iter = getEnd()->begin();
+			Bag<uml::ConnectorEnd>::iterator end = getEnd()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -462,8 +462,8 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_REDEFINEDCONNECTOR:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Connector>::iterator iter = m_redefinedConnector->begin();
-			Bag<uml::Connector>::iterator end = m_redefinedConnector->end();
+			Bag<uml::Connector>::iterator iter = getRedefinedConnector()->begin();
+			Bag<uml::Connector>::iterator end = getRedefinedConnector()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -514,13 +514,13 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Behavior>::iterator iterContract = m_contract->begin();
-			Bag<uml::Behavior>::iterator endContract = m_contract->end();
+			Bag<uml::Behavior>::iterator iterContract = getContract()->begin();
+			Bag<uml::Behavior>::iterator endContract = getContract()->end();
 			while (iterContract != endContract)
 			{
 				if (contractList->find(*iterContract) == -1)
 				{
-					m_contract->erase(*iterContract);
+					getContract()->erase(*iterContract);
 				}
 				iterContract++;
 			}
@@ -529,9 +529,9 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 			endContract = contractList->end();
 			while (iterContract != endContract)
 			{
-				if (m_contract->find(*iterContract) == -1)
+				if (getContract()->find(*iterContract) == -1)
 				{
-					m_contract->add(*iterContract);
+					getContract()->add(*iterContract);
 				}
 				iterContract++;			
 			}
@@ -550,13 +550,13 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ConnectorEnd>::iterator iterEnd = m_end->begin();
-			Bag<uml::ConnectorEnd>::iterator endEnd = m_end->end();
+			Bag<uml::ConnectorEnd>::iterator iterEnd = getEnd()->begin();
+			Bag<uml::ConnectorEnd>::iterator endEnd = getEnd()->end();
 			while (iterEnd != endEnd)
 			{
 				if (endList->find(*iterEnd) == -1)
 				{
-					m_end->erase(*iterEnd);
+					getEnd()->erase(*iterEnd);
 				}
 				iterEnd++;
 			}
@@ -565,9 +565,9 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 			endEnd = endList->end();
 			while (iterEnd != endEnd)
 			{
-				if (m_end->find(*iterEnd) == -1)
+				if (getEnd()->find(*iterEnd) == -1)
 				{
-					m_end->add(*iterEnd);
+					getEnd()->add(*iterEnd);
 				}
 				iterEnd++;			
 			}
@@ -586,13 +586,13 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Connector>::iterator iterRedefinedConnector = m_redefinedConnector->begin();
-			Bag<uml::Connector>::iterator endRedefinedConnector = m_redefinedConnector->end();
+			Bag<uml::Connector>::iterator iterRedefinedConnector = getRedefinedConnector()->begin();
+			Bag<uml::Connector>::iterator endRedefinedConnector = getRedefinedConnector()->end();
 			while (iterRedefinedConnector != endRedefinedConnector)
 			{
 				if (redefinedConnectorList->find(*iterRedefinedConnector) == -1)
 				{
-					m_redefinedConnector->erase(*iterRedefinedConnector);
+					getRedefinedConnector()->erase(*iterRedefinedConnector);
 				}
 				iterRedefinedConnector++;
 			}
@@ -601,9 +601,9 @@ bool ConnectorImpl::eSet(int featureID, Any newValue)
 			endRedefinedConnector = redefinedConnectorList->end();
 			while (iterRedefinedConnector != endRedefinedConnector)
 			{
-				if (m_redefinedConnector->find(*iterRedefinedConnector) == -1)
+				if (getRedefinedConnector()->find(*iterRedefinedConnector) == -1)
 				{
-					m_redefinedConnector->add(*iterRedefinedConnector);
+					getRedefinedConnector()->add(*iterRedefinedConnector);
 				}
 				iterRedefinedConnector++;			
 			}

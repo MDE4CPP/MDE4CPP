@@ -472,8 +472,8 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_INTERFACEREALIZATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InterfaceRealization>::iterator iter = m_interfaceRealization->begin();
-			Bag<uml::InterfaceRealization>::iterator end = m_interfaceRealization->end();
+			Bag<uml::InterfaceRealization>::iterator iter = getInterfaceRealization()->begin();
+			Bag<uml::InterfaceRealization>::iterator end = getInterfaceRealization()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -484,8 +484,8 @@ Any BehavioredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::BEHAVIOREDCLASSIFIER_ATTRIBUTE_OWNEDBEHAVIOR:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Behavior>::iterator iter = m_ownedBehavior->begin();
-			Bag<uml::Behavior>::iterator end = m_ownedBehavior->end();
+			Bag<uml::Behavior>::iterator iter = getOwnedBehavior()->begin();
+			Bag<uml::Behavior>::iterator end = getOwnedBehavior()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -534,13 +534,13 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::InterfaceRealization>::iterator iterInterfaceRealization = m_interfaceRealization->begin();
-			Bag<uml::InterfaceRealization>::iterator endInterfaceRealization = m_interfaceRealization->end();
+			Bag<uml::InterfaceRealization>::iterator iterInterfaceRealization = getInterfaceRealization()->begin();
+			Bag<uml::InterfaceRealization>::iterator endInterfaceRealization = getInterfaceRealization()->end();
 			while (iterInterfaceRealization != endInterfaceRealization)
 			{
 				if (interfaceRealizationList->find(*iterInterfaceRealization) == -1)
 				{
-					m_interfaceRealization->erase(*iterInterfaceRealization);
+					getInterfaceRealization()->erase(*iterInterfaceRealization);
 				}
 				iterInterfaceRealization++;
 			}
@@ -549,9 +549,9 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 			endInterfaceRealization = interfaceRealizationList->end();
 			while (iterInterfaceRealization != endInterfaceRealization)
 			{
-				if (m_interfaceRealization->find(*iterInterfaceRealization) == -1)
+				if (getInterfaceRealization()->find(*iterInterfaceRealization) == -1)
 				{
-					m_interfaceRealization->add(*iterInterfaceRealization);
+					getInterfaceRealization()->add(*iterInterfaceRealization);
 				}
 				iterInterfaceRealization++;			
 			}
@@ -570,13 +570,13 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Behavior>::iterator iterOwnedBehavior = m_ownedBehavior->begin();
-			Bag<uml::Behavior>::iterator endOwnedBehavior = m_ownedBehavior->end();
+			Bag<uml::Behavior>::iterator iterOwnedBehavior = getOwnedBehavior()->begin();
+			Bag<uml::Behavior>::iterator endOwnedBehavior = getOwnedBehavior()->end();
 			while (iterOwnedBehavior != endOwnedBehavior)
 			{
 				if (ownedBehaviorList->find(*iterOwnedBehavior) == -1)
 				{
-					m_ownedBehavior->erase(*iterOwnedBehavior);
+					getOwnedBehavior()->erase(*iterOwnedBehavior);
 				}
 				iterOwnedBehavior++;
 			}
@@ -585,9 +585,9 @@ bool BehavioredClassifierImpl::eSet(int featureID, Any newValue)
 			endOwnedBehavior = ownedBehaviorList->end();
 			while (iterOwnedBehavior != endOwnedBehavior)
 			{
-				if (m_ownedBehavior->find(*iterOwnedBehavior) == -1)
+				if (getOwnedBehavior()->find(*iterOwnedBehavior) == -1)
 				{
-					m_ownedBehavior->add(*iterOwnedBehavior);
+					getOwnedBehavior()->add(*iterOwnedBehavior);
 				}
 				iterOwnedBehavior++;			
 			}

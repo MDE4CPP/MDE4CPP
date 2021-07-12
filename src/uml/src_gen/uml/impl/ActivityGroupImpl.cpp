@@ -340,8 +340,8 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDEDGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_containedEdge->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_containedEdge->end();
+			Bag<uml::ActivityEdge>::iterator iter = getContainedEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator end = getContainedEdge()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -352,8 +352,8 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_CONTAINEDNODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = m_containedNode->begin();
-			Bag<uml::ActivityNode>::iterator end = m_containedNode->end();
+			Bag<uml::ActivityNode>::iterator iter = getContainedNode()->begin();
+			Bag<uml::ActivityNode>::iterator end = getContainedNode()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -366,8 +366,8 @@ Any ActivityGroupImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITYGROUP_ATTRIBUTE_SUBGROUP:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityGroup>::iterator iter = m_subgroup->begin();
-			Bag<uml::ActivityGroup>::iterator end = m_subgroup->end();
+			Bag<uml::ActivityGroup>::iterator iter = getSubgroup()->begin();
+			Bag<uml::ActivityGroup>::iterator end = getSubgroup()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);

@@ -351,8 +351,8 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_FRAGMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InteractionFragment>::iterator iter = m_fragment->begin();
-			Bag<uml::InteractionFragment>::iterator end = m_fragment->end();
+			Bag<uml::InteractionFragment>::iterator iter = getFragment()->begin();
+			Bag<uml::InteractionFragment>::iterator end = getFragment()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -407,13 +407,13 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::InteractionFragment>::iterator iterFragment = m_fragment->begin();
-			Bag<uml::InteractionFragment>::iterator endFragment = m_fragment->end();
+			Bag<uml::InteractionFragment>::iterator iterFragment = getFragment()->begin();
+			Bag<uml::InteractionFragment>::iterator endFragment = getFragment()->end();
 			while (iterFragment != endFragment)
 			{
 				if (fragmentList->find(*iterFragment) == -1)
 				{
-					m_fragment->erase(*iterFragment);
+					getFragment()->erase(*iterFragment);
 				}
 				iterFragment++;
 			}
@@ -422,9 +422,9 @@ bool InteractionOperandImpl::eSet(int featureID, Any newValue)
 			endFragment = fragmentList->end();
 			while (iterFragment != endFragment)
 			{
-				if (m_fragment->find(*iterFragment) == -1)
+				if (getFragment()->find(*iterFragment) == -1)
 				{
-					m_fragment->add(*iterFragment);
+					getFragment()->add(*iterFragment);
 				}
 				iterFragment++;			
 			}

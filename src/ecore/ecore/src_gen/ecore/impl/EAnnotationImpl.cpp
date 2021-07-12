@@ -297,8 +297,8 @@ Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_CONTENTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EObject>::iterator iter = m_contents->begin();
-			Bag<ecore::EObject>::iterator end = m_contents->end();
+			Bag<ecore::EObject>::iterator iter = getContents()->begin();
+			Bag<ecore::EObject>::iterator end = getContents()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -313,8 +313,8 @@ Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EObject>::iterator iter = m_references->begin();
-			Bag<ecore::EObject>::iterator end = m_references->end();
+			Bag<ecore::EObject>::iterator iter = getReferences()->begin();
+			Bag<ecore::EObject>::iterator end = getReferences()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -361,13 +361,13 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EObject>::iterator iterContents = m_contents->begin();
-			Bag<ecore::EObject>::iterator endContents = m_contents->end();
+			Bag<ecore::EObject>::iterator iterContents = getContents()->begin();
+			Bag<ecore::EObject>::iterator endContents = getContents()->end();
 			while (iterContents != endContents)
 			{
 				if (contentsList->find(*iterContents) == -1)
 				{
-					m_contents->erase(*iterContents);
+					getContents()->erase(*iterContents);
 				}
 				iterContents++;
 			}
@@ -376,9 +376,9 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 			endContents = contentsList->end();
 			while (iterContents != endContents)
 			{
-				if (m_contents->find(*iterContents) == -1)
+				if (getContents()->find(*iterContents) == -1)
 				{
-					m_contents->add(*iterContents);
+					getContents()->add(*iterContents);
 				}
 				iterContents++;			
 			}
@@ -413,13 +413,13 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EObject>::iterator iterReferences = m_references->begin();
-			Bag<ecore::EObject>::iterator endReferences = m_references->end();
+			Bag<ecore::EObject>::iterator iterReferences = getReferences()->begin();
+			Bag<ecore::EObject>::iterator endReferences = getReferences()->end();
 			while (iterReferences != endReferences)
 			{
 				if (referencesList->find(*iterReferences) == -1)
 				{
-					m_references->erase(*iterReferences);
+					getReferences()->erase(*iterReferences);
 				}
 				iterReferences++;
 			}
@@ -428,9 +428,9 @@ bool EAnnotationImpl::eSet(int featureID, Any newValue)
 			endReferences = referencesList->end();
 			while (iterReferences != endReferences)
 			{
-				if (m_references->find(*iterReferences) == -1)
+				if (getReferences()->find(*iterReferences) == -1)
 				{
-					m_references->add(*iterReferences);
+					getReferences()->add(*iterReferences);
 				}
 				iterReferences++;			
 			}

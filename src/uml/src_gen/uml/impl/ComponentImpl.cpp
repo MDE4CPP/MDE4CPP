@@ -585,8 +585,8 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageableElement>::iterator iter = m_packagedElement->begin();
-			Bag<uml::PackageableElement>::iterator end = m_packagedElement->end();
+			Bag<uml::PackageableElement>::iterator iter = getPackagedElement()->begin();
+			Bag<uml::PackageableElement>::iterator end = getPackagedElement()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -597,8 +597,8 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PROVIDED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Interface>::iterator iter = m_provided->begin();
-			Bag<uml::Interface>::iterator end = m_provided->end();
+			Bag<uml::Interface>::iterator iter = getProvided()->begin();
+			Bag<uml::Interface>::iterator end = getProvided()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -609,8 +609,8 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ComponentRealization>::iterator iter = m_realization->begin();
-			Bag<uml::ComponentRealization>::iterator end = m_realization->end();
+			Bag<uml::ComponentRealization>::iterator iter = getRealization()->begin();
+			Bag<uml::ComponentRealization>::iterator end = getRealization()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -621,8 +621,8 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REQUIRED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Interface>::iterator iter = m_required->begin();
-			Bag<uml::Interface>::iterator end = m_required->end();
+			Bag<uml::Interface>::iterator iter = getRequired()->begin();
+			Bag<uml::Interface>::iterator end = getRequired()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -674,13 +674,13 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::PackageableElement>::iterator iterPackagedElement = m_packagedElement->begin();
-			Bag<uml::PackageableElement>::iterator endPackagedElement = m_packagedElement->end();
+			Bag<uml::PackageableElement>::iterator iterPackagedElement = getPackagedElement()->begin();
+			Bag<uml::PackageableElement>::iterator endPackagedElement = getPackagedElement()->end();
 			while (iterPackagedElement != endPackagedElement)
 			{
 				if (packagedElementList->find(*iterPackagedElement) == -1)
 				{
-					m_packagedElement->erase(*iterPackagedElement);
+					getPackagedElement()->erase(*iterPackagedElement);
 				}
 				iterPackagedElement++;
 			}
@@ -689,9 +689,9 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 			endPackagedElement = packagedElementList->end();
 			while (iterPackagedElement != endPackagedElement)
 			{
-				if (m_packagedElement->find(*iterPackagedElement) == -1)
+				if (getPackagedElement()->find(*iterPackagedElement) == -1)
 				{
-					m_packagedElement->add(*iterPackagedElement);
+					getPackagedElement()->add(*iterPackagedElement);
 				}
 				iterPackagedElement++;			
 			}
@@ -710,13 +710,13 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ComponentRealization>::iterator iterRealization = m_realization->begin();
-			Bag<uml::ComponentRealization>::iterator endRealization = m_realization->end();
+			Bag<uml::ComponentRealization>::iterator iterRealization = getRealization()->begin();
+			Bag<uml::ComponentRealization>::iterator endRealization = getRealization()->end();
 			while (iterRealization != endRealization)
 			{
 				if (realizationList->find(*iterRealization) == -1)
 				{
-					m_realization->erase(*iterRealization);
+					getRealization()->erase(*iterRealization);
 				}
 				iterRealization++;
 			}
@@ -725,9 +725,9 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 			endRealization = realizationList->end();
 			while (iterRealization != endRealization)
 			{
-				if (m_realization->find(*iterRealization) == -1)
+				if (getRealization()->find(*iterRealization) == -1)
 				{
-					m_realization->add(*iterRealization);
+					getRealization()->add(*iterRealization);
 				}
 				iterRealization++;			
 			}

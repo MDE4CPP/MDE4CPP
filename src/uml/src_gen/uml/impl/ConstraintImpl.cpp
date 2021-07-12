@@ -312,8 +312,8 @@ Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONSTRAINEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = m_constrainedElement->begin();
-			Bag<uml::Element>::iterator end = m_constrainedElement->end();
+			Bag<uml::Element>::iterator iter = getConstrainedElement()->begin();
+			Bag<uml::Element>::iterator end = getConstrainedElement()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -358,13 +358,13 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Element>::iterator iterConstrainedElement = m_constrainedElement->begin();
-			Bag<uml::Element>::iterator endConstrainedElement = m_constrainedElement->end();
+			Bag<uml::Element>::iterator iterConstrainedElement = getConstrainedElement()->begin();
+			Bag<uml::Element>::iterator endConstrainedElement = getConstrainedElement()->end();
 			while (iterConstrainedElement != endConstrainedElement)
 			{
 				if (constrainedElementList->find(*iterConstrainedElement) == -1)
 				{
-					m_constrainedElement->erase(*iterConstrainedElement);
+					getConstrainedElement()->erase(*iterConstrainedElement);
 				}
 				iterConstrainedElement++;
 			}
@@ -373,9 +373,9 @@ bool ConstraintImpl::eSet(int featureID, Any newValue)
 			endConstrainedElement = constrainedElementList->end();
 			while (iterConstrainedElement != endConstrainedElement)
 			{
-				if (m_constrainedElement->find(*iterConstrainedElement) == -1)
+				if (getConstrainedElement()->find(*iterConstrainedElement) == -1)
 				{
-					m_constrainedElement->add(*iterConstrainedElement);
+					getConstrainedElement()->add(*iterConstrainedElement);
 				}
 				iterConstrainedElement++;			
 			}

@@ -274,8 +274,8 @@ Any EGenericTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EGENERICTYPE_ATTRIBUTE_ETYPEARGUMENTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EGenericType>::iterator iter = m_eTypeArguments->begin();
-			Bag<ecore::EGenericType>::iterator end = m_eTypeArguments->end();
+			Bag<ecore::EGenericType>::iterator iter = getETypeArguments()->begin();
+			Bag<ecore::EGenericType>::iterator end = getETypeArguments()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -350,13 +350,13 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EGenericType>::iterator iterETypeArguments = m_eTypeArguments->begin();
-			Bag<ecore::EGenericType>::iterator endETypeArguments = m_eTypeArguments->end();
+			Bag<ecore::EGenericType>::iterator iterETypeArguments = getETypeArguments()->begin();
+			Bag<ecore::EGenericType>::iterator endETypeArguments = getETypeArguments()->end();
 			while (iterETypeArguments != endETypeArguments)
 			{
 				if (eTypeArgumentsList->find(*iterETypeArguments) == -1)
 				{
-					m_eTypeArguments->erase(*iterETypeArguments);
+					getETypeArguments()->erase(*iterETypeArguments);
 				}
 				iterETypeArguments++;
 			}
@@ -365,9 +365,9 @@ bool EGenericTypeImpl::eSet(int featureID, Any newValue)
 			endETypeArguments = eTypeArgumentsList->end();
 			while (iterETypeArguments != endETypeArguments)
 			{
-				if (m_eTypeArguments->find(*iterETypeArguments) == -1)
+				if (getETypeArguments()->find(*iterETypeArguments) == -1)
 				{
-					m_eTypeArguments->add(*iterETypeArguments);
+					getETypeArguments()->add(*iterETypeArguments);
 				}
 				iterETypeArguments++;			
 			}

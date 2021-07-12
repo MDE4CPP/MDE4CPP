@@ -375,8 +375,8 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_CLIENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_client->begin();
-			Bag<uml::NamedElement>::iterator end = m_client->end();
+			Bag<uml::NamedElement>::iterator iter = getClient()->begin();
+			Bag<uml::NamedElement>::iterator end = getClient()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -387,8 +387,8 @@ Any DependencyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::DEPENDENCY_ATTRIBUTE_SUPPLIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_supplier->begin();
-			Bag<uml::NamedElement>::iterator end = m_supplier->end();
+			Bag<uml::NamedElement>::iterator iter = getSupplier()->begin();
+			Bag<uml::NamedElement>::iterator end = getSupplier()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -441,13 +441,13 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::NamedElement>::iterator iterClient = m_client->begin();
-			Bag<uml::NamedElement>::iterator endClient = m_client->end();
+			Bag<uml::NamedElement>::iterator iterClient = getClient()->begin();
+			Bag<uml::NamedElement>::iterator endClient = getClient()->end();
 			while (iterClient != endClient)
 			{
 				if (clientList->find(*iterClient) == -1)
 				{
-					m_client->erase(*iterClient);
+					getClient()->erase(*iterClient);
 				}
 				iterClient++;
 			}
@@ -456,9 +456,9 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 			endClient = clientList->end();
 			while (iterClient != endClient)
 			{
-				if (m_client->find(*iterClient) == -1)
+				if (getClient()->find(*iterClient) == -1)
 				{
-					m_client->add(*iterClient);
+					getClient()->add(*iterClient);
 				}
 				iterClient++;			
 			}
@@ -477,13 +477,13 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::NamedElement>::iterator iterSupplier = m_supplier->begin();
-			Bag<uml::NamedElement>::iterator endSupplier = m_supplier->end();
+			Bag<uml::NamedElement>::iterator iterSupplier = getSupplier()->begin();
+			Bag<uml::NamedElement>::iterator endSupplier = getSupplier()->end();
 			while (iterSupplier != endSupplier)
 			{
 				if (supplierList->find(*iterSupplier) == -1)
 				{
-					m_supplier->erase(*iterSupplier);
+					getSupplier()->erase(*iterSupplier);
 				}
 				iterSupplier++;
 			}
@@ -492,9 +492,9 @@ bool DependencyImpl::eSet(int featureID, Any newValue)
 			endSupplier = supplierList->end();
 			while (iterSupplier != endSupplier)
 			{
-				if (m_supplier->find(*iterSupplier) == -1)
+				if (getSupplier()->find(*iterSupplier) == -1)
 				{
-					m_supplier->add(*iterSupplier);
+					getSupplier()->add(*iterSupplier);
 				}
 				iterSupplier++;			
 			}

@@ -845,8 +845,8 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_qualifier->begin();
-			Bag<uml::Property>::iterator end = m_qualifier->end();
+			Bag<uml::Property>::iterator iter = getQualifier()->begin();
+			Bag<uml::Property>::iterator end = getQualifier()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -857,8 +857,8 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_REDEFINEDPROPERTY:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_redefinedProperty->begin();
-			Bag<uml::Property>::iterator end = m_redefinedProperty->end();
+			Bag<uml::Property>::iterator iter = getRedefinedProperty()->begin();
+			Bag<uml::Property>::iterator end = getRedefinedProperty()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -869,8 +869,8 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_SUBSETTEDPROPERTY:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_subsettedProperty->begin();
-			Bag<uml::Property>::iterator end = m_subsettedProperty->end();
+			Bag<uml::Property>::iterator iter = getSubsettedProperty()->begin();
+			Bag<uml::Property>::iterator end = getSubsettedProperty()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -1069,13 +1069,13 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Property>::iterator iterQualifier = m_qualifier->begin();
-			Bag<uml::Property>::iterator endQualifier = m_qualifier->end();
+			Bag<uml::Property>::iterator iterQualifier = getQualifier()->begin();
+			Bag<uml::Property>::iterator endQualifier = getQualifier()->end();
 			while (iterQualifier != endQualifier)
 			{
 				if (qualifierList->find(*iterQualifier) == -1)
 				{
-					m_qualifier->erase(*iterQualifier);
+					getQualifier()->erase(*iterQualifier);
 				}
 				iterQualifier++;
 			}
@@ -1084,9 +1084,9 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 			endQualifier = qualifierList->end();
 			while (iterQualifier != endQualifier)
 			{
-				if (m_qualifier->find(*iterQualifier) == -1)
+				if (getQualifier()->find(*iterQualifier) == -1)
 				{
-					m_qualifier->add(*iterQualifier);
+					getQualifier()->add(*iterQualifier);
 				}
 				iterQualifier++;			
 			}
@@ -1105,13 +1105,13 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Property>::iterator iterRedefinedProperty = m_redefinedProperty->begin();
-			Bag<uml::Property>::iterator endRedefinedProperty = m_redefinedProperty->end();
+			Bag<uml::Property>::iterator iterRedefinedProperty = getRedefinedProperty()->begin();
+			Bag<uml::Property>::iterator endRedefinedProperty = getRedefinedProperty()->end();
 			while (iterRedefinedProperty != endRedefinedProperty)
 			{
 				if (redefinedPropertyList->find(*iterRedefinedProperty) == -1)
 				{
-					m_redefinedProperty->erase(*iterRedefinedProperty);
+					getRedefinedProperty()->erase(*iterRedefinedProperty);
 				}
 				iterRedefinedProperty++;
 			}
@@ -1120,9 +1120,9 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 			endRedefinedProperty = redefinedPropertyList->end();
 			while (iterRedefinedProperty != endRedefinedProperty)
 			{
-				if (m_redefinedProperty->find(*iterRedefinedProperty) == -1)
+				if (getRedefinedProperty()->find(*iterRedefinedProperty) == -1)
 				{
-					m_redefinedProperty->add(*iterRedefinedProperty);
+					getRedefinedProperty()->add(*iterRedefinedProperty);
 				}
 				iterRedefinedProperty++;			
 			}
@@ -1141,13 +1141,13 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Property>::iterator iterSubsettedProperty = m_subsettedProperty->begin();
-			Bag<uml::Property>::iterator endSubsettedProperty = m_subsettedProperty->end();
+			Bag<uml::Property>::iterator iterSubsettedProperty = getSubsettedProperty()->begin();
+			Bag<uml::Property>::iterator endSubsettedProperty = getSubsettedProperty()->end();
 			while (iterSubsettedProperty != endSubsettedProperty)
 			{
 				if (subsettedPropertyList->find(*iterSubsettedProperty) == -1)
 				{
-					m_subsettedProperty->erase(*iterSubsettedProperty);
+					getSubsettedProperty()->erase(*iterSubsettedProperty);
 				}
 				iterSubsettedProperty++;
 			}
@@ -1156,9 +1156,9 @@ bool PropertyImpl::eSet(int featureID, Any newValue)
 			endSubsettedProperty = subsettedPropertyList->end();
 			while (iterSubsettedProperty != endSubsettedProperty)
 			{
-				if (m_subsettedProperty->find(*iterSubsettedProperty) == -1)
+				if (getSubsettedProperty()->find(*iterSubsettedProperty) == -1)
 				{
-					m_subsettedProperty->add(*iterSubsettedProperty);
+					getSubsettedProperty()->add(*iterSubsettedProperty);
 				}
 				iterSubsettedProperty++;			
 			}

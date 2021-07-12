@@ -281,8 +281,8 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_CONDITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Constraint>::iterator iter = m_condition->begin();
-			Bag<uml::Constraint>::iterator end = m_condition->end();
+			Bag<uml::Constraint>::iterator iter = getCondition()->begin();
+			Bag<uml::Constraint>::iterator end = getCondition()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -293,8 +293,8 @@ Any ParameterSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PARAMETERSET_ATTRIBUTE_PARAMETER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Parameter>::iterator iter = m_parameter->begin();
-			Bag<uml::Parameter>::iterator end = m_parameter->end();
+			Bag<uml::Parameter>::iterator iter = getParameter()->begin();
+			Bag<uml::Parameter>::iterator end = getParameter()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -333,13 +333,13 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Constraint>::iterator iterCondition = m_condition->begin();
-			Bag<uml::Constraint>::iterator endCondition = m_condition->end();
+			Bag<uml::Constraint>::iterator iterCondition = getCondition()->begin();
+			Bag<uml::Constraint>::iterator endCondition = getCondition()->end();
 			while (iterCondition != endCondition)
 			{
 				if (conditionList->find(*iterCondition) == -1)
 				{
-					m_condition->erase(*iterCondition);
+					getCondition()->erase(*iterCondition);
 				}
 				iterCondition++;
 			}
@@ -348,9 +348,9 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 			endCondition = conditionList->end();
 			while (iterCondition != endCondition)
 			{
-				if (m_condition->find(*iterCondition) == -1)
+				if (getCondition()->find(*iterCondition) == -1)
 				{
-					m_condition->add(*iterCondition);
+					getCondition()->add(*iterCondition);
 				}
 				iterCondition++;			
 			}
@@ -369,13 +369,13 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Parameter>::iterator iterParameter = m_parameter->begin();
-			Bag<uml::Parameter>::iterator endParameter = m_parameter->end();
+			Bag<uml::Parameter>::iterator iterParameter = getParameter()->begin();
+			Bag<uml::Parameter>::iterator endParameter = getParameter()->end();
 			while (iterParameter != endParameter)
 			{
 				if (parameterList->find(*iterParameter) == -1)
 				{
-					m_parameter->erase(*iterParameter);
+					getParameter()->erase(*iterParameter);
 				}
 				iterParameter++;
 			}
@@ -384,9 +384,9 @@ bool ParameterSetImpl::eSet(int featureID, Any newValue)
 			endParameter = parameterList->end();
 			while (iterParameter != endParameter)
 			{
-				if (m_parameter->find(*iterParameter) == -1)
+				if (getParameter()->find(*iterParameter) == -1)
 				{
-					m_parameter->add(*iterParameter);
+					getParameter()->add(*iterParameter);
 				}
 				iterParameter++;			
 			}

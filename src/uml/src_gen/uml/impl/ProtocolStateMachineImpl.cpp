@@ -482,8 +482,8 @@ Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ProtocolConformance>::iterator iter = m_conformance->begin();
-			Bag<uml::ProtocolConformance>::iterator end = m_conformance->end();
+			Bag<uml::ProtocolConformance>::iterator iter = getConformance()->begin();
+			Bag<uml::ProtocolConformance>::iterator end = getConformance()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -520,13 +520,13 @@ bool ProtocolStateMachineImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ProtocolConformance>::iterator iterConformance = m_conformance->begin();
-			Bag<uml::ProtocolConformance>::iterator endConformance = m_conformance->end();
+			Bag<uml::ProtocolConformance>::iterator iterConformance = getConformance()->begin();
+			Bag<uml::ProtocolConformance>::iterator endConformance = getConformance()->end();
 			while (iterConformance != endConformance)
 			{
 				if (conformanceList->find(*iterConformance) == -1)
 				{
-					m_conformance->erase(*iterConformance);
+					getConformance()->erase(*iterConformance);
 				}
 				iterConformance++;
 			}
@@ -535,9 +535,9 @@ bool ProtocolStateMachineImpl::eSet(int featureID, Any newValue)
 			endConformance = conformanceList->end();
 			while (iterConformance != endConformance)
 			{
-				if (m_conformance->find(*iterConformance) == -1)
+				if (getConformance()->find(*iterConformance) == -1)
 				{
-					m_conformance->add(*iterConformance);
+					getConformance()->add(*iterConformance);
 				}
 				iterConformance++;			
 			}

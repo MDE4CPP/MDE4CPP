@@ -37,9 +37,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 
 #include "uml/Class.hpp"
@@ -394,8 +394,8 @@ Any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_CLASSIFIERBEHAVIOREXECUTIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>::iterator iter = m_classifierBehaviorExecutions->begin();
-			Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>::iterator end = m_classifierBehaviorExecutions->end();
+			Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>::iterator iter = getClassifierBehaviorExecutions()->begin();
+			Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>::iterator end = getClassifierBehaviorExecutions()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -406,8 +406,8 @@ Any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>::iterator iter = m_eventPool->begin();
-			Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>::iterator end = m_eventPool->end();
+			Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>::iterator iter = getEventPool()->begin();
+			Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>::iterator end = getEventPool()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -420,8 +420,8 @@ Any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::CommonBehavior::EventAccepter>::iterator iter = m_waitingEventAccepters->begin();
-			Bag<fUML::Semantics::CommonBehavior::EventAccepter>::iterator end = m_waitingEventAccepters->end();
+			Bag<fUML::Semantics::CommonBehavior::EventAccepter>::iterator iter = getWaitingEventAccepters()->begin();
+			Bag<fUML::Semantics::CommonBehavior::EventAccepter>::iterator end = getWaitingEventAccepters()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -464,13 +464,13 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>::iterator iterClassifierBehaviorExecutions = m_classifierBehaviorExecutions->begin();
-			Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>::iterator endClassifierBehaviorExecutions = m_classifierBehaviorExecutions->end();
+			Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>::iterator iterClassifierBehaviorExecutions = getClassifierBehaviorExecutions()->begin();
+			Bag<fUML::Semantics::CommonBehavior::ClassifierBehaviorExecution>::iterator endClassifierBehaviorExecutions = getClassifierBehaviorExecutions()->end();
 			while (iterClassifierBehaviorExecutions != endClassifierBehaviorExecutions)
 			{
 				if (classifierBehaviorExecutionsList->find(*iterClassifierBehaviorExecutions) == -1)
 				{
-					m_classifierBehaviorExecutions->erase(*iterClassifierBehaviorExecutions);
+					getClassifierBehaviorExecutions()->erase(*iterClassifierBehaviorExecutions);
 				}
 				iterClassifierBehaviorExecutions++;
 			}
@@ -479,9 +479,9 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 			endClassifierBehaviorExecutions = classifierBehaviorExecutionsList->end();
 			while (iterClassifierBehaviorExecutions != endClassifierBehaviorExecutions)
 			{
-				if (m_classifierBehaviorExecutions->find(*iterClassifierBehaviorExecutions) == -1)
+				if (getClassifierBehaviorExecutions()->find(*iterClassifierBehaviorExecutions) == -1)
 				{
-					m_classifierBehaviorExecutions->add(*iterClassifierBehaviorExecutions);
+					getClassifierBehaviorExecutions()->add(*iterClassifierBehaviorExecutions);
 				}
 				iterClassifierBehaviorExecutions++;			
 			}
@@ -500,13 +500,13 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>::iterator iterEventPool = m_eventPool->begin();
-			Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>::iterator endEventPool = m_eventPool->end();
+			Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>::iterator iterEventPool = getEventPool()->begin();
+			Bag<fUML::Semantics::SimpleClassifiers::SignalInstance>::iterator endEventPool = getEventPool()->end();
 			while (iterEventPool != endEventPool)
 			{
 				if (eventPoolList->find(*iterEventPool) == -1)
 				{
-					m_eventPool->erase(*iterEventPool);
+					getEventPool()->erase(*iterEventPool);
 				}
 				iterEventPool++;
 			}
@@ -515,9 +515,9 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 			endEventPool = eventPoolList->end();
 			while (iterEventPool != endEventPool)
 			{
-				if (m_eventPool->find(*iterEventPool) == -1)
+				if (getEventPool()->find(*iterEventPool) == -1)
 				{
-					m_eventPool->add(*iterEventPool);
+					getEventPool()->add(*iterEventPool);
 				}
 				iterEventPool++;			
 			}
@@ -544,13 +544,13 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::CommonBehavior::EventAccepter>::iterator iterWaitingEventAccepters = m_waitingEventAccepters->begin();
-			Bag<fUML::Semantics::CommonBehavior::EventAccepter>::iterator endWaitingEventAccepters = m_waitingEventAccepters->end();
+			Bag<fUML::Semantics::CommonBehavior::EventAccepter>::iterator iterWaitingEventAccepters = getWaitingEventAccepters()->begin();
+			Bag<fUML::Semantics::CommonBehavior::EventAccepter>::iterator endWaitingEventAccepters = getWaitingEventAccepters()->end();
 			while (iterWaitingEventAccepters != endWaitingEventAccepters)
 			{
 				if (waitingEventAcceptersList->find(*iterWaitingEventAccepters) == -1)
 				{
-					m_waitingEventAccepters->erase(*iterWaitingEventAccepters);
+					getWaitingEventAccepters()->erase(*iterWaitingEventAccepters);
 				}
 				iterWaitingEventAccepters++;
 			}
@@ -559,9 +559,9 @@ bool ObjectActivationImpl::eSet(int featureID, Any newValue)
 			endWaitingEventAccepters = waitingEventAcceptersList->end();
 			while (iterWaitingEventAccepters != endWaitingEventAccepters)
 			{
-				if (m_waitingEventAccepters->find(*iterWaitingEventAccepters) == -1)
+				if (getWaitingEventAccepters()->find(*iterWaitingEventAccepters) == -1)
 				{
-					m_waitingEventAccepters->add(*iterWaitingEventAccepters);
+					getWaitingEventAccepters()->add(*iterWaitingEventAccepters);
 				}
 				iterWaitingEventAccepters++;			
 			}

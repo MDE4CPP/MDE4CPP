@@ -237,8 +237,8 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_SOURCE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = m_source->begin();
-			Bag<uml::Element>::iterator end = m_source->end();
+			Bag<uml::Element>::iterator iter = getSource()->begin();
+			Bag<uml::Element>::iterator end = getSource()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -249,8 +249,8 @@ Any DirectedRelationshipImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::DIRECTEDRELATIONSHIP_ATTRIBUTE_TARGET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = m_target->begin();
-			Bag<uml::Element>::iterator end = m_target->end();
+			Bag<uml::Element>::iterator iter = getTarget()->begin();
+			Bag<uml::Element>::iterator end = getTarget()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);

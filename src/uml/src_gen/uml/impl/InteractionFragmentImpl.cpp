@@ -326,8 +326,8 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_COVERED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Lifeline>::iterator iter = m_covered->begin();
-			Bag<uml::Lifeline>::iterator end = m_covered->end();
+			Bag<uml::Lifeline>::iterator iter = getCovered()->begin();
+			Bag<uml::Lifeline>::iterator end = getCovered()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -342,8 +342,8 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::GeneralOrdering>::iterator iter = m_generalOrdering->begin();
-			Bag<uml::GeneralOrdering>::iterator end = m_generalOrdering->end();
+			Bag<uml::GeneralOrdering>::iterator iter = getGeneralOrdering()->begin();
+			Bag<uml::GeneralOrdering>::iterator end = getGeneralOrdering()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -386,13 +386,13 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Lifeline>::iterator iterCovered = m_covered->begin();
-			Bag<uml::Lifeline>::iterator endCovered = m_covered->end();
+			Bag<uml::Lifeline>::iterator iterCovered = getCovered()->begin();
+			Bag<uml::Lifeline>::iterator endCovered = getCovered()->end();
 			while (iterCovered != endCovered)
 			{
 				if (coveredList->find(*iterCovered) == -1)
 				{
-					m_covered->erase(*iterCovered);
+					getCovered()->erase(*iterCovered);
 				}
 				iterCovered++;
 			}
@@ -401,9 +401,9 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 			endCovered = coveredList->end();
 			while (iterCovered != endCovered)
 			{
-				if (m_covered->find(*iterCovered) == -1)
+				if (getCovered()->find(*iterCovered) == -1)
 				{
-					m_covered->add(*iterCovered);
+					getCovered()->add(*iterCovered);
 				}
 				iterCovered++;			
 			}
@@ -438,13 +438,13 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::GeneralOrdering>::iterator iterGeneralOrdering = m_generalOrdering->begin();
-			Bag<uml::GeneralOrdering>::iterator endGeneralOrdering = m_generalOrdering->end();
+			Bag<uml::GeneralOrdering>::iterator iterGeneralOrdering = getGeneralOrdering()->begin();
+			Bag<uml::GeneralOrdering>::iterator endGeneralOrdering = getGeneralOrdering()->end();
 			while (iterGeneralOrdering != endGeneralOrdering)
 			{
 				if (generalOrderingList->find(*iterGeneralOrdering) == -1)
 				{
-					m_generalOrdering->erase(*iterGeneralOrdering);
+					getGeneralOrdering()->erase(*iterGeneralOrdering);
 				}
 				iterGeneralOrdering++;
 			}
@@ -453,9 +453,9 @@ bool InteractionFragmentImpl::eSet(int featureID, Any newValue)
 			endGeneralOrdering = generalOrderingList->end();
 			while (iterGeneralOrdering != endGeneralOrdering)
 			{
-				if (m_generalOrdering->find(*iterGeneralOrdering) == -1)
+				if (getGeneralOrdering()->find(*iterGeneralOrdering) == -1)
 				{
-					m_generalOrdering->add(*iterGeneralOrdering);
+					getGeneralOrdering()->add(*iterGeneralOrdering);
 				}
 				iterGeneralOrdering++;			
 			}

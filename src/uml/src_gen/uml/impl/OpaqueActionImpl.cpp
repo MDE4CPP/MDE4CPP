@@ -481,8 +481,8 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_INPUTVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_inputValue->begin();
-			Bag<uml::InputPin>::iterator end = m_inputValue->end();
+			Bag<uml::InputPin>::iterator iter = getInputValue()->begin();
+			Bag<uml::InputPin>::iterator end = getInputValue()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -495,8 +495,8 @@ Any OpaqueActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OPAQUEACTION_ATTRIBUTE_OUTPUTVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_outputValue->begin();
-			Bag<uml::OutputPin>::iterator end = m_outputValue->end();
+			Bag<uml::OutputPin>::iterator iter = getOutputValue()->begin();
+			Bag<uml::OutputPin>::iterator end = getOutputValue()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -545,13 +545,13 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::InputPin>::iterator iterInputValue = m_inputValue->begin();
-			Bag<uml::InputPin>::iterator endInputValue = m_inputValue->end();
+			Bag<uml::InputPin>::iterator iterInputValue = getInputValue()->begin();
+			Bag<uml::InputPin>::iterator endInputValue = getInputValue()->end();
 			while (iterInputValue != endInputValue)
 			{
 				if (inputValueList->find(*iterInputValue) == -1)
 				{
-					m_inputValue->erase(*iterInputValue);
+					getInputValue()->erase(*iterInputValue);
 				}
 				iterInputValue++;
 			}
@@ -560,9 +560,9 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 			endInputValue = inputValueList->end();
 			while (iterInputValue != endInputValue)
 			{
-				if (m_inputValue->find(*iterInputValue) == -1)
+				if (getInputValue()->find(*iterInputValue) == -1)
 				{
-					m_inputValue->add(*iterInputValue);
+					getInputValue()->add(*iterInputValue);
 				}
 				iterInputValue++;			
 			}
@@ -587,13 +587,13 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::OutputPin>::iterator iterOutputValue = m_outputValue->begin();
-			Bag<uml::OutputPin>::iterator endOutputValue = m_outputValue->end();
+			Bag<uml::OutputPin>::iterator iterOutputValue = getOutputValue()->begin();
+			Bag<uml::OutputPin>::iterator endOutputValue = getOutputValue()->end();
 			while (iterOutputValue != endOutputValue)
 			{
 				if (outputValueList->find(*iterOutputValue) == -1)
 				{
-					m_outputValue->erase(*iterOutputValue);
+					getOutputValue()->erase(*iterOutputValue);
 				}
 				iterOutputValue++;
 			}
@@ -602,9 +602,9 @@ bool OpaqueActionImpl::eSet(int featureID, Any newValue)
 			endOutputValue = outputValueList->end();
 			while (iterOutputValue != endOutputValue)
 			{
-				if (m_outputValue->find(*iterOutputValue) == -1)
+				if (getOutputValue()->find(*iterOutputValue) == -1)
 				{
-					m_outputValue->add(*iterOutputValue);
+					getOutputValue()->add(*iterOutputValue);
 				}
 				iterOutputValue++;			
 			}

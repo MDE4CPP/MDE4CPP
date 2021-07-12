@@ -317,8 +317,8 @@ Any ExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXPRESSION_ATTRIBUTE_OPERAND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ValueSpecification>::iterator iter = m_operand->begin();
-			Bag<uml::ValueSpecification>::iterator end = m_operand->end();
+			Bag<uml::ValueSpecification>::iterator iter = getOperand()->begin();
+			Bag<uml::ValueSpecification>::iterator end = getOperand()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -359,13 +359,13 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ValueSpecification>::iterator iterOperand = m_operand->begin();
-			Bag<uml::ValueSpecification>::iterator endOperand = m_operand->end();
+			Bag<uml::ValueSpecification>::iterator iterOperand = getOperand()->begin();
+			Bag<uml::ValueSpecification>::iterator endOperand = getOperand()->end();
 			while (iterOperand != endOperand)
 			{
 				if (operandList->find(*iterOperand) == -1)
 				{
-					m_operand->erase(*iterOperand);
+					getOperand()->erase(*iterOperand);
 				}
 				iterOperand++;
 			}
@@ -374,9 +374,9 @@ bool ExpressionImpl::eSet(int featureID, Any newValue)
 			endOperand = operandList->end();
 			while (iterOperand != endOperand)
 			{
-				if (m_operand->find(*iterOperand) == -1)
+				if (getOperand()->find(*iterOperand) == -1)
 				{
-					m_operand->add(*iterOperand);
+					getOperand()->add(*iterOperand);
 				}
 				iterOperand++;			
 			}

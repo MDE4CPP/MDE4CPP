@@ -37,8 +37,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"

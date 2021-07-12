@@ -711,8 +711,8 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_EDGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_edge->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_edge->end();
+			Bag<uml::ActivityEdge>::iterator iter = getEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator end = getEdge()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -725,8 +725,8 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = m_node->begin();
-			Bag<uml::ActivityNode>::iterator end = m_node->end();
+			Bag<uml::ActivityNode>::iterator iter = getNode()->begin();
+			Bag<uml::ActivityNode>::iterator end = getNode()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -737,8 +737,8 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEINPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_structuredNodeInput->begin();
-			Bag<uml::InputPin>::iterator end = m_structuredNodeInput->end();
+			Bag<uml::InputPin>::iterator iter = getStructuredNodeInput()->begin();
+			Bag<uml::InputPin>::iterator end = getStructuredNodeInput()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -749,8 +749,8 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_STRUCTUREDNODEOUTPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_structuredNodeOutput->begin();
-			Bag<uml::OutputPin>::iterator end = m_structuredNodeOutput->end();
+			Bag<uml::OutputPin>::iterator iter = getStructuredNodeOutput()->begin();
+			Bag<uml::OutputPin>::iterator end = getStructuredNodeOutput()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -761,8 +761,8 @@ Any StructuredActivityNodeImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::STRUCTUREDACTIVITYNODE_ATTRIBUTE_VARIABLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Variable>::iterator iter = m_variable->begin();
-			Bag<uml::Variable>::iterator end = m_variable->end();
+			Bag<uml::Variable>::iterator iter = getVariable()->begin();
+			Bag<uml::Variable>::iterator end = getVariable()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -833,13 +833,13 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityEdge>::iterator iterEdge = m_edge->begin();
-			Bag<uml::ActivityEdge>::iterator endEdge = m_edge->end();
+			Bag<uml::ActivityEdge>::iterator iterEdge = getEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator endEdge = getEdge()->end();
 			while (iterEdge != endEdge)
 			{
 				if (edgeList->find(*iterEdge) == -1)
 				{
-					m_edge->erase(*iterEdge);
+					getEdge()->erase(*iterEdge);
 				}
 				iterEdge++;
 			}
@@ -848,9 +848,9 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 			endEdge = edgeList->end();
 			while (iterEdge != endEdge)
 			{
-				if (m_edge->find(*iterEdge) == -1)
+				if (getEdge()->find(*iterEdge) == -1)
 				{
-					m_edge->add(*iterEdge);
+					getEdge()->add(*iterEdge);
 				}
 				iterEdge++;			
 			}
@@ -876,13 +876,13 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityNode>::iterator iterNode = m_node->begin();
-			Bag<uml::ActivityNode>::iterator endNode = m_node->end();
+			Bag<uml::ActivityNode>::iterator iterNode = getNode()->begin();
+			Bag<uml::ActivityNode>::iterator endNode = getNode()->end();
 			while (iterNode != endNode)
 			{
 				if (nodeList->find(*iterNode) == -1)
 				{
-					m_node->erase(*iterNode);
+					getNode()->erase(*iterNode);
 				}
 				iterNode++;
 			}
@@ -891,9 +891,9 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 			endNode = nodeList->end();
 			while (iterNode != endNode)
 			{
-				if (m_node->find(*iterNode) == -1)
+				if (getNode()->find(*iterNode) == -1)
 				{
-					m_node->add(*iterNode);
+					getNode()->add(*iterNode);
 				}
 				iterNode++;			
 			}
@@ -912,13 +912,13 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::InputPin>::iterator iterStructuredNodeInput = m_structuredNodeInput->begin();
-			Bag<uml::InputPin>::iterator endStructuredNodeInput = m_structuredNodeInput->end();
+			Bag<uml::InputPin>::iterator iterStructuredNodeInput = getStructuredNodeInput()->begin();
+			Bag<uml::InputPin>::iterator endStructuredNodeInput = getStructuredNodeInput()->end();
 			while (iterStructuredNodeInput != endStructuredNodeInput)
 			{
 				if (structuredNodeInputList->find(*iterStructuredNodeInput) == -1)
 				{
-					m_structuredNodeInput->erase(*iterStructuredNodeInput);
+					getStructuredNodeInput()->erase(*iterStructuredNodeInput);
 				}
 				iterStructuredNodeInput++;
 			}
@@ -927,9 +927,9 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 			endStructuredNodeInput = structuredNodeInputList->end();
 			while (iterStructuredNodeInput != endStructuredNodeInput)
 			{
-				if (m_structuredNodeInput->find(*iterStructuredNodeInput) == -1)
+				if (getStructuredNodeInput()->find(*iterStructuredNodeInput) == -1)
 				{
-					m_structuredNodeInput->add(*iterStructuredNodeInput);
+					getStructuredNodeInput()->add(*iterStructuredNodeInput);
 				}
 				iterStructuredNodeInput++;			
 			}
@@ -948,13 +948,13 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::OutputPin>::iterator iterStructuredNodeOutput = m_structuredNodeOutput->begin();
-			Bag<uml::OutputPin>::iterator endStructuredNodeOutput = m_structuredNodeOutput->end();
+			Bag<uml::OutputPin>::iterator iterStructuredNodeOutput = getStructuredNodeOutput()->begin();
+			Bag<uml::OutputPin>::iterator endStructuredNodeOutput = getStructuredNodeOutput()->end();
 			while (iterStructuredNodeOutput != endStructuredNodeOutput)
 			{
 				if (structuredNodeOutputList->find(*iterStructuredNodeOutput) == -1)
 				{
-					m_structuredNodeOutput->erase(*iterStructuredNodeOutput);
+					getStructuredNodeOutput()->erase(*iterStructuredNodeOutput);
 				}
 				iterStructuredNodeOutput++;
 			}
@@ -963,9 +963,9 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 			endStructuredNodeOutput = structuredNodeOutputList->end();
 			while (iterStructuredNodeOutput != endStructuredNodeOutput)
 			{
-				if (m_structuredNodeOutput->find(*iterStructuredNodeOutput) == -1)
+				if (getStructuredNodeOutput()->find(*iterStructuredNodeOutput) == -1)
 				{
-					m_structuredNodeOutput->add(*iterStructuredNodeOutput);
+					getStructuredNodeOutput()->add(*iterStructuredNodeOutput);
 				}
 				iterStructuredNodeOutput++;			
 			}
@@ -984,13 +984,13 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Variable>::iterator iterVariable = m_variable->begin();
-			Bag<uml::Variable>::iterator endVariable = m_variable->end();
+			Bag<uml::Variable>::iterator iterVariable = getVariable()->begin();
+			Bag<uml::Variable>::iterator endVariable = getVariable()->end();
 			while (iterVariable != endVariable)
 			{
 				if (variableList->find(*iterVariable) == -1)
 				{
-					m_variable->erase(*iterVariable);
+					getVariable()->erase(*iterVariable);
 				}
 				iterVariable++;
 			}
@@ -999,9 +999,9 @@ bool StructuredActivityNodeImpl::eSet(int featureID, Any newValue)
 			endVariable = variableList->end();
 			while (iterVariable != endVariable)
 			{
-				if (m_variable->find(*iterVariable) == -1)
+				if (getVariable()->find(*iterVariable) == -1)
 				{
-					m_variable->add(*iterVariable);
+					getVariable()->add(*iterVariable);
 				}
 				iterVariable++;			
 			}
