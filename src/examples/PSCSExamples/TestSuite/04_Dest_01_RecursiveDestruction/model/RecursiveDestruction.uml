@@ -1,49 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="RecursiveDestruction">
-  <eAnnotations xmi:id="_4LFuYFi5Eeq745ruafyE3Q" source="prepareApplication">
-    <details xmi:id="_5TFRMFi5Eeq745ruafyE3Q" key="sourceCodeMain" value="std::cout&lt;&lt;&quot;-- Test model : Recursive destruction&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- Running Test Case: Recursive destruction of parts and ports --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;#ifdef NDEBUG&#xA;&#x9;std::cout&lt;&lt;&quot;Please compile and run this test case in debug mode to enable printing debug messages when class instances are deleted&quot;&lt;&lt;std::endl;&#xA;#else&#xA;&#x9;//Creating instance a::A&#xA;&#x9;std::shared_ptr&lt;A> a = factory->createA();&#xA;&#xA;&#x9;//Destroying a&#xA;&#x9;a->destroy();&#xA;&#x9;a.reset();&#xA;#endif&#xA;&#xA;std::cout&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;"/>
-  </eAnnotations>
-  <ownedComment xmi:id="_q110IKD9Eeq8Z9IqI9dZbA">
-    <body>This test case validates recursive destruction of parts and ports in the case where a composite object is destroyed.</body>
-  </ownedComment>
-  <packageImport xmi:id="_rgWIkLArEeert7O7oCVCsA">
-    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
-  </packageImport>
-  <packagedElement xmi:type="uml:Class" xmi:id="_A0Q7QGOdEeqBpNTjBrDgSA" name="A">
-    <ownedAttribute xmi:id="_GtpJcGOdEeqBpNTjBrDgSA" name="b" type="_CTAxMGOdEeqBpNTjBrDgSA" aggregation="composite">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cHcr0KQYEeqMXo-urqQxKg" value="*"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="_ZWHzsKQYEeqMXo-urqQxKg" name="c" type="_DfqKgGOdEeqBpNTjBrDgSA" aggregation="composite">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_a-Da0KQYEeqMXo-urqQxKg" value="1"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bUyf0KQYEeqMXo-urqQxKg" value="*"/>
-    </ownedAttribute>
-    <ownedConnector xmi:id="_D3Re4KT8EeqLR5ywwElj2Q" name="r" type="_SZRLwKQXEeqMXo-urqQxKg">
-      <end xmi:id="_FjuZoKT8EeqLR5ywwElj2Q" partWithPort="_GtpJcGOdEeqBpNTjBrDgSA" role="_vOJasKEJEeq8Z9IqI9dZbA"/>
-      <end xmi:id="_F8LV4KT8EeqLR5ywwElj2Q" partWithPort="_ZWHzsKQYEeqMXo-urqQxKg" role="_ofVZUKEJEeq8Z9IqI9dZbA"/>
-    </ownedConnector>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_CTAxMGOdEeqBpNTjBrDgSA" name="B">
-    <ownedAttribute xmi:type="uml:Port" xmi:id="_vOJasKEJEeq8Z9IqI9dZbA" name="p" type="_cAlZoKEJEeq8Z9IqI9dZbA" aggregation="composite">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QvZ1gKQYEeqMXo-urqQxKg" value="1"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xhv1AKEJEeq8Z9IqI9dZbA" value="*"/>
-    </ownedAttribute>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_DfqKgGOdEeqBpNTjBrDgSA" name="C">
-    <ownedAttribute xmi:type="uml:Port" xmi:id="_ofVZUKEJEeq8Z9IqI9dZbA" name="q" type="_cAlZoKEJEeq8Z9IqI9dZbA" aggregation="composite">
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_puO1YKEJEeq8Z9IqI9dZbA" value="*"/>
-    </ownedAttribute>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_cAlZoKEJEeq8Z9IqI9dZbA" name="IImpl">
-    <ownedAttribute xmi:id="_G5yQsKQXEeqMXo-urqQxKg" name="left" type="_cAlZoKEJEeq8Z9IqI9dZbA" association="_SZRLwKQXEeqMXo-urqQxKg">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ID7voKQXEeqMXo-urqQxKg"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IgSUcKQXEeqMXo-urqQxKg" value="*"/>
-    </ownedAttribute>
-    <ownedAttribute xmi:id="_PZ7s0KQXEeqMXo-urqQxKg" name="right" type="_cAlZoKEJEeq8Z9IqI9dZbA" association="_SZRLwKQXEeqMXo-urqQxKg">
-      <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QaoU0KQXEeqMXo-urqQxKg"/>
-      <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QyvS0KQXEeqMXo-urqQxKg" value="*"/>
-    </ownedAttribute>
-    <interfaceRealization xmi:id="_eG93UKEJEeq8Z9IqI9dZbA" name="IRealization" client="_cAlZoKEJEeq8Z9IqI9dZbA" supplier="_Z3lFwKEJEeq8Z9IqI9dZbA" contract="_Z3lFwKEJEeq8Z9IqI9dZbA"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Interface" xmi:id="_Z3lFwKEJEeq8Z9IqI9dZbA" name="I"/>
-  <packagedElement xmi:type="uml:Association" xmi:id="_SZRLwKQXEeqMXo-urqQxKg" name="R" memberEnd="_G5yQsKQXEeqMXo-urqQxKg _PZ7s0KQXEeqMXo-urqQxKg"/>
-</uml:Model>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_bc8YIeLsEeur7cjoMTUC9A">
+  <uml:Model xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="RecursiveDestruction">
+    <ownedComment xmi:id="_q110IKD9Eeq8Z9IqI9dZbA">
+      <body>This test case validates recursive destruction of parts and ports in the case where a composite object is destroyed.</body>
+    </ownedComment>
+    <packageImport xmi:id="_rgWIkLArEeert7O7oCVCsA">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_A0Q7QGOdEeqBpNTjBrDgSA" name="A">
+      <ownedAttribute xmi:id="_GtpJcGOdEeqBpNTjBrDgSA" name="b" type="_CTAxMGOdEeqBpNTjBrDgSA" aggregation="composite">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_cHcr0KQYEeqMXo-urqQxKg" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_ZWHzsKQYEeqMXo-urqQxKg" name="c" type="_DfqKgGOdEeqBpNTjBrDgSA" aggregation="composite">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_a-Da0KQYEeqMXo-urqQxKg" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_bUyf0KQYEeqMXo-urqQxKg" value="*"/>
+      </ownedAttribute>
+      <ownedConnector xmi:id="_D3Re4KT8EeqLR5ywwElj2Q" name="r" type="_SZRLwKQXEeqMXo-urqQxKg">
+        <end xmi:id="_FjuZoKT8EeqLR5ywwElj2Q" partWithPort="_GtpJcGOdEeqBpNTjBrDgSA" role="_vOJasKEJEeq8Z9IqI9dZbA"/>
+        <end xmi:id="_F8LV4KT8EeqLR5ywwElj2Q" partWithPort="_ZWHzsKQYEeqMXo-urqQxKg" role="_ofVZUKEJEeq8Z9IqI9dZbA"/>
+      </ownedConnector>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_CTAxMGOdEeqBpNTjBrDgSA" name="B">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_vOJasKEJEeq8Z9IqI9dZbA" name="p" type="_cAlZoKEJEeq8Z9IqI9dZbA" aggregation="composite">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QvZ1gKQYEeqMXo-urqQxKg" value="1"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_xhv1AKEJEeq8Z9IqI9dZbA" value="*"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_DfqKgGOdEeqBpNTjBrDgSA" name="C">
+      <ownedAttribute xmi:type="uml:Port" xmi:id="_ofVZUKEJEeq8Z9IqI9dZbA" name="q" type="_cAlZoKEJEeq8Z9IqI9dZbA" aggregation="composite">
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_puO1YKEJEeq8Z9IqI9dZbA" value="*"/>
+      </ownedAttribute>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_cAlZoKEJEeq8Z9IqI9dZbA" name="IImpl">
+      <ownedAttribute xmi:id="_G5yQsKQXEeqMXo-urqQxKg" name="left" type="_cAlZoKEJEeq8Z9IqI9dZbA" association="_SZRLwKQXEeqMXo-urqQxKg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_ID7voKQXEeqMXo-urqQxKg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_IgSUcKQXEeqMXo-urqQxKg" value="*"/>
+      </ownedAttribute>
+      <ownedAttribute xmi:id="_PZ7s0KQXEeqMXo-urqQxKg" name="right" type="_cAlZoKEJEeq8Z9IqI9dZbA" association="_SZRLwKQXEeqMXo-urqQxKg">
+        <lowerValue xmi:type="uml:LiteralInteger" xmi:id="_QaoU0KQXEeqMXo-urqQxKg"/>
+        <upperValue xmi:type="uml:LiteralUnlimitedNatural" xmi:id="_QyvS0KQXEeqMXo-urqQxKg" value="*"/>
+      </ownedAttribute>
+      <interfaceRealization xmi:id="_eG93UKEJEeq8Z9IqI9dZbA" name="IRealization" client="_cAlZoKEJEeq8Z9IqI9dZbA" supplier="_Z3lFwKEJEeq8Z9IqI9dZbA" contract="_Z3lFwKEJEeq8Z9IqI9dZbA"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Interface" xmi:id="_Z3lFwKEJEeq8Z9IqI9dZbA" name="I"/>
+    <packagedElement xmi:type="uml:Association" xmi:id="_SZRLwKQXEeqMXo-urqQxKg" name="R" memberEnd="_G5yQsKQXEeqMXo-urqQxKg _PZ7s0KQXEeqMXo-urqQxKg"/>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_Zce4QOMYEeur7cjoMTUC9A" name="main">
+      <language>CPP</language>
+      <body>std::cout&lt;&lt;&quot;-- Test model : Recursive destruction&quot;&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;&quot;-- Running Test Case: Recursive destruction of parts and ports --&quot;&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;std::endl;&#xD;
+&#xD;
+#ifdef NDEBUG&#xD;
+	std::cout&lt;&lt;&quot;Please compile and run this test case in debug mode to enable printing debug messages when class instances are deleted&quot;&lt;&lt;std::endl;&#xD;
+#else&#xD;
+	//Creating instance a::A&#xD;
+	std::shared_ptr&lt;A> a = factory->createA();&#xD;
+&#xD;
+	//Destroying a&#xD;
+	a->destroy();&#xD;
+	a.reset();&#xD;
+#endif&#xD;
+&#xD;
+std::cout&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;</body>
+    </packagedElement>
+    <profileApplication xmi:id="_-kydEOMXEeur7cjoMTUC9A">
+      <eAnnotations xmi:id="_-kydEeMXEeur7cjoMTUC9A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_bc8YIeLsEeur7cjoMTUC9A"/>
+      </eAnnotations>
+      <appliedProfile href="../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <UML4CPPProfile:MainBehavior xmi:id="_ec43EOMYEeur7cjoMTUC9A" base_Behavior="_Zce4QOMYEeur7cjoMTUC9A"/>
+  <UML4CPPProfile:NonExecutable xmi:id="_ec43EeMYEeur7cjoMTUC9A" base_NamedElement="_Zce4QOMYEeur7cjoMTUC9A"/>
+</xmi:XMI>
