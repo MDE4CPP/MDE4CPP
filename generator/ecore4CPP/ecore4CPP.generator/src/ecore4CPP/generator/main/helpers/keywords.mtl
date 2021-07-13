@@ -22,7 +22,8 @@
 [** 
  * keywords for source name and keys of CodeGen annoation
 */]
-[query public sourceNameCodeGen(any : OclAny) : String = 'http://tu-ilmenau.de/see/codegen' /]	[** source name of annotation, which will be evaluated in MDE4CPP project /]
+[query public sourceNameCodeGen(any : OclAny) : String = 'http://sse.tu-ilmenau.de/codegen' /]	[** source name of annotation, which will be evaluated in MDE4CPP project /]
+[query public sourceNameDocGen(any : OclAny) : String = 'http://sse.tu-ilmenau.de/docgen'/] [** source name of annotation, which will be evaluated in MDE4CPP project to generate documentation/]
 [query public keyBody(any : OclAny) : String = 'body'/]	[**	indicates a source code specification for an operation/]
 [query public keyGetterBody(any : OclAny) : String = 'getterBody'/]	[**	indicates a source code specification for a getter function /]
 [query public keySetterBody(any : OclAny) : String = 'setterBody'/]	[**	indicates a source code specification for a setter function/]
@@ -30,15 +31,14 @@
 [query public keySetterName(any : OclAny) : String = 'setterName'/]	[**	indicates the name of setter function /]
 [query public keyNoGetter(any : OclAny) : String = 'noGetter'/]	[**	indicates that no getter should be generated /]
 [query public keyNoSetter(any : OclAny) : String = 'noSetter'/]	[**	indicates that no getter should be generated /]
-[query public keyIncludes(any : OclAny) : String = 'includes'/]	[**	indicates a header include specification/]
-[query public keyImplIncludes(any : OclAny) : String = 'implIncludes'/]	[**	indicates a header include specification for class implementations/]
-[query public keyHeaderIncludes(any : OclAny) : String = 'interfaceIncludes'/]	[**	indicates a header include specification for class interfaces /]
+[query public keyIncludes(any : OclAny) : String = 'includes'/]	[**	indicates a header include specification /]
+[query public keyHeaderIncludes(any : OclAny) : String = 'headerIncludes'/]	[**	indicates a header include specification /]
 [query public keyLibrary(any : OclAny) : String = 'library' /] [**	indicates a specification for a library to link /]
-[query public keySharedAggregation(any : OclAny) : String = 'sharedAggregation'/]	[** indicates a AggregationKind specifiation, values: 'shared' -> indicates a back reference, otherwise -> no action/]
-[query public keyNoBackReference(any : OclAny) : String = 'noBackReference'/] [** indicates that no back reference for a reference should exists/]
+[query public keyAggregationKind(any : OclAny) : String = 'AggregationKind'/]	[** indicates a AggregationKind specifiation, values: 'shared' -> indicates a back reference, otherwise -> no action/]
+[query public keyNoBackReference(any : OclAny) : String = 'no_back_reference'/] [** indicates that no back reference for a reference should exists/]
 [query public keyQualify(any : OclAny) : String = 'qualify' /] [**	indicates a type qualifier for an attribute /]
-[query public keyWeakptr(any : OclAny) : String = 'returnWeakPtr'/] [** indicates that an operation with upper=1 should return an weak pointer/]
-[query public keyConst(any : OclAny) : String = 'const'/] [** indicates that an operation should be const/]
+[query public keyWeakptr(any : OclAny) : String = 'weakptr'/] [** indicates that an operation with upper=1 should return an weak pointer/]
+[query public keyDoc(any : OclAny) : String = 'doc'/] [** indicates an documentation entry which is generated as documentation/]
 
 [** indicates, that an operation is only on implementation layer existing (not in header file), 
  * 	values: 'true' -> operation exists only on implementation layer, otherwise -> operation exists also in header file
@@ -66,6 +66,8 @@
 
 
 [** 
- * keywords for source name of prepareApplication annoation
+ * keywords for source name and keys of prepareApplication annoation
 */]
-[query public sourceNamePrepareApplication(any : OclAny) : String = 'http://tu-ilmenau.de/see/prepareApplication' /]	[** special source for C++-file with main function /]
+[query public sourceNamePrepareApplication(any : OclAny) : String = 'prepareApplication' /]	[** special source for generating class with main function /]
+[query public keyMainIncludes(any : OclAny) : String = 'sourceCodeMainIncludes'/]	[**	specifiy header to be included for main function /] 
+[query public keyMainSourceCode(any : OclAny) : String = 'sourceCodeMain'/]	[**	specifiy source code of main function /] 

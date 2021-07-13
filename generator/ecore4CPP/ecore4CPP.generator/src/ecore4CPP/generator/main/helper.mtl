@@ -37,7 +37,7 @@
  * namespace generation
 */]
 [query private getRootPackageName(anEPackage : EPackage, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else anEPackage.name endif /]
-[query private getNamespace(aEPackage : EPackage, separator : String, ignoreRoot : Boolean) : String = if(eSuperPackage.oclIsUndefined()) then getRootPackageName(ignoreRoot) else eSuperPackage.getNamespace(separator, ignoreRoot).concat(separator).concat(aEPackage.name) endif/]
+[query private getNamespace(aEPackage : EPackage, separator : String, ignoreRoot : Boolean) : String = if(aEPackage.oclIsUndefined()) then '' else if(eSuperPackage.oclIsUndefined()) then getRootPackageName(ignoreRoot) else eSuperPackage.getNamespace(separator, ignoreRoot).concat(separator).concat(aEPackage.name) endif endif/]
 [query public generateNamespacePath(anEPackage : EPackage) : String = anEPackage.getNamespace('/', false) /]
 [query public generateNamespacePath(anEClassifier : EClassifier) : String = anEClassifier.ePackage.generateNamespacePath() /]
 [query public generateNamespaceDefinition(anEClassifier : EClassifier) : String = anEClassifier.ePackage.getNamespace('::', false) /]
