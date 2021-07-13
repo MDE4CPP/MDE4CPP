@@ -20,6 +20,7 @@
 [module generateAssociation('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
@@ -40,4 +41,5 @@
 [for (memberEnd : Property | anAssociation.memberEnd)]
 [anAssociation.memberName()/]->getMemberEnd()->add([memberEnd.generatePackageGetterCall(anAssociation)/]);
 [/for]
+[anAssociation.generateStereotypeApplication()/]
 [/template]

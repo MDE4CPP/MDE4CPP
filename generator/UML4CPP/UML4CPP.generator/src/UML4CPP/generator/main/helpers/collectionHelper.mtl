@@ -23,6 +23,7 @@
 [import UML4CPP::generator::main::helpers::keywords /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::components::generateClass /]
+[import UML4CPP::generator::main::components::generateStereotype /]
 
  
 [**
@@ -49,7 +50,7 @@
 																		aPackage.member->filter(Class).attribute.type.getNearestPackage(),
 																		aPackage.member->filter(Class).ownedOperation.ownedParameter.type->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.member->filter(Class).interfaceRealization.supplier->reject(oclIsUndefined()).getNearestPackage(),
-																		aPackage.allOwnedElements().getAppliedStereotypes()._package,
+																		aPackage.allOwnedElements().getGeneratableAppliedStereotypes()._package,
 																		aPackage.getAppliedStereotypes()._package,
 																		aPackage.member->filter(Class).generalization.general->reject(oclIsUndefined()).getNearestPackage(),
 																		aPackage.allOwnedElements()->filter(CallBehaviorAction).behavior->reject(oclIsUndefined()).getNearestPackage(),

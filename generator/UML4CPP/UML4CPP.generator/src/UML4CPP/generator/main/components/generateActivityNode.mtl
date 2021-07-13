@@ -21,6 +21,7 @@
 
 [import UML4CPP::generator::main::components::generateActivityEdge /]
 [import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
@@ -269,6 +270,7 @@
 //ActivityNode [anActivityNode.name /] ([anActivityNode.eClass().name/])
 [anActivityNode.memberName()/]->setName("[anActivityNode.name/]");
 [anActivityNode.initializeActivityNodeSpecial(anActivityNode)/]
+[anActivityNode.generateStereotypeApplication()/]
 [/template]
 
 [**
@@ -512,5 +514,6 @@
 [pin.memberName()/]->setName("[pin.name/]");
 [pin.memberName()/]->setLower([pin.lower/]);
 [pin.memberName()/]->setUpper([if (isTarget)]-1[else][pin.upper/][/if]);
+[pin.generateStereotypeApplication()/]
 
 [/template]

@@ -45,13 +45,13 @@
 
 
 [query public getAllAppliedStereotypes(aPackage : Package) : Set(Stereotype) = OrderedSet{
-								aPackage.getElementsBelongingToPackage().getAppliedStereotypes(),
-								aPackage.getAppliedStereotypes()
+								aPackage.getElementsBelongingToPackage().getGeneratableAppliedStereotypes(),
+								aPackage.getGeneratableAppliedStereotypes()
 							}->flatten() /]
 [query public metaModelIncludes(aPackage : Package) : Set(Package) = OrderedSet{
 								aPackage.getElementsBelongingToPackage()->filter(TypedElement)->select(not type.oclIsUndefined()).type.getNearestPackage(),
 								aPackage.getElementsBelongingToPackage()->filter(CallBehaviorAction).behavior.getNearestPackage(),
-								aPackage.getElementsBelongingToPackage()->filter(Element).getAppliedStereotypes().getProfile(), 
+								aPackage.getElementsBelongingToPackage()->filter(Element).getGeneratableAppliedStereotypes().getProfile(), 
 								aPackage.getElementsBelongingToPackage()->filter(InstanceValue).instance.getNearestPackage(), 
 								aPackage.getElementsBelongingToPackage()->filter(Property).association->reject(oclIsUndefined()).getNearestPackage(),
 								aPackage.getElementsBelongingToPackage()->filter(Operation).method->reject(oclIsUndefined()).getNearestPackage(),
@@ -349,7 +349,6 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 	initializePackageNestedPackages();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
-
 	[if (not aPackage.oclIsKindOf(Profile))][aPackage.generateStereotypeApplication()/][/if]
 }
 
@@ -436,6 +435,7 @@ void [packageName/]::initializePackageDependencies()
 {
 [for (aDependency : Dependency | (aPackage.ownedElement->filter(Dependency)->reject(oclIsTypeOf(InterfaceRealization)))->sortedBy(myQualifiedName())) separator('\n')]
 	[aDependency.generateDependencyInitialization()/]
+
 	[aDependency.ownedElement->sortedBy(name).generateStereotypeApplication()/]
 [/for]
 }
@@ -460,6 +460,7 @@ void [packageName/]::initializePackageInterfaces()
 [if (not (aPackage.name = keyUML()))]
 [for (aInterface : Interface | aPackage.ownedMember->filter(Interface)->sortedBy(myQualifiedName())) separator ('\n')]
 	[aInterface.generateInterfaceInitialization()/]
+
 	[aInterface.ownedAttribute->sortedBy(myQualifiedName()).generateAttributeInitialization()/]
 	[aInterface.ownedOperation->sortedBy(myQualifiedName()).initalizeOperation()/]
 [/for]

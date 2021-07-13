@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::components::generateOperation /]
 [import UML4CPP::generator::main::components::generateProperty /]
 [import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
@@ -51,7 +52,7 @@
 [template public generateInterfaceInitialization(anInterface : Interface)]
 [anInterface.memberName()/]->setName("[anInterface.name/]");
 [anInterface.memberName()/]->setIsAbstract([anInterface.isAbstract/]);
-
+[anInterface.generateStereotypeApplication()/]
 [/template]
 
 [template public generateStaticInterfaceID(aInterface : Interface)]

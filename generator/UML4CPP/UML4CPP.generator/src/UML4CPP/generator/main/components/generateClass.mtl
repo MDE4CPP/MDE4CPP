@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::components::generateConstraint /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::components::generateInterface /]
+[import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::IDHelper /]
@@ -135,6 +136,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 gen = uml::umlFactory::eInstance()->createGeneralization_in_Specific([aClass.generatePackageGetterCall(aClass)/]);
 gen->setGeneral([superClass.generatePackageGetterCall(aClass)/]);
 [/for]
+[aClass.generateStereotypeApplication()/]
 [/template]
 
 [**

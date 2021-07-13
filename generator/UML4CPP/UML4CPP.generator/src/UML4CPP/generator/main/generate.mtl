@@ -34,7 +34,9 @@
 [if (aPackage.name.oclIsUndefined() or aPackage.name = '')]
 	['package has no name '.registerError()/]
 [else]
-	[aPackage.generateModel()/]
+	[if (not aPackage.isDoNotGenerate())]
+		[aPackage.generateModel()/]
+	[/if]
 [/if]
 
 [if (aPackage.errorExisting())]

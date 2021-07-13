@@ -20,6 +20,7 @@
 [module generateActivityEdge('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateType /]
+[import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [query private getOwnerPropertyName(anActivityEdge : ActivityEdge) : String = if (anActivityEdge.owner.oclIsKindOf(Activity)) then 'Activity' else 'InStructuredNode' endif /]
@@ -52,4 +53,5 @@
 [if (not anActivityEdge.guard.oclIsUndefined())]
 [anActivityEdge.memberName()/]->setGuard([anActivityEdge.guard.memberName()/]);
 [/if]
+[anActivityEdge.generateStereotypeApplication()/]
 [/template]

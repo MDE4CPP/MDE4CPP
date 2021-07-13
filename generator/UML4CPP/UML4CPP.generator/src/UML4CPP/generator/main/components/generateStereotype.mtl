@@ -44,9 +44,10 @@
  * generate application of stereotype to an element
 */]
 [template public generateStereotypeApplication(aElement : Element) ? (aElement.getAppliedStereotypes()->notEmpty() and (not((aElement.getNearestPackage().name='Ecore') or (aElement.getNearestPackage().name = keyUML()) or (aElement.getNearestPackage().name='PrimitiveTypes'))))]
-[for (stereo : Stereotype | aElement.getAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
+
+[for (stereo : Stereotype | aElement.getAppliedStereotypes()->reject(isDoNotGenerate(aElement))->asOrderedSet()->sortedBy(myQualifiedName())) separator ('\n')]
 {
-	//apply Stereotype	[stereo.name/]
+	//apply Stereotype [stereo.name/]
 	[stereo.generateCppType(false)/] stereo([stereo.generateCreateFunction()/]);
 [for (prop : Property | stereo.allAttributes())]
 [if(not aElement.getValue(stereo, prop.name).oclIsUndefined())]
@@ -111,3 +112,11 @@ stereo->[prop.setterName()/]([prop.generateValue(aElement,stereo)/]);[/if]
 [template private generateValue(prop : Property,aElement : Element, stereo : Stereotype) ? (prop.type.oclIsKindOf(PrimitiveType) and (prop.type.name='UnlimitedNatural') )]
 [aElement.getValue(stereo, prop.name).oclAsType(UnlimitedNatural)/]
 [/template]
+
+[query private getAllProfileApplicationsInScope(aPackage : Package) : Set(ProfileApplication) = if(aPackage.isRootPackage()) then aPackage.profileApplication else aPackage.profileApplication->addAll(aPackage.getSuperPackage().getAllProfileApplicationsInScope())->flatten() endif /]
+[query private definesStereotype(aProfileApplication : ProfileApplication, aStereotype : Stereotype) : Boolean = aProfileApplication.appliedProfile = aStereotype.profile /]
+[query public isDoNotGenerate(aStereotype : Stereotype, stereotypedElement : Element) : Boolean = 
+	stereotypedElement.getNearestPackage().getAllProfileApplicationsInScope()->select(pa : ProfileApplication | pa.definesStereotype(aStereotype) and pa.isDoNotGenerateElement())->size() > 0 /]
+
+[query public getGeneratableAppliedStereotypes(anElement : Element) : Set(Stereotype) = 
+								getAppliedStereotypes()->reject(isDoNotGenerate(anElement)) /]

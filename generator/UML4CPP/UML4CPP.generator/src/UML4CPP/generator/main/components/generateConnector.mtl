@@ -4,6 +4,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::components::generateType/]
+[import UML4CPP::generator::main::components::generateStereotype /]
 
 [**
  * generate creation of meta model instance for a Connector element
@@ -33,6 +34,7 @@
 [for(aConnectorEnd : ConnectorEnd | aConnector.end)]
 [aConnectorEnd.generateConnectorEndInitialization()/]
 [/for]
+[aConnector.generateStereotypeApplication()/]
 [/template]
 
 [**
@@ -48,6 +50,7 @@
 [aConnectorEnd.memberName()/]->setPartWithPort([aConnectorEnd.partWithPort.generatePackageGetterCall()/]);
 [aConnectorEnd.memberName()/]->setLower([aConnectorEnd.lower/]);
 [aConnectorEnd.memberName()/]->setUpper([aConnectorEnd.upper/]);
+[aConnectorEnd.generateStereotypeApplication()/]
 [/template]
 
 [query public getConnector(connectorEnd : ConnectorEnd) : Connector = connectorEnd.owner.oclAsType(Connector)/]

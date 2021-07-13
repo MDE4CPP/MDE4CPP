@@ -47,7 +47,6 @@
 [aDependency.client.generateDependencyClientAdding(aDependency)/]
 [aDependency.supplier.generateDependencySupplierAdding(aDependency)/]
 [aDependency.generateStereotypeApplication()/]
-
 [/template]
 
 [template private generateDependencyClientAdding(aNamedElement : NamedElement, aDependency : Dependency)]

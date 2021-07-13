@@ -20,6 +20,7 @@
 [module generateFunctionBehavior('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateParameter /]
+[import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [**
@@ -55,6 +56,7 @@
 [for (aParameter : Parameter | aOpaqueBehavior.ownedParameter)]
 [aParameter.generateParameterInitialization()/]
 [/for]
+[aOpaqueBehavior.generateStereotypeApplication()/]
 [/template]
 
 [**
@@ -70,4 +72,5 @@
 [for (aParameter : Parameter | aFunctionBehavior.ownedParameter)]
 [aParameter.generateParameterInitialization()/]
 [/for]
+[aFunctionBehavior.generateStereotypeApplication()/]
 [/template]

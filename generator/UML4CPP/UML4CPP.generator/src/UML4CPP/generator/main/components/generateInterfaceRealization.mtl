@@ -18,7 +18,8 @@
  * 
  */]
 [module generateInterfaceRealization('http://www.eclipse.org/uml2/5.0.0/UML')]
- 
+
+[import UML4CPP::generator::main::components::generateStereotype /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
@@ -51,6 +52,7 @@
 [for (aSupplier : NamedElement | anInterfaceRealization.supplier)]
 [memberName(anInterfaceRealization)/]->getSupplier()->push_back([aSupplier.generatePackageGetterCall(anInterfaceRealization)/]);
 [/for]
+[anInterfaceRealization.generateStereotypeApplication()/]
 [/template]
 
 [**

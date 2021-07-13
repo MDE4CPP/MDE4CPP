@@ -53,7 +53,8 @@
 
 [query public getSuperPackage(aPackage : Package) : Package = if((not owner.oclIsUndefined()) and (owner.oclIsKindOf(Package))) then owner.oclAsType(Package) else null endif /]
 [query public getAllSubPackageNames(aPackage : Package) : OrderedSet(String) = aPackage.allOwnedElements()->selectByKind(Package).name->asOrderedSet()/]
-[query public getRootPackage(aPackage : Package) : Package = if aPackage.getSuperPackage().oclIsUndefined() then aPackage else aPackage.getSuperPackage().getRootPackage() endif /]
+[query public getRootPackage(aPackage : Package) : Package = if aPackage.isRootPackage() then aPackage else aPackage.getSuperPackage().getRootPackage() endif /]
+[query public isRootPackage(aPackage : Package) : Boolean = getSuperPackage().oclIsUndefined() /]
 [query public getRootPackage(anElement : Element) : Package = anElement.getNearestPackage().getRootPackage() /]
 
 [**

@@ -58,6 +58,14 @@
 [query public hasMainIncludes(ePackage : Package) : Boolean = true /]
 [query public getMainIncludes(ePackage : Package) : String = '' /]
 
+[**
+ * queries for handling of the 'DoNotGenerate' stereotype
+*/]
+[query public isDoNotGenerateElement(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_DONOTGENERATE()) /]
+[query public isDoNotGenerate(aPackage : Package) : Boolean = if(aPackage.isRootPackage()) then aPackage.isDoNotGenerateElement() else aPackage.getRootPackage().isDoNotGenerate() endif /]
+[query public isDoNotGenerate(aClassifier : Classifier) : Boolean = isDoNotGenerateElement() or aClassifier.getNearestPackage().isDoNotGenerate() /]
+[query public isDoNotGenerate(aFeature : Feature) : Boolean = isDoNotGenerateElement() or aFeature.owner.isDoNotGenerateElement() or aFeature.getNearestPackage().isDoNotGenerate() /]
+
 
 [**
  * template to generate forward declaration of template class Bag for a Class element
