@@ -448,7 +448,10 @@ m_locus->setFactory(nullptr);
 	aPackage.allOwnedElements()->filter(Activity)->asSet()/]
 
 [query private getUsedActivities (aPackage : Package) : OrderedSet(Activity) = 
-	Set{aPackage.getActivitiesUsedByCallBehaviorAction(), aPackage.getActivitiesUsedByDecisionNode(), aPackage.getActivitiesUsedByOperation(), aPackage.getActivitiesOwnedByPackage(), Set{aPackage.getMainActivity()}}->reject(oclIsUndefined())->flatten()->sortedBy(name)/]
+	Set{aPackage.getActivitiesUsedByCallBehaviorAction(), aPackage.getActivitiesUsedByDecisionNode(), aPackage.getActivitiesUsedByOperation(), aPackage.getActivitiesOwnedByPackage(), aPackage.getMainActivityAsSet()}->reject(oclIsUndefined())->flatten()->sortedBy(name)/]
+
+[comment Helper query, returns a Set containing the main activity of the model if there is one, or else an empty Set /]
+[query private getMainActivityAsSet(aPackage : Package) : Set(Activity) = if(aPackage.hasMainActivity()) then Set{aPackage.getMainActivity()} else Set{} endif /]
 
 [query public listNumber(aParameter : Parameter, anActivity : Activity) : Integer =  
 	anActivity.ownedParameter->select((direction = ParameterDirectionKind::_out) or (direction = ParameterDirectionKind::_in))->indexOf(aParameter)-1 /]
