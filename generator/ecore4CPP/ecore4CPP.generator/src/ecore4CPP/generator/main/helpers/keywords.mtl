@@ -23,6 +23,7 @@
  * keywords for source name and keys of CodeGen annoation
 */]
 [query public sourceNameCodeGen(any : OclAny) : String = 'http://sse.tu-ilmenau.de/codegen' /]	[** source name of annotation, which will be evaluated in MDE4CPP project /]
+[query public sourceNameDocGen(any : OclAny) : String = 'http://sse.tu-ilmenau.de/docgen'/] [** source name of annotation, which will be evaluated in MDE4CPP project to generate documentation/]
 [query public keyBody(any : OclAny) : String = 'body'/]	[**	indicates a source code specification for an operation/]
 [query public keyGetterBody(any : OclAny) : String = 'getterBody'/]	[**	indicates a source code specification for a getter function /]
 [query public keySetterBody(any : OclAny) : String = 'setterBody'/]	[**	indicates a source code specification for a setter function/]
@@ -37,6 +38,7 @@
 [query public keyNoBackReference(any : OclAny) : String = 'no_back_reference'/] [** indicates that no back reference for a reference should exists/]
 [query public keyQualify(any : OclAny) : String = 'qualify' /] [**	indicates a type qualifier for an attribute /]
 [query public keyWeakptr(any : OclAny) : String = 'weakptr'/] [** indicates that an operation with upper=1 should return an weak pointer/]
+[query public keyDoc(any : OclAny) : String = 'doc'/] [** indicates an documentation entry which is generated as documentation/]
 
 [** indicates, that an operation is only on implementation layer existing (not in header file), 
  * 	values: 'true' -> operation exists only on implementation layer, otherwise -> operation exists also in header file
