@@ -18,7 +18,6 @@
 //Stereotypes
 #include "ecore/EDataType.hpp"
 #include "ecore/EPackage.hpp"
-#include "UML4CPPProfile/UML4CPPPackage.hpp"
 
 using namespace PrimitiveTypes;
 
@@ -169,7 +168,6 @@ void PrimitiveTypesPackageImpl::initializePackageContents(std::shared_ptr<uml::P
 	initializePackageNestedPackages();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
-
 	
 }
 

@@ -45,7 +45,7 @@ std::shared_ptr<uml::Package> UMLPluginImpl::getPackage()
 
 std::string UMLPluginImpl::eclipseURI()
 {
-	return "";
+	return "pathmap://UML_METAMODELS/UML.metamodel.uml";
 }
 
 std::string UMLPluginImpl::eNAME()

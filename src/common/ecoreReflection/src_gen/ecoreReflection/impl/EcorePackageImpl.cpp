@@ -33,7 +33,6 @@
 #include "ecore/EDataType.hpp"
 #include "ecore/EPackage.hpp"
 #include "ecore/EReference.hpp"
-#include "UML4CPPProfile/UML4CPPPackage.hpp"
 
 using namespace Ecore;
 
@@ -1143,7 +1142,6 @@ void EcorePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> e
 	initializePackageNestedPackages();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
-
 	
 }
 
@@ -1453,6 +1451,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_getEStructuralFeature_EInt_EIntreturn->setUpper(1);
 	ecore_EClass_getEStructuralFeature_EInt_EIntreturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter featureID
 	
 	ecore_EClass_getEStructuralFeature_EInt_EInt_featureID->setName("featureID");
@@ -1464,6 +1463,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_getEStructuralFeature_EInt_EInt_featureID->setUpper(1);
 	
 	ecore_EClass_getEStructuralFeature_EInt_EInt_featureID->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -1478,6 +1478,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_getEStructuralFeature_EString_EStringreturn->setUpper(1);
 	ecore_EClass_getEStructuralFeature_EString_EStringreturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter featureName
 	
 	ecore_EClass_getEStructuralFeature_EString_EString_featureName->setName("featureName");
@@ -1489,6 +1490,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_getEStructuralFeature_EString_EString_featureName->setUpper(1);
 	
 	ecore_EClass_getEStructuralFeature_EString_EString_featureName->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -1516,6 +1518,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeaturereturn->setUpper(1);
 	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeaturereturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter feature
 	
 	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature_feature->setName("feature");
@@ -1527,6 +1530,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature_feature->setUpper(1);
 	
 	ecore_EClass_getFeatureID_EStructuralFeature_EStructuralFeature_feature->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -1541,6 +1545,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_isSuperTypeOf_EClass_EClassreturn->setUpper(1);
 	ecore_EClass_isSuperTypeOf_EClass_EClassreturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter someClass
 	
 	ecore_EClass_isSuperTypeOf_EClass_EClass_someClass->setName("someClass");
@@ -1552,6 +1557,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClass_isSuperTypeOf_EClass_EClass_someClass->setUpper(1);
 	
 	ecore_EClass_isSuperTypeOf_EClass_EClass_someClass->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -1656,6 +1662,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClassifier_isInstance_EJavaObject_EJavaObjectreturn->setUpper(1);
 	ecore_EClassifier_isInstance_EJavaObject_EJavaObjectreturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter object
 	
 	ecore_EClassifier_isInstance_EJavaObject_EJavaObject_object->setName("object");
@@ -1667,6 +1674,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EClassifier_isInstance_EJavaObject_EJavaObject_object->setUpper(1);
 	
 	ecore_EClassifier_isInstance_EJavaObject_EJavaObject_object->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -1725,6 +1733,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnum_getEEnumLiteral_EString_EStringreturn->setUpper(1);
 	ecore_EEnum_getEEnumLiteral_EString_EStringreturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter name
 	
 	ecore_EEnum_getEEnumLiteral_EString_EString_name->setName("name");
@@ -1736,6 +1745,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnum_getEEnumLiteral_EString_EString_name->setUpper(1);
 	
 	ecore_EEnum_getEEnumLiteral_EString_EString_name->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -1750,6 +1760,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnum_getEEnumLiteral_EInt_EIntreturn->setUpper(1);
 	ecore_EEnum_getEEnumLiteral_EInt_EIntreturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter value
 	
 	ecore_EEnum_getEEnumLiteral_EInt_EInt_value->setName("value");
@@ -1761,6 +1772,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnum_getEEnumLiteral_EInt_EInt_value->setUpper(1);
 	
 	ecore_EEnum_getEEnumLiteral_EInt_EInt_value->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -1775,6 +1787,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnum_getEEnumLiteralByLiteral_EString_EStringreturn->setUpper(1);
 	ecore_EEnum_getEEnumLiteralByLiteral_EString_EStringreturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter literal
 	
 	ecore_EEnum_getEEnumLiteralByLiteral_EString_EString_literal->setName("literal");
@@ -1786,6 +1799,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EEnum_getEEnumLiteralByLiteral_EString_EString_literal->setUpper(1);
 	
 	ecore_EEnum_getEEnumLiteralByLiteral_EString_EString_literal->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -1877,6 +1891,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObjectreturn->setUpper(1);
 	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObjectreturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter eDataType
 	
 	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject_eDataType->setName("eDataType");
@@ -1888,6 +1903,8 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject_eDataType->setUpper(1);
 	
 	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject_eDataType->setDirection(uml::ParameterDirectionKind::IN);
+	
+	
 	
 	// parameter instanceValue
 	
@@ -1902,6 +1919,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EFactory_convertToString_EDataType_EJavaObject_EDataType_EJavaObject_instanceValue->setDirection(uml::ParameterDirectionKind::IN);
 	
 	
+	
 
 	//create
 	ecore_EFactory_create_EClass_EClass->setName("create");
@@ -1913,6 +1931,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EFactory_create_EClass_EClassreturn->setLower(0);
 	ecore_EFactory_create_EClass_EClassreturn->setUpper(1);
 	ecore_EFactory_create_EClass_EClassreturn->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 	// parameter eClass
 	
@@ -1927,6 +1946,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EFactory_create_EClass_EClass_eClass->setDirection(uml::ParameterDirectionKind::IN);
 	
 	
+	
 
 	//createFromString
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EString->setName("createFromString");
@@ -1938,6 +1958,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EStringreturn->setLower(0);
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EStringreturn->setUpper(1);
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EStringreturn->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 	// parameter eDataType
 	
@@ -1951,6 +1972,8 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EString_eDataType->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
+	
 	// parameter literalValue
 	
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EString_literalValue->setName("literalValue");
@@ -1962,6 +1985,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EString_literalValue->setUpper(1);
 	
 	ecore_EFactory_createFromString_EDataType_EString_EDataType_EString_literalValue->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -2075,6 +2099,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EModelElement_getEAnnotation_EString_EStringreturn->setUpper(1);
 	ecore_EModelElement_getEAnnotation_EString_EStringreturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter source
 	
 	ecore_EModelElement_getEAnnotation_EString_EString_source->setName("source");
@@ -2086,6 +2111,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EModelElement_getEAnnotation_EString_EString_source->setUpper(1);
 	
 	ecore_EModelElement_getEAnnotation_EString_EString_source->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -2219,6 +2245,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eGet_EStructuralFeature_EStructuralFeaturereturn->setUpper(1);
 	ecore_EObject_eGet_EStructuralFeature_EStructuralFeaturereturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter feature
 	
 	ecore_EObject_eGet_EStructuralFeature_EStructuralFeature_feature->setName("feature");
@@ -2230,6 +2257,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eGet_EStructuralFeature_EStructuralFeature_feature->setUpper(1);
 	
 	ecore_EObject_eGet_EStructuralFeature_EStructuralFeature_feature->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -2244,6 +2272,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBooleanreturn->setUpper(1);
 	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBooleanreturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter feature
 	
 	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean_feature->setName("feature");
@@ -2256,6 +2285,8 @@ void EcorePackageImpl::initializePackageClasses()
 	
 	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean_feature->setDirection(uml::ParameterDirectionKind::IN);
 	
+	
+	
 	// parameter resolve
 	
 	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean_resolve->setName("resolve");
@@ -2267,6 +2298,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean_resolve->setUpper(1);
 	
 	ecore_EObject_eGet_EStructuralFeature_EBoolean_EStructuralFeature_EBoolean_resolve->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -2294,6 +2326,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeaturereturn->setUpper(1);
 	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeaturereturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter feature
 	
 	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature_feature->setName("feature");
@@ -2305,6 +2338,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature_feature->setUpper(1);
 	
 	ecore_EObject_eIsSet_EStructuralFeature_EStructuralFeature_feature->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -2331,6 +2365,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObjectreturn->setUpper(1);
 	ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObjectreturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter feature
 	
 	ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject_feature->setName("feature");
@@ -2342,6 +2377,8 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject_feature->setUpper(1);
 	
 	ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject_feature->setDirection(uml::ParameterDirectionKind::IN);
+	
+	
 	
 	// parameter newValue
 	
@@ -2356,6 +2393,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eSet_EStructuralFeature_EJavaObject_EStructuralFeature_EJavaObject_newValue->setDirection(uml::ParameterDirectionKind::IN);
 	
 	
+	
 
 	//eUnset
 	ecore_EObject_eUnset_EStructuralFeature_EStructuralFeature->setName("eUnset");
@@ -2366,6 +2404,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eUnset_EStructuralFeature_EStructuralFeaturereturn->setLower(0);
 	ecore_EObject_eUnset_EStructuralFeature_EStructuralFeaturereturn->setUpper(1);
 	ecore_EObject_eUnset_EStructuralFeature_EStructuralFeaturereturn->setDirection(uml::ParameterDirectionKind::RETURN);
+	
 	
 	// parameter feature
 	
@@ -2378,6 +2417,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EObject_eUnset_EStructuralFeature_EStructuralFeature_feature->setUpper(1);
 	
 	ecore_EObject_eUnset_EStructuralFeature_EStructuralFeature_feature->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 
@@ -2535,6 +2575,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EPackage_getEClassifier_EString_EStringreturn->setUpper(1);
 	ecore_EPackage_getEClassifier_EString_EStringreturn->setDirection(uml::ParameterDirectionKind::RETURN);
 	
+	
 	// parameter name
 	
 	ecore_EPackage_getEClassifier_EString_EString_name->setName("name");
@@ -2546,6 +2587,7 @@ void EcorePackageImpl::initializePackageClasses()
 	ecore_EPackage_getEClassifier_EString_EString_name->setUpper(1);
 	
 	ecore_EPackage_getEClassifier_EString_EString_name->setDirection(uml::ParameterDirectionKind::IN);
+	
 	
 	
 

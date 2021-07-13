@@ -1017,4 +1017,5 @@
   <standard:Metaclass xmi:id="_Q0AbsKtKEeGF4uwJob34Mw" base_Class="EMap-_ownedTemplateSignature-_ownedParameter.1-_ownedParameteredElement"/>
   <standard:Metaclass xmi:id="_Q0CQ4KtKEeGF4uwJob34Mw" base_Class="ETreeIterator-_ownedTemplateSignature-_ownedParameter.0-_ownedParameteredElement"/>
   <UML4CPPProfile:UML4CPPPackage xmi:id="_fvOt4OMGEeur7cjoMTUC9A" base_Package="_0" eclipseURI="pathmap://UML_METAMODELS/Ecore.metamodel.uml" packageOnly="true"/>
+  <UML4CPPProfile:DoNotGenerate xmi:id="_0_RXcOPfEeuZntx0eUceXA" base_Element="_eIEi0OMGEeur7cjoMTUC9A"/>
 </xmi:XMI>

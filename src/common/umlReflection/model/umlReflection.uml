@@ -17998,4 +17998,5 @@ self.type.conformsTo(p.oclAsType(TypedElement).type)))</body>
   <standard:Metaclass xmi:id="_brLlgIx_EeOumeDJYV0ScA" base_Class="TimeObservation"/>
   <standard:Metaclass xmi:id="_brMMkIx_EeOumeDJYV0ScA" base_Class="ValueSpecification"/>
   <UML4CPPProfile:UML4CPPPackage xmi:id="_uQszQOMGEeur7cjoMTUC9A" base_Package="_0" eclipseURI="pathmap://UML_METAMODELS/UML.metamodel.uml" packageOnly="true"/>
+  <UML4CPPProfile:DoNotGenerate xmi:id="_BSXqUOPsEeue5uBLJYJANQ" base_Element="_sseAYOMGEeur7cjoMTUC9A"/>
 </xmi:XMI>

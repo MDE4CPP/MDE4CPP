@@ -45,7 +45,7 @@ std::shared_ptr<uml::Package> EcorePluginImpl::getPackage()
 
 std::string EcorePluginImpl::eclipseURI()
 {
-	return "";
+	return "pathmap://UML_METAMODELS/Ecore.metamodel.uml";
 }
 
 std::string EcorePluginImpl::eNAME()

@@ -53,4 +53,5 @@
   <Ecore:EDataType xmi:id="_2fJkEKzuEeC4yJrLbEUOVg" instanceClassName="int" base_PrimitiveType="UnlimitedNatural"/>
   <standard:ModelLibrary xmi:id="_LSAUcIx7EeOumeDJYV0ScA" base_Package="_0"/>
   <UML4CPPProfile:UML4CPPPackage xmi:id="_ZFuqUOMGEeur7cjoMTUC9A" base_Package="_0" eclipseURI="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml" packageOnly="true"/>
+  <UML4CPPProfile:DoNotGenerate xmi:id="_9Q5PYOPfEeuZntx0eUceXA" base_Element="_Ww8kQOMGEeur7cjoMTUC9A"/>
 </xmi:XMI>
