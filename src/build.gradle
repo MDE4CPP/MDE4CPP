@@ -51,6 +51,7 @@ task buildUMLProfiles() {
 	description 'generate and compile uml profile models'
 	
 	dependsOn 'common:standardProfile:buildStandardProfile'
+	dependsOn 'common:UML4CPPProfile:buildUML4CPPProfile'
 }
 
 // Compile all without generating the models
@@ -85,6 +86,7 @@ task compileUMLProfiles() {
 	description 'compile all uml profile models'
 	
 	dependsOn 'common:standardProfile:src_gen:compileStandardProfile'
+	dependsOn 'common:UML4CPPProfile:src_gen:compileUML4CPPProfile'
 }
 
 task generateEcoreModels() {
@@ -113,6 +115,7 @@ task generateUMLProfiles() {
 	description 'generate all uml profile models'
 	
 	dependsOn 'common:standardProfile:model:generateStandardProfile'
+	dependsOn 'common:UML4CPPProfile:model:generateUML4CPPProfile'
 }
 
 task deliverBasicInterfaces() {
