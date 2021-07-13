@@ -46,7 +46,7 @@
 [else]
 	[if (not aPackage.isDoNotGenerate())]
 		[aPackage.generateUML()/]
-		[if (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'PackageOnly')->notEmpty())]
+		[if (aPackage.isPackageOnly())]
 			[aPackage.generateFUMLModelForPackageOnly()/]
 		[else]
 			[aPackage.generateFUMLModel()/]
@@ -62,20 +62,24 @@
 
 [template public generateFUMLModel(aPackage : Package)]
 //generate execution for OpaqueBehaviors
-[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
-[anOpaqueBehavior.generateOpaqueBehaviorExecutionHeader(aPackage)/]
-[anOpaqueBehavior.generateOpaqueBehaviorExecutionSource(aPackage)/]
-[/for]
+[if (not aPackage.isReflectionModel())]
+	[for (anOpaqueBehavior : OpaqueBehavior | aPackage.getPackageOpaqueBehaviors()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
+	[anOpaqueBehavior.generateOpaqueBehaviorExecutionHeader(aPackage)/]
+	[anOpaqueBehavior.generateOpaqueBehaviorExecutionSource(aPackage)/]
+	[/for]
+[/if]
 
 //generate execution for Operations
 [comment]
 [aPackage.collectAllPossiblyCalledOperations().generateOperationExecutionHeader(aPackage)/]
 [aPackage.collectAllPossiblyCalledOperations().generateOperationExecutionSource(aPackage)/]
 [/comment]
-[for (anOperation : Operation | aPackage.getPackageOperations()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
-[anOperation.generateOperationExecutionHeader(aPackage)/]
-[anOperation.generateOperationExecutionSource(aPackage)/]
-[/for]
+[if (not aPackage.isReflectionModel())]
+	[for (anOperation : Operation | aPackage.getPackageOperations()->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
+	[anOperation.generateOperationExecutionHeader(aPackage)/]
+	[anOperation.generateOperationExecutionSource(aPackage)/]
+	[/for]
+[/if]
 
 //generate execution classifier
 [if (aPackage.name = keyEcore() or aPackage.name = keyUML())]
