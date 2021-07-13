@@ -123,4 +123,5 @@
   </uml:Model>
   <UML4CPPProfile:MainBehavior xmi:id="_xWvMkOMFEeur7cjoMTUC9A" base_Behavior="_7aURsOMCEeur7cjoMTUC9A"/>
   <UML4CPPProfile:NonExecutable xmi:id="__Z3JEOMFEeur7cjoMTUC9A" base_NamedElement="_adfF8LdSEeiD1JRCc1jQkA"/>
+  <UML4CPPProfile:NonExecutable xmi:id="_kHJFEOPREeuZntx0eUceXA" base_NamedElement="_7aURsOMCEeur7cjoMTUC9A"/>
 </xmi:XMI>
