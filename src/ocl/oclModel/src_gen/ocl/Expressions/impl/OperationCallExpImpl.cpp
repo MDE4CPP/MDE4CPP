@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 
@@ -349,8 +349,8 @@ Any OperationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::OclExpression>::iterator iter = m_argument->begin();
-			Bag<ocl::Expressions::OclExpression>::iterator end = m_argument->end();
+			Bag<ocl::Expressions::OclExpression>::iterator iter = getArgument()->begin();
+			Bag<ocl::Expressions::OclExpression>::iterator end = getArgument()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -391,13 +391,13 @@ bool OperationCallExpImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Expressions::OclExpression>::iterator iterArgument = m_argument->begin();
-			Bag<ocl::Expressions::OclExpression>::iterator endArgument = m_argument->end();
+			Bag<ocl::Expressions::OclExpression>::iterator iterArgument = getArgument()->begin();
+			Bag<ocl::Expressions::OclExpression>::iterator endArgument = getArgument()->end();
 			while (iterArgument != endArgument)
 			{
 				if (argumentList->find(*iterArgument) == -1)
 				{
-					m_argument->erase(*iterArgument);
+					getArgument()->erase(*iterArgument);
 				}
 				iterArgument++;
 			}
@@ -406,9 +406,9 @@ bool OperationCallExpImpl::eSet(int featureID, Any newValue)
 			endArgument = argumentList->end();
 			while (iterArgument != endArgument)
 			{
-				if (m_argument->find(*iterArgument) == -1)
+				if (getArgument()->find(*iterArgument) == -1)
 				{
-					m_argument->add(*iterArgument);
+					getArgument()->add(*iterArgument);
 				}
 				iterArgument++;			
 			}

@@ -31,12 +31,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -193,8 +193,8 @@ Any NavigationCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) 
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::OclExpEval>::iterator iter = m_qualifiers->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator end = m_qualifiers->end();
+			Bag<ocl::Evaluations::OclExpEval>::iterator iter = getQualifiers()->begin();
+			Bag<ocl::Evaluations::OclExpEval>::iterator end = getQualifiers()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -241,13 +241,13 @@ bool NavigationCallExpEvalImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Evaluations::OclExpEval>::iterator iterQualifiers = m_qualifiers->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator endQualifiers = m_qualifiers->end();
+			Bag<ocl::Evaluations::OclExpEval>::iterator iterQualifiers = getQualifiers()->begin();
+			Bag<ocl::Evaluations::OclExpEval>::iterator endQualifiers = getQualifiers()->end();
 			while (iterQualifiers != endQualifiers)
 			{
 				if (qualifiersList->find(*iterQualifiers) == -1)
 				{
-					m_qualifiers->erase(*iterQualifiers);
+					getQualifiers()->erase(*iterQualifiers);
 				}
 				iterQualifiers++;
 			}
@@ -256,9 +256,9 @@ bool NavigationCallExpEvalImpl::eSet(int featureID, Any newValue)
 			endQualifiers = qualifiersList->end();
 			while (iterQualifiers != endQualifiers)
 			{
-				if (m_qualifiers->find(*iterQualifiers) == -1)
+				if (getQualifiers()->find(*iterQualifiers) == -1)
 				{
-					m_qualifiers->add(*iterQualifiers);
+					getQualifiers()->add(*iterQualifiers);
 				}
 				iterQualifiers++;			
 			}

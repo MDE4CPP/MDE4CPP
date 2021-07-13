@@ -352,8 +352,8 @@ Any StringExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STRINGEXPRESSION_ATTRIBUTE_SUBEXPRESSION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::StringExpression>::iterator iter = m_subExpression->begin();
-			Bag<uml::StringExpression>::iterator end = m_subExpression->end();
+			Bag<uml::StringExpression>::iterator iter = getSubExpression()->begin();
+			Bag<uml::StringExpression>::iterator end = getSubExpression()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -414,13 +414,13 @@ bool StringExpressionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::StringExpression>::iterator iterSubExpression = m_subExpression->begin();
-			Bag<uml::StringExpression>::iterator endSubExpression = m_subExpression->end();
+			Bag<uml::StringExpression>::iterator iterSubExpression = getSubExpression()->begin();
+			Bag<uml::StringExpression>::iterator endSubExpression = getSubExpression()->end();
 			while (iterSubExpression != endSubExpression)
 			{
 				if (subExpressionList->find(*iterSubExpression) == -1)
 				{
-					m_subExpression->erase(*iterSubExpression);
+					getSubExpression()->erase(*iterSubExpression);
 				}
 				iterSubExpression++;
 			}
@@ -429,9 +429,9 @@ bool StringExpressionImpl::eSet(int featureID, Any newValue)
 			endSubExpression = subExpressionList->end();
 			while (iterSubExpression != endSubExpression)
 			{
-				if (m_subExpression->find(*iterSubExpression) == -1)
+				if (getSubExpression()->find(*iterSubExpression) == -1)
 				{
-					m_subExpression->add(*iterSubExpression);
+					getSubExpression()->add(*iterSubExpression);
 				}
 				iterSubExpression++;			
 			}

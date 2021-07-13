@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 
@@ -353,8 +353,8 @@ Any LoopExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::Variable>::iterator iter = m_iterator->begin();
-			Bag<ocl::Expressions::Variable>::iterator end = m_iterator->end();
+			Bag<ocl::Expressions::Variable>::iterator iter = getIterator()->begin();
+			Bag<ocl::Expressions::Variable>::iterator end = getIterator()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -401,13 +401,13 @@ bool LoopExpImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Expressions::Variable>::iterator iterIterator = m_iterator->begin();
-			Bag<ocl::Expressions::Variable>::iterator endIterator = m_iterator->end();
+			Bag<ocl::Expressions::Variable>::iterator iterIterator = getIterator()->begin();
+			Bag<ocl::Expressions::Variable>::iterator endIterator = getIterator()->end();
 			while (iterIterator != endIterator)
 			{
 				if (iteratorList->find(*iterIterator) == -1)
 				{
-					m_iterator->erase(*iterIterator);
+					getIterator()->erase(*iterIterator);
 				}
 				iterIterator++;
 			}
@@ -416,9 +416,9 @@ bool LoopExpImpl::eSet(int featureID, Any newValue)
 			endIterator = iteratorList->end();
 			while (iterIterator != endIterator)
 			{
-				if (m_iterator->find(*iterIterator) == -1)
+				if (getIterator()->find(*iterIterator) == -1)
 				{
-					m_iterator->add(*iterIterator);
+					getIterator()->add(*iterIterator);
 				}
 				iterIterator++;			
 			}

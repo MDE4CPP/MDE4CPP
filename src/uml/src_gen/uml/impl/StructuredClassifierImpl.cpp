@@ -517,8 +517,8 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
-			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
+			Bag<uml::Property>::iterator iter = getOwnedAttribute()->begin();
+			Bag<uml::Property>::iterator end = getOwnedAttribute()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -529,8 +529,8 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_OWNEDCONNECTOR:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Connector>::iterator iter = m_ownedConnector->begin();
-			Bag<uml::Connector>::iterator end = m_ownedConnector->end();
+			Bag<uml::Connector>::iterator iter = getOwnedConnector()->begin();
+			Bag<uml::Connector>::iterator end = getOwnedConnector()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -541,8 +541,8 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_PART:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_part->begin();
-			Bag<uml::Property>::iterator end = m_part->end();
+			Bag<uml::Property>::iterator iter = getPart()->begin();
+			Bag<uml::Property>::iterator end = getPart()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -553,8 +553,8 @@ Any StructuredClassifierImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case uml::umlPackage::STRUCTUREDCLASSIFIER_ATTRIBUTE_ROLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectableElement>::iterator iter = m_role->begin();
-			Bag<uml::ConnectableElement>::iterator end = m_role->end();
+			Bag<uml::ConnectableElement>::iterator iter = getRole()->begin();
+			Bag<uml::ConnectableElement>::iterator end = getRole()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -597,13 +597,13 @@ bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Property>::iterator iterOwnedAttribute = m_ownedAttribute->begin();
-			Bag<uml::Property>::iterator endOwnedAttribute = m_ownedAttribute->end();
+			Bag<uml::Property>::iterator iterOwnedAttribute = getOwnedAttribute()->begin();
+			Bag<uml::Property>::iterator endOwnedAttribute = getOwnedAttribute()->end();
 			while (iterOwnedAttribute != endOwnedAttribute)
 			{
 				if (ownedAttributeList->find(*iterOwnedAttribute) == -1)
 				{
-					m_ownedAttribute->erase(*iterOwnedAttribute);
+					getOwnedAttribute()->erase(*iterOwnedAttribute);
 				}
 				iterOwnedAttribute++;
 			}
@@ -612,9 +612,9 @@ bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
 			endOwnedAttribute = ownedAttributeList->end();
 			while (iterOwnedAttribute != endOwnedAttribute)
 			{
-				if (m_ownedAttribute->find(*iterOwnedAttribute) == -1)
+				if (getOwnedAttribute()->find(*iterOwnedAttribute) == -1)
 				{
-					m_ownedAttribute->add(*iterOwnedAttribute);
+					getOwnedAttribute()->add(*iterOwnedAttribute);
 				}
 				iterOwnedAttribute++;			
 			}
@@ -633,13 +633,13 @@ bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Connector>::iterator iterOwnedConnector = m_ownedConnector->begin();
-			Bag<uml::Connector>::iterator endOwnedConnector = m_ownedConnector->end();
+			Bag<uml::Connector>::iterator iterOwnedConnector = getOwnedConnector()->begin();
+			Bag<uml::Connector>::iterator endOwnedConnector = getOwnedConnector()->end();
 			while (iterOwnedConnector != endOwnedConnector)
 			{
 				if (ownedConnectorList->find(*iterOwnedConnector) == -1)
 				{
-					m_ownedConnector->erase(*iterOwnedConnector);
+					getOwnedConnector()->erase(*iterOwnedConnector);
 				}
 				iterOwnedConnector++;
 			}
@@ -648,9 +648,9 @@ bool StructuredClassifierImpl::eSet(int featureID, Any newValue)
 			endOwnedConnector = ownedConnectorList->end();
 			while (iterOwnedConnector != endOwnedConnector)
 			{
-				if (m_ownedConnector->find(*iterOwnedConnector) == -1)
+				if (getOwnedConnector()->find(*iterOwnedConnector) == -1)
 				{
-					m_ownedConnector->add(*iterOwnedConnector);
+					getOwnedConnector()->add(*iterOwnedConnector);
 				}
 				iterOwnedConnector++;			
 			}

@@ -255,8 +255,8 @@ Any LocalSnapshotImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_BINDINGS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::NameValueBinding>::iterator iter = m_bindings->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator end = m_bindings->end();
+			Bag<ocl::Values::NameValueBinding>::iterator iter = getBindings()->begin();
+			Bag<ocl::Values::NameValueBinding>::iterator end = getBindings()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -267,8 +267,8 @@ Any LocalSnapshotImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_INPUTQ:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::OclMessageValue>::iterator iter = m_inputQ->begin();
-			Bag<ocl::Values::OclMessageValue>::iterator end = m_inputQ->end();
+			Bag<ocl::Values::OclMessageValue>::iterator iter = getInputQ()->begin();
+			Bag<ocl::Values::OclMessageValue>::iterator end = getInputQ()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -283,8 +283,8 @@ Any LocalSnapshotImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::OclMessageValue>::iterator iter = m_outputQ->begin();
-			Bag<ocl::Values::OclMessageValue>::iterator end = m_outputQ->end();
+			Bag<ocl::Values::OclMessageValue>::iterator iter = getOutputQ()->begin();
+			Bag<ocl::Values::OclMessageValue>::iterator end = getOutputQ()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -337,13 +337,13 @@ bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Values::NameValueBinding>::iterator iterBindings = m_bindings->begin();
-			Bag<ocl::Values::NameValueBinding>::iterator endBindings = m_bindings->end();
+			Bag<ocl::Values::NameValueBinding>::iterator iterBindings = getBindings()->begin();
+			Bag<ocl::Values::NameValueBinding>::iterator endBindings = getBindings()->end();
 			while (iterBindings != endBindings)
 			{
 				if (bindingsList->find(*iterBindings) == -1)
 				{
-					m_bindings->erase(*iterBindings);
+					getBindings()->erase(*iterBindings);
 				}
 				iterBindings++;
 			}
@@ -352,9 +352,9 @@ bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
 			endBindings = bindingsList->end();
 			while (iterBindings != endBindings)
 			{
-				if (m_bindings->find(*iterBindings) == -1)
+				if (getBindings()->find(*iterBindings) == -1)
 				{
-					m_bindings->add(*iterBindings);
+					getBindings()->add(*iterBindings);
 				}
 				iterBindings++;			
 			}
@@ -373,13 +373,13 @@ bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Values::OclMessageValue>::iterator iterInputQ = m_inputQ->begin();
-			Bag<ocl::Values::OclMessageValue>::iterator endInputQ = m_inputQ->end();
+			Bag<ocl::Values::OclMessageValue>::iterator iterInputQ = getInputQ()->begin();
+			Bag<ocl::Values::OclMessageValue>::iterator endInputQ = getInputQ()->end();
 			while (iterInputQ != endInputQ)
 			{
 				if (inputQList->find(*iterInputQ) == -1)
 				{
-					m_inputQ->erase(*iterInputQ);
+					getInputQ()->erase(*iterInputQ);
 				}
 				iterInputQ++;
 			}
@@ -388,9 +388,9 @@ bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
 			endInputQ = inputQList->end();
 			while (iterInputQ != endInputQ)
 			{
-				if (m_inputQ->find(*iterInputQ) == -1)
+				if (getInputQ()->find(*iterInputQ) == -1)
 				{
-					m_inputQ->add(*iterInputQ);
+					getInputQ()->add(*iterInputQ);
 				}
 				iterInputQ++;			
 			}
@@ -423,13 +423,13 @@ bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Values::OclMessageValue>::iterator iterOutputQ = m_outputQ->begin();
-			Bag<ocl::Values::OclMessageValue>::iterator endOutputQ = m_outputQ->end();
+			Bag<ocl::Values::OclMessageValue>::iterator iterOutputQ = getOutputQ()->begin();
+			Bag<ocl::Values::OclMessageValue>::iterator endOutputQ = getOutputQ()->end();
 			while (iterOutputQ != endOutputQ)
 			{
 				if (outputQList->find(*iterOutputQ) == -1)
 				{
-					m_outputQ->erase(*iterOutputQ);
+					getOutputQ()->erase(*iterOutputQ);
 				}
 				iterOutputQ++;
 			}
@@ -438,9 +438,9 @@ bool LocalSnapshotImpl::eSet(int featureID, Any newValue)
 			endOutputQ = outputQList->end();
 			while (iterOutputQ != endOutputQ)
 			{
-				if (m_outputQ->find(*iterOutputQ) == -1)
+				if (getOutputQ()->find(*iterOutputQ) == -1)
 				{
-					m_outputQ->add(*iterOutputQ);
+					getOutputQ()->add(*iterOutputQ);
 				}
 				iterOutputQ++;			
 			}

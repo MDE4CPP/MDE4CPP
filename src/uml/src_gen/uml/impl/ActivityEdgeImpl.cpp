@@ -480,8 +480,8 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INGROUP:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityGroup>::iterator iter = m_inGroup->begin();
-			Bag<uml::ActivityGroup>::iterator end = m_inGroup->end();
+			Bag<uml::ActivityGroup>::iterator iter = getInGroup()->begin();
+			Bag<uml::ActivityGroup>::iterator end = getInGroup()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -492,8 +492,8 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INPARTITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityPartition>::iterator iter = m_inPartition->begin();
-			Bag<uml::ActivityPartition>::iterator end = m_inPartition->end();
+			Bag<uml::ActivityPartition>::iterator iter = getInPartition()->begin();
+			Bag<uml::ActivityPartition>::iterator end = getInPartition()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -508,8 +508,8 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_redefinedEdge->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_redefinedEdge->end();
+			Bag<uml::ActivityEdge>::iterator iter = getRedefinedEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator end = getRedefinedEdge()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -586,13 +586,13 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityPartition>::iterator iterInPartition = m_inPartition->begin();
-			Bag<uml::ActivityPartition>::iterator endInPartition = m_inPartition->end();
+			Bag<uml::ActivityPartition>::iterator iterInPartition = getInPartition()->begin();
+			Bag<uml::ActivityPartition>::iterator endInPartition = getInPartition()->end();
 			while (iterInPartition != endInPartition)
 			{
 				if (inPartitionList->find(*iterInPartition) == -1)
 				{
-					m_inPartition->erase(*iterInPartition);
+					getInPartition()->erase(*iterInPartition);
 				}
 				iterInPartition++;
 			}
@@ -601,9 +601,9 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 			endInPartition = inPartitionList->end();
 			while (iterInPartition != endInPartition)
 			{
-				if (m_inPartition->find(*iterInPartition) == -1)
+				if (getInPartition()->find(*iterInPartition) == -1)
 				{
-					m_inPartition->add(*iterInPartition);
+					getInPartition()->add(*iterInPartition);
 				}
 				iterInPartition++;			
 			}
@@ -638,13 +638,13 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityEdge>::iterator iterRedefinedEdge = m_redefinedEdge->begin();
-			Bag<uml::ActivityEdge>::iterator endRedefinedEdge = m_redefinedEdge->end();
+			Bag<uml::ActivityEdge>::iterator iterRedefinedEdge = getRedefinedEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator endRedefinedEdge = getRedefinedEdge()->end();
 			while (iterRedefinedEdge != endRedefinedEdge)
 			{
 				if (redefinedEdgeList->find(*iterRedefinedEdge) == -1)
 				{
-					m_redefinedEdge->erase(*iterRedefinedEdge);
+					getRedefinedEdge()->erase(*iterRedefinedEdge);
 				}
 				iterRedefinedEdge++;
 			}
@@ -653,9 +653,9 @@ bool ActivityEdgeImpl::eSet(int featureID, Any newValue)
 			endRedefinedEdge = redefinedEdgeList->end();
 			while (iterRedefinedEdge != endRedefinedEdge)
 			{
-				if (m_redefinedEdge->find(*iterRedefinedEdge) == -1)
+				if (getRedefinedEdge()->find(*iterRedefinedEdge) == -1)
 				{
-					m_redefinedEdge->add(*iterRedefinedEdge);
+					getRedefinedEdge()->add(*iterRedefinedEdge);
 				}
 				iterRedefinedEdge++;			
 			}

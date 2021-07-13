@@ -692,8 +692,8 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYOUTPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_bodyOutput->begin();
-			Bag<uml::OutputPin>::iterator end = m_bodyOutput->end();
+			Bag<uml::OutputPin>::iterator iter = getBodyOutput()->begin();
+			Bag<uml::OutputPin>::iterator end = getBodyOutput()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -704,8 +704,8 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_BODYPART:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = m_bodyPart->begin();
-			Bag<uml::ExecutableNode>::iterator end = m_bodyPart->end();
+			Bag<uml::ExecutableNode>::iterator iter = getBodyPart()->begin();
+			Bag<uml::ExecutableNode>::iterator end = getBodyPart()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -720,8 +720,8 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_loopVariable->begin();
-			Bag<uml::OutputPin>::iterator end = m_loopVariable->end();
+			Bag<uml::OutputPin>::iterator iter = getLoopVariable()->begin();
+			Bag<uml::OutputPin>::iterator end = getLoopVariable()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -732,8 +732,8 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLEINPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_loopVariableInput->begin();
-			Bag<uml::InputPin>::iterator end = m_loopVariableInput->end();
+			Bag<uml::InputPin>::iterator iter = getLoopVariableInput()->begin();
+			Bag<uml::InputPin>::iterator end = getLoopVariableInput()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -744,8 +744,8 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_RESULT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_result->begin();
-			Bag<uml::OutputPin>::iterator end = m_result->end();
+			Bag<uml::OutputPin>::iterator iter = getResult()->begin();
+			Bag<uml::OutputPin>::iterator end = getResult()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -756,8 +756,8 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_SETUPPART:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = m_setupPart->begin();
-			Bag<uml::ExecutableNode>::iterator end = m_setupPart->end();
+			Bag<uml::ExecutableNode>::iterator iter = getSetupPart()->begin();
+			Bag<uml::ExecutableNode>::iterator end = getSetupPart()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -768,8 +768,8 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_TEST:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = m_test->begin();
-			Bag<uml::ExecutableNode>::iterator end = m_test->end();
+			Bag<uml::ExecutableNode>::iterator iter = getTest()->begin();
+			Bag<uml::ExecutableNode>::iterator end = getTest()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -822,13 +822,13 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::OutputPin>::iterator iterBodyOutput = m_bodyOutput->begin();
-			Bag<uml::OutputPin>::iterator endBodyOutput = m_bodyOutput->end();
+			Bag<uml::OutputPin>::iterator iterBodyOutput = getBodyOutput()->begin();
+			Bag<uml::OutputPin>::iterator endBodyOutput = getBodyOutput()->end();
 			while (iterBodyOutput != endBodyOutput)
 			{
 				if (bodyOutputList->find(*iterBodyOutput) == -1)
 				{
-					m_bodyOutput->erase(*iterBodyOutput);
+					getBodyOutput()->erase(*iterBodyOutput);
 				}
 				iterBodyOutput++;
 			}
@@ -837,9 +837,9 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			endBodyOutput = bodyOutputList->end();
 			while (iterBodyOutput != endBodyOutput)
 			{
-				if (m_bodyOutput->find(*iterBodyOutput) == -1)
+				if (getBodyOutput()->find(*iterBodyOutput) == -1)
 				{
-					m_bodyOutput->add(*iterBodyOutput);
+					getBodyOutput()->add(*iterBodyOutput);
 				}
 				iterBodyOutput++;			
 			}
@@ -858,13 +858,13 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ExecutableNode>::iterator iterBodyPart = m_bodyPart->begin();
-			Bag<uml::ExecutableNode>::iterator endBodyPart = m_bodyPart->end();
+			Bag<uml::ExecutableNode>::iterator iterBodyPart = getBodyPart()->begin();
+			Bag<uml::ExecutableNode>::iterator endBodyPart = getBodyPart()->end();
 			while (iterBodyPart != endBodyPart)
 			{
 				if (bodyPartList->find(*iterBodyPart) == -1)
 				{
-					m_bodyPart->erase(*iterBodyPart);
+					getBodyPart()->erase(*iterBodyPart);
 				}
 				iterBodyPart++;
 			}
@@ -873,9 +873,9 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			endBodyPart = bodyPartList->end();
 			while (iterBodyPart != endBodyPart)
 			{
-				if (m_bodyPart->find(*iterBodyPart) == -1)
+				if (getBodyPart()->find(*iterBodyPart) == -1)
 				{
-					m_bodyPart->add(*iterBodyPart);
+					getBodyPart()->add(*iterBodyPart);
 				}
 				iterBodyPart++;			
 			}
@@ -909,13 +909,13 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::OutputPin>::iterator iterLoopVariable = m_loopVariable->begin();
-			Bag<uml::OutputPin>::iterator endLoopVariable = m_loopVariable->end();
+			Bag<uml::OutputPin>::iterator iterLoopVariable = getLoopVariable()->begin();
+			Bag<uml::OutputPin>::iterator endLoopVariable = getLoopVariable()->end();
 			while (iterLoopVariable != endLoopVariable)
 			{
 				if (loopVariableList->find(*iterLoopVariable) == -1)
 				{
-					m_loopVariable->erase(*iterLoopVariable);
+					getLoopVariable()->erase(*iterLoopVariable);
 				}
 				iterLoopVariable++;
 			}
@@ -924,9 +924,9 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			endLoopVariable = loopVariableList->end();
 			while (iterLoopVariable != endLoopVariable)
 			{
-				if (m_loopVariable->find(*iterLoopVariable) == -1)
+				if (getLoopVariable()->find(*iterLoopVariable) == -1)
 				{
-					m_loopVariable->add(*iterLoopVariable);
+					getLoopVariable()->add(*iterLoopVariable);
 				}
 				iterLoopVariable++;			
 			}
@@ -945,13 +945,13 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::InputPin>::iterator iterLoopVariableInput = m_loopVariableInput->begin();
-			Bag<uml::InputPin>::iterator endLoopVariableInput = m_loopVariableInput->end();
+			Bag<uml::InputPin>::iterator iterLoopVariableInput = getLoopVariableInput()->begin();
+			Bag<uml::InputPin>::iterator endLoopVariableInput = getLoopVariableInput()->end();
 			while (iterLoopVariableInput != endLoopVariableInput)
 			{
 				if (loopVariableInputList->find(*iterLoopVariableInput) == -1)
 				{
-					m_loopVariableInput->erase(*iterLoopVariableInput);
+					getLoopVariableInput()->erase(*iterLoopVariableInput);
 				}
 				iterLoopVariableInput++;
 			}
@@ -960,9 +960,9 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			endLoopVariableInput = loopVariableInputList->end();
 			while (iterLoopVariableInput != endLoopVariableInput)
 			{
-				if (m_loopVariableInput->find(*iterLoopVariableInput) == -1)
+				if (getLoopVariableInput()->find(*iterLoopVariableInput) == -1)
 				{
-					m_loopVariableInput->add(*iterLoopVariableInput);
+					getLoopVariableInput()->add(*iterLoopVariableInput);
 				}
 				iterLoopVariableInput++;			
 			}
@@ -981,13 +981,13 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::OutputPin>::iterator iterResult = m_result->begin();
-			Bag<uml::OutputPin>::iterator endResult = m_result->end();
+			Bag<uml::OutputPin>::iterator iterResult = getResult()->begin();
+			Bag<uml::OutputPin>::iterator endResult = getResult()->end();
 			while (iterResult != endResult)
 			{
 				if (resultList->find(*iterResult) == -1)
 				{
-					m_result->erase(*iterResult);
+					getResult()->erase(*iterResult);
 				}
 				iterResult++;
 			}
@@ -996,9 +996,9 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			endResult = resultList->end();
 			while (iterResult != endResult)
 			{
-				if (m_result->find(*iterResult) == -1)
+				if (getResult()->find(*iterResult) == -1)
 				{
-					m_result->add(*iterResult);
+					getResult()->add(*iterResult);
 				}
 				iterResult++;			
 			}
@@ -1017,13 +1017,13 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ExecutableNode>::iterator iterSetupPart = m_setupPart->begin();
-			Bag<uml::ExecutableNode>::iterator endSetupPart = m_setupPart->end();
+			Bag<uml::ExecutableNode>::iterator iterSetupPart = getSetupPart()->begin();
+			Bag<uml::ExecutableNode>::iterator endSetupPart = getSetupPart()->end();
 			while (iterSetupPart != endSetupPart)
 			{
 				if (setupPartList->find(*iterSetupPart) == -1)
 				{
-					m_setupPart->erase(*iterSetupPart);
+					getSetupPart()->erase(*iterSetupPart);
 				}
 				iterSetupPart++;
 			}
@@ -1032,9 +1032,9 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			endSetupPart = setupPartList->end();
 			while (iterSetupPart != endSetupPart)
 			{
-				if (m_setupPart->find(*iterSetupPart) == -1)
+				if (getSetupPart()->find(*iterSetupPart) == -1)
 				{
-					m_setupPart->add(*iterSetupPart);
+					getSetupPart()->add(*iterSetupPart);
 				}
 				iterSetupPart++;			
 			}
@@ -1053,13 +1053,13 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ExecutableNode>::iterator iterTest = m_test->begin();
-			Bag<uml::ExecutableNode>::iterator endTest = m_test->end();
+			Bag<uml::ExecutableNode>::iterator iterTest = getTest()->begin();
+			Bag<uml::ExecutableNode>::iterator endTest = getTest()->end();
 			while (iterTest != endTest)
 			{
 				if (testList->find(*iterTest) == -1)
 				{
-					m_test->erase(*iterTest);
+					getTest()->erase(*iterTest);
 				}
 				iterTest++;
 			}
@@ -1068,9 +1068,9 @@ bool LoopNodeImpl::eSet(int featureID, Any newValue)
 			endTest = testList->end();
 			while (iterTest != endTest)
 			{
-				if (m_test->find(*iterTest) == -1)
+				if (getTest()->find(*iterTest) == -1)
 				{
-					m_test->add(*iterTest);
+					getTest()->add(*iterTest);
 				}
 				iterTest++;			
 			}

@@ -258,8 +258,8 @@ Any ClassifierTemplateParameterImpl::eGet(int featureID, bool resolve, bool core
 		case uml::umlPackage::CLASSIFIERTEMPLATEPARAMETER_ATTRIBUTE_CONSTRAININGCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_constrainingClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_constrainingClassifier->end();
+			Bag<uml::Classifier>::iterator iter = getConstrainingClassifier()->begin();
+			Bag<uml::Classifier>::iterator end = getConstrainingClassifier()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -305,13 +305,13 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Classifier>::iterator iterConstrainingClassifier = m_constrainingClassifier->begin();
-			Bag<uml::Classifier>::iterator endConstrainingClassifier = m_constrainingClassifier->end();
+			Bag<uml::Classifier>::iterator iterConstrainingClassifier = getConstrainingClassifier()->begin();
+			Bag<uml::Classifier>::iterator endConstrainingClassifier = getConstrainingClassifier()->end();
 			while (iterConstrainingClassifier != endConstrainingClassifier)
 			{
 				if (constrainingClassifierList->find(*iterConstrainingClassifier) == -1)
 				{
-					m_constrainingClassifier->erase(*iterConstrainingClassifier);
+					getConstrainingClassifier()->erase(*iterConstrainingClassifier);
 				}
 				iterConstrainingClassifier++;
 			}
@@ -320,9 +320,9 @@ bool ClassifierTemplateParameterImpl::eSet(int featureID, Any newValue)
 			endConstrainingClassifier = constrainingClassifierList->end();
 			while (iterConstrainingClassifier != endConstrainingClassifier)
 			{
-				if (m_constrainingClassifier->find(*iterConstrainingClassifier) == -1)
+				if (getConstrainingClassifier()->find(*iterConstrainingClassifier) == -1)
 				{
-					m_constrainingClassifier->add(*iterConstrainingClassifier);
+					getConstrainingClassifier()->add(*iterConstrainingClassifier);
 				}
 				iterConstrainingClassifier++;			
 			}

@@ -16,6 +16,7 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::keywords /]
 [import fUML4CPP::generator::main::parameterHelper /]
 [import fUML4CPP::generator::main::generateOperationExecution /]
 [import fUML4CPP::generator::main::plugin::generateExecutionPluginImplementationSource /]
@@ -27,7 +28,7 @@
 
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
 
-[if(aPackage.allOwnedElements()->filter(Operation)->reject(hasEAnnotation(sourceNoExecution()))->size() > 0 or aPackage.allOwnedElements()->filter(CallOperationAction).operation->reject(hasEAnnotation(sourceNoExecution()))->size() > 0)]
+[if(aPackage.allOwnedElements()->filter(Operation)->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->size() > 0 or aPackage.allOwnedElements()->filter(CallOperationAction).operation->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE()))->size() > 0)]
 namespace uml
 {
 	class OpaqueBehavior;
@@ -76,7 +77,7 @@ namespace [aPackage.generateNamespace(false)/]
 			std::shared_ptr<PSCS::Semantics::Loci::CS_Executor> m_executor;
 			std::shared_ptr<PSCS::Semantics::Loci::CS_ExecutionFactory> m_factory;
 			//OpaqueBehaviors for primitive prototypes for activity executions
-			[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(hasEAnnotation(sourceNoExecution())))]
+			[for (anOperation : Operation | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA())->reject(hasStereotypeApplied(QN_STEREOTYPE_NONEXECUTABLE())))]
 			[if (not anOperation.name.oclIsUndefined())]
 			std::shared_ptr<uml::OpaqueBehavior> m_[anOperation.getFBPackageElement()/];
 			[/if]

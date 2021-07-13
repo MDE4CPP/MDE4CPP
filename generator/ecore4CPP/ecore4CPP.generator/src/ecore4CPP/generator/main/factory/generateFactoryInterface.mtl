@@ -68,6 +68,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 [endGuard(anEPackage,'Factory')/]
 [/file]
 [/template]
+
 [template public generateForwardDeclarations(anEPackage : EPackage)]
 [if (anEPackage.eSuperPackage.oclIsUndefined())]
 namespace [anEPackage.generateNamespaceDefinition()/] 

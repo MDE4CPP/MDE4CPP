@@ -655,8 +655,8 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASS_ATTRIBUTE_EXTENSION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Extension>::iterator iter = m_extension->begin();
-			Bag<uml::Extension>::iterator end = m_extension->end();
+			Bag<uml::Extension>::iterator iter = getExtension()->begin();
+			Bag<uml::Extension>::iterator end = getExtension()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -669,8 +669,8 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASS_ATTRIBUTE_NESTEDCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_nestedClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_nestedClassifier->end();
+			Bag<uml::Classifier>::iterator iter = getNestedClassifier()->begin();
+			Bag<uml::Classifier>::iterator end = getNestedClassifier()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -681,8 +681,8 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDOPERATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
-			Bag<uml::Operation>::iterator end = m_ownedOperation->end();
+			Bag<uml::Operation>::iterator iter = getOwnedOperation()->begin();
+			Bag<uml::Operation>::iterator end = getOwnedOperation()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -693,8 +693,8 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASS_ATTRIBUTE_OWNEDRECEPTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Reception>::iterator iter = m_ownedReception->begin();
-			Bag<uml::Reception>::iterator end = m_ownedReception->end();
+			Bag<uml::Reception>::iterator iter = getOwnedReception()->begin();
+			Bag<uml::Reception>::iterator end = getOwnedReception()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -705,8 +705,8 @@ Any ClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLASS_ATTRIBUTE_SUPERCLASS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Class>::iterator iter = m_superClass->begin();
-			Bag<uml::Class>::iterator end = m_superClass->end();
+			Bag<uml::Class>::iterator iter = getSuperClass()->begin();
+			Bag<uml::Class>::iterator end = getSuperClass()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -774,13 +774,13 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Classifier>::iterator iterNestedClassifier = m_nestedClassifier->begin();
-			Bag<uml::Classifier>::iterator endNestedClassifier = m_nestedClassifier->end();
+			Bag<uml::Classifier>::iterator iterNestedClassifier = getNestedClassifier()->begin();
+			Bag<uml::Classifier>::iterator endNestedClassifier = getNestedClassifier()->end();
 			while (iterNestedClassifier != endNestedClassifier)
 			{
 				if (nestedClassifierList->find(*iterNestedClassifier) == -1)
 				{
-					m_nestedClassifier->erase(*iterNestedClassifier);
+					getNestedClassifier()->erase(*iterNestedClassifier);
 				}
 				iterNestedClassifier++;
 			}
@@ -789,9 +789,9 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 			endNestedClassifier = nestedClassifierList->end();
 			while (iterNestedClassifier != endNestedClassifier)
 			{
-				if (m_nestedClassifier->find(*iterNestedClassifier) == -1)
+				if (getNestedClassifier()->find(*iterNestedClassifier) == -1)
 				{
-					m_nestedClassifier->add(*iterNestedClassifier);
+					getNestedClassifier()->add(*iterNestedClassifier);
 				}
 				iterNestedClassifier++;			
 			}
@@ -810,13 +810,13 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Operation>::iterator iterOwnedOperation = m_ownedOperation->begin();
-			Bag<uml::Operation>::iterator endOwnedOperation = m_ownedOperation->end();
+			Bag<uml::Operation>::iterator iterOwnedOperation = getOwnedOperation()->begin();
+			Bag<uml::Operation>::iterator endOwnedOperation = getOwnedOperation()->end();
 			while (iterOwnedOperation != endOwnedOperation)
 			{
 				if (ownedOperationList->find(*iterOwnedOperation) == -1)
 				{
-					m_ownedOperation->erase(*iterOwnedOperation);
+					getOwnedOperation()->erase(*iterOwnedOperation);
 				}
 				iterOwnedOperation++;
 			}
@@ -825,9 +825,9 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 			endOwnedOperation = ownedOperationList->end();
 			while (iterOwnedOperation != endOwnedOperation)
 			{
-				if (m_ownedOperation->find(*iterOwnedOperation) == -1)
+				if (getOwnedOperation()->find(*iterOwnedOperation) == -1)
 				{
-					m_ownedOperation->add(*iterOwnedOperation);
+					getOwnedOperation()->add(*iterOwnedOperation);
 				}
 				iterOwnedOperation++;			
 			}
@@ -846,13 +846,13 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Reception>::iterator iterOwnedReception = m_ownedReception->begin();
-			Bag<uml::Reception>::iterator endOwnedReception = m_ownedReception->end();
+			Bag<uml::Reception>::iterator iterOwnedReception = getOwnedReception()->begin();
+			Bag<uml::Reception>::iterator endOwnedReception = getOwnedReception()->end();
 			while (iterOwnedReception != endOwnedReception)
 			{
 				if (ownedReceptionList->find(*iterOwnedReception) == -1)
 				{
-					m_ownedReception->erase(*iterOwnedReception);
+					getOwnedReception()->erase(*iterOwnedReception);
 				}
 				iterOwnedReception++;
 			}
@@ -861,9 +861,9 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 			endOwnedReception = ownedReceptionList->end();
 			while (iterOwnedReception != endOwnedReception)
 			{
-				if (m_ownedReception->find(*iterOwnedReception) == -1)
+				if (getOwnedReception()->find(*iterOwnedReception) == -1)
 				{
-					m_ownedReception->add(*iterOwnedReception);
+					getOwnedReception()->add(*iterOwnedReception);
 				}
 				iterOwnedReception++;			
 			}
@@ -882,13 +882,13 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Class>::iterator iterSuperClass = m_superClass->begin();
-			Bag<uml::Class>::iterator endSuperClass = m_superClass->end();
+			Bag<uml::Class>::iterator iterSuperClass = getSuperClass()->begin();
+			Bag<uml::Class>::iterator endSuperClass = getSuperClass()->end();
 			while (iterSuperClass != endSuperClass)
 			{
 				if (superClassList->find(*iterSuperClass) == -1)
 				{
-					m_superClass->erase(*iterSuperClass);
+					getSuperClass()->erase(*iterSuperClass);
 				}
 				iterSuperClass++;
 			}
@@ -897,9 +897,9 @@ bool ClassImpl::eSet(int featureID, Any newValue)
 			endSuperClass = superClassList->end();
 			while (iterSuperClass != endSuperClass)
 			{
-				if (m_superClass->find(*iterSuperClass) == -1)
+				if (getSuperClass()->find(*iterSuperClass) == -1)
 				{
-					m_superClass->add(*iterSuperClass);
+					getSuperClass()->add(*iterSuperClass);
 				}
 				iterSuperClass++;			
 			}

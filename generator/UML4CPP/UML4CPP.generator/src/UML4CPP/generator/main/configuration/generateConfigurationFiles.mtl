@@ -21,7 +21,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 
 [template public generateConfigurationFiles(aPackage : Package, packOnly : Boolean) { packageName : String = getPackageName(); }]
-[let prepareApplication : Boolean = aPackage.prepareApplication()]
+[let prepareApplication : Boolean = aPackage.hasMainBehavior()]
 [aPackage.generateCMakeLists(packOnly)/]
 [aPackage.generateGradleFiles()/]
 [aPackage.generateEclipseFiles(prepareApplication)/]

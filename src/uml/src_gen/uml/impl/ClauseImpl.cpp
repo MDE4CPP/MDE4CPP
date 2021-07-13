@@ -297,8 +297,8 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODY:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = m_body->begin();
-			Bag<uml::ExecutableNode>::iterator end = m_body->end();
+			Bag<uml::ExecutableNode>::iterator iter = getBody()->begin();
+			Bag<uml::ExecutableNode>::iterator end = getBody()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -309,8 +309,8 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_BODYOUTPUT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::OutputPin>::iterator iter = m_bodyOutput->begin();
-			Bag<uml::OutputPin>::iterator end = m_bodyOutput->end();
+			Bag<uml::OutputPin>::iterator iter = getBodyOutput()->begin();
+			Bag<uml::OutputPin>::iterator end = getBodyOutput()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -323,8 +323,8 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Clause>::iterator iter = m_predecessorClause->begin();
-			Bag<uml::Clause>::iterator end = m_predecessorClause->end();
+			Bag<uml::Clause>::iterator iter = getPredecessorClause()->begin();
+			Bag<uml::Clause>::iterator end = getPredecessorClause()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -335,8 +335,8 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_SUCCESSORCLAUSE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Clause>::iterator iter = m_successorClause->begin();
-			Bag<uml::Clause>::iterator end = m_successorClause->end();
+			Bag<uml::Clause>::iterator iter = getSuccessorClause()->begin();
+			Bag<uml::Clause>::iterator end = getSuccessorClause()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -347,8 +347,8 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_TEST:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExecutableNode>::iterator iter = m_test->begin();
-			Bag<uml::ExecutableNode>::iterator end = m_test->end();
+			Bag<uml::ExecutableNode>::iterator iter = getTest()->begin();
+			Bag<uml::ExecutableNode>::iterator end = getTest()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -395,13 +395,13 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ExecutableNode>::iterator iterBody = m_body->begin();
-			Bag<uml::ExecutableNode>::iterator endBody = m_body->end();
+			Bag<uml::ExecutableNode>::iterator iterBody = getBody()->begin();
+			Bag<uml::ExecutableNode>::iterator endBody = getBody()->end();
 			while (iterBody != endBody)
 			{
 				if (bodyList->find(*iterBody) == -1)
 				{
-					m_body->erase(*iterBody);
+					getBody()->erase(*iterBody);
 				}
 				iterBody++;
 			}
@@ -410,9 +410,9 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 			endBody = bodyList->end();
 			while (iterBody != endBody)
 			{
-				if (m_body->find(*iterBody) == -1)
+				if (getBody()->find(*iterBody) == -1)
 				{
-					m_body->add(*iterBody);
+					getBody()->add(*iterBody);
 				}
 				iterBody++;			
 			}
@@ -431,13 +431,13 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::OutputPin>::iterator iterBodyOutput = m_bodyOutput->begin();
-			Bag<uml::OutputPin>::iterator endBodyOutput = m_bodyOutput->end();
+			Bag<uml::OutputPin>::iterator iterBodyOutput = getBodyOutput()->begin();
+			Bag<uml::OutputPin>::iterator endBodyOutput = getBodyOutput()->end();
 			while (iterBodyOutput != endBodyOutput)
 			{
 				if (bodyOutputList->find(*iterBodyOutput) == -1)
 				{
-					m_bodyOutput->erase(*iterBodyOutput);
+					getBodyOutput()->erase(*iterBodyOutput);
 				}
 				iterBodyOutput++;
 			}
@@ -446,9 +446,9 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 			endBodyOutput = bodyOutputList->end();
 			while (iterBodyOutput != endBodyOutput)
 			{
-				if (m_bodyOutput->find(*iterBodyOutput) == -1)
+				if (getBodyOutput()->find(*iterBodyOutput) == -1)
 				{
-					m_bodyOutput->add(*iterBodyOutput);
+					getBodyOutput()->add(*iterBodyOutput);
 				}
 				iterBodyOutput++;			
 			}
@@ -475,13 +475,13 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Clause>::iterator iterPredecessorClause = m_predecessorClause->begin();
-			Bag<uml::Clause>::iterator endPredecessorClause = m_predecessorClause->end();
+			Bag<uml::Clause>::iterator iterPredecessorClause = getPredecessorClause()->begin();
+			Bag<uml::Clause>::iterator endPredecessorClause = getPredecessorClause()->end();
 			while (iterPredecessorClause != endPredecessorClause)
 			{
 				if (predecessorClauseList->find(*iterPredecessorClause) == -1)
 				{
-					m_predecessorClause->erase(*iterPredecessorClause);
+					getPredecessorClause()->erase(*iterPredecessorClause);
 				}
 				iterPredecessorClause++;
 			}
@@ -490,9 +490,9 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 			endPredecessorClause = predecessorClauseList->end();
 			while (iterPredecessorClause != endPredecessorClause)
 			{
-				if (m_predecessorClause->find(*iterPredecessorClause) == -1)
+				if (getPredecessorClause()->find(*iterPredecessorClause) == -1)
 				{
-					m_predecessorClause->add(*iterPredecessorClause);
+					getPredecessorClause()->add(*iterPredecessorClause);
 				}
 				iterPredecessorClause++;			
 			}
@@ -511,13 +511,13 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Clause>::iterator iterSuccessorClause = m_successorClause->begin();
-			Bag<uml::Clause>::iterator endSuccessorClause = m_successorClause->end();
+			Bag<uml::Clause>::iterator iterSuccessorClause = getSuccessorClause()->begin();
+			Bag<uml::Clause>::iterator endSuccessorClause = getSuccessorClause()->end();
 			while (iterSuccessorClause != endSuccessorClause)
 			{
 				if (successorClauseList->find(*iterSuccessorClause) == -1)
 				{
-					m_successorClause->erase(*iterSuccessorClause);
+					getSuccessorClause()->erase(*iterSuccessorClause);
 				}
 				iterSuccessorClause++;
 			}
@@ -526,9 +526,9 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 			endSuccessorClause = successorClauseList->end();
 			while (iterSuccessorClause != endSuccessorClause)
 			{
-				if (m_successorClause->find(*iterSuccessorClause) == -1)
+				if (getSuccessorClause()->find(*iterSuccessorClause) == -1)
 				{
-					m_successorClause->add(*iterSuccessorClause);
+					getSuccessorClause()->add(*iterSuccessorClause);
 				}
 				iterSuccessorClause++;			
 			}
@@ -547,13 +547,13 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ExecutableNode>::iterator iterTest = m_test->begin();
-			Bag<uml::ExecutableNode>::iterator endTest = m_test->end();
+			Bag<uml::ExecutableNode>::iterator iterTest = getTest()->begin();
+			Bag<uml::ExecutableNode>::iterator endTest = getTest()->end();
 			while (iterTest != endTest)
 			{
 				if (testList->find(*iterTest) == -1)
 				{
-					m_test->erase(*iterTest);
+					getTest()->erase(*iterTest);
 				}
 				iterTest++;
 			}
@@ -562,9 +562,9 @@ bool ClauseImpl::eSet(int featureID, Any newValue)
 			endTest = testList->end();
 			while (iterTest != endTest)
 			{
-				if (m_test->find(*iterTest) == -1)
+				if (getTest()->find(*iterTest) == -1)
 				{
-					m_test->add(*iterTest);
+					getTest()->add(*iterTest);
 				}
 				iterTest++;			
 			}

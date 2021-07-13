@@ -295,8 +295,8 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::VERTEX_ATTRIBUTE_INCOMING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Transition>::iterator iter = m_incoming->begin();
-			Bag<uml::Transition>::iterator end = m_incoming->end();
+			Bag<uml::Transition>::iterator iter = getIncoming()->begin();
+			Bag<uml::Transition>::iterator end = getIncoming()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -307,8 +307,8 @@ Any VertexImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::VERTEX_ATTRIBUTE_OUTGOING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Transition>::iterator iter = m_outgoing->begin();
-			Bag<uml::Transition>::iterator end = m_outgoing->end();
+			Bag<uml::Transition>::iterator iter = getOutgoing()->begin();
+			Bag<uml::Transition>::iterator end = getOutgoing()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);

@@ -344,8 +344,8 @@ Any TemplateBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TEMPLATEBINDING_ATTRIBUTE_PARAMETERSUBSTITUTION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateParameterSubstitution>::iterator iter = m_parameterSubstitution->begin();
-			Bag<uml::TemplateParameterSubstitution>::iterator end = m_parameterSubstitution->end();
+			Bag<uml::TemplateParameterSubstitution>::iterator iter = getParameterSubstitution()->begin();
+			Bag<uml::TemplateParameterSubstitution>::iterator end = getParameterSubstitution()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -396,13 +396,13 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::TemplateParameterSubstitution>::iterator iterParameterSubstitution = m_parameterSubstitution->begin();
-			Bag<uml::TemplateParameterSubstitution>::iterator endParameterSubstitution = m_parameterSubstitution->end();
+			Bag<uml::TemplateParameterSubstitution>::iterator iterParameterSubstitution = getParameterSubstitution()->begin();
+			Bag<uml::TemplateParameterSubstitution>::iterator endParameterSubstitution = getParameterSubstitution()->end();
 			while (iterParameterSubstitution != endParameterSubstitution)
 			{
 				if (parameterSubstitutionList->find(*iterParameterSubstitution) == -1)
 				{
-					m_parameterSubstitution->erase(*iterParameterSubstitution);
+					getParameterSubstitution()->erase(*iterParameterSubstitution);
 				}
 				iterParameterSubstitution++;
 			}
@@ -411,9 +411,9 @@ bool TemplateBindingImpl::eSet(int featureID, Any newValue)
 			endParameterSubstitution = parameterSubstitutionList->end();
 			while (iterParameterSubstitution != endParameterSubstitution)
 			{
-				if (m_parameterSubstitution->find(*iterParameterSubstitution) == -1)
+				if (getParameterSubstitution()->find(*iterParameterSubstitution) == -1)
 				{
-					m_parameterSubstitution->add(*iterParameterSubstitution);
+					getParameterSubstitution()->add(*iterParameterSubstitution);
 				}
 				iterParameterSubstitution++;			
 			}

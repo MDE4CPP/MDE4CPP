@@ -43,8 +43,8 @@
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
 #include "ocl/Types/TypesPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -246,8 +246,8 @@ Any CollectionValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_ELEMENTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Values::Element>::iterator iter = m_elements->begin();
-			Bag<ocl::Values::Element>::iterator end = m_elements->end();
+			Bag<ocl::Values::Element>::iterator iter = getElements()->begin();
+			Bag<ocl::Values::Element>::iterator end = getElements()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -288,13 +288,13 @@ bool CollectionValueImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Values::Element>::iterator iterElements = m_elements->begin();
-			Bag<ocl::Values::Element>::iterator endElements = m_elements->end();
+			Bag<ocl::Values::Element>::iterator iterElements = getElements()->begin();
+			Bag<ocl::Values::Element>::iterator endElements = getElements()->end();
 			while (iterElements != endElements)
 			{
 				if (elementsList->find(*iterElements) == -1)
 				{
-					m_elements->erase(*iterElements);
+					getElements()->erase(*iterElements);
 				}
 				iterElements++;
 			}
@@ -303,9 +303,9 @@ bool CollectionValueImpl::eSet(int featureID, Any newValue)
 			endElements = elementsList->end();
 			while (iterElements != endElements)
 			{
-				if (m_elements->find(*iterElements) == -1)
+				if (getElements()->find(*iterElements) == -1)
 				{
-					m_elements->add(*iterElements);
+					getElements()->add(*iterElements);
 				}
 				iterElements++;			
 			}

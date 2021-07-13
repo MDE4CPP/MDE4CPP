@@ -284,8 +284,8 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::RedefinableElement>::iterator iter = m_redefinedElement->begin();
-			Bag<uml::RedefinableElement>::iterator end = m_redefinedElement->end();
+			Bag<uml::RedefinableElement>::iterator iter = getRedefinedElement()->begin();
+			Bag<uml::RedefinableElement>::iterator end = getRedefinedElement()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -296,8 +296,8 @@ Any RedefinableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::REDEFINABLEELEMENT_ATTRIBUTE_REDEFINITIONCONTEXT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_redefinitionContext->begin();
-			Bag<uml::Classifier>::iterator end = m_redefinitionContext->end();
+			Bag<uml::Classifier>::iterator iter = getRedefinitionContext()->begin();
+			Bag<uml::Classifier>::iterator end = getRedefinitionContext()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);

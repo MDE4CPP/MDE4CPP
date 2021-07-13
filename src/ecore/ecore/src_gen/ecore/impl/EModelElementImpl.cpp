@@ -233,8 +233,8 @@ Any EModelElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EMODELELEMENT_ATTRIBUTE_EANNOTATIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EAnnotation>::iterator iter = m_eAnnotations->begin();
-			Bag<ecore::EAnnotation>::iterator end = m_eAnnotations->end();
+			Bag<ecore::EAnnotation>::iterator iter = getEAnnotations()->begin();
+			Bag<ecore::EAnnotation>::iterator end = getEAnnotations()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -271,13 +271,13 @@ bool EModelElementImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EAnnotation>::iterator iterEAnnotations = m_eAnnotations->begin();
-			Bag<ecore::EAnnotation>::iterator endEAnnotations = m_eAnnotations->end();
+			Bag<ecore::EAnnotation>::iterator iterEAnnotations = getEAnnotations()->begin();
+			Bag<ecore::EAnnotation>::iterator endEAnnotations = getEAnnotations()->end();
 			while (iterEAnnotations != endEAnnotations)
 			{
 				if (eAnnotationsList->find(*iterEAnnotations) == -1)
 				{
-					m_eAnnotations->erase(*iterEAnnotations);
+					getEAnnotations()->erase(*iterEAnnotations);
 				}
 				iterEAnnotations++;
 			}
@@ -286,9 +286,9 @@ bool EModelElementImpl::eSet(int featureID, Any newValue)
 			endEAnnotations = eAnnotationsList->end();
 			while (iterEAnnotations != endEAnnotations)
 			{
-				if (m_eAnnotations->find(*iterEAnnotations) == -1)
+				if (getEAnnotations()->find(*iterEAnnotations) == -1)
 				{
-					m_eAnnotations->add(*iterEAnnotations);
+					getEAnnotations()->add(*iterEAnnotations);
 				}
 				iterEAnnotations++;			
 			}

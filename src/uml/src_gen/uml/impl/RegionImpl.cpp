@@ -485,8 +485,8 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Vertex>::iterator iter = m_subvertex->begin();
-			Bag<uml::Vertex>::iterator end = m_subvertex->end();
+			Bag<uml::Vertex>::iterator iter = getSubvertex()->begin();
+			Bag<uml::Vertex>::iterator end = getSubvertex()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -497,8 +497,8 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::REGION_ATTRIBUTE_TRANSITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Transition>::iterator iter = m_transition->begin();
-			Bag<uml::Transition>::iterator end = m_transition->end();
+			Bag<uml::Transition>::iterator iter = getTransition()->begin();
+			Bag<uml::Transition>::iterator end = getTransition()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -581,13 +581,13 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Vertex>::iterator iterSubvertex = m_subvertex->begin();
-			Bag<uml::Vertex>::iterator endSubvertex = m_subvertex->end();
+			Bag<uml::Vertex>::iterator iterSubvertex = getSubvertex()->begin();
+			Bag<uml::Vertex>::iterator endSubvertex = getSubvertex()->end();
 			while (iterSubvertex != endSubvertex)
 			{
 				if (subvertexList->find(*iterSubvertex) == -1)
 				{
-					m_subvertex->erase(*iterSubvertex);
+					getSubvertex()->erase(*iterSubvertex);
 				}
 				iterSubvertex++;
 			}
@@ -596,9 +596,9 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 			endSubvertex = subvertexList->end();
 			while (iterSubvertex != endSubvertex)
 			{
-				if (m_subvertex->find(*iterSubvertex) == -1)
+				if (getSubvertex()->find(*iterSubvertex) == -1)
 				{
-					m_subvertex->add(*iterSubvertex);
+					getSubvertex()->add(*iterSubvertex);
 				}
 				iterSubvertex++;			
 			}
@@ -617,13 +617,13 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Transition>::iterator iterTransition = m_transition->begin();
-			Bag<uml::Transition>::iterator endTransition = m_transition->end();
+			Bag<uml::Transition>::iterator iterTransition = getTransition()->begin();
+			Bag<uml::Transition>::iterator endTransition = getTransition()->end();
 			while (iterTransition != endTransition)
 			{
 				if (transitionList->find(*iterTransition) == -1)
 				{
-					m_transition->erase(*iterTransition);
+					getTransition()->erase(*iterTransition);
 				}
 				iterTransition++;
 			}
@@ -632,9 +632,9 @@ bool RegionImpl::eSet(int featureID, Any newValue)
 			endTransition = transitionList->end();
 			while (iterTransition != endTransition)
 			{
-				if (m_transition->find(*iterTransition) == -1)
+				if (getTransition()->find(*iterTransition) == -1)
 				{
-					m_transition->add(*iterTransition);
+					getTransition()->add(*iterTransition);
 				}
 				iterTransition++;			
 			}

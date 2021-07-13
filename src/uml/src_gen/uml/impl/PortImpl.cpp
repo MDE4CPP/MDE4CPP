@@ -550,8 +550,8 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PORT_ATTRIBUTE_PROVIDED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Interface>::iterator iter = m_provided->begin();
-			Bag<uml::Interface>::iterator end = m_provided->end();
+			Bag<uml::Interface>::iterator iter = getProvided()->begin();
+			Bag<uml::Interface>::iterator end = getProvided()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -562,8 +562,8 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PORT_ATTRIBUTE_REDEFINEDPORT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Port>::iterator iter = m_redefinedPort->begin();
-			Bag<uml::Port>::iterator end = m_redefinedPort->end();
+			Bag<uml::Port>::iterator iter = getRedefinedPort()->begin();
+			Bag<uml::Port>::iterator end = getRedefinedPort()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -574,8 +574,8 @@ Any PortImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PORT_ATTRIBUTE_REQUIRED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Interface>::iterator iter = m_required->begin();
-			Bag<uml::Interface>::iterator end = m_required->end();
+			Bag<uml::Interface>::iterator iter = getRequired()->begin();
+			Bag<uml::Interface>::iterator end = getRequired()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -653,13 +653,13 @@ bool PortImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Port>::iterator iterRedefinedPort = m_redefinedPort->begin();
-			Bag<uml::Port>::iterator endRedefinedPort = m_redefinedPort->end();
+			Bag<uml::Port>::iterator iterRedefinedPort = getRedefinedPort()->begin();
+			Bag<uml::Port>::iterator endRedefinedPort = getRedefinedPort()->end();
 			while (iterRedefinedPort != endRedefinedPort)
 			{
 				if (redefinedPortList->find(*iterRedefinedPort) == -1)
 				{
-					m_redefinedPort->erase(*iterRedefinedPort);
+					getRedefinedPort()->erase(*iterRedefinedPort);
 				}
 				iterRedefinedPort++;
 			}
@@ -668,9 +668,9 @@ bool PortImpl::eSet(int featureID, Any newValue)
 			endRedefinedPort = redefinedPortList->end();
 			while (iterRedefinedPort != endRedefinedPort)
 			{
-				if (m_redefinedPort->find(*iterRedefinedPort) == -1)
+				if (getRedefinedPort()->find(*iterRedefinedPort) == -1)
 				{
-					m_redefinedPort->add(*iterRedefinedPort);
+					getRedefinedPort()->add(*iterRedefinedPort);
 				}
 				iterRedefinedPort++;			
 			}

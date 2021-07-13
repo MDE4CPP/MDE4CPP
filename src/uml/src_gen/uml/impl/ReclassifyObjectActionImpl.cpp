@@ -368,8 +368,8 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_NEWCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_newClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_newClassifier->end();
+			Bag<uml::Classifier>::iterator iter = getNewClassifier()->begin();
+			Bag<uml::Classifier>::iterator end = getNewClassifier()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -382,8 +382,8 @@ Any ReclassifyObjectActionImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::RECLASSIFYOBJECTACTION_ATTRIBUTE_OLDCLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_oldClassifier->begin();
-			Bag<uml::Classifier>::iterator end = m_oldClassifier->end();
+			Bag<uml::Classifier>::iterator iter = getOldClassifier()->begin();
+			Bag<uml::Classifier>::iterator end = getOldClassifier()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -433,13 +433,13 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Classifier>::iterator iterNewClassifier = m_newClassifier->begin();
-			Bag<uml::Classifier>::iterator endNewClassifier = m_newClassifier->end();
+			Bag<uml::Classifier>::iterator iterNewClassifier = getNewClassifier()->begin();
+			Bag<uml::Classifier>::iterator endNewClassifier = getNewClassifier()->end();
 			while (iterNewClassifier != endNewClassifier)
 			{
 				if (newClassifierList->find(*iterNewClassifier) == -1)
 				{
-					m_newClassifier->erase(*iterNewClassifier);
+					getNewClassifier()->erase(*iterNewClassifier);
 				}
 				iterNewClassifier++;
 			}
@@ -448,9 +448,9 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 			endNewClassifier = newClassifierList->end();
 			while (iterNewClassifier != endNewClassifier)
 			{
-				if (m_newClassifier->find(*iterNewClassifier) == -1)
+				if (getNewClassifier()->find(*iterNewClassifier) == -1)
 				{
-					m_newClassifier->add(*iterNewClassifier);
+					getNewClassifier()->add(*iterNewClassifier);
 				}
 				iterNewClassifier++;			
 			}
@@ -477,13 +477,13 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Classifier>::iterator iterOldClassifier = m_oldClassifier->begin();
-			Bag<uml::Classifier>::iterator endOldClassifier = m_oldClassifier->end();
+			Bag<uml::Classifier>::iterator iterOldClassifier = getOldClassifier()->begin();
+			Bag<uml::Classifier>::iterator endOldClassifier = getOldClassifier()->end();
 			while (iterOldClassifier != endOldClassifier)
 			{
 				if (oldClassifierList->find(*iterOldClassifier) == -1)
 				{
-					m_oldClassifier->erase(*iterOldClassifier);
+					getOldClassifier()->erase(*iterOldClassifier);
 				}
 				iterOldClassifier++;
 			}
@@ -492,9 +492,9 @@ bool ReclassifyObjectActionImpl::eSet(int featureID, Any newValue)
 			endOldClassifier = oldClassifierList->end();
 			while (iterOldClassifier != endOldClassifier)
 			{
-				if (m_oldClassifier->find(*iterOldClassifier) == -1)
+				if (getOldClassifier()->find(*iterOldClassifier) == -1)
 				{
-					m_oldClassifier->add(*iterOldClassifier);
+					getOldClassifier()->add(*iterOldClassifier);
 				}
 				iterOldClassifier++;			
 			}

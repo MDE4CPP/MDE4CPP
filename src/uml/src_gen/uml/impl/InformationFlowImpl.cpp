@@ -493,8 +493,8 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_CONVEYED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_conveyed->begin();
-			Bag<uml::Classifier>::iterator end = m_conveyed->end();
+			Bag<uml::Classifier>::iterator iter = getConveyed()->begin();
+			Bag<uml::Classifier>::iterator end = getConveyed()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -505,8 +505,8 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONSOURCE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_informationSource->begin();
-			Bag<uml::NamedElement>::iterator end = m_informationSource->end();
+			Bag<uml::NamedElement>::iterator iter = getInformationSource()->begin();
+			Bag<uml::NamedElement>::iterator end = getInformationSource()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -517,8 +517,8 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_INFORMATIONTARGET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_informationTarget->begin();
-			Bag<uml::NamedElement>::iterator end = m_informationTarget->end();
+			Bag<uml::NamedElement>::iterator iter = getInformationTarget()->begin();
+			Bag<uml::NamedElement>::iterator end = getInformationTarget()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -529,8 +529,8 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Relationship>::iterator iter = m_realization->begin();
-			Bag<uml::Relationship>::iterator end = m_realization->end();
+			Bag<uml::Relationship>::iterator iter = getRealization()->begin();
+			Bag<uml::Relationship>::iterator end = getRealization()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -541,8 +541,8 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGACTIVITYEDGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_realizingActivityEdge->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_realizingActivityEdge->end();
+			Bag<uml::ActivityEdge>::iterator iter = getRealizingActivityEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator end = getRealizingActivityEdge()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -553,8 +553,8 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGCONNECTOR:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Connector>::iterator iter = m_realizingConnector->begin();
-			Bag<uml::Connector>::iterator end = m_realizingConnector->end();
+			Bag<uml::Connector>::iterator iter = getRealizingConnector()->begin();
+			Bag<uml::Connector>::iterator end = getRealizingConnector()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -565,8 +565,8 @@ Any InformationFlowImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INFORMATIONFLOW_ATTRIBUTE_REALIZINGMESSAGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Message>::iterator iter = m_realizingMessage->begin();
-			Bag<uml::Message>::iterator end = m_realizingMessage->end();
+			Bag<uml::Message>::iterator iter = getRealizingMessage()->begin();
+			Bag<uml::Message>::iterator end = getRealizingMessage()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -629,13 +629,13 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Classifier>::iterator iterConveyed = m_conveyed->begin();
-			Bag<uml::Classifier>::iterator endConveyed = m_conveyed->end();
+			Bag<uml::Classifier>::iterator iterConveyed = getConveyed()->begin();
+			Bag<uml::Classifier>::iterator endConveyed = getConveyed()->end();
 			while (iterConveyed != endConveyed)
 			{
 				if (conveyedList->find(*iterConveyed) == -1)
 				{
-					m_conveyed->erase(*iterConveyed);
+					getConveyed()->erase(*iterConveyed);
 				}
 				iterConveyed++;
 			}
@@ -644,9 +644,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 			endConveyed = conveyedList->end();
 			while (iterConveyed != endConveyed)
 			{
-				if (m_conveyed->find(*iterConveyed) == -1)
+				if (getConveyed()->find(*iterConveyed) == -1)
 				{
-					m_conveyed->add(*iterConveyed);
+					getConveyed()->add(*iterConveyed);
 				}
 				iterConveyed++;			
 			}
@@ -665,13 +665,13 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::NamedElement>::iterator iterInformationSource = m_informationSource->begin();
-			Bag<uml::NamedElement>::iterator endInformationSource = m_informationSource->end();
+			Bag<uml::NamedElement>::iterator iterInformationSource = getInformationSource()->begin();
+			Bag<uml::NamedElement>::iterator endInformationSource = getInformationSource()->end();
 			while (iterInformationSource != endInformationSource)
 			{
 				if (informationSourceList->find(*iterInformationSource) == -1)
 				{
-					m_informationSource->erase(*iterInformationSource);
+					getInformationSource()->erase(*iterInformationSource);
 				}
 				iterInformationSource++;
 			}
@@ -680,9 +680,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 			endInformationSource = informationSourceList->end();
 			while (iterInformationSource != endInformationSource)
 			{
-				if (m_informationSource->find(*iterInformationSource) == -1)
+				if (getInformationSource()->find(*iterInformationSource) == -1)
 				{
-					m_informationSource->add(*iterInformationSource);
+					getInformationSource()->add(*iterInformationSource);
 				}
 				iterInformationSource++;			
 			}
@@ -701,13 +701,13 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::NamedElement>::iterator iterInformationTarget = m_informationTarget->begin();
-			Bag<uml::NamedElement>::iterator endInformationTarget = m_informationTarget->end();
+			Bag<uml::NamedElement>::iterator iterInformationTarget = getInformationTarget()->begin();
+			Bag<uml::NamedElement>::iterator endInformationTarget = getInformationTarget()->end();
 			while (iterInformationTarget != endInformationTarget)
 			{
 				if (informationTargetList->find(*iterInformationTarget) == -1)
 				{
-					m_informationTarget->erase(*iterInformationTarget);
+					getInformationTarget()->erase(*iterInformationTarget);
 				}
 				iterInformationTarget++;
 			}
@@ -716,9 +716,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 			endInformationTarget = informationTargetList->end();
 			while (iterInformationTarget != endInformationTarget)
 			{
-				if (m_informationTarget->find(*iterInformationTarget) == -1)
+				if (getInformationTarget()->find(*iterInformationTarget) == -1)
 				{
-					m_informationTarget->add(*iterInformationTarget);
+					getInformationTarget()->add(*iterInformationTarget);
 				}
 				iterInformationTarget++;			
 			}
@@ -737,13 +737,13 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Relationship>::iterator iterRealization = m_realization->begin();
-			Bag<uml::Relationship>::iterator endRealization = m_realization->end();
+			Bag<uml::Relationship>::iterator iterRealization = getRealization()->begin();
+			Bag<uml::Relationship>::iterator endRealization = getRealization()->end();
 			while (iterRealization != endRealization)
 			{
 				if (realizationList->find(*iterRealization) == -1)
 				{
-					m_realization->erase(*iterRealization);
+					getRealization()->erase(*iterRealization);
 				}
 				iterRealization++;
 			}
@@ -752,9 +752,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 			endRealization = realizationList->end();
 			while (iterRealization != endRealization)
 			{
-				if (m_realization->find(*iterRealization) == -1)
+				if (getRealization()->find(*iterRealization) == -1)
 				{
-					m_realization->add(*iterRealization);
+					getRealization()->add(*iterRealization);
 				}
 				iterRealization++;			
 			}
@@ -773,13 +773,13 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityEdge>::iterator iterRealizingActivityEdge = m_realizingActivityEdge->begin();
-			Bag<uml::ActivityEdge>::iterator endRealizingActivityEdge = m_realizingActivityEdge->end();
+			Bag<uml::ActivityEdge>::iterator iterRealizingActivityEdge = getRealizingActivityEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator endRealizingActivityEdge = getRealizingActivityEdge()->end();
 			while (iterRealizingActivityEdge != endRealizingActivityEdge)
 			{
 				if (realizingActivityEdgeList->find(*iterRealizingActivityEdge) == -1)
 				{
-					m_realizingActivityEdge->erase(*iterRealizingActivityEdge);
+					getRealizingActivityEdge()->erase(*iterRealizingActivityEdge);
 				}
 				iterRealizingActivityEdge++;
 			}
@@ -788,9 +788,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 			endRealizingActivityEdge = realizingActivityEdgeList->end();
 			while (iterRealizingActivityEdge != endRealizingActivityEdge)
 			{
-				if (m_realizingActivityEdge->find(*iterRealizingActivityEdge) == -1)
+				if (getRealizingActivityEdge()->find(*iterRealizingActivityEdge) == -1)
 				{
-					m_realizingActivityEdge->add(*iterRealizingActivityEdge);
+					getRealizingActivityEdge()->add(*iterRealizingActivityEdge);
 				}
 				iterRealizingActivityEdge++;			
 			}
@@ -809,13 +809,13 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Connector>::iterator iterRealizingConnector = m_realizingConnector->begin();
-			Bag<uml::Connector>::iterator endRealizingConnector = m_realizingConnector->end();
+			Bag<uml::Connector>::iterator iterRealizingConnector = getRealizingConnector()->begin();
+			Bag<uml::Connector>::iterator endRealizingConnector = getRealizingConnector()->end();
 			while (iterRealizingConnector != endRealizingConnector)
 			{
 				if (realizingConnectorList->find(*iterRealizingConnector) == -1)
 				{
-					m_realizingConnector->erase(*iterRealizingConnector);
+					getRealizingConnector()->erase(*iterRealizingConnector);
 				}
 				iterRealizingConnector++;
 			}
@@ -824,9 +824,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 			endRealizingConnector = realizingConnectorList->end();
 			while (iterRealizingConnector != endRealizingConnector)
 			{
-				if (m_realizingConnector->find(*iterRealizingConnector) == -1)
+				if (getRealizingConnector()->find(*iterRealizingConnector) == -1)
 				{
-					m_realizingConnector->add(*iterRealizingConnector);
+					getRealizingConnector()->add(*iterRealizingConnector);
 				}
 				iterRealizingConnector++;			
 			}
@@ -845,13 +845,13 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Message>::iterator iterRealizingMessage = m_realizingMessage->begin();
-			Bag<uml::Message>::iterator endRealizingMessage = m_realizingMessage->end();
+			Bag<uml::Message>::iterator iterRealizingMessage = getRealizingMessage()->begin();
+			Bag<uml::Message>::iterator endRealizingMessage = getRealizingMessage()->end();
 			while (iterRealizingMessage != endRealizingMessage)
 			{
 				if (realizingMessageList->find(*iterRealizingMessage) == -1)
 				{
-					m_realizingMessage->erase(*iterRealizingMessage);
+					getRealizingMessage()->erase(*iterRealizingMessage);
 				}
 				iterRealizingMessage++;
 			}
@@ -860,9 +860,9 @@ bool InformationFlowImpl::eSet(int featureID, Any newValue)
 			endRealizingMessage = realizingMessageList->end();
 			while (iterRealizingMessage != endRealizingMessage)
 			{
-				if (m_realizingMessage->find(*iterRealizingMessage) == -1)
+				if (getRealizingMessage()->find(*iterRealizingMessage) == -1)
 				{
-					m_realizingMessage->add(*iterRealizingMessage);
+					getRealizingMessage()->add(*iterRealizingMessage);
 				}
 				iterRealizingMessage++;			
 			}

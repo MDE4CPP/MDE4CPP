@@ -289,8 +289,8 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_ENTRY:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = m_entry->begin();
-			Bag<uml::Pseudostate>::iterator end = m_entry->end();
+			Bag<uml::Pseudostate>::iterator iter = getEntry()->begin();
+			Bag<uml::Pseudostate>::iterator end = getEntry()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -301,8 +301,8 @@ Any ConnectionPointReferenceImpl::eGet(int featureID, bool resolve, bool coreTyp
 		case uml::umlPackage::CONNECTIONPOINTREFERENCE_ATTRIBUTE_EXIT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Pseudostate>::iterator iter = m_exit->begin();
-			Bag<uml::Pseudostate>::iterator end = m_exit->end();
+			Bag<uml::Pseudostate>::iterator iter = getExit()->begin();
+			Bag<uml::Pseudostate>::iterator end = getExit()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -345,13 +345,13 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Pseudostate>::iterator iterEntry = m_entry->begin();
-			Bag<uml::Pseudostate>::iterator endEntry = m_entry->end();
+			Bag<uml::Pseudostate>::iterator iterEntry = getEntry()->begin();
+			Bag<uml::Pseudostate>::iterator endEntry = getEntry()->end();
 			while (iterEntry != endEntry)
 			{
 				if (entryList->find(*iterEntry) == -1)
 				{
-					m_entry->erase(*iterEntry);
+					getEntry()->erase(*iterEntry);
 				}
 				iterEntry++;
 			}
@@ -360,9 +360,9 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 			endEntry = entryList->end();
 			while (iterEntry != endEntry)
 			{
-				if (m_entry->find(*iterEntry) == -1)
+				if (getEntry()->find(*iterEntry) == -1)
 				{
-					m_entry->add(*iterEntry);
+					getEntry()->add(*iterEntry);
 				}
 				iterEntry++;			
 			}
@@ -381,13 +381,13 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Pseudostate>::iterator iterExit = m_exit->begin();
-			Bag<uml::Pseudostate>::iterator endExit = m_exit->end();
+			Bag<uml::Pseudostate>::iterator iterExit = getExit()->begin();
+			Bag<uml::Pseudostate>::iterator endExit = getExit()->end();
 			while (iterExit != endExit)
 			{
 				if (exitList->find(*iterExit) == -1)
 				{
-					m_exit->erase(*iterExit);
+					getExit()->erase(*iterExit);
 				}
 				iterExit++;
 			}
@@ -396,9 +396,9 @@ bool ConnectionPointReferenceImpl::eSet(int featureID, Any newValue)
 			endExit = exitList->end();
 			while (iterExit != endExit)
 			{
-				if (m_exit->find(*iterExit) == -1)
+				if (getExit()->find(*iterExit) == -1)
 				{
-					m_exit->add(*iterExit);
+					getExit()->add(*iterExit);
 				}
 				iterExit++;			
 			}

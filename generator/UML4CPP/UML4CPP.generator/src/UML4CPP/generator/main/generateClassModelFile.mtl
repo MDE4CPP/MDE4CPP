@@ -53,11 +53,11 @@
 [if (element.oclIsUndefined() or element.name.oclIsUndefined())]
 // undefined  [element.eClass().name/] ([element.toString()/]) ['class '.concat(aClass.name).concat(': header include failed for undefined ').concat(element.eClass().name).concat(' ').concat(element.toString()).registerError()/]
 [else]
-[if (not element.getNearestPackage().ignoreNamespace())]namespace [element.getPackage().generateNamespace(true)/] 
+[if (not element.getNearestPackage().isIgnoreNamespace())]namespace [element.getPackage().generateNamespace(true)/] 
 {
 [/if]
 	class [element.name.toUpperFirst()/];
-[if (not element.getNearestPackage().ignoreNamespace())]}[/if]
+[if (not element.getNearestPackage().isIgnoreNamespace())]}[/if]
 [/if]
 [/for]
 [/if]
@@ -93,13 +93,13 @@
 #include "[elements.getNearestPackage().generateNamespacePath(false)/]/[elements.name.toUpperFirst().concat('.hpp')/]"[/for]
 [/if]
 
-[if (not aClass.getNearestPackage().ignoreNamespace())]
+[if (not aClass.getNearestPackage().isIgnoreNamespace())]
 namespace [aPackage.generateNamespace(false)/]
 {
 [/if]
 	class [aClass.name.toUpperFirst()/] [if (aClass.superClass->isEmpty())] : virtual public uml::[aClass.getGeneralSuperClassName()/] [aClass.generateInterfaceExtensions()/]
 [else][for (sClass : Class | aClass.superClass->reject(oclIsUndefined() and name.oclIsUndefined())->asOrderedSet()->sortedBy(myQualifiedName())) before (':') separator (',')]
-virtual public [sClass.getClassifierName(aClass, false, ignoreNamespace(sClass))/][/for]
+virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage().isIgnoreNamespace())/][/for]
 [/if]
 	{
 		protected:
@@ -132,7 +132,7 @@ virtual public [sClass.getClassifierName(aClass, false, ignoreNamespace(sClass))
 		[generateSingletonDecl(aClass.name)/]
 [/if]	
 	};
-[if (not aClass.getNearestPackage().ignoreNamespace())]}[/if]
+[if (not aClass.getNearestPackage().isIgnoreNamespace())]}[/if]
 [endGuard(aClass)/]
 [/file]
 [/template]

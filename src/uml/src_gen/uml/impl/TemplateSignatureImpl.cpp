@@ -290,8 +290,8 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_OWNEDPARAMETER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateParameter>::iterator iter = m_ownedParameter->begin();
-			Bag<uml::TemplateParameter>::iterator end = m_ownedParameter->end();
+			Bag<uml::TemplateParameter>::iterator iter = getOwnedParameter()->begin();
+			Bag<uml::TemplateParameter>::iterator end = getOwnedParameter()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -302,8 +302,8 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_PARAMETER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateParameter>::iterator iter = m_parameter->begin();
-			Bag<uml::TemplateParameter>::iterator end = m_parameter->end();
+			Bag<uml::TemplateParameter>::iterator iter = getParameter()->begin();
+			Bag<uml::TemplateParameter>::iterator end = getParameter()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -346,13 +346,13 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::TemplateParameter>::iterator iterOwnedParameter = m_ownedParameter->begin();
-			Bag<uml::TemplateParameter>::iterator endOwnedParameter = m_ownedParameter->end();
+			Bag<uml::TemplateParameter>::iterator iterOwnedParameter = getOwnedParameter()->begin();
+			Bag<uml::TemplateParameter>::iterator endOwnedParameter = getOwnedParameter()->end();
 			while (iterOwnedParameter != endOwnedParameter)
 			{
 				if (ownedParameterList->find(*iterOwnedParameter) == -1)
 				{
-					m_ownedParameter->erase(*iterOwnedParameter);
+					getOwnedParameter()->erase(*iterOwnedParameter);
 				}
 				iterOwnedParameter++;
 			}
@@ -361,9 +361,9 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 			endOwnedParameter = ownedParameterList->end();
 			while (iterOwnedParameter != endOwnedParameter)
 			{
-				if (m_ownedParameter->find(*iterOwnedParameter) == -1)
+				if (getOwnedParameter()->find(*iterOwnedParameter) == -1)
 				{
-					m_ownedParameter->add(*iterOwnedParameter);
+					getOwnedParameter()->add(*iterOwnedParameter);
 				}
 				iterOwnedParameter++;			
 			}
@@ -382,13 +382,13 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::TemplateParameter>::iterator iterParameter = m_parameter->begin();
-			Bag<uml::TemplateParameter>::iterator endParameter = m_parameter->end();
+			Bag<uml::TemplateParameter>::iterator iterParameter = getParameter()->begin();
+			Bag<uml::TemplateParameter>::iterator endParameter = getParameter()->end();
 			while (iterParameter != endParameter)
 			{
 				if (parameterList->find(*iterParameter) == -1)
 				{
-					m_parameter->erase(*iterParameter);
+					getParameter()->erase(*iterParameter);
 				}
 				iterParameter++;
 			}
@@ -397,9 +397,9 @@ bool TemplateSignatureImpl::eSet(int featureID, Any newValue)
 			endParameter = parameterList->end();
 			while (iterParameter != endParameter)
 			{
-				if (m_parameter->find(*iterParameter) == -1)
+				if (getParameter()->find(*iterParameter) == -1)
 				{
-					m_parameter->add(*iterParameter);
+					getParameter()->add(*iterParameter);
 				}
 				iterParameter++;			
 			}

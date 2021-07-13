@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Values/ValuesFactory.hpp"
 #include "ecore/ecoreFactory.hpp"
+#include "ocl/Values/ValuesFactory.hpp"
 #include "ocl/Types/TypesFactory.hpp"
 
 
@@ -195,8 +195,8 @@ Any TupleTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Types::TypesPackage::TUPLETYPE_ATTRIBUTE_PARTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Types::NameTypeBinding>::iterator iter = m_parts->begin();
-			Bag<ocl::Types::NameTypeBinding>::iterator end = m_parts->end();
+			Bag<ocl::Types::NameTypeBinding>::iterator iter = getParts()->begin();
+			Bag<ocl::Types::NameTypeBinding>::iterator end = getParts()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -243,13 +243,13 @@ bool TupleTypeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Types::NameTypeBinding>::iterator iterParts = m_parts->begin();
-			Bag<ocl::Types::NameTypeBinding>::iterator endParts = m_parts->end();
+			Bag<ocl::Types::NameTypeBinding>::iterator iterParts = getParts()->begin();
+			Bag<ocl::Types::NameTypeBinding>::iterator endParts = getParts()->end();
 			while (iterParts != endParts)
 			{
 				if (partsList->find(*iterParts) == -1)
 				{
-					m_parts->erase(*iterParts);
+					getParts()->erase(*iterParts);
 				}
 				iterParts++;
 			}
@@ -258,9 +258,9 @@ bool TupleTypeImpl::eSet(int featureID, Any newValue)
 			endParts = partsList->end();
 			while (iterParts != endParts)
 			{
-				if (m_parts->find(*iterParts) == -1)
+				if (getParts()->find(*iterParts) == -1)
 				{
-					m_parts->add(*iterParts);
+					getParts()->add(*iterParts);
 				}
 				iterParts++;			
 			}

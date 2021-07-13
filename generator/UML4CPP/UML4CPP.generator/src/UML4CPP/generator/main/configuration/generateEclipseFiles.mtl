@@ -140,7 +140,7 @@
 <projectDescription>
 <!-- [protected ('main')]
 	You may manually edit the following lines, won't be overwritten upon generation. -->
-	<name>[if(prepareApplication)]ApplicationFor[/if][packageName.toUpperFirst()/]_src[if(not prepareApplication)]_gen[/if]</name>
+	<name>[if(prepareApplication)]ApplicationFor[/if][if(prepareApplication)][packageName.toUpperFirst()/][else][packageName/][/if]</name>
 <!-- [/protected] -->
 	<comment></comment>
 	<projects> 

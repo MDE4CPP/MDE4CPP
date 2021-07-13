@@ -198,8 +198,8 @@ Any CommentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::COMMENT_ATTRIBUTE_ANNOTATEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = m_annotatedElement->begin();
-			Bag<uml::Element>::iterator end = m_annotatedElement->end();
+			Bag<uml::Element>::iterator iter = getAnnotatedElement()->begin();
+			Bag<uml::Element>::iterator end = getAnnotatedElement()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -240,13 +240,13 @@ bool CommentImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Element>::iterator iterAnnotatedElement = m_annotatedElement->begin();
-			Bag<uml::Element>::iterator endAnnotatedElement = m_annotatedElement->end();
+			Bag<uml::Element>::iterator iterAnnotatedElement = getAnnotatedElement()->begin();
+			Bag<uml::Element>::iterator endAnnotatedElement = getAnnotatedElement()->end();
 			while (iterAnnotatedElement != endAnnotatedElement)
 			{
 				if (annotatedElementList->find(*iterAnnotatedElement) == -1)
 				{
-					m_annotatedElement->erase(*iterAnnotatedElement);
+					getAnnotatedElement()->erase(*iterAnnotatedElement);
 				}
 				iterAnnotatedElement++;
 			}
@@ -255,9 +255,9 @@ bool CommentImpl::eSet(int featureID, Any newValue)
 			endAnnotatedElement = annotatedElementList->end();
 			while (iterAnnotatedElement != endAnnotatedElement)
 			{
-				if (m_annotatedElement->find(*iterAnnotatedElement) == -1)
+				if (getAnnotatedElement()->find(*iterAnnotatedElement) == -1)
 				{
-					m_annotatedElement->add(*iterAnnotatedElement);
+					getAnnotatedElement()->add(*iterAnnotatedElement);
 				}
 				iterAnnotatedElement++;			
 			}

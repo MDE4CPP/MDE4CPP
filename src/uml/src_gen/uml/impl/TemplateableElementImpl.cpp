@@ -254,8 +254,8 @@ Any TemplateableElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::TEMPLATEABLEELEMENT_ATTRIBUTE_TEMPLATEBINDING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::TemplateBinding>::iterator iter = m_templateBinding->begin();
-			Bag<uml::TemplateBinding>::iterator end = m_templateBinding->end();
+			Bag<uml::TemplateBinding>::iterator iter = getTemplateBinding()->begin();
+			Bag<uml::TemplateBinding>::iterator end = getTemplateBinding()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -302,13 +302,13 @@ bool TemplateableElementImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::TemplateBinding>::iterator iterTemplateBinding = m_templateBinding->begin();
-			Bag<uml::TemplateBinding>::iterator endTemplateBinding = m_templateBinding->end();
+			Bag<uml::TemplateBinding>::iterator iterTemplateBinding = getTemplateBinding()->begin();
+			Bag<uml::TemplateBinding>::iterator endTemplateBinding = getTemplateBinding()->end();
 			while (iterTemplateBinding != endTemplateBinding)
 			{
 				if (templateBindingList->find(*iterTemplateBinding) == -1)
 				{
-					m_templateBinding->erase(*iterTemplateBinding);
+					getTemplateBinding()->erase(*iterTemplateBinding);
 				}
 				iterTemplateBinding++;
 			}
@@ -317,9 +317,9 @@ bool TemplateableElementImpl::eSet(int featureID, Any newValue)
 			endTemplateBinding = templateBindingList->end();
 			while (iterTemplateBinding != endTemplateBinding)
 			{
-				if (m_templateBinding->find(*iterTemplateBinding) == -1)
+				if (getTemplateBinding()->find(*iterTemplateBinding) == -1)
 				{
-					m_templateBinding->add(*iterTemplateBinding);
+					getTemplateBinding()->add(*iterTemplateBinding);
 				}
 				iterTemplateBinding++;			
 			}

@@ -251,8 +251,8 @@ Any OfferImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Activities::ActivitiesPackage::OFFER_ATTRIBUTE_OFFEREDTOKENS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::Token>::iterator iter = m_offeredTokens->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator end = m_offeredTokens->end();
+			Bag<fUML::Semantics::Activities::Token>::iterator iter = getOfferedTokens()->begin();
+			Bag<fUML::Semantics::Activities::Token>::iterator end = getOfferedTokens()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -289,13 +289,13 @@ bool OfferImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::Token>::iterator iterOfferedTokens = m_offeredTokens->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator endOfferedTokens = m_offeredTokens->end();
+			Bag<fUML::Semantics::Activities::Token>::iterator iterOfferedTokens = getOfferedTokens()->begin();
+			Bag<fUML::Semantics::Activities::Token>::iterator endOfferedTokens = getOfferedTokens()->end();
 			while (iterOfferedTokens != endOfferedTokens)
 			{
 				if (offeredTokensList->find(*iterOfferedTokens) == -1)
 				{
-					m_offeredTokens->erase(*iterOfferedTokens);
+					getOfferedTokens()->erase(*iterOfferedTokens);
 				}
 				iterOfferedTokens++;
 			}
@@ -304,9 +304,9 @@ bool OfferImpl::eSet(int featureID, Any newValue)
 			endOfferedTokens = offeredTokensList->end();
 			while (iterOfferedTokens != endOfferedTokens)
 			{
-				if (m_offeredTokens->find(*iterOfferedTokens) == -1)
+				if (getOfferedTokens()->find(*iterOfferedTokens) == -1)
 				{
-					m_offeredTokens->add(*iterOfferedTokens);
+					getOfferedTokens()->add(*iterOfferedTokens);
 				}
 				iterOfferedTokens++;			
 			}

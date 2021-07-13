@@ -269,8 +269,8 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOAFTER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::GeneralOrdering>::iterator iter = m_toAfter->begin();
-			Bag<uml::GeneralOrdering>::iterator end = m_toAfter->end();
+			Bag<uml::GeneralOrdering>::iterator iter = getToAfter()->begin();
+			Bag<uml::GeneralOrdering>::iterator end = getToAfter()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -281,8 +281,8 @@ Any OccurrenceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 		case uml::umlPackage::OCCURRENCESPECIFICATION_ATTRIBUTE_TOBEFORE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::GeneralOrdering>::iterator iter = m_toBefore->begin();
-			Bag<uml::GeneralOrdering>::iterator end = m_toBefore->end();
+			Bag<uml::GeneralOrdering>::iterator iter = getToBefore()->begin();
+			Bag<uml::GeneralOrdering>::iterator end = getToBefore()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -321,13 +321,13 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::GeneralOrdering>::iterator iterToAfter = m_toAfter->begin();
-			Bag<uml::GeneralOrdering>::iterator endToAfter = m_toAfter->end();
+			Bag<uml::GeneralOrdering>::iterator iterToAfter = getToAfter()->begin();
+			Bag<uml::GeneralOrdering>::iterator endToAfter = getToAfter()->end();
 			while (iterToAfter != endToAfter)
 			{
 				if (toAfterList->find(*iterToAfter) == -1)
 				{
-					m_toAfter->erase(*iterToAfter);
+					getToAfter()->erase(*iterToAfter);
 				}
 				iterToAfter++;
 			}
@@ -336,9 +336,9 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 			endToAfter = toAfterList->end();
 			while (iterToAfter != endToAfter)
 			{
-				if (m_toAfter->find(*iterToAfter) == -1)
+				if (getToAfter()->find(*iterToAfter) == -1)
 				{
-					m_toAfter->add(*iterToAfter);
+					getToAfter()->add(*iterToAfter);
 				}
 				iterToAfter++;			
 			}
@@ -357,13 +357,13 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::GeneralOrdering>::iterator iterToBefore = m_toBefore->begin();
-			Bag<uml::GeneralOrdering>::iterator endToBefore = m_toBefore->end();
+			Bag<uml::GeneralOrdering>::iterator iterToBefore = getToBefore()->begin();
+			Bag<uml::GeneralOrdering>::iterator endToBefore = getToBefore()->end();
 			while (iterToBefore != endToBefore)
 			{
 				if (toBeforeList->find(*iterToBefore) == -1)
 				{
-					m_toBefore->erase(*iterToBefore);
+					getToBefore()->erase(*iterToBefore);
 				}
 				iterToBefore++;
 			}
@@ -372,9 +372,9 @@ bool OccurrenceSpecificationImpl::eSet(int featureID, Any newValue)
 			endToBefore = toBeforeList->end();
 			while (iterToBefore != endToBefore)
 			{
-				if (m_toBefore->find(*iterToBefore) == -1)
+				if (getToBefore()->find(*iterToBefore) == -1)
 				{
-					m_toBefore->add(*iterToBefore);
+					getToBefore()->add(*iterToBefore);
 				}
 				iterToBefore++;			
 			}

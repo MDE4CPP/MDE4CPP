@@ -1,25 +1,64 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="Hierarchy">
-  <eAnnotations xmi:id="_otFUEFgQEeqZPe2oHCHy2Q" source="prepareApplication">
-    <details xmi:id="_qWW_AFgQEeqZPe2oHCHy2Q" key="sourceCodeMain" value="std::cout&lt;&lt;&quot;-- Test model : Hierarchy&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- Running test case: Hierarchical instantiation --&quot;&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;&#xA;std::shared_ptr&lt;Hierarchy::A> a = factory->createA();&#xA;bool successful = true;&#xA;&#xA;// a.b is not empty&#xA;successful = (a->getB() != nullptr);&#xA;std::cout&lt;&lt;&quot;A::b is instantiated : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;&#xA;// a.b.c is not empty&#xA;successful = (a->getB()->getC() != nullptr);&#xA;std::cout&lt;&lt;&quot;A::b::c is instantiated : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;&#xA;// a.b.c.d is not empty&#xA;successful = (a->getB()->getC()->getD() != nullptr);&#xA;std::cout&lt;&lt;&quot;A::b::c::d is instantiated : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;&#xA;// a.b.c.d.e is empty (e is shared, not composite)&#xA;successful = (a->getB()->getC()->getD()->getE() == nullptr);&#xA;std::cout&lt;&lt;&quot;A::b::c::d::e is not instantiated : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;&#xA;std::cout&lt;&lt;&quot;Test case successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;std::endl;&#xA;std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;"/>
-  </eAnnotations>
-  <ownedComment xmi:id="_web8sKDvEeq8Z9IqI9dZbA">
-    <body>This test case addresses instantiation a composite structure with multiple hierarchy levels.</body>
-  </ownedComment>
-  <packageImport xmi:id="_rgWIkLArEeert7O7oCVCsA">
-    <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
-  </packageImport>
-  <packagedElement xmi:type="uml:Class" xmi:id="_8PCxUFmQEeqCEpOYlPRuRQ" name="A">
-    <ownedAttribute xmi:id="_KKnUUFmREeqCEpOYlPRuRQ" name="b" type="__Gii4FmQEeqCEpOYlPRuRQ" aggregation="composite"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="__Gii4FmQEeqCEpOYlPRuRQ" name="B">
-    <ownedAttribute xmi:id="_NleRoFmREeqCEpOYlPRuRQ" name="c" type="_APtKYFmREeqCEpOYlPRuRQ" aggregation="composite"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_APtKYFmREeqCEpOYlPRuRQ" name="C">
-    <ownedAttribute xmi:id="_QKMRIFmREeqCEpOYlPRuRQ" name="d" type="_BwmVYFmREeqCEpOYlPRuRQ" aggregation="composite"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_BwmVYFmREeqCEpOYlPRuRQ" name="D">
-    <ownedAttribute xmi:id="_VF-1sFmREeqCEpOYlPRuRQ" name="e" type="_DbV_8FmREeqCEpOYlPRuRQ" aggregation="shared"/>
-  </packagedElement>
-  <packagedElement xmi:type="uml:Class" xmi:id="_DbV_8FmREeqCEpOYlPRuRQ" name="E"/>
-</uml:Model>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_bc8YIeLsEeur7cjoMTUC9A">
+  <uml:Model xmi:id="_PmmP8LAqEeert7O7oCVCsA" name="Hierarchy">
+    <eAnnotations xmi:id="_otFUEFgQEeqZPe2oHCHy2Q" source="prepareApplication">
+      <details xmi:id="_qWW_AFgQEeqZPe2oHCHy2Q" key="sourceCodeMain" value=""/>
+    </eAnnotations>
+    <ownedComment xmi:id="_web8sKDvEeq8Z9IqI9dZbA">
+      <body>This test case addresses instantiation a composite structure with multiple hierarchy levels.</body>
+    </ownedComment>
+    <packageImport xmi:id="_rgWIkLArEeert7O7oCVCsA">
+      <importedPackage xmi:type="uml:Model" href="pathmap://UML_LIBRARIES/UMLPrimitiveTypes.library.uml#_0"/>
+    </packageImport>
+    <packagedElement xmi:type="uml:Class" xmi:id="_8PCxUFmQEeqCEpOYlPRuRQ" name="A">
+      <ownedAttribute xmi:id="_KKnUUFmREeqCEpOYlPRuRQ" name="b" type="__Gii4FmQEeqCEpOYlPRuRQ" aggregation="composite"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="__Gii4FmQEeqCEpOYlPRuRQ" name="B">
+      <ownedAttribute xmi:id="_NleRoFmREeqCEpOYlPRuRQ" name="c" type="_APtKYFmREeqCEpOYlPRuRQ" aggregation="composite"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_APtKYFmREeqCEpOYlPRuRQ" name="C">
+      <ownedAttribute xmi:id="_QKMRIFmREeqCEpOYlPRuRQ" name="d" type="_BwmVYFmREeqCEpOYlPRuRQ" aggregation="composite"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_BwmVYFmREeqCEpOYlPRuRQ" name="D">
+      <ownedAttribute xmi:id="_VF-1sFmREeqCEpOYlPRuRQ" name="e" type="_DbV_8FmREeqCEpOYlPRuRQ" aggregation="shared"/>
+    </packagedElement>
+    <packagedElement xmi:type="uml:Class" xmi:id="_DbV_8FmREeqCEpOYlPRuRQ" name="E"/>
+    <packagedElement xmi:type="uml:OpaqueBehavior" xmi:id="_m0Z4cOMUEeur7cjoMTUC9A" name="main">
+      <language>CPP</language>
+      <body>std::cout&lt;&lt;&quot;-- Test model : Hierarchy&quot;&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;&quot;-- Running test case: Hierarchical instantiation --&quot;&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;std::endl;&#xD;
+&#xD;
+std::shared_ptr&lt;Hierarchy::A> a = factory->createA();&#xD;
+bool successful = true;&#xD;
+&#xD;
+// a.b is not empty&#xD;
+successful = (a->getB() != nullptr);&#xD;
+std::cout&lt;&lt;&quot;A::b is instantiated : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+&#xD;
+// a.b.c is not empty&#xD;
+successful = (a->getB()->getC() != nullptr);&#xD;
+std::cout&lt;&lt;&quot;A::b::c is instantiated : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+&#xD;
+// a.b.c.d is not empty&#xD;
+successful = (a->getB()->getC()->getD() != nullptr);&#xD;
+std::cout&lt;&lt;&quot;A::b::c::d is instantiated : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+&#xD;
+// a.b.c.d.e is empty (e is shared, not composite)&#xD;
+successful = (a->getB()->getC()->getD()->getE() == nullptr);&#xD;
+std::cout&lt;&lt;&quot;A::b::c::d::e is not instantiated : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+&#xD;
+std::cout&lt;&lt;&quot;Test case successful : &quot;&lt;&lt;std::boolalpha&lt;&lt;successful&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;std::endl;&#xD;
+std::cout&lt;&lt;&quot;-- End of test case --&quot;&lt;&lt;std::endl;</body>
+    </packagedElement>
+    <profileApplication xmi:id="_alMJkOMUEeur7cjoMTUC9A">
+      <eAnnotations xmi:id="_alMJkeMUEeur7cjoMTUC9A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_bc8YIeLsEeur7cjoMTUC9A"/>
+      </eAnnotations>
+      <appliedProfile href="../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <UML4CPPProfile:MainBehavior xmi:id="_rnJ1wOMUEeur7cjoMTUC9A" base_Behavior="_m0Z4cOMUEeur7cjoMTUC9A"/>
+  <UML4CPPProfile:NonExecutable xmi:id="_rnJ1weMUEeur7cjoMTUC9A" base_NamedElement="_m0Z4cOMUEeur7cjoMTUC9A"/>
+</xmi:XMI>

@@ -451,8 +451,8 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Node>::iterator iter = m_nestedNode->begin();
-			Bag<uml::Node>::iterator end = m_nestedNode->end();
+			Bag<uml::Node>::iterator iter = getNestedNode()->begin();
+			Bag<uml::Node>::iterator end = getNestedNode()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -503,13 +503,13 @@ bool NodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Node>::iterator iterNestedNode = m_nestedNode->begin();
-			Bag<uml::Node>::iterator endNestedNode = m_nestedNode->end();
+			Bag<uml::Node>::iterator iterNestedNode = getNestedNode()->begin();
+			Bag<uml::Node>::iterator endNestedNode = getNestedNode()->end();
 			while (iterNestedNode != endNestedNode)
 			{
 				if (nestedNodeList->find(*iterNestedNode) == -1)
 				{
-					m_nestedNode->erase(*iterNestedNode);
+					getNestedNode()->erase(*iterNestedNode);
 				}
 				iterNestedNode++;
 			}
@@ -518,9 +518,9 @@ bool NodeImpl::eSet(int featureID, Any newValue)
 			endNestedNode = nestedNodeList->end();
 			while (iterNestedNode != endNestedNode)
 			{
-				if (m_nestedNode->find(*iterNestedNode) == -1)
+				if (getNestedNode()->find(*iterNestedNode) == -1)
 				{
-					m_nestedNode->add(*iterNestedNode);
+					getNestedNode()->add(*iterNestedNode);
 				}
 				iterNestedNode++;			
 			}

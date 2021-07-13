@@ -1,44 +1,47 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<uml:Model xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xmi:id="_TYIyUEw0Eeqt1NEMZ6cUVA" name="JoinNodeTest">
-  <eAnnotations xmi:id="_EDn-AAGwEeuJAuxe-SDWBA" source="prepareApplication">
-    <details xmi:id="_VIXRYAGwEeuJAuxe-SDWBA" key="activityMain" value="true"/>
-  </eAnnotations>
-  <packagedElement xmi:type="uml:Class" xmi:id="_rbalIEw0Eeqt1NEMZ6cUVA" name="A">
-    <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_vUqHkEw0Eeqt1NEMZ6cUVA" name="fbPrint" specification="_tK1UUEw0Eeqt1NEMZ6cUVA">
-      <language>CPP</language>
-      <body>	std::cout &lt;&lt; &quot;SUCCESS&quot; &lt;&lt; std::endl;</body>
-    </ownedBehavior>
-    <ownedBehavior xmi:type="uml:Activity" xmi:id="_uVEdYEw1Eeqt1NEMZ6cUVA" name="JNTest" node="_9CPccEw1Eeqt1NEMZ6cUVA _-44N8Ew1Eeqt1NEMZ6cUVA _DCGtIEw2Eeqt1NEMZ6cUVA _FPubQEw2Eeqt1NEMZ6cUVA _TQdLEEw2Eeqt1NEMZ6cUVA _9i880Ew1Eeqt1NEMZ6cUVA">
-      <eAnnotations xmi:id="_ya27EAGwEeuJAuxe-SDWBA" source="http://sse.tu-ilmenau.de/codegen">
-        <details xmi:id="_AqMHkAGxEeuJAuxe-SDWBA" key="mainActivity" value="1"/>
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_bc8YIeLsEeur7cjoMTUC9A">
+  <uml:Model xmi:id="_TYIyUEw0Eeqt1NEMZ6cUVA" name="JoinNodeTest">
+    <packagedElement xmi:type="uml:Class" xmi:id="_rbalIEw0Eeqt1NEMZ6cUVA" name="A">
+      <ownedBehavior xmi:type="uml:OpaqueBehavior" xmi:id="_vUqHkEw0Eeqt1NEMZ6cUVA" name="fbPrint" specification="_tK1UUEw0Eeqt1NEMZ6cUVA">
+        <language>CPP</language>
+        <body>	std::cout &lt;&lt; &quot;SUCCESS&quot; &lt;&lt; std::endl;</body>
+      </ownedBehavior>
+      <ownedBehavior xmi:type="uml:Activity" xmi:id="_uVEdYEw1Eeqt1NEMZ6cUVA" name="JNTest" node="_9CPccEw1Eeqt1NEMZ6cUVA _-44N8Ew1Eeqt1NEMZ6cUVA _DCGtIEw2Eeqt1NEMZ6cUVA _FPubQEw2Eeqt1NEMZ6cUVA _TQdLEEw2Eeqt1NEMZ6cUVA _9i880Ew1Eeqt1NEMZ6cUVA">
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_LANzMEw2Eeqt1NEMZ6cUVA" target="_DCGtIEw2Eeqt1NEMZ6cUVA" source="_-44N8Uw1Eeqt1NEMZ6cUVA"/>
+        <edge xmi:type="uml:ObjectFlow" xmi:id="_LhOOgEw2Eeqt1NEMZ6cUVA" target="_FPubQUw2Eeqt1NEMZ6cUVA" source="_DCGtIEw2Eeqt1NEMZ6cUVA"/>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_Mlyp4Ew2Eeqt1NEMZ6cUVA" target="_-44N8Ew1Eeqt1NEMZ6cUVA" source="_9CPccEw1Eeqt1NEMZ6cUVA">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_Mlyp4Uw2Eeqt1NEMZ6cUVA" name="Initial1_To_Create A_guard" value="true"/>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_Mlyp4kw2Eeqt1NEMZ6cUVA" name="Initial1_To_Create A_weight"/>
+        </edge>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_NCHZgEw2Eeqt1NEMZ6cUVA" target="_DCGtIEw2Eeqt1NEMZ6cUVA" source="_9i880Ew1Eeqt1NEMZ6cUVA">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_NCHZgUw2Eeqt1NEMZ6cUVA" name="Initial2_To_Join1_guard" value="true"/>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_NCHZgkw2Eeqt1NEMZ6cUVA" name="Initial2_To_Join1_weight"/>
+        </edge>
+        <edge xmi:type="uml:ControlFlow" xmi:id="_UEJ44Ew2Eeqt1NEMZ6cUVA" target="_TQdLEEw2Eeqt1NEMZ6cUVA" source="_FPubQEw2Eeqt1NEMZ6cUVA">
+          <guard xmi:type="uml:LiteralBoolean" xmi:id="_UEJ44Uw2Eeqt1NEMZ6cUVA" name="print_To_ActivityFinal1_guard" value="true"/>
+          <weight xmi:type="uml:LiteralInteger" xmi:id="_UEJ44kw2Eeqt1NEMZ6cUVA" name="print_To_ActivityFinal1_weight"/>
+        </edge>
+        <node xmi:type="uml:InitialNode" xmi:id="_9CPccEw1Eeqt1NEMZ6cUVA" name="Initial1" outgoing="_Mlyp4Ew2Eeqt1NEMZ6cUVA"/>
+        <node xmi:type="uml:InitialNode" xmi:id="_9i880Ew1Eeqt1NEMZ6cUVA" name="Initial2" outgoing="_NCHZgEw2Eeqt1NEMZ6cUVA"/>
+        <node xmi:type="uml:CreateObjectAction" xmi:id="_-44N8Ew1Eeqt1NEMZ6cUVA" name="Create A" incoming="_Mlyp4Ew2Eeqt1NEMZ6cUVA" classifier="_rbalIEw0Eeqt1NEMZ6cUVA">
+          <result xmi:id="_-44N8Uw1Eeqt1NEMZ6cUVA" name="a" outgoing="_LANzMEw2Eeqt1NEMZ6cUVA" type="_rbalIEw0Eeqt1NEMZ6cUVA"/>
+        </node>
+        <node xmi:type="uml:JoinNode" xmi:id="_DCGtIEw2Eeqt1NEMZ6cUVA" name="Join1" incoming="_LANzMEw2Eeqt1NEMZ6cUVA _NCHZgEw2Eeqt1NEMZ6cUVA" outgoing="_LhOOgEw2Eeqt1NEMZ6cUVA">
+          <joinSpec xmi:type="uml:LiteralBoolean" xmi:id="_DCGtIUw2Eeqt1NEMZ6cUVA" name="Join1" value="true"/>
+        </node>
+        <node xmi:type="uml:CallOperationAction" xmi:id="_FPubQEw2Eeqt1NEMZ6cUVA" name="print" outgoing="_UEJ44Ew2Eeqt1NEMZ6cUVA" operation="_tK1UUEw0Eeqt1NEMZ6cUVA">
+          <target xmi:id="_FPubQUw2Eeqt1NEMZ6cUVA" name="a" incoming="_LhOOgEw2Eeqt1NEMZ6cUVA" type="_rbalIEw0Eeqt1NEMZ6cUVA"/>
+        </node>
+        <node xmi:type="uml:ActivityFinalNode" xmi:id="_TQdLEEw2Eeqt1NEMZ6cUVA" name="ActivityFinal1" incoming="_UEJ44Ew2Eeqt1NEMZ6cUVA"/>
+      </ownedBehavior>
+      <ownedOperation xmi:id="_tK1UUEw0Eeqt1NEMZ6cUVA" name="print" method="_vUqHkEw0Eeqt1NEMZ6cUVA"/>
+    </packagedElement>
+    <profileApplication xmi:id="_xiehgOMQEeur7cjoMTUC9A">
+      <eAnnotations xmi:id="_xiehgeMQEeur7cjoMTUC9A" source="http://www.eclipse.org/uml2/2.0.0/UML">
+        <references xmi:type="ecore:EPackage" href="../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_bc8YIeLsEeur7cjoMTUC9A"/>
       </eAnnotations>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_LANzMEw2Eeqt1NEMZ6cUVA" target="_DCGtIEw2Eeqt1NEMZ6cUVA" source="_-44N8Uw1Eeqt1NEMZ6cUVA"/>
-      <edge xmi:type="uml:ObjectFlow" xmi:id="_LhOOgEw2Eeqt1NEMZ6cUVA" target="_FPubQUw2Eeqt1NEMZ6cUVA" source="_DCGtIEw2Eeqt1NEMZ6cUVA"/>
-      <edge xmi:type="uml:ControlFlow" xmi:id="_Mlyp4Ew2Eeqt1NEMZ6cUVA" target="_-44N8Ew1Eeqt1NEMZ6cUVA" source="_9CPccEw1Eeqt1NEMZ6cUVA">
-        <guard xmi:type="uml:LiteralBoolean" xmi:id="_Mlyp4Uw2Eeqt1NEMZ6cUVA" name="Initial1_To_Create A_guard" value="true"/>
-        <weight xmi:type="uml:LiteralInteger" xmi:id="_Mlyp4kw2Eeqt1NEMZ6cUVA" name="Initial1_To_Create A_weight"/>
-      </edge>
-      <edge xmi:type="uml:ControlFlow" xmi:id="_NCHZgEw2Eeqt1NEMZ6cUVA" target="_DCGtIEw2Eeqt1NEMZ6cUVA" source="_9i880Ew1Eeqt1NEMZ6cUVA">
-        <guard xmi:type="uml:LiteralBoolean" xmi:id="_NCHZgUw2Eeqt1NEMZ6cUVA" name="Initial2_To_Join1_guard" value="true"/>
-        <weight xmi:type="uml:LiteralInteger" xmi:id="_NCHZgkw2Eeqt1NEMZ6cUVA" name="Initial2_To_Join1_weight"/>
-      </edge>
-      <edge xmi:type="uml:ControlFlow" xmi:id="_UEJ44Ew2Eeqt1NEMZ6cUVA" target="_TQdLEEw2Eeqt1NEMZ6cUVA" source="_FPubQEw2Eeqt1NEMZ6cUVA">
-        <guard xmi:type="uml:LiteralBoolean" xmi:id="_UEJ44Uw2Eeqt1NEMZ6cUVA" name="print_To_ActivityFinal1_guard" value="true"/>
-        <weight xmi:type="uml:LiteralInteger" xmi:id="_UEJ44kw2Eeqt1NEMZ6cUVA" name="print_To_ActivityFinal1_weight"/>
-      </edge>
-      <node xmi:type="uml:InitialNode" xmi:id="_9CPccEw1Eeqt1NEMZ6cUVA" name="Initial1" outgoing="_Mlyp4Ew2Eeqt1NEMZ6cUVA"/>
-      <node xmi:type="uml:InitialNode" xmi:id="_9i880Ew1Eeqt1NEMZ6cUVA" name="Initial2" outgoing="_NCHZgEw2Eeqt1NEMZ6cUVA"/>
-      <node xmi:type="uml:CreateObjectAction" xmi:id="_-44N8Ew1Eeqt1NEMZ6cUVA" name="Create A" incoming="_Mlyp4Ew2Eeqt1NEMZ6cUVA" classifier="_rbalIEw0Eeqt1NEMZ6cUVA">
-        <result xmi:id="_-44N8Uw1Eeqt1NEMZ6cUVA" name="a" outgoing="_LANzMEw2Eeqt1NEMZ6cUVA" type="_rbalIEw0Eeqt1NEMZ6cUVA"/>
-      </node>
-      <node xmi:type="uml:JoinNode" xmi:id="_DCGtIEw2Eeqt1NEMZ6cUVA" name="Join1" incoming="_LANzMEw2Eeqt1NEMZ6cUVA _NCHZgEw2Eeqt1NEMZ6cUVA" outgoing="_LhOOgEw2Eeqt1NEMZ6cUVA">
-        <joinSpec xmi:type="uml:LiteralBoolean" xmi:id="_DCGtIUw2Eeqt1NEMZ6cUVA" name="Join1" value="true"/>
-      </node>
-      <node xmi:type="uml:CallOperationAction" xmi:id="_FPubQEw2Eeqt1NEMZ6cUVA" name="print" outgoing="_UEJ44Ew2Eeqt1NEMZ6cUVA" operation="_tK1UUEw0Eeqt1NEMZ6cUVA">
-        <target xmi:id="_FPubQUw2Eeqt1NEMZ6cUVA" name="a" incoming="_LhOOgEw2Eeqt1NEMZ6cUVA" type="_rbalIEw0Eeqt1NEMZ6cUVA"/>
-      </node>
-      <node xmi:type="uml:ActivityFinalNode" xmi:id="_TQdLEEw2Eeqt1NEMZ6cUVA" name="ActivityFinal1" incoming="_UEJ44Ew2Eeqt1NEMZ6cUVA"/>
-    </ownedBehavior>
-    <ownedOperation xmi:id="_tK1UUEw0Eeqt1NEMZ6cUVA" name="print" method="_vUqHkEw0Eeqt1NEMZ6cUVA"/>
-  </packagedElement>
-</uml:Model>
+      <appliedProfile href="../../../../../common/UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
+    </profileApplication>
+  </uml:Model>
+  <UML4CPPProfile:MainBehavior xmi:id="_PUSH8OMSEeur7cjoMTUC9A" base_Behavior="_uVEdYEw1Eeqt1NEMZ6cUVA"/>
+</xmi:XMI>

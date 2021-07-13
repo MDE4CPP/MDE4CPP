@@ -33,9 +33,9 @@
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
@@ -173,8 +173,8 @@ Any CollectionLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreTyp
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator iter = m_parts->begin();
-			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator end = m_parts->end();
+			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator iter = getParts()->begin();
+			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator end = getParts()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -211,13 +211,13 @@ bool CollectionLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator iterParts = m_parts->begin();
-			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator endParts = m_parts->end();
+			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator iterParts = getParts()->begin();
+			Bag<ocl::Evaluations::CollectionLiteralPartEval>::iterator endParts = getParts()->end();
 			while (iterParts != endParts)
 			{
 				if (partsList->find(*iterParts) == -1)
 				{
-					m_parts->erase(*iterParts);
+					getParts()->erase(*iterParts);
 				}
 				iterParts++;
 			}
@@ -226,9 +226,9 @@ bool CollectionLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 			endParts = partsList->end();
 			while (iterParts != endParts)
 			{
-				if (m_parts->find(*iterParts) == -1)
+				if (getParts()->find(*iterParts) == -1)
 				{
-					m_parts->add(*iterParts);
+					getParts()->add(*iterParts);
 				}
 				iterParts++;			
 			}

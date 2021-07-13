@@ -199,7 +199,7 @@
     <eClassifiers xsi:type="ecore:EClass" name="BagType" eSuperTypes="#//Types/CollectionType"/>
     <eClassifiers xsi:type="ecore:EClass" name="CollectionType" eSuperTypes="http://www.eclipse.org/emf/2002/Ecore#//EDataType">
       <eOperations name="kindOf" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="    if(coll != nullptr)&#xA;    {&#xA;        std::shared_ptr&lt;ecore::EClass> eclass = std::dynamic_pointer_cast&lt;ecore::EClass>(this->eClass());&#xA;        std::shared_ptr&lt;ecore::EClass> eclassOf = std::dynamic_pointer_cast&lt;ecore::EClass>(coll->eClass());&#xA;        return eclassOf->isSuperTypeOf(eclass);&#xA;    }&#xA;    return false;&#xA;   "/>
         </eAnnotations>
         <eParameters name="coll" lowerBound="1" eType="#//Types/CollectionType"/>
@@ -241,7 +241,7 @@
   <eSubpackages name="Values" nsURI="http://ocl4cpp/ocl/values.ecore" nsPrefix="ocl.values">
     <eClassifiers xsi:type="ecore:EClass" name="BagTypeValue" eSuperTypes="#//Values/CollectionValue">
       <eOperations name="addValue" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;elem->setValue(value);&#xA;elem->setIndexNr(this->getElements()->size());&#xA;this->getElements()->add(elem);&#xA;&#xA;return true;"/>
         </eAnnotations>
         <eParameters name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
@@ -258,23 +258,23 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SequenceTypeValue" eSuperTypes="#//Values/CollectionValue">
       <eOperations name="addValue" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;elem->setValue(value);&#xA;elem->setIndexNr(this->getElements()->size());&#xA;this->getElements()->add(elem);&#xA;&#xA;return true;"/>
         </eAnnotations>
         <eParameters name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ObjectValue" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Value">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;abstractDataTypes/Bag.hpp&quot;&#xA;#include &quot;ecore/EOperation.hpp&quot;&#xA;#include &quot;ecore/EParameter.hpp&quot;&#xA;#include &quot;ecore/ETypedElement.hpp&quot;&#xA;#include &quot;ecore/ENamedElement.hpp&quot;&#xA;#include &quot;ecore/EAttribute.hpp&quot;&#xA;#include &quot;ecore/EReference.hpp&quot;&#xA;#include &quot;uml/Operation.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xA;#include &quot;uml/TypedElement.hpp&quot;&#xA;#include &quot;uml/NamedElement.hpp&quot;&#xA;#include &quot;uml/Type.hpp&quot;&#xA;#include &quot;uml/Property.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;abstractDataTypes/Bag.hpp&quot;&#xA;#include &quot;ecore/EOperation.hpp&quot;&#xA;#include &quot;ecore/EParameter.hpp&quot;&#xA;#include &quot;ecore/ETypedElement.hpp&quot;&#xA;#include &quot;ecore/ENamedElement.hpp&quot;&#xA;#include &quot;ecore/EAttribute.hpp&quot;&#xA;#include &quot;ecore/EReference.hpp&quot;&#xA;#include &quot;uml/Operation.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xA;#include &quot;uml/TypedElement.hpp&quot;&#xA;#include &quot;uml/NamedElement.hpp&quot;&#xA;#include &quot;uml/Type.hpp&quot;&#xA;#include &quot;uml/Property.hpp&quot;"/>
       </eAnnotations>
       <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="if(m_value != nullptr) {&#xA;        uml::NamedElement* uname = dynamic_cast&lt;uml::NamedElement*>(m_value.get());&#xA;        if(uname != nullptr) {&#xA;            uml::Operation* uope = dynamic_cast&lt;uml::Operation*>(m_value.get());&#xA;            if(uope != nullptr) {&#xA;                std::string result = &quot;&lt;Operation> &quot; + uope->getName() + &quot;(&quot;;&#xA;                Bag&lt;uml::Parameter>* ebag = dynamic_cast&lt;Bag&lt;uml::Parameter>*>(uope->getOwnedParameter().get());&#xA;                for(unsigned int i = 0; i &lt; ebag->size(); i++) {&#xA;                    if(i > 0) result += &quot;, &quot;;&#xA;                    result += ebag->at(i)->getName() + &quot; : &quot;;&#xA;                    if(ebag->at(i)->getType() != nullptr) {&#xA;                        if(ebag->at(i)->getUpper() > 1 || ebag->at(i)->getUpper() &lt; 0)&#xA;                            result += ebag->at(i)->getType()->getName()+ &quot; [&quot;&#xA;                                +  std::to_string(ebag->at(i)->getLower()) + &quot;..*]&quot;;&#xA;                        else&#xA;                            result += ebag->at(i)->getType()->getName()+ &quot; [&quot;&#xA;                                +  std::to_string(ebag->at(i)->getLower()) + &quot;..&quot; + std::to_string(ebag->at(i)->getUpper()) + &quot;]&quot;;&#xA;                    }&#xA;                    else&#xA;                        result += &quot;[Not set in Model]&quot;;&#xA;                }&#xA;                result += &quot;)&quot;;&#xA;                return result;&#xA;            }&#xA;            uml::Property* uprop = dynamic_cast&lt;uml::Property*>(m_value.get());&#xA;            if(uprop != nullptr) {&#xA;                if(uprop->getUpper() > 1 || uprop->getUpper() &lt; 0)&#xA;                    return &quot;&lt;Property> &quot; + uprop->getName() + &quot; : &quot; + uprop->getType()->getName() + &quot; [&quot;&#xA;                        +  std::to_string(uprop->getLower()) + &quot;..*]&quot;;&#xA;                else&#xA;                    return &quot;&lt;Property> &quot; + uprop->getName() + &quot; : &quot; + uprop->getType()->getName() + &quot; [&quot;&#xA;                        +  std::to_string(uprop->getLower()) + &quot;..&quot; + std::to_string(uprop->getUpper()) + &quot;]&quot;;&#xA;            }&#xA;            uml::TypedElement* utyped = dynamic_cast&lt;uml::TypedElement*>(m_value.get());&#xA;            if(utyped != nullptr) {&#xA;                return utyped->getName() + &quot; : &quot; + utyped->getType()->getName();&#xA;            }&#xA;            return uname->getName();&#xA;        }&#xA;&#xA;        ecore::EOperation* eope = dynamic_cast&lt;ecore::EOperation*>(m_value.get());&#xA;        if(eope != nullptr) {&#xA;            std::string result = eope->getName() + &quot;(&quot;;&#xA;            Bag&lt;ecore::EParameter>* ebag = dynamic_cast&lt;Bag&lt;ecore::EParameter>*>(eope->getEParameters().get());&#xA;            for(unsigned int i = 0; i &lt; ebag->size(); i++) {&#xA;                if(i > 0) result += &quot;, &quot;;&#xA;                result += ebag->at(i)->getName() + &quot; : &quot;;&#xA;                if(ebag->at(i)->getEType() != nullptr)&#xA;                    result += ebag->at(i)->getEType()->getName();&#xA;                else&#xA;                    result += &quot;[Not set in Model]&quot;;&#xA;            }&#xA;            result += &quot;)&quot;;&#xA;            return result;&#xA;        }&#xA;        ecore::EAttribute* eattr = dynamic_cast&lt;ecore::EAttribute*>(m_value.get());&#xA;        if(eattr != nullptr) {&#xA;            if(eattr->getUpperBound() > 1 || eattr->getUpperBound() &lt; 0)&#xA;                return &quot;&lt;EAttribute> &quot; + eattr->getName() + &quot; : &quot; + eattr->getEType()->getName()+ &quot; [&quot;&#xA;                    +  std::to_string(eattr->getLowerBound()) + &quot;..*]&quot;;&#xA;            else&#xA;                return &quot;&lt;EAttribute> &quot; + eattr->getName() + &quot; : &quot; + eattr->getEType()->getName()+ &quot; [&quot;&#xA;                        +  std::to_string(eattr->getLowerBound()) + &quot;..&quot; + std::to_string(eattr->getUpperBound()) + &quot;]&quot;;&#xA;        }&#xA;        ecore::EReference* eref = dynamic_cast&lt;ecore::EReference*>(m_value.get());&#xA;        if(eref != nullptr) {&#xA;            if(eref->getUpperBound() > 1 || eref->getUpperBound() &lt; 0)&#xA;                return &quot;&lt;EReference> &quot; + eref->getName() + &quot; : &quot; + eref->getEType()->getName()+ &quot; [&quot;&#xA;                    +  std::to_string(eref->getLowerBound()) + &quot;..*]&quot;;&#xA;            else&#xA;                return &quot;&lt;EReference> &quot; + eref->getName() + &quot; : &quot; + eref->getEType()->getName()+ &quot; [&quot;&#xA;                    +  std::to_string(eref->getLowerBound()) + &quot;..&quot; + std::to_string(eref->getUpperBound()) + &quot;]&quot;;&#xA;        }&#xA;        ecore::ETypedElement* etyped = dynamic_cast&lt;ecore::ETypedElement*>(m_value.get());&#xA;        if(etyped != nullptr) {&#xA;            if(etyped->isMany())&#xA;                return etyped->getName() + &quot; : &quot; + etyped->getEType()->getName()+ &quot; [0..*]&quot;;&#xA;            else&#xA;                return etyped->getName() + &quot; : &quot; + etyped->getEType()->getName()+ &quot; [0..1]&quot;;&#xA;        }&#xA;        ecore::ENamedElement* ename = dynamic_cast&lt;ecore::ENamedElement*>(m_value.get());&#xA;        if(ename != nullptr) {&#xA;            return ename->getName();&#xA;        }&#xA;    }&#xA;    return &quot;&quot;;"/>
         </eAnnotations>
       </eOperations>
       <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="    if(otherValue != nullptr &amp;&amp; otherValue->eClass()->getClassifierID() == this->eClass()->getClassifierID()) {&#xA;        std::shared_ptr&lt;ocl::Values::ObjectValue> otherObj = std::dynamic_pointer_cast&lt;ocl::Values::ObjectValue>(otherValue);&#xA;        return otherObj != nullptr &amp;&amp; otherObj->getValue().get() == this->getValue().get();&#xA;    }&#xA;    return false;&#xA;   "/>
         </eAnnotations>
         <eParameters name="otherValue" ordered="false" lowerBound="1" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
@@ -289,18 +289,18 @@
         <eParameters name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
       </eOperations>
       <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="std::string result = &quot;&quot;;&#xA;&#xA;Bag&lt;Element>::const_iterator endIt_elem = this->getElements()->end();&#xA;for (Bag&lt;Element>::const_iterator it_reference = this->getElements()->begin();&#xA;&#x9; it_reference != endIt_elem; ++it_reference)&#xA;{&#xA;       if(!result.empty()) {&#xA;            result += &quot;\n&quot;;&#xA;        }&#xA;&#x9;result += (*it_reference)->getValue()->toString();&#xA;}&#xA;return result;"/>
         </eAnnotations>
       </eOperations>
       <eOperations name="find" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="for (Bag&lt;ocl::Values::Element>::const_iterator it_elem = this->getElements()->begin(); it_elem != this->getElements()->end(); ++it_elem)&#xA;    {&#xA;        if ((*it_elem)->getValue()->equals(value)) {&#xA;            return true;&#xA;        }&#xA;    }&#xA;    return false;"/>
         </eAnnotations>
         <eParameters name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
       </eOperations>
       <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="    if(otherValue != nullptr)&#xA;    {&#xA;        std::shared_ptr&lt;ocl::Values::CollectionValue> otherBag = std::dynamic_pointer_cast&lt;ocl::Values::CollectionValue>(otherValue);&#xA;&#xA;&#x9;if(otherBag != nullptr &amp;&amp; otherBag->getModel() != nullptr &amp;&amp; &#xA;           this->getModel()->kindOf(otherBag->getModel()) &amp;&amp;&#xA;           otherBag->getElements()->size() == this->getElements()->size()) {&#xA;&#xA;           for(size_t i = 0; i &lt; this->getElements()->size(); i++) {&#xA;                auto item1 = this->getElements()->at(i)->getValue();&#xA;                auto item2 = otherBag->getElements()->at(i)->getValue();&#xA;                &#xA;                if(!item1->equals(item2)) {&#xA;                    return false;&#xA;                }&#xA;            }&#xA;            return true;&#xA;        }&#xA;    }&#xA;    return false;&#xA;   "/>
         </eAnnotations>
         <eParameters name="otherValue" ordered="false" lowerBound="1" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
@@ -312,34 +312,34 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="SetTypeValue" eSuperTypes="#//Values/CollectionValue">
       <eOperations name="addValue" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="if(!this->find(value)) {&#xA;    std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;    elem->setValue(value);&#xA;    elem->setIndexNr(this->getElements()->size());&#xA;    this->getElements()->add(elem);&#xA;&#xA;    return true;&#xA;}&#xA;return false;"/>
         </eAnnotations>
         <eParameters name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OclVoidValue" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Value">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
       <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="return &quot;&quot;;"/>
         </eAnnotations>
       </eOperations>
       <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="    return otherValue != nullptr &amp;&amp; otherValue->eClass()->getClassifierID() == this->eClass()->getClassifierID();&#xA;   "/>
         </eAnnotations>
         <eParameters name="otherValue" ordered="false" lowerBound="1" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
       </eOperations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OclMessageValue" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Value">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
       <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="return &quot;&quot;;"/>
         </eAnnotations>
       </eOperations>
@@ -354,8 +354,8 @@
           eType="#//Values/NameValueBinding"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="StaticValue" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Value">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="LocalSnapshot">
@@ -374,12 +374,12 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TupleValue" eSuperTypes="#//Values/StaticValue">
       <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="std::string result = &quot;&quot;;&#xA;&#xA;Bag&lt;NameValueBinding>::const_iterator endIt_elem = this->getElements()->end();&#xA;for (Bag&lt;NameValueBinding>::const_iterator it_reference = this->getElements()->begin();&#xA;&#x9; it_reference != endIt_elem; ++it_reference)&#xA;{&#xA;       if(!result.empty()) {&#xA;            result += &quot;\n&quot;;&#xA;        }&#xA;&#x9;result += (*it_reference)->getName() + &quot; : &quot; + (*it_reference)->getValue()->toString();&#xA;}&#xA;return result;"/>
         </eAnnotations>
       </eOperations>
       <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="    if(otherValue != nullptr)&#xA;    {&#xA;        std::shared_ptr&lt;ocl::Values::TupleValue> otherBag = std::dynamic_pointer_cast&lt;ocl::Values::TupleValue>(otherValue);&#xA;&#xA;&#x9;if(otherBag != nullptr &amp;&amp; otherBag->getElements()->size() == this->getElements()->size()) {&#xA;&#xA;           for(size_t i = 0; i &lt; this->getElements()->size(); i++) {&#xA;                auto item1 = this->getElements()->at(i);&#xA;                auto item2 = otherBag->getElements()->at(i);&#xA;                &#xA;                if(item1->getName() != item2->getName() || !item1->getValue()->equals(item2->getValue())) {&#xA;                    return false;&#xA;                }&#xA;            }&#xA;            return true;&#xA;        }&#xA;    }&#xA;    return false;&#xA;   "/>
         </eAnnotations>
         <eParameters name="otherValue" ordered="false" lowerBound="1" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
@@ -390,16 +390,16 @@
           eOpposite="#//Types/TupleType/instance"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="UndefinedValue" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Value">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
       <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="return &quot;Undefined&quot;;"/>
         </eAnnotations>
       </eOperations>
       <eOperations name="equals" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="    return otherValue != nullptr &amp;&amp; otherValue->eClass()->getClassifierID() == this->eClass()->getClassifierID();&#xA;   "/>
         </eAnnotations>
         <eParameters name="otherValue" ordered="false" lowerBound="1" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
@@ -407,7 +407,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OrderedSetTypeValue" eSuperTypes="#//Values/CollectionValue">
       <eOperations name="addValue" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//Boolean">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="if(!this->find(value)) {&#xA;    std::shared_ptr&lt;ocl::Values::Element> elem = ocl::Values::ValuesFactory::eInstance()->createElement();&#xA;    elem->setValue(value);&#xA;    elem->setIndexNr(this->getElements()->size());&#xA;    this->getElements()->add(elem);&#xA;&#xA;    return true;&#xA;}&#xA;return false;"/>
         </eAnnotations>
         <eParameters name="value" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
@@ -416,20 +416,20 @@
   </eSubpackages>
   <eSubpackages name="Evaluations" nsURI="http://ocl4cpp/ocl/evaluations.ecore" nsPrefix="ocl.evaluations">
     <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralPartEval" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Evaluation">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
           eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TupleLiteralExpPartEval" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Evaluation">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EvalNameSpace" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Evaluation">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExpressionInOclEval">
@@ -438,8 +438,8 @@
       <eStructuralFeatures xsi:type="ecore:EReference" name="environment" eType="#//Evaluations/EvalEnvironment"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OclExpEval" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Evaluation">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="environment" lowerBound="1"
           eType="#//Evaluations/EvalEnvironment"/>
@@ -450,13 +450,13 @@
           eType="#//Expressions/OclExpression" eOpposite="#//Expressions/OclExpression/instance"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="UnspecifiedValueExpEval" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Evaluation">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OclMessageArgEval" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Evaluation">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="unspecified" eType="#//Evaluations/UnspecifiedValueExpEval"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Evaluations/OclExpEval"/>
@@ -550,61 +550,61 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralExpEval" eSuperTypes="#//Evaluations/LiteralExpEval"/>
     <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteralExpEval" eSuperTypes="#//Evaluations/PrimitiveLiteralExpEval ../../../fuml/model/fUML.ecore#//Semantics/Values/LiteralBooleanEvaluation">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NumericLiteralExpEval" eSuperTypes="#//Evaluations/PrimitiveLiteralExpEval"/>
     <eClassifiers xsi:type="ecore:EClass" name="StringLiteralExpEval" eSuperTypes="#//Evaluations/PrimitiveLiteralExpEval ../../../fuml/model/fUML.ecore#//Semantics/Values/LiteralStringEvaluation">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="UnlimitedNaturalLiteralExpEval" eSuperTypes="#//Evaluations/NumericLiteralExpEval ../../../fuml/model/fUML.ecore#//Semantics/Values/LiteralUnlimitedNaturalEvaluation">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteralExpEval" eSuperTypes="#//Evaluations/NumericLiteralExpEval ../../../fuml/model/fUML.ecore#//Semantics/Values/LiteralIntegerEvaluation">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RealLiteralExpEval" eSuperTypes="#//Evaluations/NumericLiteralExpEval ../../../fuml/model/fUML.ecore#//Semantics/Values/LiteralRealEvaluation">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EvalEnvironment">
-      <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
-        <details key="includes" value="#include &quot;ocl/values/UndefinedValue.hpp&quot;"/>
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="implIncludes" value="#include &quot;ocl/values/UndefinedValue.hpp&quot;"/>
       </eAnnotations>
       <eOperations name="getValueOf" ordered="false" lowerBound="1" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="std::shared_ptr&lt;ocl::Values::NameValueBinding> nvb = this->find(n);&#xA;if(nvb != nullptr)&#xA;&#x9;return nvb->getValue();&#xA;else&#xA;       return ocl::Values::ValuesFactory::eInstance()->createUndefinedValue();"/>
         </eAnnotations>
         <eParameters name="n" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </eOperations>
       <eOperations name="replace" ordered="false" lowerBound="1">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="std::shared_ptr&lt;ocl::Values::NameValueBinding> nvb = this->find(n->getName());&#xA;if(nvb != nullptr)&#xA;&#x9;return nvb->setValue(n->getValue());&#xA;&#xA;"/>
         </eAnnotations>
         <eParameters name="n" eType="#//Values/NameValueBinding"/>
       </eOperations>
       <eOperations name="add" ordered="false" lowerBound="1">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="//std::shared_ptr&lt;ocl::Values::NameValueBinding> nvb = this->find(n->getName());&#xA;//if(nvb != nullptr)&#xA;&#x9;m_bindings->add(n);&#xA;&#xA;"/>
         </eAnnotations>
         <eParameters name="n" eType="#//Values/NameValueBinding"/>
       </eOperations>
       <eOperations name="find" ordered="false" lowerBound="1" eType="#//Values/NameValueBinding">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="for (Bag&lt;ocl::Values::NameValueBinding>::const_iterator it_attribute = m_bindings->begin(); it_attribute != m_bindings->end(); ++it_attribute)&#xA;    {&#xA;        if ((*it_attribute)->getName() == name) {&#xA;            return *it_attribute;&#xA;        }&#xA;    }&#xA;    return nullptr;"/>
         </eAnnotations>
         <eParameters name="name" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String"/>
       </eOperations>
       <eOperations name="addAll" ordered="false" lowerBound="1">
-        <eAnnotations source="http://sse.tu-ilmenau.de/codegen">
+        <eAnnotations source="http://tu-ilmenau.de/see/codegen">
           <details key="body" value="for (Bag&lt;ocl::Values::NameValueBinding>::const_iterator it_attribute = nvbs->begin(); it_attribute != nvbs->end(); ++it_attribute)&#xA;    {&#xA;        if (this->find((*it_attribute)->getName()) == nullptr) {&#xA;           m_bindings->add(*it_attribute);&#xA;        }&#xA;    }&#xA;"/>
         </eAnnotations>
         <eParameters name="nvbs" upperBound="-1" eType="#//Values/NameValueBinding"/>

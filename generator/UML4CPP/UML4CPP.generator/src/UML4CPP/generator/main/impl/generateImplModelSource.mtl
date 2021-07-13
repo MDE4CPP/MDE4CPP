@@ -29,7 +29,7 @@
 #include "[aClass._package.generateNamespacePath(false)/]/[className/].hpp"
 #include "[aClass._package.generateNamespacePath(false)/]/impl/[className.concat('Impl')/].hpp"
 
-[if (not aClass._package.ignoreNamespace())]using namespace [aClass._package.generateNamespace(false)/];[/if]
+[if (not aClass._package.isIgnoreNamespace())]using namespace [aClass._package.generateNamespace(false)/];[/if]
 
 //static initialisation
 [generateSingletonImpl(className, false)/]

@@ -515,8 +515,8 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_EDGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityEdge>::iterator iter = m_edge->begin();
-			Bag<uml::ActivityEdge>::iterator end = m_edge->end();
+			Bag<uml::ActivityEdge>::iterator iter = getEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator end = getEdge()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -531,8 +531,8 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityNode>::iterator iter = m_node->begin();
-			Bag<uml::ActivityNode>::iterator end = m_node->end();
+			Bag<uml::ActivityNode>::iterator iter = getNode()->begin();
+			Bag<uml::ActivityNode>::iterator end = getNode()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -545,8 +545,8 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ActivityPartition>::iterator iter = m_subpartition->begin();
-			Bag<uml::ActivityPartition>::iterator end = m_subpartition->end();
+			Bag<uml::ActivityPartition>::iterator iter = getSubpartition()->begin();
+			Bag<uml::ActivityPartition>::iterator end = getSubpartition()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -597,13 +597,13 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityEdge>::iterator iterEdge = m_edge->begin();
-			Bag<uml::ActivityEdge>::iterator endEdge = m_edge->end();
+			Bag<uml::ActivityEdge>::iterator iterEdge = getEdge()->begin();
+			Bag<uml::ActivityEdge>::iterator endEdge = getEdge()->end();
 			while (iterEdge != endEdge)
 			{
 				if (edgeList->find(*iterEdge) == -1)
 				{
-					m_edge->erase(*iterEdge);
+					getEdge()->erase(*iterEdge);
 				}
 				iterEdge++;
 			}
@@ -612,9 +612,9 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 			endEdge = edgeList->end();
 			while (iterEdge != endEdge)
 			{
-				if (m_edge->find(*iterEdge) == -1)
+				if (getEdge()->find(*iterEdge) == -1)
 				{
-					m_edge->add(*iterEdge);
+					getEdge()->add(*iterEdge);
 				}
 				iterEdge++;			
 			}
@@ -647,13 +647,13 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityNode>::iterator iterNode = m_node->begin();
-			Bag<uml::ActivityNode>::iterator endNode = m_node->end();
+			Bag<uml::ActivityNode>::iterator iterNode = getNode()->begin();
+			Bag<uml::ActivityNode>::iterator endNode = getNode()->end();
 			while (iterNode != endNode)
 			{
 				if (nodeList->find(*iterNode) == -1)
 				{
-					m_node->erase(*iterNode);
+					getNode()->erase(*iterNode);
 				}
 				iterNode++;
 			}
@@ -662,9 +662,9 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 			endNode = nodeList->end();
 			while (iterNode != endNode)
 			{
-				if (m_node->find(*iterNode) == -1)
+				if (getNode()->find(*iterNode) == -1)
 				{
-					m_node->add(*iterNode);
+					getNode()->add(*iterNode);
 				}
 				iterNode++;			
 			}
@@ -691,13 +691,13 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ActivityPartition>::iterator iterSubpartition = m_subpartition->begin();
-			Bag<uml::ActivityPartition>::iterator endSubpartition = m_subpartition->end();
+			Bag<uml::ActivityPartition>::iterator iterSubpartition = getSubpartition()->begin();
+			Bag<uml::ActivityPartition>::iterator endSubpartition = getSubpartition()->end();
 			while (iterSubpartition != endSubpartition)
 			{
 				if (subpartitionList->find(*iterSubpartition) == -1)
 				{
-					m_subpartition->erase(*iterSubpartition);
+					getSubpartition()->erase(*iterSubpartition);
 				}
 				iterSubpartition++;
 			}
@@ -706,9 +706,9 @@ bool ActivityPartitionImpl::eSet(int featureID, Any newValue)
 			endSubpartition = subpartitionList->end();
 			while (iterSubpartition != endSubpartition)
 			{
-				if (m_subpartition->find(*iterSubpartition) == -1)
+				if (getSubpartition()->find(*iterSubpartition) == -1)
 				{
-					m_subpartition->add(*iterSubpartition);
+					getSubpartition()->add(*iterSubpartition);
 				}
 				iterSubpartition++;			
 			}

@@ -310,8 +310,8 @@ Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::GeneralizationSet>::iterator iter = m_generalizationSet->begin();
-			Bag<uml::GeneralizationSet>::iterator end = m_generalizationSet->end();
+			Bag<uml::GeneralizationSet>::iterator iter = getGeneralizationSet()->begin();
+			Bag<uml::GeneralizationSet>::iterator end = getGeneralizationSet()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -366,13 +366,13 @@ bool GeneralizationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::GeneralizationSet>::iterator iterGeneralizationSet = m_generalizationSet->begin();
-			Bag<uml::GeneralizationSet>::iterator endGeneralizationSet = m_generalizationSet->end();
+			Bag<uml::GeneralizationSet>::iterator iterGeneralizationSet = getGeneralizationSet()->begin();
+			Bag<uml::GeneralizationSet>::iterator endGeneralizationSet = getGeneralizationSet()->end();
 			while (iterGeneralizationSet != endGeneralizationSet)
 			{
 				if (generalizationSetList->find(*iterGeneralizationSet) == -1)
 				{
-					m_generalizationSet->erase(*iterGeneralizationSet);
+					getGeneralizationSet()->erase(*iterGeneralizationSet);
 				}
 				iterGeneralizationSet++;
 			}
@@ -381,9 +381,9 @@ bool GeneralizationImpl::eSet(int featureID, Any newValue)
 			endGeneralizationSet = generalizationSetList->end();
 			while (iterGeneralizationSet != endGeneralizationSet)
 			{
-				if (m_generalizationSet->find(*iterGeneralizationSet) == -1)
+				if (getGeneralizationSet()->find(*iterGeneralizationSet) == -1)
 				{
-					m_generalizationSet->add(*iterGeneralizationSet);
+					getGeneralizationSet()->add(*iterGeneralizationSet);
 				}
 				iterGeneralizationSet++;			
 			}

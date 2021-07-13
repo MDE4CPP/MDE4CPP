@@ -306,8 +306,8 @@ Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EObject>::iterator iter = m_eContens->begin();
-			Bag<ecore::EObject>::iterator end = m_eContens->end();
+			Bag<ecore::EObject>::iterator iter = getEContens()->begin();
+			Bag<ecore::EObject>::iterator end = getEContens()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -360,13 +360,13 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EObject>::iterator iterEContens = m_eContens->begin();
-			Bag<ecore::EObject>::iterator endEContens = m_eContens->end();
+			Bag<ecore::EObject>::iterator iterEContens = getEContens()->begin();
+			Bag<ecore::EObject>::iterator endEContens = getEContens()->end();
 			while (iterEContens != endEContens)
 			{
 				if (eContensList->find(*iterEContens) == -1)
 				{
-					m_eContens->erase(*iterEContens);
+					getEContens()->erase(*iterEContens);
 				}
 				iterEContens++;
 			}
@@ -375,9 +375,9 @@ bool EObjectImpl::eSet(int featureID, Any newValue)
 			endEContens = eContensList->end();
 			while (iterEContens != endEContens)
 			{
-				if (m_eContens->find(*iterEContens) == -1)
+				if (getEContens()->find(*iterEContens) == -1)
 				{
-					m_eContens->add(*iterEContens);
+					getEContens()->add(*iterEContens);
 				}
 				iterEContens++;			
 			}

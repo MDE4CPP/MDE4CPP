@@ -280,8 +280,8 @@ Any EEnumImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EENUM_ATTRIBUTE_ELITERALS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EEnumLiteral>::iterator iter = m_eLiterals->begin();
-			Bag<ecore::EEnumLiteral>::iterator end = m_eLiterals->end();
+			Bag<ecore::EEnumLiteral>::iterator iter = getELiterals()->begin();
+			Bag<ecore::EEnumLiteral>::iterator end = getELiterals()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -318,13 +318,13 @@ bool EEnumImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EEnumLiteral>::iterator iterELiterals = m_eLiterals->begin();
-			Bag<ecore::EEnumLiteral>::iterator endELiterals = m_eLiterals->end();
+			Bag<ecore::EEnumLiteral>::iterator iterELiterals = getELiterals()->begin();
+			Bag<ecore::EEnumLiteral>::iterator endELiterals = getELiterals()->end();
 			while (iterELiterals != endELiterals)
 			{
 				if (eLiteralsList->find(*iterELiterals) == -1)
 				{
-					m_eLiterals->erase(*iterELiterals);
+					getELiterals()->erase(*iterELiterals);
 				}
 				iterELiterals++;
 			}
@@ -333,9 +333,9 @@ bool EEnumImpl::eSet(int featureID, Any newValue)
 			endELiterals = eLiteralsList->end();
 			while (iterELiterals != endELiterals)
 			{
-				if (m_eLiterals->find(*iterELiterals) == -1)
+				if (getELiterals()->find(*iterELiterals) == -1)
 				{
-					m_eLiterals->add(*iterELiterals);
+					getELiterals()->add(*iterELiterals);
 				}
 				iterELiterals++;			
 			}

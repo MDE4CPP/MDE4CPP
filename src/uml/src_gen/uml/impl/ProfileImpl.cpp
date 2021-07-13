@@ -453,8 +453,8 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METACLASSREFERENCE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ElementImport>::iterator iter = m_metaclassReference->begin();
-			Bag<uml::ElementImport>::iterator end = m_metaclassReference->end();
+			Bag<uml::ElementImport>::iterator iter = getMetaclassReference()->begin();
+			Bag<uml::ElementImport>::iterator end = getMetaclassReference()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -465,8 +465,8 @@ Any ProfileImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROFILE_ATTRIBUTE_METAMODELREFERENCE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PackageImport>::iterator iter = m_metamodelReference->begin();
-			Bag<uml::PackageImport>::iterator end = m_metamodelReference->end();
+			Bag<uml::PackageImport>::iterator iter = getMetamodelReference()->begin();
+			Bag<uml::PackageImport>::iterator end = getMetamodelReference()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -505,13 +505,13 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ElementImport>::iterator iterMetaclassReference = m_metaclassReference->begin();
-			Bag<uml::ElementImport>::iterator endMetaclassReference = m_metaclassReference->end();
+			Bag<uml::ElementImport>::iterator iterMetaclassReference = getMetaclassReference()->begin();
+			Bag<uml::ElementImport>::iterator endMetaclassReference = getMetaclassReference()->end();
 			while (iterMetaclassReference != endMetaclassReference)
 			{
 				if (metaclassReferenceList->find(*iterMetaclassReference) == -1)
 				{
-					m_metaclassReference->erase(*iterMetaclassReference);
+					getMetaclassReference()->erase(*iterMetaclassReference);
 				}
 				iterMetaclassReference++;
 			}
@@ -520,9 +520,9 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 			endMetaclassReference = metaclassReferenceList->end();
 			while (iterMetaclassReference != endMetaclassReference)
 			{
-				if (m_metaclassReference->find(*iterMetaclassReference) == -1)
+				if (getMetaclassReference()->find(*iterMetaclassReference) == -1)
 				{
-					m_metaclassReference->add(*iterMetaclassReference);
+					getMetaclassReference()->add(*iterMetaclassReference);
 				}
 				iterMetaclassReference++;			
 			}
@@ -541,13 +541,13 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::PackageImport>::iterator iterMetamodelReference = m_metamodelReference->begin();
-			Bag<uml::PackageImport>::iterator endMetamodelReference = m_metamodelReference->end();
+			Bag<uml::PackageImport>::iterator iterMetamodelReference = getMetamodelReference()->begin();
+			Bag<uml::PackageImport>::iterator endMetamodelReference = getMetamodelReference()->end();
 			while (iterMetamodelReference != endMetamodelReference)
 			{
 				if (metamodelReferenceList->find(*iterMetamodelReference) == -1)
 				{
-					m_metamodelReference->erase(*iterMetamodelReference);
+					getMetamodelReference()->erase(*iterMetamodelReference);
 				}
 				iterMetamodelReference++;
 			}
@@ -556,9 +556,9 @@ bool ProfileImpl::eSet(int featureID, Any newValue)
 			endMetamodelReference = metamodelReferenceList->end();
 			while (iterMetamodelReference != endMetamodelReference)
 			{
-				if (m_metamodelReference->find(*iterMetamodelReference) == -1)
+				if (getMetamodelReference()->find(*iterMetamodelReference) == -1)
 				{
-					m_metamodelReference->add(*iterMetamodelReference);
+					getMetamodelReference()->add(*iterMetamodelReference);
 				}
 				iterMetamodelReference++;			
 			}

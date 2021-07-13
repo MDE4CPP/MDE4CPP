@@ -408,8 +408,8 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_CONFIGURATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::DeploymentSpecification>::iterator iter = m_configuration->begin();
-			Bag<uml::DeploymentSpecification>::iterator end = m_configuration->end();
+			Bag<uml::DeploymentSpecification>::iterator iter = getConfiguration()->begin();
+			Bag<uml::DeploymentSpecification>::iterator end = getConfiguration()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -420,8 +420,8 @@ Any DeploymentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::DEPLOYMENT_ATTRIBUTE_DEPLOYEDARTIFACT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::DeployedArtifact>::iterator iter = m_deployedArtifact->begin();
-			Bag<uml::DeployedArtifact>::iterator end = m_deployedArtifact->end();
+			Bag<uml::DeployedArtifact>::iterator iter = getDeployedArtifact()->begin();
+			Bag<uml::DeployedArtifact>::iterator end = getDeployedArtifact()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -464,13 +464,13 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::DeploymentSpecification>::iterator iterConfiguration = m_configuration->begin();
-			Bag<uml::DeploymentSpecification>::iterator endConfiguration = m_configuration->end();
+			Bag<uml::DeploymentSpecification>::iterator iterConfiguration = getConfiguration()->begin();
+			Bag<uml::DeploymentSpecification>::iterator endConfiguration = getConfiguration()->end();
 			while (iterConfiguration != endConfiguration)
 			{
 				if (configurationList->find(*iterConfiguration) == -1)
 				{
-					m_configuration->erase(*iterConfiguration);
+					getConfiguration()->erase(*iterConfiguration);
 				}
 				iterConfiguration++;
 			}
@@ -479,9 +479,9 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 			endConfiguration = configurationList->end();
 			while (iterConfiguration != endConfiguration)
 			{
-				if (m_configuration->find(*iterConfiguration) == -1)
+				if (getConfiguration()->find(*iterConfiguration) == -1)
 				{
-					m_configuration->add(*iterConfiguration);
+					getConfiguration()->add(*iterConfiguration);
 				}
 				iterConfiguration++;			
 			}
@@ -500,13 +500,13 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::DeployedArtifact>::iterator iterDeployedArtifact = m_deployedArtifact->begin();
-			Bag<uml::DeployedArtifact>::iterator endDeployedArtifact = m_deployedArtifact->end();
+			Bag<uml::DeployedArtifact>::iterator iterDeployedArtifact = getDeployedArtifact()->begin();
+			Bag<uml::DeployedArtifact>::iterator endDeployedArtifact = getDeployedArtifact()->end();
 			while (iterDeployedArtifact != endDeployedArtifact)
 			{
 				if (deployedArtifactList->find(*iterDeployedArtifact) == -1)
 				{
-					m_deployedArtifact->erase(*iterDeployedArtifact);
+					getDeployedArtifact()->erase(*iterDeployedArtifact);
 				}
 				iterDeployedArtifact++;
 			}
@@ -515,9 +515,9 @@ bool DeploymentImpl::eSet(int featureID, Any newValue)
 			endDeployedArtifact = deployedArtifactList->end();
 			while (iterDeployedArtifact != endDeployedArtifact)
 			{
-				if (m_deployedArtifact->find(*iterDeployedArtifact) == -1)
+				if (getDeployedArtifact()->find(*iterDeployedArtifact) == -1)
 				{
-					m_deployedArtifact->add(*iterDeployedArtifact);
+					getDeployedArtifact()->add(*iterDeployedArtifact);
 				}
 				iterDeployedArtifact++;			
 			}

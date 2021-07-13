@@ -22,7 +22,7 @@
 [query public hasSetter(anEReference : EReference) : EBoolean = anEReference.changeable and anEReference.upperBound=1 and not hasKey(keyNoSetter()) /]
 [query public hasGetter(anEReference : EReference) : EBoolean = not hasKey(keyNoGetter()) /]
 
-[template public generateReferenceDecl(anEReference : EReference, impl : EBoolean) ]
+[template public generateReferenceDecl(anEReference : EReference, impl : EBoolean) ? (not doNotGenerate())]
 [anEReference.generateReferenceGetterDeclaretaion(impl)/]
 [anEReference.generateReferenceSetterDeclaretaion(impl)/]
 [for (redefinedElement : EObject | anEReference.getAllRedefinedElements())][if (redefinedElement.oclIsKindOf(EReference))]
@@ -45,7 +45,7 @@ virtual void [anEReference.SetterName()/]([if (not anEReference.eGenericType.eCl
 ) [abstractSufix(impl)/];
 [/template]
 
-[template public generateProtectedReference(anEReference : EReference) ]
+[template public generateProtectedReference(anEReference : EReference) ? (not doNotGenerate())]
 [anEReference.generateDocumentation()/]
 [if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if][if(not (anEReference.upperBound = 1))]mutable [/if][anEReference.generateReferenceType()/] m_[anEReference.name/];
 [/template]
@@ -95,7 +95,7 @@ m_[eReference.name/]->initSubset([generateSubsetElements(eReference)/]);
  * Section for the Reference cpp implementation
 */]
 
-[template public generateReferenceCpp(anEReference : EReference)]
+[template public generateReferenceCpp(anEReference : EReference) ? (not doNotGenerate())]
 /*
 Getter & Setter for reference [anEReference.name/]
 */

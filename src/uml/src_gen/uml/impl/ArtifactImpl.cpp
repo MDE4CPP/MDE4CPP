@@ -590,8 +590,8 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_MANIFESTATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Manifestation>::iterator iter = m_manifestation->begin();
-			Bag<uml::Manifestation>::iterator end = m_manifestation->end();
+			Bag<uml::Manifestation>::iterator iter = getManifestation()->begin();
+			Bag<uml::Manifestation>::iterator end = getManifestation()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -602,8 +602,8 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_NESTEDARTIFACT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Artifact>::iterator iter = m_nestedArtifact->begin();
-			Bag<uml::Artifact>::iterator end = m_nestedArtifact->end();
+			Bag<uml::Artifact>::iterator iter = getNestedArtifact()->begin();
+			Bag<uml::Artifact>::iterator end = getNestedArtifact()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -614,8 +614,8 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_ownedAttribute->begin();
-			Bag<uml::Property>::iterator end = m_ownedAttribute->end();
+			Bag<uml::Property>::iterator iter = getOwnedAttribute()->begin();
+			Bag<uml::Property>::iterator end = getOwnedAttribute()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -626,8 +626,8 @@ Any ArtifactImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ARTIFACT_ATTRIBUTE_OWNEDOPERATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = m_ownedOperation->begin();
-			Bag<uml::Operation>::iterator end = m_ownedOperation->end();
+			Bag<uml::Operation>::iterator iter = getOwnedOperation()->begin();
+			Bag<uml::Operation>::iterator end = getOwnedOperation()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -693,13 +693,13 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Manifestation>::iterator iterManifestation = m_manifestation->begin();
-			Bag<uml::Manifestation>::iterator endManifestation = m_manifestation->end();
+			Bag<uml::Manifestation>::iterator iterManifestation = getManifestation()->begin();
+			Bag<uml::Manifestation>::iterator endManifestation = getManifestation()->end();
 			while (iterManifestation != endManifestation)
 			{
 				if (manifestationList->find(*iterManifestation) == -1)
 				{
-					m_manifestation->erase(*iterManifestation);
+					getManifestation()->erase(*iterManifestation);
 				}
 				iterManifestation++;
 			}
@@ -708,9 +708,9 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 			endManifestation = manifestationList->end();
 			while (iterManifestation != endManifestation)
 			{
-				if (m_manifestation->find(*iterManifestation) == -1)
+				if (getManifestation()->find(*iterManifestation) == -1)
 				{
-					m_manifestation->add(*iterManifestation);
+					getManifestation()->add(*iterManifestation);
 				}
 				iterManifestation++;			
 			}
@@ -729,13 +729,13 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Artifact>::iterator iterNestedArtifact = m_nestedArtifact->begin();
-			Bag<uml::Artifact>::iterator endNestedArtifact = m_nestedArtifact->end();
+			Bag<uml::Artifact>::iterator iterNestedArtifact = getNestedArtifact()->begin();
+			Bag<uml::Artifact>::iterator endNestedArtifact = getNestedArtifact()->end();
 			while (iterNestedArtifact != endNestedArtifact)
 			{
 				if (nestedArtifactList->find(*iterNestedArtifact) == -1)
 				{
-					m_nestedArtifact->erase(*iterNestedArtifact);
+					getNestedArtifact()->erase(*iterNestedArtifact);
 				}
 				iterNestedArtifact++;
 			}
@@ -744,9 +744,9 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 			endNestedArtifact = nestedArtifactList->end();
 			while (iterNestedArtifact != endNestedArtifact)
 			{
-				if (m_nestedArtifact->find(*iterNestedArtifact) == -1)
+				if (getNestedArtifact()->find(*iterNestedArtifact) == -1)
 				{
-					m_nestedArtifact->add(*iterNestedArtifact);
+					getNestedArtifact()->add(*iterNestedArtifact);
 				}
 				iterNestedArtifact++;			
 			}
@@ -765,13 +765,13 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Property>::iterator iterOwnedAttribute = m_ownedAttribute->begin();
-			Bag<uml::Property>::iterator endOwnedAttribute = m_ownedAttribute->end();
+			Bag<uml::Property>::iterator iterOwnedAttribute = getOwnedAttribute()->begin();
+			Bag<uml::Property>::iterator endOwnedAttribute = getOwnedAttribute()->end();
 			while (iterOwnedAttribute != endOwnedAttribute)
 			{
 				if (ownedAttributeList->find(*iterOwnedAttribute) == -1)
 				{
-					m_ownedAttribute->erase(*iterOwnedAttribute);
+					getOwnedAttribute()->erase(*iterOwnedAttribute);
 				}
 				iterOwnedAttribute++;
 			}
@@ -780,9 +780,9 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 			endOwnedAttribute = ownedAttributeList->end();
 			while (iterOwnedAttribute != endOwnedAttribute)
 			{
-				if (m_ownedAttribute->find(*iterOwnedAttribute) == -1)
+				if (getOwnedAttribute()->find(*iterOwnedAttribute) == -1)
 				{
-					m_ownedAttribute->add(*iterOwnedAttribute);
+					getOwnedAttribute()->add(*iterOwnedAttribute);
 				}
 				iterOwnedAttribute++;			
 			}
@@ -801,13 +801,13 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Operation>::iterator iterOwnedOperation = m_ownedOperation->begin();
-			Bag<uml::Operation>::iterator endOwnedOperation = m_ownedOperation->end();
+			Bag<uml::Operation>::iterator iterOwnedOperation = getOwnedOperation()->begin();
+			Bag<uml::Operation>::iterator endOwnedOperation = getOwnedOperation()->end();
 			while (iterOwnedOperation != endOwnedOperation)
 			{
 				if (ownedOperationList->find(*iterOwnedOperation) == -1)
 				{
-					m_ownedOperation->erase(*iterOwnedOperation);
+					getOwnedOperation()->erase(*iterOwnedOperation);
 				}
 				iterOwnedOperation++;
 			}
@@ -816,9 +816,9 @@ bool ArtifactImpl::eSet(int featureID, Any newValue)
 			endOwnedOperation = ownedOperationList->end();
 			while (iterOwnedOperation != endOwnedOperation)
 			{
-				if (m_ownedOperation->find(*iterOwnedOperation) == -1)
+				if (getOwnedOperation()->find(*iterOwnedOperation) == -1)
 				{
-					m_ownedOperation->add(*iterOwnedOperation);
+					getOwnedOperation()->add(*iterOwnedOperation);
 				}
 				iterOwnedOperation++;			
 			}

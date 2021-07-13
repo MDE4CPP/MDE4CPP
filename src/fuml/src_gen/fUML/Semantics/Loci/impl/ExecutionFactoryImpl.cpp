@@ -146,8 +146,8 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 
 
 #include "uml/Behavior.hpp"
@@ -815,8 +815,8 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_BUILTINTYPES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::PrimitiveType>::iterator iter = m_builtInTypes->begin();
-			Bag<uml::PrimitiveType>::iterator end = m_builtInTypes->end();
+			Bag<uml::PrimitiveType>::iterator iter = getBuiltInTypes()->begin();
+			Bag<uml::PrimitiveType>::iterator end = getBuiltInTypes()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -829,8 +829,8 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_PRIMITIVEBEHAVIORPROTOTYPES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>::iterator iter = m_primitiveBehaviorPrototypes->begin();
-			Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>::iterator end = m_primitiveBehaviorPrototypes->end();
+			Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>::iterator iter = getPrimitiveBehaviorPrototypes()->begin();
+			Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>::iterator end = getPrimitiveBehaviorPrototypes()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -841,8 +841,8 @@ Any ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Loci::LociPackage::EXECUTIONFACTORY_ATTRIBUTE_STRATEGIES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Loci::SemanticStrategy>::iterator iter = m_strategies->begin();
-			Bag<fUML::Semantics::Loci::SemanticStrategy>::iterator end = m_strategies->end();
+			Bag<fUML::Semantics::Loci::SemanticStrategy>::iterator iter = getStrategies()->begin();
+			Bag<fUML::Semantics::Loci::SemanticStrategy>::iterator end = getStrategies()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -885,13 +885,13 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::PrimitiveType>::iterator iterBuiltInTypes = m_builtInTypes->begin();
-			Bag<uml::PrimitiveType>::iterator endBuiltInTypes = m_builtInTypes->end();
+			Bag<uml::PrimitiveType>::iterator iterBuiltInTypes = getBuiltInTypes()->begin();
+			Bag<uml::PrimitiveType>::iterator endBuiltInTypes = getBuiltInTypes()->end();
 			while (iterBuiltInTypes != endBuiltInTypes)
 			{
 				if (builtInTypesList->find(*iterBuiltInTypes) == -1)
 				{
-					m_builtInTypes->erase(*iterBuiltInTypes);
+					getBuiltInTypes()->erase(*iterBuiltInTypes);
 				}
 				iterBuiltInTypes++;
 			}
@@ -900,9 +900,9 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 			endBuiltInTypes = builtInTypesList->end();
 			while (iterBuiltInTypes != endBuiltInTypes)
 			{
-				if (m_builtInTypes->find(*iterBuiltInTypes) == -1)
+				if (getBuiltInTypes()->find(*iterBuiltInTypes) == -1)
 				{
-					m_builtInTypes->add(*iterBuiltInTypes);
+					getBuiltInTypes()->add(*iterBuiltInTypes);
 				}
 				iterBuiltInTypes++;			
 			}
@@ -929,13 +929,13 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>::iterator iterPrimitiveBehaviorPrototypes = m_primitiveBehaviorPrototypes->begin();
-			Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>::iterator endPrimitiveBehaviorPrototypes = m_primitiveBehaviorPrototypes->end();
+			Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>::iterator iterPrimitiveBehaviorPrototypes = getPrimitiveBehaviorPrototypes()->begin();
+			Bag<fUML::Semantics::CommonBehavior::OpaqueBehaviorExecution>::iterator endPrimitiveBehaviorPrototypes = getPrimitiveBehaviorPrototypes()->end();
 			while (iterPrimitiveBehaviorPrototypes != endPrimitiveBehaviorPrototypes)
 			{
 				if (primitiveBehaviorPrototypesList->find(*iterPrimitiveBehaviorPrototypes) == -1)
 				{
-					m_primitiveBehaviorPrototypes->erase(*iterPrimitiveBehaviorPrototypes);
+					getPrimitiveBehaviorPrototypes()->erase(*iterPrimitiveBehaviorPrototypes);
 				}
 				iterPrimitiveBehaviorPrototypes++;
 			}
@@ -944,9 +944,9 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 			endPrimitiveBehaviorPrototypes = primitiveBehaviorPrototypesList->end();
 			while (iterPrimitiveBehaviorPrototypes != endPrimitiveBehaviorPrototypes)
 			{
-				if (m_primitiveBehaviorPrototypes->find(*iterPrimitiveBehaviorPrototypes) == -1)
+				if (getPrimitiveBehaviorPrototypes()->find(*iterPrimitiveBehaviorPrototypes) == -1)
 				{
-					m_primitiveBehaviorPrototypes->add(*iterPrimitiveBehaviorPrototypes);
+					getPrimitiveBehaviorPrototypes()->add(*iterPrimitiveBehaviorPrototypes);
 				}
 				iterPrimitiveBehaviorPrototypes++;			
 			}
@@ -965,13 +965,13 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Loci::SemanticStrategy>::iterator iterStrategies = m_strategies->begin();
-			Bag<fUML::Semantics::Loci::SemanticStrategy>::iterator endStrategies = m_strategies->end();
+			Bag<fUML::Semantics::Loci::SemanticStrategy>::iterator iterStrategies = getStrategies()->begin();
+			Bag<fUML::Semantics::Loci::SemanticStrategy>::iterator endStrategies = getStrategies()->end();
 			while (iterStrategies != endStrategies)
 			{
 				if (strategiesList->find(*iterStrategies) == -1)
 				{
-					m_strategies->erase(*iterStrategies);
+					getStrategies()->erase(*iterStrategies);
 				}
 				iterStrategies++;
 			}
@@ -980,9 +980,9 @@ bool ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 			endStrategies = strategiesList->end();
 			while (iterStrategies != endStrategies)
 			{
-				if (m_strategies->find(*iterStrategies) == -1)
+				if (getStrategies()->find(*iterStrategies) == -1)
 				{
-					m_strategies->add(*iterStrategies);
+					getStrategies()->add(*iterStrategies);
 				}
 				iterStrategies++;			
 			}

@@ -46,8 +46,8 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
-[if (aClass.hasKey(keyIncludes()))]
-[aClass.valueKey(keyIncludes())/]
+[if (aClass.hasKey(keyImplIncludes()))]
+[aClass.valueKey(keyImplIncludes())/]
 [/if]
 
 //Forward declaration includes

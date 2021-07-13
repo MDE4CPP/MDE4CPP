@@ -42,10 +42,10 @@
 
 #include <exception> // used in Persistence
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 
 #include "uml/Behavior.hpp"
@@ -350,8 +350,8 @@ Any ExecutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::EXECUTION_ATTRIBUTE_PARAMETERVALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator iter = m_parameterValues->begin();
-			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator end = m_parameterValues->end();
+			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator iter = getParameterValues()->begin();
+			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator end = getParameterValues()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -408,13 +408,13 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator iterParameterValues = m_parameterValues->begin();
-			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator endParameterValues = m_parameterValues->end();
+			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator iterParameterValues = getParameterValues()->begin();
+			Bag<fUML::Semantics::CommonBehavior::ParameterValue>::iterator endParameterValues = getParameterValues()->end();
 			while (iterParameterValues != endParameterValues)
 			{
 				if (parameterValuesList->find(*iterParameterValues) == -1)
 				{
-					m_parameterValues->erase(*iterParameterValues);
+					getParameterValues()->erase(*iterParameterValues);
 				}
 				iterParameterValues++;
 			}
@@ -423,9 +423,9 @@ bool ExecutionImpl::eSet(int featureID, Any newValue)
 			endParameterValues = parameterValuesList->end();
 			while (iterParameterValues != endParameterValues)
 			{
-				if (m_parameterValues->find(*iterParameterValues) == -1)
+				if (getParameterValues()->find(*iterParameterValues) == -1)
 				{
-					m_parameterValues->add(*iterParameterValues);
+					getParameterValues()->add(*iterParameterValues);
 				}
 				iterParameterValues++;			
 			}

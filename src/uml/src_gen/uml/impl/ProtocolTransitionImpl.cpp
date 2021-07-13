@@ -352,8 +352,8 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Operation>::iterator iter = m_referred->begin();
-			Bag<uml::Operation>::iterator end = m_referred->end();
+			Bag<uml::Operation>::iterator iter = getReferred()->begin();
+			Bag<uml::Operation>::iterator end = getReferred()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);

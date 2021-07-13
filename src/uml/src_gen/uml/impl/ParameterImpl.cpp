@@ -477,8 +477,8 @@ Any ParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PARAMETER_ATTRIBUTE_PARAMETERSET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ParameterSet>::iterator iter = m_parameterSet->begin();
-			Bag<uml::ParameterSet>::iterator end = m_parameterSet->end();
+			Bag<uml::ParameterSet>::iterator iter = getParameterSet()->begin();
+			Bag<uml::ParameterSet>::iterator end = getParameterSet()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -596,13 +596,13 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ParameterSet>::iterator iterParameterSet = m_parameterSet->begin();
-			Bag<uml::ParameterSet>::iterator endParameterSet = m_parameterSet->end();
+			Bag<uml::ParameterSet>::iterator iterParameterSet = getParameterSet()->begin();
+			Bag<uml::ParameterSet>::iterator endParameterSet = getParameterSet()->end();
 			while (iterParameterSet != endParameterSet)
 			{
 				if (parameterSetList->find(*iterParameterSet) == -1)
 				{
-					m_parameterSet->erase(*iterParameterSet);
+					getParameterSet()->erase(*iterParameterSet);
 				}
 				iterParameterSet++;
 			}
@@ -611,9 +611,9 @@ bool ParameterImpl::eSet(int featureID, Any newValue)
 			endParameterSet = parameterSetList->end();
 			while (iterParameterSet != endParameterSet)
 			{
-				if (m_parameterSet->find(*iterParameterSet) == -1)
+				if (getParameterSet()->find(*iterParameterSet) == -1)
 				{
-					m_parameterSet->add(*iterParameterSet);
+					getParameterSet()->add(*iterParameterSet);
 				}
 				iterParameterSet++;			
 			}

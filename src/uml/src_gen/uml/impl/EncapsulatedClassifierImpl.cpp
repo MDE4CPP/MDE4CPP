@@ -421,8 +421,8 @@ Any EncapsulatedClassifierImpl::eGet(int featureID, bool resolve, bool coreType)
 		case uml::umlPackage::ENCAPSULATEDCLASSIFIER_ATTRIBUTE_OWNEDPORT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Port>::iterator iter = m_ownedPort->begin();
-			Bag<uml::Port>::iterator end = m_ownedPort->end();
+			Bag<uml::Port>::iterator iter = getOwnedPort()->begin();
+			Bag<uml::Port>::iterator end = getOwnedPort()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);

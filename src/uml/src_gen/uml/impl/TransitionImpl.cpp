@@ -517,8 +517,8 @@ Any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Trigger>::iterator iter = m_trigger->begin();
-			Bag<uml::Trigger>::iterator end = m_trigger->end();
+			Bag<uml::Trigger>::iterator iter = getTrigger()->begin();
+			Bag<uml::Trigger>::iterator end = getTrigger()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -638,13 +638,13 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Trigger>::iterator iterTrigger = m_trigger->begin();
-			Bag<uml::Trigger>::iterator endTrigger = m_trigger->end();
+			Bag<uml::Trigger>::iterator iterTrigger = getTrigger()->begin();
+			Bag<uml::Trigger>::iterator endTrigger = getTrigger()->end();
 			while (iterTrigger != endTrigger)
 			{
 				if (triggerList->find(*iterTrigger) == -1)
 				{
-					m_trigger->erase(*iterTrigger);
+					getTrigger()->erase(*iterTrigger);
 				}
 				iterTrigger++;
 			}
@@ -653,9 +653,9 @@ bool TransitionImpl::eSet(int featureID, Any newValue)
 			endTrigger = triggerList->end();
 			while (iterTrigger != endTrigger)
 			{
-				if (m_trigger->find(*iterTrigger) == -1)
+				if (getTrigger()->find(*iterTrigger) == -1)
 				{
-					m_trigger->add(*iterTrigger);
+					getTrigger()->add(*iterTrigger);
 				}
 				iterTrigger++;			
 			}

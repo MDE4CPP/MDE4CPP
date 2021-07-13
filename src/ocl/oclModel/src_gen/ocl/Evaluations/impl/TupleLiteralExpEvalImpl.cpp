@@ -31,11 +31,11 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -173,8 +173,8 @@ Any TupleLiteralExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case ocl::Evaluations::EvaluationsPackage::TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator iter = m_tuplePart->begin();
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator end = m_tuplePart->end();
+			Bag<ocl::Evaluations::VariableDeclEval>::iterator iter = getTuplePart()->begin();
+			Bag<ocl::Evaluations::VariableDeclEval>::iterator end = getTuplePart()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -211,13 +211,13 @@ bool TupleLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator iterTuplePart = m_tuplePart->begin();
-			Bag<ocl::Evaluations::VariableDeclEval>::iterator endTuplePart = m_tuplePart->end();
+			Bag<ocl::Evaluations::VariableDeclEval>::iterator iterTuplePart = getTuplePart()->begin();
+			Bag<ocl::Evaluations::VariableDeclEval>::iterator endTuplePart = getTuplePart()->end();
 			while (iterTuplePart != endTuplePart)
 			{
 				if (tuplePartList->find(*iterTuplePart) == -1)
 				{
-					m_tuplePart->erase(*iterTuplePart);
+					getTuplePart()->erase(*iterTuplePart);
 				}
 				iterTuplePart++;
 			}
@@ -226,9 +226,9 @@ bool TupleLiteralExpEvalImpl::eSet(int featureID, Any newValue)
 			endTuplePart = tuplePartList->end();
 			while (iterTuplePart != endTuplePart)
 			{
-				if (m_tuplePart->find(*iterTuplePart) == -1)
+				if (getTuplePart()->find(*iterTuplePart) == -1)
 				{
-					m_tuplePart->add(*iterTuplePart);
+					getTuplePart()->add(*iterTuplePart);
 				}
 				iterTuplePart++;			
 			}

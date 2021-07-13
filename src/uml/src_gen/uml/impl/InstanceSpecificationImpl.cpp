@@ -347,8 +347,8 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_CLASSIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Classifier>::iterator iter = m_classifier->begin();
-			Bag<uml::Classifier>::iterator end = m_classifier->end();
+			Bag<uml::Classifier>::iterator iter = getClassifier()->begin();
+			Bag<uml::Classifier>::iterator end = getClassifier()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -359,8 +359,8 @@ Any InstanceSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) 
 		case uml::umlPackage::INSTANCESPECIFICATION_ATTRIBUTE_SLOT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Slot>::iterator iter = m_slot->begin();
-			Bag<uml::Slot>::iterator end = m_slot->end();
+			Bag<uml::Slot>::iterator iter = getSlot()->begin();
+			Bag<uml::Slot>::iterator end = getSlot()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -427,13 +427,13 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Classifier>::iterator iterClassifier = m_classifier->begin();
-			Bag<uml::Classifier>::iterator endClassifier = m_classifier->end();
+			Bag<uml::Classifier>::iterator iterClassifier = getClassifier()->begin();
+			Bag<uml::Classifier>::iterator endClassifier = getClassifier()->end();
 			while (iterClassifier != endClassifier)
 			{
 				if (classifierList->find(*iterClassifier) == -1)
 				{
-					m_classifier->erase(*iterClassifier);
+					getClassifier()->erase(*iterClassifier);
 				}
 				iterClassifier++;
 			}
@@ -442,9 +442,9 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 			endClassifier = classifierList->end();
 			while (iterClassifier != endClassifier)
 			{
-				if (m_classifier->find(*iterClassifier) == -1)
+				if (getClassifier()->find(*iterClassifier) == -1)
 				{
-					m_classifier->add(*iterClassifier);
+					getClassifier()->add(*iterClassifier);
 				}
 				iterClassifier++;			
 			}
@@ -463,13 +463,13 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Slot>::iterator iterSlot = m_slot->begin();
-			Bag<uml::Slot>::iterator endSlot = m_slot->end();
+			Bag<uml::Slot>::iterator iterSlot = getSlot()->begin();
+			Bag<uml::Slot>::iterator endSlot = getSlot()->end();
 			while (iterSlot != endSlot)
 			{
 				if (slotList->find(*iterSlot) == -1)
 				{
-					m_slot->erase(*iterSlot);
+					getSlot()->erase(*iterSlot);
 				}
 				iterSlot++;
 			}
@@ -478,9 +478,9 @@ bool InstanceSpecificationImpl::eSet(int featureID, Any newValue)
 			endSlot = slotList->end();
 			while (iterSlot != endSlot)
 			{
-				if (m_slot->find(*iterSlot) == -1)
+				if (getSlot()->find(*iterSlot) == -1)
 				{
-					m_slot->add(*iterSlot);
+					getSlot()->add(*iterSlot);
 				}
 				iterSlot++;			
 			}

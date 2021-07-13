@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::keywords /]
 
 [template public generateUMLPluginImplSource(aPackage : Package, packOnly:Boolean) { packageName : String = aPackage.name.concat('PluginImpl'); }]
 [file (aPackage.getPackageName().concat('/impl/').concat(packageName).concat('.cpp'), false, 'UTF-8')]
@@ -33,7 +34,7 @@
 [if (not packOnly)]#include "[aPackage.getPackageName()/]/[aPackage.name/]Factory.hpp"[/if]
 #include "[aPackage.getPackageName()/]/[aPackage.name/]Package.hpp"
 
-[if (not aPackage.ignoreNamespace())]using namespace [aPackage.name/];[/if]
+[if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.name/];[/if]
 
 //*********************************
 // Constructor / Destructor
@@ -73,7 +74,7 @@ std::shared_ptr<uml::Package> [packageName/]::getPackage()
 
 std::string [packageName/]::eclipseURI()
 {
-	return "[valueKey('eclipseURI')/]";
+	return "[aPackage.getEclipseURI()/]";
 }
 
 std::string [packageName/]::eNAME()

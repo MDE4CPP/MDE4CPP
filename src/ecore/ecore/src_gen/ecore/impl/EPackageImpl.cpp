@@ -343,8 +343,8 @@ Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ECLASSIFIERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EClassifier>::iterator iter = m_eClassifiers->begin();
-			Bag<ecore::EClassifier>::iterator end = m_eClassifiers->end();
+			Bag<ecore::EClassifier>::iterator iter = getEClassifiers()->begin();
+			Bag<ecore::EClassifier>::iterator end = getEClassifiers()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -357,8 +357,8 @@ Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EPackage>::iterator iter = m_eSubpackages->begin();
-			Bag<ecore::EPackage>::iterator end = m_eSubpackages->end();
+			Bag<ecore::EPackage>::iterator iter = getESubpackages()->begin();
+			Bag<ecore::EPackage>::iterator end = getESubpackages()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -411,13 +411,13 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EClassifier>::iterator iterEClassifiers = m_eClassifiers->begin();
-			Bag<ecore::EClassifier>::iterator endEClassifiers = m_eClassifiers->end();
+			Bag<ecore::EClassifier>::iterator iterEClassifiers = getEClassifiers()->begin();
+			Bag<ecore::EClassifier>::iterator endEClassifiers = getEClassifiers()->end();
 			while (iterEClassifiers != endEClassifiers)
 			{
 				if (eClassifiersList->find(*iterEClassifiers) == -1)
 				{
-					m_eClassifiers->erase(*iterEClassifiers);
+					getEClassifiers()->erase(*iterEClassifiers);
 				}
 				iterEClassifiers++;
 			}
@@ -426,9 +426,9 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 			endEClassifiers = eClassifiersList->end();
 			while (iterEClassifiers != endEClassifiers)
 			{
-				if (m_eClassifiers->find(*iterEClassifiers) == -1)
+				if (getEClassifiers()->find(*iterEClassifiers) == -1)
 				{
-					m_eClassifiers->add(*iterEClassifiers);
+					getEClassifiers()->add(*iterEClassifiers);
 				}
 				iterEClassifiers++;			
 			}
@@ -455,13 +455,13 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EPackage>::iterator iterESubpackages = m_eSubpackages->begin();
-			Bag<ecore::EPackage>::iterator endESubpackages = m_eSubpackages->end();
+			Bag<ecore::EPackage>::iterator iterESubpackages = getESubpackages()->begin();
+			Bag<ecore::EPackage>::iterator endESubpackages = getESubpackages()->end();
 			while (iterESubpackages != endESubpackages)
 			{
 				if (eSubpackagesList->find(*iterESubpackages) == -1)
 				{
-					m_eSubpackages->erase(*iterESubpackages);
+					getESubpackages()->erase(*iterESubpackages);
 				}
 				iterESubpackages++;
 			}
@@ -470,9 +470,9 @@ bool EPackageImpl::eSet(int featureID, Any newValue)
 			endESubpackages = eSubpackagesList->end();
 			while (iterESubpackages != endESubpackages)
 			{
-				if (m_eSubpackages->find(*iterESubpackages) == -1)
+				if (getESubpackages()->find(*iterESubpackages) == -1)
 				{
-					m_eSubpackages->add(*iterESubpackages);
+					getESubpackages()->add(*iterESubpackages);
 				}
 				iterESubpackages++;			
 			}

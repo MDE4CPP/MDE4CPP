@@ -282,8 +282,8 @@ Any DurationObservationImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::DURATIONOBSERVATION_ATTRIBUTE_EVENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::NamedElement>::iterator iter = m_event->begin();
-			Bag<uml::NamedElement>::iterator end = m_event->end();
+			Bag<uml::NamedElement>::iterator iter = getEvent()->begin();
+			Bag<uml::NamedElement>::iterator end = getEvent()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -324,13 +324,13 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::NamedElement>::iterator iterEvent = m_event->begin();
-			Bag<uml::NamedElement>::iterator endEvent = m_event->end();
+			Bag<uml::NamedElement>::iterator iterEvent = getEvent()->begin();
+			Bag<uml::NamedElement>::iterator endEvent = getEvent()->end();
 			while (iterEvent != endEvent)
 			{
 				if (eventList->find(*iterEvent) == -1)
 				{
-					m_event->erase(*iterEvent);
+					getEvent()->erase(*iterEvent);
 				}
 				iterEvent++;
 			}
@@ -339,9 +339,9 @@ bool DurationObservationImpl::eSet(int featureID, Any newValue)
 			endEvent = eventList->end();
 			while (iterEvent != endEvent)
 			{
-				if (m_event->find(*iterEvent) == -1)
+				if (getEvent()->find(*iterEvent) == -1)
 				{
-					m_event->add(*iterEvent);
+					getEvent()->add(*iterEvent);
 				}
 				iterEvent++;			
 			}

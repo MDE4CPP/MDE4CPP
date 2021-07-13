@@ -133,7 +133,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> CS_ExecutorIm
 	//generated from body annotation
 		// Instantiate the given class and start any behavior of the resulting
 	// object.
-	// (The behavior of an object includes any classifier behaviors for an
+	// (The behavior of an object implIncludes any classifier behaviors for an
 	// active object or the class of the object itself, if that is a
 	// behavior.)
 	// fUML semantics is extended in the sense that when the instantiated object

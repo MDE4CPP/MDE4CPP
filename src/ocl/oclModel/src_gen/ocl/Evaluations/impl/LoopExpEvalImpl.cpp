@@ -31,12 +31,12 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -195,8 +195,8 @@ Any LoopExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_BODYEVALS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Evaluations::OclExpEval>::iterator iter = m_bodyEvals->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator end = m_bodyEvals->end();
+			Bag<ocl::Evaluations::OclExpEval>::iterator iter = getBodyEvals()->begin();
+			Bag<ocl::Evaluations::OclExpEval>::iterator end = getBodyEvals()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -207,8 +207,8 @@ Any LoopExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Evaluations::EvaluationsPackage::LOOPEXPEVAL_ATTRIBUTE_ITERATORS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator iter = m_iterators->begin();
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator end = m_iterators->end();
+			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator iter = getIterators()->begin();
+			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator end = getIterators()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -247,13 +247,13 @@ bool LoopExpEvalImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Evaluations::OclExpEval>::iterator iterBodyEvals = m_bodyEvals->begin();
-			Bag<ocl::Evaluations::OclExpEval>::iterator endBodyEvals = m_bodyEvals->end();
+			Bag<ocl::Evaluations::OclExpEval>::iterator iterBodyEvals = getBodyEvals()->begin();
+			Bag<ocl::Evaluations::OclExpEval>::iterator endBodyEvals = getBodyEvals()->end();
 			while (iterBodyEvals != endBodyEvals)
 			{
 				if (bodyEvalsList->find(*iterBodyEvals) == -1)
 				{
-					m_bodyEvals->erase(*iterBodyEvals);
+					getBodyEvals()->erase(*iterBodyEvals);
 				}
 				iterBodyEvals++;
 			}
@@ -262,9 +262,9 @@ bool LoopExpEvalImpl::eSet(int featureID, Any newValue)
 			endBodyEvals = bodyEvalsList->end();
 			while (iterBodyEvals != endBodyEvals)
 			{
-				if (m_bodyEvals->find(*iterBodyEvals) == -1)
+				if (getBodyEvals()->find(*iterBodyEvals) == -1)
 				{
-					m_bodyEvals->add(*iterBodyEvals);
+					getBodyEvals()->add(*iterBodyEvals);
 				}
 				iterBodyEvals++;			
 			}
@@ -283,13 +283,13 @@ bool LoopExpEvalImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator iterIterators = m_iterators->begin();
-			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator endIterators = m_iterators->end();
+			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator iterIterators = getIterators()->begin();
+			Bag<fUML::Semantics::SimpleClassifiers::StringValue>::iterator endIterators = getIterators()->end();
 			while (iterIterators != endIterators)
 			{
 				if (iteratorsList->find(*iterIterators) == -1)
 				{
-					m_iterators->erase(*iterIterators);
+					getIterators()->erase(*iterIterators);
 				}
 				iterIterators++;
 			}
@@ -298,9 +298,9 @@ bool LoopExpEvalImpl::eSet(int featureID, Any newValue)
 			endIterators = iteratorsList->end();
 			while (iterIterators != endIterators)
 			{
-				if (m_iterators->find(*iterIterators) == -1)
+				if (getIterators()->find(*iterIterators) == -1)
 				{
-					m_iterators->add(*iterIterators);
+					getIterators()->add(*iterIterators);
 				}
 				iterIterators++;			
 			}

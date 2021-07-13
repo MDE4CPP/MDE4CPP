@@ -232,8 +232,8 @@ Any ConnectableElementImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case uml::umlPackage::CONNECTABLEELEMENT_ATTRIBUTE_END:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ConnectorEnd>::iterator iter = m_end->begin();
-			Bag<uml::ConnectorEnd>::iterator end = m_end->end();
+			Bag<uml::ConnectorEnd>::iterator iter = getEnd()->begin();
+			Bag<uml::ConnectorEnd>::iterator end = getEnd()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);

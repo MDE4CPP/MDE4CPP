@@ -56,9 +56,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 
 
 #include "uml/Action.hpp"
@@ -865,8 +865,8 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_INPUTPINACTIVATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator iter = m_inputPinActivation->begin();
-			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator end = m_inputPinActivation->end();
+			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator iter = getInputPinActivation()->begin();
+			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator end = getInputPinActivation()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -877,8 +877,8 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_OUTPUTPINACTIVATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iter = m_outputPinActivation->begin();
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator end = m_outputPinActivation->end();
+			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iter = getOutputPinActivation()->begin();
+			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator end = getOutputPinActivation()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -889,8 +889,8 @@ Any ActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Actions::ActionsPackage::ACTIONACTIVATION_ATTRIBUTE_PINACTIVATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::PinActivation>::iterator iter = m_pinActivation->begin();
-			Bag<fUML::Semantics::Actions::PinActivation>::iterator end = m_pinActivation->end();
+			Bag<fUML::Semantics::Actions::PinActivation>::iterator iter = getPinActivation()->begin();
+			Bag<fUML::Semantics::Actions::PinActivation>::iterator end = getPinActivation()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -950,13 +950,13 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator iterInputPinActivation = m_inputPinActivation->begin();
-			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator endInputPinActivation = m_inputPinActivation->end();
+			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator iterInputPinActivation = getInputPinActivation()->begin();
+			Bag<fUML::Semantics::Actions::InputPinActivation>::iterator endInputPinActivation = getInputPinActivation()->end();
 			while (iterInputPinActivation != endInputPinActivation)
 			{
 				if (inputPinActivationList->find(*iterInputPinActivation) == -1)
 				{
-					m_inputPinActivation->erase(*iterInputPinActivation);
+					getInputPinActivation()->erase(*iterInputPinActivation);
 				}
 				iterInputPinActivation++;
 			}
@@ -965,9 +965,9 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 			endInputPinActivation = inputPinActivationList->end();
 			while (iterInputPinActivation != endInputPinActivation)
 			{
-				if (m_inputPinActivation->find(*iterInputPinActivation) == -1)
+				if (getInputPinActivation()->find(*iterInputPinActivation) == -1)
 				{
-					m_inputPinActivation->add(*iterInputPinActivation);
+					getInputPinActivation()->add(*iterInputPinActivation);
 				}
 				iterInputPinActivation++;			
 			}
@@ -986,13 +986,13 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iterOutputPinActivation = m_outputPinActivation->begin();
-			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator endOutputPinActivation = m_outputPinActivation->end();
+			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator iterOutputPinActivation = getOutputPinActivation()->begin();
+			Bag<fUML::Semantics::Actions::OutputPinActivation>::iterator endOutputPinActivation = getOutputPinActivation()->end();
 			while (iterOutputPinActivation != endOutputPinActivation)
 			{
 				if (outputPinActivationList->find(*iterOutputPinActivation) == -1)
 				{
-					m_outputPinActivation->erase(*iterOutputPinActivation);
+					getOutputPinActivation()->erase(*iterOutputPinActivation);
 				}
 				iterOutputPinActivation++;
 			}
@@ -1001,9 +1001,9 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 			endOutputPinActivation = outputPinActivationList->end();
 			while (iterOutputPinActivation != endOutputPinActivation)
 			{
-				if (m_outputPinActivation->find(*iterOutputPinActivation) == -1)
+				if (getOutputPinActivation()->find(*iterOutputPinActivation) == -1)
 				{
-					m_outputPinActivation->add(*iterOutputPinActivation);
+					getOutputPinActivation()->add(*iterOutputPinActivation);
 				}
 				iterOutputPinActivation++;			
 			}
@@ -1022,13 +1022,13 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Actions::PinActivation>::iterator iterPinActivation = m_pinActivation->begin();
-			Bag<fUML::Semantics::Actions::PinActivation>::iterator endPinActivation = m_pinActivation->end();
+			Bag<fUML::Semantics::Actions::PinActivation>::iterator iterPinActivation = getPinActivation()->begin();
+			Bag<fUML::Semantics::Actions::PinActivation>::iterator endPinActivation = getPinActivation()->end();
 			while (iterPinActivation != endPinActivation)
 			{
 				if (pinActivationList->find(*iterPinActivation) == -1)
 				{
-					m_pinActivation->erase(*iterPinActivation);
+					getPinActivation()->erase(*iterPinActivation);
 				}
 				iterPinActivation++;
 			}
@@ -1037,9 +1037,9 @@ bool ActionActivationImpl::eSet(int featureID, Any newValue)
 			endPinActivation = pinActivationList->end();
 			while (iterPinActivation != endPinActivation)
 			{
-				if (m_pinActivation->find(*iterPinActivation) == -1)
+				if (getPinActivation()->find(*iterPinActivation) == -1)
 				{
-					m_pinActivation->add(*iterPinActivation);
+					getPinActivation()->add(*iterPinActivation);
 				}
 				iterPinActivation++;			
 			}

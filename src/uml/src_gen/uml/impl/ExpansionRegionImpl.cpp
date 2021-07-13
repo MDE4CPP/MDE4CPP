@@ -450,8 +450,8 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_INPUTELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExpansionNode>::iterator iter = m_inputElement->begin();
-			Bag<uml::ExpansionNode>::iterator end = m_inputElement->end();
+			Bag<uml::ExpansionNode>::iterator iter = getInputElement()->begin();
+			Bag<uml::ExpansionNode>::iterator end = getInputElement()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -464,8 +464,8 @@ Any ExpansionRegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXPANSIONREGION_ATTRIBUTE_OUTPUTELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ExpansionNode>::iterator iter = m_outputElement->begin();
-			Bag<uml::ExpansionNode>::iterator end = m_outputElement->end();
+			Bag<uml::ExpansionNode>::iterator iter = getOutputElement()->begin();
+			Bag<uml::ExpansionNode>::iterator end = getOutputElement()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -506,13 +506,13 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ExpansionNode>::iterator iterInputElement = m_inputElement->begin();
-			Bag<uml::ExpansionNode>::iterator endInputElement = m_inputElement->end();
+			Bag<uml::ExpansionNode>::iterator iterInputElement = getInputElement()->begin();
+			Bag<uml::ExpansionNode>::iterator endInputElement = getInputElement()->end();
 			while (iterInputElement != endInputElement)
 			{
 				if (inputElementList->find(*iterInputElement) == -1)
 				{
-					m_inputElement->erase(*iterInputElement);
+					getInputElement()->erase(*iterInputElement);
 				}
 				iterInputElement++;
 			}
@@ -521,9 +521,9 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 			endInputElement = inputElementList->end();
 			while (iterInputElement != endInputElement)
 			{
-				if (m_inputElement->find(*iterInputElement) == -1)
+				if (getInputElement()->find(*iterInputElement) == -1)
 				{
-					m_inputElement->add(*iterInputElement);
+					getInputElement()->add(*iterInputElement);
 				}
 				iterInputElement++;			
 			}
@@ -549,13 +549,13 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ExpansionNode>::iterator iterOutputElement = m_outputElement->begin();
-			Bag<uml::ExpansionNode>::iterator endOutputElement = m_outputElement->end();
+			Bag<uml::ExpansionNode>::iterator iterOutputElement = getOutputElement()->begin();
+			Bag<uml::ExpansionNode>::iterator endOutputElement = getOutputElement()->end();
 			while (iterOutputElement != endOutputElement)
 			{
 				if (outputElementList->find(*iterOutputElement) == -1)
 				{
-					m_outputElement->erase(*iterOutputElement);
+					getOutputElement()->erase(*iterOutputElement);
 				}
 				iterOutputElement++;
 			}
@@ -564,9 +564,9 @@ bool ExpansionRegionImpl::eSet(int featureID, Any newValue)
 			endOutputElement = outputElementList->end();
 			while (iterOutputElement != endOutputElement)
 			{
-				if (m_outputElement->find(*iterOutputElement) == -1)
+				if (getOutputElement()->find(*iterOutputElement) == -1)
 				{
-					m_outputElement->add(*iterOutputElement);
+					getOutputElement()->add(*iterOutputElement);
 				}
 				iterOutputElement++;			
 			}

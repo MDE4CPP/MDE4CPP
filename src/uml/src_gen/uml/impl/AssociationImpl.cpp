@@ -593,8 +593,8 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_ENDTYPE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Type>::iterator iter = m_endType->begin();
-			Bag<uml::Type>::iterator end = m_endType->end();
+			Bag<uml::Type>::iterator iter = getEndType()->begin();
+			Bag<uml::Type>::iterator end = getEndType()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -607,8 +607,8 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_MEMBEREND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_memberEnd->begin();
-			Bag<uml::Property>::iterator end = m_memberEnd->end();
+			Bag<uml::Property>::iterator iter = getMemberEnd()->begin();
+			Bag<uml::Property>::iterator end = getMemberEnd()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -619,8 +619,8 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_NAVIGABLEOWNEDEND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_navigableOwnedEnd->begin();
-			Bag<uml::Property>::iterator end = m_navigableOwnedEnd->end();
+			Bag<uml::Property>::iterator iter = getNavigableOwnedEnd()->begin();
+			Bag<uml::Property>::iterator end = getNavigableOwnedEnd()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -631,8 +631,8 @@ Any AssociationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ASSOCIATION_ATTRIBUTE_OWNEDEND:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Property>::iterator iter = m_ownedEnd->begin();
-			Bag<uml::Property>::iterator end = m_ownedEnd->end();
+			Bag<uml::Property>::iterator iter = getOwnedEnd()->begin();
+			Bag<uml::Property>::iterator end = getOwnedEnd()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -698,13 +698,13 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Property>::iterator iterMemberEnd = m_memberEnd->begin();
-			Bag<uml::Property>::iterator endMemberEnd = m_memberEnd->end();
+			Bag<uml::Property>::iterator iterMemberEnd = getMemberEnd()->begin();
+			Bag<uml::Property>::iterator endMemberEnd = getMemberEnd()->end();
 			while (iterMemberEnd != endMemberEnd)
 			{
 				if (memberEndList->find(*iterMemberEnd) == -1)
 				{
-					m_memberEnd->erase(*iterMemberEnd);
+					getMemberEnd()->erase(*iterMemberEnd);
 				}
 				iterMemberEnd++;
 			}
@@ -713,9 +713,9 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 			endMemberEnd = memberEndList->end();
 			while (iterMemberEnd != endMemberEnd)
 			{
-				if (m_memberEnd->find(*iterMemberEnd) == -1)
+				if (getMemberEnd()->find(*iterMemberEnd) == -1)
 				{
-					m_memberEnd->add(*iterMemberEnd);
+					getMemberEnd()->add(*iterMemberEnd);
 				}
 				iterMemberEnd++;			
 			}
@@ -734,13 +734,13 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Property>::iterator iterNavigableOwnedEnd = m_navigableOwnedEnd->begin();
-			Bag<uml::Property>::iterator endNavigableOwnedEnd = m_navigableOwnedEnd->end();
+			Bag<uml::Property>::iterator iterNavigableOwnedEnd = getNavigableOwnedEnd()->begin();
+			Bag<uml::Property>::iterator endNavigableOwnedEnd = getNavigableOwnedEnd()->end();
 			while (iterNavigableOwnedEnd != endNavigableOwnedEnd)
 			{
 				if (navigableOwnedEndList->find(*iterNavigableOwnedEnd) == -1)
 				{
-					m_navigableOwnedEnd->erase(*iterNavigableOwnedEnd);
+					getNavigableOwnedEnd()->erase(*iterNavigableOwnedEnd);
 				}
 				iterNavigableOwnedEnd++;
 			}
@@ -749,9 +749,9 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 			endNavigableOwnedEnd = navigableOwnedEndList->end();
 			while (iterNavigableOwnedEnd != endNavigableOwnedEnd)
 			{
-				if (m_navigableOwnedEnd->find(*iterNavigableOwnedEnd) == -1)
+				if (getNavigableOwnedEnd()->find(*iterNavigableOwnedEnd) == -1)
 				{
-					m_navigableOwnedEnd->add(*iterNavigableOwnedEnd);
+					getNavigableOwnedEnd()->add(*iterNavigableOwnedEnd);
 				}
 				iterNavigableOwnedEnd++;			
 			}
@@ -770,13 +770,13 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Property>::iterator iterOwnedEnd = m_ownedEnd->begin();
-			Bag<uml::Property>::iterator endOwnedEnd = m_ownedEnd->end();
+			Bag<uml::Property>::iterator iterOwnedEnd = getOwnedEnd()->begin();
+			Bag<uml::Property>::iterator endOwnedEnd = getOwnedEnd()->end();
 			while (iterOwnedEnd != endOwnedEnd)
 			{
 				if (ownedEndList->find(*iterOwnedEnd) == -1)
 				{
-					m_ownedEnd->erase(*iterOwnedEnd);
+					getOwnedEnd()->erase(*iterOwnedEnd);
 				}
 				iterOwnedEnd++;
 			}
@@ -785,9 +785,9 @@ bool AssociationImpl::eSet(int featureID, Any newValue)
 			endOwnedEnd = ownedEndList->end();
 			while (iterOwnedEnd != endOwnedEnd)
 			{
-				if (m_ownedEnd->find(*iterOwnedEnd) == -1)
+				if (getOwnedEnd()->find(*iterOwnedEnd) == -1)
 				{
-					m_ownedEnd->add(*iterOwnedEnd);
+					getOwnedEnd()->add(*iterOwnedEnd);
 				}
 				iterOwnedEnd++;			
 			}

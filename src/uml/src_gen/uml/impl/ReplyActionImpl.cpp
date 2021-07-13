@@ -380,8 +380,8 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::InputPin>::iterator iter = m_replyValue->begin();
-			Bag<uml::InputPin>::iterator end = m_replyValue->end();
+			Bag<uml::InputPin>::iterator iter = getReplyValue()->begin();
+			Bag<uml::InputPin>::iterator end = getReplyValue()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -432,13 +432,13 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::InputPin>::iterator iterReplyValue = m_replyValue->begin();
-			Bag<uml::InputPin>::iterator endReplyValue = m_replyValue->end();
+			Bag<uml::InputPin>::iterator iterReplyValue = getReplyValue()->begin();
+			Bag<uml::InputPin>::iterator endReplyValue = getReplyValue()->end();
 			while (iterReplyValue != endReplyValue)
 			{
 				if (replyValueList->find(*iterReplyValue) == -1)
 				{
-					m_replyValue->erase(*iterReplyValue);
+					getReplyValue()->erase(*iterReplyValue);
 				}
 				iterReplyValue++;
 			}
@@ -447,9 +447,9 @@ bool ReplyActionImpl::eSet(int featureID, Any newValue)
 			endReplyValue = replyValueList->end();
 			while (iterReplyValue != endReplyValue)
 			{
-				if (m_replyValue->find(*iterReplyValue) == -1)
+				if (getReplyValue()->find(*iterReplyValue) == -1)
 				{
-					m_replyValue->add(*iterReplyValue);
+					getReplyValue()->add(*iterReplyValue);
 				}
 				iterReplyValue++;			
 			}

@@ -46,10 +46,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Activities/ActivitiesFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Actions/ActionsFactory.hpp"
 
 
 #include "uml/Action.hpp"
@@ -473,8 +473,8 @@ Any CallActionActivationImpl::eGet(int featureID, bool resolve, bool coreType) c
 		case fUML::Semantics::Actions::ActionsPackage::CALLACTIONACTIVATION_ATTRIBUTE_CALLEXECUTIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator iter = m_callExecutions->begin();
-			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator end = m_callExecutions->end();
+			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator iter = getCallExecutions()->begin();
+			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator end = getCallExecutions()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -521,13 +521,13 @@ bool CallActionActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator iterCallExecutions = m_callExecutions->begin();
-			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator endCallExecutions = m_callExecutions->end();
+			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator iterCallExecutions = getCallExecutions()->begin();
+			Bag<fUML::Semantics::CommonBehavior::Execution>::iterator endCallExecutions = getCallExecutions()->end();
 			while (iterCallExecutions != endCallExecutions)
 			{
 				if (callExecutionsList->find(*iterCallExecutions) == -1)
 				{
-					m_callExecutions->erase(*iterCallExecutions);
+					getCallExecutions()->erase(*iterCallExecutions);
 				}
 				iterCallExecutions++;
 			}
@@ -536,9 +536,9 @@ bool CallActionActivationImpl::eSet(int featureID, Any newValue)
 			endCallExecutions = callExecutionsList->end();
 			while (iterCallExecutions != endCallExecutions)
 			{
-				if (m_callExecutions->find(*iterCallExecutions) == -1)
+				if (getCallExecutions()->find(*iterCallExecutions) == -1)
 				{
-					m_callExecutions->add(*iterCallExecutions);
+					getCallExecutions()->add(*iterCallExecutions);
 				}
 				iterCallExecutions++;			
 			}

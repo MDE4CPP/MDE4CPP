@@ -247,8 +247,8 @@ Any ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::Variable>::iterator iter = m_parameterVariable->begin();
-			Bag<ocl::Expressions::Variable>::iterator end = m_parameterVariable->end();
+			Bag<ocl::Expressions::Variable>::iterator iter = getParameterVariable()->begin();
+			Bag<ocl::Expressions::Variable>::iterator end = getParameterVariable()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -309,13 +309,13 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Expressions::Variable>::iterator iterParameterVariable = m_parameterVariable->begin();
-			Bag<ocl::Expressions::Variable>::iterator endParameterVariable = m_parameterVariable->end();
+			Bag<ocl::Expressions::Variable>::iterator iterParameterVariable = getParameterVariable()->begin();
+			Bag<ocl::Expressions::Variable>::iterator endParameterVariable = getParameterVariable()->end();
 			while (iterParameterVariable != endParameterVariable)
 			{
 				if (parameterVariableList->find(*iterParameterVariable) == -1)
 				{
-					m_parameterVariable->erase(*iterParameterVariable);
+					getParameterVariable()->erase(*iterParameterVariable);
 				}
 				iterParameterVariable++;
 			}
@@ -324,9 +324,9 @@ bool ExpressionInOclImpl::eSet(int featureID, Any newValue)
 			endParameterVariable = parameterVariableList->end();
 			while (iterParameterVariable != endParameterVariable)
 			{
-				if (m_parameterVariable->find(*iterParameterVariable) == -1)
+				if (getParameterVariable()->find(*iterParameterVariable) == -1)
 				{
-					m_parameterVariable->add(*iterParameterVariable);
+					getParameterVariable()->add(*iterParameterVariable);
 				}
 				iterParameterVariable++;			
 			}

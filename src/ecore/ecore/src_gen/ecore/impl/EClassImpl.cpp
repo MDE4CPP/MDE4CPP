@@ -764,8 +764,8 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLATTRIBUTES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EAttribute>::iterator iter = m_eAllAttributes->begin();
-			Bag<ecore::EAttribute>::iterator end = m_eAllAttributes->end();
+			Bag<ecore::EAttribute>::iterator iter = getEAllAttributes()->begin();
+			Bag<ecore::EAttribute>::iterator end = getEAllAttributes()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -776,8 +776,8 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLCONTAINMENTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EReference>::iterator iter = m_eAllContainments->begin();
-			Bag<ecore::EReference>::iterator end = m_eAllContainments->end();
+			Bag<ecore::EReference>::iterator iter = getEAllContainments()->begin();
+			Bag<ecore::EReference>::iterator end = getEAllContainments()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -788,8 +788,8 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLGENERICSUPERTYPES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EGenericType>::iterator iter = m_eAllGenericSuperTypes->begin();
-			Bag<ecore::EGenericType>::iterator end = m_eAllGenericSuperTypes->end();
+			Bag<ecore::EGenericType>::iterator iter = getEAllGenericSuperTypes()->begin();
+			Bag<ecore::EGenericType>::iterator end = getEAllGenericSuperTypes()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -800,8 +800,8 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLOPERATIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EOperation>::iterator iter = m_eAllOperations->begin();
-			Bag<ecore::EOperation>::iterator end = m_eAllOperations->end();
+			Bag<ecore::EOperation>::iterator iter = getEAllOperations()->begin();
+			Bag<ecore::EOperation>::iterator end = getEAllOperations()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -812,8 +812,8 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLREFERENCES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EReference>::iterator iter = m_eAllReferences->begin();
-			Bag<ecore::EReference>::iterator end = m_eAllReferences->end();
+			Bag<ecore::EReference>::iterator iter = getEAllReferences()->begin();
+			Bag<ecore::EReference>::iterator end = getEAllReferences()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -824,8 +824,8 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLSTRUCTURALFEATURES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EStructuralFeature>::iterator iter = m_eAllStructuralFeatures->begin();
-			Bag<ecore::EStructuralFeature>::iterator end = m_eAllStructuralFeatures->end();
+			Bag<ecore::EStructuralFeature>::iterator iter = getEAllStructuralFeatures()->begin();
+			Bag<ecore::EStructuralFeature>::iterator end = getEAllStructuralFeatures()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -836,8 +836,8 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EALLSUPERTYPES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EClass>::iterator iter = m_eAllSuperTypes->begin();
-			Bag<ecore::EClass>::iterator end = m_eAllSuperTypes->end();
+			Bag<ecore::EClass>::iterator iter = getEAllSuperTypes()->begin();
+			Bag<ecore::EClass>::iterator end = getEAllSuperTypes()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -848,8 +848,8 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EATTRIBUTES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EAttribute>::iterator iter = m_eAttributes->begin();
-			Bag<ecore::EAttribute>::iterator end = m_eAttributes->end();
+			Bag<ecore::EAttribute>::iterator iter = getEAttributes()->begin();
+			Bag<ecore::EAttribute>::iterator end = getEAttributes()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -860,8 +860,8 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EGENERICSUPERTYPES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EGenericType>::iterator iter = m_eGenericSuperTypes->begin();
-			Bag<ecore::EGenericType>::iterator end = m_eGenericSuperTypes->end();
+			Bag<ecore::EGenericType>::iterator iter = getEGenericSuperTypes()->begin();
+			Bag<ecore::EGenericType>::iterator end = getEGenericSuperTypes()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -874,8 +874,8 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EOPERATIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EOperation>::iterator iter = m_eOperations->begin();
-			Bag<ecore::EOperation>::iterator end = m_eOperations->end();
+			Bag<ecore::EOperation>::iterator iter = getEOperations()->begin();
+			Bag<ecore::EOperation>::iterator end = getEOperations()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -886,8 +886,8 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_EREFERENCES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EReference>::iterator iter = m_eReferences->begin();
-			Bag<ecore::EReference>::iterator end = m_eReferences->end();
+			Bag<ecore::EReference>::iterator iter = getEReferences()->begin();
+			Bag<ecore::EReference>::iterator end = getEReferences()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -898,8 +898,8 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ESTRUCTURALFEATURES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EStructuralFeature>::iterator iter = m_eStructuralFeatures->begin();
-			Bag<ecore::EStructuralFeature>::iterator end = m_eStructuralFeatures->end();
+			Bag<ecore::EStructuralFeature>::iterator iter = getEStructuralFeatures()->begin();
+			Bag<ecore::EStructuralFeature>::iterator end = getEStructuralFeatures()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -910,8 +910,8 @@ Any EClassImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASS_ATTRIBUTE_ESUPERTYPES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EClass>::iterator iter = m_eSuperTypes->begin();
-			Bag<ecore::EClass>::iterator end = m_eSuperTypes->end();
+			Bag<ecore::EClass>::iterator iter = getESuperTypes()->begin();
+			Bag<ecore::EClass>::iterator end = getESuperTypes()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -987,13 +987,13 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EAttribute>::iterator iterEAttributes = m_eAttributes->begin();
-			Bag<ecore::EAttribute>::iterator endEAttributes = m_eAttributes->end();
+			Bag<ecore::EAttribute>::iterator iterEAttributes = getEAttributes()->begin();
+			Bag<ecore::EAttribute>::iterator endEAttributes = getEAttributes()->end();
 			while (iterEAttributes != endEAttributes)
 			{
 				if (eAttributesList->find(*iterEAttributes) == -1)
 				{
-					m_eAttributes->erase(*iterEAttributes);
+					getEAttributes()->erase(*iterEAttributes);
 				}
 				iterEAttributes++;
 			}
@@ -1002,9 +1002,9 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 			endEAttributes = eAttributesList->end();
 			while (iterEAttributes != endEAttributes)
 			{
-				if (m_eAttributes->find(*iterEAttributes) == -1)
+				if (getEAttributes()->find(*iterEAttributes) == -1)
 				{
-					m_eAttributes->add(*iterEAttributes);
+					getEAttributes()->add(*iterEAttributes);
 				}
 				iterEAttributes++;			
 			}
@@ -1023,13 +1023,13 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EGenericType>::iterator iterEGenericSuperTypes = m_eGenericSuperTypes->begin();
-			Bag<ecore::EGenericType>::iterator endEGenericSuperTypes = m_eGenericSuperTypes->end();
+			Bag<ecore::EGenericType>::iterator iterEGenericSuperTypes = getEGenericSuperTypes()->begin();
+			Bag<ecore::EGenericType>::iterator endEGenericSuperTypes = getEGenericSuperTypes()->end();
 			while (iterEGenericSuperTypes != endEGenericSuperTypes)
 			{
 				if (eGenericSuperTypesList->find(*iterEGenericSuperTypes) == -1)
 				{
-					m_eGenericSuperTypes->erase(*iterEGenericSuperTypes);
+					getEGenericSuperTypes()->erase(*iterEGenericSuperTypes);
 				}
 				iterEGenericSuperTypes++;
 			}
@@ -1038,9 +1038,9 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 			endEGenericSuperTypes = eGenericSuperTypesList->end();
 			while (iterEGenericSuperTypes != endEGenericSuperTypes)
 			{
-				if (m_eGenericSuperTypes->find(*iterEGenericSuperTypes) == -1)
+				if (getEGenericSuperTypes()->find(*iterEGenericSuperTypes) == -1)
 				{
-					m_eGenericSuperTypes->add(*iterEGenericSuperTypes);
+					getEGenericSuperTypes()->add(*iterEGenericSuperTypes);
 				}
 				iterEGenericSuperTypes++;			
 			}
@@ -1067,13 +1067,13 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EOperation>::iterator iterEOperations = m_eOperations->begin();
-			Bag<ecore::EOperation>::iterator endEOperations = m_eOperations->end();
+			Bag<ecore::EOperation>::iterator iterEOperations = getEOperations()->begin();
+			Bag<ecore::EOperation>::iterator endEOperations = getEOperations()->end();
 			while (iterEOperations != endEOperations)
 			{
 				if (eOperationsList->find(*iterEOperations) == -1)
 				{
-					m_eOperations->erase(*iterEOperations);
+					getEOperations()->erase(*iterEOperations);
 				}
 				iterEOperations++;
 			}
@@ -1082,9 +1082,9 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 			endEOperations = eOperationsList->end();
 			while (iterEOperations != endEOperations)
 			{
-				if (m_eOperations->find(*iterEOperations) == -1)
+				if (getEOperations()->find(*iterEOperations) == -1)
 				{
-					m_eOperations->add(*iterEOperations);
+					getEOperations()->add(*iterEOperations);
 				}
 				iterEOperations++;			
 			}
@@ -1103,13 +1103,13 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EReference>::iterator iterEReferences = m_eReferences->begin();
-			Bag<ecore::EReference>::iterator endEReferences = m_eReferences->end();
+			Bag<ecore::EReference>::iterator iterEReferences = getEReferences()->begin();
+			Bag<ecore::EReference>::iterator endEReferences = getEReferences()->end();
 			while (iterEReferences != endEReferences)
 			{
 				if (eReferencesList->find(*iterEReferences) == -1)
 				{
-					m_eReferences->erase(*iterEReferences);
+					getEReferences()->erase(*iterEReferences);
 				}
 				iterEReferences++;
 			}
@@ -1118,9 +1118,9 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 			endEReferences = eReferencesList->end();
 			while (iterEReferences != endEReferences)
 			{
-				if (m_eReferences->find(*iterEReferences) == -1)
+				if (getEReferences()->find(*iterEReferences) == -1)
 				{
-					m_eReferences->add(*iterEReferences);
+					getEReferences()->add(*iterEReferences);
 				}
 				iterEReferences++;			
 			}
@@ -1139,13 +1139,13 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EStructuralFeature>::iterator iterEStructuralFeatures = m_eStructuralFeatures->begin();
-			Bag<ecore::EStructuralFeature>::iterator endEStructuralFeatures = m_eStructuralFeatures->end();
+			Bag<ecore::EStructuralFeature>::iterator iterEStructuralFeatures = getEStructuralFeatures()->begin();
+			Bag<ecore::EStructuralFeature>::iterator endEStructuralFeatures = getEStructuralFeatures()->end();
 			while (iterEStructuralFeatures != endEStructuralFeatures)
 			{
 				if (eStructuralFeaturesList->find(*iterEStructuralFeatures) == -1)
 				{
-					m_eStructuralFeatures->erase(*iterEStructuralFeatures);
+					getEStructuralFeatures()->erase(*iterEStructuralFeatures);
 				}
 				iterEStructuralFeatures++;
 			}
@@ -1154,9 +1154,9 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 			endEStructuralFeatures = eStructuralFeaturesList->end();
 			while (iterEStructuralFeatures != endEStructuralFeatures)
 			{
-				if (m_eStructuralFeatures->find(*iterEStructuralFeatures) == -1)
+				if (getEStructuralFeatures()->find(*iterEStructuralFeatures) == -1)
 				{
-					m_eStructuralFeatures->add(*iterEStructuralFeatures);
+					getEStructuralFeatures()->add(*iterEStructuralFeatures);
 				}
 				iterEStructuralFeatures++;			
 			}
@@ -1175,13 +1175,13 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EClass>::iterator iterESuperTypes = m_eSuperTypes->begin();
-			Bag<ecore::EClass>::iterator endESuperTypes = m_eSuperTypes->end();
+			Bag<ecore::EClass>::iterator iterESuperTypes = getESuperTypes()->begin();
+			Bag<ecore::EClass>::iterator endESuperTypes = getESuperTypes()->end();
 			while (iterESuperTypes != endESuperTypes)
 			{
 				if (eSuperTypesList->find(*iterESuperTypes) == -1)
 				{
-					m_eSuperTypes->erase(*iterESuperTypes);
+					getESuperTypes()->erase(*iterESuperTypes);
 				}
 				iterESuperTypes++;
 			}
@@ -1190,9 +1190,9 @@ bool EClassImpl::eSet(int featureID, Any newValue)
 			endESuperTypes = eSuperTypesList->end();
 			while (iterESuperTypes != endESuperTypes)
 			{
-				if (m_eSuperTypes->find(*iterESuperTypes) == -1)
+				if (getESuperTypes()->find(*iterESuperTypes) == -1)
 				{
-					m_eSuperTypes->add(*iterESuperTypes);
+					getESuperTypes()->add(*iterESuperTypes);
 				}
 				iterESuperTypes++;			
 			}

@@ -403,8 +403,8 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EEXCEPTIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EClassifier>::iterator iter = m_eExceptions->begin();
-			Bag<ecore::EClassifier>::iterator end = m_eExceptions->end();
+			Bag<ecore::EClassifier>::iterator iter = getEExceptions()->begin();
+			Bag<ecore::EClassifier>::iterator end = getEExceptions()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -415,8 +415,8 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EGENERICEXCEPTIONS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EGenericType>::iterator iter = m_eGenericExceptions->begin();
-			Bag<ecore::EGenericType>::iterator end = m_eGenericExceptions->end();
+			Bag<ecore::EGenericType>::iterator iter = getEGenericExceptions()->begin();
+			Bag<ecore::EGenericType>::iterator end = getEGenericExceptions()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -427,8 +427,8 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_EPARAMETERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::EParameter>::iterator iter = m_eParameters->begin();
-			Bag<ecore::EParameter>::iterator end = m_eParameters->end();
+			Bag<ecore::EParameter>::iterator iter = getEParameters()->begin();
+			Bag<ecore::EParameter>::iterator end = getEParameters()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -439,8 +439,8 @@ Any EOperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EOPERATION_ATTRIBUTE_ETYPEPARAMETERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ecore::ETypeParameter>::iterator iter = m_eTypeParameters->begin();
-			Bag<ecore::ETypeParameter>::iterator end = m_eTypeParameters->end();
+			Bag<ecore::ETypeParameter>::iterator iter = getETypeParameters()->begin();
+			Bag<ecore::ETypeParameter>::iterator end = getETypeParameters()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -489,13 +489,13 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EClassifier>::iterator iterEExceptions = m_eExceptions->begin();
-			Bag<ecore::EClassifier>::iterator endEExceptions = m_eExceptions->end();
+			Bag<ecore::EClassifier>::iterator iterEExceptions = getEExceptions()->begin();
+			Bag<ecore::EClassifier>::iterator endEExceptions = getEExceptions()->end();
 			while (iterEExceptions != endEExceptions)
 			{
 				if (eExceptionsList->find(*iterEExceptions) == -1)
 				{
-					m_eExceptions->erase(*iterEExceptions);
+					getEExceptions()->erase(*iterEExceptions);
 				}
 				iterEExceptions++;
 			}
@@ -504,9 +504,9 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 			endEExceptions = eExceptionsList->end();
 			while (iterEExceptions != endEExceptions)
 			{
-				if (m_eExceptions->find(*iterEExceptions) == -1)
+				if (getEExceptions()->find(*iterEExceptions) == -1)
 				{
-					m_eExceptions->add(*iterEExceptions);
+					getEExceptions()->add(*iterEExceptions);
 				}
 				iterEExceptions++;			
 			}
@@ -525,13 +525,13 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EGenericType>::iterator iterEGenericExceptions = m_eGenericExceptions->begin();
-			Bag<ecore::EGenericType>::iterator endEGenericExceptions = m_eGenericExceptions->end();
+			Bag<ecore::EGenericType>::iterator iterEGenericExceptions = getEGenericExceptions()->begin();
+			Bag<ecore::EGenericType>::iterator endEGenericExceptions = getEGenericExceptions()->end();
 			while (iterEGenericExceptions != endEGenericExceptions)
 			{
 				if (eGenericExceptionsList->find(*iterEGenericExceptions) == -1)
 				{
-					m_eGenericExceptions->erase(*iterEGenericExceptions);
+					getEGenericExceptions()->erase(*iterEGenericExceptions);
 				}
 				iterEGenericExceptions++;
 			}
@@ -540,9 +540,9 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 			endEGenericExceptions = eGenericExceptionsList->end();
 			while (iterEGenericExceptions != endEGenericExceptions)
 			{
-				if (m_eGenericExceptions->find(*iterEGenericExceptions) == -1)
+				if (getEGenericExceptions()->find(*iterEGenericExceptions) == -1)
 				{
-					m_eGenericExceptions->add(*iterEGenericExceptions);
+					getEGenericExceptions()->add(*iterEGenericExceptions);
 				}
 				iterEGenericExceptions++;			
 			}
@@ -561,13 +561,13 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::EParameter>::iterator iterEParameters = m_eParameters->begin();
-			Bag<ecore::EParameter>::iterator endEParameters = m_eParameters->end();
+			Bag<ecore::EParameter>::iterator iterEParameters = getEParameters()->begin();
+			Bag<ecore::EParameter>::iterator endEParameters = getEParameters()->end();
 			while (iterEParameters != endEParameters)
 			{
 				if (eParametersList->find(*iterEParameters) == -1)
 				{
-					m_eParameters->erase(*iterEParameters);
+					getEParameters()->erase(*iterEParameters);
 				}
 				iterEParameters++;
 			}
@@ -576,9 +576,9 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 			endEParameters = eParametersList->end();
 			while (iterEParameters != endEParameters)
 			{
-				if (m_eParameters->find(*iterEParameters) == -1)
+				if (getEParameters()->find(*iterEParameters) == -1)
 				{
-					m_eParameters->add(*iterEParameters);
+					getEParameters()->add(*iterEParameters);
 				}
 				iterEParameters++;			
 			}
@@ -597,13 +597,13 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ecore::ETypeParameter>::iterator iterETypeParameters = m_eTypeParameters->begin();
-			Bag<ecore::ETypeParameter>::iterator endETypeParameters = m_eTypeParameters->end();
+			Bag<ecore::ETypeParameter>::iterator iterETypeParameters = getETypeParameters()->begin();
+			Bag<ecore::ETypeParameter>::iterator endETypeParameters = getETypeParameters()->end();
 			while (iterETypeParameters != endETypeParameters)
 			{
 				if (eTypeParametersList->find(*iterETypeParameters) == -1)
 				{
-					m_eTypeParameters->erase(*iterETypeParameters);
+					getETypeParameters()->erase(*iterETypeParameters);
 				}
 				iterETypeParameters++;
 			}
@@ -612,9 +612,9 @@ bool EOperationImpl::eSet(int featureID, Any newValue)
 			endETypeParameters = eTypeParametersList->end();
 			while (iterETypeParameters != endETypeParameters)
 			{
-				if (m_eTypeParameters->find(*iterETypeParameters) == -1)
+				if (getETypeParameters()->find(*iterETypeParameters) == -1)
 				{
-					m_eTypeParameters->add(*iterETypeParameters);
+					getETypeParameters()->add(*iterETypeParameters);
 				}
 				iterETypeParameters++;			
 			}

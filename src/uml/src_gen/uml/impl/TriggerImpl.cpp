@@ -233,8 +233,8 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Port>::iterator iter = m_port->begin();
-			Bag<uml::Port>::iterator end = m_port->end();
+			Bag<uml::Port>::iterator iter = getPort()->begin();
+			Bag<uml::Port>::iterator end = getPort()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -281,13 +281,13 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Port>::iterator iterPort = m_port->begin();
-			Bag<uml::Port>::iterator endPort = m_port->end();
+			Bag<uml::Port>::iterator iterPort = getPort()->begin();
+			Bag<uml::Port>::iterator endPort = getPort()->end();
 			while (iterPort != endPort)
 			{
 				if (portList->find(*iterPort) == -1)
 				{
-					m_port->erase(*iterPort);
+					getPort()->erase(*iterPort);
 				}
 				iterPort++;
 			}
@@ -296,9 +296,9 @@ bool TriggerImpl::eSet(int featureID, Any newValue)
 			endPort = portList->end();
 			while (iterPort != endPort)
 			{
-				if (m_port->find(*iterPort) == -1)
+				if (getPort()->find(*iterPort) == -1)
 				{
-					m_port->add(*iterPort);
+					getPort()->add(*iterPort);
 				}
 				iterPort++;			
 			}

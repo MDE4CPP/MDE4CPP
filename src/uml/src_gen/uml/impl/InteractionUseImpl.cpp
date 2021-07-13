@@ -418,8 +418,8 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ACTUALGATE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Gate>::iterator iter = m_actualGate->begin();
-			Bag<uml::Gate>::iterator end = m_actualGate->end();
+			Bag<uml::Gate>::iterator iter = getActualGate()->begin();
+			Bag<uml::Gate>::iterator end = getActualGate()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -430,8 +430,8 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_ARGUMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ValueSpecification>::iterator iter = m_argument->begin();
-			Bag<uml::ValueSpecification>::iterator end = m_argument->end();
+			Bag<uml::ValueSpecification>::iterator iter = getArgument()->begin();
+			Bag<uml::ValueSpecification>::iterator end = getArgument()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -482,13 +482,13 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Gate>::iterator iterActualGate = m_actualGate->begin();
-			Bag<uml::Gate>::iterator endActualGate = m_actualGate->end();
+			Bag<uml::Gate>::iterator iterActualGate = getActualGate()->begin();
+			Bag<uml::Gate>::iterator endActualGate = getActualGate()->end();
 			while (iterActualGate != endActualGate)
 			{
 				if (actualGateList->find(*iterActualGate) == -1)
 				{
-					m_actualGate->erase(*iterActualGate);
+					getActualGate()->erase(*iterActualGate);
 				}
 				iterActualGate++;
 			}
@@ -497,9 +497,9 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 			endActualGate = actualGateList->end();
 			while (iterActualGate != endActualGate)
 			{
-				if (m_actualGate->find(*iterActualGate) == -1)
+				if (getActualGate()->find(*iterActualGate) == -1)
 				{
-					m_actualGate->add(*iterActualGate);
+					getActualGate()->add(*iterActualGate);
 				}
 				iterActualGate++;			
 			}
@@ -518,13 +518,13 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ValueSpecification>::iterator iterArgument = m_argument->begin();
-			Bag<uml::ValueSpecification>::iterator endArgument = m_argument->end();
+			Bag<uml::ValueSpecification>::iterator iterArgument = getArgument()->begin();
+			Bag<uml::ValueSpecification>::iterator endArgument = getArgument()->end();
 			while (iterArgument != endArgument)
 			{
 				if (argumentList->find(*iterArgument) == -1)
 				{
-					m_argument->erase(*iterArgument);
+					getArgument()->erase(*iterArgument);
 				}
 				iterArgument++;
 			}
@@ -533,9 +533,9 @@ bool InteractionUseImpl::eSet(int featureID, Any newValue)
 			endArgument = argumentList->end();
 			while (iterArgument != endArgument)
 			{
-				if (m_argument->find(*iterArgument) == -1)
+				if (getArgument()->find(*iterArgument) == -1)
 				{
-					m_argument->add(*iterArgument);
+					getArgument()->add(*iterArgument);
 				}
 				iterArgument++;			
 			}

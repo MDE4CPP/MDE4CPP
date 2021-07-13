@@ -159,8 +159,8 @@ Any TokenSetImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKENSET_ATTRIBUTE_TOKENS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Activities::Token>::iterator iter = m_tokens->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator end = m_tokens->end();
+			Bag<fUML::Semantics::Activities::Token>::iterator iter = getTokens()->begin();
+			Bag<fUML::Semantics::Activities::Token>::iterator end = getTokens()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -197,13 +197,13 @@ bool TokenSetImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Activities::Token>::iterator iterTokens = m_tokens->begin();
-			Bag<fUML::Semantics::Activities::Token>::iterator endTokens = m_tokens->end();
+			Bag<fUML::Semantics::Activities::Token>::iterator iterTokens = getTokens()->begin();
+			Bag<fUML::Semantics::Activities::Token>::iterator endTokens = getTokens()->end();
 			while (iterTokens != endTokens)
 			{
 				if (tokensList->find(*iterTokens) == -1)
 				{
-					m_tokens->erase(*iterTokens);
+					getTokens()->erase(*iterTokens);
 				}
 				iterTokens++;
 			}
@@ -212,9 +212,9 @@ bool TokenSetImpl::eSet(int featureID, Any newValue)
 			endTokens = tokensList->end();
 			while (iterTokens != endTokens)
 			{
-				if (m_tokens->find(*iterTokens) == -1)
+				if (getTokens()->find(*iterTokens) == -1)
 				{
-					m_tokens->add(*iterTokens);
+					getTokens()->add(*iterTokens);
 				}
 				iterTokens++;			
 			}

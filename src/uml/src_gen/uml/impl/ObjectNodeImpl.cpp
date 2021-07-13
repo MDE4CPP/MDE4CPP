@@ -358,8 +358,8 @@ Any ObjectNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::OBJECTNODE_ATTRIBUTE_INSTATE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::State>::iterator iter = m_inState->begin();
-			Bag<uml::State>::iterator end = m_inState->end();
+			Bag<uml::State>::iterator iter = getInState()->begin();
+			Bag<uml::State>::iterator end = getInState()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -426,13 +426,13 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::State>::iterator iterInState = m_inState->begin();
-			Bag<uml::State>::iterator endInState = m_inState->end();
+			Bag<uml::State>::iterator iterInState = getInState()->begin();
+			Bag<uml::State>::iterator endInState = getInState()->end();
 			while (iterInState != endInState)
 			{
 				if (inStateList->find(*iterInState) == -1)
 				{
-					m_inState->erase(*iterInState);
+					getInState()->erase(*iterInState);
 				}
 				iterInState++;
 			}
@@ -441,9 +441,9 @@ bool ObjectNodeImpl::eSet(int featureID, Any newValue)
 			endInState = inStateList->end();
 			while (iterInState != endInState)
 			{
-				if (m_inState->find(*iterInState) == -1)
+				if (getInState()->find(*iterInState) == -1)
 				{
-					m_inState->add(*iterInState);
+					getInState()->add(*iterInState);
 				}
 				iterInState++;			
 			}

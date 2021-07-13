@@ -97,7 +97,7 @@
 #include "[aPackage.name.toLower()/]/[aPackage.name.toLower().concat('Package')/].hpp"
 [/if]
 
-[if (aPackage.eAllContents()->filter(ecore::EAnnotation)->select(source = 'PackageOnly')->isEmpty())]
+[if (not aPackage.isPackageOnly())]
 //metamodel factory
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.name.concat('Factory')/].hpp"
 [/if]
@@ -130,7 +130,7 @@
 #include "[stereo._package.generateNamespacePath(true)/]/[stereo.name/].hpp"
 [/for]
 
-[if (not aPackage.ignoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
+[if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
 
 [packageName/]::[packageName/]()
 {

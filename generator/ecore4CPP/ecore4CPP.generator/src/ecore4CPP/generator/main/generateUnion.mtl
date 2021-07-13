@@ -27,7 +27,7 @@
 
 [/template]
 
-[template public generateUnionGetterCpp(aReference : EReference,aClass: EClass) ? (hasGetter() and aReference.isUnion() )]
+[template public generateUnionGetterCpp(aReference : EReference,aClass: EClass) ? (hasGetter() and aReference.isUnion() and (not aReference.doNotGenerate()))]
 [aReference.generateReferenceType()/] [aClass.name.toUpperFirst()/]Impl::[aReference.GetterName()/]() const
 {
 [if (not (aReference.upperBound = 1))]
@@ -47,42 +47,7 @@
 [aClass.getUnionsReference()->sortedBy(name).generateUnionGetterDeclaretaionBag(impl)/]
 [/template]
 
-[template public generateUnionGetterDeclaretaion(aReference : EReference, impl : EBoolean)? (hasGetter() and isUnion() )]
+[template public generateUnionGetterDeclaretaionBag(aReference : EReference, impl : EBoolean)? (hasGetter() and isUnion() and (not doNotGenerate()))]
 [aReference.generateDocumentation()/]
 virtual [aReference.generateReferenceType()/] [aReference.GetterName()/]() const [abstractSufix(impl)/];
-[/template]
-
-[template public generateUnionGetterDeclaretaionBag(aReference : EReference, impl : EBoolean)? (hasGetter() and isUnion() )]
-[aReference.generateDocumentation()/]
-virtual [aReference.generateReferenceType()/] [aReference.GetterName()/]() const [abstractSufix(impl)/];
-[/template]
-
-[template public generateEContainerOperation(aClass : EClass, impl : EBoolean)]
-virtual std::shared_ptr<ecore::EObject> eContainer() const [abstractSufix(impl)/];
-[/template]
-
-[template public generateEContainerOperationCPP(aClass: EClass)]
-std::shared_ptr<ecore::EObject> [aClass.name.toUpperFirst()/]Impl::eContainer() const
-{
-[let ref:OrderedSet(EReference) = aClass.getAllContainers()]
-[for(aReference:EReference | ref->sortedBy(name)) separator('\n')]
-[if(ref->select(eType.name = aReference.eType.name)->size()>1 )]
-	[if(ref->select(eType.name = aReference.eType.name)->asOrderedSet()->sortedBy(name)->first() = aReference)]
-		[for(multipleRef : EReference | ref->select(eType.name = aReference.eType.name)->sortedBy(name))]
-	if(auto wp = m_[multipleRef.name/].lock())
-	{
-		return wp;
-	}
-		[/for]
-	[/if]
-	[else]
-	if(auto wp = m_[aReference.name/].lock())
-	{
-		return wp;
-	}
-	[/if]
-[/for]
-[/let]
-	return nullptr;
-}
 [/template]

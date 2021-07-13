@@ -40,7 +40,7 @@
 [/if]
 [/template]
 
-[template public generateAttributeAccessorsDecl(anEAttribute : EAttribute, impl : Boolean)]
+[template public generateAttributeAccessorsDecl(anEAttribute : EAttribute, impl : Boolean) ? (not doNotGenerate())]
 [anEAttribute.generateAttributeGetterDecleration(impl)/]
 [anEAttribute.generateAttributeSetterDecleration(impl)/]
 [for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
@@ -51,7 +51,7 @@
 [/let][/if][/for]
 [/template]
 
-[template public generateAttributeProtectedMember(anEAttribute : EAttribute)]
+[template public generateAttributeProtectedMember(anEAttribute : EAttribute) ? (not doNotGenerate())]
 [anEAttribute.generateDocumentation()/] 
 [if (not(anEAttribute.upperBound = 1))]
 [if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if]mutable [anEAttribute.generateStructuralFeatureType(true)/] m_[anEAttribute.name/]; 
@@ -78,7 +78,7 @@ virtual void [anEAttribute.SetterName()/] ([anEAttribute.generateStructuralFeatu
  * Section for the Attribute cpp implementation
 */]
 
-[template public generateAttributeCpp(anEAttribute : EAttribute)]
+[template public generateAttributeCpp(anEAttribute : EAttribute) ? (not doNotGenerate())]
 /*
 Getter & Setter for attribute [anEAttribute.name/]
 */

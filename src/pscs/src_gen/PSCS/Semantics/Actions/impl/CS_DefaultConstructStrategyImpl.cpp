@@ -48,8 +48,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 
 #include "uml/Association.hpp"
@@ -723,8 +723,8 @@ Any CS_DefaultConstructStrategyImpl::eGet(int featureID, bool resolve, bool core
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Class>::iterator iter = m_generatedRealizingClasses->begin();
-			Bag<uml::Class>::iterator end = m_generatedRealizingClasses->end();
+			Bag<uml::Class>::iterator iter = getGeneratedRealizingClasses()->begin();
+			Bag<uml::Class>::iterator end = getGeneratedRealizingClasses()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -775,13 +775,13 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Class>::iterator iterGeneratedRealizingClasses = m_generatedRealizingClasses->begin();
-			Bag<uml::Class>::iterator endGeneratedRealizingClasses = m_generatedRealizingClasses->end();
+			Bag<uml::Class>::iterator iterGeneratedRealizingClasses = getGeneratedRealizingClasses()->begin();
+			Bag<uml::Class>::iterator endGeneratedRealizingClasses = getGeneratedRealizingClasses()->end();
 			while (iterGeneratedRealizingClasses != endGeneratedRealizingClasses)
 			{
 				if (generatedRealizingClassesList->find(*iterGeneratedRealizingClasses) == -1)
 				{
-					m_generatedRealizingClasses->erase(*iterGeneratedRealizingClasses);
+					getGeneratedRealizingClasses()->erase(*iterGeneratedRealizingClasses);
 				}
 				iterGeneratedRealizingClasses++;
 			}
@@ -790,9 +790,9 @@ bool CS_DefaultConstructStrategyImpl::eSet(int featureID, Any newValue)
 			endGeneratedRealizingClasses = generatedRealizingClassesList->end();
 			while (iterGeneratedRealizingClasses != endGeneratedRealizingClasses)
 			{
-				if (m_generatedRealizingClasses->find(*iterGeneratedRealizingClasses) == -1)
+				if (getGeneratedRealizingClasses()->find(*iterGeneratedRealizingClasses) == -1)
 				{
-					m_generatedRealizingClasses->add(*iterGeneratedRealizingClasses);
+					getGeneratedRealizingClasses()->add(*iterGeneratedRealizingClasses);
 				}
 				iterGeneratedRealizingClasses++;			
 			}

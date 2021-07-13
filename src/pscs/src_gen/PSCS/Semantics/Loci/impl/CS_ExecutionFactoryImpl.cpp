@@ -71,9 +71,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "uml/Class.hpp"
@@ -343,8 +343,8 @@ Any CS_ExecutionFactoryImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case PSCS::Semantics::Loci::LociPackage::CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Package>::iterator iter = m_appliedProfiles->begin();
-			Bag<uml::Package>::iterator end = m_appliedProfiles->end();
+			Bag<uml::Package>::iterator iter = getAppliedProfiles()->begin();
+			Bag<uml::Package>::iterator end = getAppliedProfiles()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -381,13 +381,13 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Package>::iterator iterAppliedProfiles = m_appliedProfiles->begin();
-			Bag<uml::Package>::iterator endAppliedProfiles = m_appliedProfiles->end();
+			Bag<uml::Package>::iterator iterAppliedProfiles = getAppliedProfiles()->begin();
+			Bag<uml::Package>::iterator endAppliedProfiles = getAppliedProfiles()->end();
 			while (iterAppliedProfiles != endAppliedProfiles)
 			{
 				if (appliedProfilesList->find(*iterAppliedProfiles) == -1)
 				{
-					m_appliedProfiles->erase(*iterAppliedProfiles);
+					getAppliedProfiles()->erase(*iterAppliedProfiles);
 				}
 				iterAppliedProfiles++;
 			}
@@ -396,9 +396,9 @@ bool CS_ExecutionFactoryImpl::eSet(int featureID, Any newValue)
 			endAppliedProfiles = appliedProfilesList->end();
 			while (iterAppliedProfiles != endAppliedProfiles)
 			{
-				if (m_appliedProfiles->find(*iterAppliedProfiles) == -1)
+				if (getAppliedProfiles()->find(*iterAppliedProfiles) == -1)
 				{
-					m_appliedProfiles->add(*iterAppliedProfiles);
+					getAppliedProfiles()->add(*iterAppliedProfiles);
 				}
 				iterAppliedProfiles++;			
 			}

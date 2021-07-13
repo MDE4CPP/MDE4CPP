@@ -520,8 +520,8 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDCOMMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Comment>::iterator iter = m_ownedComment->begin();
-			Bag<uml::Comment>::iterator end = m_ownedComment->end();
+			Bag<uml::Comment>::iterator iter = getOwnedComment()->begin();
+			Bag<uml::Comment>::iterator end = getOwnedComment()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -532,8 +532,8 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Element>::iterator iter = m_ownedElement->begin();
-			Bag<uml::Element>::iterator end = m_ownedElement->end();
+			Bag<uml::Element>::iterator iter = getOwnedElement()->begin();
+			Bag<uml::Element>::iterator end = getOwnedElement()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -576,13 +576,13 @@ bool ElementImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Comment>::iterator iterOwnedComment = m_ownedComment->begin();
-			Bag<uml::Comment>::iterator endOwnedComment = m_ownedComment->end();
+			Bag<uml::Comment>::iterator iterOwnedComment = getOwnedComment()->begin();
+			Bag<uml::Comment>::iterator endOwnedComment = getOwnedComment()->end();
 			while (iterOwnedComment != endOwnedComment)
 			{
 				if (ownedCommentList->find(*iterOwnedComment) == -1)
 				{
-					m_ownedComment->erase(*iterOwnedComment);
+					getOwnedComment()->erase(*iterOwnedComment);
 				}
 				iterOwnedComment++;
 			}
@@ -591,9 +591,9 @@ bool ElementImpl::eSet(int featureID, Any newValue)
 			endOwnedComment = ownedCommentList->end();
 			while (iterOwnedComment != endOwnedComment)
 			{
-				if (m_ownedComment->find(*iterOwnedComment) == -1)
+				if (getOwnedComment()->find(*iterOwnedComment) == -1)
 				{
-					m_ownedComment->add(*iterOwnedComment);
+					getOwnedComment()->add(*iterOwnedComment);
 				}
 				iterOwnedComment++;			
 			}

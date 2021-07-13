@@ -31,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 
@@ -351,8 +351,8 @@ Any NavigationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case ocl::Expressions::ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<ocl::Expressions::OclExpression>::iterator iter = m_qualifier->begin();
-			Bag<ocl::Expressions::OclExpression>::iterator end = m_qualifier->end();
+			Bag<ocl::Expressions::OclExpression>::iterator iter = getQualifier()->begin();
+			Bag<ocl::Expressions::OclExpression>::iterator end = getQualifier()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -399,13 +399,13 @@ bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<ocl::Expressions::OclExpression>::iterator iterQualifier = m_qualifier->begin();
-			Bag<ocl::Expressions::OclExpression>::iterator endQualifier = m_qualifier->end();
+			Bag<ocl::Expressions::OclExpression>::iterator iterQualifier = getQualifier()->begin();
+			Bag<ocl::Expressions::OclExpression>::iterator endQualifier = getQualifier()->end();
 			while (iterQualifier != endQualifier)
 			{
 				if (qualifierList->find(*iterQualifier) == -1)
 				{
-					m_qualifier->erase(*iterQualifier);
+					getQualifier()->erase(*iterQualifier);
 				}
 				iterQualifier++;
 			}
@@ -414,9 +414,9 @@ bool NavigationCallExpImpl::eSet(int featureID, Any newValue)
 			endQualifier = qualifierList->end();
 			while (iterQualifier != endQualifier)
 			{
-				if (m_qualifier->find(*iterQualifier) == -1)
+				if (getQualifier()->find(*iterQualifier) == -1)
 				{
-					m_qualifier->add(*iterQualifier);
+					getQualifier()->add(*iterQualifier);
 				}
 				iterQualifier++;			
 			}

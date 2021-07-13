@@ -242,8 +242,8 @@ Any LoopNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case fUML::Semantics::Actions::ActionsPackage::LOOPNODEACTIVATION_ATTRIBUTE_BODYOUTPUTLISTS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<fUML::Semantics::Actions::Values>::iterator iter = m_bodyOutputLists->begin();
-			Bag<fUML::Semantics::Actions::Values>::iterator end = m_bodyOutputLists->end();
+			Bag<fUML::Semantics::Actions::Values>::iterator iter = getBodyOutputLists()->begin();
+			Bag<fUML::Semantics::Actions::Values>::iterator end = getBodyOutputLists()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -280,13 +280,13 @@ bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<fUML::Semantics::Actions::Values>::iterator iterBodyOutputLists = m_bodyOutputLists->begin();
-			Bag<fUML::Semantics::Actions::Values>::iterator endBodyOutputLists = m_bodyOutputLists->end();
+			Bag<fUML::Semantics::Actions::Values>::iterator iterBodyOutputLists = getBodyOutputLists()->begin();
+			Bag<fUML::Semantics::Actions::Values>::iterator endBodyOutputLists = getBodyOutputLists()->end();
 			while (iterBodyOutputLists != endBodyOutputLists)
 			{
 				if (bodyOutputListsList->find(*iterBodyOutputLists) == -1)
 				{
-					m_bodyOutputLists->erase(*iterBodyOutputLists);
+					getBodyOutputLists()->erase(*iterBodyOutputLists);
 				}
 				iterBodyOutputLists++;
 			}
@@ -295,9 +295,9 @@ bool LoopNodeActivationImpl::eSet(int featureID, Any newValue)
 			endBodyOutputLists = bodyOutputListsList->end();
 			while (iterBodyOutputLists != endBodyOutputLists)
 			{
-				if (m_bodyOutputLists->find(*iterBodyOutputLists) == -1)
+				if (getBodyOutputLists()->find(*iterBodyOutputLists) == -1)
 				{
-					m_bodyOutputLists->add(*iterBodyOutputLists);
+					getBodyOutputLists()->add(*iterBodyOutputLists);
 				}
 				iterBodyOutputLists++;			
 			}

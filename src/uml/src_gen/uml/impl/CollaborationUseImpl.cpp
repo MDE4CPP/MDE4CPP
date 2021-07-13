@@ -276,8 +276,8 @@ Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_ROLEBINDING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::Dependency>::iterator iter = m_roleBinding->begin();
-			Bag<uml::Dependency>::iterator end = m_roleBinding->end();
+			Bag<uml::Dependency>::iterator iter = getRoleBinding()->begin();
+			Bag<uml::Dependency>::iterator end = getRoleBinding()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -318,13 +318,13 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::Dependency>::iterator iterRoleBinding = m_roleBinding->begin();
-			Bag<uml::Dependency>::iterator endRoleBinding = m_roleBinding->end();
+			Bag<uml::Dependency>::iterator iterRoleBinding = getRoleBinding()->begin();
+			Bag<uml::Dependency>::iterator endRoleBinding = getRoleBinding()->end();
 			while (iterRoleBinding != endRoleBinding)
 			{
 				if (roleBindingList->find(*iterRoleBinding) == -1)
 				{
-					m_roleBinding->erase(*iterRoleBinding);
+					getRoleBinding()->erase(*iterRoleBinding);
 				}
 				iterRoleBinding++;
 			}
@@ -333,9 +333,9 @@ bool CollaborationUseImpl::eSet(int featureID, Any newValue)
 			endRoleBinding = roleBindingList->end();
 			while (iterRoleBinding != endRoleBinding)
 			{
-				if (m_roleBinding->find(*iterRoleBinding) == -1)
+				if (getRoleBinding()->find(*iterRoleBinding) == -1)
 				{
-					m_roleBinding->add(*iterRoleBinding);
+					getRoleBinding()->add(*iterRoleBinding);
 				}
 				iterRoleBinding++;			
 			}

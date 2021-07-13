@@ -274,8 +274,8 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ValueSpecification>::iterator iter = m_value->begin();
-			Bag<uml::ValueSpecification>::iterator end = m_value->end();
+			Bag<uml::ValueSpecification>::iterator iter = getValue()->begin();
+			Bag<uml::ValueSpecification>::iterator end = getValue()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -332,13 +332,13 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ValueSpecification>::iterator iterValue = m_value->begin();
-			Bag<uml::ValueSpecification>::iterator endValue = m_value->end();
+			Bag<uml::ValueSpecification>::iterator iterValue = getValue()->begin();
+			Bag<uml::ValueSpecification>::iterator endValue = getValue()->end();
 			while (iterValue != endValue)
 			{
 				if (valueList->find(*iterValue) == -1)
 				{
-					m_value->erase(*iterValue);
+					getValue()->erase(*iterValue);
 				}
 				iterValue++;
 			}
@@ -347,9 +347,9 @@ bool SlotImpl::eSet(int featureID, Any newValue)
 			endValue = valueList->end();
 			while (iterValue != endValue)
 			{
-				if (m_value->find(*iterValue) == -1)
+				if (getValue()->find(*iterValue) == -1)
 				{
-					m_value->add(*iterValue);
+					getValue()->add(*iterValue);
 				}
 				iterValue++;			
 			}

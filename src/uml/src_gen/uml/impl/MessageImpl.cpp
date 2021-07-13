@@ -417,8 +417,8 @@ Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_ARGUMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<uml::ValueSpecification>::iterator iter = m_argument->begin();
-			Bag<uml::ValueSpecification>::iterator end = m_argument->end();
+			Bag<uml::ValueSpecification>::iterator iter = getArgument()->begin();
+			Bag<uml::ValueSpecification>::iterator end = getArgument()->end();
 			while (iter != end)
 			{
 				tempList->add(*iter);
@@ -483,13 +483,13 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 				iter++;
 			}
 			
-			Bag<uml::ValueSpecification>::iterator iterArgument = m_argument->begin();
-			Bag<uml::ValueSpecification>::iterator endArgument = m_argument->end();
+			Bag<uml::ValueSpecification>::iterator iterArgument = getArgument()->begin();
+			Bag<uml::ValueSpecification>::iterator endArgument = getArgument()->end();
 			while (iterArgument != endArgument)
 			{
 				if (argumentList->find(*iterArgument) == -1)
 				{
-					m_argument->erase(*iterArgument);
+					getArgument()->erase(*iterArgument);
 				}
 				iterArgument++;
 			}
@@ -498,9 +498,9 @@ bool MessageImpl::eSet(int featureID, Any newValue)
 			endArgument = argumentList->end();
 			while (iterArgument != endArgument)
 			{
-				if (m_argument->find(*iterArgument) == -1)
+				if (getArgument()->find(*iterArgument) == -1)
 				{
-					m_argument->add(*iterArgument);
+					getArgument()->add(*iterArgument);
 				}
 				iterArgument++;			
 			}
