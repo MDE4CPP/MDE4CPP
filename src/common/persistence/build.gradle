@@ -25,8 +25,10 @@
 
 plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "$gradle_mde4cpp_compile_plugin_version"
-	id "de.undercouch.download" version "4.1.1"
+	id "de.undercouch.download" version "4.1.2"
 }
+
+import org.gradle.internal.os.OperatingSystem;
 
 description '3rdparty: xerces-c'
 
@@ -35,20 +37,31 @@ def xercesVersion = "3.2.3"
 task deliverPersistenceInterface(type: Copy) {
 	group 'Persistence'
 	description 'deliver persistence interface header to %MDE4CPP_HOME%/application/include/persistence/interfaces'
-	from ("./interfaces") {
-		include "*.hpp"
+	
+	from ('.') {
+		include "interfaces/*.hpp"
+		include "xml/XMLPersistence.hpp"
+		include "base/Persistence.hpp"
 	}
-	exclude "build", ".gradle"
-	into System.getenv('MDE4CPP_HOME')+"/application/include/persistence/interfaces"
-	inputs.dir file("./interfaces")
-	outputs.dir file(System.getenv('MDE4CPP_HOME')+"/application/include/persistence")
+	
+	exclude '**/*/.gradle'
+	
+	into file([rootDir,'application','include',project.name].join(File.separator))
+	
+	inputs.dir file('interfaces')
+	inputs.dir file('xml')
+	inputs.dir file('base')
+
+	outputs.files(fileTree([rootDir,'application','include',project.name].join(File.separator)))
+	outputs.dir file([rootDir,'application','include',project.name].join(File.separator))
 }
 
 task downloadFile(type: Download) {
 	description 'download xerces'
-    src "http://www-eu.apache.org/dist//xerces/c/3/sources/xerces-c-${xercesVersion}.zip"
+    src "https://www-eu.apache.org/dist//xerces/c/3/sources/xerces-c-${xercesVersion}.zip"
     dest new File(file("./xerces/xerces-c-${xercesVersion}.zip").absolutePath)
     onlyIfModified true
+    quiet true
 }
 
 task downloadAndUnzipFile(dependsOn: downloadFile, type: Copy) {
@@ -60,9 +73,12 @@ task downloadAndUnzipFile(dependsOn: downloadFile, type: Copy) {
 task compileXerces(dependsOn: downloadAndUnzipFile) {
 	description 'download, unzip and compile xerces'
 
-	def folder = new File(file("./xerces/xerces-c-${xercesVersion}/.cmake").absolutePath)
-	if( !folder.exists()) {
-		folder.mkdirs()
+	doFirst {
+		def folder = new File(file("./xerces/xerces-c-${xercesVersion}/.cmake").absolutePath)
+	
+		if( !folder.exists()) {
+			folder.mkdirs()
+		}
 	}
 
 	doLast {
@@ -104,10 +120,24 @@ task compileXerces(dependsOn: downloadAndUnzipFile) {
 	inputs.files(fileTree(".${File.separator}xerces${File.separator}xerces-c-${xercesVersion}") {
         exclude '.cmake/**'
     })
-	if(!file('.' + File.separator + '.cmake' + File.separator).exists()) {
-		outputs.upToDateWhen { false }
+    
+	//if(!file('.' + File.separator + '.cmake' + File.separator).exists()) {
+	//	outputs.upToDateWhen { false }
+	//}
+	
+	if(OperatingSystem.current().isWindows()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libxerces-c' + '.dll'].join(File.separator))}
 	}
-	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'libxerces-c.dll')
+	else if(OperatingSystem.current().isLinux()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libxerces-c' + '.so'].join(File.separator))}
+	}
+	else if(OperatingSystem.current().isMacOsX()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libxerces-c' + '.dylib'].join(File.separator))}
+	}
+	else {
+	    //not supported os
+	}
+	
 	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'xercesc')
 }
 
@@ -120,12 +150,26 @@ task compilePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	inputs.files(fileTree('.') {
         exclude '.cmake/**'
     })
+    
 	if(!file('.' + File.separator + '.cmake' + File.separator).exists()) {
 		outputs.upToDateWhen { false }
 	}
-	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'persistence.dll')
-	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'persistenced.dll')
-	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'persistence')
+	
+	if(OperatingSystem.current().isWindows()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin',project.name +       '.dll'].join(File.separator))}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))  {outputs.file file([rootDir,'application','bin',project.name + 'd' + '.dll'].join(File.separator))}
+	}
+	else if(OperatingSystem.current().isLinux()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin',project.name +       '.so'].join(File.separator))}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))  {outputs.file file([System.getenv('MDE4CPP_HOME'),'application','bin',project.name + 'd' + '.so'].join(File.separator))}
+	}
+	else if(OperatingSystem.current().isMacOsX()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin',project.name +       '.dylib'].join(File.separator))}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))  {outputs.file file([rootDir,'application','bin',project.name + 'd' + '.dylib'].join(File.separator))}
+	}
+	else {
+	    //not supported os
+	}
 
 	// dependency to model 'ecore'
 	def ecore = getRootProject().getTasksByName('compileEcore', true)
@@ -151,20 +195,39 @@ task compilePersistence(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	def pluginFramwork = getRootProject().getTasksByName('compilePluginFramework', true)
 	dependsOn pluginFramwork
 	inputs.files(pluginFramwork.outputs)
+
 }
 
 task clean {
-	doFirst {
-		def cmakeFolder = file('.' + File.separator + '.cmake' + File.separator)
-		if(cmakeFolder.exists()) {
-			delete cmakeFolder.absolutePath
-			println "deleting folder " + cmakeFolder.absolutePath
+	// Extension of gradle built-in task:clean
+	doLast {
+		def xerces_dir = file('xerces')
+		if(xerces_dir.exists()){
+			delete xerces_dir.absolutePath
+			println "deleting: " + xerces_dir.absolutePath
 		}
-
-		cmakeFolder = file(".${File.separator}xerces${File.separator}xerces-c-${xercesVersion}${File.separator}.cmake${File.separator}")
-		if(cmakeFolder.exists()) {
-			delete cmakeFolder.absolutePath
-			println "deleting folder " + cmakeFolder.absolutePath
-		}
+		
+		compileXerces.outputs.files.each{
+			if(it.exists()){
+				delete it.absolutePath
+			    println "deleting: " + it
+			}
+  		}
+  		
+		compilePersistence.outputs.files.each{
+			if(it.exists()){
+				delete it.absolutePath
+			    println "deleting: " + it
+			}
+  		}
+  		
+  		deliverPersistenceInterface.outputs.files.each{
+			if(it.exists()){
+				delete it.absolutePath
+			    println "deleting: " + it
+			}
+  		}
 	}
 }
+
+//EOF

@@ -27,43 +27,83 @@ plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "$gradle_mde4cpp_compile_plugin_version"
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description "Build task for project: pluginFramework"
 
 task deliverPluginFrameworkInterface(type: Copy) {
 	group 'pluginFramework'
 	description 'deliver pluginFramework interface header to %MDE4CPP_HOME%/application/include/pluginFramework'
-	from ('.' + File.separator + 'src' + File.separator + 'pluginFramework') {
+	
+	from ('src/pluginFramework') {
 		include '*.hpp'
+		exclude '**/*/.gradle', '**/*/.cmake', '**/*/impl', 'PluginFramework.cpp'
 	}
-	exclude 'build', '.gradle', 'impl', 'PluginFramework.hpp', '.cmake'
-	into System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework'
-	inputs.files file('.' + File.separator + 'src' + File.separator + 'pluginFramework')
-	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
+	
+	into file([rootDir,'application','include',project.name].join(File.separator))
+	
+	inputs.files(fileTree(['src',project.name].join(File.separator)){exclude '**/.cmake/'})
+	
+	//redundant dir - Copy task adds 'from' directory to the outputs
+	outputs.files(fileTree([rootDir,'application','include',project.name].join(File.separator)))
+	outputs.dir([rootDir,'application','include',project.name].join(File.separator))
 }
 
 task compilePluginFramework(type: tui.sse.mde4cpp.MDE4CPPCompile) {
 	group "pluginFramework"
 	description "compile pluginFramework"
-
-	projectFolder = file('.' + File.separator + 'src' + File.separator + 'pluginFramework')
+	
+	projectFolder = file('src/pluginFramework')
 	
 	inputs.files(fileTree('.') {
         exclude 'src/pluginFramework/.cmake/**'
-    })	
-	if(!file('.' + File.separator + 'src' + File.separator + 'pluginFramework' + File.separator + '.cmake' + File.separator).exists()) {
-		outputs.upToDateWhen { false }
+    })
+   
+   	if(!file(['src',project.name,'.cmake'].join(File.separator)).exists()){
+   	    outputs.upToDateWhen { false }
+   	}
+    
+	if(OperatingSystem.current().isWindows()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin',project.name +       '.dll'].join(File.separator))}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))  {outputs.file file([rootDir,'application','bin',project.name + 'd' + '.dll'].join(File.separator))}
 	}
-	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'pluginFramework.dll')
-	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'pluginFrameworkd.dll')
-	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'pluginFramework')
+	else if(OperatingSystem.current().isLinux()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin',project.name +       '.so'].join(File.separator))}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))  {outputs.file file([rootDir,'application','bin',project.name + 'd' + '.so'].join(File.separator))}
+	}
+	else if(OperatingSystem.current().isMacOsX()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin',project.name +       '.dylib'].join(File.separator))}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))  {outputs.file file([rootDir,'application','bin',project.name + 'd' + '.dylib'].join(File.separator))}
+	}
+	else {
+	    //not supported os
+	}
 }
 
 task clean {
-	doFirst {
-		def cmakeFolder = file('.' + File.separator + 'src' + File.separator + 'pluginFramework' + File.separator + '.cmake/')
-		if(cmakeFolder.exists()) {
-			delete cmakeFolder.absolutePath
-			println "deleting folder " + cmakeFolder.absolutePath
+	description 'Extension of gradle built-in task:clean'
+	
+	doLast {
+		def dot_cmake = file('src/pluginFramework/.cmake')
+		if(dot_cmake.exists()){
+			delete dot_cmake.absolutePath
+			println "deleting: " + dot_cmake.absolutePath
 		}
+		
+		compilePluginFramework.outputs.files.each{
+			if(it.exists()){
+				delete it.absolutePath
+			    println "deleting: " + it
+			}
+  		}
+  		
+  		deliverPluginFrameworkInterface.outputs.files.each{
+			if(it.exists()){
+				delete it.absolutePath
+			    println "deleting: " + it
+			}
+  		}
 	}
 }
+
+//EOF

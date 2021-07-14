@@ -35,39 +35,38 @@ description 'MDE4CPP root project'
 project.ext.gradle_mde4cpp_compile_plugin_version  = '0.6.0-rc1'
 project.ext.gradle_mde4cpp_generate_plugin_version = '0.6.0-rc1'
 
-task buildAll() {
-	group 'MDE4CPP'
-	description 'build generators and all models'
-
-	dependsOn 'generator:createAllGenerators'
-	dependsOn 'src:buildEcoreModels'
-	dependsOn 'src:ocl:oclParser:buildOclParser'
-	dependsOn 'src:buildReflectionModels'
-	dependsOn 'src:buildUMLProfiles'
-	dependsOn 'src:common:pluginFramework:compilePluginFramework'
-	dependsOn 'src:common:persistence:compilePersistence'
-	dependsOn 'src:deliverBasicInterfaces'
-}
-
-task compileAll() {
-	group 'MDE4CPP'
-	description 'compile all models without generating the models'
-
-	dependsOn 'src:compileEcoreModels'
-	dependsOn 'src:compileReflectionModels'
-	dependsOn 'src:compileUMLProfiles'
-	dependsOn 'src:common:pluginFramework:compilePluginFramework'
-	dependsOn 'src:common:persistence:compilePersistence'
-	dependsOn 'src:deliverBasicInterfaces'
-}
-
 task generateAll() {
 	group 'MDE4CPP'
-	description 'compile all models without generating the models'
+	description 'Generate all models without compilation of generated source code'
 
 	dependsOn 'src:generateEcoreModels'
 	dependsOn 'src:generateReflectionModels'
 	dependsOn 'src:generateUMLProfiles'
+}
+
+task compileAll() {
+	group 'MDE4CPP'
+	description 'Compile all generated source code of models without generating the models'
+
+	dependsOn 'src:compileEcoreModels'
+	dependsOn 'src:compileReflectionModels'
+	dependsOn 'src:compileUMLProfiles'
+	
+	dependsOn 'src:common:pluginFramework:compilePluginFramework'
+	dependsOn 'src:common:persistence:compilePersistence'
+	dependsOn 'src:deliverBasicInterfaces'
+}
+
+task buildAll() {
+	group 'MDE4CPP'
+	description 'build generators and all models'
+
+	dependsOn tasks.getByPath('generator:createAllGenerators')
+	dependsOn tasks.getByPath('generateAll')
+	dependsOn tasks.getByPath('compileAll')
+	
+	tasks.getByPath('generateAll').mustRunAfter tasks.getByPath('generator:createAllGenerators')
+	tasks.getByPath('compileAll').mustRunAfter tasks.getByPath('generateAll')
 }
 
 task installationInstruction() {
@@ -330,3 +329,5 @@ task checkEnvironment(){
 		checkCompilerIncludes();
 	}
 }
+
+//EOF

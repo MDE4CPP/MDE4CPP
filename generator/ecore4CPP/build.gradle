@@ -1,33 +1,40 @@
-description 'ecore4CPP project'
+/*
+ * MDE4CPP - Model Driven Engineering for C++
+ *
+ * Copyright (c) TU Ilmenau, Systems and Software Engineering Group
+ * All rights reserved.
+ *
+ * MIT License
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software
+ * without restriction, including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+ * to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+ * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
 
-task createEcore4CPP(dependsOn: ['checkDependencies', 'ecore4CPP.generator:compileJava', 'executeCompiler', 'ecore4CPP.generator:deliverEcore4CPP']) {
-	group 'Generators'
-	description 'create executable jar for ecore4CPP generator'
-
-	inputs.files file("ecore4CPP.generator/build/classes/java/main"), file("ecore4CPP.generator/src")
-	outputs.dir file("ecore4CPP.generator/build")
-}
-
-task executeCompiler(type: JavaExec, dependsOn: ['checkDependencies', 'ecore4CPP.generator.compiler:jar']) {
-	description 'generate emtl files for Ecore4CPP generator'	
-	mainClass = "-jar"
-	args "ecore4CPP.generator.compiler/build/libs/ecore4CPP.generator.compiler.jar", "ecore4CPP.generator/src", "ecore4CPP.generator/build/classes/java/main"
-
-	inputs.files file("ecore4CPP.generator.compiler/build/libs/ecore4CPP.generator.compiler.jar"), file("ecore4CPP.generator/src")
-	outputs.dir file("ecore4CPP.generator/build/classes/java/main")
-}
-tasks.getByPath('ecore4CPP.generator:jar').mustRunAfter executeCompiler
-executeCompiler.mustRunAfter tasks.getByPath('ecore4CPP.generator:compileJava')
+description 'ecore4CPP - ecore to C++ generator'
 
 task checkDependencies {
-	if (System.getenv('MDE4CPP_HOME') == null) {
+	if (System.env.MDE4CPP_HOME == null) {
 		throw new GradleException('System environment variable "MDE4CPP_HOME" is not defined')
 	}
-	if (System.getenv('MDE4CPP_ECLIPSE_HOME') == null) {
+	if (System.env.MDE4CPP_ECLIPSE_HOME == null) {
 		throw new GradleException('System environment variable "MDE4CPP_ECLIPSE_HOME" is not defined')
 	}
 	
-	[	'com.google.guava_*.jar',
+	[	
+		'com.google.guava_*.jar',
 		'javax.inject_*.jar',
 		'lpg.runtime.java_*.jar',
 		'org.eclipse.acceleo.common_*.jar',
@@ -49,12 +56,47 @@ task checkDependencies {
 		'org.eclipse.uml2.common_*.jar',
 		'org.eclipse.uml2.uml_*.jar',
 		'org.eclipse.uml2.types_*.jar'
+		
 	].each { jarName ->
-		FileTree tree = fileTree(dir: System.getenv('MDE4CPP_ECLIPSE_HOME') + '/plugins', include: "${jarName}")
+		FileTree tree = fileTree(dir: System.env.MDE4CPP_ECLIPSE_HOME + '/plugins', include: "${jarName}")
 		if(tree.isEmpty()) {
-			throw new GradleException(System.getenv('MDE4CPP_ECLIPSE_HOME') + "/plugins/${jarName} is not found")
+			throw new GradleException(System.env.MDE4CPP_ECLIPSE_HOME + "/plugins/${jarName} is not found")
 		}
 	}
-	
 }
-executeCompiler.mustRunAfter(checkDependencies)
+
+task executeGeneratorCompiler_ecore4CPP(type: JavaExec) {
+	description 'Generate *.emtl files for ecore4CPP generator'
+	
+	mainClass = "-jar"
+	args "ecore4CPP.generator.compiler/build/libs/ecore4CPP.generator.compiler.jar", "ecore4CPP.generator/src", "ecore4CPP.generator/build/classes/java/main"
+
+	inputs.files file("ecore4CPP.generator.compiler/build/libs/ecore4CPP.generator.compiler.jar"), file("ecore4CPP.generator/src")
+	outputs.dir file("ecore4CPP.generator/build/classes/java/main")
+	
+	dependsOn tasks.getByPath('checkDependencies')
+	dependsOn tasks.getByPath('ecore4CPP.generator.compiler:jar')
+	
+	tasks.getByPath('ecore4CPP.generator.compiler:jar').mustRunAfter tasks.getByPath('checkDependencies')
+}
+
+task buildGenerator_ecore4CPP(){
+	description 'Build ecore4CPP generator'
+	group 'Generators'
+
+	inputs.files file("ecore4CPP.generator/build/classes/java/main"), file("ecore4CPP.generator/src")
+	outputs.dir file("ecore4CPP.generator/build")
+	
+	dependsOn tasks.getByPath('checkDependencies')
+	dependsOn tasks.getByPath('ecore4CPP.generator.compiler:jar')
+	dependsOn tasks.getByPath('executeGeneratorCompiler_ecore4CPP')
+	dependsOn tasks.getByPath('ecore4CPP.generator:jar')
+	dependsOn tasks.getByPath('ecore4CPP.generator:deliverEcore4CPP')
+	
+	tasks.getByPath('ecore4CPP.generator.compiler:jar').mustRunAfter tasks.getByPath('checkDependencies')
+	tasks.getByPath('executeGeneratorCompiler_ecore4CPP').mustRunAfter tasks.getByPath('ecore4CPP.generator.compiler:jar')
+	tasks.getByPath('ecore4CPP.generator:jar').mustRunAfter tasks.getByPath('executeGeneratorCompiler_ecore4CPP')
+	tasks.getByPath('ecore4CPP.generator:deliverEcore4CPP').mustRunAfter tasks.getByPath('ecore4CPP.generator:jar')
+}
+
+//EOF
