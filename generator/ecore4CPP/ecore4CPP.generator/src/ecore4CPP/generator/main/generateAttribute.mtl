@@ -46,7 +46,7 @@
 [for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
 [if (redefinedElement.oclIsKindOf(EAttribute))]
 [let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
-[if (redefinedEAttribute.hasSetter())]
+[if (redefinedEAttribute.hasSetter() and not (anEAttribute.eContainingClass = redefinedEAttribute.eContainingClass))]
 /*Additional Setter for '[redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]' redefined by attribute '[anEAttribute.name/]'*/
 [redefinedEAttribute.generateAttributeSetterDecleration(impl)/]
 [/if][/let][/if][/for]
@@ -90,7 +90,7 @@ Getter & Setter for attribute [anEAttribute.name/]
 [for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
 [if (redefinedElement.oclIsKindOf(EAttribute))]
 [let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
-[if(redefinedEAttribute.hasSetter())]
+[if(redefinedEAttribute.hasSetter() and not (anEAttribute.eContainingClass = redefinedEAttribute.eContainingClass))]
 /*Additional Setter for redefined attribute '[redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]'*/
 [redefinedEAttribute.generateRedefinedAttributeSetterImplementationCpp(anEAttribute)/]
 [/if]
@@ -139,12 +139,10 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.Set
 [let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
 [if(redefinedEAttribute.hasSetter())]
 //additional setter call for redefined attribute [redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]
-[redefinedEAttribute.eContainingClass.transformType()/]Impl::set[redefinedEAttribute.name.toUpperFirst()/](_[anEAttribute.name/]);
+[if(redefinedEAttribute.eContainingClass = anEAttribute.eContainingClass)]this->[else][redefinedEAttribute.eContainingClass.transformType()/]Impl::[/if]set[redefinedEAttribute.name.toUpperFirst()/](_[anEAttribute.name/]);
 [else]
 [if (redefinedEAttribute.upperBound = 1)]
-m_[redefinedEAttribute.name/] = _[anEAttribute.name/];
-[elseif(redefinedEAttribute.hasGetter())]
-[redefinedEAttribute.eContainingClass.transformType()/]Impl::get[redefinedEAttribute.name.toUpperFirst()/]()->add(_[anEAttribute.name/]);
+m_[redefinedEAttribute.name/] = this->[if(anEAttribute.hasGetter())][anEAttribute.GetterName()/]()[else]m_[anEAttribute.name/][/if];
 [/if]
 [comment recursive call to set possibly redefined attributes of redefinedEAttribute --> would normally be handled by calling the setter of redefinedEAttribute, but we do not have a setter here /]
 [redefinedEAttribute.generateRedefinedAttributesSet()/]

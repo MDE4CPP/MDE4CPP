@@ -28,7 +28,7 @@
 [for (redefinedElement : EObject | anEReference.getAllRedefinedElements())]
 [if (redefinedElement.oclIsKindOf(EReference))]
 [let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
-[if(redefinedEReference.hasSetter())]
+[if(redefinedEReference.hasSetter() and not (anEReference.eContainingClass = redefinedEReference.eContainingClass))]
 /*Additional Setter for '[redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]' redefined by reference '[anEReference.name/]'*/
 [redefinedEReference.generateReferenceSetterDeclaretaion(impl)/]
 [/if][/let][/if][/for]
@@ -107,7 +107,7 @@ Getter & Setter for reference [anEReference.name/]
 [if (anEReference.upperBound = 1)]
 [for (redefinedElement : EObject | anEReference.getAllRedefinedElements())][if (redefinedElement.oclIsKindOf(EReference))]
 [let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
-[if(redefinedEReference.hasSetter())]
+[if(redefinedEReference.hasSetter() and not (anEReference.eContainingClass = redefinedEReference.eContainingClass))]
 /*Additional Setter for redefined reference '[redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]'*/
 [redefinedEReference.generateRedefinedReferenceSetterCpp(anEReference)/]
 [/if][/let][/if][/for]
@@ -155,17 +155,14 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.Set
 [let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
 [if(redefinedEReference.hasSetter())]
 //additional setter call for redefined reference [redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]
-[redefinedEReference.eContainingClass.transformType()/]Impl::set[redefinedEReference.name.toUpperFirst()/](_[anEReference.name/]);
+[if(redefinedEReference.eContainingClass = anEReference.eContainingClass)]this->[else][redefinedEReference.eContainingClass.transformType()/]Impl::[/if]set[redefinedEReference.name.toUpperFirst()/](_[anEReference.name/][if(anEReference.isBackReference())].lock()[/if]);
 [else]
 [if (redefinedEReference.upperBound = 1)]
-m_[redefinedEReference.name/] = _[anEReference.name/];
+m_[redefinedEReference.name/] = this->[if(anEReference.hasGetter())][anEReference.GetterName()/]()[else]m_[anEReference.name/][/if][if(anEReference.isBackReference())].lock()[/if];
 [/if]
 [comment recursive call to set possibly redefined references of redefinedEReference --> would normally be handled by calling the setter of redefinedEReference, but we do not have a setter here /]
 [redefinedEReference.generateRedefinedReferencesSet()/]
-[/if]
-[/let]
-[/if]
-[/for]
+[/if][/let][/if][/for]
 [/template]
 
 [template private generateRedefinedReferenceSetterCpp(redefinedEReference : EReference, anEReference : EReference) ? (anEReference.hasSetter() and redefinedEReference.hasSetter())]
