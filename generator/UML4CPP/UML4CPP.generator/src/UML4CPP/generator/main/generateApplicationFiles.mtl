@@ -137,7 +137,7 @@ int main ()
 #include "pluginFramework/PluginFramework.hpp"
 #include "pluginFramework/UMLExecutionModelPlugin.hpp"
 
-using namespace [aPackage.getPackageName()/];
+using namespace [aPackage.generateNamespace(false)/];
 
 int main()
 {	

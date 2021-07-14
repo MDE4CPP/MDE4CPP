@@ -120,13 +120,16 @@
 	[/if]
 [/for]
 
-//Subpackages
-[for (subPackage : Package| aPackage.ownedElement->filter(Package)->sortedBy(name)) separator ('\n')]
+[if (not aPackage.isRootPackage())]
+//Superpackage
+#include "[aPackage.getSuperPackage().generateNamespacePath(false)/]/[aPackage.getSuperPackage().name/]Package.hpp"
+[/if]
+
+[for (subPackage : Package| aPackage.ownedElement->filter(Package)->sortedBy(name)) before('//Subpackages\n')]
 #include "[subPackage.generateNamespacePath(false)/]/impl/[subPackage.name.concat('PackageImpl')/].hpp"
 [/for]
 
-//Stereotypes
-[for (stereo : Stereotype | aPackage.getAllAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName()))]
+[for (stereo : Stereotype | aPackage.getAllAppliedStereotypes()->asOrderedSet()->sortedBy(myQualifiedName())) before('//Stereotypes\n')]
 #include "[stereo._package.generateNamespacePath(true)/]/[stereo.name/].hpp"
 [/for]
 
@@ -336,8 +339,11 @@ void [packageName/]::initializePackageContents(std::shared_ptr<uml::Package> [aP
 	isInitialized = true;
 
 	// Initialize package
-	setName(eNAME);
-	setURI(eNS_URI);
+	this->setName(eNAME);
+	this->setURI(eNS_URI);
+	[if (not aPackage.isRootPackage())]
+	this->setNestingPackage([aPackage.getSuperPackage().generateNamespace(false)/]::[aPackage.getSuperPackage().name/]Package::eInstance());
+	[/if]
 
 	initializePackageActivities();
 	initializePackageClasses();
