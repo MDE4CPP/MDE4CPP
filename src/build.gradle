@@ -89,6 +89,8 @@ task compileReflectionModels() {
 	dependsOn rootProject.tasks.getByPath(':src:common:umlReflection:src_gen:compileUmlReflection')
 	
 	dependsOn rootProject.tasks.getByPath(':src:ocl:oclParser:compileOclParser')
+	rootProject.tasks.getByPath(':src:common:umlReflection:src_gen:compileUmlReflection')
+		.mustRunAfter rootProject.tasks.getByPath(':src:ocl:oclParser:compileOclParser')
 }
 
 task compileUMLProfiles() {
