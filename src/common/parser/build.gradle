@@ -1,3 +1,28 @@
+/*
+ * MDE4CPP - Model Driven Engineering for C++
+ *
+ * Copyright (c) TU Ilmenau, Systems and Software Engineering Group
+ * All rights reserved.
+ *
+ * MIT License
+ *
+ * Permission is hereby granted, free of charge, to any person obtaining a copy of this
+ * software and associated documentation files (the "Software"), to deal in the Software
+ * without restriction, including without limitation the rights to use, copy, modify, merge,
+ * publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
+ * to whom the Software is furnished to do so, subject to the following conditions:
+ *
+ * The above copyright notice and this permission notice shall be included in all copies or
+ * substantial portions of the Software.
+ *
+ * THE SOFTWARE IS PROVIDED *AS IS*, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
+ * INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
+ * PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
+ * FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+ * OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
+ * DEALINGS IN THE SOFTWARE.
+ */
+
 import org.gradle.internal.os.OperatingSystem;
 
 plugins {
@@ -5,32 +30,38 @@ plugins {
 	id "de.undercouch.download" version "4.1.1"
 }
 
-description 'Parser library'
+description 'Grammar Parser (ANTLR)'
 
 def antlr4Version = "4.9.2"
 
 task downloadAntlr4(type: Download) {
 	description 'download antlr4'
+	group 'Grammar Parser (ANTLR)'
+	
     src "https://www.antlr.org/download/antlr4-cpp-runtime-${antlr4Version}-source.zip"
     dest new File(file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source.zip").absolutePath)
+    quiet false
     onlyIfModified true
 }
 
-task downloadAndUnzipAntlr4(dependsOn: downloadAntlr4, type: Copy) {
+task unzipAntlr4(dependsOn: downloadAntlr4, type: Copy) {
 	description 'download and unzip antlr4'
+	group 'Grammar Parser (ANTLR)'
+	
 	from zipTree("antlr4/antlr4-cpp-runtime-${antlr4Version}-source.zip")
 	into file("antlr4/antlr4-cpp-runtime-${antlr4Version}-source").absolutePath
 }
 
-task compileAntlr4(dependsOn: downloadAndUnzipAntlr4) {
-	group "Antlr4"
+task compileAntlr4(dependsOn: unzipAntlr4) {
 	description 'download, unzip and compile antlr4'
-
-	def folder = new File(file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source/.cmake").absolutePath)
-	if( !folder.exists()) {
-		folder.mkdirs()
+	group 'Grammar Parser (ANTLR)'
+	
+	doFirst{
+		def folder = new File(file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source/.cmake").absolutePath)
+		if( !folder.exists()) {
+			folder.mkdirs()
+		}
 	}
-
 	doLast {
 		exec {
 			workingDir "antlr4/antlr4-cpp-runtime-${antlr4Version}-source/.cmake"
@@ -70,29 +101,50 @@ task compileAntlr4(dependsOn: downloadAndUnzipAntlr4) {
         exclude '.cmake/**'
     })
 	
-	// Define the outputs
-	outputs.dir file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'include' + File.separator + 'antlr4-runtime')
-	if(OperatingSystem.current().isWindows()){
-		outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'libantlr4-runtime.dll')
-	} else if (OperatingSystem.current().isLinux()) {
-		outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'libantlr4-runtime.so')
-	} else if (OperatingSystem.current().isMacOsX()){
-		outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'libantlr4-runtime.so')
-	} else {
-		// Unknown OS
-	}
 	
-	//if(!file('.' + File.separator + '.cmake' + File.separator).exists()) {
-	//	outputs.upToDateWhen { false }
-	//}
+	// Define the outputs
+	outputs.dir([rootDir,'application','include','antlr4-runtime'].join(File.separator))
+	
+	if(OperatingSystem.current().isWindows()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libantlr4-runtime' +       '.dll'].join(File.separator))}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))    {outputs.file file([rootDir,'application','bin','libantlr4-runtime' + 'd' + '.dll'].join(File.separator))}
+	}
+	else if(OperatingSystem.current().isLinux()){
+		//@todo Add variant names of shared objects
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file([rootDir,'application','bin','libantlr4-runtime' +       '.so'].join(File.separator))}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))    {outputs.file file([rootDir,'application','bin','libantlr4-runtime' + 'd' + '.so'].join(File.separator))}
+	}
+	else if(OperatingSystem.current().isMacOsX()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){
+			outputs.file file([rootDir,'application','bin','libantlr4-runtime' + '.dylib'].join(File.separator))
+			outputs.file file([rootDir,'application','bin',"libantlr4-runtime.$antlr4Version" + '.dylib'].join(File.separator))
+		}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0')){
+			outputs.file file([rootDir,'application','bin','libantlr4-runtime' + 'd' + '.dylib'].join(File.separator))
+			outputs.file file([rootDir,'application','bin',"libantlr4-runtime' + 'd.$antlr4Version" + '.dylib'].join(File.separator))
+		}
+	}
+	else {
+	    //not supported os
+	}
 }
 
 task clean {
+	// Extension of gradle built-in task:clean
 	doLast {
-		def antlrFolder = file('.' + File.separator + 'antlr4')
-		if(antlrFolder.exists()) {
-			delete antlrFolder.absolutePath
-			println "deleting folder " + antlrFolder.absolutePath
+		def antlr4_dir = file('antlr4')
+		if(antlr4_dir.exists()){
+			delete antlr4_dir.absolutePath
+			println "deleting: " + antlr4_dir.absolutePath
 		}
+		
+		compileAntlr4.outputs.files.each{
+			if(it.exists()){
+				delete it.absolutePath
+			    println "deleting: " + it
+			}
+  		}
 	}
 }
+
+//EOF

@@ -426,7 +426,6 @@ void StandardProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::
 	initializePackageNestedPackages();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
-
 	
 }
 

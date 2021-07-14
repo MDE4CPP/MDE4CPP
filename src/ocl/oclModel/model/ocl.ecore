@@ -266,7 +266,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ObjectValue" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Value">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;&#xA;#include &quot;abstractDataTypes/Bag.hpp&quot;&#xA;#include &quot;ecore/EOperation.hpp&quot;&#xA;#include &quot;ecore/EParameter.hpp&quot;&#xA;#include &quot;ecore/ETypedElement.hpp&quot;&#xA;#include &quot;ecore/ENamedElement.hpp&quot;&#xA;#include &quot;ecore/EAttribute.hpp&quot;&#xA;#include &quot;ecore/EReference.hpp&quot;&#xA;#include &quot;uml/Operation.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xA;#include &quot;uml/TypedElement.hpp&quot;&#xA;#include &quot;uml/NamedElement.hpp&quot;&#xA;#include &quot;uml/Type.hpp&quot;&#xA;#include &quot;uml/Property.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;&#xA;#include &quot;abstractDataTypes/Bag.hpp&quot;&#xA;#include &quot;ecore/EOperation.hpp&quot;&#xA;#include &quot;ecore/EParameter.hpp&quot;&#xA;#include &quot;ecore/ETypedElement.hpp&quot;&#xA;#include &quot;ecore/ENamedElement.hpp&quot;&#xA;#include &quot;ecore/EAttribute.hpp&quot;&#xA;#include &quot;ecore/EReference.hpp&quot;&#xA;#include &quot;uml/Operation.hpp&quot;&#xA;#include &quot;uml/Parameter.hpp&quot;&#xA;#include &quot;uml/TypedElement.hpp&quot;&#xA;#include &quot;uml/NamedElement.hpp&quot;&#xA;#include &quot;uml/Type.hpp&quot;&#xA;#include &quot;uml/Property.hpp&quot;"/>
       </eAnnotations>
       <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -320,7 +320,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OclVoidValue" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Value">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
       <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -336,7 +336,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OclMessageValue" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Value">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
       <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -355,7 +355,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="StaticValue" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Value">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="LocalSnapshot">
@@ -391,7 +391,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="UndefinedValue" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Value">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
       <eOperations name="toString" ordered="false" lowerBound="1" eType="ecore:EDataType platform:/plugin/org.eclipse.uml2.types/model/Types.ecore#//String">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">
@@ -417,19 +417,19 @@
   <eSubpackages name="Evaluations" nsURI="http://ocl4cpp/ocl/evaluations.ecore" nsPrefix="ocl.evaluations">
     <eClassifiers xsi:type="ecore:EClass" name="CollectionLiteralPartEval" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Evaluation">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="element" lowerBound="1"
           eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value"/>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="TupleLiteralExpPartEval" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Evaluation">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EvalNameSpace" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Evaluation">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="ExpressionInOclEval">
@@ -439,7 +439,7 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OclExpEval" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Evaluation">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="environment" lowerBound="1"
           eType="#//Evaluations/EvalEnvironment"/>
@@ -451,12 +451,12 @@
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="UnspecifiedValueExpEval" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Evaluation">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="OclMessageArgEval" eSuperTypes="../../../fuml/model/fUML.ecore#//Semantics/Values/Evaluation">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
       <eStructuralFeatures xsi:type="ecore:EReference" name="unspecified" eType="#//Evaluations/UnspecifiedValueExpEval"/>
       <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="#//Evaluations/OclExpEval"/>
@@ -551,33 +551,33 @@
     <eClassifiers xsi:type="ecore:EClass" name="EnumLiteralExpEval" eSuperTypes="#//Evaluations/LiteralExpEval"/>
     <eClassifiers xsi:type="ecore:EClass" name="BooleanLiteralExpEval" eSuperTypes="#//Evaluations/PrimitiveLiteralExpEval ../../../fuml/model/fUML.ecore#//Semantics/Values/LiteralBooleanEvaluation">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="NumericLiteralExpEval" eSuperTypes="#//Evaluations/PrimitiveLiteralExpEval"/>
     <eClassifiers xsi:type="ecore:EClass" name="StringLiteralExpEval" eSuperTypes="#//Evaluations/PrimitiveLiteralExpEval ../../../fuml/model/fUML.ecore#//Semantics/Values/LiteralStringEvaluation">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="UnlimitedNaturalLiteralExpEval" eSuperTypes="#//Evaluations/NumericLiteralExpEval ../../../fuml/model/fUML.ecore#//Semantics/Values/LiteralUnlimitedNaturalEvaluation">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="IntegerLiteralExpEval" eSuperTypes="#//Evaluations/NumericLiteralExpEval ../../../fuml/model/fUML.ecore#//Semantics/Values/LiteralIntegerEvaluation">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="RealLiteralExpEval" eSuperTypes="#//Evaluations/NumericLiteralExpEval ../../../fuml/model/fUML.ecore#//Semantics/Values/LiteralRealEvaluation">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;fUML/FUMLFactory.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;fUML/fUMLFactory.hpp&quot;"/>
       </eAnnotations>
     </eClassifiers>
     <eClassifiers xsi:type="ecore:EClass" name="EvalEnvironment">
       <eAnnotations source="http://tu-ilmenau.de/see/codegen">
-        <details key="implIncludes" value="#include &quot;ocl/values/UndefinedValue.hpp&quot;"/>
+        <details key="implIncludes" value="#include &quot;ocl/Values/UndefinedValue.hpp&quot;"/>
       </eAnnotations>
       <eOperations name="getValueOf" ordered="false" lowerBound="1" eType="ecore:EClass ../../../fuml/model/fUML.ecore#//Semantics/Values/Value">
         <eAnnotations source="http://tu-ilmenau.de/see/codegen">

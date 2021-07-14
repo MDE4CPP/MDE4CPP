@@ -25,7 +25,7 @@
 #include "ecore/EClass.hpp"
 
 //Includes from codegen annotation
-#include "fUML/FUMLFactory.hpp"
+#include "fUML/fUMLFactory.hpp"
 #include "abstractDataTypes/Bag.hpp"
 #include "ecore/EOperation.hpp"
 #include "ecore/EParameter.hpp"
@@ -55,8 +55,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "ocl/Values/ValuesPackage.hpp"
 #include "fUML/Semantics/Values/ValuesPackage.hpp"
+#include "ocl/Values/ValuesPackage.hpp"
 #include "ecore/ecorePackage.hpp"
 
 

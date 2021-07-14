@@ -73,12 +73,14 @@ task compileReflectionModels() {
 	group 'Source'
 	description 'compile all reflection models'
 	
-	dependsOn 'common:ecoreReflection:src_gen:compileEcoreReflection'
-	dependsOn 'common:primitivetypesReflection:src_gen:compilePrimitivetypesReflection'
-	dependsOn 'common:umlReflection:src_gen:compileUmlReflection'
+	dependsOn tasks.getByPath('common:ecoreReflection:src_gen:compileEcoreReflection')
+	dependsOn tasks.getByPath('common:primitivetypesReflection:src_gen:compilePrimitivetypesReflection')
+	dependsOn tasks.getByPath('common:umlReflection:src_gen:compileUmlReflection')
 	
-	//@quickfix: Solves dependency of common:umlReflection:umlReflectionExec to oclParser library
-	dependsOn 'ocl:oclParser:compileOclParser'
+	//@quickfix {
+	dependsOn tasks.getByPath('ocl:oclParser:compileOclParser')
+	tasks.getByPath('common:umlReflection:src_gen:compileUmlReflection').mustRunAfter tasks.getByPath('ocl:oclParser:compileOclParser')                                                                 
+	//}
 }
 
 task compileUMLProfiles() {
@@ -145,3 +147,5 @@ task dos2unix_srcgen {
 		}
 	}
 }
+
+//EOF
