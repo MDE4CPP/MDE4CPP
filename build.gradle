@@ -39,22 +39,24 @@ task generateAll() {
 	group 'MDE4CPP'
 	description 'Generate all models without compilation of generated source code'
 
-	dependsOn 'src:generateEcoreModels'
-	dependsOn 'src:generateReflectionModels'
-	dependsOn 'src:generateUMLProfiles'
+	dependsOn rootProject.tasks.getByPath(':src:generateEcoreModels')
+	dependsOn rootProject.tasks.getByPath(':src:generateReflectionModels')
+	dependsOn rootProject.tasks.getByPath(':src:generateUMLProfiles')
 }
 
 task compileAll() {
 	group 'MDE4CPP'
 	description 'Compile all generated source code of models without generating the models'
 
-	dependsOn 'src:compileEcoreModels'
-	dependsOn 'src:compileReflectionModels'
-	dependsOn 'src:compileUMLProfiles'
+	dependsOn rootProject.tasks.getByPath(':src:deliverBasicInterfaces')
 	
-	dependsOn 'src:common:pluginFramework:compilePluginFramework'
-	dependsOn 'src:common:persistence:compilePersistence'
-	dependsOn 'src:deliverBasicInterfaces'
+	dependsOn rootProject.tasks.getByPath(':src:compileEcoreModels')
+	dependsOn rootProject.tasks.getByPath(':src:compileReflectionModels')
+	dependsOn rootProject.tasks.getByPath(':src:compileUMLProfiles')
+	
+	dependsOn rootProject.tasks.getByPath(':src:common:pluginFramework:compilePluginFramework')
+	dependsOn rootProject.tasks.getByPath(':src:common:persistence:compilePersistence')
+	dependsOn tasks.getByPath('src:common:pluginFramework:compilePluginFramework')
 }
 
 task buildAll() {
