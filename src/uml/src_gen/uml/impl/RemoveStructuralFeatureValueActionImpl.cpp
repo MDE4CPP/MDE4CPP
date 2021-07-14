@@ -169,6 +169,7 @@ bool RemoveStructuralFeatureValueActionImpl::getIsRemoveDuplicates() const
 void RemoveStructuralFeatureValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicates)
 {
 	m_isRemoveDuplicates = _isRemoveDuplicates;
+	
 } 
 
 
@@ -195,6 +196,9 @@ std::shared_ptr<uml::InputPin> RemoveStructuralFeatureValueActionImpl::getRemove
 void RemoveStructuralFeatureValueActionImpl::setRemoveAt(std::shared_ptr<uml::InputPin> _removeAt)
 {
     m_removeAt = _removeAt;
+	
+	
+	
 }
 
 

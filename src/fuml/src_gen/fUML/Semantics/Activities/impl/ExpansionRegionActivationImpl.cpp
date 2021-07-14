@@ -150,6 +150,7 @@ int ExpansionRegionActivationImpl::getNext() const
 void ExpansionRegionActivationImpl::setNext(int _next)
 {
 	m_next = _next;
+	
 } 
 
 

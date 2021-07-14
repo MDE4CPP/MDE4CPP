@@ -97,9 +97,11 @@ namespace fUML::Semantics::Actions
 			virtual void setRemoveStructuralFeatureValueAction(std::shared_ptr<uml::RemoveStructuralFeatureValueAction>) = 0;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'removeStructuralFeatureValueAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action>) = 0;/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'removeStructuralFeatureValueAction'*/
+			virtual void setAction(std::shared_ptr<uml::Action>) = 0;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'removeStructuralFeatureValueAction'*/
 			
 			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
+			
 
 		protected:
 			//*********************************

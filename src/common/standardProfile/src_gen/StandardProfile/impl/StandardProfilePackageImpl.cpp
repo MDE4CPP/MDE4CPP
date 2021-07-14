@@ -22,9 +22,8 @@
 #include "ecoreReflection/EcorePackage.hpp"
 #include "umlReflection/UMLPackage.hpp"
 
-//Subpackages
 
-//Stereotypes
+
 
 using namespace StandardProfile;
 
@@ -413,8 +412,8 @@ void StandardProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::
 	isInitialized = true;
 
 	// Initialize package
-	setName(eNAME);
-	setURI(eNS_URI);
+	this->setName(eNAME);
+	this->setURI(eNS_URI);
 
 	initializePackageActivities();
 	initializePackageClasses();

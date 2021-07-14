@@ -186,6 +186,7 @@ void CreateObjectActionActivationImpl::setCreateObjectAction(std::shared_ptr<uml
     m_createObjectAction = _createObjectAction;
 	//additional setter call for redefined reference ActionActivation::action
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_createObjectAction);
+	
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
 void CreateObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)

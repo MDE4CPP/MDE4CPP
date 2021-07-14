@@ -194,6 +194,7 @@ std::shared_ptr<uml::OutputPin> ClauseImpl::getDecider() const
 void ClauseImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
 {
     m_decider = _decider;
+	
 }
 
 

@@ -138,6 +138,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> AttributeCallEx
 void AttributeCallExpEvalImpl::setReferredAttribute(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAttribute)
 {
     m_referredAttribute = _referredAttribute;
+	
 }
 
 

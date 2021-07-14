@@ -132,6 +132,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> CollectionItemImpl::getItem() c
 void CollectionItemImpl::setItem(std::shared_ptr<ocl::Expressions::OclExpression> _item)
 {
     m_item = _item;
+	
 }
 
 

@@ -183,6 +183,7 @@ std::string EPackageImpl::getNsPrefix() const
 void EPackageImpl::setNsPrefix(std::string _nsPrefix)
 {
 	m_nsPrefix = _nsPrefix;
+	
 } 
 
 
@@ -196,6 +197,7 @@ std::string EPackageImpl::getNsURI() const
 void EPackageImpl::setNsURI(std::string _nsURI)
 {
 	m_nsURI = _nsURI;
+	
 } 
 
 
@@ -258,6 +260,7 @@ std::shared_ptr<ecore::EFactory> EPackageImpl::getEFactoryInstance() const
 void EPackageImpl::setEFactoryInstance(std::shared_ptr<ecore::EFactory> _eFactoryInstance)
 {
     m_eFactoryInstance = _eFactoryInstance;
+	
 }
 
 

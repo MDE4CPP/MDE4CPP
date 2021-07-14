@@ -239,6 +239,7 @@ bool ConditionalNodeImpl::getIsAssured() const
 void ConditionalNodeImpl::setIsAssured(bool _isAssured)
 {
 	m_isAssured = _isAssured;
+	
 } 
 
 
@@ -252,6 +253,7 @@ bool ConditionalNodeImpl::getIsDeterminate() const
 void ConditionalNodeImpl::setIsDeterminate(bool _isDeterminate)
 {
 	m_isDeterminate = _isDeterminate;
+	
 } 
 
 
@@ -337,8 +339,6 @@ std::shared_ptr<Bag<uml::OutputPin>> ConditionalNodeImpl::getResult() const
 
     return m_result;
 }
-
-/*Additional Setter for redefined reference 'StructuredActivityNode::structuredNodeOutput'*/
 
 
 

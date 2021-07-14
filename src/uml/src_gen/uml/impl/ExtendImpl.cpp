@@ -172,6 +172,8 @@ std::shared_ptr<uml::Constraint> ExtendImpl::getCondition() const
 void ExtendImpl::setCondition(std::shared_ptr<uml::Constraint> _condition)
 {
     m_condition = _condition;
+	
+	
 }
 
 
@@ -186,6 +188,9 @@ std::shared_ptr<uml::UseCase> ExtendImpl::getExtendedCase() const
 void ExtendImpl::setExtendedCase(std::shared_ptr<uml::UseCase> _extendedCase)
 {
     m_extendedCase = _extendedCase;
+	
+	
+	
 }
 
 
@@ -200,6 +205,13 @@ std::weak_ptr<uml::UseCase> ExtendImpl::getExtension() const
 void ExtendImpl::setExtension(std::weak_ptr<uml::UseCase> _extension)
 {
     m_extension = _extension;
+	
+	
+	m_namespace = this->getExtension().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 

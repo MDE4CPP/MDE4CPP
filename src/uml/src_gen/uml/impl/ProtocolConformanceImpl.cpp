@@ -144,6 +144,9 @@ std::shared_ptr<uml::ProtocolStateMachine> ProtocolConformanceImpl::getGeneralMa
 void ProtocolConformanceImpl::setGeneralMachine(std::shared_ptr<uml::ProtocolStateMachine> _generalMachine)
 {
     m_generalMachine = _generalMachine;
+	
+	
+	
 }
 
 
@@ -158,6 +161,11 @@ std::weak_ptr<uml::ProtocolStateMachine> ProtocolConformanceImpl::getSpecificMac
 void ProtocolConformanceImpl::setSpecificMachine(std::weak_ptr<uml::ProtocolStateMachine> _specificMachine)
 {
     m_specificMachine = _specificMachine;
+	
+	
+	m_owner = this->getSpecificMachine().lock();
+	
+	
 }
 
 

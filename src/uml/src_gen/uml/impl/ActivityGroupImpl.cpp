@@ -199,6 +199,9 @@ std::weak_ptr<uml::Activity> ActivityGroupImpl::getInActivity() const
 void ActivityGroupImpl::setInActivity(std::weak_ptr<uml::Activity> _inActivity)
 {
     m_inActivity = _inActivity;
+	m_owner = this->getInActivity().lock();
+	
+	
 }
 
 

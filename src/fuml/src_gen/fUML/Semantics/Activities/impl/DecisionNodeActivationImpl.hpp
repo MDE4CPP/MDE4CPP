@@ -78,6 +78,7 @@ namespace fUML::Semantics::Activities
 			
 			virtual void setNode(std::shared_ptr<uml::ActivityNode>) ;
 			
+			
 			//*********************************
 			// Union Getter
 			//*********************************

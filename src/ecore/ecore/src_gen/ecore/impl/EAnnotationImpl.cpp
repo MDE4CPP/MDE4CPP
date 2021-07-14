@@ -163,6 +163,7 @@ std::shared_ptr<std::map < std::string, std::string>> EAnnotationImpl::getDetail
 void EAnnotationImpl::setDetails(std::shared_ptr<std::map < std::string, std::string>> _details)
 {
 	m_details = _details;
+	
 } 
 
 
@@ -176,6 +177,7 @@ std::string EAnnotationImpl::getSource() const
 void EAnnotationImpl::setSource(std::string _source)
 {
 	m_source = _source;
+	
 } 
 
 
@@ -223,6 +225,7 @@ std::weak_ptr<ecore::EModelElement> EAnnotationImpl::getEModelElement() const
 void EAnnotationImpl::setEModelElement(std::weak_ptr<ecore::EModelElement> _eModelElement)
 {
     m_eModelElement = _eModelElement;
+	
 }
 
 

@@ -196,6 +196,7 @@ std::shared_ptr<uml::Signal> SendSignalActionImpl::getSignal() const
 void SendSignalActionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 {
     m_signal = _signal;
+	
 }
 
 
@@ -210,6 +211,9 @@ std::shared_ptr<uml::InputPin> SendSignalActionImpl::getTarget() const
 void SendSignalActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
 {
     m_target = _target;
+	
+	
+	
 }
 
 

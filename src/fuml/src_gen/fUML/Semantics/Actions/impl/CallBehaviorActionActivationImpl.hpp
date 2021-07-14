@@ -62,11 +62,14 @@ namespace fUML::Semantics::Actions
 			virtual void setCallBehaviorAction(std::shared_ptr<uml::CallBehaviorAction>) ;
 			/*Additional Setter for 'CallActionActivation::callAction' redefined by reference 'callBehaviorAction'*/
 			
-			virtual void setCallAction(std::shared_ptr<uml::CallAction>) ;/*Additional Setter for 'ActionActivation::action' redefined by reference 'callBehaviorAction'*/
+			virtual void setCallAction(std::shared_ptr<uml::CallAction>) ;
+			/*Additional Setter for 'ActionActivation::action' redefined by reference 'callBehaviorAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action>) ;/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callBehaviorAction'*/
+			virtual void setAction(std::shared_ptr<uml::Action>) ;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'callBehaviorAction'*/
 			
 			virtual void setNode(std::shared_ptr<uml::ActivityNode>) ;
+			
 			
 			//*********************************
 			// Union Getter

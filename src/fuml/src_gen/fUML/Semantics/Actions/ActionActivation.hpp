@@ -137,6 +137,7 @@ namespace fUML::Semantics::Actions
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'action'*/
 			
 			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
+			
 			virtual std::shared_ptr<Subset<fUML::Semantics::Actions::InputPinActivation, fUML::Semantics::Actions::PinActivation>> getInputPinActivation() const = 0;
 			
 			

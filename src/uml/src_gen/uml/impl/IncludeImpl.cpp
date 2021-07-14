@@ -157,6 +157,9 @@ std::shared_ptr<uml::UseCase> IncludeImpl::getAddition() const
 void IncludeImpl::setAddition(std::shared_ptr<uml::UseCase> _addition)
 {
     m_addition = _addition;
+	
+	
+	
 }
 
 
@@ -171,6 +174,13 @@ std::weak_ptr<uml::UseCase> IncludeImpl::getIncludingCase() const
 void IncludeImpl::setIncludingCase(std::weak_ptr<uml::UseCase> _includingCase)
 {
     m_includingCase = _includingCase;
+	
+	
+	m_namespace = this->getIncludingCase().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 

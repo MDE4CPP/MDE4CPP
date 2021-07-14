@@ -205,6 +205,7 @@ std::shared_ptr<uml::PartDecomposition> LifelineImpl::getDecomposedAs() const
 void LifelineImpl::setDecomposedAs(std::shared_ptr<uml::PartDecomposition> _decomposedAs)
 {
     m_decomposedAs = _decomposedAs;
+	
 }
 
 
@@ -219,6 +220,11 @@ std::weak_ptr<uml::Interaction> LifelineImpl::getInteraction() const
 void LifelineImpl::setInteraction(std::weak_ptr<uml::Interaction> _interaction)
 {
     m_interaction = _interaction;
+	m_namespace = this->getInteraction().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 
@@ -233,6 +239,7 @@ std::shared_ptr<uml::ConnectableElement> LifelineImpl::getRepresents() const
 void LifelineImpl::setRepresents(std::shared_ptr<uml::ConnectableElement> _represents)
 {
     m_represents = _represents;
+	
 }
 
 
@@ -247,6 +254,8 @@ std::shared_ptr<uml::ValueSpecification> LifelineImpl::getSelector() const
 void LifelineImpl::setSelector(std::shared_ptr<uml::ValueSpecification> _selector)
 {
     m_selector = _selector;
+	
+	
 }
 
 

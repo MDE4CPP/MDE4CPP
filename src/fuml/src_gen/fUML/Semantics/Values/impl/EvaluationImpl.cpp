@@ -134,6 +134,7 @@ std::shared_ptr<fUML::Semantics::Loci::Locus> EvaluationImpl::getLocus() const
 void EvaluationImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
+	
 }
 
 
@@ -148,6 +149,7 @@ std::shared_ptr<uml::ValueSpecification> EvaluationImpl::getSpecification() cons
 void EvaluationImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
 {
     m_specification = _specification;
+	
 }
 
 

@@ -234,6 +234,7 @@ bool ActivityPartitionImpl::getIsDimension() const
 void ActivityPartitionImpl::setIsDimension(bool _isDimension)
 {
 	m_isDimension = _isDimension;
+	
 } 
 
 
@@ -247,6 +248,7 @@ bool ActivityPartitionImpl::getIsExternal() const
 void ActivityPartitionImpl::setIsExternal(bool _isExternal)
 {
 	m_isExternal = _isExternal;
+	
 } 
 
 
@@ -343,6 +345,7 @@ std::shared_ptr<uml::Element> ActivityPartitionImpl::getRepresents() const
 void ActivityPartitionImpl::setRepresents(std::shared_ptr<uml::Element> _represents)
 {
     m_represents = _represents;
+	
 }
 
 
@@ -383,6 +386,11 @@ std::weak_ptr<uml::ActivityPartition> ActivityPartitionImpl::getSuperPartition()
 void ActivityPartitionImpl::setSuperPartition(std::weak_ptr<uml::ActivityPartition> _superPartition)
 {
     m_superPartition = _superPartition;
+	m_superGroup = this->getSuperPartition().lock();
+	m_owner = this->getSuperGroup().lock();
+	
+	
+	
 }
 
 

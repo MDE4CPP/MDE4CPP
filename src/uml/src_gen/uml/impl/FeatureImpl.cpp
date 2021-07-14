@@ -136,6 +136,7 @@ bool FeatureImpl::getIsStatic() const
 void FeatureImpl::setIsStatic(bool _isStatic)
 {
 	m_isStatic = _isStatic;
+	
 } 
 
 

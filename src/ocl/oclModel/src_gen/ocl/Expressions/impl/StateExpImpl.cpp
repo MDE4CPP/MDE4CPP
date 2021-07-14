@@ -224,6 +224,7 @@ std::shared_ptr<uml::State> StateExpImpl::getReferredState() const
 void StateExpImpl::setReferredState(std::shared_ptr<uml::State> _referredState)
 {
     m_referredState = _referredState;
+	
 }
 
 

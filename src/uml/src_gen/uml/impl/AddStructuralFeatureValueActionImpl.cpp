@@ -169,6 +169,7 @@ bool AddStructuralFeatureValueActionImpl::getIsReplaceAll() const
 void AddStructuralFeatureValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
+	
 } 
 
 
@@ -201,6 +202,9 @@ std::shared_ptr<uml::InputPin> AddStructuralFeatureValueActionImpl::getInsertAt(
 void AddStructuralFeatureValueActionImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
 {
     m_insertAt = _insertAt;
+	
+	
+	
 }
 
 

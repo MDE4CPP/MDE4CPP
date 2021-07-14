@@ -172,6 +172,7 @@ bool ReclassifyObjectActionImpl::getIsReplaceAll() const
 void ReclassifyObjectActionImpl::setIsReplaceAll(bool _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
+	
 } 
 
 
@@ -227,6 +228,9 @@ std::shared_ptr<uml::InputPin> ReclassifyObjectActionImpl::getObject() const
 void ReclassifyObjectActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
+	
+	
+	
 }
 
 

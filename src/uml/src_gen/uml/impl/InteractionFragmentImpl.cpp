@@ -209,6 +209,11 @@ std::weak_ptr<uml::Interaction> InteractionFragmentImpl::getEnclosingInteraction
 void InteractionFragmentImpl::setEnclosingInteraction(std::weak_ptr<uml::Interaction> _enclosingInteraction)
 {
     m_enclosingInteraction = _enclosingInteraction;
+	m_namespace = this->getEnclosingInteraction().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 
@@ -223,6 +228,11 @@ std::weak_ptr<uml::InteractionOperand> InteractionFragmentImpl::getEnclosingOper
 void InteractionFragmentImpl::setEnclosingOperand(std::weak_ptr<uml::InteractionOperand> _enclosingOperand)
 {
     m_enclosingOperand = _enclosingOperand;
+	m_namespace = this->getEnclosingOperand().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 

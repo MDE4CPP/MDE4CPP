@@ -129,6 +129,7 @@ int ObjectNodeActivationImpl::getOfferedTokenCount() const
 void ObjectNodeActivationImpl::setOfferedTokenCount(int _offeredTokenCount)
 {
 	m_offeredTokenCount = _offeredTokenCount;
+	
 } 
 
 

@@ -324,6 +324,7 @@ bool BehaviorImpl::getIsReentrant() const
 void BehaviorImpl::setIsReentrant(bool _isReentrant)
 {
 	m_isReentrant = _isReentrant;
+	
 } 
 
 
@@ -382,6 +383,11 @@ std::weak_ptr<uml::BehavioredClassifier> BehaviorImpl::getBehavioredClassifier()
 void BehaviorImpl::setBehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> _behavioredClassifier)
 {
     m_behavioredClassifier = _behavioredClassifier;
+	m_namespace = this->getBehavioredClassifier().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 
@@ -396,6 +402,8 @@ std::shared_ptr<uml::BehavioredClassifier> BehaviorImpl::getContext() const
 void BehaviorImpl::setContext(std::shared_ptr<uml::BehavioredClassifier> _context)
 {
     m_context = _context;
+	
+	
 }
 
 
@@ -540,6 +548,7 @@ std::shared_ptr<uml::BehavioralFeature> BehaviorImpl::getSpecification() const
 void BehaviorImpl::setSpecification(std::shared_ptr<uml::BehavioralFeature> _specification)
 {
     m_specification = _specification;
+	
 }
 
 

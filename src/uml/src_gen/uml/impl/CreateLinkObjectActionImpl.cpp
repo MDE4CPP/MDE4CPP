@@ -194,6 +194,9 @@ std::shared_ptr<uml::OutputPin> CreateLinkObjectActionImpl::getResult() const
 void CreateLinkObjectActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
+	
+	
+	
 }
 
 

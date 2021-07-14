@@ -143,6 +143,7 @@ std::shared_ptr<uml::Type> TypedElementImpl::getType() const
 void TypedElementImpl::setType(std::shared_ptr<uml::Type> _type)
 {
     m_type = _type;
+	
 }
 
 

@@ -170,6 +170,7 @@ std::shared_ptr<uml::Action> ActionExecutionSpecificationImpl::getAction() const
 void ActionExecutionSpecificationImpl::setAction(std::shared_ptr<uml::Action> _action)
 {
     m_action = _action;
+	
 }
 
 

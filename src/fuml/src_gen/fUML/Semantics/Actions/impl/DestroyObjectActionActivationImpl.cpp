@@ -269,6 +269,7 @@ void DestroyObjectActionActivationImpl::setDestroyObjectAction(std::shared_ptr<u
     m_destroyObjectAction = _destroyObjectAction;
 	//additional setter call for redefined reference ActionActivation::action
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_destroyObjectAction);
+	
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
 void DestroyObjectActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)

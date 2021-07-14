@@ -282,6 +282,7 @@ void CallOperationActionActivationImpl::setCallOperationAction(std::shared_ptr<u
     m_callOperationAction = _callOperationAction;
 	//additional setter call for redefined reference CallActionActivation::callAction
 	fUML::Semantics::Actions::CallActionActivationImpl::setCallAction(_callOperationAction);
+	
 }
 /*Additional Setter for redefined reference 'CallActionActivation::callAction'*/
 void CallOperationActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)

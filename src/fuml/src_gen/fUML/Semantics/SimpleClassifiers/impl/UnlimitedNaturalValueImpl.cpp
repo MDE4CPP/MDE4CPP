@@ -126,6 +126,7 @@ int UnlimitedNaturalValueImpl::getValue() const
 void UnlimitedNaturalValueImpl::setValue(int _value)
 {
 	m_value = _value;
+	
 } 
 
 

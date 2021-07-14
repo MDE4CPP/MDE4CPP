@@ -213,6 +213,7 @@ std::weak_ptr<fUML::Semantics::Loci::Locus> ExecutorImpl::getLocus() const
 void ExecutorImpl::setLocus(std::weak_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
+	
 }
 
 

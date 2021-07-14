@@ -170,6 +170,7 @@ int LiteralUnlimitedNaturalImpl::getValue() const
 void LiteralUnlimitedNaturalImpl::setValue(int _value)
 {
 	m_value = _value;
+	
 } 
 
 

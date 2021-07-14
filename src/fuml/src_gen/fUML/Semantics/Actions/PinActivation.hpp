@@ -101,6 +101,7 @@ namespace fUML::Semantics::Actions
 			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'pin'*/
 			
 			virtual void setNode(std::shared_ptr<uml::ActivityNode>) = 0;
+			
 
 		protected:
 			//*********************************

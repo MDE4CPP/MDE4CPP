@@ -251,6 +251,7 @@ bool ComponentImpl::getIsIndirectlyInstantiated() const
 void ComponentImpl::setIsIndirectlyInstantiated(bool _isIndirectlyInstantiated)
 {
 	m_isIndirectlyInstantiated = _isIndirectlyInstantiated;
+	
 } 
 
 

@@ -448,6 +448,10 @@ std::shared_ptr<uml::ProtocolStateMachine> InterfaceImpl::getProtocol() const
 void InterfaceImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
 {
     m_protocol = _protocol;
+	
+	
+	
+	
 }
 
 

@@ -271,6 +271,8 @@ std::shared_ptr<uml::Region> RegionImpl::getExtendedRegion() const
 void RegionImpl::setExtendedRegion(std::shared_ptr<uml::Region> _extendedRegion)
 {
     m_extendedRegion = _extendedRegion;
+	
+	
 }
 
 
@@ -285,6 +287,11 @@ std::weak_ptr<uml::State> RegionImpl::getState() const
 void RegionImpl::setState(std::weak_ptr<uml::State> _state)
 {
     m_state = _state;
+	m_namespace = this->getState().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 
@@ -299,6 +306,11 @@ std::weak_ptr<uml::StateMachine> RegionImpl::getStateMachine() const
 void RegionImpl::setStateMachine(std::weak_ptr<uml::StateMachine> _stateMachine)
 {
     m_stateMachine = _stateMachine;
+	m_namespace = this->getStateMachine().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 

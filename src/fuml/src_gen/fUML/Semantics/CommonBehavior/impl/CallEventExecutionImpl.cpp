@@ -140,6 +140,7 @@ bool CallEventExecutionImpl::getCallerSuspended() const
 void CallEventExecutionImpl::setCallerSuspended(bool _callerSuspended)
 {
 	m_callerSuspended = _callerSuspended;
+	
 } 
 
 

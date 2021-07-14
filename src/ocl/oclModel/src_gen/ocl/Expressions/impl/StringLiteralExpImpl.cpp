@@ -212,6 +212,7 @@ std::string StringLiteralExpImpl::getStringSymbol() const
 void StringLiteralExpImpl::setStringSymbol(std::string _stringSymbol)
 {
 	m_stringSymbol = _stringSymbol;
+	
 } 
 
 

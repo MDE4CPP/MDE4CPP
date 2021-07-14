@@ -168,6 +168,7 @@ std::shared_ptr<uml::Message> MessageEndImpl::getMessage() const
 void MessageEndImpl::setMessage(std::shared_ptr<uml::Message> _message)
 {
     m_message = _message;
+	
 }
 
 

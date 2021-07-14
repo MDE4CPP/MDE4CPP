@@ -139,6 +139,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> AssociationEndC
 void AssociationEndCallExpEvalImpl::setReferredAssociationEnd(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationEnd)
 {
     m_referredAssociationEnd = _referredAssociationEnd;
+	
 }
 
 

@@ -180,6 +180,7 @@ std::shared_ptr<uml::InstanceSpecification> InstanceValueImpl::getInstance() con
 void InstanceValueImpl::setInstance(std::shared_ptr<uml::InstanceSpecification> _instance)
 {
     m_instance = _instance;
+	
 }
 
 

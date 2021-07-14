@@ -13,7 +13,7 @@
 
 //depending model packages
 
-//Subpackages
+
 
 //Stereotypes
 #include "ecore/EDataType.hpp"
@@ -155,8 +155,8 @@ void PrimitiveTypesPackageImpl::initializePackageContents(std::shared_ptr<uml::P
 	isInitialized = true;
 
 	// Initialize package
-	setName(eNAME);
-	setURI(eNS_URI);
+	this->setName(eNAME);
+	this->setURI(eNS_URI);
 
 	initializePackageActivities();
 	initializePackageClasses();

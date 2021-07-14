@@ -191,6 +191,7 @@ void RemoveStructuralFeatureValueActivationImpl::setRemoveStructuralFeatureValue
     m_removeStructuralFeatureValueAction = _removeStructuralFeatureValueAction;
 	//additional setter call for redefined reference ActionActivation::action
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_removeStructuralFeatureValueAction);
+	
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
 void RemoveStructuralFeatureValueActivationImpl::setAction(std::shared_ptr<uml::Action> _action)

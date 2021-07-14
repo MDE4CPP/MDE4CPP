@@ -380,6 +380,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> Struct
 void StructuredActivityNodeActivationImpl::setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup)
 {
     m_activationGroup = _activationGroup;
+	
 }
 
 

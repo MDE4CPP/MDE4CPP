@@ -202,6 +202,7 @@ std::shared_ptr<uml::Parameter> ActivityParameterNodeImpl::getParameter() const
 void ActivityParameterNodeImpl::setParameter(std::shared_ptr<uml::Parameter> _parameter)
 {
     m_parameter = _parameter;
+	
 }
 
 

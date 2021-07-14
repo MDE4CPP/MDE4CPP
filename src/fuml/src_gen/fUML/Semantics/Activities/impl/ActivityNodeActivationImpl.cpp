@@ -165,6 +165,7 @@ bool ActivityNodeActivationImpl::isRunning() const
 void ActivityNodeActivationImpl::setRunning(bool _running)
 {
 	m_running = _running;
+	
 } 
 
 
@@ -611,6 +612,7 @@ std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> Activity
 void ActivityNodeActivationImpl::setGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group)
 {
     m_group = _group;
+	
 }
 
 
@@ -659,6 +661,7 @@ std::shared_ptr<uml::ActivityNode> ActivityNodeActivationImpl::getNode() const
 void ActivityNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)
 {
     m_node = _node;
+	
 }
 
 

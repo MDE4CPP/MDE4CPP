@@ -145,6 +145,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ReduceActionActivati
 void ReduceActionActivationImpl::setCurrentExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _currentExecution)
 {
     m_currentExecution = _currentExecution;
+	
 }
 
 

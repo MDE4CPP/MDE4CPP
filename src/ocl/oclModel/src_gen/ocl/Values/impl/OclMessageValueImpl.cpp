@@ -126,6 +126,7 @@ bool OclMessageValueImpl::getIsAsyncOperation() const
 void OclMessageValueImpl::setIsAsyncOperation(bool _isAsyncOperation)
 {
 	m_isAsyncOperation = _isAsyncOperation;
+	
 } 
 
 
@@ -139,6 +140,7 @@ bool OclMessageValueImpl::getIsSignal() const
 void OclMessageValueImpl::setIsSignal(bool _isSignal)
 {
 	m_isSignal = _isSignal;
+	
 } 
 
 
@@ -152,6 +154,7 @@ bool OclMessageValueImpl::getIsSyncOperation() const
 void OclMessageValueImpl::setIsSyncOperation(bool _isSyncOperation)
 {
 	m_isSyncOperation = _isSyncOperation;
+	
 } 
 
 
@@ -165,6 +168,7 @@ std::string OclMessageValueImpl::getName() const
 void OclMessageValueImpl::setName(std::string _name)
 {
 	m_name = _name;
+	
 } 
 
 
@@ -210,6 +214,7 @@ std::shared_ptr<ocl::Values::OclMessageValue> OclMessageValueImpl::getReturnMess
 void OclMessageValueImpl::setReturnMessage(std::shared_ptr<ocl::Values::OclMessageValue> _returnMessage)
 {
     m_returnMessage = _returnMessage;
+	
 }
 
 
@@ -224,6 +229,7 @@ std::shared_ptr<ocl::Values::ObjectValue> OclMessageValueImpl::getSource() const
 void OclMessageValueImpl::setSource(std::shared_ptr<ocl::Values::ObjectValue> _source)
 {
     m_source = _source;
+	
 }
 
 
@@ -238,6 +244,7 @@ std::shared_ptr<ocl::Values::ObjectValue> OclMessageValueImpl::getTarget() const
 void OclMessageValueImpl::setTarget(std::shared_ptr<ocl::Values::ObjectValue> _target)
 {
     m_target = _target;
+	
 }
 
 

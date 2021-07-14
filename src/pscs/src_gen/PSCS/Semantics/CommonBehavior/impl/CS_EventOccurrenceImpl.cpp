@@ -131,6 +131,7 @@ bool CS_EventOccurrenceImpl::isPropagationInward() const
 void CS_EventOccurrenceImpl::setPropagationInward(bool _propagationInward)
 {
 	m_propagationInward = _propagationInward;
+	
 } 
 
 
@@ -236,6 +237,7 @@ std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> CS_
 void CS_EventOccurrenceImpl::setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint)
 {
     m_interactionPoint = _interactionPoint;
+	
 }
 
 
@@ -250,6 +252,7 @@ std::shared_ptr<uml::Port> CS_EventOccurrenceImpl::getOnPort() const
 void CS_EventOccurrenceImpl::setOnPort(std::shared_ptr<uml::Port> _onPort)
 {
     m_onPort = _onPort;
+	
 }
 
 
@@ -264,6 +267,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> CS_EventOccurr
 void CS_EventOccurrenceImpl::setWrappedEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::EventOccurrence> _wrappedEventOccurrence)
 {
     m_wrappedEventOccurrence = _wrappedEventOccurrence;
+	
 }
 
 

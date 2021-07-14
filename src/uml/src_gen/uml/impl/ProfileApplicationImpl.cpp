@@ -141,6 +141,7 @@ bool ProfileApplicationImpl::getIsStrict() const
 void ProfileApplicationImpl::setIsStrict(bool _isStrict)
 {
 	m_isStrict = _isStrict;
+	
 } 
 
 
@@ -173,6 +174,9 @@ std::shared_ptr<uml::Profile> ProfileApplicationImpl::getAppliedProfile() const
 void ProfileApplicationImpl::setAppliedProfile(std::shared_ptr<uml::Profile> _appliedProfile)
 {
     m_appliedProfile = _appliedProfile;
+	
+	
+	
 }
 
 
@@ -187,6 +191,11 @@ std::weak_ptr<uml::Package> ProfileApplicationImpl::getApplyingPackage() const
 void ProfileApplicationImpl::setApplyingPackage(std::weak_ptr<uml::Package> _applyingPackage)
 {
     m_applyingPackage = _applyingPackage;
+	
+	
+	m_owner = this->getApplyingPackage().lock();
+	
+	
 }
 
 

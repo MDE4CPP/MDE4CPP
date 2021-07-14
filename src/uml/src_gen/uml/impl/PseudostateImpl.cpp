@@ -164,6 +164,7 @@ uml::PseudostateKind PseudostateImpl::getKind() const
 void PseudostateImpl::setKind(uml::PseudostateKind _kind)
 {
 	m_kind = _kind;
+	
 } 
 
 
@@ -238,6 +239,11 @@ std::weak_ptr<uml::State> PseudostateImpl::getState() const
 void PseudostateImpl::setState(std::weak_ptr<uml::State> _state)
 {
     m_state = _state;
+	m_namespace = this->getState().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 
@@ -252,6 +258,11 @@ std::weak_ptr<uml::StateMachine> PseudostateImpl::getStateMachine() const
 void PseudostateImpl::setStateMachine(std::weak_ptr<uml::StateMachine> _stateMachine)
 {
     m_stateMachine = _stateMachine;
+	m_namespace = this->getStateMachine().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 

@@ -151,6 +151,11 @@ std::weak_ptr<uml::TemplateParameter> ParameterableElementImpl::getOwningTemplat
 void ParameterableElementImpl::setOwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> _owningTemplateParameter)
 {
     m_owningTemplateParameter = _owningTemplateParameter;
+	m_owner = this->getOwningTemplateParameter().lock();
+	
+	//additional setter call for redefined reference ParameterableElement::templateParameter
+	this->setTemplateParameter(_owningTemplateParameter.lock());
+	
 }
 
 
@@ -165,6 +170,7 @@ std::shared_ptr<uml::TemplateParameter> ParameterableElementImpl::getTemplatePar
 void ParameterableElementImpl::setTemplateParameter(std::shared_ptr<uml::TemplateParameter> _templateParameter)
 {
     m_templateParameter = _templateParameter;
+	
 }
 
 

@@ -348,6 +348,7 @@ std::string PackageImpl::getURI() const
 void PackageImpl::setURI(std::string _URI)
 {
 	m_URI = _URI;
+	
 } 
 
 
@@ -538,6 +539,11 @@ std::weak_ptr<uml::Package> PackageImpl::getNestingPackage() const
 void PackageImpl::setNestingPackage(std::weak_ptr<uml::Package> _nestingPackage)
 {
     m_nestingPackage = _nestingPackage;
+	m_namespace = this->getNestingPackage().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 

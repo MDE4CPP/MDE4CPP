@@ -267,6 +267,7 @@ uml::AggregationKind PropertyImpl::getAggregation() const
 void PropertyImpl::setAggregation(uml::AggregationKind _aggregation)
 {
 	m_aggregation = _aggregation;
+	
 } 
 
 
@@ -280,6 +281,7 @@ std::string PropertyImpl::getDefault() const
 void PropertyImpl::setDefault(std::string _default)
 {
 	m_default = _default;
+	
 } 
 
 
@@ -293,6 +295,7 @@ bool PropertyImpl::getIsComposite() const
 void PropertyImpl::setIsComposite(bool _isComposite)
 {
 	m_isComposite = _isComposite;
+	
 } 
 
 
@@ -306,6 +309,7 @@ bool PropertyImpl::getIsDerived() const
 void PropertyImpl::setIsDerived(bool _isDerived)
 {
 	m_isDerived = _isDerived;
+	
 } 
 
 
@@ -319,6 +323,7 @@ bool PropertyImpl::getIsDerivedUnion() const
 void PropertyImpl::setIsDerivedUnion(bool _isDerivedUnion)
 {
 	m_isDerivedUnion = _isDerivedUnion;
+	
 } 
 
 
@@ -332,6 +337,7 @@ bool PropertyImpl::getIsID() const
 void PropertyImpl::setIsID(bool _isID)
 {
 	m_isID = _isID;
+	
 } 
 
 
@@ -506,6 +512,7 @@ std::shared_ptr<uml::Association> PropertyImpl::getAssociation() const
 void PropertyImpl::setAssociation(std::shared_ptr<uml::Association> _association)
 {
     m_association = _association;
+	
 }
 
 
@@ -520,6 +527,9 @@ std::weak_ptr<uml::Property> PropertyImpl::getAssociationEnd() const
 void PropertyImpl::setAssociationEnd(std::weak_ptr<uml::Property> _associationEnd)
 {
     m_associationEnd = _associationEnd;
+	m_owner = this->getAssociationEnd().lock();
+	
+	
 }
 
 
@@ -534,6 +544,13 @@ std::weak_ptr<uml::Class> PropertyImpl::getClass() const
 void PropertyImpl::setClass(std::weak_ptr<uml::Class> _class)
 {
     m_class = _class;
+	m_namespace = this->getClass().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
+	
+	
 }
 
 
@@ -548,6 +565,13 @@ std::weak_ptr<uml::DataType> PropertyImpl::getDatatype() const
 void PropertyImpl::setDatatype(std::weak_ptr<uml::DataType> _datatype)
 {
     m_datatype = _datatype;
+	m_namespace = this->getDatatype().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
+	
+	
 }
 
 
@@ -562,6 +586,8 @@ std::shared_ptr<uml::ValueSpecification> PropertyImpl::getDefaultValue() const
 void PropertyImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue)
 {
     m_defaultValue = _defaultValue;
+	
+	
 }
 
 
@@ -576,6 +602,13 @@ std::weak_ptr<uml::Interface> PropertyImpl::getInterface() const
 void PropertyImpl::setInterface(std::weak_ptr<uml::Interface> _interface)
 {
     m_interface = _interface;
+	m_namespace = this->getInterface().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
+	
+	
 }
 
 
@@ -590,6 +623,7 @@ std::shared_ptr<uml::Property> PropertyImpl::getOpposite() const
 void PropertyImpl::setOpposite(std::shared_ptr<uml::Property> _opposite)
 {
     m_opposite = _opposite;
+	
 }
 
 
@@ -604,6 +638,15 @@ std::weak_ptr<uml::Association> PropertyImpl::getOwningAssociation() const
 void PropertyImpl::setOwningAssociation(std::weak_ptr<uml::Association> _owningAssociation)
 {
     m_owningAssociation = _owningAssociation;
+	
+	m_namespace = this->getOwningAssociation().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	//additional setter call for redefined reference Property::association
+	this->setAssociation(_owningAssociation.lock());
+	
+	
 }
 
 

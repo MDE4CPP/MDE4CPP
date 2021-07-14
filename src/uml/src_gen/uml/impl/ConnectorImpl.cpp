@@ -305,6 +305,13 @@ std::weak_ptr<uml::StructuredClassifier> ConnectorImpl::getStructuredClassifier(
 void ConnectorImpl::setStructuredClassifier(std::weak_ptr<uml::StructuredClassifier> _structuredClassifier)
 {
     m_structuredClassifier = _structuredClassifier;
+	
+	m_namespace = this->getStructuredClassifier().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
+	
 }
 
 
@@ -319,6 +326,7 @@ std::shared_ptr<uml::Association> ConnectorImpl::getType() const
 void ConnectorImpl::setType(std::shared_ptr<uml::Association> _type)
 {
     m_type = _type;
+	
 }
 
 

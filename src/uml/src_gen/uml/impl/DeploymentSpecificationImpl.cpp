@@ -194,6 +194,7 @@ std::string DeploymentSpecificationImpl::getDeploymentLocation() const
 void DeploymentSpecificationImpl::setDeploymentLocation(std::string _deploymentLocation)
 {
 	m_deploymentLocation = _deploymentLocation;
+	
 } 
 
 
@@ -207,6 +208,7 @@ std::string DeploymentSpecificationImpl::getExecutionLocation() const
 void DeploymentSpecificationImpl::setExecutionLocation(std::string _executionLocation)
 {
 	m_executionLocation = _executionLocation;
+	
 } 
 
 
@@ -239,6 +241,9 @@ std::weak_ptr<uml::Deployment> DeploymentSpecificationImpl::getDeployment() cons
 void DeploymentSpecificationImpl::setDeployment(std::weak_ptr<uml::Deployment> _deployment)
 {
     m_deployment = _deployment;
+	m_owner = this->getDeployment().lock();
+	
+	
 }
 
 

@@ -125,6 +125,7 @@ double RealValueImpl::getValue() const
 void RealValueImpl::setValue(double _value)
 {
 	m_value = _value;
+	
 } 
 
 

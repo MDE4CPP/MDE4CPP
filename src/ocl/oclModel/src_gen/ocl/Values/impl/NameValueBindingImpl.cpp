@@ -114,6 +114,7 @@ std::string NameValueBindingImpl::getName() const
 void NameValueBindingImpl::setName(std::string _name)
 {
 	m_name = _name;
+	
 } 
 
 
@@ -135,6 +136,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> NameValueBindingImpl::getValue()
 void NameValueBindingImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
 {
     m_value = _value;
+	
 }
 
 

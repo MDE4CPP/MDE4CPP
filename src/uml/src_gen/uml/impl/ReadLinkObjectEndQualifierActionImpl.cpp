@@ -230,6 +230,9 @@ std::shared_ptr<uml::InputPin> ReadLinkObjectEndQualifierActionImpl::getObject()
 void ReadLinkObjectEndQualifierActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
+	
+	
+	
 }
 
 
@@ -244,6 +247,7 @@ std::shared_ptr<uml::Property> ReadLinkObjectEndQualifierActionImpl::getQualifie
 void ReadLinkObjectEndQualifierActionImpl::setQualifier(std::shared_ptr<uml::Property> _qualifier)
 {
     m_qualifier = _qualifier;
+	
 }
 
 
@@ -258,6 +262,9 @@ std::shared_ptr<uml::OutputPin> ReadLinkObjectEndQualifierActionImpl::getResult(
 void ReadLinkObjectEndQualifierActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
+	
+	
+	
 }
 
 

@@ -212,6 +212,7 @@ bool BooleanLiteralExpImpl::getBooleanSymbol() const
 void BooleanLiteralExpImpl::setBooleanSymbol(bool _booleanSymbol)
 {
 	m_booleanSymbol = _booleanSymbol;
+	
 } 
 
 

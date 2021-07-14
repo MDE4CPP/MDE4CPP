@@ -156,6 +156,7 @@ std::shared_ptr<ecore::EClassifier> CollectionTypeImpl::getElementType() const
 void CollectionTypeImpl::setElementType(std::shared_ptr<ecore::EClassifier> _elementType)
 {
     m_elementType = _elementType;
+	
 }
 
 
@@ -170,6 +171,7 @@ std::shared_ptr<ocl::Values::CollectionValue> CollectionTypeImpl::getInstance() 
 void CollectionTypeImpl::setInstance(std::shared_ptr<ocl::Values::CollectionValue> _instance)
 {
     m_instance = _instance;
+	
 }
 
 

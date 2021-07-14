@@ -135,6 +135,7 @@ bool ClassifierTemplateParameterImpl::getAllowSubstitutable() const
 void ClassifierTemplateParameterImpl::setAllowSubstitutable(bool _allowSubstitutable)
 {
 	m_allowSubstitutable = _allowSubstitutable;
+	
 } 
 
 

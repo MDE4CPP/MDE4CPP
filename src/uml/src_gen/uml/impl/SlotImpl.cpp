@@ -168,6 +168,7 @@ std::shared_ptr<uml::StructuralFeature> SlotImpl::getDefiningFeature() const
 void SlotImpl::setDefiningFeature(std::shared_ptr<uml::StructuralFeature> _definingFeature)
 {
     m_definingFeature = _definingFeature;
+	
 }
 
 
@@ -182,6 +183,9 @@ std::weak_ptr<uml::InstanceSpecification> SlotImpl::getOwningInstance() const
 void SlotImpl::setOwningInstance(std::weak_ptr<uml::InstanceSpecification> _owningInstance)
 {
     m_owningInstance = _owningInstance;
+	m_owner = this->getOwningInstance().lock();
+	
+	
 }
 
 

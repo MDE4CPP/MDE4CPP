@@ -275,6 +275,7 @@ std::shared_ptr<uml::ActivityEdge> ActivityEdgeInstanceImpl::getEdge() const
 void ActivityEdgeInstanceImpl::setEdge(std::shared_ptr<uml::ActivityEdge> _edge)
 {
     m_edge = _edge;
+	
 }
 
 
@@ -289,6 +290,7 @@ std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> Activity
 void ActivityEdgeInstanceImpl::setGroup(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _group)
 {
     m_group = _group;
+	
 }
 
 
@@ -320,6 +322,7 @@ std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityEdgeI
 void ActivityEdgeInstanceImpl::setSource(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _source)
 {
     m_source = _source;
+	
 }
 
 
@@ -334,6 +337,7 @@ std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> ActivityEdgeI
 void ActivityEdgeInstanceImpl::setTarget(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _target)
 {
     m_target = _target;
+	
 }
 
 

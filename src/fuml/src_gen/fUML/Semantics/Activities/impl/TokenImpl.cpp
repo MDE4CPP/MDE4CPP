@@ -122,6 +122,7 @@ bool TokenImpl::isWithdrawn() const
 void TokenImpl::setWithdrawn(bool _withdrawn)
 {
 	m_withdrawn = _withdrawn;
+	
 } 
 
 
@@ -210,6 +211,7 @@ std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> TokenImpl::ge
 void TokenImpl::setHolder(std::weak_ptr<fUML::Semantics::Activities::ActivityNodeActivation> _holder)
 {
     m_holder = _holder;
+	
 }
 
 

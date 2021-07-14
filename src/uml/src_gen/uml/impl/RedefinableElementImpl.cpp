@@ -140,6 +140,7 @@ bool RedefinableElementImpl::getIsLeaf() const
 void RedefinableElementImpl::setIsLeaf(bool _isLeaf)
 {
 	m_isLeaf = _isLeaf;
+	
 } 
 
 

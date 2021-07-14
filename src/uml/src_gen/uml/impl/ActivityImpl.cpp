@@ -391,6 +391,7 @@ bool ActivityImpl::getIsReadOnly() const
 void ActivityImpl::setIsReadOnly(bool _isReadOnly)
 {
 	m_isReadOnly = _isReadOnly;
+	
 } 
 
 
@@ -404,6 +405,7 @@ bool ActivityImpl::getIsSingleExecution() const
 void ActivityImpl::setIsSingleExecution(bool _isSingleExecution)
 {
 	m_isSingleExecution = _isSingleExecution;
+	
 } 
 
 

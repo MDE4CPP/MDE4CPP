@@ -170,6 +170,7 @@ bool LiteralBooleanImpl::getValue() const
 void LiteralBooleanImpl::setValue(bool _value)
 {
 	m_value = _value;
+	
 } 
 
 

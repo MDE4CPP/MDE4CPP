@@ -164,6 +164,7 @@ std::shared_ptr<uml::Behavior> BehaviorExecutionSpecificationImpl::getBehavior()
 void BehaviorExecutionSpecificationImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
+	
 }
 
 

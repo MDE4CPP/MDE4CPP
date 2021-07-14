@@ -222,8 +222,6 @@ std::shared_ptr<Bag<uml::ExecutableNode>> SequenceNodeImpl::getExecutableNode() 
     return m_executableNode;
 }
 
-/*Additional Setter for redefined reference 'StructuredActivityNode::node'*/
-
 
 
 //*********************************

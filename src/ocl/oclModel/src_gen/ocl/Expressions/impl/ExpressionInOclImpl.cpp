@@ -165,6 +165,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> ExpressionInOclImpl::getBodyExp
 void ExpressionInOclImpl::setBodyExpression(std::shared_ptr<ocl::Expressions::OclExpression> _bodyExpression)
 {
     m_bodyExpression = _bodyExpression;
+	
 }
 
 
@@ -179,6 +180,7 @@ std::shared_ptr<ocl::Expressions::Variable> ExpressionInOclImpl::getContextVaria
 void ExpressionInOclImpl::setContextVariable(std::shared_ptr<ocl::Expressions::Variable> _contextVariable)
 {
     m_contextVariable = _contextVariable;
+	
 }
 
 
@@ -210,6 +212,7 @@ std::shared_ptr<ocl::Expressions::Variable> ExpressionInOclImpl::getResultVariab
 void ExpressionInOclImpl::setResultVariable(std::shared_ptr<ocl::Expressions::Variable> _resultVariable)
 {
     m_resultVariable = _resultVariable;
+	
 }
 
 

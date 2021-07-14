@@ -618,6 +618,7 @@ std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> ActivityNodeActiva
 void ActivityNodeActivationGroupImpl::setActivityExecution(std::weak_ptr<fUML::Semantics::Activities::ActivityExecution> _activityExecution)
 {
     m_activityExecution = _activityExecution;
+	
 }
 
 
@@ -632,6 +633,7 @@ std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> Activi
 void ActivityNodeActivationGroupImpl::setContainingNodeActivation(std::weak_ptr<fUML::Semantics::Actions::StructuredActivityNodeActivation> _containingNodeActivation)
 {
     m_containingNodeActivation = _containingNodeActivation;
+	
 }
 
 

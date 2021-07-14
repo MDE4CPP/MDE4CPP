@@ -230,6 +230,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> ReturnInfo
 void ReturnInformationImpl::setCallEventOccurrence(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventOccurrence> _callEventOccurrence)
 {
     m_callEventOccurrence = _callEventOccurrence;
+	
 }
 
 

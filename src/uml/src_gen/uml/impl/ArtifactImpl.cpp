@@ -293,6 +293,7 @@ std::string ArtifactImpl::getFileName() const
 void ArtifactImpl::setFileName(std::string _fileName)
 {
 	m_fileName = _fileName;
+	
 } 
 
 

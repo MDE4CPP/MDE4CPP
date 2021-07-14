@@ -189,6 +189,7 @@ uml::MessageSort MessageImpl::getMessageSort() const
 void MessageImpl::setMessageSort(uml::MessageSort _messageSort)
 {
 	m_messageSort = _messageSort;
+	
 } 
 
 
@@ -289,6 +290,7 @@ std::shared_ptr<uml::Connector> MessageImpl::getConnector() const
 void MessageImpl::setConnector(std::shared_ptr<uml::Connector> _connector)
 {
     m_connector = _connector;
+	
 }
 
 
@@ -303,6 +305,11 @@ std::weak_ptr<uml::Interaction> MessageImpl::getInteraction() const
 void MessageImpl::setInteraction(std::weak_ptr<uml::Interaction> _interaction)
 {
     m_interaction = _interaction;
+	m_namespace = this->getInteraction().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 
@@ -317,6 +324,7 @@ std::shared_ptr<uml::MessageEnd> MessageImpl::getReceiveEvent() const
 void MessageImpl::setReceiveEvent(std::shared_ptr<uml::MessageEnd> _receiveEvent)
 {
     m_receiveEvent = _receiveEvent;
+	
 }
 
 
@@ -331,6 +339,7 @@ std::shared_ptr<uml::MessageEnd> MessageImpl::getSendEvent() const
 void MessageImpl::setSendEvent(std::shared_ptr<uml::MessageEnd> _sendEvent)
 {
     m_sendEvent = _sendEvent;
+	
 }
 
 
@@ -345,6 +354,7 @@ std::shared_ptr<uml::NamedElement> MessageImpl::getSignature() const
 void MessageImpl::setSignature(std::shared_ptr<uml::NamedElement> _signature)
 {
     m_signature = _signature;
+	
 }
 
 

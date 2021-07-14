@@ -112,6 +112,7 @@ std::string ArgumentImpl::getName() const
 void ArgumentImpl::setName(std::string _name)
 {
 	m_name = _name;
+	
 } 
 
 
@@ -133,6 +134,7 @@ std::shared_ptr<uml::Object> ArgumentImpl::getValue() const
 void ArgumentImpl::setValue(std::shared_ptr<uml::Object> _value)
 {
     m_value = _value;
+	
 }
 
 

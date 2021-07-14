@@ -192,6 +192,11 @@ std::weak_ptr<uml::Package> TypeImpl::getPackage() const
 void TypeImpl::setPackage(std::weak_ptr<uml::Package> _package)
 {
     m_package = _package;
+	m_namespace = this->getPackage().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 

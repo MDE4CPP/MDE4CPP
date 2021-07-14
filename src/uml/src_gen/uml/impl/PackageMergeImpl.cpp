@@ -144,6 +144,9 @@ std::shared_ptr<uml::Package> PackageMergeImpl::getMergedPackage() const
 void PackageMergeImpl::setMergedPackage(std::shared_ptr<uml::Package> _mergedPackage)
 {
     m_mergedPackage = _mergedPackage;
+	
+	
+	
 }
 
 
@@ -158,6 +161,11 @@ std::weak_ptr<uml::Package> PackageMergeImpl::getReceivingPackage() const
 void PackageMergeImpl::setReceivingPackage(std::weak_ptr<uml::Package> _receivingPackage)
 {
     m_receivingPackage = _receivingPackage;
+	
+	
+	m_owner = this->getReceivingPackage().lock();
+	
+	
 }
 
 

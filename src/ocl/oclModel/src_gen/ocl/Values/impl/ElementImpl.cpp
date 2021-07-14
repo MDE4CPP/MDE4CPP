@@ -114,6 +114,7 @@ int ElementImpl::getIndexNr() const
 void ElementImpl::setIndexNr(int _indexNr)
 {
 	m_indexNr = _indexNr;
+	
 } 
 
 
@@ -135,6 +136,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ElementImpl::getValue() const
 void ElementImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
 {
     m_value = _value;
+	
 }
 
 

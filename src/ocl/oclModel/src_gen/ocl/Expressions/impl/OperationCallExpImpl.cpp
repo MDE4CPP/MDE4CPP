@@ -262,6 +262,7 @@ std::shared_ptr<ecore::EOperation> OperationCallExpImpl::getReferredOperation() 
 void OperationCallExpImpl::setReferredOperation(std::shared_ptr<ecore::EOperation> _referredOperation)
 {
     m_referredOperation = _referredOperation;
+	
 }
 
 

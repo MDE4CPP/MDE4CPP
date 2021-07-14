@@ -174,6 +174,7 @@ bool ReadIsClassifiedObjectActionImpl::getIsDirect() const
 void ReadIsClassifiedObjectActionImpl::setIsDirect(bool _isDirect)
 {
 	m_isDirect = _isDirect;
+	
 } 
 
 
@@ -218,6 +219,7 @@ std::shared_ptr<uml::Classifier> ReadIsClassifiedObjectActionImpl::getClassifier
 void ReadIsClassifiedObjectActionImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
 {
     m_classifier = _classifier;
+	
 }
 
 
@@ -232,6 +234,9 @@ std::shared_ptr<uml::InputPin> ReadIsClassifiedObjectActionImpl::getObject() con
 void ReadIsClassifiedObjectActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
+	
+	
+	
 }
 
 
@@ -246,6 +251,9 @@ std::shared_ptr<uml::OutputPin> ReadIsClassifiedObjectActionImpl::getResult() co
 void ReadIsClassifiedObjectActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
+	
+	
+	
 }
 
 

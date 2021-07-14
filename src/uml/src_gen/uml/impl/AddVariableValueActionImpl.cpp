@@ -169,6 +169,7 @@ bool AddVariableValueActionImpl::getIsReplaceAll() const
 void AddVariableValueActionImpl::setIsReplaceAll(bool _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
+	
 } 
 
 
@@ -201,6 +202,9 @@ std::shared_ptr<uml::InputPin> AddVariableValueActionImpl::getInsertAt() const
 void AddVariableValueActionImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
 {
     m_insertAt = _insertAt;
+	
+	
+	
 }
 
 

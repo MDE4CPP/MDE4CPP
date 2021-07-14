@@ -278,6 +278,7 @@ bool ClassImpl::getIsActive() const
 void ClassImpl::setIsActive(bool _isActive)
 {
 	m_isActive = _isActive;
+	
 } 
 
 
@@ -460,8 +461,6 @@ std::shared_ptr<Bag<uml::Class>> ClassImpl::getSuperClass() const
 
     return m_superClass;
 }
-
-/*Additional Setter for redefined reference 'Classifier::general'*/
 
 
 

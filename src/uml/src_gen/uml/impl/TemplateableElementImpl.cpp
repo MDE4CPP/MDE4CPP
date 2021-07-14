@@ -174,6 +174,8 @@ std::shared_ptr<uml::TemplateSignature> TemplateableElementImpl::getOwnedTemplat
 void TemplateableElementImpl::setOwnedTemplateSignature(std::shared_ptr<uml::TemplateSignature> _ownedTemplateSignature)
 {
     m_ownedTemplateSignature = _ownedTemplateSignature;
+	
+	
 }
 
 

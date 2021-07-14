@@ -232,6 +232,7 @@ std::weak_ptr<ocl::Expressions::CallExp> OclExpressionImpl::getAppliedElement() 
 void OclExpressionImpl::setAppliedElement(std::weak_ptr<ocl::Expressions::CallExp> _appliedElement)
 {
     m_appliedElement = _appliedElement;
+	
 }
 
 
@@ -246,6 +247,7 @@ std::weak_ptr<ocl::Expressions::IfExp> OclExpressionImpl::getElseOwner() const
 void OclExpressionImpl::setElseOwner(std::weak_ptr<ocl::Expressions::IfExp> _elseOwner)
 {
     m_elseOwner = _elseOwner;
+	
 }
 
 
@@ -260,6 +262,7 @@ std::weak_ptr<ocl::Expressions::CollectionRange> OclExpressionImpl::getFirstOwne
 void OclExpressionImpl::setFirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> _firstOwner)
 {
     m_firstOwner = _firstOwner;
+	
 }
 
 
@@ -274,6 +277,7 @@ std::weak_ptr<ocl::Expressions::IfExp> OclExpressionImpl::getIfOwner() const
 void OclExpressionImpl::setIfOwner(std::weak_ptr<ocl::Expressions::IfExp> _ifOwner)
 {
     m_ifOwner = _ifOwner;
+	
 }
 
 
@@ -288,6 +292,7 @@ std::weak_ptr<ocl::Expressions::Variable> OclExpressionImpl::getInitializedEleme
 void OclExpressionImpl::setInitializedElement(std::weak_ptr<ocl::Expressions::Variable> _initializedElement)
 {
     m_initializedElement = _initializedElement;
+	
 }
 
 
@@ -302,6 +307,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> OclExpressionImpl::getInstance() c
 void OclExpressionImpl::setInstance(std::shared_ptr<ocl::Evaluations::OclExpEval> _instance)
 {
     m_instance = _instance;
+	
 }
 
 
@@ -316,6 +322,7 @@ std::weak_ptr<ocl::Expressions::CollectionRange> OclExpressionImpl::getLastOwner
 void OclExpressionImpl::setLastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> _lastOwner)
 {
     m_lastOwner = _lastOwner;
+	
 }
 
 
@@ -330,6 +337,7 @@ std::weak_ptr<ocl::Expressions::LoopExp> OclExpressionImpl::getLoopBodyOwner() c
 void OclExpressionImpl::setLoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> _loopBodyOwner)
 {
     m_loopBodyOwner = _loopBodyOwner;
+	
 }
 
 
@@ -344,6 +352,7 @@ std::weak_ptr<ocl::Expressions::OperationCallExp> OclExpressionImpl::getParentCa
 void OclExpressionImpl::setParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> _parentCall)
 {
     m_parentCall = _parentCall;
+	
 }
 
 
@@ -358,6 +367,7 @@ std::weak_ptr<ocl::Expressions::NavigationCallExp> OclExpressionImpl::getParentN
 void OclExpressionImpl::setParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> _parentNav)
 {
     m_parentNav = _parentNav;
+	
 }
 
 
@@ -372,6 +382,7 @@ std::weak_ptr<ocl::Expressions::IfExp> OclExpressionImpl::getThenOwner() const
 void OclExpressionImpl::setThenOwner(std::weak_ptr<ocl::Expressions::IfExp> _thenOwner)
 {
     m_thenOwner = _thenOwner;
+	
 }
 
 
@@ -386,6 +397,7 @@ std::weak_ptr<ocl::Expressions::ExpressionInOcl> OclExpressionImpl::getTopExpres
 void OclExpressionImpl::setTopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> _topExpression)
 {
     m_topExpression = _topExpression;
+	
 }
 
 

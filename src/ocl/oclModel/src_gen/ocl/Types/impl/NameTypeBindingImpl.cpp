@@ -114,6 +114,7 @@ std::string NameTypeBindingImpl::getName() const
 void NameTypeBindingImpl::setName(std::string _name)
 {
 	m_name = _name;
+	
 } 
 
 
@@ -135,6 +136,7 @@ std::shared_ptr<ecore::EClassifier> NameTypeBindingImpl::getType() const
 void NameTypeBindingImpl::setType(std::shared_ptr<ecore::EClassifier> _type)
 {
     m_type = _type;
+	
 }
 
 

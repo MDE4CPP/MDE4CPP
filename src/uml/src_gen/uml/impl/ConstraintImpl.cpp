@@ -216,6 +216,11 @@ std::weak_ptr<uml::Namespace> ConstraintImpl::getContext() const
 void ConstraintImpl::setContext(std::weak_ptr<uml::Namespace> _context)
 {
     m_context = _context;
+	m_namespace = this->getContext().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 
@@ -230,6 +235,8 @@ std::shared_ptr<uml::ValueSpecification> ConstraintImpl::getSpecification() cons
 void ConstraintImpl::setSpecification(std::shared_ptr<uml::ValueSpecification> _specification)
 {
     m_specification = _specification;
+	
+	
 }
 
 

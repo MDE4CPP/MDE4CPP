@@ -198,6 +198,7 @@ uml::TransitionKind TransitionImpl::getKind() const
 void TransitionImpl::setKind(uml::TransitionKind _kind)
 {
 	m_kind = _kind;
+	
 } 
 
 
@@ -284,6 +285,11 @@ std::weak_ptr<uml::Region> TransitionImpl::getContainer() const
 void TransitionImpl::setContainer(std::weak_ptr<uml::Region> _container)
 {
     m_container = _container;
+	m_namespace = this->getContainer().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 
@@ -298,6 +304,8 @@ std::shared_ptr<uml::Behavior> TransitionImpl::getEffect() const
 void TransitionImpl::setEffect(std::shared_ptr<uml::Behavior> _effect)
 {
     m_effect = _effect;
+	
+	
 }
 
 
@@ -312,6 +320,11 @@ std::shared_ptr<uml::Constraint> TransitionImpl::getGuard() const
 void TransitionImpl::setGuard(std::shared_ptr<uml::Constraint> _guard)
 {
     m_guard = _guard;
+	
+	
+	
+	
+	
 }
 
 
@@ -326,6 +339,8 @@ std::shared_ptr<uml::Transition> TransitionImpl::getRedefinedTransition() const
 void TransitionImpl::setRedefinedTransition(std::shared_ptr<uml::Transition> _redefinedTransition)
 {
     m_redefinedTransition = _redefinedTransition;
+	
+	
 }
 
 
@@ -340,6 +355,7 @@ std::shared_ptr<uml::Vertex> TransitionImpl::getSource() const
 void TransitionImpl::setSource(std::shared_ptr<uml::Vertex> _source)
 {
     m_source = _source;
+	
 }
 
 
@@ -354,6 +370,7 @@ std::shared_ptr<uml::Vertex> TransitionImpl::getTarget() const
 void TransitionImpl::setTarget(std::shared_ptr<uml::Vertex> _target)
 {
     m_target = _target;
+	
 }
 
 

@@ -170,6 +170,7 @@ std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getFin
 void ExecutionSpecificationImpl::setFinish(std::shared_ptr<uml::OccurrenceSpecification> _finish)
 {
     m_finish = _finish;
+	
 }
 
 
@@ -184,6 +185,7 @@ std::shared_ptr<uml::OccurrenceSpecification> ExecutionSpecificationImpl::getSta
 void ExecutionSpecificationImpl::setStart(std::shared_ptr<uml::OccurrenceSpecification> _start)
 {
     m_start = _start;
+	
 }
 
 

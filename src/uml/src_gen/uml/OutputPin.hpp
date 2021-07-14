@@ -13,6 +13,7 @@
 #include <string>
 // forward declarations
 template<class T, class ... U> class Subset;
+template<class T, class ... U> class SubsetUnion;
 
 class AnyObject;
 typedef std::shared_ptr<AnyObject> Any;

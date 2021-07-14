@@ -273,6 +273,7 @@ bool AssociationImpl::getIsDerived() const
 void AssociationImpl::setIsDerived(bool _isDerived)
 {
 	m_isDerived = _isDerived;
+	
 } 
 
 

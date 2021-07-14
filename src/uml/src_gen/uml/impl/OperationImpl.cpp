@@ -273,6 +273,7 @@ bool OperationImpl::getIsQuery() const
 void OperationImpl::setIsQuery(bool _isQuery)
 {
 	m_isQuery = _isQuery;
+	
 } 
 
 
@@ -455,6 +456,11 @@ std::shared_ptr<uml::Constraint> OperationImpl::getBodyCondition() const
 void OperationImpl::setBodyCondition(std::shared_ptr<uml::Constraint> _bodyCondition)
 {
     m_bodyCondition = _bodyCondition;
+	
+	
+	
+	
+	
 }
 
 
@@ -469,6 +475,13 @@ std::weak_ptr<uml::Class> OperationImpl::getClass() const
 void OperationImpl::setClass(std::weak_ptr<uml::Class> _class)
 {
     m_class = _class;
+	
+	m_namespace = this->getClass().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
+	
 }
 
 
@@ -483,6 +496,13 @@ std::weak_ptr<uml::DataType> OperationImpl::getDatatype() const
 void OperationImpl::setDatatype(std::weak_ptr<uml::DataType> _datatype)
 {
     m_datatype = _datatype;
+	
+	m_namespace = this->getDatatype().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
+	
 }
 
 
@@ -497,6 +517,13 @@ std::weak_ptr<uml::Interface> OperationImpl::getInterface() const
 void OperationImpl::setInterface(std::weak_ptr<uml::Interface> _interface)
 {
     m_interface = _interface;
+	
+	m_namespace = this->getInterface().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
+	
 }
 
 

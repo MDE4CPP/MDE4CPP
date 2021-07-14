@@ -34,7 +34,7 @@
 #include "ecoreReflection/EcorePackage.hpp"
 #include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 
-//Subpackages
+
 
 //Stereotypes
 #include "ecore/EAttribute.hpp"
@@ -14595,8 +14595,8 @@ void UMLPackageImpl::initializePackageContents(std::shared_ptr<uml::Package> uML
 	isInitialized = true;
 
 	// Initialize package
-	setName(eNAME);
-	setURI(eNS_URI);
+	this->setName(eNAME);
+	this->setURI(eNS_URI);
 
 	initializePackageActivities();
 	initializePackageClasses();

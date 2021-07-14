@@ -137,6 +137,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> VariableExpEval
 void VariableExpEvalImpl::setReferredVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredVariable)
 {
     m_referredVariable = _referredVariable;
+	
 }
 
 

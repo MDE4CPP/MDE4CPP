@@ -221,6 +221,7 @@ std::shared_ptr<ocl::Expressions::Variable> VariableExpImpl::getReferredVariable
 void VariableExpImpl::setReferredVariable(std::shared_ptr<ocl::Expressions::Variable> _referredVariable)
 {
     m_referredVariable = _referredVariable;
+	
 }
 
 

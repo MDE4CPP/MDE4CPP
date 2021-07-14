@@ -134,6 +134,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> PropertyCallExpEvalImpl::getSource
 void PropertyCallExpEvalImpl::setSource(std::shared_ptr<ocl::Evaluations::OclExpEval> _source)
 {
     m_source = _source;
+	
 }
 
 

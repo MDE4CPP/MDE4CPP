@@ -181,6 +181,11 @@ std::weak_ptr<uml::Activity> VariableImpl::getActivityScope() const
 void VariableImpl::setActivityScope(std::weak_ptr<uml::Activity> _activityScope)
 {
     m_activityScope = _activityScope;
+	m_namespace = this->getActivityScope().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 
@@ -195,6 +200,11 @@ std::weak_ptr<uml::StructuredActivityNode> VariableImpl::getScope() const
 void VariableImpl::setScope(std::weak_ptr<uml::StructuredActivityNode> _scope)
 {
     m_scope = _scope;
+	m_namespace = this->getScope().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 

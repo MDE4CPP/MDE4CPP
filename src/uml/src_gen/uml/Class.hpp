@@ -186,7 +186,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::Class>> getSuperClass() const = 0;
 			
-			/*Additional Setter for 'Classifier::general' redefined by reference 'superClass'*/
 			
 
 		protected:

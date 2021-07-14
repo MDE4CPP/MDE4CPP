@@ -197,6 +197,7 @@ std::string ExpressionImpl::getSymbol() const
 void ExpressionImpl::setSymbol(std::string _symbol)
 {
 	m_symbol = _symbol;
+	
 } 
 
 

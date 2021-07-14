@@ -120,6 +120,7 @@ bool ForkedTokenImpl::isBaseTokenIsWithdrawn() const
 void ForkedTokenImpl::setBaseTokenIsWithdrawn(bool _baseTokenIsWithdrawn)
 {
 	m_baseTokenIsWithdrawn = _baseTokenIsWithdrawn;
+	
 } 
 
 
@@ -133,6 +134,7 @@ int ForkedTokenImpl::getRemainingOffersCount() const
 void ForkedTokenImpl::setRemainingOffersCount(int _remainingOffersCount)
 {
 	m_remainingOffersCount = _remainingOffersCount;
+	
 } 
 
 
@@ -213,6 +215,7 @@ std::shared_ptr<fUML::Semantics::Activities::Token> ForkedTokenImpl::getBaseToke
 void ForkedTokenImpl::setBaseToken(std::shared_ptr<fUML::Semantics::Activities::Token> _baseToken)
 {
     m_baseToken = _baseToken;
+	
 }
 
 

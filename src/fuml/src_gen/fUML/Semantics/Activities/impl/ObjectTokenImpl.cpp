@@ -160,6 +160,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> ObjectTokenImpl::getValue() cons
 void ObjectTokenImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
 {
     m_value = _value;
+	
 }
 
 

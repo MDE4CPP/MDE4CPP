@@ -121,7 +121,8 @@ namespace uml
 			<p>From package UML::CommonStructure.</p>
 			*/
 			
-			virtual void setTemplate(std::weak_ptr<uml::TemplateableElement>) = 0;/*!
+			virtual void setTemplate(std::weak_ptr<uml::TemplateableElement>) = 0;
+			/*!
 			The signatures extended by this RedefinableTemplateSignature.
 			<p>From package UML::Classification.</p>
 			*/

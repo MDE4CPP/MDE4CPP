@@ -104,7 +104,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::ExecutableNode>> getExecutableNode() const = 0;
 			
-			/*Additional Setter for 'StructuredActivityNode::node' redefined by reference 'executableNode'*/
 			
 
 		protected:

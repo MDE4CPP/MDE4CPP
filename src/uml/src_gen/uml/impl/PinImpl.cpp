@@ -165,6 +165,7 @@ bool PinImpl::getIsControl() const
 void PinImpl::setIsControl(bool _isControl)
 {
 	m_isControl = _isControl;
+	
 } 
 
 

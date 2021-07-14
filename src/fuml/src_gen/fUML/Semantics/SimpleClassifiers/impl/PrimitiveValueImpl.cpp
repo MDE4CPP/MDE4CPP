@@ -155,6 +155,7 @@ std::shared_ptr<uml::PrimitiveType> PrimitiveValueImpl::getType() const
 void PrimitiveValueImpl::setType(std::shared_ptr<uml::PrimitiveType> _type)
 {
     m_type = _type;
+	
 }
 
 

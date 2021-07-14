@@ -124,6 +124,7 @@ bool LocalSnapshotImpl::getIsPost() const
 void LocalSnapshotImpl::setIsPost(bool _isPost)
 {
 	m_isPost = _isPost;
+	
 } 
 
 
@@ -137,6 +138,7 @@ bool LocalSnapshotImpl::getIsPre() const
 void LocalSnapshotImpl::setIsPre(bool _isPre)
 {
 	m_isPre = _isPre;
+	
 } 
 
 
@@ -209,6 +211,7 @@ std::shared_ptr<ocl::Values::LocalSnapshot> LocalSnapshotImpl::getPred() const
 void LocalSnapshotImpl::setPred(std::shared_ptr<ocl::Values::LocalSnapshot> _pred)
 {
     m_pred = _pred;
+	
 }
 
 
@@ -223,6 +226,7 @@ std::shared_ptr<ocl::Values::LocalSnapshot> LocalSnapshotImpl::getSucc() const
 void LocalSnapshotImpl::setSucc(std::shared_ptr<ocl::Values::LocalSnapshot> _succ)
 {
     m_succ = _succ;
+	
 }
 
 

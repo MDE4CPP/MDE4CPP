@@ -264,6 +264,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> ObjectImpl::g
 void ObjectImpl::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
 {
     m_objectActivation = _objectActivation;
+	
 }
 
 

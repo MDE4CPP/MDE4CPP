@@ -224,6 +224,7 @@ std::shared_ptr<uml::EnumerationLiteral> EnumLiteralExpImpl::getReferredEnumLite
 void EnumLiteralExpImpl::setReferredEnumLiteral(std::shared_ptr<uml::EnumerationLiteral> _referredEnumLiteral)
 {
     m_referredEnumLiteral = _referredEnumLiteral;
+	
 }
 
 

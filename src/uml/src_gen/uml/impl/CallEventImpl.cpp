@@ -161,6 +161,7 @@ std::shared_ptr<uml::Operation> CallEventImpl::getOperation() const
 void CallEventImpl::setOperation(std::shared_ptr<uml::Operation> _operation)
 {
     m_operation = _operation;
+	
 }
 
 

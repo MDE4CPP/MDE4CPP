@@ -345,6 +345,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ObjectActivation
 void ObjectActivationImpl::setObject(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _object)
 {
     m_object = _object;
+	
 }
 
 

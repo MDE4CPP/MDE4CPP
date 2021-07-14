@@ -193,6 +193,9 @@ std::shared_ptr<uml::OutputPin> ValueSpecificationActionImpl::getResult() const
 void ValueSpecificationActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
+	
+	
+	
 }
 
 
@@ -207,6 +210,8 @@ std::shared_ptr<uml::ValueSpecification> ValueSpecificationActionImpl::getValue(
 void ValueSpecificationActionImpl::setValue(std::shared_ptr<uml::ValueSpecification> _value)
 {
     m_value = _value;
+	
+	
 }
 
 

@@ -224,6 +224,7 @@ std::shared_ptr<uml::Property> ReadLinkObjectEndActionImpl::getEnd() const
 void ReadLinkObjectEndActionImpl::setEnd(std::shared_ptr<uml::Property> _end)
 {
     m_end = _end;
+	
 }
 
 
@@ -238,6 +239,9 @@ std::shared_ptr<uml::InputPin> ReadLinkObjectEndActionImpl::getObject() const
 void ReadLinkObjectEndActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
+	
+	
+	
 }
 
 
@@ -252,6 +256,9 @@ std::shared_ptr<uml::OutputPin> ReadLinkObjectEndActionImpl::getResult() const
 void ReadLinkObjectEndActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
+	
+	
+	
 }
 
 

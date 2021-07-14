@@ -213,6 +213,7 @@ std::shared_ptr<ocl::Types::CollectionType> CollectionValueImpl::getModel() cons
 void CollectionValueImpl::setModel(std::shared_ptr<ocl::Types::CollectionType> _model)
 {
     m_model = _model;
+	
 }
 
 

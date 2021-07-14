@@ -188,6 +188,9 @@ std::shared_ptr<uml::OutputPin> ReadVariableActionImpl::getResult() const
 void ReadVariableActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
+	
+	
+	
 }
 
 

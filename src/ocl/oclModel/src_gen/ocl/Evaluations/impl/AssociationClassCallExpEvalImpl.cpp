@@ -139,6 +139,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> AssociationClas
 void AssociationClassCallExpEvalImpl::setReferredAssociationClass(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredAssociationClass)
 {
     m_referredAssociationClass = _referredAssociationClass;
+	
 }
 
 

@@ -205,6 +205,7 @@ uml::CallConcurrencyKind BehavioralFeatureImpl::getConcurrency() const
 void BehavioralFeatureImpl::setConcurrency(uml::CallConcurrencyKind _concurrency)
 {
 	m_concurrency = _concurrency;
+	
 } 
 
 
@@ -218,6 +219,7 @@ bool BehavioralFeatureImpl::getIsAbstract() const
 void BehavioralFeatureImpl::setIsAbstract(bool _isAbstract)
 {
 	m_isAbstract = _isAbstract;
+	
 } 
 
 

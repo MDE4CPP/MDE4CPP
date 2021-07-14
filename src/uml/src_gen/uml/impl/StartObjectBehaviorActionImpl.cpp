@@ -201,6 +201,9 @@ std::shared_ptr<uml::InputPin> StartObjectBehaviorActionImpl::getObject() const
 void StartObjectBehaviorActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
+	
+	
+	
 }
 
 

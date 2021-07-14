@@ -24,9 +24,8 @@
 #include "primitivetypesReflection/PrimitiveTypesPackage.hpp"
 #include "umlReflection/UMLPackage.hpp"
 
-//Subpackages
 
-//Stereotypes
+
 
 using namespace UML4CPPProfile;
 
@@ -189,8 +188,8 @@ void UML4CPPProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::P
 	isInitialized = true;
 
 	// Initialize package
-	setName(eNAME);
-	setURI(eNS_URI);
+	this->setName(eNAME);
+	this->setURI(eNS_URI);
 
 	initializePackageActivities();
 	initializePackageClasses();

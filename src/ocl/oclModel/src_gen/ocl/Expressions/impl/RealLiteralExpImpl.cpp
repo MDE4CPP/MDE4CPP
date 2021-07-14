@@ -212,6 +212,7 @@ int RealLiteralExpImpl::getRealSymbol() const
 void RealLiteralExpImpl::setRealSymbol(int _realSymbol)
 {
 	m_realSymbol = _realSymbol;
+	
 } 
 
 

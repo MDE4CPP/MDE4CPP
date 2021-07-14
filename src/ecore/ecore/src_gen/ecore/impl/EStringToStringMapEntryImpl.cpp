@@ -110,6 +110,7 @@ std::string EStringToStringMapEntryImpl::getKey() const
 void EStringToStringMapEntryImpl::setKey(std::string _key)
 {
 	m_key = _key;
+	
 } 
 
 
@@ -123,6 +124,7 @@ std::string EStringToStringMapEntryImpl::getValue() const
 void EStringToStringMapEntryImpl::setValue(std::string _value)
 {
 	m_value = _value;
+	
 } 
 
 

@@ -163,6 +163,7 @@ bool ObjectFlowImpl::getIsMulticast() const
 void ObjectFlowImpl::setIsMulticast(bool _isMulticast)
 {
 	m_isMulticast = _isMulticast;
+	
 } 
 
 
@@ -176,6 +177,7 @@ bool ObjectFlowImpl::getIsMultireceive() const
 void ObjectFlowImpl::setIsMultireceive(bool _isMultireceive)
 {
 	m_isMultireceive = _isMultireceive;
+	
 } 
 
 
@@ -244,6 +246,7 @@ std::shared_ptr<uml::Behavior> ObjectFlowImpl::getSelection() const
 void ObjectFlowImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
 {
     m_selection = _selection;
+	
 }
 
 
@@ -258,6 +261,7 @@ std::shared_ptr<uml::Behavior> ObjectFlowImpl::getTransformation() const
 void ObjectFlowImpl::setTransformation(std::shared_ptr<uml::Behavior> _transformation)
 {
     m_transformation = _transformation;
+	
 }
 
 

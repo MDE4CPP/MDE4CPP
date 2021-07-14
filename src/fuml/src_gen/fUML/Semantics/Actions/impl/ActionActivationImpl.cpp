@@ -211,6 +211,7 @@ bool ActionActivationImpl::isFiring() const
 void ActionActivationImpl::setFiring(bool _firing)
 {
 	m_firing = _firing;
+	
 } 
 
 
@@ -734,6 +735,7 @@ void ActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)
     m_action = _action;
 	//additional setter call for redefined reference ActivityNodeActivation::node
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_action);
+	
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
 void ActionActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)

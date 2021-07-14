@@ -166,6 +166,7 @@ std::shared_ptr<uml::Signal> ReceptionImpl::getSignal() const
 void ReceptionImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 {
     m_signal = _signal;
+	
 }
 
 

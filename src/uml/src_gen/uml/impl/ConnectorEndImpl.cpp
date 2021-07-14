@@ -170,6 +170,7 @@ std::weak_ptr<uml::Connector> ConnectorEndImpl::getConnector() const
 void ConnectorEndImpl::setConnector(std::weak_ptr<uml::Connector> _connector)
 {
     m_connector = _connector;
+	
 }
 
 
@@ -195,6 +196,7 @@ std::shared_ptr<uml::Property> ConnectorEndImpl::getPartWithPort() const
 void ConnectorEndImpl::setPartWithPort(std::shared_ptr<uml::Property> _partWithPort)
 {
     m_partWithPort = _partWithPort;
+	
 }
 
 
@@ -209,6 +211,7 @@ std::shared_ptr<uml::ConnectableElement> ConnectorEndImpl::getRole() const
 void ConnectorEndImpl::setRole(std::shared_ptr<uml::ConnectableElement> _role)
 {
     m_role = _role;
+	
 }
 
 

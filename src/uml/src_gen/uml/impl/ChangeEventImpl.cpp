@@ -165,6 +165,8 @@ std::shared_ptr<uml::ValueSpecification> ChangeEventImpl::getChangeExpression() 
 void ChangeEventImpl::setChangeExpression(std::shared_ptr<uml::ValueSpecification> _changeExpression)
 {
     m_changeExpression = _changeExpression;
+	
+	
 }
 
 

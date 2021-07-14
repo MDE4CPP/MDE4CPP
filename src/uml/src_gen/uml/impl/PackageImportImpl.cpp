@@ -138,6 +138,7 @@ uml::VisibilityKind PackageImportImpl::getVisibility() const
 void PackageImportImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
+	
 } 
 
 
@@ -164,6 +165,9 @@ std::shared_ptr<uml::Package> PackageImportImpl::getImportedPackage() const
 void PackageImportImpl::setImportedPackage(std::shared_ptr<uml::Package> _importedPackage)
 {
     m_importedPackage = _importedPackage;
+	
+	
+	
 }
 
 
@@ -178,6 +182,11 @@ std::weak_ptr<uml::Namespace> PackageImportImpl::getImportingNamespace() const
 void PackageImportImpl::setImportingNamespace(std::weak_ptr<uml::Namespace> _importingNamespace)
 {
     m_importingNamespace = _importingNamespace;
+	
+	
+	m_owner = this->getImportingNamespace().lock();
+	
+	
 }
 
 

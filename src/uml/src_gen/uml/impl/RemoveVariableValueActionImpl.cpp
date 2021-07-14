@@ -169,6 +169,7 @@ bool RemoveVariableValueActionImpl::getIsRemoveDuplicates() const
 void RemoveVariableValueActionImpl::setIsRemoveDuplicates(bool _isRemoveDuplicates)
 {
 	m_isRemoveDuplicates = _isRemoveDuplicates;
+	
 } 
 
 
@@ -195,6 +196,9 @@ std::shared_ptr<uml::InputPin> RemoveVariableValueActionImpl::getRemoveAt() cons
 void RemoveVariableValueActionImpl::setRemoveAt(std::shared_ptr<uml::InputPin> _removeAt)
 {
     m_removeAt = _removeAt;
+	
+	
+	
 }
 
 

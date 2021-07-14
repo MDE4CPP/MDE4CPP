@@ -153,6 +153,7 @@ bool TimeObservationImpl::getFirstEvent() const
 void TimeObservationImpl::setFirstEvent(bool _firstEvent)
 {
 	m_firstEvent = _firstEvent;
+	
 } 
 
 
@@ -174,6 +175,7 @@ std::shared_ptr<uml::NamedElement> TimeObservationImpl::getEvent() const
 void TimeObservationImpl::setEvent(std::shared_ptr<uml::NamedElement> _event)
 {
     m_event = _event;
+	
 }
 
 

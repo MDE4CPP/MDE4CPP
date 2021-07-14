@@ -181,6 +181,11 @@ std::weak_ptr<uml::Enumeration> EnumerationLiteralImpl::getEnumeration() const
 void EnumerationLiteralImpl::setEnumeration(std::weak_ptr<uml::Enumeration> _enumeration)
 {
     m_enumeration = _enumeration;
+	m_namespace = this->getEnumeration().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 

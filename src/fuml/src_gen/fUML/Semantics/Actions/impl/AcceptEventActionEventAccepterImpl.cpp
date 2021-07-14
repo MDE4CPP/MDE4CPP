@@ -124,6 +124,7 @@ std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> AcceptEve
 void AcceptEventActionEventAccepterImpl::setActionActivation(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionActivation> _actionActivation)
 {
     m_actionActivation = _actionActivation;
+	
 }
 
 

@@ -122,6 +122,7 @@ std::string CommentImpl::getBody() const
 void CommentImpl::setBody(std::string _body)
 {
 	m_body = _body;
+	
 } 
 
 

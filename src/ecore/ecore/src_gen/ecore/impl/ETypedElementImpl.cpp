@@ -134,6 +134,7 @@ int ETypedElementImpl::getLowerBound() const
 void ETypedElementImpl::setLowerBound(int _lowerBound)
 {
 	m_lowerBound = _lowerBound;
+	
 } 
 
 
@@ -157,6 +158,7 @@ bool ETypedElementImpl::isOrdered() const
 void ETypedElementImpl::setOrdered(bool _ordered)
 {
 	m_ordered = _ordered;
+	
 } 
 
 
@@ -170,6 +172,7 @@ bool ETypedElementImpl::isRequired() const
 void ETypedElementImpl::setRequired(bool _required)
 {
 	m_required = _required;
+	
 } 
 
 
@@ -183,6 +186,7 @@ bool ETypedElementImpl::isUnique() const
 void ETypedElementImpl::setUnique(bool _unique)
 {
 	m_unique = _unique;
+	
 } 
 
 
@@ -196,6 +200,7 @@ int ETypedElementImpl::getUpperBound() const
 void ETypedElementImpl::setUpperBound(int _upperBound)
 {
 	m_upperBound = _upperBound;
+	
 } 
 
 
@@ -217,6 +222,7 @@ std::shared_ptr<ecore::EGenericType> ETypedElementImpl::getEGenericType() const
 void ETypedElementImpl::setEGenericType(std::shared_ptr<ecore::EGenericType> _eGenericType)
 {
     m_eGenericType = _eGenericType;
+	
 }
 
 
@@ -231,6 +237,7 @@ std::shared_ptr<ecore::EClassifier> ETypedElementImpl::getEType() const
 void ETypedElementImpl::setEType(std::shared_ptr<ecore::EClassifier> _eType)
 {
     m_eType = _eType;
+	
 }
 
 

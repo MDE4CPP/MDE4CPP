@@ -124,6 +124,7 @@ bool BooleanValueImpl::isValue() const
 void BooleanValueImpl::setValue(bool _value)
 {
 	m_value = _value;
+	
 } 
 
 

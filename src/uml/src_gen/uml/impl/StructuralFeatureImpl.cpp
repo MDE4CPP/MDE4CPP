@@ -141,6 +141,7 @@ bool StructuralFeatureImpl::getIsReadOnly() const
 void StructuralFeatureImpl::setIsReadOnly(bool _isReadOnly)
 {
 	m_isReadOnly = _isReadOnly;
+	
 } 
 
 

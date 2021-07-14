@@ -132,6 +132,7 @@ Any EEnumLiteralImpl::getInstance() const
 void EEnumLiteralImpl::setInstance(Any _instance)
 {
 	m_instance = _instance;
+	
 } 
 
 
@@ -145,6 +146,7 @@ std::string EEnumLiteralImpl::getLiteral() const
 void EEnumLiteralImpl::setLiteral(std::string _literal)
 {
 	m_literal = _literal;
+	
 } 
 
 
@@ -158,6 +160,7 @@ int EEnumLiteralImpl::getValue() const
 void EEnumLiteralImpl::setValue(int _value)
 {
 	m_value = _value;
+	
 } 
 
 

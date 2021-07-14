@@ -246,6 +246,7 @@ bool EClassImpl::isAbstract() const
 void EClassImpl::setAbstract(bool _abstract)
 {
 	m_abstract = _abstract;
+	
 } 
 
 
@@ -259,6 +260,7 @@ bool EClassImpl::isInterface() const
 void EClassImpl::setInterface(bool _interface)
 {
 	m_interface = _interface;
+	
 } 
 
 
@@ -609,6 +611,7 @@ std::shared_ptr<ecore::EAttribute> EClassImpl::getEIDAttribute() const
 void EClassImpl::setEIDAttribute(std::shared_ptr<ecore::EAttribute> _eIDAttribute)
 {
     m_eIDAttribute = _eIDAttribute;
+	
 }
 
 

@@ -176,6 +176,10 @@ std::shared_ptr<uml::Interface> InterfaceRealizationImpl::getContract() const
 void InterfaceRealizationImpl::setContract(std::shared_ptr<uml::Interface> _contract)
 {
     m_contract = _contract;
+	
+	
+	
+	
 }
 
 
@@ -190,6 +194,12 @@ std::weak_ptr<uml::BehavioredClassifier> InterfaceRealizationImpl::getImplementi
 void InterfaceRealizationImpl::setImplementingClassifier(std::weak_ptr<uml::BehavioredClassifier> _implementingClassifier)
 {
     m_implementingClassifier = _implementingClassifier;
+	
+	
+	
+	m_owner = this->getImplementingClassifier().lock();
+	
+	
 }
 
 

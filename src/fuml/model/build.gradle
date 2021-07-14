@@ -7,7 +7,6 @@ plugins {
 
 description 'Generate task for project: fUML'
 
-//@generated NOT
 task generateFUML(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'fUML'
 	description 'generate C++ code of fUML.ecore model'
@@ -19,5 +18,4 @@ task generateFUML(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	outputs.files(fileTree('../src_gen/fUML') {
         exclude '.cmake/**'
     })
-	
 }

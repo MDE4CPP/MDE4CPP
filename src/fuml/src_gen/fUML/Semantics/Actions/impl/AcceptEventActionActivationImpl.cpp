@@ -137,6 +137,7 @@ bool AcceptEventActionActivationImpl::isWaiting() const
 void AcceptEventActionActivationImpl::setWaiting(bool _waiting)
 {
 	m_waiting = _waiting;
+	
 } 
 
 
@@ -205,6 +206,7 @@ std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> Accept
 void AcceptEventActionActivationImpl::setEventAccepter(std::shared_ptr<fUML::Semantics::Actions::AcceptEventActionEventAccepter> _eventAccepter)
 {
     m_eventAccepter = _eventAccepter;
+	
 }
 
 

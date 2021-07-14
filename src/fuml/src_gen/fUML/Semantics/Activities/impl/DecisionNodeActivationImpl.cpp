@@ -461,6 +461,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> DecisionNodeActivati
 void DecisionNodeActivationImpl::setDecisionInputExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _decisionInputExecution)
 {
     m_decisionInputExecution = _decisionInputExecution;
+	
 }
 
 
@@ -477,6 +478,7 @@ void DecisionNodeActivationImpl::setDecisionNode(std::shared_ptr<uml::DecisionNo
     m_decisionNode = _decisionNode;
 	//additional setter call for redefined reference ActivityNodeActivation::node
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_decisionNode);
+	
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
 void DecisionNodeActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)

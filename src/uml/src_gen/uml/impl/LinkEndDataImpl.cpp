@@ -196,6 +196,7 @@ std::shared_ptr<uml::Property> LinkEndDataImpl::getEnd() const
 void LinkEndDataImpl::setEnd(std::shared_ptr<uml::Property> _end)
 {
     m_end = _end;
+	
 }
 
 
@@ -236,6 +237,7 @@ std::shared_ptr<uml::InputPin> LinkEndDataImpl::getValue() const
 void LinkEndDataImpl::setValue(std::shared_ptr<uml::InputPin> _value)
 {
     m_value = _value;
+	
 }
 
 

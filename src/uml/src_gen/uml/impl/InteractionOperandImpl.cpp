@@ -238,6 +238,8 @@ std::shared_ptr<uml::InteractionConstraint> InteractionOperandImpl::getGuard() c
 void InteractionOperandImpl::setGuard(std::shared_ptr<uml::InteractionConstraint> _guard)
 {
     m_guard = _guard;
+	
+	
 }
 
 

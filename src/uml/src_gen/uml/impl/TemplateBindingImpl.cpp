@@ -185,6 +185,11 @@ std::weak_ptr<uml::TemplateableElement> TemplateBindingImpl::getBoundElement() c
 void TemplateBindingImpl::setBoundElement(std::weak_ptr<uml::TemplateableElement> _boundElement)
 {
     m_boundElement = _boundElement;
+	
+	
+	m_owner = this->getBoundElement().lock();
+	
+	
 }
 
 
@@ -225,6 +230,9 @@ std::shared_ptr<uml::TemplateSignature> TemplateBindingImpl::getSignature() cons
 void TemplateBindingImpl::setSignature(std::shared_ptr<uml::TemplateSignature> _signature)
 {
     m_signature = _signature;
+	
+	
+	
 }
 
 

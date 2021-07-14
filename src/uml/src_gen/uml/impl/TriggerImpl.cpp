@@ -152,6 +152,7 @@ std::shared_ptr<uml::Event> TriggerImpl::getEvent() const
 void TriggerImpl::setEvent(std::shared_ptr<uml::Event> _event)
 {
     m_event = _event;
+	
 }
 
 

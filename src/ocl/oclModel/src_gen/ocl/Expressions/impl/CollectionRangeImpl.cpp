@@ -137,6 +137,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> CollectionRangeImpl::getFirst()
 void CollectionRangeImpl::setFirst(std::shared_ptr<ocl::Expressions::OclExpression> _first)
 {
     m_first = _first;
+	
 }
 
 
@@ -151,6 +152,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> CollectionRangeImpl::getLast() 
 void CollectionRangeImpl::setLast(std::shared_ptr<ocl::Expressions::OclExpression> _last)
 {
     m_last = _last;
+	
 }
 
 

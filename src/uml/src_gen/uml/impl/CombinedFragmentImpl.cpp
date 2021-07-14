@@ -209,6 +209,7 @@ uml::InteractionOperatorKind CombinedFragmentImpl::getInteractionOperator() cons
 void CombinedFragmentImpl::setInteractionOperator(uml::InteractionOperatorKind _interactionOperator)
 {
 	m_interactionOperator = _interactionOperator;
+	
 } 
 
 

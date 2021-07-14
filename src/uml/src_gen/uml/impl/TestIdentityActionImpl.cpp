@@ -203,6 +203,9 @@ std::shared_ptr<uml::InputPin> TestIdentityActionImpl::getFirst() const
 void TestIdentityActionImpl::setFirst(std::shared_ptr<uml::InputPin> _first)
 {
     m_first = _first;
+	
+	
+	
 }
 
 
@@ -217,6 +220,9 @@ std::shared_ptr<uml::OutputPin> TestIdentityActionImpl::getResult() const
 void TestIdentityActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
+	
+	
+	
 }
 
 
@@ -231,6 +237,9 @@ std::shared_ptr<uml::InputPin> TestIdentityActionImpl::getSecond() const
 void TestIdentityActionImpl::setSecond(std::shared_ptr<uml::InputPin> _second)
 {
     m_second = _second;
+	
+	
+	
 }
 
 

@@ -231,6 +231,9 @@ std::weak_ptr<uml::StringExpression> StringExpressionImpl::getOwningExpression()
 void StringExpressionImpl::setOwningExpression(std::weak_ptr<uml::StringExpression> _owningExpression)
 {
     m_owningExpression = _owningExpression;
+	m_owner = this->getOwningExpression().lock();
+	
+	
 }
 
 

@@ -151,6 +151,7 @@ std::shared_ptr<ecore::EPackage> EFactoryImpl::getEPackage() const
 void EFactoryImpl::setEPackage(std::shared_ptr<ecore::EPackage> _ePackage)
 {
     m_ePackage = _ePackage;
+	
 }
 
 

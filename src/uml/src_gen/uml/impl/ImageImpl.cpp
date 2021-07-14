@@ -122,6 +122,7 @@ std::string ImageImpl::getContent() const
 void ImageImpl::setContent(std::string _content)
 {
 	m_content = _content;
+	
 } 
 
 
@@ -135,6 +136,7 @@ std::string ImageImpl::getFormat() const
 void ImageImpl::setFormat(std::string _format)
 {
 	m_format = _format;
+	
 } 
 
 
@@ -148,6 +150,7 @@ std::string ImageImpl::getLocation() const
 void ImageImpl::setLocation(std::string _location)
 {
 	m_location = _location;
+	
 } 
 
 

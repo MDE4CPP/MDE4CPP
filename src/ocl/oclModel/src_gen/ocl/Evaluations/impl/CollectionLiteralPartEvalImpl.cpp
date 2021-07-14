@@ -130,6 +130,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> CollectionLiteralPartEvalImpl::g
 void CollectionLiteralPartEvalImpl::setElement(std::shared_ptr<fUML::Semantics::Values::Value> _element)
 {
     m_element = _element;
+	
 }
 
 

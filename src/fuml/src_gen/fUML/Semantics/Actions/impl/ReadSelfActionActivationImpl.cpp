@@ -185,6 +185,7 @@ void ReadSelfActionActivationImpl::setReadSelfAction(std::shared_ptr<uml::ReadSe
     m_readSelfAction = _readSelfAction;
 	//additional setter call for redefined reference ActionActivation::action
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_readSelfAction);
+	
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
 void ReadSelfActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)

@@ -131,6 +131,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionItemEvalImpl::getItem() 
 void CollectionItemEvalImpl::setItem(std::shared_ptr<ocl::Evaluations::OclExpEval> _item)
 {
     m_item = _item;
+	
 }
 
 

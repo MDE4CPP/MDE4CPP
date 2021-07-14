@@ -177,7 +177,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::OutputPin>> getResult() const = 0;
 			
-			/*Additional Setter for 'StructuredActivityNode::structuredNodeOutput' redefined by reference 'result'*/
 			
 
 		protected:

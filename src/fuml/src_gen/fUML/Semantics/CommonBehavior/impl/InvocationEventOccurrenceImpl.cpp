@@ -151,6 +151,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> InvocationEventOccur
 void InvocationEventOccurrenceImpl::setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution)
 {
     m_execution = _execution;
+	
 }
 
 

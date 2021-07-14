@@ -246,6 +246,7 @@ std::shared_ptr<uml::CallOperationAction> MessageExpImpl::getCalledOperation() c
 void MessageExpImpl::setCalledOperation(std::shared_ptr<uml::CallOperationAction> _calledOperation)
 {
     m_calledOperation = _calledOperation;
+	
 }
 
 
@@ -260,6 +261,7 @@ std::shared_ptr<uml::SendSignalAction> MessageExpImpl::getSentSignal() const
 void MessageExpImpl::setSentSignal(std::shared_ptr<uml::SendSignalAction> _sentSignal)
 {
     m_sentSignal = _sentSignal;
+	
 }
 
 
@@ -274,6 +276,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> MessageExpImpl::getTarget() con
 void MessageExpImpl::setTarget(std::shared_ptr<ocl::Expressions::OclExpression> _target)
 {
     m_target = _target;
+	
 }
 
 

@@ -158,6 +158,7 @@ bool GeneralizationSetImpl::getIsCovering() const
 void GeneralizationSetImpl::setIsCovering(bool _isCovering)
 {
 	m_isCovering = _isCovering;
+	
 } 
 
 
@@ -171,6 +172,7 @@ bool GeneralizationSetImpl::getIsDisjoint() const
 void GeneralizationSetImpl::setIsDisjoint(bool _isDisjoint)
 {
 	m_isDisjoint = _isDisjoint;
+	
 } 
 
 
@@ -220,6 +222,7 @@ std::shared_ptr<uml::Classifier> GeneralizationSetImpl::getPowertype() const
 void GeneralizationSetImpl::setPowertype(std::shared_ptr<uml::Classifier> _powertype)
 {
     m_powertype = _powertype;
+	
 }
 
 

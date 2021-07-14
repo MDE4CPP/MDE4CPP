@@ -150,6 +150,7 @@ bool EReferenceImpl::isContainment() const
 void EReferenceImpl::setContainment(bool _containment)
 {
 	m_containment = _containment;
+	
 } 
 
 
@@ -163,6 +164,7 @@ bool EReferenceImpl::isResolveProxies() const
 void EReferenceImpl::setResolveProxies(bool _resolveProxies)
 {
 	m_resolveProxies = _resolveProxies;
+	
 } 
 
 
@@ -201,6 +203,7 @@ std::shared_ptr<ecore::EReference> EReferenceImpl::getEOpposite() const
 void EReferenceImpl::setEOpposite(std::shared_ptr<ecore::EReference> _eOpposite)
 {
     m_eOpposite = _eOpposite;
+	
 }
 
 
@@ -215,6 +218,7 @@ std::shared_ptr<ecore::EClass> EReferenceImpl::getEReferenceType() const
 void EReferenceImpl::setEReferenceType(std::shared_ptr<ecore::EClass> _eReferenceType)
 {
     m_eReferenceType = _eReferenceType;
+	
 }
 
 

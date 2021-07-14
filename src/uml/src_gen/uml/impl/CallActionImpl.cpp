@@ -192,6 +192,7 @@ bool CallActionImpl::getIsSynchronous() const
 void CallActionImpl::setIsSynchronous(bool _isSynchronous)
 {
 	m_isSynchronous = _isSynchronous;
+	
 } 
 
 

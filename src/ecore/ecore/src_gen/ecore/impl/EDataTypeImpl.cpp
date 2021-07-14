@@ -130,6 +130,7 @@ bool EDataTypeImpl::isSerializable() const
 void EDataTypeImpl::setSerializable(bool _serializable)
 {
 	m_serializable = _serializable;
+	
 } 
 
 

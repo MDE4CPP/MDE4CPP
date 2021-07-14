@@ -140,6 +140,7 @@ std::shared_ptr<uml::Signal> SignalInstanceImpl::getType() const
 void SignalInstanceImpl::setType(std::shared_ptr<uml::Signal> _type)
 {
     m_type = _type;
+	
 }
 
 

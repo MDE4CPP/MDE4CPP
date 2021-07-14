@@ -166,6 +166,7 @@ bool TimeConstraintImpl::getFirstEvent() const
 void TimeConstraintImpl::setFirstEvent(bool _firstEvent)
 {
 	m_firstEvent = _firstEvent;
+	
 } 
 
 

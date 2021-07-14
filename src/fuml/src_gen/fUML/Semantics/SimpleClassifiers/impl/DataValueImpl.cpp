@@ -165,6 +165,7 @@ std::shared_ptr<uml::DataType> DataValueImpl::getType() const
 void DataValueImpl::setType(std::shared_ptr<uml::DataType> _type)
 {
     m_type = _type;
+	
 }
 
 

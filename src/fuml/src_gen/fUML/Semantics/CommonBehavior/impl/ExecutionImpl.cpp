@@ -282,6 +282,7 @@ return m_behavior;
 void ExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
+	
 }
 
 
@@ -296,6 +297,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ExecutionImpl::g
 void ExecutionImpl::setContext(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _context)
 {
     m_context = _context;
+	
 }
 
 

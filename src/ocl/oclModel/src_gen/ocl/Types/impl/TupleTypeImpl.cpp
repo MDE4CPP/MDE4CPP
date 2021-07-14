@@ -139,6 +139,7 @@ std::shared_ptr<ocl::Values::TupleValue> TupleTypeImpl::getInstance() const
 void TupleTypeImpl::setInstance(std::shared_ptr<ocl::Values::TupleValue> _instance)
 {
     m_instance = _instance;
+	
 }
 
 

@@ -126,6 +126,7 @@ bool LinkEndDestructionDataImpl::getIsDestroyDuplicates() const
 void LinkEndDestructionDataImpl::setIsDestroyDuplicates(bool _isDestroyDuplicates)
 {
 	m_isDestroyDuplicates = _isDestroyDuplicates;
+	
 } 
 
 
@@ -152,6 +153,7 @@ std::shared_ptr<uml::InputPin> LinkEndDestructionDataImpl::getDestroyAt() const
 void LinkEndDestructionDataImpl::setDestroyAt(std::shared_ptr<uml::InputPin> _destroyAt)
 {
     m_destroyAt = _destroyAt;
+	
 }
 
 

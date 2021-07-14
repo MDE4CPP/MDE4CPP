@@ -180,6 +180,7 @@ std::shared_ptr<uml::ValueSpecification> IntervalImpl::getMax() const
 void IntervalImpl::setMax(std::shared_ptr<uml::ValueSpecification> _max)
 {
     m_max = _max;
+	
 }
 
 
@@ -194,6 +195,7 @@ std::shared_ptr<uml::ValueSpecification> IntervalImpl::getMin() const
 void IntervalImpl::setMin(std::shared_ptr<uml::ValueSpecification> _min)
 {
     m_min = _min;
+	
 }
 
 

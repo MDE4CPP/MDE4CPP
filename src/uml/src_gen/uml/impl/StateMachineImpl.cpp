@@ -343,8 +343,6 @@ std::shared_ptr<Bag<uml::StateMachine>> StateMachineImpl::getExtendedStateMachin
     return m_extendedStateMachine;
 }
 
-/*Additional Setter for redefined reference 'Behavior::redefinedBehavior'*/
-
 
 
 /*

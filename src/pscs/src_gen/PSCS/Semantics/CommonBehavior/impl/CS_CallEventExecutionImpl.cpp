@@ -35,10 +35,10 @@
 #include <exception> // used in Persistence
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 #include "uml/umlFactory.hpp"
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 
 #include "uml/Behavior.hpp"
@@ -182,6 +182,7 @@ std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> CS_
 void CS_CallEventExecutionImpl::setInteractionPoint(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> _interactionPoint)
 {
     m_interactionPoint = _interactionPoint;
+	
 }
 
 

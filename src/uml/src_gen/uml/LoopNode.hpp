@@ -213,7 +213,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::InputPin>> getLoopVariableInput() const = 0;
 			
-			/*Additional Setter for 'StructuredActivityNode::structuredNodeInput' redefined by reference 'loopVariableInput'*/
 			/*!
 			A list of OutputPins that receive the loopVariable values after the last iteration of the loop and constitute the output of the LoopNode.
 			<p>From package UML::Actions.</p>
@@ -221,7 +220,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::OutputPin>> getResult() const = 0;
 			
-			/*Additional Setter for 'StructuredActivityNode::structuredNodeOutput' redefined by reference 'result'*/
 			/*!
 			The set of ExecutableNodes executed before the first iteration of the loop, in order to initialize values or perform other setup computations.
 			<p>From package UML::Actions.</p>

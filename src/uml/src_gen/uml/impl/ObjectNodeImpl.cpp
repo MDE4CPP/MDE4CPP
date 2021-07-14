@@ -173,6 +173,7 @@ bool ObjectNodeImpl::getIsControlType() const
 void ObjectNodeImpl::setIsControlType(bool _isControlType)
 {
 	m_isControlType = _isControlType;
+	
 } 
 
 
@@ -186,6 +187,7 @@ uml::ObjectNodeOrderingKind ObjectNodeImpl::getOrdering() const
 void ObjectNodeImpl::setOrdering(uml::ObjectNodeOrderingKind _ordering)
 {
 	m_ordering = _ordering;
+	
 } 
 
 
@@ -241,6 +243,7 @@ std::shared_ptr<uml::Behavior> ObjectNodeImpl::getSelection() const
 void ObjectNodeImpl::setSelection(std::shared_ptr<uml::Behavior> _selection)
 {
     m_selection = _selection;
+	
 }
 
 
@@ -255,6 +258,8 @@ std::shared_ptr<uml::ValueSpecification> ObjectNodeImpl::getUpperBound() const
 void ObjectNodeImpl::setUpperBound(std::shared_ptr<uml::ValueSpecification> _upperBound)
 {
     m_upperBound = _upperBound;
+	
+	
 }
 
 

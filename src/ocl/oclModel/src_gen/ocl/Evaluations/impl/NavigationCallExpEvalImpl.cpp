@@ -141,6 +141,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> NavigationCallE
 void NavigationCallExpEvalImpl::setNavigationSource(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _navigationSource)
 {
     m_navigationSource = _navigationSource;
+	
 }
 
 

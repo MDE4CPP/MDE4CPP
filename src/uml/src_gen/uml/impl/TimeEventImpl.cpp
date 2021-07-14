@@ -158,6 +158,7 @@ bool TimeEventImpl::getIsRelative() const
 void TimeEventImpl::setIsRelative(bool _isRelative)
 {
 	m_isRelative = _isRelative;
+	
 } 
 
 
@@ -184,6 +185,8 @@ std::shared_ptr<uml::TimeExpression> TimeEventImpl::getWhen() const
 void TimeEventImpl::setWhen(std::shared_ptr<uml::TimeExpression> _when)
 {
     m_when = _when;
+	
+	
 }
 
 

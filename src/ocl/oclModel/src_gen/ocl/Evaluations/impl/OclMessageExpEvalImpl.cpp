@@ -130,6 +130,7 @@ std::string OclMessageExpEvalImpl::getName() const
 void OclMessageExpEvalImpl::setName(std::string _name)
 {
 	m_name = _name;
+	
 } 
 
 
@@ -168,6 +169,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageExpEvalImpl::getTarget()
 void OclMessageExpEvalImpl::setTarget(std::shared_ptr<ocl::Evaluations::OclExpEval> _target)
 {
     m_target = _target;
+	
 }
 
 

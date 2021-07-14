@@ -157,6 +157,7 @@ std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getDefault() c
 void TemplateParameterImpl::setDefault(std::shared_ptr<uml::ParameterableElement> _default)
 {
     m_default = _default;
+	
 }
 
 
@@ -171,6 +172,10 @@ std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedDefaul
 void TemplateParameterImpl::setOwnedDefault(std::shared_ptr<uml::ParameterableElement> _ownedDefault)
 {
     m_ownedDefault = _ownedDefault;
+	
+	//additional setter call for redefined reference TemplateParameter::default
+	this->setDefault(_ownedDefault);
+	
 }
 
 
@@ -185,6 +190,10 @@ std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getOwnedParame
 void TemplateParameterImpl::setOwnedParameteredElement(std::shared_ptr<uml::ParameterableElement> _ownedParameteredElement)
 {
     m_ownedParameteredElement = _ownedParameteredElement;
+	
+	//additional setter call for redefined reference TemplateParameter::parameteredElement
+	this->setParameteredElement(_ownedParameteredElement);
+	
 }
 
 
@@ -199,6 +208,7 @@ std::shared_ptr<uml::ParameterableElement> TemplateParameterImpl::getParametered
 void TemplateParameterImpl::setParameteredElement(std::shared_ptr<uml::ParameterableElement> _parameteredElement)
 {
     m_parameteredElement = _parameteredElement;
+	
 }
 
 
@@ -213,6 +223,9 @@ std::weak_ptr<uml::TemplateSignature> TemplateParameterImpl::getSignature() cons
 void TemplateParameterImpl::setSignature(std::weak_ptr<uml::TemplateSignature> _signature)
 {
     m_signature = _signature;
+	m_owner = this->getSignature().lock();
+	
+	
 }
 
 

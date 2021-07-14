@@ -271,6 +271,12 @@ std::weak_ptr<uml::DeploymentTarget> DeploymentImpl::getLocation() const
 void DeploymentImpl::setLocation(std::weak_ptr<uml::DeploymentTarget> _location)
 {
     m_location = _location;
+	
+	
+	
+	m_owner = this->getLocation().lock();
+	
+	
 }
 
 

@@ -139,6 +139,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> LetExpEvalImpl::getIn() const
 void LetExpEvalImpl::setIn(std::shared_ptr<ocl::Evaluations::OclExpEval> _in)
 {
     m_in = _in;
+	
 }
 
 
@@ -153,6 +154,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> LetExpEvalImpl::getInitExpression(
 void LetExpEvalImpl::setInitExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExpression)
 {
     m_initExpression = _initExpression;
+	
 }
 
 
@@ -167,6 +169,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> LetExpEvalImpl:
 void LetExpEvalImpl::setVariable(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _variable)
 {
     m_variable = _variable;
+	
 }
 
 

@@ -241,6 +241,9 @@ std::weak_ptr<uml::Activity> ActivityNodeImpl::getActivity() const
 void ActivityNodeImpl::setActivity(std::weak_ptr<uml::Activity> _activity)
 {
     m_activity = _activity;
+	m_owner = this->getActivity().lock();
+	
+	
 }
 
 
@@ -314,6 +317,10 @@ std::weak_ptr<uml::StructuredActivityNode> ActivityNodeImpl::getInStructuredNode
 void ActivityNodeImpl::setInStructuredNode(std::weak_ptr<uml::StructuredActivityNode> _inStructuredNode)
 {
     m_inStructuredNode = _inStructuredNode;
+	
+	m_owner = this->getInStructuredNode().lock();
+	
+	
 }
 
 

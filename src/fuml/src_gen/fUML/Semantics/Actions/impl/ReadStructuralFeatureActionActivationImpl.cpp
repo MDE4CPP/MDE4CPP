@@ -191,6 +191,7 @@ void ReadStructuralFeatureActionActivationImpl::setReadStructuralFeatureAction(s
     m_readStructuralFeatureAction = _readStructuralFeatureAction;
 	//additional setter call for redefined reference ActionActivation::action
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_readStructuralFeatureAction);
+	
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
 void ReadStructuralFeatureActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)

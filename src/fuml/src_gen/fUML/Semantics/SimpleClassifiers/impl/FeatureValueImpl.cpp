@@ -144,6 +144,7 @@ int FeatureValueImpl::getPosition() const
 void FeatureValueImpl::setPosition(int _position)
 {
 	m_position = _position;
+	
 } 
 
 
@@ -246,6 +247,7 @@ std::shared_ptr<uml::StructuralFeature> FeatureValueImpl::getFeature() const
 void FeatureValueImpl::setFeature(std::shared_ptr<uml::StructuralFeature> _feature)
 {
     m_feature = _feature;
+	
 }
 
 

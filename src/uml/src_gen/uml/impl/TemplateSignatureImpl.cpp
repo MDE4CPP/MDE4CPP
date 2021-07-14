@@ -213,6 +213,9 @@ std::weak_ptr<uml::TemplateableElement> TemplateSignatureImpl::getTemplate() con
 void TemplateSignatureImpl::setTemplate(std::weak_ptr<uml::TemplateableElement> _template)
 {
     m_template = _template;
+	m_owner = this->getTemplate().lock();
+	
+	
 }
 
 

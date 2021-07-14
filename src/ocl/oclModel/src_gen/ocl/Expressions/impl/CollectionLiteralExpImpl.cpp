@@ -235,6 +235,7 @@ ocl::Expressions::CollectionKind CollectionLiteralExpImpl::getKind() const
 void CollectionLiteralExpImpl::setKind(ocl::Expressions::CollectionKind _kind)
 {
 	m_kind = _kind;
+	
 } 
 
 

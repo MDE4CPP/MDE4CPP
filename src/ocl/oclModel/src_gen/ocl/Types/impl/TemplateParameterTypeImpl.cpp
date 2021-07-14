@@ -123,6 +123,7 @@ std::string TemplateParameterTypeImpl::getSpecification() const
 void TemplateParameterTypeImpl::setSpecification(std::string _specification)
 {
 	m_specification = _specification;
+	
 } 
 
 

@@ -186,6 +186,7 @@ std::shared_ptr<uml::Port> CS_InteractionPointImpl::getDefiningPort() const
 void CS_InteractionPointImpl::setDefiningPort(std::shared_ptr<uml::Port> _definingPort)
 {
     m_definingPort = _definingPort;
+	
 }
 
 
@@ -200,6 +201,7 @@ std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> CS_Interac
 void CS_InteractionPointImpl::setOwner(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> _owner)
 {
     m_owner = _owner;
+	
 }
 
 

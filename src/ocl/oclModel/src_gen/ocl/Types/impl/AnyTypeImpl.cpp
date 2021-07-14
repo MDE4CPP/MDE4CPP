@@ -136,6 +136,7 @@ std::shared_ptr<ecore::EClassifier> AnyTypeImpl::getObject() const
 void AnyTypeImpl::setObject(std::shared_ptr<ecore::EClassifier> _object)
 {
     m_object = _object;
+	
 }
 
 

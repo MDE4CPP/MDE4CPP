@@ -126,6 +126,7 @@ bool LinkEndCreationDataImpl::getIsReplaceAll() const
 void LinkEndCreationDataImpl::setIsReplaceAll(bool _isReplaceAll)
 {
 	m_isReplaceAll = _isReplaceAll;
+	
 } 
 
 
@@ -152,6 +153,7 @@ std::shared_ptr<uml::InputPin> LinkEndCreationDataImpl::getInsertAt() const
 void LinkEndCreationDataImpl::setInsertAt(std::shared_ptr<uml::InputPin> _insertAt)
 {
     m_insertAt = _insertAt;
+	
 }
 
 

@@ -174,6 +174,7 @@ std::string ModelImpl::getViewpoint() const
 void ModelImpl::setViewpoint(std::string _viewpoint)
 {
 	m_viewpoint = _viewpoint;
+	
 } 
 
 

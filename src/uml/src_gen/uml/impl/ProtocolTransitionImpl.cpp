@@ -195,6 +195,11 @@ std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPostCondition() cons
 void ProtocolTransitionImpl::setPostCondition(std::shared_ptr<uml::Constraint> _postCondition)
 {
     m_postCondition = _postCondition;
+	
+	
+	
+	
+	
 }
 
 
@@ -209,6 +214,25 @@ std::shared_ptr<uml::Constraint> ProtocolTransitionImpl::getPreCondition() const
 void ProtocolTransitionImpl::setPreCondition(std::shared_ptr<uml::Constraint> _preCondition)
 {
     m_preCondition = _preCondition;
+	//additional setter call for redefined reference Transition::guard
+	uml::TransitionImpl::setGuard(_preCondition);
+	
+}
+/*Additional Setter for redefined reference 'Transition::guard'*/
+void ProtocolTransitionImpl::setGuard(std::shared_ptr<uml::Constraint> _guard)
+{
+	std::shared_ptr<uml::Constraint> _preCondition = std::dynamic_pointer_cast<uml::Constraint>(_guard);
+	if(_preCondition)
+	{
+		m_preCondition = _preCondition;
+
+		//additional setter call for redefined reference Transition::guard
+		uml::TransitionImpl::setGuard(_preCondition);
+	}
+	else
+	{
+		std::cerr<<"[ProtocolTransition::setGuard] : Could not set guard because provided guard was not of type 'std::shared_ptr<uml::Constraint>'"<<std::endl;
+	}
 }
 
 

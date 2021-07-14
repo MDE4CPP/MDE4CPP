@@ -175,6 +175,10 @@ std::shared_ptr<uml::Classifier> SubstitutionImpl::getContract() const
 void SubstitutionImpl::setContract(std::shared_ptr<uml::Classifier> _contract)
 {
     m_contract = _contract;
+	
+	
+	
+	
 }
 
 
@@ -189,6 +193,12 @@ std::weak_ptr<uml::Classifier> SubstitutionImpl::getSubstitutingClassifier() con
 void SubstitutionImpl::setSubstitutingClassifier(std::weak_ptr<uml::Classifier> _substitutingClassifier)
 {
     m_substitutingClassifier = _substitutingClassifier;
+	
+	
+	
+	m_owner = this->getSubstitutingClassifier().lock();
+	
+	
 }
 
 

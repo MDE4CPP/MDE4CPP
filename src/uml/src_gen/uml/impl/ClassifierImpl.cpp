@@ -354,6 +354,7 @@ bool ClassifierImpl::getIsAbstract() const
 void ClassifierImpl::setIsAbstract(bool _isAbstract)
 {
 	m_isAbstract = _isAbstract;
+	
 } 
 
 
@@ -367,6 +368,7 @@ bool ClassifierImpl::getIsFinalSpecialization() const
 void ClassifierImpl::setIsFinalSpecialization(bool _isFinalSpecialization)
 {
 	m_isFinalSpecialization = _isFinalSpecialization;
+	
 } 
 
 
@@ -861,6 +863,9 @@ std::shared_ptr<uml::CollaborationUse> ClassifierImpl::getRepresentation() const
 void ClassifierImpl::setRepresentation(std::shared_ptr<uml::CollaborationUse> _representation)
 {
     m_representation = _representation;
+	
+	
+	
 }
 
 

@@ -146,6 +146,7 @@ int ExpansionActivationGroupImpl::getIndex() const
 void ExpansionActivationGroupImpl::setIndex(int _index)
 {
 	m_index = _index;
+	
 } 
 
 
@@ -273,6 +274,7 @@ std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> Expansio
 void ExpansionActivationGroupImpl::setRegionActivation(std::shared_ptr<fUML::Semantics::Activities::ExpansionRegionActivation> _regionActivation)
 {
     m_regionActivation = _regionActivation;
+	
 }
 
 

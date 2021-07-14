@@ -179,6 +179,7 @@ std::shared_ptr<uml::ExpansionRegion> ExpansionNodeImpl::getRegionAsInput() cons
 void ExpansionNodeImpl::setRegionAsInput(std::shared_ptr<uml::ExpansionRegion> _regionAsInput)
 {
     m_regionAsInput = _regionAsInput;
+	
 }
 
 
@@ -193,6 +194,7 @@ std::shared_ptr<uml::ExpansionRegion> ExpansionNodeImpl::getRegionAsOutput() con
 void ExpansionNodeImpl::setRegionAsOutput(std::shared_ptr<uml::ExpansionRegion> _regionAsOutput)
 {
     m_regionAsOutput = _regionAsOutput;
+	
 }
 
 

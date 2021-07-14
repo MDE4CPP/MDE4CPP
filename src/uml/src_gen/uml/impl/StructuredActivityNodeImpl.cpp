@@ -326,6 +326,7 @@ bool StructuredActivityNodeImpl::getMustIsolate() const
 void StructuredActivityNodeImpl::setMustIsolate(bool _mustIsolate)
 {
 	m_mustIsolate = _mustIsolate;
+	
 } 
 
 

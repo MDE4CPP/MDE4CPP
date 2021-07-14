@@ -179,6 +179,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> CallEventOc
 void CallEventOccurrenceImpl::setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::CallEventExecution> _execution)
 {
     m_execution = _execution;
+	
 }
 
 

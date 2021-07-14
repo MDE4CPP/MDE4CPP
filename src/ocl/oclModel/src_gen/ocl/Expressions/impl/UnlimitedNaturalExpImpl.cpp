@@ -212,6 +212,7 @@ int UnlimitedNaturalExpImpl::getUnlimitedNaturalSymbol() const
 void UnlimitedNaturalExpImpl::setUnlimitedNaturalSymbol(int _unlimitedNaturalSymbol)
 {
 	m_unlimitedNaturalSymbol = _unlimitedNaturalSymbol;
+	
 } 
 
 

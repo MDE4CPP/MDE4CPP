@@ -156,6 +156,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> EventOccurren
 void EventOccurrenceImpl::setTarget(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Reference> _target)
 {
     m_target = _target;
+	
 }
 
 

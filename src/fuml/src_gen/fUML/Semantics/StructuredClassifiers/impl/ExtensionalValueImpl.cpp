@@ -158,6 +158,7 @@ std::shared_ptr<fUML::Semantics::Loci::Locus> ExtensionalValueImpl::getLocus() c
 void ExtensionalValueImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
+	
 }
 
 

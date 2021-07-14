@@ -138,6 +138,7 @@ std::shared_ptr<ocl::Evaluations::EvalEnvironment> OclExpEvalImpl::getBeforeEnvi
 void OclExpEvalImpl::setBeforeEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _beforeEnvironment)
 {
     m_beforeEnvironment = _beforeEnvironment;
+	
 }
 
 
@@ -152,6 +153,7 @@ std::shared_ptr<ocl::Evaluations::EvalEnvironment> OclExpEvalImpl::getEnvironmen
 void OclExpEvalImpl::setEnvironment(std::shared_ptr<ocl::Evaluations::EvalEnvironment> _environment)
 {
     m_environment = _environment;
+	
 }
 
 
@@ -166,6 +168,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> OclExpEvalImpl::getModel() cons
 void OclExpEvalImpl::setModel(std::shared_ptr<ocl::Expressions::OclExpression> _model)
 {
     m_model = _model;
+	
 }
 
 
@@ -180,6 +183,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> OclExpEvalImpl::getResultValue()
 void OclExpEvalImpl::setResultValue(std::shared_ptr<fUML::Semantics::Values::Value> _resultValue)
 {
     m_resultValue = _resultValue;
+	
 }
 
 

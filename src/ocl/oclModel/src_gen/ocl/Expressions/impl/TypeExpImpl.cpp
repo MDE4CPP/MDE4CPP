@@ -221,6 +221,7 @@ std::shared_ptr<ecore::EClassifier> TypeExpImpl::getReferredType() const
 void TypeExpImpl::setReferredType(std::shared_ptr<ecore::EClassifier> _referredType)
 {
     m_referredType = _referredType;
+	
 }
 
 

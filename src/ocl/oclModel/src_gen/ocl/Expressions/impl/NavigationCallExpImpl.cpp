@@ -245,6 +245,7 @@ std::shared_ptr<ecore::EAttribute> NavigationCallExpImpl::getNavigationSource() 
 void NavigationCallExpImpl::setNavigationSource(std::shared_ptr<ecore::EAttribute> _navigationSource)
 {
     m_navigationSource = _navigationSource;
+	
 }
 
 

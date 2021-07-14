@@ -193,6 +193,12 @@ std::weak_ptr<uml::Component> ComponentRealizationImpl::getAbstraction() const
 void ComponentRealizationImpl::setAbstraction(std::weak_ptr<uml::Component> _abstraction)
 {
     m_abstraction = _abstraction;
+	
+	
+	
+	m_owner = this->getAbstraction().lock();
+	
+	
 }
 
 

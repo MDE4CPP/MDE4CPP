@@ -269,6 +269,7 @@ bool LoopNodeImpl::getIsTestedFirst() const
 void LoopNodeImpl::setIsTestedFirst(bool _isTestedFirst)
 {
 	m_isTestedFirst = _isTestedFirst;
+	
 } 
 
 
@@ -377,6 +378,7 @@ std::shared_ptr<uml::OutputPin> LoopNodeImpl::getDecider() const
 void LoopNodeImpl::setDecider(std::shared_ptr<uml::OutputPin> _decider)
 {
     m_decider = _decider;
+	
 }
 
 
@@ -421,8 +423,6 @@ std::shared_ptr<Bag<uml::InputPin>> LoopNodeImpl::getLoopVariableInput() const
     return m_loopVariableInput;
 }
 
-/*Additional Setter for redefined reference 'StructuredActivityNode::structuredNodeInput'*/
-
 
 
 /*
@@ -439,8 +439,6 @@ std::shared_ptr<Bag<uml::OutputPin>> LoopNodeImpl::getResult() const
 
     return m_result;
 }
-
-/*Additional Setter for redefined reference 'StructuredActivityNode::structuredNodeOutput'*/
 
 
 

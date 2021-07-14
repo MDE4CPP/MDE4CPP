@@ -230,6 +230,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> LetExpImpl::getIn() const
 void LetExpImpl::setIn(std::shared_ptr<ocl::Expressions::OclExpression> _in)
 {
     m_in = _in;
+	
 }
 
 
@@ -244,6 +245,7 @@ std::shared_ptr<ocl::Expressions::Variable> LetExpImpl::getVariable() const
 void LetExpImpl::setVariable(std::shared_ptr<ocl::Expressions::Variable> _variable)
 {
     m_variable = _variable;
+	
 }
 
 

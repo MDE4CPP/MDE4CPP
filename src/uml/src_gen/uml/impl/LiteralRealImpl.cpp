@@ -170,6 +170,7 @@ double LiteralRealImpl::getValue() const
 void LiteralRealImpl::setValue(double _value)
 {
 	m_value = _value;
+	
 } 
 
 

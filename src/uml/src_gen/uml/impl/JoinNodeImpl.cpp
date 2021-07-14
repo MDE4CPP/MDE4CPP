@@ -165,6 +165,7 @@ bool JoinNodeImpl::getIsCombineDuplicate() const
 void JoinNodeImpl::setIsCombineDuplicate(bool _isCombineDuplicate)
 {
 	m_isCombineDuplicate = _isCombineDuplicate;
+	
 } 
 
 
@@ -197,6 +198,8 @@ std::shared_ptr<uml::ValueSpecification> JoinNodeImpl::getJoinSpec() const
 void JoinNodeImpl::setJoinSpec(std::shared_ptr<uml::ValueSpecification> _joinSpec)
 {
     m_joinSpec = _joinSpec;
+	
+	
 }
 
 

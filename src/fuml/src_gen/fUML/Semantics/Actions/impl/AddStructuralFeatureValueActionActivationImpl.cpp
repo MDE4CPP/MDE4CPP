@@ -301,6 +301,7 @@ void AddStructuralFeatureValueActionActivationImpl::setAddStructuralFeatureValue
     m_addStructuralFeatureValueAction = _addStructuralFeatureValueAction;
 	//additional setter call for redefined reference ActionActivation::action
 	fUML::Semantics::Actions::ActionActivationImpl::setAction(_addStructuralFeatureValueAction);
+	
 }
 /*Additional Setter for redefined reference 'ActionActivation::action'*/
 void AddStructuralFeatureValueActionActivationImpl::setAction(std::shared_ptr<uml::Action> _action)

@@ -131,6 +131,7 @@ std::shared_ptr<ecore::EAttribute> TupleLiteralPartImpl::getAttribute() const
 void TupleLiteralPartImpl::setAttribute(std::shared_ptr<ecore::EAttribute> _attribute)
 {
     m_attribute = _attribute;
+	
 }
 
 

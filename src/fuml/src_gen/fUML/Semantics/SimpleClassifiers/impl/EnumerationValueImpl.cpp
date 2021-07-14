@@ -203,6 +203,7 @@ std::shared_ptr<uml::EnumerationLiteral> EnumerationValueImpl::getLiteral() cons
 void EnumerationValueImpl::setLiteral(std::shared_ptr<uml::EnumerationLiteral> _literal)
 {
     m_literal = _literal;
+	
 }
 
 
@@ -217,6 +218,7 @@ std::shared_ptr<uml::Enumeration> EnumerationValueImpl::getType() const
 void EnumerationValueImpl::setType(std::shared_ptr<uml::Enumeration> _type)
 {
     m_type = _type;
+	
 }
 
 

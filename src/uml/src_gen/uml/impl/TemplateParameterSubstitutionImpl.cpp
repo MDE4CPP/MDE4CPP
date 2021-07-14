@@ -153,6 +153,7 @@ std::shared_ptr<uml::ParameterableElement> TemplateParameterSubstitutionImpl::ge
 void TemplateParameterSubstitutionImpl::setActual(std::shared_ptr<uml::ParameterableElement> _actual)
 {
     m_actual = _actual;
+	
 }
 
 
@@ -167,6 +168,7 @@ std::shared_ptr<uml::TemplateParameter> TemplateParameterSubstitutionImpl::getFo
 void TemplateParameterSubstitutionImpl::setFormal(std::shared_ptr<uml::TemplateParameter> _formal)
 {
     m_formal = _formal;
+	
 }
 
 
@@ -181,6 +183,10 @@ std::shared_ptr<uml::ParameterableElement> TemplateParameterSubstitutionImpl::ge
 void TemplateParameterSubstitutionImpl::setOwnedActual(std::shared_ptr<uml::ParameterableElement> _ownedActual)
 {
     m_ownedActual = _ownedActual;
+	
+	//additional setter call for redefined reference TemplateParameterSubstitution::actual
+	this->setActual(_ownedActual);
+	
 }
 
 
@@ -195,6 +201,9 @@ std::weak_ptr<uml::TemplateBinding> TemplateParameterSubstitutionImpl::getTempla
 void TemplateParameterSubstitutionImpl::setTemplateBinding(std::weak_ptr<uml::TemplateBinding> _templateBinding)
 {
     m_templateBinding = _templateBinding;
+	m_owner = this->getTemplateBinding().lock();
+	
+	
 }
 
 

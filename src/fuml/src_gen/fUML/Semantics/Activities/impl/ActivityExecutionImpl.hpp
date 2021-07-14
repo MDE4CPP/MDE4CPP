@@ -69,6 +69,7 @@ namespace fUML::Semantics::Activities
 			
 			virtual void setBehavior(std::shared_ptr<uml::Behavior>) ;
 			
+			
 			//*********************************
 			// Union Getter
 			//*********************************

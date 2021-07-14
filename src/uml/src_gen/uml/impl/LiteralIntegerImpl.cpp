@@ -170,6 +170,7 @@ int LiteralIntegerImpl::getValue() const
 void LiteralIntegerImpl::setValue(int _value)
 {
 	m_value = _value;
+	
 } 
 
 

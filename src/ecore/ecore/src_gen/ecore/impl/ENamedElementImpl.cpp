@@ -121,6 +121,7 @@ std::string ENamedElementImpl::getName() const
 void ENamedElementImpl::setName(std::string _name)
 {
 	m_name = _name;
+	
 } 
 
 

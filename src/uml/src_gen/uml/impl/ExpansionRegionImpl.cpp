@@ -192,6 +192,7 @@ uml::ExpansionKind ExpansionRegionImpl::getMode() const
 void ExpansionRegionImpl::setMode(uml::ExpansionKind _mode)
 {
 	m_mode = _mode;
+	
 } 
 
 

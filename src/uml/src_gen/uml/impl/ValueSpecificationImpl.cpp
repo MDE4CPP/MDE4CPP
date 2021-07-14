@@ -223,6 +223,9 @@ std::weak_ptr<uml::Slot> ValueSpecificationImpl::getOwningSlot() const
 void ValueSpecificationImpl::setOwningSlot(std::weak_ptr<uml::Slot> _owningSlot)
 {
     m_owningSlot = _owningSlot;
+	m_owner = this->getOwningSlot().lock();
+	
+	
 }
 
 
@@ -237,6 +240,9 @@ std::weak_ptr<uml::ValueSpecificationAction> ValueSpecificationImpl::getValueSpe
 void ValueSpecificationImpl::setValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> _valueSpecificationAction)
 {
     m_valueSpecificationAction = _valueSpecificationAction;
+	m_owner = this->getValueSpecificationAction().lock();
+	
+	
 }
 
 

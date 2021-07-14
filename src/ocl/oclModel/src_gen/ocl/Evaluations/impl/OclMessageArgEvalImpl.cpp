@@ -133,6 +133,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageArgEvalImpl::getExpressi
 void OclMessageArgEvalImpl::setExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _expression)
 {
     m_expression = _expression;
+	
 }
 
 
@@ -147,6 +148,7 @@ std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> OclMessageArgEvalImpl
 void OclMessageArgEvalImpl::setUnspecified(std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> _unspecified)
 {
     m_unspecified = _unspecified;
+	
 }
 
 
@@ -161,6 +163,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> OclMessageArgEvalImpl::getVariable
 void OclMessageArgEvalImpl::setVariable(std::shared_ptr<ocl::Evaluations::OclExpEval> _variable)
 {
     m_variable = _variable;
+	
 }
 
 

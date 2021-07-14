@@ -265,6 +265,7 @@ std::shared_ptr<ecore::EObject> ObjectValueImpl::getValue() const
 void ObjectValueImpl::setValue(std::shared_ptr<ecore::EObject> _value)
 {
     m_value = _value;
+	
 }
 
 

@@ -212,6 +212,11 @@ std::weak_ptr<uml::State> ConnectionPointReferenceImpl::getState() const
 void ConnectionPointReferenceImpl::setState(std::weak_ptr<uml::State> _state)
 {
     m_state = _state;
+	m_namespace = this->getState().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 

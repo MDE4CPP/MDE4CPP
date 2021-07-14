@@ -142,6 +142,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SignalEventO
 void SignalEventOccurrenceImpl::setSignalInstance(std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> _signalInstance)
 {
     m_signalInstance = _signalInstance;
+	
 }
 
 

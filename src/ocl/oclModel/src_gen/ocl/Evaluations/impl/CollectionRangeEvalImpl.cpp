@@ -132,6 +132,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionRangeEvalImpl::getFirst(
 void CollectionRangeEvalImpl::setFirst(std::shared_ptr<ocl::Evaluations::OclExpEval> _first)
 {
     m_first = _first;
+	
 }
 
 
@@ -146,6 +147,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> CollectionRangeEvalImpl::getLast()
 void CollectionRangeEvalImpl::setLast(std::shared_ptr<ocl::Evaluations::OclExpEval> _last)
 {
     m_last = _last;
+	
 }
 
 

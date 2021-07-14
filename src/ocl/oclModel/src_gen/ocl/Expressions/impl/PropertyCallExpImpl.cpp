@@ -222,6 +222,7 @@ std::shared_ptr<ecore::EAttribute> PropertyCallExpImpl::getReferredProperty() co
 void PropertyCallExpImpl::setReferredProperty(std::shared_ptr<ecore::EAttribute> _referredProperty)
 {
     m_referredProperty = _referredProperty;
+	
 }
 
 

@@ -257,6 +257,7 @@ std::shared_ptr<uml::Association> LinkImpl::getType() const
 void LinkImpl::setType(std::shared_ptr<uml::Association> _type)
 {
     m_type = _type;
+	
 }
 
 

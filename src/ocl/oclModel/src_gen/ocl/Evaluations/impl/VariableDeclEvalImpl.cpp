@@ -30,8 +30,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 
 #include "ocl/Evaluations/OclExpEval.hpp"
@@ -125,6 +125,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> VariableDeclEvalImpl::getInitExp()
 void VariableDeclEvalImpl::setInitExp(std::shared_ptr<ocl::Evaluations::OclExpEval> _initExp)
 {
     m_initExp = _initExp;
+	
 }
 
 
@@ -139,6 +140,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> VariableDeclEva
 void VariableDeclEvalImpl::setName(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _name)
 {
     m_name = _name;
+	
 }
 
 

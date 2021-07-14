@@ -147,6 +147,7 @@ std::string NamedElementImpl::getName() const
 void NamedElementImpl::setName(std::string _name)
 {
 	m_name = _name;
+	
 } 
 
 
@@ -167,6 +168,7 @@ uml::VisibilityKind NamedElementImpl::getVisibility() const
 void NamedElementImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
+	
 } 
 
 
@@ -322,6 +324,8 @@ std::shared_ptr<uml::StringExpression> NamedElementImpl::getNameExpression() con
 void NamedElementImpl::setNameExpression(std::shared_ptr<uml::StringExpression> _nameExpression)
 {
     m_nameExpression = _nameExpression;
+	
+	
 }
 
 

@@ -139,6 +139,7 @@ bool GeneralizationImpl::getIsSubstitutable() const
 void GeneralizationImpl::setIsSubstitutable(bool _isSubstitutable)
 {
 	m_isSubstitutable = _isSubstitutable;
+	
 } 
 
 
@@ -160,6 +161,9 @@ std::shared_ptr<uml::Classifier> GeneralizationImpl::getGeneral() const
 void GeneralizationImpl::setGeneral(std::shared_ptr<uml::Classifier> _general)
 {
     m_general = _general;
+	
+	
+	
 }
 
 
@@ -191,6 +195,11 @@ std::weak_ptr<uml::Classifier> GeneralizationImpl::getSpecific() const
 void GeneralizationImpl::setSpecific(std::weak_ptr<uml::Classifier> _specific)
 {
     m_specific = _specific;
+	
+	
+	m_owner = this->getSpecific().lock();
+	
+	
 }
 
 

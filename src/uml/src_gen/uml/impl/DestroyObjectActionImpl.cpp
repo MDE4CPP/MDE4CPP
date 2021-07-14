@@ -169,6 +169,7 @@ bool DestroyObjectActionImpl::getIsDestroyLinks() const
 void DestroyObjectActionImpl::setIsDestroyLinks(bool _isDestroyLinks)
 {
 	m_isDestroyLinks = _isDestroyLinks;
+	
 } 
 
 
@@ -182,6 +183,7 @@ bool DestroyObjectActionImpl::getIsDestroyOwnedObjects() const
 void DestroyObjectActionImpl::setIsDestroyOwnedObjects(bool _isDestroyOwnedObjects)
 {
 	m_isDestroyOwnedObjects = _isDestroyOwnedObjects;
+	
 } 
 
 
@@ -214,6 +216,9 @@ std::shared_ptr<uml::InputPin> DestroyObjectActionImpl::getTarget() const
 void DestroyObjectActionImpl::setTarget(std::shared_ptr<uml::InputPin> _target)
 {
     m_target = _target;
+	
+	
+	
 }
 
 

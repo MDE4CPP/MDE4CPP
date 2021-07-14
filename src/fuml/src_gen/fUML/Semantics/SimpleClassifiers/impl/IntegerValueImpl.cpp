@@ -125,6 +125,7 @@ int IntegerValueImpl::getValue() const
 void IntegerValueImpl::setValue(int _value)
 {
 	m_value = _value;
+	
 } 
 
 

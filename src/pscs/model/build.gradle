@@ -7,7 +7,6 @@ plugins {
 
 description 'Generate task for project: PSCS'
 
-//@generated NOT
 task generatePSCS(type: tui.sse.mde4cpp.MDE4CPPGenerate) {
 	group 'PSCS'
 	description 'generate C++ code of PSCS.ecore model'

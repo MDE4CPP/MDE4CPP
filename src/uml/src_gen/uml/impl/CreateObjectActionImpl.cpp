@@ -200,6 +200,7 @@ std::shared_ptr<uml::Classifier> CreateObjectActionImpl::getClassifier() const
 void CreateObjectActionImpl::setClassifier(std::shared_ptr<uml::Classifier> _classifier)
 {
     m_classifier = _classifier;
+	
 }
 
 
@@ -214,6 +215,9 @@ std::shared_ptr<uml::OutputPin> CreateObjectActionImpl::getResult() const
 void CreateObjectActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
+	
+	
+	
 }
 
 

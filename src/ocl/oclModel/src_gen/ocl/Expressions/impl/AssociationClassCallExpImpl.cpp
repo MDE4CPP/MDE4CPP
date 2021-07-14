@@ -223,6 +223,7 @@ std::shared_ptr<ecore::EReference> AssociationClassCallExpImpl::getReferredAssoc
 void AssociationClassCallExpImpl::setReferredAssociationClass(std::shared_ptr<ecore::EReference> _referredAssociationClass)
 {
     m_referredAssociationClass = _referredAssociationClass;
+	
 }
 
 

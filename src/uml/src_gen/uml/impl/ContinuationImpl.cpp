@@ -154,6 +154,7 @@ bool ContinuationImpl::getSetting() const
 void ContinuationImpl::setSetting(bool _setting)
 {
 	m_setting = _setting;
+	
 } 
 
 

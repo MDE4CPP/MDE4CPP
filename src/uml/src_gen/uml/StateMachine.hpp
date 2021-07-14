@@ -195,7 +195,6 @@ namespace uml
 			
 			virtual std::shared_ptr<Bag<uml::StateMachine>> getExtendedStateMachine() const = 0;
 			
-			/*Additional Setter for 'Behavior::redefinedBehavior' redefined by reference 'extendedStateMachine'*/
 			/*!
 			The Regions owned directly by the StateMachine.
 			<p>From package UML::StateMachines.</p>

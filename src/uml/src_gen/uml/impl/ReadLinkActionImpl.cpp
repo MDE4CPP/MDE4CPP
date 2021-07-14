@@ -213,6 +213,9 @@ std::shared_ptr<uml::OutputPin> ReadLinkActionImpl::getResult() const
 void ReadLinkActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
+	
+	
+	
 }
 
 

@@ -137,6 +137,7 @@ std::shared_ptr<ecore::EOperation> MessageTypeImpl::getReferredOperation() const
 void MessageTypeImpl::setReferredOperation(std::shared_ptr<ecore::EOperation> _referredOperation)
 {
     m_referredOperation = _referredOperation;
+	
 }
 
 
@@ -151,6 +152,7 @@ std::shared_ptr<uml::Signal> MessageTypeImpl::getReferredSignal() const
 void MessageTypeImpl::setReferredSignal(std::shared_ptr<uml::Signal> _referredSignal)
 {
     m_referredSignal = _referredSignal;
+	
 }
 
 

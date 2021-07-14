@@ -139,6 +139,7 @@ std::string ElementImportImpl::getAlias() const
 void ElementImportImpl::setAlias(std::string _alias)
 {
 	m_alias = _alias;
+	
 } 
 
 
@@ -152,6 +153,7 @@ uml::VisibilityKind ElementImportImpl::getVisibility() const
 void ElementImportImpl::setVisibility(uml::VisibilityKind _visibility)
 {
 	m_visibility = _visibility;
+	
 } 
 
 
@@ -190,6 +192,9 @@ std::shared_ptr<uml::PackageableElement> ElementImportImpl::getImportedElement()
 void ElementImportImpl::setImportedElement(std::shared_ptr<uml::PackageableElement> _importedElement)
 {
     m_importedElement = _importedElement;
+	
+	
+	
 }
 
 
@@ -204,6 +209,11 @@ std::weak_ptr<uml::Namespace> ElementImportImpl::getImportingNamespace() const
 void ElementImportImpl::setImportingNamespace(std::weak_ptr<uml::Namespace> _importingNamespace)
 {
     m_importingNamespace = _importingNamespace;
+	
+	
+	m_owner = this->getImportingNamespace().lock();
+	
+	
 }
 
 

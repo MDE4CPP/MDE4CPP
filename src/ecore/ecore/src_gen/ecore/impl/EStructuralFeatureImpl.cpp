@@ -140,6 +140,7 @@ bool EStructuralFeatureImpl::isChangeable() const
 void EStructuralFeatureImpl::setChangeable(bool _changeable)
 {
 	m_changeable = _changeable;
+	
 } 
 
 
@@ -153,6 +154,7 @@ Any EStructuralFeatureImpl::getDefaultValue() const
 void EStructuralFeatureImpl::setDefaultValue(Any _defaultValue)
 {
 	m_defaultValue = _defaultValue;
+	
 } 
 
 
@@ -166,6 +168,7 @@ std::string EStructuralFeatureImpl::getDefaultValueLiteral() const
 void EStructuralFeatureImpl::setDefaultValueLiteral(std::string _defaultValueLiteral)
 {
 	m_defaultValueLiteral = _defaultValueLiteral;
+	
 } 
 
 
@@ -179,6 +182,7 @@ bool EStructuralFeatureImpl::isDerived() const
 void EStructuralFeatureImpl::setDerived(bool _derived)
 {
 	m_derived = _derived;
+	
 } 
 
 
@@ -192,6 +196,7 @@ int EStructuralFeatureImpl::getFeatureID() const
 void EStructuralFeatureImpl::setFeatureID(int _featureID)
 {
 	m_featureID = _featureID;
+	
 } 
 
 
@@ -205,6 +210,7 @@ bool EStructuralFeatureImpl::isTransient() const
 void EStructuralFeatureImpl::setTransient(bool _transient)
 {
 	m_transient = _transient;
+	
 } 
 
 
@@ -218,6 +224,7 @@ bool EStructuralFeatureImpl::isUnsettable() const
 void EStructuralFeatureImpl::setUnsettable(bool _unsettable)
 {
 	m_unsettable = _unsettable;
+	
 } 
 
 
@@ -231,6 +238,7 @@ bool EStructuralFeatureImpl::isVolatile() const
 void EStructuralFeatureImpl::setVolatile(bool _volatile)
 {
 	m_volatile = _volatile;
+	
 } 
 
 

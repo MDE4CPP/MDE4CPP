@@ -283,6 +283,7 @@ std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> ReferenceImpl::g
 void ReferenceImpl::setReferent(std::shared_ptr<fUML::Semantics::StructuredClassifiers::Object> _referent)
 {
     m_referent = _referent;
+	
 }
 
 

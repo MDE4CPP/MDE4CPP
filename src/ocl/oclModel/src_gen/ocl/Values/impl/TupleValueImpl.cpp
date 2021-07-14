@@ -191,6 +191,7 @@ std::shared_ptr<ocl::Types::TupleType> TupleValueImpl::getModel() const
 void TupleValueImpl::setModel(std::shared_ptr<ocl::Types::TupleType> _model)
 {
     m_model = _model;
+	
 }
 
 

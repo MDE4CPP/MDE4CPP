@@ -225,6 +225,7 @@ std::shared_ptr<ocl::Expressions::Variable> IterateExpImpl::getResult() const
 void IterateExpImpl::setResult(std::shared_ptr<ocl::Expressions::Variable> _result)
 {
     m_result = _result;
+	
 }
 
 

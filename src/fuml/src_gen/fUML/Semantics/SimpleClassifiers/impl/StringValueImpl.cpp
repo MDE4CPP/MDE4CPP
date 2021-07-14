@@ -124,6 +124,7 @@ std::string StringValueImpl::getValue() const
 void StringValueImpl::setValue(std::string _value)
 {
 	m_value = _value;
+	
 } 
 
 

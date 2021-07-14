@@ -231,6 +231,9 @@ std::weak_ptr<uml::Activity> ActivityEdgeImpl::getActivity() const
 void ActivityEdgeImpl::setActivity(std::weak_ptr<uml::Activity> _activity)
 {
     m_activity = _activity;
+	m_owner = this->getActivity().lock();
+	
+	
 }
 
 
@@ -245,6 +248,8 @@ std::shared_ptr<uml::ValueSpecification> ActivityEdgeImpl::getGuard() const
 void ActivityEdgeImpl::setGuard(std::shared_ptr<uml::ValueSpecification> _guard)
 {
     m_guard = _guard;
+	
+	
 }
 
 
@@ -292,6 +297,10 @@ std::weak_ptr<uml::StructuredActivityNode> ActivityEdgeImpl::getInStructuredNode
 void ActivityEdgeImpl::setInStructuredNode(std::weak_ptr<uml::StructuredActivityNode> _inStructuredNode)
 {
     m_inStructuredNode = _inStructuredNode;
+	
+	m_owner = this->getInStructuredNode().lock();
+	
+	
 }
 
 
@@ -306,6 +315,7 @@ std::shared_ptr<uml::InterruptibleActivityRegion> ActivityEdgeImpl::getInterrupt
 void ActivityEdgeImpl::setInterrupts(std::shared_ptr<uml::InterruptibleActivityRegion> _interrupts)
 {
     m_interrupts = _interrupts;
+	
 }
 
 
@@ -346,6 +356,7 @@ std::shared_ptr<uml::ActivityNode> ActivityEdgeImpl::getSource() const
 void ActivityEdgeImpl::setSource(std::shared_ptr<uml::ActivityNode> _source)
 {
     m_source = _source;
+	
 }
 
 
@@ -360,6 +371,7 @@ std::shared_ptr<uml::ActivityNode> ActivityEdgeImpl::getTarget() const
 void ActivityEdgeImpl::setTarget(std::shared_ptr<uml::ActivityNode> _target)
 {
     m_target = _target;
+	
 }
 
 
@@ -374,6 +386,8 @@ std::shared_ptr<uml::ValueSpecification> ActivityEdgeImpl::getWeight() const
 void ActivityEdgeImpl::setWeight(std::shared_ptr<uml::ValueSpecification> _weight)
 {
     m_weight = _weight;
+	
+	
 }
 
 

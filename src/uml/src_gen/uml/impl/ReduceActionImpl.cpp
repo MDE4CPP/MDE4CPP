@@ -175,6 +175,7 @@ bool ReduceActionImpl::getIsOrdered() const
 void ReduceActionImpl::setIsOrdered(bool _isOrdered)
 {
 	m_isOrdered = _isOrdered;
+	
 } 
 
 
@@ -213,6 +214,9 @@ std::shared_ptr<uml::InputPin> ReduceActionImpl::getCollection() const
 void ReduceActionImpl::setCollection(std::shared_ptr<uml::InputPin> _collection)
 {
     m_collection = _collection;
+	
+	
+	
 }
 
 
@@ -227,6 +231,7 @@ std::shared_ptr<uml::Behavior> ReduceActionImpl::getReducer() const
 void ReduceActionImpl::setReducer(std::shared_ptr<uml::Behavior> _reducer)
 {
     m_reducer = _reducer;
+	
 }
 
 
@@ -241,6 +246,9 @@ std::shared_ptr<uml::OutputPin> ReduceActionImpl::getResult() const
 void ReduceActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
+	
+	
+	
 }
 
 

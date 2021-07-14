@@ -192,6 +192,8 @@ std::shared_ptr<uml::ValueSpecification> DurationImpl::getExpr() const
 void DurationImpl::setExpr(std::shared_ptr<uml::ValueSpecification> _expr)
 {
     m_expr = _expr;
+	
+	
 }
 
 

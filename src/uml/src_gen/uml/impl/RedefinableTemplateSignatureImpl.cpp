@@ -211,7 +211,8 @@ void RedefinableTemplateSignatureImpl::setClassifier(std::weak_ptr<uml::Classifi
 {
     m_classifier = _classifier;
 	//additional setter call for redefined reference TemplateSignature::template
-	uml::TemplateSignatureImpl::setTemplate(_classifier);
+	uml::TemplateSignatureImpl::setTemplate(_classifier.lock());
+	
 }
 /*Additional Setter for redefined reference 'TemplateSignature::template'*/
 void RedefinableTemplateSignatureImpl::setTemplate(std::weak_ptr<uml::TemplateableElement> _template)

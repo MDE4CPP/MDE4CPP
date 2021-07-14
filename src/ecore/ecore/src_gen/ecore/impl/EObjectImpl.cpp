@@ -123,6 +123,7 @@ int EObjectImpl::getMetaElementID() const
 void EObjectImpl::setMetaElementID(int _metaElementID)
 {
 	m_metaElementID = _metaElementID;
+	
 } 
 
 
@@ -246,6 +247,7 @@ std::weak_ptr<ecore::EObject> EObjectImpl::getEContainer() const
 void EObjectImpl::setEContainer(std::weak_ptr<ecore::EObject> _eContainer)
 {
     m_eContainer = _eContainer;
+	
 }
 
 

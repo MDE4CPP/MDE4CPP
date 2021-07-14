@@ -479,6 +479,8 @@ std::shared_ptr<uml::Behavior> StateImpl::getDoActivity() const
 void StateImpl::setDoActivity(std::shared_ptr<uml::Behavior> _doActivity)
 {
     m_doActivity = _doActivity;
+	
+	
 }
 
 
@@ -493,6 +495,8 @@ std::shared_ptr<uml::Behavior> StateImpl::getEntry() const
 void StateImpl::setEntry(std::shared_ptr<uml::Behavior> _entry)
 {
     m_entry = _entry;
+	
+	
 }
 
 
@@ -507,6 +511,8 @@ std::shared_ptr<uml::Behavior> StateImpl::getExit() const
 void StateImpl::setExit(std::shared_ptr<uml::Behavior> _exit)
 {
     m_exit = _exit;
+	
+	
 }
 
 
@@ -521,6 +527,8 @@ std::shared_ptr<uml::State> StateImpl::getRedefinedState() const
 void StateImpl::setRedefinedState(std::shared_ptr<uml::State> _redefinedState)
 {
     m_redefinedState = _redefinedState;
+	
+	
 }
 
 
@@ -561,6 +569,11 @@ std::shared_ptr<uml::Constraint> StateImpl::getStateInvariant() const
 void StateImpl::setStateInvariant(std::shared_ptr<uml::Constraint> _stateInvariant)
 {
     m_stateInvariant = _stateInvariant;
+	
+	
+	
+	
+	
 }
 
 
@@ -575,6 +588,7 @@ std::shared_ptr<uml::StateMachine> StateImpl::getSubmachine() const
 void StateImpl::setSubmachine(std::shared_ptr<uml::StateMachine> _submachine)
 {
     m_submachine = _submachine;
+	
 }
 
 

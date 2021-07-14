@@ -158,6 +158,7 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> OperationCallEx
 void OperationCallExpEvalImpl::setReferredOperation(std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> _referredOperation)
 {
     m_referredOperation = _referredOperation;
+	
 }
 
 

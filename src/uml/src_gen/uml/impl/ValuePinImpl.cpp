@@ -112,6 +112,7 @@ ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::AddStructuralFeatureValueAction> p
 :ValuePinImpl()
 {
 	m_addStructuralFeatureValueAction = par_addStructuralFeatureValueAction;
+	m_action = par_addStructuralFeatureValueAction;
 }
 
 //Additional constructor for the containments back reference
@@ -119,6 +120,7 @@ ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::CallOperationAction> par_callOpera
 :ValuePinImpl()
 {
 	m_callOperationAction = par_callOperationAction;
+	m_action = par_callOperationAction;
 }
 
 //Additional constructor for the containments back reference
@@ -126,6 +128,7 @@ ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::DestroyObjectAction> par_destroyOb
 :ValuePinImpl()
 {
 	m_destroyObjectAction = par_destroyObjectAction;
+	m_action = par_destroyObjectAction;
 }
 
 //Additional constructor for the containments back reference
@@ -141,6 +144,7 @@ ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::InvocationAction> par_invocationAc
 :ValuePinImpl()
 {
 	m_invocationAction = par_invocationAction;
+	m_action = par_invocationAction;
 }
 
 //Additional constructor for the containments back reference
@@ -163,6 +167,7 @@ ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction
 :ValuePinImpl()
 {
 	m_removeStructuralFeatureValueAction = par_removeStructuralFeatureValueAction;
+	m_action = par_removeStructuralFeatureValueAction;
 }
 
 //Additional constructor for the containments back reference
@@ -170,6 +175,7 @@ ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::StructuralFeatureAction> par_struc
 :ValuePinImpl()
 {
 	m_structuralFeatureAction = par_structuralFeatureAction;
+	m_action = par_structuralFeatureAction;
 }
 
 //Additional constructor for the containments back reference
@@ -177,6 +183,7 @@ ValuePinImpl::ValuePinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction> par_
 :ValuePinImpl()
 {
 	m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
+	m_action = par_writeStructuralFeatureAction;
 }
 
 ValuePinImpl::ValuePinImpl(const ValuePinImpl & obj): ValuePinImpl()
@@ -252,6 +259,8 @@ std::shared_ptr<uml::ValueSpecification> ValuePinImpl::getValue() const
 void ValuePinImpl::setValue(std::shared_ptr<uml::ValueSpecification> _value)
 {
     m_value = _value;
+	
+	
 }
 
 

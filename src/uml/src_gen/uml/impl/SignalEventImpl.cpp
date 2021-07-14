@@ -161,6 +161,7 @@ std::shared_ptr<uml::Signal> SignalEventImpl::getSignal() const
 void SignalEventImpl::setSignal(std::shared_ptr<uml::Signal> _signal)
 {
     m_signal = _signal;
+	
 }
 
 

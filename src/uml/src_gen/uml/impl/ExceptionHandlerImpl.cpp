@@ -180,6 +180,7 @@ std::shared_ptr<uml::ObjectNode> ExceptionHandlerImpl::getExceptionInput() const
 void ExceptionHandlerImpl::setExceptionInput(std::shared_ptr<uml::ObjectNode> _exceptionInput)
 {
     m_exceptionInput = _exceptionInput;
+	
 }
 
 
@@ -211,6 +212,7 @@ std::shared_ptr<uml::ExecutableNode> ExceptionHandlerImpl::getHandlerBody() cons
 void ExceptionHandlerImpl::setHandlerBody(std::shared_ptr<uml::ExecutableNode> _handlerBody)
 {
     m_handlerBody = _handlerBody;
+	
 }
 
 
@@ -225,6 +227,9 @@ std::weak_ptr<uml::ExecutableNode> ExceptionHandlerImpl::getProtectedNode() cons
 void ExceptionHandlerImpl::setProtectedNode(std::weak_ptr<uml::ExecutableNode> _protectedNode)
 {
     m_protectedNode = _protectedNode;
+	m_owner = this->getProtectedNode().lock();
+	
+	
 }
 
 

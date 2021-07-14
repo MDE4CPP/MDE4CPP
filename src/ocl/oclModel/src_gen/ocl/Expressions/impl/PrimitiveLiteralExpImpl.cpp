@@ -212,6 +212,7 @@ std::string PrimitiveLiteralExpImpl::getSymbol() const
 void PrimitiveLiteralExpImpl::setSymbol(std::string _symbol)
 {
 	m_symbol = _symbol;
+	
 } 
 
 

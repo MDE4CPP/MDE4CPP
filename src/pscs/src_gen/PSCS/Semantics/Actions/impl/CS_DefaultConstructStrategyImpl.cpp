@@ -657,6 +657,7 @@ std::shared_ptr<uml::Association> CS_DefaultConstructStrategyImpl::getDefaultAss
 void CS_DefaultConstructStrategyImpl::setDefaultAssociation(std::shared_ptr<uml::Association> _defaultAssociation)
 {
     m_defaultAssociation = _defaultAssociation;
+	
 }
 
 
@@ -688,6 +689,7 @@ std::shared_ptr<fUML::Semantics::Loci::Locus> CS_DefaultConstructStrategyImpl::g
 void CS_DefaultConstructStrategyImpl::setLocus(std::shared_ptr<fUML::Semantics::Loci::Locus> _locus)
 {
     m_locus = _locus;
+	
 }
 
 

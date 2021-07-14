@@ -150,6 +150,7 @@ std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getAfter() co
 void GeneralOrderingImpl::setAfter(std::shared_ptr<uml::OccurrenceSpecification> _after)
 {
     m_after = _after;
+	
 }
 
 
@@ -164,6 +165,7 @@ std::shared_ptr<uml::OccurrenceSpecification> GeneralOrderingImpl::getBefore() c
 void GeneralOrderingImpl::setBefore(std::shared_ptr<uml::OccurrenceSpecification> _before)
 {
     m_before = _before;
+	
 }
 
 

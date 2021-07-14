@@ -156,6 +156,7 @@ Any EClassifierImpl::getDefaultValue() const
 void EClassifierImpl::setDefaultValue(Any _defaultValue)
 {
 	m_defaultValue = _defaultValue;
+	
 } 
 
 
@@ -179,6 +180,7 @@ std::string EClassifierImpl::getInstanceClassName() const
 void EClassifierImpl::setInstanceClassName(std::string _instanceClassName)
 {
 	m_instanceClassName = _instanceClassName;
+	
 } 
 
 
@@ -192,6 +194,7 @@ std::string EClassifierImpl::getInstanceTypeName() const
 void EClassifierImpl::setInstanceTypeName(std::string _instanceTypeName)
 {
 	m_instanceTypeName = _instanceTypeName;
+	
 } 
 
 

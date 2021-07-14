@@ -224,6 +224,7 @@ bool PortImpl::getIsBehavior() const
 void PortImpl::setIsBehavior(bool _isBehavior)
 {
 	m_isBehavior = _isBehavior;
+	
 } 
 
 
@@ -237,6 +238,7 @@ bool PortImpl::getIsConjugated() const
 void PortImpl::setIsConjugated(bool _isConjugated)
 {
 	m_isConjugated = _isConjugated;
+	
 } 
 
 
@@ -250,6 +252,7 @@ bool PortImpl::getIsService() const
 void PortImpl::setIsService(bool _isService)
 {
 	m_isService = _isService;
+	
 } 
 
 
@@ -340,6 +343,7 @@ std::shared_ptr<uml::ProtocolStateMachine> PortImpl::getProtocol() const
 void PortImpl::setProtocol(std::shared_ptr<uml::ProtocolStateMachine> _protocol)
 {
     m_protocol = _protocol;
+	
 }
 
 

@@ -170,6 +170,7 @@ std::shared_ptr<uml::Clause> ClauseActivationImpl::getClause() const
 void ClauseActivationImpl::setClause(std::shared_ptr<uml::Clause> _clause)
 {
     m_clause = _clause;
+	
 }
 
 
@@ -184,6 +185,7 @@ std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> ClauseActiv
 void ClauseActivationImpl::setConditionalNodeActivation(std::shared_ptr<fUML::Semantics::Actions::ConditionalNodeActivation> _conditionalNodeActivation)
 {
     m_conditionalNodeActivation = _conditionalNodeActivation;
+	
 }
 
 

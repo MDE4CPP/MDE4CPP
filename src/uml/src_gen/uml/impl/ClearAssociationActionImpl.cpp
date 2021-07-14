@@ -189,6 +189,7 @@ std::shared_ptr<uml::Association> ClearAssociationActionImpl::getAssociation() c
 void ClearAssociationActionImpl::setAssociation(std::shared_ptr<uml::Association> _association)
 {
     m_association = _association;
+	
 }
 
 
@@ -203,6 +204,9 @@ std::shared_ptr<uml::InputPin> ClearAssociationActionImpl::getObject() const
 void ClearAssociationActionImpl::setObject(std::shared_ptr<uml::InputPin> _object)
 {
     m_object = _object;
+	
+	
+	
 }
 
 

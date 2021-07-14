@@ -136,6 +136,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> IfExpEvalImpl::getCondition() cons
 void IfExpEvalImpl::setCondition(std::shared_ptr<ocl::Evaluations::OclExpEval> _condition)
 {
     m_condition = _condition;
+	
 }
 
 
@@ -150,6 +151,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> IfExpEvalImpl::getElseExpression()
 void IfExpEvalImpl::setElseExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _elseExpression)
 {
     m_elseExpression = _elseExpression;
+	
 }
 
 
@@ -164,6 +166,7 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> IfExpEvalImpl::getThenExpression()
 void IfExpEvalImpl::setThenExpression(std::shared_ptr<ocl::Evaluations::OclExpEval> _thenExpression)
 {
     m_thenExpression = _thenExpression;
+	
 }
 
 

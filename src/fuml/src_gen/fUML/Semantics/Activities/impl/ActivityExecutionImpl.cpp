@@ -265,6 +265,7 @@ std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> Activi
 void ActivityExecutionImpl::setActivationGroup(std::shared_ptr<fUML::Semantics::Activities::ActivityNodeActivationGroup> _activationGroup)
 {
     m_activationGroup = _activationGroup;
+	
 }
 
 
@@ -287,6 +288,7 @@ void ActivityExecutionImpl::setActivity(std::shared_ptr<uml::Activity> _activity
     m_activity = _activity;
 	//additional setter call for redefined reference Execution::behavior
 	fUML::Semantics::CommonBehavior::ExecutionImpl::setBehavior(_activity);
+	
 }
 /*Additional Setter for redefined reference 'Execution::behavior'*/
 void ActivityExecutionImpl::setBehavior(std::shared_ptr<uml::Behavior> _behavior)

@@ -25,7 +25,7 @@
 
 //depending model packages
 
-//Subpackages
+
 
 //Stereotypes
 #include "ecore/EAttribute.hpp"
@@ -1129,8 +1129,8 @@ void EcorePackageImpl::initializePackageContents(std::shared_ptr<uml::Package> e
 	isInitialized = true;
 
 	// Initialize package
-	setName(eNAME);
-	setURI(eNS_URI);
+	this->setName(eNAME);
+	this->setURI(eNS_URI);
 
 	initializePackageActivities();
 	initializePackageClasses();

@@ -62,9 +62,11 @@ namespace fUML::Semantics::Actions
 			virtual void setCreateObjectAction(std::shared_ptr<uml::CreateObjectAction>) ;
 			/*Additional Setter for 'ActionActivation::action' redefined by reference 'createObjectAction'*/
 			
-			virtual void setAction(std::shared_ptr<uml::Action>) ;/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'createObjectAction'*/
+			virtual void setAction(std::shared_ptr<uml::Action>) ;
+			/*Additional Setter for 'ActivityNodeActivation::node' redefined by reference 'createObjectAction'*/
 			
 			virtual void setNode(std::shared_ptr<uml::ActivityNode>) ;
+			
 			
 			//*********************************
 			// Union Getter

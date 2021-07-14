@@ -182,6 +182,9 @@ std::shared_ptr<uml::OutputPin> ReadStructuralFeatureActionImpl::getResult() con
 void ReadStructuralFeatureActionImpl::setResult(std::shared_ptr<uml::OutputPin> _result)
 {
     m_result = _result;
+	
+	
+	
 }
 
 

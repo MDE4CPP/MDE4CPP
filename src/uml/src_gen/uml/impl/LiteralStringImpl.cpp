@@ -170,6 +170,7 @@ std::string LiteralStringImpl::getValue() const
 void LiteralStringImpl::setValue(std::string _value)
 {
 	m_value = _value;
+	
 } 
 
 

@@ -212,6 +212,7 @@ int IntegerLiteralExpImpl::getIntegerSymbol() const
 void IntegerLiteralExpImpl::setIntegerSymbol(int _integerSymbol)
 {
 	m_integerSymbol = _integerSymbol;
+	
 } 
 
 

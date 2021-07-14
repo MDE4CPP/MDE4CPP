@@ -110,6 +110,7 @@ namespace fUML::Semantics::Activities
 			/*Additional Setter for 'Execution::behavior' redefined by reference 'activity'*/
 			
 			virtual void setBehavior(std::shared_ptr<uml::Behavior>) = 0;
+			
 
 		protected:
 			//*********************************

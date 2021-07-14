@@ -176,6 +176,7 @@ void CallBehaviorActionActivationImpl::setCallBehaviorAction(std::shared_ptr<uml
     m_callBehaviorAction = _callBehaviorAction;
 	//additional setter call for redefined reference CallActionActivation::callAction
 	fUML::Semantics::Actions::CallActionActivationImpl::setCallAction(_callBehaviorAction);
+	
 }
 /*Additional Setter for redefined reference 'CallActionActivation::callAction'*/
 void CallBehaviorActionActivationImpl::setCallAction(std::shared_ptr<uml::CallAction> _callAction)

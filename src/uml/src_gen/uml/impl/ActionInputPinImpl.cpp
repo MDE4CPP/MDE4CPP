@@ -112,6 +112,7 @@ ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::AddStructuralFeatureVa
 :ActionInputPinImpl()
 {
 	m_addStructuralFeatureValueAction = par_addStructuralFeatureValueAction;
+	m_action = par_addStructuralFeatureValueAction;
 }
 
 //Additional constructor for the containments back reference
@@ -119,6 +120,7 @@ ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::CallOperationAction> p
 :ActionInputPinImpl()
 {
 	m_callOperationAction = par_callOperationAction;
+	m_action = par_callOperationAction;
 }
 
 //Additional constructor for the containments back reference
@@ -126,6 +128,7 @@ ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::DestroyObjectAction> p
 :ActionInputPinImpl()
 {
 	m_destroyObjectAction = par_destroyObjectAction;
+	m_action = par_destroyObjectAction;
 }
 
 //Additional constructor for the containments back reference
@@ -141,6 +144,7 @@ ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::InvocationAction> par_
 :ActionInputPinImpl()
 {
 	m_invocationAction = par_invocationAction;
+	m_action = par_invocationAction;
 }
 
 //Additional constructor for the containments back reference
@@ -163,6 +167,7 @@ ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::RemoveStructuralFeatur
 :ActionInputPinImpl()
 {
 	m_removeStructuralFeatureValueAction = par_removeStructuralFeatureValueAction;
+	m_action = par_removeStructuralFeatureValueAction;
 }
 
 //Additional constructor for the containments back reference
@@ -170,6 +175,7 @@ ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::StructuralFeatureActio
 :ActionInputPinImpl()
 {
 	m_structuralFeatureAction = par_structuralFeatureAction;
+	m_action = par_structuralFeatureAction;
 }
 
 //Additional constructor for the containments back reference
@@ -177,6 +183,7 @@ ActionInputPinImpl::ActionInputPinImpl(std::weak_ptr<uml::WriteStructuralFeature
 :ActionInputPinImpl()
 {
 	m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
+	m_action = par_writeStructuralFeatureAction;
 }
 
 ActionInputPinImpl::ActionInputPinImpl(const ActionInputPinImpl & obj): ActionInputPinImpl()
@@ -258,6 +265,8 @@ std::shared_ptr<uml::Action> ActionInputPinImpl::getFromAction() const
 void ActionInputPinImpl::setFromAction(std::shared_ptr<uml::Action> _fromAction)
 {
     m_fromAction = _fromAction;
+	
+	
 }
 
 

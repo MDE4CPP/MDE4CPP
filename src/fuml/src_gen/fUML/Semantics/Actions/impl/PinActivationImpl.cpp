@@ -203,6 +203,7 @@ std::weak_ptr<fUML::Semantics::Actions::ActionActivation> PinActivationImpl::get
 void PinActivationImpl::setActionActivation(std::weak_ptr<fUML::Semantics::Actions::ActionActivation> _actionActivation)
 {
     m_actionActivation = _actionActivation;
+	
 }
 
 
@@ -219,6 +220,7 @@ void PinActivationImpl::setPin(std::shared_ptr<uml::Pin> _pin)
     m_pin = _pin;
 	//additional setter call for redefined reference ActivityNodeActivation::node
 	fUML::Semantics::Activities::ActivityNodeActivationImpl::setNode(_pin);
+	
 }
 /*Additional Setter for redefined reference 'ActivityNodeActivation::node'*/
 void PinActivationImpl::setNode(std::shared_ptr<uml::ActivityNode> _node)

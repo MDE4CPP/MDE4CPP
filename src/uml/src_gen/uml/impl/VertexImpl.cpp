@@ -187,6 +187,11 @@ std::weak_ptr<uml::Region> VertexImpl::getContainer() const
 void VertexImpl::setContainer(std::weak_ptr<uml::Region> _container)
 {
     m_container = _container;
+	m_namespace = this->getContainer().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 

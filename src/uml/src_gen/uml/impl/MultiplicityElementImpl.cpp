@@ -136,6 +136,7 @@ bool MultiplicityElementImpl::getIsOrdered() const
 void MultiplicityElementImpl::setIsOrdered(bool _isOrdered)
 {
 	m_isOrdered = _isOrdered;
+	
 } 
 
 
@@ -149,6 +150,7 @@ bool MultiplicityElementImpl::getIsUnique() const
 void MultiplicityElementImpl::setIsUnique(bool _isUnique)
 {
 	m_isUnique = _isUnique;
+	
 } 
 
 
@@ -162,6 +164,7 @@ int MultiplicityElementImpl::getLower() const
 void MultiplicityElementImpl::setLower(int _lower)
 {
 	m_lower = _lower;
+	
 } 
 
 
@@ -175,6 +178,7 @@ int MultiplicityElementImpl::getUpper() const
 void MultiplicityElementImpl::setUpper(int _upper)
 {
 	m_upper = _upper;
+	
 } 
 
 
@@ -267,6 +271,8 @@ std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getLowerValue(
 void MultiplicityElementImpl::setLowerValue(std::shared_ptr<uml::ValueSpecification> _lowerValue)
 {
     m_lowerValue = _lowerValue;
+	
+	
 }
 
 
@@ -281,6 +287,8 @@ std::shared_ptr<uml::ValueSpecification> MultiplicityElementImpl::getUpperValue(
 void MultiplicityElementImpl::setUpperValue(std::shared_ptr<uml::ValueSpecification> _upperValue)
 {
     m_upperValue = _upperValue;
+	
+	
 }
 
 

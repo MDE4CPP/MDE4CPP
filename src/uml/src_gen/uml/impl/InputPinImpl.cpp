@@ -112,6 +112,7 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::AddStructuralFeatureValueAction> p
 :InputPinImpl()
 {
 	m_addStructuralFeatureValueAction = par_addStructuralFeatureValueAction;
+	m_action = par_addStructuralFeatureValueAction;
 }
 
 //Additional constructor for the containments back reference
@@ -119,6 +120,7 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::CallOperationAction> par_callOpera
 :InputPinImpl()
 {
 	m_callOperationAction = par_callOperationAction;
+	m_action = par_callOperationAction;
 }
 
 //Additional constructor for the containments back reference
@@ -126,6 +128,7 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::DestroyObjectAction> par_destroyOb
 :InputPinImpl()
 {
 	m_destroyObjectAction = par_destroyObjectAction;
+	m_action = par_destroyObjectAction;
 }
 
 //Additional constructor for the containments back reference
@@ -141,6 +144,7 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::InvocationAction> par_invocationAc
 :InputPinImpl()
 {
 	m_invocationAction = par_invocationAction;
+	m_action = par_invocationAction;
 }
 
 //Additional constructor for the containments back reference
@@ -163,6 +167,7 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::RemoveStructuralFeatureValueAction
 :InputPinImpl()
 {
 	m_removeStructuralFeatureValueAction = par_removeStructuralFeatureValueAction;
+	m_action = par_removeStructuralFeatureValueAction;
 }
 
 //Additional constructor for the containments back reference
@@ -170,6 +175,7 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::StructuralFeatureAction> par_struc
 :InputPinImpl()
 {
 	m_structuralFeatureAction = par_structuralFeatureAction;
+	m_action = par_structuralFeatureAction;
 }
 
 //Additional constructor for the containments back reference
@@ -177,6 +183,7 @@ InputPinImpl::InputPinImpl(std::weak_ptr<uml::WriteStructuralFeatureAction> par_
 :InputPinImpl()
 {
 	m_writeStructuralFeatureAction = par_writeStructuralFeatureAction;
+	m_action = par_writeStructuralFeatureAction;
 }
 
 InputPinImpl::InputPinImpl(const InputPinImpl & obj): InputPinImpl()
@@ -260,6 +267,11 @@ std::weak_ptr<uml::AddStructuralFeatureValueAction> InputPinImpl::getAddStructur
 void InputPinImpl::setAddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction> _addStructuralFeatureValueAction)
 {
     m_addStructuralFeatureValueAction = _addStructuralFeatureValueAction;
+	m_action = this->getAddStructuralFeatureValueAction().lock();
+	m_owner = this->getAction().lock();
+	
+	
+	
 }
 
 
@@ -274,6 +286,11 @@ std::weak_ptr<uml::CallOperationAction> InputPinImpl::getCallOperationAction() c
 void InputPinImpl::setCallOperationAction(std::weak_ptr<uml::CallOperationAction> _callOperationAction)
 {
     m_callOperationAction = _callOperationAction;
+	m_action = this->getCallOperationAction().lock();
+	m_owner = this->getAction().lock();
+	
+	
+	
 }
 
 
@@ -288,6 +305,11 @@ std::weak_ptr<uml::DestroyObjectAction> InputPinImpl::getDestroyObjectAction() c
 void InputPinImpl::setDestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction> _destroyObjectAction)
 {
     m_destroyObjectAction = _destroyObjectAction;
+	m_action = this->getDestroyObjectAction().lock();
+	m_owner = this->getAction().lock();
+	
+	
+	
 }
 
 
@@ -302,6 +324,11 @@ std::weak_ptr<uml::InvocationAction> InputPinImpl::getInvocationAction() const
 void InputPinImpl::setInvocationAction(std::weak_ptr<uml::InvocationAction> _invocationAction)
 {
     m_invocationAction = _invocationAction;
+	m_action = this->getInvocationAction().lock();
+	m_owner = this->getAction().lock();
+	
+	
+	
 }
 
 
@@ -316,6 +343,11 @@ std::weak_ptr<uml::RemoveStructuralFeatureValueAction> InputPinImpl::getRemoveSt
 void InputPinImpl::setRemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> _removeStructuralFeatureValueAction)
 {
     m_removeStructuralFeatureValueAction = _removeStructuralFeatureValueAction;
+	m_action = this->getRemoveStructuralFeatureValueAction().lock();
+	m_owner = this->getAction().lock();
+	
+	
+	
 }
 
 
@@ -330,6 +362,11 @@ std::weak_ptr<uml::StructuralFeatureAction> InputPinImpl::getStructuralFeatureAc
 void InputPinImpl::setStructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction> _structuralFeatureAction)
 {
     m_structuralFeatureAction = _structuralFeatureAction;
+	m_action = this->getStructuralFeatureAction().lock();
+	m_owner = this->getAction().lock();
+	
+	
+	
 }
 
 
@@ -344,6 +381,11 @@ std::weak_ptr<uml::WriteStructuralFeatureAction> InputPinImpl::getWriteStructura
 void InputPinImpl::setWriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> _writeStructuralFeatureAction)
 {
     m_writeStructuralFeatureAction = _writeStructuralFeatureAction;
+	m_action = this->getWriteStructuralFeatureAction().lock();
+	m_owner = this->getAction().lock();
+	
+	
+	
 }
 
 

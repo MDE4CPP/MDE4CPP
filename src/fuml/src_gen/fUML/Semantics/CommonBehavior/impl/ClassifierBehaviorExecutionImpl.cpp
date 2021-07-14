@@ -147,6 +147,7 @@ std::shared_ptr<uml::Class> ClassifierBehaviorExecutionImpl::getClassifier() con
 void ClassifierBehaviorExecutionImpl::setClassifier(std::shared_ptr<uml::Class> _classifier)
 {
     m_classifier = _classifier;
+	
 }
 
 
@@ -161,6 +162,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> ClassifierBehaviorEx
 void ClassifierBehaviorExecutionImpl::setExecution(std::shared_ptr<fUML::Semantics::CommonBehavior::Execution> _execution)
 {
     m_execution = _execution;
+	
 }
 
 
@@ -175,6 +177,7 @@ std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> ClassifierBeh
 void ClassifierBehaviorExecutionImpl::setObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> _objectActivation)
 {
     m_objectActivation = _objectActivation;
+	
 }
 
 

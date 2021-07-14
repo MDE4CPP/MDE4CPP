@@ -180,6 +180,7 @@ std::string ParameterImpl::getDefault() const
 void ParameterImpl::setDefault(std::string _default)
 {
 	m_default = _default;
+	
 } 
 
 
@@ -193,6 +194,7 @@ uml::ParameterDirectionKind ParameterImpl::getDirection() const
 void ParameterImpl::setDirection(uml::ParameterDirectionKind _direction)
 {
 	m_direction = _direction;
+	
 } 
 
 
@@ -206,6 +208,7 @@ uml::ParameterEffectKind ParameterImpl::getEffect() const
 void ParameterImpl::setEffect(uml::ParameterEffectKind _effect)
 {
 	m_effect = _effect;
+	
 } 
 
 
@@ -219,6 +222,7 @@ bool ParameterImpl::getIsException() const
 void ParameterImpl::setIsException(bool _isException)
 {
 	m_isException = _isException;
+	
 } 
 
 
@@ -232,6 +236,7 @@ bool ParameterImpl::getIsStream() const
 void ParameterImpl::setIsStream(bool _isStream)
 {
 	m_isStream = _isStream;
+	
 } 
 
 
@@ -336,6 +341,11 @@ std::weak_ptr<uml::Behavior> ParameterImpl::getBehavior() const
 void ParameterImpl::setBehavior(std::weak_ptr<uml::Behavior> _behavior)
 {
     m_behavior = _behavior;
+	m_namespace = this->getBehavior().lock();
+	m_owner = this->getNamespace().lock();
+	
+	
+	
 }
 
 
@@ -350,6 +360,8 @@ std::shared_ptr<uml::ValueSpecification> ParameterImpl::getDefaultValue() const
 void ParameterImpl::setDefaultValue(std::shared_ptr<uml::ValueSpecification> _defaultValue)
 {
     m_defaultValue = _defaultValue;
+	
+	
 }
 
 

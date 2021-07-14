@@ -227,6 +227,7 @@ std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> CS_ReferenceI
 void CS_ReferenceImpl::setCompositeReferent(std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> _compositeReferent)
 {
     m_compositeReferent = _compositeReferent;
+	
 }
 
 

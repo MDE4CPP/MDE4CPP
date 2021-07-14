@@ -184,6 +184,7 @@ std::weak_ptr<ocl::Expressions::IterateExp> VariableImpl::getBaseExp() const
 void VariableImpl::setBaseExp(std::weak_ptr<ocl::Expressions::IterateExp> _baseExp)
 {
     m_baseExp = _baseExp;
+	
 }
 
 
@@ -198,6 +199,7 @@ std::shared_ptr<ocl::Expressions::OclExpression> VariableImpl::getInitExpression
 void VariableImpl::setInitExpression(std::shared_ptr<ocl::Expressions::OclExpression> _initExpression)
 {
     m_initExpression = _initExpression;
+	
 }
 
 
@@ -212,6 +214,7 @@ std::weak_ptr<ocl::Expressions::LoopExp> VariableImpl::getLoopExp() const
 void VariableImpl::setLoopExp(std::weak_ptr<ocl::Expressions::LoopExp> _loopExp)
 {
     m_loopExp = _loopExp;
+	
 }
 
 
@@ -226,6 +229,7 @@ std::shared_ptr<ocl::Expressions::VariableExp> VariableImpl::getReferringExp() c
 void VariableImpl::setReferringExp(std::shared_ptr<ocl::Expressions::VariableExp> _referringExp)
 {
     m_referringExp = _referringExp;
+	
 }
 
 
@@ -240,6 +244,7 @@ std::shared_ptr<ecore::EParameter> VariableImpl::getRepresentedParameter() const
 void VariableImpl::setRepresentedParameter(std::shared_ptr<ecore::EParameter> _representedParameter)
 {
     m_representedParameter = _representedParameter;
+	
 }
 
 
@@ -254,6 +259,7 @@ std::weak_ptr<ocl::Expressions::ExpressionInOcl> VariableImpl::getResultOwner() 
 void VariableImpl::setResultOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl> _resultOwner)
 {
     m_resultOwner = _resultOwner;
+	
 }
 
 
@@ -268,6 +274,7 @@ std::weak_ptr<ocl::Expressions::ExpressionInOcl> VariableImpl::getSelfOwner() co
 void VariableImpl::setSelfOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl> _selfOwner)
 {
     m_selfOwner = _selfOwner;
+	
 }
 
 
@@ -282,6 +289,7 @@ std::shared_ptr<fUML::Semantics::Values::Value> VariableImpl::getValue() const
 void VariableImpl::setValue(std::shared_ptr<fUML::Semantics::Values::Value> _value)
 {
     m_value = _value;
+	
 }
 
 
@@ -296,6 +304,7 @@ std::weak_ptr<ocl::Expressions::ExpressionInOcl> VariableImpl::getVarOwner() con
 void VariableImpl::setVarOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl> _varOwner)
 {
     m_varOwner = _varOwner;
+	
 }
 
 
