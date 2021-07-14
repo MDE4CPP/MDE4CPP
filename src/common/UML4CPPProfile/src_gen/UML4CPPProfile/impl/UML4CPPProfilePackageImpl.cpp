@@ -16,6 +16,8 @@
 //meta meta model factory
 #include "uml/umlFactory.hpp"
 
+//metamodel factory
+#include "UML4CPPProfile/UML4CPPProfileFactory.hpp"
 
 //depending model packages
 #include "ecoreReflection/EcorePackage.hpp"
@@ -200,7 +202,6 @@ void UML4CPPProfilePackageImpl::initializePackageContents(std::shared_ptr<uml::P
 	initializePackageNestedPackages();
 	initializePackageStereotypes();
 	initializePackageValueSpecifications();
-
 	
 }
 
