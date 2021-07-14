@@ -46,9 +46,10 @@
 [for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
 [if (redefinedElement.oclIsKindOf(EAttribute))]
 [let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
+[if (redefinedEAttribute.hasSetter())]
 /*Additional Setter for '[redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]' redefined by attribute '[anEAttribute.name/]'*/
 [redefinedEAttribute.generateAttributeSetterDecleration(impl)/]
-[/let][/if][/for]
+[/if][/let][/if][/for]
 [/template]
 
 [template public generateAttributeProtectedMember(anEAttribute : EAttribute) ? (not doNotGenerate())]
@@ -84,14 +85,19 @@ Getter & Setter for attribute [anEAttribute.name/]
 */
 [anEAttribute.generateAttributeGetterImplementationCpp()/]
 [anEAttribute.generateAttributeSetterImplementationCpp()/]
+[comment additional setters for redefined attributes are only generated for upperBound=1, since no setters are generated for * multiplicity attributes /]
+[if (anEAttribute.upperBound = 1)]
 [for (redefinedElement : EObject | anEAttribute.getAllRedefinedElements())]
 [if (redefinedElement.oclIsKindOf(EAttribute))]
 [let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
+[if(redefinedEAttribute.hasSetter())]
 /*Additional Setter for redefined attribute '[redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]'*/
 [redefinedEAttribute.generateRedefinedAttributeSetterImplementationCpp(anEAttribute)/]
+[/if]
 [/let]
 [/if]
 [/for]
+[/if]
 [/template]
 
 [template private generateAttributeGetterImplementationCpp(anEAttribute : EAttribute)? (hasGetter())]
@@ -122,16 +128,30 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.Set
 	//end of body
 	[else]
 	m_[anEAttribute.name/] = _[anEAttribute.name/];
-	[for (redefinedElement : EObject | anEAttribute.getDirectlyRedefinedElements())]
-	[if (redefinedElement.oclIsKindOf(EAttribute))]
-	[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
-	//additional setter call for redefined attribute [redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]
-	[redefinedEAttribute.eContainingClass.transformType()/]Impl::set[redefinedEAttribute.name.toUpperFirst()/](_[anEAttribute.name/]);
-	[/let]
-	[/if]
-	[/for]
+	[generateRedefinedAttributesSet()/]
 	[/if]
 } 
+[/template]
+
+[template private generateRedefinedAttributesSet(anEAttribute : EAttribute)]
+[for (redefinedElement : EObject | anEAttribute.getDirectlyRedefinedElements())]
+[if (redefinedElement.oclIsKindOf(EAttribute))]
+[let redefinedEAttribute : EAttribute = redefinedElement.oclAsType(EAttribute)]
+[if(redefinedEAttribute.hasSetter())]
+//additional setter call for redefined attribute [redefinedEAttribute.eContainingClass.name/]::[redefinedEAttribute.name/]
+[redefinedEAttribute.eContainingClass.transformType()/]Impl::set[redefinedEAttribute.name.toUpperFirst()/](_[anEAttribute.name/]);
+[else]
+[if (redefinedEAttribute.upperBound = 1)]
+m_[redefinedEAttribute.name/] = _[anEAttribute.name/];
+[elseif(redefinedEAttribute.hasGetter())]
+[redefinedEAttribute.eContainingClass.transformType()/]Impl::get[redefinedEAttribute.name.toUpperFirst()/]()->add(_[anEAttribute.name/]);
+[/if]
+[comment recursive call to set possibly redefined attributes of redefinedEAttribute --> would normally be handled by calling the setter of redefinedEAttribute, but we do not have a setter here /]
+[redefinedEAttribute.generateRedefinedAttributesSet()/]
+[/if]
+[/let]
+[/if]
+[/for]
 [/template]
 
 [template private generateRedefinedAttributeSetterImplementationCpp(redefinedEAttribute : EAttribute, anEAttribute : EAttribute) ? (( hasSetter() or(hasImplSetterOnly())) )]

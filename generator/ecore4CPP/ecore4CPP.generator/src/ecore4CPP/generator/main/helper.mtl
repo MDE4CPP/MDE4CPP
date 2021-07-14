@@ -185,10 +185,10 @@
 [**
  * Check if element redefines another element
 */]
-[query private hasRedefinitionAnnotation(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameRedefines())->notEmpty() /]
+[query private hasRedefinitionAnnotation(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameRedefines() or source = sourceNameSubset())->notEmpty() /]
 [query public getDirectlyRedefinedElements(aModelElement : EModelElement) : OrderedSet(EObject) = 
 	if(aModelElement.hasRedefinitionAnnotation()) then 
-		eAnnotations->select(source = sourceNameRedefines())->first().references 
+		eAnnotations->select(source = sourceNameRedefines())->addAll(eAnnotations->select(source = sourceNameSubset()))->first().references
 	else OrderedSet{} 
 	endif /]
 [query public getAllRedefinedElements(aModelElement : EModelElement) : OrderedSet(EObject) = 

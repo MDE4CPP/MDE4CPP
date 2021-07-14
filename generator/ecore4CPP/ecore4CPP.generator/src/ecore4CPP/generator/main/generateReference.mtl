@@ -25,11 +25,13 @@
 [template public generateReferenceDecl(anEReference : EReference, impl : EBoolean) ? (not doNotGenerate())]
 [anEReference.generateReferenceGetterDeclaretaion(impl)/]
 [anEReference.generateReferenceSetterDeclaretaion(impl)/]
-[for (redefinedElement : EObject | anEReference.getAllRedefinedElements())][if (redefinedElement.oclIsKindOf(EReference))]
+[for (redefinedElement : EObject | anEReference.getAllRedefinedElements())]
+[if (redefinedElement.oclIsKindOf(EReference))]
 [let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
+[if(redefinedEReference.hasSetter())]
 /*Additional Setter for '[redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]' redefined by reference '[anEReference.name/]'*/
-[redefinedEReference.generateReferenceSetterDeclaretaion(impl)/][/let]
-[/if][/for]
+[redefinedEReference.generateReferenceSetterDeclaretaion(impl)/]
+[/if][/let][/if][/for]
 [/template]
 
 [template public generateReferenceGetterDeclaretaion(anEReference : EReference, impl : EBoolean)? (hasGetter() and (not isUnion()) )]
@@ -101,11 +103,15 @@ Getter & Setter for reference [anEReference.name/]
 */
 [anEReference.generateReferenceGetterCpp()/]
 [anEReference.generateReferenceSetterCpp()/]
+[comment additional setters for redefined references are only generated for upperBound=1, since no setters are generated for * multiplicity references /]
+[if (anEReference.upperBound = 1)]
 [for (redefinedElement : EObject | anEReference.getAllRedefinedElements())][if (redefinedElement.oclIsKindOf(EReference))]
 [let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
+[if(redefinedEReference.hasSetter())]
 /*Additional Setter for redefined reference '[redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]'*/
 [redefinedEReference.generateRedefinedReferenceSetterCpp(anEReference)/]
-[/let][/if][/for]
+[/if][/let][/if][/for]
+[/if]
 [/template]
 
 [template private generateReferenceGetterCpp(anEReference : EReference) ? (hasGetter() and (not isUnion()))]
@@ -138,16 +144,28 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[anEReference.Set
 	//end of body
 	[else]
     m_[anEReference.name/] = _[anEReference.name/];
-	[for (redefinedElement : EObject | anEReference.getDirectlyRedefinedElements())]
-	[if (redefinedElement.oclIsKindOf(EReference))]
-	[let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
-	//additional setter call for redefined reference [redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]
-	[redefinedEReference.eContainingClass.transformType()/]Impl::set[redefinedEReference.name.toUpperFirst()/](_[anEReference.name/]);
-	[/let]
-	[/if]
-	[/for]
+	[anEReference.generateRedefinedReferencesSet()/]
 	[/if]
 }
+[/template]
+
+[template private generateRedefinedReferencesSet(anEReference : EReference)]
+[for (redefinedElement : EObject | anEReference.getDirectlyRedefinedElements())]
+[if (redefinedElement.oclIsKindOf(EReference))]
+[let redefinedEReference : EReference = redefinedElement.oclAsType(EReference)]
+[if(redefinedEReference.hasSetter())]
+//additional setter call for redefined reference [redefinedEReference.eContainingClass.name/]::[redefinedEReference.name/]
+[redefinedEReference.eContainingClass.transformType()/]Impl::set[redefinedEReference.name.toUpperFirst()/](_[anEReference.name/]);
+[else]
+[if (redefinedEReference.upperBound = 1)]
+m_[redefinedEReference.name/] = _[anEReference.name/];
+[/if]
+[comment recursive call to set possibly redefined references of redefinedEReference --> would normally be handled by calling the setter of redefinedEReference, but we do not have a setter here /]
+[redefinedEReference.generateRedefinedReferencesSet()/]
+[/if]
+[/let]
+[/if]
+[/for]
 [/template]
 
 [template private generateRedefinedReferenceSetterCpp(redefinedEReference : EReference, anEReference : EReference) ? (anEReference.hasSetter() and redefinedEReference.hasSetter())]
