@@ -9665,15 +9665,15 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="structuralFeatureAction"
         eType="#//StructuralFeatureAction" eOpposite="#//StructuralFeatureAction/object">
-      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+      <eAnnotations source="subsets" references="#//InputPin/action"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="callOperationAction" eType="#//CallOperationAction"
         eOpposite="#//CallOperationAction/target">
-      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+      <eAnnotations source="subsets" references="#//InputPin/action"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="invocationAction" eType="#//InvocationAction"
         eOpposite="#//InvocationAction/argument">
-      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+      <eAnnotations source="subsets" references="#//InputPin/action"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//Action"
         changeable="false" transient="true" derived="true" eOpposite="#//Action/input">
@@ -9681,18 +9681,20 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="writeStructuralFeatureAction"
         eType="#//WriteStructuralFeatureAction" eOpposite="#//WriteStructuralFeatureAction/value">
-      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+      <eAnnotations source="subsets" references="#//InputPin/action"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="addStructuralFeatureValueAction"
         eType="#//AddStructuralFeatureValueAction" eOpposite="#//AddStructuralFeatureValueAction/insertAt">
-      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+      <eAnnotations source="subsets" references="#//InputPin/action"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="destroyObjectAction" eType="#//DestroyObjectAction"
         eOpposite="#//DestroyObjectAction/target">
-      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+      <eAnnotations source="subsets" references="#//InputPin/action"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="removeStructuralFeatureValueAction"
-        eType="#//RemoveStructuralFeatureValueAction" eOpposite="#//RemoveStructuralFeatureValueAction/removeAt"/>
+        eType="#//RemoveStructuralFeatureValueAction" eOpposite="#//RemoveStructuralFeatureValueAction/removeAt">
+      <eAnnotations source="subsets" references="#//InputPin/action"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Pin" abstract="true" eSuperTypes="#//ObjectNode #//MultiplicityElement">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -9769,7 +9771,7 @@
     </eOperations>
     <eStructuralFeatures xsi:type="ecore:EReference" name="callAction" eType="#//CallAction"
         eOpposite="#//CallAction/result">
-      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+      <eAnnotations source="subsets" references="#//OutputPin/action"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="action" eType="#//Action"
         changeable="false" transient="true" derived="true" eOpposite="#//Action/output">
@@ -9777,27 +9779,27 @@
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="valueSpecificationAction"
         eType="#//ValueSpecificationAction" eOpposite="#//ValueSpecificationAction/result">
-      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+      <eAnnotations source="subsets" references="#//OutputPin/action"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="writeStructuralFeatureAction"
         eType="#//WriteStructuralFeatureAction" eOpposite="#//WriteStructuralFeatureAction/result">
-      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+      <eAnnotations source="subsets" references="#//OutputPin/action"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="readStructuralFeatureAction"
         eType="#//ReadStructuralFeatureAction" eOpposite="#//ReadStructuralFeatureAction/result">
-      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+      <eAnnotations source="subsets" references="#//OutputPin/action"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="clearStructuralFeatureAction"
         eType="#//ClearStructuralFeatureAction" eOpposite="#//ClearStructuralFeatureAction/result">
-      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+      <eAnnotations source="subsets" references="#//OutputPin/action"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="readSelfAction" eType="#//ReadSelfAction"
         eOpposite="#//ReadSelfAction/result">
-      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+      <eAnnotations source="subsets" references="#//OutputPin/action"/>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="createObjectAction" eType="#//CreateObjectAction"
         eOpposite="#//CreateObjectAction/result">
-      <eAnnotations source="subsets" references="#//ActionExecutionSpecification/action"/>
+      <eAnnotations source="subsets" references="#//OutputPin/action"/>
     </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Variable" eSuperTypes="#//ConnectableElement #//MultiplicityElement">
