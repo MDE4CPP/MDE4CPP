@@ -36,8 +36,3 @@
 [aClass.generateClassCpp()/]
 [/if]
 [/template]
-
-[template public generateImplementation(aInterface : Interface)]
-[aInterface.generateImplementationHeader()/]
-[aInterface.generateImplementationSource()/]
-[/template]

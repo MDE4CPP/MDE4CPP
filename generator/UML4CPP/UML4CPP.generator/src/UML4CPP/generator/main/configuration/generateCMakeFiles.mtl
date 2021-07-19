@@ -66,6 +66,9 @@ SET(SOURCE_FILES
 	impl/[aPackage.name/]PluginImpl.cpp
 	[aPackage.name/]Plugin.cpp
 	[aPackage.generatePackageSourceFilesToCompile(packOnly, true)/]
+	[if (not packOnly)]
+	${MDE4CPP_HOME}/application/include/util/util.cpp
+	[/if]
 )
 
 INCLUDE_DIRECTORIES(

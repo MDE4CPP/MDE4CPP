@@ -58,27 +58,20 @@
 	[aPackage.allOwnedElements()->select(e|e.oclIsKindOf(uml::Interface)).oclAsType(uml::Interface).generateInterfaceHeaderFile()/]
 	[aPackage.ownedMember->filter(Enumeration).generateEnumerationFile()/]
 	[comment Configuration files and Plugin files should only be generated for the root package/]
-	[if (aPackage.getSuperPackage().oclIsUndefined())]
+	[if (aPackage.isRootPackage())]
 		[aPackage.generateConfigurationFiles(false)/]
 		[aPackage.generateUMLPluginFiles(false)/]
+
+		[if (aPackage.hasMainBehavior())]
+			[aPackage.generateApplication()/]
+		[/if]
 	[/if]
 [/if]
 
 [aPackage.generatePackageFiles()/]
-
-[if (aPackage.hasMainBehavior())]
-	[aPackage.generateApplication()/]
-[/if]
 [/template]
 
 [template public generateElement(aClass : Class)]
 [aClass.generateModel()/]
 [aClass.generateImplementation()/]
 [/template]
-
-[comment] DISABLE INTERFACE IMPLEMENTATION
-[template public generateElement(aInterface : Interface)]
-[aInterface.generateModel()/]
-[aInterface.generateImplementation()/]
-[/template]
-[/comment]

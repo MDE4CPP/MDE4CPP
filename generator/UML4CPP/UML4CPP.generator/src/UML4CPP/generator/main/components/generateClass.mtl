@@ -72,7 +72,7 @@ virtual std::shared_ptr<[aClass.generateCppType(true)/]> create[aClass.name.toUp
 [comment] OLD class IDs
 static const unsigned int [aClass.getMemberName().toUpperCase()/] = [aClass.getStaticClassID_ID()/];
 [/comment]
-static const unsigned long [aClass.getMemberName().toUpperCase()/] = [aClass.transformType().generateID()/];
+static const long long [aClass.getMemberName().toUpperCase()/] = [aClass.transformType().generatePolynomialRollingHash()/];
 static const unsigned int [aClass.getMemberName().toUpperCase()/]_FEATURE_COUNT = [aClass.allFeatures()->size()/];
 static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUNT = [aClass.ownedOperation->size()/];
 [/template]
@@ -90,11 +90,10 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 	[for (anAssociation : Association | c.getCompositionsToClass())]
 	[let containerProperty : Property = anAssociation.memberEnd->select(type = c)->asOrderedSet()->first()]
 	[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = c))->asOrderedSet()->first()]
-	static const unsigned long [containerProperty.name.toUpperCase()/]_[containmentProperty.name.toUpperCase()/] = [containmentProperty.type.transformType().generateID()/];
+	static const long long [containerProperty.name.toUpperCase()/]_[containmentProperty.name.toUpperCase()/] = [containmentProperty.type.transformType().generatePolynomialRollingHash()/];
 	[/let]
 	[/let]
 	[/for]
-
 [/for]
 [for (c : Class | aPackage.allOwnedElements()->selectByType(Stereotype)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
 	[generateStaticClassID(c)/]

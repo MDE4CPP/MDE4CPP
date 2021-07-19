@@ -50,6 +50,9 @@
 [generateAbstractDataTypesIncludes()/]
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "util/util.hpp"
+#include "uml/Property.hpp"
+#include "uml/Operation.hpp"
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.name.concat('Factory')/].hpp"
 #include "[aPackage.generateNamespacePath(false)/]/impl/[aPackage.name.concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"
@@ -135,7 +138,7 @@
 	DEBUG_MESSAGE(std::cout<<"[aClass.name.toUpperFirst()/] is created..."<<std::endl;)
 	//***********************************
 	// init Get Set
-	[aClass.generateGetSetInit()/] 
+	[aClass.generateGetSetInvokeInit()/]
 }
 
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
@@ -327,135 +330,11 @@ void [className/]::destroy()
 [aClass.generateeGetSetImpl()/]
 [aClass.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration)).generateESetFunctionForEnumerationImpl(aClass)/]
 
+//*********************************
+// Operation Invoction
+//*********************************
+[aClass.generateInvokeImpl()/]
+
 [aClass.generateGetThisPtrCPP()/]
-[/file]
-[/template]
-
-[template public generateImplementationSource(aInterface : Interface) { interfaceName : String = aInterface.name.toUpperFirst().concat('Impl'); aPackage : Package = aInterface.ancestors()->filter(Package)->first(); }]
-[file (aPackage.getPackageName().concat('/impl/').concat(interfaceName).concat('.cpp'), false, 'UTF-8')]
-#include "[aPackage.generateNamespacePath(false)/]/impl/[interfaceName.concat('.hpp')/]"
-
-[defineDebugMacro()/]
-
-#include <iostream>
-
-[generateAbstractDataTypesIncludes()/]
-#include "abstractDataTypes/Any.hpp"
-#include "abstractDataTypes/SubsetUnion.hpp"
-#include "[aPackage.generateNamespacePath(false)/]/impl/[aPackage.name.concat('PackageImpl')/].hpp"
-#include "[aInterface.eClass().ePackage.name/]/[aInterface.eClass().name/].hpp"
-[for (cl : Type | aInterface.includes()->sortedBy(myQualifiedName())) ? ( oclIsKindOf(Class) or oclIsKindOf(Interface))]
-[if (cl.oclIsUndefined() or cl.name.oclIsUndefined())]
-// undefined  [cl.eClass().name/] ([cl.toString()/]) ['class '.concat(aInterface.name).concat(': header include failed for undefined ').concat(cl.eClass().name).concat(' ').concat(cl.toString()).registerError()/]
-[else]
-#include "[cl.getNearestPackage().generateNamespacePath(false)/]/[cl.name.toUpperFirst()/].hpp"
-[/if]
-[/for]
-
-[if (aInterface.ownedOperation.method->notEmpty())][if(ownedOperation.method->filter(Activity)->notEmpty())]
-#include "pluginFramework/PluginFramework.hpp"
-#include "pluginFramework/UMLExecutionModelPlugin.hpp"
-[/if][/if]
-
-[for (aOperation : Operation | aInterface.ownedOperation->asOrderedSet()->sortedBy(myQualifiedName()))]
-[if (aOperation.method->notEmpty())]
-[if (aOperation.method->asOrderedSet()->first().oclIsKindOf(OpaqueBehavior))]
-[if (aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->includes(keyInclude()))]
-[let index : Integer = aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior).language->asOrderedSet()->indexOf(keyInclude())]
-[if (0 < index and index <= aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->size())]
-//Included from operation "[aOperation.name/]"
-[aOperation.method->asOrderedSet()->first().oclAsType(OpaqueBehavior)._body->asOrderedSet()->at(index)/]
-[/if][/let][/if][/if][/if][/for]
-
-[if (aInterface.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration))->size() > 0)]
-#include "uml/EnumerationLiteral.hpp"
-[/if]
-[for (instVal : InstanceValue | aInterface.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName()))]
-[if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
-// undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aInterface.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
-[else]
-#include "[instVal.type._package.generateNamespacePath(false)/]/[instVal.type._package.getPackageName()/]Factory.hpp"
-#include "[instVal.type._package.generateNamespacePath(false)/]/[instVal.type.name.toUpperFirst()/].hpp"
-[/if]
-[/for]
-
-[if (not aPackage.isIgnoreNamespace())]using namespace [aPackage.generateNamespace(false)/];[/if]
-
-//*********************************
-// Constructor / Destructor
-//*********************************
-[interfaceName/]::[interfaceName/]()
-{
-	//***********************************
-	// init Get Set
-	[aInterface.generateGetSetInit()/] 
-
-	// init properties without default
-	[for (aProperty : Property | aInterface.ownedAttribute->sortedBy(myQualifiedName()))]
-	[if (aProperty.default->isEmpty() and aProperty.upper <> 1)][aProperty.initAttributeProtectedMember()/][/if]
-	[/for]
-
-	[for (instVal : InstanceValue | aInterface.ownedAttribute.defaultValue->reject(oclIsUndefined())->selectByType(InstanceValue)->reject(type.oclIsUndefined() or type.oclIsKindOf(Enumeration))->sortedBy(myQualifiedName()))]
-	[if (instVal.type.oclIsUndefined() or instVal.type.name.oclIsUndefined())]
-	// undefined type of InstanceValue [instVal.qualifiedName/] ([instVal.type.toString()/]) ['class '.concat(aInterface.name).concat(': undefined type of InstanceValue ').concat(instVal.qualifiedName).concat(' (').concat(instVal.type.toString()).registerError()/]
-	[else]
-	[/if]
-	[/for]
-	
-}
-
-[for (anAssociation : Association | aInterface.getCompositionsToInterface())]
-[let containerProperty : Property = anAssociation.memberEnd->select(type = aInterface)->asOrderedSet()->first()]
-[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aInterface))->asOrderedSet()->first()]
-[if (containmentProperty.isBackReference())]
-[interfaceName/]::[interfaceName/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/])
-:[interfaceName/]()
-{
-    m_[containmentProperty.name/] = [containmentProperty.name.toLowerFirst()/];
-}
-[/if] [/let] [/let] [/for]
-
-[interfaceName/]::~[interfaceName/]()
-{
-}
-
-[if (isSingleton())]
-[aInterface.name.toUpperFirst()/]* [interfaceName/]::create()
-{
-	return new [interfaceName/]();
-}
-[/if]
-
-/*std::shared_ptr<uml::Class> [interfaceName/]::getMetaClass()
-{
-	return [aPackage.name.concat('PackageImpl')/]::eInstance()->[aInterface.generatePackageGetterCall(aInterface)/];
-}*/
-
-//*********************************
-// Attribute Setter Getter
-//*********************************
-[for (aAttribute : Property | aInterface.ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')]
-[aAttribute.generateAttributeSetterImplementationCpp()/]
-[aAttribute.generateAttributeGetterImplementationCpp()/]
-[/for]
-[for (interfaceR : InterfaceRealization | aInterface.ownedElement->filter(InterfaceRealization)->sortedBy(myQualifiedName()))] [for (aAttribute : Property | interfaceR.supplier.oclAsType(Interface).ownedAttribute->sortedBy(myQualifiedName())) separator ('\n')] [if (aInterface.ownedAttribute->select(name=aAttribute.name)->size() = 0)]
-[aAttribute.generateAttributeSetterImplementationCpp(aInterface)/]
-[aAttribute.generateAttributeGetterImplementationCpp(aInterface)/]
-[/if][/for][/for]
-
-//*********************************
-// Operations
-//*********************************
-[for (aOperation : Operation | aInterface.ownedOperation->sortedBy(myQualifiedName())) separator('\n')]
-[aOperation.generateOperationImplementation()/]
-[/for]
-
-//*********************************
-// Structural Feature Getter/Setter
-//*********************************
-[aInterface.generateeGetSetImpl()/]
-[aInterface.ownedAttribute->select(hasSetter())->select(type.oclIsKindOf(Enumeration)).generateESetFunctionForEnumerationImpl(aInterface)/]
-
-[aInterface.generateGetThisPtrCPP()/]
 [/file]
 [/template]
