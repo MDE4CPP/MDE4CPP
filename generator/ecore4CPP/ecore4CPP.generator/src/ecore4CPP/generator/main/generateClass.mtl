@@ -100,10 +100,7 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 [/template]
 
 [template public generateStaticClassID(aEClass : EClass)]
-[comment] OLD class IDs
-static const unsigned int [aEClass.getStaticAttributeIDName()/] = [aEClass.getMyClassifierID()/];
-[/comment]
-static const unsigned long [aEClass.getStaticAttributeIDName()/] = [aEClass.transformType().generateID()/];
+static const long long [aEClass.getStaticAttributeIDName()/] = [aEClass.transformType().generatePolynomialRollingHash()/];
 static const unsigned int [aEClass.getStaticAttributeIDName()/]_FEATURE_COUNT = [aEClass.getFeatureCount()/];
 static const unsigned int [aEClass.getStaticAttributeIDName()/]_OPERATION_COUNT = [aEClass.getOperationCount()/];
 [/template]

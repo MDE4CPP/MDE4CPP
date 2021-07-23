@@ -2,10 +2,10 @@ package ecore4CPP.generator.main.helpers;
 
 public class IDGeneratorService {
 	
-	public String generateID(String classQualifiedName) 
+	public String polynomialRollingHash(String key) 
 	{
 		//generate a hash value from string using polynomial rolling hash
-		int n = classQualifiedName.length();
+		int n = key.length();
 		int m = (int) (10e9 + 9);
 		int p = 53;
 		long powerOfP = 1;
@@ -13,7 +13,7 @@ public class IDGeneratorService {
 		
 		for(int i = 0; i < n; i++)
 		{
-			int c = classQualifiedName.charAt(i);
+			int c = key.charAt(i);
 			hash = (hash + c * powerOfP) % m;
 			powerOfP = (powerOfP * p) % m;
 		}

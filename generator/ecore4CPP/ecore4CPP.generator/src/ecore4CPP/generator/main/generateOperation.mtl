@@ -18,6 +18,7 @@
 [import ecore4CPP::generator::main::generateType /] 
 [import ecore4CPP::generator::main::helper /]
 [import ecore4CPP::generator::main::helpers::keywords /]
+[import ecore4CPP::generator::main::helpers::IDHelper /]
 
 [***###########################################################################################
  * Section for creating the EAttribute elements in the model factory
@@ -101,6 +102,21 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 [/template]
 
 [template public generateStaticOperationID(aOperation : EOperation) ? ( not hasImplOnly())]
-static const int [aOperation.getStaticAttributeIDName()/] = [aOperation.eContainingClass.getMyClassifierID() * 100 + aOperation.eContainingClass.getFeatureCount() + aOperation.getOperationID()/];
+static const int [aOperation.getStaticAttributeIDName()/] = [aOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/];
 
+[/template]
+
+[**
+ * generates the full name of an Operation (qualified name + signature)
+*/]
+[template public generateQualifiedNameWithSignature(anEOperation : EOperation)]
+[anEOperation.generateNamespaceDefinition()/]([for (anEParameter : EParameter | anEOperation.eParameters) separator(', ')][anEParameter.generateParameterForOperationQualifiedNameWithSignature()/][/for])[anEOperation.generateReturnTypeForOperationQualifiedNameWithSignature()/][if(anEOperation.hasKey(keyConst()))] {const}[/if]
+[/template]
+
+[template private generateParameterForOperationQualifiedNameWithSignature(anEParameter : EParameter)]
+[anEParameter.eType.transformType()/][if(anEParameter.upperBound<>1)]['[*]'/][/if]
+[/template]
+
+[template private generateReturnTypeForOperationQualifiedNameWithSignature(anEOperation : EOperation)]
+[if(not anEOperation.eType.oclIsUndefined())] : [anEOperation.eType.transformType()/][if (anEOperation.upperBound<>1)]['[*]'/][/if][/if]
 [/template]
