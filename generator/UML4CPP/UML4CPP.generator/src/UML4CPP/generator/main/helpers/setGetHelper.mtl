@@ -20,6 +20,7 @@
 [module setGetHelper('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateProperty /]
+[import UML4CPP::generator::main::components::generateOperation /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
@@ -83,43 +84,43 @@ std::map<long long,std::function<Any(std::shared_ptr<Bag<Any>>)>> m_invocationMa
 [let propList : OrderedSet(Property) = aClass.getSetGetProperties()]
 [for (prop : Property | propList) before('//getter init\n') after('\n')]
 	//Property [prop.name/]
-	m_getterMap.insert(std::pair<long long,std::function<Any()>>([prop.qualifiedName.generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){ return eAny(this->[prop.getterName()/]());}));
+	m_getterMap.insert(std::pair<long long,std::function<Any()>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){ return eAny(this->[prop.getterName()/]());}));
 [/for]
 [for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
 	//Property [compositeOwnerClass.name.toLowerFirst()/]
-	m_getterMap.insert(std::pair<long long,std::function<Any()>>([aClass.qualifiedName.concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){ return eAny(this->get[compositeOwnerClass.name.toUpperFirst()/]());}));
+	m_getterMap.insert(std::pair<long long,std::function<Any()>>([aClass.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){ return eAny(this->get[compositeOwnerClass.name.toUpperFirst()/]());}));
 [/for]
 
 [for (prop : Property | propList->select(hasSetter())) before('//setter init\n') after('\n')]
 //Property [prop.name/]
 [if (prop.type.oclIsKindOf(Enumeration))]
-	m_setterMap.insert(std::pair<long long,std::function<void(Any)>>([prop.qualifiedName.generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](Any object){this->[prop.setterName()/](object->get<std::shared_ptr<uml::EnumerationLiteral>>());}));
+	m_setterMap.insert(std::pair<long long,std::function<void(Any)>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](Any object){this->[prop.setterName()/](object->get<std::shared_ptr<uml::EnumerationLiteral>>());}));
 [else]
-	m_setterMap.insert(std::pair<long long,std::function<void(Any)>>([prop.qualifiedName.generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](Any object){this->[prop.setterName()/](object->get<[if (prop.upper<>1)]std::shared_ptr<Bag[/if][prop.type.generateCppType(false)/][if (prop.upper<>1)]>[/if]>());}));
+	m_setterMap.insert(std::pair<long long,std::function<void(Any)>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](Any object){this->[prop.setterName()/](object->get<[if (prop.upper<>1)]std::shared_ptr<Bag[/if][prop.type.generateCppType(false)/][if (prop.upper<>1)]>[/if]>());}));
 [/if]
 [/for]
 [for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
 	//Property [compositeOwnerClass.name.toLowerFirst()/]
-	m_setterMap.insert(std::pair<long long,std::function<void(Any)>>([aClass.qualifiedName.concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](Any object){this->set[compositeOwnerClass.name.toUpperFirst()/](object->get<std::shared_ptr<[compositeOwnerClass.generateCppType(true)/]>>());}));
+	m_setterMap.insert(std::pair<long long,std::function<void(Any)>>([aClass.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](Any object){this->set[compositeOwnerClass.name.toUpperFirst()/](object->get<std::shared_ptr<[compositeOwnerClass.generateCppType(true)/]>>());}));
 [/for]
 
 [for (prop : Property | propList->select(not(type.oclIsKindOf(PrimitiveType) or type.oclIsKindOf(Enumeration)))) before('//unsetter init\n') after('\n')]
 	//Property [prop.name/]
 [if (prop.upper=1)]
-	m_unsetterMap.insert(std::pair<long long,std::function<void()>>([prop.qualifiedName.generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){m_[prop.name/] = std::shared_ptr<[prop.type.transformType()/]>(nullptr);}));
+	m_unsetterMap.insert(std::pair<long long,std::function<void()>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){m_[prop.name/] = std::shared_ptr<[prop.type.transformType()/]>(nullptr);}));
 [else]
-	m_unsetterMap.insert(std::pair<long long,std::function<void()>>([prop.qualifiedName.generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){m_[prop.name/]->clear();}));
+	m_unsetterMap.insert(std::pair<long long,std::function<void()>>([prop.generateNamespaceName(true).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){m_[prop.name/]->clear();}));
 [/if]
 [/for]
 [for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
 	//Property [compositeOwnerClass.name.toLowerFirst()/]
-	m_unsetterMap.insert(std::pair<long long,std::function<void()>>([aClass.qualifiedName.concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){m_[compositeOwnerClass.name/] = std::shared_ptr<[compositeOwnerClass.generateCppType(true)/]>(nullptr);}));
+	m_unsetterMap.insert(std::pair<long long,std::function<void()>>([aClass.generateNamespaceName(true).concat('::').concat(compositeOwnerClass.name.toLowerFirst()).generatePolynomialRollingHash()/],[ '[' /]this[ ']' /](){m_[compositeOwnerClass.name/] = std::shared_ptr<[compositeOwnerClass.generateCppType(true)/]>(nullptr);}));
 [/for]
 [/let]
 
 [for (anOperation : Operation | aClass.ownedOperation) before('//invocation init\n')]
 	//Operation [anOperation.name/]
-	m_invocationMap.insert(std::pair<long long, std::function<Any(std::shared_ptr<Bag<Any>>)>>([anOperation.qualifiedName.generatePolynomialRollingHash()/], [ '[' /]this[ ']' /](std::shared_ptr<Bag<Any>> arguments) {
+	m_invocationMap.insert(std::pair<long long, std::function<Any(std::shared_ptr<Bag<Any>>)>>([anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/], [ '[' /]this[ ']' /](std::shared_ptr<Bag<Any>> arguments) {
 	[let inputParameterList : OrderedSet(Parameter) = anOperation.ownedParameter->select(direction = ParameterDirectionKind::_in or direction = ParameterDirectionKind::inout)]
 	[for (anInputParameter : Parameter | inputParameterList) after('\n')]
 		//Retrieve input parameter '[anInputParameter.name/]'

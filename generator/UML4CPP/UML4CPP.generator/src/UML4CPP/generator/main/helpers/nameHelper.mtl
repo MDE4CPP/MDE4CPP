@@ -64,6 +64,8 @@
 [query public generateNamespace(aPackage : Package, noReflection : Boolean) : String = getNamespace(noReflection, false) /]
 [query public generateNamespace(aClassifier : Classifier, noReflection : Boolean) : String = aClassifier.getNearestPackage().getNamespace(noReflection ,false) /]
 [query public generateNamespaceName(aClassifier : Classifier, noReflection : Boolean) : String = generateNamespace(noReflection).concat('::').concat(aClassifier.name.toUpperFirst())/]
+[query public generateNamespaceName(anOperation : Operation, noReflection : Boolean) : String = anOperation.owner.oclAsType(Classifier).generateNamespaceName(noReflection).concat('::').concat(anOperation.name)/]
+[query public generateNamespaceName(aProperty : Property, noReflection : Boolean) : String = aProperty.owner.oclAsType(Classifier).generateNamespaceName(noReflection).concat('::').concat(aProperty.name)/]
 [query private getNamespace(aPackage : Package, noReflection : Boolean, ignoreRoot : Boolean) : String = if(aPackage.getSuperPackage().oclIsUndefined()) then getRootPackageNamespaceName(noReflection, ignoreRoot) else aPackage.getSuperPackage().getNamespace(noReflection, ignoreRoot).concat('::').concat(aPackage.name) endif/]
 [query private getRootPackageNamespaceName(aPackage : Package, noReflection : Boolean, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else if (noReflection) then aPackage.myNamespaceName() else aPackage.name endif endif /]
 

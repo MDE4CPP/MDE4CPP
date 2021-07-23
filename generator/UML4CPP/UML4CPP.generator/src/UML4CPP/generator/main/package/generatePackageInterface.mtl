@@ -80,8 +80,8 @@ namespace [subPackage.generateNamespace(false)/]
 			[generateSingletonDecl(packageName)/]
 
 			[if (not isReflectionModel(aPackage))]
-			//Class IDs
-			[generateStaticPackageID(aPackage)/]
+			//Static IDs
+			[generateStaticPackageIDs(aPackage)/]
 			[/if]
 	};
 [if (not aPackage.isIgnoreNamespace())]}[/if]

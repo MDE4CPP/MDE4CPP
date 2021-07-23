@@ -147,6 +147,21 @@ virtual [aOperation.generateCppType()/] [aOperation.name/]([for (sParameter : Pa
 [/template]
 
 [**
+ * generates the full name of an Operation (qualified name + signature)
+*/]
+[template public generateQualifiedNameWithSignature(anOperation : Operation)]
+[anOperation.generateNamespaceName(true)/]([for (aParameter : Parameter | anOperation.ownedParameter->select(not (direction = ParameterDirectionKind::return))) separator(', ')][aParameter.generateParameterForOperationQualifiedNameWithSignature()/][/for])[anOperation.generateReturnTypeForOperationQualifiedNameWithSignature()/][if(anOperation.isQuery)] {const}[/if]
+[/template]
+
+[template private generateParameterForOperationQualifiedNameWithSignature(aParameter : Parameter)]
+[aParameter.type.transformType()/][if(aParameter.upper<>1)]['[*]'/][/if]
+[/template]
+
+[template private generateReturnTypeForOperationQualifiedNameWithSignature(anOperation : Operation)]
+[if(not anOperation.ownedParameter->select(direction = ParameterDirectionKind::return)->isEmpty())] : [anOperation.ownedParameter->select(direction = ParameterDirectionKind::return)->first().generateParameterForOperationQualifiedNameWithSignature()/][/if]
+[/template]
+
+[**
  * checks if 'matchingOperation' matches 'baseOperation'
  * 
  * operations match if:
