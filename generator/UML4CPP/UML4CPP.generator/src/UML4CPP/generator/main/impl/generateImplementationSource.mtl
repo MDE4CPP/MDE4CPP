@@ -53,6 +53,7 @@
 #include "util/util.hpp"
 #include "uml/Property.hpp"
 #include "uml/Operation.hpp"
+#include "uml/Parameter.hpp"
 #include "[aPackage.generateNamespacePath(false)/]/[aPackage.name.concat('Factory')/].hpp"
 #include "[aPackage.generateNamespacePath(false)/]/impl/[aPackage.name.concat('PackageImpl')/].hpp"
 #include "[aClass.eClass().ePackage.name/]/[aClass.eClass().name/].hpp"

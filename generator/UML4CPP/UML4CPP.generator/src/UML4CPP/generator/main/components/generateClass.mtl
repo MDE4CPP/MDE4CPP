@@ -88,7 +88,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 	[generateStaticClassID(c)/]
 	[comment  Properties of c/]
 	[for (aProperty : Property | c.ownedAttribute) before('//Properties\n')]
-	static const long long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/]
+	static const long long [aProperty.getMemberName().toUpperCase()/] = [aProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
 	[/for]
 	[comment TODO Notwendig? Hierfür werden keine Getter generiert/]
 	[comment  Properties for compositions of c/]
@@ -107,7 +107,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 	[comment  Operations of c/]
 	[for (anOperation : Operation | c.ownedOperation) before('//Operations\n')]
 	//[anOperation.generateQualifiedNameWithSignature()/]
-	static const long long [anOperation.getMemberName().toUpperCase()/] = [anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/]
+	static const long long [anOperation.getMemberName().toUpperCase()/] = [anOperation.generateQualifiedNameWithSignature().generatePolynomialRollingHash()/];
 	[/for]
 [/for]
 [for (c : Class | aPackage.allOwnedElements()->selectByType(Stereotype)->sortedBy(name)->reject(name.oclIsInvalid() or name = ''))]
