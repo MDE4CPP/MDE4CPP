@@ -95,7 +95,7 @@ static const unsigned int [aClass.getMemberName().toUpperCase()/]_OPERATION_COUN
 	[for (anAssociation : Association | c.getCompositionsToClass()) before('//Properties from compositions\n')]
 	[let containerProperty : Property = anAssociation.memberEnd->select(type = c)->asOrderedSet()->first()]
 	[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = c))->asOrderedSet()->first()]
-	static const long long [containerProperty.name.toUpperCase()/]_[containmentProperty.name.toUpperCase()/] = [containmentProperty.generateNamespaceName(true).generatePolynomialRollingHash()/];
+	static const long long [containerProperty.name.toUpperCase()/]_[containmentProperty.name.toUpperCase()/] = [containerProperty.name.toUpperCase().concat('_').concat(containmentProperty.name.toUpperCase()).generatePolynomialRollingHash()/];
 	[/let]
 	[/let]
 	[/for]
