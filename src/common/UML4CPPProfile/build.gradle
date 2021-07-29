@@ -7,8 +7,9 @@ task buildUML4CPPProfile() {
 	group 'UML4CPPProfile'
 	description 'build UML4CPPProfile'
 
-	dependsOn 'model:generateUML4CPPProfile'
-	dependsOn 'src_gen:compileUML4CPPProfile'
+	dependsOn project.tasks.getByPath('model:generateUML4CPPProfile')
+	dependsOn project.tasks.getByPath('src_gen:compileUML4CPPProfile')
+
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)

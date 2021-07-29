@@ -40,7 +40,7 @@ task downloadAntlr4(type: Download) {
 	
     src "https://www.antlr.org/download/antlr4-cpp-runtime-${antlr4Version}-source.zip"
     dest new File(file("./antlr4/antlr4-cpp-runtime-${antlr4Version}-source.zip").absolutePath)
-    quiet false
+    quiet true
     onlyIfModified true
 }
 

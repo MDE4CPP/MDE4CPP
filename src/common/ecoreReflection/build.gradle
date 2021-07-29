@@ -7,8 +7,9 @@ task buildEcoreReflection() {
 	group 'ecoreReflection'
 	description 'build ecoreReflection'
 
-	dependsOn 'model:generateEcoreReflection'
-	dependsOn 'src_gen:compileEcoreReflection'
+	dependsOn project.tasks.getByPath('model:generateEcoreReflection')
+	dependsOn project.tasks.getByPath('src_gen:compileEcoreReflection')
+
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 }

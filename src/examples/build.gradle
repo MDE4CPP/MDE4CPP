@@ -34,18 +34,19 @@ task generateAllExamples() {
 	dependsOn getRootProject().getTasksByName('createAllGenerators', true)
 		
 	doLast {				
-		def tool = '/bin/sh'
-		def command = '-c'
-		def prefix = './'
+
+		def generate_file = './generate'
+		def generate_interp = '/bin/sh' 
+		def generate_interp_option = '-c'
 		
-		if (System.properties['os.name'].toLowerCase().contains('windows')) {
-			tool = 'cmd'
-			command = '/C'
-			prefix = ''
+		if(OperatingSystem.current().isWindows()){
+			generate_file = 'generate.bat'
+			generate_interp = 'cmd'
+			generate_interp_option = '/C'
 		}
 		
 		def examples = []
-	
+
 		// PSCS examples ----------------------------------
 		if(OperatingSystem.current().isWindows()){
 			examples.add('./PSCSExamples/Ampelsteuerung_Example/model')
@@ -55,8 +56,9 @@ task generateAllExamples() {
 			//UMLExamples/TestSuite/copyTestUML
 		examples.add('./UMLExamples/TestSuite/copyTestUML/model')
 			//UMLExamples/UMLModelExample
+
 		examples.add('./UMLExamples/UMLModelExample/model/')
-		
+
 		// common examples --------------------------------
 			
 		// ecore examples ---------------------------------
@@ -66,23 +68,28 @@ task generateAllExamples() {
 		examples.add('./ecoreExamples/TestSuite/eInvokeTest/model/')
 		//examples.add('./ecoreExamples/TestSuite/templateTest/model/')
 		examples.add('./ecoreExamples/ecoreModelExample/model/')
-		
+
 		// fUML examples ----------------------------------
 		examples.add('./fUMLExamples/Calculator/model/')
 		examples.add('./fUMLExamples/ThreePhilosophers/model/')
-		
+	
 		// ocl examples -----------------------------------
 		examples.add('./oclExamples/oclModelExample/oclEcoreModelExample/model')
 		examples.add('./oclExamples/oclModelExample/oclFumlModelExample/model')
 		examples.add('./oclExamples/oclModelExample/oclUmlModelExample/model')
-		
-		examples.each {path ->
-			exec
-			{
+
+		examples.each { String path -> 
+			exec {
+				println "\n\n----- Generating example: $path\n"
 				workingDir = file("${path}")
-				commandLine = [tool, command, prefix + 'generate']
+				commandLine = [
+					generate_interp, 
+					generate_interp_option,
+					generate_file
+				]
+				sleep (250)
 			}
-		} 		
+		}
     }
 }
 
@@ -140,7 +147,6 @@ task compileAllExamples() {
 	dependsOn getRootProject().getTasksByName('compileOclUmlExample', true)
 		//oclExamples/oclModelExample/oclFumlModelExample
 	dependsOn getRootProject().getTasksByName('compileApplicationForConnect4', true)
-
 }
 
 task buildAllExamples(){
@@ -157,6 +163,19 @@ task buildAllExamples(){
     }
     
     dependsOn(tasks)
+}
+
+task cleanAllExamples(type: Exec){
+	group 'Examples'
+	description 'Removes all generated files in examples directory'
+	
+    workingDir System.env.MDE4CPP_HOME
+    
+    if(OperatingSystem.current().isWindows()){
+    	commandLine 'cmd', '/c', 'git clean -d -f -X' 'src\\examples'
+	} else if(OperatingSystem.current().isLinux() || OperatingSystem.current().isMacOsX()){
+		commandLine '/bin/sh', '-c', 'git clean -d -f -X src/examples'
+	}
 }
 
 task compileAllBenchmarks() {

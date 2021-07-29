@@ -182,7 +182,7 @@ Any [packageName/]::executeActivity(std::shared_ptr<uml::Activity> activity, std
 //Includes of packages from parameter types of executed Operations and Activities
 [for (pack : Package | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA()).ownedParameter.type.getNearestPackage()->asSet()->addAll(aPackage.allOwnedElements()->filter(Activity).ownedParameter.type.getNearestPackage()->asSet())->sortedBy(name))]
 [if (not (pack.name='StandardProfile'))]
-#include "[pack.generateNamespacePath(false)/]/[pack.name.concat('Package').toUpperFirst()/].hpp"
+#include "[pack.generateNamespacePath(false)/]/[pack.name.concat('Package')/].hpp"
 [/if]
 [/for]
 [for (typePackage : Package | aPackage.allOwnedElements()->filter(Operation)->addAll(aPackage.getOperationExecutionsCOA()).ownedParameter.type->asSet()->reject(supportedTypes())._package->asSet()->reject(isReflectionModel())->sortedBy(qualifiedName))]

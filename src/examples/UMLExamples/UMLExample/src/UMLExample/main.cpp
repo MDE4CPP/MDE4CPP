@@ -29,7 +29,7 @@ SOFTWARE.
 
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "uml/umlFactory.hpp"
-#include "uml/UmlPackage.hpp"
+#include "uml/umlPackage.hpp"
 #include "uml/Class.hpp"
 #include "uml/Model.hpp"
 #include "uml/Operation.hpp"

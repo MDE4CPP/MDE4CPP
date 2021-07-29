@@ -7,8 +7,9 @@ task buildPrimitivetypesReflection() {
 	group 'primitivetypesReflection'
 	description 'build primitivetypesReflection'
 
-	dependsOn 'model:generatePrimitivetypesReflection'
-	dependsOn 'src_gen:compilePrimitivetypesReflection'
+	dependsOn project.tasks.getByPath('model:generatePrimitivetypesReflection')
+	dependsOn project.tasks.getByPath('src_gen:compilePrimitivetypesReflection')
+
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 }

@@ -171,6 +171,8 @@ plugins {
 	id "tui.sse.mde4cpp.mde4cpp-compile-plugin" version "$gradle_mde4cpp_compile_plugin_version"
 }
 
+import org.gradle.internal.os.OperatingSystem;
+
 description 'Compile task for project: App_[packageName/]'
 
 task compileApplicationFor[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MDE4CPPCompile) {
@@ -182,16 +184,26 @@ task compileApplicationFor[packageName.toUpperFirst()/](type: tui.sse.mde4cpp.MD
 	inputs.files(fileTree('.') {
         exclude 'src/.cmake/**'
     })
+
 	if(!file('.' + File.separator + 'src' + File.separator + '.cmake' + File.separator).exists()) {
 		outputs.upToDateWhen { false }
 	}
-	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'App_[packageName/].exe')
-	outputs.file file(System.getenv('MDE4CPP_HOME') + File.separator + 'application' + File.separator + 'bin' + File.separator + 'App_[packageName/]d.exe')
+
+	if(OperatingSystem.current().isWindows()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file(['['/]rootDir,'application','bin','App_' + '[packageName/]' +       '.exe'[']'/].join(File.separator))}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))    {outputs.file file(['['/]rootDir,'application','bin','App_' + '[packageName/]' + 'd' + '.exe'[']'/].join(File.separator))}
+	}
+	else if(OperatingSystem.current().isLinux() || OperatingSystem.current().isMacOsX()){
+		if(project.hasProperty('RELEASE') && !project.property('RELEASE').equals('0')){outputs.file file(['['/]rootDir,'application','bin','App_' + '[packageName/]'      [']'/].join(File.separator))}
+		if(project.hasProperty('DEBUG') && !project.property('DEBUG').equals('0'))    {outputs.file file(['['/]rootDir,'application','bin','App_' + '[packageName/]' + 'd'[']'/].join(File.separator))}
+	}
 
 	// dependency to model '[packageName/]'
 	def [packageName/] = getRootProject().getTasksByName('compile[packageName.toUpperFirst()/]', true)
-	dependsOn [packageName/]
-	inputs.files([packageName/].outputs)
+	if (![packageName/].isEmpty()){
+		dependsOn [packageName/]
+		inputs.files([packageName/].outputs)
+	}
 }
 
 task clean {

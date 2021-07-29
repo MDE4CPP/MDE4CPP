@@ -7,8 +7,8 @@ task buildUmlReflection() {
 	group 'umlReflection'
 	description 'build umlReflection'
 
-	dependsOn 'model:generateUmlReflection'
-	dependsOn 'src_gen:compileUmlReflection'
+	dependsOn project.tasks.getByPath('model:generateUmlReflection')
+	dependsOn project.tasks.getByPath('src_gen:compileUmlReflection')
 	dependsOn getRootProject().getTasksByName('buildEcore', true)
 	dependsOn getRootProject().getTasksByName('buildUml', true)
 	dependsOn getRootProject().getTasksByName('buildEcoreReflection', true)
