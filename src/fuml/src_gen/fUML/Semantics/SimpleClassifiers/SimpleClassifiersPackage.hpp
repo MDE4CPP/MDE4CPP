@@ -65,16 +65,16 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class BooleanValue
 			//Class and Feature IDs 
-			static const unsigned long BOOLEANVALUE_CLASS = 696652347;
+			static const long long BOOLEANVALUE_CLASS = 696652347;
 			static const unsigned int BOOLEANVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int BOOLEANVALUE_CLASS_OPERATION_COUNT = 16;
-			static const int BOOLEANVALUE_ATTRIBUTE_VALUE = 1301;
+			static const long long BOOLEANVALUE_ATTRIBUTE_VALUE = 1361136095;
 			
 			
-			static const int BOOLEANVALUE_OPERATION__COPY = 1317;
-			static const int BOOLEANVALUE_OPERATION_EQUALS_VALUE = 1315;
-			static const int BOOLEANVALUE_OPERATION_SPECIFY = 1314;
-			static const int BOOLEANVALUE_OPERATION_TOSTRING = 1316;
+			static const int BOOLEANVALUE_OPERATION__COPY = 2112108449;
+			static const int BOOLEANVALUE_OPERATION_EQUALS_VALUE = 461046594;
+			static const int BOOLEANVALUE_OPERATION_SPECIFY = 628368992;
+			static const int BOOLEANVALUE_OPERATION_TOSTRING = 900200525;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getBooleanValue_Class() const = 0;
@@ -92,19 +92,19 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class CompoundValue
 			//Class and Feature IDs 
-			static const unsigned long COMPOUNDVALUE_CLASS = 960723248;
+			static const long long COMPOUNDVALUE_CLASS = 960723248;
 			static const unsigned int COMPOUNDVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int COMPOUNDVALUE_CLASS_OPERATION_COUNT = 25;
 			
-			static const int COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES = 2900;
+			static const long long COMPOUNDVALUE_ATTRIBUTE_FEATUREVALUES = 1775508137;
 			
-			static const int COMPOUNDVALUE_OPERATION__COPY = 2925;
-			static const int COMPOUNDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 2923;
-			static const int COMPOUNDVALUE_OPERATION_EQUALS_VALUE = 2920;
-			static const int COMPOUNDVALUE_OPERATION_REMOVEFEATUREVALUES_CLASSIFIER = 2919;
-			static const int COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 2922;
-			static const int COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUES = 2924;
-			static const int COMPOUNDVALUE_OPERATION_TOSTRING = 2921;
+			static const int COMPOUNDVALUE_OPERATION__COPY = 2112108449;
+			static const int COMPOUNDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 767186620;
+			static const int COMPOUNDVALUE_OPERATION_EQUALS_VALUE = 461046594;
+			static const int COMPOUNDVALUE_OPERATION_REMOVEFEATUREVALUES_CLASSIFIER = 1429363862;
+			static const int COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 1663916368;
+			static const int COMPOUNDVALUE_OPERATION_RETRIEVEFEATUREVALUES = 1230825757;
+			static const int COMPOUNDVALUE_OPERATION_TOSTRING = 900200525;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCompoundValue_Class() const = 0;
@@ -125,15 +125,15 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class DataValue
 			//Class and Feature IDs 
-			static const unsigned long DATAVALUE_CLASS = 622084858;
+			static const long long DATAVALUE_CLASS = 622084858;
 			static const unsigned int DATAVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int DATAVALUE_CLASS_OPERATION_COUNT = 28;
 			
-			static const int DATAVALUE_ATTRIBUTE_TYPE = 3601;
+			static const long long DATAVALUE_ATTRIBUTE_TYPE = 1547597192;
 			
-			static const int DATAVALUE_OPERATION__COPY = 3629;
-			static const int DATAVALUE_OPERATION_GETTYPES = 3628;
-			static const int DATAVALUE_OPERATION_NEW_ = 3627;
+			static const int DATAVALUE_OPERATION__COPY = 2112108449;
+			static const int DATAVALUE_OPERATION_GETTYPES = 21766847;
+			static const int DATAVALUE_OPERATION_NEW_ = 1558257922;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getDataValue_Class() const = 0;
@@ -150,19 +150,19 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class EnumerationValue
 			//Class and Feature IDs 
-			static const unsigned long ENUMERATIONVALUE_CLASS = 241622527;
+			static const long long ENUMERATIONVALUE_CLASS = 241622527;
 			static const unsigned int ENUMERATIONVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int ENUMERATIONVALUE_CLASS_OPERATION_COUNT = 16;
 			
-			static const int ENUMERATIONVALUE_ATTRIBUTE_LITERAL = 4100;
-			static const int ENUMERATIONVALUE_ATTRIBUTE_TYPE = 4101;
+			static const long long ENUMERATIONVALUE_ATTRIBUTE_LITERAL = 540460821;
+			static const long long ENUMERATIONVALUE_ATTRIBUTE_TYPE = 1547597192;
 			
-			static const int ENUMERATIONVALUE_OPERATION__COPY = 4117;
-			static const int ENUMERATIONVALUE_OPERATION_EQUALS_VALUE = 4113;
-			static const int ENUMERATIONVALUE_OPERATION_GETTYPES = 4116;
-			static const int ENUMERATIONVALUE_OPERATION_NEW_ = 4114;
-			static const int ENUMERATIONVALUE_OPERATION_SPECIFY = 4112;
-			static const int ENUMERATIONVALUE_OPERATION_TOSTRING = 4115;
+			static const int ENUMERATIONVALUE_OPERATION__COPY = 2112108449;
+			static const int ENUMERATIONVALUE_OPERATION_EQUALS_VALUE = 461046594;
+			static const int ENUMERATIONVALUE_OPERATION_GETTYPES = 21766847;
+			static const int ENUMERATIONVALUE_OPERATION_NEW_ = 1558257922;
+			static const int ENUMERATIONVALUE_OPERATION_SPECIFY = 628368992;
+			static const int ENUMERATIONVALUE_OPERATION_TOSTRING = 900200525;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEnumerationValue_Class() const = 0;
@@ -183,16 +183,16 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class FeatureValue
 			//Class and Feature IDs 
-			static const unsigned long FEATUREVALUE_CLASS = 1582063511;
+			static const long long FEATUREVALUE_CLASS = 1582063511;
 			static const unsigned int FEATUREVALUE_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int FEATUREVALUE_CLASS_OPERATION_COUNT = 2;
-			static const int FEATUREVALUE_ATTRIBUTE_POSITION = 5501;
+			static const long long FEATUREVALUE_ATTRIBUTE_POSITION = 2138557797;
 			
-			static const int FEATUREVALUE_ATTRIBUTE_FEATURE = 5502;
-			static const int FEATUREVALUE_ATTRIBUTE_VALUES = 5500;
+			static const long long FEATUREVALUE_ATTRIBUTE_FEATURE = 2137555300;
+			static const long long FEATUREVALUE_ATTRIBUTE_VALUES = 684753676;
 			
-			static const int FEATUREVALUE_OPERATION__COPY = 5504;
-			static const int FEATUREVALUE_OPERATION_HASEQUALVALUES_FEATUREVALUE = 5503;
+			static const int FEATUREVALUE_OPERATION__COPY = 1528806951;
+			static const int FEATUREVALUE_OPERATION_HASEQUALVALUES_FEATUREVALUE = 1610334948;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getFeatureValue_Class() const = 0;
@@ -210,16 +210,16 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class IntegerValue
 			//Class and Feature IDs 
-			static const unsigned long INTEGERVALUE_CLASS = 2030861441;
+			static const long long INTEGERVALUE_CLASS = 2030861441;
 			static const unsigned int INTEGERVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int INTEGERVALUE_CLASS_OPERATION_COUNT = 16;
-			static const int INTEGERVALUE_ATTRIBUTE_VALUE = 6401;
+			static const long long INTEGERVALUE_ATTRIBUTE_VALUE = 1361136095;
 			
 			
-			static const int INTEGERVALUE_OPERATION__COPY = 6417;
-			static const int INTEGERVALUE_OPERATION_EQUALS_VALUE = 6415;
-			static const int INTEGERVALUE_OPERATION_SPECIFY = 6414;
-			static const int INTEGERVALUE_OPERATION_TOSTRING = 6416;
+			static const int INTEGERVALUE_OPERATION__COPY = 2112108449;
+			static const int INTEGERVALUE_OPERATION_EQUALS_VALUE = 461046594;
+			static const int INTEGERVALUE_OPERATION_SPECIFY = 628368992;
+			static const int INTEGERVALUE_OPERATION_TOSTRING = 900200525;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getIntegerValue_Class() const = 0;
@@ -237,14 +237,14 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class PrimitiveValue
 			//Class and Feature IDs 
-			static const unsigned long PRIMITIVEVALUE_CLASS = 884702000;
+			static const long long PRIMITIVEVALUE_CLASS = 884702000;
 			static const unsigned int PRIMITIVEVALUE_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int PRIMITIVEVALUE_CLASS_OPERATION_COUNT = 12;
 			
-			static const int PRIMITIVEVALUE_ATTRIBUTE_TYPE = 8900;
+			static const long long PRIMITIVEVALUE_ATTRIBUTE_TYPE = 1547597192;
 			
-			static const int PRIMITIVEVALUE_OPERATION__COPY = 8912;
-			static const int PRIMITIVEVALUE_OPERATION_GETTYPES = 8911;
+			static const int PRIMITIVEVALUE_OPERATION__COPY = 2112108449;
+			static const int PRIMITIVEVALUE_OPERATION_GETTYPES = 21766847;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getPrimitiveValue_Class() const = 0;
@@ -260,16 +260,16 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class RealValue
 			//Class and Feature IDs 
-			static const unsigned long REALVALUE_CLASS = 1589674022;
+			static const long long REALVALUE_CLASS = 1589674022;
 			static const unsigned int REALVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int REALVALUE_CLASS_OPERATION_COUNT = 16;
-			static const int REALVALUE_ATTRIBUTE_VALUE = 9501;
+			static const long long REALVALUE_ATTRIBUTE_VALUE = 1361136095;
 			
 			
-			static const int REALVALUE_OPERATION__COPY = 9517;
-			static const int REALVALUE_OPERATION_EQUALS_VALUE = 9515;
-			static const int REALVALUE_OPERATION_SPECIFY = 9514;
-			static const int REALVALUE_OPERATION_TOSTRING = 9516;
+			static const int REALVALUE_OPERATION__COPY = 2112108449;
+			static const int REALVALUE_OPERATION_EQUALS_VALUE = 461046594;
+			static const int REALVALUE_OPERATION_SPECIFY = 628368992;
+			static const int REALVALUE_OPERATION_TOSTRING = 900200525;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getRealValue_Class() const = 0;
@@ -287,13 +287,13 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class SignalInstance
 			//Class and Feature IDs 
-			static const unsigned long SIGNALINSTANCE_CLASS = 1044212856;
+			static const long long SIGNALINSTANCE_CLASS = 1044212856;
 			static const unsigned int SIGNALINSTANCE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int SIGNALINSTANCE_CLASS_OPERATION_COUNT = 26;
 			
-			static const int SIGNALINSTANCE_ATTRIBUTE_TYPE = 10701;
+			static const long long SIGNALINSTANCE_ATTRIBUTE_TYPE = 1547597192;
 			
-			static const int SIGNALINSTANCE_OPERATION__COPY = 10727;
+			static const int SIGNALINSTANCE_OPERATION__COPY = 2112108449;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSignalInstance_Class() const = 0;
@@ -308,16 +308,16 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class StringValue
 			//Class and Feature IDs 
-			static const unsigned long STRINGVALUE_CLASS = 1276339704;
+			static const long long STRINGVALUE_CLASS = 1276339704;
 			static const unsigned int STRINGVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int STRINGVALUE_CLASS_OPERATION_COUNT = 16;
-			static const int STRINGVALUE_ATTRIBUTE_VALUE = 11001;
+			static const long long STRINGVALUE_ATTRIBUTE_VALUE = 1361136095;
 			
 			
-			static const int STRINGVALUE_OPERATION__COPY = 11017;
-			static const int STRINGVALUE_OPERATION_EQUALS_VALUE = 11015;
-			static const int STRINGVALUE_OPERATION_SPECIFY = 11014;
-			static const int STRINGVALUE_OPERATION_TOSTRING = 11016;
+			static const int STRINGVALUE_OPERATION__COPY = 2112108449;
+			static const int STRINGVALUE_OPERATION_EQUALS_VALUE = 461046594;
+			static const int STRINGVALUE_OPERATION_SPECIFY = 628368992;
+			static const int STRINGVALUE_OPERATION_TOSTRING = 900200525;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStringValue_Class() const = 0;
@@ -335,19 +335,19 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class StructuredValue
 			//Class and Feature IDs 
-			static const unsigned long STRUCTUREDVALUE_CLASS = 1984808016;
+			static const long long STRUCTUREDVALUE_CLASS = 1984808016;
 			static const unsigned int STRUCTUREDVALUE_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int STRUCTUREDVALUE_CLASS_OPERATION_COUNT = 18;
 			
 			
-			static const int STRUCTUREDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 11311;
-			static const int STRUCTUREDVALUE_OPERATION_CREATEFEATUREVALUES = 11313;
-			static const int STRUCTUREDVALUE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE = 11316;
-			static const int STRUCTUREDVALUE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE = 11317;
-			static const int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 11310;
-			static const int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUES = 11312;
-			static const int STRUCTUREDVALUE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT = 11315;
-			static const int STRUCTUREDVALUE_OPERATION_SPECIFY = 11314;
+			static const int STRUCTUREDVALUE_OPERATION_ASSIGNFEATUREVALUE_STRUCTURALFEATURE_EINT = 767186620;
+			static const int STRUCTUREDVALUE_OPERATION_CREATEFEATUREVALUES = 1073693695;
+			static const int STRUCTUREDVALUE_OPERATION_GETVALUES_STRUCTURALFEATURE_FEATUREVALUE = 797457019;
+			static const int STRUCTUREDVALUE_OPERATION_REMOVEVALUE_STRUCTURALFEATURE_VALUE = 1210552725;
+			static const int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUE_STRUCTURALFEATURE = 1663916368;
+			static const int STRUCTUREDVALUE_OPERATION_RETRIEVEFEATUREVALUES = 1230825757;
+			static const int STRUCTUREDVALUE_OPERATION_SETFEATUREVALUE_STRUCTURALFEATURE_EINT = 1814783039;
+			static const int STRUCTUREDVALUE_OPERATION_SPECIFY = 628368992;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getStructuredValue_Class() const = 0;
@@ -368,16 +368,16 @@ namespace fUML::Semantics::SimpleClassifiers
 
 			// Begin Class UnlimitedNaturalValue
 			//Class and Feature IDs 
-			static const unsigned long UNLIMITEDNATURALVALUE_CLASS = 459381760;
+			static const long long UNLIMITEDNATURALVALUE_CLASS = 459381760;
 			static const unsigned int UNLIMITEDNATURALVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int UNLIMITEDNATURALVALUE_CLASS_OPERATION_COUNT = 16;
-			static const int UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE = 11701;
+			static const long long UNLIMITEDNATURALVALUE_ATTRIBUTE_VALUE = 1361136095;
 			
 			
-			static const int UNLIMITEDNATURALVALUE_OPERATION__COPY = 11717;
-			static const int UNLIMITEDNATURALVALUE_OPERATION_EQUALS_VALUE = 11715;
-			static const int UNLIMITEDNATURALVALUE_OPERATION_SPECIFY = 11714;
-			static const int UNLIMITEDNATURALVALUE_OPERATION_TOSTRING = 11716;
+			static const int UNLIMITEDNATURALVALUE_OPERATION__COPY = 2112108449;
+			static const int UNLIMITEDNATURALVALUE_OPERATION_EQUALS_VALUE = 461046594;
+			static const int UNLIMITEDNATURALVALUE_OPERATION_SPECIFY = 628368992;
+			static const int UNLIMITEDNATURALVALUE_OPERATION_TOSTRING = 900200525;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getUnlimitedNaturalValue_Class() const = 0;

@@ -50,12 +50,12 @@ namespace fUML::Semantics::Classification
 
 			// Begin Class InstanceValueEvaluation
 			//Class and Feature IDs 
-			static const unsigned long INSTANCEVALUEEVALUATION_CLASS = 1738756913;
+			static const long long INSTANCEVALUEEVALUATION_CLASS = 1738756913;
 			static const unsigned int INSTANCEVALUEEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int INSTANCEVALUEEVALUATION_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 6305;
+			static const int INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 354197744;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInstanceValueEvaluation_Class() const = 0;
