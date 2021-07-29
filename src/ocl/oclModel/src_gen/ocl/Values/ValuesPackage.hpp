@@ -67,12 +67,12 @@ namespace ocl::Values
 
 			// Begin Class BagTypeValue
 			//Class and Feature IDs 
-			static const unsigned long BAGTYPEVALUE_CLASS = 1755720122;
+			static const long long BAGTYPEVALUE_CLASS = 1755720122;
 			static const unsigned int BAGTYPEVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int BAGTYPEVALUE_CLASS_OPERATION_COUNT = 15;
 			
 			
-			static const int BAGTYPEVALUE_OPERATION_ADDVALUE_VALUE = 716;
+			static const int BAGTYPEVALUE_OPERATION_ADDVALUE_VALUE = 1227244152;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getBagTypeValue_Class() const = 0;
@@ -86,17 +86,17 @@ namespace ocl::Values
 
 			// Begin Class CollectionValue
 			//Class and Feature IDs 
-			static const unsigned long COLLECTIONVALUE_CLASS = 539163728;
+			static const long long COLLECTIONVALUE_CLASS = 539163728;
 			static const unsigned int COLLECTIONVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int COLLECTIONVALUE_CLASS_OPERATION_COUNT = 14;
 			
-			static const int COLLECTIONVALUE_ATTRIBUTE_ELEMENTS = 2100;
-			static const int COLLECTIONVALUE_ATTRIBUTE_MODEL = 2101;
+			static const long long COLLECTIONVALUE_ATTRIBUTE_ELEMENTS = 455248729;
+			static const long long COLLECTIONVALUE_ATTRIBUTE_MODEL = 1524684448;
 			
-			static const int COLLECTIONVALUE_OPERATION_ADDVALUE_VALUE = 2112;
-			static const int COLLECTIONVALUE_OPERATION_EQUALS_VALUE = 2115;
-			static const int COLLECTIONVALUE_OPERATION_FIND_VALUE = 2114;
-			static const int COLLECTIONVALUE_OPERATION_TOSTRING = 2113;
+			static const int COLLECTIONVALUE_OPERATION_ADDVALUE_VALUE = 1227244152;
+			static const int COLLECTIONVALUE_OPERATION_EQUALS_VALUE = 2137140379;
+			static const int COLLECTIONVALUE_OPERATION_FIND_VALUE = 1374605281;
+			static const int COLLECTIONVALUE_OPERATION_TOSTRING = 1240736432;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCollectionValue_Class() const = 0;
@@ -115,12 +115,12 @@ namespace ocl::Values
 
 			// Begin Class Element
 			//Class and Feature IDs 
-			static const unsigned long ELEMENT_CLASS = 1129659260;
+			static const long long ELEMENT_CLASS = 1129659260;
 			static const unsigned int ELEMENT_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int ELEMENT_CLASS_OPERATION_COUNT = 0;
-			static const int ELEMENT_ATTRIBUTE_INDEXNR = 2200;
+			static const long long ELEMENT_ATTRIBUTE_INDEXNR = 290135725;
 			
-			static const int ELEMENT_ATTRIBUTE_VALUE = 2201;
+			static const long long ELEMENT_ATTRIBUTE_VALUE = 1558857931;
 			
 			
 			//Class and Feature Getter
@@ -136,17 +136,17 @@ namespace ocl::Values
 
 			// Begin Class LocalSnapshot
 			//Class and Feature IDs 
-			static const unsigned long LOCALSNAPSHOT_CLASS = 48802612;
+			static const long long LOCALSNAPSHOT_CLASS = 48802612;
 			static const unsigned int LOCALSNAPSHOT_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int LOCALSNAPSHOT_CLASS_OPERATION_COUNT = 0;
-			static const int LOCALSNAPSHOT_ATTRIBUTE_ISPOST = 4503;
-			static const int LOCALSNAPSHOT_ATTRIBUTE_ISPRE = 4504;
+			static const long long LOCALSNAPSHOT_ATTRIBUTE_ISPOST = 1000311420;
+			static const long long LOCALSNAPSHOT_ATTRIBUTE_ISPRE = 126528066;
 			
-			static const int LOCALSNAPSHOT_ATTRIBUTE_BINDINGS = 4502;
-			static const int LOCALSNAPSHOT_ATTRIBUTE_INPUTQ = 4505;
-			static const int LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ = 4506;
-			static const int LOCALSNAPSHOT_ATTRIBUTE_PRED = 4501;
-			static const int LOCALSNAPSHOT_ATTRIBUTE_SUCC = 4500;
+			static const long long LOCALSNAPSHOT_ATTRIBUTE_BINDINGS = 2132327661;
+			static const long long LOCALSNAPSHOT_ATTRIBUTE_INPUTQ = 997963421;
+			static const long long LOCALSNAPSHOT_ATTRIBUTE_OUTPUTQ = 1263125593;
+			static const long long LOCALSNAPSHOT_ATTRIBUTE_PRED = 1795830925;
+			static const long long LOCALSNAPSHOT_ATTRIBUTE_SUCC = 584571414;
 			
 			
 			//Class and Feature Getter
@@ -167,12 +167,12 @@ namespace ocl::Values
 
 			// Begin Class NameValueBinding
 			//Class and Feature IDs 
-			static const unsigned long NAMEVALUEBINDING_CLASS = 510142670;
+			static const long long NAMEVALUEBINDING_CLASS = 510142670;
 			static const unsigned int NAMEVALUEBINDING_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int NAMEVALUEBINDING_CLASS_OPERATION_COUNT = 0;
-			static const int NAMEVALUEBINDING_ATTRIBUTE_NAME = 5200;
+			static const long long NAMEVALUEBINDING_ATTRIBUTE_NAME = 814694916;
 			
-			static const int NAMEVALUEBINDING_ATTRIBUTE_VALUE = 5201;
+			static const long long NAMEVALUEBINDING_ATTRIBUTE_VALUE = 1558857931;
 			
 			
 			//Class and Feature Getter
@@ -188,15 +188,15 @@ namespace ocl::Values
 
 			// Begin Class ObjectValue
 			//Class and Feature IDs 
-			static const unsigned long OBJECTVALUE_CLASS = 712225641;
+			static const long long OBJECTVALUE_CLASS = 712225641;
 			static const unsigned int OBJECTVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int OBJECTVALUE_CLASS_OPERATION_COUNT = 12;
 			
-			static const int OBJECTVALUE_ATTRIBUTE_HISTORY = 5800;
-			static const int OBJECTVALUE_ATTRIBUTE_VALUE = 5801;
+			static const long long OBJECTVALUE_ATTRIBUTE_HISTORY = 386088608;
+			static const long long OBJECTVALUE_ATTRIBUTE_VALUE = 1558857931;
 			
-			static const int OBJECTVALUE_OPERATION_EQUALS_VALUE = 5813;
-			static const int OBJECTVALUE_OPERATION_TOSTRING = 5812;
+			static const int OBJECTVALUE_OPERATION_EQUALS_VALUE = 2137140379;
+			static const int OBJECTVALUE_OPERATION_TOSTRING = 1240736432;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getObjectValue_Class() const = 0;
@@ -213,20 +213,20 @@ namespace ocl::Values
 
 			// Begin Class OclMessageValue
 			//Class and Feature IDs 
-			static const unsigned long OCLMESSAGEVALUE_CLASS = 1848978034;
+			static const long long OCLMESSAGEVALUE_CLASS = 1848978034;
 			static const unsigned int OCLMESSAGEVALUE_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int OCLMESSAGEVALUE_CLASS_OPERATION_COUNT = 11;
-			static const int OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION = 6302;
-			static const int OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL = 6303;
-			static const int OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION = 6301;
-			static const int OCLMESSAGEVALUE_ATTRIBUTE_NAME = 6300;
+			static const long long OCLMESSAGEVALUE_ATTRIBUTE_ISASYNCOPERATION = 1664854685;
+			static const long long OCLMESSAGEVALUE_ATTRIBUTE_ISSIGNAL = 2101927069;
+			static const long long OCLMESSAGEVALUE_ATTRIBUTE_ISSYNCOPERATION = 1743377177;
+			static const long long OCLMESSAGEVALUE_ATTRIBUTE_NAME = 814694916;
 			
-			static const int OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS = 6307;
-			static const int OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE = 6304;
-			static const int OCLMESSAGEVALUE_ATTRIBUTE_SOURCE = 6306;
-			static const int OCLMESSAGEVALUE_ATTRIBUTE_TARGET = 6305;
+			static const long long OCLMESSAGEVALUE_ATTRIBUTE_ARGUMENTS = 557840124;
+			static const long long OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE = 825742890;
+			static const long long OCLMESSAGEVALUE_ATTRIBUTE_SOURCE = 1312766839;
+			static const long long OCLMESSAGEVALUE_ATTRIBUTE_TARGET = 336504389;
 			
-			static const int OCLMESSAGEVALUE_OPERATION_TOSTRING = 6318;
+			static const int OCLMESSAGEVALUE_OPERATION_TOSTRING = 1240736432;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOclMessageValue_Class() const = 0;
@@ -248,13 +248,13 @@ namespace ocl::Values
 
 			// Begin Class OclVoidValue
 			//Class and Feature IDs 
-			static const unsigned long OCLVOIDVALUE_CLASS = 316834162;
+			static const long long OCLVOIDVALUE_CLASS = 316834162;
 			static const unsigned int OCLVOIDVALUE_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int OCLVOIDVALUE_CLASS_OPERATION_COUNT = 12;
 			
 			
-			static const int OCLVOIDVALUE_OPERATION_EQUALS_VALUE = 6411;
-			static const int OCLVOIDVALUE_OPERATION_TOSTRING = 6410;
+			static const int OCLVOIDVALUE_OPERATION_EQUALS_VALUE = 2137140379;
+			static const int OCLVOIDVALUE_OPERATION_TOSTRING = 1240736432;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOclVoidValue_Class() const = 0;
@@ -269,12 +269,12 @@ namespace ocl::Values
 
 			// Begin Class OrderedSetTypeValue
 			//Class and Feature IDs 
-			static const unsigned long ORDEREDSETTYPEVALUE_CLASS = 119598672;
+			static const long long ORDEREDSETTYPEVALUE_CLASS = 119598672;
 			static const unsigned int ORDEREDSETTYPEVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int ORDEREDSETTYPEVALUE_CLASS_OPERATION_COUNT = 15;
 			
 			
-			static const int ORDEREDSETTYPEVALUE_OPERATION_ADDVALUE_VALUE = 6816;
+			static const int ORDEREDSETTYPEVALUE_OPERATION_ADDVALUE_VALUE = 1227244152;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getOrderedSetTypeValue_Class() const = 0;
@@ -288,12 +288,12 @@ namespace ocl::Values
 
 			// Begin Class SequenceTypeValue
 			//Class and Feature IDs 
-			static const unsigned long SEQUENCETYPEVALUE_CLASS = 695063447;
+			static const long long SEQUENCETYPEVALUE_CLASS = 695063447;
 			static const unsigned int SEQUENCETYPEVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int SEQUENCETYPEVALUE_CLASS_OPERATION_COUNT = 15;
 			
 			
-			static const int SEQUENCETYPEVALUE_OPERATION_ADDVALUE_VALUE = 7616;
+			static const int SEQUENCETYPEVALUE_OPERATION_ADDVALUE_VALUE = 1227244152;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSequenceTypeValue_Class() const = 0;
@@ -307,12 +307,12 @@ namespace ocl::Values
 
 			// Begin Class SetTypeValue
 			//Class and Feature IDs 
-			static const unsigned long SETTYPEVALUE_CLASS = 139010578;
+			static const long long SETTYPEVALUE_CLASS = 139010578;
 			static const unsigned int SETTYPEVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int SETTYPEVALUE_CLASS_OPERATION_COUNT = 15;
 			
 			
-			static const int SETTYPEVALUE_OPERATION_ADDVALUE_VALUE = 7816;
+			static const int SETTYPEVALUE_OPERATION_ADDVALUE_VALUE = 1227244152;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getSetTypeValue_Class() const = 0;
@@ -326,7 +326,7 @@ namespace ocl::Values
 
 			// Begin Class StaticValue
 			//Class and Feature IDs 
-			static const unsigned long STATICVALUE_CLASS = 565102340;
+			static const long long STATICVALUE_CLASS = 565102340;
 			static const unsigned int STATICVALUE_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int STATICVALUE_CLASS_OPERATION_COUNT = 10;
 			
@@ -343,15 +343,15 @@ namespace ocl::Values
 
 			// Begin Class TupleValue
 			//Class and Feature IDs 
-			static const unsigned long TUPLEVALUE_CLASS = 2104534521;
+			static const long long TUPLEVALUE_CLASS = 2104534521;
 			static const unsigned int TUPLEVALUE_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int TUPLEVALUE_CLASS_OPERATION_COUNT = 12;
 			
-			static const int TUPLEVALUE_ATTRIBUTE_ELEMENTS = 8900;
-			static const int TUPLEVALUE_ATTRIBUTE_MODEL = 8901;
+			static const long long TUPLEVALUE_ATTRIBUTE_ELEMENTS = 455248729;
+			static const long long TUPLEVALUE_ATTRIBUTE_MODEL = 1524684448;
 			
-			static const int TUPLEVALUE_OPERATION_EQUALS_VALUE = 8913;
-			static const int TUPLEVALUE_OPERATION_TOSTRING = 8912;
+			static const int TUPLEVALUE_OPERATION_EQUALS_VALUE = 2137140379;
+			static const int TUPLEVALUE_OPERATION_TOSTRING = 1240736432;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getTupleValue_Class() const = 0;
@@ -368,13 +368,13 @@ namespace ocl::Values
 
 			// Begin Class UndefinedValue
 			//Class and Feature IDs 
-			static const unsigned long UNDEFINEDVALUE_CLASS = 1732994739;
+			static const long long UNDEFINEDVALUE_CLASS = 1732994739;
 			static const unsigned int UNDEFINEDVALUE_CLASS_FEATURE_COUNT = 0;
 			static const unsigned int UNDEFINEDVALUE_CLASS_OPERATION_COUNT = 12;
 			
 			
-			static const int UNDEFINEDVALUE_OPERATION_EQUALS_VALUE = 9111;
-			static const int UNDEFINEDVALUE_OPERATION_TOSTRING = 9110;
+			static const int UNDEFINEDVALUE_OPERATION_EQUALS_VALUE = 2137140379;
+			static const int UNDEFINEDVALUE_OPERATION_TOSTRING = 1240736432;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getUndefinedValue_Class() const = 0;

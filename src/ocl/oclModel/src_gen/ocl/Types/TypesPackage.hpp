@@ -65,11 +65,11 @@ namespace ocl::Types
 
 			// Begin Class AnyType
 			//Class and Feature IDs 
-			static const unsigned long ANYTYPE_CLASS = 1049138756;
+			static const long long ANYTYPE_CLASS = 1049138756;
 			static const unsigned int ANYTYPE_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int ANYTYPE_CLASS_OPERATION_COUNT = 3;
 			
-			static const int ANYTYPE_ATTRIBUTE_OBJECT = 108;
+			static const long long ANYTYPE_ATTRIBUTE_OBJECT = 1036029804;
 			
 			
 			//Class and Feature Getter
@@ -84,7 +84,7 @@ namespace ocl::Types
 
 			// Begin Class BagType
 			//Class and Feature IDs 
-			static const unsigned long BAGTYPE_CLASS = 1309276377;
+			static const long long BAGTYPE_CLASS = 1309276377;
 			static const unsigned int BAGTYPE_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int BAGTYPE_CLASS_OPERATION_COUNT = 4;
 			
@@ -101,14 +101,14 @@ namespace ocl::Types
 
 			// Begin Class CollectionType
 			//Class and Feature IDs 
-			static const unsigned long COLLECTIONTYPE_CLASS = 1993307753;
+			static const long long COLLECTIONTYPE_CLASS = 1993307753;
 			static const unsigned int COLLECTIONTYPE_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int COLLECTIONTYPE_CLASS_OPERATION_COUNT = 4;
 			
-			static const int COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE = 2009;
-			static const int COLLECTIONTYPE_ATTRIBUTE_INSTANCE = 2010;
+			static const long long COLLECTIONTYPE_ATTRIBUTE_ELEMENTTYPE = 133534839;
+			static const long long COLLECTIONTYPE_ATTRIBUTE_INSTANCE = 1954904298;
 			
-			static const int COLLECTIONTYPE_OPERATION_KINDOF_COLLECTIONTYPE = 2014;
+			static const int COLLECTIONTYPE_OPERATION_KINDOF_COLLECTIONTYPE = 857973373;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCollectionType_Class() const = 0;
@@ -124,7 +124,7 @@ namespace ocl::Types
 
 			// Begin Class InvalidType
 			//Class and Feature IDs 
-			static const unsigned long INVALIDTYPE_CLASS = 280656823;
+			static const long long INVALIDTYPE_CLASS = 280656823;
 			static const unsigned int INVALIDTYPE_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int INVALIDTYPE_CLASS_OPERATION_COUNT = 3;
 			
@@ -141,12 +141,12 @@ namespace ocl::Types
 
 			// Begin Class MessageType
 			//Class and Feature IDs 
-			static const unsigned long MESSAGETYPE_CLASS = 1381501878;
+			static const long long MESSAGETYPE_CLASS = 1381501878;
 			static const unsigned int MESSAGETYPE_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int MESSAGETYPE_CLASS_OPERATION_COUNT = 3;
 			
-			static const int MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION = 4908;
-			static const int MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL = 4909;
+			static const long long MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION = 883643747;
+			static const long long MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL = 534493014;
 			
 			
 			//Class and Feature Getter
@@ -162,12 +162,12 @@ namespace ocl::Types
 
 			// Begin Class NameTypeBinding
 			//Class and Feature IDs 
-			static const unsigned long NAMETYPEBINDING_CLASS = 238682409;
+			static const long long NAMETYPEBINDING_CLASS = 238682409;
 			static const unsigned int NAMETYPEBINDING_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int NAMETYPEBINDING_CLASS_OPERATION_COUNT = 0;
-			static const int NAMETYPEBINDING_ATTRIBUTE_NAME = 5100;
+			static const long long NAMETYPEBINDING_ATTRIBUTE_NAME = 1513190260;
 			
-			static const int NAMETYPEBINDING_ATTRIBUTE_TYPE = 5101;
+			static const long long NAMETYPEBINDING_ATTRIBUTE_TYPE = 125784877;
 			
 			
 			//Class and Feature Getter
@@ -183,7 +183,7 @@ namespace ocl::Types
 
 			// Begin Class OrderedSetType
 			//Class and Feature IDs 
-			static const unsigned long ORDEREDSETTYPE_CLASS = 1790854470;
+			static const long long ORDEREDSETTYPE_CLASS = 1790854470;
 			static const unsigned int ORDEREDSETTYPE_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int ORDEREDSETTYPE_CLASS_OPERATION_COUNT = 4;
 			
@@ -200,7 +200,7 @@ namespace ocl::Types
 
 			// Begin Class SequenceType
 			//Class and Feature IDs 
-			static const unsigned long SEQUENCETYPE_CLASS = 68596060;
+			static const long long SEQUENCETYPE_CLASS = 68596060;
 			static const unsigned int SEQUENCETYPE_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int SEQUENCETYPE_CLASS_OPERATION_COUNT = 4;
 			
@@ -217,7 +217,7 @@ namespace ocl::Types
 
 			// Begin Class SetType
 			//Class and Feature IDs 
-			static const unsigned long SETTYPE_CLASS = 1886550814;
+			static const long long SETTYPE_CLASS = 1886550814;
 			static const unsigned int SETTYPE_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int SETTYPE_CLASS_OPERATION_COUNT = 4;
 			
@@ -234,10 +234,10 @@ namespace ocl::Types
 
 			// Begin Class TemplateParameterType
 			//Class and Feature IDs 
-			static const unsigned long TEMPLATEPARAMETERTYPE_CLASS = 989968086;
+			static const long long TEMPLATEPARAMETERTYPE_CLASS = 989968086;
 			static const unsigned int TEMPLATEPARAMETERTYPE_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int TEMPLATEPARAMETERTYPE_CLASS_OPERATION_COUNT = 3;
-			static const int TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION = 8308;
+			static const long long TEMPLATEPARAMETERTYPE_ATTRIBUTE_SPECIFICATION = 1730530967;
 			
 			
 			
@@ -253,12 +253,12 @@ namespace ocl::Types
 
 			// Begin Class TupleType
 			//Class and Feature IDs 
-			static const unsigned long TUPLETYPE_CLASS = 1090531508;
+			static const long long TUPLETYPE_CLASS = 1090531508;
 			static const unsigned int TUPLETYPE_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int TUPLETYPE_CLASS_OPERATION_COUNT = 3;
 			
-			static const int TUPLETYPE_ATTRIBUTE_INSTANCE = 8809;
-			static const int TUPLETYPE_ATTRIBUTE_PARTS = 8810;
+			static const long long TUPLETYPE_ATTRIBUTE_INSTANCE = 1954904298;
+			static const long long TUPLETYPE_ATTRIBUTE_PARTS = 1946706936;
 			
 			
 			//Class and Feature Getter
@@ -274,7 +274,7 @@ namespace ocl::Types
 
 			// Begin Class VoidType
 			//Class and Feature IDs 
-			static const unsigned long VOIDTYPE_CLASS = 1092966199;
+			static const long long VOIDTYPE_CLASS = 1092966199;
 			static const unsigned int VOIDTYPE_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int VOIDTYPE_CLASS_OPERATION_COUNT = 3;
 			

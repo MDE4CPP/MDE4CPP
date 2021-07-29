@@ -88,11 +88,11 @@ namespace ocl::Expressions
 
 			// Begin Class AssociationClassCallExp
 			//Class and Feature IDs 
-			static const unsigned long ASSOCIATIONCLASSCALLEXP_CLASS = 870318929;
+			static const long long ASSOCIATIONCLASSCALLEXP_CLASS = 870318929;
 			static const unsigned int ASSOCIATIONCLASSCALLEXP_CLASS_FEATURE_COUNT = 27;
 			static const unsigned int ASSOCIATIONCLASSCALLEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS = 226;
+			static const long long ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS = 904729146;
 			
 			
 			//Class and Feature Getter
@@ -107,10 +107,10 @@ namespace ocl::Expressions
 
 			// Begin Class BooleanLiteralExp
 			//Class and Feature IDs 
-			static const unsigned long BOOLEANLITERALEXP_CLASS = 225873423;
+			static const long long BOOLEANLITERALEXP_CLASS = 225873423;
 			static const unsigned int BOOLEANLITERALEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int BOOLEANLITERALEXP_CLASS_OPERATION_COUNT = 1;
-			static const int BOOLEANLITERALEXP_ATTRIBUTE_BOOLEANSYMBOL = 823;
+			static const long long BOOLEANLITERALEXP_ATTRIBUTE_BOOLEANSYMBOL = 163266681;
 			
 			
 			
@@ -126,11 +126,11 @@ namespace ocl::Expressions
 
 			// Begin Class CallExp
 			//Class and Feature IDs 
-			static const unsigned long CALLEXP_CLASS = 1741533399;
+			static const long long CALLEXP_CLASS = 1741533399;
 			static const unsigned int CALLEXP_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int CALLEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int CALLEXP_ATTRIBUTE_SOURCE = 1022;
+			static const long long CALLEXP_ATTRIBUTE_SOURCE = 1085763551;
 			
 			
 			//Class and Feature Getter
@@ -145,11 +145,11 @@ namespace ocl::Expressions
 
 			// Begin Class CollectionItem
 			//Class and Feature IDs 
-			static const unsigned long COLLECTIONITEM_CLASS = 2033004063;
+			static const long long COLLECTIONITEM_CLASS = 2033004063;
 			static const unsigned int COLLECTIONITEM_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int COLLECTIONITEM_CLASS_OPERATION_COUNT = 1;
 			
-			static const int COLLECTIONITEM_ATTRIBUTE_ITEM = 1110;
+			static const long long COLLECTIONITEM_ATTRIBUTE_ITEM = 2137854234;
 			
 			
 			//Class and Feature Getter
@@ -164,12 +164,12 @@ namespace ocl::Expressions
 
 			// Begin Class CollectionLiteralExp
 			//Class and Feature IDs 
-			static const unsigned long COLLECTIONLITERALEXP_CLASS = 658019569;
+			static const long long COLLECTIONLITERALEXP_CLASS = 658019569;
 			static const unsigned int COLLECTIONLITERALEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int COLLECTIONLITERALEXP_CLASS_OPERATION_COUNT = 1;
-			static const int COLLECTIONLITERALEXP_ATTRIBUTE_KIND = 1422;
+			static const long long COLLECTIONLITERALEXP_ATTRIBUTE_KIND = 1089781924;
 			
-			static const int COLLECTIONLITERALEXP_ATTRIBUTE_PART = 1423;
+			static const long long COLLECTIONLITERALEXP_ATTRIBUTE_PART = 2072692088;
 			
 			
 			//Class and Feature Getter
@@ -185,7 +185,7 @@ namespace ocl::Expressions
 
 			// Begin Class CollectionLiteralPart
 			//Class and Feature IDs 
-			static const unsigned long COLLECTIONLITERALPART_CLASS = 525693555;
+			static const long long COLLECTIONLITERALPART_CLASS = 525693555;
 			static const unsigned int COLLECTIONLITERALPART_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int COLLECTIONLITERALPART_CLASS_OPERATION_COUNT = 1;
 			
@@ -202,12 +202,12 @@ namespace ocl::Expressions
 
 			// Begin Class CollectionRange
 			//Class and Feature IDs 
-			static const unsigned long COLLECTIONRANGE_CLASS = 1706418751;
+			static const long long COLLECTIONRANGE_CLASS = 1706418751;
 			static const unsigned int COLLECTIONRANGE_CLASS_FEATURE_COUNT = 12;
 			static const unsigned int COLLECTIONRANGE_CLASS_OPERATION_COUNT = 1;
 			
-			static const int COLLECTIONRANGE_ATTRIBUTE_FIRST = 1810;
-			static const int COLLECTIONRANGE_ATTRIBUTE_LAST = 1811;
+			static const long long COLLECTIONRANGE_ATTRIBUTE_FIRST = 914360917;
+			static const long long COLLECTIONRANGE_ATTRIBUTE_LAST = 30378830;
 			
 			
 			//Class and Feature Getter
@@ -223,11 +223,11 @@ namespace ocl::Expressions
 
 			// Begin Class EnumLiteralExp
 			//Class and Feature IDs 
-			static const unsigned long ENUMLITERALEXP_CLASS = 1896746244;
+			static const long long ENUMLITERALEXP_CLASS = 1896746244;
 			static const unsigned int ENUMLITERALEXP_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int ENUMLITERALEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL = 2322;
+			static const long long ENUMLITERALEXP_ATTRIBUTE_REFERREDENUMLITERAL = 1742161624;
 			
 			
 			//Class and Feature Getter
@@ -242,14 +242,14 @@ namespace ocl::Expressions
 
 			// Begin Class ExpressionInOcl
 			//Class and Feature IDs 
-			static const unsigned long EXPRESSIONINOCL_CLASS = 988393756;
+			static const long long EXPRESSIONINOCL_CLASS = 988393756;
 			static const unsigned int EXPRESSIONINOCL_CLASS_FEATURE_COUNT = 14;
 			static const unsigned int EXPRESSIONINOCL_CLASS_OPERATION_COUNT = 1;
 			
-			static const int EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION = 2710;
-			static const int EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE = 2711;
-			static const int EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE = 2713;
-			static const int EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE = 2712;
+			static const long long EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION = 712388958;
+			static const long long EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE = 848264500;
+			static const long long EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE = 324600278;
+			static const long long EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE = 362564962;
 			
 			
 			//Class and Feature Getter
@@ -267,10 +267,10 @@ namespace ocl::Expressions
 
 			// Begin Class FeatureCallExp
 			//Class and Feature IDs 
-			static const unsigned long FEATURECALLEXP_CLASS = 108542242;
+			static const long long FEATURECALLEXP_CLASS = 108542242;
 			static const unsigned int FEATURECALLEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int FEATURECALLEXP_CLASS_OPERATION_COUNT = 1;
-			static const int FEATURECALLEXP_ATTRIBUTE_ISPRE = 2923;
+			static const long long FEATURECALLEXP_ATTRIBUTE_ISPRE = 1578651514;
 			
 			
 			
@@ -286,13 +286,13 @@ namespace ocl::Expressions
 
 			// Begin Class IfExp
 			//Class and Feature IDs 
-			static const unsigned long IFEXP_CLASS = 327095557;
+			static const long long IFEXP_CLASS = 327095557;
 			static const unsigned int IFEXP_CLASS_FEATURE_COUNT = 25;
 			static const unsigned int IFEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int IFEXP_ATTRIBUTE_CONDITION = 3022;
-			static const int IFEXP_ATTRIBUTE_ELSEEXPRESSION = 3024;
-			static const int IFEXP_ATTRIBUTE_THENEXPRESSION = 3023;
+			static const long long IFEXP_ATTRIBUTE_CONDITION = 541352280;
+			static const long long IFEXP_ATTRIBUTE_ELSEEXPRESSION = 403461435;
+			static const long long IFEXP_ATTRIBUTE_THENEXPRESSION = 842935867;
 			
 			
 			//Class and Feature Getter
@@ -309,11 +309,11 @@ namespace ocl::Expressions
 
 			// Begin Class InfixedExp
 			//Class and Feature IDs 
-			static const unsigned long INFIXEDEXP_CLASS = 938428434;
+			static const long long INFIXEDEXP_CLASS = 938428434;
 			static const unsigned int INFIXEDEXP_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int INFIXEDEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int INFIXEDEXP_ATTRIBUTE_SOURCE = 3222;
+			static const long long INFIXEDEXP_ATTRIBUTE_SOURCE = 1085763551;
 			
 			
 			//Class and Feature Getter
@@ -328,10 +328,10 @@ namespace ocl::Expressions
 
 			// Begin Class IntegerLiteralExp
 			//Class and Feature IDs 
-			static const unsigned long INTEGERLITERALEXP_CLASS = 274113150;
+			static const long long INTEGERLITERALEXP_CLASS = 274113150;
 			static const unsigned int INTEGERLITERALEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int INTEGERLITERALEXP_CLASS_OPERATION_COUNT = 1;
-			static const int INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL = 3323;
+			static const long long INTEGERLITERALEXP_ATTRIBUTE_INTEGERSYMBOL = 211506408;
 			
 			
 			
@@ -347,7 +347,7 @@ namespace ocl::Expressions
 
 			// Begin Class InvalidLiteralExp
 			//Class and Feature IDs 
-			static const unsigned long INVALIDLITERALEXP_CLASS = 1953131443;
+			static const long long INVALIDLITERALEXP_CLASS = 1953131443;
 			static const unsigned int INVALIDLITERALEXP_CLASS_FEATURE_COUNT = 22;
 			static const unsigned int INVALIDLITERALEXP_CLASS_OPERATION_COUNT = 1;
 			
@@ -364,11 +364,11 @@ namespace ocl::Expressions
 
 			// Begin Class IterateExp
 			//Class and Feature IDs 
-			static const unsigned long ITERATEEXP_CLASS = 1451014857;
+			static const long long ITERATEEXP_CLASS = 1451014857;
 			static const unsigned int ITERATEEXP_CLASS_FEATURE_COUNT = 26;
 			static const unsigned int ITERATEEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int ITERATEEXP_ATTRIBUTE_RESULT = 3725;
+			static const long long ITERATEEXP_ATTRIBUTE_RESULT = 1501738861;
 			
 			
 			//Class and Feature Getter
@@ -383,7 +383,7 @@ namespace ocl::Expressions
 
 			// Begin Class IteratorExp
 			//Class and Feature IDs 
-			static const unsigned long ITERATOREXP_CLASS = 1427874836;
+			static const long long ITERATOREXP_CLASS = 1427874836;
 			static const unsigned int ITERATOREXP_CLASS_FEATURE_COUNT = 25;
 			static const unsigned int ITERATOREXP_CLASS_OPERATION_COUNT = 1;
 			
@@ -400,12 +400,12 @@ namespace ocl::Expressions
 
 			// Begin Class LetExp
 			//Class and Feature IDs 
-			static const unsigned long LETEXP_CLASS = 514305968;
+			static const long long LETEXP_CLASS = 514305968;
 			static const unsigned int LETEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int LETEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int LETEXP_ATTRIBUTE_IN = 4122;
-			static const int LETEXP_ATTRIBUTE_VARIABLE = 4123;
+			static const long long LETEXP_ATTRIBUTE_IN = 2006612969;
+			static const long long LETEXP_ATTRIBUTE_VARIABLE = 681800373;
 			
 			
 			//Class and Feature Getter
@@ -421,7 +421,7 @@ namespace ocl::Expressions
 
 			// Begin Class LiteralExp
 			//Class and Feature IDs 
-			static const unsigned long LITERALEXP_CLASS = 509208412;
+			static const long long LITERALEXP_CLASS = 509208412;
 			static const unsigned int LITERALEXP_CLASS_FEATURE_COUNT = 22;
 			static const unsigned int LITERALEXP_CLASS_OPERATION_COUNT = 1;
 			
@@ -438,12 +438,12 @@ namespace ocl::Expressions
 
 			// Begin Class LoopExp
 			//Class and Feature IDs 
-			static const unsigned long LOOPEXP_CLASS = 1471094680;
+			static const long long LOOPEXP_CLASS = 1471094680;
 			static const unsigned int LOOPEXP_CLASS_FEATURE_COUNT = 25;
 			static const unsigned int LOOPEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int LOOPEXP_ATTRIBUTE_BODY = 4623;
-			static const int LOOPEXP_ATTRIBUTE_ITERATOR = 4624;
+			static const long long LOOPEXP_ATTRIBUTE_BODY = 775823562;
+			static const long long LOOPEXP_ATTRIBUTE_ITERATOR = 1271624111;
 			
 			
 			//Class and Feature Getter
@@ -459,14 +459,14 @@ namespace ocl::Expressions
 
 			// Begin Class MessageExp
 			//Class and Feature IDs 
-			static const unsigned long MESSAGEEXP_CLASS = 1834681541;
+			static const long long MESSAGEEXP_CLASS = 1834681541;
 			static const unsigned int MESSAGEEXP_CLASS_FEATURE_COUNT = 26;
 			static const unsigned int MESSAGEEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int MESSAGEEXP_ATTRIBUTE_ARGUMENT = 4823;
-			static const int MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION = 4824;
-			static const int MESSAGEEXP_ATTRIBUTE_SENTSIGNAL = 4825;
-			static const int MESSAGEEXP_ATTRIBUTE_TARGET = 4822;
+			static const long long MESSAGEEXP_ATTRIBUTE_ARGUMENT = 1876730217;
+			static const long long MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION = 670800091;
+			static const long long MESSAGEEXP_ATTRIBUTE_SENTSIGNAL = 224941433;
+			static const long long MESSAGEEXP_ATTRIBUTE_TARGET = 1707287415;
 			
 			
 			//Class and Feature Getter
@@ -484,12 +484,12 @@ namespace ocl::Expressions
 
 			// Begin Class NavigationCallExp
 			//Class and Feature IDs 
-			static const unsigned long NAVIGATIONCALLEXP_CLASS = 833199948;
+			static const long long NAVIGATIONCALLEXP_CLASS = 833199948;
 			static const unsigned int NAVIGATIONCALLEXP_CLASS_FEATURE_COUNT = 26;
 			static const unsigned int NAVIGATIONCALLEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE = 5325;
-			static const int NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER = 5324;
+			static const long long NAVIGATIONCALLEXP_ATTRIBUTE_NAVIGATIONSOURCE = 1264477946;
+			static const long long NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER = 1554459054;
 			
 			
 			//Class and Feature Getter
@@ -505,7 +505,7 @@ namespace ocl::Expressions
 
 			// Begin Class NullLiteralExp
 			//Class and Feature IDs 
-			static const unsigned long NULLLITERALEXP_CLASS = 863530749;
+			static const long long NULLLITERALEXP_CLASS = 863530749;
 			static const unsigned int NULLLITERALEXP_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int NULLLITERALEXP_CLASS_OPERATION_COUNT = 1;
 			
@@ -522,7 +522,7 @@ namespace ocl::Expressions
 
 			// Begin Class NumericLiteralExp
 			//Class and Feature IDs 
-			static const unsigned long NUMERICLITERALEXP_CLASS = 1020270764;
+			static const long long NUMERICLITERALEXP_CLASS = 1020270764;
 			static const unsigned int NUMERICLITERALEXP_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int NUMERICLITERALEXP_CLASS_OPERATION_COUNT = 1;
 			
@@ -539,22 +539,22 @@ namespace ocl::Expressions
 
 			// Begin Class OclExpression
 			//Class and Feature IDs 
-			static const unsigned long OCLEXPRESSION_CLASS = 925307628;
+			static const long long OCLEXPRESSION_CLASS = 925307628;
 			static const unsigned int OCLEXPRESSION_CLASS_FEATURE_COUNT = 22;
 			static const unsigned int OCLEXPRESSION_CLASS_OPERATION_COUNT = 1;
 			
-			static const int OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT = 6010;
-			static const int OCLEXPRESSION_ATTRIBUTE_ELSEOWNER = 6017;
-			static const int OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER = 6019;
-			static const int OCLEXPRESSION_ATTRIBUTE_IFOWNER = 6016;
-			static const int OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT = 6012;
-			static const int OCLEXPRESSION_ATTRIBUTE_INSTANCE = 6021;
-			static const int OCLEXPRESSION_ATTRIBUTE_LASTOWNER = 6020;
-			static const int OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER = 6011;
-			static const int OCLEXPRESSION_ATTRIBUTE_PARENTCALL = 6014;
-			static const int OCLEXPRESSION_ATTRIBUTE_PARENTNAV = 6018;
-			static const int OCLEXPRESSION_ATTRIBUTE_THENOWNER = 6015;
-			static const int OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION = 6013;
+			static const long long OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT = 1349393706;
+			static const long long OCLEXPRESSION_ATTRIBUTE_ELSEOWNER = 1886831920;
+			static const long long OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER = 1009034965;
+			static const long long OCLEXPRESSION_ATTRIBUTE_IFOWNER = 327030755;
+			static const long long OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT = 977252805;
+			static const long long OCLEXPRESSION_ATTRIBUTE_INSTANCE = 125355111;
+			static const long long OCLEXPRESSION_ATTRIBUTE_LASTOWNER = 1450314711;
+			static const long long OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER = 1645262158;
+			static const long long OCLEXPRESSION_ATTRIBUTE_PARENTCALL = 1138285494;
+			static const long long OCLEXPRESSION_ATTRIBUTE_PARENTNAV = 1557485548;
+			static const long long OCLEXPRESSION_ATTRIBUTE_THENOWNER = 178822705;
+			static const long long OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION = 688149434;
 			
 			
 			//Class and Feature Getter
@@ -580,12 +580,12 @@ namespace ocl::Expressions
 
 			// Begin Class OperationCallExp
 			//Class and Feature IDs 
-			static const unsigned long OPERATIONCALLEXP_CLASS = 1030298851;
+			static const long long OPERATIONCALLEXP_CLASS = 1030298851;
 			static const unsigned int OPERATIONCALLEXP_CLASS_FEATURE_COUNT = 26;
 			static const unsigned int OPERATIONCALLEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT = 6524;
-			static const int OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION = 6525;
+			static const long long OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT = 1876730217;
+			static const long long OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION = 1699464259;
 			
 			
 			//Class and Feature Getter
@@ -601,10 +601,10 @@ namespace ocl::Expressions
 
 			// Begin Class PrimitiveLiteralExp
 			//Class and Feature IDs 
-			static const unsigned long PRIMITIVELITERALEXP_CLASS = 95355624;
+			static const long long PRIMITIVELITERALEXP_CLASS = 95355624;
 			static const unsigned int PRIMITIVELITERALEXP_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int PRIMITIVELITERALEXP_CLASS_OPERATION_COUNT = 1;
-			static const int PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL = 6922;
+			static const long long PRIMITIVELITERALEXP_ATTRIBUTE_SYMBOL = 17917190;
 			
 			
 			
@@ -620,11 +620,11 @@ namespace ocl::Expressions
 
 			// Begin Class PropertyCallExp
 			//Class and Feature IDs 
-			static const unsigned long PROPERTYCALLEXP_CLASS = 133065828;
+			static const long long PROPERTYCALLEXP_CLASS = 133065828;
 			static const unsigned int PROPERTYCALLEXP_CLASS_FEATURE_COUNT = 27;
 			static const unsigned int PROPERTYCALLEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY = 7126;
+			static const long long PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY = 743796371;
 			
 			
 			//Class and Feature Getter
@@ -639,10 +639,10 @@ namespace ocl::Expressions
 
 			// Begin Class RealLiteralExp
 			//Class and Feature IDs 
-			static const unsigned long REALLITERALEXP_CLASS = 470342449;
+			static const long long REALLITERALEXP_CLASS = 470342449;
 			static const unsigned int REALLITERALEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int REALLITERALEXP_CLASS_OPERATION_COUNT = 1;
-			static const int REALLITERALEXP_ATTRIBUTE_REALSYMBOL = 7323;
+			static const long long REALLITERALEXP_ATTRIBUTE_REALSYMBOL = 105959647;
 			
 			
 			
@@ -658,11 +658,11 @@ namespace ocl::Expressions
 
 			// Begin Class StateExp
 			//Class and Feature IDs 
-			static const unsigned long STATEEXP_CLASS = 2001706267;
+			static const long long STATEEXP_CLASS = 2001706267;
 			static const unsigned int STATEEXP_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int STATEEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int STATEEXP_ATTRIBUTE_REFERREDSTATE = 7922;
+			static const long long STATEEXP_ATTRIBUTE_REFERREDSTATE = 536707064;
 			
 			
 			//Class and Feature Getter
@@ -677,10 +677,10 @@ namespace ocl::Expressions
 
 			// Begin Class StringLiteralExp
 			//Class and Feature IDs 
-			static const unsigned long STRINGLITERALEXP_CLASS = 88304816;
+			static const long long STRINGLITERALEXP_CLASS = 88304816;
 			static const unsigned int STRINGLITERALEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int STRINGLITERALEXP_CLASS_OPERATION_COUNT = 1;
-			static const int STRINGLITERALEXP_ATTRIBUTE_STRINGSYMBOL = 8123;
+			static const long long STRINGLITERALEXP_ATTRIBUTE_STRINGSYMBOL = 1144267828;
 			
 			
 			
@@ -696,11 +696,11 @@ namespace ocl::Expressions
 
 			// Begin Class TupleLiteralExp
 			//Class and Feature IDs 
-			static const unsigned long TUPLELITERALEXP_CLASS = 421328739;
+			static const long long TUPLELITERALEXP_CLASS = 421328739;
 			static const unsigned int TUPLELITERALEXP_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int TUPLELITERALEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int TUPLELITERALEXP_ATTRIBUTE_PART = 8422;
+			static const long long TUPLELITERALEXP_ATTRIBUTE_PART = 2072692088;
 			
 			
 			//Class and Feature Getter
@@ -715,11 +715,11 @@ namespace ocl::Expressions
 
 			// Begin Class TupleLiteralPart
 			//Class and Feature IDs 
-			static const unsigned long TUPLELITERALPART_CLASS = 2008604788;
+			static const long long TUPLELITERALPART_CLASS = 2008604788;
 			static const unsigned int TUPLELITERALPART_CLASS_FEATURE_COUNT = 11;
 			static const unsigned int TUPLELITERALPART_CLASS_OPERATION_COUNT = 1;
 			
-			static const int TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE = 8710;
+			static const long long TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE = 551242599;
 			
 			
 			//Class and Feature Getter
@@ -734,11 +734,11 @@ namespace ocl::Expressions
 
 			// Begin Class TypeExp
 			//Class and Feature IDs 
-			static const unsigned long TYPEEXP_CLASS = 523410060;
+			static const long long TYPEEXP_CLASS = 523410060;
 			static const unsigned int TYPEEXP_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int TYPEEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int TYPEEXP_ATTRIBUTE_REFERREDTYPE = 9022;
+			static const long long TYPEEXP_ATTRIBUTE_REFERREDTYPE = 659682022;
 			
 			
 			//Class and Feature Getter
@@ -753,10 +753,10 @@ namespace ocl::Expressions
 
 			// Begin Class UnlimitedNaturalExp
 			//Class and Feature IDs 
-			static const unsigned long UNLIMITEDNATURALEXP_CLASS = 521207252;
+			static const long long UNLIMITEDNATURALEXP_CLASS = 521207252;
 			static const unsigned int UNLIMITEDNATURALEXP_CLASS_FEATURE_COUNT = 24;
 			static const unsigned int UNLIMITEDNATURALEXP_CLASS_OPERATION_COUNT = 1;
-			static const int UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL = 9223;
+			static const long long UNLIMITEDNATURALEXP_ATTRIBUTE_UNLIMITEDNATURALSYMBOL = 1628816833;
 			
 			
 			
@@ -772,7 +772,7 @@ namespace ocl::Expressions
 
 			// Begin Class UnspecifiedValueExp
 			//Class and Feature IDs 
-			static const unsigned long UNSPECIFIEDVALUEEXP_CLASS = 233840348;
+			static const long long UNSPECIFIEDVALUEEXP_CLASS = 233840348;
 			static const unsigned int UNSPECIFIEDVALUEEXP_CLASS_FEATURE_COUNT = 22;
 			static const unsigned int UNSPECIFIEDVALUEEXP_CLASS_OPERATION_COUNT = 1;
 			
@@ -789,19 +789,19 @@ namespace ocl::Expressions
 
 			// Begin Class Variable
 			//Class and Feature IDs 
-			static const unsigned long VARIABLE_CLASS = 1173641377;
+			static const long long VARIABLE_CLASS = 1173641377;
 			static const unsigned int VARIABLE_CLASS_FEATURE_COUNT = 19;
 			static const unsigned int VARIABLE_CLASS_OPERATION_COUNT = 1;
 			
-			static const int VARIABLE_ATTRIBUTE_BASEEXP = 9613;
-			static const int VARIABLE_ATTRIBUTE_INITEXPRESSION = 9610;
-			static const int VARIABLE_ATTRIBUTE_LOOPEXP = 9612;
-			static const int VARIABLE_ATTRIBUTE_REFERRINGEXP = 9614;
-			static const int VARIABLE_ATTRIBUTE_REPRESENTEDPARAMETER = 9611;
-			static const int VARIABLE_ATTRIBUTE_RESULTOWNER = 9616;
-			static const int VARIABLE_ATTRIBUTE_SELFOWNER = 9615;
-			static const int VARIABLE_ATTRIBUTE_VALUE = 9618;
-			static const int VARIABLE_ATTRIBUTE_VAROWNER = 9617;
+			static const long long VARIABLE_ATTRIBUTE_BASEEXP = 1199498409;
+			static const long long VARIABLE_ATTRIBUTE_INITEXPRESSION = 1334231038;
+			static const long long VARIABLE_ATTRIBUTE_LOOPEXP = 979253676;
+			static const long long VARIABLE_ATTRIBUTE_REFERRINGEXP = 215524417;
+			static const long long VARIABLE_ATTRIBUTE_REPRESENTEDPARAMETER = 294243133;
+			static const long long VARIABLE_ATTRIBUTE_RESULTOWNER = 77012464;
+			static const long long VARIABLE_ATTRIBUTE_SELFOWNER = 525315198;
+			static const long long VARIABLE_ATTRIBUTE_VALUE = 1394916563;
+			static const long long VARIABLE_ATTRIBUTE_VAROWNER = 649811158;
 			
 			
 			//Class and Feature Getter
@@ -824,11 +824,11 @@ namespace ocl::Expressions
 
 			// Begin Class VariableExp
 			//Class and Feature IDs 
-			static const unsigned long VARIABLEEXP_CLASS = 838051098;
+			static const long long VARIABLEEXP_CLASS = 838051098;
 			static const unsigned int VARIABLEEXP_CLASS_FEATURE_COUNT = 23;
 			static const unsigned int VARIABLEEXP_CLASS_OPERATION_COUNT = 1;
 			
-			static const int VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE = 9822;
+			static const long long VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE = 841820569;
 			
 			
 			//Class and Feature Getter
