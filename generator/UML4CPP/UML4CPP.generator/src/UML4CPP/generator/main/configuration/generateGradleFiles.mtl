@@ -43,10 +43,11 @@ task build[packageName.toUpperFirst()/]() {
 	group '[packageName/]'
 	description 'build [packageName/]'
 
-	dependsOn 'model:generate[packageName.toUpperFirst()/]'
-	dependsOn 'src_gen:compile[packageName.toUpperFirst()/]'
+	dependsOn project.tasks.getByPath('model:generate[packageName.toUpperFirst()/]')
+	dependsOn project.tasks.getByPath('src_gen:compile[packageName.toUpperFirst()/]')
+
 [if(aPackage.hasMainBehavior())]
-	dependsOn 'application:compileApplicationFor[packageName.toUpperFirst()/]'
+	dependsOn project.tasks.getByPath('application:compileApplicationFor[packageName.toUpperFirst()/]')
 [/if]
 [for (packName : String | aPackage.collectIncludingModelNames()) ? (not(packName = aPackage.name))]
 	dependsOn getRootProject().getTasksByName('build[packName.toUpperFirst()/]', true)
