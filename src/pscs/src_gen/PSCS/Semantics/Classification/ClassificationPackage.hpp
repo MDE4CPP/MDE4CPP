@@ -50,12 +50,12 @@ namespace PSCS::Semantics::Classification
 
 			// Begin Class CS_InstanceValueEvaluation
 			//Class and Feature IDs 
-			static const unsigned long CS_INSTANCEVALUEEVALUATION_CLASS = 1742446590;
+			static const long long CS_INSTANCEVALUEEVALUATION_CLASS = 1742446590;
 			static const unsigned int CS_INSTANCEVALUEEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int CS_INSTANCEVALUEEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int CS_INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 1606;
+			static const int CS_INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 355211665;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCS_InstanceValueEvaluation_Class() const = 0;

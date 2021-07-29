@@ -50,13 +50,13 @@ namespace PSCS::Semantics::Values
 
 			// Begin Class CS_OpaqueExpressionEvaluation
 			//Class and Feature IDs 
-			static const unsigned long CS_OPAQUEEXPRESSIONEVALUATION_CLASS = 2119672650;
+			static const long long CS_OPAQUEEXPRESSIONEVALUATION_CLASS = 2119672650;
 			static const unsigned int CS_OPAQUEEXPRESSIONEVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int CS_OPAQUEEXPRESSIONEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EVALUATE = 2305;
-			static const int CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EXECUTEEXPRESSIONBEHAVIOR = 2306;
+			static const int CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EVALUATE = 2083760470;
+			static const int CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EXECUTEEXPRESSIONBEHAVIOR = 438718743;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCS_OpaqueExpressionEvaluation_Class() const = 0;
