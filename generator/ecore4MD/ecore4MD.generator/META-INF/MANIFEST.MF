@@ -15,7 +15,12 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.acceleo.profiler;bundle-version="3.3.0",
  org.eclipse.acceleo.engine;bundle-version="3.3.0",
  com.google.guava,
- ecore4CPP.generator;bundle-version="1.0.0"
+ ecore4CPP.generator;bundle-version="1.0.0",
+ org.eclipse.sirius;bundle-version="6.5.0",
+ org.eclipse.core.resources;bundle-version="3.14.0",
+ org.eclipse.sirius.ui;bundle-version="6.5.0",
+ org.eclipse.sirius.common;bundle-version="6.5.0",
+ org.eclipse.emf.workspace
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Eclipse-LazyStart: true

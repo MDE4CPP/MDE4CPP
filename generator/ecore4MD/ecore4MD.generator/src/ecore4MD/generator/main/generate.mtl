@@ -9,6 +9,8 @@
 [import ecore4MD::generator::main::generateElementDocumentation/]
 [import ecore4MD::generator::main::generateMainDocumentation/]
 [import ecore4MD::generator::main::helper/]
+[import ecore4MD::generator::generatorServices/]
+
 
 [template public generateDocumentation(anEPackage : EPackage)]
 [comment @main/]
@@ -18,11 +20,13 @@
 [anEPackage.generateMainDocumentation()/]
 	[comment generate referenced elements in saved order/]
 	[for (aModelElement:EModelElement| anEPackage.getDocAnnotations().references->filter(EModelElement))]
--------	
 [aModelElement.generateElementDocumentation()/]
+[comment  :: [anEPackage.myString()/]	
+
 	[/for]
 	[/file]	
 [else]
 [comment ToDo Generate Standard List/]
 [/if]
+
 [/template]
