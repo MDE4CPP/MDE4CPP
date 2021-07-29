@@ -11,6 +11,10 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "util/util.hpp"
+#include "uml/Property.hpp"
+#include "uml/Operation.hpp"
+#include "uml/Parameter.hpp"
 #include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
@@ -48,12 +52,21 @@ ExecutableImpl::ExecutableImpl()
 	//***********************************
 	// init Get Set
 	//getter init
-	m_getterMap.insert(std::pair<std::string,std::function<Any()>>("StandardProfile::Executable::base_Artifact",[this](){ return eAny(this->getBase_Artifact());}));
+		//Property base_Artifact
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(999600209,[this](){ return eAny(this->getBase_Artifact());}));
 	
-	m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("StandardProfile::Executable::base_Artifact",[this](Any object){this->setBase_Artifact(object->get<std::shared_ptr<uml::Artifact>>());}));
 	
-	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Executable::base_Artifact",[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
-	 
+	//setter init
+	//Property base_Artifact
+		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(999600209,[this](Any object){this->setBase_Artifact(object->get<std::shared_ptr<uml::Artifact>>());}));
+	
+	
+	//unsetter init
+		//Property base_Artifact
+		m_unsetterMap.insert(std::pair<long long,std::function<void()>>(999600209,[this](){m_base_Artifact = std::shared_ptr<uml::Artifact>(nullptr);}));
+	
+	
+	
 }
 
 
@@ -128,45 +141,125 @@ std::weak_ptr<uml::Artifact> ExecutableImpl::getBase_Artifact() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
+//Get
 Any ExecutableImpl::get(std::shared_ptr<uml::Property> _property) const
 {
-	//TODO: still two times run through map (contains and [])
-	std::string qName = _property->getQualifiedName();
-	std::map<std::string, std::function<Any()>>::const_iterator iter = m_getterMap.find(qName);
+	std::string qualifiedName = _property->getQualifiedName();
+    return this->get(qualifiedName);
+}
+
+Any ExecutableImpl::get(std::string _qualifiedName) const
+{
+	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+    return this->get(uID);
+}
+
+Any ExecutableImpl::get(long long _uID) const
+{
+	std::map<long long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
     if(iter != m_getterMap.cend())
     {
         //invoke the getter function
         return iter->second();
     }
-	return StandardProfile::FileImpl::get(_property);
+
+	Any result;
+	result = StandardProfile::FileImpl::get(_uID);
+	if (result != nullptr)
+	{
+		return result;
+	}
+	return result;
 }
 
+//Set
 void ExecutableImpl::set(std::shared_ptr<uml::Property> _property, Any value)
 {
-	//TODO: still two times run through map (contains and [])
-	std::string qName = _property->getQualifiedName();
-	std::map<std::string, std::function<void(Any)>>::iterator iter = m_setterMap.find(qName);
-    if(iter != m_setterMap.end())
+	std::string qualifiedName = _property->getQualifiedName();
+    this->set(qualifiedName, value);
+}
+
+void ExecutableImpl::set(std::string _qualifiedName, Any value)
+{
+	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+    this->set(uID, value);
+}
+
+void ExecutableImpl::set(long long _uID, Any value)
+{
+	std::map<long long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
+    if(iter != m_setterMap.cend())
     {
-        //invoke the getter function
+        //invoke the setter function
         iter->second(value);
     }
-	StandardProfile::FileImpl::set(_property, value);
+	StandardProfile::FileImpl::set(_uID, value);
 }
 
+//Unset
 void ExecutableImpl::unset(std::shared_ptr<uml::Property> _property)
 {
-	//TODO: still two times run through map (contains and [])
-	std::string qName = _property->getQualifiedName();
-	std::map<std::string,std::function<void()>>::iterator iter = m_unsetterMap.find(qName);
-    if(iter != m_unsetterMap.end())
-    {
-        //invoke the getter function
-        iter->second();
-    }
-	StandardProfile::FileImpl::unset(_property);
+	std::string qualifiedName = _property->getQualifiedName();
+    this->unset(qualifiedName);
 }
 
+void ExecutableImpl::unset(std::string _qualifiedName)
+{
+	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+    this->unset(uID);
+}
+
+void ExecutableImpl::unset(long long _uID)
+{
+	std::map<long long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
+    if(iter != m_unsetterMap.cend())
+    {
+        //invoke the unsetter function
+        iter->second();
+    }
+	StandardProfile::FileImpl::unset(_uID);
+}
+
+
+//*********************************
+// Operation Invoction
+//*********************************
+//Invoke
+Any ExecutableImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+{
+	std::string qualifiedName = _operation->getQualifiedName();
+
+	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
+	{
+		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
+	}
+
+    return this->invoke(qualifiedName, _arguments);
+}
+
+Any ExecutableImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+{
+	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+    return this->invoke(uID, _arguments);
+}
+
+Any ExecutableImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments)
+{
+	std::map<long long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
+    if(iter != m_invocationMap.cend())
+    {
+        //invoke the operation
+        return iter->second(_arguments);
+    }
+	
+	Any result;
+	result = StandardProfile::FileImpl::invoke(_uID, _arguments);
+	if (result != nullptr)
+	{
+		return result;
+	}
+	return result;
+}
 
 std::shared_ptr<Executable> ExecutableImpl::getThisExecutablePtr()
 {

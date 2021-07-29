@@ -11,6 +11,10 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "util/util.hpp"
+#include "uml/Property.hpp"
+#include "uml/Operation.hpp"
+#include "uml/Parameter.hpp"
 #include "StandardProfile/StandardProfileFactory.hpp"
 #include "StandardProfile/impl/StandardProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
@@ -48,12 +52,21 @@ InstantiateImpl::InstantiateImpl()
 	//***********************************
 	// init Get Set
 	//getter init
-	m_getterMap.insert(std::pair<std::string,std::function<Any()>>("StandardProfile::Instantiate::base_Usage",[this](){ return eAny(this->getBase_Usage());}));
+		//Property base_Usage
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1382406183,[this](){ return eAny(this->getBase_Usage());}));
 	
-	m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("StandardProfile::Instantiate::base_Usage",[this](Any object){this->setBase_Usage(object->get<std::shared_ptr<uml::Usage>>());}));
 	
-	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("StandardProfile::Instantiate::base_Usage",[this](){m_base_Usage = std::shared_ptr<uml::Usage>(nullptr);}));
-	 
+	//setter init
+	//Property base_Usage
+		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(1382406183,[this](Any object){this->setBase_Usage(object->get<std::shared_ptr<uml::Usage>>());}));
+	
+	
+	//unsetter init
+		//Property base_Usage
+		m_unsetterMap.insert(std::pair<long long,std::function<void()>>(1382406183,[this](){m_base_Usage = std::shared_ptr<uml::Usage>(nullptr);}));
+	
+	
+	
 }
 
 
@@ -127,43 +140,111 @@ std::weak_ptr<uml::Usage> InstantiateImpl::getBase_Usage() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
+//Get
 Any InstantiateImpl::get(std::shared_ptr<uml::Property> _property) const
 {
-	//TODO: still two times run through map (contains and [])
-	std::string qName = _property->getQualifiedName();
-	std::map<std::string, std::function<Any()>>::const_iterator iter = m_getterMap.find(qName);
+	std::string qualifiedName = _property->getQualifiedName();
+    return this->get(qualifiedName);
+}
+
+Any InstantiateImpl::get(std::string _qualifiedName) const
+{
+	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+    return this->get(uID);
+}
+
+Any InstantiateImpl::get(long long _uID) const
+{
+	std::map<long long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
     if(iter != m_getterMap.cend())
     {
         //invoke the getter function
         return iter->second();
     }
+
 	return eAny(nullptr);
 }
 
+//Set
 void InstantiateImpl::set(std::shared_ptr<uml::Property> _property, Any value)
 {
-	//TODO: still two times run through map (contains and [])
-	std::string qName = _property->getQualifiedName();
-	std::map<std::string, std::function<void(Any)>>::iterator iter = m_setterMap.find(qName);
-    if(iter != m_setterMap.end())
+	std::string qualifiedName = _property->getQualifiedName();
+    this->set(qualifiedName, value);
+}
+
+void InstantiateImpl::set(std::string _qualifiedName, Any value)
+{
+	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+    this->set(uID, value);
+}
+
+void InstantiateImpl::set(long long _uID, Any value)
+{
+	std::map<long long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
+    if(iter != m_setterMap.cend())
     {
-        //invoke the getter function
+        //invoke the setter function
         iter->second(value);
     }
 }
 
+//Unset
 void InstantiateImpl::unset(std::shared_ptr<uml::Property> _property)
 {
-	//TODO: still two times run through map (contains and [])
-	std::string qName = _property->getQualifiedName();
-	std::map<std::string,std::function<void()>>::iterator iter = m_unsetterMap.find(qName);
-    if(iter != m_unsetterMap.end())
+	std::string qualifiedName = _property->getQualifiedName();
+    this->unset(qualifiedName);
+}
+
+void InstantiateImpl::unset(std::string _qualifiedName)
+{
+	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+    this->unset(uID);
+}
+
+void InstantiateImpl::unset(long long _uID)
+{
+	std::map<long long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
+    if(iter != m_unsetterMap.cend())
     {
-        //invoke the getter function
+        //invoke the unsetter function
         iter->second();
     }
 }
 
+
+//*********************************
+// Operation Invoction
+//*********************************
+//Invoke
+Any InstantiateImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+{
+	std::string qualifiedName = _operation->getQualifiedName();
+
+	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
+	{
+		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
+	}
+
+    return this->invoke(qualifiedName, _arguments);
+}
+
+Any InstantiateImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+{
+	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+    return this->invoke(uID, _arguments);
+}
+
+Any InstantiateImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments)
+{
+	std::map<long long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
+    if(iter != m_invocationMap.cend())
+    {
+        //invoke the operation
+        return iter->second(_arguments);
+    }
+	
+	return eAny(nullptr);
+}
 
 std::shared_ptr<Instantiate> InstantiateImpl::getThisInstantiatePtr()
 {

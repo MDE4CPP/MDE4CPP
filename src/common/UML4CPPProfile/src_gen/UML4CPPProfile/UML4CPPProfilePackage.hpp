@@ -79,23 +79,29 @@ namespace UML4CPPProfile
 			public:
 				static std::shared_ptr<UML4CPPProfilePackage> eInstance();
 
-			//Class IDs
-				static const unsigned long DONOTGENERATE_CLASS = 173581214;
+			//Static IDs
+				//Class UML4CPPProfile::DoNotGenerate
+				static const long long DONOTGENERATE_CLASS = 173581214;
 				static const unsigned int DONOTGENERATE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int DONOTGENERATE_CLASS_OPERATION_COUNT = 0;
-				static const unsigned long EXTERNALLIBRARY_CLASS = 744219230;
+				//Class UML4CPPProfile::ExternalLibrary
+				static const long long EXTERNALLIBRARY_CLASS = 744219230;
 				static const unsigned int EXTERNALLIBRARY_CLASS_FEATURE_COUNT = 4;
 				static const unsigned int EXTERNALLIBRARY_CLASS_OPERATION_COUNT = 0;
-				static const unsigned long MAINBEHAVIOR_CLASS = 1527007467;
+				//Class UML4CPPProfile::MainBehavior
+				static const long long MAINBEHAVIOR_CLASS = 1527007467;
 				static const unsigned int MAINBEHAVIOR_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int MAINBEHAVIOR_CLASS_OPERATION_COUNT = 0;
-				static const unsigned long NONEXECUTABLE_CLASS = 1641344257;
+				//Class UML4CPPProfile::NonExecutable
+				static const long long NONEXECUTABLE_CLASS = 1641344257;
 				static const unsigned int NONEXECUTABLE_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int NONEXECUTABLE_CLASS_OPERATION_COUNT = 0;
-				static const unsigned long SINGLETON_CLASS = 1215028894;
+				//Class UML4CPPProfile::Singleton
+				static const long long SINGLETON_CLASS = 1215028894;
 				static const unsigned int SINGLETON_CLASS_FEATURE_COUNT = 1;
 				static const unsigned int SINGLETON_CLASS_OPERATION_COUNT = 0;
-				static const unsigned long UML4CPPPACKAGE_CLASS = 1707580997;
+				//Class UML4CPPProfile::UML4CPPPackage
+				static const long long UML4CPPPACKAGE_CLASS = 1707580997;
 				static const unsigned int UML4CPPPACKAGE_CLASS_FEATURE_COUNT = 4;
 				static const unsigned int UML4CPPPACKAGE_CLASS_OPERATION_COUNT = 0;
 			

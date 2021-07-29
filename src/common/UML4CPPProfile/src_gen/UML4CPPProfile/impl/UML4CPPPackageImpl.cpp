@@ -11,6 +11,10 @@
 
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
+#include "util/util.hpp"
+#include "uml/Property.hpp"
+#include "uml/Operation.hpp"
+#include "uml/Parameter.hpp"
 #include "UML4CPPProfile/UML4CPPProfileFactory.hpp"
 #include "UML4CPPProfile/impl/UML4CPPProfilePackageImpl.hpp"
 #include "uml/Stereotype.hpp"
@@ -48,18 +52,33 @@ UML4CPPPackageImpl::UML4CPPPackageImpl()
 	//***********************************
 	// init Get Set
 	//getter init
-	m_getterMap.insert(std::pair<std::string,std::function<Any()>>("UML4CPPProfile::UML4CPPPackage::base_Package",[this](){ return eAny(this->getBase_Package());}));
-	m_getterMap.insert(std::pair<std::string,std::function<Any()>>("UML4CPPProfile::UML4CPPPackage::eclipseURI",[this](){ return eAny(this->getEclipseURI());}));
-	m_getterMap.insert(std::pair<std::string,std::function<Any()>>("UML4CPPProfile::UML4CPPPackage::ignoreNamespace",[this](){ return eAny(this->isIgnoreNamespace());}));
-	m_getterMap.insert(std::pair<std::string,std::function<Any()>>("UML4CPPProfile::UML4CPPPackage::packageOnly",[this](){ return eAny(this->isPackageOnly());}));
+		//Property base_Package
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(364749133,[this](){ return eAny(this->getBase_Package());}));
+		//Property eclipseURI
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1162675821,[this](){ return eAny(this->getEclipseURI());}));
+		//Property ignoreNamespace
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(1716152545,[this](){ return eAny(this->isIgnoreNamespace());}));
+		//Property packageOnly
+		m_getterMap.insert(std::pair<long long,std::function<Any()>>(262131715,[this](){ return eAny(this->isPackageOnly());}));
 	
-	m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("UML4CPPProfile::UML4CPPPackage::base_Package",[this](Any object){this->setBase_Package(object->get<std::shared_ptr<uml::Package>>());}));
-	m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("UML4CPPProfile::UML4CPPPackage::eclipseURI",[this](Any object){this->setEclipseURI(object->get<std::string>());}));
-	m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("UML4CPPProfile::UML4CPPPackage::ignoreNamespace",[this](Any object){this->setIgnoreNamespace(object->get<bool>());}));
-	m_setterMap.insert(std::pair<std::string,std::function<void(Any)>>("UML4CPPProfile::UML4CPPPackage::packageOnly",[this](Any object){this->setPackageOnly(object->get<bool>());}));
 	
-	m_unsetterMap.insert(std::pair<std::string,std::function<void()>>("UML4CPPProfile::UML4CPPPackage::base_Package",[this](){m_base_Package = std::shared_ptr<uml::Package>(nullptr);}));
-	 
+	//setter init
+	//Property base_Package
+		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(364749133,[this](Any object){this->setBase_Package(object->get<std::shared_ptr<uml::Package>>());}));
+	//Property eclipseURI
+		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(1162675821,[this](Any object){this->setEclipseURI(object->get<std::string>());}));
+	//Property ignoreNamespace
+		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(1716152545,[this](Any object){this->setIgnoreNamespace(object->get<bool>());}));
+	//Property packageOnly
+		m_setterMap.insert(std::pair<long long,std::function<void(Any)>>(262131715,[this](Any object){this->setPackageOnly(object->get<bool>());}));
+	
+	
+	//unsetter init
+		//Property base_Package
+		m_unsetterMap.insert(std::pair<long long,std::function<void()>>(364749133,[this](){m_base_Package = std::shared_ptr<uml::Package>(nullptr);}));
+	
+	
+	
 }
 
 
@@ -167,43 +186,111 @@ bool UML4CPPPackageImpl::isPackageOnly() const
 //*********************************
 // Structural Feature Getter/Setter
 //*********************************
+//Get
 Any UML4CPPPackageImpl::get(std::shared_ptr<uml::Property> _property) const
 {
-	//TODO: still two times run through map (contains and [])
-	std::string qName = _property->getQualifiedName();
-	std::map<std::string, std::function<Any()>>::const_iterator iter = m_getterMap.find(qName);
+	std::string qualifiedName = _property->getQualifiedName();
+    return this->get(qualifiedName);
+}
+
+Any UML4CPPPackageImpl::get(std::string _qualifiedName) const
+{
+	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+    return this->get(uID);
+}
+
+Any UML4CPPPackageImpl::get(long long _uID) const
+{
+	std::map<long long, std::function<Any()>>::const_iterator iter = m_getterMap.find(_uID);
     if(iter != m_getterMap.cend())
     {
         //invoke the getter function
         return iter->second();
     }
+
 	return eAny(nullptr);
 }
 
+//Set
 void UML4CPPPackageImpl::set(std::shared_ptr<uml::Property> _property, Any value)
 {
-	//TODO: still two times run through map (contains and [])
-	std::string qName = _property->getQualifiedName();
-	std::map<std::string, std::function<void(Any)>>::iterator iter = m_setterMap.find(qName);
-    if(iter != m_setterMap.end())
+	std::string qualifiedName = _property->getQualifiedName();
+    this->set(qualifiedName, value);
+}
+
+void UML4CPPPackageImpl::set(std::string _qualifiedName, Any value)
+{
+	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+    this->set(uID, value);
+}
+
+void UML4CPPPackageImpl::set(long long _uID, Any value)
+{
+	std::map<long long, std::function<void(Any)>>::const_iterator iter = m_setterMap.find(_uID);
+    if(iter != m_setterMap.cend())
     {
-        //invoke the getter function
+        //invoke the setter function
         iter->second(value);
     }
 }
 
+//Unset
 void UML4CPPPackageImpl::unset(std::shared_ptr<uml::Property> _property)
 {
-	//TODO: still two times run through map (contains and [])
-	std::string qName = _property->getQualifiedName();
-	std::map<std::string,std::function<void()>>::iterator iter = m_unsetterMap.find(qName);
-    if(iter != m_unsetterMap.end())
+	std::string qualifiedName = _property->getQualifiedName();
+    this->unset(qualifiedName);
+}
+
+void UML4CPPPackageImpl::unset(std::string _qualifiedName)
+{
+	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+    this->unset(uID);
+}
+
+void UML4CPPPackageImpl::unset(long long _uID)
+{
+	std::map<long long, std::function<void()>>::const_iterator iter = m_unsetterMap.find(_uID);
+    if(iter != m_unsetterMap.cend())
     {
-        //invoke the getter function
+        //invoke the unsetter function
         iter->second();
     }
 }
 
+
+//*********************************
+// Operation Invoction
+//*********************************
+//Invoke
+Any UML4CPPPackageImpl::invoke(std::shared_ptr<uml::Operation> _operation, std::shared_ptr<Bag<Any>> _arguments)
+{
+	std::string qualifiedName = _operation->getQualifiedName();
+
+	for(unsigned int i = 0; i < _operation->getOwnedParameter()->size(); i++)
+	{
+		qualifiedName += "_" + _operation->getOwnedParameter()->at(i)->getType()->getName();
+	}
+
+    return this->invoke(qualifiedName, _arguments);
+}
+
+Any UML4CPPPackageImpl::invoke(std::string _qualifiedName, std::shared_ptr<Bag<Any>> _arguments)
+{
+	long long uID = util::Util::polynomialRollingHash(_qualifiedName);
+    return this->invoke(uID, _arguments);
+}
+
+Any UML4CPPPackageImpl::invoke(long long _uID, std::shared_ptr<Bag<Any>> _arguments)
+{
+	std::map<long long, std::function<Any(std::shared_ptr<Bag<Any>>)>>::const_iterator iter = m_invocationMap.find(_uID);
+    if(iter != m_invocationMap.cend())
+    {
+        //invoke the operation
+        return iter->second(_arguments);
+    }
+	
+	return eAny(nullptr);
+}
 
 std::shared_ptr<UML4CPPPackage> UML4CPPPackageImpl::getThisUML4CPPPackagePtr()
 {

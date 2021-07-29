@@ -73,6 +73,7 @@ SET(SOURCE_FILES
 	impl/UtilityImpl.cpp
 	
 	
+	${MDE4CPP_HOME}/application/include/util/util.cpp
 )
 
 INCLUDE_DIRECTORIES(
