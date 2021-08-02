@@ -23,7 +23,7 @@
  * eGet Function
 */]
 [template public generateeGetDel(aClass : EClass,impl : Boolean)]
-virtual Any eGet(int featureID, bool resolve, bool coreType) const [abstractSufix(impl)/];
+virtual std::any eGet(int featureID, bool resolve, bool coreType) const [abstractSufix(impl)/];
 [/template]
 
 [template public generateeIsSetDel(aClass : EClass,impl : Boolean)]
@@ -31,33 +31,37 @@ virtual bool internalEIsSet(int featureID) const [abstractSufix(impl)/];
 [/template]
 
 [template public generateeSetDel(aClass : EClass,impl : Boolean)]
-virtual bool eSet(int featureID, Any newValue) [abstractSufix(impl)/];
+virtual bool eSet(int featureID, std::any newValue) [abstractSufix(impl)/];
 [/template]
 
 [template public generateeGetImpl(aClass : EClass)]
-Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resolve, bool coreType) const
+std::any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resolve, bool coreType) const
 {
 	switch(featureID)
 	{
 	[for (struct : EStructuralFeature | aClass.eStructuralFeatures->reject(doNotGenerate())->asOrderedSet()->sortedBy(name))]
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
-[if (struct.eType.oclIsKindOf(EDataType))]
-			return eAny([struct.GetterName()/]()); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
-[elseif (struct.upperBound = 1)]
-			return eAny([struct.GetterName()/]()[if (struct.oclAsType(EReference).isBackReference())].lock()[/if]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
-[else]
-		{
-			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
-			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator iter = [struct.GetterName()/]()->begin();
-			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator end = [struct.GetterName()/]()->end();
-			while (iter != end)
-			{
-				tempList->add(*iter);
-				iter++;
-			}
-			return eAny(tempList); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]			
-		}
-[/if]
+		[if (struct.eType.oclIsKindOf(EDataType))]
+			return std::any([struct.GetterName()/]()); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+		[elseif (struct.upperBound = 1)]
+			return std::any([struct.GetterName()/]()[if (struct.oclAsType(EReference).isBackReference())].lock()[/if]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+		[else]
+[comment] alt ohne std::any
+*		{
+*			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
+*			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator iter = [struct.GetterName()/]()->begin();
+*			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator end = [struct.GetterName()/]()->end();
+*			while (iter != end)
+*			{
+*				tempList->add(*iter);
+*				iter++;
+*			}
+*			return eAny(tempList); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+*		}
+[/comment]
+			return std::any([struct.GetterName()/]()); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+		[/if]
+	
 	[/for]
 	}
 [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
@@ -65,7 +69,7 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 [elseif (aClass.eSuperTypes->size() = 1)]
 	return [ClassWithNamespace(aClass, aClass.eSuperTypes->first())/]Impl::eGet(featureID, resolve, coreType);
 [else]
-	Any result;
+	std::any result;
 	[let eClasses : OrderedSet(EClass) = aClass.eSuperTypes->asOrderedSet()->sortedBy(name)]		
 	[for (sClass : EClass | eClasses)]
 	result = [ClassWithNamespace(aClass,sClass)/]Impl::eGet(featureID, resolve, coreType);
@@ -115,38 +119,39 @@ bool [aClass.name.toUpperFirst().concat('Impl')/]::internalEIsSet(int featureID)
 [/template]
 
 [template public generateeSetImpl(aClass : EClass)]
-bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, Any newValue)
+bool [aClass.name.toUpperFirst().concat('Impl')/]::eSet(int featureID, std::any newValue)
 {
 	switch(featureID)
 	{
 [for (struct : EStructuralFeature | aClass.eStructuralFeatures->select(changeable)->reject(doNotGenerate())->asOrderedSet()->sortedBy(name))]
 		case [struct.metamodelPackageNameForEstructuralFeture(aClass)/]::[struct.getStaticAttributeIDName()/]:
 		{
-			// BOOST CAST
 [if (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() = 0 )]
-			[struct.generateStructuralFeatureType(false)/] _[struct.name/] = newValue->get<[struct.generateStructuralFeatureType(false)/]>();
+			[struct.generateStructuralFeatureType(false)/] _[struct.name/] = std::any_cast<[struct.generateStructuralFeatureType(false)/]>(newValue);
 			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 [elseif (struct.eType.oclIsKindOf(EDataType) and struct.upperBound = 1 and struct.eGenericType.eTypeArguments->size() > 0 )]
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> _[struct.name/] = std::dynamic_pointer_cast<[struct.generateStructuralFeatureType(false)/]>(_temp);
+			[comment std::shared_ptr<ecore::EObject> _temp = std::any_cast<std::shared_ptr<ecore::EObject>>(newValue); /]
+			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> _[struct.name/] = std::any_cast<std::shared_ptr<[struct.generateStructuralFeatureType(false)/]>>(newValue);
 			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]			
 [elseif (struct.eType.oclIsKindOf(EDataType))]
 			// nothing to do
 [elseif (struct.upperBound = 1)]
-			std::shared_ptr<ecore::EObject> _temp = newValue->get<std::shared_ptr<ecore::EObject>>();
-			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> _[struct.name/] = std::dynamic_pointer_cast<[struct.generateStructuralFeatureType(false)/]>(_temp);
+			[comment std::shared_ptr<ecore::EObject> _temp = std::any_cast<std::shared_ptr<ecore::EObject>>(newValue); /]
+			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> _[struct.name/] = std::any_cast<std::shared_ptr<[struct.generateStructuralFeatureType(false)/]>>(newValue);
 			[struct.SetterName()/](_[struct.name/]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 [else]
-			std::shared_ptr<Bag<ecore::EObject>> tempObjectList = newValue->get<std::shared_ptr<Bag<ecore::EObject>>>();
-			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> [struct.name/]List(new [struct.generateStructuralFeatureType(false)/]());
-			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
-			Bag<ecore::EObject>::iterator end = tempObjectList->end();
-			while (iter != end)
-			{
-				[struct.name/]List->add(std::dynamic_pointer_cast<[struct.eGenericType.generateCppType(false)/]>(*iter));
-				iter++;
-			}
-			
+			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> [struct.name/]List = std::any_cast<std::shared_ptr<[struct.generateStructuralFeatureType(false)/]>>(newValue);
+[comment]
+*			std::shared_ptr<[struct.generateStructuralFeatureType(false)/]> [struct.name/]List(new [struct.generateStructuralFeatureType(false)/]());
+*			Bag<ecore::EObject>::iterator iter = tempObjectList->begin();
+*			Bag<ecore::EObject>::iterator end = tempObjectList->end();
+*			while (iter != end)
+*			{
+*				[struct.name/]List->add(std::dynamic_pointer_cast<[struct.eGenericType.generateCppType(false)/]>(*iter));
+*				iter++;
+*			}
+[/comment]
+			// to set a Subset all Union has to be updated too 
 			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator iter[struct.name.toUpperFirst()/] = [struct.GetterName()/]()->begin();
 			Bag<[struct.eGenericType.generateCppType(false)/]>::iterator end[struct.name.toUpperFirst()/] = [struct.GetterName()/]()->end();
 			while (iter[struct.name.toUpperFirst()/] != end[struct.name.toUpperFirst()/])
@@ -211,5 +216,6 @@ m_[anStructFeature.name/] ![anStructFeature.oclAsType(EAttribute).generateDefaul
 [/template]
 
 [template public generateComparison(anStructFeature : EStructuralFeature) ? (eType.requiresAny())]
-[anStructFeature.GetterName()/]() != nullptr[comment TODO what is the default value of Any?/]
+[anStructFeature.GetterName()/]()
+.has_value(); [comment TODO what is the default value of any?/]
 [/template]

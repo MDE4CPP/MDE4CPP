@@ -946,7 +946,7 @@
           source="http://tu-ilmenau.de/see/codegen">
         <details
             key="body"
-            value="  std::cout &lt;&lt; __PRETTY_FUNCTION__  &lt;&lt; std::endl;&#xA;&#xA;  Any result;&#xA;  result = this->eInvoke(operation->getOperationID(), arguments);&#xA;&#xA;  return result;"/>
+            value="  std::cout &lt;&lt; __PRETTY_FUNCTION__  &lt;&lt; std::endl;&#xA;&#xA;  std::any result;&#xA;  result = this->eInvoke(operation->getOperationID(), arguments);&#xA;&#xA;  return result;"/>
       </eAnnotations>
       <eParameters
           name="operation"

@@ -39,7 +39,7 @@
 
 [generateAbstractDataTypesIncludes()/]
 [if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
-#include "abstractDataTypes/Any.hpp"
+#include <any>
 [/if]
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -223,13 +223,11 @@ using namespace [aClass.generateNamespaceDefinition()/];
 				[/if]
 	}
 			[elseif (att.eType.name.equalsIgnoreCase('EEList'))] 
-	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
+	[generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
 	if(nullptr != [att.name/]Container )
 	{
-		int size = [att.name/]Container->size();
-		for(int i=0; i<size ; i++)
+		for(auto _[att.name/]:  *[att.name/]Container)
 		{
-			auto _[att.name/]=(*[att.name/]Container)['['/]i[']'/];	
 			if(nullptr != _[att.name/])
 			{
 				[att.name/]Container->push_back(std::dynamic_pointer_cast<[att.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[att.name/]->copy()));
@@ -277,10 +275,8 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
 	if(nullptr != [ref.name/]Container )
 	{
-		int size = [ref.name/]Container->size();
-		for(int i=0; i<size ; i++)
+		for(auto _[ref.name/]: *[ref.name/]Container)
 		{
-			auto _[ref.name/]=(*[ref.name/]Container)['['/]i[']'/];
 			if(nullptr != _[ref.name/])
 			{
 				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.generateType()/]>(_[ref.name/]->copy()));
@@ -316,10 +312,8 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
 	if(nullptr != [ref.name/]Container )
 	{
-		int size = [ref.name/]Container->size();
-		for(int i=0; i<size ; i++)
+		for(auto _[ref.name/] : *[ref.name/]Container)
 		{
-			auto _[ref.name/]=(*[ref.name/]Container)['['/]i[']'/];
 			if(nullptr != _[ref.name/])
 			{
 				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.oclAsType(ecore::EClass).eGenericSuperTypes->first().eTypeArguments->first().generateCppType(false)/]>(_[ref.name/]->copy()));
@@ -363,10 +357,8 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
 	if(nullptr != [ref.name/]Container )
 	{
-		int size = [ref.name/]Container->size();
-		for(int i=0; i<size ; i++)
+		for(auto _[ref.name/]:  *[ref.name/]Container)
 		{
-			auto _[ref.name/]=(*[ref.name/]Container)['['/]i[']'/];
 			if(nullptr != _[ref.name/])
 			{
 				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eGenericType.eTypeArguments->first().eClassifier.transformType()/]>(_[ref.name/]->copy()));

@@ -74,15 +74,13 @@
 #include <memory>
 #include <string>
 [if (aClass.eAttributes.eType->select(requiresAny())->size() > 0)]
-#include "abstractDataTypes/Any.hpp"
+#include <any>
 [/if]
+[if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
+#include <any>
+[/if] 
 // forward declarations
 [generateAbstractDataTypesForwardDeclaration()/]
-[if (aClass.eAttributes.eType->select(requiresAny())->size() = 0 and aClass.eOperations.eParameters.eType->select(requiresAny())->size() > 0)]
-class AnyObject;
-typedef std::shared_ptr<AnyObject> Any;
-[/if] 
-
 //*********************************
 // generated Includes
 [generatePersistenceForwardDeclarations()/]

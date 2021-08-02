@@ -53,7 +53,7 @@
 [/template]
 
 [template public generateType(anEDataType : EClassifier)]
-[if (anEDataType.oclIsUndefined())]Any[else][anEDataType.transformType()/][/if]
+[if (anEDataType.oclIsUndefined())]std::any[else][anEDataType.transformType()/][/if]
 [/template]
 
 [template public generateParameterType(eParameter : EParameter) post(trim())]
@@ -156,7 +156,7 @@ std::shared_ptr
  * Transformation Javatypes to C++
 */]
 [template public transformType(anEClassifier : EClassifier) post(trim())]
-[if (anEClassifier.oclIsUndefined())] Any
+[if (anEClassifier.oclIsUndefined())] std::any
 [elseif (anEClassifier.oclIsKindOf(EDataType))]
     [if (anEClassifier.oclIsKindOf(EEnum))][anEClassifier.generateNamespaceDefinition()/]::[anEClassifier.name/] 
     [else]
@@ -237,7 +237,7 @@ std::map
 [/template]
 
 [template public transformTypeName(name: String) ? (name = 'EJavaObject')]
-Any
+std::any
 [/template]
 
 [template public transformTypeName(name: String) ? (name = 'ETreeIterator')]
@@ -249,7 +249,7 @@ void *
 [/template]
 
 [template public transformTypeName(name: String) ? ((name = 'EEnumerator') or (name = 'EDiagnosticChain'))]
-Any
+std::any
 [/template]
 
 [template public transformTypeName(name: String) ? ((name = 'EString') or (name = 'String') )]

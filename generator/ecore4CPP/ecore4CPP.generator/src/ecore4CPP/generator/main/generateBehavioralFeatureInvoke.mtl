@@ -43,25 +43,24 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> [name/]ValueList = inputPar
 [template public generateIncomingParameter(aEParameter : EParameter, index : Integer)]
 	//parameter [index/]
 	[aEParameter.generateParameterType()/] incoming_param_[aEParameter.name/];
-	std::list<std::shared_ptr<Any>>::const_iterator incoming_param_[aEParameter.name/]_arguments_citer = std::next(arguments->begin(), [index/]);
-	incoming_param_[aEParameter.name/] = (*incoming_param_[aEParameter.name/]_arguments_citer)->get()->get<[aEParameter.generateParameterType()/] >();
+	std::list<std::shared_ptr<std::any>>::const_iterator incoming_param_[aEParameter.name/]_arguments_citer = std::next(arguments->begin(), [index/]);
+	incoming_param_[aEParameter.name/] = std::any_cast<[aEParameter.generateParameterType()/]> (*incoming_param_[aEParameter.name/]_arguments_citer);
 [/template]
 
-
-[**/
+[**/ 
  *  Declaration of internal eInvoke helper method
  */]
 [template public generateeInvokeByIDDecl(aClass : EClass, impl : Boolean)]
-virtual Any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments) [abstractSufix(impl)/];
+virtual std::any eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<std::any>>> arguments) [abstractSufix(impl)/];
 [/template]
 
 [**/
  *  Implementation of internal eInvoke helper method
  */]
 [template public generateeInvokeByIDImpl(aClass : EClass)]
-Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<Any>>> arguments)
+std::any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_ptr<std::any>>> arguments)
 {
-	Any result;
+	std::any result;
 
   	switch(operationID)
 	{
@@ -82,24 +81,24 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eInvoke(int operationID, std::
 			this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]);
  			[else]
 			[comment Operation w/ return value /]
-			result = eAny(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]));
+			result = std::any(this->[aOperation.name.toString()/]([for (inPar : EParameter | aOperation.eParameters) separator (',')]incoming_param_[inPar.name/][/for]));
 			[/if]
 			break;
 		}
 [/for]
-
+ 
 		default:
 		{
 			// call superTypes
 [if (aClass.eSuperTypes->isEmpty() and not (aClass.name ='EObject'))]
 			result = ecore::EModelElementImpl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result.has_value())
 				break;
 [else]
 [let superTypeList : OrderedSet(EClass) = aClass.eSuperTypes]
 [for (i : EClass | superTypeList->reverse())]
 			result = [ClassWithNamespace(aClass, i)/]Impl::eInvoke(operationID, arguments);
-			if (!result->isEmpty())
+			if (result.has_value())
 				break;
 [/for]
 [/let]
