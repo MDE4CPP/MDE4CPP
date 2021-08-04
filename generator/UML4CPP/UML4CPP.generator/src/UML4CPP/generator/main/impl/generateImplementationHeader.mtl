@@ -115,6 +115,10 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			[aAttribute.generateAttributeAccessorsDeclaration(true)/]
 			[/if][/for][/for]
 			
+			//*********************************
+			// Union Getter
+			//*********************************
+			[aClass.generateUnionGetterDeclaretaion(true)/]
 
 		protected:
 			virtual std::shared_ptr<uml::Class> getMetaClass();

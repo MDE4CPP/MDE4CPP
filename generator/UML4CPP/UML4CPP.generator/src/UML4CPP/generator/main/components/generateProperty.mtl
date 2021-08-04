@@ -20,6 +20,7 @@
 [module generateProperty('http://www.eclipse.org/uml2/5.0.0/UML')]
 
 [import UML4CPP::generator::main::components::generateStereotype /]
+[import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
@@ -44,7 +45,9 @@
  * setter is only generated if hasSetter query returns true
 */]
 [template public generateAttributeAccessorsDeclaration(aProperty : Property, impl : Boolean)]
+[if (not aProperty.isUnion())]
 virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstractSuffix(impl)/];
+[/if]
 [if (aProperty.hasSetter())]
 virtual void [aProperty.setterName()/]([aProperty.generateCppType()/] _[aProperty.name/])[abstractSuffix(impl)/];
 [/if]
@@ -79,7 +82,7 @@ m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
 [***
  * generate property getter implementation
 */]
-[template public generateAttributeGetterImplementationCpp(aProperty : Property)]
+[template public generateAttributeGetterImplementationCpp(aProperty : Property) ? (not aProperty.isUnion())]
 [aProperty.generateAttributeGetterImplementationCpp(aProperty.class)/]
 [/template]
 
@@ -115,7 +118,50 @@ std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [aClass.name.toUpper
 void [aClass.name.toUpperFirst()/]Impl::[aProperty.setterName()/]([aProperty.generateCppType()/] _[aProperty.name/])
 {
 	m_[aProperty.name/] = _[aProperty.name/];
+	[aProperty.generateRedefinedPropertySet(aClass)/]
 }
+[/template]
+
+[template private generateRedefinedPropertySet(aProperty : Property, owningClassifier : Classifier)]
+[for (redefinedProperty : Property | aProperty.redefinedProperty)]
+[comment  if redefinedProperty has a setter (i.e. is not readonly)/]
+[if (redefinedProperty.hasSetter())]
+//additional setter call for redefined property [redefinedProperty.owner.oclAsType(Classifier).generateNamespaceName(true)/]::[redefinedProperty.name/]
+	[comment  if redefinedProperty is owned by a class and aProperty is owned by a class /]
+	[comment  this is done as a single condition, since a situation, where the owner of redefinedProperty is a Class and the owner of aProperty is an Interface would not make any sense/]
+	[if (redefinedProperty.owner.oclIsKindOf(Class) and owningClassifier.oclIsKindOf(Class))]
+[if (redefinedProperty.class = owningClassifier)]this->[else][redefinedProperty.class.transformType()/]Impl::[/if][redefinedProperty.setterName()/](_[aProperty.name/][if(aProperty.isBackReference())].lock()[/if]);
+	[comment  else, if redefinedProperty is owned by an Interface/]
+	[elseif(redefinedProperty.owner.oclIsKindOf(Interface))]
+	[let redefinedPropertyOwningInterface : Interface = redefinedProperty.owner.oclAsType(Interface)]
+		[comment if owningClassifier is a Class /]
+		[if (owningClassifier.oclIsKindOf(Class))]
+		[let owningClass : Class = owningClassifier.oclAsType(Class)]
+			[comment if owningClassifier realizes redefinedPropertyOwningInterface directly /]
+			[if (owningClass.realizesInterface(redefinedPropertyOwningInterface))]
+this->[redefinedProperty.setterName()/](_[aProperty.name/][if(aProperty.isBackReference())].lock()[/if]);
+			[comment else, if owningClass realizes this interface indirectly /]
+				[for (realizingBaseClass : Class | owningClass.getRealizingBaseClasses(redefinedPropertyOwningInterface))]
+[redefinedProperty.class.transformType()/]Impl::[redefinedProperty.setterName()/](_[aProperty.name/][if(aProperty.isBackReference())].lock()[/if]);
+				[/for]
+			[/if]
+		[/let]
+		[comment else, if owningClassifier is an Interface /]
+		[elseif(owningClassifier.oclIsKindOf(Interface))]
+		[let owningInterface : Interface = owningClassifier.oclAsType(Interface)]
+			[comment if interface owning aProperty and interface owning redefinedProperty are equal OR if interface owning aProperty inherites interface owning redefinedProperty/]
+			[if (owningInterface = redefinedPropertyOwningInterface or owningInterface.inheritsFrom(redefinedPropertyOwningInterface))]
+this->[redefinedProperty.setterName()/](_[aProperty.name/][if(aProperty.isBackReference())].lock()[/if]);
+			[/if]		
+		[/let]
+		[/if]
+	[/let]
+	[/if]
+[elseif(redefinedProperty.upper = 1)]
+m_[redefinedProperty.name/] = this->[aProperty.getterName()/]()[if(aProperty.isBackReference())].lock()[/if];
+[redefinedProperty.generateRedefinedPropertySet(redefinedProperty.owner.oclAsType(Classifier))/]
+[/if]
+[/for]
 [/template]
 
 [template public generateAttributeSetterImplementationCpp(aProperty : Property, aInterface : Interface) ? (aProperty.hasSetter())]

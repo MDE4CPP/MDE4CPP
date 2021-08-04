@@ -33,6 +33,19 @@
 [query public hasStereotypeApplied(anElement : Element, qualifiedName : String) : Boolean = not anElement.getAppliedStereotype(qualifiedName).oclIsUndefined() /]
 
 [**
+ * Subset Union helper queries
+*/]
+[comment indicates, that the property is a subset of other properties /]
+[query public isSubset(aProperty : Property) : Boolean = not aProperty.subsettedProperty->isEmpty() /]
+[comment indicates, that the property is a union of other properties /]
+[query public isUnion(aProperty : Property) : Boolean = aProperty.isDerivedUnion  /]
+[comment indicates, that the property is a subset as well as a union of other properties /]
+[query public isSubsetUnion(aProperty : Property) : Boolean = isSubset() and (isUnion() or subsetIsUnion())/]
+[comment indicates, whether a subset property is also a union --> this is the case if there is at least one other property in the model, which contains aProperty in its subsetted properties /]
+[query public subsetIsUnion(aProperty : Property) : Boolean = aProperty.ancestors(Package).allOwnedElements()->filter(Property).subsettedProperty->includes(aProperty) /]
+
+
+[**
  * queries for handling of the 'UML4CPPPackage' stereotype
 */]
 [query public getEclipseURI(anElement : Element) : String = if(isUML4CPPPackage()) then getValue(anElement.getAppliedStereotype(QN_STEREOTYPE_UML4CPPPACKAGE()), keyEclipseURI()) else '' endif/] [** get the packages Eclipse URI if present./]
@@ -72,9 +85,17 @@
  * forward declaration of 'Bag' is only required, if at least one property or operation parameter has an upper bound > 1 
 */]
 [template public generateAbstractDataTypesForwardDeclaration(aClass : Class)]
-[if (aClass.ownedAttribute->select(upper <> 1)->size() > 0 or aClass.ownedOperation.ownedParameter->select(upper <> 1)->size() > 0)]
+[if (aClass.ownedAttribute->select(upper <> 1 and not isSubset() and not isUnion())->size() > 0 or aClass.ownedOperation.ownedParameter->select(upper <> 1)->size() > 0)]
 template<class T> class Bag;
 [/if]
+[if (aClass.ownedAttribute->select(isSubset() and not isSubsetUnion())->size() > 0)]
+template<class T, class ... U> class Subset;
+[/if]
+[if (aClass.ownedAttribute->select(isSubsetUnion())->size() > 0)]
+template<class T, class ... U> class SubsetUnion;
+[/if]
+[if (aClass.ownedAttribute->select(isUnion() and not isSubsetUnion())->size() > 0)]
+template<class T> class Union;[/if]
 [/template]
 
 [**
@@ -92,9 +113,17 @@ template<class T> class Bag;
  * include of 'Bag' is only required, if at least one property or operation parameter has an upper bound > 1
 */]
 [template public generateAbstractDataTypesIncludes(aClass : Class)]
-[if (aClass.ownedAttribute->select(upper <> 1)->size() > 0 or aClass.ownedOperation.ownedParameter->select(upper <> 1)->size() > 0)]
+[if (aClass.ownedAttribute->select(upper <> 1 and not isSubset() and not isUnion())->size() > 0 or aClass.ownedOperation.ownedParameter->select(upper <> 1)->size() > 0)]
 #include "abstractDataTypes/Bag.hpp"
 [/if]
+[if (aClass.ownedAttribute->select((isSubset() and not isSubsetUnion()) or ((not opposite.oclIsUndefined()) and (opposite.isSubset())))->size() > 0)]
+#include "abstractDataTypes/Subset.hpp"
+[/if]
+[if (aClass.ownedAttribute->select(isSubsetUnion() or ((not opposite.oclIsUndefined()) and (opposite.isSubsetUnion())))->size() > 0)]
+#include "abstractDataTypes/SubsetUnion.hpp"
+[/if]
+[if (aClass.ownedAttribute->select((isUnion() and not isSubsetUnion()) or ((not opposite.oclIsUndefined()) and (opposite.isUnion() and (not opposite.isSubsetUnion()))))->size() > 0)]
+#include "abstractDataTypes/Union.hpp"[/if]
 [/template]
 
 [**

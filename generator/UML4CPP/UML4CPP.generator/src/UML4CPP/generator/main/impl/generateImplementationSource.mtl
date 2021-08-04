@@ -319,6 +319,11 @@ void [className/]::destroy()
 [/for]
 
 //*********************************
+// Union Getter
+//*********************************
+[aClass.generateUnionGetterCpp()/]
+
+//*********************************
 // Operations
 //*********************************
 [for (aOperation : Operation | aClass.ownedOperation->sortedBy(myQualifiedName())) separator('\n')]

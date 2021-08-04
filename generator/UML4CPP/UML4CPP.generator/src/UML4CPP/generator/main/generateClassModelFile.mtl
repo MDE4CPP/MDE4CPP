@@ -126,6 +126,12 @@ virtual public [sClass.getClassifierName(aClass, false, sClass.getNearestPackage
 			//*********************************
 			[aClass.ownedAttribute->sortedBy(name).generateAttributeProtectedMember()/]
 			[aClass.getCompositeOwners()->sortedBy(name).generateCompositeOwnerAttributeProtectedMember() /]
+
+		public:
+			//*********************************
+			// Union Getter
+			//*********************************
+			[aClass.generateUnionGetterDeclaretaion(false)/]
 [if (isSingleton())]
 
 			//Singleton Instance and Getter

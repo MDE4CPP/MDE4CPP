@@ -195,3 +195,106 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 */]
 [query public getPackage(aPackagedElement : PackageableElement) : Package = aPackagedElement.owner.oclAsType(Package) /]
 [query public getRootPackage(aPackagedElement : PackageableElement) : Package = if(aPackagedElement.getPackage().getSuperPackage().oclIsUndefined()) then aPackagedElement.getPackage() else aPackagedElement.getPackage().getRootPackage() endif /]
+
+[**
+ * queries if aClass realizes anInterface directly
+*/]
+[query public realizesInterface(aClass : Class, anInterface : Interface) : Boolean =
+	aClass.interfaceRealization.supplier->select(supplier : NamedElement | supplier.oclIsKindOf(Interface) and supplier.oclAsType(Interface)=anInterface)->size() > 0 /]
+
+[**
+ * queries a Set containing aClass, if aClass directly realizes anInterface or a Set of all (nearest) base classes of aClass that realize anInterface
+*/]
+[query public getRealizingBaseClasses(aClass : Class, anInterface : Interface) : Set(Class) = 
+	if(aClass.realizesInterface(anInterface)) then Set{aClass} 
+	else aClass.general->filter(Class).getRealizingBaseClasses(anInterface)->flatten()->asSet()
+	endif /]
+
+
+[**
+ * queries if aClassifier inherits from baseClassifier (directly or indirectly
+*/]
+[query public inheritsFrom(aClassifier : Classifier, baseClassifier : Classifier) : Boolean = 
+	if(aClassifier.general->size() > 0 ) then if(aClassifier.general->includes(baseClassifier)) then true else aClassifier.general.inheritsFrom(baseClassifier) endif else false endif/]
+
+
+
+[**
+ * Templates and Queries for generating the Subset/Union functionalities of a Class
+*/]
+[template public generateUnionGetterCpp(aClass : Class)]
+[aClass.getUnionProperties()->sortedBy(name).generateUnionGetterCpp(aClass)/]
+
+[/template]
+
+[template public generateUnionGetterCpp(aProperty : Property, aClass: Class) ? (aProperty.isUnion())]
+[aProperty.generateCppType()/] [aClass.name.toUpperFirst()/]Impl::[aProperty.getterName()/]() const
+{
+[if (not (aProperty.upper = 1))]
+	if(m_[aProperty.name/] == nullptr)
+	{
+		[aProperty.generateContainerPropertyInit()/]
+		[aProperty.generateSubsetUnionInit()/]
+	}
+[/if]
+	return m_[aProperty.name/];
+}
+
+
+[/template]
+
+[template public generateUnionGetterDeclaretaion(aClass : Class, impl : Boolean)]
+[aClass.getUnionProperties()->sortedBy(name).generateUnionGetterDeclaretaionBag(impl)/]
+[/template]
+
+[template public generateUnionGetterDeclaretaionBag(aProperty : Property, impl : Boolean) ? (isUnion())]
+virtual [aProperty.generateCppType()/] [aProperty.getterName()/]() const [abstractSuffix(impl)/];
+[/template]
+
+[query public getUnionProperties(aClass : Class) : Set(Property) = OrderedSet{aClass.getSubsetedUnionProperties(),aClass.attribute->select(isUnion())}->flatten()->sortedBy(name) /]
+
+[query public getSubsetedUnionProperties(aClass : Class): Set(Property) =  aClass.allAttributes()->select(if isSubset() then not subsettedProperty->forAll(p | not p.isUnion()) else false endif ).subsettedProperty->asOrderedSet()->sortedBy(name)/]
+[query public getSubsetsForUnion(aClass : Class, union : Property): Set(Property) =  aClass.allAttributes()->select(if isSubset() then not subsettedProperty->forAll(p | not (p = union)) else false endif ).oclAsType(Property)->asOrderedSet()->sortedBy(name)/]
+
+[**
+ * generates the lazy creation functionality for Subsets, Unions and SubsetUnions
+*/]
+[template public generateContainerPropertyInit(aProperty : Property)? (not (aProperty.upper = 1))]
+[if(aProperty.isSubsetUnion())]
+/*SubsetUnion*/
+m_[aProperty.name/].reset(new SubsetUnion<[aProperty.generateCppType()/], [aProperty.generateSubsetTypes()/] >());
+#ifdef SHOW_SUBSET_UNION
+	std::cout << "Initialising shared pointer SubsetUnion: " << "m_[aProperty.name/] - SubsetUnion<[aProperty.generateCppType()/], [aProperty.generateSubsetTypes()/] >()" << std::endl;
+#endif
+[elseif(aProperty.isSubset())]
+/*Subset*/
+m_[aProperty.name/].reset(new Subset<[aProperty.generateCppType()/], [aProperty.generateSubsetTypes()/] >());
+#ifdef SHOW_SUBSET_UNION
+	std::cout << "Initialising shared pointer Subset: " << "m_[aProperty.name/] - Subset<[aProperty.generateCppType()/], [aProperty.generateSubsetTypes()/] >()" << std::endl;
+#endif
+[elseif(aProperty.isUnion())]
+/*Union*/
+m_[aProperty.name/].reset(new Union<[aProperty.generateCppType()/]>());
+	#ifdef SHOW_SUBSET_UNION
+	std::cout << "Initialising Union: " << "m_[aProperty.name/] - Union<[aProperty.generateCppType()/]>()" << std::endl;
+#endif
+[else]
+m_[aProperty.name/].reset(new [aProperty.generateCppType()/]());
+[/if]
+[/template]
+
+[template public generateSubsetUnionInit(aProperty : Property)? (not (aProperty.upper = 1))]
+[if(aProperty.isSubsetUnion())]
+/*SubsetUnion*/
+m_[aProperty.name/]->initSubsetUnion([aProperty.generateSubsetElements()/]);
+#ifdef SHOW_SUBSET_UNION
+	std::cout << "Initialising value SubsetUnion: " << "m_[aProperty.name/] - SubsetUnion<[aProperty.generateCppType()/], [aProperty.generateSubsetTypes()/] >([aProperty.generateSubsetElements()/])" << std::endl;
+#endif
+[elseif(aProperty.isSubset())]
+/*Subset*/
+m_[aProperty.name/]->initSubset([aProperty.generateSubsetElements()/]);
+#ifdef SHOW_SUBSET_UNION
+	std::cout << "Initialising value Subset: " << "m_[aProperty.name/] - Subset<[aProperty.generateCppType()/], [aProperty.generateSubsetTypes()/] >([aProperty.generateSubsetElements()/])" << std::endl;
+#endif
+[/if]
+[/template]
