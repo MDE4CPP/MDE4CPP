@@ -172,7 +172,7 @@ task cleanAllExamples(type: Exec){
     workingDir System.env.MDE4CPP_HOME
     
     if(OperatingSystem.current().isWindows()){
-    	commandLine 'cmd', '/c', 'git clean -d -f -X' 'src\\examples'
+    	commandLine 'cmd', '/c', 'git clean -d -f -X', 'src\\examples'
 	} else if(OperatingSystem.current().isLinux() || OperatingSystem.current().isMacOsX()){
 		commandLine '/bin/sh', '-c', 'git clean -d -f -X src/examples'
 	}
