@@ -44,7 +44,10 @@ Any [aClass.name.toUpperFirst().concat('Impl')/]::eGet(int featureID, bool resol
 [if (struct.eType.oclIsKindOf(EDataType))]
 			return eAny([struct.GetterName()/]()); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
 [elseif (struct.upperBound = 1)]
-			return eAny([struct.GetterName()/]()[if (struct.oclAsType(EReference).isBackReference())].lock()[/if]); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+			{
+				std::shared_ptr<ecore::EObject> returnValue=[struct.GetterName()/]()[if (struct.oclAsType(EReference).isBackReference())].lock()[/if];
+				return eAny(returnValue); //[aClass.getMyClassifierID()/][struct.getFeatureID()/]
+			}
 [else]
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
