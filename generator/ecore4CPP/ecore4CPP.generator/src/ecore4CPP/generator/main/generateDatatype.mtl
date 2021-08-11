@@ -21,7 +21,7 @@
 */]
 
 [template public generateEDatatypeCreation(anEDatatype : EDataType)]
-[anEDatatype.getClassMemberName()/] = factory->create[if (anEDatatype.oclIsKindOf(EEnum))]EEnum[else]EDataType[/if]_in_EPackage(package, [anEDatatype.getStaticAttributeIDName()/]);
+[anEDatatype.getClassMemberName()/] = factory->create[if (anEDatatype.oclIsKindOf(EEnum))]EEnum[else]EDataType[/if]_as_eClassifiers_in_EPackage(package, [anEDatatype.getStaticAttributeIDName()/]);
 
 [/template]
 

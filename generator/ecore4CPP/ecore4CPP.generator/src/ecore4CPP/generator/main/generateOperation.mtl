@@ -54,7 +54,7 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 [query public simpleDatatypeGetter(anEClassifier : EClassifier, anOperation: EOperation) : String = if anOperation.eType.oclIsUndefined() or anOperation.eTypeParameters->notEmpty() then 'nullptr' else needMetaModelPackageGetter(anEClassifier, anOperation.eContainingClass).concat('get').concat(anEClassifier.getMemberNameUpperFirst()).concat('()') endif/]
 
 [template public generateOperationCreation(anEOperation : EOperation) ? ( not hasImplOnly()) ]
-[anEOperation.getClassMemberName()/] = factory->createEOperation_in_EContainingClass([anEOperation.eContainingClass.getClassMemberName()/], [anEOperation.getStaticAttributeIDName()/]);
+[anEOperation.getClassMemberName()/] = factory->createEOperation_as_eOperations_in_EClass([anEOperation.eContainingClass.getClassMemberName()/], [anEOperation.getStaticAttributeIDName()/]);
 
 [/template]
 
@@ -78,7 +78,7 @@ virtual [anEOperation.generateOperationType()/] [anEOperation.name/]([anEOperati
 [anEOperation.getClassMemberName()/]->setOrdered([anEOperation.ordered.toString()/]);
 [for (anEParameter : EParameter | anEOperation.eParameters) separator ('\r\n')]
 {
-	std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation([anEOperation.getClassMemberName()/]);
+	std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation([anEOperation.getClassMemberName()/]);
 	parameter->setName("[anEParameter.name/]");
 [if ((anEParameter.eType.oclIsUndefined())or(anEParameter.eType.doNotGenerate()))]
 	{ [comment external Classes for instance C++ std::map are not generated and has no metamodel informations/]

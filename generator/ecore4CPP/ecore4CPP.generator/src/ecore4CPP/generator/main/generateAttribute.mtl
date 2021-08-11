@@ -188,8 +188,7 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttrib
 */]
 
 [template public generateAttributeCreation(anEAttribute : EAttribute)]
-[anEAttribute.getClassMemberName()/] = factory->createEAttribute_in_EContainingClass([anEAttribute.eContainingClass.getClassMemberName()/], [anEAttribute.getStaticAttributeIDName()/]);
-
+[anEAttribute.getClassMemberName()/] = factory->createEAttribute_as_eStructuralFeatures_in_EClass([anEAttribute.eContainingClass.getClassMemberName()/], [anEAttribute.getStaticAttributeIDName()/]);
 [/template]
 
 [** Handling of doNotGenerate: if an Attribute has a Type on an external Class, which is not generated, then create a dummy EClass /]
