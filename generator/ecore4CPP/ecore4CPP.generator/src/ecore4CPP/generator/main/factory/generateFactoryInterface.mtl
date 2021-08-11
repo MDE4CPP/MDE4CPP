@@ -22,13 +22,13 @@
 [template public generateFactoryInterface(anEPackage : EPackage) {packageName : String = anEPackage.name.concat('Factory');}]
 [file (anEPackage.generateNamespacePath().concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]
 [startGuard(anEPackage,'Factory')/]
+// namespace macro header include
+#include "[anEPackage.getRootPackage().name/]/[anEPackage.getRootPackage().name/].hpp"
 
 #include <map>
 #include <memory>
 
-// namespace macro header include
-#include "[anEPackage.getRootPackage().name/]/[anEPackage.getRootPackage().name/].hpp"
-
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EFactory.hpp"
 [if (not (anEPackage = anEPackage.getRootPackage()))]
 #include "[anEPackage.getRootPackage().name/]/[anEPackage.getNamespacePathWithoutRoot()/][anEPackage.name/]Package.hpp"
@@ -79,7 +79,7 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 [for (subPackage : EPackage | anEPackage.eSubpackages->sortedBy(name))]
 [subPackage.generateForwardDeclarations()/]
 [/for]
-[let includeClasses:OrderedSet(EClassifier) = OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass).getAllContainers().eType->asOrderedSet()->sortedBy(name)]
+[let includeClasses:OrderedSet(EClassifier) = OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass).getAllComposition().eType->asOrderedSet()->sortedBy(name)]
 	[if (includeClasses->size()>0)]
 		[let includeNameSpaces:OrderedSet(EPackage) = includeClasses.ePackage->asOrderedSet()->sortedBy(name)]
 			[if (includeNameSpaces->size()>0)]
