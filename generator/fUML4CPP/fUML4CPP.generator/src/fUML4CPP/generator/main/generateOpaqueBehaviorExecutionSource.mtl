@@ -118,12 +118,21 @@ void [behaviorName/]::setThisExecutionPtr(std::weak_ptr<[behaviorName/]> thisExe
 
 [template private generateBody(anOpaqueBehavior : OpaqueBehavior, aPackage : Package)]
 [if (anOpaqueBehavior.hasContext())]
-std::shared_ptr<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace(false)/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]> context = std::dynamic_pointer_cast<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace(false)/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]Object>(this->getContext())->[anOpaqueBehavior.getContext().UMLValueGetterName()/]();
+std::shared_ptr<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace(false)/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]> context = nullptr;
+
+if(this->getContext()){
+	std::shared_ptr<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace(false)/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]Object> contextObject = std::dynamic_pointer_cast<[anOpaqueBehavior.getContext().getNearestPackage().generateNamespace(false)/]::[anOpaqueBehavior.getContext().name.toUpperFirst()/]Object>(this->getContext());
+
+	if(contextObject)
+	{
+		context = contextObject->[anOpaqueBehavior.getContext().UMLValueGetterName()/]();
+	}
+}
+
 DEBUG_MESSAGE(
 	if (context == nullptr)
 	{
-		std::cerr << "context of CallOperationAction '[anOpaqueBehavior.name/]'is not set" << std::endl;
-	    throw "error";
+		std::cerr << "WARNING: execution for OpaqueBehavior '[anOpaqueBehavior.name/]' does not have a context and may behave unexpected." << std::endl;
 	}
 )
 [/if]
