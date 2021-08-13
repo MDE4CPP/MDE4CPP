@@ -52,6 +52,12 @@ namespace UML4CPPProfile
 			std::shared_ptr<uml::Element> m_base_Element;
 			
 			
+
+		public:
+			//*********************************
+			// Union Getter
+			//*********************************
+			
 	};
 }
 #endif /* end of include guard: UML4CPPPROFILE_DONOTGENERATE__HPP */

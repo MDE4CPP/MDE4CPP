@@ -603,7 +603,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> PortObject::getValues(std::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DeploymentTarget_deployment())
 	{
-		std::shared_ptr<Bag<uml::Deployment>> deploymentList = m_PortValue->getDeployment();
+		std::shared_ptr<Subset<uml::Deployment, uml::Element>> deploymentList = m_PortValue->getDeployment();
 		Bag<uml::Deployment>::iterator iter = deploymentList->begin();
 		Bag<uml::Deployment>::iterator end = deploymentList->end();
 		while (iter != end)
@@ -621,7 +621,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> PortObject::getValues(std::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_PortValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_PortValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -639,7 +639,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> PortObject::getValues(std::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_PortValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_PortValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -667,7 +667,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> PortObject::getValues(std::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Feature_featuringClassifier())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> featuringClassifierList = m_PortValue->getFeaturingClassifier();
+		std::shared_ptr<Union<uml::Classifier>> featuringClassifierList = m_PortValue->getFeaturingClassifier();
 		Bag<uml::Classifier>::iterator iter = featuringClassifierList->begin();
 		Bag<uml::Classifier>::iterator end = featuringClassifierList->end();
 		while (iter != end)
@@ -873,7 +873,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> PortObject::getValues(std::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Port_redefinedPort())
 	{
-		std::shared_ptr<Bag<uml::Port>> redefinedPortList = m_PortValue->getRedefinedPort();
+		std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> redefinedPortList = m_PortValue->getRedefinedPort();
 		Bag<uml::Port>::iterator iter = redefinedPortList->begin();
 		Bag<uml::Port>::iterator end = redefinedPortList->end();
 		while (iter != end)
@@ -1036,7 +1036,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> PortObject::getValues(std::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_qualifier())
 	{
-		std::shared_ptr<Bag<uml::Property>> qualifierList = m_PortValue->getQualifier();
+		std::shared_ptr<Subset<uml::Property, uml::Element>> qualifierList = m_PortValue->getQualifier();
 		Bag<uml::Property>::iterator iter = qualifierList->begin();
 		Bag<uml::Property>::iterator end = qualifierList->end();
 		while (iter != end)
@@ -1054,7 +1054,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> PortObject::getValues(std::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_redefinedProperty())
 	{
-		std::shared_ptr<Bag<uml::Property>> redefinedPropertyList = m_PortValue->getRedefinedProperty();
+		std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> redefinedPropertyList = m_PortValue->getRedefinedProperty();
 		Bag<uml::Property>::iterator iter = redefinedPropertyList->begin();
 		Bag<uml::Property>::iterator end = redefinedPropertyList->end();
 		while (iter != end)
@@ -1094,7 +1094,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> PortObject::getValues(std::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement())
 	{
-		std::shared_ptr<Bag<uml::RedefinableElement>> redefinedElementList = m_PortValue->getRedefinedElement();
+		std::shared_ptr<Union<uml::RedefinableElement>> redefinedElementList = m_PortValue->getRedefinedElement();
 		Bag<uml::RedefinableElement>::iterator iter = redefinedElementList->begin();
 		Bag<uml::RedefinableElement>::iterator end = redefinedElementList->end();
 		while (iter != end)
@@ -1111,7 +1111,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> PortObject::getValues(std::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_PortValue->getRedefinitionContext();
+		std::shared_ptr<Union<uml::Classifier>> redefinitionContextList = m_PortValue->getRedefinitionContext();
 		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
 		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
 		while (iter != end)

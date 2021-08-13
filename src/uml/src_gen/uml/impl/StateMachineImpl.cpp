@@ -603,7 +603,7 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22261			
+			return eAny(tempList); //22262			
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
 		{
@@ -615,7 +615,7 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22264			
+			return eAny(tempList); //22265			
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
 		{
@@ -627,7 +627,7 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22263			
+			return eAny(tempList); //22264			
 		}
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
 		{
@@ -639,7 +639,7 @@ Any StateMachineImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //22262			
+			return eAny(tempList); //22263			
 		}
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
@@ -649,13 +649,13 @@ bool StateMachineImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT:
-			return getConnectionPoint() != nullptr; //22261
+			return getConnectionPoint() != nullptr; //22262
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_EXTENDEDSTATEMACHINE:
-			return getExtendedStateMachine() != nullptr; //22264
+			return getExtendedStateMachine() != nullptr; //22265
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_REGION:
-			return getRegion() != nullptr; //22263
+			return getRegion() != nullptr; //22264
 		case uml::umlPackage::STATEMACHINE_ATTRIBUTE_SUBMACHINESTATE:
-			return getSubmachineState() != nullptr; //22262
+			return getSubmachineState() != nullptr; //22263
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
 }
@@ -822,7 +822,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
   	switch(operationID)
 	{
 		
-		// 22399
+		// 22400
 		case umlPackage::STATEMACHINE_OPERATION_LCA_VERTEX_VERTEX:
 		{
 			//Retrieve input parameter 's1'
@@ -839,7 +839,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 22401
+		// 22402
 		case umlPackage::STATEMACHINE_OPERATION_LCASTATE_VERTEX_VERTEX:
 		{
 			//Retrieve input parameter 'v1'
@@ -856,7 +856,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 22400
+		// 22401
 		case umlPackage::STATEMACHINE_OPERATION_ANCESTOR_VERTEX_VERTEX:
 		{
 			//Retrieve input parameter 's1'
@@ -873,7 +873,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 22396
+		// 22397
 		case umlPackage::STATEMACHINE_OPERATION_CLASSIFIER_CONTEXT_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -890,7 +890,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 22395
+		// 22396
 		case umlPackage::STATEMACHINE_OPERATION_CONNECTION_POINTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -907,7 +907,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 22398
+		// 22399
 		case umlPackage::STATEMACHINE_OPERATION_CONTEXT_CLASSIFIER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -924,7 +924,7 @@ Any StateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::
 			break;
 		}
 		
-		// 22397
+		// 22398
 		case umlPackage::STATEMACHINE_OPERATION_METHOD_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

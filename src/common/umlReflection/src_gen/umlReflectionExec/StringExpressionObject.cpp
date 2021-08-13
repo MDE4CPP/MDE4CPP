@@ -353,7 +353,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StringExpressionObject::get
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_StringExpressionValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_StringExpressionValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -371,7 +371,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StringExpressionObject::get
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_StringExpressionValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_StringExpressionValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -399,7 +399,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StringExpressionObject::get
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Expression_operand())
 	{
-		std::shared_ptr<Bag<uml::ValueSpecification>> operandList = m_StringExpressionValue->getOperand();
+		std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> operandList = m_StringExpressionValue->getOperand();
 		Bag<uml::ValueSpecification>::iterator iter = operandList->begin();
 		Bag<uml::ValueSpecification>::iterator end = operandList->end();
 		while (iter != end)
@@ -547,7 +547,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StringExpressionObject::get
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StringExpression_subExpression())
 	{
-		std::shared_ptr<Bag<uml::StringExpression>> subExpressionList = m_StringExpressionValue->getSubExpression();
+		std::shared_ptr<Subset<uml::StringExpression, uml::Element>> subExpressionList = m_StringExpressionValue->getSubExpression();
 		Bag<uml::StringExpression>::iterator iter = subExpressionList->begin();
 		Bag<uml::StringExpression>::iterator end = subExpressionList->end();
 		while (iter != end)
@@ -576,7 +576,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> StringExpressionObject::get
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
-		std::shared_ptr<Bag<uml::TemplateBinding>> templateBindingList = m_StringExpressionValue->getTemplateBinding();
+		std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> templateBindingList = m_StringExpressionValue->getTemplateBinding();
 		Bag<uml::TemplateBinding>::iterator iter = templateBindingList->begin();
 		Bag<uml::TemplateBinding>::iterator end = templateBindingList->end();
 		while (iter != end)

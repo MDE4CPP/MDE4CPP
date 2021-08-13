@@ -463,7 +463,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehavioralFeatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_BehavioralFeature_ownedParameter())
 	{
-		std::shared_ptr<Bag<uml::Parameter>> ownedParameterList = m_BehavioralFeatureValue->getOwnedParameter();
+		std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> ownedParameterList = m_BehavioralFeatureValue->getOwnedParameter();
 		Bag<uml::Parameter>::iterator iter = ownedParameterList->begin();
 		Bag<uml::Parameter>::iterator end = ownedParameterList->end();
 		while (iter != end)
@@ -481,7 +481,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehavioralFeatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_BehavioralFeature_ownedParameterSet())
 	{
-		std::shared_ptr<Bag<uml::ParameterSet>> ownedParameterSetList = m_BehavioralFeatureValue->getOwnedParameterSet();
+		std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> ownedParameterSetList = m_BehavioralFeatureValue->getOwnedParameterSet();
 		Bag<uml::ParameterSet>::iterator iter = ownedParameterSetList->begin();
 		Bag<uml::ParameterSet>::iterator end = ownedParameterSetList->end();
 		while (iter != end)
@@ -516,7 +516,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehavioralFeatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_BehavioralFeatureValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_BehavioralFeatureValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -534,7 +534,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehavioralFeatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_BehavioralFeatureValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_BehavioralFeatureValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -562,7 +562,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehavioralFeatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Feature_featuringClassifier())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> featuringClassifierList = m_BehavioralFeatureValue->getFeaturingClassifier();
+		std::shared_ptr<Union<uml::Classifier>> featuringClassifierList = m_BehavioralFeatureValue->getFeaturingClassifier();
 		Bag<uml::Classifier>::iterator iter = featuringClassifierList->begin();
 		Bag<uml::Classifier>::iterator end = featuringClassifierList->end();
 		while (iter != end)
@@ -657,7 +657,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehavioralFeatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_elementImport())
 	{
-		std::shared_ptr<Bag<uml::ElementImport>> elementImportList = m_BehavioralFeatureValue->getElementImport();
+		std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> elementImportList = m_BehavioralFeatureValue->getElementImport();
 		Bag<uml::ElementImport>::iterator iter = elementImportList->begin();
 		Bag<uml::ElementImport>::iterator end = elementImportList->end();
 		while (iter != end)
@@ -675,7 +675,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehavioralFeatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_importedMember())
 	{
-		std::shared_ptr<Bag<uml::PackageableElement>> importedMemberList = m_BehavioralFeatureValue->getImportedMember();
+		std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> importedMemberList = m_BehavioralFeatureValue->getImportedMember();
 		Bag<uml::PackageableElement>::iterator iter = importedMemberList->begin();
 		Bag<uml::PackageableElement>::iterator end = importedMemberList->end();
 		while (iter != end)
@@ -692,7 +692,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehavioralFeatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_member())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> memberList = m_BehavioralFeatureValue->getMember();
+		std::shared_ptr<Union<uml::NamedElement>> memberList = m_BehavioralFeatureValue->getMember();
 		Bag<uml::NamedElement>::iterator iter = memberList->begin();
 		Bag<uml::NamedElement>::iterator end = memberList->end();
 		while (iter != end)
@@ -709,7 +709,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehavioralFeatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedMember())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> ownedMemberList = m_BehavioralFeatureValue->getOwnedMember();
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ownedMemberList = m_BehavioralFeatureValue->getOwnedMember();
 		Bag<uml::NamedElement>::iterator iter = ownedMemberList->begin();
 		Bag<uml::NamedElement>::iterator end = ownedMemberList->end();
 		while (iter != end)
@@ -727,7 +727,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehavioralFeatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedRule())
 	{
-		std::shared_ptr<Bag<uml::Constraint>> ownedRuleList = m_BehavioralFeatureValue->getOwnedRule();
+		std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> ownedRuleList = m_BehavioralFeatureValue->getOwnedRule();
 		Bag<uml::Constraint>::iterator iter = ownedRuleList->begin();
 		Bag<uml::Constraint>::iterator end = ownedRuleList->end();
 		while (iter != end)
@@ -745,7 +745,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehavioralFeatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_packageImport())
 	{
-		std::shared_ptr<Bag<uml::PackageImport>> packageImportList = m_BehavioralFeatureValue->getPackageImport();
+		std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> packageImportList = m_BehavioralFeatureValue->getPackageImport();
 		Bag<uml::PackageImport>::iterator iter = packageImportList->begin();
 		Bag<uml::PackageImport>::iterator end = packageImportList->end();
 		while (iter != end)
@@ -769,7 +769,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehavioralFeatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement())
 	{
-		std::shared_ptr<Bag<uml::RedefinableElement>> redefinedElementList = m_BehavioralFeatureValue->getRedefinedElement();
+		std::shared_ptr<Union<uml::RedefinableElement>> redefinedElementList = m_BehavioralFeatureValue->getRedefinedElement();
 		Bag<uml::RedefinableElement>::iterator iter = redefinedElementList->begin();
 		Bag<uml::RedefinableElement>::iterator end = redefinedElementList->end();
 		while (iter != end)
@@ -786,7 +786,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehavioralFeatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_BehavioralFeatureValue->getRedefinitionContext();
+		std::shared_ptr<Union<uml::Classifier>> redefinitionContextList = m_BehavioralFeatureValue->getRedefinitionContext();
 		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
 		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
 		while (iter != end)

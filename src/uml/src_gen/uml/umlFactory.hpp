@@ -896,11 +896,12 @@ namespace uml
 			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd(const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
 			//Add as contained object
 			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedAttribute_in_Class(std::weak_ptr<uml::Class> par_Class, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
 			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedAttribute_in_Artifact(std::shared_ptr<Artifact> par_Artifact, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
 			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedAttribute_in_DataType(std::weak_ptr<uml::DataType> par_DataType, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
 			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedAttribute_in_Interface(std::weak_ptr<uml::Interface> par_Interface, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
 			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedAttribute_in_Signal(std::shared_ptr<Signal> par_Signal, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
-			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedAttribute_in_StructuredClassifier(std::weak_ptr<uml::Class> par_StructuredClassifier, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedAttribute_in_StructuredClassifier(std::shared_ptr<StructuredClassifier> par_StructuredClassifier, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
 			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
 			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
 			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedEnd_in_Association(std::weak_ptr<uml::Association> par_Association, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
@@ -1662,11 +1663,12 @@ namespace uml
 			virtual std::shared_ptr<Port> createPort(const int metaElementID = umlPackage::PORT_CLASS) const = 0;
 			//Add as contained object
 			virtual std::shared_ptr<Port> createPort_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
+			virtual std::shared_ptr<Port> createPort_as_ownedAttribute_in_Class(std::weak_ptr<uml::Class> par_Class, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
 			virtual std::shared_ptr<Port> createPort_as_ownedAttribute_in_Artifact(std::shared_ptr<Artifact> par_Artifact, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
 			virtual std::shared_ptr<Port> createPort_as_ownedAttribute_in_DataType(std::weak_ptr<uml::DataType> par_DataType, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
 			virtual std::shared_ptr<Port> createPort_as_ownedAttribute_in_Interface(std::weak_ptr<uml::Interface> par_Interface, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
 			virtual std::shared_ptr<Port> createPort_as_ownedAttribute_in_Signal(std::shared_ptr<Signal> par_Signal, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
-			virtual std::shared_ptr<Port> createPort_as_ownedAttribute_in_StructuredClassifier(std::weak_ptr<uml::Class> par_StructuredClassifier, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
+			virtual std::shared_ptr<Port> createPort_as_ownedAttribute_in_StructuredClassifier(std::shared_ptr<StructuredClassifier> par_StructuredClassifier, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
 			virtual std::shared_ptr<Port> createPort_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
 			virtual std::shared_ptr<Port> createPort_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
 			virtual std::shared_ptr<Port> createPort_as_ownedEnd_in_Association(std::weak_ptr<uml::Association> par_Association, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
@@ -1702,11 +1704,12 @@ namespace uml
 			virtual std::shared_ptr<Property> createProperty(const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
 			//Add as contained object
 			virtual std::shared_ptr<Property> createProperty_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
+			virtual std::shared_ptr<Property> createProperty_as_ownedAttribute_in_Class(std::weak_ptr<uml::Class> par_Class, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
 			virtual std::shared_ptr<Property> createProperty_as_ownedAttribute_in_Artifact(std::shared_ptr<Artifact> par_Artifact, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
 			virtual std::shared_ptr<Property> createProperty_as_ownedAttribute_in_DataType(std::weak_ptr<uml::DataType> par_DataType, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
 			virtual std::shared_ptr<Property> createProperty_as_ownedAttribute_in_Interface(std::weak_ptr<uml::Interface> par_Interface, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
 			virtual std::shared_ptr<Property> createProperty_as_ownedAttribute_in_Signal(std::shared_ptr<Signal> par_Signal, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
-			virtual std::shared_ptr<Property> createProperty_as_ownedAttribute_in_StructuredClassifier(std::weak_ptr<uml::Class> par_StructuredClassifier, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
+			virtual std::shared_ptr<Property> createProperty_as_ownedAttribute_in_StructuredClassifier(std::shared_ptr<StructuredClassifier> par_StructuredClassifier, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
 			virtual std::shared_ptr<Property> createProperty_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
 			virtual std::shared_ptr<Property> createProperty_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
 			virtual std::shared_ptr<Property> createProperty_as_ownedEnd_in_Association(std::weak_ptr<uml::Association> par_Association, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;

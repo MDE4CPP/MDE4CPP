@@ -653,7 +653,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Association_endType())
 	{
-		std::shared_ptr<Bag<uml::Type>> endTypeList = m_ExtensionValue->getEndType();
+		std::shared_ptr<Subset<uml::Type, uml::Element>> endTypeList = m_ExtensionValue->getEndType();
 		Bag<uml::Type>::iterator iter = endTypeList->begin();
 		Bag<uml::Type>::iterator end = endTypeList->end();
 		while (iter != end)
@@ -676,7 +676,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Association_memberEnd())
 	{
-		std::shared_ptr<Bag<uml::Property>> memberEndList = m_ExtensionValue->getMemberEnd();
+		std::shared_ptr<SubsetUnion<uml::Property, uml::NamedElement>> memberEndList = m_ExtensionValue->getMemberEnd();
 		Bag<uml::Property>::iterator iter = memberEndList->begin();
 		Bag<uml::Property>::iterator end = memberEndList->end();
 		while (iter != end)
@@ -693,7 +693,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Association_navigableOwnedEnd())
 	{
-		std::shared_ptr<Bag<uml::Property>> navigableOwnedEndList = m_ExtensionValue->getNavigableOwnedEnd();
+		std::shared_ptr<Subset<uml::Property, uml::Property /*Subset does not reference a union*/>> navigableOwnedEndList = m_ExtensionValue->getNavigableOwnedEnd();
 		Bag<uml::Property>::iterator iter = navigableOwnedEndList->begin();
 		Bag<uml::Property>::iterator end = navigableOwnedEndList->end();
 		while (iter != end)
@@ -710,7 +710,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Association_ownedEnd())
 	{
-		std::shared_ptr<Bag<uml::Property>> ownedEndList = m_ExtensionValue->getOwnedEnd();
+		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature, uml::NamedElement, uml::Property /*Subset does not reference a union*/>> ownedEndList = m_ExtensionValue->getOwnedEnd();
 		Bag<uml::Property>::iterator iter = ownedEndList->begin();
 		Bag<uml::Property>::iterator end = ownedEndList->end();
 		while (iter != end)
@@ -728,7 +728,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_attribute())
 	{
-		std::shared_ptr<Bag<uml::Property>> attributeList = m_ExtensionValue->getAttribute();
+		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> attributeList = m_ExtensionValue->getAttribute();
 		Bag<uml::Property>::iterator iter = attributeList->begin();
 		Bag<uml::Property>::iterator end = attributeList->end();
 		while (iter != end)
@@ -745,7 +745,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_collaborationUse())
 	{
-		std::shared_ptr<Bag<uml::CollaborationUse>> collaborationUseList = m_ExtensionValue->getCollaborationUse();
+		std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> collaborationUseList = m_ExtensionValue->getCollaborationUse();
 		Bag<uml::CollaborationUse>::iterator iter = collaborationUseList->begin();
 		Bag<uml::CollaborationUse>::iterator end = collaborationUseList->end();
 		while (iter != end)
@@ -763,7 +763,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_feature())
 	{
-		std::shared_ptr<Bag<uml::Feature>> featureList = m_ExtensionValue->getFeature();
+		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> featureList = m_ExtensionValue->getFeature();
 		Bag<uml::Feature>::iterator iter = featureList->begin();
 		Bag<uml::Feature>::iterator end = featureList->end();
 		while (iter != end)
@@ -797,7 +797,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_generalization())
 	{
-		std::shared_ptr<Bag<uml::Generalization>> generalizationList = m_ExtensionValue->getGeneralization();
+		std::shared_ptr<Subset<uml::Generalization, uml::Element>> generalizationList = m_ExtensionValue->getGeneralization();
 		Bag<uml::Generalization>::iterator iter = generalizationList->begin();
 		Bag<uml::Generalization>::iterator end = generalizationList->end();
 		while (iter != end)
@@ -815,7 +815,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_inheritedMember())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> inheritedMemberList = m_ExtensionValue->getInheritedMember();
+		std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> inheritedMemberList = m_ExtensionValue->getInheritedMember();
 		Bag<uml::NamedElement>::iterator iter = inheritedMemberList->begin();
 		Bag<uml::NamedElement>::iterator end = inheritedMemberList->end();
 		while (iter != end)
@@ -855,7 +855,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedUseCase())
 	{
-		std::shared_ptr<Bag<uml::UseCase>> ownedUseCaseList = m_ExtensionValue->getOwnedUseCase();
+		std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> ownedUseCaseList = m_ExtensionValue->getOwnedUseCase();
 		Bag<uml::UseCase>::iterator iter = ownedUseCaseList->begin();
 		Bag<uml::UseCase>::iterator end = ownedUseCaseList->end();
 		while (iter != end)
@@ -890,7 +890,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_redefinedClassifier())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinedClassifierList = m_ExtensionValue->getRedefinedClassifier();
+		std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> redefinedClassifierList = m_ExtensionValue->getRedefinedClassifier();
 		Bag<uml::Classifier>::iterator iter = redefinedClassifierList->begin();
 		Bag<uml::Classifier>::iterator end = redefinedClassifierList->end();
 		while (iter != end)
@@ -917,7 +917,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_substitution())
 	{
-		std::shared_ptr<Bag<uml::Substitution>> substitutionList = m_ExtensionValue->getSubstitution();
+		std::shared_ptr<Subset<uml::Substitution, uml::Element>> substitutionList = m_ExtensionValue->getSubstitution();
 		Bag<uml::Substitution>::iterator iter = substitutionList->begin();
 		Bag<uml::Substitution>::iterator end = substitutionList->end();
 		while (iter != end)
@@ -962,7 +962,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_ExtensionValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_ExtensionValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -980,7 +980,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_ExtensionValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_ExtensionValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -1101,7 +1101,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_elementImport())
 	{
-		std::shared_ptr<Bag<uml::ElementImport>> elementImportList = m_ExtensionValue->getElementImport();
+		std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> elementImportList = m_ExtensionValue->getElementImport();
 		Bag<uml::ElementImport>::iterator iter = elementImportList->begin();
 		Bag<uml::ElementImport>::iterator end = elementImportList->end();
 		while (iter != end)
@@ -1119,7 +1119,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_importedMember())
 	{
-		std::shared_ptr<Bag<uml::PackageableElement>> importedMemberList = m_ExtensionValue->getImportedMember();
+		std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> importedMemberList = m_ExtensionValue->getImportedMember();
 		Bag<uml::PackageableElement>::iterator iter = importedMemberList->begin();
 		Bag<uml::PackageableElement>::iterator end = importedMemberList->end();
 		while (iter != end)
@@ -1136,7 +1136,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_member())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> memberList = m_ExtensionValue->getMember();
+		std::shared_ptr<Union<uml::NamedElement>> memberList = m_ExtensionValue->getMember();
 		Bag<uml::NamedElement>::iterator iter = memberList->begin();
 		Bag<uml::NamedElement>::iterator end = memberList->end();
 		while (iter != end)
@@ -1153,7 +1153,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedMember())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> ownedMemberList = m_ExtensionValue->getOwnedMember();
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ownedMemberList = m_ExtensionValue->getOwnedMember();
 		Bag<uml::NamedElement>::iterator iter = ownedMemberList->begin();
 		Bag<uml::NamedElement>::iterator end = ownedMemberList->end();
 		while (iter != end)
@@ -1171,7 +1171,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedRule())
 	{
-		std::shared_ptr<Bag<uml::Constraint>> ownedRuleList = m_ExtensionValue->getOwnedRule();
+		std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> ownedRuleList = m_ExtensionValue->getOwnedRule();
 		Bag<uml::Constraint>::iterator iter = ownedRuleList->begin();
 		Bag<uml::Constraint>::iterator end = ownedRuleList->end();
 		while (iter != end)
@@ -1189,7 +1189,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_packageImport())
 	{
-		std::shared_ptr<Bag<uml::PackageImport>> packageImportList = m_ExtensionValue->getPackageImport();
+		std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> packageImportList = m_ExtensionValue->getPackageImport();
 		Bag<uml::PackageImport>::iterator iter = packageImportList->begin();
 		Bag<uml::PackageImport>::iterator end = packageImportList->end();
 		while (iter != end)
@@ -1255,7 +1255,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement())
 	{
-		std::shared_ptr<Bag<uml::RedefinableElement>> redefinedElementList = m_ExtensionValue->getRedefinedElement();
+		std::shared_ptr<Union<uml::RedefinableElement>> redefinedElementList = m_ExtensionValue->getRedefinedElement();
 		Bag<uml::RedefinableElement>::iterator iter = redefinedElementList->begin();
 		Bag<uml::RedefinableElement>::iterator end = redefinedElementList->end();
 		while (iter != end)
@@ -1272,7 +1272,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_ExtensionValue->getRedefinitionContext();
+		std::shared_ptr<Union<uml::Classifier>> redefinitionContextList = m_ExtensionValue->getRedefinitionContext();
 		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
 		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
 		while (iter != end)
@@ -1289,7 +1289,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Relationship_relatedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> relatedElementList = m_ExtensionValue->getRelatedElement();
+		std::shared_ptr<Union<uml::Element>> relatedElementList = m_ExtensionValue->getRelatedElement();
 		Bag<uml::Element>::iterator iter = relatedElementList->begin();
 		Bag<uml::Element>::iterator end = relatedElementList->end();
 		while (iter != end)
@@ -1317,7 +1317,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
-		std::shared_ptr<Bag<uml::TemplateBinding>> templateBindingList = m_ExtensionValue->getTemplateBinding();
+		std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> templateBindingList = m_ExtensionValue->getTemplateBinding();
 		Bag<uml::TemplateBinding>::iterator iter = templateBindingList->begin();
 		Bag<uml::TemplateBinding>::iterator end = templateBindingList->end();
 		while (iter != end)

@@ -379,7 +379,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InitialNodeObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inGroup())
 	{
-		std::shared_ptr<Bag<uml::ActivityGroup>> inGroupList = m_InitialNodeValue->getInGroup();
+		std::shared_ptr<Union<uml::ActivityGroup>> inGroupList = m_InitialNodeValue->getInGroup();
 		Bag<uml::ActivityGroup>::iterator iter = inGroupList->begin();
 		Bag<uml::ActivityGroup>::iterator end = inGroupList->end();
 		while (iter != end)
@@ -396,7 +396,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InitialNodeObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
 	{
-		std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> inInterruptibleRegionList = m_InitialNodeValue->getInInterruptibleRegion();
+		std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> inInterruptibleRegionList = m_InitialNodeValue->getInInterruptibleRegion();
 		Bag<uml::InterruptibleActivityRegion>::iterator iter = inInterruptibleRegionList->begin();
 		Bag<uml::InterruptibleActivityRegion>::iterator end = inInterruptibleRegionList->end();
 		while (iter != end)
@@ -413,7 +413,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InitialNodeObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inPartition())
 	{
-		std::shared_ptr<Bag<uml::ActivityPartition>> inPartitionList = m_InitialNodeValue->getInPartition();
+		std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> inPartitionList = m_InitialNodeValue->getInPartition();
 		Bag<uml::ActivityPartition>::iterator iter = inPartitionList->begin();
 		Bag<uml::ActivityPartition>::iterator end = inPartitionList->end();
 		while (iter != end)
@@ -474,7 +474,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InitialNodeObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_redefinedNode())
 	{
-		std::shared_ptr<Bag<uml::ActivityNode>> redefinedNodeList = m_InitialNodeValue->getRedefinedNode();
+		std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> redefinedNodeList = m_InitialNodeValue->getRedefinedNode();
 		Bag<uml::ActivityNode>::iterator iter = redefinedNodeList->begin();
 		Bag<uml::ActivityNode>::iterator end = redefinedNodeList->end();
 		while (iter != end)
@@ -491,7 +491,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InitialNodeObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_InitialNodeValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_InitialNodeValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -509,7 +509,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InitialNodeObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_InitialNodeValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_InitialNodeValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -615,7 +615,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InitialNodeObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement())
 	{
-		std::shared_ptr<Bag<uml::RedefinableElement>> redefinedElementList = m_InitialNodeValue->getRedefinedElement();
+		std::shared_ptr<Union<uml::RedefinableElement>> redefinedElementList = m_InitialNodeValue->getRedefinedElement();
 		Bag<uml::RedefinableElement>::iterator iter = redefinedElementList->begin();
 		Bag<uml::RedefinableElement>::iterator end = redefinedElementList->end();
 		while (iter != end)
@@ -632,7 +632,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InitialNodeObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_InitialNodeValue->getRedefinitionContext();
+		std::shared_ptr<Union<uml::Classifier>> redefinitionContextList = m_InitialNodeValue->getRedefinitionContext();
 		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
 		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
 		while (iter != end)

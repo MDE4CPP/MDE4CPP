@@ -97,6 +97,12 @@ SendImpl& SendImpl::operator=(const SendImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Send "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Usage = obj.getBase_Usage();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void SendImpl::destroy()
 void SendImpl::setBase_Usage(std::weak_ptr<uml::Usage> _base_Usage)
 {
 	m_base_Usage = _base_Usage;
+	
 }
 std::weak_ptr<uml::Usage> SendImpl::getBase_Usage() const 
 {
 	return m_base_Usage;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

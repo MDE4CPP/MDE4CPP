@@ -567,7 +567,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionEndObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DeploymentTarget_deployment())
 	{
-		std::shared_ptr<Bag<uml::Deployment>> deploymentList = m_ExtensionEndValue->getDeployment();
+		std::shared_ptr<Subset<uml::Deployment, uml::Element>> deploymentList = m_ExtensionEndValue->getDeployment();
 		Bag<uml::Deployment>::iterator iter = deploymentList->begin();
 		Bag<uml::Deployment>::iterator end = deploymentList->end();
 		while (iter != end)
@@ -585,7 +585,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionEndObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_ExtensionEndValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_ExtensionEndValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -603,7 +603,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionEndObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_ExtensionEndValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_ExtensionEndValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -647,7 +647,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionEndObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Feature_featuringClassifier())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> featuringClassifierList = m_ExtensionEndValue->getFeaturingClassifier();
+		std::shared_ptr<Union<uml::Classifier>> featuringClassifierList = m_ExtensionEndValue->getFeaturingClassifier();
 		Bag<uml::Classifier>::iterator iter = featuringClassifierList->begin();
 		Bag<uml::Classifier>::iterator end = featuringClassifierList->end();
 		while (iter != end)
@@ -937,7 +937,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionEndObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_qualifier())
 	{
-		std::shared_ptr<Bag<uml::Property>> qualifierList = m_ExtensionEndValue->getQualifier();
+		std::shared_ptr<Subset<uml::Property, uml::Element>> qualifierList = m_ExtensionEndValue->getQualifier();
 		Bag<uml::Property>::iterator iter = qualifierList->begin();
 		Bag<uml::Property>::iterator end = qualifierList->end();
 		while (iter != end)
@@ -955,7 +955,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionEndObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Property_redefinedProperty())
 	{
-		std::shared_ptr<Bag<uml::Property>> redefinedPropertyList = m_ExtensionEndValue->getRedefinedProperty();
+		std::shared_ptr<SubsetUnion<uml::Property, uml::RedefinableElement>> redefinedPropertyList = m_ExtensionEndValue->getRedefinedProperty();
 		Bag<uml::Property>::iterator iter = redefinedPropertyList->begin();
 		Bag<uml::Property>::iterator end = redefinedPropertyList->end();
 		while (iter != end)
@@ -995,7 +995,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionEndObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement())
 	{
-		std::shared_ptr<Bag<uml::RedefinableElement>> redefinedElementList = m_ExtensionEndValue->getRedefinedElement();
+		std::shared_ptr<Union<uml::RedefinableElement>> redefinedElementList = m_ExtensionEndValue->getRedefinedElement();
 		Bag<uml::RedefinableElement>::iterator iter = redefinedElementList->begin();
 		Bag<uml::RedefinableElement>::iterator end = redefinedElementList->end();
 		while (iter != end)
@@ -1012,7 +1012,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ExtensionEndObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_ExtensionEndValue->getRedefinitionContext();
+		std::shared_ptr<Union<uml::Classifier>> redefinitionContextList = m_ExtensionEndValue->getRedefinitionContext();
 		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
 		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
 		while (iter != end)

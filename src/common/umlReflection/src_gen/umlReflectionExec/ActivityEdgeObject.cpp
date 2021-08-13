@@ -365,7 +365,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityEdgeObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_inGroup())
 	{
-		std::shared_ptr<Bag<uml::ActivityGroup>> inGroupList = m_ActivityEdgeValue->getInGroup();
+		std::shared_ptr<Union<uml::ActivityGroup>> inGroupList = m_ActivityEdgeValue->getInGroup();
 		Bag<uml::ActivityGroup>::iterator iter = inGroupList->begin();
 		Bag<uml::ActivityGroup>::iterator end = inGroupList->end();
 		while (iter != end)
@@ -382,7 +382,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityEdgeObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_inPartition())
 	{
-		std::shared_ptr<Bag<uml::ActivityPartition>> inPartitionList = m_ActivityEdgeValue->getInPartition();
+		std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> inPartitionList = m_ActivityEdgeValue->getInPartition();
 		Bag<uml::ActivityPartition>::iterator iter = inPartitionList->begin();
 		Bag<uml::ActivityPartition>::iterator end = inPartitionList->end();
 		while (iter != end)
@@ -419,7 +419,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityEdgeObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityEdge_redefinedEdge())
 	{
-		std::shared_ptr<Bag<uml::ActivityEdge>> redefinedEdgeList = m_ActivityEdgeValue->getRedefinedEdge();
+		std::shared_ptr<Subset<uml::ActivityEdge, uml::RedefinableElement>> redefinedEdgeList = m_ActivityEdgeValue->getRedefinedEdge();
 		Bag<uml::ActivityEdge>::iterator iter = redefinedEdgeList->begin();
 		Bag<uml::ActivityEdge>::iterator end = redefinedEdgeList->end();
 		while (iter != end)
@@ -467,7 +467,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityEdgeObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_ActivityEdgeValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_ActivityEdgeValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -485,7 +485,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityEdgeObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_ActivityEdgeValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_ActivityEdgeValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -591,7 +591,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityEdgeObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement())
 	{
-		std::shared_ptr<Bag<uml::RedefinableElement>> redefinedElementList = m_ActivityEdgeValue->getRedefinedElement();
+		std::shared_ptr<Union<uml::RedefinableElement>> redefinedElementList = m_ActivityEdgeValue->getRedefinedElement();
 		Bag<uml::RedefinableElement>::iterator iter = redefinedElementList->begin();
 		Bag<uml::RedefinableElement>::iterator end = redefinedElementList->end();
 		while (iter != end)
@@ -608,7 +608,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityEdgeObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_ActivityEdgeValue->getRedefinitionContext();
+		std::shared_ptr<Union<uml::Classifier>> redefinitionContextList = m_ActivityEdgeValue->getRedefinitionContext();
 		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
 		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
 		while (iter != end)

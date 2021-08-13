@@ -298,7 +298,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InterruptibleActivityRegion
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_containedEdge())
 	{
-		std::shared_ptr<Bag<uml::ActivityEdge>> containedEdgeList = m_InterruptibleActivityRegionValue->getContainedEdge();
+		std::shared_ptr<Union<uml::ActivityEdge>> containedEdgeList = m_InterruptibleActivityRegionValue->getContainedEdge();
 		Bag<uml::ActivityEdge>::iterator iter = containedEdgeList->begin();
 		Bag<uml::ActivityEdge>::iterator end = containedEdgeList->end();
 		while (iter != end)
@@ -315,7 +315,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InterruptibleActivityRegion
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_containedNode())
 	{
-		std::shared_ptr<Bag<uml::ActivityNode>> containedNodeList = m_InterruptibleActivityRegionValue->getContainedNode();
+		std::shared_ptr<Union<uml::ActivityNode>> containedNodeList = m_InterruptibleActivityRegionValue->getContainedNode();
 		Bag<uml::ActivityNode>::iterator iter = containedNodeList->begin();
 		Bag<uml::ActivityNode>::iterator end = containedNodeList->end();
 		while (iter != end)
@@ -342,7 +342,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InterruptibleActivityRegion
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_subgroup())
 	{
-		std::shared_ptr<Bag<uml::ActivityGroup>> subgroupList = m_InterruptibleActivityRegionValue->getSubgroup();
+		std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> subgroupList = m_InterruptibleActivityRegionValue->getSubgroup();
 		Bag<uml::ActivityGroup>::iterator iter = subgroupList->begin();
 		Bag<uml::ActivityGroup>::iterator end = subgroupList->end();
 		while (iter != end)
@@ -370,7 +370,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InterruptibleActivityRegion
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_InterruptibleActivityRegionValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_InterruptibleActivityRegionValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -388,7 +388,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InterruptibleActivityRegion
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_InterruptibleActivityRegionValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_InterruptibleActivityRegionValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -433,7 +433,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InterruptibleActivityRegion
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InterruptibleActivityRegion_node())
 	{
-		std::shared_ptr<Bag<uml::ActivityNode>> nodeList = m_InterruptibleActivityRegionValue->getNode();
+		std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> nodeList = m_InterruptibleActivityRegionValue->getNode();
 		Bag<uml::ActivityNode>::iterator iter = nodeList->begin();
 		Bag<uml::ActivityNode>::iterator end = nodeList->end();
 		while (iter != end)

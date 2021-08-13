@@ -282,7 +282,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> DeploymentTargetObject::get
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DeploymentTarget_deployment())
 	{
-		std::shared_ptr<Bag<uml::Deployment>> deploymentList = m_DeploymentTargetValue->getDeployment();
+		std::shared_ptr<Subset<uml::Deployment, uml::Element>> deploymentList = m_DeploymentTargetValue->getDeployment();
 		Bag<uml::Deployment>::iterator iter = deploymentList->begin();
 		Bag<uml::Deployment>::iterator end = deploymentList->end();
 		while (iter != end)
@@ -300,7 +300,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> DeploymentTargetObject::get
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_DeploymentTargetValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_DeploymentTargetValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -318,7 +318,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> DeploymentTargetObject::get
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_DeploymentTargetValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_DeploymentTargetValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)

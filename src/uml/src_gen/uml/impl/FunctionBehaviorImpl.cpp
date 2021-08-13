@@ -452,7 +452,7 @@ Any FunctionBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
   	switch(operationID)
 	{
 		
-		// 10795
+		// 10796
 		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_HASALLDATATYPEATTRIBUTES_DATATYPE:
 		{
 			//Retrieve input parameter 'd'
@@ -464,7 +464,7 @@ Any FunctionBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 10793
+		// 10794
 		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_ONE_OUTPUT_PARAMETER_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -481,7 +481,7 @@ Any FunctionBehaviorImpl::eInvoke(int operationID, std::shared_ptr<std::list < s
 			break;
 		}
 		
-		// 10794
+		// 10795
 		case umlPackage::FUNCTIONBEHAVIOR_OPERATION_TYPES_OF_PARAMETERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

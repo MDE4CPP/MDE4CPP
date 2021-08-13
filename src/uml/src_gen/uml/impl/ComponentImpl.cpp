@@ -581,7 +581,7 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_ISINDIRECTLYINSTANTIATED:
-			return eAny(getIsIndirectlyInstantiated()); //4752
+			return eAny(getIsIndirectlyInstantiated()); //4753
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -592,7 +592,7 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4753			
+			return eAny(tempList); //4754			
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PROVIDED:
 		{
@@ -604,7 +604,7 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4754			
+			return eAny(tempList); //4755			
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
 		{
@@ -616,7 +616,7 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4755			
+			return eAny(tempList); //4756			
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REQUIRED:
 		{
@@ -628,7 +628,7 @@ Any ComponentImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //4756			
+			return eAny(tempList); //4757			
 		}
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
@@ -638,15 +638,15 @@ bool ComponentImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_ISINDIRECTLYINSTANTIATED:
-			return getIsIndirectlyInstantiated() != true; //4752
+			return getIsIndirectlyInstantiated() != true; //4753
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
-			return getPackagedElement() != nullptr; //4753
+			return getPackagedElement() != nullptr; //4754
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PROVIDED:
-			return getProvided() != nullptr; //4754
+			return getProvided() != nullptr; //4755
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REALIZATION:
-			return getRealization() != nullptr; //4755
+			return getRealization() != nullptr; //4756
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_REQUIRED:
-			return getRequired() != nullptr; //4756
+			return getRequired() != nullptr; //4757
 	}
 	return ClassImpl::internalEIsSet(featureID);
 }
@@ -658,7 +658,7 @@ bool ComponentImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isIndirectlyInstantiated = newValue->get<bool>();
-			setIsIndirectlyInstantiated(_isIndirectlyInstantiated); //4752
+			setIsIndirectlyInstantiated(_isIndirectlyInstantiated); //4753
 			return true;
 		}
 		case uml::umlPackage::COMPONENT_ATTRIBUTE_PACKAGEDELEMENT:
@@ -748,7 +748,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
   	switch(operationID)
 	{
 		
-		// 4882
+		// 4883
 		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDCLASS_STRING_BOOLEAN:
 		{
 			//Retrieve input parameter 'name'
@@ -765,7 +765,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 4883
+		// 4884
 		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDENUMERATION_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -777,7 +777,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 4884
+		// 4885
 		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDINTERFACE_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -789,7 +789,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 4885
+		// 4886
 		case umlPackage::COMPONENT_OPERATION_CREATEOWNEDPRIMITIVETYPE_STRING:
 		{
 			//Retrieve input parameter 'name'
@@ -801,21 +801,21 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 4886
+		// 4887
 		case umlPackage::COMPONENT_OPERATION_GETPROVIDEDS:
 		{
 			result = eAny(this->getProvideds());
 			break;
 		}
 		
-		// 4887
+		// 4888
 		case umlPackage::COMPONENT_OPERATION_GETREQUIREDS:
 		{
 			result = eAny(this->getRequireds());
 			break;
 		}
 		
-		// 4880
+		// 4881
 		case umlPackage::COMPONENT_OPERATION_NO_NESTED_CLASSIFIERS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -832,7 +832,7 @@ Any ComponentImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::sha
 			break;
 		}
 		
-		// 4881
+		// 4882
 		case umlPackage::COMPONENT_OPERATION_NO_PACKAGED_ELEMENTS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

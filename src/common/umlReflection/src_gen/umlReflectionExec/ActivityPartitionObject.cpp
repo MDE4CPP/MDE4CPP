@@ -344,7 +344,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityPartitionObject::ge
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_containedEdge())
 	{
-		std::shared_ptr<Bag<uml::ActivityEdge>> containedEdgeList = m_ActivityPartitionValue->getContainedEdge();
+		std::shared_ptr<Union<uml::ActivityEdge>> containedEdgeList = m_ActivityPartitionValue->getContainedEdge();
 		Bag<uml::ActivityEdge>::iterator iter = containedEdgeList->begin();
 		Bag<uml::ActivityEdge>::iterator end = containedEdgeList->end();
 		while (iter != end)
@@ -361,7 +361,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityPartitionObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_containedNode())
 	{
-		std::shared_ptr<Bag<uml::ActivityNode>> containedNodeList = m_ActivityPartitionValue->getContainedNode();
+		std::shared_ptr<Union<uml::ActivityNode>> containedNodeList = m_ActivityPartitionValue->getContainedNode();
 		Bag<uml::ActivityNode>::iterator iter = containedNodeList->begin();
 		Bag<uml::ActivityNode>::iterator end = containedNodeList->end();
 		while (iter != end)
@@ -388,7 +388,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityPartitionObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_subgroup())
 	{
-		std::shared_ptr<Bag<uml::ActivityGroup>> subgroupList = m_ActivityPartitionValue->getSubgroup();
+		std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> subgroupList = m_ActivityPartitionValue->getSubgroup();
 		Bag<uml::ActivityGroup>::iterator iter = subgroupList->begin();
 		Bag<uml::ActivityGroup>::iterator end = subgroupList->end();
 		while (iter != end)
@@ -416,7 +416,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityPartitionObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityPartition_edge())
 	{
-		std::shared_ptr<Bag<uml::ActivityEdge>> edgeList = m_ActivityPartitionValue->getEdge();
+		std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge>> edgeList = m_ActivityPartitionValue->getEdge();
 		Bag<uml::ActivityEdge>::iterator iter = edgeList->begin();
 		Bag<uml::ActivityEdge>::iterator end = edgeList->end();
 		while (iter != end)
@@ -445,7 +445,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityPartitionObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityPartition_node())
 	{
-		std::shared_ptr<Bag<uml::ActivityNode>> nodeList = m_ActivityPartitionValue->getNode();
+		std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode>> nodeList = m_ActivityPartitionValue->getNode();
 		Bag<uml::ActivityNode>::iterator iter = nodeList->begin();
 		Bag<uml::ActivityNode>::iterator end = nodeList->end();
 		while (iter != end)
@@ -472,7 +472,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityPartitionObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityPartition_subpartition())
 	{
-		std::shared_ptr<Bag<uml::ActivityPartition>> subpartitionList = m_ActivityPartitionValue->getSubpartition();
+		std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> subpartitionList = m_ActivityPartitionValue->getSubpartition();
 		Bag<uml::ActivityPartition>::iterator iter = subpartitionList->begin();
 		Bag<uml::ActivityPartition>::iterator end = subpartitionList->end();
 		while (iter != end)
@@ -500,7 +500,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityPartitionObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_ActivityPartitionValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_ActivityPartitionValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -518,7 +518,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ActivityPartitionObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_ActivityPartitionValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_ActivityPartitionValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)

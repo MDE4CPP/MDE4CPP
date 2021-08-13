@@ -97,6 +97,12 @@ SourceImpl& SourceImpl::operator=(const SourceImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Source "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Artifact = obj.getBase_Artifact();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -128,11 +134,18 @@ void SourceImpl::destroy()
 void SourceImpl::setBase_Artifact(std::weak_ptr<uml::Artifact> _base_Artifact)
 {
 	m_base_Artifact = _base_Artifact;
+	
 }
 std::weak_ptr<uml::Artifact> SourceImpl::getBase_Artifact() const 
 {
 	return m_base_Artifact;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

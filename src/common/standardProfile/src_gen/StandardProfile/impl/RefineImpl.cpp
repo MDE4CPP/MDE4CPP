@@ -97,6 +97,12 @@ RefineImpl& RefineImpl::operator=(const RefineImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Refine "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Abstraction = obj.getBase_Abstraction();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void RefineImpl::destroy()
 void RefineImpl::setBase_Abstraction(std::weak_ptr<uml::Abstraction> _base_Abstraction)
 {
 	m_base_Abstraction = _base_Abstraction;
+	
 }
 std::weak_ptr<uml::Abstraction> RefineImpl::getBase_Abstraction() const 
 {
 	return m_base_Abstraction;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

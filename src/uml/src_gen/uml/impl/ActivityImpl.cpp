@@ -851,7 +851,7 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //762			
+			return eAny(tempList); //763			
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_GROUP:
 		{
@@ -863,12 +863,12 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //765			
+			return eAny(tempList); //766			
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_ISREADONLY:
-			return eAny(getIsReadOnly()); //767
+			return eAny(getIsReadOnly()); //768
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_ISSINGLEEXECUTION:
-			return eAny(getIsSingleExecution()); //768
+			return eAny(getIsSingleExecution()); //769
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_NODE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -879,7 +879,7 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //763			
+			return eAny(tempList); //764			
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_OWNEDGROUP:
 		{
@@ -891,7 +891,7 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //761			
+			return eAny(tempList); //762			
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_OWNEDNODE:
 		{
@@ -903,7 +903,7 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //766			
+			return eAny(tempList); //767			
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
 		{
@@ -915,7 +915,7 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //769			
+			return eAny(tempList); //770			
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_STRUCTUREDNODE:
 		{
@@ -927,7 +927,7 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //770			
+			return eAny(tempList); //771			
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_VARIABLE:
 		{
@@ -939,7 +939,7 @@ Any ActivityImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //764			
+			return eAny(tempList); //765			
 		}
 	}
 	return BehaviorImpl::eGet(featureID, resolve, coreType);
@@ -949,25 +949,25 @@ bool ActivityImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_EDGE:
-			return getEdge() != nullptr; //762
+			return getEdge() != nullptr; //763
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_GROUP:
-			return getGroup() != nullptr; //765
+			return getGroup() != nullptr; //766
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_ISREADONLY:
-			return getIsReadOnly() != false; //767
+			return getIsReadOnly() != false; //768
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_ISSINGLEEXECUTION:
-			return getIsSingleExecution() != false; //768
+			return getIsSingleExecution() != false; //769
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_NODE:
-			return getNode() != nullptr; //763
+			return getNode() != nullptr; //764
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_OWNEDGROUP:
-			return getOwnedGroup() != nullptr; //761
+			return getOwnedGroup() != nullptr; //762
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_OWNEDNODE:
-			return getOwnedNode() != nullptr; //766
+			return getOwnedNode() != nullptr; //767
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_PARTITION:
-			return getPartition() != nullptr; //769
+			return getPartition() != nullptr; //770
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_STRUCTUREDNODE:
-			return getStructuredNode() != nullptr; //770
+			return getStructuredNode() != nullptr; //771
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_VARIABLE:
-			return getVariable() != nullptr; //764
+			return getVariable() != nullptr; //765
 	}
 	return BehaviorImpl::internalEIsSet(featureID);
 }
@@ -1051,14 +1051,14 @@ bool ActivityImpl::eSet(int featureID, Any newValue)
 		{
 			// BOOST CAST
 			bool _isReadOnly = newValue->get<bool>();
-			setIsReadOnly(_isReadOnly); //767
+			setIsReadOnly(_isReadOnly); //768
 			return true;
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_ISSINGLEEXECUTION:
 		{
 			// BOOST CAST
 			bool _isSingleExecution = newValue->get<bool>();
-			setIsSingleExecution(_isSingleExecution); //768
+			setIsSingleExecution(_isSingleExecution); //769
 			return true;
 		}
 		case uml::umlPackage::ACTIVITY_ATTRIBUTE_NODE:
@@ -1292,7 +1292,7 @@ Any ActivityImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
   	switch(operationID)
 	{
 		
-		// 901
+		// 902
 		case umlPackage::ACTIVITY_OPERATION_MAXIMUM_ONE_PARAMETER_NODE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -1309,7 +1309,7 @@ Any ActivityImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shar
 			break;
 		}
 		
-		// 902
+		// 903
 		case umlPackage::ACTIVITY_OPERATION_MAXIMUM_TWO_PARAMETER_NODES_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

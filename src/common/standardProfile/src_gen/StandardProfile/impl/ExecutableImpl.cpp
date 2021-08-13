@@ -97,6 +97,12 @@ ExecutableImpl& ExecutableImpl::operator=(const ExecutableImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Executable "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Artifact = obj.getBase_Artifact();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -128,11 +134,18 @@ void ExecutableImpl::destroy()
 void ExecutableImpl::setBase_Artifact(std::weak_ptr<uml::Artifact> _base_Artifact)
 {
 	m_base_Artifact = _base_Artifact;
+	
 }
 std::weak_ptr<uml::Artifact> ExecutableImpl::getBase_Artifact() const 
 {
 	return m_base_Artifact;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

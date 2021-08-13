@@ -116,6 +116,9 @@ namespace uml
 			
 			virtual std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> getNestedClassifier() const ;
 			
+			
+			virtual std::shared_ptr<Subset<uml::Property, uml::Property,uml::NamedElement,uml::ConnectableElement>> getClass_OwnedAttribute() const ;
+			
 			/*!
 			The Operations owned by the Class.
 			<p>From package UML::StructuredClassifiers.</p>

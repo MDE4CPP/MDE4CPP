@@ -265,7 +265,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkEndCreationDataObject::
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_LinkEndCreationDataValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_LinkEndCreationDataValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -283,7 +283,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkEndCreationDataObject::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_LinkEndCreationDataValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_LinkEndCreationDataValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -337,7 +337,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkEndCreationDataObject::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkEndData_qualifier())
 	{
-		std::shared_ptr<Bag<uml::QualifierValue>> qualifierList = m_LinkEndCreationDataValue->getQualifier();
+		std::shared_ptr<Subset<uml::QualifierValue, uml::Element>> qualifierList = m_LinkEndCreationDataValue->getQualifier();
 		Bag<uml::QualifierValue>::iterator iter = qualifierList->begin();
 		Bag<uml::QualifierValue>::iterator end = qualifierList->end();
 		while (iter != end)

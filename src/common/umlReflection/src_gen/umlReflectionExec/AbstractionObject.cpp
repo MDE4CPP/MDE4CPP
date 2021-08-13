@@ -328,7 +328,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> AbstractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Dependency_client())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> clientList = m_AbstractionValue->getClient();
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> clientList = m_AbstractionValue->getClient();
 		Bag<uml::NamedElement>::iterator iter = clientList->begin();
 		Bag<uml::NamedElement>::iterator end = clientList->end();
 		while (iter != end)
@@ -345,7 +345,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> AbstractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Dependency_supplier())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> supplierList = m_AbstractionValue->getSupplier();
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> supplierList = m_AbstractionValue->getSupplier();
 		Bag<uml::NamedElement>::iterator iter = supplierList->begin();
 		Bag<uml::NamedElement>::iterator end = supplierList->end();
 		while (iter != end)
@@ -362,7 +362,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> AbstractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DirectedRelationship_source())
 	{
-		std::shared_ptr<Bag<uml::Element>> sourceList = m_AbstractionValue->getSource();
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> sourceList = m_AbstractionValue->getSource();
 		Bag<uml::Element>::iterator iter = sourceList->begin();
 		Bag<uml::Element>::iterator end = sourceList->end();
 		while (iter != end)
@@ -379,7 +379,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> AbstractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DirectedRelationship_target())
 	{
-		std::shared_ptr<Bag<uml::Element>> targetList = m_AbstractionValue->getTarget();
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> targetList = m_AbstractionValue->getTarget();
 		Bag<uml::Element>::iterator iter = targetList->begin();
 		Bag<uml::Element>::iterator end = targetList->end();
 		while (iter != end)
@@ -396,7 +396,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> AbstractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_AbstractionValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_AbstractionValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -414,7 +414,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> AbstractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_AbstractionValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_AbstractionValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -556,7 +556,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> AbstractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Relationship_relatedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> relatedElementList = m_AbstractionValue->getRelatedElement();
+		std::shared_ptr<Union<uml::Element>> relatedElementList = m_AbstractionValue->getRelatedElement();
 		Bag<uml::Element>::iterator iter = relatedElementList->begin();
 		Bag<uml::Element>::iterator end = relatedElementList->end();
 		while (iter != end)

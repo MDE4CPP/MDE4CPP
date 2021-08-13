@@ -104,6 +104,13 @@ CreateImpl& CreateImpl::operator=(const CreateImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Create "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_BehavioralFeature = obj.getBase_BehavioralFeature();
+	m_base_Usage = obj.getBase_Usage();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -138,6 +145,7 @@ void CreateImpl::destroy()
 void CreateImpl::setBase_BehavioralFeature(std::weak_ptr<uml::BehavioralFeature> _base_BehavioralFeature)
 {
 	m_base_BehavioralFeature = _base_BehavioralFeature;
+	
 }
 std::weak_ptr<uml::BehavioralFeature> CreateImpl::getBase_BehavioralFeature() const 
 {
@@ -147,11 +155,18 @@ std::weak_ptr<uml::BehavioralFeature> CreateImpl::getBase_BehavioralFeature() co
 void CreateImpl::setBase_Usage(std::weak_ptr<uml::Usage> _base_Usage)
 {
 	m_base_Usage = _base_Usage;
+	
 }
 std::weak_ptr<uml::Usage> CreateImpl::getBase_Usage() const 
 {
 	return m_base_Usage;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

@@ -32,8 +32,10 @@ namespace UML4CPPProfile
 			//getter for the ownedMember
 			virtual std::shared_ptr<uml::ExtensionEnd> get_ExtensionEnd_extension_DoNotGenerate_UML4CPPProfile_DoNotGenerate();  
 			virtual std::shared_ptr<uml::ExtensionEnd> get_ExtensionEnd_extension_ExternalLibrary_UML4CPPProfile_ExternalLibrary();  
+			virtual std::shared_ptr<uml::ExtensionEnd> get_ExtensionEnd_extension_GetterName_UML4CPPProfile_GetterName();  
 			virtual std::shared_ptr<uml::ExtensionEnd> get_ExtensionEnd_extension_MainBehavior_UML4CPPProfile_MainBehavior();  
 			virtual std::shared_ptr<uml::ExtensionEnd> get_ExtensionEnd_extension_NonExecutable_UML4CPPProfile_NonExecutable();  
+			virtual std::shared_ptr<uml::ExtensionEnd> get_ExtensionEnd_extension_SetterName_UML4CPPProfile_SetterName();  
 			virtual std::shared_ptr<uml::ExtensionEnd> get_ExtensionEnd_extension_Singleton_UML4CPPProfile_Singleton();  
 			virtual std::shared_ptr<uml::ExtensionEnd> get_ExtensionEnd_extension_UML4CPPPackage_UML4CPPProfile_UML4CPPPackage();  
 			virtual std::shared_ptr<uml::Extension> get_UML4CPPProfile_Behavior_MainBehavior();  
@@ -46,6 +48,9 @@ namespace UML4CPPProfile
 			virtual std::shared_ptr<uml::Property> get_UML4CPPProfile_ExternalLibrary_includePath();  
 			virtual std::shared_ptr<uml::Property> get_UML4CPPProfile_ExternalLibrary_libraryName();  
 			virtual std::shared_ptr<uml::Property> get_UML4CPPProfile_ExternalLibrary_libraryPath();  
+			virtual std::shared_ptr<uml::Stereotype> get_UML4CPPProfile_GetterName();  
+			virtual std::shared_ptr<uml::Property> get_UML4CPPProfile_GetterName_base_Property();  
+			virtual std::shared_ptr<uml::Property> get_UML4CPPProfile_GetterName_getterName();  
 			virtual std::shared_ptr<uml::Stereotype> get_UML4CPPProfile_MainBehavior();  
 			virtual std::shared_ptr<uml::Property> get_UML4CPPProfile_MainBehavior_base_Behavior();  
 			virtual std::shared_ptr<uml::Extension> get_UML4CPPProfile_NamedElement_NonExecutable();  
@@ -53,6 +58,11 @@ namespace UML4CPPProfile
 			virtual std::shared_ptr<uml::Property> get_UML4CPPProfile_NonExecutable_base_NamedElement();  
 			virtual std::shared_ptr<uml::Extension> get_UML4CPPProfile_Package_ExternalLibrary();  
 			virtual std::shared_ptr<uml::Extension> get_UML4CPPProfile_Package_UML4CPPPackage();  
+			virtual std::shared_ptr<uml::Extension> get_UML4CPPProfile_Property_GetterName();  
+			virtual std::shared_ptr<uml::Extension> get_UML4CPPProfile_Property_SetterName();  
+			virtual std::shared_ptr<uml::Stereotype> get_UML4CPPProfile_SetterName();  
+			virtual std::shared_ptr<uml::Property> get_UML4CPPProfile_SetterName_base_Property();  
+			virtual std::shared_ptr<uml::Property> get_UML4CPPProfile_SetterName_setterName();  
 			virtual std::shared_ptr<uml::Stereotype> get_UML4CPPProfile_Singleton();  
 			virtual std::shared_ptr<uml::Property> get_UML4CPPProfile_Singleton_base_Class();  
 			virtual std::shared_ptr<uml::Stereotype> get_UML4CPPProfile_UML4CPPPackage();  
@@ -69,8 +79,10 @@ namespace UML4CPPProfile
 			//private variables for ownedMember of the metamodel package
 			std::shared_ptr<uml::ExtensionEnd> extensionEnd_extension_DoNotGenerate_UML4CPPProfile_DoNotGenerate = nullptr;
 			std::shared_ptr<uml::ExtensionEnd> extensionEnd_extension_ExternalLibrary_UML4CPPProfile_ExternalLibrary = nullptr;
+			std::shared_ptr<uml::ExtensionEnd> extensionEnd_extension_GetterName_UML4CPPProfile_GetterName = nullptr;
 			std::shared_ptr<uml::ExtensionEnd> extensionEnd_extension_MainBehavior_UML4CPPProfile_MainBehavior = nullptr;
 			std::shared_ptr<uml::ExtensionEnd> extensionEnd_extension_NonExecutable_UML4CPPProfile_NonExecutable = nullptr;
+			std::shared_ptr<uml::ExtensionEnd> extensionEnd_extension_SetterName_UML4CPPProfile_SetterName = nullptr;
 			std::shared_ptr<uml::ExtensionEnd> extensionEnd_extension_Singleton_UML4CPPProfile_Singleton = nullptr;
 			std::shared_ptr<uml::ExtensionEnd> extensionEnd_extension_UML4CPPPackage_UML4CPPProfile_UML4CPPPackage = nullptr;
 			std::shared_ptr<uml::Extension> uML4CPPProfile_Behavior_MainBehavior = nullptr;
@@ -83,6 +95,9 @@ namespace UML4CPPProfile
 			std::shared_ptr<uml::Property> uML4CPPProfile_ExternalLibrary_includePath = nullptr;
 			std::shared_ptr<uml::Property> uML4CPPProfile_ExternalLibrary_libraryName = nullptr;
 			std::shared_ptr<uml::Property> uML4CPPProfile_ExternalLibrary_libraryPath = nullptr;
+			std::shared_ptr<uml::Stereotype> uML4CPPProfile_GetterName = nullptr;
+			std::shared_ptr<uml::Property> uML4CPPProfile_GetterName_base_Property = nullptr;
+			std::shared_ptr<uml::Property> uML4CPPProfile_GetterName_getterName = nullptr;
 			std::shared_ptr<uml::Stereotype> uML4CPPProfile_MainBehavior = nullptr;
 			std::shared_ptr<uml::Property> uML4CPPProfile_MainBehavior_base_Behavior = nullptr;
 			std::shared_ptr<uml::Extension> uML4CPPProfile_NamedElement_NonExecutable = nullptr;
@@ -90,6 +105,11 @@ namespace UML4CPPProfile
 			std::shared_ptr<uml::Property> uML4CPPProfile_NonExecutable_base_NamedElement = nullptr;
 			std::shared_ptr<uml::Extension> uML4CPPProfile_Package_ExternalLibrary = nullptr;
 			std::shared_ptr<uml::Extension> uML4CPPProfile_Package_UML4CPPPackage = nullptr;
+			std::shared_ptr<uml::Extension> uML4CPPProfile_Property_GetterName = nullptr;
+			std::shared_ptr<uml::Extension> uML4CPPProfile_Property_SetterName = nullptr;
+			std::shared_ptr<uml::Stereotype> uML4CPPProfile_SetterName = nullptr;
+			std::shared_ptr<uml::Property> uML4CPPProfile_SetterName_base_Property = nullptr;
+			std::shared_ptr<uml::Property> uML4CPPProfile_SetterName_setterName = nullptr;
 			std::shared_ptr<uml::Stereotype> uML4CPPProfile_Singleton = nullptr;
 			std::shared_ptr<uml::Property> uML4CPPProfile_Singleton_base_Class = nullptr;
 			std::shared_ptr<uml::Stereotype> uML4CPPProfile_UML4CPPPackage = nullptr;

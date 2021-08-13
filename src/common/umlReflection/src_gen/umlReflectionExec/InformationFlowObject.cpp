@@ -412,7 +412,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InformationFlowObject::getV
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DirectedRelationship_source())
 	{
-		std::shared_ptr<Bag<uml::Element>> sourceList = m_InformationFlowValue->getSource();
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> sourceList = m_InformationFlowValue->getSource();
 		Bag<uml::Element>::iterator iter = sourceList->begin();
 		Bag<uml::Element>::iterator end = sourceList->end();
 		while (iter != end)
@@ -429,7 +429,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InformationFlowObject::getV
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DirectedRelationship_target())
 	{
-		std::shared_ptr<Bag<uml::Element>> targetList = m_InformationFlowValue->getTarget();
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> targetList = m_InformationFlowValue->getTarget();
 		Bag<uml::Element>::iterator iter = targetList->begin();
 		Bag<uml::Element>::iterator end = targetList->end();
 		while (iter != end)
@@ -446,7 +446,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InformationFlowObject::getV
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_InformationFlowValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_InformationFlowValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -464,7 +464,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InformationFlowObject::getV
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_InformationFlowValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_InformationFlowValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -509,7 +509,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InformationFlowObject::getV
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InformationFlow_informationSource())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> informationSourceList = m_InformationFlowValue->getInformationSource();
+		std::shared_ptr<Subset<uml::NamedElement, uml::Element>> informationSourceList = m_InformationFlowValue->getInformationSource();
 		Bag<uml::NamedElement>::iterator iter = informationSourceList->begin();
 		Bag<uml::NamedElement>::iterator end = informationSourceList->end();
 		while (iter != end)
@@ -526,7 +526,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InformationFlowObject::getV
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InformationFlow_informationTarget())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> informationTargetList = m_InformationFlowValue->getInformationTarget();
+		std::shared_ptr<Subset<uml::NamedElement, uml::Element>> informationTargetList = m_InformationFlowValue->getInformationTarget();
 		Bag<uml::NamedElement>::iterator iter = informationTargetList->begin();
 		Bag<uml::NamedElement>::iterator end = informationTargetList->end();
 		while (iter != end)
@@ -725,7 +725,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InformationFlowObject::getV
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Relationship_relatedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> relatedElementList = m_InformationFlowValue->getRelatedElement();
+		std::shared_ptr<Union<uml::Element>> relatedElementList = m_InformationFlowValue->getRelatedElement();
 		Bag<uml::Element>::iterator iter = relatedElementList->begin();
 		Bag<uml::Element>::iterator end = relatedElementList->end();
 		while (iter != end)

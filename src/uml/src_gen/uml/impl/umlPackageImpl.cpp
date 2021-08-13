@@ -1110,6 +1110,10 @@ std::shared_ptr<ecore::EReference> umlPackageImpl::getClass_Attribute_nestedClas
 {
 	return m_class_Attribute_nestedClassifier;
 }
+std::shared_ptr<ecore::EReference> umlPackageImpl::getClass_Attribute_ownedAttribute() const
+{
+	return m_class_Attribute_ownedAttribute;
+}
 std::shared_ptr<ecore::EReference> umlPackageImpl::getClass_Attribute_ownedOperation() const
 {
 	return m_class_Attribute_ownedOperation;

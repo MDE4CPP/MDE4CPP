@@ -97,6 +97,12 @@ TypeImpl& TypeImpl::operator=(const TypeImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Type "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Class = obj.getBase_Class();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void TypeImpl::destroy()
 void TypeImpl::setBase_Class(std::weak_ptr<uml::Class> _base_Class)
 {
 	m_base_Class = _base_Class;
+	
 }
 std::weak_ptr<uml::Class> TypeImpl::getBase_Class() const 
 {
 	return m_base_Class;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

@@ -491,7 +491,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Action_input())
 	{
-		std::shared_ptr<Bag<uml::InputPin>> inputList = m_LinkActionValue->getInput();
+		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> inputList = m_LinkActionValue->getInput();
 		Bag<uml::InputPin>::iterator iter = inputList->begin();
 		Bag<uml::InputPin>::iterator end = inputList->end();
 		while (iter != end)
@@ -515,7 +515,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Action_localPostcondition())
 	{
-		std::shared_ptr<Bag<uml::Constraint>> localPostconditionList = m_LinkActionValue->getLocalPostcondition();
+		std::shared_ptr<Subset<uml::Constraint, uml::Element>> localPostconditionList = m_LinkActionValue->getLocalPostcondition();
 		Bag<uml::Constraint>::iterator iter = localPostconditionList->begin();
 		Bag<uml::Constraint>::iterator end = localPostconditionList->end();
 		while (iter != end)
@@ -533,7 +533,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Action_localPrecondition())
 	{
-		std::shared_ptr<Bag<uml::Constraint>> localPreconditionList = m_LinkActionValue->getLocalPrecondition();
+		std::shared_ptr<Subset<uml::Constraint, uml::Element>> localPreconditionList = m_LinkActionValue->getLocalPrecondition();
 		Bag<uml::Constraint>::iterator iter = localPreconditionList->begin();
 		Bag<uml::Constraint>::iterator end = localPreconditionList->end();
 		while (iter != end)
@@ -551,7 +551,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Action_output())
 	{
-		std::shared_ptr<Bag<uml::OutputPin>> outputList = m_LinkActionValue->getOutput();
+		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> outputList = m_LinkActionValue->getOutput();
 		Bag<uml::OutputPin>::iterator iter = outputList->begin();
 		Bag<uml::OutputPin>::iterator end = outputList->end();
 		while (iter != end)
@@ -579,7 +579,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inGroup())
 	{
-		std::shared_ptr<Bag<uml::ActivityGroup>> inGroupList = m_LinkActionValue->getInGroup();
+		std::shared_ptr<Union<uml::ActivityGroup>> inGroupList = m_LinkActionValue->getInGroup();
 		Bag<uml::ActivityGroup>::iterator iter = inGroupList->begin();
 		Bag<uml::ActivityGroup>::iterator end = inGroupList->end();
 		while (iter != end)
@@ -596,7 +596,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
 	{
-		std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> inInterruptibleRegionList = m_LinkActionValue->getInInterruptibleRegion();
+		std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> inInterruptibleRegionList = m_LinkActionValue->getInInterruptibleRegion();
 		Bag<uml::InterruptibleActivityRegion>::iterator iter = inInterruptibleRegionList->begin();
 		Bag<uml::InterruptibleActivityRegion>::iterator end = inInterruptibleRegionList->end();
 		while (iter != end)
@@ -613,7 +613,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inPartition())
 	{
-		std::shared_ptr<Bag<uml::ActivityPartition>> inPartitionList = m_LinkActionValue->getInPartition();
+		std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> inPartitionList = m_LinkActionValue->getInPartition();
 		Bag<uml::ActivityPartition>::iterator iter = inPartitionList->begin();
 		Bag<uml::ActivityPartition>::iterator end = inPartitionList->end();
 		while (iter != end)
@@ -674,7 +674,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_redefinedNode())
 	{
-		std::shared_ptr<Bag<uml::ActivityNode>> redefinedNodeList = m_LinkActionValue->getRedefinedNode();
+		std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> redefinedNodeList = m_LinkActionValue->getRedefinedNode();
 		Bag<uml::ActivityNode>::iterator iter = redefinedNodeList->begin();
 		Bag<uml::ActivityNode>::iterator end = redefinedNodeList->end();
 		while (iter != end)
@@ -691,7 +691,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_LinkActionValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_LinkActionValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -709,7 +709,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_LinkActionValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_LinkActionValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -737,7 +737,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExecutableNode_handler())
 	{
-		std::shared_ptr<Bag<uml::ExceptionHandler>> handlerList = m_LinkActionValue->getHandler();
+		std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> handlerList = m_LinkActionValue->getHandler();
 		Bag<uml::ExceptionHandler>::iterator iter = handlerList->begin();
 		Bag<uml::ExceptionHandler>::iterator end = handlerList->end();
 		while (iter != end)
@@ -755,7 +755,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkAction_endData())
 	{
-		std::shared_ptr<Bag<uml::LinkEndData>> endDataList = m_LinkActionValue->getEndData();
+		std::shared_ptr<Subset<uml::LinkEndData, uml::Element>> endDataList = m_LinkActionValue->getEndData();
 		Bag<uml::LinkEndData>::iterator iter = endDataList->begin();
 		Bag<uml::LinkEndData>::iterator end = endDataList->end();
 		while (iter != end)
@@ -773,7 +773,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LinkAction_inputValue())
 	{
-		std::shared_ptr<Bag<uml::InputPin>> inputValueList = m_LinkActionValue->getInputValue();
+		std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> inputValueList = m_LinkActionValue->getInputValue();
 		Bag<uml::InputPin>::iterator iter = inputValueList->begin();
 		Bag<uml::InputPin>::iterator end = inputValueList->end();
 		while (iter != end)
@@ -869,7 +869,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement())
 	{
-		std::shared_ptr<Bag<uml::RedefinableElement>> redefinedElementList = m_LinkActionValue->getRedefinedElement();
+		std::shared_ptr<Union<uml::RedefinableElement>> redefinedElementList = m_LinkActionValue->getRedefinedElement();
 		Bag<uml::RedefinableElement>::iterator iter = redefinedElementList->begin();
 		Bag<uml::RedefinableElement>::iterator end = redefinedElementList->end();
 		while (iter != end)
@@ -886,7 +886,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LinkActionObject::getValues
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_LinkActionValue->getRedefinitionContext();
+		std::shared_ptr<Union<uml::Classifier>> redefinitionContextList = m_LinkActionValue->getRedefinitionContext();
 		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
 		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
 		while (iter != end)

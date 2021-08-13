@@ -109,9 +109,15 @@ ExternalLibraryImpl& ExternalLibraryImpl::operator=(const ExternalLibraryImpl & 
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ExternalLibrary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Package = obj.getBase_Package();
 	m_includePath = obj.getIncludePath();
 	m_libraryName = obj.getLibraryName();
 	m_libraryPath = obj.getLibraryPath();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -148,6 +154,7 @@ void ExternalLibraryImpl::destroy()
 void ExternalLibraryImpl::setBase_Package(std::weak_ptr<uml::Package> _base_Package)
 {
 	m_base_Package = _base_Package;
+	
 }
 std::weak_ptr<uml::Package> ExternalLibraryImpl::getBase_Package() const 
 {
@@ -157,6 +164,7 @@ std::weak_ptr<uml::Package> ExternalLibraryImpl::getBase_Package() const
 void ExternalLibraryImpl::setIncludePath(std::string _includePath)
 {
 	m_includePath = _includePath;
+	
 }
 std::string ExternalLibraryImpl::getIncludePath() const 
 {
@@ -166,6 +174,7 @@ std::string ExternalLibraryImpl::getIncludePath() const
 void ExternalLibraryImpl::setLibraryName(std::string _libraryName)
 {
 	m_libraryName = _libraryName;
+	
 }
 std::string ExternalLibraryImpl::getLibraryName() const 
 {
@@ -175,11 +184,18 @@ std::string ExternalLibraryImpl::getLibraryName() const
 void ExternalLibraryImpl::setLibraryPath(std::string _libraryPath)
 {
 	m_libraryPath = _libraryPath;
+	
 }
 std::string ExternalLibraryImpl::getLibraryPath() const 
 {
 	return m_libraryPath;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

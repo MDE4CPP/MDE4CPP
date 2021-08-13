@@ -97,6 +97,12 @@ SystemModelImpl& SystemModelImpl::operator=(const SystemModelImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy SystemModel "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Model = obj.getBase_Model();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void SystemModelImpl::destroy()
 void SystemModelImpl::setBase_Model(std::weak_ptr<uml::Model> _base_Model)
 {
 	m_base_Model = _base_Model;
+	
 }
 std::weak_ptr<uml::Model> SystemModelImpl::getBase_Model() const 
 {
 	return m_base_Model;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

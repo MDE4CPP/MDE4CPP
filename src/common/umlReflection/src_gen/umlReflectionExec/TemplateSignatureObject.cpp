@@ -264,7 +264,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> TemplateSignatureObject::ge
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_TemplateSignatureValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_TemplateSignatureValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -282,7 +282,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> TemplateSignatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_TemplateSignatureValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_TemplateSignatureValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -310,7 +310,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> TemplateSignatureObject::ge
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateSignature_ownedParameter())
 	{
-		std::shared_ptr<Bag<uml::TemplateParameter>> ownedParameterList = m_TemplateSignatureValue->getOwnedParameter();
+		std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter /*Subset does not reference a union*/>> ownedParameterList = m_TemplateSignatureValue->getOwnedParameter();
 		Bag<uml::TemplateParameter>::iterator iter = ownedParameterList->begin();
 		Bag<uml::TemplateParameter>::iterator end = ownedParameterList->end();
 		while (iter != end)

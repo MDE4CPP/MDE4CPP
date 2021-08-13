@@ -4837,6 +4837,31 @@ void umlPackageImpl::initializeClassContent()
 			//undefined otherEnd
 			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
+	m_class_Attribute_ownedAttribute->setName("ownedAttribute");
+	m_class_Attribute_ownedAttribute->setEType(getProperty_Class());
+	m_class_Attribute_ownedAttribute->setLowerBound(0);
+	m_class_Attribute_ownedAttribute->setUpperBound(-1);
+	m_class_Attribute_ownedAttribute->setTransient(false);
+	m_class_Attribute_ownedAttribute->setVolatile(false);
+	m_class_Attribute_ownedAttribute->setChangeable(true);
+	m_class_Attribute_ownedAttribute->setUnsettable(false);
+	m_class_Attribute_ownedAttribute->setUnique(true);
+	m_class_Attribute_ownedAttribute->setDerived(false);
+	m_class_Attribute_ownedAttribute->setOrdered(true);
+	m_class_Attribute_ownedAttribute->setContainment(true);
+	m_class_Attribute_ownedAttribute->setResolveProxies(true);
+	{
+		std::string defaultValue = "";
+		if (!defaultValue.empty())
+		{
+			m_class_Attribute_ownedAttribute->setDefaultValueLiteral(defaultValue);
+		}				
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::umlPackage::eInstance()->getProperty_Attribute_class();
+		if (otherEnd != nullptr)
+	    {
+	   		m_class_Attribute_ownedAttribute->setEOpposite(otherEnd);
+	    }
+	}
 	m_class_Attribute_ownedOperation->setName("ownedOperation");
 	m_class_Attribute_ownedOperation->setEType(getOperation_Class());
 	m_class_Attribute_ownedOperation->setLowerBound(0);
@@ -23114,7 +23139,7 @@ void umlPackageImpl::initializePropertyContent()
 		{
 			m_property_Attribute_class->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = uml::umlPackage::eInstance()->getStructuredClassifier_Attribute_ownedAttribute();
+		std::shared_ptr<ecore::EReference>  otherEnd = uml::umlPackage::eInstance()->getClass_Attribute_ownedAttribute();
 		if (otherEnd != nullptr)
 	    {
 	   		m_property_Attribute_class->setEOpposite(otherEnd);
@@ -29670,11 +29695,8 @@ void umlPackageImpl::initializeStructuredClassifierContent()
 		{
 			m_structuredClassifier_Attribute_ownedAttribute->setDefaultValueLiteral(defaultValue);
 		}				
-		std::shared_ptr<ecore::EReference>  otherEnd = uml::umlPackage::eInstance()->getProperty_Attribute_class();
-		if (otherEnd != nullptr)
-	    {
-	   		m_structuredClassifier_Attribute_ownedAttribute->setEOpposite(otherEnd);
-	    }
+			//undefined otherEnd
+			std::shared_ptr<ecore::EReference>  otherEnd = nullptr; 
 	}
 	m_structuredClassifier_Attribute_ownedConnector->setName("ownedConnector");
 	m_structuredClassifier_Attribute_ownedConnector->setEType(getConnector_Class());

@@ -719,7 +719,7 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11967			
+			return eAny(tempList); //11968			
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
 		{
@@ -731,7 +731,7 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11968			
+			return eAny(tempList); //11969			
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
 		{
@@ -743,7 +743,7 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11966			
+			return eAny(tempList); //11967			
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
 		{
@@ -755,7 +755,7 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11965			
+			return eAny(tempList); //11966			
 		}
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
 		{
@@ -767,7 +767,7 @@ Any InteractionImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //11969			
+			return eAny(tempList); //11970			
 		}
 	}
 	Any result;
@@ -784,15 +784,15 @@ bool InteractionImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_ACTION:
-			return getAction() != nullptr; //11967
+			return getAction() != nullptr; //11968
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FORMALGATE:
-			return getFormalGate() != nullptr; //11968
+			return getFormalGate() != nullptr; //11969
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_FRAGMENT:
-			return getFragment() != nullptr; //11966
+			return getFragment() != nullptr; //11967
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_LIFELINE:
-			return getLifeline() != nullptr; //11965
+			return getLifeline() != nullptr; //11966
 		case uml::umlPackage::INTERACTION_ATTRIBUTE_MESSAGE:
-			return getMessage() != nullptr; //11969
+			return getMessage() != nullptr; //11970
 	}
 	bool result = false;
 	result = BehaviorImpl::internalEIsSet(featureID);
@@ -1009,7 +1009,7 @@ Any InteractionImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::s
   	switch(operationID)
 	{
 		
-		// 12100
+		// 12101
 		case umlPackage::INTERACTION_OPERATION_NOT_CONTAINED_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

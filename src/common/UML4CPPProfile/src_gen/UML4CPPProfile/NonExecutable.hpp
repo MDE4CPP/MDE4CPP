@@ -52,6 +52,12 @@ namespace UML4CPPProfile
 			std::weak_ptr<uml::NamedElement> m_base_NamedElement;
 			
 			
+
+		public:
+			//*********************************
+			// Union Getter
+			//*********************************
+			
 	};
 }
 #endif /* end of include guard: UML4CPPPROFILE_NONEXECUTABLE__HPP */

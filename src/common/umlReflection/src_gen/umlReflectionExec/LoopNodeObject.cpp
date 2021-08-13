@@ -798,7 +798,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Action_input())
 	{
-		std::shared_ptr<Bag<uml::InputPin>> inputList = m_LoopNodeValue->getInput();
+		std::shared_ptr<SubsetUnion<uml::InputPin, uml::Element>> inputList = m_LoopNodeValue->getInput();
 		Bag<uml::InputPin>::iterator iter = inputList->begin();
 		Bag<uml::InputPin>::iterator end = inputList->end();
 		while (iter != end)
@@ -822,7 +822,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Action_localPostcondition())
 	{
-		std::shared_ptr<Bag<uml::Constraint>> localPostconditionList = m_LoopNodeValue->getLocalPostcondition();
+		std::shared_ptr<Subset<uml::Constraint, uml::Element>> localPostconditionList = m_LoopNodeValue->getLocalPostcondition();
 		Bag<uml::Constraint>::iterator iter = localPostconditionList->begin();
 		Bag<uml::Constraint>::iterator end = localPostconditionList->end();
 		while (iter != end)
@@ -840,7 +840,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Action_localPrecondition())
 	{
-		std::shared_ptr<Bag<uml::Constraint>> localPreconditionList = m_LoopNodeValue->getLocalPrecondition();
+		std::shared_ptr<Subset<uml::Constraint, uml::Element>> localPreconditionList = m_LoopNodeValue->getLocalPrecondition();
 		Bag<uml::Constraint>::iterator iter = localPreconditionList->begin();
 		Bag<uml::Constraint>::iterator end = localPreconditionList->end();
 		while (iter != end)
@@ -858,7 +858,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Action_output())
 	{
-		std::shared_ptr<Bag<uml::OutputPin>> outputList = m_LoopNodeValue->getOutput();
+		std::shared_ptr<SubsetUnion<uml::OutputPin, uml::Element>> outputList = m_LoopNodeValue->getOutput();
 		Bag<uml::OutputPin>::iterator iter = outputList->begin();
 		Bag<uml::OutputPin>::iterator end = outputList->end();
 		while (iter != end)
@@ -876,7 +876,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_containedEdge())
 	{
-		std::shared_ptr<Bag<uml::ActivityEdge>> containedEdgeList = m_LoopNodeValue->getContainedEdge();
+		std::shared_ptr<Union<uml::ActivityEdge>> containedEdgeList = m_LoopNodeValue->getContainedEdge();
 		Bag<uml::ActivityEdge>::iterator iter = containedEdgeList->begin();
 		Bag<uml::ActivityEdge>::iterator end = containedEdgeList->end();
 		while (iter != end)
@@ -893,7 +893,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_containedNode())
 	{
-		std::shared_ptr<Bag<uml::ActivityNode>> containedNodeList = m_LoopNodeValue->getContainedNode();
+		std::shared_ptr<Union<uml::ActivityNode>> containedNodeList = m_LoopNodeValue->getContainedNode();
 		Bag<uml::ActivityNode>::iterator iter = containedNodeList->begin();
 		Bag<uml::ActivityNode>::iterator end = containedNodeList->end();
 		while (iter != end)
@@ -920,7 +920,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityGroup_subgroup())
 	{
-		std::shared_ptr<Bag<uml::ActivityGroup>> subgroupList = m_LoopNodeValue->getSubgroup();
+		std::shared_ptr<SubsetUnion<uml::ActivityGroup, uml::Element>> subgroupList = m_LoopNodeValue->getSubgroup();
 		Bag<uml::ActivityGroup>::iterator iter = subgroupList->begin();
 		Bag<uml::ActivityGroup>::iterator end = subgroupList->end();
 		while (iter != end)
@@ -958,7 +958,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inGroup())
 	{
-		std::shared_ptr<Bag<uml::ActivityGroup>> inGroupList = m_LoopNodeValue->getInGroup();
+		std::shared_ptr<Union<uml::ActivityGroup>> inGroupList = m_LoopNodeValue->getInGroup();
 		Bag<uml::ActivityGroup>::iterator iter = inGroupList->begin();
 		Bag<uml::ActivityGroup>::iterator end = inGroupList->end();
 		while (iter != end)
@@ -975,7 +975,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inInterruptibleRegion())
 	{
-		std::shared_ptr<Bag<uml::InterruptibleActivityRegion>> inInterruptibleRegionList = m_LoopNodeValue->getInInterruptibleRegion();
+		std::shared_ptr<Subset<uml::InterruptibleActivityRegion, uml::ActivityGroup>> inInterruptibleRegionList = m_LoopNodeValue->getInInterruptibleRegion();
 		Bag<uml::InterruptibleActivityRegion>::iterator iter = inInterruptibleRegionList->begin();
 		Bag<uml::InterruptibleActivityRegion>::iterator end = inInterruptibleRegionList->end();
 		while (iter != end)
@@ -992,7 +992,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_inPartition())
 	{
-		std::shared_ptr<Bag<uml::ActivityPartition>> inPartitionList = m_LoopNodeValue->getInPartition();
+		std::shared_ptr<Subset<uml::ActivityPartition, uml::ActivityGroup>> inPartitionList = m_LoopNodeValue->getInPartition();
 		Bag<uml::ActivityPartition>::iterator iter = inPartitionList->begin();
 		Bag<uml::ActivityPartition>::iterator end = inPartitionList->end();
 		while (iter != end)
@@ -1053,7 +1053,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ActivityNode_redefinedNode())
 	{
-		std::shared_ptr<Bag<uml::ActivityNode>> redefinedNodeList = m_LoopNodeValue->getRedefinedNode();
+		std::shared_ptr<Subset<uml::ActivityNode, uml::RedefinableElement>> redefinedNodeList = m_LoopNodeValue->getRedefinedNode();
 		Bag<uml::ActivityNode>::iterator iter = redefinedNodeList->begin();
 		Bag<uml::ActivityNode>::iterator end = redefinedNodeList->end();
 		while (iter != end)
@@ -1070,7 +1070,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_LoopNodeValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_LoopNodeValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -1088,7 +1088,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_LoopNodeValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_LoopNodeValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -1116,7 +1116,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ExecutableNode_handler())
 	{
-		std::shared_ptr<Bag<uml::ExceptionHandler>> handlerList = m_LoopNodeValue->getHandler();
+		std::shared_ptr<Subset<uml::ExceptionHandler, uml::Element>> handlerList = m_LoopNodeValue->getHandler();
 		Bag<uml::ExceptionHandler>::iterator iter = handlerList->begin();
 		Bag<uml::ExceptionHandler>::iterator end = handlerList->end();
 		while (iter != end)
@@ -1184,7 +1184,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_LoopNode_loopVariable())
 	{
-		std::shared_ptr<Bag<uml::OutputPin>> loopVariableList = m_LoopNodeValue->getLoopVariable();
+		std::shared_ptr<Subset<uml::OutputPin, uml::Element>> loopVariableList = m_LoopNodeValue->getLoopVariable();
 		Bag<uml::OutputPin>::iterator iter = loopVariableList->begin();
 		Bag<uml::OutputPin>::iterator end = loopVariableList->end();
 		while (iter != end)
@@ -1344,7 +1344,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_elementImport())
 	{
-		std::shared_ptr<Bag<uml::ElementImport>> elementImportList = m_LoopNodeValue->getElementImport();
+		std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> elementImportList = m_LoopNodeValue->getElementImport();
 		Bag<uml::ElementImport>::iterator iter = elementImportList->begin();
 		Bag<uml::ElementImport>::iterator end = elementImportList->end();
 		while (iter != end)
@@ -1362,7 +1362,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_importedMember())
 	{
-		std::shared_ptr<Bag<uml::PackageableElement>> importedMemberList = m_LoopNodeValue->getImportedMember();
+		std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> importedMemberList = m_LoopNodeValue->getImportedMember();
 		Bag<uml::PackageableElement>::iterator iter = importedMemberList->begin();
 		Bag<uml::PackageableElement>::iterator end = importedMemberList->end();
 		while (iter != end)
@@ -1379,7 +1379,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_member())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> memberList = m_LoopNodeValue->getMember();
+		std::shared_ptr<Union<uml::NamedElement>> memberList = m_LoopNodeValue->getMember();
 		Bag<uml::NamedElement>::iterator iter = memberList->begin();
 		Bag<uml::NamedElement>::iterator end = memberList->end();
 		while (iter != end)
@@ -1396,7 +1396,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedMember())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> ownedMemberList = m_LoopNodeValue->getOwnedMember();
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ownedMemberList = m_LoopNodeValue->getOwnedMember();
 		Bag<uml::NamedElement>::iterator iter = ownedMemberList->begin();
 		Bag<uml::NamedElement>::iterator end = ownedMemberList->end();
 		while (iter != end)
@@ -1414,7 +1414,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedRule())
 	{
-		std::shared_ptr<Bag<uml::Constraint>> ownedRuleList = m_LoopNodeValue->getOwnedRule();
+		std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> ownedRuleList = m_LoopNodeValue->getOwnedRule();
 		Bag<uml::Constraint>::iterator iter = ownedRuleList->begin();
 		Bag<uml::Constraint>::iterator end = ownedRuleList->end();
 		while (iter != end)
@@ -1432,7 +1432,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_packageImport())
 	{
-		std::shared_ptr<Bag<uml::PackageImport>> packageImportList = m_LoopNodeValue->getPackageImport();
+		std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> packageImportList = m_LoopNodeValue->getPackageImport();
 		Bag<uml::PackageImport>::iterator iter = packageImportList->begin();
 		Bag<uml::PackageImport>::iterator end = packageImportList->end();
 		while (iter != end)
@@ -1456,7 +1456,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement())
 	{
-		std::shared_ptr<Bag<uml::RedefinableElement>> redefinedElementList = m_LoopNodeValue->getRedefinedElement();
+		std::shared_ptr<Union<uml::RedefinableElement>> redefinedElementList = m_LoopNodeValue->getRedefinedElement();
 		Bag<uml::RedefinableElement>::iterator iter = redefinedElementList->begin();
 		Bag<uml::RedefinableElement>::iterator end = redefinedElementList->end();
 		while (iter != end)
@@ -1473,7 +1473,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_LoopNodeValue->getRedefinitionContext();
+		std::shared_ptr<Union<uml::Classifier>> redefinitionContextList = m_LoopNodeValue->getRedefinitionContext();
 		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
 		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
 		while (iter != end)
@@ -1500,7 +1500,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_edge())
 	{
-		std::shared_ptr<Bag<uml::ActivityEdge>> edgeList = m_LoopNodeValue->getEdge();
+		std::shared_ptr<Subset<uml::ActivityEdge, uml::ActivityEdge, uml::Element>> edgeList = m_LoopNodeValue->getEdge();
 		Bag<uml::ActivityEdge>::iterator iter = edgeList->begin();
 		Bag<uml::ActivityEdge>::iterator end = edgeList->end();
 		while (iter != end)
@@ -1524,7 +1524,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_node())
 	{
-		std::shared_ptr<Bag<uml::ActivityNode>> nodeList = m_LoopNodeValue->getNode();
+		std::shared_ptr<Subset<uml::ActivityNode, uml::ActivityNode, uml::Element>> nodeList = m_LoopNodeValue->getNode();
 		Bag<uml::ActivityNode>::iterator iter = nodeList->begin();
 		Bag<uml::ActivityNode>::iterator end = nodeList->end();
 		while (iter != end)
@@ -1542,7 +1542,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_structuredNodeInput())
 	{
-		std::shared_ptr<Bag<uml::InputPin>> structuredNodeInputList = m_LoopNodeValue->getStructuredNodeInput();
+		std::shared_ptr<Subset<uml::InputPin, uml::InputPin>> structuredNodeInputList = m_LoopNodeValue->getStructuredNodeInput();
 		Bag<uml::InputPin>::iterator iter = structuredNodeInputList->begin();
 		Bag<uml::InputPin>::iterator end = structuredNodeInputList->end();
 		while (iter != end)
@@ -1560,7 +1560,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_structuredNodeOutput())
 	{
-		std::shared_ptr<Bag<uml::OutputPin>> structuredNodeOutputList = m_LoopNodeValue->getStructuredNodeOutput();
+		std::shared_ptr<Subset<uml::OutputPin, uml::OutputPin>> structuredNodeOutputList = m_LoopNodeValue->getStructuredNodeOutput();
 		Bag<uml::OutputPin>::iterator iter = structuredNodeOutputList->begin();
 		Bag<uml::OutputPin>::iterator end = structuredNodeOutputList->end();
 		while (iter != end)
@@ -1578,7 +1578,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> LoopNodeObject::getValues(s
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredActivityNode_variable())
 	{
-		std::shared_ptr<Bag<uml::Variable>> variableList = m_LoopNodeValue->getVariable();
+		std::shared_ptr<Subset<uml::Variable, uml::NamedElement>> variableList = m_LoopNodeValue->getVariable();
 		Bag<uml::Variable>::iterator iter = variableList->begin();
 		Bag<uml::Variable>::iterator end = variableList->end();
 		while (iter != end)

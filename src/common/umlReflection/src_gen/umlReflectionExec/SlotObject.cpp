@@ -251,7 +251,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> SlotObject::getValues(std::
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_SlotValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_SlotValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -269,7 +269,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> SlotObject::getValues(std::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_SlotValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_SlotValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -317,7 +317,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> SlotObject::getValues(std::
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Slot_value())
 	{
-		std::shared_ptr<Bag<uml::ValueSpecification>> valueList = m_SlotValue->getValue();
+		std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> valueList = m_SlotValue->getValue();
 		Bag<uml::ValueSpecification>::iterator iter = valueList->begin();
 		Bag<uml::ValueSpecification>::iterator end = valueList->end();
 		while (iter != end)

@@ -52,6 +52,12 @@ namespace UML4CPPProfile
 			std::weak_ptr<uml::Class> m_base_Class;
 			
 			
+
+		public:
+			//*********************************
+			// Union Getter
+			//*********************************
+			
 	};
 }
 #endif /* end of include guard: UML4CPPPROFILE_SINGLETON__HPP */

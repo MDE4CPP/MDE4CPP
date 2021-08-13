@@ -52,6 +52,12 @@ namespace StandardProfile
 			std::weak_ptr<uml::Abstraction> m_base_Abstraction;
 			
 			
+
+		public:
+			//*********************************
+			// Union Getter
+			//*********************************
+			
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_DERIVE__HPP */

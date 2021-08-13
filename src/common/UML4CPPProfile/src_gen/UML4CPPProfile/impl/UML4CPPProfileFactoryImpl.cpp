@@ -6,8 +6,10 @@
 
 #include "UML4CPPProfile/impl/DoNotGenerateImpl.hpp"
 #include "UML4CPPProfile/impl/ExternalLibraryImpl.hpp"
+#include "UML4CPPProfile/impl/GetterNameImpl.hpp"
 #include "UML4CPPProfile/impl/MainBehaviorImpl.hpp"
 #include "UML4CPPProfile/impl/NonExecutableImpl.hpp"
+#include "UML4CPPProfile/impl/SetterNameImpl.hpp"
 #include "UML4CPPProfile/impl/SingletonImpl.hpp"
 #include "UML4CPPProfile/impl/UML4CPPPackageImpl.hpp"
 
@@ -20,8 +22,10 @@ UML4CPPProfileFactoryImpl::UML4CPPProfileFactoryImpl()
 {
 	m_idMap.insert(std::make_pair("UML4CPPProfile::DoNotGenerate", UML4CPPProfilePackage::DONOTGENERATE_CLASS));
 	m_idMap.insert(std::make_pair("UML4CPPProfile::ExternalLibrary", UML4CPPProfilePackage::EXTERNALLIBRARY_CLASS));
+	m_idMap.insert(std::make_pair("UML4CPPProfile::GetterName", UML4CPPProfilePackage::GETTERNAME_CLASS));
 	m_idMap.insert(std::make_pair("UML4CPPProfile::MainBehavior", UML4CPPProfilePackage::MAINBEHAVIOR_CLASS));
 	m_idMap.insert(std::make_pair("UML4CPPProfile::NonExecutable", UML4CPPProfilePackage::NONEXECUTABLE_CLASS));
+	m_idMap.insert(std::make_pair("UML4CPPProfile::SetterName", UML4CPPProfilePackage::SETTERNAME_CLASS));
 	m_idMap.insert(std::make_pair("UML4CPPProfile::Singleton", UML4CPPProfilePackage::SINGLETON_CLASS));
 	m_idMap.insert(std::make_pair("UML4CPPProfile::UML4CPPPackage", UML4CPPProfilePackage::UML4CPPPACKAGE_CLASS));
 }
@@ -52,6 +56,11 @@ std::shared_ptr<uml::Element> UML4CPPProfileFactoryImpl::create(const unsigned i
 				return this->createExternalLibrary(_metaClassId);
 			
 		}
+		case UML4CPPProfilePackage::GETTERNAME_CLASS:
+		{
+				return this->createGetterName(_metaClassId);
+			
+		}
 		case UML4CPPProfilePackage::MAINBEHAVIOR_CLASS:
 		{
 				return this->createMainBehavior(_metaClassId);
@@ -60,6 +69,11 @@ std::shared_ptr<uml::Element> UML4CPPProfileFactoryImpl::create(const unsigned i
 		case UML4CPPProfilePackage::NONEXECUTABLE_CLASS:
 		{
 				return this->createNonExecutable(_metaClassId);
+			
+		}
+		case UML4CPPProfilePackage::SETTERNAME_CLASS:
+		{
+				return this->createSetterName(_metaClassId);
 			
 		}
 		case UML4CPPProfilePackage::SINGLETON_CLASS:
@@ -127,6 +141,19 @@ std::shared_ptr<UML4CPPProfile::ExternalLibrary> UML4CPPProfileFactoryImpl::crea
 
 
 //--------------------------
+//create-Functions for class 'GetterName'
+//--------------------------
+std::shared_ptr<UML4CPPProfile::GetterName> UML4CPPProfileFactoryImpl::createGetterName(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<UML4CPPProfile::GetterNameImpl> element(new GetterNameImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisGetterNamePtr(element);
+	element->instantiate();
+	return element;
+}
+
+
+//--------------------------
 //create-Functions for class 'MainBehavior'
 //--------------------------
 std::shared_ptr<UML4CPPProfile::MainBehavior> UML4CPPProfileFactoryImpl::createMainBehavior(const int metaElementID/*=-1*/) const
@@ -147,6 +174,19 @@ std::shared_ptr<UML4CPPProfile::NonExecutable> UML4CPPProfileFactoryImpl::create
 	std::shared_ptr<UML4CPPProfile::NonExecutableImpl> element(new NonExecutableImpl());
 	element->setMetaElementID(metaElementID);
 	element->setThisNonExecutablePtr(element);
+	element->instantiate();
+	return element;
+}
+
+
+//--------------------------
+//create-Functions for class 'SetterName'
+//--------------------------
+std::shared_ptr<UML4CPPProfile::SetterName> UML4CPPProfileFactoryImpl::createSetterName(const int metaElementID/*=-1*/) const
+{
+	std::shared_ptr<UML4CPPProfile::SetterNameImpl> element(new SetterNameImpl());
+	element->setMetaElementID(metaElementID);
+	element->setThisSetterNamePtr(element);
 	element->instantiate();
 	return element;
 }

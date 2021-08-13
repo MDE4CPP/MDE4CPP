@@ -328,7 +328,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehaviorExecutionSpecificat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_BehaviorExecutionSpecificationValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_BehaviorExecutionSpecificationValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -346,7 +346,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehaviorExecutionSpecificat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_BehaviorExecutionSpecificationValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_BehaviorExecutionSpecificationValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -431,7 +431,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> BehaviorExecutionSpecificat
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_generalOrdering())
 	{
-		std::shared_ptr<Bag<uml::GeneralOrdering>> generalOrderingList = m_BehaviorExecutionSpecificationValue->getGeneralOrdering();
+		std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> generalOrderingList = m_BehaviorExecutionSpecificationValue->getGeneralOrdering();
 		Bag<uml::GeneralOrdering>::iterator iter = generalOrderingList->begin();
 		Bag<uml::GeneralOrdering>::iterator end = generalOrderingList->end();
 		while (iter != end)

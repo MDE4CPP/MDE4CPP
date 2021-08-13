@@ -219,7 +219,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> RelationshipObject::getValu
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_RelationshipValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_RelationshipValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -237,7 +237,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> RelationshipObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_RelationshipValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_RelationshipValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -265,7 +265,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> RelationshipObject::getValu
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Relationship_relatedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> relatedElementList = m_RelationshipValue->getRelatedElement();
+		std::shared_ptr<Union<uml::Element>> relatedElementList = m_RelationshipValue->getRelatedElement();
 		Bag<uml::Element>::iterator iter = relatedElementList->begin();
 		Bag<uml::Element>::iterator end = relatedElementList->end();
 		while (iter != end)

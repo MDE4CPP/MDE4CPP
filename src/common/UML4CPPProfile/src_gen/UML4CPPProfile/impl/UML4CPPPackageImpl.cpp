@@ -109,9 +109,15 @@ UML4CPPPackageImpl& UML4CPPPackageImpl::operator=(const UML4CPPPackageImpl & obj
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy UML4CPPPackage "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Package = obj.getBase_Package();
 	m_eclipseURI = obj.getEclipseURI();
 	m_ignoreNamespace = obj.isIgnoreNamespace();
 	m_packageOnly = obj.isPackageOnly();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -146,6 +152,7 @@ void UML4CPPPackageImpl::destroy()
 void UML4CPPPackageImpl::setBase_Package(std::weak_ptr<uml::Package> _base_Package)
 {
 	m_base_Package = _base_Package;
+	
 }
 std::weak_ptr<uml::Package> UML4CPPPackageImpl::getBase_Package() const 
 {
@@ -155,6 +162,7 @@ std::weak_ptr<uml::Package> UML4CPPPackageImpl::getBase_Package() const
 void UML4CPPPackageImpl::setEclipseURI(std::string _eclipseURI)
 {
 	m_eclipseURI = _eclipseURI;
+	
 }
 std::string UML4CPPPackageImpl::getEclipseURI() const 
 {
@@ -164,6 +172,7 @@ std::string UML4CPPPackageImpl::getEclipseURI() const
 void UML4CPPPackageImpl::setIgnoreNamespace(bool _ignoreNamespace)
 {
 	m_ignoreNamespace = _ignoreNamespace;
+	
 }
 bool UML4CPPPackageImpl::isIgnoreNamespace() const 
 {
@@ -173,11 +182,18 @@ bool UML4CPPPackageImpl::isIgnoreNamespace() const
 void UML4CPPPackageImpl::setPackageOnly(bool _packageOnly)
 {
 	m_packageOnly = _packageOnly;
+	
 }
 bool UML4CPPPackageImpl::isPackageOnly() const 
 {
 	return m_packageOnly;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

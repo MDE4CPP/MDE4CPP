@@ -97,6 +97,12 @@ ScriptImpl& ScriptImpl::operator=(const ScriptImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Script "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Artifact = obj.getBase_Artifact();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -128,11 +134,18 @@ void ScriptImpl::destroy()
 void ScriptImpl::setBase_Artifact(std::weak_ptr<uml::Artifact> _base_Artifact)
 {
 	m_base_Artifact = _base_Artifact;
+	
 }
 std::weak_ptr<uml::Artifact> ScriptImpl::getBase_Artifact() const 
 {
 	return m_base_Artifact;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

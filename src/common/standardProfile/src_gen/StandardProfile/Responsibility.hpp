@@ -52,6 +52,12 @@ namespace StandardProfile
 			std::weak_ptr<uml::Usage> m_base_Usage;
 			
 			
+
+		public:
+			//*********************************
+			// Union Getter
+			//*********************************
+			
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_RESPONSIBILITY__HPP */

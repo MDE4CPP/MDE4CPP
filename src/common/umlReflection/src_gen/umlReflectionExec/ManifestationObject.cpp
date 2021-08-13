@@ -335,7 +335,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ManifestationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Dependency_client())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> clientList = m_ManifestationValue->getClient();
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> clientList = m_ManifestationValue->getClient();
 		Bag<uml::NamedElement>::iterator iter = clientList->begin();
 		Bag<uml::NamedElement>::iterator end = clientList->end();
 		while (iter != end)
@@ -352,7 +352,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ManifestationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Dependency_supplier())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> supplierList = m_ManifestationValue->getSupplier();
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> supplierList = m_ManifestationValue->getSupplier();
 		Bag<uml::NamedElement>::iterator iter = supplierList->begin();
 		Bag<uml::NamedElement>::iterator end = supplierList->end();
 		while (iter != end)
@@ -369,7 +369,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ManifestationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DirectedRelationship_source())
 	{
-		std::shared_ptr<Bag<uml::Element>> sourceList = m_ManifestationValue->getSource();
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> sourceList = m_ManifestationValue->getSource();
 		Bag<uml::Element>::iterator iter = sourceList->begin();
 		Bag<uml::Element>::iterator end = sourceList->end();
 		while (iter != end)
@@ -386,7 +386,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ManifestationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DirectedRelationship_target())
 	{
-		std::shared_ptr<Bag<uml::Element>> targetList = m_ManifestationValue->getTarget();
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> targetList = m_ManifestationValue->getTarget();
 		Bag<uml::Element>::iterator iter = targetList->begin();
 		Bag<uml::Element>::iterator end = targetList->end();
 		while (iter != end)
@@ -403,7 +403,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ManifestationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_ManifestationValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_ManifestationValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -421,7 +421,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ManifestationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_ManifestationValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_ManifestationValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -573,7 +573,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ManifestationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Relationship_relatedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> relatedElementList = m_ManifestationValue->getRelatedElement();
+		std::shared_ptr<Union<uml::Element>> relatedElementList = m_ManifestationValue->getRelatedElement();
 		Bag<uml::Element>::iterator iter = relatedElementList->begin();
 		Bag<uml::Element>::iterator end = relatedElementList->end();
 		while (iter != end)

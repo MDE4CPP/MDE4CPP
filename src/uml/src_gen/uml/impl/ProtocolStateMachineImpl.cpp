@@ -488,7 +488,7 @@ Any ProtocolStateMachineImpl::eGet(int featureID, bool resolve, bool coreType) c
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //18765			
+			return eAny(tempList); //18766			
 		}
 	}
 	return StateMachineImpl::eGet(featureID, resolve, coreType);
@@ -498,7 +498,7 @@ bool ProtocolStateMachineImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE:
-			return getConformance() != nullptr; //18765
+			return getConformance() != nullptr; //18766
 	}
 	return StateMachineImpl::internalEIsSet(featureID);
 }
@@ -557,7 +557,7 @@ Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list
   	switch(operationID)
 	{
 		
-		// 18903
+		// 18904
 		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_DEEP_OR_SHALLOW_HISTORY_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -574,7 +574,7 @@ Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 18904
+		// 18905
 		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_ENTRY_EXIT_DO_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'
@@ -591,7 +591,7 @@ Any ProtocolStateMachineImpl::eInvoke(int operationID, std::shared_ptr<std::list
 			break;
 		}
 		
-		// 18905
+		// 18906
 		case umlPackage::PROTOCOLSTATEMACHINE_OPERATION_PROTOCOL_TRANSITIONS_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

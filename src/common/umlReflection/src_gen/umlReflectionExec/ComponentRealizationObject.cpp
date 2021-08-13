@@ -365,7 +365,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ComponentRealizationObject:
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_ComponentRealization_realizingClassifier())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> realizingClassifierList = m_ComponentRealizationValue->getRealizingClassifier();
+		std::shared_ptr<Subset<uml::Classifier, uml::NamedElement /*Subset does not reference a union*/>> realizingClassifierList = m_ComponentRealizationValue->getRealizingClassifier();
 		Bag<uml::Classifier>::iterator iter = realizingClassifierList->begin();
 		Bag<uml::Classifier>::iterator end = realizingClassifierList->end();
 		while (iter != end)
@@ -382,7 +382,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ComponentRealizationObject:
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Dependency_client())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> clientList = m_ComponentRealizationValue->getClient();
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> clientList = m_ComponentRealizationValue->getClient();
 		Bag<uml::NamedElement>::iterator iter = clientList->begin();
 		Bag<uml::NamedElement>::iterator end = clientList->end();
 		while (iter != end)
@@ -399,7 +399,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ComponentRealizationObject:
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Dependency_supplier())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> supplierList = m_ComponentRealizationValue->getSupplier();
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element>> supplierList = m_ComponentRealizationValue->getSupplier();
 		Bag<uml::NamedElement>::iterator iter = supplierList->begin();
 		Bag<uml::NamedElement>::iterator end = supplierList->end();
 		while (iter != end)
@@ -416,7 +416,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ComponentRealizationObject:
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DirectedRelationship_source())
 	{
-		std::shared_ptr<Bag<uml::Element>> sourceList = m_ComponentRealizationValue->getSource();
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> sourceList = m_ComponentRealizationValue->getSource();
 		Bag<uml::Element>::iterator iter = sourceList->begin();
 		Bag<uml::Element>::iterator end = sourceList->end();
 		while (iter != end)
@@ -433,7 +433,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ComponentRealizationObject:
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DirectedRelationship_target())
 	{
-		std::shared_ptr<Bag<uml::Element>> targetList = m_ComponentRealizationValue->getTarget();
+		std::shared_ptr<SubsetUnion<uml::Element, uml::Element>> targetList = m_ComponentRealizationValue->getTarget();
 		Bag<uml::Element>::iterator iter = targetList->begin();
 		Bag<uml::Element>::iterator end = targetList->end();
 		while (iter != end)
@@ -450,7 +450,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ComponentRealizationObject:
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_ComponentRealizationValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_ComponentRealizationValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -468,7 +468,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ComponentRealizationObject:
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_ComponentRealizationValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_ComponentRealizationValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -610,7 +610,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ComponentRealizationObject:
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Relationship_relatedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> relatedElementList = m_ComponentRealizationValue->getRelatedElement();
+		std::shared_ptr<Union<uml::Element>> relatedElementList = m_ComponentRealizationValue->getRelatedElement();
 		Bag<uml::Element>::iterator iter = relatedElementList->begin();
 		Bag<uml::Element>::iterator end = relatedElementList->end();
 		while (iter != end)

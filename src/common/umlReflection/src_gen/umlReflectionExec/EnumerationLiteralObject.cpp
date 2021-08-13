@@ -359,7 +359,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> EnumerationLiteralObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_DeploymentTarget_deployment())
 	{
-		std::shared_ptr<Bag<uml::Deployment>> deploymentList = m_EnumerationLiteralValue->getDeployment();
+		std::shared_ptr<Subset<uml::Deployment, uml::Element>> deploymentList = m_EnumerationLiteralValue->getDeployment();
 		Bag<uml::Deployment>::iterator iter = deploymentList->begin();
 		Bag<uml::Deployment>::iterator end = deploymentList->end();
 		while (iter != end)
@@ -377,7 +377,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> EnumerationLiteralObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_EnumerationLiteralValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_EnumerationLiteralValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -395,7 +395,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> EnumerationLiteralObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_EnumerationLiteralValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_EnumerationLiteralValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -455,7 +455,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> EnumerationLiteralObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InstanceSpecification_slot())
 	{
-		std::shared_ptr<Bag<uml::Slot>> slotList = m_EnumerationLiteralValue->getSlot();
+		std::shared_ptr<Subset<uml::Slot, uml::Element>> slotList = m_EnumerationLiteralValue->getSlot();
 		Bag<uml::Slot>::iterator iter = slotList->begin();
 		Bag<uml::Slot>::iterator end = slotList->end();
 		while (iter != end)

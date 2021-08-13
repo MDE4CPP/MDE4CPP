@@ -696,7 +696,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_BehavioredClassifier_interfaceRealization())
 	{
-		std::shared_ptr<Bag<uml::InterfaceRealization>> interfaceRealizationList = m_CollaborationValue->getInterfaceRealization();
+		std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> interfaceRealizationList = m_CollaborationValue->getInterfaceRealization();
 		Bag<uml::InterfaceRealization>::iterator iter = interfaceRealizationList->begin();
 		Bag<uml::InterfaceRealization>::iterator end = interfaceRealizationList->end();
 		while (iter != end)
@@ -714,7 +714,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_BehavioredClassifier_ownedBehavior())
 	{
-		std::shared_ptr<Bag<uml::Behavior>> ownedBehaviorList = m_CollaborationValue->getOwnedBehavior();
+		std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> ownedBehaviorList = m_CollaborationValue->getOwnedBehavior();
 		Bag<uml::Behavior>::iterator iter = ownedBehaviorList->begin();
 		Bag<uml::Behavior>::iterator end = ownedBehaviorList->end();
 		while (iter != end)
@@ -732,7 +732,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_attribute())
 	{
-		std::shared_ptr<Bag<uml::Property>> attributeList = m_CollaborationValue->getAttribute();
+		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> attributeList = m_CollaborationValue->getAttribute();
 		Bag<uml::Property>::iterator iter = attributeList->begin();
 		Bag<uml::Property>::iterator end = attributeList->end();
 		while (iter != end)
@@ -749,7 +749,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_collaborationUse())
 	{
-		std::shared_ptr<Bag<uml::CollaborationUse>> collaborationUseList = m_CollaborationValue->getCollaborationUse();
+		std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> collaborationUseList = m_CollaborationValue->getCollaborationUse();
 		Bag<uml::CollaborationUse>::iterator iter = collaborationUseList->begin();
 		Bag<uml::CollaborationUse>::iterator end = collaborationUseList->end();
 		while (iter != end)
@@ -767,7 +767,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_feature())
 	{
-		std::shared_ptr<Bag<uml::Feature>> featureList = m_CollaborationValue->getFeature();
+		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> featureList = m_CollaborationValue->getFeature();
 		Bag<uml::Feature>::iterator iter = featureList->begin();
 		Bag<uml::Feature>::iterator end = featureList->end();
 		while (iter != end)
@@ -801,7 +801,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_generalization())
 	{
-		std::shared_ptr<Bag<uml::Generalization>> generalizationList = m_CollaborationValue->getGeneralization();
+		std::shared_ptr<Subset<uml::Generalization, uml::Element>> generalizationList = m_CollaborationValue->getGeneralization();
 		Bag<uml::Generalization>::iterator iter = generalizationList->begin();
 		Bag<uml::Generalization>::iterator end = generalizationList->end();
 		while (iter != end)
@@ -819,7 +819,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_inheritedMember())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> inheritedMemberList = m_CollaborationValue->getInheritedMember();
+		std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> inheritedMemberList = m_CollaborationValue->getInheritedMember();
 		Bag<uml::NamedElement>::iterator iter = inheritedMemberList->begin();
 		Bag<uml::NamedElement>::iterator end = inheritedMemberList->end();
 		while (iter != end)
@@ -859,7 +859,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedUseCase())
 	{
-		std::shared_ptr<Bag<uml::UseCase>> ownedUseCaseList = m_CollaborationValue->getOwnedUseCase();
+		std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> ownedUseCaseList = m_CollaborationValue->getOwnedUseCase();
 		Bag<uml::UseCase>::iterator iter = ownedUseCaseList->begin();
 		Bag<uml::UseCase>::iterator end = ownedUseCaseList->end();
 		while (iter != end)
@@ -894,7 +894,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_redefinedClassifier())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinedClassifierList = m_CollaborationValue->getRedefinedClassifier();
+		std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> redefinedClassifierList = m_CollaborationValue->getRedefinedClassifier();
 		Bag<uml::Classifier>::iterator iter = redefinedClassifierList->begin();
 		Bag<uml::Classifier>::iterator end = redefinedClassifierList->end();
 		while (iter != end)
@@ -921,7 +921,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_substitution())
 	{
-		std::shared_ptr<Bag<uml::Substitution>> substitutionList = m_CollaborationValue->getSubstitution();
+		std::shared_ptr<Subset<uml::Substitution, uml::Element>> substitutionList = m_CollaborationValue->getSubstitution();
 		Bag<uml::Substitution>::iterator iter = substitutionList->begin();
 		Bag<uml::Substitution>::iterator end = substitutionList->end();
 		while (iter != end)
@@ -966,7 +966,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Collaboration_collaborationRole())
 	{
-		std::shared_ptr<Bag<uml::ConnectableElement>> collaborationRoleList = m_CollaborationValue->getCollaborationRole();
+		std::shared_ptr<Subset<uml::ConnectableElement, uml::ConnectableElement>> collaborationRoleList = m_CollaborationValue->getCollaborationRole();
 		Bag<uml::ConnectableElement>::iterator iter = collaborationRoleList->begin();
 		Bag<uml::ConnectableElement>::iterator end = collaborationRoleList->end();
 		while (iter != end)
@@ -983,7 +983,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_CollaborationValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_CollaborationValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -1001,7 +1001,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_CollaborationValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_CollaborationValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -1101,7 +1101,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_elementImport())
 	{
-		std::shared_ptr<Bag<uml::ElementImport>> elementImportList = m_CollaborationValue->getElementImport();
+		std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> elementImportList = m_CollaborationValue->getElementImport();
 		Bag<uml::ElementImport>::iterator iter = elementImportList->begin();
 		Bag<uml::ElementImport>::iterator end = elementImportList->end();
 		while (iter != end)
@@ -1119,7 +1119,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_importedMember())
 	{
-		std::shared_ptr<Bag<uml::PackageableElement>> importedMemberList = m_CollaborationValue->getImportedMember();
+		std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> importedMemberList = m_CollaborationValue->getImportedMember();
 		Bag<uml::PackageableElement>::iterator iter = importedMemberList->begin();
 		Bag<uml::PackageableElement>::iterator end = importedMemberList->end();
 		while (iter != end)
@@ -1136,7 +1136,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_member())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> memberList = m_CollaborationValue->getMember();
+		std::shared_ptr<Union<uml::NamedElement>> memberList = m_CollaborationValue->getMember();
 		Bag<uml::NamedElement>::iterator iter = memberList->begin();
 		Bag<uml::NamedElement>::iterator end = memberList->end();
 		while (iter != end)
@@ -1153,7 +1153,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedMember())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> ownedMemberList = m_CollaborationValue->getOwnedMember();
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ownedMemberList = m_CollaborationValue->getOwnedMember();
 		Bag<uml::NamedElement>::iterator iter = ownedMemberList->begin();
 		Bag<uml::NamedElement>::iterator end = ownedMemberList->end();
 		while (iter != end)
@@ -1171,7 +1171,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedRule())
 	{
-		std::shared_ptr<Bag<uml::Constraint>> ownedRuleList = m_CollaborationValue->getOwnedRule();
+		std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> ownedRuleList = m_CollaborationValue->getOwnedRule();
 		Bag<uml::Constraint>::iterator iter = ownedRuleList->begin();
 		Bag<uml::Constraint>::iterator end = ownedRuleList->end();
 		while (iter != end)
@@ -1189,7 +1189,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_packageImport())
 	{
-		std::shared_ptr<Bag<uml::PackageImport>> packageImportList = m_CollaborationValue->getPackageImport();
+		std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> packageImportList = m_CollaborationValue->getPackageImport();
 		Bag<uml::PackageImport>::iterator iter = packageImportList->begin();
 		Bag<uml::PackageImport>::iterator end = packageImportList->end();
 		while (iter != end)
@@ -1255,7 +1255,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement())
 	{
-		std::shared_ptr<Bag<uml::RedefinableElement>> redefinedElementList = m_CollaborationValue->getRedefinedElement();
+		std::shared_ptr<Union<uml::RedefinableElement>> redefinedElementList = m_CollaborationValue->getRedefinedElement();
 		Bag<uml::RedefinableElement>::iterator iter = redefinedElementList->begin();
 		Bag<uml::RedefinableElement>::iterator end = redefinedElementList->end();
 		while (iter != end)
@@ -1272,7 +1272,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_CollaborationValue->getRedefinitionContext();
+		std::shared_ptr<Union<uml::Classifier>> redefinitionContextList = m_CollaborationValue->getRedefinitionContext();
 		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
 		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
 		while (iter != end)
@@ -1289,7 +1289,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_ownedAttribute())
 	{
-		std::shared_ptr<Bag<uml::Property>> ownedAttributeList = m_CollaborationValue->getOwnedAttribute();
+		std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttributeList = m_CollaborationValue->getOwnedAttribute();
 		Bag<uml::Property>::iterator iter = ownedAttributeList->begin();
 		Bag<uml::Property>::iterator end = ownedAttributeList->end();
 		while (iter != end)
@@ -1307,7 +1307,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_ownedConnector())
 	{
-		std::shared_ptr<Bag<uml::Connector>> ownedConnectorList = m_CollaborationValue->getOwnedConnector();
+		std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>> ownedConnectorList = m_CollaborationValue->getOwnedConnector();
 		Bag<uml::Connector>::iterator iter = ownedConnectorList->begin();
 		Bag<uml::Connector>::iterator end = ownedConnectorList->end();
 		while (iter != end)
@@ -1342,7 +1342,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_role())
 	{
-		std::shared_ptr<Bag<uml::ConnectableElement>> roleList = m_CollaborationValue->getRole();
+		std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> roleList = m_CollaborationValue->getRole();
 		Bag<uml::ConnectableElement>::iterator iter = roleList->begin();
 		Bag<uml::ConnectableElement>::iterator end = roleList->end();
 		while (iter != end)
@@ -1370,7 +1370,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationObject::getVal
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
-		std::shared_ptr<Bag<uml::TemplateBinding>> templateBindingList = m_CollaborationValue->getTemplateBinding();
+		std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> templateBindingList = m_CollaborationValue->getTemplateBinding();
 		Bag<uml::TemplateBinding>::iterator iter = templateBindingList->begin();
 		Bag<uml::TemplateBinding>::iterator end = templateBindingList->end();
 		while (iter != end)

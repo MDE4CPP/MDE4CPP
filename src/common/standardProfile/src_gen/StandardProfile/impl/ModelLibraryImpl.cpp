@@ -97,6 +97,12 @@ ModelLibraryImpl& ModelLibraryImpl::operator=(const ModelLibraryImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ModelLibrary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Package = obj.getBase_Package();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void ModelLibraryImpl::destroy()
 void ModelLibraryImpl::setBase_Package(std::weak_ptr<uml::Package> _base_Package)
 {
 	m_base_Package = _base_Package;
+	
 }
 std::weak_ptr<uml::Package> ModelLibraryImpl::getBase_Package() const 
 {
 	return m_base_Package;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

@@ -58,6 +58,10 @@ namespace StandardProfile
 			
 			
 			
+			//*********************************
+			// Union Getter
+			//*********************************
+			
 
 		protected:
 			virtual std::shared_ptr<uml::Class> getMetaClass();

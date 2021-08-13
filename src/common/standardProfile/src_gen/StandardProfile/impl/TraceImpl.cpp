@@ -97,6 +97,12 @@ TraceImpl& TraceImpl::operator=(const TraceImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Trace "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Abstraction = obj.getBase_Abstraction();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void TraceImpl::destroy()
 void TraceImpl::setBase_Abstraction(std::weak_ptr<uml::Abstraction> _base_Abstraction)
 {
 	m_base_Abstraction = _base_Abstraction;
+	
 }
 std::weak_ptr<uml::Abstraction> TraceImpl::getBase_Abstraction() const 
 {
 	return m_base_Abstraction;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

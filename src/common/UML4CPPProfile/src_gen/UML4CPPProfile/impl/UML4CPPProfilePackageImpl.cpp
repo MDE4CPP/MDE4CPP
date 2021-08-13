@@ -146,6 +146,12 @@ void UML4CPPProfilePackageImpl::createPackageStereotypes(std::shared_ptr<uml::Pa
 	uML4CPPProfile_ExternalLibrary_base_Package = factory->createProperty_in_Class(uML4CPPProfile_ExternalLibrary);uML4CPPProfile_ExternalLibrary_includePath = factory->createProperty_in_Class(uML4CPPProfile_ExternalLibrary);uML4CPPProfile_ExternalLibrary_libraryName = factory->createProperty_in_Class(uML4CPPProfile_ExternalLibrary);uML4CPPProfile_ExternalLibrary_libraryPath = factory->createProperty_in_Class(uML4CPPProfile_ExternalLibrary);
 	
 
+	uML4CPPProfile_GetterName = factory->createStereotype_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::GETTERNAME_CLASS);
+	uML4CPPProfile_GetterName->setName("GetterName");
+	uML4CPPProfile_GetterName->setIsAbstract(false);
+	uML4CPPProfile_GetterName_base_Property = factory->createProperty_in_Class(uML4CPPProfile_GetterName);uML4CPPProfile_GetterName_getterName = factory->createProperty_in_Class(uML4CPPProfile_GetterName);
+	
+
 	uML4CPPProfile_MainBehavior = factory->createStereotype_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::MAINBEHAVIOR_CLASS);
 	uML4CPPProfile_MainBehavior->setName("MainBehavior");
 	uML4CPPProfile_MainBehavior->setIsAbstract(false);
@@ -156,6 +162,12 @@ void UML4CPPProfilePackageImpl::createPackageStereotypes(std::shared_ptr<uml::Pa
 	uML4CPPProfile_NonExecutable->setName("NonExecutable");
 	uML4CPPProfile_NonExecutable->setIsAbstract(false);
 	uML4CPPProfile_NonExecutable_base_NamedElement = factory->createProperty_in_Class(uML4CPPProfile_NonExecutable);
+	
+
+	uML4CPPProfile_SetterName = factory->createStereotype_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::SETTERNAME_CLASS);
+	uML4CPPProfile_SetterName->setName("SetterName");
+	uML4CPPProfile_SetterName->setIsAbstract(false);
+	uML4CPPProfile_SetterName_base_Property = factory->createProperty_in_Class(uML4CPPProfile_SetterName);uML4CPPProfile_SetterName_setterName = factory->createProperty_in_Class(uML4CPPProfile_SetterName);
 	
 
 	uML4CPPProfile_Singleton = factory->createStereotype_in_Package(uML4CPPProfile, UML4CPPProfile::UML4CPPProfilePackage::SINGLETON_CLASS);
@@ -298,6 +310,27 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	
 	
 
+	uML4CPPProfile_GetterName_base_Property->setName("base_Property");
+	uML4CPPProfile_GetterName_base_Property->setType(UML::UMLPackage::eInstance()->get_UML_Property());
+	uML4CPPProfile_GetterName_base_Property->setLower(1);
+	uML4CPPProfile_GetterName_base_Property->setUpper(1);
+	uML4CPPProfile_GetterName_base_Property->setIsUnique(true);
+	uML4CPPProfile_GetterName_base_Property->setAggregation(uml::AggregationKind::NONE);
+	uML4CPPProfile_GetterName_base_Property->setVisibility(uml::VisibilityKind::PUBLIC);
+	uML4CPPProfile_GetterName_base_Property->setAssociation(get_UML4CPPProfile_Property_GetterName());
+	
+	uML4CPPProfile_GetterName_getterName->setName("getterName");
+	uML4CPPProfile_GetterName_getterName->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+	uML4CPPProfile_GetterName_getterName->setLower(1);
+	uML4CPPProfile_GetterName_getterName->setUpper(1);
+	uML4CPPProfile_GetterName_getterName->setIsUnique(true);
+	uML4CPPProfile_GetterName_getterName->setAggregation(uml::AggregationKind::NONE);
+	uML4CPPProfile_GetterName_getterName->setVisibility(uml::VisibilityKind::PUBLIC);
+	
+	
+	
+	
+
 	uML4CPPProfile_MainBehavior_base_Behavior->setName("base_Behavior");
 	uML4CPPProfile_MainBehavior_base_Behavior->setType(UML::UMLPackage::eInstance()->get_UML_Behavior());
 	uML4CPPProfile_MainBehavior_base_Behavior->setLower(1);
@@ -318,6 +351,27 @@ void UML4CPPProfilePackageImpl::initializePackageStereotypes()
 	uML4CPPProfile_NonExecutable_base_NamedElement->setAggregation(uml::AggregationKind::NONE);
 	uML4CPPProfile_NonExecutable_base_NamedElement->setVisibility(uml::VisibilityKind::PUBLIC);
 	uML4CPPProfile_NonExecutable_base_NamedElement->setAssociation(get_UML4CPPProfile_NamedElement_NonExecutable());
+	
+	
+	
+
+	uML4CPPProfile_SetterName_base_Property->setName("base_Property");
+	uML4CPPProfile_SetterName_base_Property->setType(UML::UMLPackage::eInstance()->get_UML_Property());
+	uML4CPPProfile_SetterName_base_Property->setLower(1);
+	uML4CPPProfile_SetterName_base_Property->setUpper(1);
+	uML4CPPProfile_SetterName_base_Property->setIsUnique(true);
+	uML4CPPProfile_SetterName_base_Property->setAggregation(uml::AggregationKind::NONE);
+	uML4CPPProfile_SetterName_base_Property->setVisibility(uml::VisibilityKind::PUBLIC);
+	uML4CPPProfile_SetterName_base_Property->setAssociation(get_UML4CPPProfile_Property_SetterName());
+	
+	uML4CPPProfile_SetterName_setterName->setName("setterName");
+	uML4CPPProfile_SetterName_setterName->setType(PrimitiveTypes::PrimitiveTypesPackage::eInstance()->get_PrimitiveTypes_String());
+	uML4CPPProfile_SetterName_setterName->setLower(1);
+	uML4CPPProfile_SetterName_setterName->setUpper(1);
+	uML4CPPProfile_SetterName_setterName->setIsUnique(true);
+	uML4CPPProfile_SetterName_setterName->setAggregation(uml::AggregationKind::NONE);
+	uML4CPPProfile_SetterName_setterName->setVisibility(uml::VisibilityKind::PUBLIC);
+	uML4CPPProfile_SetterName_setterName->setAssociation(get_UML4CPPProfile_Property_SetterName());
 	
 	
 	
@@ -389,6 +443,10 @@ std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_e
 {
 	return extensionEnd_extension_ExternalLibrary_UML4CPPProfile_ExternalLibrary;
 }
+std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_GetterName_UML4CPPProfile_GetterName()
+{
+	return extensionEnd_extension_GetterName_UML4CPPProfile_GetterName;
+}
 std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_MainBehavior_UML4CPPProfile_MainBehavior()
 {
 	return extensionEnd_extension_MainBehavior_UML4CPPProfile_MainBehavior;
@@ -396,6 +454,10 @@ std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_e
 std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_NonExecutable_UML4CPPProfile_NonExecutable()
 {
 	return extensionEnd_extension_NonExecutable_UML4CPPProfile_NonExecutable;
+}
+std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_SetterName_UML4CPPProfile_SetterName()
+{
+	return extensionEnd_extension_SetterName_UML4CPPProfile_SetterName;
 }
 std::shared_ptr<uml::ExtensionEnd> UML4CPPProfilePackageImpl::get_ExtensionEnd_extension_Singleton_UML4CPPProfile_Singleton()
 {
@@ -445,6 +507,18 @@ std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Ext
 {
 	return uML4CPPProfile_ExternalLibrary_libraryPath;
 }
+std::shared_ptr<uml::Stereotype> UML4CPPProfilePackageImpl::get_UML4CPPProfile_GetterName()
+{
+	return uML4CPPProfile_GetterName;
+}
+std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_GetterName_base_Property()
+{
+	return uML4CPPProfile_GetterName_base_Property;
+}
+std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_GetterName_getterName()
+{
+	return uML4CPPProfile_GetterName_getterName;
+}
 std::shared_ptr<uml::Stereotype> UML4CPPProfilePackageImpl::get_UML4CPPProfile_MainBehavior()
 {
 	return uML4CPPProfile_MainBehavior;
@@ -472,6 +546,26 @@ std::shared_ptr<uml::Extension> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Pa
 std::shared_ptr<uml::Extension> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Package_UML4CPPPackage()
 {
 	return uML4CPPProfile_Package_UML4CPPPackage;
+}
+std::shared_ptr<uml::Extension> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Property_GetterName()
+{
+	return uML4CPPProfile_Property_GetterName;
+}
+std::shared_ptr<uml::Extension> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Property_SetterName()
+{
+	return uML4CPPProfile_Property_SetterName;
+}
+std::shared_ptr<uml::Stereotype> UML4CPPProfilePackageImpl::get_UML4CPPProfile_SetterName()
+{
+	return uML4CPPProfile_SetterName;
+}
+std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_SetterName_base_Property()
+{
+	return uML4CPPProfile_SetterName_base_Property;
+}
+std::shared_ptr<uml::Property> UML4CPPProfilePackageImpl::get_UML4CPPProfile_SetterName_setterName()
+{
+	return uML4CPPProfile_SetterName_setterName;
 }
 std::shared_ptr<uml::Stereotype> UML4CPPProfilePackageImpl::get_UML4CPPProfile_Singleton()
 {

@@ -406,7 +406,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProtocolTransitionObject::g
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_ProtocolTransitionValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_ProtocolTransitionValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -424,7 +424,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProtocolTransitionObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_ProtocolTransitionValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_ProtocolTransitionValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -524,7 +524,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProtocolTransitionObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_elementImport())
 	{
-		std::shared_ptr<Bag<uml::ElementImport>> elementImportList = m_ProtocolTransitionValue->getElementImport();
+		std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> elementImportList = m_ProtocolTransitionValue->getElementImport();
 		Bag<uml::ElementImport>::iterator iter = elementImportList->begin();
 		Bag<uml::ElementImport>::iterator end = elementImportList->end();
 		while (iter != end)
@@ -542,7 +542,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProtocolTransitionObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_importedMember())
 	{
-		std::shared_ptr<Bag<uml::PackageableElement>> importedMemberList = m_ProtocolTransitionValue->getImportedMember();
+		std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> importedMemberList = m_ProtocolTransitionValue->getImportedMember();
 		Bag<uml::PackageableElement>::iterator iter = importedMemberList->begin();
 		Bag<uml::PackageableElement>::iterator end = importedMemberList->end();
 		while (iter != end)
@@ -559,7 +559,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProtocolTransitionObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_member())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> memberList = m_ProtocolTransitionValue->getMember();
+		std::shared_ptr<Union<uml::NamedElement>> memberList = m_ProtocolTransitionValue->getMember();
 		Bag<uml::NamedElement>::iterator iter = memberList->begin();
 		Bag<uml::NamedElement>::iterator end = memberList->end();
 		while (iter != end)
@@ -576,7 +576,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProtocolTransitionObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedMember())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> ownedMemberList = m_ProtocolTransitionValue->getOwnedMember();
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ownedMemberList = m_ProtocolTransitionValue->getOwnedMember();
 		Bag<uml::NamedElement>::iterator iter = ownedMemberList->begin();
 		Bag<uml::NamedElement>::iterator end = ownedMemberList->end();
 		while (iter != end)
@@ -594,7 +594,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProtocolTransitionObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedRule())
 	{
-		std::shared_ptr<Bag<uml::Constraint>> ownedRuleList = m_ProtocolTransitionValue->getOwnedRule();
+		std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> ownedRuleList = m_ProtocolTransitionValue->getOwnedRule();
 		Bag<uml::Constraint>::iterator iter = ownedRuleList->begin();
 		Bag<uml::Constraint>::iterator end = ownedRuleList->end();
 		while (iter != end)
@@ -612,7 +612,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProtocolTransitionObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_packageImport())
 	{
-		std::shared_ptr<Bag<uml::PackageImport>> packageImportList = m_ProtocolTransitionValue->getPackageImport();
+		std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> packageImportList = m_ProtocolTransitionValue->getPackageImport();
 		Bag<uml::PackageImport>::iterator iter = packageImportList->begin();
 		Bag<uml::PackageImport>::iterator end = packageImportList->end();
 		while (iter != end)
@@ -675,7 +675,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProtocolTransitionObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement())
 	{
-		std::shared_ptr<Bag<uml::RedefinableElement>> redefinedElementList = m_ProtocolTransitionValue->getRedefinedElement();
+		std::shared_ptr<Union<uml::RedefinableElement>> redefinedElementList = m_ProtocolTransitionValue->getRedefinedElement();
 		Bag<uml::RedefinableElement>::iterator iter = redefinedElementList->begin();
 		Bag<uml::RedefinableElement>::iterator end = redefinedElementList->end();
 		while (iter != end)
@@ -692,7 +692,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProtocolTransitionObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_ProtocolTransitionValue->getRedefinitionContext();
+		std::shared_ptr<Union<uml::Classifier>> redefinitionContextList = m_ProtocolTransitionValue->getRedefinitionContext();
 		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
 		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
 		while (iter != end)
@@ -794,7 +794,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProtocolTransitionObject::g
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Transition_trigger())
 	{
-		std::shared_ptr<Bag<uml::Trigger>> triggerList = m_ProtocolTransitionValue->getTrigger();
+		std::shared_ptr<Subset<uml::Trigger, uml::Element>> triggerList = m_ProtocolTransitionValue->getTrigger();
 		Bag<uml::Trigger>::iterator iter = triggerList->begin();
 		Bag<uml::Trigger>::iterator end = triggerList->end();
 		while (iter != end)

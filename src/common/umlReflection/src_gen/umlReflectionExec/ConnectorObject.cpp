@@ -347,7 +347,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ConnectorObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Connector_end())
 	{
-		std::shared_ptr<Bag<uml::ConnectorEnd>> endList = m_ConnectorValue->getEnd();
+		std::shared_ptr<Subset<uml::ConnectorEnd, uml::Element>> endList = m_ConnectorValue->getEnd();
 		Bag<uml::ConnectorEnd>::iterator iter = endList->begin();
 		Bag<uml::ConnectorEnd>::iterator end = endList->end();
 		while (iter != end)
@@ -379,7 +379,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ConnectorObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Connector_redefinedConnector())
 	{
-		std::shared_ptr<Bag<uml::Connector>> redefinedConnectorList = m_ConnectorValue->getRedefinedConnector();
+		std::shared_ptr<Subset<uml::Connector, uml::RedefinableElement>> redefinedConnectorList = m_ConnectorValue->getRedefinedConnector();
 		Bag<uml::Connector>::iterator iter = redefinedConnectorList->begin();
 		Bag<uml::Connector>::iterator end = redefinedConnectorList->end();
 		while (iter != end)
@@ -406,7 +406,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ConnectorObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_ConnectorValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_ConnectorValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -424,7 +424,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ConnectorObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_ConnectorValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_ConnectorValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -452,7 +452,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ConnectorObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Feature_featuringClassifier())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> featuringClassifierList = m_ConnectorValue->getFeaturingClassifier();
+		std::shared_ptr<Union<uml::Classifier>> featuringClassifierList = m_ConnectorValue->getFeaturingClassifier();
 		Bag<uml::Classifier>::iterator iter = featuringClassifierList->begin();
 		Bag<uml::Classifier>::iterator end = featuringClassifierList->end();
 		while (iter != end)
@@ -553,7 +553,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ConnectorObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement())
 	{
-		std::shared_ptr<Bag<uml::RedefinableElement>> redefinedElementList = m_ConnectorValue->getRedefinedElement();
+		std::shared_ptr<Union<uml::RedefinableElement>> redefinedElementList = m_ConnectorValue->getRedefinedElement();
 		Bag<uml::RedefinableElement>::iterator iter = redefinedElementList->begin();
 		Bag<uml::RedefinableElement>::iterator end = redefinedElementList->end();
 		while (iter != end)
@@ -570,7 +570,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ConnectorObject::getValues(
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_ConnectorValue->getRedefinitionContext();
+		std::shared_ptr<Union<uml::Classifier>> redefinitionContextList = m_ConnectorValue->getRedefinitionContext();
 		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
 		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
 		while (iter != end)

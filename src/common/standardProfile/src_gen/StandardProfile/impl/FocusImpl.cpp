@@ -97,6 +97,12 @@ FocusImpl& FocusImpl::operator=(const FocusImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Focus "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Class = obj.getBase_Class();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void FocusImpl::destroy()
 void FocusImpl::setBase_Class(std::weak_ptr<uml::Class> _base_Class)
 {
 	m_base_Class = _base_Class;
+	
 }
 std::weak_ptr<uml::Class> FocusImpl::getBase_Class() const 
 {
 	return m_base_Class;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

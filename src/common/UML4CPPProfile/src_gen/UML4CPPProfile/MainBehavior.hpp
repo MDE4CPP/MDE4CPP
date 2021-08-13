@@ -52,6 +52,12 @@ namespace UML4CPPProfile
 			std::weak_ptr<uml::Behavior> m_base_Behavior;
 			
 			
+
+		public:
+			//*********************************
+			// Union Getter
+			//*********************************
+			
 	};
 }
 #endif /* end of include guard: UML4CPPPROFILE_MAINBEHAVIOR__HPP */

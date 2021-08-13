@@ -61,6 +61,12 @@ namespace UML4CPPProfile
 			std::string m_libraryPath;
 			
 			
+
+		public:
+			//*********************************
+			// Union Getter
+			//*********************************
+			
 	};
 }
 #endif /* end of include guard: UML4CPPPROFILE_EXTERNALLIBRARY__HPP */

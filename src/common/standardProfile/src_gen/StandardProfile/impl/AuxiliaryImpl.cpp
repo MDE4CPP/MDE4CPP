@@ -97,6 +97,12 @@ AuxiliaryImpl& AuxiliaryImpl::operator=(const AuxiliaryImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Auxiliary "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Class = obj.getBase_Class();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void AuxiliaryImpl::destroy()
 void AuxiliaryImpl::setBase_Class(std::weak_ptr<uml::Class> _base_Class)
 {
 	m_base_Class = _base_Class;
+	
 }
 std::weak_ptr<uml::Class> AuxiliaryImpl::getBase_Class() const 
 {
 	return m_base_Class;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

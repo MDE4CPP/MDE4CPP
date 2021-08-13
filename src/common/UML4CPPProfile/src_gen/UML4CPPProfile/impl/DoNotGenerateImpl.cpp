@@ -97,10 +97,12 @@ DoNotGenerateImpl& DoNotGenerateImpl::operator=(const DoNotGenerateImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy DoNotGenerate "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
-	if (obj.getBase_Element() != nullptr)
-	{
-	m_base_Element = std::dynamic_pointer_cast<uml::Element>(obj.getBase_Element()->copy());
-	}
+
+	//copy attributes with no containment (soft copy)
+	m_base_Element = obj.getBase_Element();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -131,11 +133,18 @@ void DoNotGenerateImpl::destroy()
 void DoNotGenerateImpl::setBase_Element(std::shared_ptr<uml::Element> _base_Element)
 {
 	m_base_Element = _base_Element;
+	
 }
 std::shared_ptr<uml::Element> DoNotGenerateImpl::getBase_Element() const 
 {
 	return m_base_Element;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

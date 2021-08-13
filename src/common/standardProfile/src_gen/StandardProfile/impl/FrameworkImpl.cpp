@@ -97,6 +97,12 @@ FrameworkImpl& FrameworkImpl::operator=(const FrameworkImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Framework "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Package = obj.getBase_Package();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void FrameworkImpl::destroy()
 void FrameworkImpl::setBase_Package(std::weak_ptr<uml::Package> _base_Package)
 {
 	m_base_Package = _base_Package;
+	
 }
 std::weak_ptr<uml::Package> FrameworkImpl::getBase_Package() const 
 {
 	return m_base_Package;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

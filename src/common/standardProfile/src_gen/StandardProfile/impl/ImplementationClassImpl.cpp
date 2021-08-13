@@ -97,6 +97,12 @@ ImplementationClassImpl& ImplementationClassImpl::operator=(const Implementation
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy ImplementationClass "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Class = obj.getBase_Class();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void ImplementationClassImpl::destroy()
 void ImplementationClassImpl::setBase_Class(std::weak_ptr<uml::Class> _base_Class)
 {
 	m_base_Class = _base_Class;
+	
 }
 std::weak_ptr<uml::Class> ImplementationClassImpl::getBase_Class() const 
 {
 	return m_base_Class;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

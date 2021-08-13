@@ -457,7 +457,7 @@ Any NodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 				tempList->add(*iter);
 				iter++;
 			}
-			return eAny(tempList); //15754			
+			return eAny(tempList); //15755			
 		}
 	}
 	Any result;
@@ -474,7 +474,7 @@ bool NodeImpl::internalEIsSet(int featureID) const
 	switch(featureID)
 	{
 		case uml::umlPackage::NODE_ATTRIBUTE_NESTEDNODE:
-			return getNestedNode() != nullptr; //15754
+			return getNestedNode() != nullptr; //15755
 	}
 	bool result = false;
 	result = ClassImpl::internalEIsSet(featureID);
@@ -547,7 +547,7 @@ Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
   	switch(operationID)
 	{
 		
-		// 15880
+		// 15881
 		case umlPackage::NODE_OPERATION_CREATECOMMUNICATIONPATH_BOOLEAN_UNLIMITEDNATURAL:
 		{
 			//Retrieve input parameter 'end1IsNavigable'
@@ -609,14 +609,14 @@ Any NodeImpl::eInvoke(int operationID, std::shared_ptr<std::list < std::shared_p
 			break;
 		}
 		
-		// 15881
+		// 15882
 		case umlPackage::NODE_OPERATION_GETCOMMUNICATIONPATHS:
 		{
 			result = eAny(this->getCommunicationPaths());
 			break;
 		}
 		
-		// 15879
+		// 15880
 		case umlPackage::NODE_OPERATION_INTERNAL_STRUCTURE_EDIAGNOSTICCHAIN_EMAP:
 		{
 			//Retrieve input parameter 'diagnostics'

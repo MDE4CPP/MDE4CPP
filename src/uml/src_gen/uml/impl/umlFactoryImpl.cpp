@@ -253,8 +253,8 @@
 
 #include "uml/Action.hpp"
 #include "uml/Gate.hpp"
-#include "uml/ValueSpecification.hpp"
 #include "uml/InputPin.hpp"
+#include "uml/ValueSpecification.hpp"
 #include "uml/ValueSpecification.hpp"
 #include "uml/Gate.hpp"
 #include "uml/ValueSpecification.hpp"
@@ -346,6 +346,7 @@
 #include "uml/Property.hpp"
 #include "uml/Property.hpp"
 #include "uml/Property.hpp"
+#include "uml/Property.hpp"
 #include "uml/Behavior.hpp"
 #include "uml/Comment.hpp"
 #include "uml/Connector.hpp"
@@ -380,8 +381,8 @@
 #include "uml/TemplateParameterSubstitution.hpp"
 #include "uml/ProfileApplication.hpp"
 #include "uml/ProtocolStateMachine.hpp"
-#include "uml/Property.hpp"
 #include "uml/QualifierValue.hpp"
+#include "uml/Property.hpp"
 #include "uml/ComponentRealization.hpp"
 #include "uml/Region.hpp"
 #include "uml/Region.hpp"
@@ -436,10 +437,10 @@
 #include "uml/Trigger.hpp"
 #include "uml/ValueSpecification.hpp"
 #include "uml/ValueSpecification.hpp"
-#include "uml/InputPin.hpp"
-#include "uml/ValueSpecification.hpp"
 #include "uml/ValueSpecification.hpp"
 #include "uml/InputPin.hpp"
+#include "uml/InputPin.hpp"
+#include "uml/ValueSpecification.hpp"
 #include "uml/ValueSpecification.hpp"
 #include "uml/Variable.hpp"
 #include "uml/Variable.hpp"
@@ -5593,6 +5594,12 @@ std::shared_ptr<ecore::EObject> umlFactoryImpl::create(const int metaElementID, 
 						return this->createExtensionEnd_as_ownedActual_in_TemplateParameterSubstitution(castedContainer,metaElementID);
 					}
 					//ExtensionEnd has ownedAttribute as a containment
+					case  umlPackage::CLASS_ATTRIBUTE_OWNEDATTRIBUTE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<Class>(container);
+						return this->createExtensionEnd_as_ownedAttribute_in_Class(castedContainer,metaElementID);
+					}
+					//ExtensionEnd has ownedAttribute as a containment
 					case  umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<Artifact>(container);
@@ -10421,6 +10428,12 @@ std::shared_ptr<ecore::EObject> umlFactoryImpl::create(const int metaElementID, 
 						return this->createPort_as_ownedActual_in_TemplateParameterSubstitution(castedContainer,metaElementID);
 					}
 					//Port has ownedAttribute as a containment
+					case  umlPackage::CLASS_ATTRIBUTE_OWNEDATTRIBUTE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<Class>(container);
+						return this->createPort_as_ownedAttribute_in_Class(castedContainer,metaElementID);
+					}
+					//Port has ownedAttribute as a containment
 					case  umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<Artifact>(container);
@@ -10675,6 +10688,12 @@ std::shared_ptr<ecore::EObject> umlFactoryImpl::create(const int metaElementID, 
 					{
 						auto castedContainer = std::dynamic_pointer_cast<TemplateParameterSubstitution>(container);
 						return this->createProperty_as_ownedActual_in_TemplateParameterSubstitution(castedContainer,metaElementID);
+					}
+					//Property has ownedAttribute as a containment
+					case  umlPackage::CLASS_ATTRIBUTE_OWNEDATTRIBUTE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<Class>(container);
+						return this->createProperty_as_ownedAttribute_in_Class(castedContainer,metaElementID);
 					}
 					//Property has ownedAttribute as a containment
 					case  umlPackage::ARTIFACT_ATTRIBUTE_OWNEDATTRIBUTE:	
@@ -23290,6 +23309,19 @@ std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_as_ownedActual_
 	return element;
 	
 }
+std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_as_ownedAttribute_in_Class(std::weak_ptr<uml::Class> par_Class, const int metaElementID) const
+{
+	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_Class));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_Class.lock())
+	{
+		wp->getOwnedAttribute()->push_back(element);
+	
+	}
+	element->setThisExtensionEndPtr(element);
+	return element;
+	
+}
 std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_as_ownedAttribute_in_Artifact(std::shared_ptr<Artifact> par_Artifact, const int metaElementID) const
 {
 	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl());
@@ -23342,13 +23374,13 @@ std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_as_ownedAttribu
 	return element;
 	
 }
-std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_as_ownedAttribute_in_StructuredClassifier(std::weak_ptr<uml::Class> par_StructuredClassifier, const int metaElementID) const
+std::shared_ptr<ExtensionEnd> umlFactoryImpl::createExtensionEnd_as_ownedAttribute_in_StructuredClassifier(std::shared_ptr<StructuredClassifier> par_StructuredClassifier, const int metaElementID) const
 {
-	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl(par_StructuredClassifier));
+	std::shared_ptr<ExtensionEndImpl> element(new ExtensionEndImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_StructuredClassifier.lock())
+	if(nullptr != par_StructuredClassifier)
 	{
-		wp->getOwnedAttribute()->push_back(element);
+		par_StructuredClassifier->getOwnedAttribute()->push_back(element);
 	
 	}
 	element->setThisExtensionEndPtr(element);
@@ -32102,6 +32134,19 @@ std::shared_ptr<Port> umlFactoryImpl::createPort_as_ownedActual_in_TemplateParam
 	return element;
 	
 }
+std::shared_ptr<Port> umlFactoryImpl::createPort_as_ownedAttribute_in_Class(std::weak_ptr<uml::Class> par_Class, const int metaElementID) const
+{
+	std::shared_ptr<PortImpl> element(new PortImpl(par_Class));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_Class.lock())
+	{
+		wp->getOwnedAttribute()->push_back(element);
+	
+	}
+	element->setThisPortPtr(element);
+	return element;
+	
+}
 std::shared_ptr<Port> umlFactoryImpl::createPort_as_ownedAttribute_in_Artifact(std::shared_ptr<Artifact> par_Artifact, const int metaElementID) const
 {
 	std::shared_ptr<PortImpl> element(new PortImpl());
@@ -32154,13 +32199,13 @@ std::shared_ptr<Port> umlFactoryImpl::createPort_as_ownedAttribute_in_Signal(std
 	return element;
 	
 }
-std::shared_ptr<Port> umlFactoryImpl::createPort_as_ownedAttribute_in_StructuredClassifier(std::weak_ptr<uml::Class> par_StructuredClassifier, const int metaElementID) const
+std::shared_ptr<Port> umlFactoryImpl::createPort_as_ownedAttribute_in_StructuredClassifier(std::shared_ptr<StructuredClassifier> par_StructuredClassifier, const int metaElementID) const
 {
-	std::shared_ptr<PortImpl> element(new PortImpl(par_StructuredClassifier));
+	std::shared_ptr<PortImpl> element(new PortImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_StructuredClassifier.lock())
+	if(nullptr != par_StructuredClassifier)
 	{
-		wp->getOwnedAttribute()->push_back(element);
+		par_StructuredClassifier->getOwnedAttribute()->push_back(element);
 	
 	}
 	element->setThisPortPtr(element);
@@ -32546,6 +32591,19 @@ std::shared_ptr<Property> umlFactoryImpl::createProperty_as_ownedActual_in_Templ
 	return element;
 	
 }
+std::shared_ptr<Property> umlFactoryImpl::createProperty_as_ownedAttribute_in_Class(std::weak_ptr<uml::Class> par_Class, const int metaElementID) const
+{
+	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_Class));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_Class.lock())
+	{
+		wp->getOwnedAttribute()->push_back(element);
+	
+	}
+	element->setThisPropertyPtr(element);
+	return element;
+	
+}
 std::shared_ptr<Property> umlFactoryImpl::createProperty_as_ownedAttribute_in_Artifact(std::shared_ptr<Artifact> par_Artifact, const int metaElementID) const
 {
 	std::shared_ptr<PropertyImpl> element(new PropertyImpl());
@@ -32598,13 +32656,13 @@ std::shared_ptr<Property> umlFactoryImpl::createProperty_as_ownedAttribute_in_Si
 	return element;
 	
 }
-std::shared_ptr<Property> umlFactoryImpl::createProperty_as_ownedAttribute_in_StructuredClassifier(std::weak_ptr<uml::Class> par_StructuredClassifier, const int metaElementID) const
+std::shared_ptr<Property> umlFactoryImpl::createProperty_as_ownedAttribute_in_StructuredClassifier(std::shared_ptr<StructuredClassifier> par_StructuredClassifier, const int metaElementID) const
 {
-	std::shared_ptr<PropertyImpl> element(new PropertyImpl(par_StructuredClassifier));
+	std::shared_ptr<PropertyImpl> element(new PropertyImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_StructuredClassifier.lock())
+	if(nullptr != par_StructuredClassifier)
 	{
-		wp->getOwnedAttribute()->push_back(element);
+		par_StructuredClassifier->getOwnedAttribute()->push_back(element);
 	
 	}
 	element->setThisPropertyPtr(element);

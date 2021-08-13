@@ -97,6 +97,12 @@ SpecificationImpl& SpecificationImpl::operator=(const SpecificationImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Specification "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Classifier = obj.getBase_Classifier();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void SpecificationImpl::destroy()
 void SpecificationImpl::setBase_Classifier(std::weak_ptr<uml::Classifier> _base_Classifier)
 {
 	m_base_Classifier = _base_Classifier;
+	
 }
 std::weak_ptr<uml::Classifier> SpecificationImpl::getBase_Classifier() const 
 {
 	return m_base_Classifier;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

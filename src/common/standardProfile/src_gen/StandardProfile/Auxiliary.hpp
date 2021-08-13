@@ -52,6 +52,12 @@ namespace StandardProfile
 			std::weak_ptr<uml::Class> m_base_Class;
 			
 			
+
+		public:
+			//*********************************
+			// Union Getter
+			//*********************************
+			
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_AUXILIARY__HPP */

@@ -97,6 +97,12 @@ InstantiateImpl& InstantiateImpl::operator=(const InstantiateImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Instantiate "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Usage = obj.getBase_Usage();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void InstantiateImpl::destroy()
 void InstantiateImpl::setBase_Usage(std::weak_ptr<uml::Usage> _base_Usage)
 {
 	m_base_Usage = _base_Usage;
+	
 }
 std::weak_ptr<uml::Usage> InstantiateImpl::getBase_Usage() const 
 {
 	return m_base_Usage;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

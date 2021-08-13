@@ -331,7 +331,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> RedefinableTemplateSignatur
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_RedefinableTemplateSignatureValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_RedefinableTemplateSignatureValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -349,7 +349,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> RedefinableTemplateSignatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_RedefinableTemplateSignatureValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_RedefinableTemplateSignatureValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -455,7 +455,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> RedefinableTemplateSignatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement())
 	{
-		std::shared_ptr<Bag<uml::RedefinableElement>> redefinedElementList = m_RedefinableTemplateSignatureValue->getRedefinedElement();
+		std::shared_ptr<Union<uml::RedefinableElement>> redefinedElementList = m_RedefinableTemplateSignatureValue->getRedefinedElement();
 		Bag<uml::RedefinableElement>::iterator iter = redefinedElementList->begin();
 		Bag<uml::RedefinableElement>::iterator end = redefinedElementList->end();
 		while (iter != end)
@@ -472,7 +472,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> RedefinableTemplateSignatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_RedefinableTemplateSignatureValue->getRedefinitionContext();
+		std::shared_ptr<Union<uml::Classifier>> redefinitionContextList = m_RedefinableTemplateSignatureValue->getRedefinitionContext();
 		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
 		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
 		while (iter != end)
@@ -499,7 +499,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> RedefinableTemplateSignatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableTemplateSignature_extendedSignature())
 	{
-		std::shared_ptr<Bag<uml::RedefinableTemplateSignature>> extendedSignatureList = m_RedefinableTemplateSignatureValue->getExtendedSignature();
+		std::shared_ptr<Subset<uml::RedefinableTemplateSignature, uml::RedefinableElement>> extendedSignatureList = m_RedefinableTemplateSignatureValue->getExtendedSignature();
 		Bag<uml::RedefinableTemplateSignature>::iterator iter = extendedSignatureList->begin();
 		Bag<uml::RedefinableTemplateSignature>::iterator end = extendedSignatureList->end();
 		while (iter != end)
@@ -516,7 +516,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> RedefinableTemplateSignatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableTemplateSignature_inheritedParameter())
 	{
-		std::shared_ptr<Bag<uml::TemplateParameter>> inheritedParameterList = m_RedefinableTemplateSignatureValue->getInheritedParameter();
+		std::shared_ptr<Subset<uml::TemplateParameter, uml::TemplateParameter /*Subset does not reference a union*/>> inheritedParameterList = m_RedefinableTemplateSignatureValue->getInheritedParameter();
 		Bag<uml::TemplateParameter>::iterator iter = inheritedParameterList->begin();
 		Bag<uml::TemplateParameter>::iterator end = inheritedParameterList->end();
 		while (iter != end)
@@ -533,7 +533,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> RedefinableTemplateSignatur
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateSignature_ownedParameter())
 	{
-		std::shared_ptr<Bag<uml::TemplateParameter>> ownedParameterList = m_RedefinableTemplateSignatureValue->getOwnedParameter();
+		std::shared_ptr<Subset<uml::TemplateParameter, uml::Element, uml::TemplateParameter /*Subset does not reference a union*/>> ownedParameterList = m_RedefinableTemplateSignatureValue->getOwnedParameter();
 		Bag<uml::TemplateParameter>::iterator iter = ownedParameterList->begin();
 		Bag<uml::TemplateParameter>::iterator end = ownedParameterList->end();
 		while (iter != end)

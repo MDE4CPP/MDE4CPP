@@ -512,7 +512,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_ProfileValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_ProfileValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -530,7 +530,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_ProfileValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_ProfileValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -630,7 +630,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_elementImport())
 	{
-		std::shared_ptr<Bag<uml::ElementImport>> elementImportList = m_ProfileValue->getElementImport();
+		std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> elementImportList = m_ProfileValue->getElementImport();
 		Bag<uml::ElementImport>::iterator iter = elementImportList->begin();
 		Bag<uml::ElementImport>::iterator end = elementImportList->end();
 		while (iter != end)
@@ -648,7 +648,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_importedMember())
 	{
-		std::shared_ptr<Bag<uml::PackageableElement>> importedMemberList = m_ProfileValue->getImportedMember();
+		std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> importedMemberList = m_ProfileValue->getImportedMember();
 		Bag<uml::PackageableElement>::iterator iter = importedMemberList->begin();
 		Bag<uml::PackageableElement>::iterator end = importedMemberList->end();
 		while (iter != end)
@@ -665,7 +665,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_member())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> memberList = m_ProfileValue->getMember();
+		std::shared_ptr<Union<uml::NamedElement>> memberList = m_ProfileValue->getMember();
 		Bag<uml::NamedElement>::iterator iter = memberList->begin();
 		Bag<uml::NamedElement>::iterator end = memberList->end();
 		while (iter != end)
@@ -682,7 +682,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedMember())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> ownedMemberList = m_ProfileValue->getOwnedMember();
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ownedMemberList = m_ProfileValue->getOwnedMember();
 		Bag<uml::NamedElement>::iterator iter = ownedMemberList->begin();
 		Bag<uml::NamedElement>::iterator end = ownedMemberList->end();
 		while (iter != end)
@@ -700,7 +700,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedRule())
 	{
-		std::shared_ptr<Bag<uml::Constraint>> ownedRuleList = m_ProfileValue->getOwnedRule();
+		std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> ownedRuleList = m_ProfileValue->getOwnedRule();
 		Bag<uml::Constraint>::iterator iter = ownedRuleList->begin();
 		Bag<uml::Constraint>::iterator end = ownedRuleList->end();
 		while (iter != end)
@@ -718,7 +718,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_packageImport())
 	{
-		std::shared_ptr<Bag<uml::PackageImport>> packageImportList = m_ProfileValue->getPackageImport();
+		std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> packageImportList = m_ProfileValue->getPackageImport();
 		Bag<uml::PackageImport>::iterator iter = packageImportList->begin();
 		Bag<uml::PackageImport>::iterator end = packageImportList->end();
 		while (iter != end)
@@ -742,7 +742,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Package_nestedPackage())
 	{
-		std::shared_ptr<Bag<uml::Package>> nestedPackageList = m_ProfileValue->getNestedPackage();
+		std::shared_ptr<Subset<uml::Package, uml::PackageableElement /*Subset does not reference a union*/>> nestedPackageList = m_ProfileValue->getNestedPackage();
 		Bag<uml::Package>::iterator iter = nestedPackageList->begin();
 		Bag<uml::Package>::iterator end = nestedPackageList->end();
 		while (iter != end)
@@ -770,7 +770,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Package_ownedStereotype())
 	{
-		std::shared_ptr<Bag<uml::Stereotype>> ownedStereotypeList = m_ProfileValue->getOwnedStereotype();
+		std::shared_ptr<Subset<uml::Stereotype, uml::PackageableElement /*Subset does not reference a union*/>> ownedStereotypeList = m_ProfileValue->getOwnedStereotype();
 		Bag<uml::Stereotype>::iterator iter = ownedStereotypeList->begin();
 		Bag<uml::Stereotype>::iterator end = ownedStereotypeList->end();
 		while (iter != end)
@@ -788,7 +788,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Package_ownedType())
 	{
-		std::shared_ptr<Bag<uml::Type>> ownedTypeList = m_ProfileValue->getOwnedType();
+		std::shared_ptr<Subset<uml::Type, uml::PackageableElement /*Subset does not reference a union*/>> ownedTypeList = m_ProfileValue->getOwnedType();
 		Bag<uml::Type>::iterator iter = ownedTypeList->begin();
 		Bag<uml::Type>::iterator end = ownedTypeList->end();
 		while (iter != end)
@@ -806,7 +806,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Package_packageMerge())
 	{
-		std::shared_ptr<Bag<uml::PackageMerge>> packageMergeList = m_ProfileValue->getPackageMerge();
+		std::shared_ptr<Subset<uml::PackageMerge, uml::Element>> packageMergeList = m_ProfileValue->getPackageMerge();
 		Bag<uml::PackageMerge>::iterator iter = packageMergeList->begin();
 		Bag<uml::PackageMerge>::iterator end = packageMergeList->end();
 		while (iter != end)
@@ -824,7 +824,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Package_packagedElement())
 	{
-		std::shared_ptr<Bag<uml::PackageableElement>> packagedElementList = m_ProfileValue->getPackagedElement();
+		std::shared_ptr<SubsetUnion<uml::PackageableElement, uml::NamedElement>> packagedElementList = m_ProfileValue->getPackagedElement();
 		Bag<uml::PackageableElement>::iterator iter = packagedElementList->begin();
 		Bag<uml::PackageableElement>::iterator end = packagedElementList->end();
 		while (iter != end)
@@ -842,7 +842,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Package_profileApplication())
 	{
-		std::shared_ptr<Bag<uml::ProfileApplication>> profileApplicationList = m_ProfileValue->getProfileApplication();
+		std::shared_ptr<Subset<uml::ProfileApplication, uml::Element>> profileApplicationList = m_ProfileValue->getProfileApplication();
 		Bag<uml::ProfileApplication>::iterator iter = profileApplicationList->begin();
 		Bag<uml::ProfileApplication>::iterator end = profileApplicationList->end();
 		while (iter != end)
@@ -902,7 +902,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Profile_metaclassReference())
 	{
-		std::shared_ptr<Bag<uml::ElementImport>> metaclassReferenceList = m_ProfileValue->getMetaclassReference();
+		std::shared_ptr<Subset<uml::ElementImport, uml::ElementImport /*Subset does not reference a union*/>> metaclassReferenceList = m_ProfileValue->getMetaclassReference();
 		Bag<uml::ElementImport>::iterator iter = metaclassReferenceList->begin();
 		Bag<uml::ElementImport>::iterator end = metaclassReferenceList->end();
 		while (iter != end)
@@ -920,7 +920,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Profile_metamodelReference())
 	{
-		std::shared_ptr<Bag<uml::PackageImport>> metamodelReferenceList = m_ProfileValue->getMetamodelReference();
+		std::shared_ptr<Subset<uml::PackageImport, uml::PackageImport /*Subset does not reference a union*/>> metamodelReferenceList = m_ProfileValue->getMetamodelReference();
 		Bag<uml::PackageImport>::iterator iter = metamodelReferenceList->begin();
 		Bag<uml::PackageImport>::iterator end = metamodelReferenceList->end();
 		while (iter != end)
@@ -949,7 +949,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> ProfileObject::getValues(st
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
-		std::shared_ptr<Bag<uml::TemplateBinding>> templateBindingList = m_ProfileValue->getTemplateBinding();
+		std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> templateBindingList = m_ProfileValue->getTemplateBinding();
 		Bag<uml::TemplateBinding>::iterator iter = templateBindingList->begin();
 		Bag<uml::TemplateBinding>::iterator end = templateBindingList->end();
 		while (iter != end)

@@ -461,7 +461,7 @@ namespace uml
 			// Begin Class Activity
 			//Class and Feature IDs 
 			static const long long ACTIVITY_CLASS = 1985531470;
-			static const unsigned int ACTIVITY_CLASS_FEATURE_COUNT = 71;
+			static const unsigned int ACTIVITY_CLASS_FEATURE_COUNT = 72;
 			static const unsigned int ACTIVITY_CLASS_OPERATION_COUNT = 132;
 			static const long long ACTIVITY_ATTRIBUTE_ISREADONLY = 1129097443;
 			static const long long ACTIVITY_ATTRIBUTE_ISSINGLEEXECUTION = 1101742880;
@@ -875,7 +875,7 @@ namespace uml
 			// Begin Class AssociationClass
 			//Class and Feature IDs 
 			static const long long ASSOCIATIONCLASS_CLASS = 595683312;
-			static const unsigned int ASSOCIATIONCLASS_CLASS_FEATURE_COUNT = 58;
+			static const unsigned int ASSOCIATIONCLASS_CLASS_FEATURE_COUNT = 59;
 			static const unsigned int ASSOCIATIONCLASS_CLASS_OPERATION_COUNT = 132;
 			
 			
@@ -896,7 +896,7 @@ namespace uml
 			// Begin Class Behavior
 			//Class and Feature IDs 
 			static const long long BEHAVIOR_CLASS = 1087049961;
-			static const unsigned int BEHAVIOR_CLASS_FEATURE_COUNT = 61;
+			static const unsigned int BEHAVIOR_CLASS_FEATURE_COUNT = 62;
 			static const unsigned int BEHAVIOR_CLASS_OPERATION_COUNT = 130;
 			static const long long BEHAVIOR_ATTRIBUTE_ISREENTRANT = 542390276;
 			
@@ -1185,12 +1185,13 @@ namespace uml
 			// Begin Class Class
 			//Class and Feature IDs 
 			static const long long CLASS_CLASS = 47454819;
-			static const unsigned int CLASS_CLASS_FEATURE_COUNT = 52;
+			static const unsigned int CLASS_CLASS_FEATURE_COUNT = 53;
 			static const unsigned int CLASS_CLASS_OPERATION_COUNT = 123;
 			static const long long CLASS_ATTRIBUTE_ISACTIVE = 130839963;
 			
 			static const long long CLASS_ATTRIBUTE_EXTENSION = 1196629775;
 			static const long long CLASS_ATTRIBUTE_NESTEDCLASSIFIER = 1946381097;
+			static const long long CLASS_ATTRIBUTE_OWNEDATTRIBUTE = 220617364;
 			static const long long CLASS_ATTRIBUTE_OWNEDOPERATION = 722162916;
 			static const long long CLASS_ATTRIBUTE_OWNEDRECEPTION = 1160725708;
 			static const long long CLASS_ATTRIBUTE_SUPERCLASS = 1440746768;
@@ -1209,6 +1210,7 @@ namespace uml
 			
 			virtual std::shared_ptr<ecore::EReference> getClass_Attribute_extension() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getClass_Attribute_nestedClassifier() const = 0;
+			virtual std::shared_ptr<ecore::EReference> getClass_Attribute_ownedAttribute() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getClass_Attribute_ownedOperation() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getClass_Attribute_ownedReception() const = 0;
 			virtual std::shared_ptr<ecore::EReference> getClass_Attribute_superClass() const = 0;
@@ -1573,7 +1575,7 @@ namespace uml
 			// Begin Class Component
 			//Class and Feature IDs 
 			static const long long COMPONENT_CLASS = 1273779364;
-			static const unsigned int COMPONENT_CLASS_FEATURE_COUNT = 57;
+			static const unsigned int COMPONENT_CLASS_FEATURE_COUNT = 58;
 			static const unsigned int COMPONENT_CLASS_OPERATION_COUNT = 131;
 			static const long long COMPONENT_ATTRIBUTE_ISINDIRECTLYINSTANTIATED = 366912419;
 			
@@ -2248,7 +2250,7 @@ namespace uml
 			// Begin Class Device
 			//Class and Feature IDs 
 			static const long long DEVICE_CLASS = 670693381;
-			static const unsigned int DEVICE_CLASS_FEATURE_COUNT = 55;
+			static const unsigned int DEVICE_CLASS_FEATURE_COUNT = 56;
 			static const unsigned int DEVICE_CLASS_OPERATION_COUNT = 127;
 			
 			
@@ -2640,7 +2642,7 @@ namespace uml
 			// Begin Class ExecutionEnvironment
 			//Class and Feature IDs 
 			static const long long EXECUTIONENVIRONMENT_CLASS = 629658321;
-			static const unsigned int EXECUTIONENVIRONMENT_CLASS_FEATURE_COUNT = 55;
+			static const unsigned int EXECUTIONENVIRONMENT_CLASS_FEATURE_COUNT = 56;
 			static const unsigned int EXECUTIONENVIRONMENT_CLASS_OPERATION_COUNT = 127;
 			
 			
@@ -2996,7 +2998,7 @@ namespace uml
 			// Begin Class FunctionBehavior
 			//Class and Feature IDs 
 			static const long long FUNCTIONBEHAVIOR_CLASS = 1790396760;
-			static const unsigned int FUNCTIONBEHAVIOR_CLASS_FEATURE_COUNT = 63;
+			static const unsigned int FUNCTIONBEHAVIOR_CLASS_FEATURE_COUNT = 64;
 			static const unsigned int FUNCTIONBEHAVIOR_CLASS_OPERATION_COUNT = 133;
 			
 			
@@ -3353,7 +3355,7 @@ namespace uml
 			// Begin Class Interaction
 			//Class and Feature IDs 
 			static const long long INTERACTION_CLASS = 570921736;
-			static const unsigned int INTERACTION_CLASS_FEATURE_COUNT = 70;
+			static const unsigned int INTERACTION_CLASS_FEATURE_COUNT = 71;
 			static const unsigned int INTERACTION_CLASS_OPERATION_COUNT = 131;
 			
 			static const long long INTERACTION_ATTRIBUTE_ACTION = 1724032373;
@@ -4356,7 +4358,7 @@ namespace uml
 			// Begin Class Node
 			//Class and Feature IDs 
 			static const long long NODE_CLASS = 1041077555;
-			static const unsigned int NODE_CLASS_FEATURE_COUNT = 55;
+			static const unsigned int NODE_CLASS_FEATURE_COUNT = 56;
 			static const unsigned int NODE_CLASS_OPERATION_COUNT = 127;
 			
 			static const long long NODE_ATTRIBUTE_NESTEDNODE = 2122983149;
@@ -4549,7 +4551,7 @@ namespace uml
 			// Begin Class OpaqueBehavior
 			//Class and Feature IDs 
 			static const long long OPAQUEBEHAVIOR_CLASS = 1759981137;
-			static const unsigned int OPAQUEBEHAVIOR_CLASS_FEATURE_COUNT = 63;
+			static const unsigned int OPAQUEBEHAVIOR_CLASS_FEATURE_COUNT = 64;
 			static const unsigned int OPAQUEBEHAVIOR_CLASS_OPERATION_COUNT = 130;
 			static const long long OPAQUEBEHAVIOR_ATTRIBUTE_BODY = 657438074;
 			static const long long OPAQUEBEHAVIOR_ATTRIBUTE_LANGUAGE = 622459075;
@@ -5303,7 +5305,7 @@ namespace uml
 			// Begin Class ProtocolStateMachine
 			//Class and Feature IDs 
 			static const long long PROTOCOLSTATEMACHINE_CLASS = 1922353868;
-			static const unsigned int PROTOCOLSTATEMACHINE_CLASS_FEATURE_COUNT = 66;
+			static const unsigned int PROTOCOLSTATEMACHINE_CLASS_FEATURE_COUNT = 67;
 			static const unsigned int PROTOCOLSTATEMACHINE_CLASS_OPERATION_COUNT = 140;
 			
 			static const long long PROTOCOLSTATEMACHINE_ATTRIBUTE_CONFORMANCE = 1464039746;
@@ -6243,7 +6245,7 @@ namespace uml
 			// Begin Class StateMachine
 			//Class and Feature IDs 
 			static const long long STATEMACHINE_CLASS = 526416040;
-			static const unsigned int STATEMACHINE_CLASS_FEATURE_COUNT = 65;
+			static const unsigned int STATEMACHINE_CLASS_FEATURE_COUNT = 66;
 			static const unsigned int STATEMACHINE_CLASS_OPERATION_COUNT = 137;
 			
 			static const long long STATEMACHINE_ATTRIBUTE_CONNECTIONPOINT = 1702727061;
@@ -6282,7 +6284,7 @@ namespace uml
 			// Begin Class Stereotype
 			//Class and Feature IDs 
 			static const long long STEREOTYPE_CLASS = 144493812;
-			static const unsigned int STEREOTYPE_CLASS_FEATURE_COUNT = 54;
+			static const unsigned int STEREOTYPE_CLASS_FEATURE_COUNT = 55;
 			static const unsigned int STEREOTYPE_CLASS_OPERATION_COUNT = 140;
 			
 			static const long long STEREOTYPE_ATTRIBUTE_ICON = 1104794320;

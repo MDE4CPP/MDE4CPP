@@ -58,6 +58,10 @@ namespace UML4CPPProfile
 			
 			
 			
+			//*********************************
+			// Union Getter
+			//*********************************
+			
 
 		protected:
 			virtual std::shared_ptr<uml::Class> getMetaClass();

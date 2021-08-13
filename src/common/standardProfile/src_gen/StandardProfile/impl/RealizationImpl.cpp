@@ -97,6 +97,12 @@ RealizationImpl& RealizationImpl::operator=(const RealizationImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Realization "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Classifier = obj.getBase_Classifier();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void RealizationImpl::destroy()
 void RealizationImpl::setBase_Classifier(std::weak_ptr<uml::Classifier> _base_Classifier)
 {
 	m_base_Classifier = _base_Classifier;
+	
 }
 std::weak_ptr<uml::Classifier> RealizationImpl::getBase_Classifier() const 
 {
 	return m_base_Classifier;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

@@ -61,6 +61,12 @@ namespace UML4CPPProfile
 			bool m_packageOnly= false /*defined default value*/;
 			
 			
+
+		public:
+			//*********************************
+			// Union Getter
+			//*********************************
+			
 	};
 }
 #endif /* end of include guard: UML4CPPPROFILE_UML4CPPPACKAGE__HPP */

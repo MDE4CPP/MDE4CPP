@@ -270,7 +270,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationUseObject::get
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_CollaborationUse_roleBinding())
 	{
-		std::shared_ptr<Bag<uml::Dependency>> roleBindingList = m_CollaborationUseValue->getRoleBinding();
+		std::shared_ptr<Subset<uml::Dependency, uml::Element>> roleBindingList = m_CollaborationUseValue->getRoleBinding();
 		Bag<uml::Dependency>::iterator iter = roleBindingList->begin();
 		Bag<uml::Dependency>::iterator end = roleBindingList->end();
 		while (iter != end)
@@ -298,7 +298,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationUseObject::get
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_CollaborationUseValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_CollaborationUseValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -316,7 +316,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> CollaborationUseObject::get
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_CollaborationUseValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_CollaborationUseValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)

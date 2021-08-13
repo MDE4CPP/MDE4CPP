@@ -97,6 +97,12 @@ ServiceImpl& ServiceImpl::operator=(const ServiceImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy Service "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Component = obj.getBase_Component();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void ServiceImpl::destroy()
 void ServiceImpl::setBase_Component(std::weak_ptr<uml::Component> _base_Component)
 {
 	m_base_Component = _base_Component;
+	
 }
 std::weak_ptr<uml::Component> ServiceImpl::getBase_Component() const 
 {
 	return m_base_Component;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

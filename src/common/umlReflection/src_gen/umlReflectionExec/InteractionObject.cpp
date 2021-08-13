@@ -487,7 +487,7 @@ void InteractionObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 	{
 		if (value == nullptr) // clear mode
 		{
-			m_InteractionValue->getOwnedAttribute()->clear();
+			m_InteractionValue->getClass_OwnedAttribute()->clear();
 		}
 		else
 		{
@@ -497,7 +497,7 @@ void InteractionObject::removeValue(std::shared_ptr<uml::StructuralFeature> feat
 			std::shared_ptr<UML::PropertyObject> inputValue = std::dynamic_pointer_cast<UML::PropertyObject>(reference->getReferent());
 			if (inputValue != nullptr)
 			{
-				m_InteractionValue->getOwnedAttribute()->erase(inputValue->getPropertyValue());
+				m_InteractionValue->getClass_OwnedAttribute()->erase(inputValue->getPropertyValue());
 			}
 		}
 	}
@@ -1067,7 +1067,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Behavior_ownedParameter())
 	{
-		std::shared_ptr<Bag<uml::Parameter>> ownedParameterList = m_InteractionValue->getOwnedParameter();
+		std::shared_ptr<Subset<uml::Parameter, uml::NamedElement>> ownedParameterList = m_InteractionValue->getOwnedParameter();
 		Bag<uml::Parameter>::iterator iter = ownedParameterList->begin();
 		Bag<uml::Parameter>::iterator end = ownedParameterList->end();
 		while (iter != end)
@@ -1085,7 +1085,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Behavior_ownedParameterSet())
 	{
-		std::shared_ptr<Bag<uml::ParameterSet>> ownedParameterSetList = m_InteractionValue->getOwnedParameterSet();
+		std::shared_ptr<Subset<uml::ParameterSet, uml::NamedElement>> ownedParameterSetList = m_InteractionValue->getOwnedParameterSet();
 		Bag<uml::ParameterSet>::iterator iter = ownedParameterSetList->begin();
 		Bag<uml::ParameterSet>::iterator end = ownedParameterSetList->end();
 		while (iter != end)
@@ -1103,7 +1103,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Behavior_postcondition())
 	{
-		std::shared_ptr<Bag<uml::Constraint>> postconditionList = m_InteractionValue->getPostcondition();
+		std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> postconditionList = m_InteractionValue->getPostcondition();
 		Bag<uml::Constraint>::iterator iter = postconditionList->begin();
 		Bag<uml::Constraint>::iterator end = postconditionList->end();
 		while (iter != end)
@@ -1121,7 +1121,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Behavior_precondition())
 	{
-		std::shared_ptr<Bag<uml::Constraint>> preconditionList = m_InteractionValue->getPrecondition();
+		std::shared_ptr<Subset<uml::Constraint, uml::Constraint /*Subset does not reference a union*/>> preconditionList = m_InteractionValue->getPrecondition();
 		Bag<uml::Constraint>::iterator iter = preconditionList->begin();
 		Bag<uml::Constraint>::iterator end = preconditionList->end();
 		while (iter != end)
@@ -1139,7 +1139,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Behavior_redefinedBehavior())
 	{
-		std::shared_ptr<Bag<uml::Behavior>> redefinedBehaviorList = m_InteractionValue->getRedefinedBehavior();
+		std::shared_ptr<Subset<uml::Behavior, uml::Classifier /*Subset does not reference a union*/>> redefinedBehaviorList = m_InteractionValue->getRedefinedBehavior();
 		Bag<uml::Behavior>::iterator iter = redefinedBehaviorList->begin();
 		Bag<uml::Behavior>::iterator end = redefinedBehaviorList->end();
 		while (iter != end)
@@ -1176,7 +1176,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_BehavioredClassifier_interfaceRealization())
 	{
-		std::shared_ptr<Bag<uml::InterfaceRealization>> interfaceRealizationList = m_InteractionValue->getInterfaceRealization();
+		std::shared_ptr<Subset<uml::InterfaceRealization, uml::Element>> interfaceRealizationList = m_InteractionValue->getInterfaceRealization();
 		Bag<uml::InterfaceRealization>::iterator iter = interfaceRealizationList->begin();
 		Bag<uml::InterfaceRealization>::iterator end = interfaceRealizationList->end();
 		while (iter != end)
@@ -1194,7 +1194,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_BehavioredClassifier_ownedBehavior())
 	{
-		std::shared_ptr<Bag<uml::Behavior>> ownedBehaviorList = m_InteractionValue->getOwnedBehavior();
+		std::shared_ptr<SubsetUnion<uml::Behavior, uml::NamedElement>> ownedBehaviorList = m_InteractionValue->getOwnedBehavior();
 		Bag<uml::Behavior>::iterator iter = ownedBehaviorList->begin();
 		Bag<uml::Behavior>::iterator end = ownedBehaviorList->end();
 		while (iter != end)
@@ -1241,7 +1241,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Class_nestedClassifier())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> nestedClassifierList = m_InteractionValue->getNestedClassifier();
+		std::shared_ptr<Subset<uml::Classifier, uml::NamedElement>> nestedClassifierList = m_InteractionValue->getNestedClassifier();
 		Bag<uml::Classifier>::iterator iter = nestedClassifierList->begin();
 		Bag<uml::Classifier>::iterator end = nestedClassifierList->end();
 		while (iter != end)
@@ -1259,7 +1259,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Class_ownedAttribute())
 	{
-		std::shared_ptr<Bag<uml::Property>> ownedAttributeList = m_InteractionValue->getOwnedAttribute();
+		std::shared_ptr<Subset<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttributeList = m_InteractionValue->getClass_OwnedAttribute();
 		Bag<uml::Property>::iterator iter = ownedAttributeList->begin();
 		Bag<uml::Property>::iterator end = ownedAttributeList->end();
 		while (iter != end)
@@ -1277,7 +1277,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Class_ownedOperation())
 	{
-		std::shared_ptr<Bag<uml::Operation>> ownedOperationList = m_InteractionValue->getOwnedOperation();
+		std::shared_ptr<Subset<uml::Operation, uml::Feature, uml::NamedElement>> ownedOperationList = m_InteractionValue->getOwnedOperation();
 		Bag<uml::Operation>::iterator iter = ownedOperationList->begin();
 		Bag<uml::Operation>::iterator end = ownedOperationList->end();
 		while (iter != end)
@@ -1295,7 +1295,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Class_ownedReception())
 	{
-		std::shared_ptr<Bag<uml::Reception>> ownedReceptionList = m_InteractionValue->getOwnedReception();
+		std::shared_ptr<Subset<uml::Reception, uml::Feature, uml::NamedElement>> ownedReceptionList = m_InteractionValue->getOwnedReception();
 		Bag<uml::Reception>::iterator iter = ownedReceptionList->begin();
 		Bag<uml::Reception>::iterator end = ownedReceptionList->end();
 		while (iter != end)
@@ -1330,7 +1330,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_attribute())
 	{
-		std::shared_ptr<Bag<uml::Property>> attributeList = m_InteractionValue->getAttribute();
+		std::shared_ptr<SubsetUnion<uml::Property, uml::Feature>> attributeList = m_InteractionValue->getAttribute();
 		Bag<uml::Property>::iterator iter = attributeList->begin();
 		Bag<uml::Property>::iterator end = attributeList->end();
 		while (iter != end)
@@ -1347,7 +1347,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_collaborationUse())
 	{
-		std::shared_ptr<Bag<uml::CollaborationUse>> collaborationUseList = m_InteractionValue->getCollaborationUse();
+		std::shared_ptr<SubsetUnion<uml::CollaborationUse, uml::Element>> collaborationUseList = m_InteractionValue->getCollaborationUse();
 		Bag<uml::CollaborationUse>::iterator iter = collaborationUseList->begin();
 		Bag<uml::CollaborationUse>::iterator end = collaborationUseList->end();
 		while (iter != end)
@@ -1365,7 +1365,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_feature())
 	{
-		std::shared_ptr<Bag<uml::Feature>> featureList = m_InteractionValue->getFeature();
+		std::shared_ptr<SubsetUnion<uml::Feature, uml::NamedElement>> featureList = m_InteractionValue->getFeature();
 		Bag<uml::Feature>::iterator iter = featureList->begin();
 		Bag<uml::Feature>::iterator end = featureList->end();
 		while (iter != end)
@@ -1399,7 +1399,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_generalization())
 	{
-		std::shared_ptr<Bag<uml::Generalization>> generalizationList = m_InteractionValue->getGeneralization();
+		std::shared_ptr<Subset<uml::Generalization, uml::Element>> generalizationList = m_InteractionValue->getGeneralization();
 		Bag<uml::Generalization>::iterator iter = generalizationList->begin();
 		Bag<uml::Generalization>::iterator end = generalizationList->end();
 		while (iter != end)
@@ -1417,7 +1417,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_inheritedMember())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> inheritedMemberList = m_InteractionValue->getInheritedMember();
+		std::shared_ptr<Subset<uml::NamedElement, uml::NamedElement>> inheritedMemberList = m_InteractionValue->getInheritedMember();
 		Bag<uml::NamedElement>::iterator iter = inheritedMemberList->begin();
 		Bag<uml::NamedElement>::iterator end = inheritedMemberList->end();
 		while (iter != end)
@@ -1457,7 +1457,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_ownedUseCase())
 	{
-		std::shared_ptr<Bag<uml::UseCase>> ownedUseCaseList = m_InteractionValue->getOwnedUseCase();
+		std::shared_ptr<Subset<uml::UseCase, uml::NamedElement>> ownedUseCaseList = m_InteractionValue->getOwnedUseCase();
 		Bag<uml::UseCase>::iterator iter = ownedUseCaseList->begin();
 		Bag<uml::UseCase>::iterator end = ownedUseCaseList->end();
 		while (iter != end)
@@ -1492,7 +1492,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_redefinedClassifier())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinedClassifierList = m_InteractionValue->getRedefinedClassifier();
+		std::shared_ptr<SubsetUnion<uml::Classifier, uml::RedefinableElement>> redefinedClassifierList = m_InteractionValue->getRedefinedClassifier();
 		Bag<uml::Classifier>::iterator iter = redefinedClassifierList->begin();
 		Bag<uml::Classifier>::iterator end = redefinedClassifierList->end();
 		while (iter != end)
@@ -1519,7 +1519,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Classifier_substitution())
 	{
-		std::shared_ptr<Bag<uml::Substitution>> substitutionList = m_InteractionValue->getSubstitution();
+		std::shared_ptr<Subset<uml::Substitution, uml::Element>> substitutionList = m_InteractionValue->getSubstitution();
 		Bag<uml::Substitution>::iterator iter = substitutionList->begin();
 		Bag<uml::Substitution>::iterator end = substitutionList->end();
 		while (iter != end)
@@ -1564,7 +1564,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_InteractionValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_InteractionValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -1582,7 +1582,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_InteractionValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_InteractionValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -1610,7 +1610,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_EncapsulatedClassifier_ownedPort())
 	{
-		std::shared_ptr<Bag<uml::Port>> ownedPortList = m_InteractionValue->getOwnedPort();
+		std::shared_ptr<Subset<uml::Port, uml::Property /*Subset does not reference a union*/>> ownedPortList = m_InteractionValue->getOwnedPort();
 		Bag<uml::Port>::iterator iter = ownedPortList->begin();
 		Bag<uml::Port>::iterator end = ownedPortList->end();
 		while (iter != end)
@@ -1628,7 +1628,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Interaction_action())
 	{
-		std::shared_ptr<Bag<uml::Action>> actionList = m_InteractionValue->getAction();
+		std::shared_ptr<Subset<uml::Action, uml::Element>> actionList = m_InteractionValue->getAction();
 		Bag<uml::Action>::iterator iter = actionList->begin();
 		Bag<uml::Action>::iterator end = actionList->end();
 		while (iter != end)
@@ -1646,7 +1646,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Interaction_formalGate())
 	{
-		std::shared_ptr<Bag<uml::Gate>> formalGateList = m_InteractionValue->getFormalGate();
+		std::shared_ptr<Subset<uml::Gate, uml::NamedElement>> formalGateList = m_InteractionValue->getFormalGate();
 		Bag<uml::Gate>::iterator iter = formalGateList->begin();
 		Bag<uml::Gate>::iterator end = formalGateList->end();
 		while (iter != end)
@@ -1664,7 +1664,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Interaction_fragment())
 	{
-		std::shared_ptr<Bag<uml::InteractionFragment>> fragmentList = m_InteractionValue->getFragment();
+		std::shared_ptr<Subset<uml::InteractionFragment, uml::NamedElement>> fragmentList = m_InteractionValue->getFragment();
 		Bag<uml::InteractionFragment>::iterator iter = fragmentList->begin();
 		Bag<uml::InteractionFragment>::iterator end = fragmentList->end();
 		while (iter != end)
@@ -1682,7 +1682,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Interaction_lifeline())
 	{
-		std::shared_ptr<Bag<uml::Lifeline>> lifelineList = m_InteractionValue->getLifeline();
+		std::shared_ptr<Subset<uml::Lifeline, uml::NamedElement>> lifelineList = m_InteractionValue->getLifeline();
 		Bag<uml::Lifeline>::iterator iter = lifelineList->begin();
 		Bag<uml::Lifeline>::iterator end = lifelineList->end();
 		while (iter != end)
@@ -1700,7 +1700,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Interaction_message())
 	{
-		std::shared_ptr<Bag<uml::Message>> messageList = m_InteractionValue->getMessage();
+		std::shared_ptr<Subset<uml::Message, uml::NamedElement>> messageList = m_InteractionValue->getMessage();
 		Bag<uml::Message>::iterator iter = messageList->begin();
 		Bag<uml::Message>::iterator end = messageList->end();
 		while (iter != end)
@@ -1755,7 +1755,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_generalOrdering())
 	{
-		std::shared_ptr<Bag<uml::GeneralOrdering>> generalOrderingList = m_InteractionValue->getGeneralOrdering();
+		std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> generalOrderingList = m_InteractionValue->getGeneralOrdering();
 		Bag<uml::GeneralOrdering>::iterator iter = generalOrderingList->begin();
 		Bag<uml::GeneralOrdering>::iterator end = generalOrderingList->end();
 		while (iter != end)
@@ -1845,7 +1845,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_elementImport())
 	{
-		std::shared_ptr<Bag<uml::ElementImport>> elementImportList = m_InteractionValue->getElementImport();
+		std::shared_ptr<SubsetUnion<uml::ElementImport, uml::Element>> elementImportList = m_InteractionValue->getElementImport();
 		Bag<uml::ElementImport>::iterator iter = elementImportList->begin();
 		Bag<uml::ElementImport>::iterator end = elementImportList->end();
 		while (iter != end)
@@ -1863,7 +1863,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_importedMember())
 	{
-		std::shared_ptr<Bag<uml::PackageableElement>> importedMemberList = m_InteractionValue->getImportedMember();
+		std::shared_ptr<Subset<uml::PackageableElement, uml::NamedElement>> importedMemberList = m_InteractionValue->getImportedMember();
 		Bag<uml::PackageableElement>::iterator iter = importedMemberList->begin();
 		Bag<uml::PackageableElement>::iterator end = importedMemberList->end();
 		while (iter != end)
@@ -1880,7 +1880,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_member())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> memberList = m_InteractionValue->getMember();
+		std::shared_ptr<Union<uml::NamedElement>> memberList = m_InteractionValue->getMember();
 		Bag<uml::NamedElement>::iterator iter = memberList->begin();
 		Bag<uml::NamedElement>::iterator end = memberList->end();
 		while (iter != end)
@@ -1897,7 +1897,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedMember())
 	{
-		std::shared_ptr<Bag<uml::NamedElement>> ownedMemberList = m_InteractionValue->getOwnedMember();
+		std::shared_ptr<SubsetUnion<uml::NamedElement, uml::Element, uml::NamedElement>> ownedMemberList = m_InteractionValue->getOwnedMember();
 		Bag<uml::NamedElement>::iterator iter = ownedMemberList->begin();
 		Bag<uml::NamedElement>::iterator end = ownedMemberList->end();
 		while (iter != end)
@@ -1915,7 +1915,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_ownedRule())
 	{
-		std::shared_ptr<Bag<uml::Constraint>> ownedRuleList = m_InteractionValue->getOwnedRule();
+		std::shared_ptr<SubsetUnion<uml::Constraint, uml::NamedElement>> ownedRuleList = m_InteractionValue->getOwnedRule();
 		Bag<uml::Constraint>::iterator iter = ownedRuleList->begin();
 		Bag<uml::Constraint>::iterator end = ownedRuleList->end();
 		while (iter != end)
@@ -1933,7 +1933,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Namespace_packageImport())
 	{
-		std::shared_ptr<Bag<uml::PackageImport>> packageImportList = m_InteractionValue->getPackageImport();
+		std::shared_ptr<SubsetUnion<uml::PackageImport, uml::Element>> packageImportList = m_InteractionValue->getPackageImport();
 		Bag<uml::PackageImport>::iterator iter = packageImportList->begin();
 		Bag<uml::PackageImport>::iterator end = packageImportList->end();
 		while (iter != end)
@@ -1999,7 +1999,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinedElement())
 	{
-		std::shared_ptr<Bag<uml::RedefinableElement>> redefinedElementList = m_InteractionValue->getRedefinedElement();
+		std::shared_ptr<Union<uml::RedefinableElement>> redefinedElementList = m_InteractionValue->getRedefinedElement();
 		Bag<uml::RedefinableElement>::iterator iter = redefinedElementList->begin();
 		Bag<uml::RedefinableElement>::iterator end = redefinedElementList->end();
 		while (iter != end)
@@ -2016,7 +2016,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_RedefinableElement_redefinitionContext())
 	{
-		std::shared_ptr<Bag<uml::Classifier>> redefinitionContextList = m_InteractionValue->getRedefinitionContext();
+		std::shared_ptr<Union<uml::Classifier>> redefinitionContextList = m_InteractionValue->getRedefinitionContext();
 		Bag<uml::Classifier>::iterator iter = redefinitionContextList->begin();
 		Bag<uml::Classifier>::iterator end = redefinitionContextList->end();
 		while (iter != end)
@@ -2033,7 +2033,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_ownedAttribute())
 	{
-		std::shared_ptr<Bag<uml::Property>> ownedAttributeList = m_InteractionValue->getOwnedAttribute();
+		std::shared_ptr<SubsetUnion<uml::Property, uml::ConnectableElement, uml::NamedElement, uml::Property>> ownedAttributeList = m_InteractionValue->getOwnedAttribute();
 		Bag<uml::Property>::iterator iter = ownedAttributeList->begin();
 		Bag<uml::Property>::iterator end = ownedAttributeList->end();
 		while (iter != end)
@@ -2051,7 +2051,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_ownedConnector())
 	{
-		std::shared_ptr<Bag<uml::Connector>> ownedConnectorList = m_InteractionValue->getOwnedConnector();
+		std::shared_ptr<Subset<uml::Connector, uml::Feature, uml::NamedElement>> ownedConnectorList = m_InteractionValue->getOwnedConnector();
 		Bag<uml::Connector>::iterator iter = ownedConnectorList->begin();
 		Bag<uml::Connector>::iterator end = ownedConnectorList->end();
 		while (iter != end)
@@ -2086,7 +2086,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_StructuredClassifier_role())
 	{
-		std::shared_ptr<Bag<uml::ConnectableElement>> roleList = m_InteractionValue->getRole();
+		std::shared_ptr<SubsetUnion<uml::ConnectableElement, uml::NamedElement>> roleList = m_InteractionValue->getRole();
 		Bag<uml::ConnectableElement>::iterator iter = roleList->begin();
 		Bag<uml::ConnectableElement>::iterator end = roleList->end();
 		while (iter != end)
@@ -2114,7 +2114,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionObject::getValue
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_TemplateableElement_templateBinding())
 	{
-		std::shared_ptr<Bag<uml::TemplateBinding>> templateBindingList = m_InteractionValue->getTemplateBinding();
+		std::shared_ptr<Subset<uml::TemplateBinding, uml::Element>> templateBindingList = m_InteractionValue->getTemplateBinding();
 		Bag<uml::TemplateBinding>::iterator iter = templateBindingList->begin();
 		Bag<uml::TemplateBinding>::iterator end = templateBindingList->end();
 		while (iter != end)
@@ -2380,7 +2380,7 @@ void InteractionObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature> 
 	{
 		Bag<fUML::Semantics::Values::Value>::iterator iter = values->begin();
 		Bag<fUML::Semantics::Values::Value>::iterator end = values->end();
-		m_InteractionValue->getOwnedAttribute()->clear();
+		m_InteractionValue->getClass_OwnedAttribute()->clear();
 		while (iter != end)
 		{
 			std::shared_ptr<fUML::Semantics::Values::Value> inputValue = *iter;
@@ -2388,7 +2388,7 @@ void InteractionObject::setFeatureValue(std::shared_ptr<uml::StructuralFeature> 
 			std::shared_ptr<UML::PropertyObject> value = std::dynamic_pointer_cast<UML::PropertyObject>(reference->getReferent());
 			if (value != nullptr)
 			{
-				m_InteractionValue->getOwnedAttribute()->push_back(value->getPropertyValue());
+				m_InteractionValue->getClass_OwnedAttribute()->push_back(value->getPropertyValue());
 			}
 			
 			iter++;
@@ -3062,7 +3062,7 @@ std::shared_ptr<Bag<fUML::Semantics::SimpleClassifiers::FeatureValue>> Interacti
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}
-		if (property == UML::UMLPackage::eInstance()->get_UML_Class_ownedAttribute() && m_InteractionValue->getOwnedAttribute() != nullptr)
+		if (property == UML::UMLPackage::eInstance()->get_UML_Class_ownedAttribute() && m_InteractionValue->getClass_OwnedAttribute() != nullptr)
 		{
 			featureValues->add(this->retrieveFeatureValue(property));
 		}

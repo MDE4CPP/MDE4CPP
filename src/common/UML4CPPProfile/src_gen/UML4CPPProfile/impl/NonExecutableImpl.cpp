@@ -97,6 +97,12 @@ NonExecutableImpl& NonExecutableImpl::operator=(const NonExecutableImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy NonExecutable "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_NamedElement = obj.getBase_NamedElement();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void NonExecutableImpl::destroy()
 void NonExecutableImpl::setBase_NamedElement(std::weak_ptr<uml::NamedElement> _base_NamedElement)
 {
 	m_base_NamedElement = _base_NamedElement;
+	
 }
 std::weak_ptr<uml::NamedElement> NonExecutableImpl::getBase_NamedElement() const 
 {
 	return m_base_NamedElement;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

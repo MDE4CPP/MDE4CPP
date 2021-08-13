@@ -97,6 +97,12 @@ MainBehaviorImpl& MainBehaviorImpl::operator=(const MainBehaviorImpl & obj)
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy MainBehavior "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
+
+	//copy attributes with no containment (soft copy)
+	m_base_Behavior = obj.getBase_Behavior();
+
+	//clone attributes with containment (deep copy)
+
 	return *this;
 }
 
@@ -127,11 +133,18 @@ void MainBehaviorImpl::destroy()
 void MainBehaviorImpl::setBase_Behavior(std::weak_ptr<uml::Behavior> _base_Behavior)
 {
 	m_base_Behavior = _base_Behavior;
+	
 }
 std::weak_ptr<uml::Behavior> MainBehaviorImpl::getBase_Behavior() const 
 {
 	return m_base_Behavior;
 }
+
+//*********************************
+// Union Getter
+//*********************************
+
+
 
 //*********************************
 // Operations

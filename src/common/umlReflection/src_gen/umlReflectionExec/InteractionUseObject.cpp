@@ -358,7 +358,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionUseObject::getVa
 	std::shared_ptr<Bag<fUML::Semantics::Values::Value>> values(new Bag<fUML::Semantics::Values::Value>());
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedComment())
 	{
-		std::shared_ptr<Bag<uml::Comment>> ownedCommentList = m_InteractionUseValue->getOwnedComment();
+		std::shared_ptr<Subset<uml::Comment, uml::Element>> ownedCommentList = m_InteractionUseValue->getOwnedComment();
 		Bag<uml::Comment>::iterator iter = ownedCommentList->begin();
 		Bag<uml::Comment>::iterator end = ownedCommentList->end();
 		while (iter != end)
@@ -376,7 +376,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionUseObject::getVa
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_Element_ownedElement())
 	{
-		std::shared_ptr<Bag<uml::Element>> ownedElementList = m_InteractionUseValue->getOwnedElement();
+		std::shared_ptr<Union<uml::Element>> ownedElementList = m_InteractionUseValue->getOwnedElement();
 		Bag<uml::Element>::iterator iter = ownedElementList->begin();
 		Bag<uml::Element>::iterator end = ownedElementList->end();
 		while (iter != end)
@@ -441,7 +441,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionUseObject::getVa
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionFragment_generalOrdering())
 	{
-		std::shared_ptr<Bag<uml::GeneralOrdering>> generalOrderingList = m_InteractionUseValue->getGeneralOrdering();
+		std::shared_ptr<Subset<uml::GeneralOrdering, uml::Element>> generalOrderingList = m_InteractionUseValue->getGeneralOrdering();
 		Bag<uml::GeneralOrdering>::iterator iter = generalOrderingList->begin();
 		Bag<uml::GeneralOrdering>::iterator end = generalOrderingList->end();
 		while (iter != end)
@@ -459,7 +459,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionUseObject::getVa
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionUse_actualGate())
 	{
-		std::shared_ptr<Bag<uml::Gate>> actualGateList = m_InteractionUseValue->getActualGate();
+		std::shared_ptr<Subset<uml::Gate, uml::Element>> actualGateList = m_InteractionUseValue->getActualGate();
 		Bag<uml::Gate>::iterator iter = actualGateList->begin();
 		Bag<uml::Gate>::iterator end = actualGateList->end();
 		while (iter != end)
@@ -477,7 +477,7 @@ std::shared_ptr<Bag<fUML::Semantics::Values::Value>> InteractionUseObject::getVa
 	}
 	if (feature == UML::UMLPackage::eInstance()->get_UML_InteractionUse_argument())
 	{
-		std::shared_ptr<Bag<uml::ValueSpecification>> argumentList = m_InteractionUseValue->getArgument();
+		std::shared_ptr<Subset<uml::ValueSpecification, uml::Element>> argumentList = m_InteractionUseValue->getArgument();
 		Bag<uml::ValueSpecification>::iterator iter = argumentList->begin();
 		Bag<uml::ValueSpecification>::iterator end = argumentList->end();
 		while (iter != end)

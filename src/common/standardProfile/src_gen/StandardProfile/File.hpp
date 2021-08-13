@@ -52,6 +52,12 @@ namespace StandardProfile
 			std::weak_ptr<uml::Artifact> m_base_Artifact;
 			
 			
+
+		public:
+			//*********************************
+			// Union Getter
+			//*********************************
+			
 	};
 }
 #endif /* end of include guard: STANDARDPROFILE_FILE__HPP */
