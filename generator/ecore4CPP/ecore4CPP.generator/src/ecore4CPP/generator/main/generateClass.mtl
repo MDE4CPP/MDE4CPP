@@ -23,13 +23,14 @@
 */]
 [template public generateClassCreate(aEClass : EClass,impl : Boolean) ? (aEClass.abstract=false)]
 virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/](const int metaElementID = [aEClass.ePackage.name/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
-[comment] [let ref:OrderedSet(EReference) = aEClass.getAllContainers()/] [/comment]
 [let ref:OrderedSet(EReference) = aEClass.getAllComposition()]
 	[for(aReference:EReference | ref->sortedBy(name)) before('//Add as contained object\n')]
-		[if (aReference.eOpposite->isEmpty())]
+		[if not (aReference.oclIsUndefined() or aReference.eContainingClass.oclIsUndefined())]
+			[if (aReference.eOpposite->isEmpty())]
 virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/](std::shared_ptr<[aReference.eContainingClass.generateTypeClass()/]> par_[aReference.eContainingClass.name/], const int metaElementID = [aEClass.ePackage.name/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
-		[else]
+			[else]
 virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/]([aReference.eOpposite.generateReferenceType(true)/] par_[aReference.eContainingClass.name/], const int metaElementID = [aEClass.ePackage.name/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
+			[/if]
 		[/if]
 	[/for]
 [/let]

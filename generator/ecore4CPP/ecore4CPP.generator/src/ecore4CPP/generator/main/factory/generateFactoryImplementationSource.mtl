@@ -130,6 +130,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 	{
 	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
 	[let ref:OrderedSet(EReference) = aClass.getAllComposition()]
+	[aClass.getAllComposition()->size()/]
 		case [anEPackage.name/]Package::[aClass.getStaticAttributeIDName()/]:
 		{
 [if(ref->size()>0)]
@@ -137,7 +138,8 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 			{
 [/if]
 				return this->create[aClass.name/](metaElementID);
-[if(ref->size()>0)]			}
+[if(ref->size()>0)]
+			}
 			else
 			{
 [/if]
@@ -146,15 +148,17 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 				{
 					[for(aReference:EReference | ref->sortedBy(name))]
 					//[aClass.name/] has [aReference.name/] as a containment
-					case  [anEPackage.name/]Package::[aReference.getStaticAttributeIDName()/]:
+					[if not (aReference.oclIsUndefined() or aReference.eContainingClass.oclIsUndefined())]
+					case  [anEPackage.name/]Package::[aReference.getStaticAttributeIDName()/]:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<[aReference.eContainingClass.generateTypeClass()/]>(container);
-						return this->create[aClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/](castedContainer,metaElementID);
+						return this->create[aClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.generateTypeClass()/](castedContainer,metaElementID);
 					}
+					[/if]
 					[/for]
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 				[elseif(ref->size()=1)]
 				std::shared_ptr<[ref->first().eContainingClass.generateTypeClass()/]> castedContainer = std::dynamic_pointer_cast<[ref->first().eContainingClass.generateTypeClass()/]>(container);
 				assert(castedContainer);
@@ -204,17 +208,18 @@ std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/
 [/if]
 	return element;
 }
-
 [let ref:OrderedSet(EReference) = aClass.getAllComposition()]
 [for(aReference:EReference | ref->sortedBy(name))]
-[if (aReference.eOpposite->isEmpty())]
+[if not (aReference.oclIsUndefined() or aReference.eContainingClass.oclIsUndefined())]
+	[if (aReference.eOpposite->isEmpty())]
 std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/](std::shared_ptr<[aReference.eContainingClass.generateTypeClass()/]> par_[aReference.eContainingClass.name/], const int metaElementID)[if (not generateObjectMonitoring())] const[/if]
-[else]
+	[else]
 std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/]([aReference.eOpposite.generateReferenceType(true)/] par_[aReference.eContainingClass.name/], const int metaElementID)[if (not generateObjectMonitoring())] const[/if]
-[/if]
+	[/if]
 {
 	[generateCreateFunctionContent(aClass, ref, aReference, anEPackage)/]
 }
+[/if]
 [/for]
 [/let]
 [/for]
@@ -286,8 +291,8 @@ return element;
 [subPackage.generateFactoryImports()/]
 [/for]
 [/comment]
-[let ref:OrderedSet(EReference) = OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass).getAllComposition()->asOrderedSet()->sortedBy(name)]
 
+[let ref:OrderedSet(EReference) = OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass).getAllComposition()->asOrderedSet()->sortedBy(name)]
 [for(aReference:EReference | ref->select(not (ref.eType.getRootPackage() = anEPackage.getRootPackage())))]
 #include "[aReference.eType.generateNamespacePath()/]/[aReference.eType.name.toUpperFirst().concat('.hpp')/]"
 [/for]
