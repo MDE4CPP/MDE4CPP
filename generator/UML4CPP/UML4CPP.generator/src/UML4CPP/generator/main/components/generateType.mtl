@@ -22,6 +22,7 @@
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
+[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
 
 [**
  * check if type is primitive type
@@ -78,12 +79,12 @@ std::shared_ptr<Bag<[aProperty.type.transformType()/]>>[/if]
 [/template]
 
 [template public generateSubsetTypes(aProperty : Property)]
-[for (subsettedProperty : Property | aProperty.subsettedProperty->asOrderedSet()) separator(', ')]
-[subsettedProperty.type.generateCppType(false)/][if (not subsettedProperty.isUnion())] /*Subset does not reference a union*/[/if][/for]
+[for (subsettedProperty : Property | aProperty.subsettedProperty->select(owner.oclIsTypeOf(Class) or owner.oclIsKindOf(Interface))->asOrderedSet()->sortedBy(type.name)) separator(', ')]
+[subsettedProperty.type.generateCppType(true)/][if (not subsettedProperty.isUnion())] /*Subset does not reference a union*/[/if][/for]
 [/template]
 
 [template public generateSubsetElements(aProperty : Property)]
-[for (subsettedProperty : Property | aProperty.subsettedProperty) separator(', ')]
+[for (subsettedProperty : Property | aProperty.subsettedProperty->select(owner.oclIsTypeOf(Class) or owner.oclIsKindOf(Interface))->asOrderedSet()->sortedBy(type.name)) separator(', ')]
 [subsettedProperty.getterName()/]()[/for]
 [/template]
 

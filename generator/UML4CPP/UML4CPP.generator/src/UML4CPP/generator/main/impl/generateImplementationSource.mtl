@@ -32,6 +32,7 @@
 [import UML4CPP::generator::main::pscs::generatePropertyInstantiation/]
 [import UML4CPP::generator::main::pscs::generateConnectorPatternsInstantiation/]
 [import UML4CPP::generator::main::pscs::generateDestruction/]
+[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
 
 [query private includes(aClass : Class)  : Set(Type) = OrderedSet{aClass.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aClass.ownedOperation.ownedParameter.type, aClass.getAllAttributes().type, aClass.importedMember, aClass.getCompositeOwners()}->flatten() /]
 [query private includes(aInterface : Interface)  : Set(Type) = OrderedSet{aInterface.member->selectByKind(TypedElement)->select(not type.oclIsUndefined()).type, aInterface.ownedOperation.ownedParameter.type}->flatten() /]
@@ -143,9 +144,10 @@
 }
 
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
-[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
-[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
-[if (containmentProperty.isBackReference())]
+	[let containerProperty : Property = anAssociation.getCompositeProperty(aClass)]
+		[if (not containerProperty.opposite.oclIsUndefined())]
+			[let containmentProperty : Property = containerProperty.opposite]
+				[if (containmentProperty.isBackReference())]
 [className/]::[className/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/])
 :[className/]()
 {
@@ -156,7 +158,7 @@
 [/comment]
     m_[containmentProperty.name/] = [containmentProperty.name.toLowerFirst()/];
 }
-[/if] [/let] [/let] [/for]
+[/if] [/let] [/if] [/let] [/for]
 [for (compositeOwnerClass : Class | aClass.getCompositeOwners())]
 [className/]::[className/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/])
 :[className/]()
@@ -199,31 +201,42 @@ std::shared_ptr<ecore::EObject>  [className/]::copy() const
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	instantiate();
-[for (att : Property | aClass.getAllAttributes()->reject(isBackReference())->sortedBy(name))]
-[if (att.upper = 1)]
-[if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]
-	if (obj.[att.getterName()/]() != nullptr)
+
+	//copy attributes with no containment (soft copy)
+[for (aProperty : Property | aClass.ownedAttribute->select(isBackReference() or not (isComposite() or isSubset()))->asOrderedSet()->sortedBy(name))]
+	m_[aProperty.name/] = obj.[aProperty.getterName()/]();
+[/for]
+
+	//clone attributes with containment (deep copy)
+[for (aProperty : Property | aClass.ownedAttribute->select((isComposite() or isSubset()) and not (isUnion() or isBackReference()))->asOrderedSet()->sortedBy(name))]
+[if (aProperty.upper = 1)]
+[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
+	if (obj.[aProperty.getterName()/]() != nullptr)
 	{
-	[/if]	m_[att.name/] = [if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]std::dynamic_pointer_cast<[att.type.generateCppType(true)/]>([/if]obj.[att.getterName()/]()[if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]->copy())[/if];
-[if (not (att.type.isPrimitive() or att.type.oclIsKindOf(Enumeration)))]
+	[/if]	m_[aProperty.name/] = [if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>([/if]obj.[aProperty.getterName()/]()[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]->copy())[/if];
+[if (not (aProperty.type.isPrimitive() or aProperty.type.oclIsKindOf(Enumeration)))]
 	}
 [/if]
 [else]
-	[att.generateCppType()/] [att.name/]List = obj.[att.getterName()/]();
-	Bag<[att.type.generateCppType(true)/]>::iterator [att.name/]Iter = [att.name/]List->begin();
-	Bag<[att.type.generateCppType(true)/]>::iterator [att.name/]End = [att.name/]List->end();
-	while ([att.name/]Iter != [att.name/]End) 
+	[aProperty.generateCppType()/] [aProperty.name/]List = obj.[aProperty.getterName()/]();
+	Bag<[aProperty.type.generateCppType(true)/]>::iterator [aProperty.name/]Iter = [aProperty.name/]List->begin();
+	Bag<[aProperty.type.generateCppType(true)/]>::iterator [aProperty.name/]End = [aProperty.name/]List->end();
+	while ([aProperty.name/]Iter != [aProperty.name/]End) 
 	{
-[if (att.type.isPrimitive())]
-		std::shared_ptr<[att.type.generateCppType(true)/]> temp(new [att.type.generateCppType(true)/](*(*[att.name/]Iter)));
+[if (aProperty.type.isPrimitive())]
+		std::shared_ptr<[aProperty.type.generateCppType(true)/]> temp(new [aProperty.type.generateCppType(true)/](*(*[aProperty.name/]Iter)));
 [else]
-		std::shared_ptr<[att.type.generateCppType(true)/]> temp = std::dynamic_pointer_cast<[att.type.generateCppType(true)/]>((*[att.name/]Iter)->copy());
+		std::shared_ptr<[aProperty.type.generateCppType(true)/]> temp = std::dynamic_pointer_cast<[aProperty.type.generateCppType(true)/]>((*[aProperty.name/]Iter)->copy());
 [/if]
-		m_[att.name/]->push_back(temp);
-		[att.name/]Iter++;
+		[aProperty.getterName()/]()->push_back(temp);
+		[aProperty.name/]Iter++;
 	}
 [/if]
 [/for]
+[for (anAttribute : Property | aClass.ownedAttribute->select(isSubset()))]
+	[anAttribute.generateSubsetUnionInit()/]
+[/for]
+
 	return *this;
 }
 
