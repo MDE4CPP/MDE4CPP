@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Ecore="http://www.eclipse.org/uml2/schemas/Ecore/5" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:standard="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/uml2/schemas/Ecore/5 pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../UML4CPPProfile/model/UML4CPPProfile.uml#_bc8YIeLsEeur7cjoMTUC9A">
+<xmi:XMI xmi:version="20131001" xmlns:xmi="http://www.omg.org/spec/XMI/20131001" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:Ecore="http://www.eclipse.org/uml2/schemas/Ecore/5" xmlns:UML4CPPProfile="http://www.tu-ilmenau.de/sse/UML4CPPProfile" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:standard="http://www.eclipse.org/uml2/5.0.0/UML/Profile/Standard" xmlns:uml="http://www.eclipse.org/uml2/5.0.0/UML" xsi:schemaLocation="http://www.eclipse.org/uml2/schemas/Ecore/5 pathmap://UML_PROFILES/Ecore.profile.uml#_z1OFcHjqEdy8S4Cr8Rc_NA http://www.tu-ilmenau.de/sse/UML4CPPProfile ../../UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg">
   <uml:Model xmi:id="_0" name="Ecore" URI="http://www.eclipse.org/emf/2002/Ecore">
     <packagedElement xmi:type="uml:Class" xmi:id="EAnnotation" name="EAnnotation">
       <eAnnotations xmi:id="EAnnotation-_http2F2Fwww.eclipse.org2Femf2F20022FEcore" source="http://www.eclipse.org/emf/2002/Ecore">
@@ -898,7 +898,7 @@
     </profileApplication>
     <profileApplication xmi:id="_eIEi0OMGEeur7cjoMTUC9A">
       <eAnnotations xmi:id="_eIEi0eMGEeur7cjoMTUC9A" source="http://www.eclipse.org/uml2/2.0.0/UML">
-        <references xmi:type="ecore:EPackage" href="../../UML4CPPProfile/model/UML4CPPProfile.uml#_bc8YIeLsEeur7cjoMTUC9A"/>
+        <references xmi:type="ecore:EPackage" href="../../UML4CPPProfile/model/UML4CPPProfile.uml#_v75nIfp7EeuavpF89IQaUg"/>
       </eAnnotations>
       <appliedProfile href="../../UML4CPPProfile/model/UML4CPPProfile.uml#_0"/>
     </profileApplication>
