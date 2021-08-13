@@ -4616,7 +4616,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="operation" ordered="false"
-        eType="#//Operation" changeable="false" volatile="true" transient="true" eOpposite="#//BehavioralFeature/ownedParameter">
+        eType="#//Operation" changeable="false" volatile="true" transient="true" eOpposite="#//Operation/ownedParameter">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The Operation owning this parameter.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
@@ -4942,6 +4942,13 @@
         <details key="documentation" value="The upper multiplicity of the return parameter, if present. This information is derived from the return result for this Operation.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
     </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1"
+        eType="#//Parameter" containment="true" eOpposite="#//Parameter/operation">
+      <eAnnotations source="http://tu-ilmenau.de/see/codegen">
+        <details key="getterName" value="getProperty_OwnedParameter"/>
+      </eAnnotations>
+      <eAnnotations source="redefines" references="#//BehavioralFeature/ownedParameter"/>
+    </eStructuralFeatures>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="BehavioralFeature" abstract="true" eSuperTypes="#//Namespace #//Feature">
     <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
@@ -5022,7 +5029,7 @@
       </eAnnotations>
     </eStructuralFeatures>
     <eStructuralFeatures xsi:type="ecore:EReference" name="ownedParameter" upperBound="-1"
-        eType="#//Parameter" containment="true" eOpposite="#//Parameter/operation">
+        eType="#//Parameter" containment="true">
       <eAnnotations source="http://www.eclipse.org/emf/2002/GenModel">
         <details key="documentation" value="The ordered set of formal Parameters of this BehavioralFeature.&#xA;&lt;p>From package UML::Classification.&lt;/p>"/>
       </eAnnotations>
