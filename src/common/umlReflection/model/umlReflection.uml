@@ -18000,4 +18000,5 @@ self.type.conformsTo(p.oclAsType(TypedElement).type)))</body>
   <UML4CPPProfile:UML4CPPPackage xmi:id="_uQszQOMGEeur7cjoMTUC9A" base_Package="_0" eclipseURI="pathmap://UML_METAMODELS/UML.metamodel.uml" packageOnly="true"/>
   <UML4CPPProfile:DoNotGenerate xmi:id="_BSXqUOPsEeue5uBLJYJANQ" base_Element="_sseAYOMGEeur7cjoMTUC9A"/>
   <UML4CPPProfile:GetterName xmi:id="_-2MC4PqAEeuavpF89IQaUg" base_Property="Class-ownedAttribute" getterName="getClass_OwnedAttribute"/>
+  <UML4CPPProfile:GetterName xmi:id="_d8ZhcPw4Eeu3hrl9NxUlVw" base_Property="Operation-ownedParameter" getterName="getProperty_OwnedParameter"/>
 </xmi:XMI>
