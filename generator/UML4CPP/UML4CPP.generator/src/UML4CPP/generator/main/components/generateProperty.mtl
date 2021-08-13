@@ -62,7 +62,7 @@ virtual void set[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compos
  * generate attribute member declaration
  */]
 [template public generateAttributeProtectedMember(aProperty : Property)]
-[if (aProperty.isStatic)]static [/if][aProperty.generateCppType()/] m_[aProperty.name/][if (aProperty.default->notEmpty())]= [aProperty.genDefault()/][/if];
+[if (aProperty.isStatic)]static [/if][if(aProperty.upper <> 1)]mutable [/if][aProperty.generateCppType()/] m_[aProperty.name/][if (aProperty.default->notEmpty())]= [aProperty.genDefault()/][/if];
 
 [/template]
 
