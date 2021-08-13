@@ -21,30 +21,32 @@
 
 [import UML4CPP::generator::main::components::generateType /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::components::generateClass /]
 
 
 [**
  * Template for generation of property instatiation (parts & ports) of composite structures
 */]
-[template public generateAttributeInstantiation(aProperty : Property)]
+[template public generateAttributeInstantiation(aProperty : Property) ? (not isUnion())]
 [if (aProperty.upper = 1)]
-[if (aProperty.canInstantiate() and (not aProperty.type.oclIsTypeOf(Interface)))]
+	[if (aProperty.canInstantiate() and (not aProperty.type.oclIsTypeOf(Interface)))]
 //instantiate property '[aProperty.name/]'
-[if (aProperty.isComposite() or aProperty.isBackReference())]
+		[if (aProperty.isComposite() or aProperty.isBackReference())]
 m_[aProperty.name/] = [aProperty.type._package.generateNamespace(false)/]::[aProperty.type._package.getPackageName()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]_as_[aProperty.name/]_in_[aProperty.class.name.toUpperFirst()/]([if (aProperty.isBackReference())]m_this[aProperty.class.name.toUpperFirst()/]Ptr[else]getThis[aProperty.class.name.toUpperFirst()/]Ptr()[/if]);
-[else]
+		[else]
 m_[aProperty.name/] = [aProperty.type._package.generateNamespace(false)/]::[aProperty.type._package.getPackageName()/]Factory::eInstance()->create[aProperty.type.name.toUpperFirst()/]();
-[/if]
-[/if]
-[else]
+		[/if]
+	[/if]
+[elseif (aProperty.canInstantiate())]
 //instantiate property '[aProperty.name/]'
-m_[aProperty.name/].reset(new Bag<[aProperty.type.transformType()/]>());
-[if (aProperty.canInstantiate() and aProperty.getUpper() = -1 and aProperty.getLower() > 0 and (not aProperty.type.oclIsTypeOf(Interface)))]
+[aProperty.generateContainerPropertyInit()/]
+	[if (aProperty.getUpper() = -1 and aProperty.getLower() > 0 and (not aProperty.type.oclIsTypeOf(Interface)))]
 for(unsigned int i = 1; i <= [aProperty.getLower()/]; i++)
 {
 	[aProperty.generatePartInstantiation()/]
 } 
-[/if]
+	[/if]
 [/if]
 [/template]
 
