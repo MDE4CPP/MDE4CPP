@@ -65,10 +65,10 @@ namespace fUML::Semantics::Values
 			static const unsigned int EVALUATION_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int EVALUATION_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long EVALUATION_ATTRIBUTE_LOCUS = 1217341572;
-			static const long long EVALUATION_ATTRIBUTE_SPECIFICATION = 2094286684;
+			static const long long EVALUATION_ATTRIBUTE_LOCUS = 62298639;
+			static const long long EVALUATION_ATTRIBUTE_SPECIFICATION = 1925928417;
 			
-			static const int EVALUATION_OPERATION_EVALUATE = 2082746549;
+			static const int EVALUATION_OPERATION_EVALUATE = 1899572768;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEvaluation_Class() const = 0;
@@ -89,7 +89,7 @@ namespace fUML::Semantics::Values
 			static const unsigned int LITERALBOOLEANEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALBOOLEANEVALUATION_OPERATION_EVALUATE = 2082746549;
+			static const int LITERALBOOLEANEVALUATION_OPERATION_EVALUATE = 1960284282;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralBooleanEvaluation_Class() const = 0;
@@ -108,7 +108,7 @@ namespace fUML::Semantics::Values
 			static const unsigned int LITERALEVALUATION_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int LITERALEVALUATION_OPERATION_GETTYPE_ESTRING = 909070947;
+			static const int LITERALEVALUATION_OPERATION_GETTYPE_ESTRING = 1020927880;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralEvaluation_Class() const = 0;
@@ -127,7 +127,7 @@ namespace fUML::Semantics::Values
 			static const unsigned int LITERALINTEGEREVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALINTEGEREVALUATION_OPERATION_EVALUATE = 2082746549;
+			static const int LITERALINTEGEREVALUATION_OPERATION_EVALUATE = 604709657;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralIntegerEvaluation_Class() const = 0;
@@ -146,7 +146,7 @@ namespace fUML::Semantics::Values
 			static const unsigned int LITERALNULLEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALNULLEVALUATION_OPERATION_EVALUATE = 2082746549;
+			static const int LITERALNULLEVALUATION_OPERATION_EVALUATE = 507735969;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralNullEvaluation_Class() const = 0;
@@ -165,7 +165,7 @@ namespace fUML::Semantics::Values
 			static const unsigned int LITERALREALEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALREALEVALUATION_OPERATION_EVALUATE = 2082746549;
+			static const int LITERALREALEVALUATION_OPERATION_EVALUATE = 1447781419;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralRealEvaluation_Class() const = 0;
@@ -184,7 +184,7 @@ namespace fUML::Semantics::Values
 			static const unsigned int LITERALSTRINGEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALSTRINGEVALUATION_OPERATION_EVALUATE = 2082746549;
+			static const int LITERALSTRINGEVALUATION_OPERATION_EVALUATE = 970736967;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralStringEvaluation_Class() const = 0;
@@ -203,7 +203,7 @@ namespace fUML::Semantics::Values
 			static const unsigned int LITERALUNLIMITEDNATURALEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int LITERALUNLIMITEDNATURALEVALUATION_OPERATION_EVALUATE = 2082746549;
+			static const int LITERALUNLIMITEDNATURALEVALUATION_OPERATION_EVALUATE = 1159124191;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getLiteralUnlimitedNaturalEvaluation_Class() const = 0;
@@ -222,14 +222,14 @@ namespace fUML::Semantics::Values
 			static const unsigned int VALUE_CLASS_OPERATION_COUNT = 10;
 			
 			
-			static const int VALUE_OPERATION__COPY = 27248265;
-			static const int VALUE_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER = 1736196815;
-			static const int VALUE_OPERATION_EQUALS_VALUE = 2018750781;
-			static const int VALUE_OPERATION_GETTYPES = 248188260;
-			static const int VALUE_OPERATION_HASTYPES_CLASSIFIER = 201520614;
-			static const int VALUE_OPERATION_OBJECTID = 191528192;
-			static const int VALUE_OPERATION_SPECIFY = 491694577;
-			static const int VALUE_OPERATION_TOSTRING = 29867880;
+			static const int VALUE_OPERATION__COPY = 569532635;
+			static const int VALUE_OPERATION_CHECKALLPARENTS_CLASSIFIER_CLASSIFIER = 1176194197;
+			static const int VALUE_OPERATION_EQUALS_VALUE = 1153535893;
+			static const int VALUE_OPERATION_GETTYPES = 53656869;
+			static const int VALUE_OPERATION_HASTYPES_CLASSIFIER = 157177571;
+			static const int VALUE_OPERATION_OBJECTID = 520851197;
+			static const int VALUE_OPERATION_SPECIFY = 164025975;
+			static const int VALUE_OPERATION_TOSTRING = 780447699;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getValue_Class() const = 0;

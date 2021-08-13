@@ -55,7 +55,7 @@ namespace PSCS::Semantics::Classification
 			static const unsigned int CS_INSTANCEVALUEEVALUATION_CLASS_OPERATION_COUNT = 5;
 			
 			
-			static const int CS_INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 355211665;
+			static const int CS_INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 71521778;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCS_InstanceValueEvaluation_Class() const = 0;

@@ -59,11 +59,11 @@ namespace PSCS::Semantics::Loci
 			static const unsigned int CS_EXECUTIONFACTORY_CLASS_FEATURE_COUNT = 5;
 			static const unsigned int CS_EXECUTIONFACTORY_CLASS_OPERATION_COUNT = 14;
 			
-			static const long long CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES = 911426052;
+			static const long long CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES = 167161141;
 			
-			static const int CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT = 1526328214;
-			static const int CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING = 1025633209;
-			static const int CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 1852163798;
+			static const int CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT = 305337573;
+			static const int CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING = 1716538227;
+			static const int CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT = 689017765;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCS_ExecutionFactory_Class() const = 0;
@@ -85,7 +85,7 @@ namespace PSCS::Semantics::Loci
 			static const unsigned int CS_EXECUTOR_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int CS_EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 319186936;
+			static const int CS_EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE = 1767369396;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCS_Executor_Class() const = 0;
@@ -104,7 +104,7 @@ namespace PSCS::Semantics::Loci
 			static const unsigned int CS_LOCUS_CLASS_OPERATION_COUNT = 8;
 			
 			
-			static const int CS_LOCUS_OPERATION_INSTANTIATE_CLASS = 646357833;
+			static const int CS_LOCUS_OPERATION_INSTANTIATE_CLASS = 1523861822;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getCS_Locus_Class() const = 0;

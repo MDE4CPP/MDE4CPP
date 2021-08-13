@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -315,7 +314,10 @@ Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERAL:
-			return eAny(getGeneral()); //1096
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getGeneral();
+				return eAny(returnValue); //1096
+			}
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_GENERALIZATIONSET:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -331,7 +333,10 @@ Any GeneralizationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_ISSUBSTITUTABLE:
 			return eAny(getIsSubstitutable()); //1098
 		case uml::umlPackage::GENERALIZATION_ATTRIBUTE_SPECIFIC:
-			return eAny(getSpecific().lock()); //1099
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSpecific().lock();
+				return eAny(returnValue); //1099
+			}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }

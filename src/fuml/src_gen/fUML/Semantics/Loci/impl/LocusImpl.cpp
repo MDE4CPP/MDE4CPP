@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -347,7 +348,10 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXECUTOR:
-			return eAny(getExecutor()); //770
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExecutor();
+				return eAny(returnValue); //770
+			}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_EXTENSIONALVALUES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -361,7 +365,10 @@ Any LocusImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //772			
 		}
 		case fUML::Semantics::Loci::LociPackage::LOCUS_ATTRIBUTE_FACTORY:
-			return eAny(getFactory()); //771
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getFactory();
+				return eAny(returnValue); //771
+			}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

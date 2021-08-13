@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -31,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 
@@ -351,11 +352,20 @@ Any IfExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:
-			return eAny(getCondition()); //3022
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCondition();
+				return eAny(returnValue); //3022
+			}
 		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:
-			return eAny(getElseExpression()); //3024
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getElseExpression();
+				return eAny(returnValue); //3024
+			}
 		case ocl::Expressions::ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:
-			return eAny(getThenExpression()); //3023
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getThenExpression();
+				return eAny(returnValue); //3023
+			}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }

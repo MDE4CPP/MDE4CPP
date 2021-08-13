@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -320,7 +320,10 @@ Any ClauseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //384			
 		}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_DECIDER:
-			return eAny(getDecider()); //385
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDecider();
+				return eAny(returnValue); //385
+			}
 		case uml::umlPackage::CLAUSE_ATTRIBUTE_PREDECESSORCLAUSE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

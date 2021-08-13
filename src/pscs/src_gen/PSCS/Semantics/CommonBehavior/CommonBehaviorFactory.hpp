@@ -6,13 +6,13 @@
 
 #ifndef PSCS_SEMANTICS_COMMONBEHAVIORFACTORY_HPP
 #define PSCS_SEMANTICS_COMMONBEHAVIORFACTORY_HPP
+// namespace macro header include
+#include "PSCS/PSCS.hpp"
 
 #include <map>
 #include <memory>
 
-// namespace macro header include
-#include "PSCS/PSCS.hpp"
-
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/CommonBehavior/CommonBehaviorPackage.hpp"
 
@@ -41,9 +41,7 @@ namespace PSCS::Semantics::CommonBehavior
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
 			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> createCS_CallEventExecution(const int metaElementID = CommonBehaviorPackage::CS_CALLEVENTEXECUTION_CLASS) const = 0;
-			
 			virtual std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> createCS_EventOccurrence(const int metaElementID = CommonBehaviorPackage::CS_EVENTOCCURRENCE_CLASS) const = 0;
-			
 			
 	};
 }

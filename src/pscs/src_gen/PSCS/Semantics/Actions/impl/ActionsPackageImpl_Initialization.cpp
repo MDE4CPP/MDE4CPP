@@ -102,7 +102,7 @@ void ActionsPackageImpl::initializeCS_AcceptCallActionActivationContent()
 	m_cS_AcceptCallActionActivation_Operation_accept_EventOccurrence->setUnique(true);
 	m_cS_AcceptCallActionActivation_Operation_accept_EventOccurrence->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_AcceptCallActionActivation_Operation_accept_EventOccurrence);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_AcceptCallActionActivation_Operation_accept_EventOccurrence);
 		parameter->setName("eventOccurrence");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -135,7 +135,7 @@ void ActionsPackageImpl::initializeCS_AcceptEventActionActivationContent()
 	m_cS_AcceptEventActionActivation_Operation_accept_EventOccurrence->setUnique(true);
 	m_cS_AcceptEventActionActivation_Operation_accept_EventOccurrence->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_AcceptEventActionActivation_Operation_accept_EventOccurrence);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_AcceptEventActionActivation_Operation_accept_EventOccurrence);
 		parameter->setName("eventOccurrence");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -199,7 +199,7 @@ void ActionsPackageImpl::initializeCS_CallOperationActionActivationContent()
 	m_cS_CallOperationActionActivation_Operation__isCreate_Operation->setUnique(true);
 	m_cS_CallOperationActionActivation_Operation__isCreate_Operation->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_CallOperationActionActivation_Operation__isCreate_Operation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_CallOperationActionActivation_Operation__isCreate_Operation);
 		parameter->setName("operation");
 		parameter->setEType(uml::umlPackage::eInstance()->getOperation_Class());
 		parameter->setLowerBound(0);
@@ -235,7 +235,7 @@ void ActionsPackageImpl::initializeCS_CallOperationActionActivationContent()
 	m_cS_CallOperationActionActivation_Operation_isCreate_Operation->setUnique(true);
 	m_cS_CallOperationActionActivation_Operation_isCreate_Operation->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_CallOperationActionActivation_Operation_isCreate_Operation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_CallOperationActionActivation_Operation_isCreate_Operation);
 		parameter->setName("operation");
 		parameter->setEType(uml::umlPackage::eInstance()->getOperation_Class());
 		parameter->setLowerBound(0);
@@ -251,7 +251,7 @@ void ActionsPackageImpl::initializeCS_CallOperationActionActivationContent()
 	m_cS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation->setUnique(true);
 	m_cS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation);
 		parameter->setName("port");
 		parameter->setEType(uml::umlPackage::eInstance()->getPort_Class());
 		parameter->setLowerBound(0);
@@ -261,7 +261,7 @@ void ActionsPackageImpl::initializeCS_CallOperationActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_CallOperationActionActivation_Operation_isOperationProvided_Port_Operation);
 		parameter->setName("operation");
 		parameter->setEType(uml::umlPackage::eInstance()->getOperation_Class());
 		parameter->setLowerBound(0);
@@ -277,7 +277,7 @@ void ActionsPackageImpl::initializeCS_CallOperationActionActivationContent()
 	m_cS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation->setUnique(true);
 	m_cS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation);
 		parameter->setName("port");
 		parameter->setEType(uml::umlPackage::eInstance()->getPort_Class());
 		parameter->setLowerBound(0);
@@ -287,7 +287,7 @@ void ActionsPackageImpl::initializeCS_CallOperationActionActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_CallOperationActionActivation_Operation_isOperationRequired_Port_Operation);
 		parameter->setName("operation");
 		parameter->setEType(uml::umlPackage::eInstance()->getOperation_Class());
 		parameter->setLowerBound(0);
@@ -327,7 +327,7 @@ void ActionsPackageImpl::initializeCS_ClearStructuralFeatureActionActivationCont
 	m_cS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_StructuredValue_StructuralFeature->setUnique(true);
 	m_cS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_StructuredValue_StructuralFeature->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_StructuredValue_StructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_StructuredValue_StructuralFeature);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStructuredValue_Class());
 		parameter->setLowerBound(0);
@@ -337,7 +337,7 @@ void ActionsPackageImpl::initializeCS_ClearStructuralFeatureActionActivationCont
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_StructuredValue_StructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_ClearStructuralFeatureActionActivation_Operation_getLinksToDestroy_StructuredValue_StructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -353,7 +353,7 @@ void ActionsPackageImpl::initializeCS_ClearStructuralFeatureActionActivationCont
 	m_cS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature->setUnique(true);
 	m_cS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature);
 		parameter->setName("context");
 		parameter->setEType(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_Reference_Class());
 		parameter->setLowerBound(0);
@@ -363,7 +363,7 @@ void ActionsPackageImpl::initializeCS_ClearStructuralFeatureActionActivationCont
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_ClearStructuralFeatureActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -390,7 +390,7 @@ void ActionsPackageImpl::initializeCS_ConstructStrategyContent()
 	m_cS_ConstructStrategy_Operation_construct_Operation_CS_Object->setUnique(true);
 	m_cS_ConstructStrategy_Operation_construct_Operation_CS_Object->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_ConstructStrategy_Operation_construct_Operation_CS_Object);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_ConstructStrategy_Operation_construct_Operation_CS_Object);
 		parameter->setName("constructor");
 		parameter->setEType(uml::umlPackage::eInstance()->getOperation_Class());
 		parameter->setLowerBound(0);
@@ -400,7 +400,7 @@ void ActionsPackageImpl::initializeCS_ConstructStrategyContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_ConstructStrategy_Operation_construct_Operation_CS_Object);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_ConstructStrategy_Operation_construct_Operation_CS_Object);
 		parameter->setName("context");
 		parameter->setEType(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_Object_Class());
 		parameter->setLowerBound(0);
@@ -554,7 +554,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value->setUnique(true);
 	m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value);
 		parameter->setName("context");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -564,7 +564,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value);
 		parameter->setName("feature");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -574,7 +574,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_addStructuralFeatureValue_CS_Reference_Value);
 		parameter->setName("value");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -590,7 +590,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	m_cS_DefaultConstructStrategy_Operation_canInstantiate_Property->setUnique(true);
 	m_cS_DefaultConstructStrategy_Operation_canInstantiate_Property->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_canInstantiate_Property);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_canInstantiate_Property);
 		parameter->setName("p");
 		parameter->setEType(uml::umlPackage::eInstance()->getProperty_Class());
 		parameter->setLowerBound(0);
@@ -606,7 +606,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	m_cS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object->setUnique(true);
 	m_cS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object);
 		parameter->setName("constructor");
 		parameter->setEType(uml::umlPackage::eInstance()->getOperation_Class());
 		parameter->setLowerBound(0);
@@ -616,7 +616,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_construct_Operation_CS_Object);
 		parameter->setName("context");
 		parameter->setEType(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_Object_Class());
 		parameter->setLowerBound(0);
@@ -632,7 +632,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	m_cS_DefaultConstructStrategy_Operation_constructObject_CS_Object_Class->setUnique(true);
 	m_cS_DefaultConstructStrategy_Operation_constructObject_CS_Object_Class->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_constructObject_CS_Object_Class);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_constructObject_CS_Object_Class);
 		parameter->setName("context");
 		parameter->setEType(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_Object_Class());
 		parameter->setLowerBound(0);
@@ -642,7 +642,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_constructObject_CS_Object_Class);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_constructObject_CS_Object_Class);
 		parameter->setName("type");
 		parameter->setEType(uml::umlPackage::eInstance()->getClass_Class());
 		parameter->setLowerBound(0);
@@ -664,7 +664,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	m_cS_DefaultConstructStrategy_Operation_generateArrayPattern_CS_Reference_Connector->setUnique(true);
 	m_cS_DefaultConstructStrategy_Operation_generateArrayPattern_CS_Reference_Connector->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_generateArrayPattern_CS_Reference_Connector);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_generateArrayPattern_CS_Reference_Connector);
 		parameter->setName("context");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -674,7 +674,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_generateArrayPattern_CS_Reference_Connector);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_generateArrayPattern_CS_Reference_Connector);
 		parameter->setName("connector");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -690,7 +690,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	m_cS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString->setUnique(true);
 	m_cS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString);
 		parameter->setName("interface_");
 		parameter->setEType(uml::umlPackage::eInstance()->getInterface_Class());
 		parameter->setLowerBound(0);
@@ -700,7 +700,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_generateRealizingClass_Interface_EString);
 		parameter->setName("className");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 		parameter->setLowerBound(0);
@@ -722,7 +722,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	m_cS_DefaultConstructStrategy_Operation_generateStarPattern_CS_Reference_Connector->setUnique(true);
 	m_cS_DefaultConstructStrategy_Operation_generateStarPattern_CS_Reference_Connector->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_generateStarPattern_CS_Reference_Connector);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_generateStarPattern_CS_Reference_Connector);
 		parameter->setName("context");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -732,7 +732,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_generateStarPattern_CS_Reference_Connector);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_generateStarPattern_CS_Reference_Connector);
 		parameter->setName("connector");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -748,7 +748,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	m_cS_DefaultConstructStrategy_Operation_getCardinality_ConnectorEnd->setUnique(true);
 	m_cS_DefaultConstructStrategy_Operation_getCardinality_ConnectorEnd->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_getCardinality_ConnectorEnd);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_getCardinality_ConnectorEnd);
 		parameter->setName("end");
 		parameter->setEType(uml::umlPackage::eInstance()->getConnectorEnd_Class());
 		parameter->setLowerBound(0);
@@ -771,7 +771,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	m_cS_DefaultConstructStrategy_Operation_getRealizingClass_Interface->setUnique(true);
 	m_cS_DefaultConstructStrategy_Operation_getRealizingClass_Interface->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_getRealizingClass_Interface);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_getRealizingClass_Interface);
 		parameter->setName("interface_");
 		parameter->setEType(uml::umlPackage::eInstance()->getInterface_Class());
 		parameter->setLowerBound(0);
@@ -787,7 +787,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	m_cS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_CS_Reference_ConnectorEnd->setUnique(true);
 	m_cS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_CS_Reference_ConnectorEnd->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_CS_Reference_ConnectorEnd);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_CS_Reference_ConnectorEnd);
 		parameter->setName("context");
 		parameter->setEType(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_Reference_Class());
 		parameter->setLowerBound(0);
@@ -797,7 +797,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_CS_Reference_ConnectorEnd);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_getValuesFromConnectorEnd_CS_Reference_ConnectorEnd);
 		parameter->setName("end");
 		parameter->setEType(uml::umlPackage::eInstance()->getConnectorEnd_Class());
 		parameter->setLowerBound(0);
@@ -813,7 +813,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	m_cS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus->setUnique(true);
 	m_cS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus);
 		parameter->setName("interface");
 		parameter->setEType(uml::umlPackage::eInstance()->getInterface_Class());
 		parameter->setLowerBound(0);
@@ -823,7 +823,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_instantiateInterface_Interface_Locus);
 		parameter->setName("locus");
 		parameter->setEType(fUML::Semantics::Loci::LociPackage::eInstance()->getLocus_Class());
 		parameter->setLowerBound(0);
@@ -839,7 +839,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	m_cS_DefaultConstructStrategy_Operation_isArrayPattern_Connector->setUnique(true);
 	m_cS_DefaultConstructStrategy_Operation_isArrayPattern_Connector->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_isArrayPattern_Connector);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_isArrayPattern_Connector);
 		parameter->setName("c");
 		parameter->setEType(uml::umlPackage::eInstance()->getConnector_Class());
 		parameter->setLowerBound(0);
@@ -855,7 +855,7 @@ void ActionsPackageImpl::initializeCS_DefaultConstructStrategyContent()
 	m_cS_DefaultConstructStrategy_Operation_isStarPattern_Connector->setUnique(true);
 	m_cS_DefaultConstructStrategy_Operation_isStarPattern_Connector->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_DefaultConstructStrategy_Operation_isStarPattern_Connector);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_DefaultConstructStrategy_Operation_isStarPattern_Connector);
 		parameter->setName("c");
 		parameter->setEType(uml::umlPackage::eInstance()->getConnector_Class());
 		parameter->setLowerBound(0);
@@ -943,7 +943,7 @@ void ActionsPackageImpl::initializeCS_RemoveStructuralFeatureValueActionActivati
 	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value->setUnique(true);
 	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getStructuredValue_Class());
 		parameter->setLowerBound(0);
@@ -953,7 +953,7 @@ void ActionsPackageImpl::initializeCS_RemoveStructuralFeatureValueActionActivati
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value);
 		parameter->setName("feature");
 		parameter->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -963,7 +963,7 @@ void ActionsPackageImpl::initializeCS_RemoveStructuralFeatureValueActionActivati
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getLinksToDestroy_StructuredValue_Value);
 		parameter->setName("removedValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -979,7 +979,7 @@ void ActionsPackageImpl::initializeCS_RemoveStructuralFeatureValueActionActivati
 	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature->setUnique(true);
 	m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature);
 		parameter->setName("context");
 		parameter->setEType(PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getCS_Reference_Class());
 		parameter->setLowerBound(0);
@@ -989,7 +989,7 @@ void ActionsPackageImpl::initializeCS_RemoveStructuralFeatureValueActionActivati
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_RemoveStructuralFeatureValueActionActivation_Operation_getPotentialLinkEnds_CS_Reference_StructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 		parameter->setLowerBound(0);

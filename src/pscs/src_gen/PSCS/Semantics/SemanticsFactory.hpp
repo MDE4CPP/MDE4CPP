@@ -6,30 +6,22 @@
 
 #ifndef PSCS_SEMANTICSFACTORY_HPP
 #define PSCS_SEMANTICSFACTORY_HPP
+// namespace macro header include
+#include "PSCS/PSCS.hpp"
 
 #include <map>
 #include <memory>
 
-// namespace macro header include
-#include "PSCS/PSCS.hpp"
-
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/SemanticsPackage.hpp"
 
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
 
 
 
 
 
 
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
 
 
 

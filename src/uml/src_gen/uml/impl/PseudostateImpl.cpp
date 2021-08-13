@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -345,9 +344,15 @@ Any PseudostateImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_KIND:
 			return eAny(getKind()); //18913
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATE:
-			return eAny(getState().lock()); //18912
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getState().lock();
+				return eAny(returnValue); //18912
+			}
 		case uml::umlPackage::PSEUDOSTATE_ATTRIBUTE_STATEMACHINE:
-			return eAny(getStateMachine().lock()); //18914
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getStateMachine().lock();
+				return eAny(returnValue); //18914
+			}
 	}
 	return VertexImpl::eGet(featureID, resolve, coreType);
 }

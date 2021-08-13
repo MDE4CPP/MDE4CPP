@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -229,7 +228,10 @@ Any MessageEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::MESSAGEEND_ATTRIBUTE_MESSAGE:
-			return eAny(getMessage()); //1489
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getMessage();
+				return eAny(returnValue); //1489
+			}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

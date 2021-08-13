@@ -179,7 +179,7 @@ void TypesPackageImpl::initializeCollectionTypeContent()
 	m_collectionType_Operation_kindOf_CollectionType->setUnique(true);
 	m_collectionType_Operation_kindOf_CollectionType->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_collectionType_Operation_kindOf_CollectionType);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_collectionType_Operation_kindOf_CollectionType);
 		parameter->setName("coll");
 		parameter->setEType(getCollectionType_Class());
 		parameter->setLowerBound(0);

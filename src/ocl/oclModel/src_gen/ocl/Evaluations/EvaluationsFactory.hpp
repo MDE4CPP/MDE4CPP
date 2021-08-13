@@ -6,13 +6,13 @@
 
 #ifndef OCL_EVALUATIONSFACTORY_HPP
 #define OCL_EVALUATIONSFACTORY_HPP
+// namespace macro header include
+#include "ocl/ocl.hpp"
 
 #include <map>
 #include <memory>
 
-// namespace macro header include
-#include "ocl/ocl.hpp"
-
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EFactory.hpp"
 #include "ocl/Evaluations/EvaluationsPackage.hpp"
 
@@ -41,77 +41,41 @@ namespace ocl::Evaluations
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
 			virtual std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> createAssociationClassCallExpEval(const int metaElementID = EvaluationsPackage::ASSOCIATIONCLASSCALLEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> createAssociationEndCallExpEval(const int metaElementID = EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> createAttributeCallExpEval(const int metaElementID = EvaluationsPackage::ATTRIBUTECALLEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> createBooleanLiteralExpEval(const int metaElementID = EvaluationsPackage::BOOLEANLITERALEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::CollectionItemEval> createCollectionItemEval(const int metaElementID = EvaluationsPackage::COLLECTIONITEMEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> createCollectionLiteralExpEval(const int metaElementID = EvaluationsPackage::COLLECTIONLITERALEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> createCollectionLiteralPartEval(const int metaElementID = EvaluationsPackage::COLLECTIONLITERALPARTEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::CollectionRangeEval> createCollectionRangeEval(const int metaElementID = EvaluationsPackage::COLLECTIONRANGEEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> createEnumLiteralExpEval(const int metaElementID = EvaluationsPackage::ENUMLITERALEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::EvalEnvironment> createEvalEnvironment(const int metaElementID = EvaluationsPackage::EVALENVIRONMENT_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::EvalNameSpace> createEvalNameSpace(const int metaElementID = EvaluationsPackage::EVALNAMESPACE_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> createExpressionInOclEval(const int metaElementID = EvaluationsPackage::EXPRESSIONINOCLEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::IfExpEval> createIfExpEval(const int metaElementID = EvaluationsPackage::IFEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> createIntegerLiteralExpEval(const int metaElementID = EvaluationsPackage::INTEGERLITERALEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::IterateExpEval> createIterateExpEval(const int metaElementID = EvaluationsPackage::ITERATEEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::IteratorExpEval> createIteratorExpEval(const int metaElementID = EvaluationsPackage::ITERATOREXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::LetExpEval> createLetExpEval(const int metaElementID = EvaluationsPackage::LETEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::LiteralExpEval> createLiteralExpEval(const int metaElementID = EvaluationsPackage::LITERALEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::LoopExpEval> createLoopExpEval(const int metaElementID = EvaluationsPackage::LOOPEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> createModelPropertyCallExpEval(const int metaElementID = EvaluationsPackage::MODELPROPERTYCALLEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> createNavigationCallExpEval(const int metaElementID = EvaluationsPackage::NAVIGATIONCALLEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> createNumericLiteralExpEval(const int metaElementID = EvaluationsPackage::NUMERICLITERALEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::OclExpEval> createOclExpEval(const int metaElementID = EvaluationsPackage::OCLEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::OclMessageArgEval> createOclMessageArgEval(const int metaElementID = EvaluationsPackage::OCLMESSAGEARGEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::OclMessageExpEval> createOclMessageExpEval(const int metaElementID = EvaluationsPackage::OCLMESSAGEEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::OperationCallExpEval> createOperationCallExpEval(const int metaElementID = EvaluationsPackage::OPERATIONCALLEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> createPrimitiveLiteralExpEval(const int metaElementID = EvaluationsPackage::PRIMITIVELITERALEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> createPropertyCallExpEval(const int metaElementID = EvaluationsPackage::PROPERTYCALLEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> createRealLiteralExpEval(const int metaElementID = EvaluationsPackage::REALLITERALEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> createStringLiteralExpEval(const int metaElementID = EvaluationsPackage::STRINGLITERALEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> createTupleLiteralExpEval(const int metaElementID = EvaluationsPackage::TUPLELITERALEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> createTupleLiteralExpPartEval(const int metaElementID = EvaluationsPackage::TUPLELITERALEXPPARTEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> createUnlimitedNaturalLiteralExpEval(const int metaElementID = EvaluationsPackage::UNLIMITEDNATURALLITERALEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> createUnspecifiedValueExpEval(const int metaElementID = EvaluationsPackage::UNSPECIFIEDVALUEEXPEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::VariableDeclEval> createVariableDeclEval(const int metaElementID = EvaluationsPackage::VARIABLEDECLEVAL_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ocl::Evaluations::VariableExpEval> createVariableExpEval(const int metaElementID = EvaluationsPackage::VARIABLEEXPEVAL_CLASS) const = 0;
-			
 			
 	};
 }

@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -549,7 +548,10 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			return eAny(tempList); //1316			
 		}
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_REPRESENTS:
-			return eAny(getRepresents()); //1317
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRepresents();
+				return eAny(returnValue); //1317
+			}
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUBPARTITION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -563,7 +565,10 @@ Any ActivityPartitionImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			return eAny(tempList); //1318			
 		}
 		case uml::umlPackage::ACTIVITYPARTITION_ATTRIBUTE_SUPERPARTITION:
-			return eAny(getSuperPartition().lock()); //1319
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSuperPartition().lock();
+				return eAny(returnValue); //1319
+			}
 	}
 	return ActivityGroupImpl::eGet(featureID, resolve, coreType);
 }

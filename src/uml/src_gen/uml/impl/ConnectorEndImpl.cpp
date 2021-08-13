@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -267,13 +267,25 @@ Any ConnectorEndImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_CONNECTOR:
-			return eAny(getConnector().lock()); //5412
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getConnector().lock();
+				return eAny(returnValue); //5412
+			}
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_DEFININGEND:
-			return eAny(getDefiningEnd()); //549
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDefiningEnd();
+				return eAny(returnValue); //549
+			}
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_PARTWITHPORT:
-			return eAny(getPartWithPort()); //5410
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getPartWithPort();
+				return eAny(returnValue); //5410
+			}
 		case uml::umlPackage::CONNECTOREND_ATTRIBUTE_ROLE:
-			return eAny(getRole()); //5411
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRole();
+				return eAny(returnValue); //5411
+			}
 	}
 	return MultiplicityElementImpl::eGet(featureID, resolve, coreType);
 }

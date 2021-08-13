@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -34,8 +35,8 @@
 
 #include <exception> // used in Persistence
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_Reference.hpp"
@@ -233,9 +234,15 @@ Any CS_InteractionPointImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_DEFININGPORT:
-			return eAny(getDefiningPort()); //172
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDefiningPort();
+				return eAny(returnValue); //172
+			}
 		case PSCS::Semantics::StructuredClassifiers::StructuredClassifiersPackage::CS_INTERACTIONPOINT_ATTRIBUTE_OWNER:
-			return eAny(getOwner()); //171
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOwner();
+				return eAny(returnValue); //171
+			}
 	}
 	return fUML::Semantics::StructuredClassifiers::ReferenceImpl::eGet(featureID, resolve, coreType);
 }

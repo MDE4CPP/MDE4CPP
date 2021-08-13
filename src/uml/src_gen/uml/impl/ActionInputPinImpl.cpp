@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -407,7 +406,10 @@ Any ActionInputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIONINPUTPIN_ATTRIBUTE_FROMACTION:
-			return eAny(getFromAction()); //641
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getFromAction();
+				return eAny(returnValue); //641
+			}
 	}
 	return InputPinImpl::eGet(featureID, resolve, coreType);
 }

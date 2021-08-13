@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -31,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 
@@ -309,7 +310,10 @@ Any AssociationClassCallExpImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::ASSOCIATIONCLASSCALLEXP_ATTRIBUTE_REFERREDASSOCIATIONCLASS:
-			return eAny(getReferredAssociationClass()); //226
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationClass();
+				return eAny(returnValue); //226
+			}
 	}
 	return NavigationCallExpImpl::eGet(featureID, resolve, coreType);
 }

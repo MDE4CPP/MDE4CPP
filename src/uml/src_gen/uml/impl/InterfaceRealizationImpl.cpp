@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -335,9 +334,15 @@ Any InterfaceRealizationImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_CONTRACT:
-			return eAny(getContract()); //12618
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getContract();
+				return eAny(returnValue); //12618
+			}
 		case uml::umlPackage::INTERFACEREALIZATION_ATTRIBUTE_IMPLEMENTINGCLASSIFIER:
-			return eAny(getImplementingClassifier().lock()); //12619
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getImplementingClassifier().lock();
+				return eAny(returnValue); //12619
+			}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }

@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -320,7 +319,10 @@ Any CallBehaviorActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::CALLBEHAVIORACTION_ATTRIBUTE_BEHAVIOR:
-			return eAny(getBehavior()); //2931
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBehavior();
+				return eAny(returnValue); //2931
+			}
 	}
 	return CallActionImpl::eGet(featureID, resolve, coreType);
 }

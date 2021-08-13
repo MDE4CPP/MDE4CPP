@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -389,13 +388,22 @@ Any ReduceActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_COLLECTION:
-			return eAny(getCollection()); //20627
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCollection();
+				return eAny(returnValue); //20627
+			}
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_ISORDERED:
 			return eAny(getIsOrdered()); //20628
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_REDUCER:
-			return eAny(getReducer()); //20629
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReducer();
+				return eAny(returnValue); //20629
+			}
 		case uml::umlPackage::REDUCEACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //20630
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //20630
+			}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

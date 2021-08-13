@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -370,9 +369,15 @@ Any ProtocolTransitionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_POSTCONDITION:
-			return eAny(getPostCondition()); //18826
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getPostCondition();
+				return eAny(returnValue); //18826
+			}
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_PRECONDITION:
-			return eAny(getPreCondition()); //18827
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getPreCondition();
+				return eAny(returnValue); //18827
+			}
 		case uml::umlPackage::PROTOCOLTRANSITION_ATTRIBUTE_REFERRED:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

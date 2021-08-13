@@ -40,7 +40,6 @@ namespace fUML::Semantics::Classification
 			//Creator functions
 			 virtual std::shared_ptr<fUML::Semantics::Classification::InstanceValueEvaluation> createInstanceValueEvaluation(const int metaElementID = ClassificationPackage::INSTANCEVALUEEVALUATION_CLASS) const ;
 			 
-			 
 
 		private:
 			static ClassificationFactory* create();

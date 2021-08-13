@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -48,8 +49,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "uml/umlFactory.hpp"
 
 
 #include "uml/Association.hpp"
@@ -721,7 +722,10 @@ Any CS_DefaultConstructStrategyImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_DEFAULTASSOCIATION:
-			return eAny(getDefaultAssociation()); //101
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDefaultAssociation();
+				return eAny(returnValue); //101
+			}
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_GENERATEDREALIZINGCLASSES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -735,7 +739,10 @@ Any CS_DefaultConstructStrategyImpl::eGet(int featureID, bool resolve, bool core
 			return eAny(tempList); //102			
 		}
 		case PSCS::Semantics::Actions::ActionsPackage::CS_DEFAULTCONSTRUCTSTRATEGY_ATTRIBUTE_LOCUS:
-			return eAny(getLocus()); //100
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLocus();
+				return eAny(returnValue); //100
+			}
 	}
 	return CS_ConstructStrategyImpl::eGet(featureID, resolve, coreType);
 }

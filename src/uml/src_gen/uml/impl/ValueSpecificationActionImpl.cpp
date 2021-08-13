@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -332,9 +331,15 @@ Any ValueSpecificationActionImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //25127
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //25127
+			}
 		case uml::umlPackage::VALUESPECIFICATIONACTION_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //25128
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getValue();
+				return eAny(returnValue); //25128
+			}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

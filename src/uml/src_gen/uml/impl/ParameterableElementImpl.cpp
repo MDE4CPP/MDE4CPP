@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -231,9 +231,15 @@ Any ParameterableElementImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_OWNINGTEMPLATEPARAMETER:
-			return eAny(getOwningTemplateParameter().lock()); //1783
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOwningTemplateParameter().lock();
+				return eAny(returnValue); //1783
+			}
 		case uml::umlPackage::PARAMETERABLEELEMENT_ATTRIBUTE_TEMPLATEPARAMETER:
-			return eAny(getTemplateParameter()); //1784
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTemplateParameter();
+				return eAny(returnValue); //1784
+			}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

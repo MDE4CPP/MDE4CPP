@@ -47,17 +47,11 @@ namespace fUML::Semantics::Values
 
 			//Creator functions
 			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralBooleanEvaluation> createLiteralBooleanEvaluation(const int metaElementID = ValuesPackage::LITERALBOOLEANEVALUATION_CLASS) const ;
-			 
 			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralIntegerEvaluation> createLiteralIntegerEvaluation(const int metaElementID = ValuesPackage::LITERALINTEGEREVALUATION_CLASS) const ;
-			 
 			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralNullEvaluation> createLiteralNullEvaluation(const int metaElementID = ValuesPackage::LITERALNULLEVALUATION_CLASS) const ;
-			 
 			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralRealEvaluation> createLiteralRealEvaluation(const int metaElementID = ValuesPackage::LITERALREALEVALUATION_CLASS) const ;
-			 
 			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralStringEvaluation> createLiteralStringEvaluation(const int metaElementID = ValuesPackage::LITERALSTRINGEVALUATION_CLASS) const ;
-			 
 			 virtual std::shared_ptr<fUML::Semantics::Values::LiteralUnlimitedNaturalEvaluation> createLiteralUnlimitedNaturalEvaluation(const int metaElementID = ValuesPackage::LITERALUNLIMITEDNATURALEVALUATION_CLASS) const ;
-			 
 			 
 
 		private:

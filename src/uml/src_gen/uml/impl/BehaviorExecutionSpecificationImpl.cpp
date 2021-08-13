@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -240,7 +239,10 @@ Any BehaviorExecutionSpecificationImpl::eGet(int featureID, bool resolve, bool c
 	switch(featureID)
 	{
 		case uml::umlPackage::BEHAVIOREXECUTIONSPECIFICATION_ATTRIBUTE_BEHAVIOR:
-			return eAny(getBehavior()); //2415
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBehavior();
+				return eAny(returnValue); //2415
+			}
 	}
 	return ExecutionSpecificationImpl::eGet(featureID, resolve, coreType);
 }

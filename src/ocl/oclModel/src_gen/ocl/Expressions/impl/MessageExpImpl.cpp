@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -31,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 
@@ -374,11 +375,20 @@ Any MessageExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //4823			
 		}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_CALLEDOPERATION:
-			return eAny(getCalledOperation()); //4824
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCalledOperation();
+				return eAny(returnValue); //4824
+			}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_SENTSIGNAL:
-			return eAny(getSentSignal()); //4825
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSentSignal();
+				return eAny(returnValue); //4825
+			}
 		case ocl::Expressions::ExpressionsPackage::MESSAGEEXP_ATTRIBUTE_TARGET:
-			return eAny(getTarget()); //4822
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTarget();
+				return eAny(returnValue); //4822
+			}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }

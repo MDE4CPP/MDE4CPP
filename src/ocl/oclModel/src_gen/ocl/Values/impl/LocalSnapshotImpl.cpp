@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -297,9 +298,15 @@ Any LocalSnapshotImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //456			
 		}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_PRED:
-			return eAny(getPred()); //451
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getPred();
+				return eAny(returnValue); //451
+			}
 		case ocl::Values::ValuesPackage::LOCALSNAPSHOT_ATTRIBUTE_SUCC:
-			return eAny(getSucc()); //450
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSucc();
+				return eAny(returnValue); //450
+			}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -244,7 +243,10 @@ Any StateInvariantImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::STATEINVARIANT_ATTRIBUTE_INVARIANT:
-			return eAny(getInvariant()); //22113
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInvariant();
+				return eAny(returnValue); //22113
+			}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }

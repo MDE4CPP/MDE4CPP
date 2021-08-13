@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -233,7 +232,10 @@ Any ExtensionPointImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXTENSIONPOINT_ATTRIBUTE_USECASE:
-			return eAny(getUseCase().lock()); //9912
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getUseCase().lock();
+				return eAny(returnValue); //9912
+			}
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }

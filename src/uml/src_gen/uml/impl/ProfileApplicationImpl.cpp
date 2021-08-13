@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -311,9 +310,15 @@ Any ProfileApplicationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLIEDPROFILE:
-			return eAny(getAppliedProfile()); //1846
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAppliedProfile();
+				return eAny(returnValue); //1846
+			}
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_APPLYINGPACKAGE:
-			return eAny(getApplyingPackage().lock()); //1848
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getApplyingPackage().lock();
+				return eAny(returnValue); //1848
+			}
 		case uml::umlPackage::PROFILEAPPLICATION_ATTRIBUTE_ISSTRICT:
 			return eAny(getIsStrict()); //1847
 	}

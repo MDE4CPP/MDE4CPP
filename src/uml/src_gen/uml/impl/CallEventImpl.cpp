@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -237,7 +236,10 @@ Any CallEventImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::CALLEVENT_ATTRIBUTE_OPERATION:
-			return eAny(getOperation()); //3112
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOperation();
+				return eAny(returnValue); //3112
+			}
 	}
 	return MessageEventImpl::eGet(featureID, resolve, coreType);
 }

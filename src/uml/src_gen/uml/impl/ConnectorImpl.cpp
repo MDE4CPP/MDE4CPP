@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -480,9 +479,15 @@ Any ConnectorImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //5317			
 		}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_STRUCTUREDCLASSIFIER:
-			return eAny(getStructuredClassifier().lock()); //5319
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getStructuredClassifier().lock();
+				return eAny(returnValue); //5319
+			}
 		case uml::umlPackage::CONNECTOR_ATTRIBUTE_TYPE:
-			return eAny(getType()); //5318
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //5318
+			}
 	}
 	return FeatureImpl::eGet(featureID, resolve, coreType);
 }

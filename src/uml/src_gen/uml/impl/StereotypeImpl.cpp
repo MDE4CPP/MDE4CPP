@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -551,7 +550,10 @@ Any StereotypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //22352			
 		}
 		case uml::umlPackage::STEREOTYPE_ATTRIBUTE_PROFILE:
-			return eAny(getProfile()); //22353
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getProfile();
+				return eAny(returnValue); //22353
+			}
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }

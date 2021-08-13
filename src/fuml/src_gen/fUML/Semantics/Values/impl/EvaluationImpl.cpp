@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -181,9 +182,15 @@ Any EvaluationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_LOCUS:
-			return eAny(getLocus()); //421
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLocus();
+				return eAny(returnValue); //421
+			}
 		case fUML::Semantics::Values::ValuesPackage::EVALUATION_ATTRIBUTE_SPECIFICATION:
-			return eAny(getSpecification()); //420
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSpecification();
+				return eAny(returnValue); //420
+			}
 	}
 	return fUML::Semantics::Loci::SemanticVisitorImpl::eGet(featureID, resolve, coreType);
 }

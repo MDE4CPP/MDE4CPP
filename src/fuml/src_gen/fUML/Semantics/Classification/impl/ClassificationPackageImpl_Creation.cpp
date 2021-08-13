@@ -37,10 +37,10 @@ void ClassificationPackageImpl::createPackageContents(std::shared_ptr<ecore::EPa
 
 void ClassificationPackageImpl::createInstanceValueEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
-	m_instanceValueEvaluation_Class = factory->createEClass_in_EPackage(package, INSTANCEVALUEEVALUATION_CLASS);
+	m_instanceValueEvaluation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, INSTANCEVALUEEVALUATION_CLASS);
 	
 	
-	m_instanceValueEvaluation_Operation_evaluate = factory->createEOperation_in_EContainingClass(m_instanceValueEvaluation_Class, INSTANCEVALUEEVALUATION_OPERATION_EVALUATE);
+	m_instanceValueEvaluation_Operation_evaluate = factory->createEOperation_as_eOperations_in_EClass(m_instanceValueEvaluation_Class, INSTANCEVALUEEVALUATION_OPERATION_EVALUATE);
 	
 }
 

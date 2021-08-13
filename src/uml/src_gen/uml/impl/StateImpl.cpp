@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -747,11 +746,20 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //22023			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_DOACTIVITY:
-			return eAny(getDoActivity()); //22024
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDoActivity();
+				return eAny(returnValue); //22024
+			}
 		case uml::umlPackage::STATE_ATTRIBUTE_ENTRY:
-			return eAny(getEntry()); //22025
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEntry();
+				return eAny(returnValue); //22025
+			}
 		case uml::umlPackage::STATE_ATTRIBUTE_EXIT:
-			return eAny(getExit()); //22026
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExit();
+				return eAny(returnValue); //22026
+			}
 		case uml::umlPackage::STATE_ATTRIBUTE_ISCOMPOSITE:
 			return eAny(getIsComposite()); //22027
 		case uml::umlPackage::STATE_ATTRIBUTE_ISORTHOGONAL:
@@ -761,7 +769,10 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::STATE_ATTRIBUTE_ISSUBMACHINESTATE:
 			return eAny(getIsSubmachineState()); //22030
 		case uml::umlPackage::STATE_ATTRIBUTE_REDEFINEDSTATE:
-			return eAny(getRedefinedState()); //22031
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRedefinedState();
+				return eAny(returnValue); //22031
+			}
 		case uml::umlPackage::STATE_ATTRIBUTE_REGION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -775,9 +786,15 @@ Any StateImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //22034			
 		}
 		case uml::umlPackage::STATE_ATTRIBUTE_STATEINVARIANT:
-			return eAny(getStateInvariant()); //22032
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getStateInvariant();
+				return eAny(returnValue); //22032
+			}
 		case uml::umlPackage::STATE_ATTRIBUTE_SUBMACHINE:
-			return eAny(getSubmachine()); //22033
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSubmachine();
+				return eAny(returnValue); //22033
+			}
 	}
 	Any result;
 	result = NamespaceImpl::eGet(featureID, resolve, coreType);

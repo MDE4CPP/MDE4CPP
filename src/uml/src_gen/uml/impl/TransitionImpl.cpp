@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -518,19 +517,37 @@ Any TransitionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_CONTAINER:
-			return eAny(getContainer().lock()); //24125
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getContainer().lock();
+				return eAny(returnValue); //24125
+			}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_EFFECT:
-			return eAny(getEffect()); //24118
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEffect();
+				return eAny(returnValue); //24118
+			}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_GUARD:
-			return eAny(getGuard()); //24119
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getGuard();
+				return eAny(returnValue); //24119
+			}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_KIND:
 			return eAny(getKind()); //24120
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_REDEFINEDTRANSITION:
-			return eAny(getRedefinedTransition()); //24121
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRedefinedTransition();
+				return eAny(returnValue); //24121
+			}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_SOURCE:
-			return eAny(getSource()); //24122
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSource();
+				return eAny(returnValue); //24122
+			}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TARGET:
-			return eAny(getTarget()); //24123
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTarget();
+				return eAny(returnValue); //24123
+			}
 		case uml::umlPackage::TRANSITION_ATTRIBUTE_TRIGGER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

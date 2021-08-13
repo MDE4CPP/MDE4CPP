@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -334,9 +333,15 @@ Any SubstitutionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_CONTRACT:
-			return eAny(getContract()); //22918
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getContract();
+				return eAny(returnValue); //22918
+			}
 		case uml::umlPackage::SUBSTITUTION_ATTRIBUTE_SUBSTITUTINGCLASSIFIER:
-			return eAny(getSubstitutingClassifier().lock()); //22919
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSubstitutingClassifier().lock();
+				return eAny(returnValue); //22919
+			}
 	}
 	return RealizationImpl::eGet(featureID, resolve, coreType);
 }

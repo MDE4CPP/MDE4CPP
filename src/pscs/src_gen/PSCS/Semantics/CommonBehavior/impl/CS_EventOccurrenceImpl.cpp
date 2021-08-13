@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,10 +33,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
-#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
+#include "fUML/Semantics/CommonBehavior/CommonBehaviorFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/StructuredClassifiers/StructuredClassifiersFactory.hpp"
 
 
 #include "PSCS/Semantics/StructuredClassifiers/CS_InteractionPoint.hpp"
@@ -299,13 +300,22 @@ Any CS_EventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_INTERACTIONPOINT:
-			return eAny(getInteractionPoint()); //131
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInteractionPoint();
+				return eAny(returnValue); //131
+			}
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_ONPORT:
-			return eAny(getOnPort()); //134
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOnPort();
+				return eAny(returnValue); //134
+			}
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_PROPAGATIONINWARD:
 			return eAny(isPropagationInward()); //133
 		case PSCS::Semantics::CommonBehavior::CommonBehaviorPackage::CS_EVENTOCCURRENCE_ATTRIBUTE_WRAPPEDEVENTOCCURRENCE:
-			return eAny(getWrappedEventOccurrence()); //132
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getWrappedEventOccurrence();
+				return eAny(returnValue); //132
+			}
 	}
 	return fUML::Semantics::CommonBehavior::EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }

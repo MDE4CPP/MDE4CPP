@@ -625,7 +625,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getEOperation_EInt->setUnique(true);
 	m_eClass_Operation_getEOperation_EInt->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getEOperation_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eClass_Operation_getEOperation_EInt);
 		parameter->setName("operationID");
 		parameter->setEType(getEInt_Class());
 		parameter->setLowerBound(0);
@@ -641,7 +641,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getEStructuralFeature_EInt->setUnique(true);
 	m_eClass_Operation_getEStructuralFeature_EInt->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getEStructuralFeature_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eClass_Operation_getEStructuralFeature_EInt);
 		parameter->setName("featureID");
 		parameter->setEType(getEInt_Class());
 		parameter->setLowerBound(0);
@@ -657,7 +657,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getEStructuralFeature_EString->setUnique(true);
 	m_eClass_Operation_getEStructuralFeature_EString->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getEStructuralFeature_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eClass_Operation_getEStructuralFeature_EString);
 		parameter->setName("featureName");
 		parameter->setEType(getEString_Class());
 		parameter->setLowerBound(0);
@@ -680,7 +680,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getFeatureID_EStructuralFeature->setUnique(true);
 	m_eClass_Operation_getFeatureID_EStructuralFeature->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getFeatureID_EStructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eClass_Operation_getFeatureID_EStructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(getEStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -696,7 +696,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getFeatureType_EStructuralFeature->setUnique(true);
 	m_eClass_Operation_getFeatureType_EStructuralFeature->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getFeatureType_EStructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eClass_Operation_getFeatureType_EStructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(getEStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -719,7 +719,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getOperationID_EOperation->setUnique(true);
 	m_eClass_Operation_getOperationID_EOperation->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getOperationID_EOperation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eClass_Operation_getOperationID_EOperation);
 		parameter->setName("operation");
 		parameter->setEType(getEOperation_Class());
 		parameter->setLowerBound(0);
@@ -735,7 +735,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_getOverride_EOperation->setUnique(true);
 	m_eClass_Operation_getOverride_EOperation->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_getOverride_EOperation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eClass_Operation_getOverride_EOperation);
 		parameter->setName("operation");
 		parameter->setEType(getEOperation_Class());
 		parameter->setLowerBound(0);
@@ -751,7 +751,7 @@ void ecorePackageImpl::initializeEClassContent()
 	m_eClass_Operation_isSuperTypeOf_EClass->setUnique(true);
 	m_eClass_Operation_isSuperTypeOf_EClass->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClass_Operation_isSuperTypeOf_EClass);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eClass_Operation_isSuperTypeOf_EClass);
 		parameter->setName("someClass");
 		parameter->setEType(getEClass_Class());
 		parameter->setLowerBound(0);
@@ -912,7 +912,7 @@ void ecorePackageImpl::initializeEClassifierContent()
 	m_eClassifier_Operation_isInstance_EJavaObject->setUnique(true);
 	m_eClassifier_Operation_isInstance_EJavaObject->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eClassifier_Operation_isInstance_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eClassifier_Operation_isInstance_EJavaObject);
 		parameter->setName("object");
 		parameter->setEType(getEJavaObject_Class());
 		parameter->setLowerBound(0);
@@ -995,7 +995,7 @@ void ecorePackageImpl::initializeEEnumContent()
 	m_eEnum_Operation_getEEnumLiteral_EString->setUnique(true);
 	m_eEnum_Operation_getEEnumLiteral_EString->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eEnum_Operation_getEEnumLiteral_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eEnum_Operation_getEEnumLiteral_EString);
 		parameter->setName("name");
 		parameter->setEType(getEString_Class());
 		parameter->setLowerBound(0);
@@ -1011,7 +1011,7 @@ void ecorePackageImpl::initializeEEnumContent()
 	m_eEnum_Operation_getEEnumLiteral_EInt->setUnique(true);
 	m_eEnum_Operation_getEEnumLiteral_EInt->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eEnum_Operation_getEEnumLiteral_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eEnum_Operation_getEEnumLiteral_EInt);
 		parameter->setName("value");
 		parameter->setEType(getEInt_Class());
 		parameter->setLowerBound(0);
@@ -1027,7 +1027,7 @@ void ecorePackageImpl::initializeEEnumContent()
 	m_eEnum_Operation_getEEnumLiteralByLiteral_EString->setUnique(true);
 	m_eEnum_Operation_getEEnumLiteralByLiteral_EString->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eEnum_Operation_getEEnumLiteralByLiteral_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eEnum_Operation_getEEnumLiteralByLiteral_EString);
 		parameter->setName("literal");
 		parameter->setEType(getEString_Class());
 		parameter->setLowerBound(0);
@@ -1175,7 +1175,7 @@ void ecorePackageImpl::initializeEFactoryContent()
 	m_eFactory_Operation_convertToString_EDataType_EJavaObject->setUnique(true);
 	m_eFactory_Operation_convertToString_EDataType_EJavaObject->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_convertToString_EDataType_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eFactory_Operation_convertToString_EDataType_EJavaObject);
 		parameter->setName("eDataType");
 		parameter->setEType(getEDataType_Class());
 		parameter->setLowerBound(0);
@@ -1185,7 +1185,7 @@ void ecorePackageImpl::initializeEFactoryContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_convertToString_EDataType_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eFactory_Operation_convertToString_EDataType_EJavaObject);
 		parameter->setName("instanceValue");
 		parameter->setEType(getEJavaObject_Class());
 		parameter->setLowerBound(0);
@@ -1201,7 +1201,7 @@ void ecorePackageImpl::initializeEFactoryContent()
 	m_eFactory_Operation_create_EClass->setUnique(true);
 	m_eFactory_Operation_create_EClass->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_create_EClass);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eFactory_Operation_create_EClass);
 		parameter->setName("eClass");
 		parameter->setEType(getEClass_Class());
 		parameter->setLowerBound(0);
@@ -1217,7 +1217,7 @@ void ecorePackageImpl::initializeEFactoryContent()
 	m_eFactory_Operation_createFromString_EDataType_EString->setUnique(true);
 	m_eFactory_Operation_createFromString_EDataType_EString->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_createFromString_EDataType_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eFactory_Operation_createFromString_EDataType_EString);
 		parameter->setName("eDataType");
 		parameter->setEType(getEDataType_Class());
 		parameter->setLowerBound(0);
@@ -1227,7 +1227,7 @@ void ecorePackageImpl::initializeEFactoryContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eFactory_Operation_createFromString_EDataType_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eFactory_Operation_createFromString_EDataType_EString);
 		parameter->setName("literalValue");
 		parameter->setEType(getEString_Class());
 		parameter->setLowerBound(0);
@@ -1386,7 +1386,7 @@ void ecorePackageImpl::initializeEGenericTypeContent()
 	m_eGenericType_Operation_isInstance_EJavaObject->setUnique(true);
 	m_eGenericType_Operation_isInstance_EJavaObject->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eGenericType_Operation_isInstance_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eGenericType_Operation_isInstance_EJavaObject);
 		parameter->setName("object");
 		parameter->setEType(getEJavaObject_Class());
 		parameter->setLowerBound(0);
@@ -1438,7 +1438,7 @@ void ecorePackageImpl::initializeEModelElementContent()
 	m_eModelElement_Operation_getEAnnotation_EString->setUnique(true);
 	m_eModelElement_Operation_getEAnnotation_EString->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eModelElement_Operation_getEAnnotation_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eModelElement_Operation_getEAnnotation_EString);
 		parameter->setName("source");
 		parameter->setEType(getEString_Class());
 		parameter->setLowerBound(0);
@@ -1615,7 +1615,7 @@ void ecorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eGet_EStructuralFeature->setUnique(true);
 	m_eObject_Operation_eGet_EStructuralFeature->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eGet_EStructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eObject_Operation_eGet_EStructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(getEStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -1631,7 +1631,7 @@ void ecorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eGet_EStructuralFeature_EBoolean->setUnique(true);
 	m_eObject_Operation_eGet_EStructuralFeature_EBoolean->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eGet_EStructuralFeature_EBoolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eObject_Operation_eGet_EStructuralFeature_EBoolean);
 		parameter->setName("feature");
 		parameter->setEType(getEStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -1641,7 +1641,7 @@ void ecorePackageImpl::initializeEObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eGet_EStructuralFeature_EBoolean);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eObject_Operation_eGet_EStructuralFeature_EBoolean);
 		parameter->setName("resolve");
 		parameter->setEType(getEBoolean_Class());
 		parameter->setLowerBound(0);
@@ -1657,7 +1657,7 @@ void ecorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eInvoke_EOperation_EEList->setUnique(true);
 	m_eObject_Operation_eInvoke_EOperation_EEList->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eInvoke_EOperation_EEList);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eObject_Operation_eInvoke_EOperation_EEList);
 		parameter->setName("operation");
 		parameter->setEType(getEOperation_Class());
 		parameter->setLowerBound(0);
@@ -1667,7 +1667,7 @@ void ecorePackageImpl::initializeEObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eInvoke_EOperation_EEList);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eObject_Operation_eInvoke_EOperation_EEList);
 		parameter->setName("arguments");
 		parameter->setEType(getEEList_Class());
 		parameter->setLowerBound(0);
@@ -1690,7 +1690,7 @@ void ecorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eIsSet_EStructuralFeature->setUnique(true);
 	m_eObject_Operation_eIsSet_EStructuralFeature->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eIsSet_EStructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eObject_Operation_eIsSet_EStructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(getEStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -1719,7 +1719,7 @@ void ecorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eSet_EStructuralFeature_EJavaObject->setUnique(true);
 	m_eObject_Operation_eSet_EStructuralFeature_EJavaObject->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eSet_EStructuralFeature_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eObject_Operation_eSet_EStructuralFeature_EJavaObject);
 		parameter->setName("feature");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1729,7 +1729,7 @@ void ecorePackageImpl::initializeEObjectContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eSet_EStructuralFeature_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eObject_Operation_eSet_EStructuralFeature_EJavaObject);
 		parameter->setName("newValue");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1751,7 +1751,7 @@ void ecorePackageImpl::initializeEObjectContent()
 	m_eObject_Operation_eUnset_EStructuralFeature->setUnique(true);
 	m_eObject_Operation_eUnset_EStructuralFeature->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eObject_Operation_eUnset_EStructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eObject_Operation_eUnset_EStructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1921,7 +1921,7 @@ void ecorePackageImpl::initializeEOperationContent()
 	m_eOperation_Operation_isOverrideOf_EOperation->setUnique(true);
 	m_eOperation_Operation_isOverrideOf_EOperation->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eOperation_Operation_isOverrideOf_EOperation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eOperation_Operation_isOverrideOf_EOperation);
 		parameter->setName("someOperation");
 		parameter->setEType(getEOperation_Class());
 		parameter->setLowerBound(0);
@@ -2088,7 +2088,7 @@ void ecorePackageImpl::initializeEPackageContent()
 	m_ePackage_Operation_getEClassifier_EString->setUnique(true);
 	m_ePackage_Operation_getEClassifier_EString->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_ePackage_Operation_getEClassifier_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_ePackage_Operation_getEClassifier_EString);
 		parameter->setName("name");
 		parameter->setEType(getEString_Class());
 		parameter->setLowerBound(0);

@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,8 +31,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
 
 
 #include "ocl/Evaluations/OclExpEval.hpp"
@@ -171,9 +172,15 @@ Any VariableDeclEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_INITEXP:
-			return eAny(getInitExp()); //970
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInitExp();
+				return eAny(returnValue); //970
+			}
 		case ocl::Evaluations::EvaluationsPackage::VARIABLEDECLEVAL_ATTRIBUTE_NAME:
-			return eAny(getName()); //971
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getName();
+				return eAny(returnValue); //971
+			}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

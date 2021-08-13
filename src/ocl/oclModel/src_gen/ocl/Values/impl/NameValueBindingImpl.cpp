@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -37,8 +38,8 @@
 
 //Factories an Package includes
 #include "ocl/oclPackage.hpp"
-#include "fUML/Semantics/Values/ValuesPackage.hpp"
 #include "ocl/Values/ValuesPackage.hpp"
+#include "fUML/Semantics/Values/ValuesPackage.hpp"
 
 
 #include "ecore/EAttribute.hpp"
@@ -169,7 +170,10 @@ Any NameValueBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_NAME:
 			return eAny(getName()); //520
 		case ocl::Values::ValuesPackage::NAMEVALUEBINDING_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //521
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getValue();
+				return eAny(returnValue); //521
+			}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

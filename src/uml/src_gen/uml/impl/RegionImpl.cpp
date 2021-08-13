@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -489,11 +488,20 @@ Any RegionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::REGION_ATTRIBUTE_EXTENDEDREGION:
-			return eAny(getExtendedRegion()); //20718
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExtendedRegion();
+				return eAny(returnValue); //20718
+			}
 		case uml::umlPackage::REGION_ATTRIBUTE_STATE:
-			return eAny(getState().lock()); //20719
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getState().lock();
+				return eAny(returnValue); //20719
+			}
 		case uml::umlPackage::REGION_ATTRIBUTE_STATEMACHINE:
-			return eAny(getStateMachine().lock()); //20720
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getStateMachine().lock();
+				return eAny(returnValue); //20720
+			}
 		case uml::umlPackage::REGION_ATTRIBUTE_SUBVERTEX:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -542,7 +542,10 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //811			
 		}
 		case uml::umlPackage::ELEMENT_ATTRIBUTE_OWNER:
-			return eAny(getOwner().lock()); //812
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOwner().lock();
+				return eAny(returnValue); //812
+			}
 	}
 	return ObjectImpl::eGet(featureID, resolve, coreType);
 }

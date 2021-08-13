@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -526,21 +525,45 @@ Any InputPinImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ACTION:
-			return eAny(getAction().lock()); //11636
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAction().lock();
+				return eAny(returnValue); //11636
+			}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_ADDSTRUCTURALFEATUREVALUEACTION:
-			return eAny(getAddStructuralFeatureValueAction().lock()); //11638
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAddStructuralFeatureValueAction().lock();
+				return eAny(returnValue); //11638
+			}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_CALLOPERATIONACTION:
-			return eAny(getCallOperationAction().lock()); //11634
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCallOperationAction().lock();
+				return eAny(returnValue); //11634
+			}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_DESTROYOBJECTACTION:
-			return eAny(getDestroyObjectAction().lock()); //11639
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDestroyObjectAction().lock();
+				return eAny(returnValue); //11639
+			}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_INVOCATIONACTION:
-			return eAny(getInvocationAction().lock()); //11635
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInvocationAction().lock();
+				return eAny(returnValue); //11635
+			}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_REMOVESTRUCTURALFEATUREVALUEACTION:
-			return eAny(getRemoveStructuralFeatureValueAction().lock()); //11640
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRemoveStructuralFeatureValueAction().lock();
+				return eAny(returnValue); //11640
+			}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_STRUCTURALFEATUREACTION:
-			return eAny(getStructuralFeatureAction().lock()); //11633
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getStructuralFeatureAction().lock();
+				return eAny(returnValue); //11633
+			}
 		case uml::umlPackage::INPUTPIN_ATTRIBUTE_WRITESTRUCTURALFEATUREACTION:
-			return eAny(getWriteStructuralFeatureAction().lock()); //11637
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getWriteStructuralFeatureAction().lock();
+				return eAny(returnValue); //11637
+			}
 	}
 	return PinImpl::eGet(featureID, resolve, coreType);
 }

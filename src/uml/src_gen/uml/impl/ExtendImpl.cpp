@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -355,11 +354,20 @@ Any ExtendImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXTEND_ATTRIBUTE_CONDITION:
-			return eAny(getCondition()); //9612
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCondition();
+				return eAny(returnValue); //9612
+			}
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENDEDCASE:
-			return eAny(getExtendedCase()); //9613
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExtendedCase();
+				return eAny(returnValue); //9613
+			}
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSION:
-			return eAny(getExtension().lock()); //9615
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExtension().lock();
+				return eAny(returnValue); //9615
+			}
 		case uml::umlPackage::EXTEND_ATTRIBUTE_EXTENSIONLOCATION:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

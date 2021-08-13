@@ -42,22 +42,27 @@
 #include "ocl/Expressions/impl/VariableImpl.hpp"
 #include "ocl/Expressions/impl/VariableExpImpl.hpp"
 
-#include "ocl/Expressions/CallExp.hpp"
-#include "ocl/Expressions/IterateExp.hpp"
-#include "ocl/Expressions/IfExp.hpp"
-#include "ocl/Expressions/CollectionRange.hpp"
-#include "ocl/Expressions/IfExp.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
 #include "ocl/Expressions/Variable.hpp"
-#include "ocl/Expressions/CollectionRange.hpp"
-#include "ocl/Expressions/LoopExp.hpp"
-#include "ocl/Expressions/LoopExp.hpp"
-#include "ocl/Expressions/OperationCallExp.hpp"
-#include "ocl/Expressions/NavigationCallExp.hpp"
-#include "ocl/Expressions/ExpressionInOcl.hpp"
-#include "ocl/Expressions/ExpressionInOcl.hpp"
-#include "ocl/Expressions/IfExp.hpp"
-#include "ocl/Expressions/ExpressionInOcl.hpp"
-#include "ocl/Expressions/ExpressionInOcl.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
+#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
+#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/TupleLiteralPart.hpp"
+#include "ocl/Expressions/CollectionLiteralPart.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
+#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/Variable.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
+#include "ocl/Expressions/OclExpression.hpp"
+#include "ocl/Expressions/Variable.hpp"
 
 
 using namespace ocl::Expressions;
@@ -125,76 +130,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//AssociationClassCallExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createAssociationClassCallExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//AssociationClassCallExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createAssociationClassCallExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//AssociationClassCallExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createAssociationClassCallExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//AssociationClassCallExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createAssociationClassCallExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//AssociationClassCallExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createAssociationClassCallExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//AssociationClassCallExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createAssociationClassCallExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//AssociationClassCallExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createAssociationClassCallExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//AssociationClassCallExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//AssociationClassCallExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createAssociationClassCallExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createAssociationClassCallExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//AssociationClassCallExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//AssociationClassCallExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createAssociationClassCallExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createAssociationClassCallExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//AssociationClassCallExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createAssociationClassCallExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//AssociationClassCallExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//AssociationClassCallExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createAssociationClassCallExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createAssociationClassCallExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//AssociationClassCallExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createAssociationClassCallExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//AssociationClassCallExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createAssociationClassCallExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//AssociationClassCallExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createAssociationClassCallExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//AssociationClassCallExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createAssociationClassCallExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//AssociationClassCallExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createAssociationClassCallExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//AssociationClassCallExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createAssociationClassCallExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//AssociationClassCallExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createAssociationClassCallExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//AssociationClassCallExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createAssociationClassCallExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//AssociationClassCallExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createAssociationClassCallExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//AssociationClassCallExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createAssociationClassCallExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::BOOLEANLITERALEXP_CLASS:
 		{
@@ -206,81 +224,103 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//BooleanLiteralExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createBooleanLiteralExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//BooleanLiteralExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createBooleanLiteralExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//BooleanLiteralExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createBooleanLiteralExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//BooleanLiteralExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createBooleanLiteralExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//BooleanLiteralExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createBooleanLiteralExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//BooleanLiteralExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createBooleanLiteralExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//BooleanLiteralExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createBooleanLiteralExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//BooleanLiteralExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//BooleanLiteralExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createBooleanLiteralExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createBooleanLiteralExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//BooleanLiteralExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//BooleanLiteralExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createBooleanLiteralExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createBooleanLiteralExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//BooleanLiteralExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createBooleanLiteralExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//BooleanLiteralExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//BooleanLiteralExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createBooleanLiteralExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createBooleanLiteralExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//BooleanLiteralExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createBooleanLiteralExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//BooleanLiteralExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createBooleanLiteralExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//BooleanLiteralExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createBooleanLiteralExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//BooleanLiteralExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createBooleanLiteralExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//BooleanLiteralExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createBooleanLiteralExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//BooleanLiteralExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createBooleanLiteralExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//BooleanLiteralExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createBooleanLiteralExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//BooleanLiteralExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createBooleanLiteralExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//BooleanLiteralExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createBooleanLiteralExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//BooleanLiteralExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createBooleanLiteralExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::COLLECTIONITEM_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCollectionItem(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<ocl::Expressions::CollectionLiteralExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionLiteralExp>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ocl::Expressions::CollectionItem>(this->createCollectionItem_as_part_in_CollectionLiteralExp(castedContainer,metaElementID));
+			}
+			break;
 		}
 		case ExpressionsPackage::COLLECTIONLITERALEXP_CLASS:
 		{
@@ -292,81 +332,103 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//CollectionLiteralExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createCollectionLiteralExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//CollectionLiteralExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createCollectionLiteralExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//CollectionLiteralExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createCollectionLiteralExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//CollectionLiteralExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createCollectionLiteralExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//CollectionLiteralExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createCollectionLiteralExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//CollectionLiteralExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createCollectionLiteralExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//CollectionLiteralExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createCollectionLiteralExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//CollectionLiteralExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//CollectionLiteralExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createCollectionLiteralExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createCollectionLiteralExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//CollectionLiteralExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//CollectionLiteralExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createCollectionLiteralExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createCollectionLiteralExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//CollectionLiteralExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createCollectionLiteralExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//CollectionLiteralExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//CollectionLiteralExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createCollectionLiteralExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createCollectionLiteralExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//CollectionLiteralExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createCollectionLiteralExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//CollectionLiteralExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createCollectionLiteralExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//CollectionLiteralExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createCollectionLiteralExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//CollectionLiteralExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createCollectionLiteralExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//CollectionLiteralExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createCollectionLiteralExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//CollectionLiteralExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createCollectionLiteralExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//CollectionLiteralExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createCollectionLiteralExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//CollectionLiteralExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createCollectionLiteralExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//CollectionLiteralExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createCollectionLiteralExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//CollectionLiteralExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createCollectionLiteralExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::COLLECTIONRANGE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createCollectionRange(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<ocl::Expressions::CollectionLiteralExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionLiteralExp>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ocl::Expressions::CollectionRange>(this->createCollectionRange_as_part_in_CollectionLiteralExp(castedContainer,metaElementID));
+			}
+			break;
 		}
 		case ExpressionsPackage::ENUMLITERALEXP_CLASS:
 		{
@@ -378,81 +440,95 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//EnumLiteralExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createEnumLiteralExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//EnumLiteralExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createEnumLiteralExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//EnumLiteralExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createEnumLiteralExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//EnumLiteralExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createEnumLiteralExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//EnumLiteralExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createEnumLiteralExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//EnumLiteralExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createEnumLiteralExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//EnumLiteralExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createEnumLiteralExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//EnumLiteralExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//EnumLiteralExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createEnumLiteralExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createEnumLiteralExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//EnumLiteralExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//EnumLiteralExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createEnumLiteralExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createEnumLiteralExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//EnumLiteralExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createEnumLiteralExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//EnumLiteralExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//EnumLiteralExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createEnumLiteralExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createEnumLiteralExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//EnumLiteralExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createEnumLiteralExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//EnumLiteralExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createEnumLiteralExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//EnumLiteralExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createEnumLiteralExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//EnumLiteralExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createEnumLiteralExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//EnumLiteralExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createEnumLiteralExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//EnumLiteralExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createEnumLiteralExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//EnumLiteralExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createEnumLiteralExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//EnumLiteralExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createEnumLiteralExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//EnumLiteralExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createEnumLiteralExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//EnumLiteralExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createEnumLiteralExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::EXPRESSIONINOCL_CLASS:
 		{
 				return this->createExpressionInOcl(metaElementID);
 			
+			break;
 		}
 		case ExpressionsPackage::IFEXP_CLASS:
 		{
@@ -464,76 +540,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//IfExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createIfExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//IfExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createIfExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//IfExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createIfExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//IfExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createIfExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//IfExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createIfExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//IfExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createIfExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//IfExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createIfExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//IfExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//IfExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createIfExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createIfExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//IfExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//IfExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createIfExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createIfExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//IfExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createIfExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//IfExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//IfExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createIfExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createIfExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//IfExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createIfExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//IfExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createIfExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//IfExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createIfExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//IfExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createIfExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//IfExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createIfExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//IfExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createIfExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//IfExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createIfExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//IfExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createIfExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//IfExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createIfExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//IfExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createIfExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::INFIXEDEXP_CLASS:
 		{
@@ -545,76 +634,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//InfixedExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createInfixedExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//InfixedExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createInfixedExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//InfixedExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createInfixedExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//InfixedExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createInfixedExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//InfixedExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createInfixedExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//InfixedExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createInfixedExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//InfixedExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createInfixedExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//InfixedExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//InfixedExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createInfixedExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createInfixedExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//InfixedExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//InfixedExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createInfixedExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createInfixedExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//InfixedExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createInfixedExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//InfixedExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//InfixedExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createInfixedExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createInfixedExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//InfixedExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createInfixedExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//InfixedExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createInfixedExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//InfixedExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createInfixedExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//InfixedExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createInfixedExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//InfixedExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createInfixedExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//InfixedExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createInfixedExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//InfixedExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createInfixedExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//InfixedExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createInfixedExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//InfixedExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createInfixedExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//InfixedExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createInfixedExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::INTEGERLITERALEXP_CLASS:
 		{
@@ -626,76 +728,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//IntegerLiteralExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createIntegerLiteralExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//IntegerLiteralExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createIntegerLiteralExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//IntegerLiteralExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createIntegerLiteralExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//IntegerLiteralExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createIntegerLiteralExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//IntegerLiteralExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createIntegerLiteralExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//IntegerLiteralExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createIntegerLiteralExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//IntegerLiteralExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createIntegerLiteralExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//IntegerLiteralExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//IntegerLiteralExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createIntegerLiteralExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createIntegerLiteralExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//IntegerLiteralExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//IntegerLiteralExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createIntegerLiteralExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createIntegerLiteralExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//IntegerLiteralExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createIntegerLiteralExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//IntegerLiteralExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//IntegerLiteralExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createIntegerLiteralExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createIntegerLiteralExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//IntegerLiteralExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createIntegerLiteralExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//IntegerLiteralExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createIntegerLiteralExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//IntegerLiteralExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createIntegerLiteralExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//IntegerLiteralExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createIntegerLiteralExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//IntegerLiteralExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createIntegerLiteralExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//IntegerLiteralExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createIntegerLiteralExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//IntegerLiteralExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createIntegerLiteralExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//IntegerLiteralExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createIntegerLiteralExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//IntegerLiteralExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createIntegerLiteralExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//IntegerLiteralExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createIntegerLiteralExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::INVALIDLITERALEXP_CLASS:
 		{
@@ -707,76 +822,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//InvalidLiteralExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createInvalidLiteralExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//InvalidLiteralExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createInvalidLiteralExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//InvalidLiteralExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createInvalidLiteralExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//InvalidLiteralExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createInvalidLiteralExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//InvalidLiteralExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createInvalidLiteralExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//InvalidLiteralExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createInvalidLiteralExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//InvalidLiteralExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createInvalidLiteralExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//InvalidLiteralExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//InvalidLiteralExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createInvalidLiteralExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createInvalidLiteralExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//InvalidLiteralExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//InvalidLiteralExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createInvalidLiteralExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createInvalidLiteralExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//InvalidLiteralExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createInvalidLiteralExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//InvalidLiteralExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//InvalidLiteralExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createInvalidLiteralExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createInvalidLiteralExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//InvalidLiteralExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createInvalidLiteralExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//InvalidLiteralExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createInvalidLiteralExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//InvalidLiteralExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createInvalidLiteralExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//InvalidLiteralExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createInvalidLiteralExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//InvalidLiteralExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createInvalidLiteralExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//InvalidLiteralExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createInvalidLiteralExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//InvalidLiteralExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createInvalidLiteralExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//InvalidLiteralExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createInvalidLiteralExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//InvalidLiteralExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createInvalidLiteralExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//InvalidLiteralExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createInvalidLiteralExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::ITERATEEXP_CLASS:
 		{
@@ -788,76 +916,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//IterateExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createIterateExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//IterateExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createIterateExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//IterateExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createIterateExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//IterateExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createIterateExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//IterateExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createIterateExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//IterateExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createIterateExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//IterateExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createIterateExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//IterateExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//IterateExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createIterateExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createIterateExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//IterateExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//IterateExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createIterateExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createIterateExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//IterateExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createIterateExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//IterateExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//IterateExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createIterateExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createIterateExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//IterateExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createIterateExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//IterateExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createIterateExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//IterateExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createIterateExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//IterateExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createIterateExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//IterateExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createIterateExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//IterateExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createIterateExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//IterateExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createIterateExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//IterateExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createIterateExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//IterateExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createIterateExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//IterateExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createIterateExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::ITERATOREXP_CLASS:
 		{
@@ -869,76 +1010,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//IteratorExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createIteratorExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//IteratorExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createIteratorExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//IteratorExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createIteratorExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//IteratorExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createIteratorExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//IteratorExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createIteratorExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//IteratorExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createIteratorExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//IteratorExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createIteratorExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//IteratorExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//IteratorExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createIteratorExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createIteratorExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//IteratorExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//IteratorExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createIteratorExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createIteratorExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//IteratorExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createIteratorExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//IteratorExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//IteratorExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createIteratorExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createIteratorExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//IteratorExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createIteratorExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//IteratorExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createIteratorExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//IteratorExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createIteratorExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//IteratorExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createIteratorExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//IteratorExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createIteratorExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//IteratorExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createIteratorExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//IteratorExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createIteratorExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//IteratorExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createIteratorExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//IteratorExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createIteratorExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//IteratorExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createIteratorExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::LETEXP_CLASS:
 		{
@@ -950,76 +1104,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//LetExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createLetExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//LetExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createLetExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//LetExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createLetExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//LetExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createLetExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//LetExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createLetExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//LetExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createLetExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//LetExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createLetExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//LetExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//LetExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createLetExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createLetExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//LetExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//LetExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createLetExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createLetExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//LetExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createLetExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//LetExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//LetExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createLetExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createLetExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//LetExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createLetExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//LetExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createLetExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//LetExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createLetExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//LetExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createLetExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//LetExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createLetExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//LetExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createLetExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//LetExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createLetExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//LetExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createLetExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//LetExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createLetExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//LetExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createLetExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::MESSAGEEXP_CLASS:
 		{
@@ -1031,76 +1198,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//MessageExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createMessageExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//MessageExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createMessageExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//MessageExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createMessageExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//MessageExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createMessageExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//MessageExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createMessageExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//MessageExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createMessageExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//MessageExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createMessageExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//MessageExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//MessageExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createMessageExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createMessageExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//MessageExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//MessageExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createMessageExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createMessageExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//MessageExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createMessageExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//MessageExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//MessageExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createMessageExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createMessageExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//MessageExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createMessageExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//MessageExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createMessageExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//MessageExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createMessageExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//MessageExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createMessageExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//MessageExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createMessageExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//MessageExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createMessageExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//MessageExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createMessageExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//MessageExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createMessageExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//MessageExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createMessageExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//MessageExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createMessageExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::NULLLITERALEXP_CLASS:
 		{
@@ -1112,76 +1292,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//NullLiteralExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createNullLiteralExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//NullLiteralExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createNullLiteralExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//NullLiteralExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createNullLiteralExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//NullLiteralExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createNullLiteralExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//NullLiteralExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createNullLiteralExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//NullLiteralExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createNullLiteralExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//NullLiteralExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createNullLiteralExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//NullLiteralExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//NullLiteralExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createNullLiteralExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createNullLiteralExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//NullLiteralExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//NullLiteralExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createNullLiteralExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createNullLiteralExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//NullLiteralExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createNullLiteralExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//NullLiteralExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//NullLiteralExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createNullLiteralExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createNullLiteralExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//NullLiteralExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createNullLiteralExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//NullLiteralExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createNullLiteralExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//NullLiteralExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createNullLiteralExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//NullLiteralExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createNullLiteralExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//NullLiteralExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createNullLiteralExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//NullLiteralExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createNullLiteralExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//NullLiteralExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createNullLiteralExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//NullLiteralExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createNullLiteralExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//NullLiteralExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createNullLiteralExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//NullLiteralExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createNullLiteralExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::OPERATIONCALLEXP_CLASS:
 		{
@@ -1193,76 +1386,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//OperationCallExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createOperationCallExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//OperationCallExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createOperationCallExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//OperationCallExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createOperationCallExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//OperationCallExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createOperationCallExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//OperationCallExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createOperationCallExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//OperationCallExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createOperationCallExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//OperationCallExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createOperationCallExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//OperationCallExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//OperationCallExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createOperationCallExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createOperationCallExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//OperationCallExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//OperationCallExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createOperationCallExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createOperationCallExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//OperationCallExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createOperationCallExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//OperationCallExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//OperationCallExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createOperationCallExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createOperationCallExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//OperationCallExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createOperationCallExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//OperationCallExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createOperationCallExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//OperationCallExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createOperationCallExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//OperationCallExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createOperationCallExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//OperationCallExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createOperationCallExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//OperationCallExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createOperationCallExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//OperationCallExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createOperationCallExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//OperationCallExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createOperationCallExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//OperationCallExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createOperationCallExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//OperationCallExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createOperationCallExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::PROPERTYCALLEXP_CLASS:
 		{
@@ -1274,76 +1480,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//PropertyCallExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createPropertyCallExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//PropertyCallExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createPropertyCallExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//PropertyCallExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createPropertyCallExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//PropertyCallExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createPropertyCallExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//PropertyCallExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createPropertyCallExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//PropertyCallExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createPropertyCallExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//PropertyCallExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createPropertyCallExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//PropertyCallExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//PropertyCallExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createPropertyCallExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createPropertyCallExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//PropertyCallExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//PropertyCallExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createPropertyCallExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createPropertyCallExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//PropertyCallExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createPropertyCallExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//PropertyCallExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//PropertyCallExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createPropertyCallExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createPropertyCallExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//PropertyCallExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createPropertyCallExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//PropertyCallExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createPropertyCallExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//PropertyCallExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createPropertyCallExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//PropertyCallExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createPropertyCallExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//PropertyCallExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createPropertyCallExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//PropertyCallExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createPropertyCallExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//PropertyCallExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createPropertyCallExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//PropertyCallExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createPropertyCallExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//PropertyCallExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createPropertyCallExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//PropertyCallExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createPropertyCallExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::REALLITERALEXP_CLASS:
 		{
@@ -1355,76 +1574,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//RealLiteralExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createRealLiteralExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//RealLiteralExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createRealLiteralExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//RealLiteralExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createRealLiteralExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//RealLiteralExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createRealLiteralExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//RealLiteralExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createRealLiteralExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//RealLiteralExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createRealLiteralExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//RealLiteralExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createRealLiteralExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//RealLiteralExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//RealLiteralExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createRealLiteralExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createRealLiteralExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//RealLiteralExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//RealLiteralExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createRealLiteralExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createRealLiteralExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//RealLiteralExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createRealLiteralExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//RealLiteralExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//RealLiteralExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createRealLiteralExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createRealLiteralExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//RealLiteralExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createRealLiteralExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//RealLiteralExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createRealLiteralExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//RealLiteralExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createRealLiteralExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//RealLiteralExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createRealLiteralExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//RealLiteralExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createRealLiteralExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//RealLiteralExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createRealLiteralExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//RealLiteralExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createRealLiteralExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//RealLiteralExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createRealLiteralExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//RealLiteralExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createRealLiteralExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//RealLiteralExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createRealLiteralExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::STATEEXP_CLASS:
 		{
@@ -1436,76 +1668,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//StateExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createStateExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//StateExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createStateExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//StateExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createStateExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//StateExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createStateExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//StateExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createStateExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//StateExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createStateExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//StateExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createStateExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//StateExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//StateExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createStateExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createStateExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//StateExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//StateExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createStateExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createStateExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//StateExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createStateExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//StateExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//StateExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createStateExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createStateExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//StateExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createStateExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//StateExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createStateExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//StateExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createStateExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//StateExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createStateExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//StateExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createStateExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//StateExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createStateExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//StateExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createStateExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//StateExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createStateExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//StateExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createStateExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//StateExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createStateExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::STRINGLITERALEXP_CLASS:
 		{
@@ -1517,76 +1762,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//StringLiteralExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createStringLiteralExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//StringLiteralExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createStringLiteralExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//StringLiteralExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createStringLiteralExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//StringLiteralExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createStringLiteralExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//StringLiteralExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createStringLiteralExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//StringLiteralExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createStringLiteralExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//StringLiteralExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createStringLiteralExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//StringLiteralExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//StringLiteralExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createStringLiteralExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createStringLiteralExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//StringLiteralExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//StringLiteralExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createStringLiteralExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createStringLiteralExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//StringLiteralExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createStringLiteralExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//StringLiteralExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//StringLiteralExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createStringLiteralExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createStringLiteralExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//StringLiteralExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createStringLiteralExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//StringLiteralExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createStringLiteralExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//StringLiteralExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createStringLiteralExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//StringLiteralExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createStringLiteralExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//StringLiteralExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createStringLiteralExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//StringLiteralExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createStringLiteralExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//StringLiteralExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createStringLiteralExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//StringLiteralExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createStringLiteralExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//StringLiteralExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createStringLiteralExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//StringLiteralExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createStringLiteralExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::TUPLELITERALEXP_CLASS:
 		{
@@ -1598,81 +1856,103 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//TupleLiteralExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createTupleLiteralExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//TupleLiteralExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createTupleLiteralExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//TupleLiteralExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createTupleLiteralExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//TupleLiteralExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createTupleLiteralExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//TupleLiteralExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createTupleLiteralExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//TupleLiteralExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createTupleLiteralExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//TupleLiteralExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createTupleLiteralExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//TupleLiteralExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//TupleLiteralExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createTupleLiteralExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createTupleLiteralExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//TupleLiteralExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//TupleLiteralExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createTupleLiteralExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createTupleLiteralExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//TupleLiteralExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createTupleLiteralExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//TupleLiteralExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//TupleLiteralExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createTupleLiteralExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createTupleLiteralExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//TupleLiteralExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createTupleLiteralExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//TupleLiteralExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createTupleLiteralExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//TupleLiteralExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createTupleLiteralExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//TupleLiteralExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createTupleLiteralExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//TupleLiteralExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createTupleLiteralExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//TupleLiteralExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createTupleLiteralExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//TupleLiteralExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createTupleLiteralExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//TupleLiteralExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createTupleLiteralExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//TupleLiteralExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createTupleLiteralExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//TupleLiteralExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createTupleLiteralExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::TUPLELITERALPART_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createTupleLiteralPart(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<ocl::Expressions::TupleLiteralExp> castedContainer = std::dynamic_pointer_cast<ocl::Expressions::TupleLiteralExp>(container);
+				assert(castedContainer);
+				return std::shared_ptr<ocl::Expressions::TupleLiteralPart>(this->createTupleLiteralPart_as_part_in_TupleLiteralExp(castedContainer,metaElementID));
+			}
+			break;
 		}
 		case ExpressionsPackage::TYPEEXP_CLASS:
 		{
@@ -1684,76 +1964,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//TypeExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createTypeExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//TypeExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createTypeExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//TypeExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createTypeExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//TypeExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createTypeExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//TypeExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createTypeExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//TypeExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createTypeExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//TypeExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createTypeExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//TypeExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//TypeExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createTypeExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createTypeExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//TypeExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//TypeExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createTypeExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createTypeExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//TypeExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createTypeExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//TypeExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//TypeExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createTypeExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createTypeExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//TypeExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createTypeExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//TypeExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createTypeExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//TypeExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createTypeExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//TypeExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createTypeExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//TypeExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createTypeExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//TypeExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createTypeExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//TypeExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createTypeExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//TypeExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createTypeExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//TypeExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createTypeExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//TypeExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createTypeExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::UNLIMITEDNATURALEXP_CLASS:
 		{
@@ -1765,76 +2058,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//UnlimitedNaturalExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createUnlimitedNaturalExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//UnlimitedNaturalExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createUnlimitedNaturalExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//UnlimitedNaturalExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createUnlimitedNaturalExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//UnlimitedNaturalExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createUnlimitedNaturalExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//UnlimitedNaturalExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createUnlimitedNaturalExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//UnlimitedNaturalExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createUnlimitedNaturalExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//UnlimitedNaturalExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createUnlimitedNaturalExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//UnlimitedNaturalExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//UnlimitedNaturalExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createUnlimitedNaturalExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createUnlimitedNaturalExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//UnlimitedNaturalExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//UnlimitedNaturalExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createUnlimitedNaturalExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createUnlimitedNaturalExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//UnlimitedNaturalExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createUnlimitedNaturalExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//UnlimitedNaturalExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//UnlimitedNaturalExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createUnlimitedNaturalExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createUnlimitedNaturalExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//UnlimitedNaturalExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createUnlimitedNaturalExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//UnlimitedNaturalExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createUnlimitedNaturalExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//UnlimitedNaturalExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createUnlimitedNaturalExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//UnlimitedNaturalExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createUnlimitedNaturalExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//UnlimitedNaturalExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createUnlimitedNaturalExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//UnlimitedNaturalExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createUnlimitedNaturalExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//UnlimitedNaturalExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createUnlimitedNaturalExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//UnlimitedNaturalExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createUnlimitedNaturalExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//UnlimitedNaturalExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createUnlimitedNaturalExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//UnlimitedNaturalExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createUnlimitedNaturalExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::UNSPECIFIEDVALUEEXP_CLASS:
 		{
@@ -1846,76 +2152,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//UnspecifiedValueExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createUnspecifiedValueExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//UnspecifiedValueExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createUnspecifiedValueExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//UnspecifiedValueExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createUnspecifiedValueExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//UnspecifiedValueExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createUnspecifiedValueExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//UnspecifiedValueExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createUnspecifiedValueExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//UnspecifiedValueExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createUnspecifiedValueExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//UnspecifiedValueExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createUnspecifiedValueExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//UnspecifiedValueExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//UnspecifiedValueExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createUnspecifiedValueExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createUnspecifiedValueExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//UnspecifiedValueExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//UnspecifiedValueExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createUnspecifiedValueExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createUnspecifiedValueExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//UnspecifiedValueExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createUnspecifiedValueExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//UnspecifiedValueExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//UnspecifiedValueExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createUnspecifiedValueExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createUnspecifiedValueExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//UnspecifiedValueExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createUnspecifiedValueExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//UnspecifiedValueExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createUnspecifiedValueExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//UnspecifiedValueExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createUnspecifiedValueExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//UnspecifiedValueExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createUnspecifiedValueExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//UnspecifiedValueExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createUnspecifiedValueExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//UnspecifiedValueExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createUnspecifiedValueExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//UnspecifiedValueExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createUnspecifiedValueExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//UnspecifiedValueExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createUnspecifiedValueExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//UnspecifiedValueExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createUnspecifiedValueExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//UnspecifiedValueExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createUnspecifiedValueExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::VARIABLE_CLASS:
 		{
@@ -1927,40 +2246,47 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//Variable has baseExp as a containment
-					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_BASEEXP:
+					//Variable has contextVariable as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp>(container);
-						return this->createVariable_in_BaseExp(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
+						return this->createVariable_as_contextVariable_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
 					}
-					//Variable has loopExp as a containment
-					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_LOOPEXP:
+					//Variable has iterator as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_ITERATOR:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createVariable_in_LoopExp(castedContainer,metaElementID);
+						return this->createVariable_as_iterator_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//Variable has resultOwner as a containment
-					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_RESULTOWNER:
+					//Variable has parameterVariable as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createVariable_in_ResultOwner(castedContainer,metaElementID);
+						return this->createVariable_as_parameterVariable_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
 					}
-					//Variable has selfOwner as a containment
-					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_SELFOWNER:
+					//Variable has result as a containment
+					case  ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IterateExp>(container);
+						return this->createVariable_as_result_in_ocl::Expressions::IterateExp(castedContainer,metaElementID);
+					}
+					//Variable has resultVariable as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createVariable_in_SelfOwner(castedContainer,metaElementID);
+						return this->createVariable_as_resultVariable_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
 					}
-					//Variable has varOwner as a containment
-					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_VAROWNER:
+					//Variable has variable as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_VARIABLE:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createVariable_in_VarOwner(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createVariable_as_variable_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 		case ExpressionsPackage::VARIABLEEXP_CLASS:
 		{
@@ -1972,76 +2298,89 @@ std::shared_ptr<ecore::EObject> ExpressionsFactoryImpl::create(const int metaEle
 			{
 				switch(referenceID)
 				{
-					//VariableExp has appliedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
-						return this->createVariableExp_in_AppliedElement(castedContainer,metaElementID);
-					}
-					//VariableExp has elseOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createVariableExp_in_ElseOwner(castedContainer,metaElementID);
-					}
-					//VariableExp has firstOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createVariableExp_in_FirstOwner(castedContainer,metaElementID);
-					}
-					//VariableExp has ifOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createVariableExp_in_IfOwner(castedContainer,metaElementID);
-					}
-					//VariableExp has initializedElement as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
-						return this->createVariableExp_in_InitializedElement(castedContainer,metaElementID);
-					}
-					//VariableExp has lastOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
-						return this->createVariableExp_in_LastOwner(castedContainer,metaElementID);
-					}
-					//VariableExp has loopBodyOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
-						return this->createVariableExp_in_LoopBodyOwner(castedContainer,metaElementID);
-					}
-					//VariableExp has parentCall as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
+					//VariableExp has argument as a containment
+					case  ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::OperationCallExp>(container);
-						return this->createVariableExp_in_ParentCall(castedContainer,metaElementID);
+						return this->createVariableExp_as_argument_in_ocl::Expressions::OperationCallExp(castedContainer,metaElementID);
 					}
-					//VariableExp has parentNav as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
+					//VariableExp has body as a containment
+					case  ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY:	
 					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
-						return this->createVariableExp_in_ParentNav(castedContainer,metaElementID);
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LoopExp>(container);
+						return this->createVariableExp_as_body_in_ocl::Expressions::LoopExp(castedContainer,metaElementID);
 					}
-					//VariableExp has thenOwner as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-					{
-						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
-						return this->createVariableExp_in_ThenOwner(castedContainer,metaElementID);
-					}
-					//VariableExp has topExpression as a containment
-					case  ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
+					//VariableExp has bodyExpression as a containment
+					case  ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::ExpressionInOcl>(container);
-						return this->createVariableExp_in_TopExpression(castedContainer,metaElementID);
+						return this->createVariableExp_as_bodyExpression_in_ocl::Expressions::ExpressionInOcl(castedContainer,metaElementID);
+					}
+					//VariableExp has condition as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createVariableExp_as_condition_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//VariableExp has elseExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createVariableExp_as_elseExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
+					}
+					//VariableExp has first as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createVariableExp_as_first_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//VariableExp has in as a containment
+					case  ExpressionsPackage::LETEXP_ATTRIBUTE_IN:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::LetExp>(container);
+						return this->createVariableExp_as_in_in_ocl::Expressions::LetExp(castedContainer,metaElementID);
+					}
+					//VariableExp has initExpression as a containment
+					case  ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::Variable>(container);
+						return this->createVariableExp_as_initExpression_in_ocl::Expressions::Variable(castedContainer,metaElementID);
+					}
+					//VariableExp has item as a containment
+					case  ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionItem>(container);
+						return this->createVariableExp_as_item_in_ocl::Expressions::CollectionItem(castedContainer,metaElementID);
+					}
+					//VariableExp has last as a containment
+					case  ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CollectionRange>(container);
+						return this->createVariableExp_as_last_in_ocl::Expressions::CollectionRange(castedContainer,metaElementID);
+					}
+					//VariableExp has qualifier as a containment
+					case  ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::NavigationCallExp>(container);
+						return this->createVariableExp_as_qualifier_in_ocl::Expressions::NavigationCallExp(castedContainer,metaElementID);
+					}
+					//VariableExp has source as a containment
+					case  ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::CallExp>(container);
+						return this->createVariableExp_as_source_in_ocl::Expressions::CallExp(castedContainer,metaElementID);
+					}
+					//VariableExp has thenExpression as a containment
+					case  ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<ocl::Expressions::IfExp>(container);
+						return this->createVariableExp_as_thenExpression_in_ocl::Expressions::IfExp(castedContainer,metaElementID);
 					}
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
-				}
+				}	
 			}
+			break;
 		}
 	default:
 	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << metaElementID <<" not found" << std::endl;
@@ -2078,134 +2417,170 @@ std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImp
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisAssociationClassCallExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisAssociationClassCallExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::AssociationClassCallExp> ExpressionsFactoryImpl::createAssociationClassCallExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::AssociationClassCallExpImpl> element(new ocl::Expressions::AssociationClassCallExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisAssociationClassCallExpPtr(element);
 	return element;
@@ -2218,134 +2593,170 @@ std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::cre
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisBooleanLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisBooleanLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::BooleanLiteralExp> ExpressionsFactoryImpl::createBooleanLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::BooleanLiteralExpImpl> element(new ocl::Expressions::BooleanLiteralExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisBooleanLiteralExpPtr(element);
 	return element;
@@ -2358,7 +2769,19 @@ std::shared_ptr<ocl::Expressions::CollectionItem> ExpressionsFactoryImpl::create
 	element->setThisCollectionItemPtr(element);
 	return element;
 }
-
+std::shared_ptr<ocl::Expressions::CollectionItem> ExpressionsFactoryImpl::createCollectionItem_as_part_in_CollectionLiteralExp(std::shared_ptr<ocl::Expressions::CollectionLiteralExp> par_CollectionLiteralExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::CollectionItemImpl> element(new ocl::Expressions::CollectionItemImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_CollectionLiteralExp)
+	{
+		par_CollectionLiteralExp->getPart()->push_back(element);
+	
+	}
+	element->setThisCollectionItemPtr(element);
+	return element;
+	
+}
 std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl());
@@ -2366,134 +2789,170 @@ std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisCollectionLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisCollectionLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::CollectionLiteralExp> ExpressionsFactoryImpl::createCollectionLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::CollectionLiteralExpImpl> element(new ocl::Expressions::CollectionLiteralExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisCollectionLiteralExpPtr(element);
 	return element;
@@ -2506,7 +2965,19 @@ std::shared_ptr<ocl::Expressions::CollectionRange> ExpressionsFactoryImpl::creat
 	element->setThisCollectionRangePtr(element);
 	return element;
 }
-
+std::shared_ptr<ocl::Expressions::CollectionRange> ExpressionsFactoryImpl::createCollectionRange_as_part_in_CollectionLiteralExp(std::shared_ptr<ocl::Expressions::CollectionLiteralExp> par_CollectionLiteralExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::CollectionRangeImpl> element(new ocl::Expressions::CollectionRangeImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_CollectionLiteralExp)
+	{
+		par_CollectionLiteralExp->getPart()->push_back(element);
+	
+	}
+	element->setThisCollectionRangePtr(element);
+	return element;
+	
+}
 std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl());
@@ -2514,134 +2985,170 @@ std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::create
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisEnumLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisEnumLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::EnumLiteralExp> ExpressionsFactoryImpl::createEnumLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::EnumLiteralExpImpl> element(new ocl::Expressions::EnumLiteralExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisEnumLiteralExpPtr(element);
 	return element;
@@ -2654,7 +3161,6 @@ std::shared_ptr<ocl::Expressions::ExpressionInOcl> ExpressionsFactoryImpl::creat
 	element->setThisExpressionInOclPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl());
@@ -2662,134 +3168,170 @@ std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp(con
 	element->setThisIfExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_OperationCallExp, ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_ARGUMENT));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisIfExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_LoopExp, ExpressionsPackage::LOOPEXP_ATTRIBUTE_BODY));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisIfExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_ExpressionInOcl, ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisIfExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_IfExp, ExpressionsPackage::IFEXP_ATTRIBUTE_CONDITION));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisIfExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_IfExp, ExpressionsPackage::IFEXP_ATTRIBUTE_ELSEEXPRESSION));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisIfExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_CollectionRange, ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisIfExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisIfExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_Variable, ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisIfExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisIfExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_CollectionRange, ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisIfExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_NavigationCallExp, ExpressionsPackage::NAVIGATIONCALLEXP_ATTRIBUTE_QUALIFIER));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisIfExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_CallExp, ExpressionsPackage::CALLEXP_ATTRIBUTE_SOURCE));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisIfExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::IfExp> ExpressionsFactoryImpl::createIfExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::IfExpImpl> element(new ocl::Expressions::IfExpImpl(par_IfExp, ExpressionsPackage::IFEXP_ATTRIBUTE_THENEXPRESSION));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisIfExpPtr(element);
 	return element;
@@ -2802,134 +3344,170 @@ std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfi
 	element->setThisInfixedExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisInfixedExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisInfixedExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisInfixedExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisInfixedExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisInfixedExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisInfixedExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisInfixedExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisInfixedExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisInfixedExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisInfixedExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisInfixedExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisInfixedExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::InfixedExp> ExpressionsFactoryImpl::createInfixedExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::InfixedExpImpl> element(new ocl::Expressions::InfixedExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisInfixedExpPtr(element);
 	return element;
@@ -2942,134 +3520,170 @@ std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::cre
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisIntegerLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisIntegerLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::IntegerLiteralExp> ExpressionsFactoryImpl::createIntegerLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::IntegerLiteralExpImpl> element(new ocl::Expressions::IntegerLiteralExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisIntegerLiteralExpPtr(element);
 	return element;
@@ -3082,134 +3696,170 @@ std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::cre
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisInvalidLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisInvalidLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::InvalidLiteralExp> ExpressionsFactoryImpl::createInvalidLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::InvalidLiteralExpImpl> element(new ocl::Expressions::InvalidLiteralExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisInvalidLiteralExpPtr(element);
 	return element;
@@ -3222,134 +3872,170 @@ std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIter
 	element->setThisIterateExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisIterateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisIterateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisIterateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisIterateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisIterateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisIterateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisIterateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisIterateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisIterateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisIterateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisIterateExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisIterateExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::IterateExp> ExpressionsFactoryImpl::createIterateExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::IterateExpImpl> element(new ocl::Expressions::IterateExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisIterateExpPtr(element);
 	return element;
@@ -3362,134 +4048,170 @@ std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIte
 	element->setThisIteratorExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisIteratorExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisIteratorExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisIteratorExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisIteratorExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisIteratorExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisIteratorExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisIteratorExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisIteratorExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisIteratorExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisIteratorExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisIteratorExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisIteratorExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::IteratorExp> ExpressionsFactoryImpl::createIteratorExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::IteratorExpImpl> element(new ocl::Expressions::IteratorExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisIteratorExpPtr(element);
 	return element;
@@ -3502,134 +4224,170 @@ std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp(c
 	element->setThisLetExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisLetExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisLetExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisLetExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisLetExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisLetExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisLetExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisLetExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisLetExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisLetExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisLetExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisLetExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisLetExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::LetExp> ExpressionsFactoryImpl::createLetExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::LetExpImpl> element(new ocl::Expressions::LetExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisLetExpPtr(element);
 	return element;
@@ -3642,134 +4400,170 @@ std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMess
 	element->setThisMessageExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisMessageExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisMessageExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisMessageExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisMessageExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisMessageExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisMessageExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisMessageExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisMessageExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisMessageExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisMessageExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisMessageExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisMessageExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::MessageExp> ExpressionsFactoryImpl::createMessageExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::MessageExpImpl> element(new ocl::Expressions::MessageExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisMessageExpPtr(element);
 	return element;
@@ -3782,134 +4576,170 @@ std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::create
 	element->setThisNullLiteralExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisNullLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisNullLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisNullLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisNullLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisNullLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisNullLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisNullLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisNullLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisNullLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisNullLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisNullLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisNullLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::NullLiteralExp> ExpressionsFactoryImpl::createNullLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::NullLiteralExpImpl> element(new ocl::Expressions::NullLiteralExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisNullLiteralExpPtr(element);
 	return element;
@@ -3922,134 +4752,170 @@ std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::crea
 	element->setThisOperationCallExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisOperationCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisOperationCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisOperationCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisOperationCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisOperationCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisOperationCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisOperationCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisOperationCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisOperationCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisOperationCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisOperationCallExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisOperationCallExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::OperationCallExp> ExpressionsFactoryImpl::createOperationCallExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::OperationCallExpImpl> element(new ocl::Expressions::OperationCallExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisOperationCallExpPtr(element);
 	return element;
@@ -4062,134 +4928,170 @@ std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::creat
 	element->setThisPropertyCallExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisPropertyCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisPropertyCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisPropertyCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisPropertyCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisPropertyCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisPropertyCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisPropertyCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisPropertyCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisPropertyCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisPropertyCallExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisPropertyCallExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisPropertyCallExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::PropertyCallExp> ExpressionsFactoryImpl::createPropertyCallExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::PropertyCallExpImpl> element(new ocl::Expressions::PropertyCallExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisPropertyCallExpPtr(element);
 	return element;
@@ -4202,134 +5104,170 @@ std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::create
 	element->setThisRealLiteralExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisRealLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisRealLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisRealLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisRealLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisRealLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisRealLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisRealLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisRealLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisRealLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisRealLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisRealLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisRealLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::RealLiteralExp> ExpressionsFactoryImpl::createRealLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::RealLiteralExpImpl> element(new ocl::Expressions::RealLiteralExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisRealLiteralExpPtr(element);
 	return element;
@@ -4342,134 +5280,170 @@ std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateE
 	element->setThisStateExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisStateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisStateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisStateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisStateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisStateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisStateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisStateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisStateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisStateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisStateExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisStateExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisStateExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::StateExp> ExpressionsFactoryImpl::createStateExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::StateExpImpl> element(new ocl::Expressions::StateExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisStateExpPtr(element);
 	return element;
@@ -4482,134 +5456,170 @@ std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::crea
 	element->setThisStringLiteralExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisStringLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisStringLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisStringLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisStringLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisStringLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisStringLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisStringLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisStringLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisStringLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisStringLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisStringLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisStringLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::StringLiteralExp> ExpressionsFactoryImpl::createStringLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::StringLiteralExpImpl> element(new ocl::Expressions::StringLiteralExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisStringLiteralExpPtr(element);
 	return element;
@@ -4622,134 +5632,170 @@ std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::creat
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisTupleLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisTupleLiteralExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::TupleLiteralExp> ExpressionsFactoryImpl::createTupleLiteralExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::TupleLiteralExpImpl> element(new ocl::Expressions::TupleLiteralExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisTupleLiteralExpPtr(element);
 	return element;
@@ -4762,7 +5808,19 @@ std::shared_ptr<ocl::Expressions::TupleLiteralPart> ExpressionsFactoryImpl::crea
 	element->setThisTupleLiteralPartPtr(element);
 	return element;
 }
-
+std::shared_ptr<ocl::Expressions::TupleLiteralPart> ExpressionsFactoryImpl::createTupleLiteralPart_as_part_in_TupleLiteralExp(std::shared_ptr<ocl::Expressions::TupleLiteralExp> par_TupleLiteralExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::TupleLiteralPartImpl> element(new ocl::Expressions::TupleLiteralPartImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_TupleLiteralExp)
+	{
+		par_TupleLiteralExp->getPart()->push_back(element);
+	
+	}
+	element->setThisTupleLiteralPartPtr(element);
+	return element;
+	
+}
 std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl());
@@ -4770,134 +5828,170 @@ std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp
 	element->setThisTypeExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisTypeExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisTypeExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisTypeExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisTypeExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisTypeExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisTypeExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisTypeExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisTypeExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisTypeExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisTypeExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisTypeExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisTypeExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::TypeExp> ExpressionsFactoryImpl::createTypeExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::TypeExpImpl> element(new ocl::Expressions::TypeExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisTypeExpPtr(element);
 	return element;
@@ -4910,134 +6004,170 @@ std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::c
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisUnlimitedNaturalExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisUnlimitedNaturalExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::UnlimitedNaturalExp> ExpressionsFactoryImpl::createUnlimitedNaturalExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::UnlimitedNaturalExpImpl> element(new ocl::Expressions::UnlimitedNaturalExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisUnlimitedNaturalExpPtr(element);
 	return element;
@@ -5050,134 +6180,170 @@ std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::c
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisUnspecifiedValueExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisUnspecifiedValueExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::UnspecifiedValueExp> ExpressionsFactoryImpl::createUnspecifiedValueExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::UnspecifiedValueExpImpl> element(new ocl::Expressions::UnspecifiedValueExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisUnspecifiedValueExpPtr(element);
 	return element;
@@ -5190,62 +6356,79 @@ std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariab
 	element->setThisVariablePtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_in_BaseExp(std::weak_ptr<ocl::Expressions::IterateExp> par_baseExp, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_as_contextVariable_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_baseExp));
+	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_baseExp.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setResult(element);
+		wp->setContextVariable(element);
+	
 	}
 	element->setThisVariablePtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_loopExp, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_as_iterator_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_loopExp));
+	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopExp.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->getIterator()->push_back(element);
+		wp->getIterator()->push_back(element);
+	
 	}
 	element->setThisVariablePtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_in_ResultOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_resultOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_as_parameterVariable_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_resultOwner, ExpressionsPackage::VARIABLE_ATTRIBUTE_RESULTOWNER));
+	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_resultOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setResultVariable(element);
+		wp->getParameterVariable()->push_back(element);
+	
 	}
 	element->setThisVariablePtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_in_SelfOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_selfOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_as_result_in_IterateExp(std::weak_ptr<ocl::Expressions::IterateExp> par_IterateExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_selfOwner, ExpressionsPackage::VARIABLE_ATTRIBUTE_SELFOWNER));
+	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_IterateExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_selfOwner.lock())
+	if(auto wp = par_IterateExp.lock())
 	{
-			wp->setContextVariable(element);
+		wp->setResult(element);
+	
 	}
 	element->setThisVariablePtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_in_VarOwner(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_varOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_as_resultVariable_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_varOwner, ExpressionsPackage::VARIABLE_ATTRIBUTE_VAROWNER));
+	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_varOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->getParameterVariable()->push_back(element);
+		wp->setResultVariable(element);
+	
+	}
+	element->setThisVariablePtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::Variable> ExpressionsFactoryImpl::createVariable_as_variable_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::VariableImpl> element(new ocl::Expressions::VariableImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_LetExp)
+	{
+		par_LetExp->setVariable(element);
+	
 	}
 	element->setThisVariablePtr(element);
 	return element;
@@ -5258,134 +6441,170 @@ std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVar
 	element->setThisVariableExpPtr(element);
 	return element;
 }
-
-std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_in_AppliedElement(std::weak_ptr<ocl::Expressions::CallExp> par_appliedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_argument_in_OperationCallExp(std::weak_ptr<ocl::Expressions::OperationCallExp> par_OperationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_appliedElement));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_OperationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_appliedElement.lock())
+	if(auto wp = par_OperationCallExp.lock())
 	{
-			wp->setSource(element);
+		wp->getArgument()->push_back(element);
+	
 	}
 	element->setThisVariableExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_in_ElseOwner(std::weak_ptr<ocl::Expressions::IfExp> par_elseOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_body_in_LoopExp(std::weak_ptr<ocl::Expressions::LoopExp> par_LoopExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_elseOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_LoopExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_elseOwner.lock())
+	if(auto wp = par_LoopExp.lock())
 	{
-			wp->setElseExpression(element);
+		wp->setBody(element);
+	
 	}
 	element->setThisVariableExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_in_FirstOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_firstOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_bodyExpression_in_ExpressionInOcl(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_ExpressionInOcl, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_firstOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_ExpressionInOcl));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_firstOwner.lock())
+	if(auto wp = par_ExpressionInOcl.lock())
 	{
-			wp->setFirst(element);
+		wp->setBodyExpression(element);
+	
 	}
 	element->setThisVariableExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_in_IfOwner(std::weak_ptr<ocl::Expressions::IfExp> par_ifOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_condition_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_ifOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_ifOwner.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setCondition(element);
+		wp->setCondition(element);
+	
 	}
 	element->setThisVariableExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_in_InitializedElement(std::weak_ptr<ocl::Expressions::Variable> par_initializedElement, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_elseExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_initializedElement));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_IfExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_initializedElement.lock())
+	if(auto wp = par_IfExp.lock())
 	{
-			wp->setInitExpression(element);
+		wp->setElseExpression(element);
+	
 	}
 	element->setThisVariableExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_in_LastOwner(std::weak_ptr<ocl::Expressions::CollectionRange> par_lastOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_first_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_lastOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_lastOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setLast(element);
+		wp->setFirst(element);
+	
 	}
 	element->setThisVariableExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_in_LoopBodyOwner(std::weak_ptr<ocl::Expressions::LoopExp> par_loopBodyOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_in_in_LetExp(std::shared_ptr<ocl::Expressions::LetExp> par_LetExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_loopBodyOwner));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_loopBodyOwner.lock())
+	if(nullptr != par_LetExp)
 	{
-			wp->setBody(element);
+		par_LetExp->setIn(element);
+	
 	}
 	element->setThisVariableExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_in_ParentCall(std::weak_ptr<ocl::Expressions::OperationCallExp> par_parentCall, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_initExpression_in_Variable(std::weak_ptr<ocl::Expressions::Variable> par_Variable, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_parentCall));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_Variable));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentCall.lock())
+	if(auto wp = par_Variable.lock())
 	{
-			wp->getArgument()->push_back(element);
+		wp->setInitExpression(element);
+	
 	}
 	element->setThisVariableExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_in_ParentNav(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_parentNav, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_item_in_CollectionItem(std::shared_ptr<ocl::Expressions::CollectionItem> par_CollectionItem, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_parentNav));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl());
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_parentNav.lock())
+	if(nullptr != par_CollectionItem)
 	{
-			wp->getQualifier()->push_back(element);
+		par_CollectionItem->setItem(element);
+	
 	}
 	element->setThisVariableExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_in_ThenOwner(std::weak_ptr<ocl::Expressions::IfExp> par_thenOwner, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_last_in_CollectionRange(std::weak_ptr<ocl::Expressions::CollectionRange> par_CollectionRange, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_thenOwner, ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_CollectionRange));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_thenOwner.lock())
+	if(auto wp = par_CollectionRange.lock())
 	{
-			wp->setThenExpression(element);
+		wp->setLast(element);
+	
 	}
 	element->setThisVariableExpPtr(element);
 	return element;
 	
 }
-std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_in_TopExpression(std::weak_ptr<ocl::Expressions::ExpressionInOcl> par_topExpression, const int metaElementID) const
+std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_qualifier_in_NavigationCallExp(std::weak_ptr<ocl::Expressions::NavigationCallExp> par_NavigationCallExp, const int metaElementID) const
 {
-	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_topExpression));
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_NavigationCallExp));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = par_topExpression.lock())
+	if(auto wp = par_NavigationCallExp.lock())
 	{
-			wp->setBodyExpression(element);
+		wp->getQualifier()->push_back(element);
+	
+	}
+	element->setThisVariableExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_source_in_CallExp(std::weak_ptr<ocl::Expressions::CallExp> par_CallExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_CallExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_CallExp.lock())
+	{
+		wp->setSource(element);
+	
+	}
+	element->setThisVariableExpPtr(element);
+	return element;
+	
+}
+std::shared_ptr<ocl::Expressions::VariableExp> ExpressionsFactoryImpl::createVariableExp_as_thenExpression_in_IfExp(std::weak_ptr<ocl::Expressions::IfExp> par_IfExp, const int metaElementID) const
+{
+	std::shared_ptr<ocl::Expressions::VariableExpImpl> element(new ocl::Expressions::VariableExpImpl(par_IfExp));
+	element->setMetaElementID(metaElementID);
+	if(auto wp = par_IfExp.lock())
+	{
+		wp->setThenExpression(element);
+	
 	}
 	element->setThisVariableExpPtr(element);
 	return element;

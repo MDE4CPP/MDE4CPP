@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -338,13 +337,25 @@ Any LifelineImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //13213			
 		}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_DECOMPOSEDAS:
-			return eAny(getDecomposedAs()); //1329
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDecomposedAs();
+				return eAny(returnValue); //1329
+			}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_INTERACTION:
-			return eAny(getInteraction().lock()); //13210
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInteraction().lock();
+				return eAny(returnValue); //13210
+			}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_REPRESENTS:
-			return eAny(getRepresents()); //13211
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRepresents();
+				return eAny(returnValue); //13211
+			}
 		case uml::umlPackage::LIFELINE_ATTRIBUTE_SELECTOR:
-			return eAny(getSelector()); //13212
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSelector();
+				return eAny(returnValue); //13212
+			}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

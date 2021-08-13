@@ -231,7 +231,7 @@ void CommonBehaviorPackageImpl::initializeCS_EventOccurrenceContent()
 	m_cS_EventOccurrence_Operation_match_Trigger->setUnique(true);
 	m_cS_EventOccurrence_Operation_match_Trigger->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_EventOccurrence_Operation_match_Trigger);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_EventOccurrence_Operation_match_Trigger);
 		parameter->setName("trigger");
 		parameter->setEType(uml::umlPackage::eInstance()->getTrigger_Class());
 		parameter->setLowerBound(0);
@@ -253,7 +253,7 @@ void CommonBehaviorPackageImpl::initializeCS_EventOccurrenceContent()
 	m_cS_EventOccurrence_Operation_sendInTo_CS_Reference_Port->setUnique(true);
 	m_cS_EventOccurrence_Operation_sendInTo_CS_Reference_Port->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_EventOccurrence_Operation_sendInTo_CS_Reference_Port);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_EventOccurrence_Operation_sendInTo_CS_Reference_Port);
 		parameter->setName("target");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -263,7 +263,7 @@ void CommonBehaviorPackageImpl::initializeCS_EventOccurrenceContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_EventOccurrence_Operation_sendInTo_CS_Reference_Port);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_EventOccurrence_Operation_sendInTo_CS_Reference_Port);
 		parameter->setName("port");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -285,7 +285,7 @@ void CommonBehaviorPackageImpl::initializeCS_EventOccurrenceContent()
 	m_cS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port->setUnique(true);
 	m_cS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port);
 		parameter->setName("target");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -295,7 +295,7 @@ void CommonBehaviorPackageImpl::initializeCS_EventOccurrenceContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_cS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_cS_EventOccurrence_Operation_sendOutTo_CS_Reference_Port);
 		parameter->setName("port");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);

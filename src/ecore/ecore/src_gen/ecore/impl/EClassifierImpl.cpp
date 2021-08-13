@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -300,7 +300,10 @@ Any EClassifierImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_DEFAULTVALUE:
 			return eAny(getDefaultValue()); //137
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_EPACKAGE:
-			return eAny(getEPackage().lock()); //139
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEPackage().lock();
+				return eAny(returnValue); //139
+			}
 		case ecore::ecorePackage::ECLASSIFIER_ATTRIBUTE_ETYPEPARAMETERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

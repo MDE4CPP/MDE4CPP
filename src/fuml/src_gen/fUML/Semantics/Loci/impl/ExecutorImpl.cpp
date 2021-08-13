@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -248,7 +249,10 @@ Any ExecutorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Loci::LociPackage::EXECUTOR_ATTRIBUTE_LOCUS:
-			return eAny(getLocus().lock()); //480
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLocus().lock();
+				return eAny(returnValue); //480
+			}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

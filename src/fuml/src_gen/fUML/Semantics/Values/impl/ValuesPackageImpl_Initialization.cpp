@@ -161,7 +161,7 @@ void ValuesPackageImpl::initializeLiteralEvaluationContent()
 	m_literalEvaluation_Operation_getType_EString->setUnique(true);
 	m_literalEvaluation_Operation_getType_EString->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_literalEvaluation_Operation_getType_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_literalEvaluation_Operation_getType_EString);
 		parameter->setName("builtInTypeName");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 		parameter->setLowerBound(0);
@@ -285,7 +285,7 @@ void ValuesPackageImpl::initializeValueContent()
 	m_value_Operation_checkAllParents_Classifier_Classifier->setUnique(true);
 	m_value_Operation_checkAllParents_Classifier_Classifier->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_value_Operation_checkAllParents_Classifier_Classifier);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_value_Operation_checkAllParents_Classifier_Classifier);
 		parameter->setName("type");
 		parameter->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
 		parameter->setLowerBound(0);
@@ -295,7 +295,7 @@ void ValuesPackageImpl::initializeValueContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_value_Operation_checkAllParents_Classifier_Classifier);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_value_Operation_checkAllParents_Classifier_Classifier);
 		parameter->setName("classifier");
 		parameter->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
 		parameter->setLowerBound(0);
@@ -311,7 +311,7 @@ void ValuesPackageImpl::initializeValueContent()
 	m_value_Operation_equals_Value->setUnique(true);
 	m_value_Operation_equals_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_value_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_value_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(getValue_Class());
 		parameter->setLowerBound(0);
@@ -334,7 +334,7 @@ void ValuesPackageImpl::initializeValueContent()
 	m_value_Operation_hasTypes_Classifier->setUnique(true);
 	m_value_Operation_hasTypes_Classifier->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_value_Operation_hasTypes_Classifier);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_value_Operation_hasTypes_Classifier);
 		parameter->setName("type");
 		parameter->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
 		parameter->setLowerBound(0);

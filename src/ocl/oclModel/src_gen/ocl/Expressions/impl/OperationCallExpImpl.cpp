@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -31,8 +32,8 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "ecore/ecoreFactory.hpp"
 #include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "ecore/ecoreFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 
 
@@ -360,7 +361,10 @@ Any OperationCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //6524			
 		}
 		case ocl::Expressions::ExpressionsPackage::OPERATIONCALLEXP_ATTRIBUTE_REFERREDOPERATION:
-			return eAny(getReferredOperation()); //6525
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
+				return eAny(returnValue); //6525
+			}
 	}
 	return FeatureCallExpImpl::eGet(featureID, resolve, coreType);
 }

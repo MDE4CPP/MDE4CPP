@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -204,7 +204,10 @@ Any LinkEndCreationDataImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_INSERTAT:
-			return eAny(getInsertAt()); //1346
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInsertAt();
+				return eAny(returnValue); //1346
+			}
 		case uml::umlPackage::LINKENDCREATIONDATA_ATTRIBUTE_ISREPLACEALL:
 			return eAny(getIsReplaceAll()); //1347
 	}

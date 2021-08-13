@@ -40,7 +40,6 @@ namespace PSCS::Semantics::Classification
 			//Creator functions
 			 virtual std::shared_ptr<PSCS::Semantics::Classification::CS_InstanceValueEvaluation> createCS_InstanceValueEvaluation(const int metaElementID = ClassificationPackage::CS_INSTANCEVALUEEVALUATION_CLASS) const ;
 			 
-			 
 
 		private:
 			static ClassificationFactory* create();

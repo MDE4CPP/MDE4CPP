@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -281,9 +280,15 @@ Any IntervalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::INTERVAL_ATTRIBUTE_MAX:
-			return eAny(getMax()); //12815
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getMax();
+				return eAny(returnValue); //12815
+			}
 		case uml::umlPackage::INTERVAL_ATTRIBUTE_MIN:
-			return eAny(getMin()); //12816
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getMin();
+				return eAny(returnValue); //12816
+			}
 	}
 	return ValueSpecificationImpl::eGet(featureID, resolve, coreType);
 }

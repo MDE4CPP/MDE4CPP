@@ -6,13 +6,13 @@
 
 #ifndef OCLFACTORY_HPP
 #define OCLFACTORY_HPP
+// namespace macro header include
+#include "ocl/ocl.hpp"
 
 #include <map>
 #include <memory>
 
-// namespace macro header include
-#include "ocl/ocl.hpp"
-
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EFactory.hpp"
 #include "ocl/oclPackage.hpp"
 
@@ -24,21 +24,16 @@ namespace ocl
 
 namespace ocl::Expressions 
 {
-	class CallExp;
-	class CollectionRange;
-	class ExpressionInOcl;
-	class IfExp;
-	class IterateExp;
-	class LoopExp;
-	class NavigationCallExp;
-	class OperationCallExp;
+	class CollectionLiteralPart;
+	class OclExpression;
+	class TupleLiteralPart;
 	class Variable;
 }
 
 
 namespace ecore 
 {
-	class EPackage;
+	class EClassifier;
 }
 
 

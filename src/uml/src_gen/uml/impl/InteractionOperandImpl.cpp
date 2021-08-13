@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -363,7 +362,10 @@ Any InteractionOperandImpl::eGet(int featureID, bool resolve, bool coreType) con
 			return eAny(tempList); //12219			
 		}
 		case uml::umlPackage::INTERACTIONOPERAND_ATTRIBUTE_GUARD:
-			return eAny(getGuard()); //12220
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getGuard();
+				return eAny(returnValue); //12220
+			}
 	}
 	Any result;
 	result = InteractionFragmentImpl::eGet(featureID, resolve, coreType);

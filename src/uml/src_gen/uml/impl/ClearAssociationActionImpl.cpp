@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -327,9 +326,15 @@ Any ClearAssociationActionImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_ASSOCIATION:
-			return eAny(getAssociation()); //3927
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAssociation();
+				return eAny(returnValue); //3927
+			}
 		case uml::umlPackage::CLEARASSOCIATIONACTION_ATTRIBUTE_OBJECT:
-			return eAny(getObject()); //3928
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getObject();
+				return eAny(returnValue); //3928
+			}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

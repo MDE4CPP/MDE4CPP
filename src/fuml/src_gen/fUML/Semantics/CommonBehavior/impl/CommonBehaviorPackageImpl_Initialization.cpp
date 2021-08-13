@@ -121,7 +121,7 @@ void CommonBehaviorPackageImpl::initializeCallEventBehaviorContent()
 	m_callEventBehavior_Operation_assignOperation_Operation->setUnique(true);
 	m_callEventBehavior_Operation_assignOperation_Operation->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_callEventBehavior_Operation_assignOperation_Operation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_callEventBehavior_Operation_assignOperation_Operation);
 		parameter->setName("operation");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -255,7 +255,7 @@ void CommonBehaviorPackageImpl::initializeCallEventExecutionContent()
 	m_callEventExecution_Operation_setOutputParameterValues_ParameterValue->setUnique(true);
 	m_callEventExecution_Operation_setOutputParameterValues_ParameterValue->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_callEventExecution_Operation_setOutputParameterValues_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_callEventExecution_Operation_setOutputParameterValues_ParameterValue);
 		parameter->setName("parameterValues");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -344,7 +344,7 @@ void CommonBehaviorPackageImpl::initializeCallEventOccurrenceContent()
 	m_callEventOccurrence_Operation_match_Trigger->setUnique(true);
 	m_callEventOccurrence_Operation_match_Trigger->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_callEventOccurrence_Operation_match_Trigger);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_callEventOccurrence_Operation_match_Trigger);
 		parameter->setName("trigger");
 		parameter->setEType(uml::umlPackage::eInstance()->getTrigger_Class());
 		parameter->setLowerBound(0);
@@ -379,7 +379,7 @@ void CommonBehaviorPackageImpl::initializeCallEventOccurrenceContent()
 	m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue->setUnique(true);
 	m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_callEventOccurrence_Operation_setOutputParameterValues_ParameterValue);
 		parameter->setName("parameterValues");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -491,7 +491,7 @@ void CommonBehaviorPackageImpl::initializeClassifierBehaviorExecutionContent()
 	m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue->setUnique(true);
 	m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue);
 		parameter->setName("classifier");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -501,7 +501,7 @@ void CommonBehaviorPackageImpl::initializeClassifierBehaviorExecutionContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifierBehaviorExecution_Operation_execute_Class_ParameterValue);
 		parameter->setName("inputs");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -613,7 +613,7 @@ void CommonBehaviorPackageImpl::initializeClassifierBehaviorInvocationEventAccep
 	m_classifierBehaviorInvocationEventAccepter_Operation_accept_EventOccurrence->setUnique(true);
 	m_classifierBehaviorInvocationEventAccepter_Operation_accept_EventOccurrence->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifierBehaviorInvocationEventAccepter_Operation_accept_EventOccurrence);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifierBehaviorInvocationEventAccepter_Operation_accept_EventOccurrence);
 		parameter->setName("eventOccurrence");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -635,7 +635,7 @@ void CommonBehaviorPackageImpl::initializeClassifierBehaviorInvocationEventAccep
 	m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue->setUnique(true);
 	m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue);
 		parameter->setName("classifier");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -645,7 +645,7 @@ void CommonBehaviorPackageImpl::initializeClassifierBehaviorInvocationEventAccep
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifierBehaviorInvocationEventAccepter_Operation_invokeBehavior_Class_ParameterValue);
 		parameter->setName("inputs");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -661,7 +661,7 @@ void CommonBehaviorPackageImpl::initializeClassifierBehaviorInvocationEventAccep
 	m_classifierBehaviorInvocationEventAccepter_Operation_match_EventOccurrence->setUnique(true);
 	m_classifierBehaviorInvocationEventAccepter_Operation_match_EventOccurrence->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_classifierBehaviorInvocationEventAccepter_Operation_match_EventOccurrence);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_classifierBehaviorInvocationEventAccepter_Operation_match_EventOccurrence);
 		parameter->setName("eventOccurrence");
 		parameter->setEType(getEventOccurrence_Class());
 		parameter->setLowerBound(0);
@@ -707,7 +707,7 @@ void CommonBehaviorPackageImpl::initializeEventAccepterContent()
 	m_eventAccepter_Operation_accept_SignalInstance->setUnique(true);
 	m_eventAccepter_Operation_accept_SignalInstance->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eventAccepter_Operation_accept_SignalInstance);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventAccepter_Operation_accept_SignalInstance);
 		parameter->setName("signalInstance");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -723,7 +723,7 @@ void CommonBehaviorPackageImpl::initializeEventAccepterContent()
 	m_eventAccepter_Operation_match_SignalInstance->setUnique(true);
 	m_eventAccepter_Operation_match_SignalInstance->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eventAccepter_Operation_match_SignalInstance);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventAccepter_Operation_match_SignalInstance);
 		parameter->setName("signalInstance");
 		parameter->setEType(fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::eInstance()->getSignalInstance_Class());
 		parameter->setLowerBound(0);
@@ -803,7 +803,7 @@ void CommonBehaviorPackageImpl::initializeEventOccurrenceContent()
 	m_eventOccurrence_Operation_match_Trigger->setUnique(true);
 	m_eventOccurrence_Operation_match_Trigger->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eventOccurrence_Operation_match_Trigger);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventOccurrence_Operation_match_Trigger);
 		parameter->setName("trigger");
 		parameter->setEType(uml::umlPackage::eInstance()->getTrigger_Class());
 		parameter->setLowerBound(0);
@@ -819,7 +819,7 @@ void CommonBehaviorPackageImpl::initializeEventOccurrenceContent()
 	m_eventOccurrence_Operation_matchAny_Trigger->setUnique(true);
 	m_eventOccurrence_Operation_matchAny_Trigger->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eventOccurrence_Operation_matchAny_Trigger);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventOccurrence_Operation_matchAny_Trigger);
 		parameter->setName("triggers");
 		parameter->setEType(uml::umlPackage::eInstance()->getTrigger_Class());
 		parameter->setLowerBound(0);
@@ -841,7 +841,7 @@ void CommonBehaviorPackageImpl::initializeEventOccurrenceContent()
 	m_eventOccurrence_Operation_sendTo_Reference->setUnique(true);
 	m_eventOccurrence_Operation_sendTo_Reference->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_eventOccurrence_Operation_sendTo_Reference);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_eventOccurrence_Operation_sendTo_Reference);
 		parameter->setName("target");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -968,7 +968,7 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Operation_getParameterValue_Parameter->setUnique(true);
 	m_execution_Operation_getParameterValue_Parameter->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_execution_Operation_getParameterValue_Parameter);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_execution_Operation_getParameterValue_Parameter);
 		parameter->setName("parameter");
 		parameter->setEType(uml::umlPackage::eInstance()->getParameter_Class());
 		parameter->setLowerBound(0);
@@ -997,7 +997,7 @@ void CommonBehaviorPackageImpl::initializeExecutionContent()
 	m_execution_Operation_setParameterValue_ParameterValue->setUnique(true);
 	m_execution_Operation_setParameterValue_ParameterValue->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_execution_Operation_setParameterValue_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_execution_Operation_setParameterValue_ParameterValue);
 		parameter->setName("parameterValue");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1055,7 +1055,7 @@ void CommonBehaviorPackageImpl::initializeGetNextEventStrategyContent()
 	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setUnique(true);
 	m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_getNextEventStrategy_Operation_retrieveNextEvent_ObjectActivation);
 		parameter->setName("objectActivation");
 		parameter->setEType(getObjectActivation_Class());
 		parameter->setLowerBound(0);
@@ -1111,7 +1111,7 @@ void CommonBehaviorPackageImpl::initializeInvocationEventOccurrenceContent()
 	m_invocationEventOccurrence_Operation_match_Trigger->setUnique(true);
 	m_invocationEventOccurrence_Operation_match_Trigger->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_invocationEventOccurrence_Operation_match_Trigger);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_invocationEventOccurrence_Operation_match_Trigger);
 		parameter->setName("trigger");
 		parameter->setEType(uml::umlPackage::eInstance()->getTrigger_Class());
 		parameter->setLowerBound(0);
@@ -1232,7 +1232,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Operation__register_EventAccepter->setUnique(true);
 	m_objectActivation_Operation__register_EventAccepter->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectActivation_Operation__register_EventAccepter);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation__register_EventAccepter);
 		parameter->setName("accepter");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1254,7 +1254,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Operation__send_EJavaObject->setUnique(true);
 	m_objectActivation_Operation__send_EJavaObject->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectActivation_Operation__send_EJavaObject);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation__send_EJavaObject);
 		parameter->setName("signal");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1309,7 +1309,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Operation_send_SignalInstance->setUnique(true);
 	m_objectActivation_Operation_send_SignalInstance->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectActivation_Operation_send_SignalInstance);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation_send_SignalInstance);
 		parameter->setName("signalInstance");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1331,7 +1331,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Operation_startBehavior_Class_ParameterValue->setUnique(true);
 	m_objectActivation_Operation_startBehavior_Class_ParameterValue->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectActivation_Operation_startBehavior_Class_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation_startBehavior_Class_ParameterValue);
 		parameter->setName("classifier");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1341,7 +1341,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectActivation_Operation_startBehavior_Class_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation_startBehavior_Class_ParameterValue);
 		parameter->setName("inputs");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1376,7 +1376,7 @@ void CommonBehaviorPackageImpl::initializeObjectActivationContent()
 	m_objectActivation_Operation_unregister_EventAccepter->setUnique(true);
 	m_objectActivation_Operation_unregister_EventAccepter->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectActivation_Operation_unregister_EventAccepter);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectActivation_Operation_unregister_EventAccepter);
 		parameter->setName("accepter");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1409,7 +1409,7 @@ void CommonBehaviorPackageImpl::initializeOpaqueBehaviorExecutionContent()
 	m_opaqueBehaviorExecution_Operation_doBody_ParameterValue_ParameterValue->setUnique(true);
 	m_opaqueBehaviorExecution_Operation_doBody_ParameterValue_ParameterValue->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_opaqueBehaviorExecution_Operation_doBody_ParameterValue_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_opaqueBehaviorExecution_Operation_doBody_ParameterValue_ParameterValue);
 		parameter->setName("inputParameters");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1419,7 +1419,7 @@ void CommonBehaviorPackageImpl::initializeOpaqueBehaviorExecutionContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_opaqueBehaviorExecution_Operation_doBody_ParameterValue_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_opaqueBehaviorExecution_Operation_doBody_ParameterValue_ParameterValue);
 		parameter->setName("outputParameters");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1550,7 +1550,7 @@ void CommonBehaviorPackageImpl::initializeSignalEventOccurrenceContent()
 	m_signalEventOccurrence_Operation_match_Trigger->setUnique(true);
 	m_signalEventOccurrence_Operation_match_Trigger->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_signalEventOccurrence_Operation_match_Trigger);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_signalEventOccurrence_Operation_match_Trigger);
 		parameter->setName("trigger");
 		parameter->setEType(uml::umlPackage::eInstance()->getTrigger_Class());
 		parameter->setLowerBound(0);

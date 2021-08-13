@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -338,9 +337,15 @@ Any CreateObjectActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::CREATEOBJECTACTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(getClassifier()); //6327
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getClassifier();
+				return eAny(returnValue); //6327
+			}
 		case uml::umlPackage::CREATEOBJECTACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //6328
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //6328
+			}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

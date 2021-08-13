@@ -40,6 +40,7 @@ std::shared_ptr<ecore::EObject> ValuesFactoryImpl::create(const int metaElementI
 		{
 				return this->createCS_OpaqueExpressionEvaluation(metaElementID);
 			
+			break;
 		}
 	default:
 	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << metaElementID <<" not found" << std::endl;
@@ -76,5 +77,4 @@ std::shared_ptr<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation> ValuesFa
 	element->setThisCS_OpaqueExpressionEvaluationPtr(element);
 	return element;
 }
-
 

@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -266,7 +265,10 @@ Any EnumerationLiteralImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::ENUMERATIONLITERAL_ATTRIBUTE_ENUMERATION:
-			return eAny(getEnumeration().lock()); //8517
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEnumeration().lock();
+				return eAny(returnValue); //8517
+			}
 	}
 	return InstanceSpecificationImpl::eGet(featureID, resolve, coreType);
 }

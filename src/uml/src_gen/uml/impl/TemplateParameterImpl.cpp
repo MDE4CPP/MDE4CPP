@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -286,15 +286,30 @@ Any TemplateParameterImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_DEFAULT:
-			return eAny(getDefault()); //2313
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDefault();
+				return eAny(returnValue); //2313
+			}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDDEFAULT:
-			return eAny(getOwnedDefault()); //2314
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOwnedDefault();
+				return eAny(returnValue); //2314
+			}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_OWNEDPARAMETEREDELEMENT:
-			return eAny(getOwnedParameteredElement()); //2317
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOwnedParameteredElement();
+				return eAny(returnValue); //2317
+			}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_PARAMETEREDELEMENT:
-			return eAny(getParameteredElement()); //2315
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getParameteredElement();
+				return eAny(returnValue); //2315
+			}
 		case uml::umlPackage::TEMPLATEPARAMETER_ATTRIBUTE_SIGNATURE:
-			return eAny(getSignature().lock()); //2316
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSignature().lock();
+				return eAny(returnValue); //2316
+			}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

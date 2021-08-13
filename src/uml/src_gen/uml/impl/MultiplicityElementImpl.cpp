@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -345,11 +345,17 @@ Any MultiplicityElementImpl::eGet(int featureID, bool resolve, bool coreType) co
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWER:
 			return eAny(getLower()); //1545
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_LOWERVALUE:
-			return eAny(getLowerValue()); //1546
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLowerValue();
+				return eAny(returnValue); //1546
+			}
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPER:
 			return eAny(getUpper()); //1547
 		case uml::umlPackage::MULTIPLICITYELEMENT_ATTRIBUTE_UPPERVALUE:
-			return eAny(getUpperValue()); //1548
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getUpperValue();
+				return eAny(returnValue); //1548
+			}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

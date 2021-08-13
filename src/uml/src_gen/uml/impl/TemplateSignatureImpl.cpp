@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -315,7 +315,10 @@ Any TemplateSignatureImpl::eGet(int featureID, bool resolve, bool coreType) cons
 			return eAny(tempList); //2333			
 		}
 		case uml::umlPackage::TEMPLATESIGNATURE_ATTRIBUTE_TEMPLATE:
-			return eAny(getTemplate().lock()); //2334
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTemplate().lock();
+				return eAny(returnValue); //2334
+			}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

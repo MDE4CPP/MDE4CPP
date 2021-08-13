@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -444,11 +443,20 @@ Any InteractionUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //12414			
 		}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_REFERSTO:
-			return eAny(getRefersTo()); //12415
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRefersTo();
+				return eAny(returnValue); //12415
+			}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUE:
-			return eAny(getReturnValue()); //12416
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReturnValue();
+				return eAny(returnValue); //12416
+			}
 		case uml::umlPackage::INTERACTIONUSE_ATTRIBUTE_RETURNVALUERECIPIENT:
-			return eAny(getReturnValueRecipient()); //12417
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReturnValueRecipient();
+				return eAny(returnValue); //12417
+			}
 	}
 	return InteractionFragmentImpl::eGet(featureID, resolve, coreType);
 }

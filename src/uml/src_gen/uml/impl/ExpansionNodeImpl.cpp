@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -295,9 +294,15 @@ Any ExpansionNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASINPUT:
-			return eAny(getRegionAsInput()); //9326
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRegionAsInput();
+				return eAny(returnValue); //9326
+			}
 		case uml::umlPackage::EXPANSIONNODE_ATTRIBUTE_REGIONASOUTPUT:
-			return eAny(getRegionAsOutput()); //9327
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRegionAsOutput();
+				return eAny(returnValue); //9327
+			}
 	}
 	return ObjectNodeImpl::eGet(featureID, resolve, coreType);
 }

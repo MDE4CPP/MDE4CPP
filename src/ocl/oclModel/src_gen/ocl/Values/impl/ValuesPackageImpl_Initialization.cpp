@@ -91,7 +91,7 @@ void ValuesPackageImpl::initializeBagTypeValueContent()
 	m_bagTypeValue_Operation_addValue_Value->setUnique(true);
 	m_bagTypeValue_Operation_addValue_Value->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_bagTypeValue_Operation_addValue_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_bagTypeValue_Operation_addValue_Value);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -165,7 +165,7 @@ void ValuesPackageImpl::initializeCollectionValueContent()
 	m_collectionValue_Operation_addValue_Value->setUnique(true);
 	m_collectionValue_Operation_addValue_Value->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_collectionValue_Operation_addValue_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_collectionValue_Operation_addValue_Value);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -181,7 +181,7 @@ void ValuesPackageImpl::initializeCollectionValueContent()
 	m_collectionValue_Operation_equals_Value->setUnique(true);
 	m_collectionValue_Operation_equals_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_collectionValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_collectionValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -197,7 +197,7 @@ void ValuesPackageImpl::initializeCollectionValueContent()
 	m_collectionValue_Operation_find_Value->setUnique(true);
 	m_collectionValue_Operation_find_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_collectionValue_Operation_find_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_collectionValue_Operation_find_Value);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -548,7 +548,7 @@ void ValuesPackageImpl::initializeObjectValueContent()
 	m_objectValue_Operation_equals_Value->setUnique(true);
 	m_objectValue_Operation_equals_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_objectValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_objectValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -768,7 +768,7 @@ void ValuesPackageImpl::initializeOclVoidValueContent()
 	m_oclVoidValue_Operation_equals_Value->setUnique(true);
 	m_oclVoidValue_Operation_equals_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_oclVoidValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_oclVoidValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -802,7 +802,7 @@ void ValuesPackageImpl::initializeOrderedSetTypeValueContent()
 	m_orderedSetTypeValue_Operation_addValue_Value->setUnique(true);
 	m_orderedSetTypeValue_Operation_addValue_Value->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_orderedSetTypeValue_Operation_addValue_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_orderedSetTypeValue_Operation_addValue_Value);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -829,7 +829,7 @@ void ValuesPackageImpl::initializeSequenceTypeValueContent()
 	m_sequenceTypeValue_Operation_addValue_Value->setUnique(true);
 	m_sequenceTypeValue_Operation_addValue_Value->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_sequenceTypeValue_Operation_addValue_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_sequenceTypeValue_Operation_addValue_Value);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -856,7 +856,7 @@ void ValuesPackageImpl::initializeSetTypeValueContent()
 	m_setTypeValue_Operation_addValue_Value->setUnique(true);
 	m_setTypeValue_Operation_addValue_Value->setOrdered(true);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_setTypeValue_Operation_addValue_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_setTypeValue_Operation_addValue_Value);
 		parameter->setName("value");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -941,7 +941,7 @@ void ValuesPackageImpl::initializeTupleValueContent()
 	m_tupleValue_Operation_equals_Value->setUnique(true);
 	m_tupleValue_Operation_equals_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_tupleValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_tupleValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -975,7 +975,7 @@ void ValuesPackageImpl::initializeUndefinedValueContent()
 	m_undefinedValue_Operation_equals_Value->setUnique(true);
 	m_undefinedValue_Operation_equals_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_undefinedValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_undefinedValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);

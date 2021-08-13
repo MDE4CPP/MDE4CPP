@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -242,7 +243,10 @@ Any TokenImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_HOLDER:
-			return eAny(getHolder().lock()); //1150
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getHolder().lock();
+				return eAny(returnValue); //1150
+			}
 		case fUML::Semantics::Activities::ActivitiesPackage::TOKEN_ATTRIBUTE_WITHDRAWN:
 			return eAny(isWithdrawn()); //1151
 	}

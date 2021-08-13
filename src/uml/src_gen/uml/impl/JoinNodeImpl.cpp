@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -302,7 +301,10 @@ Any JoinNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::JOINNODE_ATTRIBUTE_ISCOMBINEDUPLICATE:
 			return eAny(getIsCombineDuplicate()); //13120
 		case uml::umlPackage::JOINNODE_ATTRIBUTE_JOINSPEC:
-			return eAny(getJoinSpec()); //13121
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getJoinSpec();
+				return eAny(returnValue); //13121
+			}
 	}
 	return ControlNodeImpl::eGet(featureID, resolve, coreType);
 }

@@ -6,13 +6,13 @@
 
 #ifndef TYPESFACTORY_HPP
 #define TYPESFACTORY_HPP
+// namespace macro header include
+#include "types/types.hpp"
 
 #include <map>
 #include <memory>
 
-// namespace macro header include
-#include "types/types.hpp"
-
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EFactory.hpp"
 #include "types/typesPackage.hpp"
 

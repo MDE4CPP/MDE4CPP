@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -356,7 +356,10 @@ Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //418			
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_EFACTORYINSTANCE:
-			return eAny(getEFactoryInstance()); //417
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEFactoryInstance();
+				return eAny(returnValue); //417
+			}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUBPACKAGES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -370,7 +373,10 @@ Any EPackageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //419			
 		}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_ESUPERPACKAGE:
-			return eAny(getESuperPackage().lock()); //4110
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getESuperPackage().lock();
+				return eAny(returnValue); //4110
+			}
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSPREFIX:
 			return eAny(getNsPrefix()); //416
 		case ecore::ecorePackage::EPACKAGE_ATTRIBUTE_NSURI:

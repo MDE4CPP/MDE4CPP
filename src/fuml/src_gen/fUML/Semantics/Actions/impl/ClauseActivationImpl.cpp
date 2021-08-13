@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -216,9 +217,15 @@ Any ClauseActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CLAUSE:
-			return eAny(getClause()); //260
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getClause();
+				return eAny(returnValue); //260
+			}
 		case fUML::Semantics::Actions::ActionsPackage::CLAUSEACTIVATION_ATTRIBUTE_CONDITIONALNODEACTIVATION:
-			return eAny(getConditionalNodeActivation()); //261
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getConditionalNodeActivation();
+				return eAny(returnValue); //261
+			}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

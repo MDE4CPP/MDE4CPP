@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -759,9 +758,15 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_BEHAVIOREDCLASSIFIER:
-			return eAny(getBehavioredClassifier().lock()); //2360
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBehavioredClassifier().lock();
+				return eAny(returnValue); //2360
+			}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_CONTEXT:
-			return eAny(getContext()); //2353
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getContext();
+				return eAny(returnValue); //2353
+			}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_ISREENTRANT:
 			return eAny(getIsReentrant()); //2354
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_OWNEDPARAMETER:
@@ -825,7 +830,10 @@ Any BehaviorImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //2359			
 		}
 		case uml::umlPackage::BEHAVIOR_ATTRIBUTE_SPECIFICATION:
-			return eAny(getSpecification()); //2352
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSpecification();
+				return eAny(returnValue); //2352
+			}
 	}
 	return ClassImpl::eGet(featureID, resolve, coreType);
 }

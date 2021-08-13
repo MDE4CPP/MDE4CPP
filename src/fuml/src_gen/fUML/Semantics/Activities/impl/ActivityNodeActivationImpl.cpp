@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -714,7 +715,10 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_GROUP:
-			return eAny(getGroup().lock()); //93
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getGroup().lock();
+				return eAny(returnValue); //93
+			}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_HELDTOKENS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -740,7 +744,10 @@ Any ActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 			return eAny(tempList); //91			
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_NODE:
-			return eAny(getNode()); //94
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getNode();
+				return eAny(returnValue); //94
+			}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATION_ATTRIBUTE_OUTGOINGEDGES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

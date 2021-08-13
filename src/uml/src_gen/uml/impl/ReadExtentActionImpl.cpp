@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -326,9 +325,15 @@ Any ReadExtentActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(getClassifier()); //19327
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getClassifier();
+				return eAny(returnValue); //19327
+			}
 		case uml::umlPackage::READEXTENTACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //19328
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //19328
+			}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }
