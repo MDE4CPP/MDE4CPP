@@ -26,6 +26,7 @@
 [import UML4CPP::generator::main::helpers::collectionHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
 
 [template public generateFactoryImplSource(aPackage : Package) { className : String = aPackage.name.concat('FactoryImpl'); }]
 [file (aPackage.generateNamespacePath(false).concat('/impl/').concat(className).concat('.cpp'), false, 'UTF-8')]
@@ -80,48 +81,52 @@ std::shared_ptr<uml::Element> [className/]::create(const unsigned int _metaClass
 	switch(_metaClassId)
 	{
 	[for (aClass : Class | aPackage.collectModelClassesForFactoryFunctions())]
-	[let ref:OrderedSet(Association) = aClass.getCompositionsToClass()]
+	[let compositionsToClass : OrderedSet(Association) = aClass.getCompositionsToClass()]
 		case [aPackage.name/]Package::[aClass.getMemberName().toUpperCase()/]:
 		{
-			[if(ref->size()>0)]
+			[if(compositionsToClass->size()>0)]
 			if (nullptr == container)
 			{
 			[/if]
 				return this->create[aClass.name.toUpperFirst()/](_metaClassId);
-[if(ref->size()>0)]			}
+[if(compositionsToClass->size()>0)]			}
 			else
 			{
 [/if]
-				[if(ref->size()>1)]
+				[if(compositionsToClass->size()>1)]
 				switch(referenceID)
 				{
-					[for (anAssociation : Association | aClass.getCompositionsToClass())]
-					[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
-					[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+					[for (anAssociation : Association | compositionsToClass)]
+						[let containerProperty : Property = anAssociation.getCompositeProperty(aClass)]
+							[if (not containerProperty.opposite.oclIsUndefined())]
+								[let containmentProperty : Property = containerProperty.opposite]
 					//[aClass.name/] has [anAssociation.name/] as a containment
 					case  [aPackage.name/]Package::[containerProperty.name.toUpperCase()/]_[containmentProperty.name.toUpperCase()/]:
 					{
 						auto castedContainer = std::dynamic_pointer_cast<[if (containmentProperty.upper <> 1)]Bag<[/if][containmentProperty.type.transformType()/][if (containmentProperty.upper <> 1)]>[/if]>(container);
 						return this->create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/](castedContainer,_metaClassId);															  
 					}
-					[/let]
-					[/let]
+								[/let]
+							[/if]
+						[/let]
 					[/for]
 					default:
 						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
 				}
-				[elseif(ref->size()=1)]
-				[let containerProperty : Property = ref->first().memberEnd->select(type = aClass)->asOrderedSet()->first()]
-				[let containmentProperty : Property = ref->first().memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
+				[elseif(compositionsToClass->size()=1)]
+					[let containerProperty : Property = compositionsToClass->first().getCompositeProperty(aClass)]
+						[if (not containerProperty.opposite.oclIsUndefined())]
+							[let containmentProperty : Property = containerProperty.opposite]
 				[containmentProperty.generateCppType()/] castedContainer = std::dynamic_pointer_cast<[if (containmentProperty.upper <> 1)]Bag<[/if][containmentProperty.type.transformType()/][if (containmentProperty.upper <> 1)]>[/if]>(container);
-[if (not containmentProperty.isBackReference())]
+								[if (not containmentProperty.isBackReference())]
 				assert(castedContainer);
-[/if]
+								[/if]
 				return std::shared_ptr<[aClass.name.toUpperFirst()/]>(this->create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/](castedContainer,_metaClassId));
-				[/let]
-				[/let]
+							[/let]
+						[/if]
+					[/let]
 				[/if]
-			[if(ref->size()>0)]}[/if]
+			[if(compositionsToClass->size()>0)]}[/if]
 		}
 	[/let]
 	[/for]
@@ -215,35 +220,37 @@ std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.nam
 }
 
 [for (anAssociation : Association | aClass.getCompositionsToClass())]
-[let containerProperty : Property = anAssociation.memberEnd->select(type = aClass)->asOrderedSet()->first()]
-[let containmentProperty : Property = anAssociation.memberEnd->select(not (type = aClass))->asOrderedSet()->first()]
-std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/]([containmentProperty.generateCppType()/] [containmentProperty.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
+	[let containerProperty : Property = anAssociation.getCompositeProperty(aClass)]
+		[if (not containerProperty.opposite.oclIsUndefined())]
+			[let containmentProperty : Property = containerProperty.opposite]
+std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_as_[containerProperty.name/]_in_[containmentProperty.type.name.toUpperFirst()/]([containmentProperty.generateCppType()/] par_[containmentProperty.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl([if (containmentProperty.isBackReference())][containmentProperty.name.toLowerFirst()/][/if]));
+	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl([if (containmentProperty.isBackReference())]par_[containmentProperty.name.toLowerFirst()/][/if]));
 	element->setMetaElementID(metaElementID);
-[if (containmentProperty.isBackReference())]
-	if(auto wp = [containmentProperty.name.toLowerFirst()/].lock())
-[else]
-	if (nullptr != [containmentProperty.name.toLowerFirst()/])
-[/if]
+				[if (containmentProperty.isBackReference())]
+	if(auto wp = par_[containmentProperty.name.toLowerFirst()/].lock())
+				[else]
+	if (nullptr != par_[containmentProperty.name.toLowerFirst()/])
+				[/if]
 	{
-		[if (containmentProperty.isBackReference())]wp[else][containmentProperty.name.toLowerFirst()/][/if]->[if(containerProperty.upper <> 1)][containerProperty.getterName()/]()->push_back(element)[else][containerProperty.setterName()/](element)[/if];
+		[if (containmentProperty.isBackReference())]wp[else]par_[containmentProperty.name.toLowerFirst()/][/if]->[if(containerProperty.upper <> 1)][containerProperty.getterName()/]()->push_back(element)[else][containerProperty.setterName()/](element)[/if];
 	}
 	element->[aClass.generateGetThisPtrPropertySetterName()/](element);
 	element->instantiate();
 	return element;
 }
-[/let]
-[/let]
+			[/let]
+		[/if]
+	[/let]
 [/for]
 
 [for (compositeOwnerClass : Class | aClass.getCompositeOwners())] [comment for each class that has composite properties of type aClass/]
 [for (compositeProperty : Property | compositeOwnerClass.getCompositePropertiesOfType(aClass))] [comment for each composite property that compositeOwnerClass has/]
-std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> [compositeOwnerClass.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
+std::shared_ptr<[aClass.generateCppType(true)/]> [className/]::create[aClass.name.toUpperFirst()/]_as_[compositeProperty.name/]_in_[compositeOwnerClass.name.toUpperFirst()/](std::weak_ptr<[compositeOwnerClass.generateCppType(true)/]> par_[compositeOwnerClass.name.toLowerFirst()/], const int metaElementID/*=-1*/) const
 {
-	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl([compositeOwnerClass.name.toLowerFirst()/]));
+	std::shared_ptr<[aClass.generateCppType(true)/]Impl> element(new [aClass.name.toUpperFirst()/]Impl(par_[compositeOwnerClass.name.toLowerFirst()/]));
 	element->setMetaElementID(metaElementID);
-	if(auto wp = [compositeOwnerClass.name.toLowerFirst()/].lock())
+	if(auto wp = par_[compositeOwnerClass.name.toLowerFirst()/].lock())
 	{
 		wp->[if(compositeProperty.upper <> 1)][compositeProperty.getterName()/]()->push_back(element)[else][compositeProperty.setterName()/](element)[/if];
 	}
