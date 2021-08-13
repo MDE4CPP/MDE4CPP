@@ -40,8 +40,10 @@ SET(SOURCE_FILES
 	# Contents of UML4CPPProfile
 	impl/DoNotGenerateImpl.cpp
 	impl/ExternalLibraryImpl.cpp
+	impl/GetterNameImpl.cpp
 	impl/MainBehaviorImpl.cpp
 	impl/NonExecutableImpl.cpp
+	impl/SetterNameImpl.cpp
 	impl/SingletonImpl.cpp
 	impl/UML4CPPPackageImpl.cpp
 	
