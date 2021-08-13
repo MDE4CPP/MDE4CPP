@@ -159,7 +159,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	std::cout << "+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++\r\ncopy [aClass.name.toUpperFirst()/] "<< this << "\r\n+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ " << std::endl;
 	#endif
 	//Clone Attributes with (deep copy)
-	[for (att : EAttribute | aClass.eAttributes->asOrderedSet()->sortedBy(name))]
+	[for (att : EAttribute | aClass.eAttributes->reject(isRedefiningContainer())->asOrderedSet()->sortedBy(name))]
 		[if (not(att.upperBound = 1))] [comment it is a Bag of Elements /]
 			[if (not att.eGenericType.eClassifier.oclIsKindOf(EDataType))] [comment it is an Bag/Subset of non standard Elements /]
 	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
@@ -184,21 +184,15 @@ using namespace [aClass.generateNamespaceDefinition()/];
 		DEBUG_MESSAGE(std::cout << "Warning: container is nullptr [att.name/]."<< std::endl;)
 	}
 			[else]	[comment it is an Bag/Subset of standard Datatype Elements /]
-	[att.generateStructuralFeatureType(true)/] [att.name/]Container = [att.GetterName()/]();
-	if(nullptr != [att.name/]Container )
-	{
-		int size = [att.name/]Container->size();
-		for(int i=0; i<size ; i++)
+	[att.generateStructuralFeatureType(true)/] [att.name/]List = obj.[att.GetterName()/]();
+	if([att.name/]List)
+	{	[att.GetterName()/]().reset(new Bag<[att.eType.generateType()/]>());
+		Bag<[att.eType.generateType()/]>::iterator [att.name/]Iter = [att.name/]List->begin();
+		Bag<[att.eType.generateType()/]>::iterator [att.name/]End = [att.name/]List->end();
+		while ([att.name/]Iter != [att.name/]End) 
 		{
-			auto _[att.name/]=(*[att.name/]Container)['['/]i[']'/];	
-			if(nullptr != _[att.name/])
-			{
-				[att.name/]Container->push_back(_[att.name/]);
-			} 
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [att.name/]."<< std::endl;)
-			}
+			[att.GetterName()/]()->push_back(*[att.name/]Iter);
+			[att.name/]Iter++;
 		}
 	}
 	else
@@ -255,12 +249,9 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[/for]
 
 	//copy references with no containment (soft copy)
-	[for (ref : EReference | aClass.eReferences->select(aRef: EReference | aRef.isBackReference() or (aRef.containment = false and not aRef.hasSubset()))->asOrderedSet()->sortedBy(name))]
-	[if (ref.hasSetter() or ref.upperBound = 1)]
+	[for (ref : EReference | aClass.eReferences->select(aRef: EReference | aRef.isBackReference() or (aRef.containment = false and not aRef.hasSubset()))->reject(isRedefiningContainer())->asOrderedSet()->sortedBy(name))]
+	[if (ref.hasGetter())]
 	m_[ref.name/]  = obj.[ref.GetterName()/]();
-	[else]
-	[ref.generateReferenceType()/] _[ref.name/] = obj.[ref.GetterName()/]();
-	m_[ref.name/].reset(new [ref.generateReferenceType(false)/](*(obj.[ref.GetterName()/]().get())));
 	[/if]
 	[/for]
 	[comment]References must be copied in this order:
@@ -269,26 +260,22 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	3rd all the rest.
 	[/comment]
 	//Clone references with containment (deep copy)
-	[for (ref : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = true or eRef.hasSubset()) and (not eRef.isUnion()) and (not eRef.isBackReference()))->asOrderedSet()->sortedBy(name))]
-	[if (not(ref.upperBound = 1))]
+	[for (ref : EReference | aClass.eReferences->select(eRef: EReference|(eRef.containment = true or eRef.hasSubset()) and (not eRef.isUnion()) and (not eRef.isBackReference()))->reject(isRedefiningContainer())->asOrderedSet()->sortedBy(name)) separator('\n')]
+	//clone reference '[ref.name/]'
+	[if (ref.upperBound <> 1)]
 		[if (ref.hasSetter())]
 	m_[ref.name/] = std::dynamic_pointer_cast<[ref.generateReferenceType()/]>>(obj.[ref.GetterName()/]()->copy());
 		[else]
-	[ref.generateReferenceType()/] [ref.name/]Container = [ref.GetterName()/]();
-	if(nullptr != [ref.name/]Container )
+	[ref.generateReferenceType()/] [ref.name/]List = obj.[ref.GetterName()/]();
+	if([ref.name/]List)
 	{
-		int size = [ref.name/]Container->size();
-		for(int i=0; i<size ; i++)
+		Bag<[ref.eType.generateType()/]>::iterator [ref.name/]Iter = [ref.name/]List->begin();
+		Bag<[ref.eType.generateType()/]>::iterator [ref.name/]End = [ref.name/]List->end();
+		while ([ref.name/]Iter != [ref.name/]End) 
 		{
-			auto _[ref.name/]=(*[ref.name/]Container)['['/]i[']'/];
-			if(nullptr != _[ref.name/])
-			{
-				[ref.name/]Container->push_back(std::dynamic_pointer_cast<[ref.eType.generateType()/]>(_[ref.name/]->copy()));
-			}
-			else
-			{
-				DEBUG_MESSAGE(std::cout << "Warning: nullptr in container [ref.name/]."<< std::endl;)
-			}
+			std::shared_ptr<[ref.eType.generateType()/]> temp = std::dynamic_pointer_cast<[ref.eType.generateType()/]>((*[ref.name/]Iter)->copy());
+			[ref.GetterName()/]()->push_back(temp);
+			[ref.name/]Iter++;
 		}
 	}
 	else
@@ -385,7 +372,7 @@ using namespace [aClass.generateNamespaceDefinition()/];
 	[elseif (not(ref.lowerBound = 0))] [comment copy simple attribute ptr/]
 	*(m_[ref.name/]) = *(obj.[ref.GetterName()/]());
 	[else] [comment copy simple attribute/]
-	m_[ref.name/] = obj.[ref.GetterName()/]();
+	m_[ref.name/] = obj.[ref.GetterName()/]()->copy();
 	[/if][/for]
 	[for (aReference : EReference | aClass.eReferences->select(eRef: EReference|eRef.containment = true and not eRef.isUnion())->asOrderedSet()->sortedBy(name))]
 	[aReference.InitReferences()/]

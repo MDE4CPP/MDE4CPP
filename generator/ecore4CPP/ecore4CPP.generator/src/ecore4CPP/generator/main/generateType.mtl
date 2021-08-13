@@ -106,16 +106,16 @@
 [/template]
 
 [template public generateSubsetType(eReference : EReference) post(trim())]
-[let subsets : OrderedSet(EModelElement) = eReference.oclAsType(EModelElement).Subset()->asOrderedSet()]
-[for (m : EModelElement | subsets) separator(',')]
-[if(m.isUnion())][m.oclAsType(EReference).eGenericType.generateCppType(false)/][else]
-[m.oclAsType(EReference).eGenericType.generateCppType(false)/] /*Subset does not reference a union*/[comment][m.oclAsType(EReference).eReferenceType.eReferences->at(0).eGenericType.generateCppType(true)/][/comment][/if][/for][/let]
+[let subsets : OrderedSet(EReference) = eReference.Subset().oclAsType(EReference)->asOrderedSet()->sortedBy(eGenericType.eClassifier.name)]
+[for (subsettedEReference : EReference | subsets) separator(', ')]
+[if(subsettedEReference.isUnion())][subsettedEReference.eGenericType.generateCppType(false)/][else]
+[subsettedEReference.eGenericType.generateCppType(false)/] /*Subset does not reference a union*/[comment][m.oclAsType(EReference).eReferenceType.eReferences->at(0).eGenericType.generateCppType(true)/][/comment][/if][/for][/let]
 [/template]
 
 [template public generateSubsetElements(eReference : EReference)]
-[let subsets : OrderedSet(EModelElement) = eReference.oclAsType(EModelElement).Subset()->asOrderedSet()]
-[for (m : EModelElement | subsets) separator(',')]
-[m.oclAsType(EReference).GetterName()/]()[/for][/let]
+[let subsets : OrderedSet(EReference) = eReference.Subset().oclAsType(EReference)->asOrderedSet()->sortedBy(eGenericType.eClassifier.name)]
+[for (subsettedEReference : EReference | subsets) separator(', ')]
+[subsettedEReference.GetterName()/]()[/for][/let]
 [/template]
 
 [template public generateReferenceType(eReference : EReference, pointer : Boolean) post(trim())]

@@ -80,13 +80,13 @@ m_[eReference.name/].reset(new [eReference.generateReferenceType(false)/]());
 [template public InitReferences(eReference : EReference)? (not(eReference.upperBound=1))]
 [if(eReference.isSubsetUnion())]
 /*SubsetUnion*/
-m_[eReference.name/]->initSubsetUnion([generateSubsetElements(eReference)/]);
+[eReference.GetterName()/]()->initSubsetUnion([generateSubsetElements(eReference)/]);
 #ifdef SHOW_SUBSET_UNION
 	std::cout << "Initialising value SubsetUnion: " << "m_[eReference.name/] - SubsetUnion<[eReference.eGenericType.generateCppType(false)/], [generateSubsetType(eReference)/] >([generateSubsetElements(eReference)/])" << std::endl;
 #endif
 [elseif(eReference.hasSubset())]
 /*Subset*/
-m_[eReference.name/]->initSubset([generateSubsetElements(eReference)/]);
+[eReference.GetterName()/]()->initSubset([generateSubsetElements(eReference)/]);
 #ifdef SHOW_SUBSET_UNION
 	std::cout << "Initialising value Subset: " << "m_[eReference.name/] - Subset<[eReference.eGenericType.generateCppType(false)/], [generateSubsetType(eReference)/] >([generateSubsetElements(eReference)/])" << std::endl;
 #endif
@@ -123,15 +123,41 @@ Getter & Setter for reference [anEReference.name/]
 [valueKey(keyGetterBody())/]
 	//end of body
 [else]
-[if (not (anEReference.upperBound = 1))]
+	[if (anEReference.isRedefiningContainer())]
+		[let redefinedContainer : EReference = anEReference.getDirectlyRedefinedElements()->first().oclAsType(EReference)]
+			[if (anEReference.eType = redefinedContainer.eType)]
+	//Getter call of redefined container reference [redefinedContainer.eContainingClass.name/]::[redefinedContainer.name/] 
+	return [if(redefinedContainer.eContainingClass = anEReference.eContainingClass)]this->[else][redefinedContainer.eContainingClass.transformType()/]Impl::[/if]get[redefinedContainer.name.toUpperFirst()/]()[if(anEReference.isBackReference())].lock()[/if];
+			[else]
+	//Cast conversion from redefined container reference [redefinedContainer.eContainingClass.name/]::[redefinedContainer.name/] 
+	std::shared_ptr<Bag<[anEReference.eGenericType.generateCppType(false)/]>> [anEReference.name/](new Bag<[anEReference.eGenericType.generateCppType(false)/]>());
+
+	Bag<[redefinedContainer.eGenericType.generateCppType(false)/]>::iterator iter = [if(redefinedContainer.eContainingClass = anEReference.eContainingClass)]this->[else][redefinedContainer.eContainingClass.transformType()/]Impl::[/if]get[redefinedContainer.name.toUpperFirst()/]()[if(anEReference.isBackReference())].lock()[/if]->begin();
+	Bag<[redefinedContainer.eGenericType.generateCppType(false)/]>::iterator end = [if(redefinedContainer.eContainingClass = anEReference.eContainingClass)]this->[else][redefinedContainer.eContainingClass.transformType()/]Impl::[/if]get[redefinedContainer.name.toUpperFirst()/]()[if(anEReference.isBackReference())].lock()[/if]->end();
+	
+	while(iter != end)
+	{
+		[anEReference.eGenericType.generateCppType(true)/] _[anEReference.eGenericType.eClassifier.name.toLowerFirst()/] = std::dynamic_pointer_cast<[anEReference.eGenericType.generateCppType(false)/]>(*iter);
+		if(_[anEReference.eGenericType.eClassifier.name.toLowerFirst()/])
+		{
+			[anEReference.name/]->add(_[anEReference.eGenericType.eClassifier.name.toLowerFirst()/]);
+		}
+
+		iter++;
+	}	
+	return [anEReference.name/];
+			[/if]
+		[/let]
+	[else]
+		[if (not (anEReference.upperBound = 1))]
 	if(m_[anEReference.name/] == nullptr)
 	{
 		[anEReference.generateReferenceInit()/]
 		[anEReference.InitReferences()/]
 	}
-[/if]
-[if(anEReference.lowerBound>0)]//assert(m_[anEReference.name/]);[/if]
+		[/if]
     return m_[anEReference.name/];
+	[/if]
 [/if]
 }
 [/template]
@@ -259,3 +285,5 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedERefere
 static const long long [anEReference.getStaticAttributeIDName()/] = [anEReference.generateNamespaceDefinition().generatePolynomialRollingHash()/];
 
 [/template]
+
+[query public isRedefiningContainer(anEReference : EReference) : Boolean = (anEReference.upperBound <> 1) and (anEReference.getDirectlyRedefinedElements()->size() > 0) /]

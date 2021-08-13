@@ -178,12 +178,12 @@ namespace [aClass.generateNamespaceDefinition()/]
 			//*********************************
 			// Attribute Members
 			//*********************************
-			[aClass.eAttributes->sortedBy(name).generateAttributeProtectedMember()/]
+			[aClass.eAttributes->reject(isRedefiningContainer())->sortedBy(name).generateAttributeProtectedMember()/]
 			
 			//*********************************
 			// Reference Members
 			//*********************************
-			[aClass.eReferences->sortedBy(name).generateProtectedReference()/]
+			[aClass.eReferences->reject(isRedefiningContainer())->sortedBy(name).generateProtectedReference()/]
 
 		public:
 			//*********************************

@@ -54,8 +54,8 @@
 [/template]
 
 [template public generateAttributeProtectedMember(anEAttribute : EAttribute) ? (not doNotGenerate())]
-[anEAttribute.generateDocumentation()/] 
-[if (not(anEAttribute.upperBound = 1))]
+[anEAttribute.generateDocumentation()/]
+[if (anEAttribute.upperBound <> 1)]
 [if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if]mutable [anEAttribute.generateStructuralFeatureType(true)/] m_[anEAttribute.name/]; 
 [else]
 [if(hasKey(keyQualify()))][valueKey(keyQualify())/] [/if][anEAttribute.generateStructuralFeatureType(true)/] m_[anEAttribute.name/] [generateDefaultValue()/];
@@ -104,19 +104,26 @@ Getter & Setter for attribute [anEAttribute.name/]
 [template private generateAttributeGetterImplementationCpp(anEAttribute : EAttribute)? (hasGetter())]
 [anEAttribute.generateStructuralFeatureType(true)/] [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[anEAttribute.GetterName()/]() const 
 {
-	[if (hasKey(keyGetterBody()))]
+[if (hasKey(keyGetterBody()))]
 	//generated from [keyGetterBody()/] annotation
 	[valueKey(keyGetterBody())/]
 	//end of body
+[else]
+	[if (anEAttribute.isRedefiningContainer())]
+		[let redefinedContainer : EAttribute = anEAttribute.getDirectlyRedefinedElements()->first().oclAsType(EAttribute)]
+	//Getter call of redefined container reference [redefinedContainer.eContainingClass.name/]::[redefinedContainer.name/] 
+	return [if(redefinedContainer.eContainingClass = anEAttribute.eContainingClass)]this->[else][redefinedContainer.eContainingClass.transformType()/]Impl::[/if]get[redefinedContainer.name.toUpperFirst()/]();
+		[/let]
 	[else]
-	[if (not (anEAttribute.upperBound = 1))]
+		[if (not (anEAttribute.upperBound = 1))]
 	if(m_[anEAttribute.name/] == nullptr)
 	{
 		[anEAttribute.generateAttributeInit()/]
 	}
-	[/if]
+		[/if]
 	return m_[anEAttribute.name/];
 	[/if]
+[/if]
 }
 [/template]
 
@@ -233,3 +240,5 @@ void [anEAttribute.eContainingClass.name.toUpperFirst()/]Impl::[redefinedEAttrib
 static const long long [anEAttribute.getStaticAttributeIDName()/] = [anEAttribute.generateNamespaceDefinition().generatePolynomialRollingHash()/];
 
 [/template]
+
+[query public isRedefiningContainer(anEAttribute : EAttribute) : Boolean = (anEAttribute.upperBound <> 1) and (anEAttribute.getDirectlyRedefinedElements()->size() > 0) /]
