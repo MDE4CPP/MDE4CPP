@@ -130,7 +130,6 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 	{
 	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
 	[let ref:OrderedSet(EReference) = aClass.getAllComposition()]
-	[aClass.getAllComposition()->size()/]
 		case [anEPackage.name/]Package::[aClass.getStaticAttributeIDName()/]:
 		{
 [if(ref->size()>0)]
