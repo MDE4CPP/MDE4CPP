@@ -36,14 +36,16 @@
 [**
  * 	keyword for the name of the UML4CPPProfile 
 */]
-[query private QN_PROFILE_UML4CPPPROFILE(any : OclAny) : String = 'UML4CPPProfile' /]
+[query public QN_PROFILE_UML4CPPPROFILE(any : OclAny) : String = 'UML4CPPProfile' /]
 [**
  * 	keyword for the qualified names of the UML4CPPProfile stereotypes
 */]
 [query public QN_STEREOTYPE_DONOTGENERATE(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::DoNotGenerate' /]
 [query public QN_STEREOTYPE_EXTERNALLIBRARY(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::ExternalLibrary' /]
+[query public QN_STEREOTYPE_GETTERNAME(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::GetterName' /]
 [query public QN_STEREOTYPE_MAINBEHAVIOR(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::MainBehavior' /]
 [query public QN_STEREOTYPE_NONEXECUTABLE(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::NonExecutable' /]
+[query public QN_STEREOTYPE_SETTERNAME(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::SetterName' /]
 [query public QN_STEREOTYPE_SINGLETON(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::Singleton' /]
 [query public QN_STEREOTYPE_UML4CPPPACKAGE(any : OclAny) : String = QN_PROFILE_UML4CPPPROFILE()+'::UML4CPPPackage' /]
 
@@ -53,6 +55,16 @@
 [query public keyIncludePath(any : OclAny) : String = 'includePath'/] [** specifiy include path/]
 [query public keyLibraryName(any : OclAny) : String = 'libraryName'/] [** specifiy library name/]
 [query public keyLibraryPath(any : OclAny) : String = 'libraryPath'/] [** specifiy library path/]
+
+[**
+ * keywords for property names of the "GetterName" stereotype of the UML4CPPProfile
+*/]
+[query public keyGetterName(any : OclAny) : String = 'getterName'/] [** specifiy name of getter method/]
+
+[**
+ * keywords for property names of the "SetterName" stereotype of the UML4CPPProfile
+*/]
+[query public keySetterName(any : OclAny) : String = 'setterName'/] [** specifiy name of setter method/]
 
 [**
  * keywords for property names of the "UML4CPPPackage" stereotype of the UML4CPPProfile
