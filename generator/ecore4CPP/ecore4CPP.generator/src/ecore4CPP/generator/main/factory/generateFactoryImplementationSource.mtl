@@ -233,7 +233,7 @@ std::shared_ptr<[anEPackage.name.concat('Package')/]> [className/]::get[anEPacka
 [/template]
 
 [template public generateCreateFunctionContent(anEClass : EClass, ref : OrderedSet(EReference), aReference : EReference, anEPackage : EPackage) ]
-[if (aReference.eOpposite->isEmpty())]
+[if (aReference.eOpposite.oclIsUndefined())]
 std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl());
 [else]
 	[if(ref->select(eContainingClass=anEClass)->select(eType = aReference.eType)->size()>1)]
