@@ -149,7 +149,8 @@ public class UML4CPPEMtlResourceFactory extends EMtlResourceFactoryImpl {
 								"nameHelper",
 								"setGetHelper",
 								"singletonHelper",
-								"IDHelper"
+								"IDHelper",
+								"uml4CPPProfileHelper"
 								};
 		generateFilePathMapData(moduleNames, "helpers", resourcePathPrefix);
 	}

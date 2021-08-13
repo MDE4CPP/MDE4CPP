@@ -20,6 +20,7 @@
 [module nameHelper('http://www.eclipse.org/uml2/5.0.0/UML','http://www.eclipse.org/emf/2002/Ecore')]
 
 [import UML4CPP::generator::main::helpers::keywords /]
+[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
 [import UML4CPP::generator::main::validation::validateModel /]
 
 [** 
@@ -85,8 +86,8 @@
 [**
  * queries to generate getter and setter names
 */]
-[query public setterName(feature : StructuralFeature) : String = 'set'.concat(name.toUpperFirst()) /]
-[query public getterName(feature : StructuralFeature) : String = getterPrefix().concat(name.toUpperFirst()) /]
+[query public setterName(feature : StructuralFeature) : String = if hasSetterName() then getSetterName() else 'set'.concat(name.toUpperFirst()) endif /]
+[query public getterName(feature : StructuralFeature) : String = if hasGetterName() then getGetterName() else getterPrefix().concat(name.toUpperFirst()) endif /]
 [query public getterPrefix(feature : StructuralFeature) : String = feature.type.getterPrefix() /]
 [query public getterPrefix(type : Type) : String = if type.name = 'Boolean' then 'is' else 'get' endif/]
 

@@ -27,58 +27,17 @@
 */]
 [query public abstractSuffix(impl : Boolean) : String = if impl then '' else ' = 0' endif/]
 
-[** 
- * queries wether a specific stereotype is applied to an Element by its qualified name 
-*/]
-[query public hasStereotypeApplied(anElement : Element, qualifiedName : String) : Boolean = not anElement.getAppliedStereotype(qualifiedName).oclIsUndefined() /]
-
 [**
  * Subset Union helper queries
 */]
 [comment indicates, that the property is a subset of other properties /]
-[query public isSubset(aProperty : Property) : Boolean = not aProperty.subsettedProperty->isEmpty() /]
+[query public isSubset(aProperty : Property) : Boolean = not aProperty.subsettedProperty->select(owner.oclIsTypeOf(Class) or owner.oclIsTypeOf(Interface))->isEmpty() /]
 [comment indicates, that the property is a union of other properties /]
-[query public isUnion(aProperty : Property) : Boolean = aProperty.isDerivedUnion  /]
+[query public isUnion(aProperty : Property) : Boolean = aProperty.isDerivedUnion and aProperty.upper<>1 /]
 [comment indicates, that the property is a subset as well as a union of other properties /]
 [query public isSubsetUnion(aProperty : Property) : Boolean = isSubset() and (isUnion() or subsetIsUnion())/]
 [comment indicates, whether a subset property is also a union --> this is the case if there is at least one other property in the model, which contains aProperty in its subsetted properties /]
-[query public subsetIsUnion(aProperty : Property) : Boolean = aProperty.ancestors(Package).allOwnedElements()->filter(Property).subsettedProperty->includes(aProperty) /]
-
-
-[**
- * queries for handling of the 'UML4CPPPackage' stereotype
-*/]
-[query public getEclipseURI(anElement : Element) : String = if(isUML4CPPPackage()) then getValue(anElement.getAppliedStereotype(QN_STEREOTYPE_UML4CPPPACKAGE()), keyEclipseURI()) else '' endif/] [** get the packages Eclipse URI if present./]
-[query public isIgnoreNamespace(anElement : Element) : Boolean = if(isUML4CPPPackage()) then getValue(anElement.getAppliedStereotype(QN_STEREOTYPE_UML4CPPPACKAGE()), keyIgnoreNamespace()) else false endif/] [** check, if namespace should be igored./]
-[query public isPackageOnly(anElement : Element) : Boolean = if(isUML4CPPPackage()) then getValue(anElement.getAppliedStereotype(QN_STEREOTYPE_UML4CPPPACKAGE()), keyPackagOnly()) else false endif/] [** check, if only the model package should be generated./]
-[query public isSingleton(anElement : Element) : Boolean = anElement.hasStereotypeApplied(QN_STEREOTYPE_SINGLETON()) /]	[** check, if a singleton construct should be generated /]
-[query private isUML4CPPPackage(anElement : Element) : Boolean = anElement.hasStereotypeApplied(QN_STEREOTYPE_UML4CPPPACKAGE())/] [** check, if additional generation information exist./]
-[**
- * queries for handling of the 'ExternalLibrary' stereotype
-*/]
-[query public hasIncludePath(ePackage : Package) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_EXTERNALLIBRARY()) /]
-[query public getIncludePath(ePackage : Package) : String = getValue(ePackage.getAppliedStereotype(QN_STEREOTYPE_EXTERNALLIBRARY()), keyIncludePath()) /]
-
-[**
- * queries for handling of the 'MainBehavior' stereotype
-*/]
-[query public hasMainBehavior(aPackage : Package) : Boolean = aPackage.eAllContents(Behavior)->select(hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))->size() > 0 /]
-[query public getMainBehavior(aPackage : Package) : Behavior = if(hasMainBehavior()) then aPackage.eAllContents(Behavior)->select(hasStereotypeApplied(QN_STEREOTYPE_MAINBEHAVIOR()))->asOrderedSet()->first() else null endif/]
-[query public hasMainActivity(aPackage : Package) : Boolean = if(hasMainBehavior() and getMainBehavior().oclIsKindOf(Activity)) then true else false endif /]
-[query public getMainActivity(aPackage : Package) : Activity = if(hasMainActivity()) then getMainBehavior().oclAsType(Activity) else null endif /]
-[query public hasMainSourceCode(ePackage : Package) : Boolean = true /]
-[query public getMainSourceCode(ePackage : Package) : String = '' /]
-[query public hasMainIncludes(ePackage : Package) : Boolean = true /]
-[query public getMainIncludes(ePackage : Package) : String = '' /]
-
-[**
- * queries for handling of the 'DoNotGenerate' stereotype
-*/]
-[query public isDoNotGenerateElement(anElement : Element) : Boolean = hasStereotypeApplied(QN_STEREOTYPE_DONOTGENERATE()) /]
-[query public isDoNotGenerate(aPackage : Package) : Boolean = if(aPackage.isRootPackage()) then aPackage.isDoNotGenerateElement() else aPackage.getRootPackage().isDoNotGenerate() endif /]
-[query public isDoNotGenerate(aClassifier : Classifier) : Boolean = isDoNotGenerateElement() or aClassifier.getNearestPackage().isDoNotGenerate() /]
-[query public isDoNotGenerate(aFeature : Feature) : Boolean = isDoNotGenerateElement() or aFeature.owner.isDoNotGenerateElement() or aFeature.getNearestPackage().isDoNotGenerate() /]
-
+[query public subsetIsUnion(aProperty : Property) : Boolean = aProperty.ancestors(Package).allOwnedElements()->filter(Property).subsettedProperty->select(owner.oclIsTypeOf(Class) or owner.oclIsTypeOf(Interface))->includes(aProperty) /]
 
 [**
  * template to generate forward declaration of template class Bag for a Class element
