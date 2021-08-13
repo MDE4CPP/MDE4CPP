@@ -20,6 +20,7 @@
 [import UML4CPP::generator::main::helpers::nameHelper /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::keywords /]
+[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
 
 [query private getAllLocusClasses(aPackage : Package) : Set(Class) = aPackage.allOwnedElements()->filter(Class)->asSet()->flatten()->addAll(aPackage.getClassesOfCreateObjectAction())
 																	->reject(oclIsKindOf(Behavior))->reject(oclIsKindOf(AssociationClass))->reject(oclIsKindOf(Component))->reject(oclIsKindOf(Stereotype))->reject(oclIsKindOf(Node)) /]
