@@ -28,6 +28,7 @@
 [import UML4CPP::generator::main::impl::generateImplementationHeader /]
 [import UML4CPP::generator::main::impl::generateImplementationSource /]
 [import UML4CPP::generator::main::helpers::generalHelper /]
+[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
 
 [template public generateImplementation(aClass : Class)]
 [aClass.generateImplementationHeader()/]

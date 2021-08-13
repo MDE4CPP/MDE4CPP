@@ -25,7 +25,7 @@
 [import UML4CPP::generator::main::helpers::singletonHelper /]
 [import UML4CPP::generator::main::components::generateClass /]
 [import UML4CPP::generator::main::helpers::collectionHelper /]
-
+[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
 
 [template public generatePackageInterface(aPackage : Package) {packageName : String = aPackage.name.concat('Package');}]
 [file (aPackage.generateNamespacePath(false).concat('/').concat(packageName).concat('.hpp'), false, 'UTF-8')]

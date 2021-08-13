@@ -27,6 +27,7 @@
 [import UML4CPP::generator::main::plugin::generateUMLPlugin /]
 [import UML4CPP::generator::main::validation::validateModel /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
 
 [template public generateUML(aPackage : Package)]
 [comment @main/]

@@ -19,6 +19,7 @@
 [import UML4CPP::generator::main::configuration::generateEclipseFiles /]
 [import UML4CPP::generator::main::helpers::generalHelper/]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
 
 [template public generateConfigurationFiles(aPackage : Package, packOnly : Boolean) { packageName : String = getPackageName(); }]
 [let prepareApplication : Boolean = aPackage.hasMainBehavior()]

@@ -21,6 +21,7 @@
 
 [import UML4CPP::generator::main::helpers::generalHelper /]
 [import UML4CPP::generator::main::helpers::nameHelper /]
+[import UML4CPP::generator::main::helpers::uml4CPPProfileHelper /]
 
 [**
  * template for generation of file with delcaration of enumeration class and corresponding literals
