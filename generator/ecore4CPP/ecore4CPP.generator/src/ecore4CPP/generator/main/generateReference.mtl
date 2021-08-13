@@ -231,8 +231,7 @@ void [anEReference.eContainingClass.name.toUpperFirst()/]Impl::[redefinedERefere
 */]
 
 [template public generateReferenceCreation(anEReference : EReference)]
-[anEReference.getClassMemberName()/] = factory->createEReference_in_EContainingClass([anEReference.eContainingClass.getClassMemberName()/], [anEReference.getStaticAttributeIDName()/]);
-
+[anEReference.getClassMemberName()/] = factory->createEReference_as_eStructuralFeatures_in_EClass([anEReference.eContainingClass.getClassMemberName()/], [anEReference.getStaticAttributeIDName()/]);
 [/template] 
  
 [** Handling of doNotGenerate: if an Attribute has a Type on an external Class, which is not generated, then create a dummy EClass /]

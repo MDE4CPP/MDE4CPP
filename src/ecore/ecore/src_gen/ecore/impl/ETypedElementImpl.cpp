@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -288,9 +288,15 @@ Any ETypedElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_EGENERICTYPE:
-			return eAny(getEGenericType()); //5312
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEGenericType();
+				return eAny(returnValue); //5312
+			}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_ETYPE:
-			return eAny(getEType()); //5311
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEType();
+				return eAny(returnValue); //5311
+			}
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_LOWERBOUND:
 			return eAny(getLowerBound()); //537
 		case ecore::ecorePackage::ETYPEDELEMENT_ATTRIBUTE_MANY:

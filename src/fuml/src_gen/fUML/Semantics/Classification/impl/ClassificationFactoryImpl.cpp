@@ -40,6 +40,7 @@ std::shared_ptr<ecore::EObject> ClassificationFactoryImpl::create(const int meta
 		{
 				return this->createInstanceValueEvaluation(metaElementID);
 			
+			break;
 		}
 	default:
 	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << metaElementID <<" not found" << std::endl;
@@ -76,5 +77,4 @@ std::shared_ptr<fUML::Semantics::Classification::InstanceValueEvaluation> Classi
 	element->setThisInstanceValueEvaluationPtr(element);
 	return element;
 }
-
 

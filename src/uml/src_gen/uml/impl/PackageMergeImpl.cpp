@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -281,9 +280,15 @@ Any PackageMergeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_MERGEDPACKAGE:
-			return eAny(getMergedPackage()); //1726
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getMergedPackage();
+				return eAny(returnValue); //1726
+			}
 		case uml::umlPackage::PACKAGEMERGE_ATTRIBUTE_RECEIVINGPACKAGE:
-			return eAny(getReceivingPackage().lock()); //1727
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReceivingPackage().lock();
+				return eAny(returnValue); //1727
+			}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }

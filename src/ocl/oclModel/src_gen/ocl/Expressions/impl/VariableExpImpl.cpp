@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -307,7 +308,10 @@ Any VariableExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::VARIABLEEXP_ATTRIBUTE_REFERREDVARIABLE:
-			return eAny(getReferredVariable()); //9822
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredVariable();
+				return eAny(returnValue); //9822
+			}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }

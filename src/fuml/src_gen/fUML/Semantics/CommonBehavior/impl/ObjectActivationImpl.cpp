@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -417,7 +418,10 @@ Any ObjectActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //811			
 		}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_OBJECT:
-			return eAny(getObject()); //812
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getObject();
+				return eAny(returnValue); //812
+			}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::OBJECTACTIVATION_ATTRIBUTE_WAITINGEVENTACCEPTERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

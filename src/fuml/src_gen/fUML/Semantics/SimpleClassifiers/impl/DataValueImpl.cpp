@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -197,7 +198,10 @@ Any DataValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::DATAVALUE_ATTRIBUTE_TYPE:
-			return eAny(getType()); //361
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //361
+			}
 	}
 	return CompoundValueImpl::eGet(featureID, resolve, coreType);
 }

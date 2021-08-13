@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -275,7 +275,10 @@ Any CallBehaviorActionActivationImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::CALLBEHAVIORACTIONACTIVATION_ATTRIBUTE_CALLBEHAVIORACTION:
-			return eAny(getCallBehaviorAction()); //1513
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCallBehaviorAction();
+				return eAny(returnValue); //1513
+			}
 	}
 	return CallActionActivationImpl::eGet(featureID, resolve, coreType);
 }

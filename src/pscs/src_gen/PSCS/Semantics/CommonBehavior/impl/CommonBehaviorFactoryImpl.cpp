@@ -42,11 +42,13 @@ std::shared_ptr<ecore::EObject> CommonBehaviorFactoryImpl::create(const int meta
 		{
 				return this->createCS_CallEventExecution(metaElementID);
 			
+			break;
 		}
 		case CommonBehaviorPackage::CS_EVENTOCCURRENCE_CLASS:
 		{
 				return this->createCS_EventOccurrence(metaElementID);
 			
+			break;
 		}
 	default:
 	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << metaElementID <<" not found" << std::endl;
@@ -83,7 +85,6 @@ std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_CallEventExecution> CommonBe
 	element->setThisCS_CallEventExecutionPtr(element);
 	return element;
 }
-
 std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> CommonBehaviorFactoryImpl::createCS_EventOccurrence(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrenceImpl> element(new PSCS::Semantics::CommonBehavior::CS_EventOccurrenceImpl());
@@ -91,5 +92,4 @@ std::shared_ptr<PSCS::Semantics::CommonBehavior::CS_EventOccurrence> CommonBehav
 	element->setThisCS_EventOccurrencePtr(element);
 	return element;
 }
-
 

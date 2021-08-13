@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -257,7 +258,10 @@ Any CollectionValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //210			
 		}
 		case ocl::Values::ValuesPackage::COLLECTIONVALUE_ATTRIBUTE_MODEL:
-			return eAny(getModel()); //211
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getModel();
+				return eAny(returnValue); //211
+			}
 	}
 	return StaticValueImpl::eGet(featureID, resolve, coreType);
 }

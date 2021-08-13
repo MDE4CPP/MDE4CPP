@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -169,9 +170,15 @@ Any ExpressionInOclEvalImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_CONTEXT:
-			return eAny(getContext()); //280
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getContext();
+				return eAny(returnValue); //280
+			}
 		case ocl::Evaluations::EvaluationsPackage::EXPRESSIONINOCLEVAL_ATTRIBUTE_ENVIRONMENT:
-			return eAny(getEnvironment()); //281
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEnvironment();
+				return eAny(returnValue); //281
+			}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -312,7 +312,10 @@ Any EAnnotationImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_DETAILS:
 			return eAny(getDetails()); //18
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_EMODELELEMENT:
-			return eAny(getEModelElement().lock()); //15
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEModelElement().lock();
+				return eAny(returnValue); //15
+			}
 		case ecore::ecorePackage::EANNOTATION_ATTRIBUTE_REFERENCES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

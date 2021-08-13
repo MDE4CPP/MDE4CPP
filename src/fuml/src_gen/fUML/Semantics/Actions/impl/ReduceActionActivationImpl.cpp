@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -196,7 +196,10 @@ Any ReduceActionActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::REDUCEACTIONACTIVATION_ATTRIBUTE_CURRENTEXECUTION:
-			return eAny(getCurrentExecution()); //9811
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getCurrentExecution();
+				return eAny(returnValue); //9811
+			}
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }

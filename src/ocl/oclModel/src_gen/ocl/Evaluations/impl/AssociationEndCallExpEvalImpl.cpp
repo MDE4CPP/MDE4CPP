@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,11 +33,11 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -171,7 +172,10 @@ Any AssociationEndCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONEND:
-			return eAny(getReferredAssociationEnd()); //49
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredAssociationEnd();
+				return eAny(returnValue); //49
+			}
 	}
 	return NavigationCallExpEvalImpl::eGet(featureID, resolve, coreType);
 }

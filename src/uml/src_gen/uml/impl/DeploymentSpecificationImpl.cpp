@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -419,7 +418,10 @@ Any DeploymentSpecificationImpl::eGet(int featureID, bool resolve, bool coreType
 	switch(featureID)
 	{
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENT:
-			return eAny(getDeployment().lock()); //7045
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDeployment().lock();
+				return eAny(returnValue); //7045
+			}
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_DEPLOYMENTLOCATION:
 			return eAny(getDeploymentLocation()); //7043
 		case uml::umlPackage::DEPLOYMENTSPECIFICATION_ATTRIBUTE_EXECUTIONLOCATION:

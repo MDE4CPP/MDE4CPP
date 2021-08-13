@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -317,7 +316,10 @@ Any AcceptCallActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACCEPTCALLACTION_ATTRIBUTE_RETURNINFORMATION:
-			return eAny(getReturnInformation()); //230
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReturnInformation();
+				return eAny(returnValue); //230
+			}
 	}
 	return AcceptEventActionImpl::eGet(featureID, resolve, coreType);
 }

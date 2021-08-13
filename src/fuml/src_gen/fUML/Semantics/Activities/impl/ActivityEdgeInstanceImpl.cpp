@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -372,9 +373,15 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_EDGE:
-			return eAny(getEdge()); //60
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEdge();
+				return eAny(returnValue); //60
+			}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_GROUP:
-			return eAny(getGroup().lock()); //64
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getGroup().lock();
+				return eAny(returnValue); //64
+			}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_OFFERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -388,9 +395,15 @@ Any ActivityEdgeInstanceImpl::eGet(int featureID, bool resolve, bool coreType) c
 			return eAny(tempList); //63			
 		}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_SOURCE:
-			return eAny(getSource().lock()); //61
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSource().lock();
+				return eAny(returnValue); //61
+			}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYEDGEINSTANCE_ATTRIBUTE_TARGET:
-			return eAny(getTarget().lock()); //62
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTarget().lock();
+				return eAny(returnValue); //62
+			}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

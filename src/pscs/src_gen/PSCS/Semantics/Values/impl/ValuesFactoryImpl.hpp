@@ -40,7 +40,6 @@ namespace PSCS::Semantics::Values
 			//Creator functions
 			 virtual std::shared_ptr<PSCS::Semantics::Values::CS_OpaqueExpressionEvaluation> createCS_OpaqueExpressionEvaluation(const int metaElementID = ValuesPackage::CS_OPAQUEEXPRESSIONEVALUATION_CLASS) const ;
 			 
-			 
 
 		private:
 			static ValuesFactory* create();

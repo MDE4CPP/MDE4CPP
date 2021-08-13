@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -296,11 +297,20 @@ Any OclMessageValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_NAME:
 			return eAny(getName()); //630
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_RETURNMESSAGE:
-			return eAny(getReturnMessage()); //634
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReturnMessage();
+				return eAny(returnValue); //634
+			}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_SOURCE:
-			return eAny(getSource()); //636
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSource();
+				return eAny(returnValue); //636
+			}
 		case ocl::Values::ValuesPackage::OCLMESSAGEVALUE_ATTRIBUTE_TARGET:
-			return eAny(getTarget()); //635
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTarget();
+				return eAny(returnValue); //635
+			}
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }

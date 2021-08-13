@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -287,7 +286,10 @@ Any CollaborationUseImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //439			
 		}
 		case uml::umlPackage::COLLABORATIONUSE_ATTRIBUTE_TYPE:
-			return eAny(getType()); //4310
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //4310
+			}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -314,7 +313,10 @@ Any GeneralizationSetImpl::eGet(int featureID, bool resolve, bool coreType) cons
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_ISDISJOINT:
 			return eAny(getIsDisjoint()); //11013
 		case uml::umlPackage::GENERALIZATIONSET_ATTRIBUTE_POWERTYPE:
-			return eAny(getPowertype()); //11014
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getPowertype();
+				return eAny(returnValue); //11014
+			}
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }

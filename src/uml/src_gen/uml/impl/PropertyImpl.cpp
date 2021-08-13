@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -860,19 +859,37 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_AGGREGATION:
 			return eAny(getAggregation()); //18530
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATION:
-			return eAny(getAssociation()); //18543
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAssociation();
+				return eAny(returnValue); //18543
+			}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ASSOCIATIONEND:
-			return eAny(getAssociationEnd().lock()); //18531
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAssociationEnd().lock();
+				return eAny(returnValue); //18531
+			}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_CLASS:
-			return eAny(getClass().lock()); //18533
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getClass().lock();
+				return eAny(returnValue); //18533
+			}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DATATYPE:
-			return eAny(getDatatype().lock()); //18527
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDatatype().lock();
+				return eAny(returnValue); //18527
+			}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DEFAULT:
 			return eAny(getDefault()); //18529
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_DEFAULTVALUE:
-			return eAny(getDefaultValue()); //18534
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDefaultValue();
+				return eAny(returnValue); //18534
+			}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_INTERFACE:
-			return eAny(getInterface().lock()); //18528
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInterface().lock();
+				return eAny(returnValue); //18528
+			}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISCOMPOSITE:
 			return eAny(getIsComposite()); //18535
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISDERIVED:
@@ -882,9 +899,15 @@ Any PropertyImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_ISID:
 			return eAny(getIsID()); //18538
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_OPPOSITE:
-			return eAny(getOpposite()); //18539
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOpposite();
+				return eAny(returnValue); //18539
+			}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_OWNINGASSOCIATION:
-			return eAny(getOwningAssociation().lock()); //18540
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOwningAssociation().lock();
+				return eAny(returnValue); //18540
+			}
 		case uml::umlPackage::PROPERTY_ATTRIBUTE_QUALIFIER:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

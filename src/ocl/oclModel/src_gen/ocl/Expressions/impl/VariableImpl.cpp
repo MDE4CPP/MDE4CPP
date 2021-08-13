@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -360,23 +361,50 @@ Any VariableImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_BASEEXP:
-			return eAny(getBaseExp().lock()); //9613
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBaseExp().lock();
+				return eAny(returnValue); //9613
+			}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_INITEXPRESSION:
-			return eAny(getInitExpression()); //9610
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInitExpression();
+				return eAny(returnValue); //9610
+			}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_LOOPEXP:
-			return eAny(getLoopExp().lock()); //9612
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLoopExp().lock();
+				return eAny(returnValue); //9612
+			}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_REFERRINGEXP:
-			return eAny(getReferringExp()); //9614
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferringExp();
+				return eAny(returnValue); //9614
+			}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_REPRESENTEDPARAMETER:
-			return eAny(getRepresentedParameter()); //9611
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRepresentedParameter();
+				return eAny(returnValue); //9611
+			}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_RESULTOWNER:
-			return eAny(getResultOwner().lock()); //9616
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResultOwner().lock();
+				return eAny(returnValue); //9616
+			}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_SELFOWNER:
-			return eAny(getSelfOwner().lock()); //9615
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSelfOwner().lock();
+				return eAny(returnValue); //9615
+			}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //9618
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getValue();
+				return eAny(returnValue); //9618
+			}
 		case ocl::Expressions::ExpressionsPackage::VARIABLE_ATTRIBUTE_VAROWNER:
-			return eAny(getVarOwner().lock()); //9617
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getVarOwner().lock();
+				return eAny(returnValue); //9617
+			}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }

@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -307,7 +308,10 @@ Any InfixedExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::INFIXEDEXP_ATTRIBUTE_SOURCE:
-			return eAny(getSource()); //3222
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSource();
+				return eAny(returnValue); //3222
+			}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }

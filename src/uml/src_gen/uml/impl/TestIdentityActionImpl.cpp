@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -380,11 +379,20 @@ Any TestIdentityActionImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_FIRST:
-			return eAny(getFirst()); //23527
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getFirst();
+				return eAny(returnValue); //23527
+			}
 		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //23528
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //23528
+			}
 		case uml::umlPackage::TESTIDENTITYACTION_ATTRIBUTE_SECOND:
-			return eAny(getSecond()); //23529
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSecond();
+				return eAny(returnValue); //23529
+			}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

@@ -34,10 +34,10 @@ void typesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pa
 
 void typesPackageImpl::createPackageEDataTypes(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
-	m_boolean_Class = factory->createEDataType_in_EPackage(package, BOOLEAN_CLASS);
-	m_integer_Class = factory->createEDataType_in_EPackage(package, INTEGER_CLASS);
-	m_real_Class = factory->createEDataType_in_EPackage(package, REAL_CLASS);
-	m_string_Class = factory->createEDataType_in_EPackage(package, STRING_CLASS);
-	m_unlimitedNatural_Class = factory->createEDataType_in_EPackage(package, UNLIMITEDNATURAL_CLASS);
+	m_boolean_Class = factory->createEDataType_as_eClassifiers_in_EPackage(package, BOOLEAN_CLASS);
+	m_integer_Class = factory->createEDataType_as_eClassifiers_in_EPackage(package, INTEGER_CLASS);
+	m_real_Class = factory->createEDataType_as_eClassifiers_in_EPackage(package, REAL_CLASS);
+	m_string_Class = factory->createEDataType_as_eClassifiers_in_EPackage(package, STRING_CLASS);
+	m_unlimitedNatural_Class = factory->createEDataType_as_eClassifiers_in_EPackage(package, UNLIMITEDNATURAL_CLASS);
 	
 }

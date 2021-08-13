@@ -66,71 +66,85 @@ std::shared_ptr<ecore::EObject> ValuesFactoryImpl::create(const int metaElementI
 		{
 				return this->createBagTypeValue(metaElementID);
 			
+			break;
 		}
 		case ValuesPackage::COLLECTIONVALUE_CLASS:
 		{
 				return this->createCollectionValue(metaElementID);
 			
+			break;
 		}
 		case ValuesPackage::ELEMENT_CLASS:
 		{
 				return this->createElement(metaElementID);
 			
+			break;
 		}
 		case ValuesPackage::LOCALSNAPSHOT_CLASS:
 		{
 				return this->createLocalSnapshot(metaElementID);
 			
+			break;
 		}
 		case ValuesPackage::NAMEVALUEBINDING_CLASS:
 		{
 				return this->createNameValueBinding(metaElementID);
 			
+			break;
 		}
 		case ValuesPackage::OBJECTVALUE_CLASS:
 		{
 				return this->createObjectValue(metaElementID);
 			
+			break;
 		}
 		case ValuesPackage::OCLMESSAGEVALUE_CLASS:
 		{
 				return this->createOclMessageValue(metaElementID);
 			
+			break;
 		}
 		case ValuesPackage::OCLVOIDVALUE_CLASS:
 		{
 				return this->createOclVoidValue(metaElementID);
 			
+			break;
 		}
 		case ValuesPackage::ORDEREDSETTYPEVALUE_CLASS:
 		{
 				return this->createOrderedSetTypeValue(metaElementID);
 			
+			break;
 		}
 		case ValuesPackage::SEQUENCETYPEVALUE_CLASS:
 		{
 				return this->createSequenceTypeValue(metaElementID);
 			
+			break;
 		}
 		case ValuesPackage::SETTYPEVALUE_CLASS:
 		{
 				return this->createSetTypeValue(metaElementID);
 			
+			break;
 		}
 		case ValuesPackage::STATICVALUE_CLASS:
 		{
 				return this->createStaticValue(metaElementID);
 			
+			break;
 		}
 		case ValuesPackage::TUPLEVALUE_CLASS:
 		{
 				return this->createTupleValue(metaElementID);
 			
+			break;
 		}
 		case ValuesPackage::UNDEFINEDVALUE_CLASS:
 		{
 				return this->createUndefinedValue(metaElementID);
 			
+			break;
 		}
 	default:
 	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << metaElementID <<" not found" << std::endl;
@@ -167,7 +181,6 @@ std::shared_ptr<ocl::Values::BagTypeValue> ValuesFactoryImpl::createBagTypeValue
 	element->setThisBagTypeValuePtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Values::CollectionValue> ValuesFactoryImpl::createCollectionValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::CollectionValueImpl> element(new ocl::Values::CollectionValueImpl());
@@ -175,7 +188,6 @@ std::shared_ptr<ocl::Values::CollectionValue> ValuesFactoryImpl::createCollectio
 	element->setThisCollectionValuePtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Values::Element> ValuesFactoryImpl::createElement(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::ElementImpl> element(new ocl::Values::ElementImpl());
@@ -183,7 +195,6 @@ std::shared_ptr<ocl::Values::Element> ValuesFactoryImpl::createElement(const int
 	element->setThisElementPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Values::LocalSnapshot> ValuesFactoryImpl::createLocalSnapshot(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::LocalSnapshotImpl> element(new ocl::Values::LocalSnapshotImpl());
@@ -191,7 +202,6 @@ std::shared_ptr<ocl::Values::LocalSnapshot> ValuesFactoryImpl::createLocalSnapsh
 	element->setThisLocalSnapshotPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Values::NameValueBinding> ValuesFactoryImpl::createNameValueBinding(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::NameValueBindingImpl> element(new ocl::Values::NameValueBindingImpl());
@@ -199,7 +209,6 @@ std::shared_ptr<ocl::Values::NameValueBinding> ValuesFactoryImpl::createNameValu
 	element->setThisNameValueBindingPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Values::ObjectValue> ValuesFactoryImpl::createObjectValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::ObjectValueImpl> element(new ocl::Values::ObjectValueImpl());
@@ -207,7 +216,6 @@ std::shared_ptr<ocl::Values::ObjectValue> ValuesFactoryImpl::createObjectValue(c
 	element->setThisObjectValuePtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Values::OclMessageValue> ValuesFactoryImpl::createOclMessageValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::OclMessageValueImpl> element(new ocl::Values::OclMessageValueImpl());
@@ -215,7 +223,6 @@ std::shared_ptr<ocl::Values::OclMessageValue> ValuesFactoryImpl::createOclMessag
 	element->setThisOclMessageValuePtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Values::OclVoidValue> ValuesFactoryImpl::createOclVoidValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::OclVoidValueImpl> element(new ocl::Values::OclVoidValueImpl());
@@ -223,7 +230,6 @@ std::shared_ptr<ocl::Values::OclVoidValue> ValuesFactoryImpl::createOclVoidValue
 	element->setThisOclVoidValuePtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Values::OrderedSetTypeValue> ValuesFactoryImpl::createOrderedSetTypeValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::OrderedSetTypeValueImpl> element(new ocl::Values::OrderedSetTypeValueImpl());
@@ -231,7 +237,6 @@ std::shared_ptr<ocl::Values::OrderedSetTypeValue> ValuesFactoryImpl::createOrder
 	element->setThisOrderedSetTypeValuePtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Values::SequenceTypeValue> ValuesFactoryImpl::createSequenceTypeValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::SequenceTypeValueImpl> element(new ocl::Values::SequenceTypeValueImpl());
@@ -239,7 +244,6 @@ std::shared_ptr<ocl::Values::SequenceTypeValue> ValuesFactoryImpl::createSequenc
 	element->setThisSequenceTypeValuePtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Values::SetTypeValue> ValuesFactoryImpl::createSetTypeValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::SetTypeValueImpl> element(new ocl::Values::SetTypeValueImpl());
@@ -247,7 +251,6 @@ std::shared_ptr<ocl::Values::SetTypeValue> ValuesFactoryImpl::createSetTypeValue
 	element->setThisSetTypeValuePtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Values::StaticValue> ValuesFactoryImpl::createStaticValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::StaticValueImpl> element(new ocl::Values::StaticValueImpl());
@@ -255,7 +258,6 @@ std::shared_ptr<ocl::Values::StaticValue> ValuesFactoryImpl::createStaticValue(c
 	element->setThisStaticValuePtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Values::TupleValue> ValuesFactoryImpl::createTupleValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::TupleValueImpl> element(new ocl::Values::TupleValueImpl());
@@ -263,7 +265,6 @@ std::shared_ptr<ocl::Values::TupleValue> ValuesFactoryImpl::createTupleValue(con
 	element->setThisTupleValuePtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Values::UndefinedValue> ValuesFactoryImpl::createUndefinedValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Values::UndefinedValueImpl> element(new ocl::Values::UndefinedValueImpl());
@@ -271,5 +272,4 @@ std::shared_ptr<ocl::Values::UndefinedValue> ValuesFactoryImpl::createUndefinedV
 	element->setThisUndefinedValuePtr(element);
 	return element;
 }
-
 

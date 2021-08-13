@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -277,7 +276,10 @@ Any TypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TYPE_ATTRIBUTE_PACKAGE:
-			return eAny(getPackage().lock()); //24412
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getPackage().lock();
+				return eAny(returnValue); //24412
+			}
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }

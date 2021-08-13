@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -358,7 +357,10 @@ Any InvocationActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //13027			
 		}
 		case uml::umlPackage::INVOCATIONACTION_ATTRIBUTE_ONPORT:
-			return eAny(getOnPort()); //13028
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOnPort();
+				return eAny(returnValue); //13028
+			}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

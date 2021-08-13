@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -167,7 +168,10 @@ Any ArgumentImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::ARGUMENT_ATTRIBUTE_NAME:
 			return eAny(getName()); //190
 		case uml::umlPackage::ARGUMENT_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //191
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getValue();
+				return eAny(returnValue); //191
+			}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

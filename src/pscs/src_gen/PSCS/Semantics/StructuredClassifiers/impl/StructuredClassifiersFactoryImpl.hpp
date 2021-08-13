@@ -47,19 +47,12 @@ namespace PSCS::Semantics::StructuredClassifiers
 
 			//Creator functions
 			 virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropagationStrategy> createCS_DefaultRequestPropagationStrategy(const int metaElementID = StructuredClassifiersPackage::CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS) const ;
-			 
 			 virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy> createCS_DispatchOperationOfInterfaceStrategy(const int metaElementID = StructuredClassifiersPackage::CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS) const ;
-			 
 			 virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> createCS_InteractionPoint(const int metaElementID = StructuredClassifiersPackage::CS_INTERACTIONPOINT_CLASS) const ;
-			 
 			 virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> createCS_Link(const int metaElementID = StructuredClassifiersPackage::CS_LINK_CLASS) const ;
-			 
 			 virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy(const int metaElementID = StructuredClassifiersPackage::CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS) const ;
-			 
 			 virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> createCS_Object(const int metaElementID = StructuredClassifiersPackage::CS_OBJECT_CLASS) const ;
-			 
 			 virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> createCS_Reference(const int metaElementID = StructuredClassifiersPackage::CS_REFERENCE_CLASS) const ;
-			 
 			 
 
 		private:

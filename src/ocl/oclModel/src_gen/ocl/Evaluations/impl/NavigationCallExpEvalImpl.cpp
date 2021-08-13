@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,11 +33,11 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -190,7 +191,10 @@ Any NavigationCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_NAVIGATIONSOURCE:
-			return eAny(getNavigationSource()); //547
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getNavigationSource();
+				return eAny(returnValue); //547
+			}
 		case ocl::Evaluations::EvaluationsPackage::NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

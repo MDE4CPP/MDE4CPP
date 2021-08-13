@@ -55,7 +55,7 @@ namespace fUML::Semantics::Classification
 			static const unsigned int INSTANCEVALUEEVALUATION_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 354197744;
+			static const int INSTANCEVALUEEVALUATION_OPERATION_EVALUATE = 675295782;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getInstanceValueEvaluation_Class() const = 0;

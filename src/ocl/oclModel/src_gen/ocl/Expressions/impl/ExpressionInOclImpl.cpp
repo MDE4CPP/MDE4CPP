@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -244,9 +245,15 @@ Any ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_BODYEXPRESSION:
-			return eAny(getBodyExpression()); //2710
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBodyExpression();
+				return eAny(returnValue); //2710
+			}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_CONTEXTVARIABLE:
-			return eAny(getContextVariable()); //2711
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getContextVariable();
+				return eAny(returnValue); //2711
+			}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_PARAMETERVARIABLE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -260,7 +267,10 @@ Any ExpressionInOclImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //2713			
 		}
 		case ocl::Expressions::ExpressionsPackage::EXPRESSIONINOCL_ATTRIBUTE_RESULTVARIABLE:
-			return eAny(getResultVariable()); //2712
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResultVariable();
+				return eAny(returnValue); //2712
+			}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }

@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -380,7 +379,10 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYTOCALL:
-			return eAny(getReplyToCall()); //21127
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReplyToCall();
+				return eAny(returnValue); //21127
+			}
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_REPLYVALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -394,7 +396,10 @@ Any ReplyActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //21128			
 		}
 		case uml::umlPackage::REPLYACTION_ATTRIBUTE_RETURNINFORMATION:
-			return eAny(getReturnInformation()); //21129
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReturnInformation();
+				return eAny(returnValue); //21129
+			}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

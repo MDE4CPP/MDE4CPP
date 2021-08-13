@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -279,7 +278,10 @@ Any VariableActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::VARIABLEACTION_ATTRIBUTE_VARIABLE:
-			return eAny(getVariable()); //25327
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getVariable();
+				return eAny(returnValue); //25327
+			}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

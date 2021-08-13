@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -331,7 +330,10 @@ Any ClearStructuralFeatureActionImpl::eGet(int featureID, bool resolve, bool cor
 	switch(featureID)
 	{
 		case uml::umlPackage::CLEARSTRUCTURALFEATUREACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //4029
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //4029
+			}
 	}
 	return StructuralFeatureActionImpl::eGet(featureID, resolve, coreType);
 }

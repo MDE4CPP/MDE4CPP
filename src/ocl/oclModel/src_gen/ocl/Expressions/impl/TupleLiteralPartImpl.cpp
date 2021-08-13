@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -163,7 +164,10 @@ Any TupleLiteralPartImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::TUPLELITERALPART_ATTRIBUTE_ATTRIBUTE:
-			return eAny(getAttribute()); //8710
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAttribute();
+				return eAny(returnValue); //8710
+			}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }

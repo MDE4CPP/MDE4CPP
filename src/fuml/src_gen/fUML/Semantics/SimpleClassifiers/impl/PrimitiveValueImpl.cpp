@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -187,7 +188,10 @@ Any PrimitiveValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::SimpleClassifiers::SimpleClassifiersPackage::PRIMITIVEVALUE_ATTRIBUTE_TYPE:
-			return eAny(getType()); //890
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //890
+			}
 	}
 	return fUML::Semantics::Values::ValueImpl::eGet(featureID, resolve, coreType);
 }

@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -431,7 +431,10 @@ Any StructuredActivityNodeActivationImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::STRUCTUREDACTIVITYNODEACTIVATION_ATTRIBUTE_ACTIVATIONGROUP:
-			return eAny(getActivationGroup()); //11211
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getActivationGroup();
+				return eAny(returnValue); //11211
+			}
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }

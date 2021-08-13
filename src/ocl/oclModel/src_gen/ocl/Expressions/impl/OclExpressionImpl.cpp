@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -483,29 +484,65 @@ Any OclExpressionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_APPLIEDELEMENT:
-			return eAny(getAppliedElement().lock()); //6010
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAppliedElement().lock();
+				return eAny(returnValue); //6010
+			}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_ELSEOWNER:
-			return eAny(getElseOwner().lock()); //6017
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getElseOwner().lock();
+				return eAny(returnValue); //6017
+			}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_FIRSTOWNER:
-			return eAny(getFirstOwner().lock()); //6019
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getFirstOwner().lock();
+				return eAny(returnValue); //6019
+			}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_IFOWNER:
-			return eAny(getIfOwner().lock()); //6016
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getIfOwner().lock();
+				return eAny(returnValue); //6016
+			}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INITIALIZEDELEMENT:
-			return eAny(getInitializedElement().lock()); //6012
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInitializedElement().lock();
+				return eAny(returnValue); //6012
+			}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_INSTANCE:
-			return eAny(getInstance()); //6021
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInstance();
+				return eAny(returnValue); //6021
+			}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LASTOWNER:
-			return eAny(getLastOwner().lock()); //6020
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLastOwner().lock();
+				return eAny(returnValue); //6020
+			}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_LOOPBODYOWNER:
-			return eAny(getLoopBodyOwner().lock()); //6011
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLoopBodyOwner().lock();
+				return eAny(returnValue); //6011
+			}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTCALL:
-			return eAny(getParentCall().lock()); //6014
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getParentCall().lock();
+				return eAny(returnValue); //6014
+			}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_PARENTNAV:
-			return eAny(getParentNav().lock()); //6018
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getParentNav().lock();
+				return eAny(returnValue); //6018
+			}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_THENOWNER:
-			return eAny(getThenOwner().lock()); //6015
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getThenOwner().lock();
+				return eAny(returnValue); //6015
+			}
 		case ocl::Expressions::ExpressionsPackage::OCLEXPRESSION_ATTRIBUTE_TOPEXPRESSION:
-			return eAny(getTopExpression().lock()); //6013
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTopExpression().lock();
+				return eAny(returnValue); //6013
+			}
 	}
 	return ecore::ETypedElementImpl::eGet(featureID, resolve, coreType);
 }

@@ -93,7 +93,7 @@ namespace ocl::Evaluations
 			static const unsigned int ASSOCIATIONCLASSCALLEXPEVAL_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int ASSOCIATIONCLASSCALLEXPEVAL_CLASS_OPERATION_COUNT = 4;
 			
-			static const long long ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS = 719907677;
+			static const long long ASSOCIATIONCLASSCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONCLASS = 1036806143;
 			
 			
 			//Class and Feature Getter
@@ -112,7 +112,7 @@ namespace ocl::Evaluations
 			static const unsigned int ASSOCIATIONENDCALLEXPEVAL_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int ASSOCIATIONENDCALLEXPEVAL_CLASS_OPERATION_COUNT = 4;
 			
-			static const long long ASSOCIATIONENDCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONEND = 658742184;
+			static const long long ASSOCIATIONENDCALLEXPEVAL_ATTRIBUTE_REFERREDASSOCIATIONEND = 518147229;
 			
 			
 			//Class and Feature Getter
@@ -131,7 +131,7 @@ namespace ocl::Evaluations
 			static const unsigned int ATTRIBUTECALLEXPEVAL_CLASS_FEATURE_COUNT = 8;
 			static const unsigned int ATTRIBUTECALLEXPEVAL_CLASS_OPERATION_COUNT = 4;
 			
-			static const long long ATTRIBUTECALLEXPEVAL_ATTRIBUTE_REFERREDATTRIBUTE = 1414247207;
+			static const long long ATTRIBUTECALLEXPEVAL_ATTRIBUTE_REFERREDATTRIBUTE = 173200539;
 			
 			
 			//Class and Feature Getter
@@ -167,7 +167,7 @@ namespace ocl::Evaluations
 			static const unsigned int COLLECTIONITEMEVAL_CLASS_FEATURE_COUNT = 4;
 			static const unsigned int COLLECTIONITEMEVAL_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long COLLECTIONITEMEVAL_ATTRIBUTE_ITEM = 1953032765;
+			static const long long COLLECTIONITEMEVAL_ATTRIBUTE_ITEM = 1161645815;
 			
 			
 			//Class and Feature Getter
@@ -186,7 +186,7 @@ namespace ocl::Evaluations
 			static const unsigned int COLLECTIONLITERALEXPEVAL_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int COLLECTIONLITERALEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS = 1035870434;
+			static const long long COLLECTIONLITERALEXPEVAL_ATTRIBUTE_PARTS = 390425986;
 			
 			
 			//Class and Feature Getter
@@ -205,7 +205,7 @@ namespace ocl::Evaluations
 			static const unsigned int COLLECTIONLITERALPARTEVAL_CLASS_FEATURE_COUNT = 3;
 			static const unsigned int COLLECTIONLITERALPARTEVAL_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long COLLECTIONLITERALPARTEVAL_ATTRIBUTE_ELEMENT = 1863455519;
+			static const long long COLLECTIONLITERALPARTEVAL_ATTRIBUTE_ELEMENT = 1992315485;
 			
 			
 			//Class and Feature Getter
@@ -224,8 +224,8 @@ namespace ocl::Evaluations
 			static const unsigned int COLLECTIONRANGEEVAL_CLASS_FEATURE_COUNT = 5;
 			static const unsigned int COLLECTIONRANGEEVAL_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST = 729539448;
-			static const long long COLLECTIONRANGEEVAL_ATTRIBUTE_LAST = 1993041008;
+			static const long long COLLECTIONRANGEEVAL_ATTRIBUTE_FIRST = 2035092919;
+			static const long long COLLECTIONRANGEEVAL_ATTRIBUTE_LAST = 2015675787;
 			
 			
 			//Class and Feature Getter
@@ -262,13 +262,13 @@ namespace ocl::Evaluations
 			static const unsigned int EVALENVIRONMENT_CLASS_FEATURE_COUNT = 1;
 			static const unsigned int EVALENVIRONMENT_CLASS_OPERATION_COUNT = 5;
 			
-			static const long long EVALENVIRONMENT_ATTRIBUTE_BINDINGS = 891205986;
+			static const long long EVALENVIRONMENT_ATTRIBUTE_BINDINGS = 1081804929;
 			
-			static const int EVALENVIRONMENT_OPERATION_ADD_NAMEVALUEBINDING = 995246057;
-			static const int EVALENVIRONMENT_OPERATION_ADDALL_NAMEVALUEBINDING = 809827885;
-			static const int EVALENVIRONMENT_OPERATION_FIND_STRING = 1166975346;
-			static const int EVALENVIRONMENT_OPERATION_GETVALUEOF_ESTRING = 1004860909;
-			static const int EVALENVIRONMENT_OPERATION_REPLACE_NAMEVALUEBINDING = 1203805442;
+			static const int EVALENVIRONMENT_OPERATION_ADD_NAMEVALUEBINDING = 1479022861;
+			static const int EVALENVIRONMENT_OPERATION_ADDALL_NAMEVALUEBINDING = 1063443542;
+			static const int EVALENVIRONMENT_OPERATION_FIND_STRING = 946058698;
+			static const int EVALENVIRONMENT_OPERATION_GETVALUEOF_ESTRING = 1187543967;
+			static const int EVALENVIRONMENT_OPERATION_REPLACE_NAMEVALUEBINDING = 483482254;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getEvalEnvironment_Class() const = 0;
@@ -308,8 +308,8 @@ namespace ocl::Evaluations
 			static const unsigned int EXPRESSIONINOCLEVAL_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int EXPRESSIONINOCLEVAL_CLASS_OPERATION_COUNT = 0;
 			
-			static const long long EXPRESSIONINOCLEVAL_ATTRIBUTE_CONTEXT = 910117562;
-			static const long long EXPRESSIONINOCLEVAL_ATTRIBUTE_ENVIRONMENT = 853387335;
+			static const long long EXPRESSIONINOCLEVAL_ATTRIBUTE_CONTEXT = 98504013;
+			static const long long EXPRESSIONINOCLEVAL_ATTRIBUTE_ENVIRONMENT = 1230907083;
 			
 			
 			//Class and Feature Getter
@@ -329,9 +329,9 @@ namespace ocl::Evaluations
 			static const unsigned int IFEXPEVAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int IFEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long IFEXPEVAL_ATTRIBUTE_CONDITION = 356530811;
-			static const long long IFEXPEVAL_ATTRIBUTE_ELSEEXPRESSION = 218639966;
-			static const long long IFEXPEVAL_ATTRIBUTE_THENEXPRESSION = 658114398;
+			static const long long IFEXPEVAL_ATTRIBUTE_CONDITION = 404519353;
+			static const long long IFEXPEVAL_ATTRIBUTE_ELSEEXPRESSION = 2058240351;
+			static const long long IFEXPEVAL_ATTRIBUTE_THENEXPRESSION = 31674065;
 			
 			
 			//Class and Feature Getter
@@ -369,7 +369,7 @@ namespace ocl::Evaluations
 			static const unsigned int ITERATEEXPEVAL_CLASS_FEATURE_COUNT = 10;
 			static const unsigned int ITERATEEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long ITERATEEXPEVAL_ATTRIBUTE_RESULT = 1316917392;
+			static const long long ITERATEEXPEVAL_ATTRIBUTE_RESULT = 2075076725;
 			
 			
 			//Class and Feature Getter
@@ -405,9 +405,9 @@ namespace ocl::Evaluations
 			static const unsigned int LETEXPEVAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int LETEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long LETEXPEVAL_ATTRIBUTE_IN = 1821791500;
-			static const long long LETEXPEVAL_ATTRIBUTE_INITEXPRESSION = 1149409569;
-			static const long long LETEXPEVAL_ATTRIBUTE_VARIABLE = 496978904;
+			static const long long LETEXPEVAL_ATTRIBUTE_IN = 2061346667;
+			static const long long LETEXPEVAL_ATTRIBUTE_INITEXPRESSION = 206663477;
+			static const long long LETEXPEVAL_ATTRIBUTE_VARIABLE = 1286010815;
 			
 			
 			//Class and Feature Getter
@@ -445,8 +445,8 @@ namespace ocl::Evaluations
 			static const unsigned int LOOPEXPEVAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int LOOPEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long LOOPEXPEVAL_ATTRIBUTE_BODYEVALS = 683728089;
-			static const long long LOOPEXPEVAL_ATTRIBUTE_ITERATORS = 929546216;
+			static const long long LOOPEXPEVAL_ATTRIBUTE_BODYEVALS = 581264105;
+			static const long long LOOPEXPEVAL_ATTRIBUTE_ITERATORS = 1045249045;
 			
 			
 			//Class and Feature Getter
@@ -467,7 +467,7 @@ namespace ocl::Evaluations
 			static const unsigned int MODELPROPERTYCALLEXPEVAL_CLASS_OPERATION_COUNT = 4;
 			
 			
-			static const int MODELPROPERTYCALLEXPEVAL_OPERATION_ATPRE = 267444807;
+			static const int MODELPROPERTYCALLEXPEVAL_OPERATION_ATPRE = 2043150223;
 			
 			//Class and Feature Getter
 			virtual std::shared_ptr<ecore::EClass> getModelPropertyCallExpEval_Class() const = 0;
@@ -485,8 +485,8 @@ namespace ocl::Evaluations
 			static const unsigned int NAVIGATIONCALLEXPEVAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int NAVIGATIONCALLEXPEVAL_CLASS_OPERATION_COUNT = 4;
 			
-			static const long long NAVIGATIONCALLEXPEVAL_ATTRIBUTE_NAVIGATIONSOURCE = 1079656477;
-			static const long long NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS = 1624981595;
+			static const long long NAVIGATIONCALLEXPEVAL_ATTRIBUTE_NAVIGATIONSOURCE = 712337577;
+			static const long long NAVIGATIONCALLEXPEVAL_ATTRIBUTE_QUALIFIERS = 2007427052;
 			
 			
 			//Class and Feature Getter
@@ -523,10 +523,10 @@ namespace ocl::Evaluations
 			static const unsigned int OCLEXPEVAL_CLASS_FEATURE_COUNT = 6;
 			static const unsigned int OCLEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT = 2099489038;
-			static const long long OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT = 853387335;
-			static const long long OCLEXPEVAL_ATTRIBUTE_MODEL = 1220006454;
-			static const long long OCLEXPEVAL_ATTRIBUTE_RESULTVALUE = 1097993460;
+			static const long long OCLEXPEVAL_ATTRIBUTE_BEFOREENVIRONMENT = 1731605892;
+			static const long long OCLEXPEVAL_ATTRIBUTE_ENVIRONMENT = 1328139976;
+			static const long long OCLEXPEVAL_ATTRIBUTE_MODEL = 2027328861;
+			static const long long OCLEXPEVAL_ATTRIBUTE_RESULTVALUE = 1129635606;
 			
 			
 			//Class and Feature Getter
@@ -548,9 +548,9 @@ namespace ocl::Evaluations
 			static const unsigned int OCLMESSAGEARGEVAL_CLASS_FEATURE_COUNT = 5;
 			static const unsigned int OCLMESSAGEARGEVAL_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION = 908645276;
-			static const long long OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED = 92589952;
-			static const long long OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE = 496978904;
+			static const long long OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION = 783661608;
+			static const long long OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED = 1194037905;
+			static const long long OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE = 885066635;
 			
 			
 			//Class and Feature Getter
@@ -570,10 +570,10 @@ namespace ocl::Evaluations
 			static const long long OCLMESSAGEEXPEVAL_CLASS = 67948642;
 			static const unsigned int OCLMESSAGEEXPEVAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int OCLMESSAGEEXPEVAL_CLASS_OPERATION_COUNT = 3;
-			static const long long OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME = 789267322;
+			static const long long OCLMESSAGEEXPEVAL_ATTRIBUTE_NAME = 1474585385;
 			
-			static const long long OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS = 1534652322;
-			static const long long OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET = 1522465946;
+			static const long long OCLMESSAGEEXPEVAL_ATTRIBUTE_ARGUMENTS = 409606968;
+			static const long long OCLMESSAGEEXPEVAL_ATTRIBUTE_TARGET = 362334647;
 			
 			
 			//Class and Feature Getter
@@ -594,8 +594,8 @@ namespace ocl::Evaluations
 			static const unsigned int OPERATIONCALLEXPEVAL_CLASS_FEATURE_COUNT = 9;
 			static const unsigned int OPERATIONCALLEXPEVAL_CLASS_OPERATION_COUNT = 4;
 			
-			static const long long OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS = 1534652322;
-			static const long long OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION = 1514642790;
+			static const long long OPERATIONCALLEXPEVAL_ATTRIBUTE_ARGUMENTS = 1319226823;
+			static const long long OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION = 1259871072;
 			
 			
 			//Class and Feature Getter
@@ -632,7 +632,7 @@ namespace ocl::Evaluations
 			static const unsigned int PROPERTYCALLEXPEVAL_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int PROPERTYCALLEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long PROPERTYCALLEXPEVAL_ATTRIBUTE_SOURCE = 900942082;
+			static const long long PROPERTYCALLEXPEVAL_ATTRIBUTE_SOURCE = 344956044;
 			
 			
 			//Class and Feature Getter
@@ -685,7 +685,7 @@ namespace ocl::Evaluations
 			static const unsigned int TUPLELITERALEXPEVAL_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int TUPLELITERALEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART = 1064161076;
+			static const long long TUPLELITERALEXPEVAL_ATTRIBUTE_TUPLEPART = 1755246569;
 			
 			
 			//Class and Feature Getter
@@ -755,8 +755,8 @@ namespace ocl::Evaluations
 			static const unsigned int VARIABLEDECLEVAL_CLASS_FEATURE_COUNT = 2;
 			static const unsigned int VARIABLEDECLEVAL_CLASS_OPERATION_COUNT = 0;
 			
-			static const long long VARIABLEDECLEVAL_ATTRIBUTE_INITEXP = 2065413657;
-			static const long long VARIABLEDECLEVAL_ATTRIBUTE_NAME = 789267322;
+			static const long long VARIABLEDECLEVAL_ATTRIBUTE_INITEXP = 1540051415;
+			static const long long VARIABLEDECLEVAL_ATTRIBUTE_NAME = 833208171;
 			
 			
 			//Class and Feature Getter
@@ -776,7 +776,7 @@ namespace ocl::Evaluations
 			static const unsigned int VARIABLEEXPEVAL_CLASS_FEATURE_COUNT = 7;
 			static const unsigned int VARIABLEEXPEVAL_CLASS_OPERATION_COUNT = 3;
 			
-			static const long long VARIABLEEXPEVAL_ATTRIBUTE_REFERREDVARIABLE = 656999100;
+			static const long long VARIABLEEXPEVAL_ATTRIBUTE_REFERREDVARIABLE = 1894174599;
 			
 			
 			//Class and Feature Getter

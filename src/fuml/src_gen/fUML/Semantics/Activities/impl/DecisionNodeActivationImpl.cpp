@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -530,9 +531,15 @@ Any DecisionNodeActivationImpl::eGet(int featureID, bool resolve, bool coreType)
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONINPUTEXECUTION:
-			return eAny(getDecisionInputExecution()); //376
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDecisionInputExecution();
+				return eAny(returnValue); //376
+			}
 		case fUML::Semantics::Activities::ActivitiesPackage::DECISIONNODEACTIVATION_ATTRIBUTE_DECISIONNODE:
-			return eAny(getDecisionNode()); //377
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDecisionNode();
+				return eAny(returnValue); //377
+			}
 	}
 	return ControlNodeActivationImpl::eGet(featureID, resolve, coreType);
 }

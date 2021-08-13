@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -298,7 +297,10 @@ Any RaiseExceptionActionImpl::eGet(int featureID, bool resolve, bool coreType) c
 	switch(featureID)
 	{
 		case uml::umlPackage::RAISEEXCEPTIONACTION_ATTRIBUTE_EXCEPTION:
-			return eAny(getException()); //19227
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getException();
+				return eAny(returnValue); //19227
+			}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

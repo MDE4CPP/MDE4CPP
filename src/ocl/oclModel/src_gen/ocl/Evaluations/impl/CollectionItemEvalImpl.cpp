@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -30,10 +31,10 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
-#include "ocl/Evaluations/EvaluationsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/CollectionLiteralPartEval.hpp"
@@ -163,7 +164,10 @@ Any CollectionItemEvalImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::COLLECTIONITEMEVAL_ATTRIBUTE_ITEM:
-			return eAny(getItem()); //123
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getItem();
+				return eAny(returnValue); //123
+			}
 	}
 	return CollectionLiteralPartEvalImpl::eGet(featureID, resolve, coreType);
 }

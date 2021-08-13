@@ -17,6 +17,11 @@
 #include "fUML/Semantics/SimpleClassifiers/impl/StructuredValueImpl.hpp"
 #include "fUML/Semantics/SimpleClassifiers/impl/UnlimitedNaturalValueImpl.hpp"
 
+#include "fUML/Semantics/SimpleClassifiers/SignalInstance.hpp"
+#include "fUML/Semantics/SimpleClassifiers/FeatureValue.hpp"
+#include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/Values/Value.hpp"
+#include "fUML/Semantics/Values/Value.hpp"
 
 
 using namespace fUML::Semantics::SimpleClassifiers;
@@ -57,48 +62,295 @@ std::shared_ptr<ecore::EObject> SimpleClassifiersFactoryImpl::create(const int m
 	{
 		case SimpleClassifiersPackage::BOOLEANVALUE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createBooleanValue(metaElementID);
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//BooleanValue has value as a containment
+					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						return this->createBooleanValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+					}
+					//BooleanValue has values as a containment
+					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						return this->createBooleanValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+					}
+					//BooleanValue has values as a containment
+					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						return this->createBooleanValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
+			break;
 		}
 		case SimpleClassifiersPackage::DATAVALUE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createDataValue(metaElementID);
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//DataValue has value as a containment
+					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						return this->createDataValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+					}
+					//DataValue has values as a containment
+					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						return this->createDataValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+					}
+					//DataValue has values as a containment
+					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						return this->createDataValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
+			break;
 		}
 		case SimpleClassifiersPackage::ENUMERATIONVALUE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createEnumerationValue(metaElementID);
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//EnumerationValue has value as a containment
+					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						return this->createEnumerationValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+					}
+					//EnumerationValue has values as a containment
+					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						return this->createEnumerationValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+					}
+					//EnumerationValue has values as a containment
+					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						return this->createEnumerationValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
+			break;
 		}
 		case SimpleClassifiersPackage::FEATUREVALUE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createFeatureValue(metaElementID);
-			
+			}
+			else
+			{
+				std::shared_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::CompoundValue>(container);
+				assert(castedContainer);
+				return std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue>(this->createFeatureValue_as_featureValues_in_CompoundValue(castedContainer,metaElementID));
+			}
+			break;
 		}
 		case SimpleClassifiersPackage::INTEGERVALUE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createIntegerValue(metaElementID);
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//IntegerValue has value as a containment
+					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						return this->createIntegerValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+					}
+					//IntegerValue has values as a containment
+					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						return this->createIntegerValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+					}
+					//IntegerValue has values as a containment
+					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						return this->createIntegerValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
+			break;
 		}
 		case SimpleClassifiersPackage::REALVALUE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createRealValue(metaElementID);
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//RealValue has value as a containment
+					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						return this->createRealValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+					}
+					//RealValue has values as a containment
+					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						return this->createRealValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+					}
+					//RealValue has values as a containment
+					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						return this->createRealValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
+			break;
 		}
 		case SimpleClassifiersPackage::SIGNALINSTANCE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createSignalInstance(metaElementID);
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//SignalInstance has eventPool as a containment
+					case  SimpleClassifiersPackage::OBJECTACTIVATION_ATTRIBUTE_EVENTPOOL:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ObjectActivation>(container);
+						return this->createSignalInstance_as_eventPool_in_fUML::Semantics::CommonBehavior::ObjectActivation(castedContainer,metaElementID);
+					}
+					//SignalInstance has value as a containment
+					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						return this->createSignalInstance_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+					}
+					//SignalInstance has values as a containment
+					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						return this->createSignalInstance_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+					}
+					//SignalInstance has values as a containment
+					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						return this->createSignalInstance_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
+			break;
 		}
 		case SimpleClassifiersPackage::STRINGVALUE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createStringValue(metaElementID);
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//StringValue has value as a containment
+					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						return this->createStringValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+					}
+					//StringValue has values as a containment
+					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						return this->createStringValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+					}
+					//StringValue has values as a containment
+					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						return this->createStringValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
+			break;
 		}
 		case SimpleClassifiersPackage::UNLIMITEDNATURALVALUE_CLASS:
 		{
+			if (nullptr == container)
+			{
 				return this->createUnlimitedNaturalValue(metaElementID);
-			
+			}
+			else
+			{
+				switch(referenceID)
+				{
+					//UnlimitedNaturalValue has value as a containment
+					case  SimpleClassifiersPackage::OBJECTTOKEN_ATTRIBUTE_VALUE:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::Activities::ObjectToken>(container);
+						return this->createUnlimitedNaturalValue_as_value_in_fUML::Semantics::Activities::ObjectToken(castedContainer,metaElementID);
+					}
+					//UnlimitedNaturalValue has values as a containment
+					case  SimpleClassifiersPackage::FEATUREVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::SimpleClassifiers::FeatureValue>(container);
+						return this->createUnlimitedNaturalValue_as_values_in_fUML::Semantics::SimpleClassifiers::FeatureValue(castedContainer,metaElementID);
+					}
+					//UnlimitedNaturalValue has values as a containment
+					case  SimpleClassifiersPackage::PARAMETERVALUE_ATTRIBUTE_VALUES:	
+					{
+						auto castedContainer = std::dynamic_pointer_cast<fUML::Semantics::CommonBehavior::ParameterValue>(container);
+						return this->createUnlimitedNaturalValue_as_values_in_fUML::Semantics::CommonBehavior::ParameterValue(castedContainer,metaElementID);
+					}
+					default:
+						std::cerr << __PRETTY_FUNCTION__ << "ERROR: Reference type not found." << std::endl;
+				}	
+			}
+			break;
 		}
 	default:
 	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << metaElementID <<" not found" << std::endl;
@@ -135,7 +387,45 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> SimpleClassifi
 	element->setThisBooleanValuePtr(element);
 	return element;
 }
-
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> SimpleClassifiersFactoryImpl::createBooleanValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValueImpl> element(new fUML::Semantics::SimpleClassifiers::BooleanValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	
+	}
+	element->setThisBooleanValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> SimpleClassifiersFactoryImpl::createBooleanValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValueImpl> element(new fUML::Semantics::SimpleClassifiers::BooleanValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	
+	}
+	element->setThisBooleanValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValue> SimpleClassifiersFactoryImpl::createBooleanValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::BooleanValueImpl> element(new fUML::Semantics::SimpleClassifiers::BooleanValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	
+	}
+	element->setThisBooleanValuePtr(element);
+	return element;
+	
+}
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> SimpleClassifiersFactoryImpl::createDataValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValueImpl> element(new fUML::Semantics::SimpleClassifiers::DataValueImpl());
@@ -143,7 +433,45 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> SimpleClassifiers
 	element->setThisDataValuePtr(element);
 	return element;
 }
-
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> SimpleClassifiersFactoryImpl::createDataValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValueImpl> element(new fUML::Semantics::SimpleClassifiers::DataValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	
+	}
+	element->setThisDataValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> SimpleClassifiersFactoryImpl::createDataValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValueImpl> element(new fUML::Semantics::SimpleClassifiers::DataValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	
+	}
+	element->setThisDataValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValue> SimpleClassifiersFactoryImpl::createDataValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::DataValueImpl> element(new fUML::Semantics::SimpleClassifiers::DataValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	
+	}
+	element->setThisDataValuePtr(element);
+	return element;
+	
+}
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> SimpleClassifiersFactoryImpl::createEnumerationValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValueImpl> element(new fUML::Semantics::SimpleClassifiers::EnumerationValueImpl());
@@ -151,7 +479,45 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> SimpleClas
 	element->setThisEnumerationValuePtr(element);
 	return element;
 }
-
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> SimpleClassifiersFactoryImpl::createEnumerationValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValueImpl> element(new fUML::Semantics::SimpleClassifiers::EnumerationValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	
+	}
+	element->setThisEnumerationValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> SimpleClassifiersFactoryImpl::createEnumerationValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValueImpl> element(new fUML::Semantics::SimpleClassifiers::EnumerationValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	
+	}
+	element->setThisEnumerationValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValue> SimpleClassifiersFactoryImpl::createEnumerationValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::EnumerationValueImpl> element(new fUML::Semantics::SimpleClassifiers::EnumerationValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	
+	}
+	element->setThisEnumerationValuePtr(element);
+	return element;
+	
+}
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> SimpleClassifiersFactoryImpl::createFeatureValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValueImpl> element(new fUML::Semantics::SimpleClassifiers::FeatureValueImpl());
@@ -159,7 +525,19 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> SimpleClassifi
 	element->setThisFeatureValuePtr(element);
 	return element;
 }
-
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> SimpleClassifiersFactoryImpl::createFeatureValue_as_featureValues_in_CompoundValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::CompoundValue> par_CompoundValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValueImpl> element(new fUML::Semantics::SimpleClassifiers::FeatureValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_CompoundValue)
+	{
+		par_CompoundValue->getFeatureValues()->push_back(element);
+	
+	}
+	element->setThisFeatureValuePtr(element);
+	return element;
+	
+}
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> SimpleClassifiersFactoryImpl::createIntegerValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValueImpl> element(new fUML::Semantics::SimpleClassifiers::IntegerValueImpl());
@@ -167,7 +545,45 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> SimpleClassifi
 	element->setThisIntegerValuePtr(element);
 	return element;
 }
-
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> SimpleClassifiersFactoryImpl::createIntegerValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValueImpl> element(new fUML::Semantics::SimpleClassifiers::IntegerValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	
+	}
+	element->setThisIntegerValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> SimpleClassifiersFactoryImpl::createIntegerValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValueImpl> element(new fUML::Semantics::SimpleClassifiers::IntegerValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	
+	}
+	element->setThisIntegerValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValue> SimpleClassifiersFactoryImpl::createIntegerValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::IntegerValueImpl> element(new fUML::Semantics::SimpleClassifiers::IntegerValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	
+	}
+	element->setThisIntegerValuePtr(element);
+	return element;
+	
+}
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> SimpleClassifiersFactoryImpl::createRealValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValueImpl> element(new fUML::Semantics::SimpleClassifiers::RealValueImpl());
@@ -175,7 +591,45 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> SimpleClassifiers
 	element->setThisRealValuePtr(element);
 	return element;
 }
-
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> SimpleClassifiersFactoryImpl::createRealValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValueImpl> element(new fUML::Semantics::SimpleClassifiers::RealValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	
+	}
+	element->setThisRealValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> SimpleClassifiersFactoryImpl::createRealValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValueImpl> element(new fUML::Semantics::SimpleClassifiers::RealValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	
+	}
+	element->setThisRealValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValue> SimpleClassifiersFactoryImpl::createRealValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::RealValueImpl> element(new fUML::Semantics::SimpleClassifiers::RealValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	
+	}
+	element->setThisRealValuePtr(element);
+	return element;
+	
+}
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassifiersFactoryImpl::createSignalInstance(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstanceImpl> element(new fUML::Semantics::SimpleClassifiers::SignalInstanceImpl());
@@ -183,7 +637,58 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassi
 	element->setThisSignalInstancePtr(element);
 	return element;
 }
-
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassifiersFactoryImpl::createSignalInstance_as_eventPool_in_ObjectActivation(std::shared_ptr<fUML::Semantics::CommonBehavior::ObjectActivation> par_ObjectActivation, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstanceImpl> element(new fUML::Semantics::SimpleClassifiers::SignalInstanceImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectActivation)
+	{
+		par_ObjectActivation->getEventPool()->push_back(element);
+	
+	}
+	element->setThisSignalInstancePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassifiersFactoryImpl::createSignalInstance_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstanceImpl> element(new fUML::Semantics::SimpleClassifiers::SignalInstanceImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	
+	}
+	element->setThisSignalInstancePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassifiersFactoryImpl::createSignalInstance_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstanceImpl> element(new fUML::Semantics::SimpleClassifiers::SignalInstanceImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	
+	}
+	element->setThisSignalInstancePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstance> SimpleClassifiersFactoryImpl::createSignalInstance_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::SignalInstanceImpl> element(new fUML::Semantics::SimpleClassifiers::SignalInstanceImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	
+	}
+	element->setThisSignalInstancePtr(element);
+	return element;
+	
+}
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> SimpleClassifiersFactoryImpl::createStringValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValueImpl> element(new fUML::Semantics::SimpleClassifiers::StringValueImpl());
@@ -191,7 +696,45 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> SimpleClassifie
 	element->setThisStringValuePtr(element);
 	return element;
 }
-
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> SimpleClassifiersFactoryImpl::createStringValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValueImpl> element(new fUML::Semantics::SimpleClassifiers::StringValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	
+	}
+	element->setThisStringValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> SimpleClassifiersFactoryImpl::createStringValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValueImpl> element(new fUML::Semantics::SimpleClassifiers::StringValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	
+	}
+	element->setThisStringValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValue> SimpleClassifiersFactoryImpl::createStringValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::StringValueImpl> element(new fUML::Semantics::SimpleClassifiers::StringValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	
+	}
+	element->setThisStringValuePtr(element);
+	return element;
+	
+}
 std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> SimpleClassifiersFactoryImpl::createUnlimitedNaturalValue(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValueImpl> element(new fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValueImpl());
@@ -199,5 +742,43 @@ std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> Simpl
 	element->setThisUnlimitedNaturalValuePtr(element);
 	return element;
 }
-
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> SimpleClassifiersFactoryImpl::createUnlimitedNaturalValue_as_value_in_ObjectToken(std::shared_ptr<fUML::Semantics::Activities::ObjectToken> par_ObjectToken, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValueImpl> element(new fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ObjectToken)
+	{
+		par_ObjectToken->setValue(element);
+	
+	}
+	element->setThisUnlimitedNaturalValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> SimpleClassifiersFactoryImpl::createUnlimitedNaturalValue_as_values_in_FeatureValue(std::shared_ptr<fUML::Semantics::SimpleClassifiers::FeatureValue> par_FeatureValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValueImpl> element(new fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_FeatureValue)
+	{
+		par_FeatureValue->getValues()->push_back(element);
+	
+	}
+	element->setThisUnlimitedNaturalValuePtr(element);
+	return element;
+	
+}
+std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValue> SimpleClassifiersFactoryImpl::createUnlimitedNaturalValue_as_values_in_ParameterValue(std::shared_ptr<fUML::Semantics::CommonBehavior::ParameterValue> par_ParameterValue, const int metaElementID) const
+{
+	std::shared_ptr<fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValueImpl> element(new fUML::Semantics::SimpleClassifiers::UnlimitedNaturalValueImpl());
+	element->setMetaElementID(metaElementID);
+	if(nullptr != par_ParameterValue)
+	{
+		par_ParameterValue->getValues()->push_back(element);
+	
+	}
+	element->setThisUnlimitedNaturalValuePtr(element);
+	return element;
+	
+}
 

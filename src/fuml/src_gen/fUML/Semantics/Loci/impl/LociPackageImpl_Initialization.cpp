@@ -74,7 +74,7 @@ void LociPackageImpl::initializeChoiceStrategyContent()
 	m_choiceStrategy_Operation_choose_EInt->setUnique(true);
 	m_choiceStrategy_Operation_choose_EInt->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_choiceStrategy_Operation_choose_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_choiceStrategy_Operation_choose_EInt);
 		parameter->setName("size");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 		parameter->setLowerBound(0);
@@ -205,7 +205,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Operation_addBuiltInType_PrimitiveType->setUnique(true);
 	m_executionFactory_Operation_addBuiltInType_PrimitiveType->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactory_Operation_addBuiltInType_PrimitiveType);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_addBuiltInType_PrimitiveType);
 		parameter->setName("type");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -227,7 +227,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution->setUnique(true);
 	m_executionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_addPrimitiveBehaviorPrototype_OpaqueBehaviorExecution);
 		parameter->setName("execution");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -249,7 +249,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Operation_assignStrategy_SemanticStrategy->setUnique(true);
 	m_executionFactory_Operation_assignStrategy_SemanticStrategy->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactory_Operation_assignStrategy_SemanticStrategy);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_assignStrategy_SemanticStrategy);
 		parameter->setName("strategy");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -265,7 +265,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Operation_createEvaluation_ValueSpecification->setUnique(true);
 	m_executionFactory_Operation_createEvaluation_ValueSpecification->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactory_Operation_createEvaluation_ValueSpecification);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_createEvaluation_ValueSpecification);
 		parameter->setName("specification");
 		parameter->setEType(uml::umlPackage::eInstance()->getValueSpecification_Class());
 		parameter->setLowerBound(0);
@@ -281,7 +281,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Operation_createExecution_Behavior_Object->setUnique(true);
 	m_executionFactory_Operation_createExecution_Behavior_Object->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactory_Operation_createExecution_Behavior_Object);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_createExecution_Behavior_Object);
 		parameter->setName("behavior");
 		parameter->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
 		parameter->setLowerBound(0);
@@ -291,7 +291,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactory_Operation_createExecution_Behavior_Object);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_createExecution_Behavior_Object);
 		parameter->setName("context");
 		parameter->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class());
 		parameter->setLowerBound(0);
@@ -307,7 +307,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Operation_getBuiltInType_EString->setUnique(true);
 	m_executionFactory_Operation_getBuiltInType_EString->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactory_Operation_getBuiltInType_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_getBuiltInType_EString);
 		parameter->setName("name");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 		parameter->setLowerBound(0);
@@ -323,7 +323,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Operation_getStrategy_EString->setUnique(true);
 	m_executionFactory_Operation_getStrategy_EString->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactory_Operation_getStrategy_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_getStrategy_EString);
 		parameter->setName("name");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 		parameter->setLowerBound(0);
@@ -339,7 +339,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Operation_getStrategyIndex_EString->setUnique(true);
 	m_executionFactory_Operation_getStrategyIndex_EString->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactory_Operation_getStrategyIndex_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_getStrategyIndex_EString);
 		parameter->setName("name");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 		parameter->setLowerBound(0);
@@ -355,7 +355,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior->setUnique(true);
 	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_OpaqueBehavior);
 		parameter->setName("behavior");
 		parameter->setEType(uml::umlPackage::eInstance()->getOpaqueBehavior_Class());
 		parameter->setLowerBound(0);
@@ -371,7 +371,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setUnique(true);
 	m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_instantiateOpaqueBehaviorExecution_Behavior);
 		parameter->setName("behavior");
 		parameter->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
 		parameter->setLowerBound(0);
@@ -387,7 +387,7 @@ void LociPackageImpl::initializeExecutionFactoryContent()
 	m_executionFactory_Operation_instantiateVisitor_Element->setUnique(true);
 	m_executionFactory_Operation_instantiateVisitor_Element->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executionFactory_Operation_instantiateVisitor_Element);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executionFactory_Operation_instantiateVisitor_Element);
 		parameter->setName("element");
 		parameter->setEType(uml::umlPackage::eInstance()->getElement_Class());
 		parameter->setLowerBound(0);
@@ -439,7 +439,7 @@ void LociPackageImpl::initializeExecutorContent()
 	m_executor_Operation_evaluate_ValueSpecification->setUnique(true);
 	m_executor_Operation_evaluate_ValueSpecification->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executor_Operation_evaluate_ValueSpecification);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executor_Operation_evaluate_ValueSpecification);
 		parameter->setName("specification");
 		parameter->setEType(uml::umlPackage::eInstance()->getValueSpecification_Class());
 		parameter->setLowerBound(0);
@@ -455,7 +455,7 @@ void LociPackageImpl::initializeExecutorContent()
 	m_executor_Operation_execute_Behavior_ParameterValue->setUnique(true);
 	m_executor_Operation_execute_Behavior_ParameterValue->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executor_Operation_execute_Behavior_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executor_Operation_execute_Behavior_ParameterValue);
 		parameter->setName("behavior");
 		parameter->setEType(uml::umlPackage::eInstance()->getBehavior_Class());
 		parameter->setLowerBound(0);
@@ -465,7 +465,7 @@ void LociPackageImpl::initializeExecutorContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executor_Operation_execute_Behavior_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executor_Operation_execute_Behavior_ParameterValue);
 		parameter->setName("context");
 		parameter->setEType(fUML::Semantics::StructuredClassifiers::StructuredClassifiersPackage::eInstance()->getObject_Class());
 		parameter->setLowerBound(0);
@@ -475,7 +475,7 @@ void LociPackageImpl::initializeExecutorContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executor_Operation_execute_Behavior_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executor_Operation_execute_Behavior_ParameterValue);
 		parameter->setName("inputs");
 		parameter->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
 		parameter->setLowerBound(0);
@@ -491,7 +491,7 @@ void LociPackageImpl::initializeExecutorContent()
 	m_executor_Operation_start_Class_ParameterValue->setUnique(true);
 	m_executor_Operation_start_Class_ParameterValue->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executor_Operation_start_Class_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executor_Operation_start_Class_ParameterValue);
 		parameter->setName("type");
 		parameter->setEType(uml::umlPackage::eInstance()->getClass_Class());
 		parameter->setLowerBound(0);
@@ -501,7 +501,7 @@ void LociPackageImpl::initializeExecutorContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_executor_Operation_start_Class_ParameterValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_executor_Operation_start_Class_ParameterValue);
 		parameter->setName("inputs");
 		parameter->setEType(fUML::Semantics::CommonBehavior::CommonBehaviorPackage::eInstance()->getParameterValue_Class());
 		parameter->setLowerBound(0);
@@ -528,7 +528,7 @@ void LociPackageImpl::initializeFirstChoiceStrategyContent()
 	m_firstChoiceStrategy_Operation_choose_EInt->setUnique(true);
 	m_firstChoiceStrategy_Operation_choose_EInt->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_firstChoiceStrategy_Operation_choose_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_firstChoiceStrategy_Operation_choose_EInt);
 		parameter->setName("size");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEInt_Class());
 		parameter->setLowerBound(0);
@@ -633,7 +633,7 @@ void LociPackageImpl::initializeLocusContent()
 	m_locus_Operation_add_ExtensionalValue->setUnique(true);
 	m_locus_Operation_add_ExtensionalValue->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_locus_Operation_add_ExtensionalValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_add_ExtensionalValue);
 		parameter->setName("value");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -655,7 +655,7 @@ void LociPackageImpl::initializeLocusContent()
 	m_locus_Operation_assignExecutor_Executor->setUnique(true);
 	m_locus_Operation_assignExecutor_Executor->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_locus_Operation_assignExecutor_Executor);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_assignExecutor_Executor);
 		parameter->setName("executor");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -677,7 +677,7 @@ void LociPackageImpl::initializeLocusContent()
 	m_locus_Operation_assignFactory_ExecutionFactory->setUnique(true);
 	m_locus_Operation_assignFactory_ExecutionFactory->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_locus_Operation_assignFactory_ExecutionFactory);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_assignFactory_ExecutionFactory);
 		parameter->setName("factory");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -693,7 +693,7 @@ void LociPackageImpl::initializeLocusContent()
 	m_locus_Operation_conforms_Classifier_Classifier->setUnique(true);
 	m_locus_Operation_conforms_Classifier_Classifier->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_locus_Operation_conforms_Classifier_Classifier);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_conforms_Classifier_Classifier);
 		parameter->setName("type");
 		parameter->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
 		parameter->setLowerBound(0);
@@ -703,7 +703,7 @@ void LociPackageImpl::initializeLocusContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_locus_Operation_conforms_Classifier_Classifier);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_conforms_Classifier_Classifier);
 		parameter->setName("classifier");
 		parameter->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
 		parameter->setLowerBound(0);
@@ -719,7 +719,7 @@ void LociPackageImpl::initializeLocusContent()
 	m_locus_Operation_instantiate_Class->setUnique(true);
 	m_locus_Operation_instantiate_Class->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_locus_Operation_instantiate_Class);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_instantiate_Class);
 		parameter->setName("type");
 		parameter->setEType(uml::umlPackage::eInstance()->getClass_Class());
 		parameter->setLowerBound(0);
@@ -741,7 +741,7 @@ void LociPackageImpl::initializeLocusContent()
 	m_locus_Operation_remove_ExtensionalValue->setUnique(true);
 	m_locus_Operation_remove_ExtensionalValue->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_locus_Operation_remove_ExtensionalValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_remove_ExtensionalValue);
 		parameter->setName("value");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -757,7 +757,7 @@ void LociPackageImpl::initializeLocusContent()
 	m_locus_Operation_retrieveExtent_Classifier->setUnique(true);
 	m_locus_Operation_retrieveExtent_Classifier->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_locus_Operation_retrieveExtent_Classifier);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_locus_Operation_retrieveExtent_Classifier);
 		parameter->setName("classifier");
 		parameter->setEType(uml::umlPackage::eInstance()->getClassifier_Class());
 		parameter->setLowerBound(0);

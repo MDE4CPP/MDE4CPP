@@ -110,181 +110,217 @@ std::shared_ptr<ecore::EObject> EvaluationsFactoryImpl::create(const int metaEle
 		{
 				return this->createAssociationClassCallExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::ASSOCIATIONENDCALLEXPEVAL_CLASS:
 		{
 				return this->createAssociationEndCallExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::ATTRIBUTECALLEXPEVAL_CLASS:
 		{
 				return this->createAttributeCallExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::BOOLEANLITERALEXPEVAL_CLASS:
 		{
 				return this->createBooleanLiteralExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::COLLECTIONITEMEVAL_CLASS:
 		{
 				return this->createCollectionItemEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::COLLECTIONLITERALEXPEVAL_CLASS:
 		{
 				return this->createCollectionLiteralExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::COLLECTIONLITERALPARTEVAL_CLASS:
 		{
 				return this->createCollectionLiteralPartEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::COLLECTIONRANGEEVAL_CLASS:
 		{
 				return this->createCollectionRangeEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::ENUMLITERALEXPEVAL_CLASS:
 		{
 				return this->createEnumLiteralExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::EVALENVIRONMENT_CLASS:
 		{
 				return this->createEvalEnvironment(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::EVALNAMESPACE_CLASS:
 		{
 				return this->createEvalNameSpace(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::EXPRESSIONINOCLEVAL_CLASS:
 		{
 				return this->createExpressionInOclEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::IFEXPEVAL_CLASS:
 		{
 				return this->createIfExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::INTEGERLITERALEXPEVAL_CLASS:
 		{
 				return this->createIntegerLiteralExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::ITERATEEXPEVAL_CLASS:
 		{
 				return this->createIterateExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::ITERATOREXPEVAL_CLASS:
 		{
 				return this->createIteratorExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::LETEXPEVAL_CLASS:
 		{
 				return this->createLetExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::LITERALEXPEVAL_CLASS:
 		{
 				return this->createLiteralExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::LOOPEXPEVAL_CLASS:
 		{
 				return this->createLoopExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::MODELPROPERTYCALLEXPEVAL_CLASS:
 		{
 				return this->createModelPropertyCallExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::NAVIGATIONCALLEXPEVAL_CLASS:
 		{
 				return this->createNavigationCallExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::NUMERICLITERALEXPEVAL_CLASS:
 		{
 				return this->createNumericLiteralExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::OCLEXPEVAL_CLASS:
 		{
 				return this->createOclExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::OCLMESSAGEARGEVAL_CLASS:
 		{
 				return this->createOclMessageArgEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::OCLMESSAGEEXPEVAL_CLASS:
 		{
 				return this->createOclMessageExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::OPERATIONCALLEXPEVAL_CLASS:
 		{
 				return this->createOperationCallExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::PRIMITIVELITERALEXPEVAL_CLASS:
 		{
 				return this->createPrimitiveLiteralExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::PROPERTYCALLEXPEVAL_CLASS:
 		{
 				return this->createPropertyCallExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::REALLITERALEXPEVAL_CLASS:
 		{
 				return this->createRealLiteralExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::STRINGLITERALEXPEVAL_CLASS:
 		{
 				return this->createStringLiteralExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::TUPLELITERALEXPEVAL_CLASS:
 		{
 				return this->createTupleLiteralExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::TUPLELITERALEXPPARTEVAL_CLASS:
 		{
 				return this->createTupleLiteralExpPartEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::UNLIMITEDNATURALLITERALEXPEVAL_CLASS:
 		{
 				return this->createUnlimitedNaturalLiteralExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::UNSPECIFIEDVALUEEXPEVAL_CLASS:
 		{
 				return this->createUnspecifiedValueExpEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::VARIABLEDECLEVAL_CLASS:
 		{
 				return this->createVariableDeclEval(metaElementID);
 			
+			break;
 		}
 		case EvaluationsPackage::VARIABLEEXPEVAL_CLASS:
 		{
 				return this->createVariableExpEval(metaElementID);
 			
+			break;
 		}
 	default:
 	   	    std::cerr << __PRETTY_FUNCTION__ << " ID " << metaElementID <<" not found" << std::endl;
@@ -321,7 +357,6 @@ std::shared_ptr<ocl::Evaluations::AssociationClassCallExpEval> EvaluationsFactor
 	element->setThisAssociationClassCallExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> EvaluationsFactoryImpl::createAssociationEndCallExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEvalImpl> element(new ocl::Evaluations::AssociationEndCallExpEvalImpl());
@@ -329,7 +364,6 @@ std::shared_ptr<ocl::Evaluations::AssociationEndCallExpEval> EvaluationsFactoryI
 	element->setThisAssociationEndCallExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> EvaluationsFactoryImpl::createAttributeCallExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::AttributeCallExpEvalImpl> element(new ocl::Evaluations::AttributeCallExpEvalImpl());
@@ -337,7 +371,6 @@ std::shared_ptr<ocl::Evaluations::AttributeCallExpEval> EvaluationsFactoryImpl::
 	element->setThisAttributeCallExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> EvaluationsFactoryImpl::createBooleanLiteralExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEvalImpl> element(new ocl::Evaluations::BooleanLiteralExpEvalImpl());
@@ -345,7 +378,6 @@ std::shared_ptr<ocl::Evaluations::BooleanLiteralExpEval> EvaluationsFactoryImpl:
 	element->setThisBooleanLiteralExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::CollectionItemEval> EvaluationsFactoryImpl::createCollectionItemEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::CollectionItemEvalImpl> element(new ocl::Evaluations::CollectionItemEvalImpl());
@@ -353,7 +385,6 @@ std::shared_ptr<ocl::Evaluations::CollectionItemEval> EvaluationsFactoryImpl::cr
 	element->setThisCollectionItemEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> EvaluationsFactoryImpl::createCollectionLiteralExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEvalImpl> element(new ocl::Evaluations::CollectionLiteralExpEvalImpl());
@@ -361,7 +392,6 @@ std::shared_ptr<ocl::Evaluations::CollectionLiteralExpEval> EvaluationsFactoryIm
 	element->setThisCollectionLiteralExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> EvaluationsFactoryImpl::createCollectionLiteralPartEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEvalImpl> element(new ocl::Evaluations::CollectionLiteralPartEvalImpl());
@@ -369,7 +399,6 @@ std::shared_ptr<ocl::Evaluations::CollectionLiteralPartEval> EvaluationsFactoryI
 	element->setThisCollectionLiteralPartEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::CollectionRangeEval> EvaluationsFactoryImpl::createCollectionRangeEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::CollectionRangeEvalImpl> element(new ocl::Evaluations::CollectionRangeEvalImpl());
@@ -377,7 +406,6 @@ std::shared_ptr<ocl::Evaluations::CollectionRangeEval> EvaluationsFactoryImpl::c
 	element->setThisCollectionRangeEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> EvaluationsFactoryImpl::createEnumLiteralExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::EnumLiteralExpEvalImpl> element(new ocl::Evaluations::EnumLiteralExpEvalImpl());
@@ -385,7 +413,6 @@ std::shared_ptr<ocl::Evaluations::EnumLiteralExpEval> EvaluationsFactoryImpl::cr
 	element->setThisEnumLiteralExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::EvalEnvironment> EvaluationsFactoryImpl::createEvalEnvironment(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::EvalEnvironmentImpl> element(new ocl::Evaluations::EvalEnvironmentImpl());
@@ -393,7 +420,6 @@ std::shared_ptr<ocl::Evaluations::EvalEnvironment> EvaluationsFactoryImpl::creat
 	element->setThisEvalEnvironmentPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::EvalNameSpace> EvaluationsFactoryImpl::createEvalNameSpace(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::EvalNameSpaceImpl> element(new ocl::Evaluations::EvalNameSpaceImpl());
@@ -401,7 +427,6 @@ std::shared_ptr<ocl::Evaluations::EvalNameSpace> EvaluationsFactoryImpl::createE
 	element->setThisEvalNameSpacePtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> EvaluationsFactoryImpl::createExpressionInOclEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::ExpressionInOclEvalImpl> element(new ocl::Evaluations::ExpressionInOclEvalImpl());
@@ -409,7 +434,6 @@ std::shared_ptr<ocl::Evaluations::ExpressionInOclEval> EvaluationsFactoryImpl::c
 	element->setThisExpressionInOclEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::IfExpEval> EvaluationsFactoryImpl::createIfExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::IfExpEvalImpl> element(new ocl::Evaluations::IfExpEvalImpl());
@@ -417,7 +441,6 @@ std::shared_ptr<ocl::Evaluations::IfExpEval> EvaluationsFactoryImpl::createIfExp
 	element->setThisIfExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> EvaluationsFactoryImpl::createIntegerLiteralExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEvalImpl> element(new ocl::Evaluations::IntegerLiteralExpEvalImpl());
@@ -425,7 +448,6 @@ std::shared_ptr<ocl::Evaluations::IntegerLiteralExpEval> EvaluationsFactoryImpl:
 	element->setThisIntegerLiteralExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::IterateExpEval> EvaluationsFactoryImpl::createIterateExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::IterateExpEvalImpl> element(new ocl::Evaluations::IterateExpEvalImpl());
@@ -433,7 +455,6 @@ std::shared_ptr<ocl::Evaluations::IterateExpEval> EvaluationsFactoryImpl::create
 	element->setThisIterateExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::IteratorExpEval> EvaluationsFactoryImpl::createIteratorExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::IteratorExpEvalImpl> element(new ocl::Evaluations::IteratorExpEvalImpl());
@@ -441,7 +462,6 @@ std::shared_ptr<ocl::Evaluations::IteratorExpEval> EvaluationsFactoryImpl::creat
 	element->setThisIteratorExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::LetExpEval> EvaluationsFactoryImpl::createLetExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::LetExpEvalImpl> element(new ocl::Evaluations::LetExpEvalImpl());
@@ -449,7 +469,6 @@ std::shared_ptr<ocl::Evaluations::LetExpEval> EvaluationsFactoryImpl::createLetE
 	element->setThisLetExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::LiteralExpEval> EvaluationsFactoryImpl::createLiteralExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::LiteralExpEvalImpl> element(new ocl::Evaluations::LiteralExpEvalImpl());
@@ -457,7 +476,6 @@ std::shared_ptr<ocl::Evaluations::LiteralExpEval> EvaluationsFactoryImpl::create
 	element->setThisLiteralExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::LoopExpEval> EvaluationsFactoryImpl::createLoopExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::LoopExpEvalImpl> element(new ocl::Evaluations::LoopExpEvalImpl());
@@ -465,7 +483,6 @@ std::shared_ptr<ocl::Evaluations::LoopExpEval> EvaluationsFactoryImpl::createLoo
 	element->setThisLoopExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> EvaluationsFactoryImpl::createModelPropertyCallExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEvalImpl> element(new ocl::Evaluations::ModelPropertyCallExpEvalImpl());
@@ -473,7 +490,6 @@ std::shared_ptr<ocl::Evaluations::ModelPropertyCallExpEval> EvaluationsFactoryIm
 	element->setThisModelPropertyCallExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> EvaluationsFactoryImpl::createNavigationCallExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::NavigationCallExpEvalImpl> element(new ocl::Evaluations::NavigationCallExpEvalImpl());
@@ -481,7 +497,6 @@ std::shared_ptr<ocl::Evaluations::NavigationCallExpEval> EvaluationsFactoryImpl:
 	element->setThisNavigationCallExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> EvaluationsFactoryImpl::createNumericLiteralExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::NumericLiteralExpEvalImpl> element(new ocl::Evaluations::NumericLiteralExpEvalImpl());
@@ -489,7 +504,6 @@ std::shared_ptr<ocl::Evaluations::NumericLiteralExpEval> EvaluationsFactoryImpl:
 	element->setThisNumericLiteralExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::OclExpEval> EvaluationsFactoryImpl::createOclExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::OclExpEvalImpl> element(new ocl::Evaluations::OclExpEvalImpl());
@@ -497,7 +511,6 @@ std::shared_ptr<ocl::Evaluations::OclExpEval> EvaluationsFactoryImpl::createOclE
 	element->setThisOclExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::OclMessageArgEval> EvaluationsFactoryImpl::createOclMessageArgEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::OclMessageArgEvalImpl> element(new ocl::Evaluations::OclMessageArgEvalImpl());
@@ -505,7 +518,6 @@ std::shared_ptr<ocl::Evaluations::OclMessageArgEval> EvaluationsFactoryImpl::cre
 	element->setThisOclMessageArgEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::OclMessageExpEval> EvaluationsFactoryImpl::createOclMessageExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::OclMessageExpEvalImpl> element(new ocl::Evaluations::OclMessageExpEvalImpl());
@@ -513,7 +525,6 @@ std::shared_ptr<ocl::Evaluations::OclMessageExpEval> EvaluationsFactoryImpl::cre
 	element->setThisOclMessageExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::OperationCallExpEval> EvaluationsFactoryImpl::createOperationCallExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::OperationCallExpEvalImpl> element(new ocl::Evaluations::OperationCallExpEvalImpl());
@@ -521,7 +532,6 @@ std::shared_ptr<ocl::Evaluations::OperationCallExpEval> EvaluationsFactoryImpl::
 	element->setThisOperationCallExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> EvaluationsFactoryImpl::createPrimitiveLiteralExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEvalImpl> element(new ocl::Evaluations::PrimitiveLiteralExpEvalImpl());
@@ -529,7 +539,6 @@ std::shared_ptr<ocl::Evaluations::PrimitiveLiteralExpEval> EvaluationsFactoryImp
 	element->setThisPrimitiveLiteralExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> EvaluationsFactoryImpl::createPropertyCallExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::PropertyCallExpEvalImpl> element(new ocl::Evaluations::PropertyCallExpEvalImpl());
@@ -537,7 +546,6 @@ std::shared_ptr<ocl::Evaluations::PropertyCallExpEval> EvaluationsFactoryImpl::c
 	element->setThisPropertyCallExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> EvaluationsFactoryImpl::createRealLiteralExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::RealLiteralExpEvalImpl> element(new ocl::Evaluations::RealLiteralExpEvalImpl());
@@ -545,7 +553,6 @@ std::shared_ptr<ocl::Evaluations::RealLiteralExpEval> EvaluationsFactoryImpl::cr
 	element->setThisRealLiteralExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> EvaluationsFactoryImpl::createStringLiteralExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::StringLiteralExpEvalImpl> element(new ocl::Evaluations::StringLiteralExpEvalImpl());
@@ -553,7 +560,6 @@ std::shared_ptr<ocl::Evaluations::StringLiteralExpEval> EvaluationsFactoryImpl::
 	element->setThisStringLiteralExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> EvaluationsFactoryImpl::createTupleLiteralExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::TupleLiteralExpEvalImpl> element(new ocl::Evaluations::TupleLiteralExpEvalImpl());
@@ -561,7 +567,6 @@ std::shared_ptr<ocl::Evaluations::TupleLiteralExpEval> EvaluationsFactoryImpl::c
 	element->setThisTupleLiteralExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> EvaluationsFactoryImpl::createTupleLiteralExpPartEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEvalImpl> element(new ocl::Evaluations::TupleLiteralExpPartEvalImpl());
@@ -569,7 +574,6 @@ std::shared_ptr<ocl::Evaluations::TupleLiteralExpPartEval> EvaluationsFactoryImp
 	element->setThisTupleLiteralExpPartEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> EvaluationsFactoryImpl::createUnlimitedNaturalLiteralExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEvalImpl> element(new ocl::Evaluations::UnlimitedNaturalLiteralExpEvalImpl());
@@ -577,7 +581,6 @@ std::shared_ptr<ocl::Evaluations::UnlimitedNaturalLiteralExpEval> EvaluationsFac
 	element->setThisUnlimitedNaturalLiteralExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> EvaluationsFactoryImpl::createUnspecifiedValueExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEvalImpl> element(new ocl::Evaluations::UnspecifiedValueExpEvalImpl());
@@ -585,7 +588,6 @@ std::shared_ptr<ocl::Evaluations::UnspecifiedValueExpEval> EvaluationsFactoryImp
 	element->setThisUnspecifiedValueExpEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::VariableDeclEval> EvaluationsFactoryImpl::createVariableDeclEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::VariableDeclEvalImpl> element(new ocl::Evaluations::VariableDeclEvalImpl());
@@ -593,7 +595,6 @@ std::shared_ptr<ocl::Evaluations::VariableDeclEval> EvaluationsFactoryImpl::crea
 	element->setThisVariableDeclEvalPtr(element);
 	return element;
 }
-
 std::shared_ptr<ocl::Evaluations::VariableExpEval> EvaluationsFactoryImpl::createVariableExpEval(const int metaElementID/*=-1*/) const
 {
 	std::shared_ptr<ocl::Evaluations::VariableExpEvalImpl> element(new ocl::Evaluations::VariableExpEvalImpl());
@@ -601,5 +602,4 @@ std::shared_ptr<ocl::Evaluations::VariableExpEval> EvaluationsFactoryImpl::creat
 	element->setThisVariableExpEvalPtr(element);
 	return element;
 }
-
 

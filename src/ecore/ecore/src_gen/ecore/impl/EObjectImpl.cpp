@@ -18,8 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -304,7 +305,10 @@ Any EObjectImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTAINER:
-			return eAny(getEContainer().lock()); //391
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEContainer().lock();
+				return eAny(returnValue); //391
+			}
 		case ecore::ecorePackage::EOBJECT_ATTRIBUTE_ECONTENS:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

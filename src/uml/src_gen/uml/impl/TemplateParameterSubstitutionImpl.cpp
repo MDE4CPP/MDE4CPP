@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -264,13 +264,25 @@ Any TemplateParameterSubstitutionImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_ACTUAL:
-			return eAny(getActual()); //2323
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getActual();
+				return eAny(returnValue); //2323
+			}
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_FORMAL:
-			return eAny(getFormal()); //2324
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getFormal();
+				return eAny(returnValue); //2324
+			}
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_OWNEDACTUAL:
-			return eAny(getOwnedActual()); //2325
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOwnedActual();
+				return eAny(returnValue); //2325
+			}
 		case uml::umlPackage::TEMPLATEPARAMETERSUBSTITUTION_ATTRIBUTE_TEMPLATEBINDING:
-			return eAny(getTemplateBinding().lock()); //2326
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTemplateBinding().lock();
+				return eAny(returnValue); //2326
+			}
 	}
 	return ElementImpl::eGet(featureID, resolve, coreType);
 }

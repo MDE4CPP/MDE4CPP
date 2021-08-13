@@ -23,11 +23,16 @@
 */]
 [template public generateClassCreate(aEClass : EClass,impl : Boolean) ? (aEClass.abstract=false)]
 virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/](const int metaElementID = [aEClass.ePackage.name/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
-[let ref:OrderedSet(EReference) = aEClass.getAllContainers()]
-[for(aReference:EReference | ref->sortedBy(name)) before('//Add containing object\n')]
-virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_in_[aReference.name.toUpperFirst()/]([aReference.generateReferenceType(true)/] par_[aReference.name/], const int metaElementID = [aEClass.ePackage.name/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
-[/for]
-
+[let ref:OrderedSet(EReference) = aEClass.getAllComposition()]
+	[for(aReference:EReference | ref->sortedBy(name)) before('//Add as contained object\n')]
+		[if not (aReference.oclIsUndefined() or aReference.eContainingClass.oclIsUndefined())]
+			[if (aReference.eOpposite->isEmpty())]
+virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/](std::shared_ptr<[aReference.eContainingClass.generateTypeClass()/]> par_[aReference.eContainingClass.name/], const int metaElementID = [aEClass.ePackage.name/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
+			[else]
+virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/]([aReference.eOpposite.generateReferenceType(true)/] par_[aReference.eContainingClass.name/], const int metaElementID = [aEClass.ePackage.name/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
+			[/if]
+		[/if]
+	[/for]
 [/let]
 [/template]
 
@@ -89,7 +94,7 @@ void [aClass.name.toUpperFirst()/]Impl::[generateGetThisPtrPropertySetterName()/
 */]
 
 [template public generateClassCreation(aEClass : EClass)]
-[aEClass.getClassMemberName()/] = factory->createEClass_in_EPackage(package, [aEClass.getStaticAttributeIDName()/]);
+[aEClass.getClassMemberName()/] = factory->createEClass_as_eClassifiers_in_EPackage(package, [aEClass.getStaticAttributeIDName()/]);
 [/template]
 
 [template public generateClassInit(aEClass : EClass)]

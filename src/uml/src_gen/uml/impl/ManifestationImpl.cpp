@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -300,7 +299,10 @@ Any ManifestationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::MANIFESTATION_ATTRIBUTE_UTILIZEDELEMENT:
-			return eAny(getUtilizedElement()); //14518
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getUtilizedElement();
+				return eAny(returnValue); //14518
+			}
 	}
 	return AbstractionImpl::eGet(featureID, resolve, coreType);
 }

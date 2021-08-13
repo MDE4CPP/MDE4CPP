@@ -45,17 +45,13 @@ namespace fUML::Semantics::Loci
 
 			//Creator functions
 			 virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> createExecutionFactory(const int metaElementID = LociPackage::EXECUTIONFACTORY_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> createExecutionFactory_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus, const int metaElementID = LociPackage::EXECUTIONFACTORY_CLASS) const ;
-			 
+			 //Add as contained object
+			 virtual std::shared_ptr<fUML::Semantics::Loci::ExecutionFactory> createExecutionFactory_as_factory_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = LociPackage::EXECUTIONFACTORY_CLASS) const ;
 			 virtual std::shared_ptr<fUML::Semantics::Loci::Executor> createExecutor(const int metaElementID = LociPackage::EXECUTOR_CLASS) const ;
-			 //Add containing object
-			 virtual std::shared_ptr<fUML::Semantics::Loci::Executor> createExecutor_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus> par_locus, const int metaElementID = LociPackage::EXECUTOR_CLASS) const ;
-			 
+			 //Add as contained object
+			 virtual std::shared_ptr<fUML::Semantics::Loci::Executor> createExecutor_as_executor_in_Locus(std::weak_ptr<fUML::Semantics::Loci::Locus> par_Locus, const int metaElementID = LociPackage::EXECUTOR_CLASS) const ;
 			 virtual std::shared_ptr<fUML::Semantics::Loci::FirstChoiceStrategy> createFirstChoiceStrategy(const int metaElementID = LociPackage::FIRSTCHOICESTRATEGY_CLASS) const ;
-			 
 			 virtual std::shared_ptr<fUML::Semantics::Loci::Locus> createLocus(const int metaElementID = LociPackage::LOCUS_CLASS) const ;
-			 
 			 
 
 		private:

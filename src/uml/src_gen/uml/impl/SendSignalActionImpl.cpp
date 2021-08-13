@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -334,9 +333,15 @@ Any SendSignalActionImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SENDSIGNALACTION_ATTRIBUTE_SIGNAL:
-			return eAny(getSignal()); //21329
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSignal();
+				return eAny(returnValue); //21329
+			}
 		case uml::umlPackage::SENDSIGNALACTION_ATTRIBUTE_TARGET:
-			return eAny(getTarget()); //21330
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTarget();
+				return eAny(returnValue); //21330
+			}
 	}
 	return InvocationActionImpl::eGet(featureID, resolve, coreType);
 }

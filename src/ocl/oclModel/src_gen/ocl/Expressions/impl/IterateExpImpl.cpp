@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -311,7 +312,10 @@ Any IterateExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::ITERATEEXP_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //3725
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //3725
+			}
 	}
 	return LoopExpImpl::eGet(featureID, resolve, coreType);
 }

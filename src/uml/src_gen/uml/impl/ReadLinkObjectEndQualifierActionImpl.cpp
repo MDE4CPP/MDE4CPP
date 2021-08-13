@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -405,11 +404,20 @@ Any ReadLinkObjectEndQualifierActionImpl::eGet(int featureID, bool resolve, bool
 	switch(featureID)
 	{
 		case uml::umlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_OBJECT:
-			return eAny(getObject()); //19727
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getObject();
+				return eAny(returnValue); //19727
+			}
 		case uml::umlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_QUALIFIER:
-			return eAny(getQualifier()); //19728
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getQualifier();
+				return eAny(returnValue); //19728
+			}
 		case uml::umlPackage::READLINKOBJECTENDQUALIFIERACTION_ATTRIBUTE_RESULT:
-			return eAny(getResult()); //19729
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getResult();
+				return eAny(returnValue); //19729
+			}
 	}
 	return ActionImpl::eGet(featureID, resolve, coreType);
 }

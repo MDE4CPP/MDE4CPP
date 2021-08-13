@@ -36,13 +36,13 @@
 [**
  * namespace generation
 */]
-[query private getRootPackageName(anEPackage : EPackage, ignoreRoot : Boolean) : String = if (ignoreRoot) then '' else anEPackage.name endif /]
+[query private getRootPackageName(anEPackage : EPackage, ignoreRoot : Boolean) : String = if anEPackage.oclIsUndefined() then '' else if (ignoreRoot) then '' else anEPackage.name endif endif/]
 [query private getNamespace(aEPackage : EPackage, separator : String, ignoreRoot : Boolean) : String = if(aEPackage.oclIsUndefined()) then '' else if(eSuperPackage.oclIsUndefined()) then getRootPackageName(ignoreRoot) else eSuperPackage.getNamespace(separator, ignoreRoot).concat(separator).concat(aEPackage.name) endif endif/]
 [query public generateNamespacePath(anEPackage : EPackage) : String = anEPackage.getNamespace('/', false) /]
 [query public generateNamespacePath(anEClassifier : EClassifier) : String = anEClassifier.ePackage.generateNamespacePath() /]
-[query public generateNamespaceDefinition(anEClassifier : EClassifier) : String = anEClassifier.ePackage.getNamespace('::', false) /]
-[query public generateNamespaceDefinition(anEStructuralFeature : EStructuralFeature) : String = anEStructuralFeature.eContainingClass.generateNamespaceDefinition() + '::' + anEStructuralFeature.name/]
-[query public generateNamespaceDefinition(anEOperation : EOperation) : String = anEOperation.eContainingClass.generateNamespaceDefinition() + '::' + anEOperation.name/]
+[query public generateNamespaceDefinition(anEClassifier : EClassifier) : String = if(anEClassifier.oclIsUndefined()) then '' else if(anEClassifier.ePackage.oclIsUndefined()) then '' else anEClassifier.ePackage.getNamespace('::', false) endif endif/]
+[query public generateNamespaceDefinition(anEStructuralFeature : EStructuralFeature) : String = anEStructuralFeature.eContainingClass.generateNamespaceDefinition() + '::' + anEStructuralFeature.eContainingClass.name + '::' + anEStructuralFeature.name/]
+[query public generateNamespaceDefinition(anEOperation : EOperation) : String = anEOperation.eContainingClass.generateNamespaceDefinition() + '::' + anEOperation.eContainingClass.name  + '::' + anEOperation.name/]
 [query public generateNamespaceDefinition(anEPackage : EPackage) : String = anEPackage.getNamespace('::', false) /]
 [query public getRootPackage(aEPackage : EPackage) : EPackage = if(eSuperPackage.oclIsUndefined()) then aEPackage else eSuperPackage.getRootPackage() endif /]
 [query public getRootPackage(aEClassifier : EClassifier) : EPackage = if(aEClassifier.ePackage.oclIsUndefined()) then aEClassifier.ePackage else aEClassifier.ePackage.getRootPackage() endif /]
@@ -71,6 +71,7 @@
 [query public getSuperTypeContainers(aClass:EClass) : OrderedSet(EReference) = if not(aClass.eSuperTypes->isEmpty()) then aClass.eSuperTypes.getAllContainers()->flatten()->asOrderedSet() else OrderedSet{} endif /]
 
 [query public getAllContainers(aClass : EClass) : OrderedSet(EReference) =  if getContainsContainerAttribute()->notEmpty() then if getSuperTypeContainers()->isEmpty() then getContainsContainerAttribute() else OrderedSet{getContainsContainerAttribute()}->append(getSuperTypeContainers()->flatten()->reject(oclIsUndefined())->asOrderedSet())->flatten()->asOrderedSet() endif else getSuperTypeContainers()->asOrderedSet() endif /]
+[query public getAllComposition(aClass : EClass) : OrderedSet(EReference) = if not aClass.getRootPackage()->oclIsUndefined() then aClass.getRootPackage().eAllContents()->filter(ecore::EReference)->select(e| (e.containment=true) and (e.eContainer().oclIsKindOf(EClassifier)) and ((e.eType = aClass) or ((e.eType.oclIsTypeOf(ecore::EClass)) and (e.eType.oclAsType(ecore::EClass).isSuperTypeOf(aClass) ))) ) ->asOrderedSet() else OrderedSet(EReference){} endif/]
 
 [query public hasImplOnly(aModelElement : EModelElement) : Boolean =  aModelElement.hasKey(keyImplOnly())/]
 [query public doNotGenerate(aModelElement : EModelElement) : Boolean =  aModelElement.hasKey(keyDoNotGenerate())/]
@@ -229,10 +230,10 @@
  *
  */]
 [query public getClassMemberName(anENamedElement : ENamedElement) : String = 'm_'.concat(anENamedElement.getMemberName()) /]
-[query public getStaticAttributeIDName(anENamedElement : ENamedElement) : String = anENamedElement.getMemberName().toUpperCase() /]
+[query public getStaticAttributeIDName(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsUndefined()) then ''else anENamedElement.getMemberName().toUpperCase() endif/]
 [query public getMemberNameUpperFirst(anENamedElement : ENamedElement) : String = anENamedElement.getMemberName().toUpperFirst() /]
 
-[query public getMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getMemberName() else anENamedElement.getMemberNameStructFeat() endif/]
+[query public getMemberName(anENamedElement : ENamedElement) : String = if (anENamedElement. oclIsUndefined()) then '' else if (anENamedElement.oclIsKindOf(EClassifier)) then anENamedElement.oclAsType(EClassifier).getMemberName() else anENamedElement.getMemberNameStructFeat() endif endif/]
 [query private getMemberNameStructFeat(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EStructuralFeature)) then anENamedElement.oclAsType(EStructuralFeature).getMemberName() else anENamedElement.getMemberNameOperation() endif/]
 [query private getMemberNameOperation(anENamedElement : ENamedElement) : String = if (anENamedElement.oclIsKindOf(EOperation)) then anENamedElement.oclAsType(EOperation).getMemberName() else anENamedElement.getMemberNameGeneral() endif/]
 [query private getMemberNameGeneral(anENamedElement : ENamedElement) : String = anENamedElement.name.toLowerFirst().concat('_') /]
@@ -264,17 +265,22 @@ template<class T> class Union;[/if]
 [/template]
 
 [template public generateAbstractDataTypesIncludes(anEClass : EClass)]
-[if (anEClass.eAllReferences->select(upperBound <> 1 and not hasSubset() and not isUnion())->size() > 0 or anEClass.eAllOperations.eParameters->select((eType.requiresBag()  or upperBound <> 1) and not doNotGenerate())->size() > 0)]
-#include "abstractDataTypes/Bag.hpp"
-[/if]
-[if (anEClass.eAllReferences->select((hasSubset() and not isSubsetUnion()) or eOpposite.existsAndIsSubet())->size() > 0)]
-#include "abstractDataTypes/Subset.hpp"
-[/if]
 [if (anEClass.eAllReferences->select(isSubsetUnion()or eOpposite.existsAndIsSubetUnion())->size() > 0)]
 #include "abstractDataTypes/SubsetUnion.hpp"
+[else]
+	[if (anEClass.eAllReferences->select((hasSubset() and not isSubsetUnion()) or eOpposite.existsAndIsSubet())->size() > 0)]
+#include "abstractDataTypes/Subset.hpp"
+	[else]
+		[if (anEClass.eAllReferences->select((isUnion() and not isSubsetUnion()) or eOpposite.existsAndIsUnion())->size() > 0)]
+#include "abstractDataTypes/Union.hpp"
+		[else]
+			[if (anEClass.eAllReferences->select(upperBound <> 1 and not hasSubset() and not isUnion())->size() > 0 or anEClass.eAllOperations.eParameters->select((eType.requiresBag()  or upperBound <> 1) and not doNotGenerate())->size() > 0)]
+#include "abstractDataTypes/Bag.hpp"
+			[/if]
+		[/if]
+	[/if]
 [/if]
-[if (anEClass.eAllReferences->select((isUnion() and not isSubsetUnion()) or eOpposite.existsAndIsUnion())->size() > 0)]
-#include "abstractDataTypes/Union.hpp"[/if]
+
 [/template]
 
 [template public generateAbstractDataTypesIncludes(anEPackage : EPackage)]

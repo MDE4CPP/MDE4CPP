@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -184,9 +185,15 @@ Any CollectionRangeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_FIRST:
-			return eAny(getFirst()); //1810
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getFirst();
+				return eAny(returnValue); //1810
+			}
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONRANGE_ATTRIBUTE_LAST:
-			return eAny(getLast()); //1811
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getLast();
+				return eAny(returnValue); //1811
+			}
 	}
 	return CollectionLiteralPartImpl::eGet(featureID, resolve, coreType);
 }

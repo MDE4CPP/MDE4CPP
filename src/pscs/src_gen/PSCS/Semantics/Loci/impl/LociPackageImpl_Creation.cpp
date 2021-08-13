@@ -44,31 +44,30 @@ void LociPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> pac
 
 void LociPackageImpl::createCS_ExecutionFactoryContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
-	m_cS_ExecutionFactory_Class = factory->createEClass_in_EPackage(package, CS_EXECUTIONFACTORY_CLASS);
+	m_cS_ExecutionFactory_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CS_EXECUTIONFACTORY_CLASS);
 	
-	m_cS_ExecutionFactory_Attribute_appliedProfiles = factory->createEReference_in_EContainingClass(m_cS_ExecutionFactory_Class, CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES);
-	
-	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element = factory->createEOperation_in_EContainingClass(m_cS_ExecutionFactory_Class, CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT);
-	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString = factory->createEOperation_in_EContainingClass(m_cS_ExecutionFactory_Class, CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING);
-	m_cS_ExecutionFactory_Operation_instantiateVisitor_Element = factory->createEOperation_in_EContainingClass(m_cS_ExecutionFactory_Class, CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT);
+	m_cS_ExecutionFactory_Attribute_appliedProfiles = factory->createEReference_as_eStructuralFeatures_in_EClass(m_cS_ExecutionFactory_Class, CS_EXECUTIONFACTORY_ATTRIBUTE_APPLIEDPROFILES);
+	m_cS_ExecutionFactory_Operation_getStereotypeApplication_Class_Element = factory->createEOperation_as_eOperations_in_EClass(m_cS_ExecutionFactory_Class, CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPEAPPLICATION_CLASS_ELEMENT);
+	m_cS_ExecutionFactory_Operation_getStereotypeClass_EString_EString = factory->createEOperation_as_eOperations_in_EClass(m_cS_ExecutionFactory_Class, CS_EXECUTIONFACTORY_OPERATION_GETSTEREOTYPECLASS_ESTRING_ESTRING);
+	m_cS_ExecutionFactory_Operation_instantiateVisitor_Element = factory->createEOperation_as_eOperations_in_EClass(m_cS_ExecutionFactory_Class, CS_EXECUTIONFACTORY_OPERATION_INSTANTIATEVISITOR_ELEMENT);
 	
 }
 
 void LociPackageImpl::createCS_ExecutorContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
-	m_cS_Executor_Class = factory->createEClass_in_EPackage(package, CS_EXECUTOR_CLASS);
+	m_cS_Executor_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CS_EXECUTOR_CLASS);
 	
 	
-	m_cS_Executor_Operation_start_Class_ParameterValue = factory->createEOperation_in_EContainingClass(m_cS_Executor_Class, CS_EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE);
+	m_cS_Executor_Operation_start_Class_ParameterValue = factory->createEOperation_as_eOperations_in_EClass(m_cS_Executor_Class, CS_EXECUTOR_OPERATION_START_CLASS_PARAMETERVALUE);
 	
 }
 
 void LociPackageImpl::createCS_LocusContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
-	m_cS_Locus_Class = factory->createEClass_in_EPackage(package, CS_LOCUS_CLASS);
+	m_cS_Locus_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CS_LOCUS_CLASS);
 	
 	
-	m_cS_Locus_Operation_instantiate_Class = factory->createEOperation_in_EContainingClass(m_cS_Locus_Class, CS_LOCUS_OPERATION_INSTANTIATE_CLASS);
+	m_cS_Locus_Operation_instantiate_Class = factory->createEOperation_as_eOperations_in_EClass(m_cS_Locus_Class, CS_LOCUS_OPERATION_INSTANTIATE_CLASS);
 	
 }
 

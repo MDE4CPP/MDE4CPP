@@ -6,13 +6,13 @@
 
 #ifndef PSCS_SEMANTICS_STRUCTUREDCLASSIFIERSFACTORY_HPP
 #define PSCS_SEMANTICS_STRUCTUREDCLASSIFIERSFACTORY_HPP
+// namespace macro header include
+#include "PSCS/PSCS.hpp"
 
 #include <map>
 #include <memory>
 
-// namespace macro header include
-#include "PSCS/PSCS.hpp"
-
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/StructuredClassifiers/StructuredClassifiersPackage.hpp"
 
@@ -41,19 +41,12 @@ namespace PSCS::Semantics::StructuredClassifiers
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
 			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DefaultRequestPropagationStrategy> createCS_DefaultRequestPropagationStrategy(const int metaElementID = StructuredClassifiersPackage::CS_DEFAULTREQUESTPROPAGATIONSTRATEGY_CLASS) const = 0;
-			
 			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_DispatchOperationOfInterfaceStrategy> createCS_DispatchOperationOfInterfaceStrategy(const int metaElementID = StructuredClassifiersPackage::CS_DISPATCHOPERATIONOFINTERFACESTRATEGY_CLASS) const = 0;
-			
 			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_InteractionPoint> createCS_InteractionPoint(const int metaElementID = StructuredClassifiersPackage::CS_INTERACTIONPOINT_CLASS) const = 0;
-			
 			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Link> createCS_Link(const int metaElementID = StructuredClassifiersPackage::CS_LINK_CLASS) const = 0;
-			
 			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_NameBased_StructuralFeatureOfInterfaceAccessStrategy> createCS_NameBased_StructuralFeatureOfInterfaceAccessStrategy(const int metaElementID = StructuredClassifiersPackage::CS_NAMEBASED_STRUCTURALFEATUREOFINTERFACEACCESSSTRATEGY_CLASS) const = 0;
-			
 			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Object> createCS_Object(const int metaElementID = StructuredClassifiersPackage::CS_OBJECT_CLASS) const = 0;
-			
 			virtual std::shared_ptr<PSCS::Semantics::StructuredClassifiers::CS_Reference> createCS_Reference(const int metaElementID = StructuredClassifiersPackage::CS_REFERENCE_CLASS) const = 0;
-			
 			
 	};
 }

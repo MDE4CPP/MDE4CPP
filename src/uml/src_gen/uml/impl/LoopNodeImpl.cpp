@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -712,7 +711,10 @@ Any LoopNodeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //14445			
 		}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_DECIDER:
-			return eAny(getDecider()); //14446
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDecider();
+				return eAny(returnValue); //14446
+			}
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_ISTESTEDFIRST:
 			return eAny(getIsTestedFirst()); //14447
 		case uml::umlPackage::LOOPNODE_ATTRIBUTE_LOOPVARIABLE:

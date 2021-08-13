@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -183,7 +184,10 @@ Any InvocationEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreTy
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::INVOCATIONEVENTOCCURRENCE_ATTRIBUTE_EXECUTION:
-			return eAny(getExecution()); //661
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExecution();
+				return eAny(returnValue); //661
+			}
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }

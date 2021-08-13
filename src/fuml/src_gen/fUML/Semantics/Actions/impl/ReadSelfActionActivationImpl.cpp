@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -268,7 +268,10 @@ Any ReadSelfActionActivationImpl::eGet(int featureID, bool resolve, bool coreTyp
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSELFACTIONACTIVATION_ATTRIBUTE_READSELFACTION:
-			return eAny(getReadSelfAction()); //9311
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReadSelfAction();
+				return eAny(returnValue); //9311
+			}
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }

@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -308,7 +309,10 @@ Any PropertyCallExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::PROPERTYCALLEXP_ATTRIBUTE_REFERREDPROPERTY:
-			return eAny(getReferredProperty()); //7126
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredProperty();
+				return eAny(returnValue); //7126
+			}
 	}
 	return NavigationCallExpImpl::eGet(featureID, resolve, coreType);
 }

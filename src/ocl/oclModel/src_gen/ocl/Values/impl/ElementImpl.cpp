@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -169,7 +170,10 @@ Any ElementImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_INDEXNR:
 			return eAny(getIndexNr()); //220
 		case ocl::Values::ValuesPackage::ELEMENT_ATTRIBUTE_VALUE:
-			return eAny(getValue()); //221
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getValue();
+				return eAny(returnValue); //221
+			}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

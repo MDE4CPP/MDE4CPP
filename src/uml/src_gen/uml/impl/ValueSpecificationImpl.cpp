@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -329,9 +328,15 @@ Any ValueSpecificationImpl::eGet(int featureID, bool resolve, bool coreType) con
 	switch(featureID)
 	{
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_OWNINGSLOT:
-			return eAny(getOwningSlot().lock()); //25013
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOwningSlot().lock();
+				return eAny(returnValue); //25013
+			}
 		case uml::umlPackage::VALUESPECIFICATION_ATTRIBUTE_VALUESPECIFICATIONACTION:
-			return eAny(getValueSpecificationAction().lock()); //25014
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getValueSpecificationAction().lock();
+				return eAny(returnValue); //25014
+			}
 	}
 	Any result;
 	result = PackageableElementImpl::eGet(featureID, resolve, coreType);

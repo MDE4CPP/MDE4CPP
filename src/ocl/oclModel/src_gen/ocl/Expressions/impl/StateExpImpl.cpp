@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -310,7 +311,10 @@ Any StateExpImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::STATEEXP_ATTRIBUTE_REFERREDSTATE:
-			return eAny(getReferredState()); //7922
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredState();
+				return eAny(returnValue); //7922
+			}
 	}
 	return OclExpressionImpl::eGet(featureID, resolve, coreType);
 }

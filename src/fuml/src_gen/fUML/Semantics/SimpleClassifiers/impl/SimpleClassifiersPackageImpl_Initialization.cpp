@@ -114,7 +114,7 @@ void SimpleClassifiersPackageImpl::initializeBooleanValueContent()
 	m_booleanValue_Operation_equals_Value->setUnique(true);
 	m_booleanValue_Operation_equals_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_booleanValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_booleanValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -190,7 +190,7 @@ void SimpleClassifiersPackageImpl::initializeCompoundValueContent()
 	m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt->setUnique(true);
 	m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt);
 		parameter->setName("feature");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -200,7 +200,7 @@ void SimpleClassifiersPackageImpl::initializeCompoundValueContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt);
 		parameter->setName("values");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -210,7 +210,7 @@ void SimpleClassifiersPackageImpl::initializeCompoundValueContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_compoundValue_Operation_assignFeatureValue_StructuralFeature_EInt);
 		parameter->setName("position");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -226,7 +226,7 @@ void SimpleClassifiersPackageImpl::initializeCompoundValueContent()
 	m_compoundValue_Operation_equals_Value->setUnique(true);
 	m_compoundValue_Operation_equals_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_compoundValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_compoundValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -248,7 +248,7 @@ void SimpleClassifiersPackageImpl::initializeCompoundValueContent()
 	m_compoundValue_Operation_removeFeatureValues_Classifier->setUnique(true);
 	m_compoundValue_Operation_removeFeatureValues_Classifier->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_compoundValue_Operation_removeFeatureValues_Classifier);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_compoundValue_Operation_removeFeatureValues_Classifier);
 		parameter->setName("classifier");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -264,7 +264,7 @@ void SimpleClassifiersPackageImpl::initializeCompoundValueContent()
 	m_compoundValue_Operation_retrieveFeatureValue_StructuralFeature->setUnique(true);
 	m_compoundValue_Operation_retrieveFeatureValue_StructuralFeature->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_compoundValue_Operation_retrieveFeatureValue_StructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_compoundValue_Operation_retrieveFeatureValue_StructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -410,7 +410,7 @@ void SimpleClassifiersPackageImpl::initializeEnumerationValueContent()
 	m_enumerationValue_Operation_equals_Value->setUnique(true);
 	m_enumerationValue_Operation_equals_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_enumerationValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_enumerationValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -536,7 +536,7 @@ void SimpleClassifiersPackageImpl::initializeFeatureValueContent()
 	m_featureValue_Operation_hasEqualValues_FeatureValue->setUnique(true);
 	m_featureValue_Operation_hasEqualValues_FeatureValue->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_featureValue_Operation_hasEqualValues_FeatureValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_featureValue_Operation_hasEqualValues_FeatureValue);
 		parameter->setName("other");
 		parameter->setEType(getFeatureValue_Class());
 		parameter->setLowerBound(0);
@@ -590,7 +590,7 @@ void SimpleClassifiersPackageImpl::initializeIntegerValueContent()
 	m_integerValue_Operation_equals_Value->setUnique(true);
 	m_integerValue_Operation_equals_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_integerValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_integerValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -705,7 +705,7 @@ void SimpleClassifiersPackageImpl::initializeRealValueContent()
 	m_realValue_Operation_equals_Value->setUnique(true);
 	m_realValue_Operation_equals_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_realValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_realValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -813,7 +813,7 @@ void SimpleClassifiersPackageImpl::initializeStringValueContent()
 	m_stringValue_Operation_equals_Value->setUnique(true);
 	m_stringValue_Operation_equals_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_stringValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_stringValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);
@@ -860,7 +860,7 @@ void SimpleClassifiersPackageImpl::initializeStructuredValueContent()
 	m_structuredValue_Operation_assignFeatureValue_StructuralFeature_EInt->setUnique(true);
 	m_structuredValue_Operation_assignFeatureValue_StructuralFeature_EInt->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_assignFeatureValue_StructuralFeature_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredValue_Operation_assignFeatureValue_StructuralFeature_EInt);
 		parameter->setName("feature");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -870,7 +870,7 @@ void SimpleClassifiersPackageImpl::initializeStructuredValueContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_assignFeatureValue_StructuralFeature_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredValue_Operation_assignFeatureValue_StructuralFeature_EInt);
 		parameter->setName("values");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -880,7 +880,7 @@ void SimpleClassifiersPackageImpl::initializeStructuredValueContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_assignFeatureValue_StructuralFeature_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredValue_Operation_assignFeatureValue_StructuralFeature_EInt);
 		parameter->setName("position");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -909,7 +909,7 @@ void SimpleClassifiersPackageImpl::initializeStructuredValueContent()
 	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setUnique(true);
 	m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue);
 		parameter->setName("feature");
 		parameter->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -919,7 +919,7 @@ void SimpleClassifiersPackageImpl::initializeStructuredValueContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredValue_Operation_getValues_StructuralFeature_FeatureValue);
 		parameter->setName("featureValues");
 		parameter->setEType(getFeatureValue_Class());
 		parameter->setLowerBound(0);
@@ -941,7 +941,7 @@ void SimpleClassifiersPackageImpl::initializeStructuredValueContent()
 	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setUnique(true);
 	m_structuredValue_Operation_removeValue_StructuralFeature_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_removeValue_StructuralFeature_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredValue_Operation_removeValue_StructuralFeature_Value);
 		parameter->setName("feature");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -951,7 +951,7 @@ void SimpleClassifiersPackageImpl::initializeStructuredValueContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_removeValue_StructuralFeature_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredValue_Operation_removeValue_StructuralFeature_Value);
 		parameter->setName("value");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -967,7 +967,7 @@ void SimpleClassifiersPackageImpl::initializeStructuredValueContent()
 	m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature->setUnique(true);
 	m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredValue_Operation_retrieveFeatureValue_StructuralFeature);
 		parameter->setName("feature");
 		parameter->setEType(uml::umlPackage::eInstance()->getStructuralFeature_Class());
 		parameter->setLowerBound(0);
@@ -996,7 +996,7 @@ void SimpleClassifiersPackageImpl::initializeStructuredValueContent()
 	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setUnique(true);
 	m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt);
 		parameter->setName("feature");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1006,7 +1006,7 @@ void SimpleClassifiersPackageImpl::initializeStructuredValueContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt);
 		parameter->setName("values");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1016,7 +1016,7 @@ void SimpleClassifiersPackageImpl::initializeStructuredValueContent()
 	}
 	
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_structuredValue_Operation_setFeatureValue_StructuralFeature_EInt);
 		parameter->setName("position");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -1077,7 +1077,7 @@ void SimpleClassifiersPackageImpl::initializeUnlimitedNaturalValueContent()
 	m_unlimitedNaturalValue_Operation_equals_Value->setUnique(true);
 	m_unlimitedNaturalValue_Operation_equals_Value->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_unlimitedNaturalValue_Operation_equals_Value);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_unlimitedNaturalValue_Operation_equals_Value);
 		parameter->setName("otherValue");
 		parameter->setEType(fUML::Semantics::Values::ValuesPackage::eInstance()->getValue_Class());
 		parameter->setLowerBound(0);

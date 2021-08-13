@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -192,7 +192,10 @@ Any EParameterImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EPARAMETER_ATTRIBUTE_EOPERATION:
-			return eAny(getEOperation().lock()); //4213
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEOperation().lock();
+				return eAny(returnValue); //4213
+			}
 	}
 	return ETypedElementImpl::eGet(featureID, resolve, coreType);
 }

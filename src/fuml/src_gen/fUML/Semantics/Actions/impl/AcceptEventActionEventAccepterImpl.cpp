@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -156,7 +157,10 @@ Any AcceptEventActionEventAccepterImpl::eGet(int featureID, bool resolve, bool c
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::ACCEPTEVENTACTIONEVENTACCEPTER_ATTRIBUTE_ACTIONACTIVATION:
-			return eAny(getActionActivation()); //40
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getActionActivation();
+				return eAny(returnValue); //40
+			}
 	}
 	return fUML::Semantics::CommonBehavior::EventAccepterImpl::eGet(featureID, resolve, coreType);
 }

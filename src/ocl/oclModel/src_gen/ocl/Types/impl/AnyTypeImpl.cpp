@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -172,7 +173,10 @@ Any AnyTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::ANYTYPE_ATTRIBUTE_OBJECT:
-			return eAny(getObject()); //18
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getObject();
+				return eAny(returnValue); //18
+			}
 	}
 	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
 }

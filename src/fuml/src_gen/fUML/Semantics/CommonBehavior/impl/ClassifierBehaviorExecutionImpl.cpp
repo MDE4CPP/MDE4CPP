@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -208,11 +209,20 @@ Any ClassifierBehaviorExecutionImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_CLASSIFIER:
-			return eAny(getClassifier()); //221
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getClassifier();
+				return eAny(returnValue); //221
+			}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_EXECUTION:
-			return eAny(getExecution()); //220
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExecution();
+				return eAny(returnValue); //220
+			}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIOREXECUTION_ATTRIBUTE_OBJECTACTIVATION:
-			return eAny(getObjectActivation()); //222
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getObjectActivation();
+				return eAny(returnValue); //222
+			}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

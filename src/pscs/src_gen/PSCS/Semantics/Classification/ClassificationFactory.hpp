@@ -6,13 +6,13 @@
 
 #ifndef PSCS_SEMANTICS_CLASSIFICATIONFACTORY_HPP
 #define PSCS_SEMANTICS_CLASSIFICATIONFACTORY_HPP
+// namespace macro header include
+#include "PSCS/PSCS.hpp"
 
 #include <map>
 #include <memory>
 
-// namespace macro header include
-#include "PSCS/PSCS.hpp"
-
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EFactory.hpp"
 #include "PSCS/Semantics/Classification/ClassificationPackage.hpp"
 
@@ -41,7 +41,6 @@ namespace PSCS::Semantics::Classification
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
 			virtual std::shared_ptr<PSCS::Semantics::Classification::CS_InstanceValueEvaluation> createCS_InstanceValueEvaluation(const int metaElementID = ClassificationPackage::CS_INSTANCEVALUEEVALUATION_CLASS) const = 0;
-			
 			
 	};
 }

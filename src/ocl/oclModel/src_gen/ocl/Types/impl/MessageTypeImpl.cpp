@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -188,9 +189,15 @@ Any MessageTypeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDOPERATION:
-			return eAny(getReferredOperation()); //498
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
+				return eAny(returnValue); //498
+			}
 		case ocl::Types::TypesPackage::MESSAGETYPE_ATTRIBUTE_REFERREDSIGNAL:
-			return eAny(getReferredSignal()); //499
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredSignal();
+				return eAny(returnValue); //499
+			}
 	}
 	return ecore::EClassifierImpl::eGet(featureID, resolve, coreType);
 }

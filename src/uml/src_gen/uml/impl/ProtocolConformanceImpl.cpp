@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -281,9 +280,15 @@ Any ProtocolConformanceImpl::eGet(int featureID, bool resolve, bool coreType) co
 	switch(featureID)
 	{
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_GENERALMACHINE:
-			return eAny(getGeneralMachine()); //1866
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getGeneralMachine();
+				return eAny(returnValue); //1866
+			}
 		case uml::umlPackage::PROTOCOLCONFORMANCE_ATTRIBUTE_SPECIFICMACHINE:
-			return eAny(getSpecificMachine().lock()); //1867
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSpecificMachine().lock();
+				return eAny(returnValue); //1867
+			}
 	}
 	return DirectedRelationshipImpl::eGet(featureID, resolve, coreType);
 }

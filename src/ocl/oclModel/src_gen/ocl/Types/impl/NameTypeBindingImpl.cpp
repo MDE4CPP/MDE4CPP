@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -169,7 +170,10 @@ Any NameTypeBindingImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_NAME:
 			return eAny(getName()); //510
 		case ocl::Types::TypesPackage::NAMETYPEBINDING_ATTRIBUTE_TYPE:
-			return eAny(getType()); //511
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //511
+			}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

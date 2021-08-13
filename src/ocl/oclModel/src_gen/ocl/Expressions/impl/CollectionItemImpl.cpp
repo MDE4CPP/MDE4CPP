@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -164,7 +165,10 @@ Any CollectionItemImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Expressions::ExpressionsPackage::COLLECTIONITEM_ATTRIBUTE_ITEM:
-			return eAny(getItem()); //1110
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getItem();
+				return eAny(returnValue); //1110
+			}
 	}
 	return CollectionLiteralPartImpl::eGet(featureID, resolve, coreType);
 }

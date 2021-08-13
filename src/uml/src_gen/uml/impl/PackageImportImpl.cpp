@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -302,9 +301,15 @@ Any PackageImportImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTEDPACKAGE:
-			return eAny(getImportedPackage()); //1716
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getImportedPackage();
+				return eAny(returnValue); //1716
+			}
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_IMPORTINGNAMESPACE:
-			return eAny(getImportingNamespace().lock()); //1717
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getImportingNamespace().lock();
+				return eAny(returnValue); //1717
+			}
 		case uml::umlPackage::PACKAGEIMPORT_ATTRIBUTE_VISIBILITY:
 			return eAny(getVisibility()); //1718
 	}

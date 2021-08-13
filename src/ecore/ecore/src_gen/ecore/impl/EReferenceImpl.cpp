@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -290,9 +289,15 @@ Any EReferenceImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //4327			
 		}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EOPPOSITE:
-			return eAny(getEOpposite()); //4325
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEOpposite();
+				return eAny(returnValue); //4325
+			}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_EREFERENCETYPE:
-			return eAny(getEReferenceType()); //4326
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEReferenceType();
+				return eAny(returnValue); //4326
+			}
 		case ecore::ecorePackage::EREFERENCE_ATTRIBUTE_RESOLVEPROXIES:
 			return eAny(isResolveProxies()); //4324
 	}

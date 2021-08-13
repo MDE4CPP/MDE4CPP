@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -31,11 +32,11 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -201,11 +202,20 @@ Any LetExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_IN:
-			return eAny(getIn()); //426
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getIn();
+				return eAny(returnValue); //426
+			}
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_INITEXPRESSION:
-			return eAny(getInitExpression()); //427
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInitExpression();
+				return eAny(returnValue); //427
+			}
 		case ocl::Evaluations::EvaluationsPackage::LETEXPEVAL_ATTRIBUTE_VARIABLE:
-			return eAny(getVariable()); //428
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getVariable();
+				return eAny(returnValue); //428
+			}
 	}
 	return OclExpEvalImpl::eGet(featureID, resolve, coreType);
 }

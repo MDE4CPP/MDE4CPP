@@ -6,13 +6,13 @@
 
 #ifndef FUMLFACTORY_HPP
 #define FUMLFACTORY_HPP
+// namespace macro header include
+#include "fUML/fUML.hpp"
 
 #include <map>
 #include <memory>
 
-// namespace macro header include
-#include "fUML/fUML.hpp"
-
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EFactory.hpp"
 #include "fUML/fUMLPackage.hpp"
 
@@ -20,37 +20,93 @@ namespace fUML
 {
 	class fUMLPackage;
 }
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
-
-
 namespace fUML::Semantics::Actions 
 {
-	class StructuredActivityNodeActivation;
+	class ClauseActivation;
+	class Values;
 }
 namespace fUML::Semantics::Activities 
 {
-	class ActivityExecution;
+	class ActivityNodeActivation;
+}
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
+
+
+namespace fUML::Semantics::Activities 
+{
+	class ActivityEdgeInstance;
+	class ActivityNodeActivation;
 	class ActivityNodeActivationGroup;
+	class Token;
+}
+namespace fUML::Semantics::CommonBehavior 
+{
+	class Execution;
+}
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class ExtensionalValue;
+}
+namespace fUML::Semantics::Values 
+{
+	class Value;
 }
 
 
 
 
+namespace fUML::Semantics::CommonBehavior 
+{
+	class ClassifierBehaviorExecution;
+	class Execution;
+	class ObjectActivation;
+	class ParameterValue;
+}
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class ExtensionalValue;
+}
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
 
 
 namespace fUML::Semantics::Loci 
 {
-	class Locus;
+	class ExecutionFactory;
+	class Executor;
 }
 
 
+namespace fUML::Semantics::SimpleClassifiers 
+{
+	class FeatureValue;
+	class SignalInstance;
+}
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
 
 
+namespace fUML::Semantics::StructuredClassifiers 
+{
+	class ExtensionalValue;
+}
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
 
 
+namespace fUML::Semantics::Values 
+{
+	class Value;
+}
 
 
 

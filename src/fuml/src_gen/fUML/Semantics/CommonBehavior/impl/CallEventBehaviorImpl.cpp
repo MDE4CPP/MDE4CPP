@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -157,7 +158,10 @@ Any CallEventBehaviorImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CALLEVENTBEHAVIOR_ATTRIBUTE_OPERATION:
-			return eAny(getOperation()); //160
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOperation();
+				return eAny(returnValue); //160
+			}
 	}
 	return ecore::EObjectImpl::eGet(featureID, resolve, coreType);
 }

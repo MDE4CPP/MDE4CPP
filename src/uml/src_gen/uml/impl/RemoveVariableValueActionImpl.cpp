@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -321,7 +320,10 @@ Any RemoveVariableValueActionImpl::eGet(int featureID, bool resolve, bool coreTy
 		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_ISREMOVEDUPLICATES:
 			return eAny(getIsRemoveDuplicates()); //21029
 		case uml::umlPackage::REMOVEVARIABLEVALUEACTION_ATTRIBUTE_REMOVEAT:
-			return eAny(getRemoveAt()); //21030
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getRemoveAt();
+				return eAny(returnValue); //21030
+			}
 	}
 	return WriteVariableActionImpl::eGet(featureID, resolve, coreType);
 }

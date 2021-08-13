@@ -6,13 +6,13 @@
 
 #ifndef PSCSFACTORY_HPP
 #define PSCSFACTORY_HPP
+// namespace macro header include
+#include "PSCS/PSCS.hpp"
 
 #include <map>
 #include <memory>
 
-// namespace macro header include
-#include "PSCS/PSCS.hpp"
-
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EFactory.hpp"
 #include "PSCS/PSCSPackage.hpp"
 
@@ -20,20 +20,12 @@ namespace PSCS
 {
 	class PSCSPackage;
 }
-namespace fUML::Semantics::Activities 
-{
-	class ActivityNodeActivationGroup;
-}
 
 
 
 
 
 
-namespace fUML::Semantics::Loci 
-{
-	class Locus;
-}
 
 
 

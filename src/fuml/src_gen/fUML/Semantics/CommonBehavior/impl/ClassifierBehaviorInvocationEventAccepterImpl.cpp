@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -248,11 +249,20 @@ Any ClassifierBehaviorInvocationEventAccepterImpl::eGet(int featureID, bool reso
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_CLASSIFIER:
-			return eAny(getClassifier()); //250
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getClassifier();
+				return eAny(returnValue); //250
+			}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_EXECUTION:
-			return eAny(getExecution()); //251
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExecution();
+				return eAny(returnValue); //251
+			}
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::CLASSIFIERBEHAVIORINVOCATIONEVENTACCEPTER_ATTRIBUTE_OBJECTACTIVATION:
-			return eAny(getObjectActivation()); //252
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getObjectActivation();
+				return eAny(returnValue); //252
+			}
 	}
 	return EventAccepterImpl::eGet(featureID, resolve, coreType);
 }

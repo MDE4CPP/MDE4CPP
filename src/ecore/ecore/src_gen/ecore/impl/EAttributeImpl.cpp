@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -208,7 +207,10 @@ Any EAttributeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_EATTRIBUTETYPE:
-			return eAny(getEAttributeType()); //223
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEAttributeType();
+				return eAny(returnValue); //223
+			}
 		case ecore::ecorePackage::EATTRIBUTE_ATTRIBUTE_ID:
 			return eAny(isID()); //222
 	}

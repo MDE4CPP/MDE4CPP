@@ -6,13 +6,13 @@
 
 #ifndef UMLFACTORY_HPP
 #define UMLFACTORY_HPP
+// namespace macro header include
+#include "uml/uml.hpp"
 
 #include <map>
 #include <memory>
 
-// namespace macro header include
-#include "uml/uml.hpp"
-
+#include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EFactory.hpp"
 #include "uml/umlPackage.hpp"
 
@@ -23,56 +23,82 @@ namespace uml
 namespace uml 
 {
 	class Action;
-	class Activity;
+	class ActivityEdge;
 	class ActivityGroup;
+	class ActivityNode;
 	class ActivityPartition;
-	class AddStructuralFeatureValueAction;
-	class Association;
+	class Artifact;
 	class Behavior;
-	class BehavioredClassifier;
-	class CallAction;
-	class CallOperationAction;
-	class Class;
 	class Classifier;
-	class ClearStructuralFeatureAction;
-	class Component;
+	class Clause;
+	class CollaborationUse;
+	class Comment;
+	class ComponentRealization;
+	class ConnectionPointReference;
 	class Connector;
-	class CreateObjectAction;
-	class DataType;
+	class ConnectorEnd;
+	class Constraint;
+	class Dependency;
 	class Deployment;
-	class DeploymentTarget;
-	class DestroyObjectAction;
+	class DeploymentSpecification;
 	class Element;
-	class Enumeration;
+	class ElementImport;
+	class EnumerationLiteral;
+	class ExceptionHandler;
 	class ExecutableNode;
-	class InstanceSpecification;
-	class Interaction;
+	class Extend;
+	class ExtensionPoint;
+	class Gate;
+	class GeneralOrdering;
+	class Generalization;
+	class Image;
+	class Include;
+	class InputPin;
+	class InteractionConstraint;
+	class InteractionFragment;
 	class InteractionOperand;
-	class Interface;
-	class InvocationAction;
-	class Namespace;
+	class InterfaceRealization;
+	class Lifeline;
+	class LinkEndData;
+	class Manifestation;
+	class Message;
+	class NamedElement;
+	class Node;
+	class OpaqueExpression;
 	class Operation;
+	class OutputPin;
 	class Package;
+	class PackageImport;
+	class PackageMerge;
+	class PackageableElement;
+	class Parameter;
+	class ParameterSet;
+	class ParameterableElement;
+	class ProfileApplication;
 	class Property;
+	class ProtocolConformance;
 	class ProtocolStateMachine;
-	class ReadSelfAction;
-	class ReadStructuralFeatureAction;
+	class Pseudostate;
+	class QualifierValue;
+	class Reception;
 	class Region;
-	class RemoveStructuralFeatureValueAction;
 	class Slot;
-	class State;
-	class StateMachine;
+	class Stereotype;
 	class StringExpression;
-	class StructuralFeatureAction;
 	class StructuredActivityNode;
-	class StructuredClassifier;
+	class Substitution;
 	class TemplateBinding;
 	class TemplateParameter;
+	class TemplateParameterSubstitution;
 	class TemplateSignature;
-	class TemplateableElement;
+	class TimeExpression;
+	class Transition;
+	class Trigger;
+	class Type;
 	class UseCase;
-	class ValueSpecificationAction;
-	class WriteStructuralFeatureAction;
+	class ValueSpecification;
+	class Variable;
+	class Vertex;
 }
 
 
@@ -99,1428 +125,2205 @@ namespace uml
 			virtual std::shared_ptr<ecore::EObject> create(std::shared_ptr<ecore::EClass> _class, std::shared_ptr<EObject> _container=nullptr, const int referenceID = -1) const = 0;
 
 			virtual std::shared_ptr<Abstraction> createAbstraction(const int metaElementID = umlPackage::ABSTRACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Abstraction> createAbstraction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ABSTRACTION_CLASS) const = 0;
-			virtual std::shared_ptr<Abstraction> createAbstraction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ABSTRACTION_CLASS) const = 0;
-			virtual std::shared_ptr<Abstraction> createAbstraction_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::ABSTRACTION_CLASS) const = 0;
-			virtual std::shared_ptr<Abstraction> createAbstraction_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::ABSTRACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Abstraction> createAbstraction_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::ABSTRACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Abstraction> createAbstraction_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ABSTRACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Abstraction> createAbstraction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ABSTRACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Abstraction> createAbstraction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ABSTRACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Abstraction> createAbstraction_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ABSTRACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Abstraction> createAbstraction_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ABSTRACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Abstraction> createAbstraction_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::ABSTRACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Abstraction> createAbstraction_as_roleBinding_in_CollaborationUse(std::shared_ptr<CollaborationUse> par_CollaborationUse, const int metaElementID = umlPackage::ABSTRACTION_CLASS) const = 0;
 			virtual std::shared_ptr<AcceptCallAction> createAcceptCallAction(const int metaElementID = umlPackage::ACCEPTCALLACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<AcceptCallAction> createAcceptCallAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::ACCEPTCALLACTION_CLASS) const = 0;
-			virtual std::shared_ptr<AcceptCallAction> createAcceptCallAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::ACCEPTCALLACTION_CLASS) const = 0;
-			virtual std::shared_ptr<AcceptCallAction> createAcceptCallAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ACCEPTCALLACTION_CLASS) const = 0;
-			virtual std::shared_ptr<AcceptCallAction> createAcceptCallAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ACCEPTCALLACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<AcceptCallAction> createAcceptCallAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::ACCEPTCALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptCallAction> createAcceptCallAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::ACCEPTCALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptCallAction> createAcceptCallAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::ACCEPTCALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptCallAction> createAcceptCallAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::ACCEPTCALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptCallAction> createAcceptCallAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::ACCEPTCALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptCallAction> createAcceptCallAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ACCEPTCALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptCallAction> createAcceptCallAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ACCEPTCALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptCallAction> createAcceptCallAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::ACCEPTCALLACTION_CLASS) const = 0;
 			virtual std::shared_ptr<AcceptEventAction> createAcceptEventAction(const int metaElementID = umlPackage::ACCEPTEVENTACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<AcceptEventAction> createAcceptEventAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::ACCEPTEVENTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<AcceptEventAction> createAcceptEventAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::ACCEPTEVENTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<AcceptEventAction> createAcceptEventAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ACCEPTEVENTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<AcceptEventAction> createAcceptEventAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ACCEPTEVENTACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<AcceptEventAction> createAcceptEventAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::ACCEPTEVENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptEventAction> createAcceptEventAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::ACCEPTEVENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptEventAction> createAcceptEventAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::ACCEPTEVENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptEventAction> createAcceptEventAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::ACCEPTEVENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptEventAction> createAcceptEventAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::ACCEPTEVENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptEventAction> createAcceptEventAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ACCEPTEVENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptEventAction> createAcceptEventAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ACCEPTEVENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AcceptEventAction> createAcceptEventAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::ACCEPTEVENTACTION_CLASS) const = 0;
 			virtual std::shared_ptr<ActionExecutionSpecification> createActionExecutionSpecification(const int metaElementID = umlPackage::ACTIONEXECUTIONSPECIFICATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ActionExecutionSpecification> createActionExecutionSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::ACTIONEXECUTIONSPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<ActionExecutionSpecification> createActionExecutionSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::ACTIONEXECUTIONSPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<ActionExecutionSpecification> createActionExecutionSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ACTIONEXECUTIONSPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<ActionExecutionSpecification> createActionExecutionSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ACTIONEXECUTIONSPECIFICATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ActionExecutionSpecification> createActionExecutionSpecification_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::ACTIONEXECUTIONSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<ActionExecutionSpecification> createActionExecutionSpecification_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::ACTIONEXECUTIONSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<ActionExecutionSpecification> createActionExecutionSpecification_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ACTIONEXECUTIONSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<ActionExecutionSpecification> createActionExecutionSpecification_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ACTIONEXECUTIONSPECIFICATION_CLASS) const = 0;
 			virtual std::shared_ptr<ActionInputPin> createActionInputPin(const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_Action(std::weak_ptr<uml::Action> par_action, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction> par_addStructuralFeatureValueAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction> par_callOperationAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction> par_destroyObjectAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_InvocationAction(std::weak_ptr<uml::InvocationAction> par_invocationAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> par_removeStructuralFeatureValueAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction> par_structuralFeatureAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ActionInputPin> createActionInputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> par_writeStructuralFeatureAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_argument_in_InvocationAction(std::weak_ptr<uml::InvocationAction> par_InvocationAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_collection_in_ReduceAction(std::shared_ptr<ReduceAction> par_ReduceAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_exception_in_RaiseExceptionAction(std::shared_ptr<RaiseExceptionAction> par_RaiseExceptionAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_first_in_TestIdentityAction(std::shared_ptr<TestIdentityAction> par_TestIdentityAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_input_in_Action(std::weak_ptr<uml::Action> par_Action, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_inputValue_in_LinkAction(std::shared_ptr<LinkAction> par_LinkAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_inputValue_in_OpaqueAction(std::shared_ptr<OpaqueAction> par_OpaqueAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_insertAt_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction> par_AddStructuralFeatureValueAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_insertAt_in_AddVariableValueAction(std::shared_ptr<AddVariableValueAction> par_AddVariableValueAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_loopVariableInput_in_LoopNode(std::shared_ptr<LoopNode> par_LoopNode, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_object_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction> par_StructuralFeatureAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_object_in_ClearAssociationAction(std::shared_ptr<ClearAssociationAction> par_ClearAssociationAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_object_in_ReadIsClassifiedObjectAction(std::shared_ptr<ReadIsClassifiedObjectAction> par_ReadIsClassifiedObjectAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_object_in_ReadLinkObjectEndAction(std::shared_ptr<ReadLinkObjectEndAction> par_ReadLinkObjectEndAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_object_in_ReadLinkObjectEndQualifierAction(std::shared_ptr<ReadLinkObjectEndQualifierAction> par_ReadLinkObjectEndQualifierAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_object_in_ReclassifyObjectAction(std::shared_ptr<ReclassifyObjectAction> par_ReclassifyObjectAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_object_in_StartClassifierBehaviorAction(std::shared_ptr<StartClassifierBehaviorAction> par_StartClassifierBehaviorAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_object_in_StartObjectBehaviorAction(std::shared_ptr<StartObjectBehaviorAction> par_StartObjectBehaviorAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_object_in_UnmarshallAction(std::shared_ptr<UnmarshallAction> par_UnmarshallAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_removeAt_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> par_RemoveStructuralFeatureValueAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_removeAt_in_RemoveVariableValueAction(std::shared_ptr<RemoveVariableValueAction> par_RemoveVariableValueAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_replyValue_in_ReplyAction(std::shared_ptr<ReplyAction> par_ReplyAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_request_in_SendObjectAction(std::shared_ptr<SendObjectAction> par_SendObjectAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_returnInformation_in_ReplyAction(std::shared_ptr<ReplyAction> par_ReplyAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_second_in_TestIdentityAction(std::shared_ptr<TestIdentityAction> par_TestIdentityAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_structuredNodeInput_in_StructuredActivityNode(std::shared_ptr<StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_target_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction> par_CallOperationAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_target_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction> par_DestroyObjectAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_target_in_SendObjectAction(std::shared_ptr<SendObjectAction> par_SendObjectAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_target_in_SendSignalAction(std::shared_ptr<SendSignalAction> par_SendSignalAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_value_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> par_WriteStructuralFeatureAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ActionInputPin> createActionInputPin_as_value_in_WriteVariableAction(std::shared_ptr<WriteVariableAction> par_WriteVariableAction, const int metaElementID = umlPackage::ACTIONINPUTPIN_CLASS) const = 0;
 			virtual std::shared_ptr<Activity> createActivity(const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Activity> createActivity_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
-			virtual std::shared_ptr<Activity> createActivity_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
-			virtual std::shared_ptr<Activity> createActivity_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
-			virtual std::shared_ptr<Activity> createActivity_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
-			virtual std::shared_ptr<Activity> createActivity_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
-			virtual std::shared_ptr<Activity> createActivity_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Activity> createActivity_as_doActivity_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_effect_in_Transition(std::shared_ptr<Transition> par_Transition, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_entry_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_exit_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_ownedBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_BehavioredClassifier, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
+			virtual std::shared_ptr<Activity> createActivity_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::ACTIVITY_CLASS) const = 0;
 			virtual std::shared_ptr<ActivityFinalNode> createActivityFinalNode(const int metaElementID = umlPackage::ACTIVITYFINALNODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ActivityFinalNode> createActivityFinalNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::ACTIVITYFINALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ActivityFinalNode> createActivityFinalNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::ACTIVITYFINALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ActivityFinalNode> createActivityFinalNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ACTIVITYFINALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ActivityFinalNode> createActivityFinalNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ACTIVITYFINALNODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ActivityFinalNode> createActivityFinalNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::ACTIVITYFINALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ActivityFinalNode> createActivityFinalNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::ACTIVITYFINALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ActivityFinalNode> createActivityFinalNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ACTIVITYFINALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ActivityFinalNode> createActivityFinalNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ACTIVITYFINALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ActivityFinalNode> createActivityFinalNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::ACTIVITYFINALNODE_CLASS) const = 0;
 			virtual std::shared_ptr<ActivityParameterNode> createActivityParameterNode(const int metaElementID = umlPackage::ACTIVITYPARAMETERNODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ActivityParameterNode> createActivityParameterNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::ACTIVITYPARAMETERNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ActivityParameterNode> createActivityParameterNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::ACTIVITYPARAMETERNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ActivityParameterNode> createActivityParameterNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ACTIVITYPARAMETERNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ActivityParameterNode> createActivityParameterNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ACTIVITYPARAMETERNODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ActivityParameterNode> createActivityParameterNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::ACTIVITYPARAMETERNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ActivityParameterNode> createActivityParameterNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::ACTIVITYPARAMETERNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ActivityParameterNode> createActivityParameterNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ACTIVITYPARAMETERNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ActivityParameterNode> createActivityParameterNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ACTIVITYPARAMETERNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ActivityParameterNode> createActivityParameterNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::ACTIVITYPARAMETERNODE_CLASS) const = 0;
 			virtual std::shared_ptr<ActivityPartition> createActivityPartition(const int metaElementID = umlPackage::ACTIVITYPARTITION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ActivityPartition> createActivityPartition_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID = umlPackage::ACTIVITYPARTITION_CLASS) const = 0;
-			virtual std::shared_ptr<ActivityPartition> createActivityPartition_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ACTIVITYPARTITION_CLASS) const = 0;
-			virtual std::shared_ptr<ActivityPartition> createActivityPartition_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ACTIVITYPARTITION_CLASS) const = 0;
-			virtual std::shared_ptr<ActivityPartition> createActivityPartition_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID = umlPackage::ACTIVITYPARTITION_CLASS) const = 0;
-			virtual std::shared_ptr<ActivityPartition> createActivityPartition_in_SuperPartition(std::weak_ptr<uml::ActivityPartition> par_superPartition, const int metaElementID = umlPackage::ACTIVITYPARTITION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ActivityPartition> createActivityPartition_as_group_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::ACTIVITYPARTITION_CLASS) const = 0;
+			virtual std::shared_ptr<ActivityPartition> createActivityPartition_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ACTIVITYPARTITION_CLASS) const = 0;
+			virtual std::shared_ptr<ActivityPartition> createActivityPartition_as_ownedGroup_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::ACTIVITYPARTITION_CLASS) const = 0;
+			virtual std::shared_ptr<ActivityPartition> createActivityPartition_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ACTIVITYPARTITION_CLASS) const = 0;
+			virtual std::shared_ptr<ActivityPartition> createActivityPartition_as_subgroup_in_ActivityGroup(std::weak_ptr<uml::ActivityGroup> par_ActivityGroup, const int metaElementID = umlPackage::ACTIVITYPARTITION_CLASS) const = 0;
+			virtual std::shared_ptr<ActivityPartition> createActivityPartition_as_subpartition_in_ActivityPartition(std::weak_ptr<uml::ActivityPartition> par_ActivityPartition, const int metaElementID = umlPackage::ACTIVITYPARTITION_CLASS) const = 0;
 			virtual std::shared_ptr<Actor> createActor(const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Actor> createActor_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
-			virtual std::shared_ptr<Actor> createActor_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
-			virtual std::shared_ptr<Actor> createActor_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
-			virtual std::shared_ptr<Actor> createActor_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
-			virtual std::shared_ptr<Actor> createActor_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Actor> createActor_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
+			virtual std::shared_ptr<Actor> createActor_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
+			virtual std::shared_ptr<Actor> createActor_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
+			virtual std::shared_ptr<Actor> createActor_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
+			virtual std::shared_ptr<Actor> createActor_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
+			virtual std::shared_ptr<Actor> createActor_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
+			virtual std::shared_ptr<Actor> createActor_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
+			virtual std::shared_ptr<Actor> createActor_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
+			virtual std::shared_ptr<Actor> createActor_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
+			virtual std::shared_ptr<Actor> createActor_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::ACTOR_CLASS) const = 0;
 			virtual std::shared_ptr<AddStructuralFeatureValueAction> createAddStructuralFeatureValueAction(const int metaElementID = umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<AddStructuralFeatureValueAction> createAddStructuralFeatureValueAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<AddStructuralFeatureValueAction> createAddStructuralFeatureValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<AddStructuralFeatureValueAction> createAddStructuralFeatureValueAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<AddStructuralFeatureValueAction> createAddStructuralFeatureValueAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<AddStructuralFeatureValueAction> createAddStructuralFeatureValueAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddStructuralFeatureValueAction> createAddStructuralFeatureValueAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddStructuralFeatureValueAction> createAddStructuralFeatureValueAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddStructuralFeatureValueAction> createAddStructuralFeatureValueAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddStructuralFeatureValueAction> createAddStructuralFeatureValueAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddStructuralFeatureValueAction> createAddStructuralFeatureValueAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddStructuralFeatureValueAction> createAddStructuralFeatureValueAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddStructuralFeatureValueAction> createAddStructuralFeatureValueAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::ADDSTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
 			virtual std::shared_ptr<AddVariableValueAction> createAddVariableValueAction(const int metaElementID = umlPackage::ADDVARIABLEVALUEACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<AddVariableValueAction> createAddVariableValueAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::ADDVARIABLEVALUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<AddVariableValueAction> createAddVariableValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::ADDVARIABLEVALUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<AddVariableValueAction> createAddVariableValueAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ADDVARIABLEVALUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<AddVariableValueAction> createAddVariableValueAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ADDVARIABLEVALUEACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<AddVariableValueAction> createAddVariableValueAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::ADDVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddVariableValueAction> createAddVariableValueAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::ADDVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddVariableValueAction> createAddVariableValueAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::ADDVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddVariableValueAction> createAddVariableValueAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::ADDVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddVariableValueAction> createAddVariableValueAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::ADDVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddVariableValueAction> createAddVariableValueAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ADDVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddVariableValueAction> createAddVariableValueAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ADDVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<AddVariableValueAction> createAddVariableValueAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::ADDVARIABLEVALUEACTION_CLASS) const = 0;
 			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent(const int metaElementID = umlPackage::ANYRECEIVEEVENT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ANYRECEIVEEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ANYRECEIVEEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::ANYRECEIVEEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::ANYRECEIVEEVENT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::ANYRECEIVEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ANYRECEIVEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ANYRECEIVEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ANYRECEIVEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ANYRECEIVEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ANYRECEIVEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<AnyReceiveEvent> createAnyReceiveEvent_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::ANYRECEIVEEVENT_CLASS) const = 0;
 			virtual std::shared_ptr<Argument> createArgument(const int metaElementID = umlPackage::ARGUMENT_CLASS) const = 0;
-			
 			virtual std::shared_ptr<Artifact> createArtifact(const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Artifact> createArtifact_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
-			virtual std::shared_ptr<Artifact> createArtifact_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
-			virtual std::shared_ptr<Artifact> createArtifact_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
-			virtual std::shared_ptr<Artifact> createArtifact_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
-			virtual std::shared_ptr<Artifact> createArtifact_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Artifact> createArtifact_as_nestedArtifact_in_Artifact(std::shared_ptr<Artifact> par_Artifact, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
+			virtual std::shared_ptr<Artifact> createArtifact_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
+			virtual std::shared_ptr<Artifact> createArtifact_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
+			virtual std::shared_ptr<Artifact> createArtifact_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
+			virtual std::shared_ptr<Artifact> createArtifact_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
+			virtual std::shared_ptr<Artifact> createArtifact_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
+			virtual std::shared_ptr<Artifact> createArtifact_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
+			virtual std::shared_ptr<Artifact> createArtifact_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
+			virtual std::shared_ptr<Artifact> createArtifact_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
+			virtual std::shared_ptr<Artifact> createArtifact_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
+			virtual std::shared_ptr<Artifact> createArtifact_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::ARTIFACT_CLASS) const = 0;
 			virtual std::shared_ptr<Association> createAssociation(const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Association> createAssociation_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
-			virtual std::shared_ptr<Association> createAssociation_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
-			virtual std::shared_ptr<Association> createAssociation_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
-			virtual std::shared_ptr<Association> createAssociation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
-			virtual std::shared_ptr<Association> createAssociation_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Association> createAssociation_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
+			virtual std::shared_ptr<Association> createAssociation_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
+			virtual std::shared_ptr<Association> createAssociation_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
+			virtual std::shared_ptr<Association> createAssociation_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
+			virtual std::shared_ptr<Association> createAssociation_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
+			virtual std::shared_ptr<Association> createAssociation_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
+			virtual std::shared_ptr<Association> createAssociation_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
+			virtual std::shared_ptr<Association> createAssociation_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
+			virtual std::shared_ptr<Association> createAssociation_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
+			virtual std::shared_ptr<Association> createAssociation_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::ASSOCIATION_CLASS) const = 0;
 			virtual std::shared_ptr<AssociationClass> createAssociationClass(const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<AssociationClass> createAssociationClass_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
-			virtual std::shared_ptr<AssociationClass> createAssociationClass_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
-			virtual std::shared_ptr<AssociationClass> createAssociationClass_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
-			virtual std::shared_ptr<AssociationClass> createAssociationClass_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
-			virtual std::shared_ptr<AssociationClass> createAssociationClass_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<AssociationClass> createAssociationClass_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
+			virtual std::shared_ptr<AssociationClass> createAssociationClass_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
+			virtual std::shared_ptr<AssociationClass> createAssociationClass_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
+			virtual std::shared_ptr<AssociationClass> createAssociationClass_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
+			virtual std::shared_ptr<AssociationClass> createAssociationClass_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
+			virtual std::shared_ptr<AssociationClass> createAssociationClass_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
+			virtual std::shared_ptr<AssociationClass> createAssociationClass_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
+			virtual std::shared_ptr<AssociationClass> createAssociationClass_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
+			virtual std::shared_ptr<AssociationClass> createAssociationClass_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
+			virtual std::shared_ptr<AssociationClass> createAssociationClass_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::ASSOCIATIONCLASS_CLASS) const = 0;
 			virtual std::shared_ptr<BehaviorExecutionSpecification> createBehaviorExecutionSpecification(const int metaElementID = umlPackage::BEHAVIOREXECUTIONSPECIFICATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<BehaviorExecutionSpecification> createBehaviorExecutionSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::BEHAVIOREXECUTIONSPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<BehaviorExecutionSpecification> createBehaviorExecutionSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::BEHAVIOREXECUTIONSPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<BehaviorExecutionSpecification> createBehaviorExecutionSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::BEHAVIOREXECUTIONSPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<BehaviorExecutionSpecification> createBehaviorExecutionSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::BEHAVIOREXECUTIONSPECIFICATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<BehaviorExecutionSpecification> createBehaviorExecutionSpecification_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::BEHAVIOREXECUTIONSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<BehaviorExecutionSpecification> createBehaviorExecutionSpecification_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::BEHAVIOREXECUTIONSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<BehaviorExecutionSpecification> createBehaviorExecutionSpecification_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::BEHAVIOREXECUTIONSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<BehaviorExecutionSpecification> createBehaviorExecutionSpecification_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::BEHAVIOREXECUTIONSPECIFICATION_CLASS) const = 0;
 			virtual std::shared_ptr<BroadcastSignalAction> createBroadcastSignalAction(const int metaElementID = umlPackage::BROADCASTSIGNALACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<BroadcastSignalAction> createBroadcastSignalAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::BROADCASTSIGNALACTION_CLASS) const = 0;
-			virtual std::shared_ptr<BroadcastSignalAction> createBroadcastSignalAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::BROADCASTSIGNALACTION_CLASS) const = 0;
-			virtual std::shared_ptr<BroadcastSignalAction> createBroadcastSignalAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::BROADCASTSIGNALACTION_CLASS) const = 0;
-			virtual std::shared_ptr<BroadcastSignalAction> createBroadcastSignalAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::BROADCASTSIGNALACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<BroadcastSignalAction> createBroadcastSignalAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::BROADCASTSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<BroadcastSignalAction> createBroadcastSignalAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::BROADCASTSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<BroadcastSignalAction> createBroadcastSignalAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::BROADCASTSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<BroadcastSignalAction> createBroadcastSignalAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::BROADCASTSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<BroadcastSignalAction> createBroadcastSignalAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::BROADCASTSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<BroadcastSignalAction> createBroadcastSignalAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::BROADCASTSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<BroadcastSignalAction> createBroadcastSignalAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::BROADCASTSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<BroadcastSignalAction> createBroadcastSignalAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::BROADCASTSIGNALACTION_CLASS) const = 0;
 			virtual std::shared_ptr<CallBehaviorAction> createCallBehaviorAction(const int metaElementID = umlPackage::CALLBEHAVIORACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<CallBehaviorAction> createCallBehaviorAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::CALLBEHAVIORACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CallBehaviorAction> createCallBehaviorAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::CALLBEHAVIORACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CallBehaviorAction> createCallBehaviorAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CALLBEHAVIORACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CallBehaviorAction> createCallBehaviorAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CALLBEHAVIORACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<CallBehaviorAction> createCallBehaviorAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::CALLBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallBehaviorAction> createCallBehaviorAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::CALLBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallBehaviorAction> createCallBehaviorAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::CALLBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallBehaviorAction> createCallBehaviorAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::CALLBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallBehaviorAction> createCallBehaviorAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::CALLBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallBehaviorAction> createCallBehaviorAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CALLBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallBehaviorAction> createCallBehaviorAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CALLBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallBehaviorAction> createCallBehaviorAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::CALLBEHAVIORACTION_CLASS) const = 0;
 			virtual std::shared_ptr<CallEvent> createCallEvent(const int metaElementID = umlPackage::CALLEVENT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<CallEvent> createCallEvent_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CALLEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<CallEvent> createCallEvent_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CALLEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<CallEvent> createCallEvent_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::CALLEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<CallEvent> createCallEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::CALLEVENT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<CallEvent> createCallEvent_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::CALLEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<CallEvent> createCallEvent_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::CALLEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<CallEvent> createCallEvent_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CALLEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<CallEvent> createCallEvent_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CALLEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<CallEvent> createCallEvent_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::CALLEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<CallEvent> createCallEvent_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::CALLEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<CallEvent> createCallEvent_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::CALLEVENT_CLASS) const = 0;
 			virtual std::shared_ptr<CallOperationAction> createCallOperationAction(const int metaElementID = umlPackage::CALLOPERATIONACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<CallOperationAction> createCallOperationAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::CALLOPERATIONACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CallOperationAction> createCallOperationAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::CALLOPERATIONACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CallOperationAction> createCallOperationAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CALLOPERATIONACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CallOperationAction> createCallOperationAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CALLOPERATIONACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<CallOperationAction> createCallOperationAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::CALLOPERATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallOperationAction> createCallOperationAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::CALLOPERATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallOperationAction> createCallOperationAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::CALLOPERATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallOperationAction> createCallOperationAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::CALLOPERATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallOperationAction> createCallOperationAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::CALLOPERATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallOperationAction> createCallOperationAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CALLOPERATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallOperationAction> createCallOperationAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CALLOPERATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CallOperationAction> createCallOperationAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::CALLOPERATIONACTION_CLASS) const = 0;
 			virtual std::shared_ptr<CentralBufferNode> createCentralBufferNode(const int metaElementID = umlPackage::CENTRALBUFFERNODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<CentralBufferNode> createCentralBufferNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::CENTRALBUFFERNODE_CLASS) const = 0;
-			virtual std::shared_ptr<CentralBufferNode> createCentralBufferNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::CENTRALBUFFERNODE_CLASS) const = 0;
-			virtual std::shared_ptr<CentralBufferNode> createCentralBufferNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CENTRALBUFFERNODE_CLASS) const = 0;
-			virtual std::shared_ptr<CentralBufferNode> createCentralBufferNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CENTRALBUFFERNODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<CentralBufferNode> createCentralBufferNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::CENTRALBUFFERNODE_CLASS) const = 0;
+			virtual std::shared_ptr<CentralBufferNode> createCentralBufferNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::CENTRALBUFFERNODE_CLASS) const = 0;
+			virtual std::shared_ptr<CentralBufferNode> createCentralBufferNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CENTRALBUFFERNODE_CLASS) const = 0;
+			virtual std::shared_ptr<CentralBufferNode> createCentralBufferNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CENTRALBUFFERNODE_CLASS) const = 0;
+			virtual std::shared_ptr<CentralBufferNode> createCentralBufferNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::CENTRALBUFFERNODE_CLASS) const = 0;
 			virtual std::shared_ptr<ChangeEvent> createChangeEvent(const int metaElementID = umlPackage::CHANGEEVENT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ChangeEvent> createChangeEvent_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CHANGEEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<ChangeEvent> createChangeEvent_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CHANGEEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<ChangeEvent> createChangeEvent_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::CHANGEEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<ChangeEvent> createChangeEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::CHANGEEVENT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ChangeEvent> createChangeEvent_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::CHANGEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<ChangeEvent> createChangeEvent_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::CHANGEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<ChangeEvent> createChangeEvent_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CHANGEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<ChangeEvent> createChangeEvent_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CHANGEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<ChangeEvent> createChangeEvent_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::CHANGEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<ChangeEvent> createChangeEvent_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::CHANGEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<ChangeEvent> createChangeEvent_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::CHANGEEVENT_CLASS) const = 0;
 			virtual std::shared_ptr<Class> createClass(const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Class> createClass_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
-			virtual std::shared_ptr<Class> createClass_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
-			virtual std::shared_ptr<Class> createClass_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
-			virtual std::shared_ptr<Class> createClass_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
-			virtual std::shared_ptr<Class> createClass_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Class> createClass_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
+			virtual std::shared_ptr<Class> createClass_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
+			virtual std::shared_ptr<Class> createClass_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
+			virtual std::shared_ptr<Class> createClass_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
+			virtual std::shared_ptr<Class> createClass_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
+			virtual std::shared_ptr<Class> createClass_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
+			virtual std::shared_ptr<Class> createClass_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
+			virtual std::shared_ptr<Class> createClass_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
+			virtual std::shared_ptr<Class> createClass_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
+			virtual std::shared_ptr<Class> createClass_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::CLASS_CLASS) const = 0;
 			virtual std::shared_ptr<ClassifierTemplateParameter> createClassifierTemplateParameter(const int metaElementID = umlPackage::CLASSIFIERTEMPLATEPARAMETER_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ClassifierTemplateParameter> createClassifierTemplateParameter_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CLASSIFIERTEMPLATEPARAMETER_CLASS) const = 0;
-			virtual std::shared_ptr<ClassifierTemplateParameter> createClassifierTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature> par_signature, const int metaElementID = umlPackage::CLASSIFIERTEMPLATEPARAMETER_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ClassifierTemplateParameter> createClassifierTemplateParameter_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CLASSIFIERTEMPLATEPARAMETER_CLASS) const = 0;
+			virtual std::shared_ptr<ClassifierTemplateParameter> createClassifierTemplateParameter_as_ownedParameter_in_TemplateSignature(std::weak_ptr<uml::TemplateSignature> par_TemplateSignature, const int metaElementID = umlPackage::CLASSIFIERTEMPLATEPARAMETER_CLASS) const = 0;
 			virtual std::shared_ptr<Clause> createClause(const int metaElementID = umlPackage::CLAUSE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Clause> createClause_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CLAUSE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Clause> createClause_as_clause_in_ConditionalNode(std::shared_ptr<ConditionalNode> par_ConditionalNode, const int metaElementID = umlPackage::CLAUSE_CLASS) const = 0;
+			virtual std::shared_ptr<Clause> createClause_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CLAUSE_CLASS) const = 0;
 			virtual std::shared_ptr<ClearAssociationAction> createClearAssociationAction(const int metaElementID = umlPackage::CLEARASSOCIATIONACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ClearAssociationAction> createClearAssociationAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::CLEARASSOCIATIONACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ClearAssociationAction> createClearAssociationAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::CLEARASSOCIATIONACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ClearAssociationAction> createClearAssociationAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CLEARASSOCIATIONACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ClearAssociationAction> createClearAssociationAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CLEARASSOCIATIONACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ClearAssociationAction> createClearAssociationAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::CLEARASSOCIATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearAssociationAction> createClearAssociationAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::CLEARASSOCIATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearAssociationAction> createClearAssociationAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::CLEARASSOCIATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearAssociationAction> createClearAssociationAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::CLEARASSOCIATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearAssociationAction> createClearAssociationAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::CLEARASSOCIATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearAssociationAction> createClearAssociationAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CLEARASSOCIATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearAssociationAction> createClearAssociationAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CLEARASSOCIATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearAssociationAction> createClearAssociationAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::CLEARASSOCIATIONACTION_CLASS) const = 0;
 			virtual std::shared_ptr<ClearStructuralFeatureAction> createClearStructuralFeatureAction(const int metaElementID = umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ClearStructuralFeatureAction> createClearStructuralFeatureAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ClearStructuralFeatureAction> createClearStructuralFeatureAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ClearStructuralFeatureAction> createClearStructuralFeatureAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ClearStructuralFeatureAction> createClearStructuralFeatureAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ClearStructuralFeatureAction> createClearStructuralFeatureAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearStructuralFeatureAction> createClearStructuralFeatureAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearStructuralFeatureAction> createClearStructuralFeatureAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearStructuralFeatureAction> createClearStructuralFeatureAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearStructuralFeatureAction> createClearStructuralFeatureAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearStructuralFeatureAction> createClearStructuralFeatureAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearStructuralFeatureAction> createClearStructuralFeatureAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearStructuralFeatureAction> createClearStructuralFeatureAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::CLEARSTRUCTURALFEATUREACTION_CLASS) const = 0;
 			virtual std::shared_ptr<ClearVariableAction> createClearVariableAction(const int metaElementID = umlPackage::CLEARVARIABLEACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ClearVariableAction> createClearVariableAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::CLEARVARIABLEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ClearVariableAction> createClearVariableAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::CLEARVARIABLEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ClearVariableAction> createClearVariableAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CLEARVARIABLEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ClearVariableAction> createClearVariableAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CLEARVARIABLEACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ClearVariableAction> createClearVariableAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::CLEARVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearVariableAction> createClearVariableAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::CLEARVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearVariableAction> createClearVariableAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::CLEARVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearVariableAction> createClearVariableAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::CLEARVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearVariableAction> createClearVariableAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::CLEARVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearVariableAction> createClearVariableAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CLEARVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearVariableAction> createClearVariableAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CLEARVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ClearVariableAction> createClearVariableAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::CLEARVARIABLEACTION_CLASS) const = 0;
 			virtual std::shared_ptr<Collaboration> createCollaboration(const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Collaboration> createCollaboration_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
-			virtual std::shared_ptr<Collaboration> createCollaboration_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
-			virtual std::shared_ptr<Collaboration> createCollaboration_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
-			virtual std::shared_ptr<Collaboration> createCollaboration_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
-			virtual std::shared_ptr<Collaboration> createCollaboration_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Collaboration> createCollaboration_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
+			virtual std::shared_ptr<Collaboration> createCollaboration_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
+			virtual std::shared_ptr<Collaboration> createCollaboration_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
+			virtual std::shared_ptr<Collaboration> createCollaboration_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
+			virtual std::shared_ptr<Collaboration> createCollaboration_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
+			virtual std::shared_ptr<Collaboration> createCollaboration_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
+			virtual std::shared_ptr<Collaboration> createCollaboration_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
+			virtual std::shared_ptr<Collaboration> createCollaboration_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
+			virtual std::shared_ptr<Collaboration> createCollaboration_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
+			virtual std::shared_ptr<Collaboration> createCollaboration_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::COLLABORATION_CLASS) const = 0;
 			virtual std::shared_ptr<CollaborationUse> createCollaborationUse(const int metaElementID = umlPackage::COLLABORATIONUSE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<CollaborationUse> createCollaborationUse_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::COLLABORATIONUSE_CLASS) const = 0;
-			virtual std::shared_ptr<CollaborationUse> createCollaborationUse_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::COLLABORATIONUSE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<CollaborationUse> createCollaborationUse_as_collaborationUse_in_Classifier(std::shared_ptr<Classifier> par_Classifier, const int metaElementID = umlPackage::COLLABORATIONUSE_CLASS) const = 0;
+			virtual std::shared_ptr<CollaborationUse> createCollaborationUse_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::COLLABORATIONUSE_CLASS) const = 0;
+			virtual std::shared_ptr<CollaborationUse> createCollaborationUse_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::COLLABORATIONUSE_CLASS) const = 0;
 			virtual std::shared_ptr<CombinedFragment> createCombinedFragment(const int metaElementID = umlPackage::COMBINEDFRAGMENT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<CombinedFragment> createCombinedFragment_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::COMBINEDFRAGMENT_CLASS) const = 0;
-			virtual std::shared_ptr<CombinedFragment> createCombinedFragment_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::COMBINEDFRAGMENT_CLASS) const = 0;
-			virtual std::shared_ptr<CombinedFragment> createCombinedFragment_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::COMBINEDFRAGMENT_CLASS) const = 0;
-			virtual std::shared_ptr<CombinedFragment> createCombinedFragment_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::COMBINEDFRAGMENT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<CombinedFragment> createCombinedFragment_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::COMBINEDFRAGMENT_CLASS) const = 0;
+			virtual std::shared_ptr<CombinedFragment> createCombinedFragment_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::COMBINEDFRAGMENT_CLASS) const = 0;
+			virtual std::shared_ptr<CombinedFragment> createCombinedFragment_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::COMBINEDFRAGMENT_CLASS) const = 0;
+			virtual std::shared_ptr<CombinedFragment> createCombinedFragment_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::COMBINEDFRAGMENT_CLASS) const = 0;
 			virtual std::shared_ptr<Comment> createComment(const int metaElementID = umlPackage::COMMENT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Comment> createComment_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::COMMENT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Comment> createComment_as_ownedComment_in_Element(std::shared_ptr<Element> par_Element, const int metaElementID = umlPackage::COMMENT_CLASS) const = 0;
+			virtual std::shared_ptr<Comment> createComment_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::COMMENT_CLASS) const = 0;
 			virtual std::shared_ptr<CommunicationPath> createCommunicationPath(const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
-			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
-			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
-			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
-			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
+			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
+			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
+			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
+			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
+			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
+			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
+			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
+			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
+			virtual std::shared_ptr<CommunicationPath> createCommunicationPath_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::COMMUNICATIONPATH_CLASS) const = 0;
 			virtual std::shared_ptr<Component> createComponent(const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Component> createComponent_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
-			virtual std::shared_ptr<Component> createComponent_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
-			virtual std::shared_ptr<Component> createComponent_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
-			virtual std::shared_ptr<Component> createComponent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
-			virtual std::shared_ptr<Component> createComponent_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Component> createComponent_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
+			virtual std::shared_ptr<Component> createComponent_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
+			virtual std::shared_ptr<Component> createComponent_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
+			virtual std::shared_ptr<Component> createComponent_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
+			virtual std::shared_ptr<Component> createComponent_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
+			virtual std::shared_ptr<Component> createComponent_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
+			virtual std::shared_ptr<Component> createComponent_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
+			virtual std::shared_ptr<Component> createComponent_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
+			virtual std::shared_ptr<Component> createComponent_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
+			virtual std::shared_ptr<Component> createComponent_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::COMPONENT_CLASS) const = 0;
 			virtual std::shared_ptr<ComponentRealization> createComponentRealization(const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ComponentRealization> createComponentRealization_in_Abstraction(std::weak_ptr<uml::Component> par_abstraction, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
-			virtual std::shared_ptr<ComponentRealization> createComponentRealization_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
-			virtual std::shared_ptr<ComponentRealization> createComponentRealization_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
-			virtual std::shared_ptr<ComponentRealization> createComponentRealization_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
-			virtual std::shared_ptr<ComponentRealization> createComponentRealization_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ComponentRealization> createComponentRealization_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<ComponentRealization> createComponentRealization_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<ComponentRealization> createComponentRealization_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<ComponentRealization> createComponentRealization_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<ComponentRealization> createComponentRealization_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<ComponentRealization> createComponentRealization_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<ComponentRealization> createComponentRealization_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<ComponentRealization> createComponentRealization_as_realization_in_Component(std::weak_ptr<uml::Component> par_Component, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<ComponentRealization> createComponentRealization_as_roleBinding_in_CollaborationUse(std::shared_ptr<CollaborationUse> par_CollaborationUse, const int metaElementID = umlPackage::COMPONENTREALIZATION_CLASS) const = 0;
 			virtual std::shared_ptr<ConditionalNode> createConditionalNode(const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ConditionalNode> createConditionalNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ConditionalNode> createConditionalNode_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ConditionalNode> createConditionalNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ConditionalNode> createConditionalNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ConditionalNode> createConditionalNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ConditionalNode> createConditionalNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ConditionalNode> createConditionalNode_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ConditionalNode> createConditionalNode_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ConditionalNode> createConditionalNode_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ConditionalNode> createConditionalNode_as_group_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ConditionalNode> createConditionalNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ConditionalNode> createConditionalNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ConditionalNode> createConditionalNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ConditionalNode> createConditionalNode_as_ownedGroup_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ConditionalNode> createConditionalNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ConditionalNode> createConditionalNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ConditionalNode> createConditionalNode_as_structuredNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ConditionalNode> createConditionalNode_as_subgroup_in_ActivityGroup(std::weak_ptr<uml::ActivityGroup> par_ActivityGroup, const int metaElementID = umlPackage::CONDITIONALNODE_CLASS) const = 0;
 			virtual std::shared_ptr<ConnectableElementTemplateParameter> createConnectableElementTemplateParameter(const int metaElementID = umlPackage::CONNECTABLEELEMENTTEMPLATEPARAMETER_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ConnectableElementTemplateParameter> createConnectableElementTemplateParameter_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CONNECTABLEELEMENTTEMPLATEPARAMETER_CLASS) const = 0;
-			virtual std::shared_ptr<ConnectableElementTemplateParameter> createConnectableElementTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature> par_signature, const int metaElementID = umlPackage::CONNECTABLEELEMENTTEMPLATEPARAMETER_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ConnectableElementTemplateParameter> createConnectableElementTemplateParameter_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CONNECTABLEELEMENTTEMPLATEPARAMETER_CLASS) const = 0;
+			virtual std::shared_ptr<ConnectableElementTemplateParameter> createConnectableElementTemplateParameter_as_ownedParameter_in_TemplateSignature(std::weak_ptr<uml::TemplateSignature> par_TemplateSignature, const int metaElementID = umlPackage::CONNECTABLEELEMENTTEMPLATEPARAMETER_CLASS) const = 0;
 			virtual std::shared_ptr<ConnectionPointReference> createConnectionPointReference(const int metaElementID = umlPackage::CONNECTIONPOINTREFERENCE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ConnectionPointReference> createConnectionPointReference_in_Container(std::weak_ptr<uml::Region> par_container, const int metaElementID = umlPackage::CONNECTIONPOINTREFERENCE_CLASS) const = 0;
-			virtual std::shared_ptr<ConnectionPointReference> createConnectionPointReference_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CONNECTIONPOINTREFERENCE_CLASS) const = 0;
-			virtual std::shared_ptr<ConnectionPointReference> createConnectionPointReference_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CONNECTIONPOINTREFERENCE_CLASS) const = 0;
-			virtual std::shared_ptr<ConnectionPointReference> createConnectionPointReference_in_State(std::weak_ptr<uml::State> par_state, const int metaElementID = umlPackage::CONNECTIONPOINTREFERENCE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ConnectionPointReference> createConnectionPointReference_as_connection_in_State(std::weak_ptr<uml::State> par_State, const int metaElementID = umlPackage::CONNECTIONPOINTREFERENCE_CLASS) const = 0;
+			virtual std::shared_ptr<ConnectionPointReference> createConnectionPointReference_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CONNECTIONPOINTREFERENCE_CLASS) const = 0;
+			virtual std::shared_ptr<ConnectionPointReference> createConnectionPointReference_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CONNECTIONPOINTREFERENCE_CLASS) const = 0;
+			virtual std::shared_ptr<ConnectionPointReference> createConnectionPointReference_as_subvertex_in_Region(std::weak_ptr<uml::Region> par_Region, const int metaElementID = umlPackage::CONNECTIONPOINTREFERENCE_CLASS) const = 0;
 			virtual std::shared_ptr<Connector> createConnector(const int metaElementID = umlPackage::CONNECTOR_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Connector> createConnector_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CONNECTOR_CLASS) const = 0;
-			virtual std::shared_ptr<Connector> createConnector_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CONNECTOR_CLASS) const = 0;
-			virtual std::shared_ptr<Connector> createConnector_in_StructuredClassifier(std::weak_ptr<uml::StructuredClassifier> par_structuredClassifier, const int metaElementID = umlPackage::CONNECTOR_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Connector> createConnector_as_ownedConnector_in_StructuredClassifier(std::weak_ptr<uml::StructuredClassifier> par_StructuredClassifier, const int metaElementID = umlPackage::CONNECTOR_CLASS) const = 0;
+			virtual std::shared_ptr<Connector> createConnector_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CONNECTOR_CLASS) const = 0;
+			virtual std::shared_ptr<Connector> createConnector_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CONNECTOR_CLASS) const = 0;
 			virtual std::shared_ptr<ConnectorEnd> createConnectorEnd(const int metaElementID = umlPackage::CONNECTOREND_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ConnectorEnd> createConnectorEnd_in_Connector(std::weak_ptr<uml::Connector> par_connector, const int metaElementID = umlPackage::CONNECTOREND_CLASS) const = 0;
-			virtual std::shared_ptr<ConnectorEnd> createConnectorEnd_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CONNECTOREND_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ConnectorEnd> createConnectorEnd_as_end_in_Connector(std::weak_ptr<uml::Connector> par_Connector, const int metaElementID = umlPackage::CONNECTOREND_CLASS) const = 0;
+			virtual std::shared_ptr<ConnectorEnd> createConnectorEnd_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CONNECTOREND_CLASS) const = 0;
 			virtual std::shared_ptr<ConsiderIgnoreFragment> createConsiderIgnoreFragment(const int metaElementID = umlPackage::CONSIDERIGNOREFRAGMENT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ConsiderIgnoreFragment> createConsiderIgnoreFragment_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::CONSIDERIGNOREFRAGMENT_CLASS) const = 0;
-			virtual std::shared_ptr<ConsiderIgnoreFragment> createConsiderIgnoreFragment_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::CONSIDERIGNOREFRAGMENT_CLASS) const = 0;
-			virtual std::shared_ptr<ConsiderIgnoreFragment> createConsiderIgnoreFragment_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CONSIDERIGNOREFRAGMENT_CLASS) const = 0;
-			virtual std::shared_ptr<ConsiderIgnoreFragment> createConsiderIgnoreFragment_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CONSIDERIGNOREFRAGMENT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ConsiderIgnoreFragment> createConsiderIgnoreFragment_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::CONSIDERIGNOREFRAGMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ConsiderIgnoreFragment> createConsiderIgnoreFragment_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::CONSIDERIGNOREFRAGMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ConsiderIgnoreFragment> createConsiderIgnoreFragment_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CONSIDERIGNOREFRAGMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ConsiderIgnoreFragment> createConsiderIgnoreFragment_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CONSIDERIGNOREFRAGMENT_CLASS) const = 0;
 			virtual std::shared_ptr<Constraint> createConstraint(const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Constraint> createConstraint_in_Context(std::weak_ptr<uml::Namespace> par_context, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<Constraint> createConstraint_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<Constraint> createConstraint_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<Constraint> createConstraint_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<Constraint> createConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Constraint> createConstraint_as_condition_in_ParameterSet(std::shared_ptr<ParameterSet> par_ParameterSet, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<Constraint> createConstraint_as_condition_in_Extend(std::shared_ptr<Extend> par_Extend, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<Constraint> createConstraint_as_invariant_in_StateInvariant(std::shared_ptr<StateInvariant> par_StateInvariant, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<Constraint> createConstraint_as_localPostcondition_in_Action(std::shared_ptr<Action> par_Action, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<Constraint> createConstraint_as_localPrecondition_in_Action(std::shared_ptr<Action> par_Action, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<Constraint> createConstraint_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<Constraint> createConstraint_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<Constraint> createConstraint_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<Constraint> createConstraint_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<Constraint> createConstraint_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<Constraint> createConstraint_as_ownedRule_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<Constraint> createConstraint_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<Constraint> createConstraint_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::CONSTRAINT_CLASS) const = 0;
 			virtual std::shared_ptr<Continuation> createContinuation(const int metaElementID = umlPackage::CONTINUATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Continuation> createContinuation_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::CONTINUATION_CLASS) const = 0;
-			virtual std::shared_ptr<Continuation> createContinuation_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::CONTINUATION_CLASS) const = 0;
-			virtual std::shared_ptr<Continuation> createContinuation_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CONTINUATION_CLASS) const = 0;
-			virtual std::shared_ptr<Continuation> createContinuation_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CONTINUATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Continuation> createContinuation_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::CONTINUATION_CLASS) const = 0;
+			virtual std::shared_ptr<Continuation> createContinuation_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::CONTINUATION_CLASS) const = 0;
+			virtual std::shared_ptr<Continuation> createContinuation_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CONTINUATION_CLASS) const = 0;
+			virtual std::shared_ptr<Continuation> createContinuation_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CONTINUATION_CLASS) const = 0;
 			virtual std::shared_ptr<ControlFlow> createControlFlow(const int metaElementID = umlPackage::CONTROLFLOW_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ControlFlow> createControlFlow_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::CONTROLFLOW_CLASS) const = 0;
-			virtual std::shared_ptr<ControlFlow> createControlFlow_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::CONTROLFLOW_CLASS) const = 0;
-			virtual std::shared_ptr<ControlFlow> createControlFlow_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CONTROLFLOW_CLASS) const = 0;
-			virtual std::shared_ptr<ControlFlow> createControlFlow_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CONTROLFLOW_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ControlFlow> createControlFlow_as_edge_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::CONTROLFLOW_CLASS) const = 0;
+			virtual std::shared_ptr<ControlFlow> createControlFlow_as_edge_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::CONTROLFLOW_CLASS) const = 0;
+			virtual std::shared_ptr<ControlFlow> createControlFlow_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CONTROLFLOW_CLASS) const = 0;
+			virtual std::shared_ptr<ControlFlow> createControlFlow_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CONTROLFLOW_CLASS) const = 0;
 			virtual std::shared_ptr<CreateLinkAction> createCreateLinkAction(const int metaElementID = umlPackage::CREATELINKACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<CreateLinkAction> createCreateLinkAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::CREATELINKACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CreateLinkAction> createCreateLinkAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::CREATELINKACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CreateLinkAction> createCreateLinkAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CREATELINKACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CreateLinkAction> createCreateLinkAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CREATELINKACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<CreateLinkAction> createCreateLinkAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::CREATELINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkAction> createCreateLinkAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::CREATELINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkAction> createCreateLinkAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::CREATELINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkAction> createCreateLinkAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::CREATELINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkAction> createCreateLinkAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::CREATELINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkAction> createCreateLinkAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CREATELINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkAction> createCreateLinkAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CREATELINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkAction> createCreateLinkAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::CREATELINKACTION_CLASS) const = 0;
 			virtual std::shared_ptr<CreateLinkObjectAction> createCreateLinkObjectAction(const int metaElementID = umlPackage::CREATELINKOBJECTACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<CreateLinkObjectAction> createCreateLinkObjectAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::CREATELINKOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CreateLinkObjectAction> createCreateLinkObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::CREATELINKOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CreateLinkObjectAction> createCreateLinkObjectAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CREATELINKOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CreateLinkObjectAction> createCreateLinkObjectAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CREATELINKOBJECTACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<CreateLinkObjectAction> createCreateLinkObjectAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::CREATELINKOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkObjectAction> createCreateLinkObjectAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::CREATELINKOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkObjectAction> createCreateLinkObjectAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::CREATELINKOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkObjectAction> createCreateLinkObjectAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::CREATELINKOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkObjectAction> createCreateLinkObjectAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::CREATELINKOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkObjectAction> createCreateLinkObjectAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CREATELINKOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkObjectAction> createCreateLinkObjectAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CREATELINKOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateLinkObjectAction> createCreateLinkObjectAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::CREATELINKOBJECTACTION_CLASS) const = 0;
 			virtual std::shared_ptr<CreateObjectAction> createCreateObjectAction(const int metaElementID = umlPackage::CREATEOBJECTACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<CreateObjectAction> createCreateObjectAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::CREATEOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CreateObjectAction> createCreateObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::CREATEOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CreateObjectAction> createCreateObjectAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::CREATEOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<CreateObjectAction> createCreateObjectAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::CREATEOBJECTACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<CreateObjectAction> createCreateObjectAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::CREATEOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateObjectAction> createCreateObjectAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::CREATEOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateObjectAction> createCreateObjectAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::CREATEOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateObjectAction> createCreateObjectAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::CREATEOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateObjectAction> createCreateObjectAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::CREATEOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateObjectAction> createCreateObjectAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::CREATEOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateObjectAction> createCreateObjectAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::CREATEOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<CreateObjectAction> createCreateObjectAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::CREATEOBJECTACTION_CLASS) const = 0;
 			virtual std::shared_ptr<DataStoreNode> createDataStoreNode(const int metaElementID = umlPackage::DATASTORENODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<DataStoreNode> createDataStoreNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::DATASTORENODE_CLASS) const = 0;
-			virtual std::shared_ptr<DataStoreNode> createDataStoreNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::DATASTORENODE_CLASS) const = 0;
-			virtual std::shared_ptr<DataStoreNode> createDataStoreNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DATASTORENODE_CLASS) const = 0;
-			virtual std::shared_ptr<DataStoreNode> createDataStoreNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DATASTORENODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<DataStoreNode> createDataStoreNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::DATASTORENODE_CLASS) const = 0;
+			virtual std::shared_ptr<DataStoreNode> createDataStoreNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::DATASTORENODE_CLASS) const = 0;
+			virtual std::shared_ptr<DataStoreNode> createDataStoreNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DATASTORENODE_CLASS) const = 0;
+			virtual std::shared_ptr<DataStoreNode> createDataStoreNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DATASTORENODE_CLASS) const = 0;
+			virtual std::shared_ptr<DataStoreNode> createDataStoreNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::DATASTORENODE_CLASS) const = 0;
 			virtual std::shared_ptr<DataType> createDataType(const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<DataType> createDataType_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
-			virtual std::shared_ptr<DataType> createDataType_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
-			virtual std::shared_ptr<DataType> createDataType_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
-			virtual std::shared_ptr<DataType> createDataType_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
-			virtual std::shared_ptr<DataType> createDataType_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<DataType> createDataType_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
+			virtual std::shared_ptr<DataType> createDataType_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
+			virtual std::shared_ptr<DataType> createDataType_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
+			virtual std::shared_ptr<DataType> createDataType_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
+			virtual std::shared_ptr<DataType> createDataType_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
+			virtual std::shared_ptr<DataType> createDataType_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
+			virtual std::shared_ptr<DataType> createDataType_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
+			virtual std::shared_ptr<DataType> createDataType_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
+			virtual std::shared_ptr<DataType> createDataType_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
+			virtual std::shared_ptr<DataType> createDataType_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::DATATYPE_CLASS) const = 0;
 			virtual std::shared_ptr<DecisionNode> createDecisionNode(const int metaElementID = umlPackage::DECISIONNODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<DecisionNode> createDecisionNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::DECISIONNODE_CLASS) const = 0;
-			virtual std::shared_ptr<DecisionNode> createDecisionNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::DECISIONNODE_CLASS) const = 0;
-			virtual std::shared_ptr<DecisionNode> createDecisionNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DECISIONNODE_CLASS) const = 0;
-			virtual std::shared_ptr<DecisionNode> createDecisionNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DECISIONNODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<DecisionNode> createDecisionNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::DECISIONNODE_CLASS) const = 0;
+			virtual std::shared_ptr<DecisionNode> createDecisionNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::DECISIONNODE_CLASS) const = 0;
+			virtual std::shared_ptr<DecisionNode> createDecisionNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DECISIONNODE_CLASS) const = 0;
+			virtual std::shared_ptr<DecisionNode> createDecisionNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DECISIONNODE_CLASS) const = 0;
+			virtual std::shared_ptr<DecisionNode> createDecisionNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::DECISIONNODE_CLASS) const = 0;
 			virtual std::shared_ptr<Dependency> createDependency(const int metaElementID = umlPackage::DEPENDENCY_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Dependency> createDependency_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DEPENDENCY_CLASS) const = 0;
-			virtual std::shared_ptr<Dependency> createDependency_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DEPENDENCY_CLASS) const = 0;
-			virtual std::shared_ptr<Dependency> createDependency_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::DEPENDENCY_CLASS) const = 0;
-			virtual std::shared_ptr<Dependency> createDependency_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::DEPENDENCY_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Dependency> createDependency_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::DEPENDENCY_CLASS) const = 0;
+			virtual std::shared_ptr<Dependency> createDependency_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DEPENDENCY_CLASS) const = 0;
+			virtual std::shared_ptr<Dependency> createDependency_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DEPENDENCY_CLASS) const = 0;
+			virtual std::shared_ptr<Dependency> createDependency_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DEPENDENCY_CLASS) const = 0;
+			virtual std::shared_ptr<Dependency> createDependency_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DEPENDENCY_CLASS) const = 0;
+			virtual std::shared_ptr<Dependency> createDependency_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::DEPENDENCY_CLASS) const = 0;
+			virtual std::shared_ptr<Dependency> createDependency_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::DEPENDENCY_CLASS) const = 0;
+			virtual std::shared_ptr<Dependency> createDependency_as_roleBinding_in_CollaborationUse(std::shared_ptr<CollaborationUse> par_CollaborationUse, const int metaElementID = umlPackage::DEPENDENCY_CLASS) const = 0;
 			virtual std::shared_ptr<Deployment> createDeployment(const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Deployment> createDeployment_in_Location(std::weak_ptr<uml::DeploymentTarget> par_location, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
-			virtual std::shared_ptr<Deployment> createDeployment_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
-			virtual std::shared_ptr<Deployment> createDeployment_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
-			virtual std::shared_ptr<Deployment> createDeployment_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
-			virtual std::shared_ptr<Deployment> createDeployment_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Deployment> createDeployment_as_deployment_in_DeploymentTarget(std::weak_ptr<uml::DeploymentTarget> par_DeploymentTarget, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
+			virtual std::shared_ptr<Deployment> createDeployment_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
+			virtual std::shared_ptr<Deployment> createDeployment_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
+			virtual std::shared_ptr<Deployment> createDeployment_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
+			virtual std::shared_ptr<Deployment> createDeployment_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
+			virtual std::shared_ptr<Deployment> createDeployment_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
+			virtual std::shared_ptr<Deployment> createDeployment_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
+			virtual std::shared_ptr<Deployment> createDeployment_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
+			virtual std::shared_ptr<Deployment> createDeployment_as_roleBinding_in_CollaborationUse(std::shared_ptr<CollaborationUse> par_CollaborationUse, const int metaElementID = umlPackage::DEPLOYMENT_CLASS) const = 0;
 			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification(const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_in_Deployment(std::weak_ptr<uml::Deployment> par_deployment, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_as_configuration_in_Deployment(std::weak_ptr<uml::Deployment> par_Deployment, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_as_nestedArtifact_in_Artifact(std::shared_ptr<Artifact> par_Artifact, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DeploymentSpecification> createDeploymentSpecification_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::DEPLOYMENTSPECIFICATION_CLASS) const = 0;
 			virtual std::shared_ptr<DestroyLinkAction> createDestroyLinkAction(const int metaElementID = umlPackage::DESTROYLINKACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<DestroyLinkAction> createDestroyLinkAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::DESTROYLINKACTION_CLASS) const = 0;
-			virtual std::shared_ptr<DestroyLinkAction> createDestroyLinkAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::DESTROYLINKACTION_CLASS) const = 0;
-			virtual std::shared_ptr<DestroyLinkAction> createDestroyLinkAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DESTROYLINKACTION_CLASS) const = 0;
-			virtual std::shared_ptr<DestroyLinkAction> createDestroyLinkAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DESTROYLINKACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<DestroyLinkAction> createDestroyLinkAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::DESTROYLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyLinkAction> createDestroyLinkAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::DESTROYLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyLinkAction> createDestroyLinkAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::DESTROYLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyLinkAction> createDestroyLinkAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::DESTROYLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyLinkAction> createDestroyLinkAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::DESTROYLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyLinkAction> createDestroyLinkAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DESTROYLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyLinkAction> createDestroyLinkAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DESTROYLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyLinkAction> createDestroyLinkAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::DESTROYLINKACTION_CLASS) const = 0;
 			virtual std::shared_ptr<DestroyObjectAction> createDestroyObjectAction(const int metaElementID = umlPackage::DESTROYOBJECTACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<DestroyObjectAction> createDestroyObjectAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::DESTROYOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<DestroyObjectAction> createDestroyObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::DESTROYOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<DestroyObjectAction> createDestroyObjectAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DESTROYOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<DestroyObjectAction> createDestroyObjectAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DESTROYOBJECTACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<DestroyObjectAction> createDestroyObjectAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::DESTROYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyObjectAction> createDestroyObjectAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::DESTROYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyObjectAction> createDestroyObjectAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::DESTROYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyObjectAction> createDestroyObjectAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::DESTROYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyObjectAction> createDestroyObjectAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::DESTROYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyObjectAction> createDestroyObjectAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DESTROYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyObjectAction> createDestroyObjectAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DESTROYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<DestroyObjectAction> createDestroyObjectAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::DESTROYOBJECTACTION_CLASS) const = 0;
 			virtual std::shared_ptr<DestructionOccurrenceSpecification> createDestructionOccurrenceSpecification(const int metaElementID = umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<DestructionOccurrenceSpecification> createDestructionOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<DestructionOccurrenceSpecification> createDestructionOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<DestructionOccurrenceSpecification> createDestructionOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<DestructionOccurrenceSpecification> createDestructionOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<DestructionOccurrenceSpecification> createDestructionOccurrenceSpecification_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DestructionOccurrenceSpecification> createDestructionOccurrenceSpecification_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DestructionOccurrenceSpecification> createDestructionOccurrenceSpecification_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<DestructionOccurrenceSpecification> createDestructionOccurrenceSpecification_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DESTRUCTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
 			virtual std::shared_ptr<Device> createDevice(const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Device> createDevice_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
-			virtual std::shared_ptr<Device> createDevice_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
-			virtual std::shared_ptr<Device> createDevice_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
-			virtual std::shared_ptr<Device> createDevice_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
-			virtual std::shared_ptr<Device> createDevice_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Device> createDevice_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
+			virtual std::shared_ptr<Device> createDevice_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
+			virtual std::shared_ptr<Device> createDevice_as_nestedNode_in_Node(std::shared_ptr<Node> par_Node, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
+			virtual std::shared_ptr<Device> createDevice_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
+			virtual std::shared_ptr<Device> createDevice_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
+			virtual std::shared_ptr<Device> createDevice_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
+			virtual std::shared_ptr<Device> createDevice_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
+			virtual std::shared_ptr<Device> createDevice_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
+			virtual std::shared_ptr<Device> createDevice_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
+			virtual std::shared_ptr<Device> createDevice_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
+			virtual std::shared_ptr<Device> createDevice_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::DEVICE_CLASS) const = 0;
 			virtual std::shared_ptr<Duration> createDuration(const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Duration> createDuration_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
-			virtual std::shared_ptr<Duration> createDuration_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
-			virtual std::shared_ptr<Duration> createDuration_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
-			virtual std::shared_ptr<Duration> createDuration_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
-			virtual std::shared_ptr<Duration> createDuration_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
-			virtual std::shared_ptr<Duration> createDuration_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Duration> createDuration_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
+			virtual std::shared_ptr<Duration> createDuration_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::DURATION_CLASS) const = 0;
 			virtual std::shared_ptr<DurationConstraint> createDurationConstraint(const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_in_Context(std::weak_ptr<uml::Namespace> par_context, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_as_condition_in_ParameterSet(std::shared_ptr<ParameterSet> par_ParameterSet, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_as_condition_in_Extend(std::shared_ptr<Extend> par_Extend, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_as_invariant_in_StateInvariant(std::shared_ptr<StateInvariant> par_StateInvariant, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_as_localPostcondition_in_Action(std::shared_ptr<Action> par_Action, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_as_localPrecondition_in_Action(std::shared_ptr<Action> par_Action, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_as_ownedRule_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<DurationConstraint> createDurationConstraint_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::DURATIONCONSTRAINT_CLASS) const = 0;
 			virtual std::shared_ptr<DurationInterval> createDurationInterval(const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<DurationInterval> createDurationInterval_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<DurationInterval> createDurationInterval_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<DurationInterval> createDurationInterval_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<DurationInterval> createDurationInterval_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<DurationInterval> createDurationInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<DurationInterval> createDurationInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<DurationInterval> createDurationInterval_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::DURATIONINTERVAL_CLASS) const = 0;
 			virtual std::shared_ptr<DurationObservation> createDurationObservation(const int metaElementID = umlPackage::DURATIONOBSERVATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<DurationObservation> createDurationObservation_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::DURATIONOBSERVATION_CLASS) const = 0;
-			virtual std::shared_ptr<DurationObservation> createDurationObservation_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::DURATIONOBSERVATION_CLASS) const = 0;
-			virtual std::shared_ptr<DurationObservation> createDurationObservation_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::DURATIONOBSERVATION_CLASS) const = 0;
-			virtual std::shared_ptr<DurationObservation> createDurationObservation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::DURATIONOBSERVATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<DurationObservation> createDurationObservation_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::DURATIONOBSERVATION_CLASS) const = 0;
+			virtual std::shared_ptr<DurationObservation> createDurationObservation_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DURATIONOBSERVATION_CLASS) const = 0;
+			virtual std::shared_ptr<DurationObservation> createDurationObservation_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::DURATIONOBSERVATION_CLASS) const = 0;
+			virtual std::shared_ptr<DurationObservation> createDurationObservation_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::DURATIONOBSERVATION_CLASS) const = 0;
+			virtual std::shared_ptr<DurationObservation> createDurationObservation_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::DURATIONOBSERVATION_CLASS) const = 0;
+			virtual std::shared_ptr<DurationObservation> createDurationObservation_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::DURATIONOBSERVATION_CLASS) const = 0;
+			virtual std::shared_ptr<DurationObservation> createDurationObservation_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::DURATIONOBSERVATION_CLASS) const = 0;
 			virtual std::shared_ptr<ElementImport> createElementImport(const int metaElementID = umlPackage::ELEMENTIMPORT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ElementImport> createElementImport_in_ImportingNamespace(std::weak_ptr<uml::Namespace> par_importingNamespace, const int metaElementID = umlPackage::ELEMENTIMPORT_CLASS) const = 0;
-			virtual std::shared_ptr<ElementImport> createElementImport_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ELEMENTIMPORT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ElementImport> createElementImport_as_elementImport_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ELEMENTIMPORT_CLASS) const = 0;
+			virtual std::shared_ptr<ElementImport> createElementImport_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ELEMENTIMPORT_CLASS) const = 0;
 			virtual std::shared_ptr<Enumeration> createEnumeration(const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Enumeration> createEnumeration_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
-			virtual std::shared_ptr<Enumeration> createEnumeration_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
-			virtual std::shared_ptr<Enumeration> createEnumeration_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
-			virtual std::shared_ptr<Enumeration> createEnumeration_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
-			virtual std::shared_ptr<Enumeration> createEnumeration_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Enumeration> createEnumeration_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Enumeration> createEnumeration_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Enumeration> createEnumeration_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Enumeration> createEnumeration_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Enumeration> createEnumeration_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Enumeration> createEnumeration_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Enumeration> createEnumeration_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Enumeration> createEnumeration_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Enumeration> createEnumeration_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Enumeration> createEnumeration_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::ENUMERATION_CLASS) const = 0;
 			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral(const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral_in_Enumeration(std::weak_ptr<uml::Enumeration> par_enumeration, const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
-			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
-			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
-			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
-			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
+			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
+			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
+			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral_as_ownedLiteral_in_Enumeration(std::weak_ptr<uml::Enumeration> par_Enumeration, const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
+			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
+			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
+			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
+			virtual std::shared_ptr<EnumerationLiteral> createEnumerationLiteral_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::ENUMERATIONLITERAL_CLASS) const = 0;
 			virtual std::shared_ptr<ExceptionHandler> createExceptionHandler(const int metaElementID = umlPackage::EXCEPTIONHANDLER_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ExceptionHandler> createExceptionHandler_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::EXCEPTIONHANDLER_CLASS) const = 0;
-			virtual std::shared_ptr<ExceptionHandler> createExceptionHandler_in_ProtectedNode(std::weak_ptr<uml::ExecutableNode> par_protectedNode, const int metaElementID = umlPackage::EXCEPTIONHANDLER_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ExceptionHandler> createExceptionHandler_as_handler_in_ExecutableNode(std::weak_ptr<uml::ExecutableNode> par_ExecutableNode, const int metaElementID = umlPackage::EXCEPTIONHANDLER_CLASS) const = 0;
+			virtual std::shared_ptr<ExceptionHandler> createExceptionHandler_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::EXCEPTIONHANDLER_CLASS) const = 0;
 			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment(const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
-			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
-			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
-			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
-			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_as_nestedNode_in_Node(std::shared_ptr<Node> par_Node, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
+			virtual std::shared_ptr<ExecutionEnvironment> createExecutionEnvironment_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::EXECUTIONENVIRONMENT_CLASS) const = 0;
 			virtual std::shared_ptr<ExecutionOccurrenceSpecification> createExecutionOccurrenceSpecification(const int metaElementID = umlPackage::EXECUTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ExecutionOccurrenceSpecification> createExecutionOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::EXECUTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<ExecutionOccurrenceSpecification> createExecutionOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::EXECUTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<ExecutionOccurrenceSpecification> createExecutionOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::EXECUTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<ExecutionOccurrenceSpecification> createExecutionOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::EXECUTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ExecutionOccurrenceSpecification> createExecutionOccurrenceSpecification_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::EXECUTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<ExecutionOccurrenceSpecification> createExecutionOccurrenceSpecification_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::EXECUTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<ExecutionOccurrenceSpecification> createExecutionOccurrenceSpecification_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::EXECUTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<ExecutionOccurrenceSpecification> createExecutionOccurrenceSpecification_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::EXECUTIONOCCURRENCESPECIFICATION_CLASS) const = 0;
 			virtual std::shared_ptr<ExpansionNode> createExpansionNode(const int metaElementID = umlPackage::EXPANSIONNODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ExpansionNode> createExpansionNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::EXPANSIONNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ExpansionNode> createExpansionNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::EXPANSIONNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ExpansionNode> createExpansionNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::EXPANSIONNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ExpansionNode> createExpansionNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::EXPANSIONNODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ExpansionNode> createExpansionNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::EXPANSIONNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionNode> createExpansionNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::EXPANSIONNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionNode> createExpansionNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::EXPANSIONNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionNode> createExpansionNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::EXPANSIONNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionNode> createExpansionNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::EXPANSIONNODE_CLASS) const = 0;
 			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion(const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
-			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
-			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
-			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
-			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
-			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_as_group_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_as_ownedGroup_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_as_structuredNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
+			virtual std::shared_ptr<ExpansionRegion> createExpansionRegion_as_subgroup_in_ActivityGroup(std::weak_ptr<uml::ActivityGroup> par_ActivityGroup, const int metaElementID = umlPackage::EXPANSIONREGION_CLASS) const = 0;
 			virtual std::shared_ptr<Expression> createExpression(const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Expression> createExpression_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<Expression> createExpression_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<Expression> createExpression_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<Expression> createExpression_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<Expression> createExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<Expression> createExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Expression> createExpression_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<Expression> createExpression_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::EXPRESSION_CLASS) const = 0;
 			virtual std::shared_ptr<Extend> createExtend(const int metaElementID = umlPackage::EXTEND_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Extend> createExtend_in_Extension(std::weak_ptr<uml::UseCase> par_extension, const int metaElementID = umlPackage::EXTEND_CLASS) const = 0;
-			virtual std::shared_ptr<Extend> createExtend_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::EXTEND_CLASS) const = 0;
-			virtual std::shared_ptr<Extend> createExtend_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::EXTEND_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Extend> createExtend_as_extend_in_UseCase(std::weak_ptr<uml::UseCase> par_UseCase, const int metaElementID = umlPackage::EXTEND_CLASS) const = 0;
+			virtual std::shared_ptr<Extend> createExtend_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::EXTEND_CLASS) const = 0;
+			virtual std::shared_ptr<Extend> createExtend_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::EXTEND_CLASS) const = 0;
 			virtual std::shared_ptr<Extension> createExtension(const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Extension> createExtension_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
-			virtual std::shared_ptr<Extension> createExtension_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
-			virtual std::shared_ptr<Extension> createExtension_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
-			virtual std::shared_ptr<Extension> createExtension_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
-			virtual std::shared_ptr<Extension> createExtension_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Extension> createExtension_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
+			virtual std::shared_ptr<Extension> createExtension_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
+			virtual std::shared_ptr<Extension> createExtension_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
+			virtual std::shared_ptr<Extension> createExtension_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
+			virtual std::shared_ptr<Extension> createExtension_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
+			virtual std::shared_ptr<Extension> createExtension_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
+			virtual std::shared_ptr<Extension> createExtension_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
+			virtual std::shared_ptr<Extension> createExtension_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
+			virtual std::shared_ptr<Extension> createExtension_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
+			virtual std::shared_ptr<Extension> createExtension_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::EXTENSION_CLASS) const = 0;
 			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd(const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_in_AssociationEnd(std::weak_ptr<uml::Property> par_associationEnd, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
-			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_in_Class(std::weak_ptr<uml::Class> par_class, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
-			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_in_Datatype(std::weak_ptr<uml::DataType> par_datatype, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
-			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_in_Interface(std::weak_ptr<uml::Interface> par_interface, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
-			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
-			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
-			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_in_OwningAssociation(std::weak_ptr<uml::Association> par_owningAssociation, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
-			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedAttribute_in_Artifact(std::shared_ptr<Artifact> par_Artifact, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedAttribute_in_DataType(std::weak_ptr<uml::DataType> par_DataType, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedAttribute_in_Interface(std::weak_ptr<uml::Interface> par_Interface, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedAttribute_in_Signal(std::shared_ptr<Signal> par_Signal, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedAttribute_in_StructuredClassifier(std::weak_ptr<uml::Class> par_StructuredClassifier, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedEnd_in_Association(std::weak_ptr<uml::Association> par_Association, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionEnd> createExtensionEnd_as_qualifier_in_Property(std::weak_ptr<uml::Property> par_Property, const int metaElementID = umlPackage::EXTENSIONEND_CLASS) const = 0;
 			virtual std::shared_ptr<ExtensionPoint> createExtensionPoint(const int metaElementID = umlPackage::EXTENSIONPOINT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ExtensionPoint> createExtensionPoint_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::EXTENSIONPOINT_CLASS) const = 0;
-			virtual std::shared_ptr<ExtensionPoint> createExtensionPoint_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::EXTENSIONPOINT_CLASS) const = 0;
-			virtual std::shared_ptr<ExtensionPoint> createExtensionPoint_in_UseCase(std::weak_ptr<uml::UseCase> par_useCase, const int metaElementID = umlPackage::EXTENSIONPOINT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ExtensionPoint> createExtensionPoint_as_extensionPoint_in_UseCase(std::weak_ptr<uml::UseCase> par_UseCase, const int metaElementID = umlPackage::EXTENSIONPOINT_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionPoint> createExtensionPoint_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::EXTENSIONPOINT_CLASS) const = 0;
+			virtual std::shared_ptr<ExtensionPoint> createExtensionPoint_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::EXTENSIONPOINT_CLASS) const = 0;
 			virtual std::shared_ptr<Factory> createFactory(const int metaElementID = umlPackage::FACTORY_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Factory> createFactory_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::FACTORY_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Factory> createFactory_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::FACTORY_CLASS) const = 0;
 			virtual std::shared_ptr<FinalState> createFinalState(const int metaElementID = umlPackage::FINALSTATE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<FinalState> createFinalState_in_Container(std::weak_ptr<uml::Region> par_container, const int metaElementID = umlPackage::FINALSTATE_CLASS) const = 0;
-			virtual std::shared_ptr<FinalState> createFinalState_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::FINALSTATE_CLASS) const = 0;
-			virtual std::shared_ptr<FinalState> createFinalState_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::FINALSTATE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<FinalState> createFinalState_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::FINALSTATE_CLASS) const = 0;
+			virtual std::shared_ptr<FinalState> createFinalState_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::FINALSTATE_CLASS) const = 0;
+			virtual std::shared_ptr<FinalState> createFinalState_as_subvertex_in_Region(std::weak_ptr<uml::Region> par_Region, const int metaElementID = umlPackage::FINALSTATE_CLASS) const = 0;
 			virtual std::shared_ptr<FlowFinalNode> createFlowFinalNode(const int metaElementID = umlPackage::FLOWFINALNODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<FlowFinalNode> createFlowFinalNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::FLOWFINALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<FlowFinalNode> createFlowFinalNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::FLOWFINALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<FlowFinalNode> createFlowFinalNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::FLOWFINALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<FlowFinalNode> createFlowFinalNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::FLOWFINALNODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<FlowFinalNode> createFlowFinalNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::FLOWFINALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<FlowFinalNode> createFlowFinalNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::FLOWFINALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<FlowFinalNode> createFlowFinalNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::FLOWFINALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<FlowFinalNode> createFlowFinalNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::FLOWFINALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<FlowFinalNode> createFlowFinalNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::FLOWFINALNODE_CLASS) const = 0;
 			virtual std::shared_ptr<ForkNode> createForkNode(const int metaElementID = umlPackage::FORKNODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ForkNode> createForkNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::FORKNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ForkNode> createForkNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::FORKNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ForkNode> createForkNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::FORKNODE_CLASS) const = 0;
-			virtual std::shared_ptr<ForkNode> createForkNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::FORKNODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ForkNode> createForkNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::FORKNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ForkNode> createForkNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::FORKNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ForkNode> createForkNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::FORKNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ForkNode> createForkNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::FORKNODE_CLASS) const = 0;
+			virtual std::shared_ptr<ForkNode> createForkNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::FORKNODE_CLASS) const = 0;
 			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior(const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
-			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
-			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
-			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
-			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
-			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_doActivity_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_effect_in_Transition(std::shared_ptr<Transition> par_Transition, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_entry_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_exit_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_ownedBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_BehavioredClassifier, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<FunctionBehavior> createFunctionBehavior_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::FUNCTIONBEHAVIOR_CLASS) const = 0;
 			virtual std::shared_ptr<Gate> createGate(const int metaElementID = umlPackage::GATE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Gate> createGate_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::GATE_CLASS) const = 0;
-			virtual std::shared_ptr<Gate> createGate_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::GATE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Gate> createGate_as_actualGate_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::GATE_CLASS) const = 0;
+			virtual std::shared_ptr<Gate> createGate_as_cfragmentGate_in_CombinedFragment(std::shared_ptr<CombinedFragment> par_CombinedFragment, const int metaElementID = umlPackage::GATE_CLASS) const = 0;
+			virtual std::shared_ptr<Gate> createGate_as_formalGate_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::GATE_CLASS) const = 0;
+			virtual std::shared_ptr<Gate> createGate_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::GATE_CLASS) const = 0;
+			virtual std::shared_ptr<Gate> createGate_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::GATE_CLASS) const = 0;
 			virtual std::shared_ptr<GeneralOrdering> createGeneralOrdering(const int metaElementID = umlPackage::GENERALORDERING_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<GeneralOrdering> createGeneralOrdering_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::GENERALORDERING_CLASS) const = 0;
-			virtual std::shared_ptr<GeneralOrdering> createGeneralOrdering_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::GENERALORDERING_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<GeneralOrdering> createGeneralOrdering_as_generalOrdering_in_InteractionFragment(std::shared_ptr<InteractionFragment> par_InteractionFragment, const int metaElementID = umlPackage::GENERALORDERING_CLASS) const = 0;
+			virtual std::shared_ptr<GeneralOrdering> createGeneralOrdering_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::GENERALORDERING_CLASS) const = 0;
+			virtual std::shared_ptr<GeneralOrdering> createGeneralOrdering_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::GENERALORDERING_CLASS) const = 0;
 			virtual std::shared_ptr<Generalization> createGeneralization(const int metaElementID = umlPackage::GENERALIZATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Generalization> createGeneralization_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::GENERALIZATION_CLASS) const = 0;
-			virtual std::shared_ptr<Generalization> createGeneralization_in_Specific(std::weak_ptr<uml::Classifier> par_specific, const int metaElementID = umlPackage::GENERALIZATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Generalization> createGeneralization_as_generalization_in_Classifier(std::weak_ptr<uml::Classifier> par_Classifier, const int metaElementID = umlPackage::GENERALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<Generalization> createGeneralization_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::GENERALIZATION_CLASS) const = 0;
 			virtual std::shared_ptr<GeneralizationSet> createGeneralizationSet(const int metaElementID = umlPackage::GENERALIZATIONSET_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<GeneralizationSet> createGeneralizationSet_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::GENERALIZATIONSET_CLASS) const = 0;
-			virtual std::shared_ptr<GeneralizationSet> createGeneralizationSet_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::GENERALIZATIONSET_CLASS) const = 0;
-			virtual std::shared_ptr<GeneralizationSet> createGeneralizationSet_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::GENERALIZATIONSET_CLASS) const = 0;
-			virtual std::shared_ptr<GeneralizationSet> createGeneralizationSet_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::GENERALIZATIONSET_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<GeneralizationSet> createGeneralizationSet_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::GENERALIZATIONSET_CLASS) const = 0;
+			virtual std::shared_ptr<GeneralizationSet> createGeneralizationSet_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::GENERALIZATIONSET_CLASS) const = 0;
+			virtual std::shared_ptr<GeneralizationSet> createGeneralizationSet_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::GENERALIZATIONSET_CLASS) const = 0;
+			virtual std::shared_ptr<GeneralizationSet> createGeneralizationSet_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::GENERALIZATIONSET_CLASS) const = 0;
+			virtual std::shared_ptr<GeneralizationSet> createGeneralizationSet_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::GENERALIZATIONSET_CLASS) const = 0;
+			virtual std::shared_ptr<GeneralizationSet> createGeneralizationSet_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::GENERALIZATIONSET_CLASS) const = 0;
+			virtual std::shared_ptr<GeneralizationSet> createGeneralizationSet_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::GENERALIZATIONSET_CLASS) const = 0;
 			virtual std::shared_ptr<Image> createImage(const int metaElementID = umlPackage::IMAGE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Image> createImage_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::IMAGE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Image> createImage_as_icon_in_Stereotype(std::shared_ptr<Stereotype> par_Stereotype, const int metaElementID = umlPackage::IMAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Image> createImage_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::IMAGE_CLASS) const = 0;
 			virtual std::shared_ptr<Include> createInclude(const int metaElementID = umlPackage::INCLUDE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Include> createInclude_in_IncludingCase(std::weak_ptr<uml::UseCase> par_includingCase, const int metaElementID = umlPackage::INCLUDE_CLASS) const = 0;
-			virtual std::shared_ptr<Include> createInclude_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INCLUDE_CLASS) const = 0;
-			virtual std::shared_ptr<Include> createInclude_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INCLUDE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Include> createInclude_as_include_in_UseCase(std::weak_ptr<uml::UseCase> par_UseCase, const int metaElementID = umlPackage::INCLUDE_CLASS) const = 0;
+			virtual std::shared_ptr<Include> createInclude_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INCLUDE_CLASS) const = 0;
+			virtual std::shared_ptr<Include> createInclude_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INCLUDE_CLASS) const = 0;
 			virtual std::shared_ptr<InformationFlow> createInformationFlow(const int metaElementID = umlPackage::INFORMATIONFLOW_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<InformationFlow> createInformationFlow_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INFORMATIONFLOW_CLASS) const = 0;
-			virtual std::shared_ptr<InformationFlow> createInformationFlow_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INFORMATIONFLOW_CLASS) const = 0;
-			virtual std::shared_ptr<InformationFlow> createInformationFlow_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::INFORMATIONFLOW_CLASS) const = 0;
-			virtual std::shared_ptr<InformationFlow> createInformationFlow_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::INFORMATIONFLOW_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<InformationFlow> createInformationFlow_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::INFORMATIONFLOW_CLASS) const = 0;
+			virtual std::shared_ptr<InformationFlow> createInformationFlow_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INFORMATIONFLOW_CLASS) const = 0;
+			virtual std::shared_ptr<InformationFlow> createInformationFlow_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INFORMATIONFLOW_CLASS) const = 0;
+			virtual std::shared_ptr<InformationFlow> createInformationFlow_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INFORMATIONFLOW_CLASS) const = 0;
+			virtual std::shared_ptr<InformationFlow> createInformationFlow_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INFORMATIONFLOW_CLASS) const = 0;
+			virtual std::shared_ptr<InformationFlow> createInformationFlow_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::INFORMATIONFLOW_CLASS) const = 0;
+			virtual std::shared_ptr<InformationFlow> createInformationFlow_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::INFORMATIONFLOW_CLASS) const = 0;
 			virtual std::shared_ptr<InformationItem> createInformationItem(const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<InformationItem> createInformationItem_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
-			virtual std::shared_ptr<InformationItem> createInformationItem_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
-			virtual std::shared_ptr<InformationItem> createInformationItem_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
-			virtual std::shared_ptr<InformationItem> createInformationItem_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
-			virtual std::shared_ptr<InformationItem> createInformationItem_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<InformationItem> createInformationItem_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
+			virtual std::shared_ptr<InformationItem> createInformationItem_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
+			virtual std::shared_ptr<InformationItem> createInformationItem_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
+			virtual std::shared_ptr<InformationItem> createInformationItem_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
+			virtual std::shared_ptr<InformationItem> createInformationItem_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
+			virtual std::shared_ptr<InformationItem> createInformationItem_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
+			virtual std::shared_ptr<InformationItem> createInformationItem_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
+			virtual std::shared_ptr<InformationItem> createInformationItem_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
+			virtual std::shared_ptr<InformationItem> createInformationItem_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
+			virtual std::shared_ptr<InformationItem> createInformationItem_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::INFORMATIONITEM_CLASS) const = 0;
 			virtual std::shared_ptr<InitialNode> createInitialNode(const int metaElementID = umlPackage::INITIALNODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<InitialNode> createInitialNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::INITIALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<InitialNode> createInitialNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::INITIALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<InitialNode> createInitialNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INITIALNODE_CLASS) const = 0;
-			virtual std::shared_ptr<InitialNode> createInitialNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INITIALNODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<InitialNode> createInitialNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::INITIALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<InitialNode> createInitialNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::INITIALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<InitialNode> createInitialNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INITIALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<InitialNode> createInitialNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INITIALNODE_CLASS) const = 0;
+			virtual std::shared_ptr<InitialNode> createInitialNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::INITIALNODE_CLASS) const = 0;
 			virtual std::shared_ptr<InputPin> createInputPin(const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<InputPin> createInputPin_in_Action(std::weak_ptr<uml::Action> par_action, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<InputPin> createInputPin_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<InputPin> createInputPin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction> par_addStructuralFeatureValueAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<InputPin> createInputPin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction> par_callOperationAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<InputPin> createInputPin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction> par_destroyObjectAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<InputPin> createInputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<InputPin> createInputPin_in_InvocationAction(std::weak_ptr<uml::InvocationAction> par_invocationAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<InputPin> createInputPin_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<InputPin> createInputPin_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<InputPin> createInputPin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> par_removeStructuralFeatureValueAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<InputPin> createInputPin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction> par_structuralFeatureAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<InputPin> createInputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> par_writeStructuralFeatureAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<InputPin> createInputPin_as_argument_in_InvocationAction(std::weak_ptr<uml::InvocationAction> par_InvocationAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_collection_in_ReduceAction(std::shared_ptr<ReduceAction> par_ReduceAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_exception_in_RaiseExceptionAction(std::shared_ptr<RaiseExceptionAction> par_RaiseExceptionAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_first_in_TestIdentityAction(std::shared_ptr<TestIdentityAction> par_TestIdentityAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_input_in_Action(std::weak_ptr<uml::Action> par_Action, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_inputValue_in_LinkAction(std::shared_ptr<LinkAction> par_LinkAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_inputValue_in_OpaqueAction(std::shared_ptr<OpaqueAction> par_OpaqueAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_insertAt_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction> par_AddStructuralFeatureValueAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_insertAt_in_AddVariableValueAction(std::shared_ptr<AddVariableValueAction> par_AddVariableValueAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_loopVariableInput_in_LoopNode(std::shared_ptr<LoopNode> par_LoopNode, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_object_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction> par_StructuralFeatureAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_object_in_ClearAssociationAction(std::shared_ptr<ClearAssociationAction> par_ClearAssociationAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_object_in_ReadIsClassifiedObjectAction(std::shared_ptr<ReadIsClassifiedObjectAction> par_ReadIsClassifiedObjectAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_object_in_ReadLinkObjectEndAction(std::shared_ptr<ReadLinkObjectEndAction> par_ReadLinkObjectEndAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_object_in_ReadLinkObjectEndQualifierAction(std::shared_ptr<ReadLinkObjectEndQualifierAction> par_ReadLinkObjectEndQualifierAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_object_in_ReclassifyObjectAction(std::shared_ptr<ReclassifyObjectAction> par_ReclassifyObjectAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_object_in_StartClassifierBehaviorAction(std::shared_ptr<StartClassifierBehaviorAction> par_StartClassifierBehaviorAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_object_in_StartObjectBehaviorAction(std::shared_ptr<StartObjectBehaviorAction> par_StartObjectBehaviorAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_object_in_UnmarshallAction(std::shared_ptr<UnmarshallAction> par_UnmarshallAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_removeAt_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> par_RemoveStructuralFeatureValueAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_removeAt_in_RemoveVariableValueAction(std::shared_ptr<RemoveVariableValueAction> par_RemoveVariableValueAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_replyValue_in_ReplyAction(std::shared_ptr<ReplyAction> par_ReplyAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_request_in_SendObjectAction(std::shared_ptr<SendObjectAction> par_SendObjectAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_returnInformation_in_ReplyAction(std::shared_ptr<ReplyAction> par_ReplyAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_second_in_TestIdentityAction(std::shared_ptr<TestIdentityAction> par_TestIdentityAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_structuredNodeInput_in_StructuredActivityNode(std::shared_ptr<StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_target_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction> par_CallOperationAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_target_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction> par_DestroyObjectAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_target_in_SendObjectAction(std::shared_ptr<SendObjectAction> par_SendObjectAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_target_in_SendSignalAction(std::shared_ptr<SendSignalAction> par_SendSignalAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_value_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> par_WriteStructuralFeatureAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<InputPin> createInputPin_as_value_in_WriteVariableAction(std::shared_ptr<WriteVariableAction> par_WriteVariableAction, const int metaElementID = umlPackage::INPUTPIN_CLASS) const = 0;
 			virtual std::shared_ptr<InstanceSpecification> createInstanceSpecification(const int metaElementID = umlPackage::INSTANCESPECIFICATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<InstanceSpecification> createInstanceSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INSTANCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<InstanceSpecification> createInstanceSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INSTANCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<InstanceSpecification> createInstanceSpecification_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::INSTANCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<InstanceSpecification> createInstanceSpecification_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::INSTANCESPECIFICATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<InstanceSpecification> createInstanceSpecification_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::INSTANCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceSpecification> createInstanceSpecification_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INSTANCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceSpecification> createInstanceSpecification_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INSTANCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceSpecification> createInstanceSpecification_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INSTANCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceSpecification> createInstanceSpecification_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INSTANCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceSpecification> createInstanceSpecification_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::INSTANCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceSpecification> createInstanceSpecification_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::INSTANCESPECIFICATION_CLASS) const = 0;
 			virtual std::shared_ptr<InstanceValue> createInstanceValue(const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<InstanceValue> createInstanceValue_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
-			virtual std::shared_ptr<InstanceValue> createInstanceValue_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
-			virtual std::shared_ptr<InstanceValue> createInstanceValue_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
-			virtual std::shared_ptr<InstanceValue> createInstanceValue_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
-			virtual std::shared_ptr<InstanceValue> createInstanceValue_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
-			virtual std::shared_ptr<InstanceValue> createInstanceValue_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<InstanceValue> createInstanceValue_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::INSTANCEVALUE_CLASS) const = 0;
 			virtual std::shared_ptr<Interaction> createInteraction(const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Interaction> createInteraction_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
-			virtual std::shared_ptr<Interaction> createInteraction_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
-			virtual std::shared_ptr<Interaction> createInteraction_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
-			virtual std::shared_ptr<Interaction> createInteraction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
-			virtual std::shared_ptr<Interaction> createInteraction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
-			virtual std::shared_ptr<Interaction> createInteraction_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
-			virtual std::shared_ptr<Interaction> createInteraction_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
-			virtual std::shared_ptr<Interaction> createInteraction_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Interaction> createInteraction_as_doActivity_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_effect_in_Transition(std::shared_ptr<Transition> par_Transition, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_entry_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_exit_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_ownedBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_BehavioredClassifier, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<Interaction> createInteraction_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::INTERACTION_CLASS) const = 0;
 			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint(const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_in_Context(std::weak_ptr<uml::Namespace> par_context, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_condition_in_ParameterSet(std::shared_ptr<ParameterSet> par_ParameterSet, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_condition_in_Extend(std::shared_ptr<Extend> par_Extend, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_guard_in_InteractionOperand(std::shared_ptr<InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_invariant_in_StateInvariant(std::shared_ptr<StateInvariant> par_StateInvariant, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_localPostcondition_in_Action(std::shared_ptr<Action> par_Action, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_localPrecondition_in_Action(std::shared_ptr<Action> par_Action, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_ownedRule_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionConstraint> createInteractionConstraint_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::INTERACTIONCONSTRAINT_CLASS) const = 0;
 			virtual std::shared_ptr<InteractionOperand> createInteractionOperand(const int metaElementID = umlPackage::INTERACTIONOPERAND_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<InteractionOperand> createInteractionOperand_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::INTERACTIONOPERAND_CLASS) const = 0;
-			virtual std::shared_ptr<InteractionOperand> createInteractionOperand_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::INTERACTIONOPERAND_CLASS) const = 0;
-			virtual std::shared_ptr<InteractionOperand> createInteractionOperand_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INTERACTIONOPERAND_CLASS) const = 0;
-			virtual std::shared_ptr<InteractionOperand> createInteractionOperand_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INTERACTIONOPERAND_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<InteractionOperand> createInteractionOperand_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::INTERACTIONOPERAND_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionOperand> createInteractionOperand_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::INTERACTIONOPERAND_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionOperand> createInteractionOperand_as_operand_in_CombinedFragment(std::shared_ptr<CombinedFragment> par_CombinedFragment, const int metaElementID = umlPackage::INTERACTIONOPERAND_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionOperand> createInteractionOperand_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INTERACTIONOPERAND_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionOperand> createInteractionOperand_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INTERACTIONOPERAND_CLASS) const = 0;
 			virtual std::shared_ptr<InteractionUse> createInteractionUse(const int metaElementID = umlPackage::INTERACTIONUSE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<InteractionUse> createInteractionUse_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::INTERACTIONUSE_CLASS) const = 0;
-			virtual std::shared_ptr<InteractionUse> createInteractionUse_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::INTERACTIONUSE_CLASS) const = 0;
-			virtual std::shared_ptr<InteractionUse> createInteractionUse_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INTERACTIONUSE_CLASS) const = 0;
-			virtual std::shared_ptr<InteractionUse> createInteractionUse_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INTERACTIONUSE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<InteractionUse> createInteractionUse_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::INTERACTIONUSE_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionUse> createInteractionUse_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::INTERACTIONUSE_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionUse> createInteractionUse_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INTERACTIONUSE_CLASS) const = 0;
+			virtual std::shared_ptr<InteractionUse> createInteractionUse_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INTERACTIONUSE_CLASS) const = 0;
 			virtual std::shared_ptr<Interface> createInterface(const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Interface> createInterface_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
-			virtual std::shared_ptr<Interface> createInterface_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
-			virtual std::shared_ptr<Interface> createInterface_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
-			virtual std::shared_ptr<Interface> createInterface_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
-			virtual std::shared_ptr<Interface> createInterface_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Interface> createInterface_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
+			virtual std::shared_ptr<Interface> createInterface_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
+			virtual std::shared_ptr<Interface> createInterface_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
+			virtual std::shared_ptr<Interface> createInterface_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
+			virtual std::shared_ptr<Interface> createInterface_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
+			virtual std::shared_ptr<Interface> createInterface_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
+			virtual std::shared_ptr<Interface> createInterface_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
+			virtual std::shared_ptr<Interface> createInterface_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
+			virtual std::shared_ptr<Interface> createInterface_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
+			virtual std::shared_ptr<Interface> createInterface_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::INTERFACE_CLASS) const = 0;
 			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization(const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_in_ImplementingClassifier(std::weak_ptr<uml::BehavioredClassifier> par_implementingClassifier, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
-			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
-			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
-			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
-			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_as_interfaceRealization_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_BehavioredClassifier, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<InterfaceRealization> createInterfaceRealization_as_roleBinding_in_CollaborationUse(std::shared_ptr<CollaborationUse> par_CollaborationUse, const int metaElementID = umlPackage::INTERFACEREALIZATION_CLASS) const = 0;
 			virtual std::shared_ptr<InterruptibleActivityRegion> createInterruptibleActivityRegion(const int metaElementID = umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<InterruptibleActivityRegion> createInterruptibleActivityRegion_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID = umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS) const = 0;
-			virtual std::shared_ptr<InterruptibleActivityRegion> createInterruptibleActivityRegion_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS) const = 0;
-			virtual std::shared_ptr<InterruptibleActivityRegion> createInterruptibleActivityRegion_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS) const = 0;
-			virtual std::shared_ptr<InterruptibleActivityRegion> createInterruptibleActivityRegion_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID = umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<InterruptibleActivityRegion> createInterruptibleActivityRegion_as_group_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS) const = 0;
+			virtual std::shared_ptr<InterruptibleActivityRegion> createInterruptibleActivityRegion_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS) const = 0;
+			virtual std::shared_ptr<InterruptibleActivityRegion> createInterruptibleActivityRegion_as_ownedGroup_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS) const = 0;
+			virtual std::shared_ptr<InterruptibleActivityRegion> createInterruptibleActivityRegion_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS) const = 0;
+			virtual std::shared_ptr<InterruptibleActivityRegion> createInterruptibleActivityRegion_as_subgroup_in_ActivityGroup(std::weak_ptr<uml::ActivityGroup> par_ActivityGroup, const int metaElementID = umlPackage::INTERRUPTIBLEACTIVITYREGION_CLASS) const = 0;
 			virtual std::shared_ptr<Interval> createInterval(const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Interval> createInterval_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<Interval> createInterval_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<Interval> createInterval_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<Interval> createInterval_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<Interval> createInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<Interval> createInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Interval> createInterval_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<Interval> createInterval_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::INTERVAL_CLASS) const = 0;
 			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint(const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_in_Context(std::weak_ptr<uml::Namespace> par_context, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_as_condition_in_ParameterSet(std::shared_ptr<ParameterSet> par_ParameterSet, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_as_condition_in_Extend(std::shared_ptr<Extend> par_Extend, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_as_invariant_in_StateInvariant(std::shared_ptr<StateInvariant> par_StateInvariant, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_as_localPostcondition_in_Action(std::shared_ptr<Action> par_Action, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_as_localPrecondition_in_Action(std::shared_ptr<Action> par_Action, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_as_ownedRule_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<IntervalConstraint> createIntervalConstraint_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::INTERVALCONSTRAINT_CLASS) const = 0;
 			virtual std::shared_ptr<JoinNode> createJoinNode(const int metaElementID = umlPackage::JOINNODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<JoinNode> createJoinNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::JOINNODE_CLASS) const = 0;
-			virtual std::shared_ptr<JoinNode> createJoinNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::JOINNODE_CLASS) const = 0;
-			virtual std::shared_ptr<JoinNode> createJoinNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::JOINNODE_CLASS) const = 0;
-			virtual std::shared_ptr<JoinNode> createJoinNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::JOINNODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<JoinNode> createJoinNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::JOINNODE_CLASS) const = 0;
+			virtual std::shared_ptr<JoinNode> createJoinNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::JOINNODE_CLASS) const = 0;
+			virtual std::shared_ptr<JoinNode> createJoinNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::JOINNODE_CLASS) const = 0;
+			virtual std::shared_ptr<JoinNode> createJoinNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::JOINNODE_CLASS) const = 0;
+			virtual std::shared_ptr<JoinNode> createJoinNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::JOINNODE_CLASS) const = 0;
 			virtual std::shared_ptr<Lifeline> createLifeline(const int metaElementID = umlPackage::LIFELINE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Lifeline> createLifeline_in_Interaction(std::weak_ptr<uml::Interaction> par_interaction, const int metaElementID = umlPackage::LIFELINE_CLASS) const = 0;
-			virtual std::shared_ptr<Lifeline> createLifeline_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::LIFELINE_CLASS) const = 0;
-			virtual std::shared_ptr<Lifeline> createLifeline_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::LIFELINE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Lifeline> createLifeline_as_lifeline_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::LIFELINE_CLASS) const = 0;
+			virtual std::shared_ptr<Lifeline> createLifeline_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::LIFELINE_CLASS) const = 0;
+			virtual std::shared_ptr<Lifeline> createLifeline_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::LIFELINE_CLASS) const = 0;
 			virtual std::shared_ptr<LinkEndCreationData> createLinkEndCreationData(const int metaElementID = umlPackage::LINKENDCREATIONDATA_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<LinkEndCreationData> createLinkEndCreationData_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::LINKENDCREATIONDATA_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<LinkEndCreationData> createLinkEndCreationData_as_endData_in_LinkAction(std::shared_ptr<LinkAction> par_LinkAction, const int metaElementID = umlPackage::LINKENDCREATIONDATA_CLASS) const = 0;
+			virtual std::shared_ptr<LinkEndCreationData> createLinkEndCreationData_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::LINKENDCREATIONDATA_CLASS) const = 0;
 			virtual std::shared_ptr<LinkEndData> createLinkEndData(const int metaElementID = umlPackage::LINKENDDATA_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<LinkEndData> createLinkEndData_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::LINKENDDATA_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<LinkEndData> createLinkEndData_as_endData_in_LinkAction(std::shared_ptr<LinkAction> par_LinkAction, const int metaElementID = umlPackage::LINKENDDATA_CLASS) const = 0;
+			virtual std::shared_ptr<LinkEndData> createLinkEndData_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::LINKENDDATA_CLASS) const = 0;
 			virtual std::shared_ptr<LinkEndDestructionData> createLinkEndDestructionData(const int metaElementID = umlPackage::LINKENDDESTRUCTIONDATA_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<LinkEndDestructionData> createLinkEndDestructionData_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::LINKENDDESTRUCTIONDATA_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<LinkEndDestructionData> createLinkEndDestructionData_as_endData_in_LinkAction(std::shared_ptr<LinkAction> par_LinkAction, const int metaElementID = umlPackage::LINKENDDESTRUCTIONDATA_CLASS) const = 0;
+			virtual std::shared_ptr<LinkEndDestructionData> createLinkEndDestructionData_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::LINKENDDESTRUCTIONDATA_CLASS) const = 0;
 			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean(const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralBoolean> createLiteralBoolean_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::LITERALBOOLEAN_CLASS) const = 0;
 			virtual std::shared_ptr<LiteralInteger> createLiteralInteger(const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralInteger> createLiteralInteger_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::LITERALINTEGER_CLASS) const = 0;
 			virtual std::shared_ptr<LiteralNull> createLiteralNull(const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<LiteralNull> createLiteralNull_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralNull> createLiteralNull_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralNull> createLiteralNull_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralNull> createLiteralNull_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralNull> createLiteralNull_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralNull> createLiteralNull_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralNull> createLiteralNull_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::LITERALNULL_CLASS) const = 0;
 			virtual std::shared_ptr<LiteralReal> createLiteralReal(const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<LiteralReal> createLiteralReal_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralReal> createLiteralReal_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralReal> createLiteralReal_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralReal> createLiteralReal_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralReal> createLiteralReal_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralReal> createLiteralReal_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralReal> createLiteralReal_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::LITERALREAL_CLASS) const = 0;
 			virtual std::shared_ptr<LiteralString> createLiteralString(const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<LiteralString> createLiteralString_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralString> createLiteralString_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralString> createLiteralString_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralString> createLiteralString_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralString> createLiteralString_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralString> createLiteralString_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralString> createLiteralString_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::LITERALSTRING_CLASS) const = 0;
 			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural(const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
-			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
+			virtual std::shared_ptr<LiteralUnlimitedNatural> createLiteralUnlimitedNatural_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::LITERALUNLIMITEDNATURAL_CLASS) const = 0;
 			virtual std::shared_ptr<LoopNode> createLoopNode(const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<LoopNode> createLoopNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
-			virtual std::shared_ptr<LoopNode> createLoopNode_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
-			virtual std::shared_ptr<LoopNode> createLoopNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
-			virtual std::shared_ptr<LoopNode> createLoopNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
-			virtual std::shared_ptr<LoopNode> createLoopNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
-			virtual std::shared_ptr<LoopNode> createLoopNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<LoopNode> createLoopNode_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
+			virtual std::shared_ptr<LoopNode> createLoopNode_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
+			virtual std::shared_ptr<LoopNode> createLoopNode_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
+			virtual std::shared_ptr<LoopNode> createLoopNode_as_group_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
+			virtual std::shared_ptr<LoopNode> createLoopNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
+			virtual std::shared_ptr<LoopNode> createLoopNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
+			virtual std::shared_ptr<LoopNode> createLoopNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
+			virtual std::shared_ptr<LoopNode> createLoopNode_as_ownedGroup_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
+			virtual std::shared_ptr<LoopNode> createLoopNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
+			virtual std::shared_ptr<LoopNode> createLoopNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
+			virtual std::shared_ptr<LoopNode> createLoopNode_as_structuredNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
+			virtual std::shared_ptr<LoopNode> createLoopNode_as_subgroup_in_ActivityGroup(std::weak_ptr<uml::ActivityGroup> par_ActivityGroup, const int metaElementID = umlPackage::LOOPNODE_CLASS) const = 0;
 			virtual std::shared_ptr<Manifestation> createManifestation(const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Manifestation> createManifestation_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
-			virtual std::shared_ptr<Manifestation> createManifestation_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
-			virtual std::shared_ptr<Manifestation> createManifestation_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
-			virtual std::shared_ptr<Manifestation> createManifestation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Manifestation> createManifestation_as_manifestation_in_Artifact(std::shared_ptr<Artifact> par_Artifact, const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
+			virtual std::shared_ptr<Manifestation> createManifestation_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
+			virtual std::shared_ptr<Manifestation> createManifestation_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
+			virtual std::shared_ptr<Manifestation> createManifestation_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
+			virtual std::shared_ptr<Manifestation> createManifestation_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
+			virtual std::shared_ptr<Manifestation> createManifestation_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
+			virtual std::shared_ptr<Manifestation> createManifestation_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
+			virtual std::shared_ptr<Manifestation> createManifestation_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
+			virtual std::shared_ptr<Manifestation> createManifestation_as_roleBinding_in_CollaborationUse(std::shared_ptr<CollaborationUse> par_CollaborationUse, const int metaElementID = umlPackage::MANIFESTATION_CLASS) const = 0;
 			virtual std::shared_ptr<MergeNode> createMergeNode(const int metaElementID = umlPackage::MERGENODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<MergeNode> createMergeNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::MERGENODE_CLASS) const = 0;
-			virtual std::shared_ptr<MergeNode> createMergeNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::MERGENODE_CLASS) const = 0;
-			virtual std::shared_ptr<MergeNode> createMergeNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::MERGENODE_CLASS) const = 0;
-			virtual std::shared_ptr<MergeNode> createMergeNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::MERGENODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<MergeNode> createMergeNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::MERGENODE_CLASS) const = 0;
+			virtual std::shared_ptr<MergeNode> createMergeNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::MERGENODE_CLASS) const = 0;
+			virtual std::shared_ptr<MergeNode> createMergeNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::MERGENODE_CLASS) const = 0;
+			virtual std::shared_ptr<MergeNode> createMergeNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::MERGENODE_CLASS) const = 0;
+			virtual std::shared_ptr<MergeNode> createMergeNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::MERGENODE_CLASS) const = 0;
 			virtual std::shared_ptr<Message> createMessage(const int metaElementID = umlPackage::MESSAGE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Message> createMessage_in_Interaction(std::weak_ptr<uml::Interaction> par_interaction, const int metaElementID = umlPackage::MESSAGE_CLASS) const = 0;
-			virtual std::shared_ptr<Message> createMessage_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::MESSAGE_CLASS) const = 0;
-			virtual std::shared_ptr<Message> createMessage_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::MESSAGE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Message> createMessage_as_message_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::MESSAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Message> createMessage_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::MESSAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Message> createMessage_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::MESSAGE_CLASS) const = 0;
 			virtual std::shared_ptr<MessageOccurrenceSpecification> createMessageOccurrenceSpecification(const int metaElementID = umlPackage::MESSAGEOCCURRENCESPECIFICATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<MessageOccurrenceSpecification> createMessageOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::MESSAGEOCCURRENCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<MessageOccurrenceSpecification> createMessageOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::MESSAGEOCCURRENCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<MessageOccurrenceSpecification> createMessageOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::MESSAGEOCCURRENCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<MessageOccurrenceSpecification> createMessageOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::MESSAGEOCCURRENCESPECIFICATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<MessageOccurrenceSpecification> createMessageOccurrenceSpecification_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::MESSAGEOCCURRENCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<MessageOccurrenceSpecification> createMessageOccurrenceSpecification_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::MESSAGEOCCURRENCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<MessageOccurrenceSpecification> createMessageOccurrenceSpecification_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::MESSAGEOCCURRENCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<MessageOccurrenceSpecification> createMessageOccurrenceSpecification_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::MESSAGEOCCURRENCESPECIFICATION_CLASS) const = 0;
 			virtual std::shared_ptr<Model> createModel(const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Model> createModel_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
-			virtual std::shared_ptr<Model> createModel_in_NestingPackage(std::weak_ptr<uml::Package> par_nestingPackage, const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
-			virtual std::shared_ptr<Model> createModel_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
-			virtual std::shared_ptr<Model> createModel_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
-			virtual std::shared_ptr<Model> createModel_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Model> createModel_as_nestedPackage_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
+			virtual std::shared_ptr<Model> createModel_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
+			virtual std::shared_ptr<Model> createModel_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
+			virtual std::shared_ptr<Model> createModel_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
+			virtual std::shared_ptr<Model> createModel_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
+			virtual std::shared_ptr<Model> createModel_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
+			virtual std::shared_ptr<Model> createModel_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
+			virtual std::shared_ptr<Model> createModel_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::MODEL_CLASS) const = 0;
 			virtual std::shared_ptr<Node> createNode(const int metaElementID = umlPackage::NODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Node> createNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
-			virtual std::shared_ptr<Node> createNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
-			virtual std::shared_ptr<Node> createNode_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
-			virtual std::shared_ptr<Node> createNode_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
-			virtual std::shared_ptr<Node> createNode_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Node> createNode_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
+			virtual std::shared_ptr<Node> createNode_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
+			virtual std::shared_ptr<Node> createNode_as_nestedNode_in_Node(std::shared_ptr<Node> par_Node, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
+			virtual std::shared_ptr<Node> createNode_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
+			virtual std::shared_ptr<Node> createNode_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
+			virtual std::shared_ptr<Node> createNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
+			virtual std::shared_ptr<Node> createNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
+			virtual std::shared_ptr<Node> createNode_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
+			virtual std::shared_ptr<Node> createNode_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
+			virtual std::shared_ptr<Node> createNode_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
+			virtual std::shared_ptr<Node> createNode_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::NODE_CLASS) const = 0;
 			virtual std::shared_ptr<Object> createObject(const int metaElementID = umlPackage::OBJECT_CLASS) const = 0;
-			
 			virtual std::shared_ptr<ObjectFlow> createObjectFlow(const int metaElementID = umlPackage::OBJECTFLOW_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ObjectFlow> createObjectFlow_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::OBJECTFLOW_CLASS) const = 0;
-			virtual std::shared_ptr<ObjectFlow> createObjectFlow_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::OBJECTFLOW_CLASS) const = 0;
-			virtual std::shared_ptr<ObjectFlow> createObjectFlow_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::OBJECTFLOW_CLASS) const = 0;
-			virtual std::shared_ptr<ObjectFlow> createObjectFlow_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::OBJECTFLOW_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ObjectFlow> createObjectFlow_as_edge_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::OBJECTFLOW_CLASS) const = 0;
+			virtual std::shared_ptr<ObjectFlow> createObjectFlow_as_edge_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::OBJECTFLOW_CLASS) const = 0;
+			virtual std::shared_ptr<ObjectFlow> createObjectFlow_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::OBJECTFLOW_CLASS) const = 0;
+			virtual std::shared_ptr<ObjectFlow> createObjectFlow_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::OBJECTFLOW_CLASS) const = 0;
 			virtual std::shared_ptr<OccurrenceSpecification> createOccurrenceSpecification(const int metaElementID = umlPackage::OCCURRENCESPECIFICATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<OccurrenceSpecification> createOccurrenceSpecification_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::OCCURRENCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<OccurrenceSpecification> createOccurrenceSpecification_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::OCCURRENCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<OccurrenceSpecification> createOccurrenceSpecification_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::OCCURRENCESPECIFICATION_CLASS) const = 0;
-			virtual std::shared_ptr<OccurrenceSpecification> createOccurrenceSpecification_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::OCCURRENCESPECIFICATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<OccurrenceSpecification> createOccurrenceSpecification_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::OCCURRENCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<OccurrenceSpecification> createOccurrenceSpecification_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::OCCURRENCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<OccurrenceSpecification> createOccurrenceSpecification_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::OCCURRENCESPECIFICATION_CLASS) const = 0;
+			virtual std::shared_ptr<OccurrenceSpecification> createOccurrenceSpecification_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::OCCURRENCESPECIFICATION_CLASS) const = 0;
 			virtual std::shared_ptr<OpaqueAction> createOpaqueAction(const int metaElementID = umlPackage::OPAQUEACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<OpaqueAction> createOpaqueAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::OPAQUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<OpaqueAction> createOpaqueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::OPAQUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<OpaqueAction> createOpaqueAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::OPAQUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<OpaqueAction> createOpaqueAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::OPAQUEACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<OpaqueAction> createOpaqueAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::OPAQUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueAction> createOpaqueAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::OPAQUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueAction> createOpaqueAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::OPAQUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueAction> createOpaqueAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::OPAQUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueAction> createOpaqueAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::OPAQUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueAction> createOpaqueAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::OPAQUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueAction> createOpaqueAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::OPAQUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueAction> createOpaqueAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::OPAQUEACTION_CLASS) const = 0;
 			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior(const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
-			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
-			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
-			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
-			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
-			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_doActivity_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_effect_in_Transition(std::shared_ptr<Transition> par_Transition, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_entry_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_exit_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_ownedBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_BehavioredClassifier, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueBehavior> createOpaqueBehavior_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::OPAQUEBEHAVIOR_CLASS) const = 0;
 			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression(const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_mapping_in_Abstraction(std::shared_ptr<Abstraction> par_Abstraction, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<OpaqueExpression> createOpaqueExpression_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::OPAQUEEXPRESSION_CLASS) const = 0;
 			virtual std::shared_ptr<Operation> createOperation(const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Operation> createOperation_in_Class(std::weak_ptr<uml::Class> par_class, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
-			virtual std::shared_ptr<Operation> createOperation_in_Datatype(std::weak_ptr<uml::DataType> par_datatype, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
-			virtual std::shared_ptr<Operation> createOperation_in_Interface(std::weak_ptr<uml::Interface> par_interface, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
-			virtual std::shared_ptr<Operation> createOperation_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
-			virtual std::shared_ptr<Operation> createOperation_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
-			virtual std::shared_ptr<Operation> createOperation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Operation> createOperation_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Operation> createOperation_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Operation> createOperation_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Operation> createOperation_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Operation> createOperation_as_ownedOperation_in_Class(std::weak_ptr<uml::Class> par_Class, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Operation> createOperation_as_ownedOperation_in_Artifact(std::shared_ptr<Artifact> par_Artifact, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Operation> createOperation_as_ownedOperation_in_DataType(std::weak_ptr<uml::DataType> par_DataType, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Operation> createOperation_as_ownedOperation_in_Interface(std::weak_ptr<uml::Interface> par_Interface, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
+			virtual std::shared_ptr<Operation> createOperation_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::OPERATION_CLASS) const = 0;
 			virtual std::shared_ptr<OperationTemplateParameter> createOperationTemplateParameter(const int metaElementID = umlPackage::OPERATIONTEMPLATEPARAMETER_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<OperationTemplateParameter> createOperationTemplateParameter_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::OPERATIONTEMPLATEPARAMETER_CLASS) const = 0;
-			virtual std::shared_ptr<OperationTemplateParameter> createOperationTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature> par_signature, const int metaElementID = umlPackage::OPERATIONTEMPLATEPARAMETER_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<OperationTemplateParameter> createOperationTemplateParameter_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::OPERATIONTEMPLATEPARAMETER_CLASS) const = 0;
+			virtual std::shared_ptr<OperationTemplateParameter> createOperationTemplateParameter_as_ownedParameter_in_TemplateSignature(std::weak_ptr<uml::TemplateSignature> par_TemplateSignature, const int metaElementID = umlPackage::OPERATIONTEMPLATEPARAMETER_CLASS) const = 0;
 			virtual std::shared_ptr<OutputPin> createOutputPin(const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<OutputPin> createOutputPin_in_Action(std::weak_ptr<uml::Action> par_action, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<OutputPin> createOutputPin_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<OutputPin> createOutputPin_in_CallAction(std::weak_ptr<uml::CallAction> par_callAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<OutputPin> createOutputPin_in_ClearStructuralFeatureAction(std::weak_ptr<uml::ClearStructuralFeatureAction> par_clearStructuralFeatureAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<OutputPin> createOutputPin_in_CreateObjectAction(std::weak_ptr<uml::CreateObjectAction> par_createObjectAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<OutputPin> createOutputPin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<OutputPin> createOutputPin_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<OutputPin> createOutputPin_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<OutputPin> createOutputPin_in_ReadSelfAction(std::weak_ptr<uml::ReadSelfAction> par_readSelfAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<OutputPin> createOutputPin_in_ReadStructuralFeatureAction(std::weak_ptr<uml::ReadStructuralFeatureAction> par_readStructuralFeatureAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<OutputPin> createOutputPin_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
-			virtual std::shared_ptr<OutputPin> createOutputPin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> par_writeStructuralFeatureAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_loopVariable_in_LoopNode(std::shared_ptr<LoopNode> par_LoopNode, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_output_in_Action(std::weak_ptr<uml::Action> par_Action, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_outputValue_in_OpaqueAction(std::shared_ptr<OpaqueAction> par_OpaqueAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> par_WriteStructuralFeatureAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_AcceptEventAction(std::shared_ptr<AcceptEventAction> par_AcceptEventAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_CallAction(std::weak_ptr<uml::CallAction> par_CallAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_ClearStructuralFeatureAction(std::weak_ptr<uml::ClearStructuralFeatureAction> par_ClearStructuralFeatureAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_ConditionalNode(std::shared_ptr<ConditionalNode> par_ConditionalNode, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_CreateLinkObjectAction(std::shared_ptr<CreateLinkObjectAction> par_CreateLinkObjectAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_CreateObjectAction(std::weak_ptr<uml::CreateObjectAction> par_CreateObjectAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_LoopNode(std::shared_ptr<LoopNode> par_LoopNode, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_ReadExtentAction(std::shared_ptr<ReadExtentAction> par_ReadExtentAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_ReadIsClassifiedObjectAction(std::shared_ptr<ReadIsClassifiedObjectAction> par_ReadIsClassifiedObjectAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_ReadLinkAction(std::shared_ptr<ReadLinkAction> par_ReadLinkAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_ReadLinkObjectEndAction(std::shared_ptr<ReadLinkObjectEndAction> par_ReadLinkObjectEndAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_ReadLinkObjectEndQualifierAction(std::shared_ptr<ReadLinkObjectEndQualifierAction> par_ReadLinkObjectEndQualifierAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_ReadSelfAction(std::weak_ptr<uml::ReadSelfAction> par_ReadSelfAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_ReadStructuralFeatureAction(std::weak_ptr<uml::ReadStructuralFeatureAction> par_ReadStructuralFeatureAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_ReadVariableAction(std::shared_ptr<ReadVariableAction> par_ReadVariableAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_ReduceAction(std::shared_ptr<ReduceAction> par_ReduceAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_TestIdentityAction(std::shared_ptr<TestIdentityAction> par_TestIdentityAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_result_in_UnmarshallAction(std::shared_ptr<UnmarshallAction> par_UnmarshallAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_returnInformation_in_AcceptCallAction(std::shared_ptr<AcceptCallAction> par_AcceptCallAction, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
+			virtual std::shared_ptr<OutputPin> createOutputPin_as_structuredNodeOutput_in_StructuredActivityNode(std::shared_ptr<StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::OUTPUTPIN_CLASS) const = 0;
 			virtual std::shared_ptr<Package> createPackage(const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Package> createPackage_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
-			virtual std::shared_ptr<Package> createPackage_in_NestingPackage(std::weak_ptr<uml::Package> par_nestingPackage, const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
-			virtual std::shared_ptr<Package> createPackage_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
-			virtual std::shared_ptr<Package> createPackage_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
-			virtual std::shared_ptr<Package> createPackage_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Package> createPackage_as_nestedPackage_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Package> createPackage_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Package> createPackage_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Package> createPackage_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Package> createPackage_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Package> createPackage_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Package> createPackage_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Package> createPackage_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::PACKAGE_CLASS) const = 0;
 			virtual std::shared_ptr<PackageImport> createPackageImport(const int metaElementID = umlPackage::PACKAGEIMPORT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<PackageImport> createPackageImport_in_ImportingNamespace(std::weak_ptr<uml::Namespace> par_importingNamespace, const int metaElementID = umlPackage::PACKAGEIMPORT_CLASS) const = 0;
-			virtual std::shared_ptr<PackageImport> createPackageImport_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PACKAGEIMPORT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<PackageImport> createPackageImport_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PACKAGEIMPORT_CLASS) const = 0;
+			virtual std::shared_ptr<PackageImport> createPackageImport_as_packageImport_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PACKAGEIMPORT_CLASS) const = 0;
 			virtual std::shared_ptr<PackageMerge> createPackageMerge(const int metaElementID = umlPackage::PACKAGEMERGE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<PackageMerge> createPackageMerge_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PACKAGEMERGE_CLASS) const = 0;
-			virtual std::shared_ptr<PackageMerge> createPackageMerge_in_ReceivingPackage(std::weak_ptr<uml::Package> par_receivingPackage, const int metaElementID = umlPackage::PACKAGEMERGE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<PackageMerge> createPackageMerge_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PACKAGEMERGE_CLASS) const = 0;
+			virtual std::shared_ptr<PackageMerge> createPackageMerge_as_packageMerge_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::PACKAGEMERGE_CLASS) const = 0;
 			virtual std::shared_ptr<Parameter> createParameter(const int metaElementID = umlPackage::PARAMETER_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Parameter> createParameter_in_Behavior(std::weak_ptr<uml::Behavior> par_behavior, const int metaElementID = umlPackage::PARAMETER_CLASS) const = 0;
-			virtual std::shared_ptr<Parameter> createParameter_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::PARAMETER_CLASS) const = 0;
-			virtual std::shared_ptr<Parameter> createParameter_in_Operation(std::weak_ptr<uml::Operation> par_operation, const int metaElementID = umlPackage::PARAMETER_CLASS) const = 0;
-			virtual std::shared_ptr<Parameter> createParameter_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PARAMETER_CLASS) const = 0;
-			virtual std::shared_ptr<Parameter> createParameter_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::PARAMETER_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Parameter> createParameter_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::PARAMETER_CLASS) const = 0;
+			virtual std::shared_ptr<Parameter> createParameter_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PARAMETER_CLASS) const = 0;
+			virtual std::shared_ptr<Parameter> createParameter_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PARAMETER_CLASS) const = 0;
+			virtual std::shared_ptr<Parameter> createParameter_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PARAMETER_CLASS) const = 0;
+			virtual std::shared_ptr<Parameter> createParameter_as_ownedParameter_in_Behavior(std::weak_ptr<uml::Behavior> par_Behavior, const int metaElementID = umlPackage::PARAMETER_CLASS) const = 0;
+			virtual std::shared_ptr<Parameter> createParameter_as_ownedParameter_in_BehavioralFeature(std::weak_ptr<uml::Operation> par_BehavioralFeature, const int metaElementID = umlPackage::PARAMETER_CLASS) const = 0;
+			virtual std::shared_ptr<Parameter> createParameter_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PARAMETER_CLASS) const = 0;
 			virtual std::shared_ptr<ParameterSet> createParameterSet(const int metaElementID = umlPackage::PARAMETERSET_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ParameterSet> createParameterSet_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::PARAMETERSET_CLASS) const = 0;
-			virtual std::shared_ptr<ParameterSet> createParameterSet_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PARAMETERSET_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ParameterSet> createParameterSet_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PARAMETERSET_CLASS) const = 0;
+			virtual std::shared_ptr<ParameterSet> createParameterSet_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PARAMETERSET_CLASS) const = 0;
+			virtual std::shared_ptr<ParameterSet> createParameterSet_as_ownedParameterSet_in_Behavior(std::shared_ptr<Behavior> par_Behavior, const int metaElementID = umlPackage::PARAMETERSET_CLASS) const = 0;
+			virtual std::shared_ptr<ParameterSet> createParameterSet_as_ownedParameterSet_in_BehavioralFeature(std::shared_ptr<BehavioralFeature> par_BehavioralFeature, const int metaElementID = umlPackage::PARAMETERSET_CLASS) const = 0;
 			virtual std::shared_ptr<PartDecomposition> createPartDecomposition(const int metaElementID = umlPackage::PARTDECOMPOSITION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<PartDecomposition> createPartDecomposition_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::PARTDECOMPOSITION_CLASS) const = 0;
-			virtual std::shared_ptr<PartDecomposition> createPartDecomposition_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::PARTDECOMPOSITION_CLASS) const = 0;
-			virtual std::shared_ptr<PartDecomposition> createPartDecomposition_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::PARTDECOMPOSITION_CLASS) const = 0;
-			virtual std::shared_ptr<PartDecomposition> createPartDecomposition_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PARTDECOMPOSITION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<PartDecomposition> createPartDecomposition_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::PARTDECOMPOSITION_CLASS) const = 0;
+			virtual std::shared_ptr<PartDecomposition> createPartDecomposition_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::PARTDECOMPOSITION_CLASS) const = 0;
+			virtual std::shared_ptr<PartDecomposition> createPartDecomposition_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PARTDECOMPOSITION_CLASS) const = 0;
+			virtual std::shared_ptr<PartDecomposition> createPartDecomposition_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PARTDECOMPOSITION_CLASS) const = 0;
 			virtual std::shared_ptr<Port> createPort(const int metaElementID = umlPackage::PORT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Port> createPort_in_AssociationEnd(std::weak_ptr<uml::Property> par_associationEnd, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
-			virtual std::shared_ptr<Port> createPort_in_Class(std::weak_ptr<uml::Class> par_class, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
-			virtual std::shared_ptr<Port> createPort_in_Datatype(std::weak_ptr<uml::DataType> par_datatype, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
-			virtual std::shared_ptr<Port> createPort_in_Interface(std::weak_ptr<uml::Interface> par_interface, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
-			virtual std::shared_ptr<Port> createPort_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
-			virtual std::shared_ptr<Port> createPort_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
-			virtual std::shared_ptr<Port> createPort_in_OwningAssociation(std::weak_ptr<uml::Association> par_owningAssociation, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
-			virtual std::shared_ptr<Port> createPort_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Port> createPort_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
+			virtual std::shared_ptr<Port> createPort_as_ownedAttribute_in_Artifact(std::shared_ptr<Artifact> par_Artifact, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
+			virtual std::shared_ptr<Port> createPort_as_ownedAttribute_in_DataType(std::weak_ptr<uml::DataType> par_DataType, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
+			virtual std::shared_ptr<Port> createPort_as_ownedAttribute_in_Interface(std::weak_ptr<uml::Interface> par_Interface, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
+			virtual std::shared_ptr<Port> createPort_as_ownedAttribute_in_Signal(std::shared_ptr<Signal> par_Signal, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
+			virtual std::shared_ptr<Port> createPort_as_ownedAttribute_in_StructuredClassifier(std::weak_ptr<uml::Class> par_StructuredClassifier, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
+			virtual std::shared_ptr<Port> createPort_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
+			virtual std::shared_ptr<Port> createPort_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
+			virtual std::shared_ptr<Port> createPort_as_ownedEnd_in_Association(std::weak_ptr<uml::Association> par_Association, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
+			virtual std::shared_ptr<Port> createPort_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
+			virtual std::shared_ptr<Port> createPort_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
+			virtual std::shared_ptr<Port> createPort_as_qualifier_in_Property(std::weak_ptr<uml::Property> par_Property, const int metaElementID = umlPackage::PORT_CLASS) const = 0;
 			virtual std::shared_ptr<PrimitiveType> createPrimitiveType(const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
-			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
-			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
-			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
-			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
+			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
+			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
+			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
+			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
+			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
+			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
+			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
+			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
+			virtual std::shared_ptr<PrimitiveType> createPrimitiveType_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::PRIMITIVETYPE_CLASS) const = 0;
 			virtual std::shared_ptr<Profile> createProfile(const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Profile> createProfile_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
-			virtual std::shared_ptr<Profile> createProfile_in_NestingPackage(std::weak_ptr<uml::Package> par_nestingPackage, const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
-			virtual std::shared_ptr<Profile> createProfile_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
-			virtual std::shared_ptr<Profile> createProfile_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
-			virtual std::shared_ptr<Profile> createProfile_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Profile> createProfile_as_nestedPackage_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
+			virtual std::shared_ptr<Profile> createProfile_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
+			virtual std::shared_ptr<Profile> createProfile_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
+			virtual std::shared_ptr<Profile> createProfile_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
+			virtual std::shared_ptr<Profile> createProfile_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
+			virtual std::shared_ptr<Profile> createProfile_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
+			virtual std::shared_ptr<Profile> createProfile_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
+			virtual std::shared_ptr<Profile> createProfile_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::PROFILE_CLASS) const = 0;
 			virtual std::shared_ptr<ProfileApplication> createProfileApplication(const int metaElementID = umlPackage::PROFILEAPPLICATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ProfileApplication> createProfileApplication_in_ApplyingPackage(std::weak_ptr<uml::Package> par_applyingPackage, const int metaElementID = umlPackage::PROFILEAPPLICATION_CLASS) const = 0;
-			virtual std::shared_ptr<ProfileApplication> createProfileApplication_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PROFILEAPPLICATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ProfileApplication> createProfileApplication_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PROFILEAPPLICATION_CLASS) const = 0;
+			virtual std::shared_ptr<ProfileApplication> createProfileApplication_as_profileApplication_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::PROFILEAPPLICATION_CLASS) const = 0;
 			virtual std::shared_ptr<Property> createProperty(const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Property> createProperty_in_AssociationEnd(std::weak_ptr<uml::Property> par_associationEnd, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
-			virtual std::shared_ptr<Property> createProperty_in_Class(std::weak_ptr<uml::Class> par_class, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
-			virtual std::shared_ptr<Property> createProperty_in_Datatype(std::weak_ptr<uml::DataType> par_datatype, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
-			virtual std::shared_ptr<Property> createProperty_in_Interface(std::weak_ptr<uml::Interface> par_interface, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
-			virtual std::shared_ptr<Property> createProperty_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
-			virtual std::shared_ptr<Property> createProperty_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
-			virtual std::shared_ptr<Property> createProperty_in_OwningAssociation(std::weak_ptr<uml::Association> par_owningAssociation, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
-			virtual std::shared_ptr<Property> createProperty_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Property> createProperty_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
+			virtual std::shared_ptr<Property> createProperty_as_ownedAttribute_in_Artifact(std::shared_ptr<Artifact> par_Artifact, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
+			virtual std::shared_ptr<Property> createProperty_as_ownedAttribute_in_DataType(std::weak_ptr<uml::DataType> par_DataType, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
+			virtual std::shared_ptr<Property> createProperty_as_ownedAttribute_in_Interface(std::weak_ptr<uml::Interface> par_Interface, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
+			virtual std::shared_ptr<Property> createProperty_as_ownedAttribute_in_Signal(std::shared_ptr<Signal> par_Signal, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
+			virtual std::shared_ptr<Property> createProperty_as_ownedAttribute_in_StructuredClassifier(std::weak_ptr<uml::Class> par_StructuredClassifier, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
+			virtual std::shared_ptr<Property> createProperty_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
+			virtual std::shared_ptr<Property> createProperty_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
+			virtual std::shared_ptr<Property> createProperty_as_ownedEnd_in_Association(std::weak_ptr<uml::Association> par_Association, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
+			virtual std::shared_ptr<Property> createProperty_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
+			virtual std::shared_ptr<Property> createProperty_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
+			virtual std::shared_ptr<Property> createProperty_as_qualifier_in_Property(std::weak_ptr<uml::Property> par_Property, const int metaElementID = umlPackage::PROPERTY_CLASS) const = 0;
 			virtual std::shared_ptr<ProtocolConformance> createProtocolConformance(const int metaElementID = umlPackage::PROTOCOLCONFORMANCE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ProtocolConformance> createProtocolConformance_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PROTOCOLCONFORMANCE_CLASS) const = 0;
-			virtual std::shared_ptr<ProtocolConformance> createProtocolConformance_in_SpecificMachine(std::weak_ptr<uml::ProtocolStateMachine> par_specificMachine, const int metaElementID = umlPackage::PROTOCOLCONFORMANCE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ProtocolConformance> createProtocolConformance_as_conformance_in_ProtocolStateMachine(std::weak_ptr<uml::ProtocolStateMachine> par_ProtocolStateMachine, const int metaElementID = umlPackage::PROTOCOLCONFORMANCE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolConformance> createProtocolConformance_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PROTOCOLCONFORMANCE_CLASS) const = 0;
 			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine(const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
-			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
-			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
-			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
-			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
-			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_doActivity_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_effect_in_Transition(std::shared_ptr<Transition> par_Transition, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_entry_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_exit_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_ownedBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_BehavioredClassifier, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolStateMachine> createProtocolStateMachine_as_protocol_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::PROTOCOLSTATEMACHINE_CLASS) const = 0;
 			virtual std::shared_ptr<ProtocolTransition> createProtocolTransition(const int metaElementID = umlPackage::PROTOCOLTRANSITION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ProtocolTransition> createProtocolTransition_in_Container(std::weak_ptr<uml::Region> par_container, const int metaElementID = umlPackage::PROTOCOLTRANSITION_CLASS) const = 0;
-			virtual std::shared_ptr<ProtocolTransition> createProtocolTransition_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::PROTOCOLTRANSITION_CLASS) const = 0;
-			virtual std::shared_ptr<ProtocolTransition> createProtocolTransition_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PROTOCOLTRANSITION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ProtocolTransition> createProtocolTransition_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PROTOCOLTRANSITION_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolTransition> createProtocolTransition_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PROTOCOLTRANSITION_CLASS) const = 0;
+			virtual std::shared_ptr<ProtocolTransition> createProtocolTransition_as_transition_in_Region(std::weak_ptr<uml::Region> par_Region, const int metaElementID = umlPackage::PROTOCOLTRANSITION_CLASS) const = 0;
 			virtual std::shared_ptr<Pseudostate> createPseudostate(const int metaElementID = umlPackage::PSEUDOSTATE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Pseudostate> createPseudostate_in_Container(std::weak_ptr<uml::Region> par_container, const int metaElementID = umlPackage::PSEUDOSTATE_CLASS) const = 0;
-			virtual std::shared_ptr<Pseudostate> createPseudostate_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::PSEUDOSTATE_CLASS) const = 0;
-			virtual std::shared_ptr<Pseudostate> createPseudostate_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::PSEUDOSTATE_CLASS) const = 0;
-			virtual std::shared_ptr<Pseudostate> createPseudostate_in_State(std::weak_ptr<uml::State> par_state, const int metaElementID = umlPackage::PSEUDOSTATE_CLASS) const = 0;
-			virtual std::shared_ptr<Pseudostate> createPseudostate_in_StateMachine(std::weak_ptr<uml::StateMachine> par_stateMachine, const int metaElementID = umlPackage::PSEUDOSTATE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Pseudostate> createPseudostate_as_connectionPoint_in_StateMachine(std::weak_ptr<uml::StateMachine> par_StateMachine, const int metaElementID = umlPackage::PSEUDOSTATE_CLASS) const = 0;
+			virtual std::shared_ptr<Pseudostate> createPseudostate_as_connectionPoint_in_State(std::weak_ptr<uml::State> par_State, const int metaElementID = umlPackage::PSEUDOSTATE_CLASS) const = 0;
+			virtual std::shared_ptr<Pseudostate> createPseudostate_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::PSEUDOSTATE_CLASS) const = 0;
+			virtual std::shared_ptr<Pseudostate> createPseudostate_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::PSEUDOSTATE_CLASS) const = 0;
+			virtual std::shared_ptr<Pseudostate> createPseudostate_as_subvertex_in_Region(std::weak_ptr<uml::Region> par_Region, const int metaElementID = umlPackage::PSEUDOSTATE_CLASS) const = 0;
 			virtual std::shared_ptr<QualifierValue> createQualifierValue(const int metaElementID = umlPackage::QUALIFIERVALUE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<QualifierValue> createQualifierValue_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::QUALIFIERVALUE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<QualifierValue> createQualifierValue_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::QUALIFIERVALUE_CLASS) const = 0;
+			virtual std::shared_ptr<QualifierValue> createQualifierValue_as_qualifier_in_LinkEndData(std::shared_ptr<LinkEndData> par_LinkEndData, const int metaElementID = umlPackage::QUALIFIERVALUE_CLASS) const = 0;
 			virtual std::shared_ptr<RaiseExceptionAction> createRaiseExceptionAction(const int metaElementID = umlPackage::RAISEEXCEPTIONACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<RaiseExceptionAction> createRaiseExceptionAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::RAISEEXCEPTIONACTION_CLASS) const = 0;
-			virtual std::shared_ptr<RaiseExceptionAction> createRaiseExceptionAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::RAISEEXCEPTIONACTION_CLASS) const = 0;
-			virtual std::shared_ptr<RaiseExceptionAction> createRaiseExceptionAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::RAISEEXCEPTIONACTION_CLASS) const = 0;
-			virtual std::shared_ptr<RaiseExceptionAction> createRaiseExceptionAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::RAISEEXCEPTIONACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<RaiseExceptionAction> createRaiseExceptionAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::RAISEEXCEPTIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RaiseExceptionAction> createRaiseExceptionAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::RAISEEXCEPTIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RaiseExceptionAction> createRaiseExceptionAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::RAISEEXCEPTIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RaiseExceptionAction> createRaiseExceptionAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::RAISEEXCEPTIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RaiseExceptionAction> createRaiseExceptionAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::RAISEEXCEPTIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RaiseExceptionAction> createRaiseExceptionAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::RAISEEXCEPTIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RaiseExceptionAction> createRaiseExceptionAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::RAISEEXCEPTIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RaiseExceptionAction> createRaiseExceptionAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::RAISEEXCEPTIONACTION_CLASS) const = 0;
 			virtual std::shared_ptr<ReadExtentAction> createReadExtentAction(const int metaElementID = umlPackage::READEXTENTACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ReadExtentAction> createReadExtentAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::READEXTENTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadExtentAction> createReadExtentAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::READEXTENTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadExtentAction> createReadExtentAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::READEXTENTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadExtentAction> createReadExtentAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::READEXTENTACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ReadExtentAction> createReadExtentAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::READEXTENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadExtentAction> createReadExtentAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::READEXTENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadExtentAction> createReadExtentAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::READEXTENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadExtentAction> createReadExtentAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::READEXTENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadExtentAction> createReadExtentAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::READEXTENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadExtentAction> createReadExtentAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::READEXTENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadExtentAction> createReadExtentAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::READEXTENTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadExtentAction> createReadExtentAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::READEXTENTACTION_CLASS) const = 0;
 			virtual std::shared_ptr<ReadIsClassifiedObjectAction> createReadIsClassifiedObjectAction(const int metaElementID = umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ReadIsClassifiedObjectAction> createReadIsClassifiedObjectAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadIsClassifiedObjectAction> createReadIsClassifiedObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadIsClassifiedObjectAction> createReadIsClassifiedObjectAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadIsClassifiedObjectAction> createReadIsClassifiedObjectAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ReadIsClassifiedObjectAction> createReadIsClassifiedObjectAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadIsClassifiedObjectAction> createReadIsClassifiedObjectAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadIsClassifiedObjectAction> createReadIsClassifiedObjectAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadIsClassifiedObjectAction> createReadIsClassifiedObjectAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadIsClassifiedObjectAction> createReadIsClassifiedObjectAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadIsClassifiedObjectAction> createReadIsClassifiedObjectAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadIsClassifiedObjectAction> createReadIsClassifiedObjectAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadIsClassifiedObjectAction> createReadIsClassifiedObjectAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::READISCLASSIFIEDOBJECTACTION_CLASS) const = 0;
 			virtual std::shared_ptr<ReadLinkAction> createReadLinkAction(const int metaElementID = umlPackage::READLINKACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ReadLinkAction> createReadLinkAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::READLINKACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadLinkAction> createReadLinkAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::READLINKACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadLinkAction> createReadLinkAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::READLINKACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadLinkAction> createReadLinkAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::READLINKACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ReadLinkAction> createReadLinkAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::READLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkAction> createReadLinkAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::READLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkAction> createReadLinkAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::READLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkAction> createReadLinkAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::READLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkAction> createReadLinkAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::READLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkAction> createReadLinkAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::READLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkAction> createReadLinkAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::READLINKACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkAction> createReadLinkAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::READLINKACTION_CLASS) const = 0;
 			virtual std::shared_ptr<ReadLinkObjectEndAction> createReadLinkObjectEndAction(const int metaElementID = umlPackage::READLINKOBJECTENDACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ReadLinkObjectEndAction> createReadLinkObjectEndAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::READLINKOBJECTENDACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadLinkObjectEndAction> createReadLinkObjectEndAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::READLINKOBJECTENDACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadLinkObjectEndAction> createReadLinkObjectEndAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::READLINKOBJECTENDACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadLinkObjectEndAction> createReadLinkObjectEndAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::READLINKOBJECTENDACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ReadLinkObjectEndAction> createReadLinkObjectEndAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::READLINKOBJECTENDACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndAction> createReadLinkObjectEndAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::READLINKOBJECTENDACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndAction> createReadLinkObjectEndAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::READLINKOBJECTENDACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndAction> createReadLinkObjectEndAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::READLINKOBJECTENDACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndAction> createReadLinkObjectEndAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::READLINKOBJECTENDACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndAction> createReadLinkObjectEndAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::READLINKOBJECTENDACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndAction> createReadLinkObjectEndAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::READLINKOBJECTENDACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndAction> createReadLinkObjectEndAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::READLINKOBJECTENDACTION_CLASS) const = 0;
 			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> createReadLinkObjectEndQualifierAction(const int metaElementID = umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> createReadLinkObjectEndQualifierAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> createReadLinkObjectEndQualifierAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> createReadLinkObjectEndQualifierAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> createReadLinkObjectEndQualifierAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> createReadLinkObjectEndQualifierAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> createReadLinkObjectEndQualifierAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> createReadLinkObjectEndQualifierAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> createReadLinkObjectEndQualifierAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> createReadLinkObjectEndQualifierAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> createReadLinkObjectEndQualifierAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> createReadLinkObjectEndQualifierAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadLinkObjectEndQualifierAction> createReadLinkObjectEndQualifierAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::READLINKOBJECTENDQUALIFIERACTION_CLASS) const = 0;
 			virtual std::shared_ptr<ReadSelfAction> createReadSelfAction(const int metaElementID = umlPackage::READSELFACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ReadSelfAction> createReadSelfAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::READSELFACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadSelfAction> createReadSelfAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::READSELFACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadSelfAction> createReadSelfAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::READSELFACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadSelfAction> createReadSelfAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::READSELFACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ReadSelfAction> createReadSelfAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::READSELFACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadSelfAction> createReadSelfAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::READSELFACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadSelfAction> createReadSelfAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::READSELFACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadSelfAction> createReadSelfAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::READSELFACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadSelfAction> createReadSelfAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::READSELFACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadSelfAction> createReadSelfAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::READSELFACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadSelfAction> createReadSelfAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::READSELFACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadSelfAction> createReadSelfAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::READSELFACTION_CLASS) const = 0;
 			virtual std::shared_ptr<ReadStructuralFeatureAction> createReadStructuralFeatureAction(const int metaElementID = umlPackage::READSTRUCTURALFEATUREACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ReadStructuralFeatureAction> createReadStructuralFeatureAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::READSTRUCTURALFEATUREACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadStructuralFeatureAction> createReadStructuralFeatureAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::READSTRUCTURALFEATUREACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadStructuralFeatureAction> createReadStructuralFeatureAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::READSTRUCTURALFEATUREACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadStructuralFeatureAction> createReadStructuralFeatureAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::READSTRUCTURALFEATUREACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ReadStructuralFeatureAction> createReadStructuralFeatureAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::READSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadStructuralFeatureAction> createReadStructuralFeatureAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::READSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadStructuralFeatureAction> createReadStructuralFeatureAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::READSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadStructuralFeatureAction> createReadStructuralFeatureAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::READSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadStructuralFeatureAction> createReadStructuralFeatureAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::READSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadStructuralFeatureAction> createReadStructuralFeatureAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::READSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadStructuralFeatureAction> createReadStructuralFeatureAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::READSTRUCTURALFEATUREACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadStructuralFeatureAction> createReadStructuralFeatureAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::READSTRUCTURALFEATUREACTION_CLASS) const = 0;
 			virtual std::shared_ptr<ReadVariableAction> createReadVariableAction(const int metaElementID = umlPackage::READVARIABLEACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ReadVariableAction> createReadVariableAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::READVARIABLEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadVariableAction> createReadVariableAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::READVARIABLEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadVariableAction> createReadVariableAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::READVARIABLEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReadVariableAction> createReadVariableAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::READVARIABLEACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ReadVariableAction> createReadVariableAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::READVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadVariableAction> createReadVariableAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::READVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadVariableAction> createReadVariableAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::READVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadVariableAction> createReadVariableAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::READVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadVariableAction> createReadVariableAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::READVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadVariableAction> createReadVariableAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::READVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadVariableAction> createReadVariableAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::READVARIABLEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReadVariableAction> createReadVariableAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::READVARIABLEACTION_CLASS) const = 0;
 			virtual std::shared_ptr<Realization> createRealization(const int metaElementID = umlPackage::REALIZATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Realization> createRealization_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::REALIZATION_CLASS) const = 0;
-			virtual std::shared_ptr<Realization> createRealization_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::REALIZATION_CLASS) const = 0;
-			virtual std::shared_ptr<Realization> createRealization_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::REALIZATION_CLASS) const = 0;
-			virtual std::shared_ptr<Realization> createRealization_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::REALIZATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Realization> createRealization_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::REALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<Realization> createRealization_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::REALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<Realization> createRealization_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::REALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<Realization> createRealization_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::REALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<Realization> createRealization_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::REALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<Realization> createRealization_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::REALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<Realization> createRealization_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::REALIZATION_CLASS) const = 0;
+			virtual std::shared_ptr<Realization> createRealization_as_roleBinding_in_CollaborationUse(std::shared_ptr<CollaborationUse> par_CollaborationUse, const int metaElementID = umlPackage::REALIZATION_CLASS) const = 0;
 			virtual std::shared_ptr<Reception> createReception(const int metaElementID = umlPackage::RECEPTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Reception> createReception_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::RECEPTION_CLASS) const = 0;
-			virtual std::shared_ptr<Reception> createReception_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::RECEPTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Reception> createReception_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::RECEPTION_CLASS) const = 0;
+			virtual std::shared_ptr<Reception> createReception_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::RECEPTION_CLASS) const = 0;
+			virtual std::shared_ptr<Reception> createReception_as_ownedReception_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::RECEPTION_CLASS) const = 0;
+			virtual std::shared_ptr<Reception> createReception_as_ownedReception_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::RECEPTION_CLASS) const = 0;
 			virtual std::shared_ptr<ReclassifyObjectAction> createReclassifyObjectAction(const int metaElementID = umlPackage::RECLASSIFYOBJECTACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ReclassifyObjectAction> createReclassifyObjectAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::RECLASSIFYOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReclassifyObjectAction> createReclassifyObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::RECLASSIFYOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReclassifyObjectAction> createReclassifyObjectAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::RECLASSIFYOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReclassifyObjectAction> createReclassifyObjectAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::RECLASSIFYOBJECTACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ReclassifyObjectAction> createReclassifyObjectAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::RECLASSIFYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReclassifyObjectAction> createReclassifyObjectAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::RECLASSIFYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReclassifyObjectAction> createReclassifyObjectAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::RECLASSIFYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReclassifyObjectAction> createReclassifyObjectAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::RECLASSIFYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReclassifyObjectAction> createReclassifyObjectAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::RECLASSIFYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReclassifyObjectAction> createReclassifyObjectAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::RECLASSIFYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReclassifyObjectAction> createReclassifyObjectAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::RECLASSIFYOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReclassifyObjectAction> createReclassifyObjectAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::RECLASSIFYOBJECTACTION_CLASS) const = 0;
 			virtual std::shared_ptr<RedefinableTemplateSignature> createRedefinableTemplateSignature(const int metaElementID = umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<RedefinableTemplateSignature> createRedefinableTemplateSignature_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS) const = 0;
-			virtual std::shared_ptr<RedefinableTemplateSignature> createRedefinableTemplateSignature_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS) const = 0;
-			virtual std::shared_ptr<RedefinableTemplateSignature> createRedefinableTemplateSignature_in_Template(std::weak_ptr<uml::TemplateableElement> par_template, const int metaElementID = umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<RedefinableTemplateSignature> createRedefinableTemplateSignature_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS) const = 0;
+			virtual std::shared_ptr<RedefinableTemplateSignature> createRedefinableTemplateSignature_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS) const = 0;
+			virtual std::shared_ptr<RedefinableTemplateSignature> createRedefinableTemplateSignature_as_ownedTemplateSignature_in_TemplateableElement(std::weak_ptr<uml::TemplateableElement> par_TemplateableElement, const int metaElementID = umlPackage::REDEFINABLETEMPLATESIGNATURE_CLASS) const = 0;
 			virtual std::shared_ptr<ReduceAction> createReduceAction(const int metaElementID = umlPackage::REDUCEACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ReduceAction> createReduceAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::REDUCEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReduceAction> createReduceAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::REDUCEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReduceAction> createReduceAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::REDUCEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReduceAction> createReduceAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::REDUCEACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ReduceAction> createReduceAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::REDUCEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReduceAction> createReduceAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::REDUCEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReduceAction> createReduceAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::REDUCEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReduceAction> createReduceAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::REDUCEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReduceAction> createReduceAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::REDUCEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReduceAction> createReduceAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::REDUCEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReduceAction> createReduceAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::REDUCEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReduceAction> createReduceAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::REDUCEACTION_CLASS) const = 0;
 			virtual std::shared_ptr<Region> createRegion(const int metaElementID = umlPackage::REGION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Region> createRegion_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::REGION_CLASS) const = 0;
-			virtual std::shared_ptr<Region> createRegion_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::REGION_CLASS) const = 0;
-			virtual std::shared_ptr<Region> createRegion_in_State(std::weak_ptr<uml::State> par_state, const int metaElementID = umlPackage::REGION_CLASS) const = 0;
-			virtual std::shared_ptr<Region> createRegion_in_StateMachine(std::weak_ptr<uml::StateMachine> par_stateMachine, const int metaElementID = umlPackage::REGION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Region> createRegion_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::REGION_CLASS) const = 0;
+			virtual std::shared_ptr<Region> createRegion_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::REGION_CLASS) const = 0;
+			virtual std::shared_ptr<Region> createRegion_as_region_in_StateMachine(std::weak_ptr<uml::StateMachine> par_StateMachine, const int metaElementID = umlPackage::REGION_CLASS) const = 0;
+			virtual std::shared_ptr<Region> createRegion_as_region_in_State(std::weak_ptr<uml::State> par_State, const int metaElementID = umlPackage::REGION_CLASS) const = 0;
 			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> createRemoveStructuralFeatureValueAction(const int metaElementID = umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> createRemoveStructuralFeatureValueAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> createRemoveStructuralFeatureValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> createRemoveStructuralFeatureValueAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> createRemoveStructuralFeatureValueAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> createRemoveStructuralFeatureValueAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> createRemoveStructuralFeatureValueAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> createRemoveStructuralFeatureValueAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> createRemoveStructuralFeatureValueAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> createRemoveStructuralFeatureValueAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> createRemoveStructuralFeatureValueAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> createRemoveStructuralFeatureValueAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveStructuralFeatureValueAction> createRemoveStructuralFeatureValueAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::REMOVESTRUCTURALFEATUREVALUEACTION_CLASS) const = 0;
 			virtual std::shared_ptr<RemoveVariableValueAction> createRemoveVariableValueAction(const int metaElementID = umlPackage::REMOVEVARIABLEVALUEACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<RemoveVariableValueAction> createRemoveVariableValueAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::REMOVEVARIABLEVALUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<RemoveVariableValueAction> createRemoveVariableValueAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::REMOVEVARIABLEVALUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<RemoveVariableValueAction> createRemoveVariableValueAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::REMOVEVARIABLEVALUEACTION_CLASS) const = 0;
-			virtual std::shared_ptr<RemoveVariableValueAction> createRemoveVariableValueAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::REMOVEVARIABLEVALUEACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<RemoveVariableValueAction> createRemoveVariableValueAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::REMOVEVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveVariableValueAction> createRemoveVariableValueAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::REMOVEVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveVariableValueAction> createRemoveVariableValueAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::REMOVEVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveVariableValueAction> createRemoveVariableValueAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::REMOVEVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveVariableValueAction> createRemoveVariableValueAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::REMOVEVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveVariableValueAction> createRemoveVariableValueAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::REMOVEVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveVariableValueAction> createRemoveVariableValueAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::REMOVEVARIABLEVALUEACTION_CLASS) const = 0;
+			virtual std::shared_ptr<RemoveVariableValueAction> createRemoveVariableValueAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::REMOVEVARIABLEVALUEACTION_CLASS) const = 0;
 			virtual std::shared_ptr<ReplyAction> createReplyAction(const int metaElementID = umlPackage::REPLYACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ReplyAction> createReplyAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::REPLYACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReplyAction> createReplyAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::REPLYACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReplyAction> createReplyAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::REPLYACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ReplyAction> createReplyAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::REPLYACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ReplyAction> createReplyAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::REPLYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReplyAction> createReplyAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::REPLYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReplyAction> createReplyAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::REPLYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReplyAction> createReplyAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::REPLYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReplyAction> createReplyAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::REPLYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReplyAction> createReplyAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::REPLYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReplyAction> createReplyAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::REPLYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ReplyAction> createReplyAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::REPLYACTION_CLASS) const = 0;
 			virtual std::shared_ptr<SendObjectAction> createSendObjectAction(const int metaElementID = umlPackage::SENDOBJECTACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<SendObjectAction> createSendObjectAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::SENDOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<SendObjectAction> createSendObjectAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::SENDOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<SendObjectAction> createSendObjectAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::SENDOBJECTACTION_CLASS) const = 0;
-			virtual std::shared_ptr<SendObjectAction> createSendObjectAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::SENDOBJECTACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<SendObjectAction> createSendObjectAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::SENDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendObjectAction> createSendObjectAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::SENDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendObjectAction> createSendObjectAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::SENDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendObjectAction> createSendObjectAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::SENDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendObjectAction> createSendObjectAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::SENDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendObjectAction> createSendObjectAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::SENDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendObjectAction> createSendObjectAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::SENDOBJECTACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendObjectAction> createSendObjectAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::SENDOBJECTACTION_CLASS) const = 0;
 			virtual std::shared_ptr<SendSignalAction> createSendSignalAction(const int metaElementID = umlPackage::SENDSIGNALACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<SendSignalAction> createSendSignalAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::SENDSIGNALACTION_CLASS) const = 0;
-			virtual std::shared_ptr<SendSignalAction> createSendSignalAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::SENDSIGNALACTION_CLASS) const = 0;
-			virtual std::shared_ptr<SendSignalAction> createSendSignalAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::SENDSIGNALACTION_CLASS) const = 0;
-			virtual std::shared_ptr<SendSignalAction> createSendSignalAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::SENDSIGNALACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<SendSignalAction> createSendSignalAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::SENDSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendSignalAction> createSendSignalAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::SENDSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendSignalAction> createSendSignalAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::SENDSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendSignalAction> createSendSignalAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::SENDSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendSignalAction> createSendSignalAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::SENDSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendSignalAction> createSendSignalAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::SENDSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendSignalAction> createSendSignalAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::SENDSIGNALACTION_CLASS) const = 0;
+			virtual std::shared_ptr<SendSignalAction> createSendSignalAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::SENDSIGNALACTION_CLASS) const = 0;
 			virtual std::shared_ptr<SequenceNode> createSequenceNode(const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<SequenceNode> createSequenceNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
-			virtual std::shared_ptr<SequenceNode> createSequenceNode_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
-			virtual std::shared_ptr<SequenceNode> createSequenceNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
-			virtual std::shared_ptr<SequenceNode> createSequenceNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
-			virtual std::shared_ptr<SequenceNode> createSequenceNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
-			virtual std::shared_ptr<SequenceNode> createSequenceNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<SequenceNode> createSequenceNode_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
+			virtual std::shared_ptr<SequenceNode> createSequenceNode_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
+			virtual std::shared_ptr<SequenceNode> createSequenceNode_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
+			virtual std::shared_ptr<SequenceNode> createSequenceNode_as_group_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
+			virtual std::shared_ptr<SequenceNode> createSequenceNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
+			virtual std::shared_ptr<SequenceNode> createSequenceNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
+			virtual std::shared_ptr<SequenceNode> createSequenceNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
+			virtual std::shared_ptr<SequenceNode> createSequenceNode_as_ownedGroup_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
+			virtual std::shared_ptr<SequenceNode> createSequenceNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
+			virtual std::shared_ptr<SequenceNode> createSequenceNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
+			virtual std::shared_ptr<SequenceNode> createSequenceNode_as_structuredNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
+			virtual std::shared_ptr<SequenceNode> createSequenceNode_as_subgroup_in_ActivityGroup(std::weak_ptr<uml::ActivityGroup> par_ActivityGroup, const int metaElementID = umlPackage::SEQUENCENODE_CLASS) const = 0;
 			virtual std::shared_ptr<Signal> createSignal(const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Signal> createSignal_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
-			virtual std::shared_ptr<Signal> createSignal_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
-			virtual std::shared_ptr<Signal> createSignal_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
-			virtual std::shared_ptr<Signal> createSignal_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
-			virtual std::shared_ptr<Signal> createSignal_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Signal> createSignal_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
+			virtual std::shared_ptr<Signal> createSignal_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
+			virtual std::shared_ptr<Signal> createSignal_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
+			virtual std::shared_ptr<Signal> createSignal_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
+			virtual std::shared_ptr<Signal> createSignal_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
+			virtual std::shared_ptr<Signal> createSignal_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
+			virtual std::shared_ptr<Signal> createSignal_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
+			virtual std::shared_ptr<Signal> createSignal_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
+			virtual std::shared_ptr<Signal> createSignal_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
+			virtual std::shared_ptr<Signal> createSignal_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::SIGNAL_CLASS) const = 0;
 			virtual std::shared_ptr<SignalEvent> createSignalEvent(const int metaElementID = umlPackage::SIGNALEVENT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<SignalEvent> createSignalEvent_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::SIGNALEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<SignalEvent> createSignalEvent_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::SIGNALEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<SignalEvent> createSignalEvent_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::SIGNALEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<SignalEvent> createSignalEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::SIGNALEVENT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<SignalEvent> createSignalEvent_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::SIGNALEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<SignalEvent> createSignalEvent_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::SIGNALEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<SignalEvent> createSignalEvent_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::SIGNALEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<SignalEvent> createSignalEvent_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::SIGNALEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<SignalEvent> createSignalEvent_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::SIGNALEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<SignalEvent> createSignalEvent_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::SIGNALEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<SignalEvent> createSignalEvent_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::SIGNALEVENT_CLASS) const = 0;
 			virtual std::shared_ptr<Slot> createSlot(const int metaElementID = umlPackage::SLOT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Slot> createSlot_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::SLOT_CLASS) const = 0;
-			virtual std::shared_ptr<Slot> createSlot_in_OwningInstance(std::weak_ptr<uml::InstanceSpecification> par_owningInstance, const int metaElementID = umlPackage::SLOT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Slot> createSlot_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::SLOT_CLASS) const = 0;
+			virtual std::shared_ptr<Slot> createSlot_as_slot_in_InstanceSpecification(std::weak_ptr<uml::InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::SLOT_CLASS) const = 0;
 			virtual std::shared_ptr<StartClassifierBehaviorAction> createStartClassifierBehaviorAction(const int metaElementID = umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<StartClassifierBehaviorAction> createStartClassifierBehaviorAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS) const = 0;
-			virtual std::shared_ptr<StartClassifierBehaviorAction> createStartClassifierBehaviorAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS) const = 0;
-			virtual std::shared_ptr<StartClassifierBehaviorAction> createStartClassifierBehaviorAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS) const = 0;
-			virtual std::shared_ptr<StartClassifierBehaviorAction> createStartClassifierBehaviorAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<StartClassifierBehaviorAction> createStartClassifierBehaviorAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartClassifierBehaviorAction> createStartClassifierBehaviorAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartClassifierBehaviorAction> createStartClassifierBehaviorAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartClassifierBehaviorAction> createStartClassifierBehaviorAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartClassifierBehaviorAction> createStartClassifierBehaviorAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartClassifierBehaviorAction> createStartClassifierBehaviorAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartClassifierBehaviorAction> createStartClassifierBehaviorAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartClassifierBehaviorAction> createStartClassifierBehaviorAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::STARTCLASSIFIERBEHAVIORACTION_CLASS) const = 0;
 			virtual std::shared_ptr<StartObjectBehaviorAction> createStartObjectBehaviorAction(const int metaElementID = umlPackage::STARTOBJECTBEHAVIORACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<StartObjectBehaviorAction> createStartObjectBehaviorAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::STARTOBJECTBEHAVIORACTION_CLASS) const = 0;
-			virtual std::shared_ptr<StartObjectBehaviorAction> createStartObjectBehaviorAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::STARTOBJECTBEHAVIORACTION_CLASS) const = 0;
-			virtual std::shared_ptr<StartObjectBehaviorAction> createStartObjectBehaviorAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::STARTOBJECTBEHAVIORACTION_CLASS) const = 0;
-			virtual std::shared_ptr<StartObjectBehaviorAction> createStartObjectBehaviorAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::STARTOBJECTBEHAVIORACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<StartObjectBehaviorAction> createStartObjectBehaviorAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::STARTOBJECTBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartObjectBehaviorAction> createStartObjectBehaviorAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::STARTOBJECTBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartObjectBehaviorAction> createStartObjectBehaviorAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::STARTOBJECTBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartObjectBehaviorAction> createStartObjectBehaviorAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::STARTOBJECTBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartObjectBehaviorAction> createStartObjectBehaviorAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::STARTOBJECTBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartObjectBehaviorAction> createStartObjectBehaviorAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::STARTOBJECTBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartObjectBehaviorAction> createStartObjectBehaviorAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::STARTOBJECTBEHAVIORACTION_CLASS) const = 0;
+			virtual std::shared_ptr<StartObjectBehaviorAction> createStartObjectBehaviorAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::STARTOBJECTBEHAVIORACTION_CLASS) const = 0;
 			virtual std::shared_ptr<State> createState(const int metaElementID = umlPackage::STATE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<State> createState_in_Container(std::weak_ptr<uml::Region> par_container, const int metaElementID = umlPackage::STATE_CLASS) const = 0;
-			virtual std::shared_ptr<State> createState_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::STATE_CLASS) const = 0;
-			virtual std::shared_ptr<State> createState_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::STATE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<State> createState_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::STATE_CLASS) const = 0;
+			virtual std::shared_ptr<State> createState_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::STATE_CLASS) const = 0;
+			virtual std::shared_ptr<State> createState_as_subvertex_in_Region(std::weak_ptr<uml::Region> par_Region, const int metaElementID = umlPackage::STATE_CLASS) const = 0;
 			virtual std::shared_ptr<StateInvariant> createStateInvariant(const int metaElementID = umlPackage::STATEINVARIANT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<StateInvariant> createStateInvariant_in_EnclosingInteraction(std::weak_ptr<uml::Interaction> par_enclosingInteraction, const int metaElementID = umlPackage::STATEINVARIANT_CLASS) const = 0;
-			virtual std::shared_ptr<StateInvariant> createStateInvariant_in_EnclosingOperand(std::weak_ptr<uml::InteractionOperand> par_enclosingOperand, const int metaElementID = umlPackage::STATEINVARIANT_CLASS) const = 0;
-			virtual std::shared_ptr<StateInvariant> createStateInvariant_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::STATEINVARIANT_CLASS) const = 0;
-			virtual std::shared_ptr<StateInvariant> createStateInvariant_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::STATEINVARIANT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<StateInvariant> createStateInvariant_as_fragment_in_Interaction(std::weak_ptr<uml::Interaction> par_Interaction, const int metaElementID = umlPackage::STATEINVARIANT_CLASS) const = 0;
+			virtual std::shared_ptr<StateInvariant> createStateInvariant_as_fragment_in_InteractionOperand(std::weak_ptr<uml::InteractionOperand> par_InteractionOperand, const int metaElementID = umlPackage::STATEINVARIANT_CLASS) const = 0;
+			virtual std::shared_ptr<StateInvariant> createStateInvariant_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::STATEINVARIANT_CLASS) const = 0;
+			virtual std::shared_ptr<StateInvariant> createStateInvariant_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::STATEINVARIANT_CLASS) const = 0;
 			virtual std::shared_ptr<StateMachine> createStateMachine(const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<StateMachine> createStateMachine_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_behavioredClassifier, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
-			virtual std::shared_ptr<StateMachine> createStateMachine_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
-			virtual std::shared_ptr<StateMachine> createStateMachine_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
-			virtual std::shared_ptr<StateMachine> createStateMachine_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
-			virtual std::shared_ptr<StateMachine> createStateMachine_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
-			virtual std::shared_ptr<StateMachine> createStateMachine_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_doActivity_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_effect_in_Transition(std::shared_ptr<Transition> par_Transition, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_entry_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_exit_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_ownedBehavior_in_BehavioredClassifier(std::weak_ptr<uml::BehavioredClassifier> par_BehavioredClassifier, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
+			virtual std::shared_ptr<StateMachine> createStateMachine_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::STATEMACHINE_CLASS) const = 0;
 			virtual std::shared_ptr<Stereotype> createStereotype(const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Stereotype> createStereotype_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
-			virtual std::shared_ptr<Stereotype> createStereotype_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
-			virtual std::shared_ptr<Stereotype> createStereotype_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
-			virtual std::shared_ptr<Stereotype> createStereotype_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
-			virtual std::shared_ptr<Stereotype> createStereotype_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Stereotype> createStereotype_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
+			virtual std::shared_ptr<Stereotype> createStereotype_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
+			virtual std::shared_ptr<Stereotype> createStereotype_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
+			virtual std::shared_ptr<Stereotype> createStereotype_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
+			virtual std::shared_ptr<Stereotype> createStereotype_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
+			virtual std::shared_ptr<Stereotype> createStereotype_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
+			virtual std::shared_ptr<Stereotype> createStereotype_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
+			virtual std::shared_ptr<Stereotype> createStereotype_as_ownedStereotype_in_Package(std::shared_ptr<Package> par_Package, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
+			virtual std::shared_ptr<Stereotype> createStereotype_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
+			virtual std::shared_ptr<Stereotype> createStereotype_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
+			virtual std::shared_ptr<Stereotype> createStereotype_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::STEREOTYPE_CLASS) const = 0;
 			virtual std::shared_ptr<StringExpression> createStringExpression(const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<StringExpression> createStringExpression_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<StringExpression> createStringExpression_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<StringExpression> createStringExpression_in_OwningExpression(std::weak_ptr<uml::StringExpression> par_owningExpression, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<StringExpression> createStringExpression_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<StringExpression> createStringExpression_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<StringExpression> createStringExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<StringExpression> createStringExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_nameExpression_in_NamedElement(std::shared_ptr<NamedElement> par_NamedElement, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_subExpression_in_StringExpression(std::weak_ptr<uml::StringExpression> par_StringExpression, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<StringExpression> createStringExpression_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::STRINGEXPRESSION_CLASS) const = 0;
 			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode(const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
-			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_in_InActivity(std::weak_ptr<uml::Activity> par_inActivity, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
-			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
-			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
-			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
-			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_in_SuperGroup(std::weak_ptr<uml::ActivityGroup> par_superGroup, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
+			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
+			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
+			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_as_group_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
+			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
+			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
+			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
+			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_as_ownedGroup_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
+			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
+			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
+			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_as_structuredNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
+			virtual std::shared_ptr<StructuredActivityNode> createStructuredActivityNode_as_subgroup_in_ActivityGroup(std::weak_ptr<uml::ActivityGroup> par_ActivityGroup, const int metaElementID = umlPackage::STRUCTUREDACTIVITYNODE_CLASS) const = 0;
 			virtual std::shared_ptr<Substitution> createSubstitution(const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Substitution> createSubstitution_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
-			virtual std::shared_ptr<Substitution> createSubstitution_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
-			virtual std::shared_ptr<Substitution> createSubstitution_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
-			virtual std::shared_ptr<Substitution> createSubstitution_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
-			virtual std::shared_ptr<Substitution> createSubstitution_in_SubstitutingClassifier(std::weak_ptr<uml::Classifier> par_substitutingClassifier, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Substitution> createSubstitution_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
+			virtual std::shared_ptr<Substitution> createSubstitution_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
+			virtual std::shared_ptr<Substitution> createSubstitution_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
+			virtual std::shared_ptr<Substitution> createSubstitution_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
+			virtual std::shared_ptr<Substitution> createSubstitution_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
+			virtual std::shared_ptr<Substitution> createSubstitution_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
+			virtual std::shared_ptr<Substitution> createSubstitution_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
+			virtual std::shared_ptr<Substitution> createSubstitution_as_roleBinding_in_CollaborationUse(std::shared_ptr<CollaborationUse> par_CollaborationUse, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
+			virtual std::shared_ptr<Substitution> createSubstitution_as_substitution_in_Classifier(std::weak_ptr<uml::Classifier> par_Classifier, const int metaElementID = umlPackage::SUBSTITUTION_CLASS) const = 0;
 			virtual std::shared_ptr<TemplateBinding> createTemplateBinding(const int metaElementID = umlPackage::TEMPLATEBINDING_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<TemplateBinding> createTemplateBinding_in_BoundElement(std::weak_ptr<uml::TemplateableElement> par_boundElement, const int metaElementID = umlPackage::TEMPLATEBINDING_CLASS) const = 0;
-			virtual std::shared_ptr<TemplateBinding> createTemplateBinding_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::TEMPLATEBINDING_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<TemplateBinding> createTemplateBinding_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::TEMPLATEBINDING_CLASS) const = 0;
+			virtual std::shared_ptr<TemplateBinding> createTemplateBinding_as_templateBinding_in_TemplateableElement(std::weak_ptr<uml::TemplateableElement> par_TemplateableElement, const int metaElementID = umlPackage::TEMPLATEBINDING_CLASS) const = 0;
 			virtual std::shared_ptr<TemplateParameter> createTemplateParameter(const int metaElementID = umlPackage::TEMPLATEPARAMETER_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<TemplateParameter> createTemplateParameter_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::TEMPLATEPARAMETER_CLASS) const = 0;
-			virtual std::shared_ptr<TemplateParameter> createTemplateParameter_in_Signature(std::weak_ptr<uml::TemplateSignature> par_signature, const int metaElementID = umlPackage::TEMPLATEPARAMETER_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<TemplateParameter> createTemplateParameter_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::TEMPLATEPARAMETER_CLASS) const = 0;
+			virtual std::shared_ptr<TemplateParameter> createTemplateParameter_as_ownedParameter_in_TemplateSignature(std::weak_ptr<uml::TemplateSignature> par_TemplateSignature, const int metaElementID = umlPackage::TEMPLATEPARAMETER_CLASS) const = 0;
 			virtual std::shared_ptr<TemplateParameterSubstitution> createTemplateParameterSubstitution(const int metaElementID = umlPackage::TEMPLATEPARAMETERSUBSTITUTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<TemplateParameterSubstitution> createTemplateParameterSubstitution_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::TEMPLATEPARAMETERSUBSTITUTION_CLASS) const = 0;
-			virtual std::shared_ptr<TemplateParameterSubstitution> createTemplateParameterSubstitution_in_TemplateBinding(std::weak_ptr<uml::TemplateBinding> par_templateBinding, const int metaElementID = umlPackage::TEMPLATEPARAMETERSUBSTITUTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<TemplateParameterSubstitution> createTemplateParameterSubstitution_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::TEMPLATEPARAMETERSUBSTITUTION_CLASS) const = 0;
+			virtual std::shared_ptr<TemplateParameterSubstitution> createTemplateParameterSubstitution_as_parameterSubstitution_in_TemplateBinding(std::weak_ptr<uml::TemplateBinding> par_TemplateBinding, const int metaElementID = umlPackage::TEMPLATEPARAMETERSUBSTITUTION_CLASS) const = 0;
 			virtual std::shared_ptr<TemplateSignature> createTemplateSignature(const int metaElementID = umlPackage::TEMPLATESIGNATURE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<TemplateSignature> createTemplateSignature_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::TEMPLATESIGNATURE_CLASS) const = 0;
-			virtual std::shared_ptr<TemplateSignature> createTemplateSignature_in_Template(std::weak_ptr<uml::TemplateableElement> par_template, const int metaElementID = umlPackage::TEMPLATESIGNATURE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<TemplateSignature> createTemplateSignature_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::TEMPLATESIGNATURE_CLASS) const = 0;
+			virtual std::shared_ptr<TemplateSignature> createTemplateSignature_as_ownedTemplateSignature_in_TemplateableElement(std::weak_ptr<uml::TemplateableElement> par_TemplateableElement, const int metaElementID = umlPackage::TEMPLATESIGNATURE_CLASS) const = 0;
 			virtual std::shared_ptr<TestIdentityAction> createTestIdentityAction(const int metaElementID = umlPackage::TESTIDENTITYACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<TestIdentityAction> createTestIdentityAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::TESTIDENTITYACTION_CLASS) const = 0;
-			virtual std::shared_ptr<TestIdentityAction> createTestIdentityAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::TESTIDENTITYACTION_CLASS) const = 0;
-			virtual std::shared_ptr<TestIdentityAction> createTestIdentityAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::TESTIDENTITYACTION_CLASS) const = 0;
-			virtual std::shared_ptr<TestIdentityAction> createTestIdentityAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::TESTIDENTITYACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<TestIdentityAction> createTestIdentityAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::TESTIDENTITYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<TestIdentityAction> createTestIdentityAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::TESTIDENTITYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<TestIdentityAction> createTestIdentityAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::TESTIDENTITYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<TestIdentityAction> createTestIdentityAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::TESTIDENTITYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<TestIdentityAction> createTestIdentityAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::TESTIDENTITYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<TestIdentityAction> createTestIdentityAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::TESTIDENTITYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<TestIdentityAction> createTestIdentityAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::TESTIDENTITYACTION_CLASS) const = 0;
+			virtual std::shared_ptr<TestIdentityAction> createTestIdentityAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::TESTIDENTITYACTION_CLASS) const = 0;
 			virtual std::shared_ptr<TimeConstraint> createTimeConstraint(const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_in_Context(std::weak_ptr<uml::Namespace> par_context, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
-			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_as_condition_in_ParameterSet(std::shared_ptr<ParameterSet> par_ParameterSet, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_as_condition_in_Extend(std::shared_ptr<Extend> par_Extend, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_as_invariant_in_StateInvariant(std::shared_ptr<StateInvariant> par_StateInvariant, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_as_localPostcondition_in_Action(std::shared_ptr<Action> par_Action, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_as_localPrecondition_in_Action(std::shared_ptr<Action> par_Action, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_as_ownedRule_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeConstraint> createTimeConstraint_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::TIMECONSTRAINT_CLASS) const = 0;
 			virtual std::shared_ptr<TimeEvent> createTimeEvent(const int metaElementID = umlPackage::TIMEEVENT_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<TimeEvent> createTimeEvent_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::TIMEEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<TimeEvent> createTimeEvent_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::TIMEEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<TimeEvent> createTimeEvent_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::TIMEEVENT_CLASS) const = 0;
-			virtual std::shared_ptr<TimeEvent> createTimeEvent_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::TIMEEVENT_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<TimeEvent> createTimeEvent_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::TIMEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeEvent> createTimeEvent_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::TIMEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeEvent> createTimeEvent_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::TIMEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeEvent> createTimeEvent_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::TIMEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeEvent> createTimeEvent_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::TIMEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeEvent> createTimeEvent_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::TIMEEVENT_CLASS) const = 0;
+			virtual std::shared_ptr<TimeEvent> createTimeEvent_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::TIMEEVENT_CLASS) const = 0;
 			virtual std::shared_ptr<TimeExpression> createTimeExpression(const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<TimeExpression> createTimeExpression_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<TimeExpression> createTimeExpression_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<TimeExpression> createTimeExpression_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<TimeExpression> createTimeExpression_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<TimeExpression> createTimeExpression_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
-			virtual std::shared_ptr<TimeExpression> createTimeExpression_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeExpression> createTimeExpression_as_when_in_TimeEvent(std::shared_ptr<TimeEvent> par_TimeEvent, const int metaElementID = umlPackage::TIMEEXPRESSION_CLASS) const = 0;
 			virtual std::shared_ptr<TimeInterval> createTimeInterval(const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<TimeInterval> createTimeInterval_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<TimeInterval> createTimeInterval_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<TimeInterval> createTimeInterval_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<TimeInterval> createTimeInterval_in_OwningSlot(std::weak_ptr<uml::Slot> par_owningSlot, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<TimeInterval> createTimeInterval_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
-			virtual std::shared_ptr<TimeInterval> createTimeInterval_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_valueSpecificationAction, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_argument_in_Message(std::shared_ptr<Message> par_Message, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_argument_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_changeExpression_in_ChangeEvent(std::shared_ptr<ChangeEvent> par_ChangeEvent, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_defaultValue_in_Property(std::shared_ptr<Property> par_Property, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_defaultValue_in_Parameter(std::shared_ptr<Parameter> par_Parameter, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_expr_in_TimeExpression(std::shared_ptr<TimeExpression> par_TimeExpression, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_expr_in_Duration(std::shared_ptr<Duration> par_Duration, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_guard_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_joinSpec_in_JoinNode(std::shared_ptr<JoinNode> par_JoinNode, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_lowerValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_maxint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_minint_in_InteractionConstraint(std::shared_ptr<InteractionConstraint> par_InteractionConstraint, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_operand_in_Expression(std::shared_ptr<Expression> par_Expression, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_returnValue_in_InteractionUse(std::shared_ptr<InteractionUse> par_InteractionUse, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_selector_in_Lifeline(std::shared_ptr<Lifeline> par_Lifeline, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_specification_in_Constraint(std::shared_ptr<Constraint> par_Constraint, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_specification_in_InstanceSpecification(std::shared_ptr<InstanceSpecification> par_InstanceSpecification, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_upperBound_in_ObjectNode(std::shared_ptr<ObjectNode> par_ObjectNode, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_upperValue_in_MultiplicityElement(std::shared_ptr<MultiplicityElement> par_MultiplicityElement, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_value_in_Slot(std::weak_ptr<uml::Slot> par_Slot, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_value_in_ValueSpecificationAction(std::weak_ptr<uml::ValueSpecificationAction> par_ValueSpecificationAction, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_value_in_ValuePin(std::shared_ptr<ValuePin> par_ValuePin, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
+			virtual std::shared_ptr<TimeInterval> createTimeInterval_as_weight_in_ActivityEdge(std::shared_ptr<ActivityEdge> par_ActivityEdge, const int metaElementID = umlPackage::TIMEINTERVAL_CLASS) const = 0;
 			virtual std::shared_ptr<TimeObservation> createTimeObservation(const int metaElementID = umlPackage::TIMEOBSERVATION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<TimeObservation> createTimeObservation_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::TIMEOBSERVATION_CLASS) const = 0;
-			virtual std::shared_ptr<TimeObservation> createTimeObservation_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::TIMEOBSERVATION_CLASS) const = 0;
-			virtual std::shared_ptr<TimeObservation> createTimeObservation_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::TIMEOBSERVATION_CLASS) const = 0;
-			virtual std::shared_ptr<TimeObservation> createTimeObservation_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::TIMEOBSERVATION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<TimeObservation> createTimeObservation_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::TIMEOBSERVATION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeObservation> createTimeObservation_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::TIMEOBSERVATION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeObservation> createTimeObservation_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::TIMEOBSERVATION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeObservation> createTimeObservation_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::TIMEOBSERVATION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeObservation> createTimeObservation_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::TIMEOBSERVATION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeObservation> createTimeObservation_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::TIMEOBSERVATION_CLASS) const = 0;
+			virtual std::shared_ptr<TimeObservation> createTimeObservation_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::TIMEOBSERVATION_CLASS) const = 0;
 			virtual std::shared_ptr<Transition> createTransition(const int metaElementID = umlPackage::TRANSITION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Transition> createTransition_in_Container(std::weak_ptr<uml::Region> par_container, const int metaElementID = umlPackage::TRANSITION_CLASS) const = 0;
-			virtual std::shared_ptr<Transition> createTransition_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::TRANSITION_CLASS) const = 0;
-			virtual std::shared_ptr<Transition> createTransition_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::TRANSITION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Transition> createTransition_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::TRANSITION_CLASS) const = 0;
+			virtual std::shared_ptr<Transition> createTransition_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::TRANSITION_CLASS) const = 0;
+			virtual std::shared_ptr<Transition> createTransition_as_transition_in_Region(std::weak_ptr<uml::Region> par_Region, const int metaElementID = umlPackage::TRANSITION_CLASS) const = 0;
 			virtual std::shared_ptr<Trigger> createTrigger(const int metaElementID = umlPackage::TRIGGER_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Trigger> createTrigger_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::TRIGGER_CLASS) const = 0;
-			virtual std::shared_ptr<Trigger> createTrigger_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::TRIGGER_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Trigger> createTrigger_as_deferrableTrigger_in_State(std::shared_ptr<State> par_State, const int metaElementID = umlPackage::TRIGGER_CLASS) const = 0;
+			virtual std::shared_ptr<Trigger> createTrigger_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::TRIGGER_CLASS) const = 0;
+			virtual std::shared_ptr<Trigger> createTrigger_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::TRIGGER_CLASS) const = 0;
+			virtual std::shared_ptr<Trigger> createTrigger_as_trigger_in_Transition(std::shared_ptr<Transition> par_Transition, const int metaElementID = umlPackage::TRIGGER_CLASS) const = 0;
+			virtual std::shared_ptr<Trigger> createTrigger_as_trigger_in_AcceptEventAction(std::shared_ptr<AcceptEventAction> par_AcceptEventAction, const int metaElementID = umlPackage::TRIGGER_CLASS) const = 0;
 			virtual std::shared_ptr<UnmarshallAction> createUnmarshallAction(const int metaElementID = umlPackage::UNMARSHALLACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<UnmarshallAction> createUnmarshallAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::UNMARSHALLACTION_CLASS) const = 0;
-			virtual std::shared_ptr<UnmarshallAction> createUnmarshallAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::UNMARSHALLACTION_CLASS) const = 0;
-			virtual std::shared_ptr<UnmarshallAction> createUnmarshallAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::UNMARSHALLACTION_CLASS) const = 0;
-			virtual std::shared_ptr<UnmarshallAction> createUnmarshallAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::UNMARSHALLACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<UnmarshallAction> createUnmarshallAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::UNMARSHALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<UnmarshallAction> createUnmarshallAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::UNMARSHALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<UnmarshallAction> createUnmarshallAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::UNMARSHALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<UnmarshallAction> createUnmarshallAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::UNMARSHALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<UnmarshallAction> createUnmarshallAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::UNMARSHALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<UnmarshallAction> createUnmarshallAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::UNMARSHALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<UnmarshallAction> createUnmarshallAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::UNMARSHALLACTION_CLASS) const = 0;
+			virtual std::shared_ptr<UnmarshallAction> createUnmarshallAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::UNMARSHALLACTION_CLASS) const = 0;
 			virtual std::shared_ptr<Usage> createUsage(const int metaElementID = umlPackage::USAGE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Usage> createUsage_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::USAGE_CLASS) const = 0;
-			virtual std::shared_ptr<Usage> createUsage_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::USAGE_CLASS) const = 0;
-			virtual std::shared_ptr<Usage> createUsage_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::USAGE_CLASS) const = 0;
-			virtual std::shared_ptr<Usage> createUsage_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::USAGE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Usage> createUsage_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::USAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Usage> createUsage_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::USAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Usage> createUsage_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::USAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Usage> createUsage_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::USAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Usage> createUsage_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::USAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Usage> createUsage_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::USAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Usage> createUsage_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::USAGE_CLASS) const = 0;
+			virtual std::shared_ptr<Usage> createUsage_as_roleBinding_in_CollaborationUse(std::shared_ptr<CollaborationUse> par_CollaborationUse, const int metaElementID = umlPackage::USAGE_CLASS) const = 0;
 			virtual std::shared_ptr<UseCase> createUseCase(const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<UseCase> createUseCase_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
-			virtual std::shared_ptr<UseCase> createUseCase_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
-			virtual std::shared_ptr<UseCase> createUseCase_in_OwningPackage(std::weak_ptr<uml::Package> par_owningPackage, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
-			virtual std::shared_ptr<UseCase> createUseCase_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
-			virtual std::shared_ptr<UseCase> createUseCase_in_Package(std::weak_ptr<uml::Package> par_package, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<UseCase> createUseCase_as_nestedClassifier_in_Class(std::shared_ptr<Class> par_Class, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
+			virtual std::shared_ptr<UseCase> createUseCase_as_nestedClassifier_in_Interface(std::shared_ptr<Interface> par_Interface, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
+			virtual std::shared_ptr<UseCase> createUseCase_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
+			virtual std::shared_ptr<UseCase> createUseCase_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
+			virtual std::shared_ptr<UseCase> createUseCase_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
+			virtual std::shared_ptr<UseCase> createUseCase_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
+			virtual std::shared_ptr<UseCase> createUseCase_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
+			virtual std::shared_ptr<UseCase> createUseCase_as_ownedType_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
+			virtual std::shared_ptr<UseCase> createUseCase_as_ownedUseCase_in_Classifier(std::shared_ptr<Classifier> par_Classifier, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
+			virtual std::shared_ptr<UseCase> createUseCase_as_packagedElement_in_Package(std::weak_ptr<uml::Package> par_Package, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
+			virtual std::shared_ptr<UseCase> createUseCase_as_packagedElement_in_Component(std::shared_ptr<Component> par_Component, const int metaElementID = umlPackage::USECASE_CLASS) const = 0;
 			virtual std::shared_ptr<ValuePin> createValuePin(const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ValuePin> createValuePin_in_Action(std::weak_ptr<uml::Action> par_action, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ValuePin> createValuePin_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ValuePin> createValuePin_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction> par_addStructuralFeatureValueAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ValuePin> createValuePin_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction> par_callOperationAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ValuePin> createValuePin_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction> par_destroyObjectAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ValuePin> createValuePin_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ValuePin> createValuePin_in_InvocationAction(std::weak_ptr<uml::InvocationAction> par_invocationAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ValuePin> createValuePin_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ValuePin> createValuePin_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ValuePin> createValuePin_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> par_removeStructuralFeatureValueAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ValuePin> createValuePin_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction> par_structuralFeatureAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
-			virtual std::shared_ptr<ValuePin> createValuePin_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> par_writeStructuralFeatureAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ValuePin> createValuePin_as_argument_in_InvocationAction(std::weak_ptr<uml::InvocationAction> par_InvocationAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_collection_in_ReduceAction(std::shared_ptr<ReduceAction> par_ReduceAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_exception_in_RaiseExceptionAction(std::shared_ptr<RaiseExceptionAction> par_RaiseExceptionAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_first_in_TestIdentityAction(std::shared_ptr<TestIdentityAction> par_TestIdentityAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_input_in_Action(std::weak_ptr<uml::Action> par_Action, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_inputValue_in_LinkAction(std::shared_ptr<LinkAction> par_LinkAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_inputValue_in_OpaqueAction(std::shared_ptr<OpaqueAction> par_OpaqueAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_insertAt_in_AddStructuralFeatureValueAction(std::weak_ptr<uml::AddStructuralFeatureValueAction> par_AddStructuralFeatureValueAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_insertAt_in_AddVariableValueAction(std::shared_ptr<AddVariableValueAction> par_AddVariableValueAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_loopVariableInput_in_LoopNode(std::shared_ptr<LoopNode> par_LoopNode, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_object_in_StructuralFeatureAction(std::weak_ptr<uml::StructuralFeatureAction> par_StructuralFeatureAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_object_in_ClearAssociationAction(std::shared_ptr<ClearAssociationAction> par_ClearAssociationAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_object_in_ReadIsClassifiedObjectAction(std::shared_ptr<ReadIsClassifiedObjectAction> par_ReadIsClassifiedObjectAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_object_in_ReadLinkObjectEndAction(std::shared_ptr<ReadLinkObjectEndAction> par_ReadLinkObjectEndAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_object_in_ReadLinkObjectEndQualifierAction(std::shared_ptr<ReadLinkObjectEndQualifierAction> par_ReadLinkObjectEndQualifierAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_object_in_ReclassifyObjectAction(std::shared_ptr<ReclassifyObjectAction> par_ReclassifyObjectAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_object_in_StartClassifierBehaviorAction(std::shared_ptr<StartClassifierBehaviorAction> par_StartClassifierBehaviorAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_object_in_StartObjectBehaviorAction(std::shared_ptr<StartObjectBehaviorAction> par_StartObjectBehaviorAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_object_in_UnmarshallAction(std::shared_ptr<UnmarshallAction> par_UnmarshallAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_removeAt_in_RemoveStructuralFeatureValueAction(std::weak_ptr<uml::RemoveStructuralFeatureValueAction> par_RemoveStructuralFeatureValueAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_removeAt_in_RemoveVariableValueAction(std::shared_ptr<RemoveVariableValueAction> par_RemoveVariableValueAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_replyValue_in_ReplyAction(std::shared_ptr<ReplyAction> par_ReplyAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_request_in_SendObjectAction(std::shared_ptr<SendObjectAction> par_SendObjectAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_returnInformation_in_ReplyAction(std::shared_ptr<ReplyAction> par_ReplyAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_second_in_TestIdentityAction(std::shared_ptr<TestIdentityAction> par_TestIdentityAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_structuredNodeInput_in_StructuredActivityNode(std::shared_ptr<StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_target_in_CallOperationAction(std::weak_ptr<uml::CallOperationAction> par_CallOperationAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_target_in_DestroyObjectAction(std::weak_ptr<uml::DestroyObjectAction> par_DestroyObjectAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_target_in_SendObjectAction(std::shared_ptr<SendObjectAction> par_SendObjectAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_target_in_SendSignalAction(std::shared_ptr<SendSignalAction> par_SendSignalAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_value_in_WriteStructuralFeatureAction(std::weak_ptr<uml::WriteStructuralFeatureAction> par_WriteStructuralFeatureAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
+			virtual std::shared_ptr<ValuePin> createValuePin_as_value_in_WriteVariableAction(std::shared_ptr<WriteVariableAction> par_WriteVariableAction, const int metaElementID = umlPackage::VALUEPIN_CLASS) const = 0;
 			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction(const int metaElementID = umlPackage::VALUESPECIFICATIONACTION_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction_in_Activity(std::weak_ptr<uml::Activity> par_activity, const int metaElementID = umlPackage::VALUESPECIFICATIONACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction_in_InStructuredNode(std::weak_ptr<uml::StructuredActivityNode> par_inStructuredNode, const int metaElementID = umlPackage::VALUESPECIFICATIONACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::VALUESPECIFICATIONACTION_CLASS) const = 0;
-			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::VALUESPECIFICATIONACTION_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction_as_action_in_Interaction(std::shared_ptr<Interaction> par_Interaction, const int metaElementID = umlPackage::VALUESPECIFICATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction_as_executableNode_in_SequenceNode(std::shared_ptr<SequenceNode> par_SequenceNode, const int metaElementID = umlPackage::VALUESPECIFICATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction_as_fromAction_in_ActionInputPin(std::shared_ptr<ActionInputPin> par_ActionInputPin, const int metaElementID = umlPackage::VALUESPECIFICATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction_as_node_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::VALUESPECIFICATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction_as_node_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::VALUESPECIFICATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::VALUESPECIFICATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::VALUESPECIFICATIONACTION_CLASS) const = 0;
+			virtual std::shared_ptr<ValueSpecificationAction> createValueSpecificationAction_as_ownedNode_in_Activity(std::shared_ptr<Activity> par_Activity, const int metaElementID = umlPackage::VALUESPECIFICATIONACTION_CLASS) const = 0;
 			virtual std::shared_ptr<Variable> createVariable(const int metaElementID = umlPackage::VARIABLE_CLASS) const = 0;
-			//Add containing object
-			virtual std::shared_ptr<Variable> createVariable_in_ActivityScope(std::weak_ptr<uml::Activity> par_activityScope, const int metaElementID = umlPackage::VARIABLE_CLASS) const = 0;
-			virtual std::shared_ptr<Variable> createVariable_in_Namespace(std::weak_ptr<uml::Namespace> par_namespace, const int metaElementID = umlPackage::VARIABLE_CLASS) const = 0;
-			virtual std::shared_ptr<Variable> createVariable_in_Owner(std::weak_ptr<uml::Element> par_owner, const int metaElementID = umlPackage::VARIABLE_CLASS) const = 0;
-			virtual std::shared_ptr<Variable> createVariable_in_OwningTemplateParameter(std::weak_ptr<uml::TemplateParameter> par_owningTemplateParameter, const int metaElementID = umlPackage::VARIABLE_CLASS) const = 0;
-			virtual std::shared_ptr<Variable> createVariable_in_Scope(std::weak_ptr<uml::StructuredActivityNode> par_scope, const int metaElementID = umlPackage::VARIABLE_CLASS) const = 0;
-			
+			//Add as contained object
+			virtual std::shared_ptr<Variable> createVariable_as_ownedActual_in_TemplateParameterSubstitution(std::shared_ptr<TemplateParameterSubstitution> par_TemplateParameterSubstitution, const int metaElementID = umlPackage::VARIABLE_CLASS) const = 0;
+			virtual std::shared_ptr<Variable> createVariable_as_ownedDefault_in_TemplateParameter(std::shared_ptr<TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::VARIABLE_CLASS) const = 0;
+			virtual std::shared_ptr<Variable> createVariable_as_ownedElement_in_Element(std::weak_ptr<uml::Element> par_Element, const int metaElementID = umlPackage::VARIABLE_CLASS) const = 0;
+			virtual std::shared_ptr<Variable> createVariable_as_ownedMember_in_Namespace(std::weak_ptr<uml::Namespace> par_Namespace, const int metaElementID = umlPackage::VARIABLE_CLASS) const = 0;
+			virtual std::shared_ptr<Variable> createVariable_as_ownedParameteredElement_in_TemplateParameter(std::weak_ptr<uml::TemplateParameter> par_TemplateParameter, const int metaElementID = umlPackage::VARIABLE_CLASS) const = 0;
+			virtual std::shared_ptr<Variable> createVariable_as_variable_in_Activity(std::weak_ptr<uml::Activity> par_Activity, const int metaElementID = umlPackage::VARIABLE_CLASS) const = 0;
+			virtual std::shared_ptr<Variable> createVariable_as_variable_in_StructuredActivityNode(std::weak_ptr<uml::StructuredActivityNode> par_StructuredActivityNode, const int metaElementID = umlPackage::VARIABLE_CLASS) const = 0;
 			
 	};
 }

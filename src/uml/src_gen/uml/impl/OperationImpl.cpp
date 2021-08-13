@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -780,13 +779,25 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::OPERATION_ATTRIBUTE_BODYCONDITION:
-			return eAny(getBodyCondition()); //16730
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBodyCondition();
+				return eAny(returnValue); //16730
+			}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_CLASS:
-			return eAny(getClass().lock()); //16731
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getClass().lock();
+				return eAny(returnValue); //16731
+			}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_DATATYPE:
-			return eAny(getDatatype().lock()); //16732
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDatatype().lock();
+				return eAny(returnValue); //16732
+			}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_INTERFACE:
-			return eAny(getInterface().lock()); //16733
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInterface().lock();
+				return eAny(returnValue); //16733
+			}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_ISORDERED:
 			return eAny(getIsOrdered()); //16734
 		case uml::umlPackage::OPERATION_ATTRIBUTE_ISQUERY:
@@ -832,7 +843,10 @@ Any OperationImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //16740			
 		}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_TYPE:
-			return eAny(getType()); //16741
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getType();
+				return eAny(returnValue); //16741
+			}
 		case uml::umlPackage::OPERATION_ATTRIBUTE_UPPER:
 			return eAny(getUpper()); //16742
 	}

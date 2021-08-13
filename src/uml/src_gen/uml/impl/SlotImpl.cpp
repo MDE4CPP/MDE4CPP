@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -272,9 +272,15 @@ Any SlotImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::SLOT_ATTRIBUTE_DEFININGFEATURE:
-			return eAny(getDefiningFeature()); //2173
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDefiningFeature();
+				return eAny(returnValue); //2173
+			}
 		case uml::umlPackage::SLOT_ATTRIBUTE_OWNINGINSTANCE:
-			return eAny(getOwningInstance().lock()); //2175
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getOwningInstance().lock();
+				return eAny(returnValue); //2175
+			}
 		case uml::umlPackage::SLOT_ATTRIBUTE_VALUE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

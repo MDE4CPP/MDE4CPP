@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -404,7 +403,10 @@ Any ExtensionImpl::eGet(int featureID, bool resolve, bool coreType) const
 		case uml::umlPackage::EXTENSION_ATTRIBUTE_ISREQUIRED:
 			return eAny(getIsRequired()); //9744
 		case uml::umlPackage::EXTENSION_ATTRIBUTE_METACLASS:
-			return eAny(getMetaclass()); //9745
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getMetaclass();
+				return eAny(returnValue); //9745
+			}
 	}
 	return AssociationImpl::eGet(featureID, resolve, coreType);
 }

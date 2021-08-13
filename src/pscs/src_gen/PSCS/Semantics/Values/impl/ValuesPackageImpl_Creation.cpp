@@ -37,11 +37,11 @@ void ValuesPackageImpl::createPackageContents(std::shared_ptr<ecore::EPackage> p
 
 void ValuesPackageImpl::createCS_OpaqueExpressionEvaluationContent(std::shared_ptr<ecore::EPackage> package, std::shared_ptr<ecore::ecoreFactory> factory)
 {
-	m_cS_OpaqueExpressionEvaluation_Class = factory->createEClass_in_EPackage(package, CS_OPAQUEEXPRESSIONEVALUATION_CLASS);
+	m_cS_OpaqueExpressionEvaluation_Class = factory->createEClass_as_eClassifiers_in_EPackage(package, CS_OPAQUEEXPRESSIONEVALUATION_CLASS);
 	
 	
-	m_cS_OpaqueExpressionEvaluation_Operation_evaluate = factory->createEOperation_in_EContainingClass(m_cS_OpaqueExpressionEvaluation_Class, CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EVALUATE);
-	m_cS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior = factory->createEOperation_in_EContainingClass(m_cS_OpaqueExpressionEvaluation_Class, CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EXECUTEEXPRESSIONBEHAVIOR);
+	m_cS_OpaqueExpressionEvaluation_Operation_evaluate = factory->createEOperation_as_eOperations_in_EClass(m_cS_OpaqueExpressionEvaluation_Class, CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EVALUATE);
+	m_cS_OpaqueExpressionEvaluation_Operation_executeExpressionBehavior = factory->createEOperation_as_eOperations_in_EClass(m_cS_OpaqueExpressionEvaluation_Class, CS_OPAQUEEXPRESSIONEVALUATION_OPERATION_EXECUTEEXPRESSIONBEHAVIOR);
 	
 }
 

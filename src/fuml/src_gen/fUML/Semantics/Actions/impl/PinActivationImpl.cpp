@@ -18,8 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -272,9 +273,15 @@ Any PinActivationImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_ACTIONACTIVATION:
-			return eAny(getActionActivation().lock()); //887
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getActionActivation().lock();
+				return eAny(returnValue); //887
+			}
 		case fUML::Semantics::Actions::ActionsPackage::PINACTIVATION_ATTRIBUTE_PIN:
-			return eAny(getPin()); //888
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getPin();
+				return eAny(returnValue); //888
+			}
 	}
 	return fUML::Semantics::Activities::ObjectNodeActivationImpl::eGet(featureID, resolve, coreType);
 }

@@ -445,7 +445,7 @@ void EvaluationsPackageImpl::initializeEvalEnvironmentContent()
 	m_evalEnvironment_Operation_add_NameValueBinding->setUnique(true);
 	m_evalEnvironment_Operation_add_NameValueBinding->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_add_NameValueBinding);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_evalEnvironment_Operation_add_NameValueBinding);
 		parameter->setName("n");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -467,7 +467,7 @@ void EvaluationsPackageImpl::initializeEvalEnvironmentContent()
 	m_evalEnvironment_Operation_addAll_NameValueBinding->setUnique(true);
 	m_evalEnvironment_Operation_addAll_NameValueBinding->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_addAll_NameValueBinding);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_evalEnvironment_Operation_addAll_NameValueBinding);
 		parameter->setName("nvbs");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);
@@ -483,7 +483,7 @@ void EvaluationsPackageImpl::initializeEvalEnvironmentContent()
 	m_evalEnvironment_Operation_find_String->setUnique(true);
 	m_evalEnvironment_Operation_find_String->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_find_String);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_evalEnvironment_Operation_find_String);
 		parameter->setName("name");
 		parameter->setEType(types::typesPackage::eInstance()->getString_Class());
 		parameter->setLowerBound(0);
@@ -499,7 +499,7 @@ void EvaluationsPackageImpl::initializeEvalEnvironmentContent()
 	m_evalEnvironment_Operation_getValueOf_EString->setUnique(true);
 	m_evalEnvironment_Operation_getValueOf_EString->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_getValueOf_EString);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_evalEnvironment_Operation_getValueOf_EString);
 		parameter->setName("n");
 		parameter->setEType(ecore::ecorePackage::eInstance()->getEString_Class());
 		parameter->setLowerBound(0);
@@ -521,7 +521,7 @@ void EvaluationsPackageImpl::initializeEvalEnvironmentContent()
 	m_evalEnvironment_Operation_replace_NameValueBinding->setUnique(true);
 	m_evalEnvironment_Operation_replace_NameValueBinding->setOrdered(false);
 	{
-		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(m_evalEnvironment_Operation_replace_NameValueBinding);
+		std::shared_ptr<ecore::EParameter> parameter = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(m_evalEnvironment_Operation_replace_NameValueBinding);
 		parameter->setName("n");
 		parameter->setEType(nullptr);
 		parameter->setLowerBound(0);

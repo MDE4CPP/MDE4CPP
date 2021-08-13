@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -488,9 +487,15 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_ACTIVITY:
-			return eAny(getActivity().lock()); //812
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getActivity().lock();
+				return eAny(returnValue); //812
+			}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_GUARD:
-			return eAny(getGuard()); //813
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getGuard();
+				return eAny(returnValue); //813
+			}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INGROUP:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -516,9 +521,15 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //814			
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INSTRUCTUREDNODE:
-			return eAny(getInStructuredNode().lock()); //816
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInStructuredNode().lock();
+				return eAny(returnValue); //816
+			}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_INTERRUPTS:
-			return eAny(getInterrupts()); //815
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInterrupts();
+				return eAny(returnValue); //815
+			}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_REDEFINEDEDGE:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());
@@ -532,11 +543,20 @@ Any ActivityEdgeImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //819			
 		}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_SOURCE:
-			return eAny(getSource()); //818
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSource();
+				return eAny(returnValue); //818
+			}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_TARGET:
-			return eAny(getTarget()); //817
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getTarget();
+				return eAny(returnValue); //817
+			}
 		case uml::umlPackage::ACTIVITYEDGE_ATTRIBUTE_WEIGHT:
-			return eAny(getWeight()); //820
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getWeight();
+				return eAny(returnValue); //820
+			}
 	}
 	return RedefinableElementImpl::eGet(featureID, resolve, coreType);
 }

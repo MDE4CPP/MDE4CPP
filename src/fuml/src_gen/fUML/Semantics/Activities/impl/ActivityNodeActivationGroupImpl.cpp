@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -724,9 +725,15 @@ Any ActivityNodeActivationGroupImpl::eGet(int featureID, bool resolve, bool core
 	switch(featureID)
 	{
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_ACTIVITYEXECUTION:
-			return eAny(getActivityExecution().lock()); //102
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getActivityExecution().lock();
+				return eAny(returnValue); //102
+			}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_CONTAININGNODEACTIVATION:
-			return eAny(getContainingNodeActivation().lock()); //103
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getContainingNodeActivation().lock();
+				return eAny(returnValue); //103
+			}
 		case fUML::Semantics::Activities::ActivitiesPackage::ACTIVITYNODEACTIVATIONGROUP_ATTRIBUTE_EDGEINSTANCES:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

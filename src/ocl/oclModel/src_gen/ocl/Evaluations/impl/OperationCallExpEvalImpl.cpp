@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -32,11 +33,11 @@
 
 #include <exception> // used in Persistence
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
-#include "fUML/Semantics/Loci/LociFactory.hpp"
+#include "ocl/Expressions/ExpressionsFactory.hpp"
 #include "uml/umlFactory.hpp"
 #include "fUML/Semantics/Values/ValuesFactory.hpp"
 #include "fUML/Semantics/SimpleClassifiers/SimpleClassifiersFactory.hpp"
-#include "ocl/Expressions/ExpressionsFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "ocl/Evaluations/EvalEnvironment.hpp"
@@ -202,7 +203,10 @@ Any OperationCallExpEvalImpl::eGet(int featureID, bool resolve, bool coreType) c
 			return eAny(tempList); //668			
 		}
 		case ocl::Evaluations::EvaluationsPackage::OPERATIONCALLEXPEVAL_ATTRIBUTE_REFERREDOPERATION:
-			return eAny(getReferredOperation()); //667
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReferredOperation();
+				return eAny(returnValue); //667
+			}
 	}
 	return ModelPropertyCallExpEvalImpl::eGet(featureID, resolve, coreType);
 }

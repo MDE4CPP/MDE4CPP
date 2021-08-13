@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -234,7 +234,10 @@ Any EEnumLiteralImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_EENUM:
-			return eAny(getEEnum().lock()); //218
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEEnum().lock();
+				return eAny(returnValue); //218
+			}
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_INSTANCE:
 			return eAny(getInstance()); //216
 		case ecore::ecorePackage::EENUMLITERAL_ATTRIBUTE_LITERAL:

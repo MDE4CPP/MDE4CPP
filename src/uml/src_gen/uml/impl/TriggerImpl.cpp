@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -230,7 +229,10 @@ Any TriggerImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_EVENT:
-			return eAny(getEvent()); //2439
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEvent();
+				return eAny(returnValue); //2439
+			}
 		case uml::umlPackage::TRIGGER_ATTRIBUTE_PORT:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

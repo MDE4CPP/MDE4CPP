@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -437,19 +436,34 @@ Any MessageImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //1479			
 		}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_CONNECTOR:
-			return eAny(getConnector()); //14710
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getConnector();
+				return eAny(returnValue); //14710
+			}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_INTERACTION:
-			return eAny(getInteraction().lock()); //14711
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getInteraction().lock();
+				return eAny(returnValue); //14711
+			}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGEKIND:
 			return eAny(getMessageKind()); //14712
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_MESSAGESORT:
 			return eAny(getMessageSort()); //14713
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_RECEIVEEVENT:
-			return eAny(getReceiveEvent()); //14714
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReceiveEvent();
+				return eAny(returnValue); //14714
+			}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_SENDEVENT:
-			return eAny(getSendEvent()); //14715
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSendEvent();
+				return eAny(returnValue); //14715
+			}
 		case uml::umlPackage::MESSAGE_ATTRIBUTE_SIGNATURE:
-			return eAny(getSignature()); //14716
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSignature();
+				return eAny(returnValue); //14716
+			}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

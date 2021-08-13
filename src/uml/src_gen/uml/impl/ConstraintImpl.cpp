@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -329,9 +328,15 @@ Any ConstraintImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //5712			
 		}
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_CONTEXT:
-			return eAny(getContext().lock()); //5713
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getContext().lock();
+				return eAny(returnValue); //5713
+			}
 		case uml::umlPackage::CONSTRAINT_ATTRIBUTE_SPECIFICATION:
-			return eAny(getSpecification()); //5714
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSpecification();
+				return eAny(returnValue); //5714
+			}
 	}
 	return PackageableElementImpl::eGet(featureID, resolve, coreType);
 }

@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -327,7 +326,10 @@ Any EStructuralFeatureImpl::eGet(int featureID, bool resolve, bool coreType) con
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_DERIVED:
 			return eAny(isDerived()); //5019
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_ECONTAININGCLASS:
-			return eAny(getEContainingClass().lock()); //5021
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEContainingClass().lock();
+				return eAny(returnValue); //5021
+			}
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_FEATUREID:
 			return eAny(getFeatureID()); //5020
 		case ecore::ecorePackage::ESTRUCTURALFEATURE_ATTRIBUTE_TRANSIENT:

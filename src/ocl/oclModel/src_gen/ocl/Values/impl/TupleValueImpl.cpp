@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -235,7 +236,10 @@ Any TupleValueImpl::eGet(int featureID, bool resolve, bool coreType) const
 			return eAny(tempList); //890			
 		}
 		case ocl::Values::ValuesPackage::TUPLEVALUE_ATTRIBUTE_MODEL:
-			return eAny(getModel()); //891
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getModel();
+				return eAny(returnValue); //891
+			}
 	}
 	return StaticValueImpl::eGet(featureID, resolve, coreType);
 }

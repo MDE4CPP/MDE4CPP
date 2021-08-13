@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/Any.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
@@ -226,9 +225,15 @@ Any GeneralOrderingImpl::eGet(int featureID, bool resolve, bool coreType) const
 	switch(featureID)
 	{
 		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_AFTER:
-			return eAny(getAfter()); //1089
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getAfter();
+				return eAny(returnValue); //1089
+			}
 		case uml::umlPackage::GENERALORDERING_ATTRIBUTE_BEFORE:
-			return eAny(getBefore()); //10810
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getBefore();
+				return eAny(returnValue); //10810
+			}
 	}
 	return NamedElementImpl::eGet(featureID, resolve, coreType);
 }

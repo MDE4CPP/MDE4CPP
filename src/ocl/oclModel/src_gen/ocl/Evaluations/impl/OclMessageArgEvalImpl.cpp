@@ -19,6 +19,7 @@
 #include <sstream>
 
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -31,9 +32,9 @@
 #include "persistence/interfaces/XSaveHandler.hpp" // used for Persistence
 
 #include <exception> // used in Persistence
-#include "fUML/Semantics/Loci/LociFactory.hpp"
 #include "ocl/Evaluations/EvaluationsFactory.hpp"
 #include "uml/umlFactory.hpp"
+#include "fUML/Semantics/Loci/LociFactory.hpp"
 
 
 #include "fUML/Semantics/Values/Evaluation.hpp"
@@ -195,11 +196,20 @@ Any OclMessageArgEvalImpl::eGet(int featureID, bool resolve, bool coreType) cons
 	switch(featureID)
 	{
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_EXPRESSION:
-			return eAny(getExpression()); //613
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getExpression();
+				return eAny(returnValue); //613
+			}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_UNSPECIFIED:
-			return eAny(getUnspecified()); //612
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getUnspecified();
+				return eAny(returnValue); //612
+			}
 		case ocl::Evaluations::EvaluationsPackage::OCLMESSAGEARGEVAL_ATTRIBUTE_VARIABLE:
-			return eAny(getVariable()); //614
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getVariable();
+				return eAny(returnValue); //614
+			}
 	}
 	return fUML::Semantics::Values::EvaluationImpl::eGet(featureID, resolve, coreType);
 }

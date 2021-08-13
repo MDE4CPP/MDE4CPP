@@ -18,10 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
-#include "abstractDataTypes/Subset.hpp"
 #include "abstractDataTypes/SubsetUnion.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -346,9 +345,15 @@ Any InteractionFragmentImpl::eGet(int featureID, bool resolve, bool coreType) co
 			return eAny(tempList); //1219			
 		}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGINTERACTION:
-			return eAny(getEnclosingInteraction().lock()); //12111
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEnclosingInteraction().lock();
+				return eAny(returnValue); //12111
+			}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_ENCLOSINGOPERAND:
-			return eAny(getEnclosingOperand().lock()); //12110
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getEnclosingOperand().lock();
+				return eAny(returnValue); //12110
+			}
 		case uml::umlPackage::INTERACTIONFRAGMENT_ATTRIBUTE_GENERALORDERING:
 		{
 			std::shared_ptr<Bag<ecore::EObject>> tempList(new Bag<ecore::EObject>());

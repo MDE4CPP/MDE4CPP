@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -352,7 +352,10 @@ Any DestroyObjectActionActivationImpl::eGet(int featureID, bool resolve, bool co
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::DESTROYOBJECTACTIONACTIVATION_ATTRIBUTE_DESTROYOBJECTACTION:
-			return eAny(getDestroyObjectAction()); //3911
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getDestroyObjectAction();
+				return eAny(returnValue); //3911
+			}
 	}
 	return ActionActivationImpl::eGet(featureID, resolve, coreType);
 }

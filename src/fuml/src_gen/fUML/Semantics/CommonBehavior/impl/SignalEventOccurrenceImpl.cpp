@@ -20,6 +20,7 @@
 
 #include "abstractDataTypes/Bag.hpp"
 
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -174,7 +175,10 @@ Any SignalEventOccurrenceImpl::eGet(int featureID, bool resolve, bool coreType) 
 	switch(featureID)
 	{
 		case fUML::Semantics::CommonBehavior::CommonBehaviorPackage::SIGNALEVENTOCCURRENCE_ATTRIBUTE_SIGNALINSTANCE:
-			return eAny(getSignalInstance()); //1061
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getSignalInstance();
+				return eAny(returnValue); //1061
+			}
 	}
 	return EventOccurrenceImpl::eGet(featureID, resolve, coreType);
 }

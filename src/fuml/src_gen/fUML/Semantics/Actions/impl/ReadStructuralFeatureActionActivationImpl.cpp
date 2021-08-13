@@ -18,9 +18,9 @@
 #include <iostream>
 #include <sstream>
 
-#include "abstractDataTypes/Bag.hpp"
 #include "abstractDataTypes/Subset.hpp"
-#include "abstractDataTypes/Union.hpp"
+
+
 #include "abstractDataTypes/SubsetUnion.hpp"
 #include "ecore/EAnnotation.hpp"
 #include "ecore/EClass.hpp"
@@ -274,7 +274,10 @@ Any ReadStructuralFeatureActionActivationImpl::eGet(int featureID, bool resolve,
 	switch(featureID)
 	{
 		case fUML::Semantics::Actions::ActionsPackage::READSTRUCTURALFEATUREACTIONACTIVATION_ATTRIBUTE_READSTRUCTURALFEATUREACTION:
-			return eAny(getReadStructuralFeatureAction()); //9411
+			{
+				std::shared_ptr<ecore::EObject> returnValue=getReadStructuralFeatureAction();
+				return eAny(returnValue); //9411
+			}
 	}
 	return StructuralFeatureActionActivationImpl::eGet(featureID, resolve, coreType);
 }
