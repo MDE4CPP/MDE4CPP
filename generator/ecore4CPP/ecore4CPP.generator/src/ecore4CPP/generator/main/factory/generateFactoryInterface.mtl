@@ -79,7 +79,8 @@ namespace [anEPackage.generateNamespaceDefinition()/]
 [for (subPackage : EPackage | anEPackage.eSubpackages->sortedBy(name))]
 [subPackage.generateForwardDeclarations()/]
 [/for]
-[let includeClasses:OrderedSet(EClassifier) = OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass).getAllComposition().eType->asOrderedSet()->sortedBy(name)]
+[comment] Deprecated?
+[let includeClasses:OrderedSet(EClassifier) = OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass).getAllCompositionsToClass().eType->asOrderedSet()->sortedBy(name)]
 	[if (includeClasses->size()>0)]
 		[let includeNameSpaces:OrderedSet(EPackage) = includeClasses.ePackage->asOrderedSet()->sortedBy(name)]
 			[if (includeNameSpaces->size()>0)]
@@ -95,5 +96,20 @@ namespace [includeNamespace.generateNamespaceDefinition()/]
 		[/let]
 	[/if]
 [/let]
+[/comment]
+[comment Forward declarations for composition container classes /]
+[let packageCompositionContainerClasses : OrderedSet(EClass) = anEPackage.eClassifiers->filter(EClass).getAllCompositionsToClass().eContainingClass->asOrderedSet()]
+	[if (packageCompositionContainerClasses->size() > 0)]
+		[for (aForwardDeclaredPackage : EPackage | packageCompositionContainerClasses.ePackage->asOrderedSet()->reject(p : EPackage | p = anEPackage)->sortedBy(name))]
+namespace [aForwardDeclaredPackage.generateNamespaceDefinition()/]
+{
+			[for (forwardDeclaredClass : EClass | packageCompositionContainerClasses->select(ePackage = aForwardDeclaredPackage)->asOrderedSet()->sortedBy(name))]
+	class [forwardDeclaredClass.name/];
+			[/for]
+}
+		[/for]
+	[/if]
+[/let]
+
 
 [/template]

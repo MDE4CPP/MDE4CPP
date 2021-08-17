@@ -129,7 +129,7 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 	switch(metaElementID)
 	{
 	[for (aClass : EClass | anEPackage.eClassifiers->selectByKind(EClass)->select(not doNotGenerate())->asOrderedSet()->sortedBy(name)) ? (aClass.abstract=false)]
-	[let ref:OrderedSet(EReference) = aClass.getAllComposition()]
+	[let ref:OrderedSet(EReference) = aClass.getAllCompositionsToClass()]
 		case [anEPackage.name/]Package::[aClass.getStaticAttributeIDName()/]:
 		{
 [if(ref->size()>0)]
@@ -148,11 +148,13 @@ std::shared_ptr<[needNamespace(anEPackage, 'EObject')/]> [className/]::create(co
 					[for(aReference:EReference | ref->sortedBy(name))]
 					//[aClass.name/] has [aReference.name/] as a containment
 					[if not (aReference.oclIsUndefined() or aReference.eContainingClass.oclIsUndefined())]
-					case  [anEPackage.name/]Package::[aReference.getStaticAttributeIDName()/]:	
+						[let packageContainingReference : EPackage = aReference.ancestors(EPackage)->first()]
+					case  [packageContainingReference.generateNamespaceDefinition()/]::[packageContainingReference.name/]Package::[aReference.getStaticAttributeIDName()/]:	
 					{
 						auto castedContainer = std::dynamic_pointer_cast<[aReference.eContainingClass.generateTypeClass()/]>(container);
-						return this->create[aClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.generateTypeClass()/](castedContainer,metaElementID);
+						return this->create[aClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/](castedContainer,metaElementID);
 					}
+						[/let]
 					[/if]
 					[/for]
 					default:
@@ -207,16 +209,16 @@ std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/
 [/if]
 	return element;
 }
-[let ref:OrderedSet(EReference) = aClass.getAllComposition()]
-[for(aReference:EReference | ref->sortedBy(name))]
-[if not (aReference.oclIsUndefined() or aReference.eContainingClass.oclIsUndefined())]
-	[if (aReference.eOpposite->isEmpty())]
-std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/](std::shared_ptr<[aReference.eContainingClass.generateTypeClass()/]> par_[aReference.eContainingClass.name/], const int metaElementID)[if (not generateObjectMonitoring())] const[/if]
+[let allCompositionsToClass : OrderedSet(EReference) = aClass.getAllCompositionsToClass()]
+[for(currentCompositionToClass : EReference | allCompositionsToClass->sortedBy(name))]
+[if not (currentCompositionToClass.oclIsUndefined() or currentCompositionToClass.eContainingClass.oclIsUndefined())]
+	[if (currentCompositionToClass.eOpposite->isEmpty())]
+std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_as_[currentCompositionToClass.name/]_in_[currentCompositionToClass.eContainingClass.name.toUpperFirst()/](std::shared_ptr<[currentCompositionToClass.eContainingClass.generateTypeClass()/]> par_[currentCompositionToClass.eContainingClass.name/], const int metaElementID)[if (not generateObjectMonitoring())] const[/if]
 	[else]
-std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_as_[aReference.name/]_in_[aReference.eContainingClass.name.toUpperFirst()/]([aReference.eOpposite.generateReferenceType(true)/] par_[aReference.eContainingClass.name/], const int metaElementID)[if (not generateObjectMonitoring())] const[/if]
+std::shared_ptr<[aClass.generateTypeClass()/]> [className/]::create[aClass.name/]_as_[currentCompositionToClass.name/]_in_[currentCompositionToClass.eContainingClass.name.toUpperFirst()/]([currentCompositionToClass.eOpposite.generateReferenceType(true)/] par_[currentCompositionToClass.eContainingClass.name/], const int metaElementID)[if (not generateObjectMonitoring())] const[/if]
 	[/if]
 {
-	[generateCreateFunctionContent(aClass, ref, aReference, anEPackage)/]
+	[generateCreateFunctionContent(aClass, allCompositionsToClass, currentCompositionToClass, anEPackage)/]
 }
 [/if]
 [/for]
@@ -232,41 +234,43 @@ std::shared_ptr<[anEPackage.name.concat('Package')/]> [className/]::get[anEPacka
 [/file]
 [/template]
 
-[template public generateCreateFunctionContent(anEClass : EClass, ref : OrderedSet(EReference), aReference : EReference, anEPackage : EPackage) ]
-[if (aReference.eOpposite.oclIsUndefined())]
+[template public generateCreateFunctionContent(anEClass : EClass, allCompositionsToClass : OrderedSet(EReference), currentCompositionToClass : EReference, anEPackage : EPackage) ]
+[if (currentCompositionToClass.eOpposite.oclIsUndefined())]
 std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl());
 [else]
-	[if(ref->select(eContainingClass=anEClass)->select(eType = aReference.eType)->size()>1)]
-std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[aReference.eContainingClass.name/], [anEPackage.name/]Package::[aReference.getStaticAttributeIDName()/]));
+	[if(currentCompositionToClass.eContainingClass.getCompositionsToClass(anEClass)->select(r : EReference | (not r.eOpposite.oclIsUndefined()) and r.eOpposite.isContainerAttribute())->size() > 1)]
+		[let packageContainingReference : EPackage = currentCompositionToClass.ancestors(EPackage)->first()]
+std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[currentCompositionToClass.eContainingClass.name/], [packageContainingReference.generateNamespaceDefinition()/]::[packageContainingReference.name/]Package::[currentCompositionToClass.getStaticAttributeIDName()/]));
+		[/let]
 	[else]
-std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[aReference.eContainingClass.name/]));
+std::shared_ptr<[anEClass.generateTypeClass()/]Impl> element(new [anEClass.generateTypeClass()/]Impl(par_[currentCompositionToClass.eContainingClass.name/]));
 	[/if]
 [/if]
 element->set[anEClass.getClassifierIDName()/]ID(metaElementID);
-[if (aReference.containment)] [comment sollte immer eine Komposition sein /]
-	[if (aReference.eOpposite->isEmpty())] 
-if(nullptr != par_[aReference.eContainingClass.name/])
+[if (currentCompositionToClass.containment)] [comment sollte immer eine Komposition sein /]
+	[if (currentCompositionToClass.eOpposite->isEmpty())] 
+if(nullptr != par_[currentCompositionToClass.eContainingClass.name/])
 {
-		[if(aReference.upperBound <> 1)]
-	par_[aReference.eContainingClass.name/]->get[aReference.name.toUpperFirst()/]()->push_back(element);
+		[if(currentCompositionToClass.upperBound <> 1)]
+	par_[currentCompositionToClass.eContainingClass.name/]->get[currentCompositionToClass.name.toUpperFirst()/]()->push_back(element);
 		[else]
-	par_[aReference.eContainingClass.name/]->set[aReference.name.toUpperFirst()/](element);
+	par_[currentCompositionToClass.eContainingClass.name/]->set[currentCompositionToClass.name.toUpperFirst()/](element);
 		[/if]
 	[else]
-		[if(aReference.eOpposite.isBackReference())]
-if(auto wp = par_[aReference.eContainingClass.name/].lock())
+		[if(currentCompositionToClass.eOpposite.isBackReference())]
+if(auto wp = par_[currentCompositionToClass.eContainingClass.name/].lock())
 {
 		[else]
-if(nullptr != par_[aReference.eContainingClass.name/])
+if(nullptr != par_[currentCompositionToClass.eContainingClass.name/])
 {
 		[/if]
 [comment] wir haben bereits die richtige komposition
-	[let r : EReference = findLowerSubset(aReference.eType.oclAsType(EClass), anEClass, aReference.eOpposite)]
+	[let r : EReference = findLowerSubset(currentCompositionToClass.eType.oclAsType(EClass), anEClass, currentCompositionToClass.eOpposite)]
 [/comment]
-		[if(aReference.upperBound <> 1)]
-	[if(aReference.eOpposite.isBackReference())]wp[else]par_[aReference.eContainingClass.name/][/if]->get[aReference.name.toUpperFirst()/]()->push_back(element);
+		[if(currentCompositionToClass.upperBound <> 1)]
+	[if(currentCompositionToClass.eOpposite.isBackReference())]wp[else]par_[currentCompositionToClass.eContainingClass.name/][/if]->get[currentCompositionToClass.name.toUpperFirst()/]()->push_back(element);
 		[else]
-	[if(aReference.eOpposite.isBackReference())]wp[else]par_[aReference.eContainingClass.name/][/if]->set[aReference.name.toUpperFirst()/](element);
+	[if(currentCompositionToClass.eOpposite.isBackReference())]wp[else]par_[currentCompositionToClass.eContainingClass.name/][/if]->set[currentCompositionToClass.name.toUpperFirst()/](element);
 		[/if]
 	[/if]
 [comment 	[/let/]
@@ -291,9 +295,21 @@ return element;
 [/for]
 [/comment]
 
-[let ref:OrderedSet(EReference) = OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass).getAllComposition()->asOrderedSet()->sortedBy(name)]
+[comment] Deprecated?
+[let ref:OrderedSet(EReference) = OrderedSet{anEPackage.eClassifiers}->flatten()->selectByKind(EClass).getAllCompositionsToClass()->asOrderedSet()->sortedBy(name)]
 [for(aReference:EReference | ref->select(not (ref.eType.getRootPackage() = anEPackage.getRootPackage())))]
 #include "[aReference.eType.generateNamespacePath()/]/[aReference.eType.name.toUpperFirst().concat('.hpp')/]"
 [/for]
+[/let]
+[/comment]
+[let packageCompositionContainerClasses : OrderedSet(EClass) = anEPackage.eClassifiers->filter(EClass).getAllCompositionsToClass().eContainingClass->asOrderedSet()]
+	[if (packageCompositionContainerClasses->size() > 0)]
+		[for (aForwardDeclaredPackage : EPackage | packageCompositionContainerClasses.ePackage->asOrderedSet()->reject(p : EPackage | p = anEPackage)->sortedBy(name))]
+#include "[aForwardDeclaredPackage.generateNamespacePath()/]/[aForwardDeclaredPackage.name/]Package.hpp"
+			[for (forwardDeclaredClass : EClass | packageCompositionContainerClasses->select(ePackage = aForwardDeclaredPackage)->asOrderedSet()->sortedBy(name))]
+#include "[forwardDeclaredClass.generateNamespacePath()/]/[forwardDeclaredClass.name.toUpperFirst()/].hpp"
+			[/for]
+		[/for]
+	[/if]
 [/let]
 [/template]
