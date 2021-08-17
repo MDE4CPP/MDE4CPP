@@ -448,14 +448,14 @@ std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr
         std::shared_ptr<uml::Element> type = upackage->getOwnedElement()->at(i);
         std::shared_ptr<uml::Class> uclass = std::dynamic_pointer_cast<uml::Class>(type);
         if(uclass != nullptr) {
-            std::shared_ptr<ecore::EClass> c = factory->createEClass_in_EPackage(epackage, uclass->getMetaElementID());
+            std::shared_ptr<ecore::EClass> c = factory->createEClass_as_eClassifiers_in_EPackage(epackage, uclass->getMetaElementID());
             c->setName(uclass->getName());
             //std::cout << "class : " << c->getName() << std::endl;
         }
         else {
             std::shared_ptr<uml::Enumeration> uenum = std::dynamic_pointer_cast<uml::Enumeration>(type);
             if(uenum != nullptr) {
-                std::shared_ptr<ecore::EEnum> eenum =factory->createEEnum_in_EPackage(epackage, uenum->getMetaElementID());
+                std::shared_ptr<ecore::EEnum> eenum =factory->createEEnum_as_eClassifiers_in_EPackage(epackage, uenum->getMetaElementID());
                 eenum->setName(uenum->getName());
                 //std::cout << "enum : " << uenum->getName() << std::endl;
             }
@@ -479,10 +479,10 @@ std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr
             {
                 std::shared_ptr<ecore::EStructuralFeature> prop = nullptr;
                 if((*it_attribute)->getAssociation() == nullptr) {
-                    prop = ecore::ecoreFactory::eInstance()->createEAttribute_in_EContainingClass(eclass, (*it_attribute)->getMetaElementID());
+                    prop = ecore::ecoreFactory::eInstance()->createEAttribute_as_eStructuralFeatures_in_EClass(eclass, (*it_attribute)->getMetaElementID());
                 }
                 else {
-                    prop = ecore::ecoreFactory::eInstance()->createEReference_in_EContainingClass(eclass, (*it_attribute)->getMetaElementID());
+                    prop = ecore::ecoreFactory::eInstance()->createEReference_as_eStructuralFeatures_in_EClass(eclass, (*it_attribute)->getMetaElementID());
                 }
                 std::string name = (*it_attribute)->getName();
                 std::shared_ptr<ecore::EClassifier> propType = createClassifier(epackage, (*it_attribute)->getType());
@@ -499,7 +499,7 @@ std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr
                  it_operation != endIt_operation; ++it_operation)
             {
                 std::shared_ptr<uml::Operation> currentOp = *it_operation;
-                std::shared_ptr<ecore::EOperation> op = ecore::ecoreFactory::eInstance()->createEOperation_in_EContainingClass(eclass, currentOp->getMetaElementID());
+                std::shared_ptr<ecore::EOperation> op = ecore::ecoreFactory::eInstance()->createEOperation_as_eOperations_in_EClass(eclass, currentOp->getMetaElementID());
                 std::string name = currentOp->getName();
                 std::shared_ptr<ecore::EClassifier> propType = createClassifier(epackage, currentOp->getType());
                 op->setName(name);
@@ -511,7 +511,7 @@ std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr
                 for(size_t j = 0; j < currentParams->size(); j++) {
                     std::shared_ptr<uml::Parameter> p = currentParams->at(j);
                     if(p->getDirection() != uml::ParameterDirectionKind::RETURN) {
-                        std::shared_ptr<ecore::EParameter> param = ecore::ecoreFactory::eInstance()->createEParameter_in_EOperation(op, p->getMetaElementID());
+                        std::shared_ptr<ecore::EParameter> param = ecore::ecoreFactory::eInstance()->createEParameter_as_eParameters_in_EOperation(op, p->getMetaElementID());
                         std::shared_ptr<ecore::EClassifier> currentPropType = createClassifier(epackage, p->getType());
                         param->setEType(currentPropType);
                         param->setName(p->getName());
@@ -530,7 +530,7 @@ std::shared_ptr<ecore::EPackage> OclReflection::umlPackage2Ecore(std::shared_ptr
                 for (Bag<uml::EnumerationLiteral>::const_iterator it_literal = uliteral->begin();
                      it_literal != endIt_literal; ++it_literal)
                 {
-                    std::shared_ptr<ecore::EEnumLiteral> literal = ecore::ecoreFactory::eInstance()->createEEnumLiteral_in_EEnum(eenum, (*it_literal)->getMetaElementID());
+                    std::shared_ptr<ecore::EEnumLiteral> literal = ecore::ecoreFactory::eInstance()->createEEnumLiteral_as_eLiterals_in_EEnum(eenum, (*it_literal)->getMetaElementID());
                     literal->setName((*it_literal)->getName());
                     //std::cout << (*it_literal)->getName() << std::endl;
                 }
