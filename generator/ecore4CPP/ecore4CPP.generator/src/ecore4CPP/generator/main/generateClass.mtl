@@ -23,7 +23,7 @@
 */]
 [template public generateClassCreate(aEClass : EClass,impl : Boolean) ? (aEClass.abstract=false)]
 virtual std::shared_ptr<[aEClass.generateTypeClass()/]> create[aEClass.name/](const int metaElementID = [aEClass.ePackage.name/]Package::[aEClass.getStaticAttributeIDName()/])[if (not generateObjectMonitoring())] const[/if] [abstractSufix(impl)/];
-[let ref:OrderedSet(EReference) = aEClass.getAllComposition()]
+[let ref:OrderedSet(EReference) = aEClass.getAllCompositionsToClass()]
 	[for(aReference:EReference | ref->sortedBy(name)) before('//Add as contained object\n')]
 		[if not (aReference.oclIsUndefined() or aReference.eContainingClass.oclIsUndefined())]
 			[if (aReference.eOpposite->isEmpty())]
