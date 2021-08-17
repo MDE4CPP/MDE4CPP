@@ -285,4 +285,4 @@ static const long long [anEReference.getStaticAttributeIDName()/] = [anEReferenc
 
 [/template]
 
-[query public isRedefiningContainer(anEReference : EReference) : Boolean = (anEReference.upperBound <> 1) and (anEReference.getDirectlyRedefinedElements()->size() > 0) /]
+[query public isRedefiningContainer(anEReference : EReference) : Boolean = (anEReference.upperBound <> 1) and anEReference.hasRedefinitionAnnotation() and eAnnotations->select(source = sourceNameRedefines())->first().references->size() > 0 /]

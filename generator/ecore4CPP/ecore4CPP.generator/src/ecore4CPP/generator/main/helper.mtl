@@ -65,13 +65,13 @@
 
 [query public containsContainerAttribute(aClass : EClass) : Boolean =  getContainsContainerAttribute()->notEmpty() /]
 [query public getContainsContainerAttribute(aClass : EClass) : OrderedSet(EReference) =  aClass.eReferences->select(isContainerAttribute())->sortedBy(name) /]
-
-[query public isContainerAttribute(aRef : EReference) : Boolean =  not (aRef.hasKey(keyNoBackReference())) and  aRef.container or (aRef->closure(eAnnotations->select(source=sourceNameSubset()).references.oclAsType(EReference))->select(container)->size() > 0)  /]
-
+[query public isContainerAttribute(aRef : EReference) : Boolean =  not (aRef.hasKey(keyNoBackReference())) and  aRef.container or (aRef->closure(eAnnotations->select(source='subsets').references.oclAsType(EReference))->select(container)->size() > 0)  /]
 [query public getSuperTypeContainers(aClass:EClass) : OrderedSet(EReference) = if not(aClass.eSuperTypes->isEmpty()) then aClass.eSuperTypes.getAllContainers()->flatten()->asOrderedSet() else OrderedSet{} endif /]
-
 [query public getAllContainers(aClass : EClass) : OrderedSet(EReference) =  if getContainsContainerAttribute()->notEmpty() then if getSuperTypeContainers()->isEmpty() then getContainsContainerAttribute() else OrderedSet{getContainsContainerAttribute()}->append(getSuperTypeContainers()->flatten()->reject(oclIsUndefined())->asOrderedSet())->flatten()->asOrderedSet() endif else getSuperTypeContainers()->asOrderedSet() endif /]
-[query public getAllComposition(aClass : EClass) : OrderedSet(EReference) = if not aClass.getRootPackage()->oclIsUndefined() then aClass.getRootPackage().eAllContents()->filter(ecore::EReference)->select(e| (e.containment=true) and (e.eContainer().oclIsKindOf(EClassifier)) and ((e.eType = aClass) or ((e.eType.oclIsTypeOf(ecore::EClass)) and (e.eType.oclAsType(ecore::EClass).isSuperTypeOf(aClass) ))) ) ->asOrderedSet() else OrderedSet(EReference){} endif/]
+
+[query public getAllCompositionsToClass(aClass : EClass) : OrderedSet(EReference) = if not aClass.getRootPackage()->oclIsUndefined() then aClass.getRootPackage().eAllContents()->filter(EClass).eReferences->select(ref : EReference | ref.isDirectOrIndirectCompositionToClass(aClass))->asOrderedSet() else OrderedSet(EReference){} endif/]
+[query public getCompositionsToClass(containerClass : EClass, containedClass : EClass) : OrderedSet(EReference) = containerClass.eReferences->select(isDirectOrIndirectCompositionToClass(containedClass)) /]
+[query private isDirectOrIndirectCompositionToClass(aComposition : EReference, anEClass : EClass) : Boolean = aComposition.containment and (aComposition.eReferenceType = anEClass or aComposition.eReferenceType.isSuperTypeOf(anEClass)) /]
 
 [query public hasImplOnly(aModelElement : EModelElement) : Boolean =  aModelElement.hasKey(keyImplOnly())/]
 [query public doNotGenerate(aModelElement : EModelElement) : Boolean =  aModelElement.hasKey(keyDoNotGenerate())/]
@@ -188,7 +188,7 @@
 [**
  * Check if element redefines another element
 */]
-[query private hasRedefinitionAnnotation(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameRedefines())->notEmpty() /]
+[query public hasRedefinitionAnnotation(aModelElement : EModelElement) : Boolean = eAnnotations->select(source = sourceNameRedefines())->notEmpty() /]
 [query public getDirectlyRedefinedElements(aModelElement : EModelElement) : OrderedSet(EObject) = 
 	if(aModelElement.hasRedefinitionAnnotation()) then 
 		eAnnotations->select(source = sourceNameRedefines())->addAll(eAnnotations->select(source = sourceNameSubset()))->first().references
